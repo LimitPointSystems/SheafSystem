@@ -1,0 +1,14 @@
+// $RCSfile: std_numeric.h.cmake.in,v $ $Revision: 1.2 $ $Date: 2011/04/29 04:58:25 $
+
+//
+// Copyright (c) 2010 Limit Point Systems, Inc. 
+//
+
+#ifndef STD_NUMERIC_H
+#define STD_NUMERIC_H
+
+#include <numeric>
+
+using namespace std;
+
+#endif // STD_NUMERIC_H

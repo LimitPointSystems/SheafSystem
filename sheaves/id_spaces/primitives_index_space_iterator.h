@@ -1,0 +1,202 @@
+// $RCSfile: primitives_index_space_iterator.h,v $ $Revision: 1.3 $ $Date: 2013/01/15 22:23:44 $
+
+// $Name: HEAD $
+//
+// Copyright (c) 2011 Limit Point Systems, Inc.
+//
+
+/// @file
+/// Interface for class primitives_index_space_iterator
+
+#ifndef PRIMITIVES_INDEX_SPACE_ITERATOR_H
+#define PRIMITIVES_INDEX_SPACE_ITERATOR_H
+
+#ifndef SHEAF_DLL_SPEC_H
+#include "sheaf_dll_spec.h"
+#endif
+
+#ifndef EXPLICIT_INDEX_SPACE_ITERATOR_H
+#include "explicit_index_space_iterator.h"
+#endif
+
+namespace sheaf
+{
+
+///
+/// An iterator over the id space for the primitives row dof id space.
+///
+class SHEAF_DLL_SPEC primitives_index_space_iterator : public explicit_index_space_iterator
+{
+
+  friend class primitives_index_space_state;
+
+  // ===========================================================
+  /// @name PRIMITIVES_INDEX_SPACE_ITERATOR FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Default constructor.
+  ///
+  primitives_index_space_iterator();
+
+  ///
+  /// Copy constructor.
+  ///
+  primitives_index_space_iterator(const primitives_index_space_iterator& xother);
+
+  ///
+  /// Constructor: Attach to state with index xindex in the family xid_spaces.
+  ///
+  primitives_index_space_iterator(const index_space_family& xid_spaces,
+				  pod_type xindex);
+
+  ///
+  /// Constructor: Attach to state with name xname in the family xid_spaces.
+  ///
+  primitives_index_space_iterator(const index_space_family& xid_spaces,
+				  const string& xname);
+
+  ///
+  /// Assignment operator.
+  ///
+  primitives_index_space_iterator& operator=(const primitives_index_space_iterator& xother);
+
+  ///
+  /// Destructor
+  ///
+  virtual ~primitives_index_space_iterator();
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
+  /// @name EXPLICIT_INDEX_SPACE_ITERATOR FACET
+  // ===========================================================
+  //@{
+
+public:
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
+  /// @name INDEX_SPACE_ITERATOR FACET
+  // ===========================================================
+
+public:
+
+  ///
+  /// Assignment operator.
+  ///
+  virtual primitives_index_space_iterator& operator=(const index_space_iterator& xother);
+
+  ///
+  /// Virtual constructor, makes a new instance of the same type as this.
+  /// If the iterator is attached, attach to the same state.
+  ///
+  virtual primitives_index_space_iterator* clone() const;
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
+  /// @name ITERATOR FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Makes item() the next id in the iteration.
+  ///
+  virtual void next();
+
+  ///
+  /// Restarts the iteration.
+  ///
+  virtual void reset();
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
+  /// @name HANDLE FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  using explicit_index_space_iterator::attach_to;
+
+  using explicit_index_space_iterator::conforms_to_state;
+
+protected:
+
+  ///
+  ///
+  /// Attach to the explicit id space state xstate.
+  ///
+  virtual void attach_to(explicit_index_space_state* xstate);
+
+  ///
+  /// True if this conforms to the iterator type required by the
+  /// explicit id space state xstate.
+  ///
+  virtual bool conforms_to_state(explicit_index_space_state* xstate) const;
+
+private:
+
+  //@}
+
+
+  // ===========================================================
+  /// @name ANY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Conformance test; true if other conforms to this
+  ///
+  virtual bool is_ancestor_of(const any *other) const;
+
+  ///
+  /// Class invariant.
+  ///
+  virtual bool invariant() const ;
+
+protected:
+
+private:
+
+  //@}
+
+};
+
+// ===========================================================
+// NON-MEMBER FUNCTIONS
+// ===========================================================
+
+} // namespace sheaf
+
+#endif // ifndef PRIMITIVES_INDEX_SPACE_ITERATOR_H

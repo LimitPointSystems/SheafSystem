@@ -1,0 +1,232 @@
+/// @dir fiber_bundles/fiber_spaces
+///
+/// @details
+/// <h1>Fiber Algebra</h1>
+/// 
+/// <p>The classes in the fiber_spaces cluster
+/// provide the various algebraic types used in theoretical physics to describe the
+/// properties of particles and systems. Each of these algebraic types has an
+/// associated set of operations, an algebra. In this overview we summarize the
+/// operations associated with each type. See the class documentation for a
+/// complete descriptiuon of the operations and the numerous signatures supported
+/// for each operation.</p>
+/// 
+/// <h2>Abstract vectors (vector algebra)</h2>
+/// 
+/// <p>Class vd and its descendants support the operations of
+/// vector algebra (linear algebra). The main(int xargc, char* xargv[]) operations are:</p>
+/// 
+/// <table width="1024" border="0">
+/// <tr>
+///	<td>add</td>
+///		<td>Add
+///		two vectors.</td>
+/// </tr>
+///	<tr>
+///	<td>subtract</td>
+///		<td>Subtract
+///		one vector from another.</td>
+///	</tr>
+///	<tr>
+///	<td>multiply</td>
+///		<td>Multiply
+///		a vector by a scalar.</td>
+///	</tr>
+///	<tr>
+///	<td>divide</td>
+///		<td>Divide
+///		a vector by a scalar.</td>
+///	</tr>
+///	<tr>
+///	<td>min</td>
+///		<td>Find
+///		the minimum component of a vector.</td>
+///	</tr>
+///	<tr>
+///	<td>max</td>
+///		<td>Find
+///		the maximum component of a vector.</td>
+///	</tr>
+///	<tr>
+///	<td>contract</td>
+///		<td>Contract 
+///		a vector with a covector.</td>
+///	</tr>
+///	</table>
+/// <h2>Euclidean vectors (Euclidean vector algebra)</h2>
+///	<table width="1024" border="0">
+///	<tr>
+///	<td>dot</td>
+///		<td>The
+///		Euclidean scalar product of two vectors.</td>
+///	</tr>
+///	<tr>
+/// <td>length</td>
+///		<td>The
+///		length of a vector.</td>
+///	</tr>
+///	<tr>
+///	<td>put_length</td>
+///		<td>Sets
+///		the length of a vector.</td>
+/// </tr>
+/// <tr> 
+/// <td>normalize</td>
+///		<td>Sets
+///		the length of a vector to 1.</td>
+/// </tr>
+/// <tr>
+///	<td>cross</td>
+///		<td>The
+///		vector (&quot;cross&quot;) product of an e3 vector with another.</td>
+///	</tr>
+/// </table>
+/// <h2>General tensors</h2>
+///
+/// <p>Class tp and its descendants support general tensor algebra.
+/// The main(int xargc, char* xargv[]) operations are:</p>
+///
+/// <table width="1024" border="0">
+/// <tr>
+/// <td>tensor</td>
+///		<td>The
+///		tensor product of one tensor with another.</td>
+/// </tr>
+/// <tr>
+/// <td>alt</td>
+///		<td>The
+///		antisymmetric (&quot;alternating&quot;) part of a tensor.</td>
+/// </tr>
+/// <tr>
+/// <td>sym</td>
+///		<td>The
+/// 	symmetric part of a tensor.</td>
+/// </tr>
+/// <tr>
+/// 	<td>contract</td>
+/// 	<td>Contract
+///		a tensor on one contravariant and one covariant index.</td>
+/// </tr>
+/// </table>
+/// <h2>Antisymmetric tensors (exterior algebra)</h2>
+///
+/// <p>Class atp and its descendants support exterior algebra. the
+/// main(int xargc, char* xargv[]) operations are:</p>
+///
+/// <table width="1024" border="0">
+/// <tr>
+///	<td>wedge</td>
+///  	<td>The
+///  	exterior (&quot;wedge&quot;) product of two antisymmetric tensors.</td>
+/// </tr>
+/// <tr>
+///	<td>hook</td>
+///		<td>The
+///		interior (&quot;hook&quot;) product of an antisymmetric tensor and a vector.</td>
+/// </tr>
+/// <tr>
+/// <td>star</td>
+///		<td>The
+/// 	Hodge star (&quot;dual&quot;) of an antisymmetric tensor.</td>
+/// </tr>
+/// </table>
+/// <h2>Symmetric tensors (symmetric algebra)</h2>
+/// <table width="1024" border="0">
+/// <tr>
+///	<td>symmetric_product</td>
+///		<td>The
+///		symmetric product of one symmetric tensor with another.</td>
+/// </tr>
+/// <tr>
+/// <td>trace</td>
+/// 	<td>The
+/// 	trace of a degree 2 symmetric tensor.</td>
+/// </tr>
+/// <tr>
+/// <td>determinant</td>
+/// 	<td>The
+/// 	determinant of a degree 2 symmetric tensor.</td>
+/// </tr>
+/// <tr>
+///	<td>to_principal_axes</td>
+///		<td>Diagonalizes
+///		a degree 2 symmetric tensor.</td>
+/// </tr>
+/// </table>
+/// <h2>Metric tensors</h2>
+/// <table width="1024" border="0">
+/// <tr>
+///	<td>raise</td>
+///		<td>Make
+///		a given index of a tensor contravariant.</td>
+/// </tr>
+/// <tr>
+///	<td>lower</td>
+///		<td>Make
+///		a given index of a tensor covariant.</td>
+/// </tr>
+/// </table> 
+/// <h2>Jacobians</h2>
+/// <table width="1024" border="0">
+/// <tr>
+/// <td>push</td>
+///		<td>Push
+/// 	a vector from the domain(int xargc, char* xargv[]) to the range of a Jacobian.</td>
+/// </tr>
+/// <tr>
+/// <td>pull</td>
+/// 	<td>Pull
+/// 	a covector from the range to the domain(int xargc, char* xargv[]) of a Jacobian.</td>
+/// </tr>
+/// </table>
+/// <h2>Transformation groups</h2>
+/// <table width="1024" border="0">
+/// <tr>
+///	<td>inverse</td>
+///		<td>The
+///		inverse of a linear transformation</td>
+/// </tr>
+/// <tr>
+/// <td>transform_basis_by</td>
+/// 	<td>Transform
+///     the basis and components of a tensor</td>
+/// </tr>
+/// </table>
+///
+/// <h2>Multiple signatures</h2>
+/// 
+/// <p>Each of the above operations is represented by a family of
+/// functions implementing multiple signatures for the operation. Typically each
+/// operation is provided for both regular fiber types and the associated lite
+/// fiber types. In addition, auto-allocated, pre-allocated and self-allocated
+/// variants are provided. Finally, whenver it makes sense, operator variants are
+/// provided. As an example, the full set of functions for the add operation is as
+/// follows:</p>
+/// 
+/// 
+/// <p><i>///<br>/// x0 add x1 (auto-allocated version for lite types).<br>///</i><br>
+/// template &lt;typename T&gt; T* add(const T&amp; x0, const T&amp x1);</p>
+/// 
+/// <p><i>///<br>/// x0 add x1 (pre-allocated version for regular types).<br>///</i><br>
+/// void add(const vd&amp; x0, const vd&amp; x1, vd&amp; xresult, bool xauto_access);</p>
+/// 
+/// <p><i>///<br>/// x0 add x1 (pre-allocated version for lite types).<br>///</i><br>
+/// void add(const vd_lite&amp; x0, const vd_lite&amp; x1, vd_lite&amp; xresult);</p>
+/// 
+/// <p><i>///<br>/// x0 add_equal x1 (self-allocated version for regular types);<br>/// synonym for add(xresult, xother, xresult, xauto_access).<br>///</i><br>
+/// void add_equal(vd&amp; xresult, const vd&amp; xother, bool xauto_access);</p>
+/// 
+/// <p><i>///<br>/// x0 add_equal x1 (self-allocated version for lite types).<br>///</i><br>
+/// template &lt;typename T&gt; void add_equal(T&amp; xresult, const T&amp; xother);</p>
+/// 
+/// <p><i>///<br>/// x0 + x1 (auto-allocated for lite types);<br>/// synonym for add(x0, x1).<br>///</i><br>
+/// template &lt;typename T&gt; T* operator+(const T&amp; x0, const T&amp; x1);</p>
+/// 
+/// <p><i>///<br>/// x0 += x1 (self-allocated for lite types);<br>/// synonym for add_equal(x0, x1).<br>///</i><br>
+/// template &lt;typename T&gt; T&amp; operator+=(T&amp; xresult, const T&amp; xother);</p>
+/// 
+/// <p>The full fiber algebra consists of all the various
+/// signatures for all the various operations and thus contains approximately 100
+/// functions.</p>
+/// 
+/// 

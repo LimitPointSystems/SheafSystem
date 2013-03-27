@@ -1,0 +1,23 @@
+// $RCSfile: std_cstdlib.h.cmake.in,v $ $Revision: 1.2 $ $Date: 2011/04/29 04:58:25 $
+
+//
+// Copyright (c) 2010 Limit Point Systems, Inc. 
+//
+
+#ifndef STD_CSTDLIB_H
+#define STD_CSTDLIB_H
+
+#cmakedefine HAVE_CSTDLIB 1
+
+#if HAVE_CSTDLIB
+
+#include <cstdlib>
+using namespace std;
+
+#else
+
+#include <stdlib.h>
+
+#endif 
+
+#endif // STD_CSTDLIB_H

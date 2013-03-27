@@ -1,0 +1,156 @@
+// $RCSfile: field_refinement_policy.h,v $ $Revision: 1.7 $ $Date: 2013/01/12 17:17:28 $
+
+//
+// Copyright (c) 2013 Limit Point Systems, Inc.
+//
+
+/// @file
+/// Interface for class field_refinement_policy
+
+#ifndef FIELD_REFINEMENT_POLICY_H
+#define FIELD_REFINEMENT_POLICY_H
+
+#ifndef SHEAF_DLL_SPEC_H
+#include "sheaf_dll_spec.h"
+#endif
+
+#ifndef ANY_H
+#include "any.h"
+#endif
+
+#ifndef FIELDS_H
+#include "fields.h"
+#endif
+
+namespace sheaf
+{
+template <class T>
+class factory;
+}
+
+namespace fields
+{
+
+using namespace sheaf;
+  
+class field_refinement_buffer;
+
+///
+/// An abstract policy that determines the conditions under which
+/// a zone should be refined.
+///
+class SHEAF_DLL_SPEC field_refinement_policy : public any
+{
+
+  // ===========================================================
+  /// @name FIELD_REFINEMENT_POLICY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Destructor
+  ///
+  virtual ~field_refinement_policy();
+
+  ///
+  /// True if the zone specified by xzone_id should be refined.
+  ///
+  virtual bool should_refine(field_refinement_buffer& xbuffer,
+                             size_type xrefinement_depth) const = 0;
+
+  ///
+  /// The upper bound on the refinement depth of a cell.
+  /// A cell will not be refined if its refinement depth
+  /// is equal to or greater than the upper bound.
+  ///
+  size_type refinement_depth_ub() const;
+
+  ///
+  /// Set the refinement depth upper bound to xub.
+  ///
+  void put_refinement_depth_ub(size_type xub);
+
+  ///
+  /// The class name of this.
+  ///
+  virtual const string& class_name() const;
+
+  ///
+  /// The class name of this class.
+  ///
+  static const string& static_class_name();
+
+  ///
+  /// Creates an instance of the policy with class name xname.
+  ///
+  static field_refinement_policy* new_policy(const string& xname);
+
+  ///
+  /// A factory for making policy objects.
+  ///
+  static factory<field_refinement_policy>& policy_factory();
+
+protected:
+
+  ///
+  /// Creates an instance with reinement upper bound xrefinement_ub.
+  ///
+  ///
+  field_refinement_policy(size_type xrefinement_depth_ub);
+
+  ///
+  /// Copy constructor
+  ///
+  ///
+  field_refinement_policy(const field_refinement_policy& xother);
+
+  ///
+  /// The upper bound and the refinement level of a cell.
+  ///
+  size_type _refinement_depth_ub;
+
+  //@}
+
+
+  // ===========================================================
+  /// @name ANY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Conformance test; true if other conforms to this
+  ///
+  virtual bool is_ancestor_of(const any *other) const;
+
+  ///
+  /// Virtual constructor, makes a new
+  /// instance of the same type as this
+  ///
+  virtual field_refinement_policy* clone() const = 0;
+
+  ///
+  /// Assignment operator
+  ///
+  ///
+  virtual field_refinement_policy& operator=(const field_refinement_policy& xother);
+
+  ///
+  /// Class invariant.
+  ///
+  virtual bool invariant() const;
+
+  //@}
+
+};
+
+// ===========================================================
+// NON-MEMBER FUNCTIONS
+// ===========================================================
+ 
+} // namespace fields
+
+#endif // ifndef FIELD_REFINEMENT_POLICY_H

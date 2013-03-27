@@ -1,0 +1,23 @@
+// $RCSfile: std_cstring.h.cmake.in,v $ $Revision: 1.2 $ $Date: 2011/04/29 04:58:25 $
+
+//
+// Copyright (c) 2010 Limit Point Systems, Inc. 
+//
+
+#ifndef STD_CSTRING_H
+#define STD_CSTRING_H
+
+#cmakedefine HAVE_CSTRING 1
+
+#if HAVE_CSTRING
+
+#include <cstring>
+using namespace std;
+
+#else
+
+#include <string.h>
+
+#endif 
+
+#endif // STD_CSTRING_H

@@ -1,0 +1,71 @@
+// $RCSfile: std_slist.h.cmake.in,v $ $Revision: 1.3 $ $Date: 2013/01/02 04:42:47 $
+
+//
+// Copyright (c) 2010 Limit Point Systems, Inc. 
+//
+
+#ifndef STD_SLIST_H
+#define STD_SLIST_H
+
+#ifndef STD_STRING_H
+#include "std_string.h"
+#endif
+
+// Autoconf hooks; will be replaced with #define if have <slist>
+// or <ext/slist>, respectively, or commented out if not.
+
+#cmakedefine HAVE_SLIST 1
+#cmakedefine HAVE_EXT_SLIST 1
+
+#ifdef HAVE_SLIST
+
+// This environment has <slist>.
+
+#include <slist>
+
+using namespace std;
+
+#elif HAVE_EXT_SLIST
+
+// This environment has <ext/slist>.
+
+#include <ext/slist>
+
+#ifdef __GNUG__
+
+// g++ - class slist is in namespace __gnu_cxx
+
+using namespace __gnu_cxx;
+
+#else
+
+// Assume class slist is in namespace std
+
+using namespace std;
+
+#endif // ifdef __GNUG__
+
+
+
+#else
+
+// This environment does not have an slist class;
+// simulate with list.
+
+#include <list>
+
+using namespace std;
+
+template <class T, class A = allocator<T> > class slist : public list<T, A> 
+{ 
+  public:
+
+  iterator erase_after(iterator pos)
+  {
+    return erase(++pos);
+  }
+};
+
+#endif // HAVE_SLIST
+
+#endif // STD_SLIST_H

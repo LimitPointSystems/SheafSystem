@@ -1,0 +1,58 @@
+// $RCSfile: std_strstream.h.cmake.in,v $ $Revision: 1.2 $ $Date: 2011/04/29 04:58:25 $
+
+//
+// Copyright (c) 2010 Limit Point Systems, Inc. 
+//
+
+#ifndef STD_STRSTREAM_H
+#define STD_STRSTREAM_H
+
+// define if GCC version 3.x is being used.
+#cmakedefine GCC_3DOTX 1
+
+#ifndef GCC_3DOTX
+
+#include <strstream>
+
+#else
+
+// Use stringstream by including sstream and typedefing the different
+// stream classes.
+
+#include <sstream>
+
+class strstream : public stringstream
+{
+  public:
+
+    inline void freeze(bool frz)
+    {
+      // NOT IMPLEMENTED
+    }
+};
+
+class ostrstream : public ostringstream
+{
+  public:
+
+    inline void freeze(bool frz)
+    {
+      // NOT IMPLEMENTED
+    }
+};
+
+class istrstream : public istringstream
+{
+  public:
+
+    inline void freeze(bool frz)
+    {
+      // NOT IMPLEMENTED
+    }
+};
+
+#endif
+
+using namespace std;
+
+#endif // STD_STRSTREAM_H

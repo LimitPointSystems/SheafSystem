@@ -1,0 +1,106 @@
+/// @dir fiber_bundles/section_spaces
+///
+/// @details
+/// <h1>Section algebra</h1>
+/// 
+/// <p>The section type hierarchy repeats the fiber type hierarchy;
+/// for every type F in the fiber hierarchy there is a section type S with fiber of
+/// type F. Every fiber operation has a corresponding section operation. Sections
+/// also support additional operations, not defined for fibers. The most important
+/// of these are the real-valued functions of scalar sections. A scalar section is
+/// essentially a map from the base space to reals and we can compose this with any
+/// map from reals to reals to form another map from the base space to reals, i.e.
+/// another scalar section. We define such an operation for each math library
+/// function defined by the C++ standard. We summarize these in the following:</p>
+/// 
+/// <table width="1024" border="0">
+/// <tr>
+/// <td>fabs</td>
+///		<td>Absolute value of a scalar section.</td>
+/// </tr>
+/// <tr>
+/// <td>ceil
+///		<td>Ceiling of a scalar section.</td>
+/// </tr>
+/// <tr>
+///	<td>floor</td>
+///		<td>Floor of a scalar section.</td>
+/// </tr>
+/// <tr>
+///	<td>sqrt</td>
+///		<td>Square root of a scalar section.</td>
+/// </tr>
+/// <tr>
+///	<td>pow</td>
+///		<td>Power of a scalar section.</td>
+/// </tr>
+/// <tr>
+///	<td>cos</td>
+///		<td>Cosine of a scalar section.</td>
+/// </tr>
+/// <tr>
+///	<td>sin</td>
+///		<td>Sine of a scalar section.</td>
+///	</tr>
+///	<tr>
+///	<td>tan</td>
+///		<td>Tangent of a scalar section.</td>
+/// </tr>
+///	<tr>
+///	<td>acos</td>
+///		<td>Arc cosine of a scalar section.</td>
+/// </tr>
+///	<tr>
+///	<td>asin</td>
+///		<td>Arc sine of a scalar section.</td>
+/// </tr>
+///	<tr>
+///	<td>atan</td>
+///		<td>Arc tangent of a scalar section.</td>
+///	</tr>
+///	<tr>
+///	<td>atan2</td>
+///		<td>Arc tangent of a scalar section.</td>
+///	</tr>
+///	<tr>
+///	<td>cosh</td>
+///		<td>Hyperbolic cosine of a scalar section.</td>
+///	</tr>
+///	<tr>
+///	<td>sinh</td>
+///		<td>Hyperbolic sine of a scalar section.</td>
+///	</tr>
+///	<tr>
+///	<td>tanh</td>
+///	<td>Hyperbolic tangent of a scalar section.</td>
+///	</tr>
+///	<tr>
+///	<td>exp</td>
+///		<td>Exponential of a scalar section.</td>
+///	</tr>
+///	<tr>
+///	<td>log</td>
+///		<td>Log base e of a scalar section.</td>
+///	</tr>
+///	<tr>
+///	<td>log10</td>
+///		<td>Log base 10 of a scalar section.</td>
+///	</tr>
+///	<tr>
+///	<td>modf</td>
+///		<td>Integer and fractional parts of a scalar section.</td>
+///	</tr>
+///	<tr>
+///	<td>frexp</td>
+///		<td>Fractional and exponent parts of a scalar section.</td>
+///	</tr>
+///	<tr>
+///	<td>fmod</td>
+///		<td>Remainder of scalar section.</td>
+///	</tr>
+///	<tr>
+///	<td>ldexp</td>
+///		<td>Scalar section times a power of 2.</td>
+///	</tr>
+/// </table>
+/// 

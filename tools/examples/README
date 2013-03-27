@@ -1,0 +1,55 @@
+************************************************
+TOOLS?EXAMPLES README FILE:
+************************************************
+
+Executing SheafScope:
+-----------------------
+
+Assuming the suporting libraries have not been moved since
+building SheafScope simply type:
+ 
+  SheafScope
+
+
+Executing ViewerDemo:
+-----------------------
+
+The ViewerDemo depends on data files created with the
+data generators test_case_3d.t, test_case_3d_irregular.t,
+and test_case_2d.t include in this directory.  Each test
+case creates sections with scalar, vector, and tensor data.
+To execute the test generators with default mesh dimensions
+type the name of the excutables, ie:
+
+    test_case_3d.t
+    test_case_3d_irregular.t
+    test_case_2d.t
+
+or type
+
+   create_test_data
+
+Either of these steps creates data files named "test_3d.hdf",
+"test_3d_irregular.hdf, and "test_2d.hdf".
+
+Then to view and interact with the data enter
+
+    ViewerDemo -t=TYPE test_3d.hdf test_3d_irregular.hdf
+
+where TYPE must be either "solid", "scalar", "vector",
+or "tensor" (without the double quotes).  The "solid"
+will just show geometry. The "scalar" options displays the
+scalar values. The "vector" option begins by displaying
+the vector magnitude as the scalar and allows either
+"hedgehog" or "glyphs" to be selected to show vector
+magnitude and direction.  The "tensor" option shows
+the mean stress as the scalar and allows tensor glyphs
+(ellipsoids) to be shown (see the "Options" menu).
+
+The ViewDemo (including can also be executed including
+tensor data generation) by executing
+
+    make demo
+
+ 
+

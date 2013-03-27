@@ -1,0 +1,24 @@
+// $RCSfile: std_cstdio.h.cmake.in,v $ $Revision: 1.2 $ $Date: 2011/04/29 04:58:25 $
+
+//
+// Copyright (c) 2010 Limit Point Systems, Inc. 
+//
+
+#ifndef STD_CSTDIO_H
+#define STD_CSTDIO_H
+
+#cmakedefine HAVE_CSTDIO 1
+
+#if HAVE_CSTDIO
+
+#include <cstdio>
+using namespace std;
+
+#else
+
+#include <stdio.h>
+
+#endif 
+
+#endif // STD_CSTDIO_H
+

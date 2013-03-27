@@ -1,0 +1,23 @@
+// $RCSfile: std_cwchar.h.cmake.in,v $ $Revision: 1.2 $ $Date: 2011/04/29 04:58:25 $
+
+//
+// Copyright (c) 2010 Limit Point Systems, Inc. 
+//
+
+#ifndef STD_CWCHAR_H
+#define STD_CWCHAR_H
+
+#cmakedefine HAVE_CWCHAR 1
+
+#if HAVE_CWCHAR
+
+#include <cwchar>
+using namespace std;
+
+#else
+
+#include <wchar.h>
+
+#endif 
+
+#endif // STD_CWCHAR_H

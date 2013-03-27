@@ -1,0 +1,23 @@
+// $RCSfile: std_cfloat.h.cmake.in,v $ $Revision: 1.2 $ $Date: 2011/04/29 04:58:25 $
+
+//
+// Copyright (c) 2010 Limit Point Systems, Inc. 
+//
+
+#ifndef STD_CFLOAT_H
+#define STD_CFLOAT_H
+
+#cmakedefine HAVE_CFLOAT 1
+
+#if HAVE_CFLOAT
+
+#include <cfloat>
+using namespace std;
+
+#else
+
+#include <float.h>
+
+#endif 
+
+#endif // STD_CFLOAT_H

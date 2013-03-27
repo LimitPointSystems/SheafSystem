@@ -1,0 +1,23 @@
+// $RCSfile: std_cstdarg.h.cmake.in,v $ $Revision: 1.2 $ $Date: 2011/04/29 04:58:25 $
+
+//
+// Copyright (c) 2010 Limit Point Systems, Inc. 
+//
+
+#ifndef STD_CSTDARG_H
+#define STD_CSTDARG_H
+
+#cmakedefine HAVE_CSTDARG 1
+
+#if HAVE_CSTDARG
+
+#include <cstdarg>
+using namespace std;
+
+#else
+
+#include <stdarg.h>
+
+#endif 
+
+#endif // STD_CSTDARG_H

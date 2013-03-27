@@ -1,0 +1,196 @@
+// $RCSfile: std_hash_set.h.cmake.in,v $ $Revision: 1.2 $ $Date: 2011/04/29 04:58:25 $
+
+//
+// Copyright (c) 2010 Limit Point Systems, Inc. 
+//
+
+// Template to configure hash set typedef and include
+
+#ifndef STD_HASH_SET_H
+#define STD_HASH_SET_H
+
+#ifndef STD_STRING_H
+#include "std_string.h"
+#endif
+
+
+// Autoconf configuration targets;
+// CMake will comment out or change these to #defines
+// based on which header files it can find.
+
+#ifdef WIN32
+// Windows uses unordered_set only.
+#cmakedefine HAVE_UNORDERED_SET 1
+#else
+#cmakedefine HAVE_HASH_SET 1
+#cmakedefine HAVE_EXT_HASH_SET 1
+#cmakedefine HAVE_UNORDERED_SET 1
+#endif
+
+#ifdef HAVE_HASH_SET
+
+// This environment has <hash_set>
+
+#include <hash_set>
+
+using namespace std;
+
+// Alias for namespace hash_set is
+// needed when specializing hash<T>.
+
+#ifndef SHEAF_HASH_NAMESPACE
+#define SHEAF_HASH_NAMESPACE std
+#define SHEAF_BEGIN_HASH_NAMESPACE namespace std {
+#define SHEAF_END_HASH_NAMESPACE }
+#endif
+
+
+// set_key_test 
+// placed in this file because it must be configured to match
+// hash_set configuration.
+
+struct set_key_test
+{
+public:
+    bool operator()(const char* s1, const char* s2) const
+      {
+	return strcmp(s1, s2) == 0;
+      }
+};
+
+#elif HAVE_EXT_HASH_SET
+
+// This environment has <ext/hash_set>
+
+#include <ext/hash_set>
+
+#ifdef __GNUG__
+
+// g++ - class hash_set is in namespace __gnu_cxx
+
+using namespace __gnu_cxx;
+#ifndef SHEAF_HASH_NAMESPACE
+#define SHEAF_HASH_NAMESPACE __gnu_cxx
+#define SHEAF_BEGIN_HASH_NAMESPACE namespace __gnu_cxx {
+#define SHEAF_END_HASH_NAMESPACE  }
+#endif
+
+#else
+
+// Assume class slist is in namespace std
+
+using namespace std;
+#ifndef SHEAF_HASH_NAMESPACE
+#define SHEAF_HASH_NAMESPACE std
+#define SHEAF_BEGIN_HASH_NAMESPACE namespace std {
+#define SHEAF_END_HASH_NAMESPACE }
+#endif
+
+#endif // ifdef __GNUG__
+
+struct set_key_test
+{
+public:
+    bool operator()(const char* s1, const char* s2) const
+      {
+	return strcmp(s1, s2) == 0;
+      }
+};
+
+#elif HAVE_UNORDERED_SET
+
+//  __IBMCPP__ is the identifier for xlC on AIX;
+// may share includes with versions that don't 
+// support unordered_set.
+//#ifdef __IBMCPP__
+
+#include <unordered_set>
+
+using namespace std::tr1;
+#ifndef SHEAF_HASH_NAMESPACE
+#define SHEAF_HASH_NAMESPACE std::tr1
+#define SHEAF_BEGIN_HASH_NAMESPACE namespace std { namespace tr1 {
+#define SHEAF_END_HASH_NAMESPACE }}
+#endif
+
+template <typename Key,
+          typename HashFun   = hash<Key>,
+          typename EqualKey  = equal_to<Key>,
+	  typename Allocator = allocator<Key> >
+class hash_set : public unordered_set<Key, HashFun, EqualKey, Allocator> 
+{
+public:
+  inline void resize(typename unordered_set::size_type n)
+  {
+    this->rehash(n);
+  };
+  inline bool operator==(const unordered_set<Key, HashFun, EqualKey, Allocator>& us1)
+  {
+     return true;
+  };
+};
+
+template <typename Key,
+          typename HashFun   = hash<Key>,
+          typename EqualKey  = equal_to<Key>,
+	  typename Allocator = allocator<Key> >
+class hash_multiset : public unordered_multiset<Key, HashFun, EqualKey, Allocator> 
+{
+public:
+  inline void resize(typename unordered_multiset::size_type n)
+  {
+    this->rehash(n);
+  };
+  inline bool operator==(const unordered_multiset<Key, HashFun, EqualKey, Allocator>& ums1)
+  {
+     return true;
+  };
+};
+
+//#endif // __IBMCPP__
+
+#else
+
+// This environment does not have a hash_set class.
+// Simulate hash_set with set.
+
+#include <set>
+
+using namespace std;
+#ifndef SHEAF_HASH_NAMESPACE
+#define SHEAF_HASH_NAMESPACE std
+#define SHEAF_BEGIN_HASH_NAMESPACE namespace std {
+#define SHEAF_END_HASH_NAMESPACE }
+#endif
+
+namespace std
+{
+  template <class Value> class set_hash { };
+}
+
+struct set_key_test
+{
+public:
+    bool operator()(const char* s1, const char* s2) const
+      {
+	return strcmp(s1, s2) < 0;
+      }
+};
+
+template <class Key, 
+          class HashFun   = set_hash<Key>, 
+          class EqualKey  = less<Key>,
+	  class Allocator = allocator<Key> >
+class hash_set : public set<Key, EqualKey, Allocator> { };
+
+template <class Key, 
+          class HashFun   = set_hash<Key>, 
+          class EqualKey  = less<Key>,
+	  class Allocator = allocator<Key> >
+class hash_multiset : public multiset<Key, EqualKey, Allocator> { };
+
+
+
+#endif // ifdef HAVE_HASH_SET
+
+#endif // ifndef STD_HASH_SET_H

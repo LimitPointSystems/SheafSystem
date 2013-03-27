@@ -1,0 +1,25 @@
+#
+# $RCSfile: vtk_definitions.cmake.in,v $ $Revision: 1.13 $ $Date: 2013/01/12 17:16:50 $
+#
+# Copyright (c) 2013 Limit Point Systems, Inc.
+#
+#
+
+#
+# NOTE: VTK_INCLUDE_DIRS and VTK_LIBRARY_DIRS are defined and set in the
+#       VTKConfig.cmake file included in the VTK distribution.
+#
+
+#
+# True if we want geometry to link against VTK
+#
+
+
+set(VTK_FOUND @VTK_FOUND@ CACHE STRING "Set to true if VTK is found.")
+set(VTK_INC_DIRS @VTK_INCLUDE_DIRS@ CACHE STRING "Include directories for VTK.")
+set(VTK_LIB_DIR @VTK_LIBRARY_DIRS@ CACHE STRING "Link directories for VTK.")
+set(VTK_JAR @VTK_LIBRARY_DIRS@/java/vtk.jar CACHE STRING "Jar file for VTK.")
+
+set(VTK_LIBS vtkCommon vtkCommonJava vtkDICOMParser vtkexpat vtkFiltering vtkGraphics vtkHybrid vtkIO vtkImaging vtkRendering vtkfreetype vtkftgl vtkjpeg vtkpng vtktiff vtkzlib CACHE STRING "VTK libs list")
+
+

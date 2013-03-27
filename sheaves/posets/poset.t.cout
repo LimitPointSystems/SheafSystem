@@ -1,0 +1,1028 @@
+iterating over jims of test_namespace
+3  2  
+test_namespace contains: 
+
+
+#### BEGIN NAMESPACE test_namespace ###################
+
+
+#### BEGIN POSET test_namespace ###################
+
+member pool:
+
+pool 0x81090a0 free_ct = 3 allocated_ct = 5 free_list = 5
+
+member:     0   dof_map:         0x1    upper_cover: 3 			lower_cover: 
+member:     1   dof_map:         0x2    upper_cover: 			lower_cover: 4 
+member:     2   dof_map:   0x81095b0    upper_cover: 4 			lower_cover: 3 
+member:     3   dof_map:   0x8109640    upper_cover: 2 			lower_cover: 0 
+member:     4   dof_map:         0x5    upper_cover: 1 			lower_cover: 2 
+member:     5   dof_map:         0x6    upper_cover: 			lower_cover: 
+member:     6   dof_map:         0x7    upper_cover: 			lower_cover: 
+member:     7   dof_map:  0xffffffff    upper_cover: 			lower_cover: 
+
+subposet pool:
+
+pool 0x81092b0 free_ct = 5 allocated_ct = 3 free_list = 4
+
+member:     0   jims		members: 00110000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     1   test_namespace	members: 11111000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     2   resident	members: 00110000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     3   <void>		
+member:     4   <void>		
+member:     5   <void>		
+member:     6   <void>		
+member:     7   <void>		
+
+poset: test_namespace  handle: 0x8108e78   host: (nil)    index: -1   state: 0x8108fd0    dof count: 1      dof_tuple_ub: 4
+
+name                             index  type    dof   0
+                                             void_ptr  
+-------------------------------- ----- ----- ----------
+bottom                               0   jrm
+top                                  1   jrm
+primitives                           2   jim  0x8108ebc
+primitives_schema                    3   jim  0x810a350
+primitive definitions                4   jrm
+
+#### END POSET test_namespace ###################
+
+
+
+#### BEGIN POSET primitives ###################
+
+member pool:
+
+pool 0x8109818 free_ct = 0 allocated_ct = 8 free_list = -1
+
+member:     0   dof_map:         0x1    upper_cover: 2 3 4 5 6 7 	lower_cover: 
+member:     1   dof_map:         0x2    upper_cover: 			lower_cover: 2 3 4 5 6 7 
+member:     2   dof_map:   0x8109e50    upper_cover: 1 			lower_cover: 0 
+member:     3   dof_map:   0x8109ee0    upper_cover: 1 			lower_cover: 0 
+member:     4   dof_map:   0x8109f70    upper_cover: 1 			lower_cover: 0 
+member:     5   dof_map:   0x810a000    upper_cover: 1 			lower_cover: 0 
+member:     6   dof_map:   0x810a098    upper_cover: 1 			lower_cover: 0 
+member:     7   dof_map:   0x810a130    upper_cover: 1 			lower_cover: 0 
+
+subposet pool:
+
+pool 0x8109a28 free_ct = 13 allocated_ct = 19 free_list = 19
+
+member:     0   jims		members: 00111111  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     1   primitives	members: 11111111  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     2   resident	members: 00000000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     3   __1_table_dofs	members: 00000000  id_map: 0x810b3f8  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:     4   __1_row_dofs	members: 00111111  id_map: 0x810b560  is_dof_sp: 1  dof_ct: 6  offsets:      4,    4,    0     4,    4,    4     8,    4,    8     4,    4,   16     4,    4,   20     4,    4,   24     0,    0,   28
+member:     5   __2_table_dofs	members: 00000000  id_map: 0x810b9d8  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:     6   __2_row_dofs	members: 00100000  id_map: 0x810bbd8  is_dof_sp: 1  dof_ct: 1  offsets:      4,    4,    0     0,    0,    4
+member:     7   __0_table_dofs	members: 00000000  id_map: 0x810be50  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:     8   __0_row_dofs	members: 00000000  id_map: 0x8109d60  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:     9   __3_table_dofs	members: 00000000  id_map: 0x810c390  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:    10   __3_row_dofs	members: 00010000  id_map: 0x810c590  is_dof_sp: 1  dof_ct: 1  offsets:      4,    4,    0     0,    0,    4
+member:    11   __4_table_dofs	members: 00000000  id_map: 0x810c7e8  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:    12   __4_row_dofs	members: 00001000  id_map: 0x810c9b0  is_dof_sp: 1  dof_ct: 1  offsets:      8,    4,    0     0,    0,    8
+member:    13   __5_table_dofs	members: 00000000  id_map: 0x810cc28  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:    14   __5_row_dofs	members: 00000100  id_map: 0x810cdf0  is_dof_sp: 1  dof_ct: 1  offsets:      4,    4,    0     0,    0,    4
+member:    15   __6_table_dofs	members: 00000000  id_map: 0x810d068  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:    16   __6_row_dofs	members: 00000010  id_map: 0x810c018  is_dof_sp: 1  dof_ct: 1  offsets:      4,    4,    0     0,    0,    4
+member:    17   __7_table_dofs	members: 00000000  id_map: 0x810d670  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:    18   __7_row_dofs	members: 00000001  id_map: 0x810d838  is_dof_sp: 1  dof_ct: 1  offsets:      4,    4,    0     0,    0,    4
+member:    19   <void>		
+member:    20   <void>		
+member:    21   <void>		
+member:    22   <void>		
+member:    23   <void>		
+member:    24   <void>		
+member:    25   <void>		
+member:    26   <void>		
+member:    27   <void>		
+member:    28   <void>		
+member:    29   <void>		
+member:    30   <void>		
+member:    31   <void>		
+
+poset: primitives  handle: 0x8108ebc   host: 0x8108e78    index: 2   state: 0x8109748    dof count: 3      dof_tuple_ub: 12
+
+name                             index  type    dof   0    dof   1    dof   2
+                                             size       alignment  index     
+-------------------------------- ----- ----- ---------- ---------- ----------
+bottom                               0   jrm
+top                                  1   jrm
+size_t                               2   jim          4          4          2
+int                                  3   jim          4          4          3
+double                               4   jim          8          4          4
+char_ptr                             5   jim          4          4          5
+void_ptr                             6   jim          4          4          6
+poset_member_index                   7   jim          4          4          7
+
+#### END POSET primitives ###################
+
+
+
+#### BEGIN POSET primitives_schema ###################
+
+member pool:
+
+pool 0x810a4a0 free_ct = 3 allocated_ct = 5 free_list = 5
+
+member:     0   dof_map:         0x1    upper_cover: 2 3 4 		lower_cover: 
+member:     1   dof_map:         0x2    upper_cover: 			lower_cover: 2 3 4 
+member:     2   dof_map:   0x8109e50    upper_cover: 1 			lower_cover: 0 
+member:     3   dof_map:   0x8109e50    upper_cover: 1 			lower_cover: 0 
+member:     4   dof_map:   0x8109ee0    upper_cover: 1 			lower_cover: 0 
+member:     5   dof_map:         0x6    upper_cover: 			lower_cover: 
+member:     6   dof_map:         0x7    upper_cover: 			lower_cover: 
+member:     7   dof_map:  0xffffffff    upper_cover: 			lower_cover: 
+
+subposet pool:
+
+pool 0x810a600 free_ct = 3 allocated_ct = 5 free_list = 5
+
+member:     0   jims		members: 00111000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     1   primitives_schemamembers: 11111000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     2   resident	members: 00000000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     3   __1_table_dofs	members: 00000000  id_map: 0x810adc0  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:     4   __1_row_dofs	members: 00111000  id_map: 0x810aef0  is_dof_sp: 1  dof_ct: 3  offsets:      4,    4,    0     4,    4,    4     4,    4,    8     0,    0,   12
+member:     5   <void>		
+member:     6   <void>		
+member:     7   <void>		
+
+poset: primitives_schema  handle: 0x810a350   host: 0x8108e78    index: 3   state: 0x810a3d0    dof count: 3      dof_tuple_ub: 12
+
+name                             index  type    dof   0    dof   1    dof   2
+                                             size       alignment  index     
+-------------------------------- ----- ----- ---------- ---------- ----------
+bottom                               0   jrm
+top                                  1   jrm
+size                                 2   jim          4          4          2
+alignment                            3   jim          4          4          2
+index                                4   jim          4          4          3
+
+#### END POSET primitives_schema ###################
+
+#### END NAMESPACE test_namespace ###################
+
+primitives poset contains: 
+
+
+#### BEGIN POSET primitives ###################
+
+member pool:
+
+pool 0x8109818 free_ct = 0 allocated_ct = 8 free_list = -1
+
+member:     0   dof_map:         0x1    upper_cover: 2 3 4 5 6 7 	lower_cover: 
+member:     1   dof_map:         0x2    upper_cover: 			lower_cover: 2 3 4 5 6 7 
+member:     2   dof_map:   0x8109e50    upper_cover: 1 			lower_cover: 0 
+member:     3   dof_map:   0x8109ee0    upper_cover: 1 			lower_cover: 0 
+member:     4   dof_map:   0x8109f70    upper_cover: 1 			lower_cover: 0 
+member:     5   dof_map:   0x810a000    upper_cover: 1 			lower_cover: 0 
+member:     6   dof_map:   0x810a098    upper_cover: 1 			lower_cover: 0 
+member:     7   dof_map:   0x810a130    upper_cover: 1 			lower_cover: 0 
+
+subposet pool:
+
+pool 0x8109a28 free_ct = 13 allocated_ct = 19 free_list = 19
+
+member:     0   jims		members: 00111111  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     1   primitives	members: 11111111  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     2   resident	members: 00000000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     3   __1_table_dofs	members: 00000000  id_map: 0x810b3f8  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:     4   __1_row_dofs	members: 00111111  id_map: 0x810b560  is_dof_sp: 1  dof_ct: 6  offsets:      4,    4,    0     4,    4,    4     8,    4,    8     4,    4,   16     4,    4,   20     4,    4,   24     0,    0,   28
+member:     5   __2_table_dofs	members: 00000000  id_map: 0x810b9d8  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:     6   __2_row_dofs	members: 00100000  id_map: 0x810bbd8  is_dof_sp: 1  dof_ct: 1  offsets:      4,    4,    0     0,    0,    4
+member:     7   __0_table_dofs	members: 00000000  id_map: 0x810be50  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:     8   __0_row_dofs	members: 00000000  id_map: 0x8109d60  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:     9   __3_table_dofs	members: 00000000  id_map: 0x810c390  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:    10   __3_row_dofs	members: 00010000  id_map: 0x810c590  is_dof_sp: 1  dof_ct: 1  offsets:      4,    4,    0     0,    0,    4
+member:    11   __4_table_dofs	members: 00000000  id_map: 0x810c7e8  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:    12   __4_row_dofs	members: 00001000  id_map: 0x810c9b0  is_dof_sp: 1  dof_ct: 1  offsets:      8,    4,    0     0,    0,    8
+member:    13   __5_table_dofs	members: 00000000  id_map: 0x810cc28  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:    14   __5_row_dofs	members: 00000100  id_map: 0x810cdf0  is_dof_sp: 1  dof_ct: 1  offsets:      4,    4,    0     0,    0,    4
+member:    15   __6_table_dofs	members: 00000000  id_map: 0x810d068  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:    16   __6_row_dofs	members: 00000010  id_map: 0x810c018  is_dof_sp: 1  dof_ct: 1  offsets:      4,    4,    0     0,    0,    4
+member:    17   __7_table_dofs	members: 00000000  id_map: 0x810d670  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:    18   __7_row_dofs	members: 00000001  id_map: 0x810d838  is_dof_sp: 1  dof_ct: 1  offsets:      4,    4,    0     0,    0,    4
+member:    19   <void>		
+member:    20   <void>		
+member:    21   <void>		
+member:    22   <void>		
+member:    23   <void>		
+member:    24   <void>		
+member:    25   <void>		
+member:    26   <void>		
+member:    27   <void>		
+member:    28   <void>		
+member:    29   <void>		
+member:    30   <void>		
+member:    31   <void>		
+
+poset: primitives  handle: 0x8108ebc   host: 0x8108e78    index: 2   state: 0x8109748    dof count: 3      dof_tuple_ub: 12
+
+name                             index  type    dof   0    dof   1    dof   2
+                                             size       alignment  index     
+-------------------------------- ----- ----- ---------- ---------- ----------
+bottom                               0   jrm
+top                                  1   jrm
+size_t                               2   jim          4          4          2
+int                                  3   jim          4          4          3
+double                               4   jim          8          4          4
+char_ptr                             5   jim          4          4          5
+void_ptr                             6   jim          4          4          6
+poset_member_index                   7   jim          4          4          7
+
+#### END POSET primitives ###################
+
+primitives poset schema contains:
+
+
+#### BEGIN POSET primitives_schema ###################
+
+member pool:
+
+pool 0x810a4a0 free_ct = 3 allocated_ct = 5 free_list = 5
+
+member:     0   dof_map:         0x1    upper_cover: 2 3 4 		lower_cover: 
+member:     1   dof_map:         0x2    upper_cover: 			lower_cover: 2 3 4 
+member:     2   dof_map:   0x8109e50    upper_cover: 1 			lower_cover: 0 
+member:     3   dof_map:   0x8109e50    upper_cover: 1 			lower_cover: 0 
+member:     4   dof_map:   0x8109ee0    upper_cover: 1 			lower_cover: 0 
+member:     5   dof_map:         0x6    upper_cover: 			lower_cover: 
+member:     6   dof_map:         0x7    upper_cover: 			lower_cover: 
+member:     7   dof_map:  0xffffffff    upper_cover: 			lower_cover: 
+
+subposet pool:
+
+pool 0x810a600 free_ct = 3 allocated_ct = 5 free_list = 5
+
+member:     0   jims		members: 00111000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     1   primitives_schemamembers: 11111000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     2   resident	members: 00000000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     3   __1_table_dofs	members: 00000000  id_map: 0x810adc0  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:     4   __1_row_dofs	members: 00111000  id_map: 0x810aef0  is_dof_sp: 1  dof_ct: 3  offsets:      4,    4,    0     4,    4,    4     4,    4,    8     0,    0,   12
+member:     5   <void>		
+member:     6   <void>		
+member:     7   <void>		
+
+poset: primitives_schema  handle: 0x810a350   host: 0x8108e78    index: 3   state: 0x810a3d0    dof count: 3      dof_tuple_ub: 12
+
+name                             index  type    dof   0    dof   1    dof   2
+                                             size       alignment  index     
+-------------------------------- ----- ----- ---------- ---------- ----------
+bottom                               0   jrm
+top                                  1   jrm
+size                                 2   jim          4          4          2
+alignment                            3   jim          4          4          2
+index                                4   jim          4          4          3
+
+#### END POSET primitives_schema ###################
+
+
+R2_schema contains:
+
+
+#### BEGIN POSET R2_schema ###################
+
+member pool:
+
+pool 0x8110628 free_ct = 12 allocated_ct = 4 free_list = 4
+
+member:     0   dof_map:         0x1    upper_cover: 2 3 			lower_cover: 
+member:     1   dof_map:         0x2    upper_cover: 			lower_cover: 2 3 
+member:     2   dof_map:   0x8109f70    upper_cover: 1 			lower_cover: 0 
+member:     3   dof_map:   0x8109f70    upper_cover: 1 			lower_cover: 0 
+member:     4   dof_map:         0x5    upper_cover: 			lower_cover: 
+member:     5   dof_map:         0x6    upper_cover: 			lower_cover: 
+member:     6   dof_map:         0x7    upper_cover: 			lower_cover: 
+member:     7   dof_map:         0x8    upper_cover: 			lower_cover: 
+member:     8   dof_map:         0x9    upper_cover: 			lower_cover: 
+member:     9   dof_map:         0xa    upper_cover: 			lower_cover: 
+member:    10   dof_map:         0xb    upper_cover: 			lower_cover: 
+member:    11   dof_map:         0xc    upper_cover: 			lower_cover: 
+member:    12   dof_map:         0xd    upper_cover: 			lower_cover: 
+member:    13   dof_map:         0xe    upper_cover: 			lower_cover: 
+member:    14   dof_map:         0xf    upper_cover: 			lower_cover: 
+member:    15   dof_map:  0xffffffff    upper_cover: 			lower_cover: 
+
+subposet pool:
+
+pool 0x8110918 free_ct = 5 allocated_ct = 11 free_list = 11
+
+member:     0   jims		members: 0011000000000000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     1   R2_schema	members: 1111000000000000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     2   resident	members: 0000000000000000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     3   __1_table_dofs	members: 0000000000000000  id_map: 0x8111168  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:     4   __1_row_dofs	members: 0011000000000000  id_map: 0x81112d0  is_dof_sp: 1  dof_ct: 2  offsets:      8,    4,    0     8,    4,    8     0,    0,   16
+member:     5   __2_table_dofs	members: 0000000000000000  id_map: 0x81115f8  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:     6   __2_row_dofs	members: 0010000000000000  id_map: 0x81117c0  is_dof_sp: 1  dof_ct: 1  offsets:      8,    4,    0     0,    0,    8
+member:     7   __0_table_dofs	members: 0000000000000000  id_map: 0x8111a58  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:     8   __0_row_dofs	members: 0000000000000000  id_map: 0x8110e08  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:     9   __3_table_dofs	members: 0000000000000000  id_map: 0x8111f98  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:    10   __3_row_dofs	members: 0001000000000000  id_map: 0x8112198  is_dof_sp: 1  dof_ct: 1  offsets:      8,    4,    0     0,    0,    8
+member:    11   <void>		
+member:    12   <void>		
+member:    13   <void>		
+member:    14   <void>		
+member:    15   <void>		
+
+poset: R2_schema  handle: 0x8110048   host: 0x8108e78    index: 5   state: 0x8110558    dof count: 3      dof_tuple_ub: 12
+
+name                             index  type    dof   0    dof   1    dof   2
+                                             size       alignment  index     
+-------------------------------- ----- ----- ---------- ---------- ----------
+bottom                               0   jrm
+top                                  1   jrm
+x_component                          2   jim          8          4          4
+y_component                          3   jim          8          4          4
+
+#### END POSET R2_schema ###################
+
+test_namespace contains: 
+
+
+#### BEGIN NAMESPACE poset.t ###################
+
+
+#### BEGIN POSET poset.t ###################
+
+member pool:
+
+pool 0x81090a0 free_ct = 2 allocated_ct = 6 free_list = 6
+
+member:     0   dof_map:         0x1    upper_cover: 3 			lower_cover: 
+member:     1   dof_map:         0x2    upper_cover: 			lower_cover: 4 5 
+member:     2   dof_map:   0x81095b0    upper_cover: 4 			lower_cover: 3 
+member:     3   dof_map:   0x8109640    upper_cover: 2 5 			lower_cover: 0 
+member:     4   dof_map:         0x5    upper_cover: 1 			lower_cover: 2 
+member:     5   dof_map:   0x8110c90    upper_cover: 1 			lower_cover: 3 
+member:     6   dof_map:         0x7    upper_cover: 			lower_cover: 
+member:     7   dof_map:  0xffffffff    upper_cover: 			lower_cover: 
+
+subposet pool:
+
+pool 0x81092b0 free_ct = 5 allocated_ct = 3 free_list = 4
+
+member:     0   jims		members: 00110100  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     1   poset.t		members: 11111100  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     2   resident	members: 00110100  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     3   <void>		
+member:     4   <void>		
+member:     5   <void>		
+member:     6   <void>		
+member:     7   <void>		
+
+poset: poset.t  handle: 0x8108e78   host: (nil)    index: -1   state: 0x8108fd0    dof count: 1      dof_tuple_ub: 4
+
+name                             index  type    dof   0
+                                             void_ptr  
+-------------------------------- ----- ----- ----------
+bottom                               0   jrm
+top                                  1   jrm
+primitives                           2   jim  0x8108ebc
+primitives_schema                    3   jim  0x810a350
+primitive definitions                4   jrm
+R2_schema                            5   jim  0x8110048
+
+#### END POSET poset.t ###################
+
+
+
+#### BEGIN POSET primitives ###################
+
+member pool:
+
+pool 0x8109818 free_ct = 0 allocated_ct = 8 free_list = -1
+
+member:     0   dof_map:         0x1    upper_cover: 2 3 4 5 6 7 	lower_cover: 
+member:     1   dof_map:         0x2    upper_cover: 			lower_cover: 2 3 4 5 6 7 
+member:     2   dof_map:   0x8109e50    upper_cover: 1 			lower_cover: 0 
+member:     3   dof_map:   0x8109ee0    upper_cover: 1 			lower_cover: 0 
+member:     4   dof_map:   0x8109f70    upper_cover: 1 			lower_cover: 0 
+member:     5   dof_map:   0x810a000    upper_cover: 1 			lower_cover: 0 
+member:     6   dof_map:   0x810a098    upper_cover: 1 			lower_cover: 0 
+member:     7   dof_map:   0x810a130    upper_cover: 1 			lower_cover: 0 
+
+subposet pool:
+
+pool 0x8109a28 free_ct = 13 allocated_ct = 19 free_list = 19
+
+member:     0   jims		members: 00111111  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     1   primitives	members: 11111111  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     2   resident	members: 00000000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     3   __1_table_dofs	members: 00000000  id_map: 0x810b3f8  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:     4   __1_row_dofs	members: 00111111  id_map: 0x810b560  is_dof_sp: 1  dof_ct: 6  offsets:      4,    4,    0     4,    4,    4     8,    4,    8     4,    4,   16     4,    4,   20     4,    4,   24     0,    0,   28
+member:     5   __2_table_dofs	members: 00000000  id_map: 0x810b9d8  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:     6   __2_row_dofs	members: 00100000  id_map: 0x810bbd8  is_dof_sp: 1  dof_ct: 1  offsets:      4,    4,    0     0,    0,    4
+member:     7   __0_table_dofs	members: 00000000  id_map: 0x810be50  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:     8   __0_row_dofs	members: 00000000  id_map: 0x8109d60  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:     9   __3_table_dofs	members: 00000000  id_map: 0x810c390  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:    10   __3_row_dofs	members: 00010000  id_map: 0x810c590  is_dof_sp: 1  dof_ct: 1  offsets:      4,    4,    0     0,    0,    4
+member:    11   __4_table_dofs	members: 00000000  id_map: 0x810c7e8  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:    12   __4_row_dofs	members: 00001000  id_map: 0x810c9b0  is_dof_sp: 1  dof_ct: 1  offsets:      8,    4,    0     0,    0,    8
+member:    13   __5_table_dofs	members: 00000000  id_map: 0x810cc28  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:    14   __5_row_dofs	members: 00000100  id_map: 0x810cdf0  is_dof_sp: 1  dof_ct: 1  offsets:      4,    4,    0     0,    0,    4
+member:    15   __6_table_dofs	members: 00000000  id_map: 0x810d068  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:    16   __6_row_dofs	members: 00000010  id_map: 0x810c018  is_dof_sp: 1  dof_ct: 1  offsets:      4,    4,    0     0,    0,    4
+member:    17   __7_table_dofs	members: 00000000  id_map: 0x810d670  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:    18   __7_row_dofs	members: 00000001  id_map: 0x810d838  is_dof_sp: 1  dof_ct: 1  offsets:      4,    4,    0     0,    0,    4
+member:    19   <void>		
+member:    20   <void>		
+member:    21   <void>		
+member:    22   <void>		
+member:    23   <void>		
+member:    24   <void>		
+member:    25   <void>		
+member:    26   <void>		
+member:    27   <void>		
+member:    28   <void>		
+member:    29   <void>		
+member:    30   <void>		
+member:    31   <void>		
+
+poset: primitives  handle: 0x8108ebc   host: 0x8108e78    index: 2   state: 0x8109748    dof count: 3      dof_tuple_ub: 12
+
+name                             index  type    dof   0    dof   1    dof   2
+                                             size       alignment  index     
+-------------------------------- ----- ----- ---------- ---------- ----------
+bottom                               0   jrm
+top                                  1   jrm
+size_t                               2   jim          4          4          2
+int                                  3   jim          4          4          3
+double                               4   jim          8          4          4
+char_ptr                             5   jim          4          4          5
+void_ptr                             6   jim          4          4          6
+poset_member_index                   7   jim          4          4          7
+
+#### END POSET primitives ###################
+
+
+
+#### BEGIN POSET primitives_schema ###################
+
+member pool:
+
+pool 0x810a4a0 free_ct = 3 allocated_ct = 5 free_list = 5
+
+member:     0   dof_map:         0x1    upper_cover: 2 3 4 		lower_cover: 
+member:     1   dof_map:         0x2    upper_cover: 			lower_cover: 2 3 4 
+member:     2   dof_map:   0x8109e50    upper_cover: 1 			lower_cover: 0 
+member:     3   dof_map:   0x8109e50    upper_cover: 1 			lower_cover: 0 
+member:     4   dof_map:   0x8109ee0    upper_cover: 1 			lower_cover: 0 
+member:     5   dof_map:         0x6    upper_cover: 			lower_cover: 
+member:     6   dof_map:         0x7    upper_cover: 			lower_cover: 
+member:     7   dof_map:  0xffffffff    upper_cover: 			lower_cover: 
+
+subposet pool:
+
+pool 0x810a600 free_ct = 3 allocated_ct = 5 free_list = 5
+
+member:     0   jims		members: 00111000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     1   primitives_schemamembers: 11111000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     2   resident	members: 00000000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     3   __1_table_dofs	members: 00000000  id_map: 0x810adc0  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:     4   __1_row_dofs	members: 00111000  id_map: 0x810aef0  is_dof_sp: 1  dof_ct: 3  offsets:      4,    4,    0     4,    4,    4     4,    4,    8     0,    0,   12
+member:     5   <void>		
+member:     6   <void>		
+member:     7   <void>		
+
+poset: primitives_schema  handle: 0x810a350   host: 0x8108e78    index: 3   state: 0x810a3d0    dof count: 3      dof_tuple_ub: 12
+
+name                             index  type    dof   0    dof   1    dof   2
+                                             size       alignment  index     
+-------------------------------- ----- ----- ---------- ---------- ----------
+bottom                               0   jrm
+top                                  1   jrm
+size                                 2   jim          4          4          2
+alignment                            3   jim          4          4          2
+index                                4   jim          4          4          3
+
+#### END POSET primitives_schema ###################
+
+
+
+#### BEGIN POSET R2_schema ###################
+
+member pool:
+
+pool 0x8110628 free_ct = 12 allocated_ct = 4 free_list = 4
+
+member:     0   dof_map:         0x1    upper_cover: 2 3 			lower_cover: 
+member:     1   dof_map:         0x2    upper_cover: 			lower_cover: 2 3 
+member:     2   dof_map:   0x8109f70    upper_cover: 1 			lower_cover: 0 
+member:     3   dof_map:   0x8109f70    upper_cover: 1 			lower_cover: 0 
+member:     4   dof_map:         0x5    upper_cover: 			lower_cover: 
+member:     5   dof_map:         0x6    upper_cover: 			lower_cover: 
+member:     6   dof_map:         0x7    upper_cover: 			lower_cover: 
+member:     7   dof_map:         0x8    upper_cover: 			lower_cover: 
+member:     8   dof_map:         0x9    upper_cover: 			lower_cover: 
+member:     9   dof_map:         0xa    upper_cover: 			lower_cover: 
+member:    10   dof_map:         0xb    upper_cover: 			lower_cover: 
+member:    11   dof_map:         0xc    upper_cover: 			lower_cover: 
+member:    12   dof_map:         0xd    upper_cover: 			lower_cover: 
+member:    13   dof_map:         0xe    upper_cover: 			lower_cover: 
+member:    14   dof_map:         0xf    upper_cover: 			lower_cover: 
+member:    15   dof_map:  0xffffffff    upper_cover: 			lower_cover: 
+
+subposet pool:
+
+pool 0x8110918 free_ct = 5 allocated_ct = 11 free_list = 11
+
+member:     0   jims		members: 0011000000000000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     1   R2_schema	members: 1111000000000000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     2   resident	members: 0000000000000000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     3   __1_table_dofs	members: 0000000000000000  id_map: 0x8111168  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:     4   __1_row_dofs	members: 0011000000000000  id_map: 0x81112d0  is_dof_sp: 1  dof_ct: 2  offsets:      8,    4,    0     8,    4,    8     0,    0,   16
+member:     5   __2_table_dofs	members: 0000000000000000  id_map: 0x81115f8  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:     6   __2_row_dofs	members: 0010000000000000  id_map: 0x81117c0  is_dof_sp: 1  dof_ct: 1  offsets:      8,    4,    0     0,    0,    8
+member:     7   __0_table_dofs	members: 0000000000000000  id_map: 0x8111a58  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:     8   __0_row_dofs	members: 0000000000000000  id_map: 0x8110e08  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:     9   __3_table_dofs	members: 0000000000000000  id_map: 0x8111f98  is_dof_sp: 1  dof_ct: 0  offsets:      0,    0,    0
+member:    10   __3_row_dofs	members: 0001000000000000  id_map: 0x8112198  is_dof_sp: 1  dof_ct: 1  offsets:      8,    4,    0     0,    0,    8
+member:    11   <void>		
+member:    12   <void>		
+member:    13   <void>		
+member:    14   <void>		
+member:    15   <void>		
+
+poset: R2_schema  handle: 0x8110048   host: 0x8108e78    index: 5   state: 0x8110558    dof count: 3      dof_tuple_ub: 12
+
+name                             index  type    dof   0    dof   1    dof   2
+                                             size       alignment  index     
+-------------------------------- ----- ----- ---------- ---------- ----------
+bottom                               0   jrm
+top                                  1   jrm
+x_component                          2   jim          8          4          4
+y_component                          3   jim          8          4          4
+
+#### END POSET R2_schema ###################
+
+#### END NAMESPACE poset.t ###################
+
+R2:
+
+
+#### BEGIN POSET R2 ###################
+
+member pool:
+
+pool 0x8114538 free_ct = 11 allocated_ct = 5 free_list = 5
+
+member:     0   dof_map:         0x1    upper_cover: 2 3 4 		lower_cover: 
+member:     1   dof_map:         0x2    upper_cover: 			lower_cover: 2 3 4 
+member:     2   dof_map:   0x8114c50    upper_cover: 1 			lower_cover: 0 
+member:     3   dof_map:   0x8114ce8    upper_cover: 1 			lower_cover: 0 
+member:     4   dof_map:   0x8114d80    upper_cover: 1 			lower_cover: 0 
+member:     5   dof_map:         0x6    upper_cover: 			lower_cover: 
+member:     6   dof_map:         0x7    upper_cover: 			lower_cover: 
+member:     7   dof_map:         0x8    upper_cover: 			lower_cover: 
+member:     8   dof_map:         0x9    upper_cover: 			lower_cover: 
+member:     9   dof_map:         0xa    upper_cover: 			lower_cover: 
+member:    10   dof_map:         0xb    upper_cover: 			lower_cover: 
+member:    11   dof_map:         0xc    upper_cover: 			lower_cover: 
+member:    12   dof_map:         0xd    upper_cover: 			lower_cover: 
+member:    13   dof_map:         0xe    upper_cover: 			lower_cover: 
+member:    14   dof_map:         0xf    upper_cover: 			lower_cover: 
+member:    15   dof_map:  0xffffffff    upper_cover: 			lower_cover: 
+
+subposet pool:
+
+pool 0x8114808 free_ct = 1 allocated_ct = 3 free_list = 3
+
+member:     0   jims		members: 0011100000000000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     1   R2		members: 1111100000000000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     2   resident	members: 0000000000000000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     3   <void>		
+
+poset: R2  handle: 0x8114138   host: 0x8108e78    index: 6   state: 0x810dd40    dof count: 2      dof_tuple_ub: 16
+
+name                             index  type    dof   0    dof   1
+                                             x_componen y_componen
+-------------------------------- ----- ----- ---------- ----------
+bottom                               0   jrm
+top                                  1   jrm
+zero                                 2   jim          0          0
+i-hat                                3   jim          1          0
+j-hat                                4   jim          0          1
+
+#### END POSET R2 ###################
+
+R2_schema.is_schema() == 1
+R2.is_schema() == 0
+*** ENTERING NEW_JIM_TEST *************************
+
+Cells poset contains:
+
+
+#### BEGIN POSET cells ###################
+
+member pool:
+
+pool 0x8115760 free_ct = 5 allocated_ct = 11 free_list = 11
+
+member:     0   dof_map:         0x1    upper_cover: 2 3 8 9 10 		lower_cover: 
+member:     1   dof_map:         0x2    upper_cover: 			lower_cover: 2 3 4 
+member:     2   dof_map:   0x8115f80    upper_cover: 1 			lower_cover: 0 
+member:     3   dof_map:   0x8116048    upper_cover: 1 			lower_cover: 0 
+member:     4   dof_map:   0x8116110    upper_cover: 1 			lower_cover: 5 6 7 
+member:     5   dof_map:   0x81161e0    upper_cover: 4 			lower_cover: 8 9 
+member:     6   dof_map:   0x81162a0    upper_cover: 4 			lower_cover: 8 10 
+member:     7   dof_map:   0x8116360    upper_cover: 4 			lower_cover: 9 10 
+member:     8   dof_map:   0x8116420    upper_cover: 5 6 			lower_cover: 0 
+member:     9   dof_map:   0x81164e0    upper_cover: 5 7 			lower_cover: 0 
+member:    10   dof_map:   0x81165a0    upper_cover: 6 7 			lower_cover: 0 
+member:    11   dof_map:         0xc    upper_cover: 			lower_cover: 
+member:    12   dof_map:         0xd    upper_cover: 			lower_cover: 
+member:    13   dof_map:         0xe    upper_cover: 			lower_cover: 
+member:    14   dof_map:         0xf    upper_cover: 			lower_cover: 
+member:    15   dof_map:  0xffffffff    upper_cover: 			lower_cover: 
+
+subposet pool:
+
+pool 0x8115ac0 free_ct = 1 allocated_ct = 3 free_list = 3
+
+member:     0   jims		members: 0011111111100000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     1   cells		members: 1111111111100000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     2   resident	members: 0000000000000000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     3   <void>		
+
+poset: cells  handle: 0x81155c8   host: 0x8108e78    index: 7   state: 0x8115690    dof count: 1      dof_tuple_ub: 4
+
+name                             index  type    dof   0
+                                             poset_memb
+-------------------------------- ----- ----- ----------
+bottom                               0   jrm
+top                                  1   jrm
+standard vertex                      2   jim          2
+standard edge                        3   jim          3
+standard triangle                    4   jim          4
+e0                                   5   jim          3
+e1                                   6   jim          3
+e2                                   7   jim          3
+v0                                   8   jim          2
+v1                                   9   jim          2
+v2                                  10   jim          2
+
+#### END POSET cells ###################
+
+*** LEAVING NEW_JIM_TEST *************************
+ *** ENTERING NEW_JRM_TEST *********************
+
+Cells lattice with 2 vertexs jrm:
+
+
+#### BEGIN POSET cells ###################
+
+member pool:
+
+pool 0x8115760 free_ct = 4 allocated_ct = 12 free_list = 12
+
+member:     0   dof_map:         0x1    upper_cover: 2 3 8 9 10 		lower_cover: 
+member:     1   dof_map:         0x2    upper_cover: 			lower_cover: 2 3 4 
+member:     2   dof_map:   0x8115f80    upper_cover: 1 			lower_cover: 0 
+member:     3   dof_map:   0x8116048    upper_cover: 1 			lower_cover: 0 
+member:     4   dof_map:   0x8116110    upper_cover: 1 			lower_cover: 5 6 7 
+member:     5   dof_map:   0x81161e0    upper_cover: 4 			lower_cover: 11 
+member:     6   dof_map:   0x81162a0    upper_cover: 4 			lower_cover: 8 10 
+member:     7   dof_map:   0x8116360    upper_cover: 4 			lower_cover: 9 10 
+member:     8   dof_map:   0x8116420    upper_cover: 6 11 			lower_cover: 0 
+member:     9   dof_map:   0x81164e0    upper_cover: 7 11 			lower_cover: 0 
+member:    10   dof_map:   0x81165a0    upper_cover: 6 7 			lower_cover: 0 
+member:    11   dof_map:         0xc    upper_cover: 5 			lower_cover: 8 9 
+member:    12   dof_map:         0xd    upper_cover: 			lower_cover: 
+member:    13   dof_map:         0xe    upper_cover: 			lower_cover: 
+member:    14   dof_map:         0xf    upper_cover: 			lower_cover: 
+member:    15   dof_map:  0xffffffff    upper_cover: 			lower_cover: 
+
+subposet pool:
+
+pool 0x8115ac0 free_ct = 5 allocated_ct = 3 free_list = 4
+
+member:     0   jims		members: 0011111111100000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     1   cells		members: 1111111111110000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     2   resident	members: 0000000000000000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     3   <void>		
+member:     4   <void>		
+member:     5   <void>		
+member:     6   <void>		
+member:     7   <void>		
+
+poset: cells  handle: 0x81155c8   host: 0x8108e78    index: 7   state: 0x8115690    dof count: 1      dof_tuple_ub: 4
+
+name                             index  type    dof   0
+                                             poset_memb
+-------------------------------- ----- ----- ----------
+bottom                               0   jrm
+top                                  1   jrm
+standard vertex                      2   jim          2
+standard edge                        3   jim          3
+standard triangle                    4   jim          4
+e0                                   5   jim          3
+e1                                   6   jim          3
+e2                                   7   jim          3
+v0                                   8   jim          2
+v1                                   9   jim          2
+v2                                  10   jim          2
+2 vertices                          11   jrm
+
+#### END POSET cells ###################
+
+Cells lattice with other 2 vertexs jrm:
+
+
+#### BEGIN POSET cells ###################
+
+member pool:
+
+pool 0x8115760 free_ct = 3 allocated_ct = 13 free_list = 13
+
+member:     0   dof_map:         0x1    upper_cover: 2 3 8 9 10 		lower_cover: 
+member:     1   dof_map:         0x2    upper_cover: 			lower_cover: 2 3 4 
+member:     2   dof_map:   0x8115f80    upper_cover: 1 			lower_cover: 0 
+member:     3   dof_map:   0x8116048    upper_cover: 1 			lower_cover: 0 
+member:     4   dof_map:   0x8116110    upper_cover: 1 			lower_cover: 5 6 7 
+member:     5   dof_map:   0x81161e0    upper_cover: 4 			lower_cover: 11 
+member:     6   dof_map:   0x81162a0    upper_cover: 4 			lower_cover: 8 10 
+member:     7   dof_map:   0x8116360    upper_cover: 4 			lower_cover: 12 
+member:     8   dof_map:   0x8116420    upper_cover: 6 11 			lower_cover: 0 
+member:     9   dof_map:   0x81164e0    upper_cover: 11 12 			lower_cover: 0 
+member:    10   dof_map:   0x81165a0    upper_cover: 6 12 			lower_cover: 0 
+member:    11   dof_map:         0xc    upper_cover: 5 			lower_cover: 8 9 
+member:    12   dof_map:         0xd    upper_cover: 7 			lower_cover: 9 10 
+member:    13   dof_map:         0xe    upper_cover: 			lower_cover: 
+member:    14   dof_map:         0xf    upper_cover: 			lower_cover: 
+member:    15   dof_map:  0xffffffff    upper_cover: 			lower_cover: 
+
+subposet pool:
+
+pool 0x8115ac0 free_ct = 5 allocated_ct = 3 free_list = 3
+
+member:     0   jims		members: 0011111111100000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     1   cells		members: 1111111111111000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     2   resident	members: 0000000000000000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     3   <void>		
+member:     4   <void>		
+member:     5   <void>		
+member:     6   <void>		
+member:     7   <void>		
+
+poset: cells  handle: 0x81155c8   host: 0x8108e78    index: 7   state: 0x8115690    dof count: 1      dof_tuple_ub: 4
+
+name                             index  type    dof   0
+                                             poset_memb
+-------------------------------- ----- ----- ----------
+bottom                               0   jrm
+top                                  1   jrm
+standard vertex                      2   jim          2
+standard edge                        3   jim          3
+standard triangle                    4   jim          4
+e0                                   5   jim          3
+e1                                   6   jim          3
+e2                                   7   jim          3
+v0                                   8   jim          2
+v1                                   9   jim          2
+v2                                  10   jim          2
+2 vertices                          11   jrm
+other 2 vertices                    12   jrm
+
+#### END POSET cells ###################
+
+Cells lattice with vertex pairs joined jrm:
+
+
+#### BEGIN POSET cells ###################
+
+member pool:
+
+pool 0x8115760 free_ct = 2 allocated_ct = 14 free_list = 14
+
+member:     0   dof_map:         0x1    upper_cover: 2 3 8 9 10 		lower_cover: 
+member:     1   dof_map:         0x2    upper_cover: 			lower_cover: 2 3 4 
+member:     2   dof_map:   0x8115f80    upper_cover: 1 			lower_cover: 0 
+member:     3   dof_map:   0x8116048    upper_cover: 1 			lower_cover: 0 
+member:     4   dof_map:   0x8116110    upper_cover: 1 			lower_cover: 5 6 7 13 
+member:     5   dof_map:   0x81161e0    upper_cover: 4 			lower_cover: 11 
+member:     6   dof_map:   0x81162a0    upper_cover: 4 			lower_cover: 8 10 
+member:     7   dof_map:   0x8116360    upper_cover: 4 			lower_cover: 12 
+member:     8   dof_map:   0x8116420    upper_cover: 6 11 			lower_cover: 0 
+member:     9   dof_map:   0x81164e0    upper_cover: 11 12 			lower_cover: 0 
+member:    10   dof_map:   0x81165a0    upper_cover: 6 12 			lower_cover: 0 
+member:    11   dof_map:         0xc    upper_cover: 5 13 			lower_cover: 8 9 
+member:    12   dof_map:         0xd    upper_cover: 7 13 			lower_cover: 9 10 
+member:    13   dof_map:         0xe    upper_cover: 4 			lower_cover: 11 12 
+member:    14   dof_map:         0xf    upper_cover: 			lower_cover: 
+member:    15   dof_map:  0xffffffff    upper_cover: 			lower_cover: 
+
+subposet pool:
+
+pool 0x8115ac0 free_ct = 5 allocated_ct = 3 free_list = 4
+
+member:     0   jims		members: 0011111111100000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     1   cells		members: 1111111111111100  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     2   resident	members: 0000000000000000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     3   <void>		
+member:     4   <void>		
+member:     5   <void>		
+member:     6   <void>		
+member:     7   <void>		
+
+poset: cells  handle: 0x81155c8   host: 0x8108e78    index: 7   state: 0x8115690    dof count: 1      dof_tuple_ub: 4
+
+name                             index  type    dof   0
+                                             poset_memb
+-------------------------------- ----- ----- ----------
+bottom                               0   jrm
+top                                  1   jrm
+standard vertex                      2   jim          2
+standard edge                        3   jim          3
+standard triangle                    4   jim          4
+e0                                   5   jim          3
+e1                                   6   jim          3
+e2                                   7   jim          3
+v0                                   8   jim          2
+v1                                   9   jim          2
+v2                                  10   jim          2
+2 vertices                          11   jrm
+other 2 vertices                    12   jrm
+2 join other 2                      13   jrm
+
+#### END POSET cells ###################
+
+Cells lattice with vertexs jrm:
+
+
+#### BEGIN POSET cells ###################
+
+member pool:
+
+pool 0x8115760 free_ct = 1 allocated_ct = 15 free_list = 15
+
+member:     0   dof_map:         0x1    upper_cover: 2 3 8 9 10 		lower_cover: 
+member:     1   dof_map:         0x2    upper_cover: 			lower_cover: 2 3 4 
+member:     2   dof_map:   0x8115f80    upper_cover: 1 			lower_cover: 0 
+member:     3   dof_map:   0x8116048    upper_cover: 1 			lower_cover: 0 
+member:     4   dof_map:   0x8116110    upper_cover: 1 			lower_cover: 5 6 7 14 
+member:     5   dof_map:   0x81161e0    upper_cover: 4 			lower_cover: 11 
+member:     6   dof_map:   0x81162a0    upper_cover: 4 			lower_cover: 8 10 
+member:     7   dof_map:   0x8116360    upper_cover: 4 			lower_cover: 12 
+member:     8   dof_map:   0x8116420    upper_cover: 6 11 			lower_cover: 0 
+member:     9   dof_map:   0x81164e0    upper_cover: 11 12 			lower_cover: 0 
+member:    10   dof_map:   0x81165a0    upper_cover: 6 12 			lower_cover: 0 
+member:    11   dof_map:         0xc    upper_cover: 5 13 			lower_cover: 8 9 
+member:    12   dof_map:         0xd    upper_cover: 7 13 			lower_cover: 9 10 
+member:    13   dof_map:         0xe    upper_cover: 14 			lower_cover: 11 12 
+member:    14   dof_map:         0xf    upper_cover: 4 			lower_cover: 13 
+member:    15   dof_map:  0xffffffff    upper_cover: 			lower_cover: 
+
+subposet pool:
+
+pool 0x8115ac0 free_ct = 5 allocated_ct = 3 free_list = 3
+
+member:     0   jims		members: 0011111111100000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     1   cells		members: 1111111111111110  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     2   resident	members: 0000000000000000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     3   <void>		
+member:     4   <void>		
+member:     5   <void>		
+member:     6   <void>		
+member:     7   <void>		
+
+poset: cells  handle: 0x81155c8   host: 0x8108e78    index: 7   state: 0x8115690    dof count: 1      dof_tuple_ub: 4
+
+name                             index  type    dof   0
+                                             poset_memb
+-------------------------------- ----- ----- ----------
+bottom                               0   jrm
+top                                  1   jrm
+standard vertex                      2   jim          2
+standard edge                        3   jim          3
+standard triangle                    4   jim          4
+e0                                   5   jim          3
+e1                                   6   jim          3
+e2                                   7   jim          3
+v0                                   8   jim          2
+v1                                   9   jim          2
+v2                                  10   jim          2
+2 vertices                          11   jrm
+other 2 vertices                    12   jrm
+2 join other 2                      13   jrm
+all vertices                        14   jrm
+
+#### END POSET cells ###################
+
+Cells lattice with edges jrm:
+
+
+#### BEGIN POSET cells ###################
+
+member pool:
+
+pool 0x8115760 free_ct = 0 allocated_ct = 16 free_list = -1
+
+member:     0   dof_map:         0x1    upper_cover: 2 3 8 9 10 		lower_cover: 
+member:     1   dof_map:         0x2    upper_cover: 			lower_cover: 2 3 4 
+member:     2   dof_map:   0x8115f80    upper_cover: 1 			lower_cover: 0 
+member:     3   dof_map:   0x8116048    upper_cover: 1 			lower_cover: 0 
+member:     4   dof_map:   0x8116110    upper_cover: 1 			lower_cover: 15 
+member:     5   dof_map:   0x81161e0    upper_cover: 15 			lower_cover: 11 
+member:     6   dof_map:   0x81162a0    upper_cover: 15 			lower_cover: 8 10 
+member:     7   dof_map:   0x8116360    upper_cover: 15 			lower_cover: 12 
+member:     8   dof_map:   0x8116420    upper_cover: 6 11 			lower_cover: 0 
+member:     9   dof_map:   0x81164e0    upper_cover: 11 12 			lower_cover: 0 
+member:    10   dof_map:   0x81165a0    upper_cover: 6 12 			lower_cover: 0 
+member:    11   dof_map:         0xc    upper_cover: 5 13 			lower_cover: 8 9 
+member:    12   dof_map:         0xd    upper_cover: 7 13 			lower_cover: 9 10 
+member:    13   dof_map:         0xe    upper_cover: 14 			lower_cover: 11 12 
+member:    14   dof_map:         0xf    upper_cover: 15 			lower_cover: 13 
+member:    15   dof_map:  0xffffffff    upper_cover: 4 			lower_cover: 14 5 6 7 
+
+subposet pool:
+
+pool 0x8115ac0 free_ct = 5 allocated_ct = 3 free_list = 3
+
+member:     0   jims		members: 0011111111100000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     1   cells		members: 1111111111111111  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     2   resident	members: 0000000000000000  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     3   <void>		
+member:     4   <void>		
+member:     5   <void>		
+member:     6   <void>		
+member:     7   <void>		
+
+poset: cells  handle: 0x81155c8   host: 0x8108e78    index: 7   state: 0x8115690    dof count: 1      dof_tuple_ub: 4
+
+name                             index  type    dof   0
+                                             poset_memb
+-------------------------------- ----- ----- ----------
+bottom                               0   jrm
+top                                  1   jrm
+standard vertex                      2   jim          2
+standard edge                        3   jim          3
+standard triangle                    4   jim          4
+e0                                   5   jim          3
+e1                                   6   jim          3
+e2                                   7   jim          3
+v0                                   8   jim          2
+v1                                   9   jim          2
+v2                                  10   jim          2
+2 vertices                          11   jrm
+other 2 vertices                    12   jrm
+2 join other 2                      13   jrm
+all vertices                        14   jrm
+edges                               15   jrm
+
+#### END POSET cells ###################
+
+ *** LEAVING NEW_JRM_TEST ***********************
+
+**** ENTERING SUBPOSET ITERATOR TEST **********************
+subposet 0 jims:	members  2 3 5 6 7
+subposet 1 poset.t:	members  0 1 2 3 4 5 6 7
+subposet 2 resident:	members  2 3 5 6 7
+**** LEAVING SUBPOSET ITERATOR TEST **********************
+
+Attempt to write test_namespace to poset.t.hdf returned with status SUCCESS
+
+#### BEGIN POSET poset.t ###################
+
+member pool:
+
+pool 0x81090a0 free_ct = 0 allocated_ct = 8 free_list = -1
+
+member:     0   dof_map:         0x1    upper_cover: 3 			lower_cover: 
+member:     1   dof_map:         0x2    upper_cover: 			lower_cover: 4 6 7 
+member:     2   dof_map:   0x81095b0    upper_cover: 4 7 			lower_cover: 3 
+member:     3   dof_map:   0x8109640    upper_cover: 2 5 			lower_cover: 0 
+member:     4   dof_map:         0x5    upper_cover: 1 			lower_cover: 2 
+member:     5   dof_map:   0x8110c90    upper_cover: 6 			lower_cover: 3 
+member:     6   dof_map:   0x8114b98    upper_cover: 1 			lower_cover: 5 
+member:     7   dof_map:   0x8115e80    upper_cover: 1 			lower_cover: 2 
+
+subposet pool:
+
+pool 0x81092b0 free_ct = 5 allocated_ct = 3 free_list = 4
+
+member:     0   jims		members: 00110111  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     1   poset.t		members: 11111111  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     2   resident	members: 00110111  id_map: (nil)  is_dof_sp: 0  dof_ct: 0  offsets: 
+member:     3   <void>		
+member:     4   <void>		
+member:     5   <void>		
+member:     6   <void>		
+member:     7   <void>		
+
+poset: poset.t  handle: 0x8108e78   host: (nil)    index: -1   state: 0x8108fd0    dof count: 1      dof_tuple_ub: 4
+
+name                             index  type    dof   0
+                                             void_ptr  
+-------------------------------- ----- ----- ----------
+bottom                               0   jrm
+top                                  1   jrm
+primitives                           2   jim  0x8108ebc
+primitives_schema                    3   jim  0x810a350
+primitive definitions                4   jrm
+R2_schema                            5   jim  0x8110048
+R2                                   6   jim  0x8114138
+cells                                7   jim  0x81155c8
+
+#### END POSET poset.t ###################
+

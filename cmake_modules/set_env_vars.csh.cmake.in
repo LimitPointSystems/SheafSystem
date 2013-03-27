@@ -1,0 +1,57 @@
+#
+# Source this script to set needed environment variables
+# for SheafSystem development.
+
+set revert_file = @CMAKE_BINARY_DIR@/revert_env_vars.csh
+
+# Backup the current terminal state
+if (! -e $revert_file) then
+   if ($?LD_LIBRARY_PATH) then
+      echo copying contents of existing LD_LIBRARY_PATH to $revert_file
+      echo setenv LD_LIBRARY_PATH $LD_LIBRARY_PATH > $revert_file
+   else
+      echo LD_LIBRARY_PATH is not set in your environment. No backup will be created.
+   endif
+
+   if ($?CLASSPATH) then
+      echo copying contents of existing CLASSPATH to $revert_file
+      echo setenv CLASSPATH $CLASSPATH >>! $revert_file
+   else
+      echo CLASSPATH is not set in your environment. No backup will be created.
+   endif
+
+   if ($?PATH) then
+      echo copying contents of existing PATH to $revert_file
+      echo setenv PATH $PATH >>! $revert_file
+   else
+      echo PATH is not set in your environment. No backup will be created.
+   endif
+
+   if ($?PYTHONPATH) then
+      echo copying contents of existing PYTHONPATH to $revert_file
+      echo setenv PYTHONPATH $PYTHONPATH >>! $revert_file
+   else
+      echo PYTHONPATH is not set in your environment. No backup will be created.
+   endif
+
+endif # revert_file
+
+	echo setting LD_LIBRARY_PATH in this terminal.
+    if ($?LD_LIBRARY_PATH) then
+		setenv LD_LIBRARY_PATH $LD_LIBRARY_PATH\:@GNU_LIBPATH@:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib:@VTK_LIB_DIR@:@JMF_LIB_DIR@:@JDK_LIB_DIR@:@JVM_LIB_DIR@:@XAWT_LIB_DIR@:@TETGEN_LIB_DIR@:
+	else
+		setenv LD_LIBRARY_PATH @GNU_LIBPATH@:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib:@VTK_LIB_DIR@:@JMF_LIB_DIR@:@JDK_LIB_DIR@:@JVM_LIB_DIR@:@XAWT_LIB_DIR@:@TETGEN_LIB_DIR@:
+	endif
+	
+	echo setting CLASSPATH in this terminal.
+	setenv CLASSPATH .:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/SheafScope.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/solvers_java_binding.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/tools_java_binding.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/fields_java_binding.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/geometry_java_binding.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/fiber_bundles_java_binding.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/sheaves_java_binding.jar:@VTK_LIB_DIR@/java/vtk.jar:@JMF_LIB_DIR@/jmf.jar
+
+	echo setting PATH in this terminal.
+	setenv PATH @JDK_BIN_DIR@:$PATH
+
+	echo setting PYTHONPATH in this terminal.
+	setenv PYTHONPATH .:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib
+
+	echo setting PROF_DIR in this terminal.
+	setenv PROF_DIR @COVERAGE_DIR@
+

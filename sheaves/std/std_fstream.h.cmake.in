@@ -1,0 +1,17 @@
+// $RCSfile: std_fstream.h.cmake.in,v $ $Revision: 1.2 $ $Date: 2011/04/29 04:58:25 $
+
+//
+// Copyright (c) 2010 Limit Point Systems, Inc. 
+//
+
+#ifndef STD_FSTREAM_H
+#define STD_FSTREAM_H
+
+// Define if you have <fstream>
+#cmakedefine HAVE_FSTREAM 1
+
+#include <fstream>
+
+using namespace std;
+
+#endif // STD_FSTREAM_H

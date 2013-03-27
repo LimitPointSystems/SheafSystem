@@ -1,0 +1,24 @@
+// $RCSfile: std_ctime.h.cmake.in,v $ $Revision: 1.2 $ $Date: 2011/04/29 04:58:25 $
+
+//
+// Copyright (c) 2010 Limit Point Systems, Inc. 
+//
+
+#ifndef STD_CTIME_H
+#define STD_CTIME_H
+
+#cmakedefine HAVE_CTIME 1
+
+#if HAVE_CTIME
+
+#include <ctime>
+using namespace std;
+
+#else
+
+#include <time.h>
+
+#endif 
+
+#endif // STD_CTIME_H
+

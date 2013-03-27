@@ -1,0 +1,228 @@
+// $RCSfile: std_hash_map.h.cmake.in,v $ $Revision: 1.2 $ $Date: 2011/04/29 04:58:25 $
+
+//
+// Copyright (c) 2010 Limit Point Systems, Inc. 
+//
+
+// Template to configure hash map typedef and include
+
+#ifndef STD_HASH_MAP_H
+#define STD_HASH_MAP_H
+
+#ifndef STD_STRING_H
+#include "std_string.h"
+#endif
+
+
+// Autoconf configuration targets;
+// CMake will comment out or change these to #defines
+// based on which header files it can find.
+
+#ifdef WIN32
+// Windows uses unordered_set only.
+#cmakedefine HAVE_UNORDERED_MAP 1
+#else
+#cmakedefine HAVE_HASH_MAP 1
+#cmakedefine HAVE_EXT_HASH_MAP 1
+#cmakedefine HAVE_UNORDERED_MAP 1
+#endif
+
+#ifdef HAVE_HASH_MAP
+
+// This environment has <hash_map>
+
+#include <hash_map>
+
+using namespace std;
+
+// Alias for namespace hash_map is
+// needed when specializing hash<T>.
+
+#ifndef SHEAF_HASH_NAMESPACE
+#define SHEAF_HASH_NAMESPACE std
+#define SHEAF_BEGIN_HASH_NAMESPACE namespace std {
+#define SHEAF_END_HASH_NAMESPACE }
+#endif
+
+// key_test used by sheaves/maps/name_map.h
+// placed in this file because it must be configured to match
+// hash_map configuration.
+
+struct key_test
+{
+public:
+    bool operator()(const char* s1, const char* s2) const
+      {
+	return strcmp(s1, s2) == 0;
+      }
+};
+
+typedef hash<char*> hash_cstr;
+
+#elif HAVE_EXT_HASH_MAP
+
+// This environment has <ext/hash_map>
+
+#include <ext/hash_map>
+
+#ifdef __GNUG__
+
+// g++ - class hash_map is in namespace __gnu_cxx
+
+using namespace __gnu_cxx;
+#ifndef SHEAF_HASH_NAMESPACE
+#define SHEAF_HASH_NAMESPACE __gnu_cxx
+#define SHEAF_BEGIN_HASH_NAMESPACE namespace __gnu_cxx {
+#define SHEAF_END_HASH_NAMESPACE  }
+#endif
+
+#else
+
+// Assume class slist is in namespace std
+
+using namespace std;
+#ifndef SHEAF_HASH_NAMESPACE
+#define SHEAF_HASH_NAMESPACE std
+#define SHEAF_BEGIN_HASH_NAMESPACE namespace std {
+#define SHEAF_END_HASH_NAMESPACE }
+#endif
+
+#endif // ifdef __GNUG__
+
+typedef hash<char*> hash_cstr;
+
+struct key_test
+{
+public:
+    bool operator()(const char* s1, const char* s2) const
+      {
+	return strcmp(s1, s2) == 0;
+      }
+};
+
+
+
+#elif HAVE_UNORDERED_MAP
+
+//This environment does not have a hash_map class.
+//Use unordered map with xlC.
+
+// __IBMCPP__ is the identifier for xlC on AIX
+// #ifdef __IBMCPP__
+
+#include <unordered_map>
+
+using namespace std::tr1;
+#ifndef SHEAF_HASH_NAMESPACE
+#define SHEAF_HASH_NAMESPACE std::tr1
+#define SHEAF_BEGIN_HASH_NAMESPACE namespace std { namespace tr1 {
+#define SHEAF_END_HASH_NAMESPACE }}
+#endif
+
+struct key_test
+{
+public:
+    bool operator()(const char* s1, const char* s2) const
+      {
+	return strcmp(s1, s2) == 0;
+      }
+};
+
+struct hash_cstr
+{
+    size_t operator()(const char* __s) const
+    { 
+      unsigned long __h = 0;
+      for ( ; *__s; ++__s)
+        __h = 5*__h + *__s;
+      return size_t(__h);
+    }
+};
+
+template <typename Key, 
+	     typename T, 
+	     typename HashFnc = hash<Key>,
+             typename EqualKey = equal_to<Key>,
+	     typename Alloc = allocator<pair<Key,T> > >
+class hash_map : public unordered_map<Key,T,HashFnc,EqualKey,Alloc>
+{
+public:
+  inline void resize(typename unordered_map::size_type n)
+  {
+    this->rehash(n);
+  };
+  inline bool operator==(const unordered_map<Key,T,HashFnc,EqualKey,Alloc>& um1)
+  {
+     return true;
+  };
+  inline bool operator!=(const unordered_map<Key,T,HashFnc,EqualKey,Alloc>& um1)
+  {
+     return false;
+  };
+};
+
+template <typename Key, 
+	     typename T, typename HashFnc = hash<Key>,
+             typename EqualKey = equal_to<Key>,
+             typename Alloc = allocator<pair<Key,T> > >
+class hash_multimap : public unordered_multimap<Key,T,HashFnc,EqualKey,Alloc>
+{
+public:
+inline void resize(typename unordered_multimap::size_type n)
+  {
+    this->rehash(n);
+  };
+  // These operators are not defined for unordered_map.
+  inline bool operator==(const unordered_multimap<Key,T,HashFnc,EqualKey,Alloc>& umm1)
+  {
+     return true;
+  };
+  inline bool operator!=(const unordered_multimap<Key,T,HashFnc,EqualKey,Alloc>& um1)
+  {
+     return false;
+  };
+};
+
+//#endif // __IBMCPP__
+
+#else
+
+// This environment does not have a hash_map class.
+// Simulate hash_map with map.
+
+#include <map>
+
+using namespace std;
+#ifndef SHEAF_HASH_NAMESPACE
+#define SHEAF_HASH_NAMESPACE std
+#define SHEAF_BEGIN_HASH_NAMESPACE namespace std {
+#define SHEAF_END_HASH_NAMESPACE }
+#endif
+namespace std
+{
+  template <class Value> class hash { };
+}
+
+struct key_test
+{
+public:
+    bool operator()(const char* s1, const char* s2) const
+      {
+	return strcmp(s1, s2) < 0;
+      }
+};
+
+template <class Key, class T, class HashFnc = hash<Key>, 
+          class SheafKeyTest = less<Key>,
+          class Alloc = allocator<pair<Key,T> > >
+class hash_map : public map<Key,T,SheafKeyTest,Alloc> { };
+
+template <class Key, class T, class HashFnc = hash<Key>, 
+          class SheafKeyTest = less<Key>,
+          class Alloc = allocator<pair<Key,T> > >
+class hash_multimap : public multimap<Key,T,SheafKeyTest,Alloc> { };
+
+
+#endif // ifdef HAVE_HASH_MAP
+
+#endif // ifndef STD_HASH_MAP_H

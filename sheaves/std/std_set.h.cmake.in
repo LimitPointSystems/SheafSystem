@@ -1,0 +1,14 @@
+// $RCSfile: std_set.h.cmake.in,v $ $Revision: 1.2 $ $Date: 2011/04/29 04:58:25 $
+
+//
+// Copyright (c) 2010 Limit Point Systems, Inc. 
+//
+
+#ifndef STD_SET_H
+#define STD_SET_H
+
+#include <set>
+
+using namespace std;
+
+#endif // STD_SET_H

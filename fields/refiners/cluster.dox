@@ -1,0 +1,70 @@
+/// @dir fields/refiners
+///
+/// @details
+/// The refiners cluster contains classes intended to support adaptive mesh refinement. The classes fall 
+/// into 4 categories:
+/// 
+/// <ul>
+/// <li><B>refinement policies:</B>
+/// <br>
+/// classes with "_policy" suffix implement refinement 
+/// policies that specify the conditions under which a zone should be refined;
+/// 
+/// <li><B>local refinement services:</B> 
+/// <br>
+/// classes with "_refiner" suffix implement the actual 
+/// refinement operation, each subdivides a specific zone type;
+/// 
+/// <li><B>refiner families:</B> 
+/// <br>
+/// classes with "_family" suffix collect refiners into 
+/// families with one refiner for each primitive cell type that may 
+/// appear in a mesh; and
+/// <li><B>global refinement services:</B> 
+/// <br>
+/// classes field_refiner ansdrefining_section_pusher (see pushers cluster) 
+/// use a refinement policy and a refinement family to accomplish refinement 
+/// over an entire mesh.
+/// </ul>
+/// <br>
+/// There are three refinement families currently: 
+/// 
+/// <ul>
+/// <li><B>zone-centered refinement family:</B>
+/// <br>
+/// refiners that create new vertices only in the interior of a zone;
+/// <li><B>edge-centered refinement family:</B>
+/// <br>
+/// refiners that create new vertices in the boundary of a zone; and
+/// <li><B>barycentric refinement family:</B>
+/// <br>
+/// refiners that create new vertices both in the interior and in the boundary
+/// of a zone. Specifically, barycentric refiners create a new vertex 
+/// in the center of each member of the downset of a zone, 
+/// that is, in the center of the zone and in the centers of each of its faces and edges.
+/// </ul>
+/// <br>
+/// The edge centered and barycentric refiners are more complicated to implement because the boundaries
+/// are shared between zones, including between zones that are refined and zones 
+/// that are not refined. These refiners require more computational 
+/// resources, but they also produce better results. 
+/// 
+/// <BR><B>Status:</B>
+/// <BR><BR><div style="margin-left: 30px;">
+/// The refiners cluster is a work in progress. The initial development has validated
+/// the design approach, but has also identified
+/// several additional features which must be implemented:
+/// </div>
+/// 
+/// <ul>
+/// <li><b>d=3 refiners:</B><br>
+/// The edge centered and barycentric
+/// refiners are currently implemented only for d = 1 and 2, because the d = 3 versions
+/// require kernel features that have not yet been implemented. 
+/// <li><b>multi-field refiner:</b><br>
+/// The field_refiner currently refines the mesh, the coordinates, and a primary
+/// property section, which determines the refinement. The refiner needs to be 
+/// generalized to simultaneously refine the primary property field and multiple secondary 
+/// property fields. 
+///
+///

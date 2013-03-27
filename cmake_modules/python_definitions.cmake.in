@@ -1,0 +1,12 @@
+#
+# $RCSfile: python_definitions.cmake.in,v $ $Revision: 1.5 $ $Date: 2013/01/12 17:16:50 $
+#
+# Copyright (c) 2013 Limit Point Systems, Inc.
+#
+#
+
+set(PYTHONLIBS_FOUND @PYTHONLIBS_FOUND@ CACHE STRING "Have the Python libs been found.")
+set(PYTHON_LIBRARIES @PYTHON_LIBRARIES@ CACHE STRING "Path to the python library.")
+set(PYTHON_INCLUDE_PATH @PYTHON_INCLUDE_PATH@ CACHE STRING "Path to where Python.h is found (deprecated).")
+set(PYTHON_INCLUDE_DIRS @PYTHON_INCLUDE_DIRS@ CACHE STRING "Path to where Python.h is found.")
+set(PYTHON_DEBUG_LIBRARIES @PYTHON_DEBUG_LIBRARIES@ CACHE STRING "Path to the debug library.")

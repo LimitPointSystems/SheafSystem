@@ -1,0 +1,181 @@
+// $RCSfile: namespace_poset_schema.h,v $ $Revision: 1.27 $ $Date: 2013/01/12 17:17:42 $
+
+// $Name: HEAD $
+//
+// Copyright (c) 2013 Limit Point Systems, Inc.
+//
+
+/// @file
+/// Interface for class namespace_poset_schema
+
+#ifndef NAMESPACE_POSET_SCHEMA_H
+#define NAMESPACE_POSET_SCHEMA_H
+
+#ifndef SHEAF_DLL_SPEC_H
+#include "sheaf_dll_spec.h"
+#endif
+
+#ifndef POSET_H
+#include "poset.h"
+#endif
+
+#ifndef POSET_MEMBER_H
+#include "poset_member.h"
+#endif
+
+#ifndef POSET_STATE_HANDLE_H
+#include "poset_state_handle.h"
+#endif
+
+namespace sheaf
+{
+
+class namespace_poset;
+class subposet;
+  
+///
+/// The schema poset for the namespace.
+///
+class SHEAF_DLL_SPEC namespace_poset_schema : public poset_state_handle
+{
+
+  friend class namespace_poset;
+  friend class primitives_poset;
+
+  // ===========================================================
+  /// @name NAMESPACE_POSET_SCHEMA FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// The standard name for an instance of this class.
+  ///
+  static const string& standard_name();
+
+protected:
+
+private:
+
+  ///
+  /// Creates an unattached handle
+  ///
+  namespace_poset_schema();
+
+  ///
+  /// Creates a new handle attached to a new state not in any namespace.
+  ///
+  namespace_poset_schema(abstract_poset_member* xschema,
+                         bool xauto_access = true);
+
+  ///
+  /// Destructor
+  ///
+  ~namespace_poset_schema();
+
+  ///
+  /// Handle for subposet which identifies table dofs.
+  ///
+  subposet* _table_dof_subposet;
+
+  ///
+  /// Handle for subposet which idnetifies row dofs.
+  ///
+  subposet* _row_dof_subposet;
+
+  ///
+  /// True if prototype for this class has been entered in factory.
+  /// Intended to force creation of prototype at initialization.
+  ///
+  static bool _has_prototype;
+
+  ///
+  /// Creates prototype for this class and enters in factory.
+  ///
+  static bool make_prototype();
+
+  //@}
+
+
+  // ===========================================================
+  /// @name POSET_STATE_HANDLE FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Identifier for the type of this poset.
+  ///
+  virtual poset_type type_id() const;
+
+  ///
+  /// The name of this class.
+  ///
+  virtual const char* class_name() const;
+
+  ///
+  /// True if xdof_map conforms to (i.e. is derived from) the type of
+  /// row dof map required by this poset
+  ///
+  virtual bool row_dof_map_conforms(const poset_dof_map* xdof_map) const;
+
+protected:
+
+  ///
+  /// Creates the subposets common to every poset (i.e._whole and _jims) plus
+  /// those required of a schema poset (table_dofs and row_dofs)
+  ///
+  virtual void initialize_standard_subposets(const string& xname);
+
+  ///
+  /// Initializes the predefined members of the poset.
+  ///
+  virtual void initialize_standard_members();
+
+private:
+
+  using poset_state_handle::new_state;
+
+  ///
+  /// Creates a new namespace_poset_schema state, not in any namespace.
+  ///
+  void new_state(const abstract_poset_member* xschema, bool xauto_access = true);
+
+  //@}
+
+
+  // ===========================================================
+  /// @name ANY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// True if other conforms to this
+  ///
+  virtual bool is_ancestor_of(const any* other) const;
+
+  ///
+  /// Class invariant
+  ///
+  bool invariant() const;
+
+protected:
+
+private:
+
+  ///
+  /// Make a new instance of the same type as this
+  ///
+  virtual namespace_poset_schema* clone() const;
+
+  //@}
+};
+
+} // namespace sheaf
+
+#endif // ifndef NAMESPACE_POSET_SCHEMA_H
+

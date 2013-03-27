@@ -1,0 +1,12 @@
+#
+# $RCSfile: doxygen_definitions.cmake.in,v $ $Revision: 1.5 $ $Date: 2013/01/12 17:16:50 $
+#
+# Copyright (c) 2013 Limit Point Systems, Inc.
+#
+#
+
+set(DOXYGEN_EXECUTABLE @DOXYGEN_EXECUTABLE@ CACHE STRING "Path to the doxygen command.")
+set(DOXYGEN_FOUND @DOXYGEN_FOUND@ CACHE STRING "True if Doxygen found.")
+set(DOXYGEN_DOT_EXECUTABLE @DOXYGEN_DOT_EXECUTABLE@ CACHE STRING "Path to the dot program used by doxygen.")
+set(DOXYGEN_DOT_FOUND @DOXYGEN_DOT_FOUND@ CACHE STRING "True if Dot found.")
+set(DOXYGEN_DOT_PATH @DOXYGEN_DOT_PATH@ CACHE STRING "Path to dot not including the executable.")

@@ -1,0 +1,114 @@
+
+Updated 07/18/2011
+
+The following are notes associated with several of the test cases
+implemented in this cluster. The test cases of interest are:
+
+  cube_with_fault_1.t.cc,
+  jessen.t.cc,
+  oct_generator.t.cc,
+  oct_generator_2.t.cc,
+  s2_bag_generator.t.cc,
+  schonhardt.t.cc,
+  small_angles.t.cc, and
+  sphere_generator.t.cc
+
+The source code for all of these test cases is identical
+except for the two functions get_connectivities and
+get_coordinates. At some point the common code for these
+tesst should be factored out and put into a separate class
+or stand alone functions file. 
+
+Also the default tetgen command line switches in main
+may vary slightly for each test. However, all tests have
+the option to enter the tetgen switches as a string in
+the second command line argument.
+
+Tetgen has many possible command line arguments ("switches").
+To see the complete list including detailed explanations visit
+http://tetgen.berlios.de/switches.html.
+
+Currently successful execution of the any cases will produces
+an hdf file.  If DIAGNOSTIC_OUTPUT is defined in a test case
+two vtk files wiil be produced, one for the original surface
+and one for the tetrahedralized solid.  The hdf file is viewable
+with SheafScope and any vtk files can be viewed with a vtk viewer
+such as ParaView (linux and windows executables can be
+downloaded from the ParaView website).
+
+Here are some details about the individual test cases:
+
+  oct_generator.t.cc:
+
+    This is a regular octahedron (8 triangular faces, 12 edges,
+    and 6 vertices).
+
+  oct_generator_2.t.cc:
+
+    This is a regular octahedron with each of the 8 triangular faces
+    triangularized into 3 subtriangles by adding a vertex at the
+    centroids (24 triangular faces, 36 edges, and 14 vertices).
+
+  sphere_generator.t.cc:
+
+    This is a shpere of radius 1.5.  The original surface triangulation
+    consists of 288 triangles with 146 vertices.
+
+  schonhardt.t.cc:
+
+    This is a Schönhardt polyhedron which is basically a twisted
+    octahedron.  The Schönhardt polyhedron is the simplest non-convex
+    polyhedron that cannot be triangulated into tetrahedra without adding
+    new vertices (Steiner points).
+
+  jessen.t.cc:
+
+    Jessen's icosahedron, sometimes called Jessen's orthogonal icosahedron
+    is a non-convex polyhedron with the same number of vertices, edges and
+    faces as the regular icosahedron.  Like the Schönhardt polyhedron, it
+    also requires the addition of Steiner points to tetrahedralize.
+
+  small_angles.t.cc:
+
+    The purpose of this test case is to demonstrate the ability
+    of tetgen to handle small angles.
+
+    This a rectangular bar described by a surface consisting of
+    12 triangles, 18 edges,  and 8 vertices.  By default, the bar
+    dimensions are 10x1x1.  The x-dimension (default == 10) can be
+    changed via the first command line argument.  Tetgen produces
+    a tetrahedral mesh consisting of 6 elements all of which are
+    are "stretched" the full x length.  With the 'V' switch in the
+    arguments tetgen will printout lots of data relative to the
+    generated tetrahedral mesh such as the smallest dihedral.
+    For example: with the command "small_angles.t 100 pYV" tetgen
+    will print the smallest dihedral as:
+      "Smallest dihedral:        0.40514" (degrees)
+
+
+  cube_with_fault_1.t.cc:
+
+    This is a unit cube with a 0.5 by 0.5 square fin/tab/fracture (internal
+    boundary) with normal (1, 0, 0) and centered at (0.5, 0.5. 0.25). 
+    This test demonstrates that tetgen does indeed create tetrahedra
+    with consistent faces across internal boundaries. It can also be
+    used to experiment with allowing or not allowing tetgen to add
+    additional points on either internal or external boundaries. 
+
+  s2_bag_generator.t.cc:
+
+    Generates a tetrahedral mesh for just the salt bag portion
+    of surface geometry described by s2_bag+2horizons.log
+    (Shell_data/truncationtopologyreftests/s2_bag+2horizons.log).
+    Because of the centroidal meshing of the surface polygons,
+    the resulting surface looks like somekind of steath fighter.
+    Currently, the default tetgen command line switches are "pq1.4V"
+    and produce a tetrahedral mesh which does not preserve the
+    original boundary mesh.  To preserve the original boundary mesh
+    invoke the test case with something like:
+        "s2_bag_generator.t pYq1.4V".
+
+
+
+  
+

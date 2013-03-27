@@ -1,0 +1,23 @@
+// $RCSfile: std_cerrno.h.cmake.in,v $ $Revision: 1.2 $ $Date: 2011/04/29 04:58:25 $
+
+//
+// Copyright (c) 2010 Limit Point Systems, Inc. 
+//
+
+#ifndef STD_CERRNO_H
+#define STD_CERRNO_H
+
+#cmakedefine HAVE_CERRNO 1
+
+#if HAVE_CERRNO
+
+#include <cerrno>
+using namespace std;
+
+#else
+
+#include <errno.h>
+
+#endif 
+
+#endif // STD_CERRNO_H

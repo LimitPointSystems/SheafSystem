@@ -1,0 +1,18 @@
+// $RCSfile: std_hdf5.h.cmake.in,v $ $Revision: 1.2 $ $Date: 2011/04/29 04:58:25 $
+
+//
+// Copyright (c) 2010 Limit Point Systems, Inc. 
+//
+
+#ifndef STD_HDF5_H
+#define STD_HDF5_H
+
+// Undefine RCSID to avoid duplicate definitions of RcsId when compiling
+// with SUNWSpro.
+#cmakedefine RCSID 1
+
+#ifndef _HDF5_H
+#include "hdf5.h"
+#endif
+
+#endif // STD_HDF5_H

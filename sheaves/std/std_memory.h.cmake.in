@@ -1,0 +1,14 @@
+// $RCSfile: std_memory.h.cmake.in,v $ $Revision: 1.2 $ $Date: 2011/04/29 04:58:25 $
+
+//
+// Copyright (c) 2010 Limit Point Systems, Inc. 
+//
+
+#ifndef STD_MEMORY_H
+#define STD_MEMORY_H
+
+#include <memory>
+
+using namespace std;
+
+#endif // STD_MEMORY_H

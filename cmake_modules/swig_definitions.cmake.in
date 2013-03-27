@@ -1,0 +1,13 @@
+#
+# $RCSfile: swig_definitions.cmake.in,v $ $Revision: 1.5 $ $Date: 2013/01/12 17:16:50 $
+#
+# Copyright (c) 2013 Limit Point Systems, Inc.
+#
+#
+
+set(SWIG_FOUND @SWIG_FOUND@ CACHE STRING "Set to true if SWIG is found.")
+set(SWIG_DIR @SWIG_DIR@ CACHE STRING "The directory where swig is installed.")
+set(SWIG_EXECUTABLE @SWIG_EXECUTABLE@ CACHE STRING "Path to the swig executable.")
+set(SWIG_VERSION @SWIG_VERSION@ CACHE STRING "Version number of the swig executable.")
+set(SWIG_JAVA_INC_DIR @SWIG_JAVA_INC_DIR@ CACHE STRING "Directory containing the java .i files.")
+set(SWIG_PYTHON_INC_DIR @SWIG_PYTHON_INC_DIR@ CACHE STRING "Directory containing the python .i files.")
