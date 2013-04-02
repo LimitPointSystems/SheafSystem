@@ -16,7 +16,6 @@ set(CLUSTER test_posets)
 # Library sources.
 #
 set(SRCS
-    sheaves_namespace.cc
 )
 
 collect_sources()

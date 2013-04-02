@@ -16,6 +16,8 @@ set(CLUSTER general)
 # Library sources.
 #
 set(SRCS
+    sheaf.cc
+    sheaves_namespace.cc
 )
 
 collect_sources()

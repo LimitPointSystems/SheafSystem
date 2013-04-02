@@ -40,7 +40,6 @@ set(SRCS
     rc_ptr.cc
     report.cc
     scoped_index.cc
-    sheaf.cc
     stl_scoped_index.cc
     stop_watch.cc
     tern.cc
