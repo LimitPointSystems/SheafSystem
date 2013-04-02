@@ -23,7 +23,6 @@ set(SRCS
     block.inst.cc
     deep_size.inst.cc
     depth_first_itr.inst.cc
-    equivalence_relation.inst.cc
     factory.inst.cc
     factory_2.inst.cc
     filtered_depth_first_itr.inst.cc
