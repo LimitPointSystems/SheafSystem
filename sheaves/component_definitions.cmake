@@ -19,7 +19,7 @@ include(${CMAKE_MODULE_PATH}/LPSCommon.cmake)
 # Define the clusters for this component.
 #
 set(clusters concurrency dof_iterators dof_maps examples id_spaces io general
-    iterators maps posets support test_posets traversers template_instantiations)
+    iterators maps posets support traversers template_instantiations)
 
 #
 # Initialize all variables for this component.
