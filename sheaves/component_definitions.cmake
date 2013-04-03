@@ -226,7 +226,7 @@ function(add_bindings_targets)
         message(STATUS "${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/\$(OutDir)/${${COMPONENT}_JAVA_BINDING_JAR}")
         set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Library Jars") 
         mark_as_advanced(FORCE ${COMPONENT}_CLASSPATH)        
-message(STATUS "In Sheaves, OUTDIR is: ${OUTDIR}")
+
         # Java documentation
         add_custom_target(${PROJECT_NAME}-java-docs EXCLUDE_FROM_ALL
                     COMMAND ${JDK_BIN_DIR}/javadoc -quiet -classpath ${${COMPONENT}_CLASSPATH} 
