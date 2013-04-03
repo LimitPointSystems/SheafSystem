@@ -9,7 +9,6 @@
 # found in the top level of any component. Functions and variables
 # that need to have system scope should be declared and/or defined here.
 #
-#
 
 #
 # Establish the list of components in this system

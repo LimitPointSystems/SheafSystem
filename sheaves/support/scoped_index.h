@@ -3940,11 +3940,9 @@ struct SHEAF_DLL_SPEC index_traits<scoped_index>
 // a syntax error when processed by swig.
 // But swig would ignore the namespace and template declaration
 // any way, so just don't process it.
-#if _MSC_VER >= 1600
-// do nothing
-#else
+
 SHEAF_BEGIN_HASH_NAMESPACE
-#endif
+
 ///
 /// Specialization of hash function to scoped_index.
 ///
@@ -3952,11 +3950,9 @@ template<> struct SHEAF_DLL_SPEC hash<sheaf::scoped_index>
 {
   size_t operator()(sheaf::scoped_index xindex) const;
 };
-#if _MSC_VER >= 1600
-// do nothing
-#else
+
 SHEAF_END_HASH_NAMESPACE
-#endif
+
 #endif // SWIG
 
 

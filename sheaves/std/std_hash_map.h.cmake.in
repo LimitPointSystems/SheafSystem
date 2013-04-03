@@ -102,18 +102,26 @@
 #elif HAVE_UNORDERED_MAP
 
     //This environment does not have a hash_map class.
-    //Use unordered map with xlC.
-    
+
     #include <unordered_map>
-        // _MSC_VER 1500 = VS2008, 1600 = VS2010, 1700 = VS2012
-        #if _MSC_VER <=1500
-            using namespace std::tr1;
-            #ifndef SHEAF_HASH_NAMESPACE
-            #define SHEAF_HASH_NAMESPACE std::tr1
-            #define SHEAF_BEGIN_HASH_NAMESPACE namespace std { namespace tr1 {
-            #define SHEAF_END_HASH_NAMESPACE }}
-            #endif
+    
+    // _MSC_VER 1500 = VS2008, 1600 = VS2010, 1700 = VS2012
+    #if _MSC_VER <=1500
+        using namespace std::tr1;
+        #ifndef SHEAF_HASH_NAMESPACE
+        #define SHEAF_HASH_NAMESPACE std::tr1
+        #define SHEAF_BEGIN_HASH_NAMESPACE namespace std { namespace tr1 {
+        #define SHEAF_END_HASH_NAMESPACE }}
         #endif
+    #else
+        using namespace std;
+        #ifndef SHEAF_HASH_NAMESPACE
+        #define SHEAF_HASH_NAMESPACE std
+        #define SHEAF_BEGIN_HASH_NAMESPACE namespace std {
+        #define SHEAF_END_HASH_NAMESPACE }
+        #endif
+    #endif
+    
     struct key_test
     {
     public:

@@ -22,7 +22,10 @@
 #ifndef STD_BITSET_H
 #include "std_bitset.h"
 #endif
- 
+
+#ifndef STD_ITERATOR_H
+#include "std_iterator.h"
+#endif
 
 namespace fiber_bundle
 {

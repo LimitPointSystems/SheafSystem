@@ -18,7 +18,10 @@
 #ifndef KD_MEMBER_H
 #include "kd_member.h"
 #endif
- 
+
+#ifndef STD_ITERATOR_H
+#include "std_iterator.h"
+#endif
 
 namespace fiber_bundle
 {

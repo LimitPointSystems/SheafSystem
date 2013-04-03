@@ -157,11 +157,7 @@ sheaf::deep_size(const scoped_index& xp, bool xinclude_shallow)
 // TEMPLATE SPECIALIZATIONS
 // ===========================================================
 
-#if _MSC_VER >= 1600
-// do nothing
-#else
 SHEAF_BEGIN_HASH_NAMESPACE
-#endif
 
 size_t
 hash<sheaf::scoped_index>::
@@ -170,8 +166,5 @@ operator()(sheaf::scoped_index xindex) const
   return xindex.hub_pod();
 }
 
-#if _MSC_VER >= 1600
-// do nothing
-#else
 SHEAF_END_HASH_NAMESPACE
-#endif
+
