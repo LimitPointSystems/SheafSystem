@@ -39,7 +39,7 @@ class at0;
 ///
 class SHEAF_DLL_SPEC sec_at0_space : public sec_atp_space
 {
-  friend class fiber_bundles_namespace; // For initialize_prototypes.
+  friend class fiber_bundles_namespace;
 
   // ===========================================================
   /// @name SEC_AT0_SPACE FACET

@@ -42,7 +42,7 @@ class tuple;
 ///
 class SHEAF_DLL_SPEC sec_tuple_space : public sec_rep_space
 {
-  friend class fiber_bundles_namespace; // For initialize_prototypes.
+  friend class fiber_bundles_namespace;
 
   // ===========================================================
   /// @name SEC_TUPLE_SPACE FACET

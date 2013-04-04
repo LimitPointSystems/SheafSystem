@@ -113,10 +113,8 @@ public:
   static const string& standard_section_space_schema_schema_poset_name();
 
   ///
-  /// Initialize the prototypes needed to read a fiber_bundles_namespace
-  /// into a namespace_poset.
-  ///
-  /// @hack This is an temporary solution for read.t.cc.  See Issue 405.
+  /// Initialize the prototypes needed by various factory methods,
+  /// in particular the poset factory methods.
   ///
   static void initialize_prototypes();
 

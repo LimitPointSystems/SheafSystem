@@ -40,7 +40,7 @@ class SHEAF_DLL_SPEC base_space_poset : public refinable_poset
 
   friend class sheaf::namespace_poset;
   friend class unstructured_block_builder;
-  friend class fiber_bundles_namespace; // For initialize_prototypes.
+  friend class fiber_bundles_namespace;
   friend SHEAF_DLL_SPEC size_t deep_size(const base_space_poset& xp, bool xinclude_shallow, size_t xresults[4]);
   
   // ===========================================================

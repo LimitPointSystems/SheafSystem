@@ -38,7 +38,7 @@ class stp;
 ///
 class SHEAF_DLL_SPEC sec_stp_space : public sec_tp_space
 {
-  friend class fiber_bundles_namespace; // For initialize_prototypes.
+  friend class fiber_bundles_namespace;
 
   // ===========================================================
   /// @name SEC_STP_SPACE FACET

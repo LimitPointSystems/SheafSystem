@@ -139,10 +139,8 @@ public:
   void clear();
 
   ///
-  /// Initialize the prototypes needed to read a file
-  /// into a namespace_poset.
-  ///
-  /// @hack This is an temporary solution for read.t.cc.  See Issue 405.
+  /// Initialize the prototypes needed by various factory methods,
+  /// in particular the poset factory method.
   ///
   static void initialize_prototypes();
 
