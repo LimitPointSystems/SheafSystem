@@ -385,13 +385,6 @@ function(create_output_dirs)
         file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
         # Create build/bin for executables.
         file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/bin)        
-        # $OutDir is defined differently by VS2008 and VS 2010; adjust it here
-#        if(${CMAKE_GENERATOR} MATCHES "Visual Studio 10 Win64")
-#        message(STATUS "CMAKE_ARCHIVE_OUTPUT_DIR is ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}")
-#            set(OUTDIR "${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/$(Configuration)" CACHE STRING "Visual Studio Output Directory" FORCE)
-#        else()
-#            set(OUTDIR "${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/$(Outdir)" CACHE STRING "Visual Studio Output Directory")
-#        endif()          
     else()
         set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/lib PARENT_SCOPE)
         set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/lib PARENT_SCOPE)

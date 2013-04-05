@@ -1,7 +1,4 @@
 #
-# $RCSfile: component_definitions.cmake,v $ $Revision: 1.39 $ $Date: 2013/01/28 17:19:35 $
-#
-#
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
 #
@@ -159,12 +156,6 @@ function(add_bindings_targets)
 
         include(${SWIG_USE_FILE})
         
-        if(${CMAKE_GENERATOR} MATCHES "Visual Studio 10 Win64")
-            set(OUTDIR "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Configuration)" CACHE STRING "Visual Studio Output Directory")
-        else()
-            set(OUTDIR "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Outdir)" CACHE STRING "Visual Studio Output Directory")
-        endif() 
-
         #
         # Java ################################################################
         #
@@ -198,7 +189,6 @@ function(add_bindings_targets)
         # Output path in windows differs slightly from Linux. Cmake wont allow a conditional inside add_custom_target
         # So we have to do it outside.
         if(WIN64INTEL OR WIN64MSVC)
-            #set(${COMPONENT}_CLASSPATH ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/$(Outdir)/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)         
             set(${COMPONENT}_CLASSPATH ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)         
             add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
                            DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB}

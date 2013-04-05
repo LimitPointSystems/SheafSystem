@@ -98,7 +98,7 @@ vertex_hub_begin(pod_type xlocal_id) const
   // xlocal_id is the zone id, compute the i, j indices.
 
   pod_type i, j, k;
-  tuple(xlocal_id, _j_size, i, j);
+  sheaf::tuple(xlocal_id, _j_size, i, j);
 
   // Compute the vertex id.
 
