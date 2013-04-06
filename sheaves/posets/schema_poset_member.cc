@@ -824,10 +824,7 @@ dof_tuple_ub(bool xis_table_dof) const
 
   // Body:
 
-  schema_poset_member* lthis = const_cast<schema_poset_member*>(this);
-  result = xis_table_dof ?
-    lthis->table_dof_tuple_ub() :
-    lthis->row_dof_tuple_ub();
+  result = xis_table_dof ? table_dof_tuple_ub() : row_dof_tuple_ub();
 
   // Postconditions:
 
@@ -2217,10 +2214,7 @@ dof_descriptors(bool xis_table_dof) const
 
   // Body:
 
-  schema_poset_member* lthis = const_cast<schema_poset_member*>(this);
-  result = xis_table_dof ?
-    lthis->table_dof_descriptors() :
-    lthis->row_dof_descriptors();
+  result = xis_table_dof ? table_dof_descriptors() : row_dof_descriptors();
 
   // Postconditions:
 
@@ -3766,8 +3760,7 @@ deep_size(const schema_poset_member& xp, bool xinclude_shallow)
 
   // Add any contributions from the parent class.
 
-  schema_poset_member& lxp = const_cast<schema_poset_member&>(xp);
-  total_poset_member& p = static_cast<total_poset_member&>(lxp);
+  const total_poset_member& p = static_cast<const total_poset_member&>(lxp);
   result += deep_size(p);
 
   // Determine the deep size of data members:
