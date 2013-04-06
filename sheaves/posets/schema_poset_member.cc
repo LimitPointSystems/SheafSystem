@@ -3760,21 +3760,21 @@ deep_size(const schema_poset_member& xp, bool xinclude_shallow)
 
   // Add any contributions from the parent class.
 
-  const total_poset_member& p = static_cast<const total_poset_member&>(lxp);
+  const total_poset_member& p = static_cast<const total_poset_member&>(xp);
   result += deep_size(p);
 
   // Determine the deep size of data members:
   //   dof_descriptor_array* _table_dof_descriptors.
   //   dof_descriptor_array* _row_dof_descriptors.
 
-  if(lxp.table_dof_descriptors() != 0)
+  if(xp.table_dof_descriptors() != 0)
   {
-    result += deep_size(*(lxp.table_dof_descriptors()), false);
+    result += deep_size(*(xp.table_dof_descriptors()), false);
   }
 
-  if(lxp.row_dof_descriptors() != 0)
+  if(xp.row_dof_descriptors() != 0)
   {
-    result += deep_size(*(lxp.row_dof_descriptors()), false);
+    result += deep_size(*(xp.row_dof_descriptors()), false);
   }
 
 #ifdef DIAGNOSTIC_OUTPUT
