@@ -75,7 +75,8 @@ if(${CMAKE_GENERATOR} MATCHES "Visual Studio 10 Win64" OR ${CMAKE_GENERATOR} MAT
     set(OUTDIR "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Configuration)" CACHE STRING "Visual Studio Output Directory")
 else()
     set(OUTDIR "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Outdir)" CACHE STRING "Visual Studio Output Directory")
-endif() 
+endif()
+ 
 #
 # System level is responsible for installing the documentation. The component list (see system_definitions.cmake)
 # determines what components are included in the docs.
