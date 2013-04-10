@@ -223,7 +223,7 @@ function(add_bindings_targets)
 
          # Create the bindings jar file 
         if(WIN64INTEL OR WIN64MSVC)
-            set(${COMPONENT}_CLASSPATH ${FIELDS_CLASSPATH} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/$(Outdir)/${${COMPONENT}_JAVA_BINDING_JAR} ${VTK_JAR} ${JMF_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
+            set(${COMPONENT}_CLASSPATH ${FIELDS_CLASSPATH} ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} ${VTK_JAR} ${JMF_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
             set(parent_classpath ${FIELDS_CLASSPATH} ${VTK_JAR} ${JMF_JAR})
             set(this_classpath "${${COMPONENT}_CLASSPATH}")
             add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
@@ -232,7 +232,7 @@ function(add_bindings_targets)
                            COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
                            COMMAND ${JAVAC_EXECUTABLE} -classpath "${FIELDS_CLASSPATH}" -d . *.java
                            COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                           COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/$(Outdir)/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
+                           COMMAND ${JAR_EXECUTABLE} cvf ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
             )
         else()
             set(${COMPONENT}_CLASSPATH ${FIELDS_CLASSPATH} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR} ${VTK_JAR} ${JMF_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
@@ -276,7 +276,7 @@ function(add_bindings_targets)
         	               COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources/docs ${LIB_JAR_DIR}/tools/SheafScope/resources/docs 
     
                            COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                          COMMAND ${JAR_EXECUTABLE} cvmf ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/manifest.txt ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Outdir)/SheafScope.jar  -C ${LIB_JAR_DIR} .
+                          COMMAND ${JAR_EXECUTABLE} cvmf ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/manifest.txt ${OUTDIR}/SheafScope.jar  -C ${LIB_JAR_DIR} .
             )
         else()
          # Build the SheafScope jar
@@ -356,7 +356,7 @@ function(add_install_target)
                       
             if(SWIG_FOUND AND BUILD_BINDINGS)
                 install(TARGETS ${${COMPONENT}_JAVA_BINDING_LIB} RUNTIME DESTINATION bin/\${BUILD_TYPE})
-                install(PROGRAMS ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_JAR} DESTINATION lib/\${BUILD_TYPE})  
+                install(PROGRAMS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_JAR} DESTINATION lib/\${BUILD_TYPE})  
                 install(PROGRAMS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/SheafScope.jar DESTINATION bin/\${BUILD_TYPE})
                 install(PROGRAMS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/dumpsheaf.exe DESTINATION bin/\${BUILD_TYPE})
                 # Only install python binding if the component has a target for it.

@@ -1,7 +1,4 @@
 #
-# $RCSfile: CMakeLists.txt,v $ $Revision: 1.39 $ $Date: 2013/03/13 00:58:40 $
-#
-#
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
 #
@@ -71,6 +68,15 @@ add_tags_target()
 configure_file(${CMAKE_MODULE_PATH}/set_env_vars.csh.cmake.in ${CMAKE_BINARY_DIR}/set_env_vars.csh)
 configure_file(${CMAKE_MODULE_PATH}/set_env_vars.sh.cmake.in ${CMAKE_BINARY_DIR}/set_env_vars.sh)
 
+#
+# VS9 and VS10 handle output locations differently.
+#
+if(${CMAKE_GENERATOR} MATCHES "Visual Studio 10 Win64" OR ${CMAKE_GENERATOR} MATCHES "Visual Studio 11 Win64")
+    set(OUTDIR "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Configuration)" CACHE STRING "Visual Studio Output Directory")
+else()
+    set(OUTDIR "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Outdir)" CACHE STRING "Visual Studio Output Directory")
+endif()
+ 
 #
 # System level is responsible for installing the documentation. The component list (see system_definitions.cmake)
 # determines what components are included in the docs.
@@ -157,4 +163,5 @@ else()
     include(InstallRequiredSystemLibraries)
     install(FILES ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in DESTINATION config/\${BUILD_TYPE})
 endif()    
-    
+
+

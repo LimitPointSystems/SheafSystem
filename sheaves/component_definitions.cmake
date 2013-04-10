@@ -1,7 +1,4 @@
 #
-# $RCSfile: component_definitions.cmake,v $ $Revision: 1.39 $ $Date: 2013/01/28 17:19:35 $
-#
-#
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
 #
@@ -109,12 +106,6 @@ configure_std_headers()
 function(add_library_targets)
     if(WIN64INTEL OR WIN64MSVC)
         
-#        if( MATCHES "Debug-contracts" OR ${CMAKE_INSTALL_CONFIG_NAME} MATCHES "Debug-no-contracts")
-#            set(HDF5_hdf5_LIBRARY ${HDF5_hdf5_LIBRARY_DEBUG})
-#        else()
-#            set(HDF5_hdf5_LIBRARY ${HDF5_hdf5_LIBRARY_RELEASE})
-#        endif()
-        
         # Tell the linker where to look for this project's libraries.
         link_directories(${${COMPONENT}_OUTPUT_DIR})
         # Create the DLL.
@@ -164,7 +155,7 @@ function(add_bindings_targets)
     if(SWIG_FOUND AND BUILD_BINDINGS)
 
         include(${SWIG_USE_FILE})
-
+        
         #
         # Java ################################################################
         #
@@ -198,7 +189,7 @@ function(add_bindings_targets)
         # Output path in windows differs slightly from Linux. Cmake wont allow a conditional inside add_custom_target
         # So we have to do it outside.
         if(WIN64INTEL OR WIN64MSVC)
-            set(${COMPONENT}_CLASSPATH ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/$(Outdir)/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)         
+            set(${COMPONENT}_CLASSPATH ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)         
             add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
                            DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB}
                            set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Component Binding Jars")
@@ -207,7 +198,8 @@ function(add_bindings_targets)
                            COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
                            COMMAND ${JAVAC_EXECUTABLE} -classpath . -d . *.java
                            COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                           COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/$(OutDir)/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
+#                           COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/$(OutDir)/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
+                           COMMAND ${JAR_EXECUTABLE} cvf ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
             )
         else()
             set(${COMPONENT}_CLASSPATH ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)   
@@ -221,7 +213,7 @@ function(add_bindings_targets)
                            COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
              )        
         endif()
-        
+        message(STATUS "${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/\$(OutDir)/${${COMPONENT}_JAVA_BINDING_JAR}")
         set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Library Jars") 
         mark_as_advanced(FORCE ${COMPONENT}_CLASSPATH)        
 
@@ -261,7 +253,7 @@ function(add_bindings_targets)
         # Create the csharp assembly
         if(WIN64INTEL OR WIN64MSVC)
             add_custom_target(${${COMPONENT}_CSHARP_BINDING_ASSY} ALL
-                        COMMAND ${CSHARP_COMPILER} /noconfig /errorreport:prompt /target:library /out:${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(OutDir)/${${COMPONENT}_CSHARP_BINDING_ASSY}  ${CMAKE_CURRENT_BINARY_DIR}/*.cs
+                        COMMAND ${CSHARP_COMPILER} /noconfig /errorreport:prompt /target:library /out:${OUTDIR}/${${COMPONENT}_CSHARP_BINDING_ASSY}  ${CMAKE_CURRENT_BINARY_DIR}/*.cs
                             DEPENDS ${${COMPONENT}_CSHARP_BINDING_ASSY} ${${COMPONENT}_CSHARP_BINDING_LIB}
             )
         else()
@@ -345,7 +337,7 @@ function(add_install_target)
           
             if(SWIG_FOUND AND BUILD_BINDINGS)
                 install(TARGETS ${${COMPONENT}_JAVA_BINDING_LIB} RUNTIME DESTINATION bin/\${BUILD_TYPE})
-                install(FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_JAR} DESTINATION lib/\${BUILD_TYPE})  
+                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_JAR} DESTINATION lib/\${BUILD_TYPE})  
                 # Only install python binding if the component has a target for it.
                 if(TARGET ${${COMPONENT}_PYTHON_BINDING_LIB})
                     install(TARGETS ${${COMPONENT}_PYTHON_BINDING_LIB} ARCHIVE DESTINATION lib/\${BUILD_TYPE})

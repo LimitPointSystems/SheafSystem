@@ -385,7 +385,6 @@ function(create_output_dirs)
         file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
         # Create build/bin for executables.
         file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/bin)        
-        
     else()
         set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/lib PARENT_SCOPE)
         set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/lib PARENT_SCOPE)

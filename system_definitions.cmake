@@ -9,7 +9,6 @@
 # found in the top level of any component. Functions and variables
 # that need to have system scope should be declared and/or defined here.
 #
-#
 
 #
 # Establish the list of components in this system
@@ -162,7 +161,7 @@ mark_as_advanced(LIB_VERSION)
 #
 # Set the cmake module path.
 #
-set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake_modules CACHE STRING "Location of Cmake modules")
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" CACHE STRING "Location of Cmake modules")
 
 #
 # Targets with global scope are declared and optionally defined in 
@@ -174,6 +173,15 @@ include(${CMAKE_MODULE_PATH}/target_declarations.cmake)
 # Prerequisite discovery
 #
 include(${CMAKE_MODULE_PATH}/find_prerequisites.cmake)
+
+#
+# C++11 features
+#
+message(STATUS " ")
+message(STATUS "Checking for C++11 Compliance - ")
+message(STATUS " ")
+
+include(${CMAKE_MODULE_PATH}/CheckCXX11Features.cmake)
 
 #
 # Utility function to add a component to a system.

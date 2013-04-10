@@ -3942,6 +3942,7 @@ struct SHEAF_DLL_SPEC index_traits<scoped_index>
 // any way, so just don't process it.
 
 SHEAF_BEGIN_HASH_NAMESPACE
+
 ///
 /// Specialization of hash function to scoped_index.
 ///
@@ -3949,6 +3950,7 @@ template<> struct SHEAF_DLL_SPEC hash<sheaf::scoped_index>
 {
   size_t operator()(sheaf::scoped_index xindex) const;
 };
+
 SHEAF_END_HASH_NAMESPACE
 
 #endif // SWIG
