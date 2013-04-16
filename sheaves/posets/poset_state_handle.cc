@@ -5380,6 +5380,7 @@ insert_cover_member(pod_index_type xother_mbr_hub_id,
 
   require(state_is_read_write_accessible());
   require(contains_member(xmbr_hub_id));
+  require(!cover_contains_member(xlower, xmbr_hub_id, xother_mbr_hub_id));
 
   // Body:
 
