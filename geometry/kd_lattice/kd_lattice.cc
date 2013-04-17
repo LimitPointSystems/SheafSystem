@@ -3318,6 +3318,11 @@ insert_region(const e3_lite& xlb, const e3_lite& xub)
   _coords->release_access();
   _base_space->end_jim_edit_mode(false, true);
 
+
+  //   update_section_space_schema();
+  //   display(false, true);
+
+
   // Postconditions:
 
   ensure(region_of_interest().id().is_valid());
@@ -3364,7 +3369,7 @@ extract_subvolume_surfaces()
     sec_e3 lsv_coords(_coords->host(), lsv_base);
 
     stringstream lstr;
-    lstr << "subvolume_" << lsv_itr.hub_pod();
+    lstr << "subvolume_" << lsv_itr.pod();
     lsv_coords.put_name(lstr.str(), true, false);
 
     assign(lsv_coords, *_coords, false);

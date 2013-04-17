@@ -53,7 +53,7 @@ public:
   ///
   /// Static const ints; hack to make MSC++ happy.
   ///
-  enum static_const_int{POINT_CT = 3};
+  enum static_const_int{POINT_CT = 3, EDGE_CT = 3};
 
   ///
   /// The name of the base space member prototype for triangles.

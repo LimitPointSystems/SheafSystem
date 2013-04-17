@@ -740,7 +740,7 @@ subvolumes(kd_lattice& xhost, const scoped_index& xid, id_list& xresult)
 
   // $$SCRIBBLE: this will only find subvolumes that
   // intersect the roi surface. We need to consider all
-  // oreinted triangles that remain after following this
+  // oriented triangles that remain after following this
   // procedure. Perhaps by removing triangles from an
   // unvisited set rather than inserting them is a visited set.
 
@@ -754,7 +754,7 @@ subvolumes(kd_lattice& xhost, const scoped_index& xid, id_list& xresult)
     // Try to insert roi triangle in visited set.
     // Orientation of roi triangle is always outward == true.
 
-    // cout << "roi triangle: " << lrt->pod() << "  " << name(xhost, *lrt) << endl;
+    // cout << "roi triangle: " << *lrt << "  " << name(xhost, *lrt) << endl;
 
     ot lrtot(*lrt, true);
 
@@ -770,6 +770,14 @@ subvolumes(kd_lattice& xhost, const scoped_index& xid, id_list& xresult)
       lbase.new_link(xhost.active_part().index(), lvol_id);
       xresult.push_back(lvol_id);
 
+      // Only want to link a given triangle to this subvolume
+      // once (see call to new_link and associated comments below).
+      // Can use contains_cover_member, but default list id space
+      // requires O(size of list) time for search.
+      // Allocate a hash set to keep track instead.
+
+      pod_id_hash_set llinked;
+
       // Initialize the oriented triangle queue.
 
       lot_q.clear();
@@ -779,7 +787,7 @@ subvolumes(kd_lattice& xhost, const scoped_index& xid, id_list& xresult)
       {
         ot_list::iterator lot = lot_q.begin();
 
-        // cout << "front of q: " << lot->first.pod();
+        // cout << "front of q: " << lot->first;
         // cout << "  " << boolalpha << lot->second << noboolalpha << endl;
 
         if(lvisited.insert(*lot).second)
@@ -789,44 +797,68 @@ subvolumes(kd_lattice& xhost, const scoped_index& xid, id_list& xresult)
 
           // cout << "Haven't visited this oriented triangle before." << endl;          
 
-          // $$SCRIBBLE: we lose the orientation of the triangle
-          // at this point. So our subvolume surfaces are not oriented
-          // and the triangles in any internal boundaries occur twice,
-          // without identification of orientation.
-
-          lbase.new_link(xresult.back(), lot->first);          
-
           // Get the points for this triangle.
 
           kd_triangle::points(xhost, lot->first, lpt_ids);
 
-          // cout << "triangle: " << setw(6) << lot->first.pod();
+          // cout << "triangle: " << setw(6) << lot->first;
           // cout << boolalpha << setw(7) << lot->second << noboolalpha;
-          // cout << "  nbrs:";
+          // cout << endl;
+          // cout << "   vertices: ";
+          // for(int i=0; i<kd_triangle::POINT_CT; ++i)
+          // {
+            // cout << "  " << lpt_ids[i];
+          // }
+          // cout << endl;
           
-          for(int i=0; i<kd_triangle::POINT_CT; ++i) // edges in triangle
+          // cout << "   nbrs:" << endl;
+          
+          for(int i=0; i<kd_triangle::EDGE_CT; ++i) // edges in triangle
           {
             // Get the inside neighbor through edge i.
 
             kd_triangle::edge_neighbor(xhost, lot->first, lot->second, lpt_ids, i, lnbr);
 
-            // cout << setw(6) << lnbr.first.pod();
+            // cout << "   " << lnbr.first;
             // cout << boolalpha << setw(7) << lnbr.second << noboolalpha;
-
+            
             if(lnbr.first.is_valid())
             {
-              // cout << "queueing: " << lnbr.first.pod();
-              // cout << "  " << boolalpha << lnbr.second << noboolalpha << endl;
-              
               lot_q.push_back(lnbr);
+              // cout << " ... queued: ";
             }
             else
             {
               // No neighbors; do nothing.
             }
+            // cout << endl;
           } // end for edges in triangle
 
           // cout << endl;
+
+          // If we have any internal boundaries, the triangles in
+          // the internal boundary will appear twice here, once in each
+          // orientation. We currently have no way to distinguish
+          // between orientations in the CRG and inserting two links
+          // between the same two members is undefined.
+          // We can deal with this in 3 ways:
+          // 1) Duplicate the triangle in the opposite orientation,
+          //    creates a double sided internal boundary.
+          // 2) Only insert it once, creates a single sided internal boundary
+          // 3) Remove it entirely, no internal boundary.
+          //
+          // We'll use option 2:
+
+          assertion(lot->first.is_hub_scope());
+
+          if(llinked.insert(lot->first.pod()).second)
+          // if(!lbase.cover_contains_member(LOWER, xresult.back(), lot->first))
+          {
+            // This is the first time we've seen this triangle in
+            // this subvolume. Link it.
+
+            lbase.new_link(xresult.back(), lot->first);
+          }
           
         } // front of quueue lvisited insert succeeded
         else
@@ -838,7 +870,7 @@ subvolumes(kd_lattice& xhost, const scoped_index& xid, id_list& xresult)
         
         lot_q.pop_front();
 
-      } // end while stack not empty
+      } // end while queue not empty
 
       // cout << "queue empty; next roi triangle" << endl;
       
