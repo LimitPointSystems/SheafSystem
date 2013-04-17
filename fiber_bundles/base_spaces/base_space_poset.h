@@ -882,6 +882,38 @@ private:
 
 
   // ===========================================================
+  /// @name I/O SUPPORT FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// True if the member with hub id xmbr_id is an explicit member.
+  ///
+  /// @hack product subposet hack, ver 2.
+  /// Needed to enforce that a section space schema member with an implicit
+  /// base space schema member is not supported by the i/o system.
+  ///
+  bool is_explicit_member(pod_index_type xmbr_id) const;
+  
+  ///
+  /// True if the member with hub id xmbr_id is a block member.
+  ///
+  /// @hack product subposet hack, ver 2.
+  /// Needed to enforce that a section space schema member with an implicit
+  /// base space schema member is not supported by the i/o system.
+  ///
+  bool is_block_member(pod_index_type xmbr_id) const;
+  
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
   /// @name ANY FACET
   // ===========================================================
   //@{
