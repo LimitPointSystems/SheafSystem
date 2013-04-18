@@ -134,6 +134,21 @@ public:
   virtual size_type ub(pod_type xi) const;
 
   ///
+  /// The upper bound in the i-direction.
+  ///
+  size_type i_ub() const;
+
+  ///
+  /// The upper bound in the j-direction.
+  ///
+  size_type j_ub() const;
+
+  ///
+  /// The upper bound in the k-direction.
+  ///
+  size_type k_ub() const;
+
+  ///
   /// 3-tuple to ordinal conversion.
   ///
   void ordinal(pod_type xi, pod_type xj, pod_type xk, pod_type& xordinal) const;

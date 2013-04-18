@@ -1,7 +1,7 @@
-// $RCSfile: std_hash_set.h.cmake.in,v $ $Revision: 1.2 $ $Date: 2011/04/29 04:58:25 $
+
 
 //
-// Copyright (c) 2010 Limit Point Systems, Inc. 
+// Copyright (c) 2013 Limit Point Systems, Inc. 
 //
 
 // Template to configure hash set typedef and include
@@ -106,11 +106,21 @@ public:
 
 #include <unordered_set>
 
-using namespace std::tr1;
-#ifndef SHEAF_HASH_NAMESPACE
-#define SHEAF_HASH_NAMESPACE std::tr1
-#define SHEAF_BEGIN_HASH_NAMESPACE namespace std { namespace tr1 {
-#define SHEAF_END_HASH_NAMESPACE }}
+// _MSC_VER 1500 = VS2008, 1600 = VS2010, 1700 = VS2012
+#if _MSC_VER <=1500
+    using namespace std::tr1;
+    #ifndef SHEAF_HASH_NAMESPACE
+    #define SHEAF_HASH_NAMESPACE std::tr1
+    #define SHEAF_BEGIN_HASH_NAMESPACE namespace std { namespace tr1 {
+    #define SHEAF_END_HASH_NAMESPACE }}
+    #endif
+#else
+    using namespace std;
+    #ifndef SHEAF_HASH_NAMESPACE
+    #define SHEAF_HASH_NAMESPACE std
+    #define SHEAF_BEGIN_HASH_NAMESPACE namespace std {
+    #define SHEAF_END_HASH_NAMESPACE }
+    #endif
 #endif
 
 template <typename Key,

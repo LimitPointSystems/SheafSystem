@@ -22,7 +22,10 @@
 #ifndef STD_BITSET_H
 #include "std_bitset.h"
 #endif
- 
+
+#ifndef STD_ITERATOR_H
+#include "std_iterator.h"
+#endif
 
 namespace fiber_bundle
 {
@@ -50,7 +53,7 @@ public:
   ///
   /// Static const ints; hack to make MSC++ happy.
   ///
-  enum static_const_int{POINT_CT = 3};
+  enum static_const_int{POINT_CT = 3, EDGE_CT = 3};
 
   ///
   /// The name of the base space member prototype for triangles.

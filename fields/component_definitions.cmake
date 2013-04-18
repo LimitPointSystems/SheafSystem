@@ -205,14 +205,14 @@ function(add_bindings_targets)
         
         # Create the bindings jar file 
         if(WIN64INTEL OR WIN64MSVC)
-            set(${COMPONENT}_CLASSPATH ${GEOMETRY_CLASSPATH} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/$(Outdir)/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
+            set(${COMPONENT}_CLASSPATH ${GEOMETRY_CLASSPATH} ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
             add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
                            DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${GEOMETRY_JAVA_BINDING_JAR}
                            set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Component Binding Jars")                           
                            COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
                            COMMAND ${JAVAC_EXECUTABLE} -classpath "${GEOMETRY_CLASSPATH}" -d . *.java
                            COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                           COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/$(Outdir)/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
+                           COMMAND ${JAR_EXECUTABLE} cvf ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
             )
         else()
             set(${COMPONENT}_CLASSPATH ${GEOMETRY_CLASSPATH} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
@@ -267,7 +267,7 @@ function(add_bindings_targets)
         # Create the csharp assembly
         if(WIN64INTEL OR WIN64MSVC)
             add_custom_target(${${COMPONENT}_CSHARP_BINDING_ASSY} ALL
-                        COMMAND ${CSHARP_COMPILER} /noconfig /errorreport:prompt /target:library /out:${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(OutDir)/${${COMPONENT}_CSHARP_BINDING_ASSY}  ${CMAKE_CURRENT_BINARY_DIR}/*.cs
+                        COMMAND ${CSHARP_COMPILER} /noconfig /errorreport:prompt /target:library /out:${OUTDIR}/${${COMPONENT}_CSHARP_BINDING_ASSY}  ${CMAKE_CURRENT_BINARY_DIR}/*.cs
             )
         else()
             add_custom_target(${${COMPONENT}_CSHARP_BINDING_ASSY} ALL
@@ -349,7 +349,7 @@ function(add_install_target)
           
             if(SWIG_FOUND AND BUILD_BINDINGS)
                 install(TARGETS ${${COMPONENT}_JAVA_BINDING_LIB} RUNTIME DESTINATION bin/\${BUILD_TYPE})
-                install(FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_JAR} DESTINATION lib/\${BUILD_TYPE})  
+                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_JAR} DESTINATION lib/\${BUILD_TYPE})  
                 # Only install python binding if the component has a target for it.
                 if(TARGET ${${COMPONENT}_PYTHON_BINDING_LIB})
                     install(TARGETS ${${COMPONENT}_PYTHON_BINDING_LIB} ARCHIVE DESTINATION lib/\${BUILD_TYPE})

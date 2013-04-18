@@ -254,6 +254,57 @@ ub(pod_type xi) const
   return result;
 }
 
+sheaf::size_type
+sheaf::ijk_product_structure::
+i_ub() const
+{
+  // Preconditions:
+
+  // Body:
+
+  // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return _i_ub;
+}
+
+sheaf::size_type
+sheaf::ijk_product_structure::
+j_ub() const
+{
+  // Preconditions:
+
+  // Body:
+
+  // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return _j_ub;
+}
+
+sheaf::size_type
+sheaf::ijk_product_structure::
+k_ub() const
+{
+  // Preconditions:
+
+  // Body:
+
+  // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return _k_ub;
+}
+
 void
 sheaf::ijk_product_structure::
 ordinal(pod_type xi, pod_type xj, pod_type xk, pod_type& xordinal) const

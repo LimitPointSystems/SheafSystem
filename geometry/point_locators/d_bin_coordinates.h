@@ -63,7 +63,7 @@ public:
   ///
   /// The type used for integer coordinates.
   ///
-  typedef unsigned long int_type;
+  typedef unsigned long long int_type;
 
   ///
   /// Default constructor
