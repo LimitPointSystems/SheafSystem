@@ -79,7 +79,7 @@ set(${COMPONENT}_PYTHON_BINDING_LIBS ${FIELDS_PYTHON_BINDING_LIBS} ${${COMPONENT
 #
 # Set the cumulative include path for this component.
 #
-set(${COMPONENT}_IPATHS ${FIELDS_IPATHS} ${${COMPONENT}_IPATH} CACHE STRING " Cumulative include paths for ${PROJECT_NAME}")
+set(${COMPONENT}_IPATHS ${FIELDS_IPATHS} ${${COMPONENT}_IPATH} ${VTK_INC_DIRS} ${JDK_INC_DIR} ${JDK_PLATFORM_INC_DIR} ${TETGEN_INC_DIR} CACHE STRING " Cumulative include paths for ${PROJECT_NAME}")
 
 #
 # Specify component prerequisite include directories.
