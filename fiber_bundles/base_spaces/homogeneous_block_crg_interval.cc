@@ -1,6 +1,5 @@
-// $RCSfile: homogeneous_block_crg_interval.cc,v $ $Revision: 1.2 $ $Date: 2013/01/10 13:54:19 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2011 Limit Point Systems, Inc.
 //

@@ -1,5 +1,4 @@
 
-// $RCSfile: field_vd_funcs.h,v $ $Revision: 1.12 $ $Date: 2013/03/21 17:40:19 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

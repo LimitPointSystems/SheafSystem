@@ -1,4 +1,3 @@
-// $RCSfile: poset_dof_iterator.cc,v $ $Revision: 1.28 $ $Date: 2013/03/13 00:59:01 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

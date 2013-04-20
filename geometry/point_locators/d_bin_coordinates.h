@@ -1,4 +1,3 @@
-// $RCSfile: d_bin_coordinates.h,v $ $Revision: 1.8 $ $Date: 2013/01/20 19:40:46 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

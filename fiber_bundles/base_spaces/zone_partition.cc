@@ -1,6 +1,5 @@
-// $RCSfile: zone_partition.cc,v $ $Revision: 1.11 $ $Date: 2013/01/12 17:16:53 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc. 
 //

@@ -1,6 +1,5 @@
 
 //
-// $RCSfile: fields_common_binding_includes.i,v $ $Revision: 1.6 $ $Date: 2013/01/07 22:34:30 $
 //
 //
 // Copyright (c) 2007.save Limit Point Systems, Inc.

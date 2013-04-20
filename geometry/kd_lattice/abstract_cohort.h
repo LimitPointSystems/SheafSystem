@@ -1,6 +1,5 @@
-// $RCSfile: abstract_cohort.h,v $ $Revision: 1.4 $ $Date: 2013/01/10 13:54:42 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2008 Limit Point Systems, Inc. 
 //

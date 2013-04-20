@@ -1,6 +1,5 @@
-// $RCSfile: assert_contract.cc,v $ $Revision: 1.3 $ $Date: 2012/07/04 16:42:27 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2008 Limit Point Systems, Inc. 
 //

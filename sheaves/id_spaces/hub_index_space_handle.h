@@ -1,6 +1,5 @@
-// $RCSfile: hub_index_space_handle.h,v $ $Revision: 1.4 $ $Date: 2013/03/13 00:59:02 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2011 Limit Point Systems, Inc. 
 //

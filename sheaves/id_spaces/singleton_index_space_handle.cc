@@ -1,6 +1,5 @@
-// $RCSfile: singleton_index_space_handle.cc,v $ $Revision: 1.3 $ $Date: 2013/01/15 22:23:45 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2011 Limit Point Systems, Inc. 
 //

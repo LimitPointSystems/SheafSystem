@@ -1,5 +1,4 @@
 //
-// $RCSfile: fiber_bundles_common_binding.i,v $ $Revision: 1.21 $ $Date: 2013/03/13 00:58:42 $
 //
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

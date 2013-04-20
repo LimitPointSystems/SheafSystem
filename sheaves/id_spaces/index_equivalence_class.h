@@ -1,6 +1,5 @@
-// $RCSfile: index_equivalence_class.h,v $ $Revision: 1.8 $ $Date: 2013/01/12 17:17:35 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

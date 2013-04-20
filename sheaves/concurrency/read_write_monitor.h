@@ -1,4 +1,3 @@
-// $RCSfile: read_write_monitor.h,v $ $Revision: 1.24 $ $Date: 2013/03/13 00:59:01 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

@@ -1,6 +1,5 @@
 
 //
-// $RCSfile: sheaves_common_binding_includes.i,v $ $Revision: 1.17 $ $Date: 2013/03/13 00:59:01 $
 //
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

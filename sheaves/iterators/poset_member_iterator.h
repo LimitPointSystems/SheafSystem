@@ -1,4 +1,3 @@
-// $RCSfile: poset_member_iterator.h,v $ $Revision: 1.16 $ $Date: 2013/03/13 00:59:05 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

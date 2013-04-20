@@ -1,6 +1,5 @@
-// $RCSfile: explicit_crg_interval.cc,v $ $Revision: 1.2 $ $Date: 2013/01/10 13:55:03 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2011 Limit Point Systems, Inc.
 //

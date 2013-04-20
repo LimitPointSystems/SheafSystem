@@ -1,4 +1,3 @@
-// $RCSfile: at0_space.h,v $ $Revision: 1.10 $ $Date: 2013/03/13 00:58:42 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

@@ -1,4 +1,3 @@
-// $RCSfile: sec_ed_invertible.cc,v $ $Revision: 1.5 $ $Date: 2013/03/20 21:56:07 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

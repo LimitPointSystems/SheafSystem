@@ -1,7 +1,6 @@
 
-// $RCSfile: product_section_space_schema_poset.h,v $ $Revision: 1.2 $ $Date: 2013/01/10 13:54:33 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2011 Limit Point Systems, Inc.
 //

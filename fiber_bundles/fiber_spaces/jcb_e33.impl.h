@@ -1,5 +1,4 @@
 
-// $RCSfile: jcb_e33.impl.h,v $ $Revision: 1.10 $ $Date: 2013/01/12 17:17:01 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

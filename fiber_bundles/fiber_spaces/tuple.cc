@@ -1,5 +1,4 @@
 
-// $RCSfile: tuple.cc,v $ $Revision: 1.61 $ $Date: 2013/03/18 02:53:23 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

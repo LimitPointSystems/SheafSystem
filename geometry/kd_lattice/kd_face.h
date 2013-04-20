@@ -1,6 +1,5 @@
-// $RCSfile: kd_face.h,v $ $Revision: 1.5 $ $Date: 2013/01/10 13:54:43 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2008 Limit Point Systems, Inc. 
 //

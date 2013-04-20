@@ -1,4 +1,3 @@
-// $RCSfile: equivalence.cc,v $ $Revision: 1.17 $ $Date: 2013/01/12 17:17:33 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

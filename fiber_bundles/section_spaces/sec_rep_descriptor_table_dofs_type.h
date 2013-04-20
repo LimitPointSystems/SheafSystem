@@ -1,5 +1,4 @@
 
-// $RCSfile: sec_rep_descriptor_table_dofs_type.h,v $ $Revision: 1.7 $ $Date: 2013/01/12 17:17:12 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

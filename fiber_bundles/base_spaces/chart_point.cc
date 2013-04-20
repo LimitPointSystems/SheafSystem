@@ -1,6 +1,5 @@
-// $RCSfile: chart_point.cc,v $ $Revision: 1.33 $ $Date: 2013/01/29 23:00:06 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

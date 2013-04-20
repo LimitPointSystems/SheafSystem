@@ -1,5 +1,4 @@
 
-// $RCSfile: field_tp_funcs.impl.h,v $ $Revision: 1.8 $ $Date: 2013/03/13 00:58:56 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

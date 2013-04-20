@@ -1,4 +1,3 @@
-// $RCSfile: namespace_member_index.cc,v $ $Revision: 1.7 $ $Date: 2013/01/12 17:17:41 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

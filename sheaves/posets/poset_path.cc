@@ -1,5 +1,4 @@
 
-// $RCSfile: poset_path.cc,v $ $Revision: 1.41 $ $Date: 2013/03/13 00:59:06 $
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

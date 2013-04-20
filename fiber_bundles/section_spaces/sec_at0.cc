@@ -1,7 +1,6 @@
 
-// $RCSfile: sec_at0.cc,v $ $Revision: 1.39 $ $Date: 2013/03/13 00:58:49 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

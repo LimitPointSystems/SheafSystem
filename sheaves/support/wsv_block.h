@@ -1,4 +1,3 @@
-// $RCSfile: wsv_block.h,v $ $Revision: 1.18 $ $Date: 2013/01/22 16:38:26 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

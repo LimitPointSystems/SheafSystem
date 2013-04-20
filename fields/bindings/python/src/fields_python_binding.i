@@ -1,6 +1,5 @@
 
 //
-// $RCSfile: fields_python_binding.i,v $ $Revision: 1.5 $ $Date: 2013/01/12 17:17:20 $
 //
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

@@ -1,5 +1,4 @@
 
-// $RCSfile: field_atp.h,v $ $Revision: 1.16 $ $Date: 2013/03/21 17:40:18 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

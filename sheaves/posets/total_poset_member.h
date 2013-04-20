@@ -1,6 +1,5 @@
-// $RCSfile: total_poset_member.h,v $ $Revision: 1.35 $ $Date: 2013/03/20 21:56:07 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

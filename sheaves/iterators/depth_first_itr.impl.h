@@ -1,6 +1,5 @@
-// $RCSfile: depth_first_itr.impl.h,v $ $Revision: 1.15 $ $Date: 2013/03/13 00:59:05 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

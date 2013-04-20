@@ -1,7 +1,6 @@
 
-// $RCSfile: sec_stp_space.cc,v $ $Revision: 1.14 $ $Date: 2013/03/18 02:53:24 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

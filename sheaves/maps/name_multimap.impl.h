@@ -1,4 +1,3 @@
-// $RCSfile: name_multimap.impl.h,v $ $Revision: 1.10 $ $Date: 2013/01/12 17:17:40 $
 
 
 //

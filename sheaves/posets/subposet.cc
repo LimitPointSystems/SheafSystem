@@ -1,6 +1,5 @@
-// $RCSfile: subposet.cc,v $ $Revision: 1.61 $ $Date: 2013/03/13 00:59:07 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

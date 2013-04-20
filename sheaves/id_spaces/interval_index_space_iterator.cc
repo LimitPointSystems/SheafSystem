@@ -1,6 +1,5 @@
-// $RCSfile: interval_index_space_iterator.cc,v $ $Revision: 1.6 $ $Date: 2013/01/25 01:32:12 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2011 Limit Point Systems, Inc.
 //

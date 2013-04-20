@@ -1,6 +1,5 @@
-// $RCSfile: interval_set_iterator.cc,v $ $Revision: 1.11 $ $Date: 2013/01/14 23:29:39 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

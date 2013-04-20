@@ -1,5 +1,4 @@
 
-// $RCSfile: ternary_section_space_schema_member.h,v $ $Revision: 1.23 $ $Date: 2013/01/12 17:17:13 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

@@ -1,4 +1,3 @@
-// $RCSfile: primitives_schema_member_index.cc,v $ $Revision: 1.7 $ $Date: 2013/01/12 17:17:43 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

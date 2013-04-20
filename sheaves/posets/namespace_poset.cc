@@ -1,6 +1,5 @@
-// $RCSfile: namespace_poset.cc,v $ $Revision: 1.68 $ $Date: 2013/03/18 02:53:24 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

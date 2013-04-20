@@ -1,4 +1,3 @@
-// $RCSfile: tetra_connectivity.h,v $ $Revision: 1.16 $ $Date: 2013/01/12 17:16:52 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

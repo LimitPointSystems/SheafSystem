@@ -1,6 +1,5 @@
-// $RCSfile: kd_truncation.cc,v $ $Revision: 1.7 $ $Date: 2013/03/13 00:59:00 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2008 Limit Point Systems, Inc. 
 //

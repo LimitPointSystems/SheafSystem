@@ -1,4 +1,3 @@
-// $RCSfile: depth_first_iterator.cc,v $ $Revision: 1.43 $ $Date: 2013/03/13 00:59:05 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

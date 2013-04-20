@@ -1,4 +1,3 @@
-// $RCSfile: visualization_iterator.cc,v $ $Revision: 1.23 $ $Date: 2013/01/12 17:17:57 $
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

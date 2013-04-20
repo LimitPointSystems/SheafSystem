@@ -1,6 +1,5 @@
-// $RCSfile: section_space_schema_member.cc,v $ $Revision: 1.42 $ $Date: 2013/03/18 02:53:24 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

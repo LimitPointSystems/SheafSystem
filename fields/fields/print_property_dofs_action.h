@@ -1,4 +1,3 @@
-// $RCSfile: print_property_dofs_action.h,v $ $Revision: 1.11 $ $Date: 2013/01/12 17:17:22 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

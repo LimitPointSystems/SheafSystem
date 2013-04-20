@@ -1,4 +1,3 @@
-// $RCSfile: edge_centered_polygon_refiner.cc,v $ $Revision: 1.16 $ $Date: 2013/03/13 00:58:59 $
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

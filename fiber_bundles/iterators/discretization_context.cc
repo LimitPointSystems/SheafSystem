@@ -1,6 +1,5 @@
-// $RCSfile: discretization_context.cc,v $ $Revision: 1.13 $ $Date: 2013/01/12 17:17:08 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

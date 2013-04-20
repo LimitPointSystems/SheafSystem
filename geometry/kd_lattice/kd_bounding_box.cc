@@ -1,6 +1,5 @@
-// $RCSfile: kd_bounding_box.cc,v $ $Revision: 1.6 $ $Date: 2013/03/13 00:58:59 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2008 Limit Point Systems, Inc. 
 //

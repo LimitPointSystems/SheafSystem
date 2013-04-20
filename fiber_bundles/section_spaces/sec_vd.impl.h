@@ -1,5 +1,4 @@
 
-// $RCSfile: sec_vd.impl.h,v $ $Revision: 1.13 $ $Date: 2013/03/13 00:58:51 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

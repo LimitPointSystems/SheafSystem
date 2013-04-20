@@ -1,6 +1,5 @@
-// $RCSfile: zone_nodes_block.cc,v $ $Revision: 1.27 $ $Date: 2013/03/18 02:53:22 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

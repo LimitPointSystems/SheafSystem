@@ -1,6 +1,5 @@
-// $RCSfile: line_surface_intersecter.cc,v $ $Revision: 1.5 $ $Date: 2013/03/13 00:59:01 $
 
-// $Name: HEAD $
+
 //
 // CONFIDENTIALITY: 
 // This is a CONFIDENTIAL document. 

@@ -1,4 +1,3 @@
-// $RCSfile: unstructured_block_builder.cc,v $ $Revision: 1.42 $ $Date: 2013/03/20 21:56:04 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

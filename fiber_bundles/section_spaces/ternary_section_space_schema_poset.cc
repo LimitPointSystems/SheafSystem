@@ -1,5 +1,4 @@
 
-// $RCSfile: ternary_section_space_schema_poset.cc,v $ $Revision: 1.26 $ $Date: 2013/01/13 17:34:33 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

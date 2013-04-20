@@ -1,4 +1,3 @@
-// $RCSfile: index_space_handle.inst.cc,v $ $Revision: 1.3 $ $Date $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

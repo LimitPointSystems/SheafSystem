@@ -1,6 +1,5 @@
-// $RCSfile: section_space_schema_jims_index_space_state.cc,v $ $Revision: 1.3 $ $Date: 2013/03/13 00:58:48 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2011 Limit Point Systems, Inc. 
 //

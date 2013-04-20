@@ -1,4 +1,3 @@
-// $RCSfile: sheaf.cc,v $ $Revision: 1.13 $ $Date: 2013/01/29 23:00:08 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

@@ -1,6 +1,5 @@
-// $RCSfile: poset_orderer.cc,v $ $Revision: 1.17 $ $Date: 2013/03/13 00:59:08 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

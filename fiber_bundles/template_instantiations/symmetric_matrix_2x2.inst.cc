@@ -1,5 +1,4 @@
 
-// $RCSfile: symmetric_matrix_2x2.inst.cc,v $ $Revision: 1.3 $ $Date: 2013/01/12 17:17:18 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

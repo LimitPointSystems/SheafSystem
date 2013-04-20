@@ -1,4 +1,3 @@
-// $RCSfile: field_eval_iterator.h,v $ $Revision: 1.16 $ $Date: 2013/03/20 21:56:07 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

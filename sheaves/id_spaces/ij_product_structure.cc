@@ -1,6 +1,5 @@
-// $RCSfile: ij_product_structure.cc,v $ $Revision: 1.4 $ $Date: 2013/01/16 19:46:04 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2011 Limit Point Systems, Inc. 
 //
