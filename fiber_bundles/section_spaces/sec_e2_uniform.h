@@ -54,20 +54,6 @@ public:
   // NEW HANDLE, NEW STATE CONSTRUCTORS
   // ===========================================================================
 
-  //   ///
-  ///   /// Create a new handle attached to a new state with in a new section space
-  ///   /// with a new fiber space and new base with with name xbase_name
-  ///   /// and size xbase_size. Section bounds are given by xmin and xmax.
-  //   ///
-  //   sec_e2_uniform(fiber_bundles_namespace& xns,
-  //                  const string& xbase_name,
-  //                  int xbase_i_size,
-  //                  int xbase_j_size,
-  //                  const block<dof_type>& xmin,
-  //                  const block<dof_type>& xmax,
-  //                  bool xauto_access);
-
-
   ///
   /// Create a new handle attached to a new state in xhost with
   /// section bounds xmin and xmax.
@@ -107,7 +93,7 @@ public:
 
   ///
   /// Creates a new sec_e2_uniform handle attached to the member state with
-  //  index xindex in xhost.
+  /// index xindex in xhost.
   ///
   sec_e2_uniform(const sec_rep_space* xhost, pod_index_type xindex);
 
