@@ -1,6 +1,5 @@
-// $RCSfile: kd_triangle.cc,v $ $Revision: 1.6 $ $Date: 2013/03/13 00:59:00 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2008 Limit Point Systems, Inc. 
 //
@@ -1895,20 +1894,28 @@ edge_neighbor(const kd_lattice& xhost,
   int li1 = (xedge_id + 1) % POINT_CT;
   int li2 = other_local_point_id(li0, li1);
 
+  // cout << "local vertices:" << setw(3) << li0 << setw(3) << li1 << setw(3) << li2 << endl;  
+
   const scoped_index& lpt0_id = xpt_ids[li0];
   const scoped_index& lpt1_id = xpt_ids[li1];
   const scoped_index& lpt2_id = xpt_ids[li2];
+
+  // cout << "scoped vertices: " << lpt0_id << "  " << lpt1_id << "  " << lpt2_id << endl;
   
   // Get the other triangles for each point as sets.
 
   id_list lpt0_list;
   kd_point::triangles(xhost, lpt0_id, lpt0_list);
   id_set lpt0_set(lpt0_list.begin(), lpt0_list.end());
+
+  // cout << "triangles for pt 0: " << lpt0_set << endl;
   
   id_list lpt1_list;
   kd_point::triangles(xhost, lpt1_id, lpt1_list);
   id_set lpt1_set(lpt1_list.begin(), lpt1_list.end());  
   
+  // cout << "triangles for pt 1: " << lpt1_set << endl;
+
   // Triangles connected through the edge are the triangles
   // that appear in both sets of triangles; compute the intersection.
   
@@ -1916,6 +1923,8 @@ edge_neighbor(const kd_lattice& xhost,
   back_insert_iterator<id_list> lnbr_itr(lnbrs);
   
   set_intersection(lpt0_set.begin(), lpt0_set.end(), lpt1_set.begin(), lpt1_set.end(), lnbr_itr);
+
+  // cout << "triangles in both: " << lnbrs << endl;
 
   // The current triangle has to be in the nbrs list; remove it.
 
@@ -2026,13 +2035,13 @@ edge_neighbor(const kd_lattice& xhost,
 
     // Debugging: check for degenerate triangles.
 
-    bool lis_collinear = is_collinear(lpts);
-    if(lis_collinear)
-    {
-      // cout << "coliinear triangle:" << endl;
-      // cout << "pt ids: " << setw(6) << xpt_ids[0].pod() << setw(6) << xpt_ids[1].pod() << setw(6) << xpt_ids[2].pod() << endl;
-      // cout << "points: " << lpts[0] << lpts[1] << lpts[2] << endl;
-    }
+    //     bool lis_collinear = is_collinear(lpts);
+    //     if(lis_collinear)
+    //     {
+    //       cout << "coliinear triangle:" << endl;
+    //       cout << "pt ids: " << setw(6) << xpt_ids[0].pod() << setw(6) << xpt_ids[1].pod() << setw(6) << xpt_ids[2].pod() << endl;
+    //       cout << "points: " << lpts[0] << lpts[1] << lpts[2] << endl;
+    //     }
 
     ot_list::iterator linside_nbr;
     vd_value_type ltheta, ltheta_min = numeric_limits<vd_value_type>::max();
@@ -2080,8 +2089,8 @@ edge_neighbor(const kd_lattice& xhost,
 
       bool lorientation = xorientation ? !lsame_order : lsame_order;
 
-    // We never accept the false oreintation of an roi triangle
-    // or any exterior triangle.
+      // We never accept the false oreintation of an roi triangle
+      // or any exterior triangle.
 
       bool lis_roi_surface = (kd_triangle::surface(xhost, *ln) == lroi_id);
       bool lis_roi_interior = xhost.interior_triangles().contains(*ln);

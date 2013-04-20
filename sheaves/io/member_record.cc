@@ -1,4 +1,3 @@
-// $RCSfile: member_record.cc,v $ $Revision: 1.46 $ $Date: 2013/03/13 00:59:04 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
@@ -2251,7 +2250,7 @@ internalize_toc(size_t& xnext_field_offset)
 
   define_old_variable(size_t old_xnext_field_offset = xnext_field_offset);
 
-  _toc = toc_type(static_cast<unsigned long>(int_buf()[xnext_field_offset++]));
+  _toc = toc_type(static_cast<unsigned long long>(int_buf()[xnext_field_offset++]));
 
 #ifdef DIAGNOSTIC_OUTPUT
   cout << "\ttoc: " << _toc << " = " << _toc.to_ulong() << endl;

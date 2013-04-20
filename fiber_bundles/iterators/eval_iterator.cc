@@ -1,4 +1,3 @@
-// $RCSfile: eval_iterator.cc,v $ $Revision: 1.48 $ $Date: 2013/03/20 21:56:06 $
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

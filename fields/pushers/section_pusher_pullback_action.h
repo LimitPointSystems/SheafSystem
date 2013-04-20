@@ -1,4 +1,3 @@
-// $RCSfile: section_pusher_pullback_action.h,v $ $Revision: 1.9 $ $Date: 2013/01/12 17:17:27 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

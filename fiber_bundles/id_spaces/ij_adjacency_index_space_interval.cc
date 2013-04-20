@@ -1,6 +1,5 @@
-// $RCSfile: ij_adjacency_index_space_interval.cc,v $ $Revision: 1.3 $ $Date: 2013/03/13 00:58:48 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2011 Limit Point Systems, Inc. 
 //
@@ -104,7 +103,7 @@ zone_hub_begin(pod_type xlocal_id) const
   // xlocal_id is the vertex id, compute the i, j indices.
 
   pod_type i, j;
-  tuple(xlocal_id, _j_vertex_size, i, j);
+  sheaf::tuple(xlocal_id, _j_vertex_size, i, j);
 
   pod_type result = ordinal(i, j, _j_size) + _zone_hub_begin;
 
@@ -143,7 +142,7 @@ adjacent_zones(pod_type xlocal_id,
   // xlocal_id is the vertex id, compute the i, j indices.
 
   pod_type i, j;
-  tuple(xlocal_id, _j_vertex_size, i, j);
+  sheaf::tuple(xlocal_id, _j_vertex_size, i, j);
 
   // Calculate the first adjacent zone id and the number of adjacent
   // zones in the i and j directions.
@@ -531,7 +530,7 @@ ct(pod_type xlocal_id) const
   // xlocal_id is the zone id, compute the i, j indices.
 
   pod_type i, j;
-  tuple(xlocal_id, _j_vertex_size, i, j);
+  sheaf::tuple(xlocal_id, _j_vertex_size, i, j);
 
   // Compute the count in each direction.
 
@@ -650,7 +649,7 @@ contains_unglued_hub(pod_type xlocal_id, pod_type xid) const
   // adjacent to vertex xlocal_id.
 
   pod_type i, j;
-  tuple(xid - lzone_hub_begin, _j_size, i, j);
+  sheaf::tuple(xid - lzone_hub_begin, _j_size, i, j);
 
   bool result = ((0 <= i) && (i < li_ct) && (0 <= j) && (j < lj_ct));
 
@@ -707,7 +706,7 @@ pod(pod_type xlocal_id, pod_type xid) const
   // adjacent to vertex xlocal_id.
 
   pod_type i, j;
-  tuple(xid - lzone_hub_begin, _j_size, i, j);
+  sheaf::tuple(xid - lzone_hub_begin, _j_size, i, j);
 
   // Compute pod.
 
@@ -751,7 +750,7 @@ unglued_hub_pod(pod_type xlocal_id, pod_type xid) const
   // Factor the pod.
 
   pod_type i, j;
-  tuple(xid, lj_ct, i, j);
+  sheaf::tuple(xid, lj_ct, i, j);
 
   // Calculate the hub pod.
 

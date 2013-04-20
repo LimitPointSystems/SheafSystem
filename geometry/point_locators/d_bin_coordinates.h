@@ -1,4 +1,3 @@
-// $RCSfile: d_bin_coordinates.h,v $ $Revision: 1.8 $ $Date: 2013/01/20 19:40:46 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
@@ -63,7 +62,7 @@ public:
   ///
   /// The type used for integer coordinates.
   ///
-  typedef unsigned long int_type;
+  typedef unsigned long long int_type;
 
   ///
   /// Default constructor

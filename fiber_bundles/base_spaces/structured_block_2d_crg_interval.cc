@@ -1,6 +1,5 @@
-// $RCSfile: structured_block_2d_crg_interval.cc,v $ $Revision: 1.3 $ $Date: 2013/03/13 00:58:41 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2011 Limit Point Systems, Inc.
 //

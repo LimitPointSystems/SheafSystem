@@ -1,6 +1,5 @@
-// $RCSfile: ij_product_structure.cc,v $ $Revision: 1.4 $ $Date: 2013/01/16 19:46:04 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2011 Limit Point Systems, Inc. 
 //
@@ -231,6 +230,40 @@ ub(pod_type xi) const
   // Exit:
 
   return result;
+}
+
+sheaf::size_type
+sheaf::ij_product_structure::
+i_ub() const
+{
+  // Preconditions:
+
+  // Body:
+
+  // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return _i_ub;
+}
+
+sheaf::size_type
+sheaf::ij_product_structure::
+j_ub() const
+{
+  // Preconditions:
+
+  // Body:
+
+  // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return _j_ub;
 }
 
 void

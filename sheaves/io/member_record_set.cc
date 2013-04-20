@@ -1,4 +1,3 @@
-// $RCSfile: member_record_set.cc,v $ $Revision: 1.49 $ $Date: 2013/03/13 00:59:04 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

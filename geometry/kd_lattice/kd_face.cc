@@ -1,6 +1,5 @@
-// $RCSfile: kd_face.cc,v $ $Revision: 1.7 $ $Date: 2013/03/13 00:58:59 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2008 Limit Point Systems, Inc. 
 //
@@ -1657,7 +1656,7 @@ subface(const kd_lattice& xhost, const scoped_index& xid, int xi)
 
   const cohort& lfaces = xhost.faces();
 
-  scoped_index result;
+  scoped_index result(xhost.base_space().member_id(false));
   index_space_iterator& litr = xhost.base_space().get_cover_id_space_iterator(LOWER, xid); // link 0
 
   if(xi == 0)

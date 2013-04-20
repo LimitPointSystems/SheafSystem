@@ -1,6 +1,5 @@
-// $RCSfile: schema_poset_member.cc,v $ $Revision: 1.63 $ $Date: 2013/03/18 02:53:25 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

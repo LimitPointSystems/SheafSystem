@@ -1,4 +1,3 @@
-// $RCSfile: block.inst.cc,v $ $Revision: 1.5 $ $Date: 2013/01/12 17:17:17 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
@@ -15,6 +14,7 @@
 #include "chart_point_3d.h"
 #include "discretization_context.h"
 #include "e3.h"
+#include "sec_at0.h"
 #include "sec_vd.h"
 #include "sec_tuple.h"
 #include "std_utility.h"
@@ -280,6 +280,31 @@ bool sheaf::operator == <fiber_bundle::sec_vd*>(const sheaf::block<fiber_bundle:
 template
 SHEAF_DLL_SPEC
 size_t sheaf::deep_size<fiber_bundle::sec_vd>(const sheaf::block<fiber_bundle::sec_vd*>& xblk, bool xinclude_shallow);
+
+#endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
+
+//=============================================================================
+// block<sec_at0*>
+//=============================================================================
+
+template class
+SHEAF_DLL_SPEC
+sheaf::block< fiber_bundle::sec_at0* >;
+
+#ifndef DOXYGEN_SKIP_INSTANTIATIONS
+
+template class
+SHEAF_DLL_SPEC
+sheaf::auto_block< fiber_bundle::sec_at0* >;
+
+template
+SHEAF_DLL_SPEC
+bool sheaf::operator == <fiber_bundle::sec_at0*>(const sheaf::block<fiber_bundle::sec_at0*>& xblk1, const sheaf::block<fiber_bundle::sec_at0*>& xblk2);
+
+// Instantiation references undefined deep_size(const sec_at0&, bool)
+// template
+// SHEAF_DLL_SPEC
+// size_t sheaf::deep_size<fiber_bundle::sec_at0>(const sheaf::block<fiber_bundle::sec_at0*>& xblk, bool xinclude_shallow);
 
 #endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
 

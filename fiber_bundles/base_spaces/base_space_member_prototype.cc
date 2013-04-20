@@ -1,6 +1,5 @@
-// $RCSfile: base_space_member_prototype.cc,v $ $Revision: 1.38 $ $Date: 2013/03/20 21:56:04 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

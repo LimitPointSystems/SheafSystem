@@ -1,4 +1,3 @@
-// $RCSfile: section_eval_iterator.h,v $ $Revision: 1.26 $ $Date: 2013/03/13 00:58:49 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

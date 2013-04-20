@@ -1,6 +1,5 @@
-// $RCSfile: homogeneous_block.h,v $ $Revision: 1.33 $ $Date: 2013/03/20 21:56:04 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

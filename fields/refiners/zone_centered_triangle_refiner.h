@@ -1,4 +1,3 @@
-// $RCSfile: zone_centered_triangle_refiner.h,v $ $Revision: 1.8 $ $Date: 2013/01/12 17:17:28 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

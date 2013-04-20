@@ -1,6 +1,5 @@
-// $RCSfile: ij_product_structure.h,v $ $Revision: 1.3 $ $Date: 2013/01/15 22:23:44 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2011 Limit Point Systems, Inc. 
 //
@@ -82,7 +81,7 @@ private:
 
 
   // ===========================================================
-  /// @name IJ_PRODUCT_STRUCTURE FACET
+  /// @name ABSTRACT_PRODUCT_STRUCTURE FACET
   // ===========================================================
   //@{
 
@@ -127,6 +126,16 @@ public:
   /// The upper-bound for the dimension xi.
   ///
   virtual size_type ub(pod_type xi) const;
+
+  ///
+  /// The upper bound in the i-direction.
+  ///
+  size_type i_ub() const;
+
+  ///
+  /// The upper bound in the j-direction.
+  ///
+  size_type j_ub() const;
 
   ///
   /// 2-tuple to ordinal conversion.

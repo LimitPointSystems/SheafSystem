@@ -1,4 +1,3 @@
-// $RCSfile: linear_fcn_space.cc,v $ $Revision: 1.35 $ $Date: 2013/01/12 17:16:58 $
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

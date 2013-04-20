@@ -1,6 +1,5 @@
-// $RCSfile: copy_base_space_map_push_action.h,v $ $Revision: 1.10 $ $Date: 2013/01/12 17:17:26 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

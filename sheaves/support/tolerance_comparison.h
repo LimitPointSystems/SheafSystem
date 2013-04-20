@@ -1,6 +1,5 @@
-// $RCSfile: tolerance_comparison.h,v $ $Revision: 1.4 $ $Date: 2012/07/04 16:42:28 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2008 Limit Point Systems, Inc. 
 //

@@ -1,6 +1,5 @@
-// $RCSfile: product_section_space_schema_member.h,v $ $Revision: 1.3 $ $Date: 2013/03/13 00:58:49 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2011 Limit Point Systems, Inc.
 //

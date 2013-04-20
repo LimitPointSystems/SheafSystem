@@ -1,4 +1,3 @@
-// $RCSfile: write_std_namespace.cc,v $ $Revision: 1.30 $ $Date: 2013/01/12 17:16:59 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

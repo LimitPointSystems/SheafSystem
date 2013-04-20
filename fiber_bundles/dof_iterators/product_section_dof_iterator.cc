@@ -1,4 +1,3 @@
-// $RCSfile: product_section_dof_iterator.cc,v $ $Revision: 1.2 $ $Date: 2013/01/10 13:54:23 $
 
 //
 // Copyright (c) 2011 Limit Point Systems, Inc.

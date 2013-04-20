@@ -1,5 +1,4 @@
 
-// $RCSfile: field_at3_e3.cc,v $ $Revision: 1.12 $ $Date: 2013/03/13 00:58:55 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

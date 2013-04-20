@@ -1,5 +1,4 @@
 
-// $RCSfile: field_stp_funcs.impl.h,v $ $Revision: 1.6 $ $Date: 2013/01/12 17:17:22 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

@@ -1,4 +1,3 @@
-// $RCSfile: structured_block_2d.h,v $ $Revision: 1.40 $ $Date: 2013/03/20 21:56:04 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

@@ -1,6 +1,5 @@
-// $RCSfile: poset.h,v $ $Revision: 1.33 $ $Date: 2013/01/12 17:17:42 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

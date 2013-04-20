@@ -1,4 +1,3 @@
-// $RCSfile: data_converter.cc,v $ $Revision: 1.26 $ $Date: 2013/01/12 17:17:35 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

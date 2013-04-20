@@ -1,7 +1,6 @@
 
-// $RCSfile: section_space_factory.cc,v $ $Revision: 1.27 $ $Date: 2013/01/12 17:17:13 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

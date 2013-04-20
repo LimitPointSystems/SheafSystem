@@ -1,6 +1,5 @@
-// $RCSfile: block_adjacency.cc,v $ $Revision: 1.15 $ $Date: 2013/01/12 17:16:51 $
 //
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

@@ -1,6 +1,5 @@
-// $RCSfile: index_space_family.h,v $ $Revision: 1.14 $ $Date: 2013/03/13 00:59:02 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

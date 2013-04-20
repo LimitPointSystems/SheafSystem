@@ -1,4 +1,3 @@
-// $RCSfile: test_case_2d.h,v $ $Revision: 1.15 $ $Date: 2013/01/12 17:17:56 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

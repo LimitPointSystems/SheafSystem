@@ -1,5 +1,4 @@
 
-// $RCSfile: svd.h,v $ $Revision: 1.5 $ $Date: 2013/01/12 17:17:09 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

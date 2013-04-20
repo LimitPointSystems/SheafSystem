@@ -1,4 +1,3 @@
-// $RCSfile: poset_type.h,v $ $Revision: 1.12 $ $Date: 2013/01/12 17:17:43 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

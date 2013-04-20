@@ -1,5 +1,4 @@
 
-// $RCSfile: field_at0_funcs.h,v $ $Revision: 1.11 $ $Date: 2013/03/13 00:58:54 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

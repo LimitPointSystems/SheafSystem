@@ -1,4 +1,3 @@
-// $RCSfile: dlinear_eval_family.h,v $ $Revision: 1.24 $ $Date: 2013/01/12 17:16:57 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

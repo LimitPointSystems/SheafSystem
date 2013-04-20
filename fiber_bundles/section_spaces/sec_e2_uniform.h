@@ -1,7 +1,6 @@
 
-// $RCSfile: sec_e2_uniform.h,v $ $Revision: 1.22 $ $Date: 2013/01/14 23:41:29 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

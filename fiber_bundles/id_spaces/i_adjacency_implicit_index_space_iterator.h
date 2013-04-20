@@ -1,6 +1,5 @@
-// $RCSfile: i_adjacency_implicit_index_space_iterator.h,v $ $Revision: 1.3 $ $Date: 2013/01/15 22:23:43 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2011 Limit Point Systems, Inc.
 //

@@ -1,6 +1,5 @@
-// $RCSfile: fiber_bundles_namespace.impl.h,v $ $Revision: 1.23 $ $Date: 2013/03/20 21:56:06 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc. 
 //

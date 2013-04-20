@@ -1,6 +1,5 @@
-// $RCSfile: ij_connectivity_index_space_interval.cc,v $ $Revision: 1.3 $ $Date: 2013/03/13 00:58:48 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2011 Limit Point Systems, Inc. 
 //
@@ -98,7 +97,7 @@ vertex_hub_begin(pod_type xlocal_id) const
   // xlocal_id is the zone id, compute the i, j indices.
 
   pod_type i, j, k;
-  tuple(xlocal_id, _j_size, i, j);
+  sheaf::tuple(xlocal_id, _j_size, i, j);
 
   // Compute the vertex id.
 

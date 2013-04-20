@@ -1,6 +1,5 @@
-// $RCSfile: field_factory_2.impl.h,v $ $Revision: 1.18 $ $Date: 2013/03/13 00:58:55 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

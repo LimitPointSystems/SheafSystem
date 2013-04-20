@@ -1,6 +1,5 @@
-// $RCSfile: section_space_schema_table_dof_crg_range.h,v $ $Revision: 1.2 $ $Date: 2013/01/10 13:54:37 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2011 Limit Point Systems, Inc. 
 //

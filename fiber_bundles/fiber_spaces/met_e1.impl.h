@@ -1,5 +1,4 @@
 
-// $RCSfile: met_e1.impl.h,v $ $Revision: 1.9 $ $Date: 2013/01/12 17:17:02 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

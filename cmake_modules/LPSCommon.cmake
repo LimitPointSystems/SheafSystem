@@ -1,6 +1,4 @@
 #
-# $RCSfile: LPSCommon.cmake,v $ $Revision: 1.62 $ $Date: 2013/03/27 14:49:21 $
-#
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
 # Contains all that is LPS specific; all flags, all macros, etc.
@@ -385,7 +383,6 @@ function(create_output_dirs)
         file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
         # Create build/bin for executables.
         file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/bin)        
-        
     else()
         set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/lib PARENT_SCOPE)
         set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/lib PARENT_SCOPE)
@@ -799,6 +796,7 @@ function(export_targets)
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(HDF_INCLUDE_DIR ${HDF5_INCLUDE_DIRS} CACHE STRING \"HDF5 Include Path \")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     endif()
+    #$$TODO: "GEOMETRY" will change to "TOOLS" when we pull kd_lattice out of SheafSystem
     if("${COMPONENT}" MATCHES "GEOMETRY")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK ON CACHE BOOL \"Set to link against VTK libs\" FORCE)\n")

@@ -1,6 +1,5 @@
-// $RCSfile: geometry_namespace.h,v $ $Revision: 1.3 $ $Date: 2012/07/04 16:42:16 $
 
-// $Name: HEAD $
+
 //
 // CONFIDENTIALITY: 
 // This is a CONFIDENTIAL document. 

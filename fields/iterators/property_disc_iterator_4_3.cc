@@ -1,4 +1,3 @@
-// $RCSfile: property_disc_iterator_4_3.cc,v $ $Revision: 1.11 $ $Date: 2013/01/12 17:17:25 $
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

@@ -1,6 +1,5 @@
-// $RCSfile: kd_point.h,v $ $Revision: 1.5 $ $Date: 2012/07/04 16:42:17 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2008 Limit Point Systems, Inc. 
 //
@@ -18,7 +17,10 @@
 #ifndef KD_MEMBER_H
 #include "kd_member.h"
 #endif
- 
+
+#ifndef STD_ITERATOR_H
+#include "std_iterator.h"
+#endif
 
 namespace fiber_bundle
 {

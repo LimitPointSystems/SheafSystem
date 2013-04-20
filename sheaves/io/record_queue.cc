@@ -1,4 +1,3 @@
-// $RCSfile: record_queue.cc,v $ $Revision: 1.19 $ $Date: 2013/01/12 17:17:36 $
 
 // $Name@
 //

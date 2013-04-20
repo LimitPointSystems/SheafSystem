@@ -1,6 +1,5 @@
-// $RCSfile: base_space_poset.cc,v $ $Revision: 1.55 $ $Date: 2013/03/20 21:56:04 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

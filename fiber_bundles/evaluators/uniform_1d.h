@@ -1,4 +1,3 @@
-// $RCSfile: uniform_1d.h,v $ $Revision: 1.25 $ $Date: 2013/03/20 21:56:05 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

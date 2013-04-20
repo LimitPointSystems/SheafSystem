@@ -1,6 +1,5 @@
-// $RCSfile: hash_index_space_state.h,v $ $Revision: 1.3 $ $Date: 2013/03/13 00:59:02 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2011 Limit Point Systems, Inc. 
 //

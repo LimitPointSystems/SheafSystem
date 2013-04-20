@@ -1,6 +1,5 @@
-// $RCSfile: poset_state_handle.cc,v $ $Revision: 1.109 $ $Date: 2013/03/13 00:59:06 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //
@@ -5380,6 +5379,7 @@ insert_cover_member(pod_index_type xother_mbr_hub_id,
 
   require(state_is_read_write_accessible());
   require(contains_member(xmbr_hub_id));
+  require(!cover_contains_member(xlower, xmbr_hub_id, xother_mbr_hub_id));
 
   // Body:
 

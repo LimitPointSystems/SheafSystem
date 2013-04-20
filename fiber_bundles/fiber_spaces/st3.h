@@ -1,5 +1,4 @@
 
-// $RCSfile: st3.h,v $ $Revision: 1.17 $ $Date: 2013/03/13 00:58:44 $
 
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.

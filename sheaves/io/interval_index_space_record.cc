@@ -1,4 +1,3 @@
-// $RCSfile: interval_index_space_record.cc,v $ $Revision: 1.2 $ $Date: 2013/01/10 13:54:59 $
 
 //
 // Copyright (c) 2011 Limit Point Systems, Inc.

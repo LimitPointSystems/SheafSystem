@@ -1,6 +1,5 @@
-// $RCSfile: kd_display.cc,v $ $Revision: 1.10 $ $Date: 2013/03/13 00:58:59 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc. 
 //

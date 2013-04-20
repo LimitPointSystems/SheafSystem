@@ -1,5 +1,4 @@
 
-// $RCSfile: trilinear_3d.cc,v $ $Revision: 1.36 $ $Date: 2013/03/20 21:56:05 $
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

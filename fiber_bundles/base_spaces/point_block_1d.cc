@@ -1,6 +1,5 @@
-// $RCSfile: point_block_1d.cc,v $ $Revision: 1.29 $ $Date: 2013/03/18 02:53:22 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //

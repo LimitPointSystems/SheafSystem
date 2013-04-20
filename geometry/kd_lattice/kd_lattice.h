@@ -1,6 +1,5 @@
-// $RCSfile: kd_lattice.h,v $ $Revision: 1.7 $ $Date: 2013/01/20 19:40:46 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2008 Limit Point Systems, Inc. 
 //

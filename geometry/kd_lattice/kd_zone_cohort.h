@@ -1,6 +1,5 @@
-// $RCSfile: kd_zone_cohort.h,v $ $Revision: 1.3 $ $Date: 2012/07/04 16:42:17 $
 
-// $Name: HEAD $
+
 //
 // Copyright (c) 2008 Limit Point Systems, Inc. 
 //
