@@ -864,8 +864,16 @@ delete_poset(pod_index_type xhub_id, bool xauto_access)
 
 void
 sheaf::namespace_poset::
-delete_poset(const scoped_index& xid, bool xauto_access)
+delete_poset(scoped_index xid, bool xauto_access)
 {
+  // Argument xid must be passed by value, otherwise
+  // since poset_state_handle::index returns a reference,
+  // it is possible to pass a reference to the index
+  // member of the poset handle itself, which has just
+  // been deleted, causing the usage of xid in postcondition
+  // to fail.
+
+
   // Preconditions:
 
   require(contains_poset(xid, xauto_access));
@@ -887,8 +895,13 @@ delete_poset(const scoped_index& xid, bool xauto_access)
 
 void
 sheaf::namespace_poset::
-delete_poset(const string& xname, bool xauto_access)
+delete_poset(string xname, bool xauto_access)
 {
+  // Argument xname passed by value as opposed to ref
+  // to avoid any possibility of it being a reference
+  // to something in the poset being deleted, which
+  // would cause usage in postcondition to fail.
+
   // Preconditions:
 
   require(contains_poset(xname, xauto_access));
@@ -910,8 +923,13 @@ delete_poset(const string& xname, bool xauto_access)
 
 void
 sheaf::namespace_poset::
-delete_poset(const poset_path& xpath, bool xauto_access)
+delete_poset(poset_path xpath, bool xauto_access)
 {
+  // Argument xpath passed by value as opposed to ref
+  // to avoid any possibility of it being a reference
+  // to something in the poset being deleted, which
+  // would cause usage in postcondition to fail.
+
   // Preconditions:
 
   require(contains_poset(xpath, xauto_access));
