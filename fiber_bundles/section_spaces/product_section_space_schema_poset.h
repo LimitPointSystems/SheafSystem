@@ -134,12 +134,6 @@ protected:
   void put_product_range(product_section_space_schema_crg_range& xproduct_range);
 
   ///
-  /// True if prototype for this class has been entered in factory.
-  /// Intended to force creation of prototype at initialization.
-  ///
-  static bool _has_prototype;
-
-  ///
   /// Creates prototype for this class and enters in in factory.
   ///
   static bool make_prototype();

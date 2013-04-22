@@ -1000,10 +1000,6 @@ class_name() const
 
 bool
 fiber_bundle::product_section_space_schema_crg_range::
-_has_prototype = make_prototype();
-
-bool
-fiber_bundle::product_section_space_schema_crg_range::
 make_prototype()
 {
   // Preconditions:

@@ -543,11 +543,6 @@ initialize_arg_list(const namespace_poset& xns,
 
 bool
 fiber_bundle::sec_at0_space::
-_has_prototype = make_prototype();
-
-
-bool
-fiber_bundle::sec_at0_space::
 make_prototype()
 {
   bool result = false;

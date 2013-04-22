@@ -248,10 +248,6 @@ clone(const arg_list& xargs) const
 
 bool
 fiber_bundle::ij_connectivity_index_space_interval::
-_has_prototype = make_prototype();
-
-bool
-fiber_bundle::ij_connectivity_index_space_interval::
 make_prototype()
 {
   // Preconditions:

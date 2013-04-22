@@ -325,10 +325,6 @@ initialize_arg_list(const namespace_poset& xns,
 
 bool
 fiber_bundle::binary_section_space_schema_poset::
-_has_prototype = make_prototype();
-
-bool
-fiber_bundle::binary_section_space_schema_poset::
 make_prototype()
 {
   // Preconditions:

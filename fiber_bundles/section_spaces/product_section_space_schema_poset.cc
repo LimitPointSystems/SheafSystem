@@ -335,10 +335,6 @@ put_product_range(product_section_space_schema_crg_range& xproduct_range)
 
 bool
 fiber_bundle::product_section_space_schema_poset::
-_has_prototype = make_prototype();
-
-bool
-fiber_bundle::product_section_space_schema_poset::
 make_prototype()
 {
   // Preconditions:

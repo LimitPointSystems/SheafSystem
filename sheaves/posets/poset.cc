@@ -412,10 +412,6 @@ operator=(const poset_state_handle& xother)
 
 bool
 sheaf::poset::
-_has_prototype = make_prototype();
-
-bool
-sheaf::poset::
 make_prototype()
 {
   // Preconditions:

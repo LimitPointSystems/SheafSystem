@@ -561,10 +561,6 @@ new_version(int xversion)
 
 bool
 sheaf::refinable_poset::
-_has_prototype = make_prototype();
-
-bool
-sheaf::refinable_poset::
 make_prototype()
 {
   // Preconditions:

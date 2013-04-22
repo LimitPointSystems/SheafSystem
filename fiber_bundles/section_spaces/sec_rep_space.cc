@@ -679,10 +679,6 @@ sec_rep_space(const abstract_poset_member* xmbr)
 
 bool
 fiber_bundle::sec_rep_space::
-_has_prototype = make_prototype();
-
-bool
-fiber_bundle::sec_rep_space::
 make_prototype()
 {
   // Preconditions:

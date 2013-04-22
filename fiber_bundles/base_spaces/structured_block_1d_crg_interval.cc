@@ -741,10 +741,6 @@ class_name() const
 
 bool
 fiber_bundle::structured_block_1d_crg_interval::
-_has_prototype = make_prototype();
-
-bool
-fiber_bundle::structured_block_1d_crg_interval::
 make_prototype()
 {
   // Preconditions:

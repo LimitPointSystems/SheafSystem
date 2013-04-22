@@ -192,10 +192,6 @@ initialize_primitive_member(total_poset_member& xmbr, primitive_type xtype)
 
 bool
 sheaf::primitives_poset::
-_has_prototype = make_prototype();
-
-bool
-sheaf::primitives_poset::
 make_prototype()
 {
   // Preconditions:

@@ -942,10 +942,6 @@ clone(const arg_list& xargs) const
 
 bool
 fiber_bundle::section_space_schema_jims_index_space_state::
-_has_prototype = make_prototype();
-
-bool
-fiber_bundle::section_space_schema_jims_index_space_state::
 make_prototype()
 {
   // Preconditions:

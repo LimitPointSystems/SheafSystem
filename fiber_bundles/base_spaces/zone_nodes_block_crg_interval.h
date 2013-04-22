@@ -54,6 +54,8 @@ class block_connectivity;
 class SHEAF_DLL_SPEC zone_nodes_block_crg_interval : public homogeneous_block_crg_interval
 {
 
+  friend class fiber_bundles_namespace;
+
   // ===========================================================
   /// @name ZONE_NODE_BLOCK_CRG_INTERVAL FACET
   // ===========================================================
@@ -440,12 +442,6 @@ public:
 protected:
 
 private:
-
-  ///
-  /// True if prototype for this class has been entered in factory.
-  /// Intended to force creation of prototype at initialization.
-  ///
-  static bool _has_prototype;
 
   ///
   /// Creates prototype for this class and enters in factory.

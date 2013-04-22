@@ -950,13 +950,6 @@ allocate_dofs()
   return;
 }
 
-
-
-bool
-fiber_bundle::array_section_dof_map::
-_has_prototype = make_prototype();
-
-///
 bool
 fiber_bundle::array_section_dof_map::
 make_prototype()

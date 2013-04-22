@@ -2661,10 +2661,6 @@ row_dof_tuple(const scoped_index& xid, bool xrequire_write_access) const
 
 bool
 fiber_bundle::base_space_poset::
-_has_prototype = make_prototype();
-
-bool
-fiber_bundle::base_space_poset::
 make_prototype()
 {
   bool result = false;

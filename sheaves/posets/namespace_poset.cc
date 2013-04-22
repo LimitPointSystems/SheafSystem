@@ -11,12 +11,17 @@
 
 #include "arg_list.h"
 #include "array_index_space_state.h" // for intialize_prototypes
+#include "array_index_space_interval.h" // for initialize_prototypes
 #include "array_poset_dof_map.h"
 #include "assert_contract.h"
+#include "constant_index_space_interval.h" // for initialize_prototypes
 #include "error_message.h"
+#include "explicit_crg_interval.h" // for initialize_prototypes
+#include "explicit_index_space_interval.h" // for initialize_prototypes
 #include "hash_index_space_state.h" // for intialize_prototypes
 #include "index_space_iterator.h"
 #include "interval_index_space_state.h" // for intialize_prototypes
+#include "list_index_space_state.h" // for initialize_prototypes
 #include "namespace_poset_dof_map.h"
 #include "namespace_poset_member.h"
 #include "mutable_index_space_handle.h"
@@ -26,7 +31,15 @@
 #include "poset_type.h"
 #include "postorder_member_iterator.h"
 #include "postorder_iterator.h"
+#include "primary_index_space_state.h" // for initialize_prototypes
+#include "primary_sum_index_space_state.h" // for initialize_prototypes
+#include "primitives_index_space_state.h" // for initialize_prototypes
+#include "ragged_array_index_space_interval.h" // for initialize_prototypes
 #include "refinable_poset.h" // for intialize_prototypes
+#include "reserved_primary_index_space_state.h" // for initialize_prototypes
+#include "singleton_index_space_state.h" // for initalize_prototypes
+#include "singleton_index_space_interval.h" // for initialize_prototypes
+#include "standard_member_hack_crg_interval.h" // for initialize_prototypes
 #include "std_list.h"
 #include "std_set.h"
 #include "std_sstream.h"
@@ -392,20 +405,44 @@ initialize_prototypes()
 
     // Posets
 
-    namespace_poset ldummy1;
-    namespace_poset_schema ldummy2;
-    poset ldummy3;
-    primitives_poset ldummy4;
-    primitives_poset_schema ldummy5;
-    refinable_poset dummy6;
+    namespace_poset::make_prototype();
+    namespace_poset_schema::make_prototype();
+    poset::make_prototype();
+    primitives_poset::make_prototype();
+    primitives_poset_schema::make_prototype();
+    refinable_poset::make_prototype();
+
+    // Crg intervals.
+
+    explicit_crg_interval::make_prototype();
+    standard_member_hack_crg_interval::make_prototype();
 
     // Dof maps
 
-    array_poset_dof_map ldummy15;
-    namespace_poset_dof_map ldummy16;
-    primitives_poset_dof_map ldummy17;
+    array_poset_dof_map::make_prototype();
+    namespace_poset_dof_map::make_prototype();
+    primitives_poset_dof_map::make_prototype();
 
-    // Other
+    // Id space states.
+
+    array_index_space_state::make_prototype();
+    hash_index_space_state::make_prototype();
+    interval_index_space_state::make_prototype();
+    list_index_space_state::make_prototype();
+    offset_index_space_state::make_prototype();
+    primary_index_space_state::make_prototype();
+    primary_sum_index_space_state::make_prototype();
+    primitives_index_space_state::make_prototype();
+    reserved_primary_index_space_state::make_prototype();
+    singleton_index_space_state::make_prototype();
+
+    // Id space intervals.
+
+    array_index_space_interval::make_prototype();
+    constant_index_space_interval::make_prototype();
+    explicit_index_space_interval::make_prototype();
+    ragged_array_index_space_interval::make_prototype();
+    singleton_index_space_interval::make_prototype();
 
     // Done with prototype initializations.
 
@@ -752,14 +789,9 @@ _current_namespace  = 0;
 
 bool
 sheaf::namespace_poset::
-_has_prototype = make_prototype();
-
-bool
-sheaf::namespace_poset::
 make_prototype()
 {
   // Preconditions:
-
 
   // Body:
 
@@ -771,7 +803,6 @@ make_prototype()
   factory().insert_prototype(ltype, lproto);
 
   // Postconditions:
-
 
   // Exit:
 

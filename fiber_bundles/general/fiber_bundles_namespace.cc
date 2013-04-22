@@ -35,6 +35,12 @@
 #include "gln.h"
 #include "gln_space.h"
 #include "homogeneous_block.h"
+#include "i_adjacency_index_space_interval.h" // for initialize_prototypes
+#include "i_connectivity_index_space_interval.h" // for initialize_prototypes
+#include "ij_adjacency_index_space_interval.h" // for initialize_prototypes
+#include "ij_connectivity_index_space_interval.h" // for initialize_prototypes
+#include "ijk_adjacency_index_space_interval.h" // for initialize_prototypes
+#include "ijk_connectivity_index_space_interval.h" // for initialize_prototypes
 #include "index_iterator.h"
 #include "index_space_iterator.h"
 #include "jcb.h"
@@ -73,6 +79,7 @@
 #include "sec_stp_space.h" // For initialize_prototypes.
 #include "sec_tp_space.h" // For initialize_prototypes.
 #include "sec_vd_space.h" // For initialize_prototypes.
+#include "section_space_schema_jims_index_space_state.h" // For initialize_prototypes
 #include "st2.h"
 #include "st2_e2.h"
 #include "st2_e3.h"
@@ -325,44 +332,57 @@ initialize_prototypes()
 
     // Base space classes.
 
-    base_space_poset ldummy1;
-    point_block_crg_interval ldummy2;
-    structured_block_1d_crg_interval ldummy3;
-    structured_block_2d_crg_interval ldummy4;
-    structured_block_3d_crg_interval ldummy5;
-    zone_nodes_block_crg_interval ldummy6;
+    base_space_poset::make_prototype();
+    point_block_crg_interval::make_prototype();
+    structured_block_1d_crg_interval::make_prototype();
+    structured_block_2d_crg_interval::make_prototype();
+    structured_block_3d_crg_interval::make_prototype();
+    zone_nodes_block_crg_interval::make_prototype();
 
     // Section space classes
 
-    binary_section_space_schema_poset ldummy7;
-    sec_at0_space ldummy9;
-    sec_at1_space ldummy10;
-    sec_atp_space ldummy11;
-    sec_jcb_space ldummy12;
-    sec_rep_space ldummy13;
-    sec_rep_descriptor_poset ldummy14;
-    sec_stp_space ldummy15;
-    sec_tp_space ldummy16;
-    sec_tuple_space ldummy17;
-    sec_vd_space ldummy18;
+    binary_section_space_schema_poset::make_prototype();
+    sec_at0_space::make_prototype();
+    sec_at1_space::make_prototype();
+    sec_atp_space::make_prototype();
+    sec_jcb_space::make_prototype();
+    sec_rep_space::make_prototype();
+    sec_rep_descriptor_poset::make_prototype();
+    sec_stp_space::make_prototype();
+    sec_tp_space::make_prototype();
+    sec_tuple_space::make_prototype();
+    sec_vd_space::make_prototype();
     
     // Fiber space classes
 
-    at0_space ldummy20;
-    at1_space ldummy21;
-    atp_space ldummy22;
-    gln_space ldummy23;
-    jcb_space ldummy24;
-    stp_space ldummy25;
-    tp_space ldummy26;
-    tuple_space ldummy27;
-    vd_space ldummy28;
+    at0_space::make_prototype();
+    at1_space::make_prototype();
+    atp_space::make_prototype();
+    gln_space::make_prototype();
+    jcb_space::make_prototype();
+    stp_space::make_prototype();
+    tp_space::make_prototype();
+    tuple_space::make_prototype();
+    vd_space::make_prototype();
 
     // Dof map classes.
 
-    //  array_sec_vd_dof_map ldummy29; Not currently in build.
-    array_section_dof_map ldummy30;
-    sparse_section_dof_map ldummy31;
+    //  array_sec_vd_dof_map::make_prototype(); Not currently in build.
+    array_section_dof_map::make_prototype();
+    sparse_section_dof_map::make_prototype();
+
+    // Id space states.
+
+    section_space_schema_jims_index_space_state::make_prototype();
+
+    // Id space interval.
+
+    i_adjacency_index_space_interval::make_prototype();
+    i_connectivity_index_space_interval::make_prototype();
+    ij_adjacency_index_space_interval::make_prototype();
+    ij_connectivity_index_space_interval::make_prototype();
+    ijk_adjacency_index_space_interval::make_prototype();
+    ijk_connectivity_index_space_interval::make_prototype();
 
     // Done with prototype initializations.
 

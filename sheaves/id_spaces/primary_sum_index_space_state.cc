@@ -1991,10 +1991,6 @@ clone(const arg_list& xargs) const
 
 bool
 sheaf::primary_sum_index_space_state::
-_has_prototype = make_prototype();
-
-bool
-sheaf::primary_sum_index_space_state::
 make_prototype()
 {
   // Preconditions:
