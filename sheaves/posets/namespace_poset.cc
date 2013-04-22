@@ -214,11 +214,13 @@ namespace_poset(const string& xname)
 
   // Body:
 
-  new_state(xname);
-
   // Initialize the prototypes.
 
   initialize_prototypes();
+
+  // Create the state.
+
+  new_state(xname);
 
   // Postconditions:
 
