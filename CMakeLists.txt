@@ -123,14 +123,24 @@ if(LINUX64INTEL OR LINUX64GNU)
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK ON CACHE BOOL \"Set to link against VTK libs\")\n")
         file(APPEND  ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/lib/vtk CACHE STRING \"Location of VTK libs\")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/lib/VTK CACHE STRING \"Location of VTK libs\")\n")
         file(APPEND  ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
+        install(DIRECTORY ${HOME_DIR}/LPS/prerequisites/VTK/include/vtk-5.6/ DESTINATION include/VTK PATTERN "*.h"
+        PERMISSIONS
+        OWNER_WRITE OWNER_READ OWNER_EXECUTE
+        GROUP_READ WORLD_READ)
     endif()             
 else()
     # All forward slashes in path
     file(TO_CMAKE_PATH $ENV{USERPROFILE} HOME_DIR)
     file(GLOB VTK_IMPORT_LIBS ${HOME_DIR}/LPS/prerequisites/VTK/lib/vtk-5.6/*.lib)
     file(GLOB VTK_DYNAMIC_LIBS ${HOME_DIR}/LPS/prerequisites/VTK/bin/*.dll)
+    
+    install(DIRECTORY ${HOME_DIR}/LPS/prerequisites/VTK/include/vtk-5.6/ DESTINATION include/VTK PATTERN "*.h"
+    PERMISSIONS
+    OWNER_WRITE OWNER_READ OWNER_EXECUTE
+    GROUP_READ WORLD_READ)
+    
     file(GLOB HDF_INCS ${HOME_DIR}/LPS/prerequisites/hdf-static/include/*.h)
     # Tetgen header
     install(FILES ${HOME_DIR}/LPS/prerequisites/tetgen/include/tetgen.h DESTINATION include)  
