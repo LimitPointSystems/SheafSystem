@@ -277,17 +277,17 @@ public:
   ///
   /// Delete the poset with id xid.
   ///
-  void delete_poset(const scoped_index& xid, bool xauto_access);
+  void delete_poset(scoped_index xid, bool xauto_access);
 
   ///
   /// Delete the poset with name xname.
   ///
-  void delete_poset(const string& xname, bool xauto_access);
+  void delete_poset(string xname, bool xauto_access);
 
   ///
   /// Delete the poset with name xpath.poset_name().
   ///
-  void delete_poset(const poset_path& xpath, bool xauto_access);
+  void delete_poset(poset_path xpath, bool xauto_access);
 
   ///
   /// Delete the poset associated with xmbr.
