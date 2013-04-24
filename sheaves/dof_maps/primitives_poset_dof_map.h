@@ -37,6 +37,8 @@ class primitives_poset;
 class SHEAF_DLL_SPEC primitives_poset_dof_map : public poset_dof_map
 {
 
+  friend class namespace_poset;
+
 public:
 
   ///
@@ -207,12 +209,6 @@ private:
   /// Storage for the dofs
   ///
   primitive_descriptor _dofs;
-
-  ///
-  /// True if prototype for this class has been entered in factory.
-  /// Intended to force creation of prototype at initialization.
-  ///
-  static bool _has_prototype;
 
   ///
   /// Creates prototype for this class and enters in factory.

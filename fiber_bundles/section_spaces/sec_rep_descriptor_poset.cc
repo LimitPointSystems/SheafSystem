@@ -307,10 +307,6 @@ initialize_arg_list(const namespace_poset& xns,
 
 bool
 fiber_bundle::sec_rep_descriptor_poset::
-_has_prototype = make_prototype();
-
-bool
-fiber_bundle::sec_rep_descriptor_poset::
 make_prototype()
 {
   // Preconditions:

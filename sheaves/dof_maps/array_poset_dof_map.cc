@@ -721,10 +721,6 @@ dof_in_bounds(pod_index_type xdof_id) const
   return result;
 }
 
-bool
-sheaf::array_poset_dof_map::
-_has_prototype = make_prototype();
-
 ///
 bool
 sheaf::array_poset_dof_map::

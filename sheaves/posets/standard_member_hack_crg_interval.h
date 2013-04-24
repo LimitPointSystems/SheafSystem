@@ -32,6 +32,8 @@ class factory;
 class SHEAF_DLL_SPEC standard_member_hack_crg_interval : public explicit_crg_interval
 {
 
+  friend class namespace_poset;
+
   // ===========================================================
   /// @name STANDARD_MEMBER_HACK_CRG_INTERVAL FACET
   // ===========================================================
@@ -138,12 +140,6 @@ public:
 protected:
 
 private:
-
-  ///
-  /// True if prototype for this class has been entered in factory.
-  /// Intended to force creation of prototype at initialization.
-  ///
-  static bool _has_prototype;
 
   ///
   /// Creates prototype for this class and enters in factory.

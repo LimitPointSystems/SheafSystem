@@ -85,10 +85,6 @@ sheaf::primitives_poset_schema::
 
 bool
 sheaf::primitives_poset_schema::
-_has_prototype = make_prototype();
-
-bool
-sheaf::primitives_poset_schema::
 make_prototype()
 {
   // Preconditions:

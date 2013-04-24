@@ -854,10 +854,6 @@ clone(const arg_list& xargs) const
 
 bool
 sheaf::array_index_space_state::
-_has_prototype = make_prototype();
-
-bool
-sheaf::array_index_space_state::
 make_prototype()
 {
   // Preconditions:

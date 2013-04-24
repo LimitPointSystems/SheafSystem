@@ -138,10 +138,29 @@ public:
   void clear();
 
   ///
-  /// Initialize the prototypes needed by various factory methods,
-  /// in particular the poset factory method.
+  /// Initialize all the prototypes needed by various factory methods,
   ///
   static void initialize_prototypes();
+
+  ///
+  /// Initialize the prototypes needed by poset factory method,
+  ///
+  static void initialize_poset_prototypes();
+
+  ///
+  /// Initialize the prototypes needed by crg interval factory method,
+  ///
+  static void initialize_crg_interval_prototypes();
+
+  ///
+  /// Initialize the prototypes needed by dof map factory method,
+  ///
+  static void initialize_dof_map_prototypes();
+
+  ///
+  /// Initialize the  prototypes needed by id space factory method,
+  ///
+  static void initialize_id_space_prototypes();
 
 protected:
 
@@ -230,12 +249,6 @@ private:
   /// The current working namespace.
   ///
   static namespace_poset* _current_namespace;
-
-  ///
-  /// True if prototype for this class has been entered in factory.
-  /// Intended to force creation of prototype at initialization.
-  ///
-  static bool _has_prototype;
 
   ///
   /// Creates prototype for this class and enters in factory.

@@ -31,6 +31,8 @@ class schema_poset_member;
 class SHEAF_DLL_SPEC array_poset_dof_map : public poset_dof_map
 {
 
+  friend class namespace_poset;
+
 public:
 
   ///
@@ -218,12 +220,6 @@ private:
   /// True if this allocated _dofs and hence should delete it
   ///
   bool _this_owns_dofs;
-
-  ///
-  /// True if prototype for this class has been entered in factory.
-  /// Intended to force creation of prototype at initialization.
-  ///
-  static bool _has_prototype;
 
   ///
   /// Creates prototype for this class and enters in factory.
