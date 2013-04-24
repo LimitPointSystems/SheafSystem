@@ -400,12 +400,31 @@ initialize_prototypes()
 
   // Body:
 
-  static bool ldone = false;
+  initialize_poset_prototypes();
+  initialize_crg_interval_prototypes();
+  initialize_dof_map_prototypes();
+  initialize_id_space_prototypes();
 
-  if(!ldone)
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::namespace_poset::
+initialize_poset_prototypes()
+{
+  // Preconditions:
+
+  // Body:
+
+  static bool lposet_prototypes_initialized = false;
+
+  if(!lposet_prototypes_initialized)
   {
-
-    // Posets
+    // Initialize the prototypes
 
     namespace_poset::make_prototype();
     namespace_poset_schema::make_prototype();
@@ -414,18 +433,103 @@ initialize_prototypes()
     primitives_poset_schema::make_prototype();
     refinable_poset::make_prototype();
 
-    // Crg intervals.
+    // Done with prototype initializations.
+
+    lposet_prototypes_initialized = true;
+
+#ifdef DIAGNOSTIC_OUTPUT
+    cout << "Initialized sheaves poset prototypes" << endl;
+#endif
+
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::namespace_poset::
+initialize_crg_interval_prototypes()
+{
+  // Preconditions:
+
+  // Body:
+
+  static bool lcrg_interval_prototypes_initialized = false;
+
+  if(!lcrg_interval_prototypes_initialized)
+  {
+    // Initialize the prototypes
 
     explicit_crg_interval::make_prototype();
     standard_member_hack_crg_interval::make_prototype();
 
-    // Dof maps
+    // Done with prototype initializations.
+
+    lcrg_interval_prototypes_initialized = true;
+
+#ifdef DIAGNOSTIC_OUTPUT
+    cout << "Initialized sheaves crg interval prototypes" << endl;
+#endif
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::namespace_poset::
+initialize_dof_map_prototypes()
+{
+  // Preconditions:
+
+  // Body:
+
+  static bool ldof_map_prototypes_initialized = false;
+
+  if(!ldof_map_prototypes_initialized)
+  {
+    // Initialize the prototypes
 
     array_poset_dof_map::make_prototype();
     namespace_poset_dof_map::make_prototype();
     primitives_poset_dof_map::make_prototype();
 
-    // Id space states.
+    // Done with prototype initializations.
+
+    ldof_map_prototypes_initialized = true;
+
+#ifdef DIAGNOSTIC_OUTPUT
+    cout << "Initialized sheaves dof map prototypes" << endl;
+#endif
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::namespace_poset::
+initialize_id_space_prototypes()
+{
+  // Preconditions:
+
+  // Body:
+
+  static bool lid_space_prototypes_initialized = false;
+
+  if(!lid_space_prototypes_initialized)
+  {
+    // Initialize the prototypes
 
     array_index_space_state::make_prototype();
     hash_index_space_state::make_prototype();
@@ -438,8 +542,6 @@ initialize_prototypes()
     reserved_primary_index_space_state::make_prototype();
     singleton_index_space_state::make_prototype();
 
-    // Id space intervals.
-
     array_index_space_interval::make_prototype();
     constant_index_space_interval::make_prototype();
     explicit_index_space_interval::make_prototype();
@@ -448,7 +550,11 @@ initialize_prototypes()
 
     // Done with prototype initializations.
 
-    ldone = true;
+    lid_space_prototypes_initialized = true;
+
+#ifdef DIAGNOSTIC_OUTPUT
+    cout << "Initialized sheaves id space prototypes" << endl;
+#endif
   }
 
   // Postconditions:

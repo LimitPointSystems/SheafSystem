@@ -325,23 +325,35 @@ initialize_prototypes()
 
   // Body:
 
-  static bool ldone = false;
+  initialize_poset_prototypes();
+  initialize_crg_interval_prototypes();
+  initialize_dof_map_prototypes();
+  initialize_id_space_prototypes();
 
-  if(!ldone)
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+fiber_bundle::fiber_bundles_namespace::
+initialize_poset_prototypes()
+{
+  // Preconditions:
+
+  // Body:
+
+  static bool lposet_prototypes_initialized = false;
+
+  if(!lposet_prototypes_initialized)
   {
+    namespace_poset::initialize_poset_prototypes();
 
-    namespace_poset::initialize_prototypes();
-
-    // Base space classes.
+    // Initialize the prototypes
 
     base_space_poset::make_prototype();
-    point_block_crg_interval::make_prototype();
-    structured_block_1d_crg_interval::make_prototype();
-    structured_block_2d_crg_interval::make_prototype();
-    structured_block_3d_crg_interval::make_prototype();
-    zone_nodes_block_crg_interval::make_prototype();
-
-    // Section space classes
 
     binary_section_space_schema_poset::make_prototype();
     sec_at0_space::make_prototype();
@@ -354,8 +366,6 @@ initialize_prototypes()
     sec_tp_space::make_prototype();
     sec_tuple_space::make_prototype();
     sec_vd_space::make_prototype();
-    
-    // Fiber space classes
 
     at0_space::make_prototype();
     at1_space::make_prototype();
@@ -367,17 +377,113 @@ initialize_prototypes()
     tuple_space::make_prototype();
     vd_space::make_prototype();
 
-    // Dof map classes.
+    // Done with prototype initializations.
 
-    //  array_sec_vd_dof_map::make_prototype(); Not currently in build.
+    lposet_prototypes_initialized = true;
+
+#ifdef DIAGNOSTIC_OUTPUT
+    cout << "Initialized fiber bundles poset prototypes" << endl;
+#endif
+
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+fiber_bundle::fiber_bundles_namespace::
+initialize_crg_interval_prototypes()
+{
+  // Preconditions:
+
+  // Body:
+
+  static bool lcrg_interval_prototypes_initialized = false;
+
+  if(!lcrg_interval_prototypes_initialized)
+  {
+    namespace_poset::initialize_crg_interval_prototypes();
+
+    // Initialize the prototypes
+
+    point_block_crg_interval::make_prototype();
+    structured_block_1d_crg_interval::make_prototype();
+    structured_block_2d_crg_interval::make_prototype();
+    structured_block_3d_crg_interval::make_prototype();
+    zone_nodes_block_crg_interval::make_prototype();
+
+    // Done with prototype initializations.
+
+    lcrg_interval_prototypes_initialized = true;
+
+#ifdef DIAGNOSTIC_OUTPUT
+    cout << "Initialized fiber bundles crg interval prototypes" << endl;
+#endif
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+fiber_bundle::fiber_bundles_namespace::
+initialize_dof_map_prototypes()
+{
+  // Preconditions:
+
+  // Body:
+
+  static bool ldof_map_prototypes_initialized = false;
+
+  if(!ldof_map_prototypes_initialized)
+  {
+    namespace_poset::initialize_dof_map_prototypes();
+
+    // Initialize the prototypes
+
     array_section_dof_map::make_prototype();
     sparse_section_dof_map::make_prototype();
 
-    // Id space states.
+    // Done with prototype initializations.
+
+    ldof_map_prototypes_initialized = true;
+
+#ifdef DIAGNOSTIC_OUTPUT
+    cout << "Initialized fiber bundles dof map prototypes" << endl;
+#endif
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+fiber_bundle::fiber_bundles_namespace::
+initialize_id_space_prototypes()
+{
+  // Preconditions:
+
+  // Body:
+
+  static bool lid_space_prototypes_initialized = false;
+
+  if(!lid_space_prototypes_initialized)
+  {
+    namespace_poset::initialize_id_space_prototypes();
+
+    // Initialize the prototypes
 
     section_space_schema_jims_index_space_state::make_prototype();
-
-    // Id space interval.
 
     i_adjacency_index_space_interval::make_prototype();
     i_connectivity_index_space_interval::make_prototype();
@@ -388,7 +494,11 @@ initialize_prototypes()
 
     // Done with prototype initializations.
 
-    ldone = true;
+    lid_space_prototypes_initialized = true;
+
+#ifdef DIAGNOSTIC_OUTPUT
+    cout << "Initialized fiber bundles id space prototypes" << endl;
+#endif
   }
 
   // Postconditions:
