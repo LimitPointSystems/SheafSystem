@@ -154,7 +154,7 @@ endif()
 # This is only relevant for releases. 1.1.1 is chosen here
 # simply as a stub.
 #
-set(LIB_VERSION 1.1.1 CACHE STRING "Library version number for release purposes")
+set(LIB_VERSION 0.0.0.0 CACHE STRING "Library version number for release purposes")
 
 mark_as_advanced(LIB_VERSION)
 
