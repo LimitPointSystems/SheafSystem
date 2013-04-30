@@ -175,7 +175,6 @@ typedef sheaf::arg_list::arg_type arg_type;
 %include                   "triorder_itr.h"
 %include       "error_message.h"
 %include       "filtered_depth_first_member_iterator.h"
-%include             "block_decomposition_iterator.h"
 %include             "postorder_member_iterator.h"
 %include             "preorder_member_iterator.h"
 %include       "index_equivalence_class.h"
