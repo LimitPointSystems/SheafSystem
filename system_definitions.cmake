@@ -11,30 +11,52 @@
 #
 
 #
+# Establish the version number for this build.
+# This is only relevant for releases. 0.0.0.0 is chosen here
+# simply as a stub.
+#
+#set(LIB_VERSION 0.0.0.0 CACHE STRING "Library version number for release purposes" FORCE)
+set(LIB_VERSION 0.0.0.0 CACHE STRING "Library version number for release purposes")
+mark_as_advanced(LIB_VERSION)
+
+#
 # Establish the list of components in this system
 #
 set(COMPONENTS sheaves fiber_bundles geometry fields tools CACHE STRING "List of components in this system" FORCE)
 
+#
 # Set the default value for install location
-if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+#
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT AND LIB_VERSION MATCHES "0.0.0.0" )
     if(LINUX64GNU OR LINUX64INTEL)
       set(CMAKE_INSTALL_PREFIX
-        "$ENV{HOME}/SheafSystem" CACHE PATH "SheafSystem install prefix" FORCE
+        "$ENV{HOME}/SheafSystem" CACHE PATH "SheafSystem install prefix"
         )
     else()
       set(CMAKE_INSTALL_PREFIX
-        "$ENV{USERPROFILE}/SheafSystem" CACHE PATH "SheafSystem install prefix" FORCE
+        "$ENV{USERPROFILE}/SheafSystem" CACHE PATH "SheafSystem install prefix"
+        )
+    endif()
+else()
+    if(LINUX64GNU OR LINUX64INTEL)
+      set(CMAKE_INSTALL_PREFIX
+        "$ENV{HOME}/SheafSystem-${LIB_VERSION}" CACHE PATH "SheafSystem install prefix"
+        )
+    else()
+      set(CMAKE_INSTALL_PREFIX
+        "$ENV{USERPROFILE}/SheafSystem-${LIB_VERSION}" CACHE PATH "SheafSystem install prefix"
         )
     endif()
 endif()
 
+#
 # Now fix the install path.
+#
 file(TO_CMAKE_PATH ${CMAKE_INSTALL_PREFIX} CMAKE_INSTALL_PREFIX)
 
 #
 # Platform definitions
 #
-
 # OS is 64 bit Windows, compiler is cl 
 if(CMAKE_HOST_SYSTEM_NAME MATCHES "Windows" AND MSVC AND CMAKE_SIZEOF_VOID_P MATCHES "8")
     set(WIN64MSVC ON CACHE BOOL "MS compiler in use.")
@@ -77,6 +99,7 @@ if(NOT CMAKE_BUILD_TYPE)
 endif(NOT CMAKE_BUILD_TYPE)
 
 set_property(GLOBAL PROPERTY DEBUG_CONFIGURATIONS "Debug-contracts" "Debug-no-contracts") 
+
 #   
 #  Type of system documentation to build: Dev or User
 #
@@ -85,7 +108,7 @@ set(BUILD_BINDINGS NO CACHE BOOL "Toggle build of language bindings.")
 #
 # True if we want geometry to link against VTK
 #
-set(USE_VTK CACHE BOOL "Set to link geometry against VTK libs.")
+set(USE_VTK ON CACHE BOOL "Set to link geometry against VTK libs.")
 
 #
 # Toggle multi-process compilation in win32.
@@ -148,15 +171,6 @@ if(LINUX64GNU OR LINUX64INTEL)
 elseif(WIN64MSVC OR WIN64INTEL)
     set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR} CACHE STRING "System install location")
 endif()
-
-#
-# Establish the version number for this build.
-# This is only relevant for releases. 1.1.1 is chosen here
-# simply as a stub.
-#
-set(LIB_VERSION 0.0.0.0 CACHE STRING "Library version number for release purposes")
-
-mark_as_advanced(LIB_VERSION)
 
 #
 # Set the cmake module path.
