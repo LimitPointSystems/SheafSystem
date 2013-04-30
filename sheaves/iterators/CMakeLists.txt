@@ -18,7 +18,6 @@ set(CLUSTER iterators)
 set(SRCS
     biorder_iterator.cc
     biorder_itr.cc
-    block_decomposition_iterator.cc
     depth_first_iterator.cc
     depth_first_itr.cc
     filtered_depth_first_itr.cc
