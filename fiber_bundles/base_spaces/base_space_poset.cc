@@ -21,7 +21,6 @@
 #include "poset_handle_factory.h"
 #include "poset_type.h"
 #include "preorder_iterator.h"
-#include "processor_decomposition.h"
 #include "std_strstream.h"
 #include "zone_nodes_block_crg_interval.h"
 

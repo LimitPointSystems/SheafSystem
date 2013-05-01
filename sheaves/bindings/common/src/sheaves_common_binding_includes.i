@@ -107,7 +107,6 @@
 #include                   "array_implicit_index_space_iterator.h"
 #include                   "ragged_array_implicit_index_space_iterator.h"
 #include                   "singleton_implicit_index_space_iterator.h"
-#include       "name_map.h"
 #include       "name_multimap.h"
 #include       "poset_bounds.h"
 #include       "poset_bounds_descriptor.h"
