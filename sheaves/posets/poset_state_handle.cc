@@ -7038,6 +7038,8 @@ row_dof_subposet() const
 // Leaving it as is for now.
 // Tue Dec 23 16:38:01 2008
 
+// PROTECTED FUNCTIONS
+
 sheaf::subposet&
 sheaf::poset_state_handle::
 resident()
@@ -7051,8 +7053,6 @@ resident() const
 {
   return _resident;
 }
-
-// PROTECTED FUNCTIONS
 
 sheaf::poset_powerset_state&
 sheaf::poset_state_handle::
