@@ -1972,12 +1972,7 @@ public:
   void delete_subposet(const scoped_index& xsubposet_id);
 
   ///
-  /// The "improper" subset containing all members of this poset (mutable version)
-  ///
-  virtual subposet& whole();
-
-  ///
-  /// The "improper" subset containing all members of this poset (const version)
+  /// The "improper" subset containing all members of this poset
   ///
   virtual const subposet& whole() const;
 
