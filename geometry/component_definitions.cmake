@@ -210,9 +210,12 @@ function(add_bindings_targets)
             target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB} ${FIBER_BUNDLES_JAVA_BINDING_LIBS} ${HDF5_LIBRARIES} ${JDK_LIBS}) 
         endif()
 
+         list(APPEND ${COMPONENT}_CLASSPATH ${FIBER_BUNDLES_CLASSPATH} ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR})
+         set(${COMPONENT}_CLASSPATH ${${COMPONENT}_CLASSPATH} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
+                    
          # Create the bindings jar file 
         if(WIN64INTEL OR WIN64MSVC)
-            set(${COMPONENT}_CLASSPATH ${FIBER_BUNDLES_CLASSPATH} ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
+
             add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
                            DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${FIBER_BUNDLES_JAVA_BINDING_JAR}
                            set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Component Binding Jars")                           
@@ -239,8 +242,8 @@ function(add_bindings_targets)
         mark_as_advanced(FORCE ${COMPONENT}_CLASSPATH) 
          
          # Java documentation
-        add_custom_target(${PROJECT_NAME}-java-docs
-                    COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle ${PROJECT_NAME} -classpath .:${${COMPONENT}_CLASSPATH} 
+        add_custom_target(${PROJECT_NAME}-java-docs ALL
+                    COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${${COMPONENT}_CLASSPATH}" 
                     -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
                     *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
                     DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB}

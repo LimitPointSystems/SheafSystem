@@ -170,10 +170,13 @@ function(add_bindings_targets)
         set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES LINKER_LANGUAGE CXX)
         # Define the library version.
         set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES VERSION ${LIB_VERSION})
+
+        list(APPEND ${COMPONENT}_CLASSPATH ${SHEAVES_CLASSPATH} ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR})
+        set(${COMPONENT}_CLASSPATH ${${COMPONENT}_CLASSPATH} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
           
         # Create the bindings jar file 
         if(WIN64INTEL OR WIN64MSVC)
-            set(${COMPONENT}_CLASSPATH  ${SHEAVES_CLASSPATH} ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
+        
             add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
                            DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${SHEAVES_JAVA_BINDING_JAR}
                            set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Component Binding Jars")
@@ -183,7 +186,7 @@ function(add_bindings_targets)
                            COMMAND ${JAR_EXECUTABLE} cvf ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
             )
         else()
-            set(${COMPONENT}_CLASSPATH ${SHEAVES_CLASSPATH} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
+            set(${COMPONENT}_CLASSPATH ${SHEAVES_CLASSPATH}:${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
             # The default list item separator in cmake is ";". If Linux, then exchange ";" for  the UNIX style ":"
             # and store the result in parent_classpath.
             string(REGEX REPLACE ";" ":" parent_classpath "${SHEAVES_CLASSPATH}")
@@ -200,8 +203,8 @@ function(add_bindings_targets)
         mark_as_advanced(FORCE ${COMPONENT}_CLASSPATH) 
 
         # Java documentation
-        add_custom_target(${PROJECT_NAME}-java-docs
-                    COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle ${PROJECT_NAME} -classpath .:${${COMPONENT}_CLASSPATH} 
+        add_custom_target(${PROJECT_NAME}-java-docs ALL
+                    COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${${COMPONENT}_CLASSPATH}" 
                     -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
                     *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
                     DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB}

@@ -213,13 +213,13 @@ function(add_bindings_targets)
                            COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
              )        
         endif()
-        message(STATUS "${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/\$(OutDir)/${${COMPONENT}_JAVA_BINDING_JAR}")
+
         set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Library Jars") 
         mark_as_advanced(FORCE ${COMPONENT}_CLASSPATH)        
 
         # Java documentation
-        add_custom_target(${PROJECT_NAME}-java-docs
-                    COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle ${PROJECT_NAME} -classpath .:${${COMPONENT}_CLASSPATH} 
+        add_custom_target(${PROJECT_NAME}-java-docs ALL
+                    COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${${COMPONENT}_CLASSPATH}" 
                     -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
                     *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
                     DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB}

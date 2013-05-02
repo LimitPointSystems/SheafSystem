@@ -240,6 +240,10 @@ function(clear_component_variables comp)
     # list the same include paths n times.
     unset(${COMP}_IPATH CACHE)
 
+    # clear the ipath var so consecutive cmake runs don't
+    # list the same include paths n times.
+    unset(${COMP}_CLASSPATH CACHE)
+    
 endfunction(clear_component_variables)
 
 #
