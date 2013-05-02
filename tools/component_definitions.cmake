@@ -303,11 +303,12 @@ function(add_bindings_targets)
         set_target_properties(SheafScope.jar PROPERTIES FOLDER "Executable Jars") 
                                
         # Java documentation
-        add_custom_target(${PROJECT_NAME}-java-docs EXCLUDE_FROM_ALL
-                    COMMAND ${JDK_BIN_DIR}/javadoc -quiet -classpath .:${${COMPONENT}_CLASSPATH} 
+        add_custom_target(${PROJECT_NAME}-java-docs
+                    COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle ${PROJECT_NAME} -classpath .:${${COMPONENT}_CLASSPATH} 
                     -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
-                    -sourcepath ${CMAKE_CURRENT_BINARY_DIR} bindings.java *.java
-                    DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB})
+                    *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                    DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB}
+                    )
         set_target_properties(${PROJECT_NAME}-java-docs PROPERTIES FOLDER "Documentation Targets")
         
         add_dependencies(${PROJECT_NAME}-bindings ${PROJECT_NAME}_java_binding.jar SheafScope ${PROJECT_NAME}-python-binding)
