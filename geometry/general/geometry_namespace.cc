@@ -24,10 +24,6 @@
 #include "e1.h"
 #include "e2.h"
 #include "e3.h"
-//#include "kd_edge.h"
-//#include "kd_face.h"
-//#include "kd_plane.h"
-//#include "kd_zone.h"
 #include "poset_path.h"
 #include "sec_rep_descriptor.h"
 #include "sec_rep_descriptor_poset.h"
@@ -135,30 +131,6 @@ geometry::geometry_namespace::
 // ===========================================================
 // FIBER_BUNDLES_NAMESPACE FACET
 // ===========================================================
-
-//void
-//geometry::geometry_namespace::
-//make_base_space_schema_members()
-//{
-//  // Preconditions:
-//
-//  require(state_is_read_write_accessible());
-//  require(contains_poset(standard_base_space_schema_poset_name(), false));
-//  require(member_poset(standard_base_space_schema_poset_name(), false).state_is_read_write_accessible());
-//
-//  // Body:
-//
-//  fiber_bundles_namespace::make_base_space_schema_members();
-//
-// // $$TODO: Commenting this out is just a stopgap. What replaces this functionality?
-// // kd_member::make_standard_schema(*this);
-//
-//  // Postconditions:
-//
-//  // Exit:
-//
-//  return;
-//}
 
 void
 geometry::geometry_namespace::
@@ -303,80 +275,6 @@ make_polygon_prototype(base_space_poset* xspace)
   return;
 }
 
-//void
-//geometry::geometry_namespace::
-//make_kd_lattice_prototypes(base_space_poset* xspace)
-//{
-//  // Preconditions:
-//
-//  require(xspace != 0);
-//  require(xspace->in_jim_edit_mode());
-//
-//  // Body:
-//
-//  /// @hack Can't fully initialize dof tuples for prototypes because
-//  /// base_space_member_prototype schema doesn't include alignment dof.
-//  /// Alignment dof set in kd_zone_cohort, kd_face_cohort, etc.
-//
-//  base_space_member_prototype lzone(xspace, kd_zone::prototype_name(), 3, "", false);
-//  lzone.detach_from_state();
-//
-//  base_space_member_prototype lx_axis_aligned_face(xspace, kd_face::prototype_name(X_AXIS_ALIGNED), 2, "", false);
-//  lx_axis_aligned_face.detach_from_state();
-//
-//  base_space_member_prototype ly_axis_aligned_face(xspace, kd_face::prototype_name(Y_AXIS_ALIGNED), 2, "", false);
-//  ly_axis_aligned_face.detach_from_state();
-//
-//  base_space_member_prototype lz_axis_aligned_face(xspace, kd_face::prototype_name(Z_AXIS_ALIGNED), 2, "", false);
-//  lz_axis_aligned_face.detach_from_state();
-//
-//  base_space_member_prototype lx_axis_aligned_edge(xspace, kd_edge::prototype_name(X_AXIS_ALIGNED), 1, "", false);
-//  lx_axis_aligned_edge.detach_from_state();
-//
-//  base_space_member_prototype ly_axis_aligned_edge(xspace, kd_edge::prototype_name(Y_AXIS_ALIGNED), 1, "", false);
-//  ly_axis_aligned_edge.detach_from_state();
-//
-//  base_space_member_prototype lz_axis_aligned_edge(xspace, kd_edge::prototype_name(Z_AXIS_ALIGNED), 1, "", false);
-//  lz_axis_aligned_edge.detach_from_state();
-//
-//  base_space_member_prototype lvertex(xspace, "kd_vertex", 0, "", false);
-//  lvertex.detach_from_state();
-//
-//  // Postconditions:
-//
-//  ensure(xspace->contains_member("polygon"));
-//
-//  // Exit:
-//
-//  return;
-//}
- 
-//void
-//geometry::geometry_namespace::
-//make_fiber_space_schema_members()
-//{
-//  // Preconditions:
-//
-//  require(contains_poset(standard_fiber_space_schema_poset_name(), false));
-//  require(state_is_read_write_accessible());
-//
-//
-//  // Body:
-//
-//  // Make all the standard fiber schema of the fiber bundles name space..
-//
-//  fiber_bundles_namespace::make_fiber_space_schema_members();
-//
-//  // $$TODO: Commenting this out is just a stopgap. What replaces this functionality?
-// // kd_plane::make_standard_schema(*this);
-//
-//  // Postconditions:
-//
-//
-//  // Exit:
-//
-//  return;
-//}
 
 // =============================================================================
 // ANY FACET

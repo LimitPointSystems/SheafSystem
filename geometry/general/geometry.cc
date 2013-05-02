@@ -13,7 +13,6 @@
 #include "std_utility.h"
 #include "chart_point_3d.h"
 #include "e3.h"
-//#include "kd_line_fragment.h"
 
 using namespace geometry; // Workaround for MS C++ bug.
 
