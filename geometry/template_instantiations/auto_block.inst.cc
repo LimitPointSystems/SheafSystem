@@ -11,8 +11,8 @@
 #include "d_bounding_box.impl.h"
 #include "d_tree_point_locator_node.impl.h"
 #include "geometry.h"
-#include "kd_bounding_box.h"
-#include "kd_plane.h"
+//#include "kd_bounding_box.h"
+//#include "kd_plane.h"
 #include "std_slist.h"
 #include "std_utility.h"
 
@@ -29,33 +29,33 @@ using namespace geometry; // Workaround for MS C++ bug.
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
 
-template class 
-SHEAF_DLL_SPEC
-sheaf::un_block_initialization_policy<geometry::kd_plane>;
-
-template class 
-SHEAF_DLL_SPEC
-sheaf::auto_block<geometry::kd_plane,
-                  sheaf::un_block_initialization_policy<geometry::kd_plane> >;
+//template class
+//SHEAF_DLL_SPEC
+//sheaf::un_block_initialization_policy<geometry::kd_plane>;
+//
+//template class
+//SHEAF_DLL_SPEC
+//sheaf::auto_block<geometry::kd_plane,
+//                  sheaf::un_block_initialization_policy<geometry::kd_plane> >;
 
 #endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
 
-template 
-SHEAF_DLL_SPEC 
-bool sheaf::operator == <geometry::kd_plane, sheaf::un_block_initialization_policy<geometry::kd_plane> >(const sheaf::auto_block<geometry::kd_plane, sheaf::un_block_initialization_policy<geometry::kd_plane> >& xblk1,
-									     const sheaf::auto_block<geometry::kd_plane, sheaf::un_block_initialization_policy<geometry::kd_plane> >& xblk2);
-
-template 
-SHEAF_DLL_SPEC 
-ostream& sheaf::operator << <geometry::kd_plane, sheaf::un_block_initialization_policy<geometry::kd_plane> >(ostream& xos,
-										 const sheaf::auto_block<geometry::kd_plane, sheaf::un_block_initialization_policy<geometry::kd_plane> >& xblk);
-
-template 
-SHEAF_DLL_SPEC 
-size_t sheaf::deep_size<geometry::kd_plane, sheaf::un_block_initialization_policy<geometry::kd_plane> >(const sheaf::auto_block<geometry::kd_plane, sheaf::un_block_initialization_policy<geometry::kd_plane> >& xblk,
-									    bool xinclude_shallow);
+//template
+//SHEAF_DLL_SPEC
+//bool sheaf::operator == <geometry::kd_plane, sheaf::un_block_initialization_policy<geometry::kd_plane> >(const sheaf::auto_block<geometry::kd_plane, sheaf::un_block_initialization_policy<geometry::kd_plane> >& xblk1,
+//									     const sheaf::auto_block<geometry::kd_plane, sheaf::un_block_initialization_policy<geometry::kd_plane> >& xblk2);
+//
+//template
+//SHEAF_DLL_SPEC
+//ostream& sheaf::operator << <geometry::kd_plane, sheaf::un_block_initialization_policy<geometry::kd_plane> >(ostream& xos,
+//										 const sheaf::auto_block<geometry::kd_plane, sheaf::un_block_initialization_policy<geometry::kd_plane> >& xblk);
+//
+//template
+//SHEAF_DLL_SPEC
+//size_t sheaf::deep_size<geometry::kd_plane, sheaf::un_block_initialization_policy<geometry::kd_plane> >(const sheaf::auto_block<geometry::kd_plane, sheaf::un_block_initialization_policy<geometry::kd_plane> >& xblk,
+//									    bool xinclude_shallow);
 
 #endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
 
@@ -64,38 +64,38 @@ size_t sheaf::deep_size<geometry::kd_plane, sheaf::un_block_initialization_polic
 // auto_block<kd_bounding_box>
 //==============================================================================
 
-#ifndef DOXYGEN_SKIP_INSTANTIATIONS
-
-template class 
-SHEAF_DLL_SPEC
-sheaf::un_block_initialization_policy<geometry::kd_bounding_box>;
-
-template class 
-SHEAF_DLL_SPEC
-sheaf::auto_block<geometry::kd_bounding_box,
-                  sheaf::un_block_initialization_policy<geometry::kd_bounding_box> >;
-
-
-#endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
-
-#ifndef DOXYGEN_SKIP_INSTANTIATIONS
-
-template 
-SHEAF_DLL_SPEC 
-bool sheaf::operator == <geometry::kd_bounding_box, sheaf::un_block_initialization_policy<geometry::kd_bounding_box> >(const sheaf::auto_block<geometry::kd_bounding_box, sheaf::un_block_initialization_policy<geometry::kd_bounding_box> >& xblk1,
-									     const sheaf::auto_block<geometry::kd_bounding_box, sheaf::un_block_initialization_policy<geometry::kd_bounding_box> >& xblk2);
-
-template 
-SHEAF_DLL_SPEC 
-ostream& sheaf::operator << <geometry::kd_bounding_box, sheaf::un_block_initialization_policy<geometry::kd_bounding_box> >(ostream& xos,
-										 const sheaf::auto_block<geometry::kd_bounding_box, sheaf::un_block_initialization_policy<geometry::kd_bounding_box> >& xblk);
-
-template 
-SHEAF_DLL_SPEC 
-size_t sheaf::deep_size<geometry::kd_bounding_box, sheaf::un_block_initialization_policy<geometry::kd_bounding_box> >(const sheaf::auto_block<geometry::kd_bounding_box, sheaf::un_block_initialization_policy<geometry::kd_bounding_box> >& xblk,
-									    bool xinclude_shallow);
-
-#endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
+//#ifndef DOXYGEN_SKIP_INSTANTIATIONS
+//
+//template class
+//SHEAF_DLL_SPEC
+//sheaf::un_block_initialization_policy<geometry::kd_bounding_box>;
+//
+//template class
+//SHEAF_DLL_SPEC
+//sheaf::auto_block<geometry::kd_bounding_box,
+//                  sheaf::un_block_initialization_policy<geometry::kd_bounding_box> >;
+//
+//
+//#endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
+//
+//#ifndef DOXYGEN_SKIP_INSTANTIATIONS
+//
+//template
+//SHEAF_DLL_SPEC
+//bool sheaf::operator == <geometry::kd_bounding_box, sheaf::un_block_initialization_policy<geometry::kd_bounding_box> >(const sheaf::auto_block<geometry::kd_bounding_box, sheaf::un_block_initialization_policy<geometry::kd_bounding_box> >& xblk1,
+//									     const sheaf::auto_block<geometry::kd_bounding_box, sheaf::un_block_initialization_policy<geometry::kd_bounding_box> >& xblk2);
+//
+//template
+//SHEAF_DLL_SPEC
+//ostream& sheaf::operator << <geometry::kd_bounding_box, sheaf::un_block_initialization_policy<geometry::kd_bounding_box> >(ostream& xos,
+//										 const sheaf::auto_block<geometry::kd_bounding_box, sheaf::un_block_initialization_policy<geometry::kd_bounding_box> >& xblk);
+//
+//template
+//SHEAF_DLL_SPEC
+//size_t sheaf::deep_size<geometry::kd_bounding_box, sheaf::un_block_initialization_policy<geometry::kd_bounding_box> >(const sheaf::auto_block<geometry::kd_bounding_box, sheaf::un_block_initialization_policy<geometry::kd_bounding_box> >& xblk,
+//									    bool xinclude_shallow);
+//
+//#endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
 
 
 //==============================================================================

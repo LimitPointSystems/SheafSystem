@@ -14,8 +14,8 @@
 #include "d_tree_point_locator_node.impl.h"
 #include "db0_point_locator.impl.h"
 
-#include "kd_plane.h"
-#include "kd_bounding_box.h"
+//#include "kd_plane.h"
+//#include "kd_bounding_box.h"
 
 #include "std_slist.h"
 #include "std_utility.h"
@@ -29,54 +29,54 @@ using namespace geometry; // Workaround for MS C++ bug.
 //==============================================================================
 // block<kd_plane>
 //==============================================================================
-
-#ifndef DOXYGEN_SKIP_INSTANTIATIONS
-
-template class 
-SHEAF_DLL_SPEC
-sheaf::block<geometry::kd_plane>;
-
-#endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
-
-#ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
-template 
-SHEAF_DLL_SPEC 
-bool sheaf::operator == <geometry::kd_plane>(const sheaf::block<geometry::kd_plane>& xblk1, const sheaf::block<geometry::kd_plane>& xblk2);
-
-template 
-SHEAF_DLL_SPEC 
-ostream& sheaf::operator << <geometry::kd_plane>(ostream& xos, const sheaf::block<geometry::kd_plane>& xblk);
-
-template 
-SHEAF_DLL_SPEC 
-size_t sheaf::deep_size<geometry::kd_plane>(const sheaf::block<geometry::kd_plane>& xblk, bool xinclude_shallow);
-#endif // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
+//
+//#ifndef DOXYGEN_SKIP_INSTANTIATIONS
+//
+//template class
+//SHEAF_DLL_SPEC
+//sheaf::block<geometry::kd_plane>;
+//
+//#endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
+//
+//#ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
+//template
+//SHEAF_DLL_SPEC
+//bool sheaf::operator == <geometry::kd_plane>(const sheaf::block<geometry::kd_plane>& xblk1, const sheaf::block<geometry::kd_plane>& xblk2);
+//
+//template
+//SHEAF_DLL_SPEC
+//ostream& sheaf::operator << <geometry::kd_plane>(ostream& xos, const sheaf::block<geometry::kd_plane>& xblk);
+//
+//template
+//SHEAF_DLL_SPEC
+//size_t sheaf::deep_size<geometry::kd_plane>(const sheaf::block<geometry::kd_plane>& xblk, bool xinclude_shallow);
+//#endif // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
 
 //==============================================================================
 // block<kd_bounding_box>
 //==============================================================================
 
-#ifndef DOXYGEN_SKIP_INSTANTIATIONS
-
-template class 
-SHEAF_DLL_SPEC
-sheaf::block<geometry::kd_bounding_box>;
-
-#endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
-
-#ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
-template 
-SHEAF_DLL_SPEC 
-bool sheaf::operator == <geometry::kd_bounding_box>(const sheaf::block<geometry::kd_bounding_box>& xblk1, const sheaf::block<geometry::kd_bounding_box>& xblk2);
-
-template 
-SHEAF_DLL_SPEC 
-ostream& sheaf::operator << <geometry::kd_bounding_box>(ostream& xos, const sheaf::block<geometry::kd_bounding_box>& xblk);
-
-template 
-SHEAF_DLL_SPEC 
-size_t sheaf::deep_size<geometry::kd_bounding_box>(const sheaf::block<geometry::kd_bounding_box>& xblk, bool xinclude_shallow);
-#endif // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
+//#ifndef DOXYGEN_SKIP_INSTANTIATIONS
+//
+//template class
+//SHEAF_DLL_SPEC
+//sheaf::block<geometry::kd_bounding_box>;
+//
+//#endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
+//
+//#ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
+//template
+//SHEAF_DLL_SPEC
+//bool sheaf::operator == <geometry::kd_bounding_box>(const sheaf::block<geometry::kd_bounding_box>& xblk1, const sheaf::block<geometry::kd_bounding_box>& xblk2);
+//
+//template
+//SHEAF_DLL_SPEC
+//ostream& sheaf::operator << <geometry::kd_bounding_box>(ostream& xos, const sheaf::block<geometry::kd_bounding_box>& xblk);
+//
+//template
+//SHEAF_DLL_SPEC
+//size_t sheaf::deep_size<geometry::kd_bounding_box>(const sheaf::block<geometry::kd_bounding_box>& xblk, bool xinclude_shallow);
+//#endif // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
 
 
 //==============================================================================

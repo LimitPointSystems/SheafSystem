@@ -85,7 +85,7 @@ protected:
   ///
   /// Create schema members for standard base space member types.
   ///
-  virtual void make_base_space_schema_members();
+  //virtual void make_base_space_schema_members();
 
   ///
   /// Create standard base space member prototypes.
@@ -120,12 +120,12 @@ protected:
   ///
   /// Create prototypes for kd_lattice members in poset xspace.
   ///
-  void make_kd_lattice_prototypes(base_space_poset* xspace);
+ // void make_kd_lattice_prototypes(base_space_poset* xspace);
 
   ///
   /// Create schema members for standard fiber space types.
   ///
-  virtual void make_fiber_space_schema_members();
+  //virtual void make_fiber_space_schema_members();
 
 private:
 
