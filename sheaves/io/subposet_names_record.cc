@@ -174,7 +174,7 @@ transfer_internal_buffer_to_poset()
     // Delete the existing name for the namespace;
     // let it be reset from the file.
 
-    scaffold().structure().whole().delete_all_names();
+    scaffold().structure().powerset().whole().delete_all_names();
   }
 
   if(scaffold().is_versioned())

@@ -2533,7 +2533,7 @@ new_member(bool xis_jim, pod_index_type xtuple_hub_id)
 
   // Put new node in subposet of all members.
 
-  whole().insert_member(result);
+  powerset().whole().insert_member(result);
 
   // New members are not jims, not resident, and not modified by default.
   // Note that since resident and modified refers to the dof tuple,
@@ -4084,7 +4084,7 @@ new_member(pod_index_type xmbr_hub_id, bool xis_jim, const scoped_index& xdof_tu
 
   // Put new node in subposet of all members.
 
-  whole().insert_member(xmbr_hub_id);
+  powerset().whole().insert_member(xmbr_hub_id);
 
   // New members are not jims, not resident, and not modified by default.
   // Note that since resident and modified refers to the dof tuple,
@@ -4232,7 +4232,7 @@ new_member_interval(const string& xinterval_type, size_type xsize)
   {
     // Set whole() membership.
 
-    whole().insert_member(i);
+    powerset().whole().insert_member(i);
   }
 
   // Postconditions:
@@ -4283,7 +4283,7 @@ new_member_interval(pod_index_type xmbr_hub_id, const string& xinterval_type, si
   {
     // Set whole() membership.
 
-    whole().insert_member(i);
+    powerset().whole().insert_member(i);
   }
 
   // Postconditions:
@@ -6968,15 +6968,6 @@ delete_subposet(const scoped_index& xsubposet_id)
   return;
 }
 
-sheaf::subposet&
-sheaf::poset_state_handle::
-whole()
-{
-  require(state_is_read_accessible());
-
-  return powerset().whole();
-}
-
 const sheaf::subposet&
 sheaf::poset_state_handle::
 whole() const
@@ -7047,6 +7038,8 @@ row_dof_subposet() const
 // Leaving it as is for now.
 // Tue Dec 23 16:38:01 2008
 
+// PROTECTED FUNCTIONS
+
 sheaf::subposet&
 sheaf::poset_state_handle::
 resident()
@@ -7060,8 +7053,6 @@ resident() const
 {
   return _resident;
 }
-
-// PROTECTED FUNCTIONS
 
 sheaf::poset_powerset_state&
 sheaf::poset_state_handle::
@@ -8078,7 +8069,7 @@ put_version(int xversion)
   {
     // Select the coarsest common refinement.
 
-    whole().attach_to_state(WHOLE_INDEX);
+    powerset().whole().attach_to_state(WHOLE_INDEX);
     jims().attach_to_state(JIMS_INDEX);
   }
   else
@@ -8089,7 +8080,7 @@ put_version(int xversion)
 
     string lname = version_to_name(xversion);
     pod_index_type lid = subposet_id(lname);
-    whole().attach_to_state(lid);
+    powerset().whole().attach_to_state(lid);
 
     // Attach the jims subposet to the new level
 
@@ -8104,7 +8095,7 @@ put_version(int xversion)
   // change version(), but there's no way to ensure the client hasn't
   // changed it. So force it just to be sure.
 
-  whole().put_version(CURRENT_HOST_VERSION);
+  powerset().whole().put_version(CURRENT_HOST_VERSION);
   jims().put_version(CURRENT_HOST_VERSION);
 
   // Postconditions:
