@@ -79,9 +79,9 @@ set(${COMPONENT}_IPATHS ${FIBER_BUNDLES_IPATHS} ${${COMPONENT}_IPATH} CACHE STRI
 #
 include_directories(${FIBER_BUNDLES_IPATHS})
 
-if(${USE_VTK})
-    include_directories(${VTK_INC_DIRS})
-endif()
+#if(${USE_VTK})
+#    include_directories(${VTK_INC_DIRS})
+#endif()
 
 include_directories(${TETGEN_INC_DIR})
 
@@ -95,9 +95,9 @@ include_directories(${TETGEN_INC_DIR})
 #
 function(add_library_targets)
 
-    if(${USE_VTK})
-        link_directories(${VTK_LIB_DIR})
-    endif()
+#    if(${USE_VTK})
+#        link_directories(${VTK_LIB_DIR})
+#    endif()
 
      if(WIN64INTEL OR WIN64MSVC)
 
@@ -108,13 +108,13 @@ function(add_library_targets)
         add_library(${${COMPONENT}_DYNAMIC_LIB} SHARED ${${COMPONENT}_SRCS})
         add_dependencies(${${COMPONENT}_DYNAMIC_LIB} ${FIBER_BUNDLES_IMPORT_LIBS})
 
-        if(${USE_VTK})
-            target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${FIBER_BUNDLES_IMPORT_LIBS} ${VTK_LIBS})
-            target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} LINK_PRIVATE ${TETGEN_LIB})           
-        else()
+#        if(${USE_VTK})
+#            target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${FIBER_BUNDLES_IMPORT_LIBS} ${VTK_LIBS})
+#            target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} LINK_PRIVATE ${TETGEN_LIB})           
+#        else()
             target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${FIBER_BUNDLES_IMPORT_LIBS})        
             target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} LINK_PRIVATE ${TETGEN_LIB})
-        endif() 
+#        endif() 
      
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")
         # Override cmake's placing of "${${COMPONENT}_DYNAMIC_LIB}_EXPORTS into the preproc symbol table.
@@ -145,19 +145,19 @@ function(add_library_targets)
         add_dependencies(${PROJECT_NAME}-shared-lib ${${COMPONENT}_SHARED_LIBS})
         add_dependencies(${PROJECT_NAME}-static-lib ${${COMPONENT}_STATIC_LIBS})
         
-        if(${USE_VTK})
-            target_link_libraries(${${COMPONENT}_SHARED_LIB} ${FIBER_BUNDLES_SHARED_LIBS}) 
-            target_link_libraries(${${COMPONENT}_SHARED_LIB} LINK_PRIVATE ${TETGEN_LIB})
-            target_link_libraries(${${COMPONENT}_SHARED_LIB} LINK_PRIVATE ${VTK_LIBS})            
-            target_link_libraries(${${COMPONENT}_STATIC_LIB} ${FIBER_BUNDLES_STATIC_LIBS}) 
-            target_link_libraries(${${COMPONENT}_STATIC_LIB} LINK_PRIVATE ${TETGEN_LIB})
-            target_link_libraries(${${COMPONENT}_STATIC_LIB} LINK_PRIVATE ${VTK_LIBS}) 
-        else()
+#        if(${USE_VTK})
+#            target_link_libraries(${${COMPONENT}_SHARED_LIB} ${FIBER_BUNDLES_SHARED_LIBS}) 
+#            target_link_libraries(${${COMPONENT}_SHARED_LIB} LINK_PRIVATE ${TETGEN_LIB})
+#            target_link_libraries(${${COMPONENT}_SHARED_LIB} LINK_PRIVATE ${VTK_LIBS})            
+#            target_link_libraries(${${COMPONENT}_STATIC_LIB} ${FIBER_BUNDLES_STATIC_LIBS}) 
+#            target_link_libraries(${${COMPONENT}_STATIC_LIB} LINK_PRIVATE ${TETGEN_LIB})
+#            target_link_libraries(${${COMPONENT}_STATIC_LIB} LINK_PRIVATE ${VTK_LIBS}) 
+#        else()
             target_link_libraries(${${COMPONENT}_SHARED_LIB} ${FIBER_BUNDLES_SHARED_LIBS}) 
             target_link_libraries(${${COMPONENT}_SHARED_LIB} LINK_PRIVATE ${TETGEN_LIB})
             target_link_libraries(${${COMPONENT}_STATIC_LIB} ${FIBER_BUNDLES_STATIC_LIBS}) 
             target_link_libraries(${${COMPONENT}_STATIC_LIB} LINK_PRIVATE ${TETGEN_LIB})  
-        endif()
+#        endif()
 
     endif()
 
@@ -204,11 +204,11 @@ function(add_bindings_targets)
         # Define the library version.
         set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES VERSION ${LIB_VERSION})
 
-        if(${USE_VTK}) 
-            target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB} ${FIBER_BUNDLES_JAVA_BINDING_LIBS} ${HDF5_LIBRARIES} ${JDK_LIBS} ${VTK_LIBS}) 
-        else()
+#        if(${USE_VTK}) 
+#            target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB} ${FIBER_BUNDLES_JAVA_BINDING_LIBS} ${HDF5_LIBRARIES} ${JDK_LIBS} ${VTK_LIBS}) 
+#        else()
             target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB} ${FIBER_BUNDLES_JAVA_BINDING_LIBS} ${HDF5_LIBRARIES} ${JDK_LIBS}) 
-        endif()
+#        endif()
 
          list(APPEND ${COMPONENT}_CLASSPATH ${FIBER_BUNDLES_CLASSPATH} ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR})
          set(${COMPONENT}_CLASSPATH ${${COMPONENT}_CLASSPATH} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)

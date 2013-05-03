@@ -108,7 +108,7 @@ set(BUILD_BINDINGS NO CACHE BOOL "Toggle build of language bindings.")
 #
 # True if we want geometry to link against VTK
 #
-set(USE_VTK ON CACHE BOOL "Set to link geometry against VTK libs.")
+#set(USE_VTK ON CACHE BOOL "Set to link geometry against VTK libs.")
 
 #
 # Toggle multi-process compilation in win32.

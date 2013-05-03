@@ -243,21 +243,21 @@ function(set_compiler_flags)
         
     # Configuration specific flags 
     if(WIN64MSVC OR WIN64INTEL)
-        if(${USE_VTK})     
-            set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUG=1\" /MDd /DUSE_VTK" CACHE
-                STRING "Flags used by the C++ compiler for Debug-contracts builds" FORCE)
-        else()
+#        if(${USE_VTK})     
+#            set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUG=1\" /MDd /DUSE_VTK" CACHE
+#                STRING "Flags used by the C++ compiler for Debug-contracts builds" FORCE)
+#        else()
              set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUG=1\" /MDd" CACHE
                 STRING "Flags used by the C++ compiler for Debug-contracts builds" FORCE)       
-        endif()
+#        endif()
     else()
-        if(${USE_VTK})
-            set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} -g -DUSE_VTK " CACHE
-                STRING "Flags used by the C++ compiler for Debug-contracts builds" FORCE)
-        else()         
+#        if(${USE_VTK})
+#            set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} -g -DUSE_VTK " CACHE
+#                STRING "Flags used by the C++ compiler for Debug-contracts builds" FORCE)
+#        else()         
             set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} -g" CACHE
                 STRING "Flags used by the C++ compiler for Debug-contracts builds" FORCE)
-        endif()
+#        endif()
     endif()
     
     # True for all currently supported platforms    
@@ -274,21 +274,21 @@ function(set_compiler_flags)
 
     # Configuration specific flags 
     if(WIN64MSVC OR WIN64INTEL)
-        if(${USE_VTK}) 
-            set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUG=1\" /MDd /DUSE_VTK /DNDEBUG" CACHE
-                STRING "Flags used by the C++ compiler for Debug-no-contracts builds" FORCE)
-         else()   
+#        if(${USE_VTK}) 
+#            set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUG=1\" /MDd /DUSE_VTK /DNDEBUG" CACHE
+#                STRING "Flags used by the C++ compiler for Debug-no-contracts builds" FORCE)
+#         else()   
             set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUG=1\" /MDd /DNDEBUG" CACHE
                 STRING "Flags used by the C++ compiler for Debug-no-contracts builds" FORCE)
-         endif()
+#         endif()
     else()
-        if(${USE_VTK})    
-            set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} -g -DNDEBUG -DUSE_VTK" CACHE
-                STRING "Flags used by the C++ compiler for Debug-no-contracts builds" FORCE)
-        else()
+#        if(${USE_VTK})    
+#            set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} -g -DNDEBUG -DUSE_VTK" CACHE
+#                STRING "Flags used by the C++ compiler for Debug-no-contracts builds" FORCE)
+#        else()
             set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} -g -DNDEBUG" CACHE
                 STRING "Flags used by the C++ compiler for Debug-no-contracts builds" FORCE)
-        endif()
+#        endif()
     endif()
 
     # True for all currently supported platforms       
@@ -304,13 +304,13 @@ function(set_compiler_flags)
 
     # Configuration specific flags 
     if(WIN64MSVC OR WIN64INTEL)
-     if(${USE_VTK})
-        set(CMAKE_CXX_FLAGS_RELEASE-CONTRACTS "${LPS_CXX_FLAGS} /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUG=0\" /DUSE_VTK /MD" CACHE
-            STRING "Flags used by the C++ compiler for Release-contracts builds" FORCE)
-      else()   
+#     if(${USE_VTK})
+#        set(CMAKE_CXX_FLAGS_RELEASE-CONTRACTS "${LPS_CXX_FLAGS} /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUG=0\" /DUSE_VTK /MD" CACHE
+#            STRING "Flags used by the C++ compiler for Release-contracts builds" FORCE)
+#      else()   
         set(CMAKE_CXX_FLAGS_RELEASE-CONTRACTS "${LPS_CXX_FLAGS} /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUG=0\" /MD" CACHE
             STRING "Flags used by the C++ compiler for Release-contracts builds" FORCE)
-     endif()
+#     endif()
     set(CMAKE_EXE_LINKER_FLAGS_RELEASE-CONTRACTS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD"  CACHE
         STRING "Flags used by the linker for executables for Release-contracts builds" FORCE)
     set(CMAKE_SHARED_LINKER_FLAGS_RELEASE-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD" CACHE
@@ -334,13 +334,13 @@ function(set_compiler_flags)
 
     # Configuration specific flags         
     if(WIN64MSVC OR WIN64INTEL)
-        if(${USE_VTK})
-            set(CMAKE_CXX_FLAGS_RELEASE-NO-CONTRACTS "${LPS_CXX_FLAGS} /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUG=0\" /MD /DUSE_VTK /DNDEBUG" CACHE
-                STRING "Flags used by the C++ compiler for Release-no-contracts builds" FORCE)
-       else()        
+#        if(${USE_VTK})
+#            set(CMAKE_CXX_FLAGS_RELEASE-NO-CONTRACTS "${LPS_CXX_FLAGS} /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUG=0\" /MD /DUSE_VTK /DNDEBUG" CACHE
+#                STRING "Flags used by the C++ compiler for Release-no-contracts builds" FORCE)
+#       else()        
             set(CMAKE_CXX_FLAGS_RELEASE-NO-CONTRACTS "${LPS_CXX_FLAGS} /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUG=0\" /MD /DNDEBUG" CACHE
                 STRING "Flags used by the C++ compiler for Release-no-contracts builds" FORCE)
-      endif()               
+#      endif()               
     set(CMAKE_EXE_LINKER_FLAGS_RELEASE-NO-CONTRACTS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD" CACHE
         STRING "Flags used by the linker for executables for Release-no-contracts builds" FORCE)
     set(CMAKE_SHARED_LINKER_FLAGS_RELEASE-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD" CACHE
@@ -799,7 +799,7 @@ function(export_targets)
     #$$TODO: "GEOMETRY" will change to "TOOLS" when we pull kd_lattice out of SheafSystem
     if("${COMPONENT}" MATCHES "GEOMETRY")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK ON CACHE BOOL \"Set to link against VTK libs\" FORCE)\n")
+    #    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK ON CACHE BOOL \"Set to link against VTK libs\" FORCE)\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @VTK_LIB_DIR@ CACHE PATH \"VTK library path\" FORCE)\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
@@ -831,8 +831,8 @@ function(export_install_config_file_vars)
         file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
         if("${COMPONENT}" MATCHES "GEOMETRY")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(USE_VTK ON CACHE BOOL \"Set to link against VTK libs\" FORCE)\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
+#            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(USE_VTK ON CACHE BOOL \"Set to link against VTK libs\" FORCE)\n")
+#            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/lib/vtk CACHE PATH \"VTK library path\" FORCE)\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_BIN_DIR @SHEAFSYSTEM_HOME@/bin/vtk CACHE PATH  \"Set to link against VTK libs\" FORCE)\n")
@@ -858,8 +858,8 @@ function(export_install_config_file_vars)
         #if(${USE_VTK} AND (${COMPONENT} MATCHES "GEOMETRY"))
         if("${COMPONENT}" MATCHES "GEOMETRY")        
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(USE_VTK ON CACHE BOOL \"Set ON to link against VTK libs\" FORCE)\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
+#            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(USE_VTK ON CACHE BOOL \"Set ON to link against VTK libs\" FORCE)\n")
+#            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_INC_DIR @SHEAFSYSTEM_HOME@/include/VTK CACHE PATH \"VTK library path\" FORCE)\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")            
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/lib/VTK CACHE PATH \"VTK library path\" FORCE)\n")

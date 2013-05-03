@@ -221,7 +221,7 @@ function(add_bindings_targets)
 
         target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB} ${FIELDS_JAVA_BINDING_LIBS} ${VTK_LIBS} ${JDK_LIBS} ) 
 
-        list(APPEND ${COMPONENT}_CLASSPATH ${FIELDS_CLASSPATH} ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR})
+        list(APPEND ${COMPONENT}_CLASSPATH ${FIELDS_CLASSPATH} ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} ${VTK_JAR} ${JMF_JAR})
         set(${COMPONENT}_CLASSPATH ${${COMPONENT}_CLASSPATH} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
         
          # Create the bindings jar file 
@@ -231,7 +231,7 @@ function(add_bindings_targets)
                            DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${FIELDS_JAVA_BINDING_JAR}
                            set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Component Binding Jars")                           
                            COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
-                           COMMAND ${JAVAC_EXECUTABLE} -classpath "${FIELDS_CLASSPATH}" -d . *.java
+                           COMMAND ${JAVAC_EXECUTABLE} -classpath "${FIELDS_CLASSPATH};${VTK_JAR};${JMF_JAR}" -d . *.java
                            COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
                            COMMAND ${JAR_EXECUTABLE} cvf ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
             )
@@ -242,7 +242,7 @@ function(add_bindings_targets)
             string(REGEX REPLACE ";" ":" this_classpath "${${COMPONENT}_CLASSPATH}")
             # The default list item separator in cmake is ";". If Linux, then exchange ";" for  the UNIX style ":"
             # and store the result in parent_classpath.
-            string(REGEX REPLACE ";" ":" parent_classpath "${FIELDS_CLASSPATH}")
+            string(REGEX REPLACE ";" ":" parent_classpath "${FIELDS_CLASSPATH};${VTK_JAR};${JMF_JAR}")
             add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
                            DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${FIELDS_JAVA_BINDING_JAR}
                            COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
