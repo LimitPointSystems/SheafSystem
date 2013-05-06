@@ -256,7 +256,7 @@ public:
   ///
   /// The type of the subposet_name_map.
   ///
-  typedef name_multimap<pod_index_type> subposet_name_map_type;
+  typedef name_multimap subposet_name_map_type;
 
   ///
   /// Bi-directional map between subposet names and indices

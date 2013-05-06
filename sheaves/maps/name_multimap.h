@@ -3,7 +3,8 @@
 // Copyright (c) 2013 Limit Point Systems, Inc.
 //
 
-// Interface for class name_multimap
+/// @file
+/// Interface for class name_multimap
 
 #ifndef NAME_MULTIMAP_H
 #define NAME_MULTIMAP_H
@@ -39,68 +40,31 @@
 namespace sheaf
 {
 
-class poset;  
-
-template<typename T>
+class poset;
 class name_multimap;
-
 class scoped_index;
-
-template<typename T>
-ostream& operator<<(ostream& xos, const name_multimap<T>& xp);
-
-template<typename T>
-size_t deep_size(const name_multimap<T>& p, bool s);
+ostream& operator<<(ostream& xos, const name_multimap& xp);
+size_t deep_size(const name_multimap& p, bool s);
 
 ///
 /// A partial multi-valued relation with total injective inverse
 /// between names and indices of type index_type.
 ///
-/// @deprecated To be replaced by a non-templated version.
-///
-template<typename index_type>
 class name_multimap : public any
 {
-  friend size_t deep_size<index_type>(const name_multimap<index_type>& xp,
-		                              bool xinclude_shallow);
+  friend size_t deep_size(const name_multimap& xp,  bool xinclude_shallow);
+
+  // ===========================================================
+  /// @name NAME_MULTIMAP FACET
+  // ===========================================================
+  //@{
 
 public:
 
-  // =============================================================================
-  // ANY FACET
-  // =============================================================================
-
   ///
-  /// Virtual constructor;
-  /// makes a new instance of
-  /// the same type as this
+  /// The type of the index in the map.
   ///
-  virtual name_multimap* clone() const;
-
-  ///
-  /// Class invariant.
-  ///
-  virtual bool invariant() const;
-
-  ///
-  /// Conformance test; true if other conforms to this
-  ///
-  virtual bool is_ancestor_of(const any* other) const;
-
-  ///
-  /// Equality test; true if other has the same contents as this.
-  ///
-  bool operator==(const name_multimap& xother);
-
-  ///
-  /// Assignment operator; make this a copy of xother.
-  ///
-  name_multimap& operator=(const name_multimap& xother);
-
-
-  // =============================================================================
-  // NAME_MULTIMAP FACET
-  // =============================================================================
+  typedef pod_index_type index_type;
 
   ///
   /// The type of an entry in the map.
@@ -115,22 +79,22 @@ public:
   ///
   /// The iterator type for names.
   ///
-  typedef typename name_list_type::iterator name_iterator;
+  typedef name_list_type::iterator name_iterator;
 
   ///
   /// The const iterator type for names.
   ///
-  typedef typename name_list_type::const_iterator const_name_iterator;
+  typedef name_list_type::const_iterator const_name_iterator;
 
   ///
   /// The iterator type for this map.
   ///
-  typedef typename map<index_type, name_list_type >::iterator iterator;
+  typedef map<index_type, name_list_type >::iterator iterator;
 
   ///
   /// The const iterator type for this map.
   ///
-  typedef typename map<index_type, name_list_type >::const_iterator const_iterator;
+  typedef map<index_type, name_list_type >::const_iterator const_iterator;
 
   ///
   /// Default constructor.
@@ -244,7 +208,7 @@ public:
   /// Prints the data members of xm on stream xos.
   /// Intended for use debugging.
   ///
-  void print(ostream& xos, const name_multimap<index_type>& xm) const;
+  void print(ostream& xos, const name_multimap& xm) const;
   
   ///
   /// The number of names associated with key xindex.
@@ -273,37 +237,65 @@ private:
   ///
   index_to_name_map_type _index_to_name_map;
 
+  //@}
+
+
+  // ===========================================================
+  /// @name ANY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Virtual constructor;
+  /// makes a new instance of
+  /// the same type as this
+  ///
+  virtual name_multimap* clone() const;
+
+  ///
+  /// Class invariant.
+  ///
+  virtual bool invariant() const;
+
+  ///
+  /// Conformance test; true if other conforms to this
+  ///
+  virtual bool is_ancestor_of(const any* other) const;
+
+  ///
+  /// Equality test; true if other has the same contents as this.
+  ///
+  bool operator==(const name_multimap& xother);
+
+  ///
+  /// Assignment operator; make this a copy of xother.
+  ///
+  name_multimap& operator=(const name_multimap& xother);
+
+protected:
+
+private:
+
+  //@}
 };
 
-// ===========================================================
-// TEMPLATE SPECIALIZATIONS
-// ===========================================================
-
-/// @todo Remove.
-
-//template <>
-//SHEAF_DLL_SPEC
-//bool
-//name_multimap<sheaf::scoped_index>::
-//contains_entry(const entry_type& xentry) const;
- 
 
 // ===========================================================
 // NON-MEMBER FUNCTIONS
 // ===========================================================
 
 ///
-/// Insert name_multimap<index_type> xm into ostream xos. 
+/// Insert name_multimap xm into ostream xos. 
 ///
-template<typename index_type>
-ostream& operator<<(ostream& xos, const name_multimap<index_type>& xm);
+ostream& operator<<(ostream& xos, const name_multimap& xm);
 
 ///
 /// The deep size of the referenced object of type name_multimap;
 /// if xinclude_shallow, add the sizeof xp to the result.
 ///
-template<typename index_type>
-size_t deep_size(const name_multimap<index_type>& xp, bool xinclude_shallow);
+size_t deep_size(const name_multimap& xp, bool xinclude_shallow);
  
 } // namespace sheaf
 

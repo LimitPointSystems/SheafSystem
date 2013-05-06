@@ -30,7 +30,6 @@ set(SRCS
     index_space_handle.inst.cc
     linkorder_itr.inst.cc
     list_pool.inst.cc
-    name_multimap.inst.cc
     namespace_poset.inst.cc
     pool.inst.cc
     poset_crg_state.inst.cc
