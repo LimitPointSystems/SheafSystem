@@ -151,12 +151,6 @@ template
 SHEAF_DLL_SPEC
 fiber_bundle::at0_space&
 sheaf::namespace_poset::
-member_poset<fiber_bundle::at0_space>(const string& xname, bool xauto_access) const;
- 
-template
-SHEAF_DLL_SPEC
-fiber_bundle::at0_space&
-sheaf::namespace_poset::
 member_poset<fiber_bundle::at0_space>(const poset_path& xpath, bool xauto_access) const;
  
 template
@@ -164,12 +158,6 @@ SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 contains_poset<fiber_bundle::at0_space>(const scoped_index& index, bool xauto_access) const;
- 
-template
-SHEAF_DLL_SPEC
-bool
-sheaf::namespace_poset::
-contains_poset<fiber_bundle::at0_space>(const string& xname, bool xauto_access) const;
  
 template
 SHEAF_DLL_SPEC
@@ -254,12 +242,6 @@ template
 SHEAF_DLL_SPEC
 fiber_bundle::at1_space&
 sheaf::namespace_poset::
-member_poset<fiber_bundle::at1_space>(const string& xname, bool xauto_access) const;
- 
-template
-SHEAF_DLL_SPEC
-fiber_bundle::at1_space&
-sheaf::namespace_poset::
 member_poset<fiber_bundle::at1_space>(const poset_path& xpath, bool xauto_access) const;
  
 template
@@ -267,12 +249,6 @@ SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 contains_poset<fiber_bundle::at1_space>(const scoped_index& index, bool xauto_access) const;
- 
-template
-SHEAF_DLL_SPEC
-bool
-sheaf::namespace_poset::
-contains_poset<fiber_bundle::at1_space>(const string& xname, bool xauto_access) const;
  
 template
 SHEAF_DLL_SPEC
@@ -357,12 +333,6 @@ template
 SHEAF_DLL_SPEC
 fiber_bundle::atp_space&
 sheaf::namespace_poset::
-member_poset<fiber_bundle::atp_space>(const string& xname, bool xauto_access) const;
- 
-template
-SHEAF_DLL_SPEC
-fiber_bundle::atp_space&
-sheaf::namespace_poset::
 member_poset<fiber_bundle::atp_space>(const poset_path& xpath, bool xauto_access) const;
  
 template
@@ -370,12 +340,6 @@ SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 contains_poset<fiber_bundle::atp_space>(const scoped_index& index, bool xauto_access) const;
- 
-template
-SHEAF_DLL_SPEC
-bool
-sheaf::namespace_poset::
-contains_poset<fiber_bundle::atp_space>(const string& xname, bool xauto_access) const;
  
 template
 SHEAF_DLL_SPEC
@@ -459,12 +423,6 @@ template
 SHEAF_DLL_SPEC
 fiber_bundle::gln_space&
 sheaf::namespace_poset::
-member_poset<fiber_bundle::gln_space>(const string& xname, bool xauto_access) const;
- 
-template
-SHEAF_DLL_SPEC
-fiber_bundle::gln_space&
-sheaf::namespace_poset::
 member_poset<fiber_bundle::gln_space>(const poset_path& xpath, bool xauto_access) const;
  
 template
@@ -472,12 +430,6 @@ SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 contains_poset<fiber_bundle::gln_space>(const scoped_index& index, bool xauto_access) const;
- 
-template
-SHEAF_DLL_SPEC
-bool
-sheaf::namespace_poset::
-contains_poset<fiber_bundle::gln_space>(const string& xname, bool xauto_access) const;
  
 template
 SHEAF_DLL_SPEC
@@ -562,12 +514,6 @@ template
 SHEAF_DLL_SPEC
 fiber_bundle::jcb_space&
 sheaf::namespace_poset::
-member_poset<fiber_bundle::jcb_space>(const string& xname, bool xauto_access) const;
- 
-template
-SHEAF_DLL_SPEC
-fiber_bundle::jcb_space&
-sheaf::namespace_poset::
 member_poset<fiber_bundle::jcb_space>(const poset_path& xpath, bool xauto_access) const;
  
 template
@@ -575,12 +521,6 @@ SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 contains_poset<fiber_bundle::jcb_space>(const scoped_index& index, bool xauto_access) const;
- 
-template
-SHEAF_DLL_SPEC
-bool
-sheaf::namespace_poset::
-contains_poset<fiber_bundle::jcb_space>(const string& xname, bool xauto_access) const;
  
 template
 SHEAF_DLL_SPEC
@@ -665,12 +605,6 @@ template
 SHEAF_DLL_SPEC
 fiber_bundle::stp_space&
 sheaf::namespace_poset::
-member_poset<fiber_bundle::stp_space>(const string& xname, bool xauto_access) const;
- 
-template
-SHEAF_DLL_SPEC
-fiber_bundle::stp_space&
-sheaf::namespace_poset::
 member_poset<fiber_bundle::stp_space>(const poset_path& xpath, bool xauto_access) const;
  
 template
@@ -678,12 +612,6 @@ SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 contains_poset<fiber_bundle::stp_space>(const scoped_index& index, bool xauto_access) const;
- 
-template
-SHEAF_DLL_SPEC
-bool
-sheaf::namespace_poset::
-contains_poset<fiber_bundle::stp_space>(const string& xname, bool xauto_access) const;
  
 template
 SHEAF_DLL_SPEC
@@ -768,12 +696,6 @@ template
 SHEAF_DLL_SPEC
 fiber_bundle::tp_space&
 sheaf::namespace_poset::
-member_poset<fiber_bundle::tp_space>(const string& xname, bool xauto_access) const;
- 
-template
-SHEAF_DLL_SPEC
-fiber_bundle::tp_space&
-sheaf::namespace_poset::
 member_poset<fiber_bundle::tp_space>(const poset_path& xpath, bool xauto_access) const;
  
 template
@@ -781,12 +703,6 @@ SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 contains_poset<fiber_bundle::tp_space>(const scoped_index& index, bool xauto_access) const;
- 
-template
-SHEAF_DLL_SPEC
-bool
-sheaf::namespace_poset::
-contains_poset<fiber_bundle::tp_space>(const string& xname, bool xauto_access) const;
  
 template
 SHEAF_DLL_SPEC
@@ -871,12 +787,6 @@ template
 SHEAF_DLL_SPEC
 fiber_bundle::tuple_space&
 sheaf::namespace_poset::
-member_poset<fiber_bundle::tuple_space>(const string& xname, bool xauto_access) const;
- 
-template
-SHEAF_DLL_SPEC
-fiber_bundle::tuple_space&
-sheaf::namespace_poset::
 member_poset<fiber_bundle::tuple_space>(const poset_path& xpath, bool xauto_access) const;
  
 template
@@ -884,12 +794,6 @@ SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 contains_poset<fiber_bundle::tuple_space>(const scoped_index& index, bool xauto_access) const;
- 
-template
-SHEAF_DLL_SPEC
-bool
-sheaf::namespace_poset::
-contains_poset<fiber_bundle::tuple_space>(const string& xname, bool xauto_access) const;
  
 template
 SHEAF_DLL_SPEC
@@ -974,12 +878,6 @@ template
 SHEAF_DLL_SPEC
 fiber_bundle::vd_space&
 sheaf::namespace_poset::
-member_poset<fiber_bundle::vd_space>(const string& xname, bool xauto_access) const;
- 
-template
-SHEAF_DLL_SPEC
-fiber_bundle::vd_space&
-sheaf::namespace_poset::
 member_poset<fiber_bundle::vd_space>(const poset_path& xpath, bool xauto_access) const;
  
 template
@@ -987,12 +885,6 @@ SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 contains_poset<fiber_bundle::vd_space>(const scoped_index& index, bool xauto_access) const;
- 
-template
-SHEAF_DLL_SPEC
-bool
-sheaf::namespace_poset::
-contains_poset<fiber_bundle::vd_space>(const string& xname, bool xauto_access) const;
  
 template
 SHEAF_DLL_SPEC
@@ -1078,13 +970,6 @@ template
 SHEAF_DLL_SPEC
 fiber_bundle::sec_at0_space&
 sheaf::namespace_poset::
-member_poset<fiber_bundle::sec_at0_space>(const string& xname, bool xauto_access) const;
- 
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::sec_at0_space&
-sheaf::namespace_poset::
 member_poset<fiber_bundle::sec_at0_space>(const poset_path& xpath, bool xauto_access) const;
  
 
@@ -1093,13 +978,6 @@ SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 contains_poset<fiber_bundle::sec_at0_space>(const scoped_index& index, bool xauto_access) const;
- 
-
-template
-SHEAF_DLL_SPEC
-bool
-sheaf::namespace_poset::
-contains_poset<fiber_bundle::sec_at0_space>(const string& xname, bool xauto_access) const;
  
 
 template
@@ -1195,13 +1073,6 @@ template
 SHEAF_DLL_SPEC
 fiber_bundle::sec_at1_space&
 sheaf::namespace_poset::
-member_poset<fiber_bundle::sec_at1_space>(const string& xname, bool xauto_access) const;
- 
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::sec_at1_space&
-sheaf::namespace_poset::
 member_poset<fiber_bundle::sec_at1_space>(const poset_path& xpath, bool xauto_access) const;
  
 
@@ -1210,13 +1081,6 @@ SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 contains_poset<fiber_bundle::sec_at1_space>(const scoped_index& index, bool xauto_access) const;
- 
-
-template
-SHEAF_DLL_SPEC
-bool
-sheaf::namespace_poset::
-contains_poset<fiber_bundle::sec_at1_space>(const string& xname, bool xauto_access) const;
  
 
 template
@@ -1311,13 +1175,6 @@ template
 SHEAF_DLL_SPEC
 fiber_bundle::sec_atp_space&
 sheaf::namespace_poset::
-member_poset<fiber_bundle::sec_atp_space>(const string& xname, bool xauto_access) const;
- 
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::sec_atp_space&
-sheaf::namespace_poset::
 member_poset<fiber_bundle::sec_atp_space>(const poset_path& xpath, bool xauto_access) const;
  
 
@@ -1326,13 +1183,6 @@ SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 contains_poset<fiber_bundle::sec_atp_space>(const scoped_index& index, bool xauto_access) const;
- 
-
-template
-SHEAF_DLL_SPEC
-bool
-sheaf::namespace_poset::
-contains_poset<fiber_bundle::sec_atp_space>(const string& xname, bool xauto_access) const;
  
 
 template
@@ -1431,13 +1281,6 @@ arg_is_auto_read_write_available<fiber_bundle::sec_atp_space>(const string& xnam
 // SHEAF_DLL_SPEC
 // fiber_bundle::sec_jcb_space&
 // sheaf::namespace_poset::
-// member_poset<fiber_bundle::sec_jcb_space>(const string& xname, bool xauto_access) const;
- 
-
-// template
-// SHEAF_DLL_SPEC
-// fiber_bundle::sec_jcb_space&
-// sheaf::namespace_poset::
 // member_poset<fiber_bundle::sec_jcb_space>(const poset_path& xpath, bool xauto_access) const;
  
 
@@ -1446,13 +1289,6 @@ arg_is_auto_read_write_available<fiber_bundle::sec_atp_space>(const string& xnam
 // bool
 // sheaf::namespace_poset::
 // contains_poset<fiber_bundle::sec_jcb_space>(const scoped_index& index, bool xauto_access) const;
- 
-
-// template
-// SHEAF_DLL_SPEC
-// bool
-// sheaf::namespace_poset::
-// contains_poset<fiber_bundle::sec_jcb_space>(const string& xname, bool xauto_access) const;
  
 
 // template
@@ -1559,14 +1395,6 @@ template
 SHEAF_DLL_SPEC
 fiber_bundle::sec_rep_space&
 sheaf::namespace_poset::
-member_poset<fiber_bundle::sec_rep_space>(const string& xname,
-					  bool xauto_access) const;
- 
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::sec_rep_space&
-sheaf::namespace_poset::
 member_poset<fiber_bundle::sec_rep_space>(const poset_path& xpath,
 					  bool xauto_access) const;
  
@@ -1576,14 +1404,6 @@ SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 contains_poset<fiber_bundle::sec_rep_space>(const scoped_index& index,
-					    bool xauto_access) const;
- 
-
-template
-SHEAF_DLL_SPEC
-bool
-sheaf::namespace_poset::
-contains_poset<fiber_bundle::sec_rep_space>(const string& xname,
 					    bool xauto_access) const;
  
 
@@ -1687,13 +1507,6 @@ template
 SHEAF_DLL_SPEC
 fiber_bundle::sec_stp_space&
 sheaf::namespace_poset::
-member_poset<fiber_bundle::sec_stp_space>(const string& xname, bool xauto_access) const;
- 
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::sec_stp_space&
-sheaf::namespace_poset::
 member_poset<fiber_bundle::sec_stp_space>(const poset_path& xpath, bool xauto_access) const;
  
 
@@ -1702,13 +1515,6 @@ SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 contains_poset<fiber_bundle::sec_stp_space>(const scoped_index& index, bool xauto_access) const;
- 
-
-template
-SHEAF_DLL_SPEC
-bool
-sheaf::namespace_poset::
-contains_poset<fiber_bundle::sec_stp_space>(const string& xname, bool xauto_access) const;
  
 
 template
@@ -1805,13 +1611,6 @@ template
 SHEAF_DLL_SPEC
 fiber_bundle::sec_tp_space&
 sheaf::namespace_poset::
-member_poset<fiber_bundle::sec_tp_space>(const string& xname, bool xauto_access) const;
- 
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::sec_tp_space&
-sheaf::namespace_poset::
 member_poset<fiber_bundle::sec_tp_space>(const poset_path& xpath, bool xauto_access) const;
  
 
@@ -1820,13 +1619,6 @@ SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 contains_poset<fiber_bundle::sec_tp_space>(const scoped_index& index, bool xauto_access) const;
- 
-
-template
-SHEAF_DLL_SPEC
-bool
-sheaf::namespace_poset::
-contains_poset<fiber_bundle::sec_tp_space>(const string& xname, bool xauto_access) const;
  
 
 template
@@ -1922,13 +1714,6 @@ template
 SHEAF_DLL_SPEC
 fiber_bundle::sec_tuple_space&
 sheaf::namespace_poset::
-member_poset<fiber_bundle::sec_tuple_space>(const string& xname, bool xauto_access) const;
- 
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::sec_tuple_space&
-sheaf::namespace_poset::
 member_poset<fiber_bundle::sec_tuple_space>(const poset_path& xpath, bool xauto_access) const;
  
 
@@ -1937,13 +1722,6 @@ SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 contains_poset<fiber_bundle::sec_tuple_space>(const scoped_index& index, bool xauto_access) const;
- 
-
-template
-SHEAF_DLL_SPEC
-bool
-sheaf::namespace_poset::
-contains_poset<fiber_bundle::sec_tuple_space>(const string& xname, bool xauto_access) const;
  
 
 template
@@ -2039,13 +1817,6 @@ template
 SHEAF_DLL_SPEC
 fiber_bundle::sec_vd_space&
 sheaf::namespace_poset::
-member_poset<fiber_bundle::sec_vd_space>(const string& xname, bool xauto_access) const;
- 
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::sec_vd_space&
-sheaf::namespace_poset::
 member_poset<fiber_bundle::sec_vd_space>(const poset_path& xpath, bool xauto_access) const;
  
 
@@ -2054,13 +1825,6 @@ SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 contains_poset<fiber_bundle::sec_vd_space>(const scoped_index& index, bool xauto_access) const;
- 
-
-template
-SHEAF_DLL_SPEC
-bool
-sheaf::namespace_poset::
-contains_poset<fiber_bundle::sec_vd_space>(const string& xname, bool xauto_access) const;
  
 
 template
@@ -2165,13 +1929,6 @@ template
 SHEAF_DLL_SPEC 
 fiber_bundle::base_space_poset&
 sheaf::namespace_poset::
-member_poset<fiber_bundle::base_space_poset>(const string& xname,
-					     bool xauto_access) const;
- 
-template
-SHEAF_DLL_SPEC 
-fiber_bundle::base_space_poset&
-sheaf::namespace_poset::
 member_poset<fiber_bundle::base_space_poset>(const poset_path& xpath,
 					     bool xauto_access) const;
  
@@ -2180,13 +1937,6 @@ SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 contains_poset<fiber_bundle::base_space_poset>(const scoped_index& index,
-					       bool xauto_access) const;
- 
-template
-SHEAF_DLL_SPEC 
-bool
-sheaf::namespace_poset::
-contains_poset<fiber_bundle::base_space_poset>(const string& xname,
 					       bool xauto_access) const;
  
 template
@@ -2288,13 +2038,6 @@ template
 SHEAF_DLL_SPEC 
 fiber_bundle::binary_section_space_schema_poset&
 sheaf::namespace_poset::
-member_poset<fiber_bundle::binary_section_space_schema_poset>(const string& xname,
-							      bool xauto_access) const;
- 
-template
-SHEAF_DLL_SPEC 
-fiber_bundle::binary_section_space_schema_poset&
-sheaf::namespace_poset::
 member_poset<fiber_bundle::binary_section_space_schema_poset>(const poset_path& xpath,
 							      bool xauto_access) const;
  
@@ -2303,13 +2046,6 @@ SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 contains_poset<fiber_bundle::binary_section_space_schema_poset>(const scoped_index& index,
-								bool xauto_access) const;
- 
-template
-SHEAF_DLL_SPEC 
-bool
-sheaf::namespace_poset::
-contains_poset<fiber_bundle::binary_section_space_schema_poset>(const string& xname,
 								bool xauto_access) const;
  
 template
@@ -2453,14 +2189,6 @@ template
 SHEAF_DLL_SPEC
 fiber_bundle::sec_rep_descriptor_poset&
 sheaf::namespace_poset::
-member_poset<fiber_bundle::sec_rep_descriptor_poset>(const string& xname,
-						     bool xauto_access) const;
- 
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::sec_rep_descriptor_poset&
-sheaf::namespace_poset::
 member_poset<fiber_bundle::sec_rep_descriptor_poset>(const poset_path& xpath,
 						     bool xauto_access) const;
  
@@ -2470,14 +2198,6 @@ SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 contains_poset<fiber_bundle::sec_rep_descriptor_poset>(const scoped_index& index,
-						       bool xauto_access) const;
- 
-
-template
-SHEAF_DLL_SPEC
-bool
-sheaf::namespace_poset::
-contains_poset<fiber_bundle::sec_rep_descriptor_poset>(const string& xname,
 						       bool xauto_access) const;
  
 
