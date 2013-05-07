@@ -303,7 +303,7 @@ public:
 
   ///
   /// Creates a new section space schema and member in
-  /// namespace xns with path xsection_space_schema_path and repreentation, base space and
+  /// namespace xns with path xsection_space_schema_path and representation, base space and
   /// fiber space specified by xrep_path, xbase_space_path, and xfiber_space_path,
   /// respectively. Note that the objects referred to by xrep_path,
   /// xbase_space_path, and xfiber_space_path must already exist and that
