@@ -50,7 +50,7 @@ size_t deep_size(const name_multimap& p, bool s);
 /// A partial multi-valued relation with total injective inverse
 /// between names and indices of type index_type.
 ///
-class name_multimap : public any
+class SHEAF_DLL_SPEC name_multimap : public any
 {
   friend size_t deep_size(const name_multimap& xp,  bool xinclude_shallow);
 
@@ -289,13 +289,17 @@ private:
 ///
 /// Insert name_multimap xm into ostream xos. 
 ///
-ostream& operator<<(ostream& xos, const name_multimap& xm);
+ostream&
+SHEAF_DLL_SPEC
+operator<<(ostream& xos, const name_multimap& xm);
 
 ///
 /// The deep size of the referenced object of type name_multimap;
 /// if xinclude_shallow, add the sizeof xp to the result.
 ///
-size_t deep_size(const name_multimap& xp, bool xinclude_shallow);
+size_t
+SHEAF_DLL_SPEC
+deep_size(const name_multimap& xp, bool xinclude_shallow);
  
 } // namespace sheaf
 
