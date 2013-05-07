@@ -24,7 +24,7 @@
 
 namespace sheaf
 {
-template <class T> class name_multimap;
+class name_multimap;
 class namespace_poset;
 class poset_path;
 class subposet;
@@ -239,7 +239,7 @@ public:
   /// temporarily to avoid problems merging with branch refactor-8.
   ///
   subposet* embed_property(const string& xresult_name,
-                           name_multimap<int>& xresult_member_names,
+                           name_multimap& xresult_member_names,
                            bool xauto_access);
 
   ///

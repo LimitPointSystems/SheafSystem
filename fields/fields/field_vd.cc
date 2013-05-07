@@ -932,7 +932,7 @@ property_at_coordinates(sec_vd_value_type xcoord_base[], int xcoord_ct,
 sheaf::subposet*
 fields::field_vd::
 embed_property(const string& xresult_name,
-               name_multimap<int>& xresult_member_names,
+               name_multimap& xresult_member_names,
                bool xauto_access)
 {
   subposet* result;

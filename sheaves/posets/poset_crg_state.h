@@ -330,7 +330,7 @@ public:
   ///
   /// The type of the member_name_map.
   ///
-  typedef name_multimap<pod_index_type> member_name_map_type;
+  typedef name_multimap member_name_map_type;
 
   ///
   /// Bi-directional map between member names and indices
