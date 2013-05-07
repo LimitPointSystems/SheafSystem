@@ -48,8 +48,6 @@ namespace sheaf
 namespace fiber_bundle
 {
   class chart_point_3d;
-  class e3_lite;
-  class e2_lite;
 }
 
 ///
@@ -63,6 +61,11 @@ namespace geometry
   using namespace sheaf;
   using namespace fiber_bundle;
 
+
+  ///
+  /// A point in base space paired with a branch in section space.
+  ///
+  typedef pair<scoped_index, chart_point_3d> branch_point_pair;
 
 
   // ===========================================================
