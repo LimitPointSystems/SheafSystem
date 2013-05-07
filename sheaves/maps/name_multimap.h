@@ -43,8 +43,6 @@ namespace sheaf
 class poset;
 class name_multimap;
 class scoped_index;
-ostream& operator<<(ostream& xos, const name_multimap& xp);
-size_t deep_size(const name_multimap& p, bool s);
 
 ///
 /// A partial multi-valued relation with total injective inverse
@@ -52,7 +50,7 @@ size_t deep_size(const name_multimap& p, bool s);
 ///
 class SHEAF_DLL_SPEC name_multimap : public any
 {
-  friend size_t deep_size(const name_multimap& xp,  bool xinclude_shallow);
+  friend SHEAF_DLL_SPEC size_t deep_size(const name_multimap& xp,  bool xinclude_shallow);
 
   // ===========================================================
   /// @name NAME_MULTIMAP FACET
@@ -289,16 +287,16 @@ private:
 ///
 /// Insert name_multimap xm into ostream xos. 
 ///
-ostream&
 SHEAF_DLL_SPEC
+ostream&
 operator<<(ostream& xos, const name_multimap& xm);
 
 ///
 /// The deep size of the referenced object of type name_multimap;
 /// if xinclude_shallow, add the sizeof xp to the result.
 ///
-size_t
 SHEAF_DLL_SPEC
+size_t
 deep_size(const name_multimap& xp, bool xinclude_shallow);
  
 } // namespace sheaf
