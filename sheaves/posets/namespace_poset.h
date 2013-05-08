@@ -138,10 +138,29 @@ public:
   void clear();
 
   ///
-  /// Initialize the prototypes needed by various factory methods,
-  /// in particular the poset factory method.
+  /// Initialize all the prototypes needed by various factory methods,
   ///
   static void initialize_prototypes();
+
+  ///
+  /// Initialize the prototypes needed by poset factory method,
+  ///
+  static void initialize_poset_prototypes();
+
+  ///
+  /// Initialize the prototypes needed by crg interval factory method,
+  ///
+  static void initialize_crg_interval_prototypes();
+
+  ///
+  /// Initialize the prototypes needed by dof map factory method,
+  ///
+  static void initialize_dof_map_prototypes();
+
+  ///
+  /// Initialize the  prototypes needed by id space factory method,
+  ///
+  static void initialize_id_space_prototypes();
 
 protected:
 
@@ -232,12 +251,6 @@ private:
   static namespace_poset* _current_namespace;
 
   ///
-  /// True if prototype for this class has been entered in factory.
-  /// Intended to force creation of prototype at initialization.
-  ///
-  static bool _has_prototype;
-
-  ///
   /// Creates prototype for this class and enters in factory.
   ///
   static bool make_prototype();
@@ -325,22 +338,6 @@ public:
   P& member_poset(const scoped_index& xid, bool xauto_access = true) const;
 
   ///
-  /// @deprecated Use member_poset(const poset_path&, bool xauto_access).
-  /// The poset_state_handle object referred to by
-  /// the member with name xname.
-  ///
-  poset_state_handle& member_poset(const string& xname, bool xauto_access = true) const;
-
-  ///
-  /// @deprecated Use member_poset(const poset_path&, bool xauto_access).
-  /// The poset_state_handle object referred to by the member with name xname
-  /// dynamically cast to type P*.
-  ///
-  template <typename P>
-  SHEAF_DLL_SPEC
-  P& member_poset(const string& xname, bool xauto_access = true) const;
-
-  ///
   /// The poset_state_handle object referred to by
   /// the member with name xpath.poset_name().
   ///
@@ -353,17 +350,7 @@ public:
   ///
   template <typename P>
   SHEAF_DLL_SPEC
-  P& member_poset(const poset_path& xpath, bool xauto_access) const;
-
-  // The following undocumented signature is provided to eliminate
-  // ambiguity between the above string and poset_path signatures 
-  // when called with member_poset("const char* string", ...).
-
-  poset_state_handle& member_poset(const char* xname, bool xauto_access = true) const
-  {
-    poset_path lpath(xname);
-    return member_poset(lpath, xauto_access);
-  };
+  P& member_poset(const poset_path& xpath, bool xauto_access = true) const;
 
 protected:
 
@@ -412,19 +399,6 @@ public:
   bool contains_poset(const scoped_index& id, bool xauto_access = true) const;
 
   ///
-  /// True if this contains a poset with name xname.
-  ///
-  bool contains_poset(const string& xname, bool xauto_access = true) const;
-
-  ///
-  /// True if and only if this contains a poset with name xname
-  /// and the poset conforms to type P.
-  ///
-  template <typename P>
-  SHEAF_DLL_SPEC
-  bool contains_poset(const string& xname, bool xauto_access = true) const;
-
-  ///
   /// True if this contains a poset with name xpath.poset_name().
   ///
   bool contains_poset(const poset_path& xpath, bool xauto_access = true) const;
@@ -435,7 +409,7 @@ public:
   ///
   template <typename P>
   SHEAF_DLL_SPEC
-  bool contains_poset(const poset_path& xpath, bool xauto_access) const;
+  bool contains_poset(const poset_path& xpath, bool xauto_access = true) const;
 
   ///
   /// True if the poset referred to by xpath is read accessible.

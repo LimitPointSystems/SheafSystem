@@ -871,10 +871,6 @@ clone(const arg_list& xargs) const
 
 bool
 sheaf::hash_index_space_state::
-_has_prototype = make_prototype();
-
-bool
-sheaf::hash_index_space_state::
 make_prototype()
 {
   // Preconditions:

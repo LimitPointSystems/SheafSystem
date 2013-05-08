@@ -112,10 +112,29 @@ public:
   static const string& standard_section_space_schema_schema_poset_name();
 
   ///
-  /// Initialize the prototypes needed by various factory methods,
-  /// in particular the poset factory methods.
+  /// Initialize all the prototypes needed by various factory methods,
   ///
   static void initialize_prototypes();
+
+  ///
+  /// Initialize the prototypes needed by poset factory method,
+  ///
+  static void initialize_poset_prototypes();
+
+  ///
+  /// Initialize the prototypes needed by crg interval factory method,
+  ///
+  static void initialize_crg_interval_prototypes();
+
+  ///
+  /// Initialize the prototypes needed by dof map factory method,
+  ///
+  static void initialize_dof_map_prototypes();
+
+  ///
+  /// Initialize the  prototypes needed by id space factory method,
+  ///
+  static void initialize_id_space_prototypes();
 
   ///
   /// The poset defining the schema for  base_space_poset, base_space_member and descendants.

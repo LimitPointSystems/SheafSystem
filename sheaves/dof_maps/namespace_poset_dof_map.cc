@@ -779,10 +779,6 @@ allocate_dofs()
 
 // PRIVATE MEMBERS
 
-bool
-sheaf::namespace_poset_dof_map::
-_has_prototype = make_prototype();
-
 ///
 bool
 sheaf::namespace_poset_dof_map::

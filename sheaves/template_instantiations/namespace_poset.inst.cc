@@ -82,12 +82,6 @@ member_poset<sheaf::refinable_poset>(const poset_path& xpath, bool xauto_access)
  
 template
 SHEAF_DLL_SPEC
-sheaf::refinable_poset&
-sheaf::namespace_poset::
-member_poset<sheaf::refinable_poset>(const string& xpath, bool xauto_access) const;
- 
-template
-SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 contains_poset<sheaf::refinable_poset>(const poset_path& xpath, bool xauto_access) const;
@@ -107,12 +101,6 @@ SHEAF_DLL_SPEC
 sheaf::poset&
 sheaf::namespace_poset::
 member_poset<sheaf::poset>(const poset_path& xpath, bool xauto_access) const;
- 
-template
-SHEAF_DLL_SPEC
-sheaf::poset&
-sheaf::namespace_poset::
-member_poset<sheaf::poset>(const string& xpath, bool xauto_access) const;
  
 template
 SHEAF_DLL_SPEC

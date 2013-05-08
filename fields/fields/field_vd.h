@@ -24,7 +24,7 @@
 
 namespace sheaf
 {
-template <class T> class name_map;
+class name_multimap;
 class namespace_poset;
 class poset_path;
 class subposet;
@@ -232,8 +232,6 @@ public:
                                sec_vd_value_type xprop_base[],
                                int xprop_ub) const;
 
-  ///@todo Specialize name_map for scoped_index.
-
   ///
   /// Creates a decomposition of the base space such that the value
   /// of property() is constant on each member.
@@ -241,8 +239,7 @@ public:
   /// temporarily to avoid problems merging with branch refactor-8.
   ///
   subposet* embed_property(const string& xresult_name,
-                           //name_map<client_index>& xresult_member_names,
-                           name_map<int>& xresult_member_names,
+                           name_multimap& xresult_member_names,
                            bool xauto_access);
 
   ///

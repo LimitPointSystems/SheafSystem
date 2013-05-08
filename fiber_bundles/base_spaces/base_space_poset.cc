@@ -21,7 +21,6 @@
 #include "poset_handle_factory.h"
 #include "poset_type.h"
 #include "preorder_iterator.h"
-#include "processor_decomposition.h"
 #include "std_strstream.h"
 #include "zone_nodes_block_crg_interval.h"
 
@@ -2658,10 +2657,6 @@ row_dof_tuple(const scoped_index& xid, bool xrequire_write_access) const
 }
 
 // PROTECTED FUNCTIONS
-
-bool
-fiber_bundle::base_space_poset::
-_has_prototype = make_prototype();
 
 bool
 fiber_bundle::base_space_poset::

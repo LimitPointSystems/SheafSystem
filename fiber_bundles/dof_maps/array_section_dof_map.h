@@ -34,6 +34,8 @@ class sec_rep_space;
 class SHEAF_DLL_SPEC array_section_dof_map : public section_dof_map
 {
 
+  friend class fiber_bundles_namespace;
+
 public:
 
   ///
@@ -307,12 +309,6 @@ private:
   /// Initializes dof storage.
   ///
   void init_dofs(void* xdofs, size_t xdofs_ub);
-
-  ///
-  /// True if prototype for this class has been entered in factory.
-  /// Intended to force creation of prototype at initialization.
-  ///
-  static bool _has_prototype;
 
   ///
   /// Creates prototype for this class and enters in factory.

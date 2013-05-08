@@ -11,12 +11,17 @@
 
 #include "arg_list.h"
 #include "array_index_space_state.h" // for intialize_prototypes
+#include "array_index_space_interval.h" // for initialize_prototypes
 #include "array_poset_dof_map.h"
 #include "assert_contract.h"
+#include "constant_index_space_interval.h" // for initialize_prototypes
 #include "error_message.h"
+#include "explicit_crg_interval.h" // for initialize_prototypes
+#include "explicit_index_space_interval.h" // for initialize_prototypes
 #include "hash_index_space_state.h" // for intialize_prototypes
 #include "index_space_iterator.h"
 #include "interval_index_space_state.h" // for intialize_prototypes
+#include "list_index_space_state.h" // for initialize_prototypes
 #include "namespace_poset_dof_map.h"
 #include "namespace_poset_member.h"
 #include "mutable_index_space_handle.h"
@@ -26,7 +31,15 @@
 #include "poset_type.h"
 #include "postorder_member_iterator.h"
 #include "postorder_iterator.h"
+#include "primary_index_space_state.h" // for initialize_prototypes
+#include "primary_sum_index_space_state.h" // for initialize_prototypes
+#include "primitives_index_space_state.h" // for initialize_prototypes
+#include "ragged_array_index_space_interval.h" // for initialize_prototypes
 #include "refinable_poset.h" // for intialize_prototypes
+#include "reserved_primary_index_space_state.h" // for initialize_prototypes
+#include "singleton_index_space_state.h" // for initalize_prototypes
+#include "singleton_index_space_interval.h" // for initialize_prototypes
+#include "standard_member_hack_crg_interval.h" // for initialize_prototypes
 #include "std_list.h"
 #include "std_set.h"
 #include "std_sstream.h"
@@ -201,11 +214,13 @@ namespace_poset(const string& xname)
 
   // Body:
 
-  new_state(xname);
-
   // Initialize the prototypes.
 
   initialize_prototypes();
+
+  // Create the state.
+
+  new_state(xname);
 
   // Postconditions:
 
@@ -385,31 +400,161 @@ initialize_prototypes()
 
   // Body:
 
-  static bool ldone = false;
+  initialize_poset_prototypes();
+  initialize_crg_interval_prototypes();
+  initialize_dof_map_prototypes();
+  initialize_id_space_prototypes();
 
-  if(!ldone)
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::namespace_poset::
+initialize_poset_prototypes()
+{
+  // Preconditions:
+
+  // Body:
+
+  static bool lposet_prototypes_initialized = false;
+
+  if(!lposet_prototypes_initialized)
   {
+    // Initialize the prototypes
 
-    // Posets
-
-    namespace_poset ldummy1;
-    namespace_poset_schema ldummy2;
-    poset ldummy3;
-    primitives_poset ldummy4;
-    primitives_poset_schema ldummy5;
-    refinable_poset dummy6;
-
-    // Dof maps
-
-    array_poset_dof_map ldummy15;
-    namespace_poset_dof_map ldummy16;
-    primitives_poset_dof_map ldummy17;
-
-    // Other
+    namespace_poset::make_prototype();
+    namespace_poset_schema::make_prototype();
+    poset::make_prototype();
+    primitives_poset::make_prototype();
+    primitives_poset_schema::make_prototype();
+    refinable_poset::make_prototype();
 
     // Done with prototype initializations.
 
-    ldone = true;
+    lposet_prototypes_initialized = true;
+
+#ifdef DIAGNOSTIC_OUTPUT
+    cout << "Initialized sheaves poset prototypes" << endl;
+#endif
+
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::namespace_poset::
+initialize_crg_interval_prototypes()
+{
+  // Preconditions:
+
+  // Body:
+
+  static bool lcrg_interval_prototypes_initialized = false;
+
+  if(!lcrg_interval_prototypes_initialized)
+  {
+    // Initialize the prototypes
+
+    explicit_crg_interval::make_prototype();
+    standard_member_hack_crg_interval::make_prototype();
+
+    // Done with prototype initializations.
+
+    lcrg_interval_prototypes_initialized = true;
+
+#ifdef DIAGNOSTIC_OUTPUT
+    cout << "Initialized sheaves crg interval prototypes" << endl;
+#endif
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::namespace_poset::
+initialize_dof_map_prototypes()
+{
+  // Preconditions:
+
+  // Body:
+
+  static bool ldof_map_prototypes_initialized = false;
+
+  if(!ldof_map_prototypes_initialized)
+  {
+    // Initialize the prototypes
+
+    array_poset_dof_map::make_prototype();
+    namespace_poset_dof_map::make_prototype();
+    primitives_poset_dof_map::make_prototype();
+
+    // Done with prototype initializations.
+
+    ldof_map_prototypes_initialized = true;
+
+#ifdef DIAGNOSTIC_OUTPUT
+    cout << "Initialized sheaves dof map prototypes" << endl;
+#endif
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::namespace_poset::
+initialize_id_space_prototypes()
+{
+  // Preconditions:
+
+  // Body:
+
+  static bool lid_space_prototypes_initialized = false;
+
+  if(!lid_space_prototypes_initialized)
+  {
+    // Initialize the prototypes
+
+    array_index_space_state::make_prototype();
+    hash_index_space_state::make_prototype();
+    interval_index_space_state::make_prototype();
+    list_index_space_state::make_prototype();
+    offset_index_space_state::make_prototype();
+    primary_index_space_state::make_prototype();
+    primary_sum_index_space_state::make_prototype();
+    primitives_index_space_state::make_prototype();
+    reserved_primary_index_space_state::make_prototype();
+    singleton_index_space_state::make_prototype();
+
+    array_index_space_interval::make_prototype();
+    constant_index_space_interval::make_prototype();
+    explicit_index_space_interval::make_prototype();
+    ragged_array_index_space_interval::make_prototype();
+    singleton_index_space_interval::make_prototype();
+
+    // Done with prototype initializations.
+
+    lid_space_prototypes_initialized = true;
+
+#ifdef DIAGNOSTIC_OUTPUT
+    cout << "Initialized sheaves id space prototypes" << endl;
+#endif
   }
 
   // Postconditions:
@@ -752,14 +897,9 @@ _current_namespace  = 0;
 
 bool
 sheaf::namespace_poset::
-_has_prototype = make_prototype();
-
-bool
-sheaf::namespace_poset::
 make_prototype()
 {
   // Preconditions:
-
 
   // Body:
 
@@ -771,7 +911,6 @@ make_prototype()
   factory().insert_prototype(ltype, lproto);
 
   // Postconditions:
-
 
   // Exit:
 
@@ -1058,24 +1197,23 @@ member_poset(const scoped_index& xid, bool xauto_access) const
 
 sheaf::poset_state_handle&
 sheaf::namespace_poset::
-member_poset(const string& xname, bool xauto_access) const
+member_poset(const poset_path& xpath, bool xauto_access) const
 {
-
   // Preconditions:
 
   require(xauto_access || state_is_read_accessible());
-  require(contains_member(xname, xauto_access));
+  require(contains_member(xpath.poset_name(), xauto_access));
 
   if(xauto_access)
   {
     get_read_access();
   }
 
-  require(is_jim(xname));
+  require(is_jim(xpath.poset_name()));
 
   // Body:
 
-  poset_state_handle& result = member_poset(member_id(xname, false), false);
+  poset_state_handle& result = member_poset(member_id(xpath.poset_name(), false), false);
 
   // Postconditions:
 
@@ -1083,28 +1221,6 @@ member_poset(const string& xname, bool xauto_access) const
   {
     release_access();
   }
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::poset_state_handle&
-sheaf::namespace_poset::
-member_poset(const poset_path& xpath, bool xauto_access) const
-{
-
-  // Preconditions:
-
-  require(precondition_of(member_poset(xpath.poset_name(), xauto_access)));
-
-  // Body:
-
-  poset_state_handle& result = member_poset(xpath.poset_name(), xauto_access);
-
-  // Postconditions:
-
-  ensure(postcondition_of(member_poset(xpath.poset_name(), xauto_access)));
 
   // Exit:
 
@@ -1204,7 +1320,7 @@ contains_poset(const scoped_index& xid, bool xauto_access) const
 
 bool
 sheaf::namespace_poset::
-contains_poset(const string& xname, bool xauto_access) const
+contains_poset(const poset_path& xpath, bool xauto_access) const
 {
   bool result;
 
@@ -1219,34 +1335,13 @@ contains_poset(const string& xname, bool xauto_access) const
     get_read_access();
   }
 
-  result = !xname.empty() && contains_member(xname, false) && is_jim(xname);
+  result =
+    !xpath.poset_name().empty() && contains_member(xpath.poset_name(), false) && is_jim(xpath.poset_name());
 
   if(xauto_access)
   {
     release_access();
   }
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-bool
-sheaf::namespace_poset::
-contains_poset(const poset_path& xpath, bool xauto_access) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-
-  // Body:
-
-  result =
-    !xpath.poset_name().empty() && contains_poset(xpath.poset_name(), xauto_access);
 
   // Postconditions:
 

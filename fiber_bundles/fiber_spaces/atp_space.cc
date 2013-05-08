@@ -552,11 +552,6 @@ covariant_subposet_ct() const
 
 bool
 fiber_bundle::atp_space::
-_has_prototype = make_prototype();
-
-
-bool
-fiber_bundle::atp_space::
 make_prototype()
 {
   bool result = false;

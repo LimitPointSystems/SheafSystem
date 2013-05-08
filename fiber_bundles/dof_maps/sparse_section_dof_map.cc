@@ -746,11 +746,6 @@ allocate_dofs()
 
 bool
 fiber_bundle::sparse_section_dof_map::
-_has_prototype = make_prototype();
-
-///
-bool
-fiber_bundle::sparse_section_dof_map::
 make_prototype()
 {
   bool result = false;

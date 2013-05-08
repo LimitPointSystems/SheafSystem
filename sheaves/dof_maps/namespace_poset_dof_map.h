@@ -38,6 +38,7 @@ class SHEAF_DLL_SPEC namespace_poset_dof_map : public poset_dof_map
 {
 
   friend class poset_state_handle;
+  friend class namespace_poset;
   friend class namespace_poset_member;
 
 public:
@@ -236,12 +237,6 @@ private:
   /// schema dof id space but storage is on the top id space.
   ///
   block<pod_index_type> _storage_map;
-
-  ///
-  /// True if prototype for this class has been entered in factory.
-  /// Intended to force creation of prototype at initialization.
-  ///
-  static bool _has_prototype;
 
   ///
   /// Creates prototype for this class and enters in factory.

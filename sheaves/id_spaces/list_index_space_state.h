@@ -41,6 +41,7 @@ class SHEAF_DLL_SPEC list_index_space_state : public mutable_index_space_state
 {
 
   friend class list_index_space_iterator;
+  friend class namespace_poset;
   friend SHEAF_DLL_SPEC size_t deep_size(const list_index_space_state& xn, bool xinclude_shallow);
 
   // ===========================================================
@@ -317,12 +318,6 @@ public:
 protected:
 
 private:
-
-  ///
-  /// True if prototype for this class has been entered in factory.
-  /// Intended to force creation of prototype at initialization.
-  ///
-  static bool _has_prototype;
 
   ///
   /// Creates prototype for this class and enters in factory.

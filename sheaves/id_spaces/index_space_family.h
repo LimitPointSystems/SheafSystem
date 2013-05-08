@@ -164,7 +164,7 @@ protected:
   ///
   /// Map from name to id space index.
   ///
-  name_multimap<pod_type> _name_to_index;
+  name_multimap _name_to_index;
 
   ///
   /// Ending index of the id spaces.
