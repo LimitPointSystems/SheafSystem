@@ -822,12 +822,6 @@ public:
 protected:
 
   ///
-  /// True if prototype for this class has been entered in factory.
-  /// Intended to force creation of prototype at initialization.
-  ///
-  static bool _has_prototype;
-
-  ///
   /// Creates prototype for this class and enters in factory.
   ///
   static bool make_prototype();

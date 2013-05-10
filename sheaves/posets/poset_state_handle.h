@@ -1972,12 +1972,7 @@ public:
   void delete_subposet(const scoped_index& xsubposet_id);
 
   ///
-  /// The "improper" subset containing all members of this poset (mutable version)
-  ///
-  virtual subposet& whole();
-
-  ///
-  /// The "improper" subset containing all members of this poset (const version)
+  /// The "improper" subset containing all members of this poset 
   ///
   virtual const subposet& whole() const;
 
@@ -1990,18 +1985,6 @@ public:
   /// The subset of all jims (const version)
   ///
   virtual const subposet& jims() const;
-
-  // $$CONST mutable version of resident() is needed by detach_from_state()
-
-  ///
-  /// The subset of all members with resident (in memory) dof tuples (mutable version).
-  ///
-  virtual subposet& resident();
-
-  ///
-  /// The subset of all members with resident (in memory) dof tuples (const version).
-  ///
-  virtual const subposet& resident() const;
 
   ///
   /// The table dof subposet when this poset is used as a schema (mutable version).
@@ -2029,6 +2012,16 @@ protected:
   /// The subposet of members with resident dof tuples
   ///
   subposet _resident;
+
+  ///
+  /// The subset of all members with resident (in memory) dof tuples (mutable version).
+  ///
+  virtual subposet& resident();
+
+  ///
+  /// The subset of all members with resident (in memory) dof tuples (const version).
+  ///
+  virtual const subposet& resident() const;
 
   ///
   /// The set of subposets of this poset.

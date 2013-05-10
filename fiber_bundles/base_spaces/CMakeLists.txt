@@ -57,19 +57,6 @@ set(SRCS
     unstructured_block_builder.cc
     zone_nodes_block.cc
     zone_nodes_block_crg_interval.cc
-# The following files are no longer part of the build.
-# they are deprecated and only remain around as a reference
-# for future development.
-#    connectivity_array.cc
-#    material_decomposition.cc
-#    mesh_decomposition.cc
-#    mesh_partition.cc
-#    processor_decomposition.cc
-#    zone_partition.cc
-#    adjacency_extractor.cc
-#    connectivity_extractor.cc
-#    neighborhood_extractor.cc
-#    stencil_extractor.cc
 )
 
 collect_sources()

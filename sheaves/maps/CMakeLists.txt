@@ -17,7 +17,6 @@ set(CLUSTER maps)
 #
 set(SRCS
     name_multimap.cc 
-    name_map.cc
     record_map.cc
 )
 
@@ -27,8 +26,6 @@ collect_sources()
 # Headers that are NOT associated with a .cc file.
 #
 set(ADDITIONAL_INCS
-    name_map.impl.h 
-    name_multimap.impl.h 
     record_map.impl.h
   )
   

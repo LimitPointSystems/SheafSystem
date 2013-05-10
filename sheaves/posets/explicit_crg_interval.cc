@@ -171,14 +171,9 @@ class_name() const
 
 bool
 sheaf::explicit_crg_interval::
-_has_prototype = make_prototype();
-
-bool
-sheaf::explicit_crg_interval::
 make_prototype()
 {
   // Preconditions:
-
 
   // Body:
 
@@ -187,7 +182,6 @@ make_prototype()
   interval_factory().insert_prototype(lproto);
 
   // Postconditions:
-
 
   // Exit:
 

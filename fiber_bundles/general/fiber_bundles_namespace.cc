@@ -35,6 +35,12 @@
 #include "gln.h"
 #include "gln_space.h"
 #include "homogeneous_block.h"
+#include "i_adjacency_index_space_interval.h" // for initialize_prototypes
+#include "i_connectivity_index_space_interval.h" // for initialize_prototypes
+#include "ij_adjacency_index_space_interval.h" // for initialize_prototypes
+#include "ij_connectivity_index_space_interval.h" // for initialize_prototypes
+#include "ijk_adjacency_index_space_interval.h" // for initialize_prototypes
+#include "ijk_connectivity_index_space_interval.h" // for initialize_prototypes
 #include "index_iterator.h"
 #include "index_space_iterator.h"
 #include "jcb.h"
@@ -73,6 +79,7 @@
 #include "sec_stp_space.h" // For initialize_prototypes.
 #include "sec_tp_space.h" // For initialize_prototypes.
 #include "sec_vd_space.h" // For initialize_prototypes.
+#include "section_space_schema_jims_index_space_state.h" // For initialize_prototypes
 #include "st2.h"
 #include "st2_e2.h"
 #include "st2_e3.h"
@@ -172,11 +179,13 @@ fiber_bundles_namespace(const string& xname)
 
   // Body:
 
-  new_state(xname);
-
   // Initialize the prototypes.
 
   initialize_prototypes();
+
+  // Create the state.
+
+  new_state(xname);
 
   // Postconditions:
 
@@ -316,57 +325,180 @@ initialize_prototypes()
 
   // Body:
 
-  static bool ldone = false;
+  initialize_poset_prototypes();
+  initialize_crg_interval_prototypes();
+  initialize_dof_map_prototypes();
+  initialize_id_space_prototypes();
 
-  if(!ldone)
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+fiber_bundle::fiber_bundles_namespace::
+initialize_poset_prototypes()
+{
+  // Preconditions:
+
+  // Body:
+
+  static bool lposet_prototypes_initialized = false;
+
+  if(!lposet_prototypes_initialized)
   {
+    namespace_poset::initialize_poset_prototypes();
 
-    namespace_poset::initialize_prototypes();
+    // Initialize the prototypes
 
-    // Base space classes.
+    base_space_poset::make_prototype();
 
-    base_space_poset ldummy1;
-    point_block_crg_interval ldummy2;
-    structured_block_1d_crg_interval ldummy3;
-    structured_block_2d_crg_interval ldummy4;
-    structured_block_3d_crg_interval ldummy5;
-    zone_nodes_block_crg_interval ldummy6;
+    binary_section_space_schema_poset::make_prototype();
+    sec_at0_space::make_prototype();
+    sec_at1_space::make_prototype();
+    sec_atp_space::make_prototype();
+    sec_jcb_space::make_prototype();
+    sec_rep_space::make_prototype();
+    sec_rep_descriptor_poset::make_prototype();
+    sec_stp_space::make_prototype();
+    sec_tp_space::make_prototype();
+    sec_tuple_space::make_prototype();
+    sec_vd_space::make_prototype();
 
-    // Section space classes
-
-    binary_section_space_schema_poset ldummy7;
-    sec_at0_space ldummy9;
-    sec_at1_space ldummy10;
-    sec_atp_space ldummy11;
-    sec_jcb_space ldummy12;
-    sec_rep_space ldummy13;
-    sec_rep_descriptor_poset ldummy14;
-    sec_stp_space ldummy15;
-    sec_tp_space ldummy16;
-    sec_tuple_space ldummy17;
-    sec_vd_space ldummy18;
-    
-    // Fiber space classes
-
-    at0_space ldummy20;
-    at1_space ldummy21;
-    atp_space ldummy22;
-    gln_space ldummy23;
-    jcb_space ldummy24;
-    stp_space ldummy25;
-    tp_space ldummy26;
-    tuple_space ldummy27;
-    vd_space ldummy28;
-
-    // Dof map classes.
-
-    //  array_sec_vd_dof_map ldummy29; Not currently in build.
-    array_section_dof_map ldummy30;
-    sparse_section_dof_map ldummy31;
+    at0_space::make_prototype();
+    at1_space::make_prototype();
+    atp_space::make_prototype();
+    gln_space::make_prototype();
+    jcb_space::make_prototype();
+    stp_space::make_prototype();
+    tp_space::make_prototype();
+    tuple_space::make_prototype();
+    vd_space::make_prototype();
 
     // Done with prototype initializations.
 
-    ldone = true;
+    lposet_prototypes_initialized = true;
+
+#ifdef DIAGNOSTIC_OUTPUT
+    cout << "Initialized fiber bundles poset prototypes" << endl;
+#endif
+
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+fiber_bundle::fiber_bundles_namespace::
+initialize_crg_interval_prototypes()
+{
+  // Preconditions:
+
+  // Body:
+
+  static bool lcrg_interval_prototypes_initialized = false;
+
+  if(!lcrg_interval_prototypes_initialized)
+  {
+    namespace_poset::initialize_crg_interval_prototypes();
+
+    // Initialize the prototypes
+
+    point_block_crg_interval::make_prototype();
+    structured_block_1d_crg_interval::make_prototype();
+    structured_block_2d_crg_interval::make_prototype();
+    structured_block_3d_crg_interval::make_prototype();
+    zone_nodes_block_crg_interval::make_prototype();
+
+    // Done with prototype initializations.
+
+    lcrg_interval_prototypes_initialized = true;
+
+#ifdef DIAGNOSTIC_OUTPUT
+    cout << "Initialized fiber bundles crg interval prototypes" << endl;
+#endif
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+fiber_bundle::fiber_bundles_namespace::
+initialize_dof_map_prototypes()
+{
+  // Preconditions:
+
+  // Body:
+
+  static bool ldof_map_prototypes_initialized = false;
+
+  if(!ldof_map_prototypes_initialized)
+  {
+    namespace_poset::initialize_dof_map_prototypes();
+
+    // Initialize the prototypes
+
+    array_section_dof_map::make_prototype();
+    sparse_section_dof_map::make_prototype();
+
+    // Done with prototype initializations.
+
+    ldof_map_prototypes_initialized = true;
+
+#ifdef DIAGNOSTIC_OUTPUT
+    cout << "Initialized fiber bundles dof map prototypes" << endl;
+#endif
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+fiber_bundle::fiber_bundles_namespace::
+initialize_id_space_prototypes()
+{
+  // Preconditions:
+
+  // Body:
+
+  static bool lid_space_prototypes_initialized = false;
+
+  if(!lid_space_prototypes_initialized)
+  {
+    namespace_poset::initialize_id_space_prototypes();
+
+    // Initialize the prototypes
+
+    section_space_schema_jims_index_space_state::make_prototype();
+
+    i_adjacency_index_space_interval::make_prototype();
+    i_connectivity_index_space_interval::make_prototype();
+    ij_adjacency_index_space_interval::make_prototype();
+    ij_connectivity_index_space_interval::make_prototype();
+    ijk_adjacency_index_space_interval::make_prototype();
+    ijk_connectivity_index_space_interval::make_prototype();
+
+    // Done with prototype initializations.
+
+    lid_space_prototypes_initialized = true;
+
+#ifdef DIAGNOSTIC_OUTPUT
+    cout << "Initialized fiber bundles id space prototypes" << endl;
+#endif
   }
 
   // Postconditions:

@@ -32,6 +32,8 @@ namespace fiber_bundle
 class SHEAF_DLL_SPEC structured_block_1d_crg_interval : public homogeneous_block_crg_interval
 {
 
+  friend class fiber_bundles_namespace;
+
   // ===========================================================
   /// @name STRUCTURED_BLOCK_1D_CRG_INTERVAL FACET
   // ===========================================================
@@ -342,12 +344,6 @@ public:
 protected:
 
 private:
-
-  ///
-  /// True if prototype for this class has been entered in factory.
-  /// Intended to force creation of prototype at initialization.
-  ///
-  static bool _has_prototype;
 
   ///
   /// Creates prototype for this class and enters in factory.

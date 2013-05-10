@@ -176,10 +176,6 @@ class_name() const
 
 bool
 sheaf::standard_member_hack_crg_interval::
-_has_prototype = make_prototype();
-
-bool
-sheaf::standard_member_hack_crg_interval::
 make_prototype()
 {
   // Preconditions:

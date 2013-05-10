@@ -34,6 +34,8 @@ class primitives_index_space_iterator;
 class SHEAF_DLL_SPEC primitives_index_space_state : public explicit_index_space_state
 {
 
+  friend class namespace_poset;
+
   // ===========================================================
   /// @name PRIMITIVES_INDEX_SPACE_STATE FACET
   // ===========================================================
@@ -242,12 +244,6 @@ public:
 protected:
 
 private:
-
-  ///
-  /// True if prototype for this class has been entered in factory.
-  /// Intended to force creation of prototype at initialization.
-  ///
-  static bool _has_prototype;
 
   ///
   /// Creates prototype for this class and enters in factory.

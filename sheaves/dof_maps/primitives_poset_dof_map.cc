@@ -708,11 +708,6 @@ put_host(const poset_state_handle* xhost)
 
 bool
 sheaf::primitives_poset_dof_map::
-_has_prototype = make_prototype();
-
-///
-bool
-sheaf::primitives_poset_dof_map::
 make_prototype()
 {
   // Preconditions:

@@ -180,10 +180,6 @@ clone(const arg_list& xargs) const
 
 bool
 sheaf::explicit_index_space_interval::
-_has_prototype = make_prototype();
-
-bool
-sheaf::explicit_index_space_interval::
 make_prototype()
 {
   // Preconditions:

@@ -992,10 +992,6 @@ class_name() const
 
 bool
 fiber_bundle::point_block_crg_interval::
-_has_prototype = make_prototype();
-
-bool
-fiber_bundle::point_block_crg_interval::
 make_prototype()
 {
   // Preconditions:

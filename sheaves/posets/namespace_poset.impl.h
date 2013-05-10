@@ -213,40 +213,6 @@ member_poset(const scoped_index& xid, bool xauto_access) const
 template<typename P>
 P&
 sheaf::namespace_poset::
-member_poset(const string& xname, bool xauto_access) const
-{
-
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-  require(contains_member(xname, xauto_access));
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  require(is_jim(xname));
-
-  // Body:
-
-  P& result = dynamic_cast<P&>(member_poset(member_id(xname, false), false));
-
-  // Postconditions:
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Exit:
-
-  return result;
-}
-
-template<typename P>
-P&
-sheaf::namespace_poset::
 member_poset(const poset_path& xpath, bool xauto_access) const
 {
   // Preconditions:
@@ -326,40 +292,6 @@ contains_poset(const scoped_index& xid, bool xauto_access) const
   // Body:
 
   return contains_poset<P>(xid.hub_pod(), xauto_access);
-}
-
-template<typename P>
-bool
-sheaf::namespace_poset::
-contains_poset(const string& xname, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  bool result = !xname.empty() && contains_member(xname, false) && is_jim(xname);
-  if(result)
-  {
-    result = (dynamic_cast<P*>(&member_poset(xname, xauto_access)) != 0);
-  }
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
 }
 
 template<typename P>

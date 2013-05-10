@@ -1606,7 +1606,7 @@ new_standard_member_hack(standard_member_index xindex)
 
   // Put new node in subposet of all members.
 
-  whole().insert_member(xindex);
+  powerset().whole().insert_member(xindex);
 
   // Postconditions:
 

@@ -19,7 +19,7 @@
 #include "eval_family.h"
 #include "field_eval_iterator.h"
 #include "hash_index_space_state.h"
-#include "name_map.h"
+#include "name_multimap.h"
 #include "namespace_poset_member.h"
 #include "poset_path.h"
 #include "print_property_dofs_action.h"
@@ -932,7 +932,7 @@ property_at_coordinates(sec_vd_value_type xcoord_base[], int xcoord_ct,
 sheaf::subposet*
 fields::field_vd::
 embed_property(const string& xresult_name,
-               name_map<int>& xresult_member_names,
+               name_multimap& xresult_member_names,
                bool xauto_access)
 {
   subposet* result;

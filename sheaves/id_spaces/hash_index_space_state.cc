@@ -403,9 +403,7 @@ map_rep_gather()
 
   // Body:
 
-  // Initialize map members.
-
-  // Initialize map members.
+  // Build the gathered _to_domain map.
 
   _to_domain.clear();
   _ct = 0;
@@ -413,12 +411,10 @@ map_rep_gather()
   pod_type ldomain_id = 0;
   pod_type lrange_id;
   
-  to_range_type::iterator itr = _to_range.begin();
-  while(itr != _to_range.end())
+  to_range_type::iterator lto_range_itr = _to_range.begin();
+  while(lto_range_itr != _to_range.end())
   {
-    // Make _to_domain entry.
-
-    lrange_id = itr->second;
+    lrange_id = lto_range_itr->second;
 
     if(hub_id_space().contains(lrange_id))
     {
@@ -427,63 +423,34 @@ map_rep_gather()
 
       _to_domain[lrange_id] = ldomain_id;
 
-      // Make _to_range entry.
+      // Increment the domain id.
 
-      if(itr->first == ldomain_id)
-      {
-	// We don't need to move this entry.
-	// Just advance to the next entry.
+      ++ldomain_id;
 
-	++itr;
-	++ldomain_id;
-      }
-      else
-      {
-	// We need to move this entry.
+      // Increment the id space count.
 
-	// Make the new entry.
-      
-	_to_range[ldomain_id] = lrange_id;
-
-	// Erase the old entry.
-
-	// The old entry is the current item in the iteration
-	// and erasing it will invalidate the iterator,
-	// so we have to advance the iterator first.
-
-	// Copy the iterator.
-
-	to_range_type::iterator lerase_itr = itr;
-
-	// Advance the iterator.
-
-	++itr;
-	++ldomain_id;
-
-	// Erase the old entry.
-
-	_to_range.erase(lerase_itr);
-      }
-
-      // Update the count.
-
-      _ct++;
+      ++_ct;
     }
-    else
-    {
-      // The range id has been removed from the hub id space.
-      // Remove it from the _to_range map.
 
-      to_range_type::iterator lerase_itr = itr;
+    // Increment to the next entry in the _to_range map.
 
-      // Advance the iterator.
+    ++lto_range_itr;
+  }
 
-      ++itr;
+  // Build the gathered _to_range map.
 
-      // Erase the old entry.
+  _to_range.clear();
 
-      _to_range.erase(lerase_itr);
-    }
+  to_domain_type::iterator lto_domain_itr = _to_domain.begin();
+  while(lto_domain_itr != _to_domain.end())
+  {
+    // Insert the entry into the map.
+
+    _to_range[lto_domain_itr->second] = lto_domain_itr->first;
+
+    // Increment the iterator.
+
+    ++lto_domain_itr;
   }
   
   // Postconditions:
@@ -868,10 +835,6 @@ clone(const arg_list& xargs) const
 // PROTECTED MEMBER FUNCTIONS
 
 // PRIVATE MEMBER FUNCTIONS
-
-bool
-sheaf::hash_index_space_state::
-_has_prototype = make_prototype();
 
 bool
 sheaf::hash_index_space_state::

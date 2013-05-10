@@ -41,6 +41,8 @@ class sec_rep_space;
 class SHEAF_DLL_SPEC sparse_section_dof_map : public section_dof_map
 {
 
+  friend class fiber_bundles_namespace;
+
 public:
 
   ///
@@ -249,12 +251,6 @@ protected:
   virtual void allocate_dofs();
 
 private:
-
-  ///
-  /// True if prototype for this class has been entered in factory.
-  /// Intended to force creation of prototype at initialization.
-  ///
-  static bool _has_prototype;
 
   ///
   /// Creates prototype for this class and enters in factory.

@@ -524,9 +524,9 @@ new_version(int xversion)
   // the old membership to it.
 
   subposet old_whole(whole());
-  whole().new_state();
-  whole().put_name(whole_name, true, false);
-  whole().make_equal_to(&old_whole);
+  powerset().whole().new_state();
+  powerset().whole().put_name(whole_name, true, false);
+  powerset().whole().make_equal_to(&old_whole);
 
   // Create the new jims() subposet and copy
   // the old membership to it.
@@ -558,10 +558,6 @@ new_version(int xversion)
 // PROTECTED FUNCTIONS
 
 // PRIVATE FUNCTIONS
-
-bool
-sheaf::refinable_poset::
-_has_prototype = make_prototype();
 
 bool
 sheaf::refinable_poset::

@@ -48,6 +48,7 @@ class index_space_handle;
 class SHEAF_DLL_SPEC ragged_array_index_space_interval : public index_space_interval
 {
 
+  friend class namespace_poset;
   friend SHEAF_DLL_SPEC size_t deep_size(const ragged_array_index_space_interval& xn, bool xinclude_shallow);
 
   // ===========================================================
@@ -147,12 +148,6 @@ public:
 protected:
 
 private:
-
-  ///
-  /// True if prototype for this class has been entered in factory.
-  /// Intended to force creation of prototype at initialization.
-  ///
-  static bool _has_prototype;
 
   ///
   /// Creates prototype for this class and enters in factory.

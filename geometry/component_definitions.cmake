@@ -352,7 +352,14 @@ function(add_install_target)
             # for this project. We pass it literally here. 
             install(TARGETS ${${COMPONENT}_IMPORT_LIB} EXPORT ${${COMPONENT}_IMPORT_LIB} ARCHIVE DESTINATION lib/\${BUILD_TYPE})
             install(TARGETS ${${COMPONENT}_DYNAMIC_LIB} RUNTIME DESTINATION bin/\${BUILD_TYPE})
-          
+            
+            # Only try to install the pdb files if they exist. Easier to determine existence than the current config type in win32.
+            if(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}.pdb")
+                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}.pdb DESTINATION bin/\${BUILD_TYPE})
+            elseif(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}.pdb")
+                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}.pdb DESTINATION bin/\${BUILD_TYPE})               
+            endif()
+                             
             if(SWIG_FOUND AND BUILD_BINDINGS)
                 install(TARGETS ${${COMPONENT}_JAVA_BINDING_LIB} RUNTIME DESTINATION bin/\${BUILD_TYPE})
                 install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_JAR} DESTINATION lib/\${BUILD_TYPE})  
