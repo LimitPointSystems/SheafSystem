@@ -42,7 +42,33 @@ using namespace geometry; // Workaround for MSVC++ bug.
 // GEOMETRY_NAMESPACE FACET
 // =============================================================================
 
-///
+// PUBLIC MEMBER FUNCTIONS
+
+
+geometry::geometry_namespace::
+geometry_namespace(const string& xname)
+{
+  // Preconditions:
+
+  require(precondition_of(new_state(xname)));
+
+  // Body:
+
+  // Create the state.
+
+  new_state(xname);
+
+  // Postconditions:
+
+  ensure(postcondition_of(new_state(xname)));
+
+  // Exit:
+
+  return;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
 geometry::geometry_namespace::
 geometry_namespace()
 {
@@ -64,7 +90,6 @@ geometry_namespace()
 }
 
 
-///
 geometry::geometry_namespace::
 geometry_namespace(const geometry_namespace& xother)
     : fiber_bundles_namespace(xother)
@@ -86,34 +111,6 @@ geometry_namespace(const geometry_namespace& xother)
 
   return;
 }
-
-///
-geometry::geometry_namespace::
-geometry_namespace(const string& xname)
-{
-  // Preconditions:
-
-  require(precondition_of(new_state(xname)));
-
-  // Body:
-
-  // Initialize the prototypes.
-
-  initialize_prototypes();
-
-  // Create the state.
-
-  new_state(xname);
-
-  // Postconditions:
-
-  ensure(postcondition_of(new_state(xname)));
-
-  // Exit:
-
-  return;
-}
-
 
 ///
 geometry::geometry_namespace::

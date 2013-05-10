@@ -71,6 +71,7 @@ namespace geometry
   class geometry_namespace;
   class jim_cohort;
   class kd_bounding_box;
+  class kd_display;
   class kd_edge;
   class kd_edge_cohort;
   class kd_face;

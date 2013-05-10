@@ -165,6 +165,12 @@ public:
 protected:
 
   ///
+  /// Initialize all the prototypes needed by various factory methods;
+  /// virtual version.
+  ///
+  virtual void virtual_initialize_prototypes();
+
+  ///
   /// Default constructor; creates an unattached namespace handle.
   ///
   namespace_poset();

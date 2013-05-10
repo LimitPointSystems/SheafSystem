@@ -46,16 +46,6 @@ public:
   // CANONICAL MEMBERS
 
   ///
-  /// Default constructor; creates an unattached handle.
-  ///
-  sheaves_namespace();
-
-  ///
-  /// Copy constructor; attaches this to the same state as xother
-  ///
-  sheaves_namespace(const sheaves_namespace& xother);
-
-  ///
   /// Destructor
   ///
   virtual ~sheaves_namespace();
@@ -76,9 +66,19 @@ public:
 protected:
 
   ///
+  /// Default constructor; creates an unattached handle.
+  ///
+  sheaves_namespace();
+
+  ///
   /// Covariant constructor.
   ///
   sheaves_namespace(namespace_poset_member* xtop, namespace_poset_member* xbottom);
+
+  ///
+  /// Copy constructor; attaches this to the same state as xother
+  ///
+  sheaves_namespace(const sheaves_namespace& xother);
 
 
 };

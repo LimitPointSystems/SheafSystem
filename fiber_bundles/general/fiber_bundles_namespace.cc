@@ -130,47 +130,6 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 // PUBLIC MEMBER FUNCTIONS
 
 fiber_bundle::fiber_bundles_namespace::
-fiber_bundles_namespace()
-{
-  // Preconditions:
-
-  // Body:
-
-  _base_space_schema_poset = 0;
-  _base_space_member_prototypes_poset = 0;
-
-  // Postconditions:
-
-  ensure(!is_attached());
-
-  // Exit:
-
-  return;
-}
-
-fiber_bundle::fiber_bundles_namespace::
-fiber_bundles_namespace(const fiber_bundles_namespace& xother)
-    : sheaves_namespace(xother)
-{
-  // Preconditions:
-
-  require(precondition_of(sheaves_namespace(xother)));
-
-  // Body:
-
-  _base_space_schema_poset = 0;
-  _base_space_member_prototypes_poset = 0;
-
-  // Postconditions
-
-  ensure(postcondition_of(sheaves_namespace(xother)));
-
-  // Exit:
-
-  return;
-}
-
-fiber_bundle::fiber_bundles_namespace::
 fiber_bundles_namespace(const string& xname)
 {
   // Preconditions:
@@ -178,10 +137,6 @@ fiber_bundles_namespace(const string& xname)
   require(precondition_of(new_state(xname)));
 
   // Body:
-
-  // Initialize the prototypes.
-
-  initialize_prototypes();
 
   // Create the state.
 
@@ -578,6 +533,49 @@ base_space_member_prototypes_poset() const
 
 // PROTECTED MEMBER FUNCTIONS
 
+void
+fiber_bundle::fiber_bundles_namespace::
+virtual_initialize_prototypes()
+{
+  // cout << endl << "Entering namespace_poset::virutal_initialize_prototypes." << endl;
+
+  // Preconditions:
+
+
+  // Body:
+
+  // Call static version defined in this class.
+
+  fiber_bundles_namespace::initialize_prototypes();
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving namespace_poset::virutal_initialize_prototypes." << endl;
+  return;
+}
+
+fiber_bundle::fiber_bundles_namespace::
+fiber_bundles_namespace()
+{
+  // Preconditions:
+
+  // Body:
+
+  _base_space_schema_poset = 0;
+  _base_space_member_prototypes_poset = 0;
+
+  // Postconditions:
+
+  ensure(!is_attached());
+
+  // Exit:
+
+  return;
+}
+
 fiber_bundle::fiber_bundles_namespace::
 fiber_bundles_namespace(namespace_poset_member* xtop, namespace_poset_member* xbottom)
     :  sheaves_namespace(xtop, xbottom)
@@ -593,6 +591,28 @@ fiber_bundles_namespace(namespace_poset_member* xtop, namespace_poset_member* xb
   // Postconditions:
 
   ensure(postcondition_of(sheaves_namespace(xtop, xbottom)));
+
+  // Exit:
+
+  return;
+}
+
+fiber_bundle::fiber_bundles_namespace::
+fiber_bundles_namespace(const fiber_bundles_namespace& xother)
+    : sheaves_namespace(xother)
+{
+  // Preconditions:
+
+  require(precondition_of(sheaves_namespace(xother)));
+
+  // Body:
+
+  _base_space_schema_poset = 0;
+  _base_space_member_prototypes_poset = 0;
+
+  // Postconditions
+
+  ensure(postcondition_of(sheaves_namespace(xother)));
 
   // Exit:
 

@@ -214,10 +214,6 @@ namespace_poset(const string& xname)
 
   // Body:
 
-  // Initialize the prototypes.
-
-  initialize_prototypes();
-
   // Create the state.
 
   new_state(xname);
@@ -565,6 +561,31 @@ initialize_id_space_prototypes()
 }
 
 // PROTECTED FUNCTIONS
+
+void
+sheaf::namespace_poset::
+virtual_initialize_prototypes()
+{
+  // cout << endl << "Entering namespace_poset::virutal_initialize_prototypes." << endl;
+
+  // Preconditions:
+
+
+  // Body:
+
+  // Call static version defined in this class.
+
+  namespace_poset::initialize_prototypes();
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving namespace_poset::virutal_initialize_prototypes." << endl;
+  return;
+}
+
 
 sheaf::namespace_poset::
 namespace_poset()
@@ -2080,6 +2101,12 @@ new_state(const string& xname)
   // member functions until construction finished
 
   disable_invariant_check();
+
+  // Initialize the prototypes; use the virtual method
+  // to ensure the prototypes for actual namespace type
+  // being created are initialized.
+
+  virtual_initialize_prototypes();
 
   // The bootstrap problem:
   //

@@ -100,6 +100,10 @@ sheaves_namespace(const string& xname)
 
   // Body:
 
+  // Create the state.
+
+  new_state(xname);
+
   // Postconditions:
 
   get_read_access();

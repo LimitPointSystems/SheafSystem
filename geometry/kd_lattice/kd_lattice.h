@@ -34,14 +34,6 @@
 #include "kd_bounding_box.h"
 #endif
 
-#ifdef USE_VTK
-
-#ifndef KD_DISPLAY_H
-#include "kd_display.h"
-#endif
-
-#endif
-
 #ifndef KD_ENUMS_H
 #include "kd_enums.h"
 #endif
@@ -232,14 +224,10 @@ private:
   ///
   e3_lite _coord_ub;
 
-#ifdef USE_VTK
-
   ///
   /// The VTK display.
   ///
-  kd_display _display;
-
-#endif
+  kd_display* _display;
 
   ///
   /// Create the base space.

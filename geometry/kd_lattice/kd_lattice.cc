@@ -27,6 +27,7 @@
 #include "index_space_iterator.h"
 #include "jim_cohort.h"
 #include "kd_bounding_box.h"
+#include "kd_display.h"
 #include "kd_edge.h"
 #include "kd_edge_cohort.h"
 #include "kd_face.h"
@@ -165,6 +166,11 @@ kd_lattice(geometry_namespace& xns, const string& xname, const e3_lite& xlb, con
 
   _auto_clear_notify_sets = true;
   _auto_triangulate = true;
+
+  // Initialize the display pointer to null;
+  // will be created later if needed.
+
+  _display = 0;
   
   // Postconditions:
 
@@ -188,6 +194,13 @@ geometry::kd_lattice::
 
     
   // Body:
+
+  // Delete the dipslay object.
+
+  if(_display != 0)
+  {
+    delete _display;
+  }
 
   // Region of interest.
 
@@ -834,8 +847,13 @@ display(bool xexploded, bool xpt_labels)
 
 #ifdef USE_VTK
 
-  _display.display_point_labels = xpt_labels;
-  _display.display(*this, xexploded);
+  if(_display == 0)
+  {
+    _display = new kd_display;
+  }
+
+  _display->display_point_labels = xpt_labels;
+  _display->display(*this, xexploded);
 
 #endif
 
@@ -861,8 +879,13 @@ display_subvolumes(bool xexploded, bool xpt_labels)
 
 #ifdef USE_VTK
 
-  _display.display_point_labels = xpt_labels;
-  _display.display_subvolumes(*this, xexploded);
+  if(_display == 0)
+  {
+    _display = new kd_display;
+  }
+
+  _display->display_point_labels = xpt_labels;
+  _display->display_subvolumes(*this, xexploded);
 
 #endif
 
