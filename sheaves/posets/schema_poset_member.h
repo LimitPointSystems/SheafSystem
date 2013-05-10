@@ -149,7 +149,6 @@ public:
   ///
   /// Creates a new jim which conforms_to the schema with path xparent_path
   /// and has additional dofs with names, types, and roles specified by xdof_specs.
-  /// Xschematize is obsolete and is ignored.
   ///
   schema_poset_member(const namespace_poset& xns,
                       const string& xname,
