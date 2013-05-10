@@ -113,7 +113,7 @@ IF(_VTK_40_ALLOW AND NOT VTK_DIR)
   # Look for UseVTK.cmake in build trees or under <prefix>/include/vtk.
   FIND_PATH(VTK_DIR
     NAMES UseVTK.cmake
-    PATH_SUFFIXES vtk-4.0 vtk
+    PATH_SUFFIXES vtk-5.6 vtk-5.10 vtk
     HINTS $ENV{VTK_DIR} 
 
     PATHS
