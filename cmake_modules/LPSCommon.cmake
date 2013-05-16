@@ -33,7 +33,7 @@ link_directories(${CMAKE_BINARY_DIR}/lib)
 
 #
 # Set some variables for the Intel coverage utilities.
-# $$TODO: Linux only for now -- hook up for Windows as well.
+# $$TODO: Linux only for now -- hook up for Windows as well (if we pursue support for Intel).
 #
 if(LINUX64INTEL)
     set(UNCOVERED_COLOR DE0829 CACHE STRING "Color for uncovered code.")
@@ -209,7 +209,6 @@ function(set_compiler_flags)
         
     if(WIN64MSVC)
        set(LPS_CXX_FLAGS "/D_USRDLL ${MP} /GR /nologo /DWIN32 /D_WINDOWS /W1 /EHsc /D_HDF5USEDLL_" CACHE STRING "C++ Compiler Flags")
-       #set(LPS_CXX_FLAGS "/D_USRDLL ${MP} /GR /nologo /DWIN32 /D_WINDOWS /W1 /EHsc ${OPTIMIZATION} /D_HDF5USEDLL_" CACHE STRING "C++ Compiler Flags")
        set(LPS_SHARED_LINKER_FLAGS "/INCREMENTAL:NO /NOLOGO /DLL /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /DYNAMICBASE /NXCOMPAT /MACHINE:X64" CACHE STRING "Linker Flags for Shared Libs")
        set(LPS_EXE_LINKER_FLAGS "/INCREMENTAL:NO /NOLOGO /DLL /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /DYNAMICBASE /NXCOMPAT /MACHINE:X64" CACHE STRING "Linker Flags for Executables")
     elseif(WIN64INTEL)
@@ -380,6 +379,7 @@ function(create_output_dirs)
     
     # Visual Studio will generate cmake_build_dir folders for the current build type.
     # Linux needs to be told.
+    
     # These uber-verbose variable names have special meaning to cmake --
     # the cmake counterpart to what GNU autotools calls a "precious" variable.
     # Not a good idea to change them to anything shorter and sweeter; so don't.
@@ -417,20 +417,12 @@ function(add_doc_targets)
                     COMMAND ${CMAKE_COMMAND} -E echo "Generating Developer Documentation ... " 
                     COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/documentation                    
                     COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/dev_doxyfile
-                    # Hack to correct a bug in doxygend. Dowxygen puts the graph legend into the output dir
-                    # but looks for it in the location from which doxygen was run.
-                    # This trick won't fly with an install, and needs to be addressed ASAP.
-                    #COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/documentation/C++/graph_legend.png ${CMAKE_BINARY_DIR}
                             )
         else()
             add_custom_target(doc ALL
                     COMMAND ${CMAKE_COMMAND} -E echo "Generating User Documentation ... "  
                     COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/documentation                     
                     COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/user_doxyfile
-                    # Hack to correct a bug in doxygend. Dowxygen puts the graph legend into the output dir
-                    # but looks for it in the location from which doxygen was run
-                    # This trick won't fly with an install, and needs to be addressed ASAP.
-                    #COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/documentation/C++/graph_legend.png ${CMAKE_BINARY_DIR}
                              )
         endif()
                 set_target_properties(doc PROPERTIES FOLDER "Documentation Targets")    
@@ -443,15 +435,18 @@ endfunction(add_doc_targets)
 #
 function(add_clean_files)
     #$$TODO: Probably need to get the location property from the targets and use it in this section.
+    
     #Define the file types to be included in the clean operation.
     
     file(GLOB HDF_FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/*.hdf)
     file(GLOB WIN_JAR_FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Outdir)/*.jar)
     file(GLOB LINUX_JAR_FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/*.jar)
+    
     # Clean up the mess left by the Intel coverage tool
     file(GLOB DYN_FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/*.dyn)
     file(GLOB DPI_FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/*.dpi)
     file(GLOB SPI_FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/*.spi)
+    
     # List of files with paths for SheafScope.jar build
     file(GLOB SCOPE_FILE_LIST ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/scopesrcs)
                 
