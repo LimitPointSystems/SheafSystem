@@ -252,7 +252,10 @@ function(add_bindings_targets)
         # Create the csharp assembly
         if(WIN64INTEL OR WIN64MSVC)
             add_custom_target(${${COMPONENT}_CSHARP_BINDING_ASSY} ALL
-                        COMMAND ${CSHARP_COMPILER} /noconfig /errorreport:prompt /target:library /out:${OUTDIR}/${${COMPONENT}_CSHARP_BINDING_ASSY}  ${CMAKE_CURRENT_BINARY_DIR}/*.cs
+                        COMMAND ${CMAKE_COMMAND} -E echo ""
+                        COMMAND ${CMAKE_COMMAND} -E echo "Creating Csharp Binding for ${PROJECT_NAME} ..."
+                        COMMAND ${CMAKE_COMMAND} -E echo ""                           
+                        COMMAND ${CSHARP_COMPILER} /nologo /noconfig /warn:1 /errorreport:prompt /target:library /out:${OUTDIR}/${${COMPONENT}_CSHARP_BINDING_ASSY}  ${CMAKE_CURRENT_BINARY_DIR}/*.cs
                             DEPENDS ${${COMPONENT}_CSHARP_BINDING_ASSY} ${${COMPONENT}_CSHARP_BINDING_LIB}
             )
         else()
