@@ -121,7 +121,7 @@ if(LINUX64INTEL OR LINUX64GNU)
 
     if(${USE_VTK})
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK ON CACHE BOOL \"Set to link against VTK libs\")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK OFF CACHE BOOL \"Set to link against VTK libs\")\n")
         file(APPEND  ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/lib/VTK CACHE STRING \"Location of VTK libs\")\n")
         file(APPEND  ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
