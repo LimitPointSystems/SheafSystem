@@ -257,13 +257,9 @@ function(set_compiler_flags)
             STRING "Flags used by the linker for executables for Debug-contracts builds")            
     
     else()
-#        if(${USE_VTK})
-#            set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} -g -DUSE_VTK " CACHE
-#                STRING "Flags used by the C++ compiler for Debug-contracts builds" FORCE)
-#        else()         
-            set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} -g" CACHE
-                STRING "Flags used by the C++ compiler for Debug-contracts builds" FORCE)
-        endif()
+       
+        set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} -g" CACHE
+            STRING "Flags used by the C++ compiler for Debug-contracts builds" FORCE)
         set(CMAKE_EXE_LINKER_FLAGS_DEBUG-CONTRACTS ${CMAKE_EXE_LINKER_FLAGS}  CACHE
             STRING "Flags used by the linker for executables for Debug-contracts builds")        
     endif()
@@ -580,7 +576,7 @@ function(add_test_targets)
         # If the target already exists, don't try to create it.
         if(NOT TARGET ${t_file})
              message(STATUS "Creating ${t_file} from ${t_cc_file}")
-             add_executable(${t_file} EXCLUDE_FROM_ALL ${t_cc_file})
+             add_executable(${t_file} ${t_cc_file})
             # Make sure the library is up to date
             if(WIN64MSVC OR WIN64INTEL)
                 # Supply the *_DLL_IMPORTS directive to preprocessor
@@ -796,7 +792,7 @@ function(export_targets)
     if("${COMPONENT}" MATCHES "TOOLS")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
 
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK OFF CACHE BOOL \"Set to link against VTK libs\")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK ${USE_VTK} CACHE BOOL \"Set to link against VTK libs\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @VTK_LIB_DIR@ CACHE PATH \"VTK library path\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
@@ -832,7 +828,7 @@ function(export_install_config_file_vars)
         file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
         if("${COMPONENT}" MATCHES "GEOMETRY")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(USE_VTK OFF CACHE BOOL \"Set to link against VTK libs\")\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(USE_VTK ${USE_VTK} CACHE BOOL \"Set to link against VTK libs\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/lib/vtk CACHE PATH \"VTK library path\" FORCE)\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
@@ -855,11 +851,10 @@ function(export_install_config_file_vars)
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(${COMPONENT}_SHARED_LIBS ${${COMPONENT}_SHARED_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative shared library list\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
         endif()
-        #$$ISSUE: The below commented-out syntax should work, but doesnt. Find out why.
-        #if(${USE_VTK} AND (${COMPONENT} MATCHES "GEOMETRY"))
-        if("${COMPONENT}" MATCHES "GEOMETRY")        
+
+        if("${COMPONENT}" MATCHES "TOOLS")        
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(USE_VTK OFF CACHE BOOL \"Set ON to link against VTK libs\")\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(USE_VTK ${USE_VTK} CACHE BOOL \"Set ON to link against VTK libs\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_INC_DIR @SHEAFSYSTEM_HOME@/include/VTK CACHE PATH \"VTK library path\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")            
