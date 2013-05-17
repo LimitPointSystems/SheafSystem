@@ -214,10 +214,6 @@ namespace_poset(const string& xname)
 
   // Body:
 
-  // Initialize the prototypes.
-
-  initialize_prototypes();
-
   // Create the state.
 
   new_state(xname);
@@ -565,6 +561,31 @@ initialize_id_space_prototypes()
 }
 
 // PROTECTED FUNCTIONS
+
+void
+sheaf::namespace_poset::
+virtual_initialize_prototypes()
+{
+  // cout << endl << "Entering namespace_poset::virutal_initialize_prototypes." << endl;
+
+  // Preconditions:
+
+
+  // Body:
+
+  // Call static version defined in this class.
+
+  namespace_poset::initialize_prototypes();
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving namespace_poset::virutal_initialize_prototypes." << endl;
+  return;
+}
+
 
 sheaf::namespace_poset::
 namespace_poset()
@@ -1197,24 +1218,23 @@ member_poset(const scoped_index& xid, bool xauto_access) const
 
 sheaf::poset_state_handle&
 sheaf::namespace_poset::
-member_poset(const string& xname, bool xauto_access) const
+member_poset(const poset_path& xpath, bool xauto_access) const
 {
-
   // Preconditions:
 
   require(xauto_access || state_is_read_accessible());
-  require(contains_member(xname, xauto_access));
+  require(contains_member(xpath.poset_name(), xauto_access));
 
   if(xauto_access)
   {
     get_read_access();
   }
 
-  require(is_jim(xname));
+  require(is_jim(xpath.poset_name()));
 
   // Body:
 
-  poset_state_handle& result = member_poset(member_id(xname, false), false);
+  poset_state_handle& result = member_poset(member_id(xpath.poset_name(), false), false);
 
   // Postconditions:
 
@@ -1222,28 +1242,6 @@ member_poset(const string& xname, bool xauto_access) const
   {
     release_access();
   }
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::poset_state_handle&
-sheaf::namespace_poset::
-member_poset(const poset_path& xpath, bool xauto_access) const
-{
-
-  // Preconditions:
-
-  require(precondition_of(member_poset(xpath.poset_name(), xauto_access)));
-
-  // Body:
-
-  poset_state_handle& result = member_poset(xpath.poset_name(), xauto_access);
-
-  // Postconditions:
-
-  ensure(postcondition_of(member_poset(xpath.poset_name(), xauto_access)));
 
   // Exit:
 
@@ -1343,7 +1341,7 @@ contains_poset(const scoped_index& xid, bool xauto_access) const
 
 bool
 sheaf::namespace_poset::
-contains_poset(const string& xname, bool xauto_access) const
+contains_poset(const poset_path& xpath, bool xauto_access) const
 {
   bool result;
 
@@ -1358,34 +1356,13 @@ contains_poset(const string& xname, bool xauto_access) const
     get_read_access();
   }
 
-  result = !xname.empty() && contains_member(xname, false) && is_jim(xname);
+  result =
+    !xpath.poset_name().empty() && contains_member(xpath.poset_name(), false) && is_jim(xpath.poset_name());
 
   if(xauto_access)
   {
     release_access();
   }
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-bool
-sheaf::namespace_poset::
-contains_poset(const poset_path& xpath, bool xauto_access) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-
-  // Body:
-
-  result =
-    !xpath.poset_name().empty() && contains_poset(xpath.poset_name(), xauto_access);
 
   // Postconditions:
 
@@ -2124,6 +2101,12 @@ new_state(const string& xname)
   // member functions until construction finished
 
   disable_invariant_check();
+
+  // Initialize the prototypes; use the virtual method
+  // to ensure the prototypes for actual namespace type
+  // being created are initialized.
+
+  virtual_initialize_prototypes();
 
   // The bootstrap problem:
   //

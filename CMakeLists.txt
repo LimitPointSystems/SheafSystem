@@ -75,7 +75,7 @@ endif()
 #
 if(${CMAKE_GENERATOR} MATCHES "Visual Studio 10 Win64" OR ${CMAKE_GENERATOR} MATCHES "Visual Studio 11 Win64")
     set(OUTDIR "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Configuration)" CACHE STRING "Visual Studio Output Directory")
-else()
+elseif(${CMAKE_GENERATOR} MATCHES "Visual Studio 9 Win64" ) # VS 2008 
     set(OUTDIR "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Outdir)" CACHE STRING "Visual Studio Output Directory")
 endif()
  
@@ -97,7 +97,7 @@ if(LINUX64INTEL OR LINUX64GNU)
     # All forward slashes in path
     file(TO_CMAKE_PATH $ENV{HOME} HOME_DIR)
     
-    install(DIRECTORY ${HOME_DIR}/LPS/prerequisites/vtk/lib/vtk-5.6/ DESTINATION lib/vtk/ USE_SOURCE_PERMISSIONS PATTERN "lib*"
+    install(DIRECTORY ${VTK_LIB_DIR}/ DESTINATION lib/vtk/ USE_SOURCE_PERMISSIONS PATTERN "lib*"
     PERMISSIONS
     OWNER_WRITE OWNER_READ OWNER_EXECUTE
     GROUP_READ GROUP_EXECUTE
@@ -109,41 +109,40 @@ if(LINUX64INTEL OR LINUX64GNU)
     PATTERN "CMake" EXCLUDE
     PATTERN "testing" EXCLUDE)
     
-    install(DIRECTORY ${HOME_DIR}/LPS/prerequisites/hdf/include/ DESTINATION include PATTERN "*.h"
+    install(DIRECTORY ${HDF5_INCLUDE_DIR}/ DESTINATION include PATTERN "*.h"
     PERMISSIONS
     OWNER_WRITE OWNER_READ OWNER_EXECUTE
     GROUP_READ WORLD_READ)
     
-    install(FILES ${HOME_DIR}/LPS/prerequisites/tetgen/include/tetgen.h DESTINATION include
+    install(FILES ${TETGEN_INC_DIR}/tetgen.h DESTINATION include
     PERMISSIONS
     OWNER_WRITE OWNER_READ OWNER_EXECUTE
     GROUP_READ WORLD_READ)
 
     if(${USE_VTK})
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK ON CACHE BOOL \"Set to link against VTK libs\")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK OFF CACHE BOOL \"Set to link against VTK libs\")\n")
         file(APPEND  ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/lib/VTK CACHE STRING \"Location of VTK libs\")\n")
         file(APPEND  ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        install(DIRECTORY ${HOME_DIR}/LPS/prerequisites/VTK/include/vtk-5.6/ DESTINATION include/VTK PATTERN "*.h"
+        install(DIRECTORY ${VTK_INC_DIRS} DESTINATION include/VTK PATTERN "*.h"
         PERMISSIONS
         OWNER_WRITE OWNER_READ OWNER_EXECUTE
         GROUP_READ WORLD_READ)
     endif()             
 else()
-    # All forward slashes in path
-    file(TO_CMAKE_PATH $ENV{USERPROFILE} HOME_DIR)
-    file(GLOB VTK_IMPORT_LIBS ${HOME_DIR}/LPS/prerequisites/VTK/lib/vtk-5.6/*.lib)
-    file(GLOB VTK_DYNAMIC_LIBS ${HOME_DIR}/LPS/prerequisites/VTK/bin/*.dll)
+
+    file(GLOB VTK_IMPORT_LIBS ${VTK_LIB_DIR}/*.lib)
+    file(GLOB VTK_DYNAMIC_LIBS ${VTK_BIN_DIR}/*.dll)
     
-    install(DIRECTORY ${HOME_DIR}/LPS/prerequisites/VTK/include/vtk-5.6/ DESTINATION include/VTK PATTERN "*.h"
+    install(DIRECTORY ${VTK_INC_DIRS}/ DESTINATION include/VTK PATTERN "*.h"
     PERMISSIONS
     OWNER_WRITE OWNER_READ OWNER_EXECUTE
     GROUP_READ WORLD_READ)
     
-    file(GLOB HDF_INCS ${HOME_DIR}/LPS/prerequisites/hdf-static/include/*.h)
+    file(GLOB HDF_INCS ${HDF5_INCLUDE_DIR}/*.h)
     # Tetgen header
-    install(FILES ${HOME_DIR}/LPS/prerequisites/tetgen/include/tetgen.h DESTINATION include)  
+    install(FILES ${TETGEN_INC_DIR}/tetgen.h DESTINATION include)  
     # Import libs
     install(FILES ${VTK_IMPORT_LIBS} DESTINATION lib/VTK/)
     # Runtime libs

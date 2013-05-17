@@ -116,7 +116,7 @@ if(BUILD_BINDINGS)
     find_package(JMF REQUIRED)
         if(JMF_FOUND)
             configure_file(${CMAKE_MODULE_PATH}/jmf_definitions.cmake.in ${CMAKE_BINARY_DIR}/jmf_definitions.cmake)
-            include(${CMAKE_BINARY_DIR}/jmf_definitions.cmake)
+           include(${CMAKE_BINARY_DIR}/jmf_definitions.cmake)
         endif()   
 endif()
 

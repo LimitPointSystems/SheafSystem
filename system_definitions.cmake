@@ -15,7 +15,6 @@
 # This is only relevant for releases. 0.0.0.0 is chosen here
 # simply as a stub.
 #
-#set(LIB_VERSION 0.0.0.0 CACHE STRING "Library version number for release purposes" FORCE)
 set(LIB_VERSION 0.0.0.0 CACHE STRING "Library version number for release purposes")
 mark_as_advanced(LIB_VERSION)
 
@@ -108,7 +107,7 @@ set(BUILD_BINDINGS NO CACHE BOOL "Toggle build of language bindings.")
 #
 # True if we want geometry to link against VTK
 #
-#set(USE_VTK ON CACHE BOOL "Set to link geometry against VTK libs.")
+set(USE_VTK OFF CACHE BOOL "Set to link geometry against VTK libs.")
 
 #
 # Toggle multi-process compilation in win32.

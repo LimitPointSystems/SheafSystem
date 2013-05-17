@@ -48,16 +48,6 @@ public:
 public:
 
   ///
-  /// Default constructor; creates an unattached handle.
-  ///
-  geometry_namespace();
-
-  ///
-  /// Copy constructor; attaches this to the same state as xother
-  ///
-  geometry_namespace(const geometry_namespace& xother);
-
-  ///
   /// Creates a geometry namespace with name xname.
   ///
   geometry_namespace(const string& xname);
@@ -68,6 +58,16 @@ public:
   virtual ~geometry_namespace();
 
 protected:
+
+  ///
+  /// Default constructor; creates an unattached handle.
+  ///
+  geometry_namespace();
+
+  ///
+  /// Copy constructor; attaches this to the same state as xother
+  ///
+  geometry_namespace(const geometry_namespace& xother);
 
 private:
 

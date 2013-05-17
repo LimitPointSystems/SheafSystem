@@ -57,16 +57,6 @@ class SHEAF_DLL_SPEC fiber_bundles_namespace : public sheaves_namespace
 public:
 
   ///
-  /// Default constructor; creates an unattached handle.
-  ///
-  fiber_bundles_namespace();
-
-  ///
-  /// Copy constructor; attaches this to the same state as xother
-  ///
-  fiber_bundles_namespace(const fiber_bundles_namespace& xother);
-
-  ///
   /// Creates a fiber bundles namespace with name xname.
   ///
   fiber_bundles_namespace(const string& xname);
@@ -159,10 +149,25 @@ public:
 protected:
 
   ///
+  /// Initialize all the prototypes needed by various factory methods;
+  /// virtual version.
+  ///
+  virtual void virtual_initialize_prototypes();
+
+  ///
+  /// Default constructor; creates an unattached handle.
+  ///
+  fiber_bundles_namespace();
+
+  ///
   /// Covariant constructor.
   ///
-  fiber_bundles_namespace(namespace_poset_member* xtop,
-                          namespace_poset_member* xbottom);
+  fiber_bundles_namespace(namespace_poset_member* xtop, namespace_poset_member* xbottom);
+
+  ///
+  /// Copy constructor; attaches this to the same state as xother
+  ///
+  fiber_bundles_namespace(const fiber_bundles_namespace& xother);
 
 private:
 
@@ -322,7 +327,7 @@ public:
 
   ///
   /// Creates a new section space schema and member in
-  /// namespace xns with path xsection_space_schema_path and repreentation, base space and
+  /// namespace xns with path xsection_space_schema_path and representation, base space and
   /// fiber space specified by xrep_path, xbase_space_path, and xfiber_space_path,
   /// respectively. Note that the objects referred to by xrep_path,
   /// xbase_space_path, and xfiber_space_path must already exist and that
