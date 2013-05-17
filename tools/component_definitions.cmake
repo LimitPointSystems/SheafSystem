@@ -224,13 +224,21 @@ function(add_bindings_targets)
             set(parent_classpath ${FIELDS_CLASSPATH} ${VTK_JAR} ${JMF_JAR})
             set(this_classpath "${${COMPONENT}_CLASSPATH}")
             add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
-                           DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${FIELDS_JAVA_BINDING_JAR}
-                           set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Component Binding Jars")                           
-                           COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
-                           COMMAND ${JAVAC_EXECUTABLE} -classpath "${FIELDS_CLASSPATH}" -d . *.java
-                           COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                           COMMAND ${JAR_EXECUTABLE} cvf ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
-            )
+                               DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${FIELDS_JAVA_BINDING_JAR}
+                               set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Component Binding Jars")                           
+                               COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
+                               COMMAND ${JAVAC_EXECUTABLE} -classpath "${FIELDS_CLASSPATH}" -d . *.java
+                               COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
+                               COMMAND ${JAR_EXECUTABLE} cvf ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
+                             )
+                             
+                        # Java documentation
+            add_custom_target(${PROJECT_NAME}-java-docs ALL
+                                COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${FIELDS_CLASSPATH}" 
+                                -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
+                                *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                                DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
+                             )                 
         else()
             set(${COMPONENT}_CLASSPATH ${FIELDS_CLASSPATH} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR} ${VTK_JAR} ${JMF_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
             # The default list item separator in cmake is ";". If Linux, then exchange ";" for  the UNIX style ":"
@@ -241,12 +249,20 @@ function(add_bindings_targets)
             # and store the result in parent_classpath.
             string(REGEX REPLACE ";" ":" parent_classpath "${FIELDS_CLASSPATH}")
             add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
-                           DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${FIELDS_JAVA_BINDING_JAR}
-                           COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
-                           COMMAND ${JAVAC_EXECUTABLE} -classpath "${parent_classpath}" -d . *.java
-                           COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                           COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
-            ) 
+                               DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${FIELDS_JAVA_BINDING_JAR}
+                               COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
+                               COMMAND ${JAVAC_EXECUTABLE} -classpath "${parent_classpath}" -d . *.java
+                               COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
+                               COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
+                             )
+            
+                    # Java documentation
+            add_custom_target(${PROJECT_NAME}-java-docs ALL
+                                COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${parent_classpath}" 
+                                -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
+                                *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                                DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
+                             )     
         endif()
 
         set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Library Jars") 
@@ -258,55 +274,48 @@ function(add_bindings_targets)
          # Build the SheafScope jar
         if(WIN64INTEL OR WIN64MSVC)
              add_custom_target(SheafScope.jar ALL 
-                           DEPENDS ${PROJECT_NAME}_java_binding.jar 
-                           COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}
-                           COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
-                           COMMAND ${JAVAC_EXECUTABLE} -classpath "${this_classpath}" -g -d ${LIB_JAR_DIR} @${CMAKE_BINARY_DIR}/scopesrcs
-        	               COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/common/gui/resources
-        	               COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/viewer/resources/docs
-       	                   COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/SheafScope/resources/docs
-    
-        	               COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/common/gui/resources      ${LIB_JAR_DIR}/tools/common/gui/resources
-        	               COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/viewer/resources          ${LIB_JAR_DIR}/tools/viewer/resources
-        	               COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/viewer/resources/docs     ${LIB_JAR_DIR}/tools/viewer/resources/docs
-        	               COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources      ${LIB_JAR_DIR}/tools/SheafScope/resources
-        	               COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources/docs ${LIB_JAR_DIR}/tools/SheafScope/resources/docs 
-    
-                           COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                          COMMAND ${JAR_EXECUTABLE} cvmf ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/manifest.txt ${OUTDIR}/SheafScope.jar  -C ${LIB_JAR_DIR} .
-            )
+                                 DEPENDS ${PROJECT_NAME}_java_binding.jar 
+                                 COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}
+                                 COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
+                                 COMMAND ${JAVAC_EXECUTABLE} -classpath "${this_classpath}" -g -d ${LIB_JAR_DIR} @${CMAKE_BINARY_DIR}/scopesrcs
+            	                 COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/common/gui/resources
+            	                 COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/viewer/resources/docs
+           	                     COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/SheafScope/resources/docs
+        
+            	                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/common/gui/resources      ${LIB_JAR_DIR}/tools/common/gui/resources
+            	                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/viewer/resources          ${LIB_JAR_DIR}/tools/viewer/resources
+            	                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/viewer/resources/docs     ${LIB_JAR_DIR}/tools/viewer/resources/docs
+            	                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources      ${LIB_JAR_DIR}/tools/SheafScope/resources
+            	                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources/docs ${LIB_JAR_DIR}/tools/SheafScope/resources/docs 
+        
+                                 COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
+                                 COMMAND ${JAR_EXECUTABLE} cvmf ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/manifest.txt ${OUTDIR}/SheafScope.jar  -C ${LIB_JAR_DIR} .
+                              )
         else()
          # Build the SheafScope jar
              add_custom_target(SheafScope.jar ALL 
-                 DEPENDS ${PROJECT_NAME}_java_binding.jar 
-                 COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}
-                 COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
-                 COMMAND ${JAVAC_EXECUTABLE} -classpath "${this_classpath}" -g -d ${LIB_JAR_DIR} @${CMAKE_BINARY_DIR}/scopesrcs
-                 COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/common/gui/resources
-                 COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/viewer/resources/docs
-                 COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/SheafScope/resources/docs
-    
-                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/common/gui/resources      ${LIB_JAR_DIR}/tools/common/gui/resources
-                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/viewer/resources          ${LIB_JAR_DIR}/tools/viewer/resources
-                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/viewer/resources/docs     ${LIB_JAR_DIR}/tools/viewer/resources/docs
-                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources      ${LIB_JAR_DIR}/tools/SheafScope/resources
-                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources/docs ${LIB_JAR_DIR}/tools/SheafScope/resources/docs 
-    
-                 COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                 COMMAND ${JAR_EXECUTABLE} cvmf ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/manifest.txt ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/SheafScope.jar -C ${LIB_JAR_DIR} .
-                 )
+                                 DEPENDS ${PROJECT_NAME}_java_binding.jar 
+                                 COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}
+                                 COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
+                                 COMMAND ${JAVAC_EXECUTABLE} -classpath "${this_classpath}" -g -d ${LIB_JAR_DIR} @${CMAKE_BINARY_DIR}/scopesrcs
+                                 COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/common/gui/resources
+                                 COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/viewer/resources/docs
+                                 COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/SheafScope/resources/docs
+                    
+                                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/common/gui/resources      ${LIB_JAR_DIR}/tools/common/gui/resources
+                                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/viewer/resources          ${LIB_JAR_DIR}/tools/viewer/resources
+                                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/viewer/resources/docs     ${LIB_JAR_DIR}/tools/viewer/resources/docs
+                                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources      ${LIB_JAR_DIR}/tools/SheafScope/resources
+                                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources/docs ${LIB_JAR_DIR}/tools/SheafScope/resources/docs 
+                    
+                                 COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
+                                 COMMAND ${JAR_EXECUTABLE} cvmf ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/manifest.txt ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/SheafScope.jar -C ${LIB_JAR_DIR} .
+                              )
         endif()
         
         set_target_properties(SheafScope.jar PROPERTIES FOLDER "Executable Jars") 
-                               
-        # Java documentation
-        add_custom_target(${PROJECT_NAME}-java-docs EXCLUDE_FROM_ALL
-                    COMMAND ${JDK_BIN_DIR}/javadoc -quiet -classpath .:${${COMPONENT}_CLASSPATH} 
-                    -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
-                    -sourcepath ${CMAKE_CURRENT_BINARY_DIR} bindings.java *.java
-                    DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB})
         set_target_properties(${PROJECT_NAME}-java-docs PROPERTIES FOLDER "Documentation Targets")
-        
+     
         add_dependencies(${PROJECT_NAME}-bindings ${PROJECT_NAME}_java_binding.jar SheafScope ${PROJECT_NAME}-python-binding)
         
         # Guard these until we can get the VS solution explorer aesthetic issues sorted
