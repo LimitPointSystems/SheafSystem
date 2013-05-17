@@ -71,9 +71,7 @@ if(NOT VTK_FOUND)
                    HINTS $ENV{HOME}/LPS/prerequisites/vtk $ENV{USERPROFILE}/LPS/prerequisites/vtk/lib)
 endif()
 
-    get_filename_component(__TMP_DIR "${VTK_LIB_DIR}" PATH)
-    get_filename_component(__TMP_DIR "${__TMP_DIR}" PATH)
-    set(VTK_BIN_DIR "${__TMP_DIR}/bin" CACHE PATH "VTK Runtime libraries location.")
+
 
   # Look for UseVTK.cmake in build trees or under <prefix>/include/vtk.
   find_path(VTK_LIB_DIR
@@ -102,6 +100,10 @@ endif()
     # Help the user find it if we cannot.
     DOC "The ${VTK_DIR_DESCRIPTION}"
     )
+
+get_filename_component(__TMP_DIR "${VTK_LIB_DIR}" PATH)
+get_filename_component(__TMP_DIR "${__TMP_DIR}" PATH)
+set(VTK_BIN_DIR "${__TMP_DIR}/bin" CACHE PATH "VTK Runtime libraries location.")
 
 #-----------------------------------------------------------------------------
 if(VTK_FOUND)

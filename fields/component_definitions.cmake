@@ -75,9 +75,7 @@ set(${COMPONENT}_IPATHS ${GEOMETRY_IPATHS} ${${COMPONENT}_IPATH} CACHE STRING " 
 #
 # Specify component prerequisite include directories.
 #
-
 include_directories(${GEOMETRY_IPATHS})
-#include_directories(${${COMPONENT}_IPATHS})
 
 if(${USE_VTK})
     include_directories(${VTK_INC_DIRS})
@@ -104,13 +102,6 @@ function(add_library_targets)
         link_directories(${${COMPONENT}_OUTPUT_DIR})
     
         add_library(${${COMPONENT}_DYNAMIC_LIB} SHARED ${${COMPONENT}_SRCS})
-#        if(${USE_VTK})
-#            target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${GEOMETRY_IMPORT_LIBS} ${VTK_LIBS}) 
-#            target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} LINK_PRIVATE ${TETGEN_LIB}) 
-#        else()
-#            target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${GEOMETRY_IMPORT_LIBS})        
-#            target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} LINK_PRIVATE ${TETGEN_LIB}) 
-#        endif()  
 
         if(${USE_VTK})
             target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${GEOMETRY_IMPORT_LIBS}) 

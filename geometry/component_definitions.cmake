@@ -377,6 +377,5 @@ function(add_install_target)
         endif()
 
         install(FILES ${${COMPONENT}_INCS} DESTINATION include) 
-     #   install(FILES ${STD_HEADERS} DESTINATION include)
                          
 endfunction(add_install_target)
