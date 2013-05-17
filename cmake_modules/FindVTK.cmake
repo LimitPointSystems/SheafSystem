@@ -77,7 +77,7 @@ endif()
   find_path(VTK_LIB_DIR
     NAMES UseVTK.cmake
     PATH_SUFFIXES vtk-5.6 vtk-5.10 vtk
-    HINTS $ENV{VTK_LIB_DIR} $ENV{HOME}/LPS/prerequisites/vtk $ENV{USERPROFILE}/LPS/prerequisites/vtk/lib
+    HINTS $ENV{VTK_LIB_DIR} $ENV{HOME}/LPS/prerequisites/vtk/lib $ENV{USERPROFILE}/LPS/prerequisites/vtk/lib
 
     PATHS
 

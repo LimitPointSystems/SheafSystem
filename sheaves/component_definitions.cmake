@@ -218,10 +218,10 @@ function(add_bindings_targets)
 
         # Java documentation
         add_custom_target(${PROJECT_NAME}-java-docs ALL
-                    COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${${COMPONENT}_CLASSPATH}" 
+                    COMMAND ${JDK_BIN_DIR}/javadoc -quiet -windowtitle "${PROJECT_NAME} documentation" -classpath "${${COMPONENT}_CLASSPATH}" 
                     -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
                     *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-                    DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB}
+                    DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
                     )
         set_target_properties(${PROJECT_NAME}-java-docs PROPERTIES FOLDER "Documentation Targets")
 

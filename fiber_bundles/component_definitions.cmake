@@ -199,11 +199,12 @@ function(add_bindings_targets)
         mark_as_advanced(FORCE ${COMPONENT}_CLASSPATH) 
 
         # Java documentation
-        add_custom_target(${PROJECT_NAME}-java-docs EXCLUDE_FROM_ALL
-            COMMAND ${JDK_BIN_DIR}/javadoc -quiet -classpath .:${${COMPONENT}_CLASSPATH} 
-            -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
-            -sourcepath ${CMAKE_CURRENT_BINARY_DIR} bindings.java *.java
-            DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB})
+        add_custom_target(${PROJECT_NAME}-java-docs ALL
+                    COMMAND ${JDK_BIN_DIR}/javadoc -quiet -windowtitle "${PROJECT_NAME} documentation" -classpath "${SHEAVES_CLASSPATH}" 
+                    -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
+                    *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                    DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
+                    )
         set_target_properties(${PROJECT_NAME}-java-docs PROPERTIES FOLDER "Documentation Targets")
 
         #
