@@ -244,11 +244,15 @@ function(set_compiler_flags)
     if(WIN64MSVC OR WIN64INTEL)
  
         if(${USE_VTK})     
-            set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUGGING=1\" /MDd /LDd /Od /DUSE_VTK" CACHE
+            set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od /DUSE_VTK" CACHE
                 STRING "Flags used by the C++ compiler for Debug-contracts builds" FORCE)
+            #set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUGGING=1\" /MDd /LDd /Od /DUSE_VTK" CACHE            
+            #    STRING "Flags used by the C++ compiler for Debug-contracts builds" FORCE)
         else()
-             set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUGGING=1\" /MDd /LDd /Od" CACHE
+             set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od" CACHE
                 STRING "Flags used by the C++ compiler for Debug-contracts builds" FORCE)       
+             #set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUGGING=1\" /MDd /LDd /Od" CACHE
+             #   STRING "Flags used by the C++ compiler for Debug-contracts builds" FORCE)  
         endif()
         
         set(CMAKE_SHARED_LINKER_FLAGS_DEBUG-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG" CACHE
@@ -278,12 +282,16 @@ function(set_compiler_flags)
     # Configuration specific flags 
     if(WIN64MSVC OR WIN64INTEL)
     
-        if(${USE_VTK}) 
-            set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUGGING=1\" /MDd /LDd /Od /DUSE_VTK /DNDEBUG" CACHE
+        if(${USE_VTK})
+             set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od /DUSE_VTK /DNDEBUG" CACHE
                 STRING "Flags used by the C++ compiler for Debug-no-contracts builds" FORCE)
-         else()   
-            set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUGGING=1\" /MDd /LDd /Od /DNDEBUG" CACHE
-                STRING "Flags used by the C++ compiler for Debug-no-contracts builds" FORCE)
+            #set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUGGING=1\" /MDd /LDd /Od /DUSE_VTK /DNDEBUG" CACHE
+            #    STRING "Flags used by the C++ compiler for Debug-no-contracts builds" FORCE)
+         else()
+            set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od /DNDEBUG" CACHE
+                STRING "Flags used by the C++ compiler for Debug-no-contracts builds" FORCE)            
+            #set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUGGING=1\" /MDd /LDd /Od /DNDEBUG" CACHE
+            #    STRING "Flags used by the C++ compiler for Debug-no-contracts builds" FORCE)
          endif()
     
      set(CMAKE_SHARED_LINKER_FLAGS_DEBUG-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG" CACHE

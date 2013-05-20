@@ -102,7 +102,7 @@ function(add_library_targets)
         link_directories(${${COMPONENT}_OUTPUT_DIR})
     
         add_library(${${COMPONENT}_DYNAMIC_LIB} SHARED ${${COMPONENT}_SRCS})
-        add_dependencies(${${COMPONENT}_DYNAMIC_LIB} ${GEOMETRY_IMPORT_LIBS})
+      #  add_dependencies(${${COMPONENT}_DYNAMIC_LIB} ${GEOMETRY_IMPORT_LIBS})
         
         if(${USE_VTK})
             target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${GEOMETRY_IMPORT_LIBS}) 
