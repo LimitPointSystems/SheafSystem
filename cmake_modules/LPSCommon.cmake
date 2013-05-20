@@ -244,11 +244,15 @@ function(set_compiler_flags)
     if(WIN64MSVC OR WIN64INTEL)
  
         if(${USE_VTK})     
-            set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUGGING=1\" /MDd /LDd /Od /DUSE_VTK" CACHE
+            set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od /DUSE_VTK" CACHE
                 STRING "Flags used by the C++ compiler for Debug-contracts builds" FORCE)
+            #set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUGGING=1\" /MDd /LDd /Od /DUSE_VTK" CACHE            
+            #    STRING "Flags used by the C++ compiler for Debug-contracts builds" FORCE)
         else()
-             set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUGGING=1\" /MDd /LDd /Od" CACHE
+             set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od" CACHE
                 STRING "Flags used by the C++ compiler for Debug-contracts builds" FORCE)       
+             #set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUGGING=1\" /MDd /LDd /Od" CACHE
+             #   STRING "Flags used by the C++ compiler for Debug-contracts builds" FORCE)  
         endif()
         
         set(CMAKE_SHARED_LINKER_FLAGS_DEBUG-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG" CACHE
@@ -278,12 +282,16 @@ function(set_compiler_flags)
     # Configuration specific flags 
     if(WIN64MSVC OR WIN64INTEL)
     
-        if(${USE_VTK}) 
-            set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUGGING=1\" /MDd /LDd /Od /DUSE_VTK /DNDEBUG" CACHE
+        if(${USE_VTK})
+             set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od /DUSE_VTK /DNDEBUG" CACHE
                 STRING "Flags used by the C++ compiler for Debug-no-contracts builds" FORCE)
-         else()   
-            set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUGGING=1\" /MDd /LDd /Od /DNDEBUG" CACHE
-                STRING "Flags used by the C++ compiler for Debug-no-contracts builds" FORCE)
+            #set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUGGING=1\" /MDd /LDd /Od /DUSE_VTK /DNDEBUG" CACHE
+            #    STRING "Flags used by the C++ compiler for Debug-no-contracts builds" FORCE)
+         else()
+            set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od /DNDEBUG" CACHE
+                STRING "Flags used by the C++ compiler for Debug-no-contracts builds" FORCE)            
+            #set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_SECURE_SCL=1\" /D\"_HAS_ITERATOR_DEBUGGING=1\" /MDd /LDd /Od /DNDEBUG" CACHE
+            #    STRING "Flags used by the C++ compiler for Debug-no-contracts builds" FORCE)
          endif()
     
      set(CMAKE_SHARED_LINKER_FLAGS_DEBUG-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG" CACHE
@@ -309,10 +317,10 @@ function(set_compiler_flags)
     if(WIN64MSVC OR WIN64INTEL)
     
         if(${USE_VTK})
-            set(CMAKE_CXX_FLAGS_RELEASE-CONTRACTS "${LPS_CXX_FLAGS} /D\"_SECURE_SCL=0\" /DUSE_VTK /MD /Ox " CACHE
+            set(CMAKE_CXX_FLAGS_RELEASE-CONTRACTS "${LPS_CXX_FLAGS} /D\"_SECURE_SCL=0\" /DUSE_VTK /MD /LD /Ox " CACHE
                 STRING "Flags used by the C++ compiler for Release-contracts builds" FORCE)
         else()   
-            set(CMAKE_CXX_FLAGS_RELEASE-CONTRACTS "${LPS_CXX_FLAGS} /D\"_SECURE_SCL=0\" /MD /Ox " CACHE
+            set(CMAKE_CXX_FLAGS_RELEASE-CONTRACTS "${LPS_CXX_FLAGS} /D\"_SECURE_SCL=0\" /MD /LD /Ox " CACHE
                 STRING "Flags used by the C++ compiler for Release-contracts builds" FORCE)
         endif()
     
@@ -341,10 +349,10 @@ function(set_compiler_flags)
     if(WIN64MSVC OR WIN64INTEL)
     
        if(${USE_VTK})
-            set(CMAKE_CXX_FLAGS_RELEASE-NO-CONTRACTS "${LPS_CXX_FLAGS} /D\"_SECURE_SCL=0\" /MD /Ox /DUSE_VTK /DNDEBUG" CACHE
+            set(CMAKE_CXX_FLAGS_RELEASE-NO-CONTRACTS "${LPS_CXX_FLAGS} /D\"_SECURE_SCL=0\" /MD /LD /Ox /DUSE_VTK /DNDEBUG" CACHE
                 STRING "Flags used by the C++ compiler for Release-no-contracts builds" FORCE)
        else()        
-            set(CMAKE_CXX_FLAGS_RELEASE-NO-CONTRACTS "${LPS_CXX_FLAGS} /D\"_SECURE_SCL=0\" /MD /Ox /DNDEBUG" CACHE
+            set(CMAKE_CXX_FLAGS_RELEASE-NO-CONTRACTS "${LPS_CXX_FLAGS} /D\"_SECURE_SCL=0\" /MD /LD /Ox /DNDEBUG" CACHE
                 STRING "Flags used by the C++ compiler for Release-no-contracts builds" FORCE)
       endif()     
                 
@@ -811,6 +819,8 @@ function(export_targets)
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")        
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(TETGEN_INCLUDE_DIR ${TETGEN_INC_DIR} CACHE STRING \"Tetgen Include Path \")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(JMF_JAR ${JMF_JAR} CACHE STRING \"JMF jar location\")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")        
     endif()             
 endfunction(export_targets)
 
@@ -867,7 +877,9 @@ function(export_install_config_file_vars)
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/lib/vtk CACHE PATH \"VTK library path\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_LIBS ${VTK_LIBS} CACHE STRING \"VTK Libraries\")\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")   
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(JMF_JAR ${JMF_JAR} CACHE STRING \"JMF jar location\")\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
         endif()             
     endif()
     file(APPEND  ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
