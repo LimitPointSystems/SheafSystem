@@ -15,7 +15,6 @@
 # This is only relevant for releases. 0.0.0.0 is chosen here
 # simply as a stub.
 #
-#set(LIB_VERSION 0.0.0.0 CACHE STRING "Library version number for release purposes" FORCE)
 set(LIB_VERSION 0.0.0.0 CACHE STRING "Library version number for release purposes")
 mark_as_advanced(LIB_VERSION)
 
@@ -269,7 +268,7 @@ function(set_optimization_level)
         elseif(${OPTIMIZATION_LEVEL} EQUAL 2)
             set(OPTIMIZATION "/O2" PARENT_SCOPE)
         elseif(${OPTIMIZATION_LEVEL} EQUAL 3)
-            set(OPTIMIZATION "/GL" PARENT_SCOPE)    
+            set(OPTIMIZATION "/Ox" PARENT_SCOPE)    
         endif()
     endif()    
 

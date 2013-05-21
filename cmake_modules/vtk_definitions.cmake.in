@@ -20,6 +20,11 @@ set(VTK_INC_DIRS @VTK_INCLUDE_DIRS@ CACHE STRING "Include directories for VTK.")
 set(VTK_LIB_DIR @VTK_LIBRARY_DIRS@ CACHE STRING "Link directories for VTK.")
 set(VTK_JAR @VTK_LIBRARY_DIRS@/java/vtk.jar CACHE STRING "Jar file for VTK.")
 
-set(VTK_LIBS vtkCommon vtkCommonJava vtkDICOMParser vtkexpat vtkFiltering vtkGraphics vtkHybrid vtkIO vtkImaging vtkRendering vtkfreetype vtkftgl vtkjpeg vtkpng vtktiff vtkzlib CACHE STRING "VTK libs list")
+# Essential libs. Full "deprecated" list commented out below.
+set(VTK_LIBS vtkCommon vtkCommonJava vtkFiltering vtkGraphics vtkHybrid vtkRendering CACHE STRING "VTK libs list")
+
+#set(VTK_LIBS vtkCommon vtkCommonJava vtkDICOMParser vtkexpat vtkFiltering vtkGraphics vtkHybrid vtkIO 
+#vtkImaging vtkRendering vtkfreetype vtkftgl vtkjpeg vtkpng vtktiff vtkzlib CACHE STRING "VTK libs list")
+
 
 

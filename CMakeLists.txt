@@ -132,8 +132,12 @@ if(LINUX64INTEL OR LINUX64GNU)
     endif()             
 else()
 
-    file(GLOB VTK_IMPORT_LIBS ${VTK_LIB_DIR}/*.lib)
-    file(GLOB VTK_DYNAMIC_LIBS ${VTK_BIN_DIR}/*.dll)
+    foreach(lib ${VTK_LIBS})
+        install(FILES ${VTK_BIN_DIR}/${lib}.dll DESTINATION bin/VTK/)
+        install(FILES ${VTK_LIB_DIR}/${lib}.lib DESTINATION lib/VTK/)    
+    #    file(GLOB VTK_IMPORT_LIBS ${VTK_LIB_DIR}/*.lib)
+    #    file(GLOB VTK_DYNAMIC_LIBS ${VTK_BIN_DIR}/*.dll)
+    endforeach()
     
     install(DIRECTORY ${VTK_INC_DIRS}/ DESTINATION include/VTK PATTERN "*.h"
     PERMISSIONS
@@ -144,10 +148,11 @@ else()
     # Tetgen header
     install(FILES ${TETGEN_INC_DIR}/tetgen.h DESTINATION include)  
     # Import libs
-    install(FILES ${VTK_IMPORT_LIBS} DESTINATION lib/VTK/)
+#    install(FILES ${VTK_IMPORT_LIBS} DESTINATION lib/VTK/)
     # Runtime libs
-    install(FILES ${VTK_DYNAMIC_LIBS} DESTINATION bin/VTK/)
+#    install(FILES ${VTK_DYNAMIC_LIBS} DESTINATION bin/VTK/)
     # HDF
+    file(GLOB HDF_INCS ${HDF5_INCLUDE_DIR}/*.h)
     install(FILES ${HDF_INCS} DESTINATION include)
 
 endif()
