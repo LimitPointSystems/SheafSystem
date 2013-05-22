@@ -203,11 +203,11 @@ function(add_bindings_targets)
         swig_add_module(${${COMPONENT}_JAVA_BINDING_LIB} java ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_JAVA_INTERFACE})
         
         if(WIN64INTEL OR WIN64MSVC)
-            add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} ${FIELDS_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS} ${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE} ${${COMPONENT}_SWIG_COMMON_INTERFACE})
-            target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${JDK_LIBS} ${FIELDS_JAVA_BINDING_LIBS}  ${${COMPONENT}_IMPORT_LIBS})   
+            add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} ${FIELDS_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})
+            target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${JDK_LIBS} ${FIELDS_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})   
             set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES FOLDER "Binding Targets - Java")
         else()
-            add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} ${FIELDS_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB} ${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE} ${${COMPONENT}_SWIG_COMMON_INTERFACE})
+            add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} ${FIELDS_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB})
             target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${JDK_LIBS} ${${COMPONENT}_SHARED_LIB})   
         endif()
         
@@ -216,7 +216,7 @@ function(add_bindings_targets)
         # Define the library version.
         set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES VERSION ${LIB_VERSION})
 
-        target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB} ${FIELDS_JAVA_BINDING_LIBS} ${VTK_LIBS} ${JDK_LIBS} ) 
+        target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB} ${FIELDS_JAVA_BINDING_LIBS} ${VTK_LIBS} ${JDK_LIBS}) 
 
          # Create the bindings jar file 
         if(WIN64INTEL OR WIN64MSVC)

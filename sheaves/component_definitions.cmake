@@ -173,7 +173,7 @@ function(add_bindings_targets)
         swig_add_module(${${COMPONENT}_JAVA_BINDING_LIB} java ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_JAVA_INTERFACE})
         
         if(WIN64INTEL OR WIN64MSVC)
-            add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB} ${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE} ${${COMPONENT}_SWIG_COMMON_INTERFACE})
+            add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB})
             target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${JDK_LIBS} ${${COMPONENT}_IMPORT_LIB})
             set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES FOLDER "Binding Targets - Java")   
         else()

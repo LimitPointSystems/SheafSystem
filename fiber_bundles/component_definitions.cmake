@@ -158,11 +158,11 @@ function(add_bindings_targets)
         swig_add_module(${${COMPONENT}_JAVA_BINDING_LIB} java ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_JAVA_INTERFACE})
         
         if(WIN64INTEL OR WIN64MSVC)
-            add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} ${SHEAVES_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS} ${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE} ${${COMPONENT}_SWIG_COMMON_INTERFACE})
+            add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} ${SHEAVES_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})
             target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${JDK_LIBS} ${SHEAVES_JAVA_BINDING_LIBS}  ${${COMPONENT}_IMPORT_LIBS})   
             set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES FOLDER "Binding Targets - Java")
         else()
-            add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} ${SHEAVES_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB} ${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE} ${${COMPONENT}_SWIG_COMMON_INTERFACE})
+            add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} ${SHEAVES_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB})
             target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${JDK_LIBS} ${${COMPONENT}_SHARED_LIB})   
         endif()
         
@@ -272,13 +272,13 @@ function(add_bindings_targets)
         swig_add_module(${${COMPONENT}_PYTHON_BINDING_LIB} python ${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE})
         
         if(WIN64INTEL OR WIN64MSVC)
-            add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} ${SHEAVES_PYTHON_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS} ${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE} ${${COMPONENT}_SWIG_COMMON_INTERFACE})
+            add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} ${SHEAVES_PYTHON_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})
             # Including both release and debug libs here. Linker is smart enough to know which one to use, and since the build type is a run-time decision in VS
             # we have no way to choose when generating the make file.
-            target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${SHEAVES_PYTHON_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIB} ${PYTHON_LIBRARY} ${PYTHON_DEBUG_LIBRARY} )
+            target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${SHEAVES_PYTHON_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIB} ${PYTHON_LIBRARY} ${PYTHON_DEBUG_LIBRARY})
             set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} PROPERTIES FOLDER "Binding Targets - Python")
         else()
-            add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} ${SHEAVES_PYTHON_BINDING_LIBS} ${${COMPONENT}_SHARED_LIBS} ${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE} ${${COMPONENT}_SWIG_COMMON_INTERFACE})
+            add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} ${SHEAVES_PYTHON_BINDING_LIBS} ${${COMPONENT}_SHARED_LIBS})
             target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${SHEAVES_PYTHON_BINDING_LIBS} ${${COMPONENT}_SHARED_LIBS})
         endif()
         
