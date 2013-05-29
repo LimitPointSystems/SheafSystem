@@ -866,8 +866,7 @@ function(export_install_config_file_vars)
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(${COMPONENT}_SHARED_LIBS ${${COMPONENT}_SHARED_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative shared library list\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
         endif()
-        #$$ISSUE: The below commented-out syntax should work, but doesnt. Find out why.
-        #if(${USE_VTK} AND (${COMPONENT} MATCHES "GEOMETRY"))
+    #$$TODO: "GEOMETRY" will change to "TOOLS" when we pull kd_lattice out of SheafSystem
         if("${COMPONENT}" MATCHES "GEOMETRY")        
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(USE_VTK OFF CACHE BOOL \"Set ON to link against VTK libs\")\n")
