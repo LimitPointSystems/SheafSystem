@@ -133,8 +133,8 @@ if(LINUX64INTEL OR LINUX64GNU)
 else()
     # Install only the VTK libs we use
     foreach(lib ${VTK_LIBS})
-        install(FILES ${VTK_BIN_DIR}/${lib}.dll DESTINATION bin)
-        install(FILES ${VTK_LIB_DIR}/${lib}.lib DESTINATION lib)    
+        install(FILES ${VTK_BIN_DIR}/${lib}.dll DESTINATION bin/\${BUILD_TYPE})
+        install(FILES ${VTK_LIB_DIR}/${lib}.lib DESTINATION lib/\${BUILD_TYPE})    
     endforeach()
     # Install only the VTK includes we use    
     foreach(inc ${VTK_INCS})
