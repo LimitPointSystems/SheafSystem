@@ -91,63 +91,10 @@ endif()
 #
 install(DIRECTORY ${CMAKE_BINARY_DIR}/documentation/ DESTINATION documentation)
 
-# Prerequisite components install
-if(LINUX64INTEL OR LINUX64GNU)
-
-    # All forward slashes in path
-    file(TO_CMAKE_PATH $ENV{HOME} HOME_DIR)
-    
-    install(DIRECTORY ${VTK_LIB_DIR}/ DESTINATION lib/vtk/ USE_SOURCE_PERMISSIONS PATTERN "lib*"
-    PERMISSIONS
-    OWNER_WRITE OWNER_READ OWNER_EXECUTE
-    GROUP_READ GROUP_EXECUTE
-    WORLD_READ WORLD_EXECUTE
-    PATTERN "*.cmake" EXCLUDE
-    PATTERN "doc" EXCLUDE
-    PATTERN "doxygen" EXCLUDE
-    PATTERN "hints" EXCLUDE
-    PATTERN "CMake" EXCLUDE
-    PATTERN "testing" EXCLUDE)
-    
-    install(DIRECTORY ${HDF5_INCLUDE_DIR}/ DESTINATION include PATTERN "*.h"
-    PERMISSIONS
-    OWNER_WRITE OWNER_READ OWNER_EXECUTE
-    GROUP_READ WORLD_READ)
-    
-    install(FILES ${TETGEN_INC_DIR}/tetgen.h DESTINATION include
-    PERMISSIONS
-    OWNER_WRITE OWNER_READ OWNER_EXECUTE
-    GROUP_READ WORLD_READ)
-
-    if(${USE_VTK})
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK OFF CACHE BOOL \"Set to link against VTK libs\")\n")
-        file(APPEND  ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/lib/VTK CACHE STRING \"Location of VTK libs\")\n")
-        file(APPEND  ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        install(DIRECTORY ${VTK_INC_DIRS} DESTINATION include/VTK PATTERN "*.h"
-        PERMISSIONS
-        OWNER_WRITE OWNER_READ OWNER_EXECUTE
-        GROUP_READ WORLD_READ)
-    endif()             
-else()
-    # Install only the VTK libs we use
-    foreach(lib ${VTK_LIBS})
-        install(FILES ${VTK_BIN_DIR}/${lib}.dll DESTINATION bin/\${BUILD_TYPE})
-        install(FILES ${VTK_LIB_DIR}/${lib}.lib DESTINATION lib/\${BUILD_TYPE})    
-    endforeach()
-    # Install only the VTK includes we use    
-    foreach(inc ${VTK_INCS})
-        install(FILES ${VTK_INC_DIRS}/${inc} DESTINATION include)
-    endforeach()
-    # Tetgen header
-    install(FILES ${TETGEN_INC_DIR}/tetgen.h DESTINATION include)  
-
-    # HDF
-    file(GLOB HDF_INCS ${HDF5_INCLUDE_DIR}/*.h)
-    install(FILES ${HDF_INCS} DESTINATION include)
-
-endif()
+#
+# Install what few prerequisite resources we need
+#
+install_prereqs()
 
 #
 # Generate some info about the release
@@ -168,7 +115,12 @@ generate_install_config_file()
 if(LINUX64INTEL OR LINUX64GNU)
     install(FILES ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in DESTINATION ${CMAKE_BUILD_TYPE}/config)
 else()
-    include(InstallRequiredSystemLibraries)
+    # Install the MSVC Runtime components
+# TODO: Once we figure out a reasonable way to only include the runtime in release
+# configurations, then turn this back on.    
+#    set(CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP TRUE) 
+#    include(InstallRequiredSystemLibraries)
+#    install(FILES ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS} DESTINATION bin/\${BUILD_TYPE})
     install(FILES ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in DESTINATION config/\${BUILD_TYPE})
 endif()    
 

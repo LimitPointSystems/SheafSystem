@@ -717,7 +717,7 @@ function(set_component_vars)
     if(WIN64MSVC OR WIN64INTEL)
         set(${COMPONENT}_DYNAMIC_LIB ${PROJECT_NAME} CACHE STRING "${PROJECT_NAME} dynamic link library")
         set(${COMPONENT}_IMPORT_LIB ${PROJECT_NAME} CACHE STRING "${PROJECT_NAME} import library")
-        set(${COMPONENT}_DEBUG_IMPORT_LIB ${PROJECT_NAME}_d CACHE STRING "${PROJECT_NAME} Debug import library")
+#        set(${COMPONENT}_DEBUG_IMPORT_LIB ${PROJECT_NAME}_d CACHE STRING "${PROJECT_NAME} Debug import library")
         set(${COMPONENT}_CSHARP_BINDING_ASSY ${PROJECT_NAME}_csharp_assembly.dll CACHE STRING "${PROJECT_NAME} csharp binding assembly name")
     else()
         set(${COMPONENT}_SHARED_LIB lib${PROJECT_NAME}.so CACHE STRING "${PROJECT_NAME} shared library")
@@ -778,7 +778,12 @@ function(export_targets)
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(${COMPONENT}_IMPORT_LIB ${${COMPONENT}_IMPORT_LIB} CACHE STRING \"${PROJECT_NAME} Win32 import library \")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")     
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(${COMPONENT}_IMPORT_LIBS ${${COMPONENT}_IMPORT_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative Win32 import library list\")\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n") 
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
+#        export(TARGETS ${${COMPONENT}_DEBUG_IMPORT_LIB} APPEND FILE ${CMAKE_BINARY_DIR}/${EXPORTS_FILE})
+#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(${COMPONENT}_DEBUG_IMPORT_LIB ${${COMPONENT}_DEBUG_IMPORT_LIB} CACHE STRING \"${PROJECT_NAME} Win32 import library \")\n")
+#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")     
+#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(${COMPONENT}_DEBUG_IMPORT_LIBS ${${COMPONENT}_DEBUG_IMPORT_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative Win32 import library list\")\n")
+#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")          
     else()
         export(TARGETS ${${COMPONENT}_SHARED_LIB} ${${COMPONENT}_STATIC_LIB} APPEND FILE ${CMAKE_BINARY_DIR}/${EXPORTS_FILE})
         file(APPEND  ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
@@ -1022,3 +1027,65 @@ macro(get_date RESULT)
         set(${RESULT} 000000)
     endif(WIN32)
 endmacro(get_date)
+
+function(install_prereqs)
+# Prerequisite components install
+if(LINUX64INTEL OR LINUX64GNU)
+
+    # All forward slashes in path
+    file(TO_CMAKE_PATH $ENV{HOME} HOME_DIR)
+    
+    install(DIRECTORY ${VTK_LIB_DIR}/ DESTINATION lib/vtk/ USE_SOURCE_PERMISSIONS PATTERN "lib*"
+    PERMISSIONS
+    OWNER_WRITE OWNER_READ OWNER_EXECUTE
+    GROUP_READ GROUP_EXECUTE
+    WORLD_READ WORLD_EXECUTE
+    PATTERN "*.cmake" EXCLUDE
+    PATTERN "doc" EXCLUDE
+    PATTERN "doxygen" EXCLUDE
+    PATTERN "hints" EXCLUDE
+    PATTERN "CMake" EXCLUDE
+    PATTERN "testing" EXCLUDE)
+    
+    install(DIRECTORY ${HDF5_INCLUDE_DIR}/ DESTINATION include PATTERN "*.h"
+    PERMISSIONS
+    OWNER_WRITE OWNER_READ OWNER_EXECUTE
+    GROUP_READ WORLD_READ)
+    
+    install(FILES ${TETGEN_INC_DIR}/tetgen.h DESTINATION include
+    PERMISSIONS
+    OWNER_WRITE OWNER_READ OWNER_EXECUTE
+    GROUP_READ WORLD_READ)
+
+    if(${USE_VTK})
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK OFF CACHE BOOL \"Set to link against VTK libs\")\n")
+        file(APPEND  ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/lib/VTK CACHE STRING \"Location of VTK libs\")\n")
+        file(APPEND  ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
+        install(DIRECTORY ${VTK_INC_DIRS} DESTINATION include/VTK PATTERN "*.h"
+        PERMISSIONS
+        OWNER_WRITE OWNER_READ OWNER_EXECUTE
+        GROUP_READ WORLD_READ)
+    endif()             
+else()
+    # Install only the VTK libs we use
+#    foreach(lib ${VTK_LIBS})
+#        install(FILES ${VTK_BIN_DIR}/${lib}.dll DESTINATION bin/\${BUILD_TYPE})
+#        install(FILES ${VTK_LIB_DIR}/${lib}.lib DESTINATION lib/\${BUILD_TYPE})    
+#    endforeach()
+
+    # Install only the VTK includes we use    
+    foreach(inc ${VTK_INCS})
+        install(FILES ${VTK_INC_DIRS}/${inc} DESTINATION include)
+    endforeach()
+    
+    # Tetgen header
+    install(FILES ${TETGEN_INC_DIR}/tetgen.h DESTINATION include)  
+
+    # Install only the HDF includes we use 
+    foreach(inc ${HDF5_INCS})
+        install(FILES ${HDF5_INCLUDE_DIRS}/${inc} DESTINATION include)
+    endforeach()    
+endif()
+endfunction(install_prereqs)

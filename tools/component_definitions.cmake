@@ -46,7 +46,7 @@ if(WIN64INTEL OR WIN64MSVC)
     # Set the cumulative import library (win32) var for this component.
     #
     set(${COMPONENT}_IMPORT_LIBS  ${FIELDS_IMPORT_LIBS} ${${COMPONENT}_IMPORT_LIB} CACHE STRING " Cumulative import libraries (win32) for ${PROJECT_NAME}" FORCE)
-    set(${COMPONENT}_DEBUG_IMPORT_LIBS ${FIELDS_DEBUG_IMPORT_LIBS} ${${COMPONENT}_DEBUG_IMPORT_LIB}  CACHE STRING " Cumulative debug import libraries (win32) for ${PROJECT_NAME}" FORCE)    
+ #   set(${COMPONENT}_DEBUG_IMPORT_LIBS ${FIELDS_DEBUG_IMPORT_LIBS} ${${COMPONENT}_DEBUG_IMPORT_LIB}  CACHE STRING " Cumulative debug import libraries (win32) for ${PROJECT_NAME}" FORCE)    
 
 else()
 
@@ -134,7 +134,8 @@ function(add_library_targets)
         add_library(${${COMPONENT}_DYNAMIC_LIB} SHARED ${${COMPONENT}_SRCS})
         add_dependencies(${${COMPONENT}_DYNAMIC_LIB} ${FIELDS_IMPORT_LIBS})
                  
-        target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} debug ${FIELDS_DEBUG_IMPORT_LIBS} optimized ${FIELDS_IMPORT_LIBS} ${JDK_LIBS} ${VTK_LIBS})        
+       # target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} debug ${FIELDS_DEBUG_IMPORT_LIBS} optimized ${FIELDS_IMPORT_LIBS} ${JDK_LIBS} ${VTK_LIBS})        
+        target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${FIELDS_IMPORT_LIBS} ${JDK_LIBS} ${VTK_LIBS}) 
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")        
         
         # Override cmake's placing of "${${COMPONENT}_DYNAMIC_LIB}_EXPORTS into the preproc symbol table.

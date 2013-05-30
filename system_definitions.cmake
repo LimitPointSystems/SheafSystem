@@ -29,23 +29,22 @@ set(COMPONENTS sheaves fiber_bundles geometry fields tools CACHE STRING "List of
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT AND LIB_VERSION MATCHES "0.0.0.0" )
     if(LINUX64GNU OR LINUX64INTEL)
       set(CMAKE_INSTALL_PREFIX
-        "$ENV{HOME}/SheafSystem" CACHE PATH "SheafSystem install prefix"
+        "$ENV{HOME}/SheafSystem" CACHE PATH "SheafSystem install prefix" FORCE
         )
     else()
       set(CMAKE_INSTALL_PREFIX
-        "$ENV{USERPROFILE}/SheafSystem" CACHE PATH "SheafSystem install prefix"
+        "$ENV{USERPROFILE}/SheafSystem" CACHE PATH "SheafSystem install prefix" FORCE
         )
     endif()
-else()
-    if(LINUX64GNU OR LINUX64INTEL)
-      set(CMAKE_INSTALL_PREFIX
-        "$ENV{HOME}/SheafSystem-${LIB_VERSION}" CACHE PATH "SheafSystem install prefix"
-        )
-    else()
-      set(CMAKE_INSTALL_PREFIX
-        "$ENV{USERPROFILE}/SheafSystem-${LIB_VERSION}" CACHE PATH "SheafSystem install prefix"
-        )
-    endif()
+#else()
+#    if(LINUX64GNU OR LINUX64INTEL)
+#      set(CMAKE_INSTALL_PREFIX
+#        "$ENV{HOME}/SheafSystem-${LIB_VERSION}" CACHE PATH "SheafSystem install prefix"
+#        )
+#    else()
+#      set(CMAKE_INSTALL_PREFIX "$ENV{USERPROFILE}/SheafSystem-${LIB_VERSION}" CACHE PATH "SheafSystem install prefix" FORCE
+#        )
+#    endif()
 endif()
 
 #

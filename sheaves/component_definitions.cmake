@@ -37,7 +37,7 @@ if(WIN64INTEL OR WIN64MSVC)
     #
     if(ENABLE_STATIC_PREREQS)
         set(${COMPONENT}_IMPORT_LIBS ${${COMPONENT}_IMPORT_LIB}  CACHE STRING " Cumulative import libraries (win32) for ${PROJECT_NAME}" FORCE)
-        set(${COMPONENT}_DEBUG_IMPORT_LIBS ${${COMPONENT}_DEBUG_IMPORT_LIB}  CACHE STRING " Cumulative debug import libraries (win32) for ${PROJECT_NAME}" FORCE)
+#        set(${COMPONENT}_DEBUG_IMPORT_LIBS ${${COMPONENT}_DEBUG_IMPORT_LIB}  CACHE STRING " Cumulative debug import libraries (win32) for ${PROJECT_NAME}" FORCE)
     else()
         set(${COMPONENT}_IMPORT_LIBS ${HDF5_DLL_LIBRARY} ${${COMPONENT}_IMPORT_LIB}  CACHE STRING " Cumulative import libraries (win32) for ${PROJECT_NAME}" FORCE)        
     endif()
@@ -111,7 +111,8 @@ function(add_library_targets)
         link_directories(${${COMPONENT}_OUTPUT_DIR})
         # Create the DLL.
         add_library(${${COMPONENT}_DYNAMIC_LIB} SHARED ${${COMPONENT}_SRCS})
-        target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} LINK_PRIVATE debug ${HDF5_LIBRARY_DIRS}/hdf5d.lib optimized ${HDF5_LIBRARY_DIRS}/hdf5.lib) 
+        #target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} LINK_PRIVATE debug ${HDF5_LIBRARY_DIRS}/hdf5d.lib optimized ${HDF5_LIBRARY_DIRS}/hdf5.lib)
+        target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} LINK_PRIVATE debug ${HDF5_hdf5_LIBRARY_DEBUG} optimized ${HDF5_hdf5_LIBRARY_RELEASE})
 
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")
         # Override cmake's placing of "${${COMPONENT}_DYNAMIC_LIB}_EXPORTS into the preproc symbol table.
@@ -123,13 +124,13 @@ function(add_library_targets)
         add_library(${${COMPONENT}_STATIC_LIB} STATIC ${${COMPONENT}_SRCS})
         set_target_properties(${${COMPONENT}_STATIC_LIB} PROPERTIES OUTPUT_NAME ${PROJECT_NAME} LINKER_LANGUAGE CXX)
         set_target_properties(${${COMPONENT}_STATIC_LIB} PROPERTIES LINK_INTERFACE_LIBRARIES "") 
-        target_link_libraries(${${COMPONENT}_STATIC_LIB} LINK_PRIVATE ${HDF5_LIBRARIES})
+        target_link_libraries(${${COMPONENT}_STATIC_LIB} LINK_PRIVATE debug ${HDF5_hdf5_LIBRARY_DEBUG} optimized ${HDF5_hdf5_LIBRARY_RELEASE})
         
         # Shared library
         add_library(${${COMPONENT}_SHARED_LIB} SHARED ${${COMPONENT}_SRCS})
         set_target_properties(${${COMPONENT}_SHARED_LIB} PROPERTIES OUTPUT_NAME ${PROJECT_NAME} LINKER_LANGUAGE CXX)
         set_target_properties(${${COMPONENT}_SHARED_LIB} PROPERTIES LINK_INTERFACE_LIBRARIES "")        
-        target_link_libraries(${${COMPONENT}_SHARED_LIB} LINK_PRIVATE ${HDF5_LIBRARIES})        
+        target_link_libraries(${${COMPONENT}_SHARED_LIB} LINK_PRIVATE debug ${HDF5_hdf5_LIBRARY_DEBUG} optimized ${HDF5_hdf5_LIBRARY_RELEASE})        
 
         # Override cmake's placing of "${COMPONENT_LIB}_EXPORTS into the preproc symbol table.
         # CMake apparently detects the presence of cdecl_dllspec in the source and places
@@ -212,7 +213,6 @@ function(add_bindings_targets)
                            COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
              )        
         endif()
-        message(STATUS "${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/\$(OutDir)/${${COMPONENT}_JAVA_BINDING_JAR}")
         set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Library Jars") 
         mark_as_advanced(FORCE ${COMPONENT}_CLASSPATH)        
 
@@ -282,9 +282,7 @@ function(add_bindings_targets)
         
         if(WIN64INTEL OR WIN64MSVC)
             add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB} ${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE} ${${COMPONENT}_SWIG_COMMON_INTERFACE})
-            # Including both release and debug libs here. Linker is smart enough to know which one to use, and since the build type is a run-time decision in VS
-            # we have no way to choose when generating the make file.
-            target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB} ${PYTHON_LIBRARY} ${PYTHON_DEBUG_LIBRARY} )
+            target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB} ${PYTHON_LIBRARY} )
             set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} PROPERTIES FOLDER "Binding Targets - Python")
         else()
             add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_SHARED_LIB}${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE} ${${COMPONENT}_SWIG_COMMON_INTERFACE})
