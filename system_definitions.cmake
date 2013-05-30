@@ -72,6 +72,9 @@ else()
     message(FATAL_ERROR "A 64 bit Windows or Linux environment was not detected; exiting")
 endif()
 
+#
+# Define the exports files
+#
 set(EXPORTS_FILE ${PROJECT_NAME}-exports.cmake CACHE STRING "System exports file name")
 set(INSTALL_CONFIG_FILE ${PROJECT_NAME}-install.cmake CACHE STRING "Install config file name")
 
@@ -98,6 +101,11 @@ if(NOT CMAKE_BUILD_TYPE)
 endif(NOT CMAKE_BUILD_TYPE)
 
 set_property(GLOBAL PROPERTY DEBUG_CONFIGURATIONS "Debug-contracts" "Debug-no-contracts") 
+
+if(WIN64MSVC OR WIN64INTEL)
+    set(CMAKE_DEBUG-CONTRACTS_POSTFIX "_d"CACHE STRING "Debug libs suffix")
+    set(CMAKE_DEBUG-NO-CONTRACTS_POSTFIX "_d"CACHE STRING "Debug libs suffix")
+endif()
 
 #   
 #  Type of system documentation to build: Dev or User

@@ -39,6 +39,7 @@ if(WIN64INTEL OR WIN64MSVC)
     # Set the cumulative import library (win32) var for this component.
     #
     set(${COMPONENT}_IMPORT_LIBS ${FIBER_BUNDLES_IMPORT_LIBS} ${${COMPONENT}_IMPORT_LIB} CACHE STRING " Cumulative import libraries (win32) for ${PROJECT_NAME}" FORCE)
+    set(${COMPONENT}_DEBUG_IMPORT_LIBS ${FIBER_BUNDLES_DEBUG_IMPORT_LIBS} ${${COMPONENT}_DEBUG_IMPORT_LIB}  CACHE STRING " Cumulative debug import libraries (win32) for ${PROJECT_NAME}" FORCE)    
 
 else()
 
@@ -109,10 +110,10 @@ function(add_library_targets)
         add_dependencies(${${COMPONENT}_DYNAMIC_LIB} ${FIBER_BUNDLES_IMPORT_LIBS})
 
         if(${USE_VTK})
-            target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${FIBER_BUNDLES_IMPORT_LIBS} ${VTK_LIBS})
+            target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${VTK_LIBS} debug ${FIBER_BUNDLES_DEBUG_IMPORT_LIBS} optimized ${FIBER_BUNDLES_IMPORT_LIBS} )
             target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} LINK_PRIVATE ${TETGEN_LIB})           
         else()
-            target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${FIBER_BUNDLES_IMPORT_LIBS})        
+            target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} debug ${FIBER_BUNDLES_DEBUG_IMPORT_LIBS} optimized ${FIBER_BUNDLES_IMPORT_LIBS})        
             target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} LINK_PRIVATE ${TETGEN_LIB})
         endif() 
      
