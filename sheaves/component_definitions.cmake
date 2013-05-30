@@ -111,9 +111,7 @@ function(add_library_targets)
         link_directories(${${COMPONENT}_OUTPUT_DIR})
         # Create the DLL.
         add_library(${${COMPONENT}_DYNAMIC_LIB} SHARED ${${COMPONENT}_SRCS})
-        #target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} LINK_PRIVATE debug ${HDF5_LIBRARY_DIRS}/hdf5d.lib optimized ${HDF5_LIBRARY_DIRS}/hdf5.lib)
-        target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} LINK_PRIVATE debug ${HDF5_hdf5_LIBRARY_DEBUG} optimized ${HDF5_hdf5_LIBRARY_RELEASE})
-
+        target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} LINK_PRIVATE debug ${HDF5_LIB_DIR}/hdf5d.lib optimized ${HDF5_LIB_DIR}/hdf5.lib)
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")
         # Override cmake's placing of "${${COMPONENT}_DYNAMIC_LIB}_EXPORTS into the preproc symbol table.
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES DEFINE_SYMBOL "SHEAF_DLL_EXPORTS")

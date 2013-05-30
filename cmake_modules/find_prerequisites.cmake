@@ -35,26 +35,26 @@ if(ENABLE_STATIC_PREREQS)
     set(HDF5_USE_STATIC_LIBRARIES ON)
 endif()
 
-find_package(HDF5 1.8.3 REQUIRED)
+find_package(HDF5 1.8.9 REQUIRED)
 
 if(HDF5_FOUND)
     configure_file(${CMAKE_MODULE_PATH}/hdf_definitions.cmake.in ${CMAKE_BINARY_DIR}/hdf_definitions.cmake)
     include(${CMAKE_BINARY_DIR}/hdf_definitions.cmake)
-    link_directories(${HDF5_LIBRARY_DIRS})
+    link_directories(${HDF5_LIB_DIR})
     include_directories(${HDF5_INCLUDE_DIRS})
 endif()
 
 #
 # Find VTK
 #
-find_package(VTK REQUIRED MODULE)
+find_package(VTK 5.10 REQUIRED MODULE)
 if(VTK_FOUND)
     configure_file(${CMAKE_MODULE_PATH}/vtk_definitions.cmake.in ${CMAKE_BINARY_DIR}/vtk_definitions.cmake)
     include(${CMAKE_BINARY_DIR}/vtk_definitions.cmake)
 endif()
 
 # Find the JDK
-find_package(Java 1.6 REQUIRED)
+find_package(Java 1.7 REQUIRED)
 if(JAVA_FOUND)
     configure_file(${CMAKE_MODULE_PATH}/java_definitions.cmake.in ${CMAKE_BINARY_DIR}/java_definitions.cmake)
     include(${CMAKE_BINARY_DIR}/java_definitions.cmake)
