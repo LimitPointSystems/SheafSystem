@@ -90,7 +90,7 @@ endif()
 # Only install the documentation when Release-no-contracts is being installed. This prevents 4 iterations of doc generation.
 # The rationale here is that Release-no-contracts will always be released.
 #
-install(DIRECTORY ${CMAKE_BINARY_DIR}/documentation/ DESTINATION documentation)
+install(DIRECTORY ${PROJECT_BINARY_DIR}/documentation/ DESTINATION documentation)
 
 #
 # Install what few prerequisite resources we need
@@ -103,7 +103,7 @@ install_prereqs()
 set(RELEASE_DATE)
 get_date(RELEASE_DATE)
 file(WRITE ${CMAKE_BINARY_DIR}/RELEASE "${PROJECT_NAME} version ${LIB_VERSION} ${RELEASE_DATE}  \n")
-install(FILES ${CMAKE_BINARY_DIR}/RELEASE DESTINATION ${CMAKE_INSTALL_PREFIX})
+install(FILES ${PROJECT_BINARY_DIR}/RELEASE DESTINATION ${CMAKE_INSTALL_PREFIX})
 
 #
 # Generate the install configuration file.
@@ -114,7 +114,7 @@ generate_install_config_file()
 # Install the exports file
 #
 if(LINUX64INTEL OR LINUX64GNU)
-    install(FILES ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in DESTINATION ${CMAKE_BUILD_TYPE}/config)
+    install(FILES ${PROJECT_BINARY_DIR}/${EXPORTS_FILE}.in DESTINATION ${CMAKE_BUILD_TYPE}/config)
 else()
     # Install the MSVC Runtime components
 # TODO: Once we figure out a reasonable way to only include the runtime in release
@@ -122,7 +122,7 @@ else()
 #    set(CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP TRUE) 
 #    include(InstallRequiredSystemLibraries)
 #    install(FILES ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS} DESTINATION bin/\${BUILD_TYPE})
-    install(FILES ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in DESTINATION config/\${BUILD_TYPE})
+    install(FILES ${PROJECT_BINARY_DIR}/${EXPORTS_FILE}.in DESTINATION config/\${BUILD_TYPE})
 endif()    
 
 

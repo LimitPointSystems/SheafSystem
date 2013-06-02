@@ -12,9 +12,16 @@ set(HDF5_FOUND @HDF5_FOUND@ CACHE
 set(HDF5_DIFF_EXECUTABLE @HDF5_DIFF_EXECUTABLE@ CACHE
 	STRING "Path to the HDF5 dataset comparison tool.")
 
-set(HDF5_INCS hdf5.h H5public.h H5pubconf.h H5version.h H5api_adpt.h H5Apublic.h H5Ipublic.h 
-H5Opublic.h H5Lpublic.h H5Tpublic.h H5ACpublic.h H5Cpublic.h H5Dpublic.h H5Epublic.h H5Epubgen.h 
-H5Fpublic.h H5FDpublic.h H5Gpublic.h H5MMpublic.h H5Zpublic.h H5Rpublic.h H5Spublic.h H5FDcore.h 
-H5FDfamily.h H5FDlog.h H5FDmpi.h H5FDmpio.h H5FDmpiposix.h H5FDmulti.h H5Ppublic.h H5FDstdio.h 
-H5FDwindows.h H5FDsec2.h H5FDdirect.h CACHE STRING "HDF required includes")
-	
+if(WIN32)
+	set(HDF5_INCS hdf5.h H5public.h H5pubconf.h H5version.h H5api_adpt.h H5Apublic.h H5Ipublic.h 
+	H5Opublic.h H5Lpublic.h H5Tpublic.h H5ACpublic.h H5Cpublic.h H5Dpublic.h H5Epublic.h H5Epubgen.h 
+	H5Fpublic.h H5FDpublic.h H5Gpublic.h H5MMpublic.h H5Zpublic.h H5Rpublic.h H5Spublic.h H5FDcore.h 
+	H5FDfamily.h H5FDlog.h H5FDmpi.h H5FDmpio.h H5FDmpiposix.h H5FDmulti.h H5Ppublic.h H5FDstdio.h 
+	H5FDsec2.h H5FDdirect.h H5FDwindows.h CACHE STRING "HDF required includes" FORCE)
+else()
+	set(HDF5_INCS hdf5.h H5public.h H5pubconf.h H5version.h H5api_adpt.h H5Apublic.h H5Ipublic.h 
+	H5Opublic.h H5Lpublic.h H5Tpublic.h H5ACpublic.h H5Cpublic.h H5Dpublic.h H5Epublic.h H5Epubgen.h 
+	H5Fpublic.h H5FDpublic.h H5Gpublic.h H5MMpublic.h H5Zpublic.h H5Rpublic.h H5Spublic.h H5FDcore.h 
+	H5FDfamily.h H5FDlog.h H5FDmpi.h H5FDmpio.h H5FDmpiposix.h H5FDmulti.h H5Ppublic.h H5FDstdio.h 
+	H5FDsec2.h H5FDdirect.h CACHE STRING "HDF required includes" FORCE)
+endif()	

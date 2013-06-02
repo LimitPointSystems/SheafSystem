@@ -806,60 +806,72 @@ function(install_prereqs)
 # Prerequisite components install
 if(LINUX64INTEL OR LINUX64GNU)
 
-    # All forward slashes in path
-    file(TO_CMAKE_PATH $ENV{HOME} HOME_DIR)
+    foreach(name ${VTK_LIBS})
+        file(GLOB files "${VTK_LIB_DIR}/lib${name}.*")
+        set(VTK_INSTALL_LIBS ${VTK_INSTALL_LIBS} ${files})
+    endforeach()
     
-    install(DIRECTORY ${VTK_LIB_DIR}/ DESTINATION lib/vtk/ USE_SOURCE_PERMISSIONS PATTERN "lib*"
+    install(FILES ${VTK_INSTALL_LIBS} DESTINATION lib/vtk/
     PERMISSIONS
     OWNER_WRITE OWNER_READ OWNER_EXECUTE
     GROUP_READ GROUP_EXECUTE
-    WORLD_READ WORLD_EXECUTE
-    PATTERN "*.cmake" EXCLUDE
-    PATTERN "doc" EXCLUDE
-    PATTERN "doxygen" EXCLUDE
-    PATTERN "hints" EXCLUDE
-    PATTERN "CMake" EXCLUDE
-    PATTERN "testing" EXCLUDE)
-    
-    install(DIRECTORY ${HDF5_INCLUDE_DIR}/ DESTINATION include PATTERN "*.h"
-    PERMISSIONS
-    OWNER_WRITE OWNER_READ OWNER_EXECUTE
-    GROUP_READ WORLD_READ)
-    
-    install(FILES ${TETGEN_INC_DIR}/tetgen.h DESTINATION include
-    PERMISSIONS
-    OWNER_WRITE OWNER_READ OWNER_EXECUTE
-    GROUP_READ WORLD_READ)
-
-    if(${USE_VTK})
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK OFF CACHE BOOL \"Set to link against VTK libs\")\n")
-        file(APPEND  ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/lib/VTK CACHE STRING \"Location of VTK libs\")\n")
-        file(APPEND  ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        install(DIRECTORY ${VTK_INC_DIRS} DESTINATION include/VTK PATTERN "*.h"
-        PERMISSIONS
-        OWNER_WRITE OWNER_READ OWNER_EXECUTE
-        GROUP_READ WORLD_READ)
-    endif()             
+    WORLD_READ WORLD_EXECUTE   
+    )
+        
 else()
-    # Install only the VTK libs we use
-#    foreach(lib ${VTK_LIBS})
-#        install(FILES ${VTK_BIN_DIR}/${lib}.dll DESTINATION bin/\${BUILD_TYPE})
-#        install(FILES ${VTK_LIB_DIR}/${lib}.lib DESTINATION lib/\${BUILD_TYPE})    
-#    endforeach()
 
-    # Install only the VTK includes we use    
+    foreach(name ${VTK_LIBS})
+        file(GLOB files "${VTK_LIB_DIR}/${name}.lib")
+        set(VTK_IMPORT_LIBS ${VTK_IMPORT_LIBS} ${files})
+    endforeach()
+    
+    install(FILES ${VTK_INSTALL_LIBS} DESTINATION lib/vtk/
+    PERMISSIONS
+    OWNER_WRITE OWNER_READ OWNER_EXECUTE
+    GROUP_READ GROUP_EXECUTE
+    WORLD_READ WORLD_EXECUTE   
+    )
+        
+    foreach(name ${VTK_LIBS})
+        file(GLOB files "${VTK_BIN_DIR}/${name}.dll")
+        set(VTK_RUNTIME_LIBS ${VTK_RUNTIME_LIBS} ${files})
+    endforeach()
+    
+    install(FILES ${VTK_RUNTIME_LIBS} DESTINATION lib/vtk/
+    PERMISSIONS
+    OWNER_WRITE OWNER_READ OWNER_EXECUTE
+    GROUP_READ GROUP_EXECUTE
+    WORLD_READ WORLD_EXECUTE   
+    )
+        
+endif()
+
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK OFF CACHE BOOL \"Set to link against VTK libs\")\n")
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/lib/vtk CACHE STRING \"Location of VTK libs\")\n")
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
+        
+     # Install only the VTK includes we use    
     foreach(inc ${VTK_INCS})
-        install(FILES ${VTK_INC_DIRS}/${inc} DESTINATION include)
+        install(FILES ${VTK_INC_DIRS}/${inc} DESTINATION include
+        PERMISSIONS
+        OWNER_WRITE OWNER_READ
+        GROUP_READ WORLD_READ)
     endforeach()
     
     # Tetgen header
-    install(FILES ${TETGEN_INC_DIR}/tetgen.h DESTINATION include)  
+    install(FILES ${TETGEN_INC_DIR}/tetgen.h DESTINATION include
+        PERMISSIONS
+        OWNER_WRITE OWNER_READ 
+        GROUP_READ WORLD_READ)  
 
     # Install only the HDF includes we use 
     foreach(inc ${HDF5_INCS})
-        install(FILES ${HDF5_INCLUDE_DIRS}/${inc} DESTINATION include)
-    endforeach()    
-endif()
+        install(FILES ${HDF5_INCLUDE_DIRS}/${inc} DESTINATION include
+        PERMISSIONS
+        OWNER_WRITE OWNER_READ
+        GROUP_READ WORLD_READ)
+    endforeach()
+
 endfunction(install_prereqs)
