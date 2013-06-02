@@ -803,48 +803,48 @@ macro(get_date RESULT)
 endmacro(get_date)
 
 function(install_prereqs)
-# Prerequisite components install
-if(LINUX64INTEL OR LINUX64GNU)
-
-    foreach(name ${VTK_LIBS})
-        file(GLOB files "${VTK_LIB_DIR}/lib${name}.*")
-        set(VTK_INSTALL_LIBS ${VTK_INSTALL_LIBS} ${files})
-    endforeach()
+    # Prerequisite components install
+    if(LINUX64INTEL OR LINUX64GNU)
     
-    install(FILES ${VTK_INSTALL_LIBS} DESTINATION lib/vtk/
-    PERMISSIONS
-    OWNER_WRITE OWNER_READ OWNER_EXECUTE
-    GROUP_READ GROUP_EXECUTE
-    WORLD_READ WORLD_EXECUTE   
-    )
+        foreach(name ${VTK_LIBS})
+            file(GLOB files "${VTK_LIB_DIR}/lib${name}.*")
+            set(VTK_INSTALL_LIBS ${VTK_INSTALL_LIBS} ${files})
+        endforeach()
         
-else()
-
-    foreach(name ${VTK_LIBS})
-        file(GLOB files "${VTK_LIB_DIR}/${name}.lib")
-        set(VTK_IMPORT_LIBS ${VTK_IMPORT_LIBS} ${files})
-    endforeach()
+        install(FILES ${VTK_INSTALL_LIBS} DESTINATION lib/vtk/
+        PERMISSIONS
+        OWNER_WRITE OWNER_READ OWNER_EXECUTE
+        GROUP_READ GROUP_EXECUTE
+        WORLD_READ WORLD_EXECUTE   
+        )
+            
+    else()
     
-    install(FILES ${VTK_INSTALL_LIBS} DESTINATION lib/vtk/
-    PERMISSIONS
-    OWNER_WRITE OWNER_READ OWNER_EXECUTE
-    GROUP_READ GROUP_EXECUTE
-    WORLD_READ WORLD_EXECUTE   
-    )
+        foreach(name ${VTK_LIBS})
+            file(GLOB files "${VTK_LIB_DIR}/${name}.lib")
+            set(VTK_IMPORT_LIBS ${VTK_IMPORT_LIBS} ${files})
+        endforeach()
         
-    foreach(name ${VTK_LIBS})
-        file(GLOB files "${VTK_BIN_DIR}/${name}.dll")
-        set(VTK_RUNTIME_LIBS ${VTK_RUNTIME_LIBS} ${files})
-    endforeach()
-    
-    install(FILES ${VTK_RUNTIME_LIBS} DESTINATION lib/vtk/
-    PERMISSIONS
-    OWNER_WRITE OWNER_READ OWNER_EXECUTE
-    GROUP_READ GROUP_EXECUTE
-    WORLD_READ WORLD_EXECUTE   
-    )
+        install(FILES ${VTK_INSTALL_LIBS} DESTINATION lib/vtk/
+        PERMISSIONS
+        OWNER_WRITE OWNER_READ OWNER_EXECUTE
+        GROUP_READ GROUP_EXECUTE
+        WORLD_READ WORLD_EXECUTE   
+        )
+            
+        foreach(name ${VTK_LIBS})
+            file(GLOB files "${VTK_BIN_DIR}/${name}.dll")
+            set(VTK_RUNTIME_LIBS ${VTK_RUNTIME_LIBS} ${files})
+        endforeach()
         
-endif()
+        install(FILES ${VTK_RUNTIME_LIBS} DESTINATION lib/vtk/
+        PERMISSIONS
+        OWNER_WRITE OWNER_READ OWNER_EXECUTE
+        GROUP_READ GROUP_EXECUTE
+        WORLD_READ WORLD_EXECUTE   
+        )
+            
+    endif()
 
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK OFF CACHE BOOL \"Set to link against VTK libs\")\n")
