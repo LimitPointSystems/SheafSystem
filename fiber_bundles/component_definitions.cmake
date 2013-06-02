@@ -1,6 +1,4 @@
 #
-# $RCSfile: component_definitions.cmake,v $ $Revision: 1.32 $ $Date: 2013/01/17 18:53:26 $
-#
 #
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
@@ -40,7 +38,7 @@ if(WIN64INTEL OR WIN64MSVC)
     # Set the cumulative import library (win32) var for this component.
     #
     set(${COMPONENT}_IMPORT_LIBS ${SHEAVES_IMPORT_LIBS} ${${COMPONENT}_IMPORT_LIB} CACHE STRING " Cumulative import libraries (win32) for ${PROJECT_NAME}" FORCE)
-#    set(${COMPONENT}_DEBUG_IMPORT_LIBS ${SHEAVES_DEBUG_IMPORT_LIBS} ${${COMPONENT}_DEBUG_IMPORT_LIB}  CACHE STRING " Cumulative debug import libraries (win32) for ${PROJECT_NAME}" FORCE)    
+
 else()
 
     #
@@ -330,7 +328,6 @@ function(add_install_target)
             # The BUILD_TYPE variable will be set while CMake is processing the install files. It is not set at configure time
             # for this project. We pass it literally here. 
             install(TARGETS ${${COMPONENT}_IMPORT_LIB} EXPORT ${${COMPONENT}_IMPORT_LIB} ARCHIVE DESTINATION lib/\${BUILD_TYPE})
-#            install(TARGETS ${${COMPONENT}_DEBUG_IMPORT_LIB} EXPORT ${${COMPONENT}_DEBUG_IMPORT_LIB} ARCHIVE DESTINATION lib/\${BUILD_TYPE})
             install(TARGETS ${${COMPONENT}_DYNAMIC_LIB} RUNTIME DESTINATION bin/\${BUILD_TYPE})
             
             # Only try to install the pdb files if they exist. Easier to determine existence than the current config type in win32.

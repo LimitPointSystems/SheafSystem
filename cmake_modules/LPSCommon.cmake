@@ -265,7 +265,7 @@ function(set_compiler_flags)
             set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} -g -DUSE_VTK " CACHE
                 STRING "Flags used by the C++ compiler for Debug-contracts builds" FORCE)
         else()         
-            set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} -g" CACHE
+            set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} -g " CACHE
                 STRING "Flags used by the C++ compiler for Debug-contracts builds" FORCE)
         endif()
         set(CMAKE_EXE_LINKER_FLAGS_DEBUG-CONTRACTS ${CMAKE_EXE_LINKER_FLAGS}  CACHE
@@ -473,226 +473,6 @@ function(add_clean_files)
 
 endfunction(add_clean_files) 
 
-# 
-# Establish a system level "bin" target
-#
-function(add_bin_target)
-
-    add_custom_target(bin DEPENDS ${ALL_BIN_TARGETS})
-    set_target_properties(bin PROPERTIES FOLDER "Bin Targets")
-        
-endfunction(add_bin_target)
-
-#
-# Add component specific bin targets. e.g., "sheaves-bin", "tools-bin", etc.
-#
-function(add_component_bin_target)
-
-    add_custom_target(${PROJECT_NAME}-bin DEPENDS ${${COMPONENT}_SHARED_LIB} ${${COMPONENT}_UNIT_TESTS} ${${COMPONENT}_EXAMPLES})
-    # Add a bin target for this component to the system list. "make bin" will invoke this list.
-    set(ALL_BIN_TARGETS ${ALL_BIN_TARGETS} ${PROJECT_NAME}-bin CACHE STRING "Aggregate list of component bin targets" FORCE)
-        set_target_properties(${PROJECT_NAME}-bin PROPERTIES FOLDER "Bin Targets")
-    mark_as_advanced(ALL_BIN_TARGETS) 
-
-endfunction(add_component_bin_target)
-
-# 
-# Establish a system level "check" target
-#
-function(add_check_target)
-
-    if(WIN64MSVC OR WIN64INTEL)
-        # $$TODO: Spend a little time finding out what's going on here.
-        add_custom_target(check COMMAND ${CMAKE_CTEST_COMMAND} -C ${CMAKE_CFG_INTDIR})
-        add_dependencies(check ${${COMPONENT}_SHARED_LIB} ${ALL_CHECK_TARGETS})
-    else()
-        add_custom_target(check COMMAND DEPENDS ${ALL_CHECK_TARGETS})
-    endif()
-    set_target_properties(check PROPERTIES FOLDER "Check Targets")
-        
-endfunction(add_check_target)
-
-#
-# Add component specific check targets. e.g., "sheaves-check", "tools-check", etc.
-#
-function(add_component_check_target)
-
-    add_custom_target(${PROJECT_NAME}-check COMMAND ${CMAKE_CTEST_COMMAND} DEPENDS ${${COMPONENT}_SHARED_LIB} ${${COMPONENT}_UNIT_TESTS})
-    # Add a check target for this component to the system list. "make check" will invoke this list.
-    set(ALL_CHECK_TARGETS ${ALL_CHECK_TARGETS} ${PROJECT_NAME}-check CACHE STRING "Aggregate list of component check targets" FORCE)
-        set_target_properties(${PROJECT_NAME}-check PROPERTIES FOLDER "Check Targets")
-    mark_as_advanced(ALL_CHECK_TARGETS) 
-
-endfunction(add_component_check_target)
-
-#
-# Add component specific coverage targets. e.g., "sheaves-coverage", "tools-coverage", etc.
-#
-#$$TODO: Expand this to cover windows/intel as well.
-function(add_component_coverage_target)
-
-    if(LINUX64INTEL)
-        # if the component unit test list is not empty, generate coverage data.   
-        if(NOT ${COMPONENT}_UNIT_TEST_SRCS STREQUAL "")
-            add_custom_target(${PROJECT_NAME}-coverage DEPENDS ${PROJECT_NAME}-check
-                COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR}/${PROJECT_NAME} ${PROFMERGE}
-                COMMAND ${CMAKE_COMMAND} -E chdir ${CMAKE_BINARY_DIR}/${PROJECT_NAME} ${CODECOV} -bcolor ${UNCOVERED_COLOR} -ccolor ${COVERED_COLOR} -pcolor ${PARTIAL_COLOR} -prj ${PROJECT_NAME} -txtbcvrgfull ${PROJECT_NAME}_cov.out -demang 
-                COMMAND ${CMAKE_COMMAND} -E rename ${CMAKE_BINARY_DIR}/${PROJECT_NAME}/CODE_COVERAGE.HTML ${CMAKE_BINARY_DIR}/${PROJECT_NAME}/index.html
-                )
-        else()
-            # Component has no unit tests associated with it, make target an "informational no-op"
-            add_custom_target(${PROJECT_NAME}-coverage
-                COMMAND ${CMAKE_COMMAND} -E echo " " 
-                COMMAND ${CMAKE_COMMAND} -E echo "   There are currently no unit tests for the ${PROJECT_NAME} component. Coverage results will not be generated." 
-                COMMAND ${CMAKE_COMMAND} -E echo " "                      
-                )
-        endif()
-            # Append the coverage target to the system wide list
-            set(ALL_COVERAGE_TARGETS ${ALL_COVERAGE_TARGETS} ${PROJECT_NAME}-coverage CACHE STRING "Aggregate list of component coverage targets" FORCE)
-            mark_as_advanced(ALL_COVERAGE_TARGETS)
-    endif()
-
-endfunction()
-
-# 
-# Establish a system level "coverage" target
-#
-#$$TODO: Expand this to cover windows/intel as well.
-function(add_coverage_target)
-
-    if(LINUX64INTEL)
-        add_custom_target(coverage DEPENDS ${ALL_COVERAGE_TARGETS})
-    endif()
-
-endfunction()
-
-# 
-# Create a cmake test for each unit test executable.
-#
-function(add_test_targets)
-
-    if(${USE_VTK})
-        link_directories(${VTK_LIB_DIR})
-    endif()
-    # link_directories only applies to targets created after it is called.
-    if(LINUX64GNU OR LINUX64INTEL)
-        link_directories($CMAKE_ARCHIVE_OUTPUT_DIRECTORY} ${HDF5_LIBRARY_DIRS} ${TETGEN_DIR})
-    else()
-        link_directories($CMAKE_ARCHIVE_OUTPUT_DIRECTORY} ${HDF5_LIBRARY_DIRS} ${TETGEN_DIR})        
-    endif()    
-    # Let the user know what's being configured
-    status_message("Configuring Unit Tests for ${PROJECT_NAME}")   
-    foreach(t_cc_file ${${COMPONENT}_UNIT_TEST_SRCS})
-
-        # Extract name of executable from source filename
-        string(REPLACE .t.cc .t t_file_with_path ${t_cc_file})
-        # Remove path information  
-        get_filename_component(t_file ${t_file_with_path} NAME)
-
-        set(${COMPONENT}_UNIT_TESTS ${${COMPONENT}_UNIT_TESTS} ${t_file} CACHE STRING "List of unit test binaries" FORCE)
-        mark_as_advanced(${COMPONENT}_UNIT_TESTS)
-        # If the target already exists, don't try to create it.
-        if(NOT TARGET ${t_file})
-             message(STATUS "Creating ${t_file} from ${t_cc_file}")
-             add_executable(${t_file} EXCLUDE_FROM_ALL ${t_cc_file})
-            # Make sure the library is up to date
-            if(WIN64MSVC OR WIN64INTEL)
-                # Supply the *_DLL_IMPORTS directive to preprocessor
-                set_target_properties(${t_file} PROPERTIES COMPILE_DEFINITIONS "SHEAF_DLL_IMPORTS")
-                add_dependencies(${t_file} ${${COMPONENT}_IMPORT_LIBS})
-            else()
-                add_dependencies(${t_file} ${${COMPONENT}_SHARED_LIB})
-            endif()
-
-            if(LINUX64GNU OR LINUX64INTEL)
-                target_link_libraries(${t_file} ${${COMPONENT}_SHARED_LIB} ${HDF5_LIBRARIES})
-            elseif(WIN64MSVC OR WIN64INTEL)
-                if(${USE_VTK})
-                    target_link_libraries(${t_file} ${${COMPONENT}_IMPORT_LIBS} ${HDF5_LIBRARIES} ${VTK_LIBS}) 
-                else()
-                    target_link_libraries(${t_file} ${${COMPONENT}_IMPORT_LIBS} ${HDF5_LIBRARIES})                                         
-                endif()
-                # Insert the unit tests into the VS folder "unit test targets"
-                set_target_properties(${t_file} PROPERTIES FOLDER "Unit Test Targets")
-            endif()
-
-            # Add a test target for ${t_file}
-         
-            add_test(${t_file} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${t_file})
-            # Tag the test with the name of the current component.
-            set_property(TEST ${t_file} PROPERTY LABELS "${PROJECT_NAME}")
-
-            if(WIN64MSVC OR WIN64INTEL)
-                # Set the PATH environment variable for CTest so the HDF5 and Fields dlls lie in it.
-                set_tests_properties(${t_file} PROPERTIES ENVIRONMENT
-                                     "PATH=${HDF5_LIBRARY_DIRS};$CMAKE_ARCHIVE_OUTPUT_DIRECTORY}:${CMAKE_CFG_INTDIR}")
-            endif()
-        endif()
-    endforeach()
-
-endfunction(add_test_targets)
-
-# 
-# Create a target for each example.
-#
-function(add_example_targets)
-
-    if(${USE_VTK})
-        link_directories(${VTK_LIB_DIR})
-    endif()
-
-    foreach(t_cc_file ${${COMPONENT}_EXAMPLE_SRCS})
-        # link_directories only applies to targets created after it is called.
-        if(LINUX64GNU OR LINUX64INTEL)
-            link_directories($CMAKE_ARCHIVE_OUTPUT_DIRECTORY} ${HDF5_LIBRARY_DIRS} ${TETGEN_DIR})
-        else()
-            link_directories($CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_BUILD_TYPE} ${HDF5_LIBRARY_DIRS} ${TETGEN_DIR})
-        endif()    
-        # Let the user know what's being configured
-        status_message("Configuring example executables for ${PROJECT_NAME}")   
-        # Deduce name of executable from source filename
-        string(REPLACE .cc "" t_file_with_path ${t_cc_file})
-        # Remove path information so the executable goes into build/bin (or build/VisualStudio)
-        # and not into build/bin/examples (or build/VisualStudio/examples)
-        get_filename_component(t_file ${t_file_with_path} NAME)
-        set(${COMPONENT}_EXAMPLES ${${COMPONENT}_EXAMPLES} ${t_file} CACHE STRING "List of example binaries" FORCE)
-        mark_as_advanced(${COMPONENT}_EXAMPLES)    
-        # Add building of executable and link with shared library
-        message(STATUS "Creating ${t_file} from ${t_cc_file}")
-        add_executable(${t_file} ${t_cc_file})
-    
-        # Make sure the library is up to date
-        if(WIN64MSVC OR WIN64INTEL)
-            add_dependencies(${t_file} ${${COMPONENT}_IMPORT_LIB})
-            if(${USE_VTK})
-                link_directories(${${COMPONENT}_OUTPUT_DIR}/$(OutDir) ${VTK_LIB_DIR})
-                target_link_libraries(${t_file} ${${COMPONENT}_IMPORT_LIBS} ${VTK_LIBS})
-            else()
-                link_directories(${${COMPONENT}_OUTPUT_DIR}/$(OutDir))
-                target_link_libraries(${t_file} ${${COMPONENT}_IMPORT_LIBS})
-
-            endif()
-            
-            # Insert the unit tests into the VS folder "unit_tests"
-            set_target_properties(${t_file} PROPERTIES FOLDER "Example Targets")
-        else()
-            add_dependencies(${t_file} ${${COMPONENT}_STATIC_LIB})
-            if(${USE_VTK})
-                link_directories(${${COMPONENT}_OUTPUT_DIR} ${HDF5_LIBRARY_DIRS} ${TETGEN_DIR} ${VTK_LIB_DIR})
-                target_link_libraries(${t_file} ${${COMPONENT}_SHARED_LIB} ${HDF5_LIBRARIES} ${TETGEN_LIBS} ${VTK_LIBS})
-            else()
-                link_directories(${${COMPONENT}_OUTPUT_DIR} ${HDF5_LIBRARY_DIRS} ${TETGEN_DIR})
-                target_link_libraries(${t_file} ${${COMPONENT}_SHARED_LIB} ${HDF5_LIBRARIES} ${TETGEN_LIBS})
-            endif()
-        endif()
-    
-        # Supply the *_DLL_IMPORTS directive to preprocessor
-        set_target_properties(${t_file} PROPERTIES COMPILE_DEFINITIONS "SHEAF_DLL_IMPORTS")
-    
-    endforeach()
-
-endfunction(add_example_targets)
-
 #
 # Add the list of clusters to this component.
 #
@@ -717,7 +497,6 @@ function(set_component_vars)
     if(WIN64MSVC OR WIN64INTEL)
         set(${COMPONENT}_DYNAMIC_LIB ${PROJECT_NAME} CACHE STRING "${PROJECT_NAME} dynamic link library")
         set(${COMPONENT}_IMPORT_LIB ${PROJECT_NAME} CACHE STRING "${PROJECT_NAME} import library")
-#        set(${COMPONENT}_DEBUG_IMPORT_LIB ${PROJECT_NAME}_d CACHE STRING "${PROJECT_NAME} Debug import library")
         set(${COMPONENT}_CSHARP_BINDING_ASSY ${PROJECT_NAME}_csharp_assembly.dll CACHE STRING "${PROJECT_NAME} csharp binding assembly name")
     else()
         set(${COMPONENT}_SHARED_LIB lib${PROJECT_NAME}.so CACHE STRING "${PROJECT_NAME} shared library")
@@ -779,11 +558,6 @@ function(export_targets)
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")     
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(${COMPONENT}_IMPORT_LIBS ${${COMPONENT}_IMPORT_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative Win32 import library list\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-#        export(TARGETS ${${COMPONENT}_DEBUG_IMPORT_LIB} APPEND FILE ${CMAKE_BINARY_DIR}/${EXPORTS_FILE})
-#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(${COMPONENT}_DEBUG_IMPORT_LIB ${${COMPONENT}_DEBUG_IMPORT_LIB} CACHE STRING \"${PROJECT_NAME} Win32 import library \")\n")
-#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")     
-#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(${COMPONENT}_DEBUG_IMPORT_LIBS ${${COMPONENT}_DEBUG_IMPORT_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative Win32 import library list\")\n")
-#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")          
     else()
         export(TARGETS ${${COMPONENT}_SHARED_LIB} ${${COMPONENT}_STATIC_LIB} APPEND FILE ${CMAKE_BINARY_DIR}/${EXPORTS_FILE})
         file(APPEND  ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")

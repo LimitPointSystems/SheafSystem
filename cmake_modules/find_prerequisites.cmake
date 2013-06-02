@@ -1,6 +1,4 @@
 #
-# $RCSfile: find_prerequisites.cmake,v $ $Revision: 1.15 $ $Date: 2013/01/30 04:38:35 $
-#
 #
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
@@ -14,10 +12,6 @@
 #
 
 # HDF5, Tetgen, and Doxygen need to be found for all target platforms.
-
-#
-# Find Doxygen; Make sure we have exactly v1.5.4.
-# 1.5.4 does the best version of documenting our code base.
 #
 
 find_package(Doxygen)
@@ -36,7 +30,6 @@ if(ENABLE_STATIC_PREREQS)
 endif()
 
 find_package(HDF5 1.8.9 REQUIRED)
-
 if(HDF5_FOUND)
     configure_file(${CMAKE_MODULE_PATH}/hdf_definitions.cmake.in ${CMAKE_BINARY_DIR}/hdf_definitions.cmake)
     include(${CMAKE_BINARY_DIR}/hdf_definitions.cmake)
@@ -69,7 +62,6 @@ if(TETGEN_FOUND)
     configure_file(${CMAKE_MODULE_PATH}/tetgen_definitions.cmake.in ${CMAKE_BINARY_DIR}/tetgen_definitions.cmake)
     include(${CMAKE_BINARY_DIR}/tetgen_definitions.cmake)
     include_directories(${TETGEN_INC_DIR})
-    link_directories(${TETGEN_LIB_DIR})
 endif()
 
 

@@ -1,6 +1,4 @@
 #
-# $RCSfile: component_definitions.cmake,v $ $Revision: 1.41 $ $Date: 2013/03/27 17:31:37 $
-#
 #
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
@@ -10,15 +8,11 @@
 # This file contains declarations and functions unique to this component.
 #
 set(CMAKE_BACKWARDS_COMPATIBILITY 2.2)
+
 #
 # Include functions and definitions common to all components.
 # 
 include(${CMAKE_MODULE_PATH}/LPSCommon.cmake)
-
-#
-# Include cmake test functions and macros
-#
-#include(CTest)
 
 #
 # Define the clusters for this component.
@@ -46,7 +40,6 @@ if(WIN64INTEL OR WIN64MSVC)
     # Set the cumulative import library (win32) var for this component.
     #
     set(${COMPONENT}_IMPORT_LIBS  ${FIELDS_IMPORT_LIBS} ${${COMPONENT}_IMPORT_LIB} CACHE STRING " Cumulative import libraries (win32) for ${PROJECT_NAME}" FORCE)
- #   set(${COMPONENT}_DEBUG_IMPORT_LIBS ${FIELDS_DEBUG_IMPORT_LIBS} ${${COMPONENT}_DEBUG_IMPORT_LIB}  CACHE STRING " Cumulative debug import libraries (win32) for ${PROJECT_NAME}" FORCE)    
 
 else()
 
@@ -258,7 +251,7 @@ function(add_bindings_targets)
                                COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
                              )
             
-                    # Java documentation
+            # Java documentation
             add_custom_target(${PROJECT_NAME}-java-docs ALL
                                 COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${parent_classpath}" 
                                 -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
@@ -324,7 +317,6 @@ function(add_bindings_targets)
         if(LINUX64GNU OR LINUX64INTEL) 
             add_dependencies(${PROJECT_NAME}-java-binding ${PROJECT_NAME}_java_binding.jar)    
             add_dependencies(${PROJECT_NAME}-python-binding ALL fields-python-binding)
-           #add_dependencies(${PROJECT_NAME}-csharp-binding ${${COMPONENT}_CSHARP_BINDING_LIB})
             add_dependencies(${PROJECT_NAME}-python-binding ALL fields-python-binding)
         endif() 
         
@@ -399,9 +391,9 @@ function(add_dumpsheaf_target)
             link_directories(${FIBER_BUNDLES_OUTPUT_DIR}/$(OutDir))
             target_link_libraries(dumpsheaf ${FIBER_BUNDLES_IMPORT_LIBS})
         else()
-            add_dependencies(dumpsheaf ${FIBER_BUNDLES_STATIC_LIB})
+            add_dependencies(dumpsheaf ${FIBER_BUNDLES_SHARED_LIB})
             link_directories(${FIBER_BUNDLES_OUTPUT_DIR})
-            target_link_libraries(dumpsheaf ${FIBER_BUNDLES_STATIC_LIB})
+            target_link_libraries(dumpsheaf ${FIBER_BUNDLES_SHARED_LIB})
         endif()
     
         # Supply the *_DLL_IMPORTS directive to preprocessor

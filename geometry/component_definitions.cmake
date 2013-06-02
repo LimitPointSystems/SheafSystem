@@ -39,7 +39,6 @@ if(WIN64INTEL OR WIN64MSVC)
     # Set the cumulative import library (win32) var for this component.
     #
     set(${COMPONENT}_IMPORT_LIBS ${FIBER_BUNDLES_IMPORT_LIBS} ${${COMPONENT}_IMPORT_LIB} CACHE STRING " Cumulative import libraries (win32) for ${PROJECT_NAME}" FORCE)
-    #    set(${COMPONENT}_DEBUG_IMPORT_LIBS ${FIBER_BUNDLES_DEBUG_IMPORT_LIBS} ${${COMPONENT}_DEBUG_IMPORT_LIB}  CACHE STRING " Cumulative debug import libraries (win32) for ${PROJECT_NAME}" FORCE)    
 
 else()
 
@@ -148,14 +147,14 @@ function(add_library_targets)
         
         if(${USE_VTK})
             target_link_libraries(${${COMPONENT}_SHARED_LIB} ${FIBER_BUNDLES_SHARED_LIBS}) 
-            target_link_libraries(${${COMPONENT}_SHARED_LIB} LINK_PRIVATE ${TETGEN_LIB})
+            target_link_libraries(${${COMPONENT}_SHARED_LIB} LINK_PRIVATE Wl,-Bstatic ${TETGEN_LIB} -Wl,-Bdynamic)
             target_link_libraries(${${COMPONENT}_SHARED_LIB} LINK_PRIVATE ${VTK_LIBS})            
             target_link_libraries(${${COMPONENT}_STATIC_LIB} ${FIBER_BUNDLES_STATIC_LIBS}) 
             target_link_libraries(${${COMPONENT}_STATIC_LIB} LINK_PRIVATE ${TETGEN_LIB})
             target_link_libraries(${${COMPONENT}_STATIC_LIB} LINK_PRIVATE ${VTK_LIBS}) 
         else()
             target_link_libraries(${${COMPONENT}_SHARED_LIB} ${FIBER_BUNDLES_SHARED_LIBS}) 
-            target_link_libraries(${${COMPONENT}_SHARED_LIB} LINK_PRIVATE ${TETGEN_LIB})
+            target_link_libraries(${${COMPONENT}_SHARED_LIB} LINK_PRIVATE -Wl,-Bstatic ${TETGEN_LIB} -Wl,-Bdynamic)
             target_link_libraries(${${COMPONENT}_STATIC_LIB} ${FIBER_BUNDLES_STATIC_LIBS}) 
             target_link_libraries(${${COMPONENT}_STATIC_LIB} LINK_PRIVATE ${TETGEN_LIB})  
         endif()

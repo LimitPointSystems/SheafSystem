@@ -1,4 +1,5 @@
 #
+#
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
 #
@@ -37,7 +38,6 @@ if(WIN64INTEL OR WIN64MSVC)
     #
     if(ENABLE_STATIC_PREREQS)
         set(${COMPONENT}_IMPORT_LIBS ${${COMPONENT}_IMPORT_LIB}  CACHE STRING " Cumulative import libraries (win32) for ${PROJECT_NAME}" FORCE)
-#        set(${COMPONENT}_DEBUG_IMPORT_LIBS ${${COMPONENT}_DEBUG_IMPORT_LIB}  CACHE STRING " Cumulative debug import libraries (win32) for ${PROJECT_NAME}" FORCE)
     else()
         set(${COMPONENT}_IMPORT_LIBS ${HDF5_DLL_LIBRARY} ${${COMPONENT}_IMPORT_LIB}  CACHE STRING " Cumulative import libraries (win32) for ${PROJECT_NAME}" FORCE)        
     endif()
@@ -57,11 +57,11 @@ else()
         #
         # Set the cumulative static library var for this component.
         #
-        set(${COMPONENT}_STATIC_LIBS ${HDF5_LIBRARIES} ${${COMPONENT}_STATIC_LIB} CACHE STRING " Cumulative static libraries for ${PROJECT_NAME}" FORCE)
+        set(${COMPONENT}_STATIC_LIBS ${${COMPONENT}_STATIC_LIB} CACHE STRING " Cumulative static libraries for ${PROJECT_NAME}" FORCE)
         #
         # Set the cumulative shared library var for this component.
         #
-        set(${COMPONENT}_SHARED_LIBS ${HDF5_LIBRARIES} ${${COMPONENT}_SHARED_LIB} CACHE STRING " Cumulative shared libraries for ${PROJECT_NAME}" FORCE)
+        set(${COMPONENT}_SHARED_LIBS ${${COMPONENT}_SHARED_LIB} CACHE STRING " Cumulative shared libraries for ${PROJECT_NAME}" FORCE)
     endif()   
 endif()
 
@@ -109,26 +109,29 @@ function(add_library_targets)
         
         # Tell the linker where to look for this project's libraries.
         link_directories(${${COMPONENT}_OUTPUT_DIR})
+
         # Create the DLL.
         add_library(${${COMPONENT}_DYNAMIC_LIB} SHARED ${${COMPONENT}_SRCS})
         target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} LINK_PRIVATE debug ${HDF5_LIB_DIR}/hdf5d.lib optimized ${HDF5_LIB_DIR}/hdf5.lib)
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")
+
         # Override cmake's placing of "${${COMPONENT}_DYNAMIC_LIB}_EXPORTS into the preproc symbol table.
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES DEFINE_SYMBOL "SHEAF_DLL_EXPORTS")
 
     else()
 
+        
         # Static library
         add_library(${${COMPONENT}_STATIC_LIB} STATIC ${${COMPONENT}_SRCS})
         set_target_properties(${${COMPONENT}_STATIC_LIB} PROPERTIES OUTPUT_NAME ${PROJECT_NAME} LINKER_LANGUAGE CXX)
-        set_target_properties(${${COMPONENT}_STATIC_LIB} PROPERTIES LINK_INTERFACE_LIBRARIES "") 
-        target_link_libraries(${${COMPONENT}_STATIC_LIB} LINK_PRIVATE debug ${HDF5_hdf5_LIBRARY_DEBUG} optimized ${HDF5_hdf5_LIBRARY_RELEASE})
-        
+        #set_target_properties(${${COMPONENT}_STATIC_LIB} PROPERTIES LINK_INTERFACE_LIBRARIES "") 
+        target_link_libraries(${${COMPONENT}_STATIC_LIB} hdf5_cpp )       
+
         # Shared library
         add_library(${${COMPONENT}_SHARED_LIB} SHARED ${${COMPONENT}_SRCS})
         set_target_properties(${${COMPONENT}_SHARED_LIB} PROPERTIES OUTPUT_NAME ${PROJECT_NAME} LINKER_LANGUAGE CXX)
-        set_target_properties(${${COMPONENT}_SHARED_LIB} PROPERTIES LINK_INTERFACE_LIBRARIES "")        
-        target_link_libraries(${${COMPONENT}_SHARED_LIB} LINK_PRIVATE debug ${HDF5_hdf5_LIBRARY_DEBUG} optimized ${HDF5_hdf5_LIBRARY_RELEASE})        
+        set_target_properties(${${COMPONENT}_SHARED_LIB} PROPERTIES LINK_INTERFACE_LIBRARIES "")          
+        target_link_libraries(${${COMPONENT}_SHARED_LIB} -Wl,-Bstatic hdf5_cpp -Wl,-Bdynamic)  
 
         # Override cmake's placing of "${COMPONENT_LIB}_EXPORTS into the preproc symbol table.
         # CMake apparently detects the presence of cdecl_dllspec in the source and places
@@ -227,7 +230,6 @@ function(add_bindings_targets)
         # CSharp ##############################################################
         #
         
-        #set(CMAKE_SWIG_FLAGS -c++ -w842 -namespace sheaf)
         set(CMAKE_SWIG_FLAGS -c++ -namespace sheaf)        
 
         # Add the csharp binding library target
@@ -299,7 +301,7 @@ function(add_bindings_targets)
             add_dependencies(${PROJECT_NAME}-csharp-binding ${${COMPONENT}_CSHARP_BINDING_LIB})
         endif()
 
-        # bindings target aliases already declared at system level. Add dependencies here.
+        # Bindings target aliases already declared at system level. Add dependencies here.
         add_dependencies(${PROJECT_NAME}-bindings ${PROJECT_NAME}_java_binding.jar ${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_CSHARP_BINDING_LIB})
         
     endif()

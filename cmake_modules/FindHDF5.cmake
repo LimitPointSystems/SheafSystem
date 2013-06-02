@@ -98,7 +98,7 @@ FIND_PATH (HDF5_INCLUDE_DIRS "H5public.h"
         include
         Include
 )
-FIND_PATH (HDF5_LIB_DIR "hdf5.lib"
+FIND_PATH (HDF5_LIB_DIR "hdf5.lib" "libhdf5_cpp.a"
     HINTS ${_HDF5_HINTS} ${HDF5_ROOT}/lib
     PATHS ${_HDF5_PATHS}
 

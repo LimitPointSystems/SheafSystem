@@ -36,7 +36,6 @@ if(WIN64INTEL OR WIN64MSVC)
     # Set the cumulative import library (win32) var for this component.
     #
     set(${COMPONENT}_IMPORT_LIBS ${GEOMETRY_IMPORT_LIBS} ${${COMPONENT}_IMPORT_LIB} CACHE STRING " Cumulative import libraries (win32) for ${PROJECT_NAME}" FORCE)
-#    set(${COMPONENT}_DEBUG_IMPORT_LIBS ${GEOMETRY_DEBUG_IMPORT_LIBS} ${${COMPONENT}_DEBUG_IMPORT_LIB}  CACHE STRING " Cumulative debug import libraries (win32) for ${PROJECT_NAME}" FORCE)    
 
 else()
 
@@ -110,7 +109,6 @@ function(add_library_targets)
             target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} LINK_PRIVATE ${VTK_LIBS}) 
         else()
             target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${GEOMETRY_IMPORT_LIBS} )        
-           # target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} LINK_PRIVATE ${TETGEN_LIB}) 
         endif() 
         
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")   
