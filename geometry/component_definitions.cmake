@@ -147,7 +147,7 @@ function(add_library_targets)
         
         if(${USE_VTK})
             target_link_libraries(${${COMPONENT}_SHARED_LIB} ${FIBER_BUNDLES_SHARED_LIBS}) 
-            target_link_libraries(${${COMPONENT}_SHARED_LIB} LINK_PRIVATE Wl,-Bstatic ${TETGEN_LIB} -Wl,-Bdynamic)
+            target_link_libraries(${${COMPONENT}_SHARED_LIB} LINK_PRIVATE -Wl,-Bstatic ${TETGEN_LIB} -Wl,-Bdynamic)
             target_link_libraries(${${COMPONENT}_SHARED_LIB} LINK_PRIVATE ${VTK_LIBS})            
             target_link_libraries(${${COMPONENT}_STATIC_LIB} ${FIBER_BUNDLES_STATIC_LIBS}) 
             target_link_libraries(${${COMPONENT}_STATIC_LIB} LINK_PRIVATE ${TETGEN_LIB})
