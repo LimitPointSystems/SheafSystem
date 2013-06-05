@@ -36,15 +36,15 @@ if(WIN64INTEL OR WIN64MSVC)
     #
     # Set the cumulative import library (win32) var for this component.
     #
-    if(ENABLE_STATIC_PREREQS)
+    #if(ENABLE_STATIC_PREREQS)
         set(${COMPONENT}_IMPORT_LIBS ${${COMPONENT}_IMPORT_LIB}  CACHE STRING " Cumulative import libraries (win32) for ${PROJECT_NAME}" FORCE)
-    else()
-        set(${COMPONENT}_IMPORT_LIBS ${HDF5_DLL_LIBRARY} ${${COMPONENT}_IMPORT_LIB}  CACHE STRING " Cumulative import libraries (win32) for ${PROJECT_NAME}" FORCE)        
-    endif()
+    #else()
+    #    set(${COMPONENT}_IMPORT_LIBS ${HDF5_DLL_LIBRARY} ${${COMPONENT}_IMPORT_LIB}  CACHE STRING " Cumulative import libraries (win32) for ${PROJECT_NAME}" FORCE)        
+    #endif()
     
 else()
 
-     if(ENABLE_STATIC_PREREQS)
+     #if(ENABLE_STATIC_PREREQS)
         #
         # Set the cumulative static library var for this component.
         #
@@ -53,16 +53,16 @@ else()
         # Set the cumulative shared library var for this component.
         #
         set(${COMPONENT}_SHARED_LIBS ${${COMPONENT}_SHARED_LIB} CACHE STRING " Cumulative shared libraries for ${PROJECT_NAME}" FORCE)
-    else()
+    #else()
         #
         # Set the cumulative static library var for this component.
         #
-        set(${COMPONENT}_STATIC_LIBS ${${COMPONENT}_STATIC_LIB} CACHE STRING " Cumulative static libraries for ${PROJECT_NAME}" FORCE)
+     #   set(${COMPONENT}_STATIC_LIBS ${${COMPONENT}_STATIC_LIB} CACHE STRING " Cumulative static libraries for ${PROJECT_NAME}" FORCE)
         #
         # Set the cumulative shared library var for this component.
         #
-        set(${COMPONENT}_SHARED_LIBS ${${COMPONENT}_SHARED_LIB} CACHE STRING " Cumulative shared libraries for ${PROJECT_NAME}" FORCE)
-    endif()   
+      #  set(${COMPONENT}_SHARED_LIBS ${${COMPONENT}_SHARED_LIB} CACHE STRING " Cumulative shared libraries for ${PROJECT_NAME}" FORCE)
+    #endif()   
 endif()
 
 #
@@ -112,19 +112,17 @@ function(add_library_targets)
 
         # Create the DLL.
         add_library(${${COMPONENT}_DYNAMIC_LIB} SHARED ${${COMPONENT}_SRCS})
-        target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} LINK_PRIVATE debug ${HDF5_LIB_DIR}/hdf5d.lib optimized ${HDF5_LIB_DIR}/hdf5.lib)
+        target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} LINK_PRIVATE hdf5_cpp )        
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")
 
         # Override cmake's placing of "${${COMPONENT}_DYNAMIC_LIB}_EXPORTS into the preproc symbol table.
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES DEFINE_SYMBOL "SHEAF_DLL_EXPORTS")
 
     else()
-
         
         # Static library
         add_library(${${COMPONENT}_STATIC_LIB} STATIC ${${COMPONENT}_SRCS})
         set_target_properties(${${COMPONENT}_STATIC_LIB} PROPERTIES OUTPUT_NAME ${PROJECT_NAME} LINKER_LANGUAGE CXX)
-        #set_target_properties(${${COMPONENT}_STATIC_LIB} PROPERTIES LINK_INTERFACE_LIBRARIES "") 
         target_link_libraries(${${COMPONENT}_STATIC_LIB} hdf5_cpp )       
 
         # Shared library

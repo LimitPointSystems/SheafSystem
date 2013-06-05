@@ -124,7 +124,7 @@ set(ENABLE_WIN32_MP ON CACHE BOOL "Toggle win32 compiler MP directive. Works for
 #
 # Toggle linking of shared LPS libraries against static external prerequisites.
 #
-set(ENABLE_STATIC_PREREQS ON CACHE BOOL "Link shared LPS libraries against static external prerequisites Default is OFF.")
+#set(ENABLE_STATIC_PREREQS ON CACHE BOOL "Link shared LPS libraries against static external prerequisites Default is OFF.")
 
 #
 # $$HACK Toggle intel compiler warnings.
