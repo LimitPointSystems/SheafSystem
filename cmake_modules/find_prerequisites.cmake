@@ -25,9 +25,7 @@ else()
 endif()
 
 # Tell hdf to use static libs
-#if(ENABLE_STATIC_PREREQS)
-    set(HDF5_USE_STATIC_LIBRARIES ON)
-#endif()
+set(HDF5_USE_STATIC_LIBRARIES ON)
 
 find_package(HDF5 1.8.9 REQUIRED)
 if(HDF5_FOUND)

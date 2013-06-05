@@ -36,15 +36,6 @@ if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT AND LIB_VERSION MATCHES "0.0.0.0"
         "$ENV{USERPROFILE}/SheafSystem" CACHE PATH "SheafSystem install prefix" FORCE
         )
     endif()
-#else()
-#    if(LINUX64GNU OR LINUX64INTEL)
-#      set(CMAKE_INSTALL_PREFIX
-#        "$ENV{HOME}/SheafSystem-${LIB_VERSION}" CACHE PATH "SheafSystem install prefix"
-#        )
-#    else()
-#      set(CMAKE_INSTALL_PREFIX "$ENV{USERPROFILE}/SheafSystem-${LIB_VERSION}" CACHE PATH "SheafSystem install prefix" FORCE
-#        )
-#    endif()
 endif()
 
 #
@@ -122,11 +113,6 @@ set(USE_VTK OFF CACHE BOOL "Set to link geometry against VTK libs.")
 set(ENABLE_WIN32_MP ON CACHE BOOL "Toggle win32 compiler MP directive. Works for MS and Intel. Default is ON.")
 
 #
-# Toggle linking of shared LPS libraries against static external prerequisites.
-#
-#set(ENABLE_STATIC_PREREQS ON CACHE BOOL "Link shared LPS libraries against static external prerequisites Default is OFF.")
-
-#
 # $$HACK Toggle intel compiler warnings.
 #
 set(INTELWARN CACHE BOOL "Toggle Intel compiler warnings")
@@ -195,7 +181,7 @@ include(${CMAKE_MODULE_PATH}/target_declarations.cmake)
 include(${CMAKE_MODULE_PATH}/find_prerequisites.cmake)
 
 #
-# C++11 features
+# Detect C++11 features
 #
 message(STATUS " ")
 message(STATUS "Checking for C++11 Compliance - ")
@@ -204,7 +190,7 @@ message(STATUS " ")
 include(${CMAKE_MODULE_PATH}/CheckCXX11Features.cmake)
 
 #
-# Utility function to add a component to a system.
+# Utility function to add components to a system.
 #
 function(add_components)
 

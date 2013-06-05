@@ -44,14 +44,10 @@ INCLUDE (FindPackageHandleStandardArgs)
 if(LINUX64GNU OR LINUX64INTEL)
     set(HDF5_ROOT "$ENV{HOME}/LPS/prerequisites/hdf")
 else()
-  #  if(ENABLE_STATIC_PREREQS)
-        set(HDF5_USE_STATIC_LIBRARIES ON)
-        # We can deal with Windows here. Linux static linking needs to be taken care
-        # of at the link line because static and shared hdf libs are in the same place
-        set(HDF5_ROOT "$ENV{USERPROFILE}/LPS/prerequisites/hdf")
-   # else()
-    #    set(HDF5_ROOT "$ENV{USERPROFILE}/LPS/prerequisites/hdf")
-    #endif()
+    set(HDF5_USE_STATIC_LIBRARIES ON)
+    # We can deal with Windows here. Linux static linking needs to be taken care
+    # of at the link line because static and shared hdf libs are in the same place
+    set(HDF5_ROOT "$ENV{USERPROFILE}/LPS/prerequisites/hdf")
 endif()
 
 # The HINTS option should only be used for values computed from the system.

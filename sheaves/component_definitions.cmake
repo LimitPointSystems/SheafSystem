@@ -36,33 +36,16 @@ if(WIN64INTEL OR WIN64MSVC)
     #
     # Set the cumulative import library (win32) var for this component.
     #
-    #if(ENABLE_STATIC_PREREQS)
-        set(${COMPONENT}_IMPORT_LIBS ${${COMPONENT}_IMPORT_LIB}  CACHE STRING " Cumulative import libraries (win32) for ${PROJECT_NAME}" FORCE)
-    #else()
-    #    set(${COMPONENT}_IMPORT_LIBS ${HDF5_DLL_LIBRARY} ${${COMPONENT}_IMPORT_LIB}  CACHE STRING " Cumulative import libraries (win32) for ${PROJECT_NAME}" FORCE)        
-    #endif()
-    
+    set(${COMPONENT}_IMPORT_LIBS ${${COMPONENT}_IMPORT_LIB}  CACHE STRING " Cumulative import libraries (win32) for ${PROJECT_NAME}" FORCE)
 else()
-
-     #if(ENABLE_STATIC_PREREQS)
-        #
-        # Set the cumulative static library var for this component.
-        #
-        set(${COMPONENT}_STATIC_LIBS ${${COMPONENT}_STATIC_LIB} CACHE STRING " Cumulative static libraries for ${PROJECT_NAME}" FORCE)   
-        #
-        # Set the cumulative shared library var for this component.
-        #
-        set(${COMPONENT}_SHARED_LIBS ${${COMPONENT}_SHARED_LIB} CACHE STRING " Cumulative shared libraries for ${PROJECT_NAME}" FORCE)
-    #else()
-        #
-        # Set the cumulative static library var for this component.
-        #
-     #   set(${COMPONENT}_STATIC_LIBS ${${COMPONENT}_STATIC_LIB} CACHE STRING " Cumulative static libraries for ${PROJECT_NAME}" FORCE)
-        #
-        # Set the cumulative shared library var for this component.
-        #
-      #  set(${COMPONENT}_SHARED_LIBS ${${COMPONENT}_SHARED_LIB} CACHE STRING " Cumulative shared libraries for ${PROJECT_NAME}" FORCE)
-    #endif()   
+    #
+    # Set the cumulative static library var for this component.
+    #
+    set(${COMPONENT}_STATIC_LIBS ${${COMPONENT}_STATIC_LIB} CACHE STRING " Cumulative static libraries for ${PROJECT_NAME}" FORCE)   
+    #
+    # Set the cumulative shared library var for this component.
+    #
+    set(${COMPONENT}_SHARED_LIBS ${${COMPONENT}_SHARED_LIB} CACHE STRING " Cumulative shared libraries for ${PROJECT_NAME}" FORCE)
 endif()
 
 #
