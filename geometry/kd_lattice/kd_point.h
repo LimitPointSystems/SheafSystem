@@ -247,6 +247,17 @@ public:
   static bool is_truncation_reversal(const kd_lattice& xhost, const scoped_index& xid);
 
   ///
+  /// True if and only if this is a centroid point.
+  ///
+  bool is_centroid() const;
+
+  ///
+  /// True if and only if the point with id xid in
+  /// kd_lattice xhost is a centroid point
+  ///
+  static bool is_centroid(const kd_lattice& xhost, const scoped_index& xid);
+
+  ///
   /// The lines containing this point..
   ///
   void lines(id_list& xresult) const;
@@ -255,6 +266,16 @@ public:
   /// The lines containing the point with id xid in kd_lattice xhost.
   ///
   static void lines(const kd_lattice& xhost, const scoped_index& xid, id_list& xresult);
+
+  ///
+  /// The polygon containing this centroid point.
+  ///
+  void polygon(id_list& xresult) const;
+
+  ///
+  /// The polygon containing the centroid point with id xid in kd_lattice xhost.
+  ///
+  static void polygon(const kd_lattice& xhost, const scoped_index& xid, id_list& xresult);
 
   ///
   /// The surfaces containing this point..

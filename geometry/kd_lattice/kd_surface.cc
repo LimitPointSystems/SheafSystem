@@ -327,6 +327,55 @@ members(const kd_lattice& xhost, const scoped_index& xid, id_list& xmbrs)
 
 void
 geometry::kd_surface::
+centroids(id_list& xcentroids) const
+{
+  // Preconditions:
+
+  require(precondition_of(centroids(host(),id(), xcentroids)));
+
+  // Body:
+
+  centroids(*_host, _id, xcentroids);
+
+  // Postconditions:
+
+  ensure(postcondition_of(centroids(host(),id(), xcentroids)));
+
+  // Exit:
+
+  return;
+}
+
+void
+geometry::kd_surface::
+centroids(const kd_lattice& xhost, const scoped_index& xid, id_list& xcentroids)
+{
+  // cout << endl << "Entering kd_surface::centroids." << endl;
+  // Preconditions:
+
+  require(xhost.base_space().state_is_read_accessible());
+  require(xhost.surfaces().contains(xid));
+
+  // Body:
+
+  base_space_member lsurf(&xhost.base_space(), xid);
+  set_postorder_itr litr(lsurf, xhost.centroids().sp(),true, true);
+  while(!litr.is_done())
+    {
+      xcentroids.push_back(litr.index());
+      litr.next();
+    }
+
+  // Postconditions:
+
+  // Exit:
+
+  // cout << "Leaving kd_surface::centroids." << endl;
+  return;
+}
+
+void
+geometry::kd_surface::
 lines(id_list& xlines) const
 {
   // Preconditions:
