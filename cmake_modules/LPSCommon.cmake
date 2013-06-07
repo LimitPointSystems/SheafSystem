@@ -817,7 +817,11 @@ function(install_prereqs)
         GROUP_READ GROUP_EXECUTE
         WORLD_READ WORLD_EXECUTE   
         )
-            
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK OFF CACHE BOOL \"Set to link against VTK libs\")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/lib/vtk CACHE STRING \"Location of VTK libs\")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     else()
     
         foreach(name ${VTK_LIBS})
@@ -825,7 +829,7 @@ function(install_prereqs)
             set(VTK_IMPORT_LIBS ${VTK_IMPORT_LIBS} ${files})
         endforeach()
         
-        install(FILES ${VTK_INSTALL_LIBS} DESTINATION lib/vtk/
+        install(FILES ${VTK_IMPORT_LIBS} DESTINATION lib/vtk/
         PERMISSIONS
         OWNER_WRITE OWNER_READ OWNER_EXECUTE
         GROUP_READ GROUP_EXECUTE
@@ -837,20 +841,19 @@ function(install_prereqs)
             set(VTK_RUNTIME_LIBS ${VTK_RUNTIME_LIBS} ${files})
         endforeach()
         
-        install(FILES ${VTK_RUNTIME_LIBS} DESTINATION lib/vtk/
+        install(FILES ${VTK_RUNTIME_LIBS} DESTINATION bin/vtk/
         PERMISSIONS
         OWNER_WRITE OWNER_READ OWNER_EXECUTE
         GROUP_READ GROUP_EXECUTE
         WORLD_READ WORLD_EXECUTE   
         )
-            
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK OFF CACHE BOOL \"Set to link against VTK libs\")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/bin/vtk CACHE STRING \"Location of VTK libs\")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")            
     endif()
 
-    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK OFF CACHE BOOL \"Set to link against VTK libs\")\n")
-    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/lib/vtk CACHE STRING \"Location of VTK libs\")\n")
-    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         
      # Install only the VTK includes we use    
     foreach(inc ${VTK_INCS})
