@@ -88,6 +88,16 @@ public:
   static void members(const kd_lattice& xhost, const scoped_index& xid, id_list& xmbrs);
 
   ///
+  /// The centroids contained in this surface.
+  ///
+  void centroids(id_list& xcentroids) const;
+
+  ///
+  /// The centroids contained in the surface with id xid in kd_lattice xhost.
+  ///
+  static void centroids(const kd_lattice& xhost, const scoped_index& xid, id_list& xcentroids);
+
+  ///
   /// The lines contained in this surface.
   ///
   void lines(id_list& xlines) const;

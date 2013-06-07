@@ -20,6 +20,7 @@
 #include "kd_lattice.h"
 #include "kd_line.h"
 #include "kd_segment.h"
+#include "kd_triangle.h"
 #include "kd_truncation_pair.h"
 #include "kd_truncation.h"
 #include "postorder_itr.h"
@@ -866,6 +867,78 @@ is_last(const kd_lattice& xhost, const scoped_index& xid)
   return result;
 }
 
+void
+geometry::kd_point::
+update_cohorts()
+{
+  // cout << endl << "Entering kd_point::update_cohorts." << endl;
+
+  // Preconditions:
+
+  require(precondition_of(update_cohorts(host(), id())));
+
+  // Body:
+
+  update_cohorts(*_host, _id);
+
+  // Postconditions:
+
+  ensure(postcondition_of(update_cohorts(host(), id())));
+
+  // Exit:
+
+  // cout << "Leaving kd_point::update_cohorts." << endl;
+  return;
+}
+
+void
+geometry::kd_point::
+update_cohorts(kd_lattice& xhost, const scoped_index& xid)
+{
+  // cout << endl << "Entering kd_point::update_cohorts." << endl;
+
+  // Preconditions:
+
+  require(xhost.base_space().state_is_read_accessible());
+  require(xhost.base_space().vertices().contains_member(xid));
+
+  // Body:
+
+  if(xhost.intersection_points().contains(xid))
+  {
+    if(!kd_point::is_intersection(xhost, xid))
+    {
+      xhost.intersection_points().remove_member(xid);
+    }
+  }
+
+  if(xhost.truncation_points().contains(xid))
+  {
+    if(!kd_point::is_truncation(xhost, xid))
+    {
+      xhost.truncation_points().remove_member(xid);
+    }
+  }
+
+  if(xhost.truncation_reversal_points().contains(xid))
+  {
+    /// @error: see is_truncation_reversal.
+    if(!kd_point::is_truncation_reversal(xhost, xid))
+    {
+      xhost.truncation_reversal_points().remove_member(xid);
+    }
+  }
+
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving kd_point::update_cohorts." << endl;
+  return;
+}
+
 bool
 geometry::kd_point::
 is_intersection() const
@@ -916,6 +989,7 @@ is_intersection(const kd_lattice& xhost, const scoped_index& xid)
   // cout << "Leaving kd_point::is_intersection." << endl;
   return result;
 }
+
 
 bool
 geometry::kd_point::
@@ -1026,35 +1100,35 @@ is_truncation_reversal(const kd_lattice& xhost, const scoped_index& xid)
   return result;
 }
 
-void
+bool
 geometry::kd_point::
-update_cohorts()
+is_centroid() const
 {
-  // cout << endl << "Entering kd_point::update_cohorts." << endl;
+  // cout << endl << "Entering kd_point::is_centroid." << endl;
 
   // Preconditions:
 
-  require(precondition_of(update_cohorts(host(), id())));
+  require(precondition_of(is_centroid(host(), id())));
 
   // Body:
 
-  update_cohorts(*_host, _id);
+  bool result = is_centroid(*_host, _id);
 
   // Postconditions:
 
-  ensure(postcondition_of(update_cohorts(host(), id())));
+  ensure(postcondition_of(is_centroid(host(), id())));
 
   // Exit:
 
-  // cout << "Leaving kd_point::update_cohorts." << endl;
-  return;
+  // cout << "Leaving kd_point::is_centroid." << endl;
+  return result;
 }
 
-void
+bool
 geometry::kd_point::
-update_cohorts(kd_lattice& xhost, const scoped_index& xid)
+is_centroid(const kd_lattice& xhost, const scoped_index& xid)
 {
-  // cout << endl << "Entering kd_point::update_cohorts." << endl;
+  // cout << endl << "Entering kd_point::is_centroid." << endl;
 
   // Preconditions:
 
@@ -1063,40 +1137,83 @@ update_cohorts(kd_lattice& xhost, const scoped_index& xid)
 
   // Body:
 
-  if(xhost.intersection_points().contains(xid))
-  {
-    if(!kd_point::is_intersection(xhost, xid))
-    {
-      xhost.intersection_points().remove_member(xid);
-    }
-  }
+  bool result = xhost.centroids().contains(xid);
 
-  if(xhost.truncation_points().contains(xid))
-  {
-    if(!kd_point::is_truncation(xhost, xid))
-    {
-      xhost.truncation_points().remove_member(xid);
-    }
-  }
-
-  if(xhost.truncation_reversal_points().contains(xid))
-  {
-    /// @error: see is_truncation_reversal.
-    if(!kd_point::is_truncation_reversal(xhost, xid))
-    {
-      xhost.truncation_reversal_points().remove_member(xid);
-    }
-  }
-
-  
   // Postconditions:
 
+
+  // Exit:
+  // cout << "Leaving kd_point::is_centroid." << endl;
+  return result;
+}
+
+void
+geometry::kd_point::
+polygon(id_list& xresult) const
+{
+  // cout << endl << "Entering kd_point::polygon." << endl;
+
+  // Preconditions:
+
+  require(precondition_of(polygon(host(), id(), xresult)));
+
+  // Body:
+
+  polygon(host(), id(), xresult);
+
+  // Postconditions:
+
+  ensure(postcondition_of(polygon(host(), id(), xresult)));
+
+  // Exit:
+
+  // cout << "Leaving kd_point::polygon." << endl;
+  return;
+}
+
+void
+geometry::kd_point::
+polygon(const kd_lattice& xhost, const scoped_index& xid, id_list& xresult)
+{
+  // cout << endl << "Entering kd_point::polygon." << endl;
+
+  // Preconditions:
+
+  require(xhost.base_space().state_is_read_accessible());
+  require(xhost.points().is_active(xid));
+  require(is_centroid(xhost, xid));
+
+  define_old_variable(size_type old_xresult_size = xresult.size());
+
+  // Body:
+
+  // Get the triangles containing the point.
+
+  id_list ltrilst;
+  triangles(xhost, xid, ltrilst);
+
+  // Traverse triangle list, extracting first
+  // edge of each triangle.
+
+  scoped_index ltri_verts[kd_triangle::POINT_CT];
+  id_list::iterator ltri = ltrilst.begin();
+  while(ltri != ltrilst.end())
+  {
+	kd_triangle::points(xhost, *ltri, ltri_verts);
+	xresult.push_back(ltri_verts[0]);
+	xresult.push_back(ltri_verts[1]);
+	++ltri;
+  }
+  // Postconditions:
+
+  ensure(xresult.size() >= old_xresult_size);
   
   // Exit:
 
-  // cout << "Leaving kd_point::update_cohorts." << endl;
+  // cout << "Leaving kd_point::polygon." << endl;
   return;
 }
+
 
 void
 geometry::kd_point::
@@ -1177,6 +1294,7 @@ lines(const kd_lattice& xhost, const scoped_index& xid, id_list& xresult)
   // cout << "Leaving kd_point::lines." << endl;
   return;
 }
+
 
 void
 geometry::kd_point::
@@ -1288,6 +1406,9 @@ triangles(const kd_lattice& xhost, const scoped_index& xid, id_list& xresult)
 
   const base_space_poset& lbase = xhost.base_space();
   
+  // Triangles contain their vertices directly, even
+  // if the vertex is also contained in a segment.
+
   index_space_iterator& litr = lbase.get_cover_id_space_iterator(UPPER, xid);
   scoped_index lid(lbase.member_id(false));
   while(!litr.is_done())
