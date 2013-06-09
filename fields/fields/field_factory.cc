@@ -734,7 +734,7 @@ new_scalar_field_1d_unstructured(fiber_bundles_namespace& xns,
   // Body:
 
   // Create the mesh.
-
+  post_information_message("")
   unstructured_block* lbase_space =
     new_1d_unstructured_base_space(xns, xname+"_base_space", xi_size);
 
@@ -751,7 +751,7 @@ new_scalar_field_1d_unstructured(fiber_bundles_namespace& xns,
   // Create the field.
 
   field_vd* result = new field_vd(*lcoords, *lprop, true);
-
+  post_information_message("")
   // Set the property values.
 
   if(xfcn == 0)
@@ -765,7 +765,7 @@ new_scalar_field_1d_unstructured(fiber_bundles_namespace& xns,
 
   lbase_space->detach_from_state();
   delete lbase_space;
-
+  post_information_message("")
   lcoords->detach_from_state();
   delete lcoords;
 

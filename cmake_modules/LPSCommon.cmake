@@ -822,7 +822,8 @@ function(install_prereqs)
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/lib/vtk CACHE STRING \"Location of VTK libs\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-    else()
+
+    elseif(WIN32) 
     
         foreach(name ${VTK_LIBS})
             file(GLOB files "${VTK_LIB_DIR}/${name}.lib")

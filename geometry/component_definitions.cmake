@@ -366,10 +366,10 @@ function(add_install_target)
             install(TARGETS ${${COMPONENT}_DYNAMIC_LIB} RUNTIME DESTINATION bin/\${BUILD_TYPE})
             
             # Only try to install the pdb files if they exist. Easier to determine existence than the current config type in win32.
-            if(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}.pdb")
-                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}.pdb DESTINATION bin/\${BUILD_TYPE})
-            elseif(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}.pdb")
-                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}.pdb DESTINATION bin/\${BUILD_TYPE})               
+             if(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb")
+                 install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb DESTINATION bin/\${BUILD_TYPE})
+            elseif(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb")
+                 install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb DESTINATION bin/\${BUILD_TYPE})               
             endif()
                              
             if(SWIG_FOUND AND BUILD_BINDINGS)
