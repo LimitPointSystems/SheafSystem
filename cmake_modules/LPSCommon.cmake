@@ -803,12 +803,13 @@ function(install_prereqs)
     # Prerequisite components install
     if(LINUX64INTEL OR LINUX64GNU)
     
-        foreach(name ${VTK_LIBS})
+        foreach(name ${VTK_INSTALL_LIBS})
             file(GLOB files "${VTK_LIB_DIR}/lib${name}.*")
-            set(VTK_INSTALL_LIBS ${VTK_INSTALL_LIBS} ${files})
+            string(REPLACE "${VTK_LIB_DIR}/lib${name}.a" "" files "${files}")
+            set(VTK_INST_LIBS ${VTK_INST_LIBS} "${files}")
         endforeach()
-        
-        install(FILES ${VTK_INSTALL_LIBS} DESTINATION lib/vtk/
+          message(STATUS "VTK INSTALL LIBS ARE: ${VTK_INST_LIBS}") 
+        install(FILES ${VTK_INST_LIBS} DESTINATION lib/vtk/
         PERMISSIONS
         OWNER_WRITE OWNER_READ OWNER_EXECUTE
         GROUP_READ GROUP_EXECUTE
@@ -822,12 +823,12 @@ function(install_prereqs)
 
     elseif(WIN32) 
     
-        foreach(name ${VTK_LIBS})
+        foreach(name ${VTK_INSTALL_LIBS})
             file(GLOB files "${VTK_LIB_DIR}/${name}.lib")
-            set(VTK_IMPORT_LIBS ${VTK_IMPORT_LIBS} ${files})
+            set(VTK_INST_LIBS ${VTK_INST_LIBS} ${files})
         endforeach()
-        
-        install(FILES ${VTK_IMPORT_LIBS} DESTINATION lib/vtk/
+        message(STATUS "VTK INSTALL LIBS ARE: ${VTK_IMPORT_LIBS}")
+        install(FILES ${VTK_INST_LIBS} DESTINATION lib/vtk/
         PERMISSIONS
         OWNER_WRITE OWNER_READ OWNER_EXECUTE
         GROUP_READ GROUP_EXECUTE
