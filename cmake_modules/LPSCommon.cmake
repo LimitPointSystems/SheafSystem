@@ -808,7 +808,6 @@ function(install_prereqs)
             string(REPLACE "${VTK_LIB_DIR}/lib${name}.a" "" files "${files}")
             set(VTK_INST_LIBS ${VTK_INST_LIBS} "${files}")
         endforeach()
-          message(STATUS "VTK INSTALL LIBS ARE: ${VTK_INST_LIBS}") 
         install(FILES ${VTK_INST_LIBS} DESTINATION lib/vtk/
         PERMISSIONS
         OWNER_WRITE OWNER_READ OWNER_EXECUTE
