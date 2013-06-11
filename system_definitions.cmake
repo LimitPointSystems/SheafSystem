@@ -93,8 +93,11 @@ endif(NOT CMAKE_BUILD_TYPE)
 set_property(GLOBAL PROPERTY DEBUG_CONFIGURATIONS "Debug-contracts" "Debug-no-contracts") 
 
 if(WIN64MSVC OR WIN64INTEL)
-    set(CMAKE_DEBUG-CONTRACTS_POSTFIX "_d"CACHE STRING "Debug libs suffix")
-    set(CMAKE_DEBUG-NO-CONTRACTS_POSTFIX "_d"CACHE STRING "Debug libs suffix")
+    set(CMAKE_DEBUG-CONTRACTS_POSTFIX "_d" CACHE STRING "Debug libs suffix")
+    set(CMAKE_DEBUG-NO-CONTRACTS_POSTFIX "_d" CACHE STRING "Debug libs suffix")
+else()
+    set(CMAKE_DEBUG-CONTRACTS_POSTFIX "_debug" CACHE STRING "Debug libs suffix")
+    set(CMAKE_DEBUG-NO-CONTRACTS_POSTFIX "_debug" CACHE STRING "Debug libs suffix")
 endif()
 
 #   
