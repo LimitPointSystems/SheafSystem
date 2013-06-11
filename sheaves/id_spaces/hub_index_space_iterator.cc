@@ -23,12 +23,11 @@
 
 sheaf::hub_index_space_iterator::
 hub_index_space_iterator()
+  : _mbr_itr(0)
 {
   // Preconditions:
 
   // Body:
-
-  _mbr_itr = 0;
 
   // Postconditions:
 
@@ -62,6 +61,7 @@ hub_index_space_iterator(const hub_index_space_iterator& xother)
 sheaf::hub_index_space_iterator::
 hub_index_space_iterator(const index_space_family& xid_spaces,
 			 pod_type xindex)
+  : _mbr_itr(0)
 {
   // Preconditions:
 
@@ -86,6 +86,7 @@ hub_index_space_iterator(const index_space_family& xid_spaces,
 sheaf::hub_index_space_iterator::
 hub_index_space_iterator(const index_space_family& xid_spaces,
 			 const string& xname)
+  : _mbr_itr(0)
 {
   // Preconditions:
 
@@ -366,6 +367,11 @@ attach_to(explicit_index_space_state* xstate)
 
   primary_sum_index_space_state* lstate =
     reinterpret_cast<primary_sum_index_space_state*>(xstate);
+
+  if(_mbr_itr != 0)
+  {
+    delete _mbr_itr;
+  }
 
   _state   = xstate;
   _mbr_itr = lstate->_members.iterator(true);

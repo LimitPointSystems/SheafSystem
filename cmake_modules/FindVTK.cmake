@@ -76,7 +76,7 @@ endif()
   # Look for UseVTK.cmake in build trees or under <prefix>/include/vtk.
   find_path(VTK_LIB_DIR
     NAMES UseVTK.cmake
-    PATH_SUFFIXES vtk-5.6 vtk-5.10 vtk
+    PATH_SUFFIXES vtk-5.10 vtk
     HINTS $ENV{VTK_LIB_DIR} $ENV{HOME}/LPS/prerequisites/vtk/lib $ENV{USERPROFILE}/LPS/prerequisites/vtk/lib
 
     PATHS
@@ -104,7 +104,15 @@ endif()
 get_filename_component(__TMP_DIR "${VTK_LIB_DIR}" PATH)
 get_filename_component(__TMP_DIR "${__TMP_DIR}" PATH)
 set(VTK_BIN_DIR "${__TMP_DIR}/bin" CACHE PATH "VTK Runtime libraries location.")
-message(STATUS "${VTK_BIN_DIR}")
+
+get_filename_component(__TMP_DIR "${VTK_LIB_DIR}" PATH)
+get_filename_component(__TMP_DIR "${__TMP_DIR}" PATH)
+set(VTK_INCLUDE_DIRS "${__TMP_DIR}/include/vtk-5.10" CACHE PATH "VTK Headers location.")
+
+#if(VTK_LIB_DIR)
+#    set(VTK_FOUND 1)
+#endif()
+
 #-----------------------------------------------------------------------------
 if(VTK_FOUND)
   # set USE_VTK_FILE for backward-compatability.

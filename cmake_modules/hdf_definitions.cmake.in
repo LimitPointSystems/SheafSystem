@@ -7,29 +7,21 @@
 
 set(HDF5_INCLUDE_DIRS @HDF5_INCLUDE_DIRS@ CACHE 
 	STRING "Location of the hdf5 includes.")
-set(HDF5_DLL_LIBRARY @HDF5_DLL_LIBRARY@ CACHE 
-	STRING "Location of the hdf5 DLL.")
-set(HDF5_STATIC_LIBRARY @HDF5_STATIC_LIBRARY@ CACHE 
-	STRING "Location of the hdf5 DLL.")	
-set(HDF5_INCLUDE_DIR @HDF5_INCLUDE_DIR@ CACHE
-	STRING "Location of the hdf5 includes (deprecated).")
-set(HDF5_DEFINITIONS @HDF5_DEFINITIONS@ CACHE
-	STRING "Required compiler definitions for HDF5.")
-set(HDF5_C_LIBRARIES @HDF5_C_LIBRARIES@ CACHE
-	STRING "Required libraries for the HDF5 C bindings.")
-set(HDF5_CXX_LIBRARIES @HDF5_CXX_LIBRARIES@ CACHE
-	STRING "Required libraries for the HDF5 C++ bindings.")
-set(HDF5_LIBRARIES @HDF5_LIBRARIES@ CACHE
-	STRING "Required libraries for all requested bindings.")
 set(HDF5_FOUND @HDF5_FOUND@ CACHE
 	STRING "True if HDF5 was found on the system.")
-set(HDF5_LIBRARY_DIRS @HDF5_LIBRARY_DIRS@ CACHE
-	STRING "The full set of library directories.")
-set(HDF5_IS_PARALLEL @HDF5_IS_PARALLEL@ CACHE
-	STRING "True if HDF5 has parallel IO support ")
-set(HDF5_C_COMPILER_EXECUTABLE  @HDF5_C_COMPILER_EXECUTABLE@ CACHE
-	STRING "Path to the HDF5 C wrapper compiler.")
-set(HDF5_CXX_COMPILER_EXECUTABLE @HDF5_CXX_COMPILER_EXECUTABLE@ CACHE
-	STRING "Path to the HDF5 C++ wrapper compiler.")
 set(HDF5_DIFF_EXECUTABLE @HDF5_DIFF_EXECUTABLE@ CACHE
 	STRING "Path to the HDF5 dataset comparison tool.")
+
+if(WIN32)
+	set(HDF5_INCS hdf5.h H5public.h H5pubconf.h H5version.h H5api_adpt.h H5Apublic.h H5Ipublic.h 
+	H5Opublic.h H5Lpublic.h H5Tpublic.h H5ACpublic.h H5Cpublic.h H5Dpublic.h H5Epublic.h H5Epubgen.h 
+	H5Fpublic.h H5FDpublic.h H5Gpublic.h H5MMpublic.h H5Zpublic.h H5Rpublic.h H5Spublic.h H5FDcore.h 
+	H5FDfamily.h H5FDlog.h H5FDmpi.h H5FDmpio.h H5FDmpiposix.h H5FDmulti.h H5Ppublic.h H5FDstdio.h 
+	H5FDsec2.h H5FDdirect.h H5FDwindows.h CACHE STRING "HDF required includes" FORCE)
+else()
+	set(HDF5_INCS hdf5.h H5public.h H5pubconf.h H5version.h H5api_adpt.h H5Apublic.h H5Ipublic.h 
+	H5Opublic.h H5Lpublic.h H5Tpublic.h H5ACpublic.h H5Cpublic.h H5Dpublic.h H5Epublic.h H5Epubgen.h 
+	H5Fpublic.h H5FDpublic.h H5Gpublic.h H5MMpublic.h H5Zpublic.h H5Rpublic.h H5Spublic.h H5FDcore.h 
+	H5FDfamily.h H5FDlog.h H5FDmpi.h H5FDmpio.h H5FDmpiposix.h H5FDmulti.h H5Ppublic.h H5FDstdio.h 
+	H5FDsec2.h H5FDdirect.h CACHE STRING "HDF required includes" FORCE)
+endif()	

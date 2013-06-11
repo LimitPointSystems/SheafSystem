@@ -108,8 +108,7 @@ function(add_library_targets)
             target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${GEOMETRY_IMPORT_LIBS}) 
             target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} LINK_PRIVATE ${VTK_LIBS}) 
         else()
-            target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${GEOMETRY_IMPORT_LIBS})        
-           # target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} LINK_PRIVATE ${TETGEN_LIB}) 
+            target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${GEOMETRY_IMPORT_LIBS} )        
         endif() 
         
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")   
@@ -308,7 +307,7 @@ function(add_bindings_targets)
             add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} ${GEOMETRY_PYTHON_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIB})
             # Including both release and debug libs here. Linker is smart enough to know which one to use, and since the build type is a run-time decision in VS
             # we have no way to choose when generating the make file.
-            target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${GEOMETRY_PYTHON_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIB} ${PYTHON_LIBRARY} ${PYTHON_DEBUG_LIBRARY} )
+            target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${GEOMETRY_PYTHON_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIB} ${PYTHON_LIBRARY})
             set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} PROPERTIES FOLDER "Binding Targets - Python")
         else()
             add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} ${GEOMETRY_PYTHON_BINDING_LIBS} ${${COMPONENT}_SHARED_LIBS})
@@ -360,10 +359,10 @@ function(add_install_target)
             install(TARGETS ${${COMPONENT}_DYNAMIC_LIB} RUNTIME DESTINATION bin/\${BUILD_TYPE})
             
             # Only try to install the pdb files if they exist. Easier to determine existence than the current config type in win32.
-            if(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}.pdb")
-                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}.pdb DESTINATION bin/\${BUILD_TYPE})
-            elseif(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}.pdb")
-                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}.pdb DESTINATION bin/\${BUILD_TYPE})               
+             if(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb")
+                 install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb DESTINATION bin/\${BUILD_TYPE})
+            elseif(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb")
+                 install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb DESTINATION bin/\${BUILD_TYPE})               
             endif()
                              
             if(SWIG_FOUND AND BUILD_BINDINGS)

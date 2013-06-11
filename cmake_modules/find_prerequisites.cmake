@@ -1,6 +1,4 @@
 #
-# $RCSfile: find_prerequisites.cmake,v $ $Revision: 1.15 $ $Date: 2013/01/30 04:38:35 $
-#
 #
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
@@ -14,10 +12,6 @@
 #
 
 # HDF5, Tetgen, and Doxygen need to be found for all target platforms.
-
-#
-# Find Doxygen; Make sure we have exactly v1.5.4.
-# 1.5.4 does the best version of documenting our code base.
 #
 
 find_package(Doxygen)
@@ -31,30 +25,27 @@ else()
 endif()
 
 # Tell hdf to use static libs
-if(ENABLE_STATIC_PREREQS)
-    set(HDF5_USE_STATIC_LIBRARIES ON)
-endif()
+set(HDF5_USE_STATIC_LIBRARIES ON)
 
-find_package(HDF5 1.8.3 REQUIRED)
-
+find_package(HDF5 1.8.9 REQUIRED)
 if(HDF5_FOUND)
     configure_file(${CMAKE_MODULE_PATH}/hdf_definitions.cmake.in ${CMAKE_BINARY_DIR}/hdf_definitions.cmake)
     include(${CMAKE_BINARY_DIR}/hdf_definitions.cmake)
-    link_directories(${HDF5_LIBRARY_DIRS})
+    link_directories(${HDF5_LIB_DIR})
     include_directories(${HDF5_INCLUDE_DIRS})
 endif()
 
 #
 # Find VTK
 #
-find_package(VTK REQUIRED MODULE)
+find_package(VTK 5.10 REQUIRED MODULE)
 if(VTK_FOUND)
     configure_file(${CMAKE_MODULE_PATH}/vtk_definitions.cmake.in ${CMAKE_BINARY_DIR}/vtk_definitions.cmake)
     include(${CMAKE_BINARY_DIR}/vtk_definitions.cmake)
 endif()
 
 # Find the JDK
-find_package(Java 1.6 REQUIRED)
+find_package(Java 1.7 REQUIRED)
 if(JAVA_FOUND)
     configure_file(${CMAKE_MODULE_PATH}/java_definitions.cmake.in ${CMAKE_BINARY_DIR}/java_definitions.cmake)
     include(${CMAKE_BINARY_DIR}/java_definitions.cmake)
@@ -69,7 +60,7 @@ if(TETGEN_FOUND)
     configure_file(${CMAKE_MODULE_PATH}/tetgen_definitions.cmake.in ${CMAKE_BINARY_DIR}/tetgen_definitions.cmake)
     include(${CMAKE_BINARY_DIR}/tetgen_definitions.cmake)
     include_directories(${TETGEN_INC_DIR})
-    link_directories(${TETGEN_LIB_DIR})
+    link_directories(${TETGEN_LIB_DIR})    
 endif()
 
 
