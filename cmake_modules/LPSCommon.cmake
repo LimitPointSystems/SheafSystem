@@ -826,7 +826,6 @@ function(install_prereqs)
             file(GLOB files "${VTK_LIB_DIR}/${name}.lib")
             set(VTK_INST_LIBS ${VTK_INST_LIBS} ${files})
         endforeach()
-        message(STATUS "VTK INSTALL LIBS ARE: ${VTK_IMPORT_LIBS}")
         install(FILES ${VTK_INST_LIBS} DESTINATION lib/vtk/
         PERMISSIONS
         OWNER_WRITE OWNER_READ OWNER_EXECUTE
