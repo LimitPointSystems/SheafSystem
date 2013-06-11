@@ -1,6 +1,4 @@
 #
-# $RCSfile: component_definitions.cmake,v $ $Revision: 1.32 $ $Date: 2013/01/17 18:53:26 $
-#
 #
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
@@ -40,7 +38,7 @@ if(WIN64INTEL OR WIN64MSVC)
     # Set the cumulative import library (win32) var for this component.
     #
     set(${COMPONENT}_IMPORT_LIBS ${SHEAVES_IMPORT_LIBS} ${${COMPONENT}_IMPORT_LIB} CACHE STRING " Cumulative import libraries (win32) for ${PROJECT_NAME}" FORCE)
-    
+
 else()
 
     #
@@ -96,7 +94,8 @@ function(add_library_targets)
         add_library(${${COMPONENT}_DYNAMIC_LIB} SHARED ${${COMPONENT}_SRCS})
         add_dependencies(${${COMPONENT}_DYNAMIC_LIB} ${SHEAVES_IMPORT_LIBS})
 
-        target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${SHEAVES_IMPORT_LIBS} )
+        #target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} debug ${SHEAVES_DEBUG_IMPORT_LIBS} optimized ${SHEAVES_IMPORT_LIBS})
+        target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${SHEAVES_IMPORT_LIBS})
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")
         # Override cmake's placing of "${${COMPONENT}_DYNAMIC_LIB}_EXPORTS into the preproc symbol table.
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES DEFINE_SYMBOL "SHEAF_DLL_EXPORTS")
@@ -159,7 +158,8 @@ function(add_bindings_targets)
         
         if(WIN64INTEL OR WIN64MSVC)
             add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} ${SHEAVES_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})
-            target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${JDK_LIBS} ${SHEAVES_JAVA_BINDING_LIBS}  ${${COMPONENT}_IMPORT_LIBS})   
+           # target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${JDK_LIBS} ${SHEAVES_JAVA_BINDING_LIBS} debug ${${COMPONENT}_DEBUG_IMPORT_LIBS} optimized ${${COMPONENT}_IMPORT_LIBS})   
+            target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${JDK_LIBS} ${SHEAVES_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})
             set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES FOLDER "Binding Targets - Java")
         else()
             add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} ${SHEAVES_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB})
@@ -230,7 +230,8 @@ function(add_bindings_targets)
         swig_add_module(${${COMPONENT}_CSHARP_BINDING_LIB} csharp ${${COMPONENT}_CSHARP_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_CSHARP_INTERFACE})
         if(WIN64INTEL OR WIN64MSVC)
             add_dependencies(${${COMPONENT}_CSHARP_BINDING_LIB} ${SHEAVES_CSHARP_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB})
-            target_link_libraries(${${COMPONENT}_CSHARP_BINDING_LIB} ${SHEAVES_CSHARP_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB} ${CSHARP_LIBRARY})
+          # target_link_libraries(${${COMPONENT}_CSHARP_BINDING_LIB} ${SHEAVES_CSHARP_BINDING_LIB} debug ${${COMPONENT}_DEBUG_IMPORT_LIB} optimized ${${COMPONENT}_IMPORT_LIB} ${CSHARP_LIBRARY})
+           target_link_libraries(${${COMPONENT}_CSHARP_BINDING_LIB} ${SHEAVES_CSHARP_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB} ${CSHARP_LIBRARY})
             set_target_properties(${${COMPONENT}_CSHARP_BINDING_LIB} PROPERTIES FOLDER "Binding Targets - CSharp")
         else()
             add_dependencies(${${COMPONENT}_CSHARP_BINDING_LIB} ${SHEAVES_CSHARP_BINDING_LIB} ${${COMPONENT}_SHARED_LIB})
@@ -275,7 +276,9 @@ function(add_bindings_targets)
             add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} ${SHEAVES_PYTHON_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})
             # Including both release and debug libs here. Linker is smart enough to know which one to use, and since the build type is a run-time decision in VS
             # we have no way to choose when generating the make file.
-            target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${SHEAVES_PYTHON_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIB} ${PYTHON_LIBRARY} ${PYTHON_DEBUG_LIBRARY})
+            #target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${SHEAVES_PYTHON_BINDING_LIBS} debug ${${COMPONENT}_DEBUG_IMPORT_LIB} optimized ${${COMPONENT}_IMPORT_LIB} optimized ${PYTHON_LIBRARY} debug ${PYTHON_DEBUG_LIBRARY})
+            #target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${SHEAVES_PYTHON_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIB} optimized ${PYTHON_LIBRARY} debug ${PYTHON_DEBUG_LIBRARY})
+            target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${SHEAVES_PYTHON_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIB} ${PYTHON_LIBRARY} )
             set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} PROPERTIES FOLDER "Binding Targets - Python")
         else()
             add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} ${SHEAVES_PYTHON_BINDING_LIBS} ${${COMPONENT}_SHARED_LIBS})
@@ -328,10 +331,10 @@ function(add_install_target)
             install(TARGETS ${${COMPONENT}_DYNAMIC_LIB} RUNTIME DESTINATION bin/\${BUILD_TYPE})
             
             # Only try to install the pdb files if they exist. Easier to determine existence than the current config type in win32.
-            if(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}.pdb")
-                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}.pdb DESTINATION bin/\${BUILD_TYPE})
-            elseif(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}.pdb")
-                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}.pdb DESTINATION bin/\${BUILD_TYPE})               
+             if(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb")
+                 install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb DESTINATION bin/\${BUILD_TYPE})
+            elseif(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb")
+                 install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb DESTINATION bin/\${BUILD_TYPE})               
             endif()
                      
             if(SWIG_FOUND AND BUILD_BINDINGS)

@@ -1,6 +1,4 @@
 #
-# $RCSfile: component_definitions.cmake,v $ $Revision: 1.41 $ $Date: 2013/03/27 17:31:37 $
-#
 #
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
@@ -10,15 +8,11 @@
 # This file contains declarations and functions unique to this component.
 #
 set(CMAKE_BACKWARDS_COMPATIBILITY 2.2)
+
 #
 # Include functions and definitions common to all components.
 # 
 include(${CMAKE_MODULE_PATH}/LPSCommon.cmake)
-
-#
-# Include cmake test functions and macros
-#
-#include(CTest)
 
 #
 # Define the clusters for this component.
@@ -133,7 +127,8 @@ function(add_library_targets)
         add_library(${${COMPONENT}_DYNAMIC_LIB} SHARED ${${COMPONENT}_SRCS})
         add_dependencies(${${COMPONENT}_DYNAMIC_LIB} ${FIELDS_IMPORT_LIBS})
                  
-        target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${FIELDS_IMPORT_LIBS} ${JDK_LIBS} ${VTK_LIBS})        
+       # target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} debug ${FIELDS_DEBUG_IMPORT_LIBS} optimized ${FIELDS_IMPORT_LIBS} ${JDK_LIBS} ${VTK_LIBS})        
+        target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${FIELDS_IMPORT_LIBS} ${JDK_LIBS} ${VTK_LIBS}) 
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")        
         
         # Override cmake's placing of "${${COMPONENT}_DYNAMIC_LIB}_EXPORTS into the preproc symbol table.
@@ -256,7 +251,7 @@ function(add_bindings_targets)
                                COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
                              )
             
-                    # Java documentation
+            # Java documentation
             add_custom_target(${PROJECT_NAME}-java-docs ALL
                                 COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${parent_classpath}" 
                                 -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
@@ -322,7 +317,6 @@ function(add_bindings_targets)
         if(LINUX64GNU OR LINUX64INTEL) 
             add_dependencies(${PROJECT_NAME}-java-binding ${PROJECT_NAME}_java_binding.jar)    
             add_dependencies(${PROJECT_NAME}-python-binding ALL fields-python-binding)
-           #add_dependencies(${PROJECT_NAME}-csharp-binding ${${COMPONENT}_CSHARP_BINDING_LIB})
             add_dependencies(${PROJECT_NAME}-python-binding ALL fields-python-binding)
         endif() 
         
@@ -361,10 +355,10 @@ function(add_install_target)
             install(TARGETS ${${COMPONENT}_DYNAMIC_LIB} RUNTIME DESTINATION bin/\${BUILD_TYPE})
             
             # Only try to install the pdb files if they exist. Easier to determine existence than the current config type in win32.
-            if(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}.pdb")
-                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}.pdb DESTINATION bin/\${BUILD_TYPE})
-            elseif(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}.pdb")
-                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}.pdb DESTINATION bin/\${BUILD_TYPE})               
+             if(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb")
+                 install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb DESTINATION bin/\${BUILD_TYPE})
+            elseif(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb")
+                 install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb DESTINATION bin/\${BUILD_TYPE})               
             endif()
                                          
             if(SWIG_FOUND AND BUILD_BINDINGS)
@@ -397,9 +391,9 @@ function(add_dumpsheaf_target)
             link_directories(${FIBER_BUNDLES_OUTPUT_DIR}/$(OutDir))
             target_link_libraries(dumpsheaf ${FIBER_BUNDLES_IMPORT_LIBS})
         else()
-            add_dependencies(dumpsheaf ${FIBER_BUNDLES_STATIC_LIB})
+            add_dependencies(dumpsheaf ${FIBER_BUNDLES_SHARED_LIB})
             link_directories(${FIBER_BUNDLES_OUTPUT_DIR})
-            target_link_libraries(dumpsheaf ${FIBER_BUNDLES_STATIC_LIB})
+            target_link_libraries(dumpsheaf ${FIBER_BUNDLES_SHARED_LIB})
         endif()
     
         # Supply the *_DLL_IMPORTS directive to preprocessor

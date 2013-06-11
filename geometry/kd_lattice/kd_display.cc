@@ -7,6 +7,40 @@
 /// @file
 /// Implementation for class kd_display
 
+#ifdef USE_VTK
+
+#include "vtkActor.h"
+#include "vtkAssembly.h"
+#include "vtkCamera.h"
+#include "vtkCellArray.h"
+#include "vtkCellCenters.h"
+#include "vtkCellData.h"
+#include "vtkCubeAxesActor.h"
+#include "vtkCubeAxesActor2D.h"
+#include "vtkDataSetMapper.h"
+#include "vtkDoubleArray.h"
+#include "vtkFieldData.h"
+#include "vtkIdTypeArray.h"
+#include "vtkIntArray.h"
+#include "vtkInteractorStyleTrackballCamera.h"
+#include "vtkLabeledDataMapper.h"
+#include "vtkLookupTable.h"
+#include "vtkPointData.h"
+#include "vtkPoints.h"
+#include "vtkPolyDataMapper.h"
+#include "vtkProperty.h"
+#include "vtkProperty2D.h"
+#include "vtkRenderer.h"
+#include "vtkRenderWindow.h"
+#include "vtkRenderWindowInteractor.h"
+#include "vtkSelectVisiblePoints.h"
+#include "vtkTextProperty.h"
+#include "vtkTransform.h"
+#include "vtkTransformFilter.h"
+#include "vtkUnstructuredGrid.h"
+#include "vtkUnstructuredGridWriter.h"
+
+#endif // USE_VTK
 #include "kd_display.h"
 #include "assert_contract.h"
 #include "at0.h"
@@ -52,41 +86,6 @@
 #include "subcohort.h"
 #include "tolerance_comparison.h"
 #include "vertex_cohort.h"
-
-#ifdef USE_VTK
-
-#include "vtkActor.h"
-#include "vtkAssembly.h"
-#include "vtkCamera.h"
-#include "vtkCellArray.h"
-#include "vtkCellCenters.h"
-#include "vtkCellData.h"
-#include "vtkCubeAxesActor.h"
-#include "vtkCubeAxesActor2D.h"
-#include "vtkDataSetMapper.h"
-#include "vtkDoubleArray.h"
-#include "vtkFieldData.h"
-#include "vtkIdTypeArray.h"
-#include "vtkIntArray.h"
-#include "vtkInteractorStyleTrackballCamera.h"
-#include "vtkLabeledDataMapper.h"
-#include "vtkLookupTable.h"
-#include "vtkPointData.h"
-#include "vtkPoints.h"
-#include "vtkPolyDataMapper.h"
-#include "vtkProperty.h"
-#include "vtkProperty2D.h"
-#include "vtkRenderer.h"
-#include "vtkRenderWindow.h"
-#include "vtkRenderWindowInteractor.h"
-#include "vtkSelectVisiblePoints.h"
-#include "vtkTextProperty.h"
-#include "vtkTransform.h"
-#include "vtkTransformFilter.h"
-#include "vtkUnstructuredGrid.h"
-#include "vtkUnstructuredGridWriter.h"
-
-#endif // USE_VTK
 
 using namespace fiber_bundle;
 using namespace fiber_bundle::vd_algebra;
