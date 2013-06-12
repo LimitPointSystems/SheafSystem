@@ -356,7 +356,7 @@ private:
     ///
     /// True if evaluation is above discretization.
     ///
-    size_t eval_is_above_disc;
+    size_type eval_is_above_disc;
 
     ///
     /// Constructor
