@@ -209,12 +209,13 @@ function(set_compiler_flags)
         
     if(WIN64MSVC)
     
-       set(LPS_CXX_FLAGS "/D_USRDLL ${MP} /GR /nologo /DWIN32 /D_WINDOWS /W1 /EHsc /D_HDF5USEDLL_ " CACHE STRING "C++ Compiler Flags")
-       set(LPS_SHARED_LINKER_FLAGS "/INCREMENTAL:NO /NOLOGO /DLL /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /DYNAMICBASE /NXCOMPAT /MACHINE:X64 " CACHE STRING "Linker Flags for Shared Libs")
-       set(LPS_EXE_LINKER_FLAGS "/INCREMENTAL:NO /NOLOGO /DLL /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /DYNAMICBASE /NXCOMPAT /MACHINE:X64" CACHE STRING "Linker Flags for Executables")
+       #set(LPS_CXX_FLAGS "/D_USRDLL ${MP} /GR /nologo /DWIN32 /D_WINDOWS /W1 /EHsc /D_HDF5USEDLL_ " CACHE STRING "C++ Compiler Flags")
+       set(LPS_CXX_FLAGS "${MP} /GR /nologo /DWIN32 /D_WINDOWS /W1 /EHsc  " CACHE STRING "C++ Compiler Flags")       
+       set(LPS_SHARED_LINKER_FLAGS "/INCREMENTAL:NO /NOLOGO /DLL /SUBSYSTEM:CONSOLE /MACHINE:X64 " CACHE STRING "Linker Flags for Shared Libs")
+       set(LPS_EXE_LINKER_FLAGS "/INCREMENTAL:NO /NOLOGO /DLL /SUBSYSTEM:CONSOLE /MACHINE:X64" CACHE STRING "Linker Flags for Executables")
     elseif(WIN64INTEL)
        set(LPS_CXX_FLAGS "/D_USRDLL ${MP} /GR /nologo /DWIN32 /D_WINDOWS /W1 /wd2651 /EHsc ${OPTIMIZATION} /Qprof-gen:srcpos /D_HDF5USEDLL_" CACHE STRING "C++ Compiler Flags")
-       set(LPS_SHARED_LINKER_FLAGS "/INCREMENTAL:NO /NOLOGO /DLL /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /DYNAMICBASE /NXCOMPAT /MACHINE:X64" CACHE STRING "Linker Flags") 
+       set(LPS_SHARED_LINKER_FLAGS "/INCREMENTAL:NO /NOLOGO /DLL /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /NXCOMPAT /MACHINE:X64" CACHE STRING "Linker Flags") 
     elseif(LINUX64INTEL)
         if(ENABLE_COVERAGE)
             if(INTELWARN)
@@ -314,17 +315,29 @@ function(set_compiler_flags)
     if(WIN64MSVC OR WIN64INTEL)
     
         if(${USE_VTK})
-            set(CMAKE_CXX_FLAGS_RELEASE-CONTRACTS "${LPS_CXX_FLAGS} /D\"_SECURE_SCL=0\" /DUSE_VTK /MD /LD /Ox " CACHE
+            set(CMAKE_CXX_FLAGS_RELEASE-CONTRACTS "${LPS_CXX_FLAGS} /DUSE_VTK /MD /LD /Ox " CACHE
                 STRING "Flags used by the C++ compiler for Release-contracts builds" FORCE)
         else()   
-            set(CMAKE_CXX_FLAGS_RELEASE-CONTRACTS "${LPS_CXX_FLAGS} /D\"_SECURE_SCL=0\" /MD /LD /Ox " CACHE
+            set(CMAKE_CXX_FLAGS_RELEASE-CONTRACTS "${LPS_CXX_FLAGS} /MD /LD /Ox " CACHE
                 STRING "Flags used by the C++ compiler for Release-contracts builds" FORCE)
         endif()
+
+#        if(${USE_VTK})
+#           set(CMAKE_CXX_FLAGS_RELEASE-CONTRACTS "${LPS_CXX_FLAGS} /D\"_SECURE_SCL=0\" /DUSE_VTK /MD /LD /Ox " CACHE
+#                STRING "Flags used by the C++ compiler for Release-contracts builds" FORCE)
+#        else()   
+#            set(CMAKE_CXX_FLAGS_RELEASE-CONTRACTS "${LPS_CXX_FLAGS} /D\"_SECURE_SCL=0\" /MD /LD /Ox " CACHE
+#                STRING "Flags used by the C++ compiler for Release-contracts builds" FORCE)
+#        endif()
     
-        set(CMAKE_EXE_LINKER_FLAGS_RELEASE-CONTRACTS "${LPS_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD"  CACHE
+        set(CMAKE_EXE_LINKER_FLAGS_RELEASE-CONTRACTS "${LPS_EXE_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD  /OPT:REF /OPT:ICF /NXCOMPAT"  CACHE
             STRING "Flags used by the linker for executables for Release-contracts builds" FORCE)
-        set(CMAKE_SHARED_LINKER_FLAGS_RELEASE-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD" CACHE
-            STRING "Flags used by the linker for shared libraries for Release-contracts builds" FORCE)   
+        set(CMAKE_SHARED_LINKER_FLAGS_RELEASE-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD /OPT:REF /OPT:ICF /NXCOMPAT " CACHE
+            STRING "Flags used by the linker for shared libraries for Release-contracts builds" FORCE) 
+        #set(CMAKE_EXE_LINKER_FLAGS_RELEASE-CONTRACTS "${LPS_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD"  CACHE
+          #  STRING "Flags used by the linker for executables for Release-contracts builds" FORCE)
+        #set(CMAKE_SHARED_LINKER_FLAGS_RELEASE-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD" CACHE
+         #   STRING "Flags used by the linker for shared libraries for Release-contracts builds" FORCE)   
     else()
         set(CMAKE_CXX_FLAGS_RELEASE-CONTRACTS "${LPS_CXX_FLAGS} ${OPTIMIZATION}" CACHE
             STRING "Flags used by the C++ compiler for Release-contracts builds" FORCE)
@@ -353,11 +366,14 @@ function(set_compiler_flags)
                 STRING "Flags used by the C++ compiler for Release-no-contracts builds" FORCE)
       endif()     
                 
-    set(CMAKE_EXE_LINKER_FLAGS_RELEASE-NO-CONTRACTS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD" CACHE
+    set(CMAKE_EXE_LINKER_FLAGS_RELEASE-NO-CONTRACTS "${CMAKE_EXE_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD  /OPT:REF /OPT:ICF /NXCOMPAT" CACHE
         STRING "Flags used by the linker for executables for Release-no-contracts builds" FORCE)
-    set(CMAKE_SHARED_LINKER_FLAGS_RELEASE-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD" CACHE
+    set(CMAKE_SHARED_LINKER_FLAGS_RELEASE-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD /OPT:REF /OPT:ICF /NXCOMPAT" CACHE
         STRING "Flags used by the linker for shared libraries for Release-no-contracts builds" FORCE)
-    
+#     set(CMAKE_EXE_LINKER_FLAGS_RELEASE-NO-CONTRACTS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD" CACHE
+#        STRING "Flags used by the linker for executables for Release-no-contracts builds" FORCE)
+#    set(CMAKE_SHARED_LINKER_FLAGS_RELEASE-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD" CACHE
+#        STRING "Flags used by the linker for shared libraries for Release-no-contracts builds" FORCE)   
     else()
         set(CMAKE_CXX_FLAGS_RELEASE-NO-CONTRACTS "${LPS_CXX_FLAGS} ${OPTIMIZATION} -DNDEBUG" CACHE
             STRING "Flags used by the C++ compiler for Release-no-contracts builds" FORCE)
@@ -436,40 +452,13 @@ function(add_doc_targets)
 endfunction(add_doc_targets)
 
 # 
-#  Append file types to CMake's default clean list.
+#  Clean up. Remove everything, not just the build products.
 #
-function(add_clean_files)
-    #$$TODO: Probably need to get the location property from the targets and use it in this section.
+add_custom_command(TARGET clean POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E rm -f ${CMAKE_BINARY_DIR}/bin/${CMAKE_CFG_INTDIR}/*
+    COMMAND ${CMAKE_COMMAND} -E rm -f ${CMAKE_BINARY_DIR}/lib/${CMAKE_CFG_INTDIR}/*    
+    )
     
-    #Define the file types to be included in the clean operation.
-    
-    file(GLOB HDF_FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/*.hdf)
-    file(GLOB WIN_JAR_FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Outdir)/*.jar)
-    file(GLOB LINUX_JAR_FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/*.jar)
-    
-    # Clean up the mess left by the Intel coverage tool
-    file(GLOB DYN_FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/*.dyn)
-    file(GLOB DPI_FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/*.dpi)
-    file(GLOB SPI_FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/*.spi)
-    
-    # List of files with paths for SheafScope.jar build
-    file(GLOB SCOPE_FILE_LIST ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/scopesrcs)
-                
-    # Append them to the list
-    list(APPEND CLEAN_FILES ${HDF_FILES})
-    list(APPEND CLEAN_FILES ${WIN_JAR_FILES})
-    list(APPEND CLEAN_FILES ${LINUX_JAR_FILES})    
-    list(APPEND CLEAN_FILES ${SWIG_JAVA_FILES})
-    list(APPEND CLEAN_FILES ${DYN_FILES})
-    list(APPEND CLEAN_FILES ${DPI_FILES})
-    list(APPEND CLEAN_FILES ${SPI_FILES})
-    list(APPEND CLEAN_FILES ${SCOPE_FILE_LIST})
-    list(APPEND CLEAN_FILES "TAGS")
-  
-    set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "${CLEAN_FILES}")
-
-endfunction(add_clean_files) 
-
 #
 # Add the list of clusters to this component.
 #

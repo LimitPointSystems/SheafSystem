@@ -46,11 +46,6 @@ add_bindings_targets()
 add_install_target()
 
 #
-# Add files to the clean target
-#
-add_clean_files()
-
-#
 # Write this component's lib targets and include paths to an export file.
 #
 export_targets()

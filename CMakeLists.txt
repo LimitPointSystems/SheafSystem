@@ -54,11 +54,6 @@ create_output_dirs()
 add_doc_targets()
 
 #
-# Add files to the clean target
-#
-add_clean_files()
-
-#
 # Target to generate emacs tags
 #
 add_tags_target()
