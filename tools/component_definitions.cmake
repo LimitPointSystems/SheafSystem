@@ -356,9 +356,9 @@ function(add_install_target)
             
             # Only try to install the pdb files if they exist. Easier to determine existence than the current config type in win32.
              if(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb")
-                 install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb DESTINATION bin/\${BUILD_TYPE})
+                 install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb DESTINATION bin/Debug-contracts)
             elseif(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb")
-                 install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb DESTINATION bin/\${BUILD_TYPE})               
+                 install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb DESTINATION bin/Debug-no-contracts)               
             endif()
                                          
             if(SWIG_FOUND AND BUILD_BINDINGS)
