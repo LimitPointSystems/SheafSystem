@@ -230,7 +230,6 @@ function(set_compiler_flags)
             endif()
        endif() # ENABLE_COVERAGE        
     elseif(LINUX64GNU)
-      # set(LPS_CXX_FLAGS "-ansi -m64 -Wno-deprecated ${OPTIMIZATION}")
         set(LPS_CXX_FLAGS "-ansi -m64 -Wno-deprecated")       
     #$$TODO: A 32 bit option is not needed. Do away with this case.
     else() # Assume 32-bit i686 linux for the present
@@ -246,24 +245,24 @@ function(set_compiler_flags)
  
         if(${USE_VTK})     
             set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od /DUSE_VTK" CACHE
-                STRING "Flags used by the C++ compiler for Debug-contracts builds" FORCE)
+                STRING "Flags used by the C++ compiler for Debug-contracts builds" )
         else()
              set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od" CACHE
-                STRING "Flags used by the C++ compiler for Debug-contracts builds" FORCE)       
+                STRING "Flags used by the C++ compiler for Debug-contracts builds" )       
         endif()
         
         set(CMAKE_SHARED_LINKER_FLAGS_DEBUG-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG" CACHE
-            STRING "Flags used by the linker for shared libraries for Debug-contracts builds" FORCE)
+            STRING "Flags used by the linker for shared libraries for Debug-contracts builds" )
         set(CMAKE_EXE_LINKER_FLAGS_DEBUG-CONTRACTS "${LPS_EXE_LINKER_FLAGS} /DEBUG" CACHE
             STRING "Flags used by the linker for executables for Debug-contracts builds")            
     
     else() # Linux
         if(${USE_VTK})
             set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} -g -DUSE_VTK " CACHE
-                STRING "Flags used by the C++ compiler for Debug-contracts builds" FORCE)
+                STRING "Flags used by the C++ compiler for Debug-contracts builds" )
         else()         
             set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} -g " CACHE
-                STRING "Flags used by the C++ compiler for Debug-contracts builds" FORCE)
+                STRING "Flags used by the C++ compiler for Debug-contracts builds" )
         endif()
         set(CMAKE_EXE_LINKER_FLAGS_DEBUG-CONTRACTS ${CMAKE_EXE_LINKER_FLAGS}  CACHE
             STRING "Flags used by the linker for executables for Debug-contracts builds")        
@@ -281,27 +280,29 @@ function(set_compiler_flags)
     
         if(${USE_VTK})
              set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od /DUSE_VTK /DNDEBUG" CACHE
-                STRING "Flags used by the C++ compiler for Debug-no-contracts builds" FORCE)
+                STRING "Flags used by the C++ compiler for Debug-no-contracts builds" )
          else()
             set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od /DNDEBUG" CACHE
-                STRING "Flags used by the C++ compiler for Debug-no-contracts builds" FORCE)            
+                STRING "Flags used by the C++ compiler for Debug-no-contracts builds" )            
          endif()
     
      set(CMAKE_SHARED_LINKER_FLAGS_DEBUG-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG" CACHE
-         STRING "Flags used by the linker for shared libraries for Debug-contracts builds" FORCE)
+         STRING "Flags used by the linker for shared libraries for Debug-contracts builds" )
      set(CMAKE_EXE_LINKER_FLAGS_DEBUG-NO-CONTRACTS "${LPS_EXE_LINKER_FLAGS} /DEBUG" CACHE
          STRING "Flags used by the linker for executables for Debug-contracts builds")                  
     
     else()
         if(${USE_VTK})    
             set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} -g -DNDEBUG -DUSE_VTK" CACHE
-                STRING "Flags used by the C++ compiler for Debug-no-contracts builds" FORCE)
+                STRING "Flags used by the C++ compiler for Debug-no-contracts builds" )
         else()
             set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} -g -DNDEBUG" CACHE
-                STRING "Flags used by the C++ compiler for Debug-no-contracts builds" FORCE)
+                STRING "Flags used by the C++ compiler for Debug-no-contracts builds" )
         endif()
     endif()
 
+    mark_as_advanced(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS
+                     CMAKE_EXE_LINKER_FLAGS_DEBUG-NO-CONTRACTS CMAKE_SHARED_LINKER_FLAGS_DEBUG-NO-CONTRACTS)
     #                 
     # RELEASE_CONTRACTS section
     #
@@ -311,23 +312,23 @@ function(set_compiler_flags)
     
         if(${USE_VTK})
             set(CMAKE_CXX_FLAGS_RELEASE-CONTRACTS "${LPS_CXX_FLAGS} /DUSE_VTK /MD /LD /O2 " CACHE
-                STRING "Flags used by the C++ compiler for Release-contracts builds" FORCE)
+                STRING "Flags used by the C++ compiler for Release-contracts builds" )
         else()   
             set(CMAKE_CXX_FLAGS_RELEASE-CONTRACTS "${LPS_CXX_FLAGS} /MD /LD /O2 " CACHE
-                STRING "Flags used by the C++ compiler for Release-contracts builds" FORCE)
+                STRING "Flags used by the C++ compiler for Release-contracts builds" )
         endif()
   
         set(CMAKE_EXE_LINKER_FLAGS_RELEASE-CONTRACTS "${LPS_EXE_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD  /OPT:REF /OPT:ICF /NXCOMPAT"  CACHE
-            STRING "Flags used by the linker for executables for Release-contracts builds" FORCE)
+            STRING "Flags used by the linker for executables for Release-contracts builds" )
         set(CMAKE_SHARED_LINKER_FLAGS_RELEASE-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD /OPT:REF /OPT:ICF /NXCOMPAT " CACHE
-            STRING "Flags used by the linker for shared libraries for Release-contracts builds" FORCE) 
+            STRING "Flags used by the linker for shared libraries for Release-contracts builds" ) 
     else()
         set(CMAKE_CXX_FLAGS_RELEASE-CONTRACTS "${LPS_CXX_FLAGS} ${OPTIMIZATION}" CACHE
-            STRING "Flags used by the C++ compiler for Release-contracts builds" FORCE)
+            STRING "Flags used by the C++ compiler for Release-contracts builds" )
         set(CMAKE_EXE_LINKER_FLAGS_RELEASE-CONTRACTS "${LPS_EXE_LINKER_FLAGS}"  CACHE
-            STRING "Flags used by the linker for executables for Release-contracts builds" FORCE)
+            STRING "Flags used by the linker for executables for Release-contracts builds" )
         set(CMAKE_SHARED_LINKER_FLAGS_RELEASE-CONTRACTS "${LPS_SHARED_LINKER_FLAGS}" CACHE
-            STRING "Flags used by the linker for shared libraries for Release-contracts builds" FORCE)
+            STRING "Flags used by the linker for shared libraries for Release-contracts builds" )
     endif()
     
     # True for all currently supported platforms        
@@ -343,23 +344,23 @@ function(set_compiler_flags)
     
        if(${USE_VTK})
             set(CMAKE_CXX_FLAGS_RELEASE-NO-CONTRACTS "${LPS_CXX_FLAGS} /MD /LD /O2 /DUSE_VTK /DNDEBUG" CACHE
-                STRING "Flags used by the C++ compiler for Release-no-contracts builds" FORCE)
+                STRING "Flags used by the C++ compiler for Release-no-contracts builds" )
        else()        
             set(CMAKE_CXX_FLAGS_RELEASE-NO-CONTRACTS "${LPS_CXX_FLAGS}  /MD /LD /O2 /DNDEBUG" CACHE
-                STRING "Flags used by the C++ compiler for Release-no-contracts builds" FORCE)
+                STRING "Flags used by the C++ compiler for Release-no-contracts builds" )
       endif()     
                 
     set(CMAKE_EXE_LINKER_FLAGS_RELEASE-NO-CONTRACTS "${CMAKE_EXE_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD  /OPT:REF /OPT:ICF /NXCOMPAT" CACHE
-        STRING "Flags used by the linker for executables for Release-no-contracts builds" FORCE)
+        STRING "Flags used by the linker for executables for Release-no-contracts builds" )
     set(CMAKE_SHARED_LINKER_FLAGS_RELEASE-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD /OPT:REF /OPT:ICF /NXCOMPAT" CACHE
-        STRING "Flags used by the linker for shared libraries for Release-no-contracts builds" FORCE)
+        STRING "Flags used by the linker for shared libraries for Release-no-contracts builds" )
     else()
         set(CMAKE_CXX_FLAGS_RELEASE-NO-CONTRACTS "${LPS_CXX_FLAGS} ${OPTIMIZATION} -DNDEBUG" CACHE
-            STRING "Flags used by the C++ compiler for Release-no-contracts builds" FORCE)
+            STRING "Flags used by the C++ compiler for Release-no-contracts builds" )
         set(CMAKE_EXE_LINKER_FLAGS_RELEASE-NO-CONTRACTS "${CMAKE_EXE_LINKER_FLAGS}" CACHE
-            STRING "Flags used by the linker for executables for Release-no-contracts builds" FORCE)
+            STRING "Flags used by the linker for executables for Release-no-contracts builds" )
         set(CMAKE_SHARED_LINKER_FLAGS_RELEASE-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS}" CACHE
-            STRING "Flags used by the linker for shared libraries for Release-no-contracts builds" FORCE)
+            STRING "Flags used by the linker for shared libraries for Release-no-contracts builds" )
     endif()
     
     # True for all currently supported platforms        
