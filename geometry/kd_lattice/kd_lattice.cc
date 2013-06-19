@@ -53,6 +53,7 @@
 #include "sec_e3.h"
 #include "std_fstream.h"
 #include "std_sstream.h"
+#include "std_stdexcept.h"
 #include "subcohort.h"
 #include "tolerance_comparison.h"
 #include "vertex_cohort.h"
@@ -69,12 +70,22 @@ using namespace fiber_bundle::sec_vd_algebra;
 // PUBLIC MEMBER FUNCTIONS
 
 geometry::kd_lattice::
-kd_lattice(geometry_namespace& xns, const string& xname, const e3_lite& xlb, const e3_lite& xub)
+kd_lattice(geometry_namespace& xns,
+	   const string& xname,
+	   const e3_lite& xlb,
+	   const e3_lite& xub,
+	   bool xlogging,
+	   const string& xlogfile_dir_path)
 {
   // Preconditions:
 
 
   // Body:
+
+  // Turn off logging to start.  The logging facility will capture the
+  // constructor arguments when it is turned on.
+
+  _logging = false;
 
   // Set the name space.
 
@@ -172,6 +183,8 @@ kd_lattice(geometry_namespace& xns, const string& xname, const e3_lite& xlb, con
 
   _display = 0;
   
+  put_logging(xname, xlb, xub, xlogging, xlogfile_dir_path);
+
   // Postconditions:
 
   // @todo Finish postconditions.
@@ -181,6 +194,7 @@ kd_lattice(geometry_namespace& xns, const string& xname, const e3_lite& xlb, con
   ensure(bounding_box().ub() == xub);
   ensure(auto_clear_notify_sets());
   ensure(auto_triangulate());
+  ensure(logging() == xlogging);
   
   // Exit:
 
@@ -324,6 +338,11 @@ create_active_sections()
 
   // Body:
 
+  if(logging())
+  {
+    kd_lattice_log::create_active_sections_record lrec;
+    log(lrec);
+  }
 
   // @hack Visualizer won't find segments and vertices in triangles
   // if it traverses line web first. Join triangles so we have a
@@ -460,6 +479,12 @@ void
 geometry::kd_lattice::
 update_section_space_schema()
 {
+  if(logging())
+  {
+    kd_lattice_log::update_section_space_schema_record lrec;
+    log(lrec);
+  }
+
   sec_at1_space* lvector_space;
   poset_path lscalar_path;
   
@@ -715,6 +740,576 @@ create_sections()
 
   return;
 }
+
+// ===========================================================
+// LOGGING FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+bool
+geometry::kd_lattice::
+logging() const
+{
+  return _logging;
+}
+
+const string&
+geometry::kd_lattice::
+logfile_dir_path() const
+{
+  return _logfile_dir_path;
+}
+
+const string&
+geometry::kd_lattice::
+logfile_name() const
+{
+  return _logfile_name;
+}
+
+geometry::kd_lattice*
+geometry::kd_lattice::
+restart(geometry_namespace& xns,
+	const string& xlogfile_path,
+        bool xskip_last_record,
+        bool xlogging,
+        const string& xlogfile_dir_path,
+        string& xerr_msg)
+{
+  // Preconditions:
+
+
+  // Body:
+
+  // Read the log file.
+
+  kd_lattice_log llog;
+  
+  string llogfile_path(xlogfile_path);
+  ifstream llogfile(llogfile_path.c_str());
+  if(!llogfile)
+  {
+    cerr << "open failed for file " << llogfile_path << endl;
+    return 0;
+  }
+  llogfile >> llog;
+  llogfile.close();
+  
+  // Recreate the kd_lattice without populating it.
+  
+  kd_lattice* result = restart(xns,
+			  llog,
+			  xskip_last_record,
+			  xlogging,
+			  xlogfile_dir_path,
+			  xerr_msg);
+  
+  // Postconditions:
+
+  ensure(unexecutable("result != 0 || restart failed"));
+  ensure(result != 0 ? result->logging() == xlogging : true);
+  
+  // Exit:
+
+  return result;
+}
+
+geometry::kd_lattice*
+geometry::kd_lattice::
+restart(geometry_namespace& xns,
+	const kd_lattice_log& xlog,
+        bool xskip_last_record,
+        bool xlogging,
+        const string& xlogfile_dir_path,
+        string& xerr_msg)
+{
+  // Preconditions:
+
+
+  // Body:
+
+  // Recreate the kd_lattice without populating it.
+  
+  int lnext_record;
+  kd_lattice* result = recreate(xns, xlog, xlogging, xlogfile_dir_path, lnext_record);
+
+  int lrecord_ub =
+    xskip_last_record ? xlog.records().ct() - 1 : xlog.records().ct();
+  if(result != 0)
+  {
+    // Populate the structure from the log records.
+  
+    for(int i=lnext_record; i<lrecord_ub; ++i)
+    {
+      if(!result->execute_log_record(*xlog.records()[i], xerr_msg))
+      {
+	// Crashed; Can't restart.
+
+	delete result;
+	result = 0 ;
+	break;
+      }
+    }  
+  }
+  
+  // Postconditions:
+
+  ensure(unexecutable("result != 0 || restart failed"));
+  ensure(result != 0 ? result->logging() == xlogging : true);
+  
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+void
+geometry::kd_lattice::
+log(const string& xmessage) const
+{
+  // Preconditions:
+
+  require(logging());
+  require(!xmessage.empty());
+
+  // Body:
+
+  // In order to make sure nothing is lost on a crash, exception, etc.,
+  // the file is opened before every write and then closed.
+
+  ofstream los;
+  los.open(_logfile_name.c_str(), ios::out | ios::app);
+  if(los.is_open())
+  {
+    los << xmessage << endl;
+    los.close();
+  }
+
+  // Postconditions:
+
+  // Exit
+
+  return;
+}
+
+void
+geometry::kd_lattice::
+put_logging(const string& xname,
+            const e3_lite& xlb, 
+	    const e3_lite& xub, 
+	    bool xlogging,
+	    const string& xlogfile_dir_path)
+{
+  // Preconditions:
+
+  require(unexecutable("if xlogging then xlogfile_dir_path is empty or terminated with path delimiter"));
+
+  // Body:
+
+  _logging = xlogging;
+  _logfile_dir_path = xlogfile_dir_path;
+
+  if(_logging)
+  {
+    // Create a unique log file name
+    // using the encoded date and time.
+
+    time_t lnow;
+    time(&lnow);
+
+    stringstream lstr;
+    lstr << "kd_lattice_" << lnow << ".log";
+    
+    _logfile_name = _logfile_dir_path + lstr.str();
+
+    // Open a file with the unique log file name.
+    // Add a header line.
+
+    stringstream lstr2;
+    lstr2<< endl;
+    lstr2<< "Kd_lattice Log File: " << _logfile_name << endl;
+    lstr2<< endl;
+    log(lstr2.str());
+
+    // Add the constructor log record.
+
+    kd_lattice_log::constructor_record lrec (xname, 
+					xlb, 
+					xub);
+
+    log(lrec);
+
+    cout << "Created log file " << _logfile_name << endl;
+  }
+
+  // Postconditions:
+
+  ensure(logging() == xlogging);
+  
+  // Exit:
+
+  return;
+}
+
+geometry::kd_lattice*
+geometry::kd_lattice::
+recreate(geometry_namespace& xns,
+	 const kd_lattice_log& xlog,
+         bool xlogging,
+         const string& xlogfile_dir_path,
+         int& xnext_record)
+{
+  // Preconditions:
+
+
+  // Body:
+
+  kd_lattice* result = 0;
+  
+  for(int i=0; i<xlog.records().ct(); ++i)
+  {
+    kd_lattice_log::record* lrecord = xlog.records()[i];
+
+#ifdef DIAGNOSTIC_OUTPUT
+    cout << endl << *lrecord;
+#endif
+
+    xnext_record = i+1;
+
+    if(lrecord->id == kd_lattice_log::CONSTRUCTOR)
+    {
+      typedef kd_lattice_log::constructor_record rec_type;
+      const rec_type& lrec = reinterpret_cast<const rec_type&>(*lrecord);
+      e3_lite lb;
+      lb[0] = lrec.lb[0];
+      lb[1] = lrec.lb[1];
+      lb[2] = lrec.lb[2];
+      e3_lite ub;
+      ub[0] = lrec.ub[0];
+      ub[1] = lrec.ub[1];
+      ub[2] = lrec.ub[2];
+
+#ifdef DIAGNOSTIC_OUTPUT
+	  cout << "kd_lattice::kd_lattice()" << endl;
+	  cout << "  name = " << lrec.name << endl;
+	  cout << "  lb = " << lb[0] << ", " << lb[1] << ",  " << lb[2] << endl;
+	  cout << "  ub = " << ub[0] << ", " << ub[1] << ",  " << ub[2] << endl;
+#endif
+      result = new kd_lattice(xns, lrec.name, lb, ub, xlogging, xlogfile_dir_path);
+      break;
+    }
+  }  
+
+  // Postconditions:
+
+  ensure((result == 0) == (xnext_record == xlog.records().ct()));
+  ensure(result != 0 ? result->logging() == xlogging : true);
+  
+  
+  // Exit:
+
+  return result;
+}
+
+bool
+geometry::kd_lattice::
+execute_log_record(const kd_lattice_log::record& xrecord,
+                   string& xerr_msg)
+{
+  // Preconditions:
+
+  // Body:
+
+  bool result;
+
+  try
+  {    
+    result = execute_log_record_dbg(xrecord, xerr_msg);
+  }
+  catch(std::logic_error& lexception)
+  {
+    stringstream lerr_msg;
+    lerr_msg << "Unable to execute log record; ";
+    lerr_msg << "violated assertion: " << lexception.what();
+    xerr_msg = lerr_msg.str();
+    result = false;
+  }
+  
+  // Postconditions:
+
+
+  // Exit:
+
+  return result;
+}
+
+bool
+geometry::kd_lattice::
+execute_log_record_dbg(const kd_lattice_log::record& xrecord,
+                       string& xerr_msg)
+{
+  // Preconditions:
+
+  // Body:
+
+  bool result = true;
+  xerr_msg.clear();
+  stringstream lerr_msg;
+
+#ifdef DIAGNOSTIC_OUTPUT
+  cout << endl << xrecord;
+#endif
+
+  switch(xrecord.id)
+  {
+    case kd_lattice_log::UPDATE_SECTION_SPACE_SCHEMA:
+      {
+#ifdef DIAGNOSTIC_OUTPUT
+	cout << "kd_lattice::update_section_space_schema()" << endl;
+#endif
+	update_section_space_schema();
+      }
+      break;
+      
+    case kd_lattice_log::CREATE_ACTIVE_SECTIONS:
+      {
+#ifdef DIAGNOSTIC_OUTPUT
+	cout << "kd_lattice::create_active_sections()" << endl;
+#endif
+	create_active_sections();
+      }
+      break;
+      
+    case kd_lattice_log::INSERT_PLANE:
+      {
+	typedef kd_lattice_log::insert_plane_record rec_type;
+	const rec_type& lrec = reinterpret_cast<const rec_type&>(xrecord);
+	kd_plane lplane;
+	lplane.put(lrec.alignment, lrec.distance);
+#ifdef DIAGNOSTIC_OUTPUT
+	cout << "kd_lattice::insert_plane()" << endl;
+	cout << "  xplane = " << lplane << endl;
+#endif
+	insert_plane(lplane);
+      }
+      break;
+      
+    case kd_lattice_log::PUT_PLANE_TOLERANCE:
+      {
+	typedef kd_lattice_log::put_plane_tolerance_record rec_type;
+	const rec_type& lrec = reinterpret_cast<const rec_type&>(xrecord);
+	e3_lite ltolerance(lrec.tolerance[0], lrec.tolerance[1], lrec.tolerance[2]);
+#ifdef DIAGNOSTIC_OUTPUT
+	cout << "kd_lattice::put_plane_tolerance()" << endl;
+	cout << "  xtolerance = " << ltolerance << endl;
+#endif
+	put_plane_tolerance(ltolerance);
+      }
+      break;
+      
+    case kd_lattice_log::PUT_POINT_TOLERANCE:
+      {
+	typedef kd_lattice_log::put_point_tolerance_record rec_type;
+	const rec_type& lrec = reinterpret_cast<const rec_type&>(xrecord);
+	e3_lite ltolerance(lrec.tolerance[0], lrec.tolerance[1], lrec.tolerance[2]);
+#ifdef DIAGNOSTIC_OUTPUT
+	cout << "kd_lattice::put_point_tolerance()" << endl;
+	cout << "  xtolerance = " << ltolerance << endl;
+#endif
+	put_point_tolerance(ltolerance);
+      }
+      break;
+      
+    case kd_lattice_log::PUT_TRUNCATION_TOLERANCE:
+      {
+	typedef kd_lattice_log::put_truncation_tolerance_record rec_type;
+	const rec_type& lrec = reinterpret_cast<const rec_type&>(xrecord);
+	e3_lite ltolerance(lrec.tolerance[0], lrec.tolerance[1], lrec.tolerance[2]);
+#ifdef DIAGNOSTIC_OUTPUT
+	cout << "kd_lattice::put_truncation_tolerance()" << endl;
+	cout << "  xtolerance = " << ltolerance << endl;
+#endif
+	put_truncation_tolerance(ltolerance);
+      }
+      break;
+      
+    case kd_lattice_log::PUT_INTERSECTION_TOLERANCE:
+      {
+	typedef kd_lattice_log::put_intersection_tolerance_record rec_type;
+	const rec_type& lrec = reinterpret_cast<const rec_type&>(xrecord);
+	e3_lite ltolerance(lrec.tolerance[0], lrec.tolerance[1], lrec.tolerance[2]);
+#ifdef DIAGNOSTIC_OUTPUT
+	cout << "kd_lattice::put_intersection_tolerance()" << endl;
+	cout << "  xtolerance = " << ltolerance << endl;
+#endif
+	put_intersection_tolerance(ltolerance);
+      }
+      break;
+      
+    case kd_lattice_log::FORCE_LINE:
+      {
+	typedef kd_lattice_log::force_line_record rec_type;
+	const rec_type& lrec = reinterpret_cast<const rec_type&>(xrecord);
+	pt_list lline;
+	for(int i = 0; i < lrec.pt_ct; ++i)
+	{
+	  e3_lite lpt(lrec.x[i], lrec.y[i], lrec.z[i]);
+
+	  lline.push_back(lpt);
+	}
+	
+	kd_plane lplane;
+	lplane.put(lrec.alignment, lrec.distance);
+
+	lplane = equivalent_plane(lplane);
+	if(!lplane.is_valid())
+	{
+	  cerr << "force_line_record could not find plane with alignment '"
+	       << lrec.alignment << "' and distance '" << lrec.distance
+	       << "'." << endl;
+	  cerr << "skipping force_line." << endl;
+	}
+	else
+	{
+#ifdef DIAGNOSTIC_OUTPUT
+	  cout << "kd_lattice::force_line()" << endl;
+	  cout << "  xline = " << endl;
+	  for(pt_list::const_iterator itr = lline.begin();
+	      itr != lline.end(); ++itr)
+	  {
+	    cout << "  " << (*itr)[0] << ", " << (*itr)[1] << ", " << (*itr)[2] << endl;
+	  }
+	  cout << "  xplane = " << lplane << endl;
+#endif
+	  force_line(lline, lplane);
+	}
+      }
+      break;
+      
+    case kd_lattice_log::INSERT_LINE:
+      {
+	typedef kd_lattice_log::insert_line_record rec_type;
+	const rec_type& lrec = reinterpret_cast<const rec_type&>(xrecord);
+	pt_list lline;
+	for(int i = 0; i < lrec.pt_ct; ++i)
+	{
+	  e3_lite lpt(lrec.x[i], lrec.y[i], lrec.z[i]);
+
+	  lline.push_back(lpt);
+	}
+	
+	kd_plane lplane;
+	lplane.put(lrec.alignment, lrec.distance);
+
+	lplane = equivalent_plane(lplane);
+	if(!lplane.is_valid())
+	{
+	  cerr << "insert_line_record could not find plane with alignment '"
+	       << lrec.alignment << "' and distance '" << lrec.distance
+	       << "'." << endl;
+	  cerr << "skipping insert_line." << endl;
+	}
+	else
+	{
+#ifdef DIAGNOSTIC_OUTPUT
+	  cout << "kd_lattice::insert_line()" << endl;
+	  cout << "  xline = " << endl;
+	  for(pt_list::const_iterator itr = lline.begin();
+	      itr != lline.end(); ++itr)
+	  {
+	    cout << "  " << (*itr)[0] << ", " << (*itr)[1] << ", " << (*itr)[2] << endl;
+	  }
+	  cout << "  xplane = " << lplane << endl;
+#endif
+	  insert_line(lline, lplane);
+	}
+      }
+      break;
+      
+    case kd_lattice_log::REMOVE_LINE:
+      {
+	typedef kd_lattice_log::remove_line_record rec_type;
+	const rec_type& lrec = reinterpret_cast<const rec_type&>(xrecord);
+	if(!lines().contains(lrec.hub_id))
+	{
+	  cerr << "remove_line: could not find line with id '" << lrec.hub_id << "'." << endl;
+	  cerr << "skipping remove_line." << endl;
+	}
+	else
+	{
+#ifdef DIAGNOSTIC_OUTPUT
+	  cout << "kd_lattice::remove_line()" << endl;
+	  cout << "  xhub_id = " << lrec.hub_id << endl;
+#endif
+	  remove_line(base_space().member_id(lrec.hub_id, true));
+	}
+      }
+      break;
+      
+    case kd_lattice_log::PUT_AUTO_TRIANGULATE:
+      {
+	typedef kd_lattice_log::put_auto_triangulate_record rec_type;
+	const rec_type& lrec = reinterpret_cast<const rec_type&>(xrecord);
+#ifdef DIAGNOSTIC_OUTPUT
+	  cout << "kd_lattice::put_auto_triangulate()" << endl;
+	  cout << "  xvalue = " << lrec.value << endl;
+#endif
+	put_auto_triangulate(lrec.value);
+      }
+      break;
+      
+    case kd_lattice_log::RETRIANGULATE:
+      {
+#ifdef DIAGNOSTIC_OUTPUT
+	  cout << "kd_lattice::retriangulate()" << endl;
+#endif
+	retriangulate();
+      }
+      break;
+      
+    case kd_lattice_log::INSERT_REGION:
+      {
+	typedef kd_lattice_log::insert_region_record rec_type;
+	const rec_type& lrec = reinterpret_cast<const rec_type&>(xrecord);
+	e3_lite lb(lrec.lb[0], lrec.lb[1], lrec.lb[2]);
+	e3_lite ub(lrec.ub[0], lrec.ub[1], lrec.ub[2]);
+
+#ifdef DIAGNOSTIC_OUTPUT
+	  cout << "kd_lattice::insert_region()" << endl;
+	  cout << "  lb = " << lb[0] << ", " << lb[1] << ",  " << lb[2] << endl;
+	  cout << "  ub = " << ub[0] << ", " << ub[1] << ",  " << ub[2] << endl;
+#endif
+	  insert_region(lb, ub);
+      }
+      break;
+
+    case kd_lattice_log::EXTRACT_SUBVOLUME_SURFACES:
+      {
+#ifdef DIAGNOSTIC_OUTPUT
+	  cout << "kd_lattice::extract_subvolume_surfaces()" << endl;
+#endif
+	  extract_subvolume_surfaces();
+      }
+      break;
+      
+    default:
+      lerr_msg << "Ignored record of type: " << xrecord.id << endl;
+      xerr_msg = lerr_msg.str();
+      break;
+  }
+  
+  // Postconditions:
+
+
+  // Exit:
+
+  return result;
+}
+
+// PRIVATE MEMBER FUNCTIONS
+ 
 
 // ===========================================================
 // DISPLAY FACET
@@ -1436,6 +2031,12 @@ insert_plane(const kd_plane& xp)
   
   // Body:
 
+  if(logging())
+  {
+    kd_lattice_log::insert_plane_record lrec(xp);
+    log(lrec);
+  }
+
   if(auto_clear_notify_sets())
   {
     clear_notify_sets();
@@ -1539,6 +2140,12 @@ put_plane_tolerance(const e3_lite& xtolerance)
 
 
   // Body:
+
+  if(logging())
+  {
+    kd_lattice_log::put_plane_tolerance_record lrec(xtolerance);
+    log(lrec);
+  }
 
   _plane_tolerance[0] = abs(xtolerance[0]);
   _plane_tolerance[1] = abs(xtolerance[1]);
@@ -1930,6 +2537,12 @@ put_point_tolerance(const e3_lite& xtolerance)
 
   // Body:
 
+  if(logging())
+  {
+    kd_lattice_log::put_point_tolerance_record lrec(xtolerance);
+    log(lrec);
+  }
+
   _point_tolerance[0] = abs(xtolerance[0]);
   _point_tolerance[1] = abs(xtolerance[1]);
   _point_tolerance[2] = abs(xtolerance[2]);
@@ -2093,6 +2706,12 @@ put_truncation_tolerance(const e3_lite& xtolerance)
 
   // Body:
 
+  if(logging())
+  {
+    kd_lattice_log::put_truncation_tolerance_record lrec(xtolerance);
+    log(lrec);
+  }
+
   _truncation_tolerance[0] = abs(xtolerance[0]);
   _truncation_tolerance[1] = abs(xtolerance[1]);
   _truncation_tolerance[2] = abs(xtolerance[2]);
@@ -2198,6 +2817,12 @@ put_intersection_tolerance(const e3_lite& xtolerance)
 
 
   // Body:
+
+  if(logging())
+  {
+    kd_lattice_log::put_intersection_tolerance_record lrec(xtolerance);
+    log(lrec);
+  }
 
   _intersection_tolerance[0] = abs(xtolerance[0]);
   _intersection_tolerance[1] = abs(xtolerance[1]);
@@ -2478,6 +3103,12 @@ force_line(pt_list& xline, const kd_plane& xp)
   
   // Body:
 
+  if(logging())
+  {
+    kd_lattice_log::force_line_record lrec(xline, xp);
+    log(lrec);
+  }
+
   int lc = xp.int_alignment();
   
   for(pt_list::iterator p=xline.begin(); p!=xline.end(); ++p)
@@ -2511,6 +3142,12 @@ insert_line(pt_list& xline, const kd_plane& xp)
   require(bounding_box().contains_line(xline));
   
   // Body:
+
+  if(logging())
+  {
+    kd_lattice_log::insert_line_record lrec(xline, xp);
+    log(lrec);
+  }
 
   if(auto_clear_notify_sets())
   {
@@ -2698,6 +3335,12 @@ remove_line(const scoped_index& xid)
   require(lines().contains(xid));
 
   // Body:
+
+  if(logging())
+  {
+    kd_lattice_log::remove_line_record lrec(xid.hub_pod());
+    log(lrec);
+  }
 
   if(auto_clear_notify_sets())
   {
@@ -3054,6 +3697,12 @@ put_auto_triangulate(bool xvalue)
 
   // Body:
 
+  if(logging())
+  {
+    kd_lattice_log::put_auto_triangulate_record lrec(xvalue);
+    log(lrec);
+  }
+
   _auto_triangulate = xvalue;
 
   // Postconditions:
@@ -3077,6 +3726,12 @@ retriangulate()
 
 
   // Body:
+
+  if(logging())
+  {
+    kd_lattice_log::retriangulate_record lrec;
+    log(lrec);
+  }
 
   _base_space->begin_jim_edit_mode(true);
   _coords->get_read_write_access();
@@ -3331,6 +3986,12 @@ insert_region(const e3_lite& xlb, const e3_lite& xub)
   
   // Body:
 
+  if(logging())
+  {
+    kd_lattice_log::insert_region_record lrec(xlb, xub);
+    log(lrec);
+  }
+
   _base_space->begin_jim_edit_mode(true);
   _coords->get_read_write_access();
 
@@ -3373,6 +4034,12 @@ extract_subvolume_surfaces()
   require(subvolume_surfaces().ct() == 0);
   
   // Body:
+
+  if(logging())
+  {
+    kd_lattice_log::extract_subvolume_surfaces_record lrec;
+    log(lrec);
+  }
 
   _base_space->begin_jim_edit_mode(true);
   _coords->get_read_write_access();

@@ -37,6 +37,10 @@
 #ifndef KD_ENUMS_H
 #include "kd_enums.h"
 #endif
+
+#ifndef KD_LATTICE_LOG_H
+#include "kd_lattice_log.h"
+#endif
  
 namespace sheaf
 {
@@ -71,9 +75,16 @@ class SHEAF_DLL_SPEC kd_lattice : public any
 public:
 
   ///
-  /// Creates an instance in namespace xns with name xname for the volume bounded by xlb and xub.
+  /// Creates an instance in namespace xns with name xname for the
+  /// volume bounded by xlb and xub.  If xlogging, record action in
+  /// a log file located in xlogfile_dir_path.
   ///
-  kd_lattice(geometry_namespace& xns, const string& xname, const e3_lite& xlb, const e3_lite& xub);
+  kd_lattice(geometry_namespace& xns,
+	     const string& xname,
+	     const e3_lite& xlb,
+	     const e3_lite& xub,
+	     bool xlogging,
+	     const string& xlogfile_dir_path = "");
 
   ///
   /// Destructor
@@ -246,6 +257,129 @@ private:
   
 
   //@}
+
+
+  // ===========================================================
+  /// @name LOGGING FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Write log messages to file if true.
+  ///
+  bool logging() const;
+
+  ///
+  /// Directory path of the log file.
+  ///
+  const string& logfile_dir_path() const;
+
+  ///
+  /// Name of the log file.
+  ///
+  const string& logfile_name() const;
+
+  ///
+  /// Creates a new kd_lattice in namespace xns and populates it
+  /// by executing the records in the logfile.
+  /// with path xlogfile_path, If xskip_last_record, 
+  /// does not excute the last record.
+  /// If xlogging, logging will be enabled in
+  /// the new kd_lattice. If restart fails,
+  /// result is void and xerr_msg is set.
+  ///
+  static kd_lattice* restart(geometry_namespace& xns,
+			     const string& xlogfile_path,
+			     bool xskip_last_record,
+			     bool xlogging,
+			     const string& xlogfile_dir_path, 
+			     string& xerr_msg);
+
+  ///
+  /// Creates a new kd_lattice in namespace xns and populates it
+  /// by executing the records in the logfile xlog.
+  /// If xskip_last_record, does not excute the last record.
+  /// If xlogging, logging will be enabled in
+  /// the new kd_lattice. If restart fails,
+  /// result is void and xerr_msg is set.
+  ///
+  static kd_lattice* restart(geometry_namespace& xns,
+			     const kd_lattice_log& xlog,
+			     bool xskip_last_record,
+			     bool xlogging,
+			     const string& xlogfile_dir_path, 
+			     string& xerr_msg);
+
+protected:
+
+  ///
+  /// Write xmessage to the log file.
+  ///
+  void log(const string& xmessage) const;
+
+  ///
+  /// Set logging to xlogging.
+  ///
+  void put_logging(const string& xname,
+		   const e3_lite& xlb, 
+		   const e3_lite& xub, 
+		   bool xlogging,
+		   const string& xlogfile_dir_path);
+
+  ///
+  /// Recreates the kd_lattice in namespace xns specified in
+  /// log xlog, but does not populate it.Sets xnext_record
+  /// to the next record to be executed for populating the
+  /// kd_lattice.
+  ///
+  static kd_lattice* recreate(geometry_namespace& xns,
+			      const kd_lattice_log& xlog,
+			      bool xlogging,
+			      const string& xlogfile_dir_path,
+			      int& xnext_record);
+
+  ///
+  /// Executes the command in log record xrecord.
+  /// Returns true if the record executed successfully.
+  /// Returns true and sets xerr_msg if the record was 
+  /// ignored because it was not executable.
+  /// Returns false and sets xerr_msg if execution
+  /// caused an exception, which implies this is corrupted
+  /// and must be abandoned.
+  ///
+  bool execute_log_record(const kd_lattice_log::record& xrecord, string& xerr_msg);
+
+  ///
+  /// Executes the command in log record xrecord.
+  /// Returns true if the record executed successfully.
+  /// Returns true and sets xerr_msg if the record was 
+  /// ignored because it was not executable.
+  /// Does not catch exceptions thrown by contract
+  /// violations; lets the debugger do that.
+  ///
+  bool execute_log_record_dbg(const kd_lattice_log::record& xrecord, string& xerr_msg);
+
+private:
+
+  ///
+  /// Write log messages to a file if true.
+  ///
+  bool _logging;
+
+  ///
+  /// Directory path of the log file.
+  ///
+  string _logfile_dir_path;
+
+  ///
+  /// Name of the log file.
+  ///
+  string _logfile_name;
+
+  //@}
+ 
 
   // ===========================================================
   /// @name DISPLAY FACET
