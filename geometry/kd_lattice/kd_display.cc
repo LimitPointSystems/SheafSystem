@@ -39,8 +39,12 @@
 #include "vtkTransformFilter.h"
 #include "vtkUnstructuredGrid.h"
 #include "vtkUnstructuredGridWriter.h"
+// vtkWin32Header.h defines macro STRICT which conflicts
+// with sheaf::STRICT in sheaf.h, so undefine vtk STRICT
+#undef STRICT
 
 #endif // USE_VTK
+
 #include "kd_display.h"
 #include "assert_contract.h"
 #include "at0.h"
