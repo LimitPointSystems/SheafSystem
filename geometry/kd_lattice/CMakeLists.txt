@@ -29,7 +29,8 @@ set(SRCS
   kd_enums.cc 
   kd_face.cc 
   kd_face_cohort.cc 
-  kd_lattice.cc 
+  kd_lattice.cc
+  kd_lattice_log.cc 
   kd_line.cc 
   kd_line_fragment.cc 
   kd_member.cc 
