@@ -82,10 +82,9 @@ kd_lattice(geometry_namespace& xns,
 
   // Body:
 
-  // Turn off logging to start.  The logging facility will capture the
-  // constructor arguments when it is turned on.
-
-  _logging = false;
+  _logging_level = 0;
+  put_logging(xname, xlb, xub, xlogging, xlogfile_dir_path);
+  disable_logging();
 
   // Set the name space.
 
@@ -182,9 +181,9 @@ kd_lattice(geometry_namespace& xns,
   // will be created later if needed.
 
   _display = 0;
-  
-  put_logging(xname, xlb, xub, xlogging, xlogfile_dir_path);
 
+  enable_logging();
+  
   // Postconditions:
 
   // @todo Finish postconditions.
@@ -344,6 +343,8 @@ create_active_sections()
     log(lrec);
   }
 
+  disable_logging();
+
   // @hack Visualizer won't find segments and vertices in triangles
   // if it traverses line web first. Join triangles so we have a
   // base space member that does not include line webs.
@@ -420,6 +421,7 @@ create_active_sections()
   //  lpolygon_boundary.detach_from_state();
   //  lpolygon_segments.detach_from_state();
 
+  enable_logging();
 
   // Postconditions:
 
@@ -485,6 +487,8 @@ update_section_space_schema()
     log(lrec);
   }
 
+  disable_logging();
+
   sec_at1_space* lvector_space;
   poset_path lscalar_path;
   
@@ -514,6 +518,8 @@ update_section_space_schema()
   //   lplanes_space->schema().host()->update_top_id_space(true);
   //   lplanes_space->schema().force_cache_update();
   //   lplanes_space->release_access();
+
+  enable_logging();
 
   return;
 }
@@ -751,7 +757,7 @@ bool
 geometry::kd_lattice::
 logging() const
 {
-  return _logging;
+  return _logging && (_logging_level == 0);
 }
 
 const string&
@@ -1306,6 +1312,20 @@ execute_log_record_dbg(const kd_lattice_log::record& xrecord,
   // Exit:
 
   return result;
+}
+
+void
+geometry::kd_lattice::
+disable_logging()
+{
+  _logging_level++;
+}
+
+void
+geometry::kd_lattice::
+enable_logging()
+{
+  _logging_level--;
 }
 
 // PRIVATE MEMBER FUNCTIONS
@@ -2037,6 +2057,8 @@ insert_plane(const kd_plane& xp)
     log(lrec);
   }
 
+  disable_logging();
+
   if(auto_clear_notify_sets())
   {
     clear_notify_sets();
@@ -2089,6 +2111,8 @@ insert_plane(const kd_plane& xp)
   {
     display(true, true);
   }
+
+  enable_logging();
   
   // Postconditions:
 
@@ -2147,9 +2171,13 @@ put_plane_tolerance(const e3_lite& xtolerance)
     log(lrec);
   }
 
+  disable_logging();
+
   _plane_tolerance[0] = abs(xtolerance[0]);
   _plane_tolerance[1] = abs(xtolerance[1]);
   _plane_tolerance[2] = abs(xtolerance[2]);
+
+  enable_logging();
 
   // Postconditions:
 
@@ -2543,9 +2571,13 @@ put_point_tolerance(const e3_lite& xtolerance)
     log(lrec);
   }
 
+  disable_logging();
+
   _point_tolerance[0] = abs(xtolerance[0]);
   _point_tolerance[1] = abs(xtolerance[1]);
   _point_tolerance[2] = abs(xtolerance[2]);
+
+  enable_logging();
 
   // Postconditions:
 
@@ -2712,9 +2744,13 @@ put_truncation_tolerance(const e3_lite& xtolerance)
     log(lrec);
   }
 
+  disable_logging();
+
   _truncation_tolerance[0] = abs(xtolerance[0]);
   _truncation_tolerance[1] = abs(xtolerance[1]);
   _truncation_tolerance[2] = abs(xtolerance[2]);
+
+  enable_logging();
 
   // Postconditions:
 
@@ -2824,9 +2860,13 @@ put_intersection_tolerance(const e3_lite& xtolerance)
     log(lrec);
   }
 
+  disable_logging();
+
   _intersection_tolerance[0] = abs(xtolerance[0]);
   _intersection_tolerance[1] = abs(xtolerance[1]);
   _intersection_tolerance[2] = abs(xtolerance[2]);
+
+  enable_logging();
 
   // Postconditions:
 
@@ -3109,12 +3149,16 @@ force_line(pt_list& xline, const kd_plane& xp)
     log(lrec);
   }
 
+  disable_logging();
+
   int lc = xp.int_alignment();
   
   for(pt_list::iterator p=xline.begin(); p!=xline.end(); ++p)
   {
     (*p)[lc] = xp.distance();
   }
+
+  enable_logging();
   
   // Postconditions:
 
@@ -3148,6 +3192,8 @@ insert_line(pt_list& xline, const kd_plane& xp)
     kd_lattice_log::insert_line_record lrec(xline, xp);
     log(lrec);
   }
+
+  disable_logging();
 
   if(auto_clear_notify_sets())
   {
@@ -3312,6 +3358,7 @@ insert_line(pt_list& xline, const kd_plane& xp)
     display(false, false);
   }
   
+  enable_logging();
   
   // Postconditions:
 
@@ -3341,6 +3388,8 @@ remove_line(const scoped_index& xid)
     kd_lattice_log::remove_line_record lrec(xid.hub_pod());
     log(lrec);
   }
+
+  disable_logging();
 
   if(auto_clear_notify_sets())
   {
@@ -3444,6 +3493,8 @@ remove_line(const scoped_index& xid)
   {
     display(true, true);
   }
+
+  enable_logging();
 
   // Postconditions:
 
@@ -3703,7 +3754,11 @@ put_auto_triangulate(bool xvalue)
     log(lrec);
   }
 
+  disable_logging();
+
   _auto_triangulate = xvalue;
+
+  enable_logging();
 
   // Postconditions:
 
@@ -3732,6 +3787,8 @@ retriangulate()
     kd_lattice_log::retriangulate_record lrec;
     log(lrec);
   }
+
+  disable_logging();
 
   _base_space->begin_jim_edit_mode(true);
   _coords->get_read_write_access();
@@ -3780,6 +3837,8 @@ retriangulate()
 
   _coords->release_access();
   _base_space->end_jim_edit_mode(false, true);
+
+  enable_logging();
 
   // Postconditions:
 
@@ -3992,6 +4051,8 @@ insert_region(const e3_lite& xlb, const e3_lite& xub)
     log(lrec);
   }
 
+  disable_logging();
+
   _base_space->begin_jim_edit_mode(true);
   _coords->get_read_write_access();
 
@@ -4006,6 +4067,7 @@ insert_region(const e3_lite& xlb, const e3_lite& xub)
   //   update_section_space_schema();
   //   display(false, true);
 
+  enable_logging();
 
   // Postconditions:
 
@@ -4041,6 +4103,8 @@ extract_subvolume_surfaces()
     log(lrec);
   }
 
+  disable_logging();
+
   _base_space->begin_jim_edit_mode(true);
   _coords->get_read_write_access();
   
@@ -4074,6 +4138,8 @@ extract_subvolume_surfaces()
   
   _coords->release_access();
   _base_space->end_jim_edit_mode(false, true);
+
+  enable_logging();
 
   // Postconditions:
 

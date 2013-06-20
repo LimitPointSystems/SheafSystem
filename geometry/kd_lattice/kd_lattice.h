@@ -41,7 +41,7 @@
 #ifndef KD_LATTICE_LOG_H
 #include "kd_lattice_log.h"
 #endif
- 
+
 namespace sheaf
 {
   class subposet;
@@ -361,12 +361,27 @@ protected:
   ///
   bool execute_log_record_dbg(const kd_lattice_log::record& xrecord, string& xerr_msg);
 
+  ///
+  /// Disable the logging.
+  ///
+  void disable_logging();
+
+  ///
+  /// Enable the logging.
+  ///
+  void enable_logging();
+
 private:
 
   ///
   /// Write log messages to a file if true.
   ///
   bool _logging;
+
+  ///
+  /// The level of logging calls.
+  ///
+  int _logging_level;
 
   ///
   /// Directory path of the log file.
