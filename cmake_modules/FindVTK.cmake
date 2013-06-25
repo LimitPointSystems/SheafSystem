@@ -56,8 +56,15 @@
 # - Check in the LPS standard prerequisites location.
 #=============================================================================
 
-set(VERSION 5.6)
-#set(VERSION 5.10)
+# VTK 5.10 has a bug that causes a crash in Xwindows upon closing.
+# Revert to 5.6 on Linux for now. 5.10 seems to work fine on windows.
+#
+if(WIN32)
+    set(VERSION 5.10)
+else()
+    set(VERSION 5.6)
+endif()
+
 # Assume not found.
 set(VTK_FOUND 0)
 
@@ -142,9 +149,7 @@ else()
     get_filename_component(__TMP_DIR "${VTK_LIB_DIR}" PATH)
     get_filename_component(__TMP_DIR "${__TMP_DIR}" PATH)
     set(VTK_BIN_DIR "${__TMP_DIR}/bin" CACHE PATH "VTK Runtime libraries location.")
-message(STATUS "TMP_DIR IS: ${__TMP_DIR}")
-message(STATUS "VTK_LIB_DIR IS: ${VTK_LIB_DIR}")
-message(STATUS "VTK_BIN_DIR IS: ${VTK_BIN_DIR}")      
+  
     get_filename_component(__TMP_DIR "${VTK_LIB_DIR}" PATH)
     get_filename_component(__TMP_DIR "${__TMP_DIR}" PATH)
     set(VTK_INCLUDE_DIRS "${__TMP_DIR}/include/vtk-5.6" CACHE PATH "VTK Headers location.")
