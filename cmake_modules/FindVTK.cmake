@@ -115,7 +115,8 @@ if(VERSION MATCHES "5.10")
     set(VTK_INCLUDE_DIRS "${__TMP_DIR}/include/vtk-5.10" CACHE PATH "VTK Headers location.")
 message(STATUS "${VTK_LIB_DIR}")
 message(STATUS "${__TMP_DIR}/include/vtk-5.10")
-message(STATUS "$ENV{VTK_LIB_DIR} $ENV{HOME}/LPS/prerequisites/vtk/lib")
+message(STATUS "HOME dir is: $ENV{HOME}")
+message(STATUS "$ENV{HOME}/LPS/prerequisites/vtk/lib")
 else()    
 
   # Look for UseVTK.cmake in build trees or under <prefix>/include/vtk.
