@@ -57,13 +57,10 @@
 #=============================================================================
 
 # VTK 5.10 has a bug that causes a crash in Xwindows upon closing.
-# Revert to 5.6 on Linux for now. 5.10 seems to work fine on windows.
+# Uncomment/comment appropriately below to use 5.6 on Linux for now. 5.10 seems to work fine on windows.
 #
-if(WIN32)
-    set(VERSION 5.10)
-else()
-    set(VERSION 5.6)
-endif()
+set(VERSION 5.10)
+#set(VERSION 5.6)
 
 # Assume not found.
 set(VTK_FOUND 0)
