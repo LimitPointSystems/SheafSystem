@@ -72,10 +72,10 @@ set(VTK_DIR_MESSAGE "VTK not found.  Set the VTK_LIB_DIR cmake cache entry to th
 # Use the Config mode of the find_package() command to find VTKConfig.
 # If this succeeds (possibly because VTK_LIB_DIR is already set), the
 # command will have already loaded VTKConfig.cmake and set VTK_FOUND.
-if(NOT VTK_FOUND)
-  find_package(VTK QUIET NO_MODULE
-                   HINTS $ENV{HOME}/LPS/prerequisites/vtk $ENV{USERPROFILE}/LPS/prerequisites/vtk/lib)
-endif()
+#if(NOT VTK_FOUND)
+#  find_package(VTK QUIET NO_MODULE
+#                   HINTS $ENV{HOME}/LPS/prerequisites/vtk $ENV{USERPROFILE}/LPS/prerequisites/vtk/lib)
+#endif()
 
 if(VERSION MATCHES "5.10")
 
@@ -115,7 +115,7 @@ if(VERSION MATCHES "5.10")
     set(VTK_INCLUDE_DIRS "${__TMP_DIR}/include/vtk-5.10" CACHE PATH "VTK Headers location.")
 message(STATUS "${VTK_LIB_DIR}")
 message(STATUS "${__TMP_DIR}/include/vtk-5.10")
-
+message(STATUS "$ENV{VTK_LIB_DIR} $ENV{HOME}/LPS/prerequisites/vtk/lib")
 else()    
 
   # Look for UseVTK.cmake in build trees or under <prefix>/include/vtk.
