@@ -18,7 +18,7 @@
 set(VTK_FOUND @VTK_FOUND@ CACHE STRING "Set to true if VTK is found.")
 set(VTK_INC_DIRS @VTK_INCLUDE_DIRS@ CACHE STRING "Include directories for VTK.")
 set(VTK_LIB_DIR @VTK_LIBRARY_DIRS@ CACHE STRING "Link directories for VTK.")
-set(VTK_JAR @VTK_LIBRARY_DIRS@/java/vtk.jar CACHE STRING "Jar file for VTK.")
+set(VTK_JAR ${VTK_LIB_DIR}/java/vtk.jar CACHE STRING "Jar file for VTK.")
 
 # Essential libs. Full "deprecated" list commented out below.
 set(VTK_LIBS vtkCommon vtkCommonJava vtkFiltering vtkGraphics 
