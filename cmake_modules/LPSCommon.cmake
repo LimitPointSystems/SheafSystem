@@ -580,9 +580,10 @@ function(export_targets)
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     endif()
     #$$TODO: "GEOMETRY" will change to "TOOLS" when we pull kd_lattice out of SheafSystem
+    # Note that although USE_VTK is on by default for production, we ship with USE_VTK off.
     if("${COMPONENT}" MATCHES "GEOMETRY")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK OFF CACHE BOOL \"Set to link against VTK libs\")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK @USE_VTK@ CACHE BOOL \"Set to link against VTK libs\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @VTK_LIB_DIR@ CACHE PATH \"VTK library path\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
@@ -607,7 +608,7 @@ function(export_install_config_file_vars)
 
     if(WIN64MSVC OR WIN64INTEL)
         export(TARGETS ${${COMPONENT}_DYNAMIC_LIB} APPEND FILE ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE})
-        # $$HACK: the below is a temporary measure until we completely sort out the staic link issues. JEB 01.17.13
+        # $$HACK: the below is a temporary measure until we completely sort out the static link issues. JEB 01.17.13
         if("${COMPONENT}" MATCHES "SHEAVES")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(${COMPONENT}_IMPORT_LIBS ${${COMPONENT}_IMPORT_LIB} CACHE STRING \"${PROJECT_NAME} cumulative import library list\")\n")
         else()
@@ -616,11 +617,11 @@ function(export_install_config_file_vars)
         file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
         if("${COMPONENT}" MATCHES "GEOMETRY")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(USE_VTK OFF CACHE BOOL \"Set to link against VTK libs\")\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(USE_VTK @USE_VTK@ CACHE BOOL \"Set to link against VTK libs\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/lib/vtk CACHE PATH \"VTK library path\" FORCE)\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/vtk/lib CACHE PATH \"VTK library path\" FORCE)\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_BIN_DIR @SHEAFSYSTEM_HOME@/bin/vtk CACHE PATH  \"Set to link against VTK libs\" FORCE)\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_BIN_DIR @SHEAFSYSTEM_HOME@/vtk/bin CACHE PATH  \"Set to link against VTK libs\" FORCE)\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
         endif()            
     else()
@@ -642,13 +643,12 @@ function(export_install_config_file_vars)
         #$$TODO: "GEOMETRY" will change to "TOOLS" when we pull kd_lattice out of SheafSystem
         if("${COMPONENT}" MATCHES "GEOMETRY")        
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(USE_VTK OFF CACHE BOOL \"Set ON to link against VTK libs\")\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(USE_VTK @USE_VTK@ CACHE BOOL \"Set ON to link against VTK libs\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_INC_DIR @SHEAFSYSTEM_HOME@/include/vtk CACHE PATH \"VTK library path\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")            
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/lib/vtk CACHE PATH \"VTK library path\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_LIBS ${VTK_LIBS} CACHE STRING \"VTK Libraries\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(JMF_JAR ${JMF_JAR} CACHE STRING \"JMF jar location\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
@@ -672,9 +672,13 @@ function(generate_install_config_file)
     file(WRITE ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "${MASSAGED_OUTPUT}")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "\n")
     if(WIN64MSVC OR WIN64INTEL)
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "set(INSTALLED_VTK_LIB_DIR "\@SHEAFSYSTEM_HOME\@"/lib/vtk CACHE STRING \"VTK Base Dir\" FORCE)\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "set(VTK_BIN_DIR "\@SHEAFSYSTEM_HOME\@"/bin/vtk CACHE STRING \"VTK Base Dir\" FORCE)\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "set(VTK_INC_DIR "\@SHEAFSYSTEM_HOME\@"/include/vtk CACHE STRING \"VTK Base Dir\" FORCE)\n") 
+        #file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "set(INSTALLED_VTK_LIB_DIR "\@SHEAFSYSTEM_HOME\@"/lib/vtk CACHE STRING \"VTK Base Dir\" FORCE)\n")
+        #file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "set(VTK_BIN_DIR "\@SHEAFSYSTEM_HOME\@"/bin/vtk CACHE STRING \"VTK Base Dir\" FORCE)\n")
+        #file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "set(VTK_INC_DIR "\@SHEAFSYSTEM_HOME\@"/include/vtk CACHE STRING \"VTK Base Dir\" FORCE)\n") 
+        
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "set(INSTALLED_VTK_LIB_DIR "\@SHEAFSYSTEM_HOME\@"/vtk/lib CACHE STRING \"VTK Base Dir\" FORCE)\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "set(VTK_BIN_DIR "\@SHEAFSYSTEM_HOME\@"/vtk/bin CACHE STRING \"VTK Base Dir\" FORCE)\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "set(VTK_INC_DIR "\@SHEAFSYSTEM_HOME\@"/vtk/include CACHE STRING \"VTK Base Dir\" FORCE)\n") 
     endif()
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "set(VTK_LIBS ${VTK_LIBS} CACHE STRING \"VTK Runtime Libraries\" FORCE)\n")      
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "set(HDF_INCLUDE_DIR ${HDF_INCLUDE_DIR} CACHE STRING \"HDF Include Directory\" FORCE)\n")  
@@ -799,7 +803,7 @@ function(install_prereqs)
     # Prerequisite components install
     if(LINUX64INTEL OR LINUX64GNU)
     
-        foreach(name ${VTK_INSTALL_LIBS})
+        foreach(name ${VTK_LIBS})
             file(GLOB files "${VTK_LIB_DIR}/lib${name}.*")
             string(REPLACE "${VTK_LIB_DIR}/lib${name}.a" "" files "${files}")
             set(VTK_INST_LIBS ${VTK_INST_LIBS} "${files}")
@@ -818,11 +822,12 @@ function(install_prereqs)
 
     elseif(WIN32) 
     
-        foreach(name ${VTK_INSTALL_LIBS})
+        foreach(name ${VTK_LIBS})
             file(GLOB files "${VTK_LIB_DIR}/${name}.lib")
             set(VTK_INST_LIBS ${VTK_INST_LIBS} ${files})
         endforeach()
-        install(FILES ${VTK_INST_LIBS} DESTINATION lib/vtk/
+        install(FILES ${VTK_INST_LIBS} DESTINATION vtk/lib
+        #install(FILES ${VTK_INST_LIBS} DESTINATION lib/vtk/
         PERMISSIONS
         OWNER_WRITE OWNER_READ OWNER_EXECUTE
         GROUP_READ GROUP_EXECUTE
@@ -834,7 +839,8 @@ function(install_prereqs)
             set(VTK_RUNTIME_LIBS ${VTK_RUNTIME_LIBS} ${files})
         endforeach()
         
-        install(FILES ${VTK_RUNTIME_LIBS} DESTINATION bin/vtk/
+        #install(FILES ${VTK_RUNTIME_LIBS} DESTINATION bin/vtk/
+        install(FILES ${VTK_RUNTIME_LIBS} DESTINATION vtk/bin
         PERMISSIONS
         OWNER_WRITE OWNER_READ OWNER_EXECUTE
         GROUP_READ GROUP_EXECUTE
@@ -842,15 +848,18 @@ function(install_prereqs)
         )
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK OFF CACHE BOOL \"Set to link against VTK libs\")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK @USE_VTK@ CACHE BOOL \"Set to link against VTK libs\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/bin/vtk CACHE STRING \"Location of VTK libs\")\n")
+        #file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/bin/vtk CACHE STRING \"Location of VTK libs\")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/vtk/lib CACHE STRING \"Location of VTK libs\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")            
     endif()
 
         
      # Install only the VTK includes we use    
     foreach(inc ${VTK_INCS})
-        install(FILES ${VTK_INC_DIRS}/${inc} DESTINATION include
+        install(FILES ${VTK_INC_DIRS}/${inc} DESTINATION vtk/include
+       # install(FILES ${VTK_INC_DIRS}/${inc} DESTINATION include
         PERMISSIONS
         OWNER_WRITE OWNER_READ
         GROUP_READ WORLD_READ)
