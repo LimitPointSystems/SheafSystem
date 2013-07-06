@@ -71,8 +71,8 @@ set(INSTALL_CONFIG_FILE ${PROJECT_NAME}-install.cmake CACHE STRING "Install conf
 # Windows has a notion of Debug and Release builds. For practical purposes, "Release" is
 # equivalent to "not Debug". We'll carry that notion through to linux/gcc as well for now, with
 # "Release" equivalent to "!-g"
-set(CMAKE_CONFIGURATION_TYPES Debug-contracts Debug-no-contracts Release-contracts Release-no-contracts CACHE
-    STRING "Supported configuration types"
+set(CMAKE_CONFIGURATION_TYPES Debug-contracts Debug-no-contracts Release-contracts Release-no-contracts 
+     RelWithDebInfo-contracts RelWithDebInfo-no-contracts CACHE STRING "Supported configuration types"
     FORCE)
 
 #

@@ -318,9 +318,9 @@ function(set_compiler_flags)
                 STRING "Flags used by the C++ compiler for Release-contracts builds" )
         endif()
   
-        set(CMAKE_EXE_LINKER_FLAGS_RELEASE-CONTRACTS "${LPS_EXE_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD  /OPT:REF /OPT:ICF /NXCOMPAT"  CACHE
+        set(CMAKE_EXE_LINKER_FLAGS_RELEASE-CONTRACTS "${LPS_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD  /OPT:REF /OPT:ICF /NXCOMPAT"  CACHE
             STRING "Flags used by the linker for executables for Release-contracts builds" )
-        set(CMAKE_SHARED_LINKER_FLAGS_RELEASE-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD /OPT:REF /OPT:ICF /NXCOMPAT " CACHE
+        set(CMAKE_SHARED_LINKER_FLAGS_RELEASE-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD /OPT:REF /OPT:ICF /NXCOMPAT " CACHE
             STRING "Flags used by the linker for shared libraries for Release-contracts builds" ) 
     else()
         set(CMAKE_CXX_FLAGS_RELEASE-CONTRACTS "${LPS_CXX_FLAGS} ${OPTIMIZATION}" CACHE
@@ -350,9 +350,9 @@ function(set_compiler_flags)
                 STRING "Flags used by the C++ compiler for Release-no-contracts builds" )
       endif()     
                 
-    set(CMAKE_EXE_LINKER_FLAGS_RELEASE-NO-CONTRACTS "${CMAKE_EXE_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD  /OPT:REF /OPT:ICF /NXCOMPAT" CACHE
+    set(CMAKE_EXE_LINKER_FLAGS_RELEASE-NO-CONTRACTS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD  /OPT:REF /OPT:ICF /NXCOMPAT" CACHE
         STRING "Flags used by the linker for executables for Release-no-contracts builds" )
-    set(CMAKE_SHARED_LINKER_FLAGS_RELEASE-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD /OPT:REF /OPT:ICF /NXCOMPAT" CACHE
+    set(CMAKE_SHARED_LINKER_FLAGS_RELEASE-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD /OPT:REF /OPT:ICF /NXCOMPAT" CACHE
         STRING "Flags used by the linker for shared libraries for Release-no-contracts builds" )
     else()
         set(CMAKE_CXX_FLAGS_RELEASE-NO-CONTRACTS "${LPS_CXX_FLAGS} ${OPTIMIZATION} -DNDEBUG" CACHE
@@ -368,7 +368,71 @@ function(set_compiler_flags)
                      CMAKE_EXE_LINKER_FLAGS_RELEASE-NO-CONTRACTS CMAKE_SHARED_LINKER_FLAGS_RELEASE-NO-CONTRACTS
                   )
 
-endfunction(set_compiler_flags)
+    #                 
+    # RelWithDebInfo-contracts section
+    #
+
+    # Configuration specific flags 
+    if(WIN64MSVC OR WIN64INTEL)
+    
+        if(${USE_VTK})
+            set(CMAKE_CXX_FLAGS_RELWITHDEBINFO-CONTRACTS "${LPS_CXX_FLAGS} /DUSE_VTK /MD /LD /O2 " CACHE
+                STRING "RelWithDebInfo-contracts compiler flags" )
+        else()   
+            set(CMAKE_CXX_FLAGS_RELWITHDEBINFO-CONTRACTS "${LPS_CXX_FLAGS} /MD /LD /O2 " CACHE
+                STRING "RelWithDebInfo-contracts compiler flags" )
+        endif()
+  
+        set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-CONTRACTS "${LPS_EXE_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD  /OPT:REF /OPT:ICF /NXCOMPAT"  CACHE
+            STRING "RelWithDebInfo-contracts linker flags - executables" )
+        set(CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD /OPT:REF /OPT:ICF /NXCOMPAT " CACHE
+            STRING "RelWithDebInfo-contracts linker flags - shared libs" ) 
+    else()
+        set(CMAKE_CXX_FLAGS_RELWITHDEBINFO-CONTRACTS "${LPS_CXX_FLAGS} ${OPTIMIZATION}" CACHE
+            STRING "RelWithDebInfo-contracts compiler flags" )
+        set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-CONTRACTS "${LPS_EXE_LINKER_FLAGS}"  CACHE
+            STRING "RelWithDebInfo-contracts linker flags - executables" )
+        set(CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS}" CACHE
+            STRING "RelWithDebInfo-contracts linker flags - shared libs" )
+    endif()
+    
+    # True for all currently supported platforms        
+    mark_as_advanced(CMAKE_CXX_FLAGS_RELWITHDEBINFO-CONTRACTS
+                     CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-CONTRACTS CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-CONTRACTS
+                    )
+    #                 
+    # RelWithDebInfo-no-contracts section
+    #
+
+    # Configuration specific flags         
+    if(WIN64MSVC OR WIN64INTEL)
+    
+       if(${USE_VTK})
+            set(CMAKE_CXX_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${LPS_CXX_FLAGS} /MD /LD /O2 /DUSE_VTK /DNDEBUG" CACHE
+                STRING "RelWithDebInfo-no-contracts compiler flags" )
+       else()        
+            set(CMAKE_CXX_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${LPS_CXX_FLAGS}  /MD /LD /O2 /DNDEBUG" CACHE
+                STRING "RelWithDebInfo-no-contracts compiler flags" )
+      endif()     
+                
+    set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${CMAKE_EXE_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD  /OPT:REF /OPT:ICF /NXCOMPAT" CACHE
+        STRING "RelWithDebInfo-no-contracts linker flags - executables" )
+    set(CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD /OPT:REF /OPT:ICF /NXCOMPAT" CACHE
+        STRING "RelWithDebInfo-no-contracts linker flags - shared libs" )
+    else()
+        set(CMAKE_CXX_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${LPS_CXX_FLAGS} ${OPTIMIZATION} -DNDEBUG" CACHE
+            STRING "RelWithDebInfo-no-contracts compiler flags" )
+        set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${CMAKE_EXE_LINKER_FLAGS}" CACHE
+            STRING "RelWithDebInfo-no-contracts linker flags - executables" )
+        set(CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS}" CACHE
+            STRING "RelWithDebInfo-no-contracts linker flags - shared libs" )
+    endif()
+    
+    # True for all currently supported platforms        
+    mark_as_advanced(CMAKE_CXX_FLAGS_RELWITHDEBINFO-NO-CONTRACTS
+                     CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-NO-CONTRACTS CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-NO-CONTRACTS
+                  )
+endfunction(set_compiler_flags)	
 
 #
 # Create the build output directories.
