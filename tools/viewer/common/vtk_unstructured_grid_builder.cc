@@ -1142,6 +1142,59 @@ set_cell_data(abstract_poset_member& xbase,
   return;
 }
 
+///
+void
+tool::vtk_unstructured_grid_builder::
+build_file(const sec_vd& xcoords, const sec_vd& xproperty, const string& xvtk_file_name, bool xis_ascii)
+{
+  // Preconditions:
+
+  require(xcoords.state_is_read_accessible());
+  require(xcoords.schema().base_space().schema().conforms_to(base_space_member::standard_schema_path()));
+  require(xcoords.schema().df() <= 3);
+  require(xproperty.state_is_read_accessible());
+  require(xproperty.schema().base_space().is_same_state(&xcoords.schema().base_space()));
+  require(xproperty.schema().evaluation().is_same_state(&xcoords.schema().evaluation()));
+  require(!xvtk_file_name.empty());
+
+  // Body:
+
+
+  // Create a vtk data object.
+
+  vtkUnstructuredGrid* lug = build(xcoords, xproperty);
+
+  // Create a vtk data object writer and set it to write
+  // either ascii or binary.
+
+  vtkUnstructuredGridWriter* writer = vtkUnstructuredGridWriter::New();
+  writer->SetInput(lug);
+  writer->SetFileName(xvtk_file_name.c_str());
+
+  if(xis_ascii)
+    writer->SetFileTypeToASCII();
+  else
+    writer->SetFileTypeToBinary();
+
+  // Actually write the file.
+
+  writer->Write();
+
+  // Cleanup.
+
+  writer->Delete();
+  lug->Delete();
+
+
+  // Postconditions:
+
+
+  // Exit:
+
+  return;
+
+}
+
 bool
 tool::vtk_unstructured_grid_builder::
 is_scalar(const sec_vd* xsec) const

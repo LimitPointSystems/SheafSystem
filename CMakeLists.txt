@@ -1,4 +1,5 @@
 #
+#
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
 #
@@ -53,15 +54,11 @@ create_output_dirs()
 add_doc_targets()
 
 #
-# Add files to the clean target
-#
-add_clean_files()
-
-#
 # Target to generate emacs tags
 #
 add_tags_target()
 
+add_clean_files()
 #
 # Configure the environment scripts. 
 #
@@ -120,11 +117,6 @@ if(LINUX64INTEL OR LINUX64GNU)
     GROUP_READ WORLD_READ)
 
     if(${USE_VTK})
-#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK OFF CACHE BOOL \"Set to link against VTK libs\")\n")
-#        file(APPEND  ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/lib/VTK CACHE STRING \"Location of VTK libs\")\n")
-#        file(APPEND  ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         install(DIRECTORY ${VTK_INC_DIRS} DESTINATION include/VTK PATTERN "*.h"
         PERMISSIONS
         OWNER_WRITE OWNER_READ OWNER_EXECUTE
@@ -149,8 +141,20 @@ else()
     install(FILES ${VTK_DYNAMIC_LIBS} DESTINATION bin/VTK/)
     # HDF
     install(FILES ${HDF_INCS} DESTINATION include)
+    configure_file(${CMAKE_MODULE_PATH}/index.html.in ${CMAKE_BINARY_DIR}/index.html)
+    configure_file(${CMAKE_MODULE_PATH}/jindex.html.in ${CMAKE_BINARY_DIR}/jindex.html)
+    install(DIRECTORY ${PROJECT_BINARY_DIR}/documentation/ DESTINATION documentation)
+    install(DIRECTORY ${CMAKE_MODULE_PATH}/css DESTINATION documentation)
+    install(DIRECTORY ${CMAKE_MODULE_PATH}/images DESTINATION documentation)
+    install(FILES ${CMAKE_BINARY_DIR}/index.html DESTINATION documentation)
+    install(FILES ${CMAKE_BINARY_DIR}/jindex.html DESTINATION documentation/java)
 
 endif()
+
+#
+# Install what few prerequisite resources we need
+#
+install_prereqs()
 
 #
 # Generate some info about the release
@@ -158,7 +162,7 @@ endif()
 set(RELEASE_DATE)
 get_date(RELEASE_DATE)
 file(WRITE ${CMAKE_BINARY_DIR}/RELEASE "${PROJECT_NAME} version ${LIB_VERSION} ${RELEASE_DATE}  \n")
-install(FILES ${CMAKE_BINARY_DIR}/RELEASE DESTINATION ${CMAKE_INSTALL_PREFIX})
+install(FILES ${PROJECT_BINARY_DIR}/RELEASE DESTINATION ${CMAKE_INSTALL_PREFIX})
 
 #
 # Generate the install configuration file.
@@ -169,10 +173,15 @@ generate_install_config_file()
 # Install the exports file
 #
 if(LINUX64INTEL OR LINUX64GNU)
-    install(FILES ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in DESTINATION ${CMAKE_BUILD_TYPE}/config)
+    install(FILES ${PROJECT_BINARY_DIR}/${EXPORTS_FILE}.in DESTINATION ${CMAKE_BUILD_TYPE}/config)
 else()
-    include(InstallRequiredSystemLibraries)
-    install(FILES ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in DESTINATION config/\${BUILD_TYPE})
+    # Install the MSVC Runtime components
+# TODO: Once we figure out a reasonable way to only include the runtime in release
+# configurations, then turn this back on.    
+#    set(CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP TRUE) 
+#    include(InstallRequiredSystemLibraries)
+#    install(FILES ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS} DESTINATION bin/\${BUILD_TYPE})
+    install(FILES ${PROJECT_BINARY_DIR}/${EXPORTS_FILE}.in DESTINATION config/\${BUILD_TYPE})
 endif()    
 
 

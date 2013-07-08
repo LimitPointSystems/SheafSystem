@@ -552,22 +552,22 @@ public:
   static string block_vertices_name();
 
   ///
-  /// The subposet containing all the vertices (mutable version).
+  /// The subposet containing all the vertices, that is, the cells of dimension 0 (mutable version).
   ///
   subposet& vertices();
 
   ///
-  /// The subposet containing all the vertices (const version).
+  /// The subposet containing all the vertices, that is, the cells of dimension 0 (const version).
   ///
   const subposet& vertices() const;
 
   ///
-  /// The subposet containing the elements or zones.
+  /// The subposet containing the elements or zones, that is, the cells of maximal dimension.
   ///
   subposet& elements();
 
   ///
-  /// The subposet containing the elements or zones.
+  /// The subposet containing the elements or zones, that is, the cells of maximal dimension.
   ///
   const subposet& elements() const;
 

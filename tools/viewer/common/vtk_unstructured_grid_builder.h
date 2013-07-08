@@ -165,6 +165,16 @@ public:
                 const block<sec_vd*>& xproperties,
                 vtkUnstructuredGrid& xresult);
 
+
+  ///
+  /// Builds a vtk file representation of a vtkPolyData from xcoords and xproperty
+  /// with file name xvtk_file_name.
+  /// If xis_ascii is true, write an  ascii (text) file; otherwise write a
+  /// binary file.
+  ///
+  void build_file(const sec_vd& xcoords, const sec_vd& xproperty,
+                  const string& xvtk_file_name, bool xis_ascii = true);
+
   ///
   /// True if the fiber of xsec is a scalar type.
   ///

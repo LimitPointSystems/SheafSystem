@@ -1,6 +1,4 @@
 #
-# $RCSfile: CMakeLists.txt,v $ $Revision: 1.16 $ $Date: 2013/01/20 19:40:46 $
-#
 #
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
@@ -44,11 +42,6 @@ add_bindings_targets()
 # Installation target
 #
 add_install_target()
-
-#
-# Add files to the clean target
-#
-add_clean_files()
 
 #
 # Write this component's lib targets and include paths to an export file.

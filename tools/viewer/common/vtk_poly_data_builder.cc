@@ -217,7 +217,7 @@ build_file(const sec_vd& xcoords, const sec_vd& xproperty,
 
   require(xcoords.state_is_read_accessible());
   require(xcoords.schema().base_space().schema().conforms_to(base_space_member::standard_schema_path()));
-  require(xcoords.schema().df() <= 2);
+  require(xcoords.schema().df() <= 3);
   require(xproperty.state_is_read_accessible());
   require(xproperty.schema().base_space().is_same_state(&xcoords.schema().base_space()));
   require(xproperty.schema().evaluation().is_same_state(&xcoords.schema().evaluation()));
@@ -271,7 +271,7 @@ build_file(const sec_vd& xcoords,
 
   require(xcoords.state_is_read_accessible());
   require(xcoords.schema().base_space().schema().conforms_to(base_space_member::standard_schema_path()));
-  require(xcoords.schema().df() <= 2);
+  require(xcoords.schema().df() <= 3);
   require(!xvtk_file_name.empty());
 
   // Body:
@@ -323,7 +323,7 @@ build(const sec_vd& xcoords, const sec_vd& xproperty)
 
   require(xcoords.state_is_read_accessible());
   require(xcoords.schema().base_space().schema().conforms_to(base_space_member::standard_schema_path()));
-  require(xcoords.schema().df() <= 2);
+  require(xcoords.schema().df() <= 3);
   require(xproperty.state_is_read_accessible());
   require(xproperty.schema().base_space().is_same_state(&xcoords.schema().base_space()));
   require(xproperty.schema().evaluation().is_same_state(&xcoords.schema().evaluation()));
@@ -353,7 +353,7 @@ build(const sec_vd& xcoords)
 
   require(xcoords.state_is_read_accessible());
   require(xcoords.schema().base_space().schema().conforms_to(base_space_member::standard_schema_path()));
-  require(xcoords.schema().df() <= 2);
+  require(xcoords.schema().df() <= 3);
 
   // Body:
 
@@ -378,7 +378,7 @@ build_pa(const sec_vd& xcoords, const sec_vd& xproperty, vtkPolyData& xresult)
 
   require(xcoords.state_is_read_accessible());
   require(xcoords.schema().base_space().schema().conforms_to(base_space_member::standard_schema_path()));
-  require(xcoords.schema().df() <= 2);
+  require(xcoords.schema().df() <= 3);
   require(xproperty.state_is_read_accessible());
   require(xproperty.schema().base_space().is_same_state(&xcoords.schema().base_space()));
   require(xproperty.schema().evaluation().is_same_state(&xcoords.schema().evaluation()));
@@ -415,7 +415,7 @@ build_pa(const sec_vd& xcoords, vtkPolyData& xresult)
 
   require(xcoords.state_is_read_accessible());
   require(xcoords.schema().base_space().schema().conforms_to(base_space_member::standard_schema_path()));
-  require(xcoords.schema().df() <= 2);
+  require(xcoords.schema().df() <= 3);
   require(&xresult != 0);
 
   // Body:
@@ -526,7 +526,7 @@ get_connectivity(const sec_vd& xcoords)
 
   require(xcoords.state_is_read_accessible());
   require(xcoords.schema().base_space().schema().conforms_to(base_space_member::standard_schema_path()));
-  require(xcoords.schema().df() <= 2);
+  require(xcoords.schema().df() <= 3);
 
   // Body:
 

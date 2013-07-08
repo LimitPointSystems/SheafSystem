@@ -521,6 +521,7 @@ new_jim_state(poset_state_handle* xhost,
   ensure(xdof_map == 0 ? evaluator_family_name().empty() : true);
   ensure(xdof_map == 0 ? url().empty() : true);
   ensure(xdof_map == 0 ? multiplicity() == 0 : true);
+  ensure(xdof_map == 0 ? !eval_is_above_disc() : true);
 
   // Clean-up auto access.
 
@@ -596,6 +597,7 @@ new_jim_state(poset* xhost,
   ensure(evaluator_family_name() == xevaluator_family_name);
   ensure(url() == xurl);
   ensure(multiplicity() == xmultiplicity);
+  ensure(eval_is_above_disc() == xeval_is_above_disc);
 
   if(xauto_access)
     xhost->end_jim_edit_mode();

@@ -29,21 +29,11 @@ set(COMPONENTS sheaves fiber_bundles geometry fields tools CACHE STRING "List of
 if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT AND LIB_VERSION MATCHES "0.0.0.0" )
     if(LINUX64GNU OR LINUX64INTEL)
       set(CMAKE_INSTALL_PREFIX
-        "$ENV{HOME}/SheafSystem" CACHE PATH "SheafSystem install prefix"
+        "$ENV{HOME}/SheafSystem" CACHE PATH "SheafSystem install prefix" FORCE
         )
     else()
       set(CMAKE_INSTALL_PREFIX
-        "$ENV{USERPROFILE}/SheafSystem" CACHE PATH "SheafSystem install prefix"
-        )
-    endif()
-else()
-    if(LINUX64GNU OR LINUX64INTEL)
-      set(CMAKE_INSTALL_PREFIX
-        "$ENV{HOME}/SheafSystem-${LIB_VERSION}" CACHE PATH "SheafSystem install prefix"
-        )
-    else()
-      set(CMAKE_INSTALL_PREFIX
-        "$ENV{USERPROFILE}/SheafSystem-${LIB_VERSION}" CACHE PATH "SheafSystem install prefix"
+        "$ENV{USERPROFILE}/SheafSystem" CACHE PATH "SheafSystem install prefix" FORCE
         )
     endif()
 endif()
@@ -72,14 +62,17 @@ else()
     message(FATAL_ERROR "A 64 bit Windows or Linux environment was not detected; exiting")
 endif()
 
+#
+# Define the exports files
+#
 set(EXPORTS_FILE ${PROJECT_NAME}-exports.cmake CACHE STRING "System exports file name")
 set(INSTALL_CONFIG_FILE ${PROJECT_NAME}-install.cmake CACHE STRING "Install config file name")
 
 # Windows has a notion of Debug and Release builds. For practical purposes, "Release" is
 # equivalent to "not Debug". We'll carry that notion through to linux/gcc as well for now, with
 # "Release" equivalent to "!-g"
-set(CMAKE_CONFIGURATION_TYPES Debug-contracts Debug-no-contracts Release-contracts Release-no-contracts CACHE
-    STRING "Supported configuration types"
+set(CMAKE_CONFIGURATION_TYPES Debug-contracts Debug-no-contracts Release-contracts Release-no-contracts 
+     RelWithDebInfo-contracts RelWithDebInfo-no-contracts CACHE STRING "Supported configuration types"
     FORCE)
 
 #
@@ -99,6 +92,14 @@ endif(NOT CMAKE_BUILD_TYPE)
 
 set_property(GLOBAL PROPERTY DEBUG_CONFIGURATIONS "Debug-contracts" "Debug-no-contracts") 
 
+if(WIN64MSVC OR WIN64INTEL)
+    set(CMAKE_DEBUG-CONTRACTS_POSTFIX "_d" CACHE STRING "Debug libs suffix")
+    set(CMAKE_DEBUG-NO-CONTRACTS_POSTFIX "_d" CACHE STRING "Debug libs suffix")
+else()
+    set(CMAKE_DEBUG-CONTRACTS_POSTFIX "_debug" CACHE STRING "Debug libs suffix")
+    set(CMAKE_DEBUG-NO-CONTRACTS_POSTFIX "_debug" CACHE STRING "Debug libs suffix")
+endif()
+
 #   
 #  Type of system documentation to build: Dev or User
 #
@@ -107,17 +108,12 @@ set(BUILD_BINDINGS NO CACHE BOOL "Toggle build of language bindings.")
 #
 # True if we want geometry to link against VTK
 #
-#set(USE_VTK OFF CACHE BOOL "Set to link geometry against VTK libs.")
+set(USE_VTK OFF CACHE BOOL "Set to link geometry against VTK libs.")
 
 #
 # Toggle multi-process compilation in win32.
 #
 set(ENABLE_WIN32_MP ON CACHE BOOL "Toggle win32 compiler MP directive. Works for MS and Intel. Default is ON.")
-
-#
-# Toggle linking of shared LPS libraries against static external prerequisites.
-#
-set(ENABLE_STATIC_PREREQS ON CACHE BOOL "Link shared LPS libraries against static external prerequisites Default is OFF.")
 
 #
 # $$HACK Toggle intel compiler warnings.
@@ -188,7 +184,7 @@ include(${CMAKE_MODULE_PATH}/target_declarations.cmake)
 include(${CMAKE_MODULE_PATH}/find_prerequisites.cmake)
 
 #
-# C++11 features
+# Detect C++11 features
 #
 message(STATUS " ")
 message(STATUS "Checking for C++11 Compliance - ")
@@ -197,7 +193,7 @@ message(STATUS " ")
 include(${CMAKE_MODULE_PATH}/CheckCXX11Features.cmake)
 
 #
-# Utility function to add a component to a system.
+# Utility function to add components to a system.
 #
 function(add_components)
 
@@ -272,7 +268,7 @@ function(set_optimization_level)
         elseif(${OPTIMIZATION_LEVEL} EQUAL 2)
             set(OPTIMIZATION "/O2" PARENT_SCOPE)
         elseif(${OPTIMIZATION_LEVEL} EQUAL 3)
-            set(OPTIMIZATION "/GL" PARENT_SCOPE)    
+            set(OPTIMIZATION "/Ox" PARENT_SCOPE)    
         endif()
     endif()    
 

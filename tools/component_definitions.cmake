@@ -1,6 +1,4 @@
 #
-# $RCSfile: component_definitions.cmake,v $ $Revision: 1.41 $ $Date: 2013/03/27 17:31:37 $
-#
 #
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
@@ -10,15 +8,11 @@
 # This file contains declarations and functions unique to this component.
 #
 set(CMAKE_BACKWARDS_COMPATIBILITY 2.2)
+
 #
 # Include functions and definitions common to all components.
 # 
 include(${CMAKE_MODULE_PATH}/LPSCommon.cmake)
-
-#
-# Include cmake test functions and macros
-#
-#include(CTest)
 
 #
 # Define the clusters for this component.
@@ -133,7 +127,8 @@ function(add_library_targets)
         add_library(${${COMPONENT}_DYNAMIC_LIB} SHARED ${${COMPONENT}_SRCS})
         add_dependencies(${${COMPONENT}_DYNAMIC_LIB} ${FIELDS_IMPORT_LIBS})
                  
-        target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${FIELDS_IMPORT_LIBS} ${JDK_LIBS} ${VTK_LIBS})        
+       # target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} debug ${FIELDS_DEBUG_IMPORT_LIBS} optimized ${FIELDS_IMPORT_LIBS} ${JDK_LIBS} ${VTK_LIBS})        
+        target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${FIELDS_IMPORT_LIBS} ${JDK_LIBS} ${VTK_LIBS}) 
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")        
         
         # Override cmake's placing of "${${COMPONENT}_DYNAMIC_LIB}_EXPORTS into the preproc symbol table.
@@ -203,11 +198,11 @@ function(add_bindings_targets)
         swig_add_module(${${COMPONENT}_JAVA_BINDING_LIB} java ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_JAVA_INTERFACE})
         
         if(WIN64INTEL OR WIN64MSVC)
-            add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} ${FIELDS_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS} ${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE} ${${COMPONENT}_SWIG_COMMON_INTERFACE})
-            target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${JDK_LIBS} ${FIELDS_JAVA_BINDING_LIBS}  ${${COMPONENT}_IMPORT_LIBS})   
+            add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} ${FIELDS_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})
+            target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${JDK_LIBS} ${FIELDS_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})   
             set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES FOLDER "Binding Targets - Java")
         else()
-            add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} ${FIELDS_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB} ${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE} ${${COMPONENT}_SWIG_COMMON_INTERFACE})
+            add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} ${FIELDS_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB})
             target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${JDK_LIBS} ${${COMPONENT}_SHARED_LIB})   
         endif()
         
@@ -216,7 +211,7 @@ function(add_bindings_targets)
         # Define the library version.
         set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES VERSION ${LIB_VERSION})
 
-        target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB} ${FIELDS_JAVA_BINDING_LIBS} ${VTK_LIBS} ${JDK_LIBS} ) 
+        target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB} ${FIELDS_JAVA_BINDING_LIBS} ${VTK_LIBS} ${JDK_LIBS}) 
 
         list(APPEND ${COMPONENT}_CLASSPATH ${FIELDS_CLASSPATH} ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} ${VTK_JAR} ${JMF_JAR})
         set(${COMPONENT}_CLASSPATH ${${COMPONENT}_CLASSPATH} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
@@ -225,13 +220,21 @@ function(add_bindings_targets)
         if(WIN64INTEL OR WIN64MSVC)
 
             add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
-                           DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${FIELDS_JAVA_BINDING_JAR}
-                           set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Component Binding Jars")                           
-                           COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
-                           COMMAND ${JAVAC_EXECUTABLE} -classpath "${FIELDS_CLASSPATH};${VTK_JAR};${JMF_JAR}" -d . *.java
-                           COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                           COMMAND ${JAR_EXECUTABLE} cvf ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
-            )
+                               DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${FIELDS_JAVA_BINDING_JAR}
+                               set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Component Binding Jars")                           
+                               COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
+                               COMMAND ${JAVAC_EXECUTABLE} -classpath "${FIELDS_CLASSPATH}" -d . *.java
+                               COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
+                               COMMAND ${JAR_EXECUTABLE} cvf ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
+                             )
+                             
+                        # Java documentation
+            add_custom_target(${PROJECT_NAME}-java-docs ALL
+                                COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${FIELDS_CLASSPATH}" 
+                                -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
+                                *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                                DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
+                             )                 
         else()
             # The default list item separator in cmake is ";". If Linux, then exchange ";" for  the UNIX style ":"
             # and store the result in parent_classpath.
@@ -241,12 +244,20 @@ function(add_bindings_targets)
             # and store the result in parent_classpath.
             string(REGEX REPLACE ";" ":" parent_classpath "${FIELDS_CLASSPATH};${VTK_JAR};${JMF_JAR}")
             add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
-                           DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${FIELDS_JAVA_BINDING_JAR}
-                           COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
-                           COMMAND ${JAVAC_EXECUTABLE} -classpath "${parent_classpath}" -d . *.java
-                           COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                           COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
-            ) 
+                               DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${FIELDS_JAVA_BINDING_JAR}
+                               COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
+                               COMMAND ${JAVAC_EXECUTABLE} -classpath "${parent_classpath}" -d . *.java
+                               COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
+                               COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
+                             )
+            
+            # Java documentation
+            add_custom_target(${PROJECT_NAME}-java-docs ALL
+                                COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${parent_classpath}" 
+                                -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
+                                *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                                DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
+                             )     
         endif()
 
         set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Library Jars") 
@@ -258,63 +269,54 @@ function(add_bindings_targets)
          # Build the SheafScope jar
         if(WIN64INTEL OR WIN64MSVC)
              add_custom_target(SheafScope.jar ALL 
-                           DEPENDS ${PROJECT_NAME}_java_binding.jar 
-                           COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}
-                           COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
-                           COMMAND ${JAVAC_EXECUTABLE} -classpath "${${COMPONENT}_CLASSPATH}" -g -d ${LIB_JAR_DIR} @${CMAKE_BINARY_DIR}/scopesrcs
-        	               COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/common/gui/resources
-        	               COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/viewer/resources/docs
-       	                   COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/SheafScope/resources/docs
-    
-        	               COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/common/gui/resources      ${LIB_JAR_DIR}/tools/common/gui/resources
-        	               COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/viewer/resources          ${LIB_JAR_DIR}/tools/viewer/resources
-        	               COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/viewer/resources/docs     ${LIB_JAR_DIR}/tools/viewer/resources/docs
-        	               COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources      ${LIB_JAR_DIR}/tools/SheafScope/resources
-        	               COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources/docs ${LIB_JAR_DIR}/tools/SheafScope/resources/docs 
-    
-                           COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                          COMMAND ${JAR_EXECUTABLE} cvmf ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/manifest.txt ${OUTDIR}/SheafScope.jar  -C ${LIB_JAR_DIR} .
-            )
+                                 DEPENDS ${PROJECT_NAME}_java_binding.jar 
+                                 COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}
+                                 COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
+                                 COMMAND ${JAVAC_EXECUTABLE} -classpath "${this_classpath}" -g -d ${LIB_JAR_DIR} @${CMAKE_BINARY_DIR}/scopesrcs
+            	                 COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/common/gui/resources
+            	                 COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/viewer/resources/docs
+           	                     COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/SheafScope/resources/docs
+        
+            	                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/common/gui/resources      ${LIB_JAR_DIR}/tools/common/gui/resources
+            	                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/viewer/resources          ${LIB_JAR_DIR}/tools/viewer/resources
+            	                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/viewer/resources/docs     ${LIB_JAR_DIR}/tools/viewer/resources/docs
+            	                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources      ${LIB_JAR_DIR}/tools/SheafScope/resources
+            	                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources/docs ${LIB_JAR_DIR}/tools/SheafScope/resources/docs 
+        
+                                 COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
+                                 COMMAND ${JAR_EXECUTABLE} cvmf ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/manifest.txt ${OUTDIR}/SheafScope.jar  -C ${LIB_JAR_DIR} .
+                              )
         else()
          # Build the SheafScope jar
              add_custom_target(SheafScope.jar ALL 
-                 DEPENDS ${PROJECT_NAME}_java_binding.jar 
-                 COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}
-                 COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
-                 COMMAND ${JAVAC_EXECUTABLE} -classpath "${this_classpath}" -g -d ${LIB_JAR_DIR} @${CMAKE_BINARY_DIR}/scopesrcs
-                 COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/common/gui/resources
-                 COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/viewer/resources/docs
-                 COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/SheafScope/resources/docs
-    
-                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/common/gui/resources      ${LIB_JAR_DIR}/tools/common/gui/resources
-                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/viewer/resources          ${LIB_JAR_DIR}/tools/viewer/resources
-                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/viewer/resources/docs     ${LIB_JAR_DIR}/tools/viewer/resources/docs
-                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources      ${LIB_JAR_DIR}/tools/SheafScope/resources
-                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources/docs ${LIB_JAR_DIR}/tools/SheafScope/resources/docs 
-    
-                 COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                 COMMAND ${JAR_EXECUTABLE} cvmf ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/manifest.txt ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/SheafScope.jar -C ${LIB_JAR_DIR} .
-                 )
+                                 DEPENDS ${PROJECT_NAME}_java_binding.jar 
+                                 COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}
+                                 COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
+                                 COMMAND ${JAVAC_EXECUTABLE} -classpath "${parent_classpath}" -g -d ${LIB_JAR_DIR} @${CMAKE_BINARY_DIR}/scopesrcs
+                                 COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/common/gui/resources
+                                 COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/viewer/resources/docs
+                                 COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/SheafScope/resources/docs
+                    
+                                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/common/gui/resources      ${LIB_JAR_DIR}/tools/common/gui/resources
+                                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/viewer/resources          ${LIB_JAR_DIR}/tools/viewer/resources
+                                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/viewer/resources/docs     ${LIB_JAR_DIR}/tools/viewer/resources/docs
+                                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources      ${LIB_JAR_DIR}/tools/SheafScope/resources
+                                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources/docs ${LIB_JAR_DIR}/tools/SheafScope/resources/docs 
+                    
+                                 COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
+                                 COMMAND ${JAR_EXECUTABLE} cvmf ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/manifest.txt ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/SheafScope.jar -C ${LIB_JAR_DIR} .
+                              )
         endif()
         
         set_target_properties(SheafScope.jar PROPERTIES FOLDER "Executable Jars") 
-        # Java documentation
-        # Java documentation
-        add_custom_target(${PROJECT_NAME}-java-docs ALL
-                    COMMAND ${JDK_BIN_DIR}/javadoc -quiet -windowtitle "${PROJECT_NAME} documentation" -classpath "${FIELDS_CLASSPATH}" 
-                    -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
-                    *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-                    DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR} SheafScope.jar
-                    )
         set_target_properties(${PROJECT_NAME}-java-docs PROPERTIES FOLDER "Documentation Targets")
-        
+     
         add_dependencies(${PROJECT_NAME}-bindings ${PROJECT_NAME}_java_binding.jar SheafScope ${PROJECT_NAME}-python-binding)
         
         # Guard these until we can get the VS solution explorer aesthetic issues sorted
         if(LINUX64GNU OR LINUX64INTEL) 
             add_dependencies(${PROJECT_NAME}-java-binding ${PROJECT_NAME}_java_binding.jar)    
             add_dependencies(${PROJECT_NAME}-python-binding ALL fields-python-binding)
-           #add_dependencies(${PROJECT_NAME}-csharp-binding ${${COMPONENT}_CSHARP_BINDING_LIB})
             add_dependencies(${PROJECT_NAME}-python-binding ALL fields-python-binding)
         endif() 
         
@@ -353,10 +355,10 @@ function(add_install_target)
             install(TARGETS ${${COMPONENT}_DYNAMIC_LIB} RUNTIME DESTINATION bin/\${BUILD_TYPE})
             
             # Only try to install the pdb files if they exist. Easier to determine existence than the current config type in win32.
-            if(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}.pdb")
-                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}.pdb DESTINATION bin/\${BUILD_TYPE})
-            elseif(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}.pdb")
-                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}.pdb DESTINATION bin/\${BUILD_TYPE})               
+             if(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb")
+                 install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb DESTINATION bin/Debug-contracts)
+            elseif(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb")
+                 install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb DESTINATION bin/Debug-no-contracts)               
             endif()
                                          
             if(SWIG_FOUND AND BUILD_BINDINGS)
@@ -389,9 +391,9 @@ function(add_dumpsheaf_target)
             link_directories(${FIBER_BUNDLES_OUTPUT_DIR}/$(OutDir))
             target_link_libraries(dumpsheaf ${FIBER_BUNDLES_IMPORT_LIBS})
         else()
-            add_dependencies(dumpsheaf ${FIBER_BUNDLES_STATIC_LIB})
+            add_dependencies(dumpsheaf ${FIBER_BUNDLES_SHARED_LIB})
             link_directories(${FIBER_BUNDLES_OUTPUT_DIR})
-            target_link_libraries(dumpsheaf ${FIBER_BUNDLES_STATIC_LIB})
+            target_link_libraries(dumpsheaf ${FIBER_BUNDLES_SHARED_LIB})
         endif()
     
         # Supply the *_DLL_IMPORTS directive to preprocessor
