@@ -185,20 +185,7 @@ endfunction(configure_std_headers)
 #
 function(set_compiler_flags)
 
-       # Clear all cmake's intrinsic vars. If we don't, then their values will be appended to our
-       # compile and link lines.
-       set(CMAKE_CXX_FLAGS "" CACHE STRING "CXX Flags")
-       set(CMAKE_SHARED_LINKER_FLAGS "" CACHE STRING "Shared Linker Flags")
-       set(CMAKE_SHARED_LINKER_FLAGS_DEBUG "" CACHE STRING "Debug Shared Linker Flags")
-       set(CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO "" CACHE STRING "Debug Shared Linker Flags")
-       set(CMAKE_SHARED_LINKER_FLAGS_DEBUG "" CACHE STRING "Debug Shared Linker Flags")
-       set(CMAKE_EXE_LINKER_FLAGS "" CACHE STRING "Exe Linker Flags")
-       set(CMAKE_EXE_LINKER_FLAGS_DEBUG "" CACHE STRING "Exe Linker Flags")
-       set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO "" CACHE STRING "Exe Linker Flags")
-       set(CMAKE_MODULE_LINKER_FLAGS "" CACHE STRING "Module Linker Flags")
-       set(CMAKE_MODULE_LINKER_FLAGS_DEBUG "" CACHE STRING "Module Linker Flags")
-       set(CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO "" CACHE STRING "Module Linker Flags") 
-        
+       
        # Toggle multi-process compilation in Windows
        # Set in system_definitions.cmake
        if(ENABLE_WIN32_MP)
