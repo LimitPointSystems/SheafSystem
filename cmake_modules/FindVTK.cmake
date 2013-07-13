@@ -118,11 +118,7 @@ else()
   # Look for UseVTK.cmake in build trees or under <prefix>/include/vtk.
   find_path(VTK_LIB_DIR
     NAMES UseVTK.cmake
-<<<<<<< HEAD
-    PATH_SUFFIXES vtk-5.6 vtk-5.10 vtk
-=======
-    PATH_SUFFIXES vtk-5.6 vtk
->>>>>>> master
+    PATH_SUFFIXES vtk-5.6  vtk
     HINTS $ENV{VTK_LIB_DIR} $ENV{HOME}/LPS/prerequisites/vtk/lib $ENV{USERPROFILE}/LPS/prerequisites/vtk/lib
 
     PATHS
