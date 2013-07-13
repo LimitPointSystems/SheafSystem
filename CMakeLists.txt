@@ -88,63 +88,6 @@ endif()
 #
 install(DIRECTORY ${CMAKE_BINARY_DIR}/documentation/ DESTINATION documentation)
 
-# Prerequisite components install
-if(LINUX64INTEL OR LINUX64GNU)
-
-    # All forward slashes in path
-    file(TO_CMAKE_PATH $ENV{HOME} HOME_DIR)
-    
-    install(DIRECTORY ${VTK_LIB_DIR}/ DESTINATION lib/vtk/ USE_SOURCE_PERMISSIONS PATTERN "lib*"
-    PERMISSIONS
-    OWNER_WRITE OWNER_READ OWNER_EXECUTE
-    GROUP_READ GROUP_EXECUTE
-    WORLD_READ WORLD_EXECUTE
-    PATTERN "*.cmake" EXCLUDE
-    PATTERN "doc" EXCLUDE
-    PATTERN "doxygen" EXCLUDE
-    PATTERN "hints" EXCLUDE
-    PATTERN "CMake" EXCLUDE
-    PATTERN "testing" EXCLUDE)
-    
-    install(DIRECTORY ${HDF5_INCLUDE_DIR}/ DESTINATION include PATTERN "*.h"
-    PERMISSIONS
-    OWNER_WRITE OWNER_READ OWNER_EXECUTE
-    GROUP_READ WORLD_READ)
-    
-    install(FILES ${TETGEN_INC_DIR}/tetgen.h DESTINATION include
-    PERMISSIONS
-    OWNER_WRITE OWNER_READ OWNER_EXECUTE
-    GROUP_READ WORLD_READ)
-
-else()
-
-    file(GLOB VTK_IMPORT_LIBS ${VTK_LIB_DIR}/*.lib)
-    file(GLOB VTK_DYNAMIC_LIBS ${VTK_BIN_DIR}/*.dll)
-    
-    install(DIRECTORY ${VTK_INC_DIRS}/ DESTINATION include/VTK PATTERN "*.h"
-    PERMISSIONS
-    OWNER_WRITE OWNER_READ OWNER_EXECUTE
-    GROUP_READ WORLD_READ)
-    
-    file(GLOB HDF_INCS ${HDF5_INCLUDE_DIR}/*.h)
-    # Tetgen header
-    install(FILES ${TETGEN_INC_DIR}/tetgen.h DESTINATION include)  
-    # Import libs
-    install(FILES ${VTK_IMPORT_LIBS} DESTINATION lib/VTK/)
-    # Runtime libs
-    install(FILES ${VTK_DYNAMIC_LIBS} DESTINATION bin/VTK/)
-    # HDF
-    install(FILES ${HDF_INCS} DESTINATION include)
-    configure_file(${CMAKE_MODULE_PATH}/index.html.in ${CMAKE_BINARY_DIR}/index.html)
-    configure_file(${CMAKE_MODULE_PATH}/jindex.html.in ${CMAKE_BINARY_DIR}/jindex.html)
-    install(DIRECTORY ${PROJECT_BINARY_DIR}/documentation/ DESTINATION documentation)
-    install(DIRECTORY ${CMAKE_MODULE_PATH}/css DESTINATION documentation)
-    install(DIRECTORY ${CMAKE_MODULE_PATH}/images DESTINATION documentation)
-    install(FILES ${CMAKE_BINARY_DIR}/index.html DESTINATION documentation)
-    install(FILES ${CMAKE_BINARY_DIR}/jindex.html DESTINATION documentation/java)
-
-endif()
-
 #
 # Install what few prerequisite resources we need
 #
