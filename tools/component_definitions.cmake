@@ -213,7 +213,7 @@ function(add_bindings_targets)
 
         target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB} ${FIELDS_JAVA_BINDING_LIBS} ${VTK_LIBS} ${JDK_LIBS}) 
 
-        list(APPEND ${COMPONENT}_CLASSPATH ${FIELDS_CLASSPATH} ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} ${VTK_JAR} ${JMF_JAR})
+        list(APPEND ${COMPONENT}_CLASSPATH ${FIELDS_CLASSPATH} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR} ${VTK_JAR} ${JMF_JAR})
         set(${COMPONENT}_CLASSPATH ${${COMPONENT}_CLASSPATH} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
         
          # Create the bindings jar file 
@@ -240,6 +240,7 @@ function(add_bindings_targets)
             # and store the result in parent_classpath.
             string(REGEX REPLACE ";" ":" parent_classpath "${FIELDS_CLASSPATH}")
             string(REGEX REPLACE ";" ":" this_classpath "${${COMPONENT}_CLASSPATH}")
+            message(STATUS "${this_classpath}")
             # The default list item separator in cmake is ";". If Linux, then exchange ";" for  the UNIX style ":"
             # and store the result in parent_classpath.
             string(REGEX REPLACE ";" ":" parent_classpath "${FIELDS_CLASSPATH};${VTK_JAR};${JMF_JAR}")
@@ -268,6 +269,7 @@ function(add_bindings_targets)
          
          # Build the SheafScope jar
         if(WIN64INTEL OR WIN64MSVC)
+          message(STATUS "${this_classpath}")
              add_custom_target(SheafScope.jar ALL 
                                  DEPENDS ${PROJECT_NAME}_java_binding.jar 
                                  COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}
@@ -287,12 +289,13 @@ function(add_bindings_targets)
                                  COMMAND ${JAR_EXECUTABLE} cvmf ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/manifest.txt ${OUTDIR}/SheafScope.jar  -C ${LIB_JAR_DIR} .
                               )
         else()
+                  message(STATUS "${this_classpath}")
          # Build the SheafScope jar
              add_custom_target(SheafScope.jar ALL 
                                  DEPENDS ${PROJECT_NAME}_java_binding.jar 
                                  COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}
                                  COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
-                                 COMMAND ${JAVAC_EXECUTABLE} -classpath "${parent_classpath}" -g -d ${LIB_JAR_DIR} @${CMAKE_BINARY_DIR}/scopesrcs
+                                 COMMAND ${JAVAC_EXECUTABLE} -classpath "${this_classpath}" -g -d ${LIB_JAR_DIR} @${CMAKE_BINARY_DIR}/scopesrcs
                                  COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/common/gui/resources
                                  COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/viewer/resources/docs
                                  COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/SheafScope/resources/docs
