@@ -1,6 +1,4 @@
 #
-# $RCSfile: CMakeLists.txt,v $ $Revision: 1.10 $ $Date: 2013/01/12 17:17:26 $
-#
 #
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
@@ -10,7 +8,7 @@
 # Programmer Filename Entry Section
 #------------------------------------------------
 
-set(CLUSTER pushers)
+set(CLUSTER ${CMAKE_CURRENT_BINARY_DIR})
 
 #
 # Library sources.
@@ -29,7 +27,7 @@ set(SRCS
     section_pusher_pullback_action.cc
     section_pusher_push_action.cc
 
-)
+   )
 
 ## @hack: The following 5 classes are excluded from the SRCS list because they 
 ## are currently unused and there is no working test driver. -- JEB 01/03/13
@@ -47,7 +45,7 @@ collect_sources()
 #
 set(ADDITIONAL_INCS
 
-  )
+   )
 
 collect_includes()
 
@@ -55,7 +53,7 @@ collect_includes()
 # Source for unit test executables.
 #
 set(UNIT_TEST_SRCS
-)
+   )
 
 collect_unit_test_sources()
 
@@ -64,7 +62,7 @@ collect_unit_test_sources()
 #
 set(EXAMPLE_SRCS
 
- )
+   )
 
 collect_example_sources()
 
