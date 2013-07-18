@@ -1,6 +1,4 @@
 #
-# $RCSfile: CMakeLists.txt,v $ $Revision: 1.8 $ $Date: 2013/01/12 17:17:20 $
-#
 #
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
@@ -10,7 +8,7 @@
 # Programmer Filename Entry Section
 #------------------------------------------------
 
-set(CLUSTER fields)
+set(CLUSTER ${CMAKE_CURRENT_BINARY_DIR})
 
 #
 # Library sources.
@@ -70,7 +68,7 @@ set(SRCS
     print_property_dofs_action.cc
     put_property_dofs_action.cc
     put_property_dofs_fcn_action.cc
-)
+   )
 
 collect_sources()
 
@@ -99,7 +97,7 @@ set(ADDITIONAL_INCS
     field_tp_funcs.impl.h 
     field_vd_funcs.h 
     field_vd_funcs.impl.h 
-)
+   )    
 
 collect_includes()
 
@@ -108,7 +106,7 @@ collect_includes()
 #
 set(UNIT_TEST_SRCS
 
-)
+   )
 
 collect_unit_test_sources()
 
@@ -117,6 +115,6 @@ collect_unit_test_sources()
 #
 set(EXAMPLE_SRCS
 
-)
+   )
 
 collect_example_sources()
