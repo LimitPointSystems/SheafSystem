@@ -50,27 +50,10 @@ quad_connectivity(const quad_connectivity& xother)
   ensure(postcondition_of(block_connectivity(xother)));
 }
 
-// fiber_bundle::quad_connectivity::
-// quad_connectivity(const pod_index_type* xnode_ids,
-//                   size_type xnode_id_ct, 
-// 			      size_type xnode_ct)
-// {
-
-//   // Preconditions:
-
-//   // Body:
-
-//   not_implemented();
-
-//   // Postconditions:
-
-//   // Exit:
-// }
-
 fiber_bundle::quad_connectivity::
 quad_connectivity(const pod_index_type* xnode_ids,
                   size_type xnode_id_ct, 
-			      size_type xnode_ct)
+                  size_type xnode_ct)
   : block_connectivity(xnode_ids, xnode_id_ct, NODES_PER_ELEMENT, xnode_ct)
 {
 

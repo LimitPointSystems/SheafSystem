@@ -53,6 +53,29 @@ triangle_connectivity(const triangle_connectivity& xother)
 }
 
 fiber_bundle::triangle_connectivity::
+triangle_connectivity(const pod_index_type* xnode_ids, size_type xnode_id_ct, size_type xnode_ct)
+  : block_connectivity(xnode_ids, xnode_id_ct, NODES_PER_ELEMENT, xnode_ct)
+{
+  // Preconditions:
+
+  require(xnode_id_ct > 0);
+  require((xnode_id_ct % NODES_PER_ELEMENT) == 0);
+
+  // Body:
+
+  // Postconditions:
+
+  ensure(element_ct() == xnode_id_ct/NODES_PER_ELEMENT);
+  ensure(xnode_ct > 0 ? node_ct() == xnode_ct : node_ct() > 0);
+  ensure(node_id_ct() == xnode_id_ct);
+  ensure(node_ids() == xnode_ids);
+  ensure(!delete_node_ids());
+  ensure(nodes_per_element() == NODES_PER_ELEMENT);
+
+  // Exit:
+}
+
+fiber_bundle::triangle_connectivity::
 triangle_connectivity(size_type xi_size,
                       size_type xj_size,
                       pod_index_type xstart_id,
@@ -76,29 +99,6 @@ triangle_connectivity(size_type xi_size,
   ensure(nodes_per_element() == NODES_PER_ELEMENT);
   ensure(start_id() == xstart_id);
   ensure(node_ids()[0] == xstart_id);
-}
-
-fiber_bundle::triangle_connectivity::
-triangle_connectivity(const pod_index_type* xnode_ids, size_type xnode_id_ct, size_type xnode_ct)
-  : block_connectivity(xnode_ids, xnode_id_ct, NODES_PER_ELEMENT, xnode_ct)
-{
-  // Preconditions:
-
-  require(xnode_id_ct > 0);
-  require((xnode_id_ct % NODES_PER_ELEMENT) == 0);
-
-  // Body:
-
-  // Postconditions:
-
-  ensure(element_ct() == xnode_id_ct/NODES_PER_ELEMENT);
-  ensure(xnode_ct > 0 ? node_ct() == xnode_ct : node_ct() > 0);
-  ensure(node_id_ct() == xnode_id_ct);
-  ensure(node_ids() == xnode_ids);
-  ensure(!delete_node_ids());
-  ensure(nodes_per_element() == NODES_PER_ELEMENT);
-
-  // Exit:
 }
 
 fiber_bundle::triangle_connectivity::

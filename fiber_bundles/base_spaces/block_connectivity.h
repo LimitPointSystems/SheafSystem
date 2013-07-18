@@ -30,7 +30,7 @@ namespace fiber_bundle
   using namespace sheaf;
 
 ///
-/// Zone to node connectivity relation for zone_nodes block.
+/// Zone to node connectivity relation for a block of zones of a given type.
 ///
 class SHEAF_DLL_SPEC block_connectivity  : public block_relation
 {

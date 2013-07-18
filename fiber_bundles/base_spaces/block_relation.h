@@ -30,7 +30,7 @@ namespace fiber_bundle
   using namespace sheaf;
 
 ///
-/// Abstract cell relation for zone_nodes block.
+/// Abstract cell relation for a block of zones of a given type.
 ///
 class SHEAF_DLL_SPEC block_relation  : public any
 {
@@ -69,7 +69,7 @@ public:
   virtual ~block_relation();
 
   ///
-  /// The element type.
+  /// The element (zone) type.
   ///
   virtual cell_type element_type() const = 0;
 

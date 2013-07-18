@@ -62,7 +62,7 @@ point_connectivity(size_type xi_size, pod_index_type xstart_id)
   // Postconditions:
 
   ensure(element_ct() == xi_size);
-  ensure(node_ct() == (xi_size+1));
+  ensure(node_ct() == xi_size);
   ensure(node_id_ct() == element_ct() * NODES_PER_ELEMENT);
   ensure(node_ids() != 0);
   ensure(delete_node_ids());
@@ -92,7 +92,7 @@ create_connectivity(size_type xi_size, pod_index_type xstart_id)
   // Body:
 
   _element_ct = xi_size;
-  _node_ct = xi_size+1;
+  _node_ct = xi_size;
   _node_id_ct = _element_ct * NODES_PER_ELEMENT;
   _node_ids = new pod_index_type[_node_id_ct];
   _delete_node_ids = true;
@@ -108,7 +108,7 @@ create_connectivity(size_type xi_size, pod_index_type xstart_id)
 
   // Postconditions:
   ensure(element_ct() == xi_size);
-  ensure(node_ct() == (xi_size+1));
+  ensure(node_ct() == xi_size);
   ensure(node_id_ct() == element_ct() * NODES_PER_ELEMENT);
   ensure(node_ids() != 0);
   ensure(delete_node_ids());

@@ -23,9 +23,9 @@ namespace fiber_bundle
   using namespace sheaf;
 
 ///
-/// Connectivity for a point mesh. Since a point mesh is just a collection
-/// of disconnected points, the "connectivity" list for each
-/// point contains just the point itself.
+/// Nodal connectivity for a block containing zones of type point.
+/// Since a point block is just a collection of disconnected points, 
+/// the "connectivity" list for each point contains just the point itself.
 ///
 class SHEAF_DLL_SPEC point_connectivity : public block_connectivity
 {
@@ -51,7 +51,7 @@ public:
   point_connectivity(const point_connectivity& xother);
 
   ///
-  /// Creates an instance with i_size() == xi_size.
+  /// Creates an instance with element_ct() == xi_size.
   ///
   point_connectivity(size_type xi_size, pod_index_type xstart=0);
 
