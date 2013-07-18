@@ -1,6 +1,4 @@
 #
-# $RCSfile: CMakeLists.txt,v $ $Revision: 1.9 $ $Date: 2013/01/12 17:17:35 $
-#
 #
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
@@ -10,7 +8,7 @@
 # Programmer Filename Entry Section
 #------------------------------------------------
 
-set(CLUSTER io)
+set(CLUSTER ${CMAKE_CURRENT_BINARY_DIR})
 
 #
 # Library sources.
@@ -47,7 +45,7 @@ set(SRCS
     subposet_names_record.cc
     table_dof_tuple_record.cc
     variable_length_record.cc
-)
+   )
 
 collect_sources()
 
@@ -56,7 +54,7 @@ collect_sources()
 #
 set(ADDITIONAL_INCS
     record_index.h
-  )
+   )
   
 collect_includes()
 
@@ -65,7 +63,7 @@ collect_includes()
 #
 set(UNIT_TEST_SRCS
 
-)
+   )
 
 collect_unit_test_sources()
 
@@ -74,7 +72,7 @@ collect_unit_test_sources()
 #
 set(EXAMPLE_SRCS
 
- )
+   )
 
 collect_example_sources()
 

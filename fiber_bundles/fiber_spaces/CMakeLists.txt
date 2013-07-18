@@ -1,6 +1,4 @@
-#
-# $RCSfile: CMakeLists.txt,v $ $Revision: 1.8 $ $Date: 2013/01/12 17:16:59 $
-#
+##
 #
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
@@ -10,7 +8,8 @@
 # Programmer Filename Entry Section
 #------------------------------------------------
 
-set(CLUSTER fiber_spaces)
+set(CLUSTER ${CMAKE_CURRENT_BINARY_DIR})
+
 
 #
 # Library sources.
@@ -74,7 +73,7 @@ set(SRCS
     tuple_space.cc    
     vd.cc    
     vd_space.cc
-)
+   )
 
 
 collect_sources()
@@ -131,7 +130,7 @@ set(ADDITIONAL_INCS
     tuple_table_dofs_type.h 
     vd.impl.h 
     vd_table_dofs_type.h
-)
+   )
 
 collect_includes()
 
@@ -140,7 +139,7 @@ collect_includes()
 #
 set(UNIT_TEST_SRCS    
 
-)
+   )
 
 collect_unit_test_sources()
 
@@ -149,6 +148,6 @@ collect_unit_test_sources()
 #
 set(EXAMPLE_SRCS
 
-)
+   )
 
 collect_example_sources()

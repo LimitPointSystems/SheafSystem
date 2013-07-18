@@ -1,6 +1,4 @@
 #
-# $RCSfile: CMakeLists.txt,v $ $Revision: 1.8 $ $Date: 2013/01/12 17:17:08 $
-#
 #
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
@@ -10,7 +8,7 @@
 # Programmer Filename Entry Section
 #------------------------------------------------
 
-set(CLUSTER matrices)
+set(CLUSTER ${CMAKE_CURRENT_BINARY_DIR})
 
 #
 # Library sources.
@@ -29,7 +27,7 @@ set(SRCS
     symmetric_matrix_2x2.cc
     symmetric_matrix_3x3.cc
     svd.cc
-)
+   )
 
 collect_sources()
 
@@ -50,7 +48,7 @@ set(ADDITIONAL_INCS
     symmetric_matrix_2x2.impl.h 
     symmetric_matrix_3x3.impl.h 
     svd.h
-  )
+   )
 
 collect_includes()
 
@@ -58,7 +56,7 @@ collect_includes()
 # Source for unit test executables.
 #
 set(UNIT_TEST_SRCS
-)
+   )
 
 collect_unit_test_sources()
 
@@ -67,6 +65,6 @@ collect_unit_test_sources()
 #
 set(EXAMPLE_SRCS
 
- )
+   )
 
 collect_example_sources()

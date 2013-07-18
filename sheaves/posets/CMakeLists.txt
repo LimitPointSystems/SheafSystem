@@ -1,6 +1,4 @@
 #
-# $RCSfile: CMakeLists.txt,v $ $Revision: 1.9 $ $Date: 2013/01/12 17:17:41 $
-#
 #
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
@@ -10,7 +8,7 @@
 # Programmer Filename Entry Section
 #------------------------------------------------
 
-set(CLUSTER posets)
+set(CLUSTER ${CMAKE_CURRENT_BINARY_DIR})
 
 #
 # Library sources.
@@ -54,7 +52,7 @@ set(SRCS
     subposet.cc
     subposet_state.cc
     total_poset_member.cc
-)
+   )
 
 collect_sources()
 
@@ -67,7 +65,7 @@ set(ADDITIONAL_INCS
     poset_crg_state.impl.h 
     namespace_poset.impl.h 
     poset_state_handle.impl.h
-  )
+   )
 
 collect_includes()  
 
@@ -75,7 +73,7 @@ collect_includes()
 # Source for unit test executables.
 #
 set(UNIT_TEST_SRCS
-)
+   )
 
 collect_unit_test_sources()
 
@@ -84,7 +82,7 @@ collect_unit_test_sources()
 #
 set(EXAMPLE_SRCS
 
- )
+   )
 
 collect_example_sources()
 

@@ -1,6 +1,4 @@
 #
-# $RCSfile: CMakeLists.txt,v $ $Revision: 1.9 $ $Date: 2013/01/12 17:17:10 $
-#
 #
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
@@ -10,7 +8,7 @@
 # Programmer Filename Entry Section
 #------------------------------------------------
 
-set(CLUSTER section_spaces)
+set(CLUSTER ${CMAKE_CURRENT_BINARY_DIR})
 
 #
 # Library sources.
@@ -80,7 +78,7 @@ set(SRCS
     section_space_schema_member.cc
     section_space_schema_poset.cc
     section_traits.cc
-)
+   )
 
 collect_sources()
 
@@ -92,7 +90,7 @@ set(ADDITIONAL_INCS
     sec_rep_descriptor_table_dofs_type.h 
     section_space_factory.impl.h 
     section_space_schema_table_dofs_type.h 
-)
+   )
 
 collect_includes()
 
@@ -101,7 +99,7 @@ collect_includes()
 #
 set(UNIT_TEST_SRCS
 
-)
+   )
 
 collect_unit_test_sources()
 
@@ -110,6 +108,6 @@ collect_unit_test_sources()
 #
 set(EXAMPLE_SRCS
 
-)
+   )
 
 collect_example_sources()

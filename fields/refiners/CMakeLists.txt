@@ -1,6 +1,4 @@
 #
-# $RCSfile: CMakeLists.txt,v $ $Revision: 1.8 $ $Date: 2013/01/12 17:17:27 $
-#
 #
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
@@ -10,7 +8,7 @@
 # Programmer Filename Entry Section
 #------------------------------------------------
 
-set(CLUSTER refiners)
+set(CLUSTER ${CMAKE_CURRENT_BINARY_DIR})
 
 #
 # Library sources.
@@ -35,7 +33,7 @@ set(SRCS
     zone_centered_segment_refiner.cc
     zone_centered_tet_refiner.cc
     zone_centered_triangle_refiner.cc
-)
+   )
 
 collect_sources()
 
@@ -44,7 +42,7 @@ collect_sources()
 #
 set(ADDITIONAL_INCS
 
-  )
+   )
 
 collect_includes()
 
@@ -52,7 +50,7 @@ collect_includes()
 # Source for unit test executables.
 #
 set(UNIT_TEST_SRCS
-)
+   )
 
 collect_unit_test_sources()
 
@@ -61,6 +59,6 @@ collect_unit_test_sources()
 #
 set(EXAMPLE_SRCS
 
- )
+   )
 
 collect_example_sources()
