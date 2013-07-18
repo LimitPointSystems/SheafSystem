@@ -86,13 +86,7 @@ endif()
 # Only install the documentation when Release-no-contracts is being installed. This prevents 4 iterations of doc generation.
 # The rationale here is that Release-no-contracts will always be released.
 #
-configure_file(${CMAKE_MODULE_PATH}/index.html.in ${CMAKE_BINARY_DIR}/index.html)
-configure_file(${CMAKE_MODULE_PATH}/jindex.html.in ${CMAKE_BINARY_DIR}/jindex.html)
-install(DIRECTORY ${PROJECT_BINARY_DIR}/documentation/ DESTINATION documentation)
-install(DIRECTORY ${CMAKE_MODULE_PATH}/css DESTINATION documentation)
-install(DIRECTORY ${CMAKE_MODULE_PATH}/images DESTINATION documentation)
-install(FILES ${CMAKE_BINARY_DIR}/index.html DESTINATION documentation)
-install(FILES ${CMAKE_BINARY_DIR}/jindex.html DESTINATION documentation/java)
+install(DIRECTORY ${CMAKE_BINARY_DIR}/documentation/ DESTINATION documentation)
 
 #
 # Install what few prerequisite resources we need

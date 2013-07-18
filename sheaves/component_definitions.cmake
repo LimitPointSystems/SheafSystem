@@ -207,6 +207,7 @@ function(add_bindings_targets)
                          )
         set_target_properties(${PROJECT_NAME}-java-docs PROPERTIES FOLDER "Documentation Targets")
 
+        
         #
         # CSharp ##############################################################
         #

@@ -18,7 +18,7 @@ include(${CMAKE_MODULE_PATH}/LPSCommon.cmake)
 #
 # Define the clusters for this component.
 #
-set(clusters coordinates general kd_lattice mesh_generators point_locators template_instantiations)
+set(clusters coordinates general mesh_generators point_locators template_instantiations)
 
 #
 # Initialize all variables for this component.
@@ -79,10 +79,6 @@ set(${COMPONENT}_IPATHS ${FIBER_BUNDLES_IPATHS} ${${COMPONENT}_IPATH} CACHE STRI
 #
 include_directories(${FIBER_BUNDLES_IPATHS})
 
-if(${USE_VTK})
-    include_directories(${VTK_INC_DIRS})
-endif()
-
 include_directories(${TETGEN_INC_DIR})
 
 
@@ -95,10 +91,6 @@ include_directories(${TETGEN_INC_DIR})
 #
 function(add_library_targets)
 
-    if(${USE_VTK})
-        link_directories(${VTK_LIB_DIR})
-    endif()
-
      if(WIN64INTEL OR WIN64MSVC)
 
         # Tell the linker where to look for this project's libraries.
@@ -107,15 +99,8 @@ function(add_library_targets)
         # Create the DLL.
         add_library(${${COMPONENT}_DYNAMIC_LIB} SHARED ${${COMPONENT}_SRCS})
         add_dependencies(${${COMPONENT}_DYNAMIC_LIB} ${FIBER_BUNDLES_IMPORT_LIBS})
-
-        if(${USE_VTK})
-            target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${VTK_LIBS} ${FIBER_BUNDLES_IMPORT_LIBS} )
-            target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} LINK_PRIVATE ${TETGEN_LIB})           
-        else()
-            target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${FIBER_BUNDLES_IMPORT_LIBS})        
-            target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} LINK_PRIVATE ${TETGEN_LIB})
-        endif() 
-     
+        target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${FIBER_BUNDLES_IMPORT_LIBS})        
+        target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} LINK_PRIVATE ${TETGEN_LIB})
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")
         # Override cmake's placing of "${${COMPONENT}_DYNAMIC_LIB}_EXPORTS into the preproc symbol table.
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES DEFINE_SYMBOL "SHEAF_DLL_EXPORTS")
@@ -145,20 +130,10 @@ function(add_library_targets)
         add_dependencies(${PROJECT_NAME}-shared-lib ${${COMPONENT}_SHARED_LIBS})
         add_dependencies(${PROJECT_NAME}-static-lib ${${COMPONENT}_STATIC_LIBS})
         
-        if(${USE_VTK})
-            target_link_libraries(${${COMPONENT}_SHARED_LIB} ${FIBER_BUNDLES_SHARED_LIBS}) 
-            target_link_libraries(${${COMPONENT}_SHARED_LIB} LINK_PRIVATE -Wl,-Bstatic ${TETGEN_LIB} -Wl,-Bdynamic)
-            target_link_libraries(${${COMPONENT}_SHARED_LIB} LINK_PRIVATE ${VTK_LIBS_NO_BINDINGS})            
-            target_link_libraries(${${COMPONENT}_STATIC_LIB} ${FIBER_BUNDLES_STATIC_LIBS}) 
-            target_link_libraries(${${COMPONENT}_STATIC_LIB} LINK_PRIVATE ${TETGEN_LIB})
-            target_link_libraries(${${COMPONENT}_STATIC_LIB} LINK_PRIVATE ${VTK_LIBS}) 
-        else()
-            target_link_libraries(${${COMPONENT}_SHARED_LIB} ${FIBER_BUNDLES_SHARED_LIBS}) 
-            target_link_libraries(${${COMPONENT}_SHARED_LIB} LINK_PRIVATE -Wl,-Bstatic ${TETGEN_LIB} -Wl,-Bdynamic)
-            target_link_libraries(${${COMPONENT}_STATIC_LIB} ${FIBER_BUNDLES_STATIC_LIBS}) 
-            target_link_libraries(${${COMPONENT}_STATIC_LIB} LINK_PRIVATE ${TETGEN_LIB})  
-        endif()
-
+        target_link_libraries(${${COMPONENT}_SHARED_LIB} ${FIBER_BUNDLES_SHARED_LIBS}) 
+        target_link_libraries(${${COMPONENT}_SHARED_LIB} LINK_PRIVATE -Wl,-Bstatic ${TETGEN_LIB} -Wl,-Bdynamic)
+        target_link_libraries(${${COMPONENT}_STATIC_LIB} ${FIBER_BUNDLES_STATIC_LIBS}) 
+        target_link_libraries(${${COMPONENT}_STATIC_LIB} LINK_PRIVATE ${TETGEN_LIB})  
     endif()
 
 endfunction(add_library_targets)
@@ -204,15 +179,13 @@ function(add_bindings_targets)
         # Define the library version.
         set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES VERSION ${LIB_VERSION})
 
-        if(${USE_VTK}) 
-            target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB} ${FIBER_BUNDLES_JAVA_BINDING_LIBS} ${JDK_LIBS} ${VTK_LIBS}) 
-        else()
-            target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB} ${FIBER_BUNDLES_JAVA_BINDING_LIBS} ${JDK_LIBS}) 
-        endif()
-
+        target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB} ${FIBER_BUNDLES_JAVA_BINDING_LIBS} ${JDK_LIBS}) 
+        list(APPEND ${COMPONENT}_CLASSPATH ${FIBER_BUNDLES_CLASSPATH} ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR})
+        set(${COMPONENT}_CLASSPATH ${${COMPONENT}_CLASSPATH} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
+                    
          # Create the bindings jar file 
         if(WIN64INTEL OR WIN64MSVC)
-            set(${COMPONENT}_CLASSPATH ${FIBER_BUNDLES_CLASSPATH} ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
+
             add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
                                DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${FIBER_BUNDLES_JAVA_BINDING_JAR}
                                set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Component Binding Jars")                           

@@ -106,11 +106,6 @@ endif()
 set(BUILD_BINDINGS NO CACHE BOOL "Toggle build of language bindings.")
 
 #
-# True if we want geometry to link against VTK
-#
-set(USE_VTK ON CACHE BOOL "Set to link geometry against VTK libs.")
-
-#
 # Toggle multi-process compilation in win32.
 #
 set(ENABLE_WIN32_MP ON CACHE BOOL "Toggle win32 compiler MP directive. Works for MS and Intel. Default is ON.")
@@ -235,6 +230,10 @@ function(clear_component_variables comp)
     # list the same include paths n times.
     unset(${COMP}_IPATH CACHE)
 
+    # clear the ipath var so consecutive cmake runs don't
+    # list the same include paths n times.
+    unset(${COMP}_CLASSPATH CACHE)
+    
 endfunction(clear_component_variables)
 
 #

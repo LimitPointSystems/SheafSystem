@@ -77,10 +77,6 @@ set(${COMPONENT}_IPATHS ${GEOMETRY_IPATHS} ${${COMPONENT}_IPATH} CACHE STRING " 
 #
 include_directories(${GEOMETRY_IPATHS})
 
-if(${USE_VTK})
-    include_directories(${VTK_INC_DIRS})
-endif()
-
 include_directories(${TETGEN_INC_DIR})
 
 #------------------------------------------------------------------------------
@@ -91,26 +87,15 @@ include_directories(${TETGEN_INC_DIR})
 # Create the library targets for this component.
 #
 function(add_library_targets)
-    
-    if(${USE_VTK})
-        link_directories(${VTK_LIB_DIR})
-    endif()
-    
     if(WIN64INTEL OR WIN64MSVC)
     
         # Tell the linker where to look for this project's libraries.
         link_directories(${${COMPONENT}_OUTPUT_DIR})
     
         add_library(${${COMPONENT}_DYNAMIC_LIB} SHARED ${${COMPONENT}_SRCS})
+
         add_dependencies(${${COMPONENT}_DYNAMIC_LIB} ${GEOMETRY_IMPORT_LIBS})
-        
-        if(${USE_VTK})
-            target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${GEOMETRY_IMPORT_LIBS}) 
-            target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} LINK_PRIVATE ${VTK_LIBS}) 
-        else()
-            target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${GEOMETRY_IMPORT_LIBS} )        
-        endif() 
-        
+        target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${GEOMETRY_IMPORT_LIBS} )        
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")   
         # Override cmake's placing of "${COMPONENT_LIB}_EXPORTS into the preproc symbol table.
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES DEFINE_SYMBOL "SHEAF_DLL_EXPORTS")
@@ -140,15 +125,8 @@ function(add_library_targets)
         add_dependencies(${PROJECT_NAME}-shared-lib ${${COMPONENT}_SHARED_LIBS})
         add_dependencies(${PROJECT_NAME}-static-lib ${${COMPONENT}_STATIC_LIBS})
         
-        if(${USE_VTK})
-            target_link_libraries(${${COMPONENT}_SHARED_LIB} ${GEOMETRY_IMPORT_LIBS}) 
-            target_link_libraries(${${COMPONENT}_SHARED_LIB} LINK_PRIVATE ${VTK_LIBS})
-            target_link_libraries(${${COMPONENT}_STATIC_LIB} ${GEOMETRY_IMPORT_LIBS}) 
-            target_link_libraries(${${COMPONENT}_STATIC_LIB} LINK_PRIVATE ${VTK_LIBS}) 
-        else()
-            target_link_libraries(${${COMPONENT}_SHARED_LIB} ${GEOMETRY_IMPORT_LIBS}) 
-            target_link_libraries(${${COMPONENT}_STATIC_LIB} ${GEOMETRY_IMPORT_LIBS}) 
-        endif()
+        target_link_libraries(${${COMPONENT}_SHARED_LIB} ${GEOMETRY_IMPORT_LIBS}) 
+        target_link_libraries(${${COMPONENT}_STATIC_LIB} ${GEOMETRY_IMPORT_LIBS}) 
 
     endif()
 
@@ -182,29 +160,26 @@ function(add_bindings_targets)
         
         if(WIN64INTEL OR WIN64MSVC)
             add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} ${GEOMETRY_JAVA_BINDING_LIB} ${${COMPONENT}_IMPORT_LIBS})
-            if(${USE_VTK})
-                target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${GEOMETRY_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS} ${VTK_LIBS} ${JDK_LIBS})   
-            else()
-                target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${GEOMETRY_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS} ${JDK_LIBS})
-            endif()               
+            target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${GEOMETRY_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS} ${JDK_LIBS})
             set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES FOLDER "Binding Targets - Java")
         else()
             add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} ${GEOMETRY_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB})
-            if(${USE_VTK})
-                target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${GEOMETRY_JAVA_BINDING_LIBS} ${${COMPONENT}_SHARED_LIBS} ${VTK_LIBS} ${JDK_LIBS})
-            else()
-                target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${GEOMETRY_JAVA_BINDING_LIBS} ${${COMPONENT}_SHARED_LIBS} ${JDK_LIBS})
-            endif()                     
+            target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${GEOMETRY_JAVA_BINDING_LIBS} ${${COMPONENT}_SHARED_LIBS} ${JDK_LIBS})
         endif()
         
         set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES LINKER_LANGUAGE CXX)
         
         # Define the library version.
         set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES VERSION ${LIB_VERSION})  
-        
+ 
+        #list(APPEND ${COMPONENT}_CLASSPATH ${GEOMETRY_CLASSPATH} ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} ${VTK_JAR} ${JMF_JAR})       
+        list(APPEND ${COMPONENT}_CLASSPATH ${GEOMETRY_CLASSPATH} ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} ${JMF_JAR})
+        set(${COMPONENT}_CLASSPATH ${${COMPONENT}_CLASSPATH} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
+
         # Create the bindings jar file 
         if(WIN64INTEL OR WIN64MSVC)
-            set(${COMPONENT}_CLASSPATH ${GEOMETRY_CLASSPATH} ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
+
+            #set(${COMPONENT}_CLASSPATH ${GEOMETRY_CLASSPATH} ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
             add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
                                DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${GEOMETRY_JAVA_BINDING_JAR}
                                set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Component Binding Jars")                           

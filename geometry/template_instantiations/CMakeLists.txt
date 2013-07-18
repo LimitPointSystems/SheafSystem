@@ -10,7 +10,7 @@
 # Programmer Filename Entry Section
 #------------------------------------------------
 
-set(CLUSTER maps)
+set(CLUSTER template_instantiations)
 
 #
 # Library sources.

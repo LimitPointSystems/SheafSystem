@@ -169,7 +169,7 @@ function(add_bindings_targets)
         set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES LINKER_LANGUAGE CXX)
         # Define the library version.
         set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES VERSION ${LIB_VERSION})
-          
+
         # Create the bindings jar file 
         if(WIN64INTEL OR WIN64MSVC)
             set(${COMPONENT}_CLASSPATH  ${SHEAVES_CLASSPATH} ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
