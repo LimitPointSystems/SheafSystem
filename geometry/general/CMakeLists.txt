@@ -1,6 +1,4 @@
 #
-# $RCSfile: CMakeLists.txt,v $ $Revision: 1.8 $ $Date: 2013/01/12 17:17:29 $
-#
 #
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
@@ -18,7 +16,7 @@ set(CLUSTER ${CMAKE_CURRENT_BINARY_DIR})
 set(SRCS
     geometry.cc
     geometry_namespace.cc
-)
+   )
 
 collect_sources()
 
@@ -27,7 +25,7 @@ collect_sources()
 #
 set(ADDITIONAL_INCS
 
-  )
+   )
 
 collect_includes()
 
@@ -35,7 +33,7 @@ collect_includes()
 # Source for unit test executables.
 #
 set(UNIT_TEST_SRCS
-)
+   )
 
 collect_unit_test_sources()
 
@@ -44,6 +42,6 @@ collect_unit_test_sources()
 #
 set(EXAMPLE_SRCS
 
- )
+   )
 
 collect_example_sources()
