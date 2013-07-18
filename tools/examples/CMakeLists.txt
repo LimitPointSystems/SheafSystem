@@ -10,10 +10,6 @@
 
 set(CLUSTER ${CMAKE_CURRENT_BINARY_DIR})
 
-set(CLUSTER examples)
-
-configure_file(lps_environment.h.cmake.in lps_environment.h)
-
 #
 # Library sources.
 #

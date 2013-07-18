@@ -10,8 +10,6 @@
 
 set(CLUSTER ${CMAKE_CURRENT_BINARY_DIR})
 
-set(CLUSTER common/util)
-
 #
 # Library sources.
 #

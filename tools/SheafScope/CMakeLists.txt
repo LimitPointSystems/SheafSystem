@@ -9,7 +9,6 @@
 #------------------------------------------------
 
 set(CLUSTER ${CMAKE_CURRENT_BINARY_DIR})
-set(CLUSTER SheafScope)
 
 #
 # Library sources.
