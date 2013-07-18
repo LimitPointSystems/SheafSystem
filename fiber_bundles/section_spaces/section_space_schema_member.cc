@@ -2056,6 +2056,14 @@ get_ext_id(const string& xid_space_name) const
 
   require(precondition_of(host()->base_space().get_ext_id(base_space_id(), xid_space_name)));
 
+  /// @error product subposet hack, ver 2
+  /// The base space schema member can not be a implicit member or the
+  /// host()->base_space().get_ext_id(base_space_id(), xid_space_name, false)
+  /// will violate a precondition.  The following precondition has been added
+  /// to publish this error.
+
+  require(host()->base_space().is_explicit_member(base_space_id()) ||
+	  host()->base_space().is_block_member(base_space_id()));
 
   // Body:
 
