@@ -55,13 +55,13 @@ endif()
 #
 # Find tetgen
 #
-find_package(Tetgen REQUIRED)
-if(TETGEN_FOUND)
-    configure_file(${CMAKE_MODULE_PATH}/tetgen_definitions.cmake.in ${CMAKE_BINARY_DIR}/tetgen_definitions.cmake)
-    include(${CMAKE_BINARY_DIR}/tetgen_definitions.cmake)
-    include_directories(${TETGEN_INC_DIR})
-    link_directories(${TETGEN_LIB_DIR})    
-endif()
+#find_package(Tetgen REQUIRED)
+#if(TETGEN_FOUND)
+#    configure_file(${CMAKE_MODULE_PATH}/tetgen_definitions.cmake.in ${CMAKE_BINARY_DIR}/tetgen_definitions.cmake)
+#    include(${CMAKE_BINARY_DIR}/tetgen_definitions.cmake)
+#    include_directories(${TETGEN_INC_DIR})
+#    link_directories(${TETGEN_LIB_DIR})    
+#endif()
 
 
     
