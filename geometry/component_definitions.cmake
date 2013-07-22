@@ -100,7 +100,6 @@ function(add_library_targets)
         add_library(${${COMPONENT}_DYNAMIC_LIB} SHARED ${${COMPONENT}_SRCS})
         add_dependencies(${${COMPONENT}_DYNAMIC_LIB} ${FIBER_BUNDLES_IMPORT_LIBS})
         target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${FIBER_BUNDLES_IMPORT_LIBS})        
-        target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} LINK_PRIVATE ${TETGEN_LIB})
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")
         # Override cmake's placing of "${${COMPONENT}_DYNAMIC_LIB}_EXPORTS into the preproc symbol table.
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES DEFINE_SYMBOL "SHEAF_DLL_EXPORTS")
@@ -131,9 +130,8 @@ function(add_library_targets)
         add_dependencies(${PROJECT_NAME}-static-lib ${${COMPONENT}_STATIC_LIBS})
         
         target_link_libraries(${${COMPONENT}_SHARED_LIB} ${FIBER_BUNDLES_SHARED_LIBS}) 
-        target_link_libraries(${${COMPONENT}_SHARED_LIB} LINK_PRIVATE -Wl,-Bstatic ${TETGEN_LIB} -Wl,-Bdynamic)
         target_link_libraries(${${COMPONENT}_STATIC_LIB} ${FIBER_BUNDLES_STATIC_LIBS}) 
-        target_link_libraries(${${COMPONENT}_STATIC_LIB} LINK_PRIVATE ${TETGEN_LIB})  
+ 
     endif()
 
 endfunction(add_library_targets)
