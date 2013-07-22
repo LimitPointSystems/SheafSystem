@@ -37,9 +37,6 @@
 #include       "d_uniform_point_locator.h"
 #include       "db0_point_locator.h"
 
-#include "mesh_generator.h"
-#include       "tetgen_generator.h"
-
 #include "sec_ed_invertible.h"
 
 using namespace geometry;
