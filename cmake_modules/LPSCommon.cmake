@@ -478,9 +478,9 @@ function(add_test_targets)
 
     # link_directories only applies to targets created after it is called.
     if(LINUX64GNU OR LINUX64INTEL)
-        link_directories($CMAKE_ARCHIVE_OUTPUT_DIRECTORY} ${HDF5_LIBRARY_DIRS} ${TETGEN_DIR})
+        link_directories($CMAKE_ARCHIVE_OUTPUT_DIRECTORY} ${HDF5_LIBRARY_DIRS})
     else()
-        link_directories($CMAKE_ARCHIVE_OUTPUT_DIRECTORY} ${HDF5_LIBRARY_DIRS} ${TETGEN_DIR})        
+        link_directories($CMAKE_ARCHIVE_OUTPUT_DIRECTORY} ${HDF5_LIBRARY_DIRS})        
     endif()    
     # Let the user know what's being configured
     status_message("Configuring Unit Tests for ${PROJECT_NAME}")   
@@ -538,9 +538,9 @@ function(add_example_targets)
     foreach(t_cc_file ${${COMPONENT}_EXAMPLE_SRCS})
         # link_directories only applies to targets created after it is called.
         if(LINUX64GNU OR LINUX64INTEL)
-            link_directories($CMAKE_ARCHIVE_OUTPUT_DIRECTORY} ${HDF5_LIBRARY_DIRS} ${TETGEN_DIR})
+            link_directories($CMAKE_ARCHIVE_OUTPUT_DIRECTORY} ${HDF5_LIBRARY_DIRS})
         else()
-            link_directories($CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_BUILD_TYPE} ${HDF5_LIBRARY_DIRS} ${TETGEN_DIR})
+            link_directories($CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_BUILD_TYPE} ${HDF5_LIBRARY_DIRS})
         endif()    
         # Let the user know what's being configured
         status_message("Configuring example executables for ${PROJECT_NAME}")   
@@ -564,8 +564,8 @@ function(add_example_targets)
             set_target_properties(${t_file} PROPERTIES FOLDER "Example Targets")
         else()
             add_dependencies(${t_file} ${${COMPONENT}_STATIC_LIB})
-            link_directories(${${COMPONENT}_OUTPUT_DIR} ${HDF5_LIBRARY_DIRS} ${TETGEN_DIR})
-            target_link_libraries(${t_file} ${${COMPONENT}_SHARED_LIB} ${HDF5_LIBRARIES} ${TETGEN_LIBS})
+            link_directories(${${COMPONENT}_OUTPUT_DIR} ${HDF5_LIBRARY_DIRS})
+            target_link_libraries(${t_file} ${${COMPONENT}_SHARED_LIB} ${HDF5_LIBRARIES})
             endif()
         endif()
 
@@ -700,11 +700,6 @@ function(export_targets)
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIBS ${VTK_LIBS} CACHE STRING \"VTK Libraries\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")                  
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(TETGEN_INCLUDE_DIR ${TETGEN_INC_DIR} CACHE STRING \"Tetgen Include Path \")\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(TETGEN_LIB_DIR ${TETGEN_LIB_DIR} CACHE STRING \"Tetgen Library Path \")\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(TETGEN_LIB ${TETGEN_LIB} CACHE STRING \"Tetgen Library \")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")        
         file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(JMF_JAR ${JMF_JAR} CACHE STRING \"JMF jar location\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")        
@@ -965,12 +960,6 @@ function(install_prereqs)
         GROUP_READ WORLD_READ)
     endforeach()
     
-    # Tetgen header
-    install(FILES ${TETGEN_INC_DIR}/tetgen.h DESTINATION include
-        PERMISSIONS
-        OWNER_WRITE OWNER_READ 
-        GROUP_READ WORLD_READ)  
-
     # Install only the HDF includes we use 
     foreach(inc ${HDF5_INCS})
         install(FILES ${HDF5_INCLUDE_DIRS}/${inc} DESTINATION include
