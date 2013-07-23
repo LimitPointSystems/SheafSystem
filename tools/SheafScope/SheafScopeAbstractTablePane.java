@@ -3,8 +3,6 @@
  *
  * @author $Author: dmbutler $
  *
- * @version $RCSfile: SheafScopeAbstractTablePane.java,v $ $Revision: 1.29 $
- *
  * $Date: 2013/03/13 00:59:08 $
  *
  * Copyright (c) 2013 Limit Point Systems, Inc.
