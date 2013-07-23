@@ -206,7 +206,345 @@ protected:
 private:
 
   //@}
+
+
+  //--------------------------------------------------------------------------
+  // BEGIN NEW INTERFACE
  
+  // ===========================================================
+  /// @name STANDARD NAME FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Create a standard path for fiber space of type F and
+  /// suffix xfiber_suffix.
+  ///
+  template <typename F>
+  poset_path
+  standard_fiber_space_path(const string& xfiber_suffix) const;
+
+  ///
+  /// Create a standard schema path for fiber space of type F and
+  /// suffix xfiber_suffix.
+  ///
+  template <typename F>
+  poset_path
+  standard_fiber_space_schema_path(const string& xfiber_suffix) const;
+
+  ///
+  /// Create a standard path for section space of type S, base space with
+  /// path xbase_space_path, section representation with path xrep_path
+  /// section suffix xsection_suffix and fiber suffix xfiber_suffix.
+  ///
+  template <typename S>
+  poset_path
+  standard_section_space_path(const poset_path& xbase_space_path,
+			      const poset_path& xrep_path,
+			      const string& xsection_suffix,
+			      const string& xfiber_suffix) const;
+
+  ///
+  /// Create a standard schema path for section space of type S, base space
+  /// with path xbase_space_path, section representation with path xrep_path
+  /// section suffix xsection_suffix and fiber suffix xfiber_suffix.
+  ///
+  template <typename S>
+  poset_path
+  standard_section_space_schema_path(const poset_path& xbase_space_path,
+				     const poset_path& xrep_path,
+				     const string& xsection_suffix,
+				     const string& xfiber_suffix) const;
+
+protected:
+
+private:
+
+  //@}
+ 
+
+  // ===========================================================
+  /// @name SHALLOW FIBER SPACE FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Find or create a scalar fiber space with fibers of type F.
+  /// at path xscalar_space_path. The arguments and schema
+  /// specified by xscalar_space_args and xscalar_schema_path,
+  /// respectively are used to create the fiber space.
+  ///
+  template <typename F>
+  typename F::host_type&
+  new_scalar_space(const poset_path& xscalar_space_path,
+		   const arg_list& xscalar_space_args,
+		   const poset_path& xscalar_space_schema_path,
+		   bool xauto_access);
+
+  ///
+  /// Find or create a vector fiber space with fibers of type F.
+  /// at path xvector_space_path. The arguments and schema
+  /// specified by xvector_space_args and xvector_schema_path,
+  /// respectively are used to create the fiber space.
+  ///
+  template <typename F>
+  typename F::host_type&
+  new_vector_space(const poset_path& xvector_space_path,
+		   const arg_list& xvector_space_args,
+		   const poset_path& xvector_space_schema_path,
+		   bool xauto_access);
+
+  ///
+  /// Find or create a tensor fiber space with fibers of type F.
+  /// at path xtensor_space_path. The arguments and schema
+  /// specified by xtensor_space_args and xtensor_schema_path,
+  /// respectively are used to create the fiber space.
+  ///
+  template <typename F>
+  typename F::host_type&
+  new_tensor_space(const poset_path& xtensor_space_path,
+		   const arg_list& xtensor_space_args,
+		   const poset_path& xtensor_space_schema_path,
+		   bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+ 
+
+  // ===========================================================
+  /// @name DEEP FIBER SPACE FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Find or create a scalar fiber space with fibers of type F.
+  /// at path, standard_fiber_space_path<F>(xfiber_suffix).
+  ///
+  template <typename F>
+  typename F::host_type&
+  new_scalar_space(const string& xfiber_suffix, bool xauto_access);
+
+  ///
+  /// Find or create a vector fiber space with fibers of type F.
+  /// at path, standard_fiber_space_path<F>(xfiber_suffix).
+  ///
+  template <typename F>
+  typename F::host_type&
+  new_vector_space(const string& xfiber_suffix, bool xauto_access);
+
+  ///
+  /// Find or create a tensor fiber space with fibers of type F.
+  /// at path, standard_fiber_space_path<F>(xfiber_suffix).
+  ///
+  template <typename F>
+  typename F::host_type&
+  new_tensor_space(const string& xfiber_suffix, bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+ 
+
+  // ===========================================================
+  /// @name SHALLOW SECTION SPACE FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Find or create a scalar section space with sections of type S.
+  /// at path xscalar_space_path.  The arguments and schema
+  /// specified by xscalar_space_args and xscalar_schema_path,
+  /// respectively are used to create the fiber space.
+  ///
+  template <typename S>
+  typename S::host_type&
+  new_scalar_section_space(const poset_path& xscalar_space_path,
+			   const arg_list& xscalar_space_args,
+			   const poset_path& xscalar_space_schema_path,
+			   bool xauto_access);
+
+  ///
+  /// Find or create a vector section space with sections of type S.
+  /// at path xvector_space_path.  The arguments and schema
+  /// specified by xvector_space_args and xvector_schema_path,
+  /// respectively are used to create the fiber space.
+  ///
+  template <typename S>
+  typename S::host_type&
+  new_vector_section_space(const poset_path& xvector_space_path,
+			   const arg_list& xvector_space_args,
+			   const poset_path& xvector_space_schema_path,
+			   bool xauto_access);
+
+  ///
+  /// Find or create a tensor section space with sections of type S.
+  /// at path xtensor_space_path.  The arguments and schema
+  /// specified by xtensor_space_args and xtensor_schema_path,
+  /// respectively are used to create the fiber space.
+  ///
+  template <typename S>
+  typename S::host_type&
+  new_tensor_section_space(const poset_path& xtensor_space_path,
+			   const arg_list& xtensor_space_args,
+			   const poset_path& xtensor_space_schema_path,
+			   bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+ 
+
+  // ===========================================================
+  /// @name DEEP SECTION SPACE FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Find or create a scalar section space with sections of type S.
+  /// at path standard_section_space_path<S>(xbase_path, xrep_path, xsection_suffix).
+  /// The fiber at path standard_fiber_space<S::fiber_type>(xfiber_suffix)
+  /// is used to create the section space.
+  ///
+  template <typename S>
+  typename S::host_type&
+  new_scalar_section_space(const poset_path& xbase_path,
+			   const poset_path& xrep_path,
+			   const string& xsection_suffix,
+			   const string& xfiber_suffix,
+			   bool xauto_access);
+
+  ///
+  /// Find or create a vector section space with sections of type S.
+  /// at path standard_section_space_path<S>(xbase_path, xrep_path, xsection_suffix).
+  /// The fiber at path standard_fiber_space<S::fiber_type>(xfiber_suffix)
+  /// is used to create the section space.
+  ///
+  template <typename S>
+  typename S::host_type&
+  new_vector_section_space(const poset_path& xbase_path,
+			   const poset_path& xrep_path,
+			   const string& xsection_suffix,
+			   const string& xfiber_suffix,
+			   bool xauto_access);
+
+  ///
+  /// Find or create a tensor section space with sections of type S.
+  /// at path standard_section_space_path<S>(xbase_path, xrep_path, xsection_suffix).
+  /// The fiber at path standard_fiber_space<S::fiber_type>(xfiber_suffix)
+  /// is used to create the section space.
+  ///
+  template <typename S>
+  typename S::host_type&
+  new_tensor_section_space(const poset_path& xbase_path,
+			   const poset_path& xrep_path,
+			   const string& xsection_suffix,
+			   const string& xfiber_suffix,
+			   bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+ 
+
+  // ===========================================================
+  /// @name SHALLOW SECTION SPACE SCHEMA FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Find or create a section space schema poset with members type S
+  /// at path xsection_space_schema_path.  The representation, base space
+  /// and fiber space specified by xrep_path, xbase_space_path, and
+  /// xfiber_space_path, respectively are used to create the section
+  /// space schema.
+  ///
+  template <typename S>
+  S::host_type&
+  new_section_space_schema(const poset_path& xsection_space_schema_path,
+			   const poset_path& xbase_space_path,
+			   const poset_path& xrep_path,
+			   const poset_path& xfiber_space_path,
+			   bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+ 
+
+  // ===========================================================
+  /// @name DEEP SECTION SPACE SCHEMA FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Find or create a scalar section space schema poset with members type S
+  /// at path standard_section_space_schema_path(xbase_space_path, xrep_path, xfiber_suffix).
+  ///
+  template <typename S>
+  S::host_type&
+  new_scalar_section_space_schema(const poset_path& xbase_space_path,
+				  const poset_path& xrep_path,
+				  const string& xfiber_suffix,
+				  bool xauto_access);
+  
+  ///
+  /// Find or create a vector section space schema poset with members type S
+  /// at path standard_section_space_schema_path(xbase_space_path, xrep_path, xfiber_suffix).
+  ///
+  template <typename S>
+  S::host_type&
+  new_vector_section_space_schema(const poset_path& xbase_space_path,
+				  const poset_path& xrep_path,
+				  const string& xfiber_suffix,
+				  bool xauto_access);
+  
+  ///
+  /// Find or create a tensor section space schema poset with members type S
+  /// at path standard_section_space_schema_path(xbase_space_path, xrep_path, xfiber_suffix).
+  ///
+  template <typename S>
+  S::host_type&
+  new_tensor_section_space_schema(const poset_path& xbase_space_path,
+				  const poset_path& xrep_path,
+				  const string& xfiber_suffix,
+				  bool xauto_access);
+  
+protected:
+
+private:
+
+  //@}
+ 
+
+  // END NEW INTERFACE
+  //--------------------------------------------------------------------------
+ 
+
   // ===========================================================
   /// @name FIBER SPACE FACTORY METHODS FACET
   // ===========================================================
