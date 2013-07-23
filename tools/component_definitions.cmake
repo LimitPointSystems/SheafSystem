@@ -225,7 +225,7 @@ function(add_bindings_targets)
                                COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
                                COMMAND ${JAVAC_EXECUTABLE} -classpath "${FIELDS_CLASSPATH} ${VTK_JAR} ${JMF_JAR}" -d . *.java
                                COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                               COMMAND ${JAR_EXECUTABLE} cvf ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
+                               COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
                              )
                              
                         # Java documentation
@@ -286,7 +286,7 @@ function(add_bindings_targets)
             	                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources/docs ${LIB_JAR_DIR}/tools/SheafScope/resources/docs 
         
                                  COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                                 COMMAND ${JAR_EXECUTABLE} cvmf ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/manifest.txt ${OUTDIR}/SheafScope.jar  -C ${LIB_JAR_DIR} .
+                                 COMMAND ${JAR_EXECUTABLE} cvmf ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/manifest.txt ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/SheafScope.jar  -C ${LIB_JAR_DIR} .
                               )
         else()
                   message(STATUS "${this_classpath}")

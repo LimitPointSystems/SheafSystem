@@ -178,7 +178,7 @@ function(add_bindings_targets)
         set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES VERSION ${LIB_VERSION})
 
         target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB} ${FIBER_BUNDLES_JAVA_BINDING_LIBS} ${JDK_LIBS}) 
-        list(APPEND ${COMPONENT}_CLASSPATH ${FIBER_BUNDLES_CLASSPATH} ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR})
+        list(APPEND ${COMPONENT}_CLASSPATH ${FIBER_BUNDLES_CLASSPATH} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR})
         set(${COMPONENT}_CLASSPATH ${${COMPONENT}_CLASSPATH} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
                     
          # Create the bindings jar file 
@@ -190,7 +190,7 @@ function(add_bindings_targets)
                                COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
                                COMMAND ${JAVAC_EXECUTABLE} -classpath "${FIBER_BUNDLES_CLASSPATH}" -d . *.java
                                COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                               COMMAND ${JAR_EXECUTABLE} cvf ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
+                               COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
                              )
                              
          # Java documentation
@@ -257,7 +257,7 @@ function(add_bindings_targets)
                         COMMAND ${CMAKE_COMMAND} -E echo ""
                         COMMAND ${CMAKE_COMMAND} -E echo "Creating Csharp Binding for ${PROJECT_NAME} ..."
                         COMMAND ${CMAKE_COMMAND} -E echo ""                 
-                        COMMAND ${CSHARP_COMPILER} /nologo /noconfig /warn:1 /errorreport:prompt /target:library /out:${OUTDIR}/${${COMPONENT}_CSHARP_BINDING_ASSY}  ${CMAKE_CURRENT_BINARY_DIR}/*.cs
+                        COMMAND ${CSHARP_COMPILER} /nologo /noconfig /warn:1 /errorreport:prompt /target:library /out:${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_CSHARP_BINDING_ASSY}  ${CMAKE_CURRENT_BINARY_DIR}/*.cs
             )
         else()
             add_custom_target(${${COMPONENT}_CSHARP_BINDING_ASSY} ALL

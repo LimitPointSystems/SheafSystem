@@ -172,14 +172,14 @@ function(add_bindings_targets)
 
         # Create the bindings jar file 
         if(WIN64INTEL OR WIN64MSVC)
-            set(${COMPONENT}_CLASSPATH  ${SHEAVES_CLASSPATH} ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
+            set(${COMPONENT}_CLASSPATH  ${SHEAVES_CLASSPATH} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
             add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
                DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${SHEAVES_JAVA_BINDING_JAR}
                set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Component Binding Jars")
                COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
                COMMAND ${JAVAC_EXECUTABLE} -classpath "${SHEAVES_CLASSPATH}" -d . *.java
                COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-               COMMAND ${JAR_EXECUTABLE} cvf ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
+               COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
                )
                
             # Java documentation
@@ -248,7 +248,7 @@ function(add_bindings_targets)
                 COMMAND ${CMAKE_COMMAND} -E echo ""
                 COMMAND ${CMAKE_COMMAND} -E echo "Creating Csharp Binding for ${PROJECT_NAME} ..."
                 COMMAND ${CMAKE_COMMAND} -E echo ""                 
-                COMMAND ${CSHARP_COMPILER} /nologo /noconfig /warn:1 /errorreport:prompt /target:library /out:${OUTDIR}/${${COMPONENT}_CSHARP_BINDING_ASSY}  ${CMAKE_CURRENT_BINARY_DIR}/*.cs
+                COMMAND ${CSHARP_COMPILER} /nologo /noconfig /warn:1 /errorreport:prompt /target:library /out:${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_CSHARP_BINDING_ASSY}  ${CMAKE_CURRENT_BINARY_DIR}/*.cs
                 )
         else()
             add_custom_target(${${COMPONENT}_CSHARP_BINDING_ASSY} ALL

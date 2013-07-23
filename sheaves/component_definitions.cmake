@@ -172,7 +172,7 @@ function(add_bindings_targets)
         # Output path in windows differs slightly from Linux. Cmake wont allow a conditional inside add_custom_target
         # So we have to do it outside.
         if(WIN64INTEL OR WIN64MSVC)
-            set(${COMPONENT}_CLASSPATH ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)         
+            set(${COMPONENT}_CLASSPATH ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)         
             add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
                            DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB}
                            set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Component Binding Jars")
@@ -181,7 +181,7 @@ function(add_bindings_targets)
                            COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
                            COMMAND ${JAVAC_EXECUTABLE} -classpath . -d . *.java
                            COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                           COMMAND ${JAR_EXECUTABLE} cvf ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
+                           COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
             )
         else()
             set(${COMPONENT}_CLASSPATH ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)   
@@ -238,7 +238,7 @@ function(add_bindings_targets)
                         COMMAND ${CMAKE_COMMAND} -E echo ""
                         COMMAND ${CMAKE_COMMAND} -E echo "Creating Csharp Binding for ${PROJECT_NAME} ..."
                         COMMAND ${CMAKE_COMMAND} -E echo ""                           
-                        COMMAND ${CSHARP_COMPILER} /nologo /noconfig /warn:1 /errorreport:prompt /target:library /out:${OUTDIR}/${${COMPONENT}_CSHARP_BINDING_ASSY}  ${CMAKE_CURRENT_BINARY_DIR}/*.cs
+                        COMMAND ${CSHARP_COMPILER} /nologo /noconfig /warn:1 /errorreport:prompt /target:library /out:${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_CSHARP_BINDING_ASSY}  ${CMAKE_CURRENT_BINARY_DIR}/*.cs
                             DEPENDS ${${COMPONENT}_CSHARP_BINDING_ASSY} ${${COMPONENT}_CSHARP_BINDING_LIB}
             )
         else()
