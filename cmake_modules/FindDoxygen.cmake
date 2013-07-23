@@ -1,8 +1,6 @@
 #
-# $RCSfile: FindDoxygen.cmake,v $ $Revision: 1.7 $ $Date: 2013/01/12 17:16:50 $
 #
-#
-# Some portions Copyright (c) 2013 Limit Point Systems, Inc.
+# Copyright (c) 2013 Limit Point Systems, Inc.
 #
 #
 

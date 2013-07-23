@@ -1,8 +1,6 @@
 #
-# $RCSfile: FindSWIG.cmake,v $ $Revision: 1.8 $ $Date: 2013/01/28 15:18:44 $
 #
-#
-# Some portions Copyright (c) 2013 Limit Point Systems, Inc.
+# Copyright (c) 2013 Limit Point Systems, Inc.
 #
 #
 
