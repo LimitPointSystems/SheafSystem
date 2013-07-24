@@ -3,8 +3,6 @@
  *
  * @author $Author: jebutler $
  *
- * @version $RCSfile: AboutDialog.java,v $ $Revision: 1.9 $
- *
  * $Date: 2013/01/12 17:17:54 $
  *
  * Copyright (c) 2013 Limit Point Systems, Inc.

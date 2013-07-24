@@ -4,8 +4,6 @@
  *
  * @author $Author: jebutler $
  *
- * @version $RCSfile: G3DViewer.java,v $ $Revision: 1.11 $
- *
  * $Date: 2013/01/12 17:18:01 $
  *
  * Copyright (c) 2013 Limit Point Systems, Inc.

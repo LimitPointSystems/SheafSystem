@@ -1,8 +1,6 @@
 #
-# $RCSfile: FindJava.cmake,v $ $Revision: 1.7 $ $Date: 2013/01/17 01:45:12 $
 #
-#
-# Some portions Copyright (c) 2013 Limit Point Systems, Inc.
+# Copyright (c) 2013 Limit Point Systems, Inc.
 #
 #
 # - Find Java

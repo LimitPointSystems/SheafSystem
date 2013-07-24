@@ -1,8 +1,7 @@
 #
-# $RCSfile: FindVTK.cmake,v $ $Revision: 1.8 $ $Date: 2013/01/30 04:38:35 $
 #
+# Copyright (c) 2013 Limit Point Systems, Inc.
 #
-# Some portions Copyright (c) 2013 Limit Point Systems, Inc.
 #
 #
 #

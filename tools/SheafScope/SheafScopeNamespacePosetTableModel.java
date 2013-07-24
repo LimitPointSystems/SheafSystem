@@ -4,8 +4,6 @@
  *
  * @author $Author: jebutler $
  *
- * @version $RCSfile: SheafScopeNamespacePosetTableModel.java,v $ $Revision: 1.21 $
- *
  * $Date: 2013/01/12 17:17:53 $
  *
  * Copyright (c) 2013 Limit Point Systems, Inc.

@@ -1,11 +1,8 @@
 #
-# $RCSfile: component_definitions.cmake,v $ $Revision: 1.39 $ $Date: 2013/01/28 16:37:07 $
-#
 #
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
 #
-
 #
 # This file contains declarations and functions unique to this component.
 #

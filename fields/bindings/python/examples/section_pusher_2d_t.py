@@ -1,9 +1,5 @@
 #! /usr/bin/env python
 
-##
-## $RCSfile: section_pusher_2d_t.py,v $ $Revision: 1.3 $ $Date: 2012/08/01 21:18:34 $
-##
-
 
 ## Test driver for class section_pusher (2d version).
 
