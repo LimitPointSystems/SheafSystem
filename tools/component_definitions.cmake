@@ -240,7 +240,6 @@ function(add_bindings_targets)
             # and store the result in parent_classpath.
             string(REGEX REPLACE ";" ":" parent_classpath "${FIELDS_CLASSPATH}")
             string(REGEX REPLACE ";" ":" this_classpath "${${COMPONENT}_CLASSPATH}")
-            message(STATUS "${this_classpath}")
             # The default list item separator in cmake is ";". If Linux, then exchange ";" for  the UNIX style ":"
             # and store the result in parent_classpath.
             string(REGEX REPLACE ";" ":" parent_classpath "${${COMPONENT}_CLASSPATH}")
@@ -269,7 +268,6 @@ function(add_bindings_targets)
    
          # Build the SheafScope jar
         if(WIN64INTEL OR WIN64MSVC)
-          message(STATUS "${this_classpath}")
              add_custom_target(SheafScope.jar ALL 
                                  DEPENDS ${PROJECT_NAME}_java_binding.jar 
                                  COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}
@@ -289,7 +287,6 @@ function(add_bindings_targets)
                                  COMMAND ${JAR_EXECUTABLE} cvmf ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/manifest.txt ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/SheafScope.jar  -C ${LIB_JAR_DIR} .
                               )
         else()
-                  message(STATUS "${this_classpath}")
          # Build the SheafScope jar
              add_custom_target(SheafScope.jar ALL 
                                  DEPENDS ${PROJECT_NAME}_java_binding.jar 
