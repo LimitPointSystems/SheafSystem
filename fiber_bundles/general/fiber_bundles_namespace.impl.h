@@ -145,6 +145,1091 @@ new_base_space(const poset_path& xbase_space_path,
   
   
 
+//--------------------------------------------------------------------------
+// BEGIN NEW INTERFACE
+
+// ===========================================================
+// STANDARD NAME FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+template <typename F>
+sheaf::poset_path
+fiber_bundle::fiber_bundles_namespace::
+standard_fiber_space_path(const string& xfiber_suffix) const
+{
+  // Preconditions:
+
+  // Body:
+
+  poset_path result(F::class_name() + xfiber_suffix, "");
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+template <typename F>
+sheaf::poset_path
+fiber_bundle::fiber_bundles_namespace::
+standard_fiber_space_schema_path(const string& xfiber_suffix) const
+{
+  // Preconditions:
+
+  // Body:
+
+  poset_path result(standard_fiber_space_path<F>(xfiber_suffix).poset_name() + "_schema", "");
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+template <typename S>
+sheaf::poset_path
+fiber_bundle::fiber_bundles_namespace::
+standard_section_space_path(const poset_path& xbase_space_path,
+			    const poset_path& xrep_path,
+			    const string& xsection_suffix,
+			    const string& xfiber_suffix) const
+{
+  // Preconditions:
+
+  // Body:
+
+  string lrep(xrep_path.member_name());
+  if(lrep.empty())
+  {
+    lrep = "vertex_cells_dlinear";
+  }
+
+  string result = standard_fiber_space_path<S::fiber_type>(xfiber_suffix).poset_name();
+  result += "_on_" + xbase_space_path.poset_name();
+  result += "_" + lrep;
+  if(!xsection_suffix.empty())
+  {
+    result += "_" + xsection_suffix;
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+template <typename S>
+sheaf::poset_path
+fiber_bundle::fiber_bundles_namespace::
+standard_section_space_schema_path(const poset_path& xbase_space_path,
+				   const poset_path& xrep_path,
+				   const string& xfiber_suffix) const
+{
+  // Preconditions:
+
+  // Body:
+
+  poset_path result(standard_section_space_path<S>(xbase_space_path, xrep_path, "", xfiber_suffix).poset_name() + "_schema", "");
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// ===========================================================
+// SHALLOW FIBER SPACE FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+template <typename F>
+typename F::host_type&
+fiber_bundle::fiber_bundles_namespace::
+new_fiber_space_2(const poset_path& xfiber_space_path,
+		const arg_list& xfiber_space_args,
+		const poset_path& xfiber_space_schema_path,
+		bool xauto_access)
+{
+  // Preconditions:
+
+  // Body:
+
+  typedef typename F::host_type host_type;
+
+  host_type* lresult_ptr;
+
+  /// @todo Implement with templatized struct.
+
+  host_type& result = *lresult_ptr;
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+template <typename F>
+typename F::host_type&
+fiber_bundle::fiber_bundles_namespace::
+new_scalar_space_2(const poset_path& xscalar_space_path,
+		 const arg_list& xscalar_space_args,
+		 const poset_path& xscalar_space_schema_path,
+		 bool xauto_access)
+{
+  // Preconditions:
+
+  require(unexecutable("F::host_type conforms to at0_space"));
+  require(path_is_auto_read_available(xscalar_space_path, xauto_access));
+  require(unexecutable("xscalar_space_args properly initialized"));
+  require(path_is_auto_read_accessible(xscalar_space_schema_path, xauto_access));
+
+  // Body:
+
+  typedef typename F::host_type host_type;
+
+  host_type* lresult_ptr;
+
+  if(contains_poset<host_type>(xscalar_space_path, xauto_access))
+  {
+    // Fiber space exists; precondition ensures it is the right type; get it.
+
+    lresult_ptr = &member_poset<host_type>(xscalar_space_path, xauto_access);
+  }
+  else
+  {
+    // Fiber space doesn't exist; create it.
+
+    lresult_ptr = new host_type(*this,
+				xscalar_space_path.poset_name(),
+				xscalar_space_args,
+				xscalar_space_schema_path,
+				xauto_access);
+  }
+
+  host_type& result = *lresult_ptr;
+
+  // Postconditions:
+
+  ensure(contains_poset(xscalar_space_path));
+  ensure(result.path() == xscalar_space_path);
+  ensure(result.schema().path() == xscalar_space_schema_path);
+
+  // Exit:
+
+  return result;
+}
+
+template <typename F>
+typename F::host_type&
+fiber_bundle::fiber_bundles_namespace::
+new_vector_space(const poset_path& xvector_space_path,
+		 const arg_list& xvector_space_args,
+		 const poset_path& xvector_space_schema_path,
+		 bool xauto_access)
+{
+  // Preconditions:
+
+  require(unexecutable("F::host_type conforms to at1_space"));
+  require(path_is_auto_read_available(xvector_space_path, xauto_access));
+  require(unexecutable("xvector_space_args properly initialized"));
+  require(path_is_auto_read_accessible(xvector_space_schema_path, xauto_access));
+  require(path_is_auto_read_accessible(xvector_space_args.value("scalar_space_path"), xauto_access));
+
+  // Body:
+
+  typedef typename F::host_type host_type;
+
+  host_type* lresult_ptr;
+
+  if(contains_poset<host_type>(xvector_space_path, xauto_access))
+  {
+    // Fiber space exists; precondition ensures it is the right type; get it.
+
+    lresult_ptr = &member_poset<host_type>(xvector_space_path, xauto_access);
+  }
+  else
+  {
+    // Fiber space doesn't exist; create it.
+
+    lresult_ptr = new host_type(*this,
+				xvector_space_path.poset_name(),
+				xvector_space_args,
+				xvector_space_schema_path,
+				xauto_access);
+  }
+
+  host_type& result = *lresult_ptr;
+
+  // Postconditions:
+
+  ensure(contains_poset(xvector_space_path));
+  ensure(result.path() == xvector_space_path);
+  ensure(result.schema().path() == xvector_space_schema_path);
+  ensure(result.scalar_space_path() == xvector_space_args.value("scalar_space_path"));
+
+  // Exit:
+
+  return result;
+}
+
+template <typename F>
+typename F::host_type&
+fiber_bundle::fiber_bundles_namespace::
+new_tensor_space(const poset_path& xtensor_space_path,
+		 const arg_list& xtensor_space_args,
+		 const poset_path& xtensor_space_schema_path,
+		 bool xauto_access)
+{
+  // Preconditions:
+
+  require(unexecutable("F::host_type conforms to tp_space"));
+  require(path_is_auto_read_available(xtensor_space_path, xauto_access));
+  require(unexecutable("xtensor_space_args properly initialized"));
+  require(path_is_auto_read_accessible(xtensor_space_schema_path, xauto_access));
+  require(path_is_auto_read_accessible(xtensor_space_args.value("vector_space_path"), xauto_access));
+
+  // Body:
+
+  typedef typename F::host_type host_type;
+
+  host_type* lresult_ptr;
+
+  if(contains_poset<host_type>(xtensor_space_path, xauto_access))
+  {
+    // Fiber space exists; precondition ensures it is the right type; get it.
+
+    lresult_ptr = &member_poset<host_type>(xtensor_space_path, xauto_access);
+  }
+  else
+  {
+    // Fiber space doesn't exist; create it.
+
+    lresult_ptr = new host_type(*this,
+				xtensor_space_path.poset_name(),
+				xtensor_space_args,
+				xtensor_space_schema_path,
+				xauto_access);
+  }
+
+  host_type& result = *lresult_ptr;
+
+  // Postconditions:
+
+  ensure(contains_poset(xtensor_space_path));
+  ensure(result.path() == xtensor_space_path);
+  ensure(result.schema().path() == xtensor_space_schema_path);
+  ensure(result.vector_space_path() == xtensor_space_args.value("vector_space_path"));
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// ===========================================================
+// DEEP FIBER SPACE FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+template <typename F>
+typename F::host_type&
+fiber_bundle::fiber_bundles_namespace::
+new_fiber_space(const string& xfiber_suffix, bool xauto_access)
+{
+  // Preconditions:
+
+  // Body:
+
+  typedef typename F::host_type host_type;
+
+  host_type* lresult_ptr;
+
+  /// @todo Implement with templatized struct.
+
+  host_type& result = *lresult_ptr;
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+template <typename F>
+typename F::host_type&
+fiber_bundle::fiber_bundles_namespace::
+new_scalar_space(const string& xfiber_suffix, bool xauto_access)
+{
+  // Preconditions:
+
+  require(unexecutable("F::host_type conforms to at0_space"));
+  require(path_is_auto_read_available(standard_fiber_space_path<F>(xfiber_suffix), xauto_access));
+  require(path_is_auto_read_accessible(standard_fiber_space_schema_path<F>(xfiber_suffix), xauto_access));
+
+  // Body:
+
+  poset_path lscalar_space_path = standard_fiber_space_path<F>(xfiber_suffix);
+
+  typedef typename F::host_type host_type;
+
+  host_type* lresult_ptr;
+
+  if(contains_poset<host_type>(lscalar_space_path, xauto_access))
+  {
+    // Fiber space exists; precondition ensures it is the right type; get it.
+
+    lresult_ptr = &member_poset<host_type>(lscalar_space_path, xauto_access);
+  }
+  else
+  {
+    // Fiber space doesn't exist; create it.
+
+    arg_list lscalar_space_args = host_type::make_arg_list();
+    poset_path lscalar_space_schema_path = standard_fiber_space_schema_path<F>(xfiber_suffix);
+
+    lresult_ptr = new host_type(*this,
+				lscalar_space_path.poset_name(),
+				lscalar_space_args,
+				lscalar_space_schema_path,
+				xauto_access);
+  }
+
+  host_type& result = *lresult_ptr;
+
+  // Postconditions:
+
+  ensure(contains_poset(standard_fiber_space_path<F>(xfiber_suffix)));
+  ensure(result.path() == standard_fiber_space_path<F>(xfiber_suffix));
+  ensure(result.schema().path() == standard_fiber_space_schema_path<F>(xfiber_suffix));
+
+  // Exit:
+
+  return result;
+}
+
+template <typename F>
+typename F::host_type&
+fiber_bundle::fiber_bundles_namespace::
+new_vector_space(const string& xfiber_suffix, bool xauto_access)
+{
+  // Preconditions:
+
+  require(unexecutable("F::host_type conforms to at1_space"));
+  require(path_is_auto_read_available(standard_fiber_space_path<F>(xfiber_suffix), xauto_access));
+  require(path_is_auto_read_accessible(standard_fiber_space_schema_path<F>(xfiber_suffix), xauto_access));
+  require(path_is_auto_read_available(standard_fiber_space_path<F::scalar_type>(xfiber_suffix), xauto_access));
+
+  // Body:
+
+  typedef typename F::host_type host_type;
+  typedef typename F::scalar_type scalar_type;
+  typedef typename scalar_type::host_type scalar_host_type;
+
+  poset_path lvector_space_path = standard_fiber_space_path<F>(xfiber_suffix);
+
+  host_type* lresult_ptr;
+
+  if(contains_poset<host_type>(lvector_space_path, xauto_access))
+  {
+    // Fiber space exists; precondition ensures it is the right type; get it.
+
+    lresult_ptr = &member_poset<host_type>(lvector_space_path, xauto_access);
+  }
+  else
+  {
+    // Fiber space doesn't exist; Create it.
+
+    // Create the scalar fiber space if not already created.
+
+    scalar_host_type& lscalar_space = new_scalar_space<scalar_type>(xfiber_suffix, xauto_access);
+
+    // Create the vector fiber space.
+
+    arg_list lvector_space_args = host_type::make_arg_list(lscalar_space.path());
+    poset_path lvector_space_schema_path = standard_fiber_space_schema_path<F>(xfiber_suffix);
+
+    lresult_ptr = new host_type(*this,
+				lvector_space_path.poset_name(),
+				lvector_space_args,
+				lvector_space_schema_path,
+				xauto_access);
+  }
+
+  host_type& result = *lresult_ptr;
+
+  // Postconditions:
+
+  ensure(contains_poset(standard_fiber_space_path<F>(xfiber_suffix)));
+  ensure(result.path() == standard_fiber_space_path<F>(xfiber_suffix));
+  ensure(result.schema().path() == standard_fiber_space_schema_path<F>(xfiber_suffix));
+  ensure(result.scalar_space_path() == standard_fiber_space_path<F::scalar_type>(xfiber_suffix));
+
+  // Exit:
+
+  return result;
+}
+
+template <typename F>
+typename F::host_type&
+fiber_bundle::fiber_bundles_namespace::
+new_tensor_space(const string& xfiber_suffix, bool xauto_access)
+{
+  // Preconditions:
+
+  require(unexecutable("F::host_type conforms to tp_space"));
+  require(path_is_auto_read_available(standard_fiber_space_path<F>(xfiber_suffix), xauto_access));
+  require(path_is_auto_read_accessible(standard_fiber_space_schema_path<F>(xfiber_suffix), xauto_access));
+  require(path_is_auto_read_available(standard_fiber_space_path<F::vector_type>(xfiber_suffix), xauto_access));
+  require(path_is_auto_read_available(standard_fiber_space_path<F::scalar_type>(xfiber_suffix), xauto_access));
+
+  // Body:
+
+  typedef typename F::host_type host_type;
+  typedef typename F::vector_type vector_type;
+  typedef typename vector_type::host_type vector_host_type;
+
+  poset_path ltensor_space_path = standard_fiber_space_path<F>(xfiber_suffix);
+
+  host_type* lresult_ptr;
+
+  if(contains_poset<host_type>(ltensor_space_path, xauto_access))
+  {
+    // Fiber space exists; precondition ensures it is the right type; get it.
+
+    lresult_ptr = &member_poset<host_type>(ltensor_space_path, xauto_access);
+  }
+  else
+  {
+    // Fiber space doesn't exist; Create it.
+
+    // Create the vector fiber space if not already created.
+
+    vector_host_type& lvector_space = new_vector_space<vector_type>(xfiber_suffix, xauto_access);
+
+    // Create the tensor fiber space.
+
+    arg_list ltensor_space_args = host_type::make_arg_list(F::P, lvector_space.path());
+    poset_path ltensor_space_schema_path = standard_fiber_space_schema_path<F>(xfiber_suffix);
+
+    lresult_ptr = new host_type(*this,
+				ltensor_space_path.poset_name(),
+				ltensor_space_args,
+				ltensor_space_schema_path,
+				xauto_access);
+  }
+
+  host_type& result = *lresult_ptr;
+
+  // Postconditions:
+
+  ensure(contains_poset(standard_fiber_space_path<F>(xfiber_suffix)));
+  ensure(result.path() == standard_fiber_space_path<F>(xfiber_suffix));
+  ensure(result.schema().path() == standard_fiber_space_schema_path<F>(xfiber_suffix));
+  ensure(result.vector_space_path() == standard_fiber_space_path<F::vector_type>(xfiber_suffix));
+  ensure(result.scalar_space_path() == standard_fiber_space_path<F::scalar_type>(xfiber_suffix));
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// ===========================================================
+// SHALLOW SECTION SPACE FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+template <typename S>
+typename S::host_type&
+fiber_bundle::fiber_bundles_namespace::
+new_section_space_2(const poset_path& xsection_space_path,
+		    const arg_list& xsection_space_args,
+		    const poset_path& xsection_space_schema_path,
+		    bool xauto_access)
+{
+  // Preconditions:
+
+  // Body:
+
+  typedef typename S::host_type host_type;
+
+  host_type* lresult_ptr;
+
+  /// @todo Implement with templatized struct.
+
+  host_type& result = *lresult_ptr;
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+template <typename S>
+typename S::host_type&
+fiber_bundle::fiber_bundles_namespace::
+new_scalar_section_space_2(const poset_path& xscalar_space_path,
+			   const arg_list& xscalar_space_args,
+			   const poset_path& xscalar_space_schema_path,
+			   bool xauto_access)
+{
+  // Preconditions:
+
+  require(unexecutable("S::host_type conforms to sec_at0_space"));
+  require(path_is_auto_read_available(xscalar_space_path, xauto_access));
+  require(unexecutable("xscalar_space_args properly initialized"));
+  require(path_is_auto_read_accessible(xscalar_space_schema_path, xauto_access));
+
+  // Body:
+
+  typedef typename S::host_type host_type;
+
+  host_type* lresult_ptr;
+
+  if(contains_poset<host_type>(xscalar_space_path, xauto_access))
+  {
+    // Section space exists; precondition ensures it is the right type; get it.
+
+    lresult_ptr = &member_poset<host_type>(xscalar_space_path, xauto_access);
+  }
+  else
+  {
+    // Section space doesn't exist; create it.
+
+    lresult_ptr = new host_type(*this,
+				xscalar_space_path.poset_name(),
+				xscalar_space_args,
+				xscalar_space_schema_path,
+				xauto_access);
+  }
+
+  host_type& result = *lresult_ptr;
+
+  // Postconditions:
+
+  ensure(contains_poset(xscalar_space_path));
+  ensure(result.path() == xscalar_space_path);
+  ensure(result.schema().path() == xscalar_space_schema_path);
+
+  // Exit:
+
+  return result;
+}
+
+template <typename S>
+typename S::host_type&
+fiber_bundle::fiber_bundles_namespace::
+new_vector_section_space(const poset_path& xvector_space_path,
+			 const arg_list& xvector_space_args,
+			 const poset_path& xvector_space_schema_path,
+			 bool xauto_access)
+{
+  // Preconditions:
+
+  require(unexecutable("S::host_type conforms to sec_at1_space"));
+  require(path_is_auto_read_available(xvector_space_path, xauto_access));
+  require(unexecutable("xvector_space_args properly initialized"));
+  require(path_is_auto_read_accessible(xvector_space_schema_path, xauto_access));
+  require(path_is_auto_read_accessible(xvector_space_args.value("scalar_space_path"), xauto_access));
+
+  // Body:
+
+  typedef typename S::host_type host_type;
+
+  host_type* lresult_ptr;
+
+  if(contains_poset<host_type>(xvector_space_path, xauto_access))
+  {
+    // Section space exists; precondition ensures it is the right type; get it.
+
+    lresult_ptr = &member_poset<host_type>(xvector_space_path, xauto_access);
+  }
+  else
+  {
+    // Section space doesn't exist; create it.
+
+    lresult_ptr = new host_type(*this,
+				xvector_space_path.poset_name(),
+				xvector_space_args,
+				xvector_space_schema_path,
+				xauto_access);
+  }
+
+  host_type& result = *lresult_ptr;
+
+  // Postconditions:
+
+  ensure(contains_poset(xvector_space_path));
+  ensure(result.path() == xvector_space_path);
+  ensure(result.schema().path() == xvector_space_schema_path);
+  ensure(result.scalar_space_path() == xvector_space_args.value("scalar_space_path"));
+
+  // Exit:
+
+  return result;
+}
+
+template <typename S>
+typename S::host_type&
+fiber_bundle::fiber_bundles_namespace::
+new_tensor_section_space(const poset_path& xtensor_space_path,
+			 const arg_list& xtensor_space_args,
+			 const poset_path& xtensor_space_schema_path,
+			 bool xauto_access)
+{
+  // Preconditions:
+
+  require(unexecutable("S::host_type conforms to sec_tp_space"));
+  require(path_is_auto_read_available(xtensor_space_path, xauto_access));
+  require(unexecutable("xtensor_space_args properly initialized"));
+  require(path_is_auto_read_accessible(xtensor_space_schema_path, xauto_access));
+  require(path_is_auto_read_accessible(xtensor_space_args.value("vector_space_path"), xauto_access));
+
+  // Body:
+
+  typedef typename S::host_type host_type;
+
+  host_type* lresult_ptr;
+
+  if(contains_poset<host_type>(xtensor_space_path, xauto_access))
+  {
+    // Section space exists; precondition ensures it is the right type; get it.
+
+    lresult_ptr = &member_poset<host_type>(xtensor_space_path, xauto_access);
+  }
+  else
+  {
+    // Section space doesn't exist; create it.
+
+    lresult_ptr = new host_type(*this,
+				xtensor_space_path.poset_name(),
+				xtensor_space_args,
+				xtensor_space_schema_path,
+				xauto_access);
+  }
+
+  host_type& result = *lresult_ptr;
+
+  // Postconditions:
+
+  ensure(contains_poset(xtensor_space_path));
+  ensure(result.path() == xtensor_space_path);
+  ensure(result.schema().path() == xtensor_space_schema_path);
+  ensure(result.vector_space_path() == xtensor_space_args.value("vector_space_path"));
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// ===========================================================
+// DEEP SECTION SPACE FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+template <typename S>
+typename S::host_type&
+fiber_bundle::fiber_bundles_namespace::
+new_section_space(const poset_path& xbase_path,
+		  const poset_path& xrep_path,
+		  const string& xsection_suffix,
+		  const string& xfiber_suffix,
+		  bool xauto_access)
+{
+  // Preconditions:
+
+  // Body:
+
+  typedef typename S::host_type host_type;
+
+  host_type* lresult_ptr;
+
+  /// @todo Implement with templatized struct.
+
+  host_type& result = *lresult_ptr;
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+template <typename S>
+typename S::host_type&
+fiber_bundle::fiber_bundles_namespace::
+new_scalar_section_space(const poset_path& xbase_space_path,
+			 const poset_path& xrep_path,
+			 const string& xsection_suffix,
+			 const string& xfiber_suffix,
+			 bool xauto_access)
+{
+  // Preconditions:
+
+  require(unexecutable("S::host_type conforms to sec_at0_space"));
+
+  // Scalar section space
+
+  require(path_is_auto_read_accessible(xbase_space_path, xauto_access));
+  require(path_is_auto_read_available(standard_section_space_path<S>(xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix), xauto_access));
+  require(path_is_auto_read_available(standard_section_space_schema_path<S>(xbase_space_path, xrep_path, xfiber_suffix), xauto_access));
+
+  // Scalar fiber space
+
+  require(path_is_auto_read_available(standard_fiber_space_path<S::fiber_type>(xfiber_suffix), xauto_access));
+  require(path_is_auto_read_available(standard_fiber_space_schema_path<S::fiber_type>(xfiber_suffix), xauto_access));
+
+  // Body:
+
+  typedef typename S::host_type host_type;
+
+  host_type* lresult_ptr;
+
+  poset_path lscalar_space_path = standard_section_space_path<S>(xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix);
+  if(contains_poset<host_type>(lscalar_space_path, xauto_access))
+  {
+    // Section space exists; precondition ensures it is the right type; get it.
+
+    lresult_ptr = &member_poset<host_type>(lscalar_space_path, xauto_access);
+  }
+  else
+  {
+    // Section space doesn't exist;
+
+    // Create section space schema if required.
+
+    poset_path lscalar_space_schema_path = new_scalar_section_space_schema<S>(xbase_space_path, xrep_path, xfiber_suffix);
+
+    // Create the section space.
+
+    arg_list lscalar_space_args = host_type::make_arg_list();
+
+    lresult_ptr = new host_type(*this,
+				lscalar_space_path.poset_name(),
+				lscalar_space_args,
+				lscalar_space_schema_path,
+				xauto_access);
+  }
+  
+  host_type& result = *lresult_ptr;
+
+  // Postconditions:
+
+  // Scalar section space
+
+  ensure(contains_poset(standard_section_space_path<S>(xbase_space_path, xrep_path,xsection_suffix, xfiber_suffix)));
+  ensure(result.path() == standard_section_space_path<S>(xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix));
+  ensure(contains_poset(standard_section_space_schema_path<S>(xbase_space_path, xrep_path, xfiber_suffix)));
+  ensure(result.schema().path() == standard_section_space_schema_path<S>(xbase_space_path, xrep_path, xfiber_suffix));
+
+  // Scalar fiber space
+
+  ensure(contains_poset(standard_fiber_space_path<S::fiber_type>(xfiber_suffix)));
+  ensure(result.schema().fiber_space_path() == standard_fiber_space_path<S::fiber_type>(xfiber_suffix));
+  ensure(member_poset(standard_fiber_space_path<S::fiber_type>()).schema().path() == standard_fiber_space_schema_path<S::fiber_type>(xfiber_suffix));
+
+  // Exit:
+
+  return result;
+}
+
+template <typename S>
+typename S::host_type&
+fiber_bundle::fiber_bundles_namespace::
+new_vector_section_space(const poset_path& xbase_space_path,
+			 const poset_path& xrep_path,
+			 const string& xsection_suffix,
+			 const string& xfiber_suffix,
+			 bool xauto_access)
+{
+  // Preconditions:
+
+  require(unexecutable("S::host_type conforms to sec_at1_space"));
+
+  // Vector section space
+
+  require(path_is_auto_read_accessible(xbase_space_path, xauto_access));
+  require(path_is_auto_read_available(standard_section_space_path<S>(xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix), xauto_access));
+  require(path_is_auto_read_available(standard_section_space_schema_path<S>(xbase_space_path, xrep_path, xfiber_suffix), xauto_access));
+
+  // Vector fiber space
+
+  require(path_is_auto_read_available(standard_fiber_space_path<S::fiber_type>(xfiber_suffix), xauto_access));
+  require(path_is_auto_read_available(standard_fiber_space_schema_path<S::fiber_type>(xfiber_suffix), xauto_access));
+
+  // Scalar section space
+
+  require(path_is_auto_read_available(standard_section_space_path<S::scalar_type>(xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix), xauto_access));
+  require(path_is_auto_read_available(standard_section_space_schema_path<S::scalar_type>(xbase_space_path, xrep_path,xfiber_suffix), xauto_access));
+
+  // Scalar fiber space
+
+  require(path_is_auto_read_available(standard_fiber_space_path<S::scalar_type::fiber_type>(xfiber_suffix), xauto_access));
+  require(path_is_auto_read_available(standard_fiber_space_schema_path<S::scalar_type::fiber_type>(xfiber_suffix), xauto_access));
+
+  // Body:
+
+  typedef typename S::host_type host_type;
+  typedef typename S::scalar_type scalar_type;
+  typedef typename scalar_type::host_type scalar_host_type;
+
+  host_type* lresult_ptr;
+
+  poset_path lvector_space_path = standard_section_space_path<S>(xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix);
+  if(contains_poset<host_type>(lvector_space_path, xauto_access))
+  {
+    // Section space exists; precondition ensures it is the right type; get it.
+
+    lresult_ptr = &member_poset<host_type>(lvector_space_path, xauto_access);
+  }
+  else
+  {
+    // Section space doesn't exist;
+
+    // Create the scalar space if required.
+
+    scalar_host_type& lscalar_space = new_scalar_section_space<scalar_type>(xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix);
+
+    // Create section space schema if required.
+
+    poset_path lvector_space_schema_path = new_vector_section_space_schema<S>(xbase_space_path, xrep_path, xfiber_suffix);
+
+    // Create the section space.
+
+    arg_list lvector_space_args = host_type::make_arg_list(lscalar_space.path());
+
+    lresult_ptr = new host_type(*this,
+				lvector_space_path.poset_name(),
+				lvector_space_args,
+				lvector_space_schema_path,
+				xauto_access);
+  }
+  
+  host_type& result = *lresult_ptr;
+
+  // Postconditions:
+
+  // Vector section space
+
+  ensure(contains_poset(standard_section_space_path<S>(xbase_space_path, xrep_path,xsection_suffix, xfiber_suffix)));
+  ensure(result.path() == standard_section_space_path<S>(xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix));
+  ensure(contains_poset(standard_section_space_schema_path<S>(xbase_space_path, xrep_path, xfiber_suffix)));
+  ensure(result.schema().path() == standard_section_space_schema_path<S>(xbase_space_path, xrep_path, xfiber_suffix));
+
+  // Vector fiber space
+
+  ensure(contains_poset(standard_fiber_space_path<S::fiber_type>(xfiber_suffix)));
+  ensure(result.schema().fiber_space_path() == standard_fiber_space_path<S::fiber_type>(xfiber_suffix));
+  ensure(member_poset(standard_fiber_space_path<S::fiber_type>()).schema().path() == standard_fiber_space_schema_path<S::fiber_type>(xfiber_suffix));
+
+  // Scalar section space
+
+  ensure(contains_poset(standard_section_space_path<S::scalar_type>(xbase_space_path, xrep_path,xsection_suffix, xfiber_suffix)));
+  ensure(result.path() == standard_section_space_path<S::scalar_type>(xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix));
+  ensure(contains_poset(standard_section_space_schema_path<S::scalar_type>(xbase_space_path, xrep_path, xfiber_suffix)));
+  ensure(result.schema().path() == standard_section_space_schema_path<S::scalar_type>(xbase_space_path, xrep_path, xfiber_suffix));
+
+  // Scalar fiber space
+
+  ensure(contains_poset(standard_fiber_space_path<S::scalar_type::fiber_type>(xfiber_suffix)));
+  ensure(result.schema().fiber_space_path() == standard_fiber_space_path<S::scalar_type::fiber_type>(xfiber_suffix));
+  ensure(member_poset(standard_fiber_space_path<S::scalar_type::fiber_type>()).schema().path() == standard_fiber_space_schema_path<S::scalar_type::fiber_type>(xfiber_suffix));
+
+  // Exit:
+
+  return result;
+}
+
+template <typename S>
+typename S::host_type&
+fiber_bundle::fiber_bundles_namespace::
+new_tensor_section_space(const poset_path& xbase_space_path,
+			 const poset_path& xrep_path,
+			 const string& xsection_suffix,
+			 const string& xfiber_suffix,
+			 bool xauto_access)
+{
+  // Preconditions:
+
+  require(unexecutable("S::host_type conforms to sec_tp_space"));
+
+  // Tensor section space
+
+  require(path_is_auto_read_accessible(xbase_space_path, xauto_access));
+  require(path_is_auto_read_available(standard_section_space_path<S>(xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix), xauto_access));
+  require(path_is_auto_read_available(standard_section_space_schema_path<S>(xbase_space_path, xrep_path, xfiber_suffix), xauto_access));
+
+  // Tensor fiber space
+
+  require(path_is_auto_read_available(standard_fiber_space_path<S::fiber_type>(xfiber_suffix), xauto_access));
+  require(path_is_auto_read_available(standard_fiber_space_schema_path<S::fiber_type>(xfiber_suffix), xauto_access));
+
+  // Vector section space
+
+  require(path_is_auto_read_available(standard_section_space_path<S::vector_type>(xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix), xauto_access));
+  require(path_is_auto_read_available(standard_section_space_schema_path<S::vector_type>(xbase_space_path, xrep_path,xfiber_suffix), xauto_access));
+
+  // Vector fiber space
+
+  require(path_is_auto_read_available(standard_fiber_space_path<S::vector_type::fiber_type>(xfiber_suffix), xauto_access));
+  require(path_is_auto_read_available(standard_fiber_space_schema_path<S::vector_type::fiber_type>(xfiber_suffix), xauto_access));
+
+  // Scalar section space
+
+  require(path_is_auto_read_available(standard_section_space_path<S::scalar_type>(xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix), xauto_access));
+  require(path_is_auto_read_available(standard_section_space_schema_path<S::scalar_type>(xbase_space_path, xrep_path,xfiber_suffix), xauto_access));
+
+  // Scalar fiber space
+
+  require(path_is_auto_read_available(standard_fiber_space_path<S::scalar_type::fiber_type>(xfiber_suffix), xauto_access));
+  require(path_is_auto_read_available(standard_fiber_space_schema_path<S::scalar_type::fiber_type>(xfiber_suffix), xauto_access));
+
+  // Body:
+
+  typedef typename S::host_type host_type;
+  typedef typename S::vector_type vector_type;
+  typedef typename vector_type::host_type vector_host_type;
+
+  host_type* lresult_ptr;
+
+  poset_path ltensor_space_path = standard_section_space_path<S>(xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix);
+  if(contains_poset<host_type>(ltensor_space_path, xauto_access))
+  {
+    // Section space exists; precondition ensures it is the right type; get it.
+
+    lresult_ptr = &member_poset<host_type>(ltensor_space_path, xauto_access);
+  }
+  else
+  {
+    // Section space doesn't exist;
+
+    // Create the vector space if required.
+
+    vector_host_type& lvector_space = new_vector_section_space<vector_type>(xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix);
+
+    // Create section space schema if required.
+
+    poset_path ltensor_space_schema_path = new_tensor_section_space_schema<S>(xbase_space_path, xrep_path, xfiber_suffix);
+
+    // Create the section space.
+
+    arg_list ltensor_space_args = host_type::make_arg_list(lvector_space.path());
+
+    lresult_ptr = new host_type(*this,
+				ltensor_space_path.poset_name(),
+				ltensor_space_args,
+				ltensor_space_schema_path,
+				xauto_access);
+  }
+  
+  host_type& result = *lresult_ptr;
+
+  // Postconditions:
+
+  // Tensor section space
+
+  ensure(contains_poset(standard_section_space_path<S>(xbase_space_path, xrep_path,xsection_suffix, xfiber_suffix)));
+  ensure(result.path() == standard_section_space_path<S>(xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix));
+  ensure(contains_poset(standard_section_space_schema_path<S>(xbase_space_path, xrep_path, xfiber_suffix)));
+  ensure(result.schema().path() == standard_section_space_schema_path<S>(xbase_space_path, xrep_path, xfiber_suffix));
+
+  // Tensor fiber space
+
+  ensure(contains_poset(standard_fiber_space_path<S::fiber_type>(xfiber_suffix)));
+  ensure(result.schema().fiber_space_path() == standard_fiber_space_path<S::fiber_type>(xfiber_suffix));
+  ensure(member_poset(standard_fiber_space_path<S::fiber_type>()).schema().path() == standard_fiber_space_schema_path<S::fiber_type>(xfiber_suffix));
+
+  // Vector section space
+
+  ensure(contains_poset(standard_section_space_path<S::vector_type>(xbase_space_path, xrep_path,xsection_suffix, xfiber_suffix)));
+  ensure(result.path() == standard_section_space_path<S::vector_type>(xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix));
+  ensure(contains_poset(standard_section_space_schema_path<S::vector_type>(xbase_space_path, xrep_path, xfiber_suffix)));
+  ensure(result.schema().path() == standard_section_space_schema_path<S::vector_type>(xbase_space_path, xrep_path, xfiber_suffix));
+
+  // Vector fiber space
+
+  ensure(contains_poset(standard_fiber_space_path<S::vector_type::fiber_type>(xfiber_suffix)));
+  ensure(result.schema().fiber_space_path() == standard_fiber_space_path<S::vector_type::fiber_type>(xfiber_suffix));
+  ensure(member_poset(standard_fiber_space_path<S::vector_type::fiber_type>()).schema().path() == standard_fiber_space_schema_path<S::vector_type::fiber_type>(xfiber_suffix));
+
+  // Scalar section space
+
+  ensure(contains_poset(standard_section_space_path<S::scalar_type>(xbase_space_path, xrep_path,xsection_suffix, xfiber_suffix)));
+  ensure(result.path() == standard_section_space_path<S::scalar_type>(xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix));
+  ensure(contains_poset(standard_section_space_schema_path<S::scalar_type>(xbase_space_path, xrep_path, xfiber_suffix)));
+  ensure(result.schema().path() == standard_section_space_schema_path<S::scalar_type>(xbase_space_path, xrep_path, xfiber_suffix));
+
+  // Scalar fiber space
+
+  ensure(contains_poset(standard_fiber_space_path<S::scalar_type::fiber_type>(xfiber_suffix)));
+  ensure(result.schema().fiber_space_path() == standard_fiber_space_path<S::scalar_type::fiber_type>(xfiber_suffix));
+  ensure(member_poset(standard_fiber_space_path<S::scalar_type::fiber_type>()).schema().path() == standard_fiber_space_schema_path<S::scalar_type::fiber_type>(xfiber_suffix));
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// ===========================================================
+// SHALLOW SECTION SPACE SCHEMA FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// ===========================================================
+// DEEP SECTION SPACE SCHEMA FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// END NEW INTERFACE
+//--------------------------------------------------------------------------
+
 // ===========================================================
 // FIBER SPACE FACTORY METHOD FACET
 // ===========================================================
