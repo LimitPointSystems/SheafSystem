@@ -213,7 +213,7 @@ function(add_bindings_targets)
 
         target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB} ${FIELDS_JAVA_BINDING_LIBS} ${VTK_LIBS} ${JDK_LIBS}) 
 
-        list(APPEND ${COMPONENT}_CLASSPATH ${FIELDS_CLASSPATH} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR} ${VTK_JAR} ${JMF_JAR})
+        list(APPEND ${COMPONENT}_CLASSPATH ${FIELDS_CLASSPATH} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} ${VTK_JAR} ${JMF_JAR})
         set(${COMPONENT}_CLASSPATH ${${COMPONENT}_CLASSPATH} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
         
          # Create the bindings jar file 
@@ -225,7 +225,7 @@ function(add_bindings_targets)
                                COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
                                COMMAND ${JAVAC_EXECUTABLE} -classpath "${FIELDS_CLASSPATH} ${VTK_JAR} ${JMF_JAR}" -d . *.java
                                COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                               COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
+                               COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
                              )
                              
                         # Java documentation
@@ -284,7 +284,7 @@ function(add_bindings_targets)
             	                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources/docs ${LIB_JAR_DIR}/tools/SheafScope/resources/docs 
         
                                  COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                                 COMMAND ${JAR_EXECUTABLE} cvmf ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/manifest.txt ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/SheafScope.jar  -C ${LIB_JAR_DIR} .
+                                 COMMAND ${JAR_EXECUTABLE} cvmf ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/manifest.txt ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/SheafScope.jar  -C ${LIB_JAR_DIR} .
                               )
         else()
          # Build the SheafScope jar
@@ -304,7 +304,7 @@ function(add_bindings_targets)
                                  COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources/docs ${LIB_JAR_DIR}/tools/SheafScope/resources/docs 
                     
                                  COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                                 COMMAND ${JAR_EXECUTABLE} cvmf ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/manifest.txt ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/SheafScope.jar -C ${LIB_JAR_DIR} .
+                                 COMMAND ${JAR_EXECUTABLE} cvmf ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/manifest.txt ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/SheafScope.jar -C ${LIB_JAR_DIR} .
                               )
         endif()
         
@@ -337,7 +337,7 @@ function(add_install_target)
             if(SWIG_FOUND AND BUILD_BINDINGS)
                 install(TARGETS ${${COMPONENT}_JAVA_BINDING_LIB} LIBRARY DESTINATION ${CMAKE_BUILD_TYPE}/lib)
                 install(FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR} DESTINATION ${CMAKE_BUILD_TYPE}/lib)  
-                install(PROGRAMS ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/SheafScope.jar DESTINATION ${CMAKE_BUILD_TYPE}/lib)
+                install(PROGRAMS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/SheafScope.jar DESTINATION ${CMAKE_BUILD_TYPE}/lib)
                 install(PROGRAMS ${JMF_JAR} DESTINATION ${CMAKE_BUILD_TYPE}/lib)
                 install(PROGRAMS ${VTK_JAR} DESTINATION ${CMAKE_BUILD_TYPE}/lib)
                 install(PROGRAMS ${JDK_LIBS} DESTINATION ${CMAKE_BUILD_TYPE}/lib)
@@ -352,29 +352,21 @@ function(add_install_target)
             # The BUILD_TYPE variable will be set while CMake is processing the install files. It is not set at configure time
             # for this project. We pass it literally here. 
             install(TARGETS ${${COMPONENT}_IMPORT_LIB} EXPORT ${${COMPONENT}_IMPORT_LIB} ARCHIVE DESTINATION lib/\${BUILD_TYPE})
-            install(TARGETS ${${COMPONENT}_DYNAMIC_LIB} RUNTIME DESTINATION bin/\${BUILD_TYPE})
-            
-            # Only try to install the pdb files if they exist. Easier to determine existence than the current config type in win32.
-             if(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb")
-                 install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb DESTINATION bin/Debug-contracts)
-            elseif(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb")
-                 install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb DESTINATION bin/Debug-no-contracts)               
-            endif()
-                                         
             if(SWIG_FOUND AND BUILD_BINDINGS)
                 install(TARGETS ${${COMPONENT}_JAVA_BINDING_LIB} RUNTIME DESTINATION bin/\${BUILD_TYPE})
-                install(PROGRAMS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_JAR} DESTINATION lib/\${BUILD_TYPE})  
-                install(PROGRAMS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/SheafScope.jar DESTINATION bin/\${BUILD_TYPE})
-                install(PROGRAMS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/dumpsheaf.exe DESTINATION bin/\${BUILD_TYPE})
-                install(PROGRAMS ${JMF_JAR} DESTINATION lib/\${BUILD_TYPE})
-                install(PROGRAMS ${VTK_JAR} DESTINATION lib/\${BUILD_TYPE})
-                install(PROGRAMS ${JDK_LIBS} DESTINATION lib/\${BUILD_TYPE})
-                # Only install python binding if the component has a target for it.
-                if(TARGET ${${COMPONENT}_PYTHON_BINDING_LIB})
-                    install(TARGETS ${${COMPONENT}_PYTHON_BINDING_LIB} ARCHIVE DESTINATION lib/\${BUILD_TYPE})
-                endif()
+                # Add the pdb files               
+                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_DYNAMIC_LIB}_d.pdb DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
+                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_LIB}_d.pdb DESTINATION bin/\${BUILD_TYPE} OPTIONAL)                
+                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_DYNAMIC_LIB}.pdb DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
+                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_LIB}.pdb DESTINATION bin/\${BUILD_TYPE} OPTIONAL)              
+
+                install(PROGRAMS ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_JAR} DESTINATION lib/\${BUILD_TYPE} OPTIONAL)  
+                install(PROGRAMS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/SheafScope.jar DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
+                install(PROGRAMS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/dumpsheaf.exe DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
+                install(PROGRAMS ${JMF_JAR} DESTINATION lib/\${BUILD_TYPE} OPTIONAL)
+                install(PROGRAMS ${VTK_JAR} DESTINATION lib/\${BUILD_TYPE} OPTIONAL)
+                install(PROGRAMS ${JDK_LIBS} DESTINATION lib/\${BUILD_TYPE} OPTIONAL)
             endif()
-            
         endif()
 
         install(FILES ${${COMPONENT}_INCS} DESTINATION include) 
