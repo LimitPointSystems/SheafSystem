@@ -3,8 +3,6 @@
  *
  * @author $Author: dmbutler $
  *
- * @version $RCSfile: SheafScopeJTree.java,v $ $Revision: 1.22 $
- *
  * $Date: 2013/03/13 00:59:08 $
  *
  * Copyright (c) 2013 Limit Point Systems, Inc.

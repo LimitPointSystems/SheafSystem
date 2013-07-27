@@ -10,9 +10,8 @@
 # It does NOT stop cmake from setting all the cache variables associated with those same
 # configurations however.
 
-set(CMAKE_CONFIGURATION_TYPES Debug-contracts Debug-no-contracts Release-contracts Release-no-contracts CACHE
-    STRING "Supported configuration types"
-    FORCE)
+set(CMAKE_CONFIGURATION_TYPES Debug-contracts Debug-no-contracts Release-contracts Release-no-contracts 
+    RelWithDebInfo-contracts RelWithDebInfo-contracts CACHE STRING "Supported configuration types" FORCE)
 
 #
 # Establish the project name
@@ -22,18 +21,13 @@ project(SheafSystem)
 #
 # Ensure that we have the required cmake version.
 #
-cmake_minimum_required(VERSION 2.8.5)
+cmake_minimum_required(VERSION 2.8.8)
 
 #
 # Include variable definitions and functions
 # unique to and/or required at the system level.
 #
 include(system_definitions.cmake)
-
-#
-# Set the compiler optimization level
-#
-set_optimization_level()
 
 #
 # Add components to the system
@@ -66,15 +60,6 @@ if(LINUX64GNU OR LINUX64INTEL)
     configure_file(${CMAKE_MODULE_PATH}/set_env_vars.csh.cmake.in ${CMAKE_BINARY_DIR}/set_env_vars.csh)
     configure_file(${CMAKE_MODULE_PATH}/set_env_vars.sh.cmake.in ${CMAKE_BINARY_DIR}/set_env_vars.sh)
 endif()
-
-#
-# VS9 and VS10 handle output locations differently.
-#
-if(${CMAKE_GENERATOR} MATCHES "Visual Studio 10 Win64" OR ${CMAKE_GENERATOR} MATCHES "Visual Studio 11 Win64")
-    set(OUTDIR "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Configuration)" CACHE STRING "Visual Studio Output Directory")
-elseif(${CMAKE_GENERATOR} MATCHES "Visual Studio 9 Win64" ) # VS 2008 
-    set(OUTDIR "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$(Outdir)" CACHE STRING "Visual Studio Output Directory")
-endif()
  
 #
 # System level is responsible for installing the documentation. The component list (see system_definitions.cmake)
@@ -86,13 +71,7 @@ endif()
 # Only install the documentation when Release-no-contracts is being installed. This prevents 4 iterations of doc generation.
 # The rationale here is that Release-no-contracts will always be released.
 #
-configure_file(${CMAKE_MODULE_PATH}/index.html.in ${CMAKE_BINARY_DIR}/index.html)
-configure_file(${CMAKE_MODULE_PATH}/jindex.html.in ${CMAKE_BINARY_DIR}/jindex.html)
-install(DIRECTORY ${PROJECT_BINARY_DIR}/documentation/ DESTINATION documentation)
-install(DIRECTORY ${CMAKE_MODULE_PATH}/css DESTINATION documentation)
-install(DIRECTORY ${CMAKE_MODULE_PATH}/images DESTINATION documentation)
-install(FILES ${CMAKE_BINARY_DIR}/index.html DESTINATION documentation)
-install(FILES ${CMAKE_BINARY_DIR}/jindex.html DESTINATION documentation/java)
+install(DIRECTORY ${CMAKE_BINARY_DIR}/documentation/ DESTINATION documentation)
 
 #
 # Install what few prerequisite resources we need
@@ -118,12 +97,6 @@ generate_install_config_file()
 if(LINUX64INTEL OR LINUX64GNU)
     install(FILES ${PROJECT_BINARY_DIR}/${EXPORTS_FILE}.in DESTINATION ${CMAKE_BUILD_TYPE}/config)
 else()
-    # Install the MSVC Runtime components
-# TODO: Once we figure out a reasonable way to only include the runtime in release
-# configurations, then turn this back on.    
-#    set(CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_SKIP TRUE) 
-#    include(InstallRequiredSystemLibraries)
-#    install(FILES ${CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS} DESTINATION bin/\${BUILD_TYPE})
     install(FILES ${PROJECT_BINARY_DIR}/${EXPORTS_FILE}.in DESTINATION config/\${BUILD_TYPE})
 endif()    
 

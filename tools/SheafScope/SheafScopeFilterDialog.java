@@ -4,9 +4,7 @@
  *
  * @author $Author: jebutler $
  *
- * @version $RCSfile: SheafScopeFilterDialog.java,v $ $Revision: 1.15 $
- *
- *      $Date: 2013/01/12 17:17:52 $
+ * $Date: 2013/01/12 17:17:52 $
  *
  * Copyright (c) 2013 Limit Point Systems, Inc.
  */

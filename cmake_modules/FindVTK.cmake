@@ -1,8 +1,7 @@
 #
-# $RCSfile: FindVTK.cmake,v $ $Revision: 1.8 $ $Date: 2013/01/30 04:38:35 $
 #
+# Copyright (c) 2013 Limit Point Systems, Inc.
 #
-# Some portions Copyright (c) 2013 Limit Point Systems, Inc.
 #
 #
 #
@@ -118,7 +117,7 @@ else()
   # Look for UseVTK.cmake in build trees or under <prefix>/include/vtk.
   find_path(VTK_LIB_DIR
     NAMES UseVTK.cmake
-    PATH_SUFFIXES vtk-5.6 vtk
+    PATH_SUFFIXES vtk-5.6  vtk
     HINTS $ENV{VTK_LIB_DIR} $ENV{HOME}/LPS/prerequisites/vtk/lib $ENV{USERPROFILE}/LPS/prerequisites/vtk/lib
 
     PATHS

@@ -2891,6 +2891,53 @@ attach_handle_data_members()
 
 
 // ===========================================================
+// I/O SUPPORT FACET
+// ===========================================================
+
+// PUBLIC FUNCTIONS
+
+bool
+fiber_bundle::base_space_poset::
+is_explicit_member(pod_index_type xmbr_id) const
+{
+  // Preconditions::
+
+  // Body:
+
+  bool result = crg().contains_explicit_member(xmbr_id);
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+bool
+fiber_bundle::base_space_poset::
+is_block_member(pod_index_type xmbr_id) const
+{
+  // Preconditions::
+
+  // Body:
+
+  implicit_crg_interval* linterval = crg().implicit_member(xmbr_id);
+
+  bool result = (linterval != 0) && linterval->is_interval_member(xmbr_id);
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED FUNCTIONS
+
+// PRIVATE FUNCTIONS
+
+
+// ===========================================================
 // ANY FACET
 // ===========================================================
 

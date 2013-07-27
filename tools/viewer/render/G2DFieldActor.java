@@ -4,8 +4,6 @@
  *
  * @author $Author: jebutler $
  *
- * @version $RCSfile: G2DFieldActor.java,v $ $Revision: 1.9 $
- *
  * $Date: 2013/01/12 17:18:00 $
  *
  * Copyright (c) 2013 Limit Point Systems, Inc.

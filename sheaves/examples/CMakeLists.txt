@@ -8,13 +8,13 @@
 # Programmer Filename Entry Section
 #------------------------------------------------
 
-set(CLUSTER examples)
+set(CLUSTER ${CMAKE_CURRENT_BINARY_DIR})
 
 #
 # Library sources.
 #
 set(SRCS
-)
+   )
 
 collect_sources()
 
@@ -23,7 +23,7 @@ collect_sources()
 #
 set(ADDITIONAL_INCS
 
-  )
+   )
   
 collect_includes()
 
@@ -31,7 +31,7 @@ collect_includes()
 # Source for unit test executables.
 #
 set(UNIT_TEST_SRCS
-)
+   )
 
 collect_unit_test_sources()
 
@@ -41,6 +41,6 @@ collect_unit_test_sources()
 set(EXAMPLE_SRCS
     sheaves_read.cc
  #   write_sheaves_namespace.cc
-  )
+   )
 
 collect_example_sources()

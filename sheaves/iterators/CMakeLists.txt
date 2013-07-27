@@ -1,6 +1,4 @@
 #
-# $RCSfile: CMakeLists.txt,v $ $Revision: 1.10 $ $Date: 2013/01/12 17:17:38 $
-#
 #
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
@@ -10,7 +8,7 @@
 # Programmer Filename Entry Section
 #------------------------------------------------
 
-set(CLUSTER iterators)
+set(CLUSTER ${CMAKE_CURRENT_BINARY_DIR})
 
 #
 # Library sources.
@@ -35,7 +33,7 @@ set(SRCS
     subposet_member_iterator.cc
     triorder_iterator.cc
     triorder_itr.cc
-)
+   )
 
 collect_sources()
 
@@ -51,7 +49,7 @@ set(ADDITIONAL_INCS
 	postorder_itr.impl.h 
 	preorder_itr.impl.h 
 	triorder_itr.impl.h
-  )
+   )
 
 collect_includes()  
 
@@ -59,7 +57,7 @@ collect_includes()
 # Source for unit test executables.
 #
 set(UNIT_TEST_SRCS
-)
+   )
 
 collect_unit_test_sources()
 
@@ -68,6 +66,6 @@ collect_unit_test_sources()
 #
 set(EXAMPLE_SRCS
 
- )
+   )
 
 collect_example_sources()

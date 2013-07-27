@@ -1,6 +1,4 @@
 #
-# $RCSfile: CMakeLists.txt,v $ $Revision: 1.9 $ $Date: 2013/01/12 17:17:08 $
-#
 #
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
@@ -10,7 +8,7 @@
 # Programmer Filename Entry Section
 #------------------------------------------------
 
-set(CLUSTER id_spaces)
+set(CLUSTER ${CMAKE_CURRENT_BINARY_DIR})
 
 #
 # Library sources.
@@ -31,7 +29,7 @@ set(SRCS
     section_space_schema_jims_index_space_handle.cc
     section_space_schema_jims_index_space_iterator.cc
     section_space_schema_jims_index_space_state.cc
-)
+   )
 
 collect_sources()
 
@@ -40,7 +38,7 @@ collect_sources()
 #
 set(ADDITIONAL_INCS
 
-  )
+   )
 
 collect_includes()
 
@@ -48,7 +46,7 @@ collect_includes()
 # Source for unit test executables.
 #
 set(UNIT_TEST_SRCS
-)
+   )
 
 collect_unit_test_sources()
 
@@ -57,7 +55,7 @@ collect_unit_test_sources()
 #
 set(EXAMPLE_SRCS
 
- )
+   )
 
 collect_example_sources()
 

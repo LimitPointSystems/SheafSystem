@@ -1,14 +1,14 @@
-# $RCSfile: CMakeLists.txt,v $ $Revision: 1.5 $ $Date: 2012/07/04 16:42:30 $
-
 #
-# Copyright (c) 2010 Limit Point Systems, Inc.
+#
+# Copyright (c) 2013 Limit Point Systems, Inc.
+#
 #
 
 #------------------------------------------------
 # Programmer Filename Entry Section
 #------------------------------------------------
 
-set(CLUSTER Viewer/application)
+set(CLUSTER ${CMAKE_CURRENT_BINARY_DIR})
 
 #
 # Library sources.

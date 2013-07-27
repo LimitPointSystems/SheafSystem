@@ -62,7 +62,4 @@
 
 %include "sec_ed_invertible.h"
 
-%include "mesh_generator.h"
-%include       "tetgen_generator.h"
-
 //=============================================================================
