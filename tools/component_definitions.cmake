@@ -352,12 +352,13 @@ function(add_install_target)
             # The BUILD_TYPE variable will be set while CMake is processing the install files. It is not set at configure time
             # for this project. We pass it literally here. 
             install(TARGETS ${${COMPONENT}_IMPORT_LIB} EXPORT ${${COMPONENT}_IMPORT_LIB} ARCHIVE DESTINATION lib/\${BUILD_TYPE})
+            install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_DYNAMIC_LIB}_d.pdb DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
+            install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_DYNAMIC_LIB}.pdb DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
+                
             if(SWIG_FOUND AND BUILD_BINDINGS)
                 install(TARGETS ${${COMPONENT}_JAVA_BINDING_LIB} RUNTIME DESTINATION bin/\${BUILD_TYPE})
                 # Add the pdb files               
-                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_DYNAMIC_LIB}_d.pdb DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
                 install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_LIB}_d.pdb DESTINATION bin/\${BUILD_TYPE} OPTIONAL)                
-                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_DYNAMIC_LIB}.pdb DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
                 install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_LIB}.pdb DESTINATION bin/\${BUILD_TYPE} OPTIONAL)              
 
                 install(PROGRAMS ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_JAR} DESTINATION lib/\${BUILD_TYPE} OPTIONAL)  
