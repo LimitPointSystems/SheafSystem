@@ -45,27 +45,29 @@ if(LINUX64GNU OR LINUX64INTEL)
             COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/documentation) 
 endif()
 
-    #
-    # clean targets
-    #
-    add_custom_target(docclean 
-            COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/documentation)
-    set_target_properties(docclean PROPERTIES FOLDER "Documentation Targets")
+
 
     #
     # Documentation targets
     #
-
-    add_custom_target(java-docs)
-    # $$TODO: this list, and the one for bindings above, should be populated programmatically,
-    # NOT by hand. Fix it.
-    add_dependencies(java-docs sheaves-java-docs fiber_bundles-java-docs geometry-java-docs
-                     fields-java-docs solvers-java-docs tools-java-docs)
-    set_target_properties(java-docs PROPERTIES FOLDER "Documentation Targets")
-                         
-    add_custom_target(alldocs DEPENDS doc java-docs)
-    set_target_properties(alldocs PROPERTIES FOLDER "Documentation Targets")
-    
+    if(DOC_TARGETS)
+        add_custom_target(java-docs)
+        # $$TODO: this list, and the one for bindings above, should be populated programmatically,
+        # NOT by hand. Fix it.
+        add_dependencies(java-docs sheaves-java-docs fiber_bundles-java-docs geometry-java-docs
+                         fields-java-docs solvers-java-docs tools-java-docs)
+        set_target_properties(java-docs PROPERTIES FOLDER "Documentation Targets")
+                             
+        add_custom_target(alldocs DEPENDS doc java-docs)
+        set_target_properties(alldocs PROPERTIES FOLDER "Documentation Targets")
+        #
+        # clean targets
+        #
+        add_custom_target(docclean 
+                COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/documentation)
+        set_target_properties(docclean PROPERTIES FOLDER "Documentation Targets")
+    endif()  
+      
     #
     # Bindings targets
     #
@@ -120,7 +122,11 @@ endif()
        # Add an "all" target to the system.
        if(WIN64INTEL OR WIN64MSVC)
            add_custom_target(all)
-           add_dependencies(all fields-bindings tools-bindings doc)
+           if(DOC_TARGETS)
+               add_dependencies(all fields-bindings tools-bindings doc)
+           else()
+               add_dependencies(all fields-bindings tools-bindings)
+           endif()          
            set_target_properties(all PROPERTIES FOLDER "Library Targets")
        endif()           
     endif()

@@ -183,13 +183,15 @@ function(add_bindings_targets)
                )
                
             # Java documentation
-            add_custom_target(${PROJECT_NAME}-java-docs ALL
-                                COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${SHEAVES_CLASSPATH}" 
-                                -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
-                                *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-                                DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
-                             )
-                                            
+            if(DOC_TARGETS)
+                add_custom_target(${PROJECT_NAME}-java-docs ALL
+                                    COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${SHEAVES_CLASSPATH}" 
+                                    -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
+                                    *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                                    DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
+                                 )
+              set_target_properties(${PROJECT_NAME}-java-docs PROPERTIES FOLDER "Documentation Targets") 
+              endif()                              
         else()
         
             set(${COMPONENT}_CLASSPATH ${SHEAVES_CLASSPATH} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
@@ -203,19 +205,20 @@ function(add_bindings_targets)
                                COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
                                COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
                              )
-               
+             #$$TODO: Why is the linux version of this target different than Win32?  
             # Java documentation
-            add_custom_target(${PROJECT_NAME}-java-docs ALL
-                                COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${parent_classpath}" 
-                                -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
-                                *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-                                DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
-                             )                
+            if(DOC_TARGETS)
+                add_custom_target(${PROJECT_NAME}-java-docs ALL
+                                    COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${${COMPONENT}_CLASSPATH}" 
+                                    -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
+                                    *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                                    DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
+                                 )
+            endif()
         endif()
               
         set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Library Jars") 
         mark_as_advanced(FORCE ${COMPONENT}_CLASSPATH) 
-        set_target_properties(${PROJECT_NAME}-java-docs PROPERTIES FOLDER "Documentation Targets")
 
         #
         # CSharp ##############################################################

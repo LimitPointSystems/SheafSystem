@@ -228,14 +228,18 @@ function(add_bindings_targets)
                                COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
                              )
                              
-                        # Java documentation
-            add_custom_target(${PROJECT_NAME}-java-docs ALL
-                                COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${FIELDS_CLASSPATH}" 
-                                -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
-                                *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-                                DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
-                             )                 
+            # Java documentation
+            if(DOC_TARGETS)
+                add_custom_target(${PROJECT_NAME}-java-docs ALL
+                                    COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${FIELDS_CLASSPATH}" 
+                                    -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
+                                    *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                                    DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
+                                 )
+            set_target_properties(${PROJECT_NAME}-java-docs PROPERTIES FOLDER "Documentation Targets")                                                  
+            endif()
         else()
+        
             # The default list item separator in cmake is ";". If Linux, then exchange ";" for  the UNIX style ":"
             # and store the result in parent_classpath.
             string(REGEX REPLACE ";" ":" parent_classpath "${FIELDS_CLASSPATH}")
@@ -252,12 +256,14 @@ function(add_bindings_targets)
                              )
             
             # Java documentation
-            add_custom_target(${PROJECT_NAME}-java-docs ALL
-                                COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${parent_classpath}" 
-                                -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
-                                *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-                                DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
-                             )     
+             if(DOC_TARGETS)            
+                add_custom_target(${PROJECT_NAME}-java-docs ALL
+                                    COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${parent_classpath}" 
+                                    -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
+                                    *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                                    DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
+                                 )
+            endif()                                      
         endif()
 
         set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Library Jars") 
@@ -309,8 +315,7 @@ function(add_bindings_targets)
         endif()
         
         set_target_properties(SheafScope.jar PROPERTIES FOLDER "Executable Jars") 
-        set_target_properties(${PROJECT_NAME}-java-docs PROPERTIES FOLDER "Documentation Targets")
-     
+ 
         add_dependencies(${PROJECT_NAME}-bindings ${PROJECT_NAME}_java_binding.jar SheafScope ${PROJECT_NAME}-python-binding)
         
         # Guard these until we can get the VS solution explorer aesthetic issues sorted

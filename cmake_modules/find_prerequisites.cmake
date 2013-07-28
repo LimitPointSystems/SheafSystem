@@ -16,13 +16,13 @@
 
 find_package(Doxygen)
 
-if(DOXYGEN_FOUND)
-    configure_file(${CMAKE_MODULE_PATH}/doxygen_definitions.cmake.in ${CMAKE_BINARY_DIR}/doxygen_definitions.cmake)
-    configure_file(${CMAKE_MODULE_PATH}/dev_doxyfile.cmake.in ${CMAKE_BINARY_DIR}/dev_doxyfile)
-    configure_file(${CMAKE_MODULE_PATH}/user_doxyfile.cmake.in ${CMAKE_BINARY_DIR}/user_doxyfile)
-else()
-    message(WARNING "Doxygen was not found. Documentation will not be generated.")
-endif()
+#if(DOXYGEN_FOUND)
+#    configure_file(${CMAKE_MODULE_PATH}/doxygen_definitions.cmake.in ${CMAKE_BINARY_DIR}/doxygen_definitions.cmake)
+#    configure_file(${CMAKE_MODULE_PATH}/dev_doxyfile.cmake.in ${CMAKE_BINARY_DIR}/dev_doxyfile)
+#    configure_file(${CMAKE_MODULE_PATH}/user_doxyfile.cmake.in ${CMAKE_BINARY_DIR}/user_doxyfile)
+#else()
+#    message(WARNING "Doxygen was not found. Documentation will not be generated.")
+#endif()
 
 # Tell hdf to use static libs
 set(HDF5_USE_STATIC_LIBRARIES ON)

@@ -410,26 +410,27 @@ endfunction()
 # Add the documentation targets.
 # Default Doc state is "User"
 #
-function(add_doc_targets)
 
-    if(DOXYGEN_FOUND)
-        if(LPS_DOC_STATE MATCHES Dev OR LPS_DOC_STATE MATCHES dev OR LPS_DOC_STATE MATCHES DEV)
-            add_custom_target(doc ALL
-                    COMMAND ${CMAKE_COMMAND} -E echo "Generating Developer Documentation ... " 
-                    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/documentation                    
-                    COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/dev_doxyfile
-                            )
-        else()
-            add_custom_target(doc ALL
-                    COMMAND ${CMAKE_COMMAND} -E echo "Generating User Documentation ... "  
-                    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/documentation                     
-                    COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/user_doxyfile
-                             )
-        endif()
-                set_target_properties(doc PROPERTIES FOLDER "Documentation Targets")    
-    endif()
-                    
-endfunction(add_doc_targets)
+    function(add_doc_targets)
+        if(DOC_TARGETS)
+            if(DOXYGEN_FOUND)
+                if(LPS_DOC_STATE MATCHES Dev OR LPS_DOC_STATE MATCHES dev OR LPS_DOC_STATE MATCHES DEV)
+                    add_custom_target(doc ALL
+                            COMMAND ${CMAKE_COMMAND} -E echo "Generating Developer Documentation ... " 
+                            COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/documentation                    
+                            COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/dev_doxyfile
+                                    )
+                else()
+                    add_custom_target(doc ALL
+                            COMMAND ${CMAKE_COMMAND} -E echo "Generating User Documentation ... "  
+                            COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/documentation                     
+                            COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/user_doxyfile
+                                     )
+                endif()
+                        set_target_properties(doc PROPERTIES FOLDER "Documentation Targets")    
+            endif()
+        endif() 
+    endfunction(add_doc_targets)
 
 # 
 #  Append file types to CMake's default clean list.

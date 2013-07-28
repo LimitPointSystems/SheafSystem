@@ -101,6 +101,7 @@ FIND_PROGRAM(DOXYGEN_EXECUTABLE
 #
 # Check version
 #
+set(REQ_VER "1.8.4")
 
 # Ask the executable for version number
 execute_process(COMMAND ${DOXYGEN_EXECUTABLE} "--version" OUTPUT_VARIABLE Doxygen_VERSION)
@@ -108,18 +109,31 @@ execute_process(COMMAND ${DOXYGEN_EXECUTABLE} "--version" OUTPUT_VARIABLE Doxyge
 # Remove trailing newline
 string(REPLACE "\n" "" Doxygen_VERSION "${Doxygen_VERSION}")
 
-# Check
-set(Doxygen_VERSION_VALID)
+if((${Doxygen_VERSION} STREQUAL ${REQ_VER}) OR (${Doxygen_VERSION} STRGREATER ${REQ_VER}))
+     
+     set(DOC_TARGETS ON CACHE BOOL "Toggles generation of documentation targets")
+    # Check
+#    set(Doxygen_VERSION_VALID)
+    
+#    if(Doxygen_VERSION)
+      set(Doxygen_VERSION_VALID 1)
+#    endif()
 
-if(Doxygen_VERSION)
-  set(Doxygen_VERSION_VALID 1)
+    # handle the QUIETLY and REQUIRED arguments and set DOXYGEN_FOUND to TRUE if 
+    # all listed variables are TRUE
+    include(FindPackageHandleStandardArgs)
+    FIND_PACKAGE_HANDLE_STANDARD_ARGS(Doxygen DEFAULT_MSG DOXYGEN_EXECUTABLE Doxygen_VERSION_VALID)
+  
+    message(STATUS "Doxygen version is: " ${Doxygen_VERSION})
+
+    configure_file(${CMAKE_MODULE_PATH}/doxygen_definitions.cmake.in ${CMAKE_BINARY_DIR}/doxygen_definitions.cmake)
+    configure_file(${CMAKE_MODULE_PATH}/dev_doxyfile.cmake.in ${CMAKE_BINARY_DIR}/dev_doxyfile)
+    configure_file(${CMAKE_MODULE_PATH}/user_doxyfile.cmake.in ${CMAKE_BINARY_DIR}/user_doxyfile)
+    
+else()
+    message(WARNING "Doxygen version needs to be ${RE_VER} or greater. No documentation targets will be generated.")
+    set(DOC_TARGETS OFF CACHE BOOL "Toggles generation of documentation targets")
 endif()
-
-# handle the QUIETLY and REQUIRED arguments and set DOXYGEN_FOUND to TRUE if 
-# all listed variables are TRUE
-include(FindPackageHandleStandardArgs)
-FIND_PACKAGE_HANDLE_STANDARD_ARGS(Doxygen DEFAULT_MSG DOXYGEN_EXECUTABLE Doxygen_VERSION_VALID)
-message(STATUS "Doxygen version is: " ${Doxygen_VERSION})
 #
 # Find Dot...
 #
