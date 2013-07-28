@@ -198,6 +198,7 @@ function(add_bindings_targets)
             # The default list item separator in cmake is ";". If Linux, then exchange ";" for  the UNIX style ":"
             # and store the result in parent_classpath.
             string(REGEX REPLACE ";" ":" parent_classpath "${SHEAVES_CLASSPATH}")
+            string(REGEX REPLACE ";" ":" this_classpath "${${COMPONENT}_CLASSPATH}")            
             add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
                                DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${SHEAVES_JAVA_BINDING_JAR}
                                COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
@@ -205,11 +206,10 @@ function(add_bindings_targets)
                                COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
                                COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
                              )
-             #$$TODO: Why is the linux version of this target different than Win32?  
             # Java documentation
             if(DOC_TARGETS)
                 add_custom_target(${PROJECT_NAME}-java-docs ALL
-                                    COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${${COMPONENT}_CLASSPATH}" 
+                                    COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${this_classpath}" 
                                     -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
                                     *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
                                     DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
