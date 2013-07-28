@@ -24,7 +24,7 @@
 #
 #
 
-#=============================================================================
+#=============================================================
 # Copyright 2001-2009 Kitware, Inc.
 #
 # Distributed under the OSI-approved BSD License (the "License");
@@ -33,51 +33,21 @@
 # This software is distributed WITHOUT ANY WARRANTY; without even the
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 # See the License for more information.
-#=============================================================================
+#=============================================================
 
-#=============================================================================
+#=============================================================
 # LPS Modifications:
 #
 # - Look in ${ENV{HOME}/LPS/prerequisites/doxygen/bin for doxygen.
 # - If it's not there, look in the directory specified by the DOXYGEN_BIN
 #   environment variable.
 # - The version is checked against what is passed in from CMakeLists.txt.
-#=============================================================================
-
-# (To distributed this file outside of CMake, substitute the full
-#  License text for the above reference.)
+#=============================================================
 
 # For backwards compatibility support
 IF(Doxygen_FIND_QUIETLY)
   SET(DOXYGEN_FIND_QUIETLY TRUE)
 ENDIF()
-
-# ===== Rationale for OS X AppBundle mods below =====
-#     With the OS X GUI version, Doxygen likes to be installed to /Applications and
-#     it contains the doxygen executable in the bundle. In the versions I've 
-#     seen, it is located in Resources, but in general, more often binaries are 
-#     located in MacOS.
-#
-#     NOTE: The official Doxygen.app that is distributed for OS X uses non-standard 
-#     conventions.  Instead of the command-line "doxygen" tool being placed in
-#     Doxygen.app/Contents/MacOS, "Doxywizard" is placed there instead and 
-#     "doxygen" is placed in Contents/Resources.  This is most likely done
-#     so that something happens when people double-click on the Doxygen.app
-#     package.  Unfortunately, CMake gets confused by this as when it sees the
-#     bundle it uses "Doxywizard" as the executable to use instead of
-#     "doxygen".  Therefore to work-around this issue we temporarily disable
-#     the app-bundle feature, just for this CMake module:
-if(APPLE)
-    #  Save the old setting
-    SET(TEMP_DOXYGEN_SAVE_CMAKE_FIND_APPBUNDLE ${CMAKE_FIND_APPBUNDLE})
-    # Disable the App-bundle detection feature
-    SET(CMAKE_FIND_APPBUNDLE "NEVER")
-endif()
-#     FYI:
-#     In the older versions of OS X Doxygen, dot was included with the 
-#     Doxygen bundle. But the new versions require you to download
-#     Graphviz.app which contains "dot" in it's bundle.
-# ============== End OSX stuff ================
 
 #
 # Find Doxygen...
@@ -104,12 +74,14 @@ FIND_PROGRAM(DOXYGEN_EXECUTABLE
 set(REQ_VER "1.8.4")
 
 # Ask the executable for version number
-execute_process(COMMAND ${DOXYGEN_EXECUTABLE} "--version" OUTPUT_VARIABLE Doxygen_VERSION)
+execute_process(COMMAND ${DOXYGEN_EXECUTABLE} "--version" 
+    OUTPUT_VARIABLE Doxygen_VERSION)
 
 # Remove trailing newline
 string(REPLACE "\n" "" Doxygen_VERSION "${Doxygen_VERSION}")
 
-if((${Doxygen_VERSION} STREQUAL ${REQ_VER}) OR (${Doxygen_VERSION} STRGREATER ${REQ_VER}))
+if((${Doxygen_VERSION} STREQUAL ${REQ_VER}) OR (${Doxygen_VERSION} 
+    STRGREATER ${REQ_VER}))
      
      set(DOC_TARGETS ON CACHE BOOL "Toggles generation of documentation targets")
      set(Doxygen_VERSION_VALID 1)
@@ -117,13 +89,15 @@ if((${Doxygen_VERSION} STREQUAL ${REQ_VER}) OR (${Doxygen_VERSION} STRGREATER ${
     # handle the QUIETLY and REQUIRED arguments and set DOXYGEN_FOUND to TRUE if 
     # all listed variables are TRUE
     include(FindPackageHandleStandardArgs)
-#    FIND_PACKAGE_HANDLE_STANDARD_ARGS(Doxygen DEFAULT_MSG DOXYGEN_EXECUTABLE Doxygen_VERSION_VALID)
     FIND_PACKAGE_HANDLE_STANDARD_ARGS(Doxygen "" DOXYGEN_EXECUTABLE Doxygen_VERSION_VALID)  
     message(STATUS "Doxygen version is: " ${Doxygen_VERSION})
 
-    configure_file(${CMAKE_MODULE_PATH}/doxygen_definitions.cmake.in ${CMAKE_BINARY_DIR}/doxygen_definitions.cmake)
-    configure_file(${CMAKE_MODULE_PATH}/dev_doxyfile.cmake.in ${CMAKE_BINARY_DIR}/dev_doxyfile)
-    configure_file(${CMAKE_MODULE_PATH}/user_doxyfile.cmake.in ${CMAKE_BINARY_DIR}/user_doxyfile)
+    configure_file(${CMAKE_MODULE_PATH}/doxygen_definitions.cmake.in 
+        ${CMAKE_BINARY_DIR}/doxygen_definitions.cmake)
+    configure_file(${CMAKE_MODULE_PATH}/dev_doxyfile.cmake.in 
+        ${CMAKE_BINARY_DIR}/dev_doxyfile)
+    configure_file(${CMAKE_MODULE_PATH}/user_doxyfile.cmake.in 
+        ${CMAKE_BINARY_DIR}/user_doxyfile)
     
 else()
     message(WARNING "Doxygen version needs to be ${RE_VER} or greater. No documentation targets will be generated.")
@@ -151,7 +125,8 @@ IF(NOT DOXYGEN_SKIP_DOT)
   if(DOXYGEN_DOT_EXECUTABLE)
     set(DOXYGEN_DOT_FOUND TRUE)
     # The Doxyfile wants the path to Dot, not the entire path and executable
-    get_filename_component(DOXYGEN_DOT_PATH "${DOXYGEN_DOT_EXECUTABLE}" PATH CACHE)
+    get_filename_component(DOXYGEN_DOT_PATH 
+        "${DOXYGEN_DOT_EXECUTABLE}" PATH CACHE)
   endif()
   
 endif()
