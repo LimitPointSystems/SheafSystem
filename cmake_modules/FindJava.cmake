@@ -160,7 +160,7 @@ IF(Java_JAVA_EXECUTABLE)
       # display info
       #MESSAGE( STATUS "Java version ${Java_VERSION_STRING} configured successfully!" ) # keep me, used for debug
       IF(NOT Java_FIND_QUIETLY)
-        MESSAGE( STATUS "Java version ${Java_VERSION} configured successfully!" )
+        MESSAGE( STATUS "Java version is: ${Java_VERSION}" )
       ENDIF(NOT Java_FIND_QUIETLY)
     ENDIF()
 
