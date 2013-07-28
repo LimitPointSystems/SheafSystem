@@ -112,18 +112,13 @@ string(REPLACE "\n" "" Doxygen_VERSION "${Doxygen_VERSION}")
 if((${Doxygen_VERSION} STREQUAL ${REQ_VER}) OR (${Doxygen_VERSION} STRGREATER ${REQ_VER}))
      
      set(DOC_TARGETS ON CACHE BOOL "Toggles generation of documentation targets")
-    # Check
-#    set(Doxygen_VERSION_VALID)
-    
-#    if(Doxygen_VERSION)
-      set(Doxygen_VERSION_VALID 1)
-#    endif()
+     set(Doxygen_VERSION_VALID 1)
 
     # handle the QUIETLY and REQUIRED arguments and set DOXYGEN_FOUND to TRUE if 
     # all listed variables are TRUE
     include(FindPackageHandleStandardArgs)
-    FIND_PACKAGE_HANDLE_STANDARD_ARGS(Doxygen DEFAULT_MSG DOXYGEN_EXECUTABLE Doxygen_VERSION_VALID)
-  
+#    FIND_PACKAGE_HANDLE_STANDARD_ARGS(Doxygen DEFAULT_MSG DOXYGEN_EXECUTABLE Doxygen_VERSION_VALID)
+    FIND_PACKAGE_HANDLE_STANDARD_ARGS(Doxygen "" DOXYGEN_EXECUTABLE Doxygen_VERSION_VALID)  
     message(STATUS "Doxygen version is: " ${Doxygen_VERSION})
 
     configure_file(${CMAKE_MODULE_PATH}/doxygen_definitions.cmake.in ${CMAKE_BINARY_DIR}/doxygen_definitions.cmake)
