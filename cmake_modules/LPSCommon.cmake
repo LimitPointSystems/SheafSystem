@@ -751,7 +751,7 @@ function(export_install_config_file_vars)
 
         if("${COMPONENT}" MATCHES "TOOLS")        
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_INC_DIR @SHEAFSYSTEM_HOME@/include/vtk CACHE PATH \"VTK library path\")\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_INC_DIR @SHEAFSYSTEM_HOME@/vtk/include CACHE PATH \"VTK library path\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")            
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/lib/vtk CACHE PATH \"VTK library path\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
@@ -951,15 +951,20 @@ function(install_prereqs)
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")            
     endif()
 
-        
-     # Install only the VTK includes we use    
-    foreach(inc ${VTK_INCS})
-        install(FILES ${VTK_INC_DIRS}/${inc} DESTINATION vtk/include
-       # install(FILES ${VTK_INC_DIRS}/${inc} DESTINATION include
+     file(GLOB vtk_includes "${VTK_INC_DIRS}/*.h")
+     install(FILES ${vtk_includes} DESTINATION vtk/include
         PERMISSIONS
         OWNER_WRITE OWNER_READ
-        GROUP_READ WORLD_READ)
-    endforeach()
+        GROUP_READ WORLD_READ
+             )       
+     # Install only the VTK includes we use    
+#    foreach(inc ${VTK_INCS})
+#        install(FILES ${VTK_INC_DIRS}/${inc} DESTINATION vtk/include
+       # install(FILES ${VTK_INC_DIRS}/${inc} DESTINATION include
+#        PERMISSIONS
+#        OWNER_WRITE OWNER_READ
+#        GROUP_READ WORLD_READ)
+#    endforeach()
     
     # Install only the HDF includes we use 
     foreach(inc ${HDF5_INCS})

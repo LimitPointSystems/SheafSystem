@@ -28,11 +28,24 @@ set(VTK_LIBS vtkCommon vtkCommonJava vtkFiltering vtkGraphics
 vtkHybrid vtkRendering vtksys vtkverdict vtkIO vtkexoIIc
 vtkftgl vtkImaging vtkfreetype vtkNetCDF vtkhdf5_hl
 vtkhdf5 vtkzlib vtkNetCDF_cxx LSDyna vtkmetaio vtksqlite
-vtkpng vtkjpeg vtktiff vtkexpat vtkDICOMParser CACHE STRING "VTK required install libs list" FORCE)
+vtkpng vtkjpeg vtktiff vtkexpat vtkDICOMParser 
+CACHE STRING "VTK required install libs list" FORCE)
 
-set(VTK_INCS vtkActor.h vtkType.h vtkConfigure.h vtkOStreamWrapper.h vtkOStrStreamWrapper.h 
-vtkSystemIncludes.h vtkSetGet.h vtkSystemIncludes.h vtkTimeStamp.h 
-vtkWeakPointerBase.h vtkObjectBase.h vtkJavaUtil.h vtkCommand.h vtkObject.h 
-vtkStdString.h CACHE STRING "VTK required includes list")
+# Eliminate this variable. Just shotgun the installation of ALL the vtk incs.
+#set(VTK_INCS vtkActor.h vtkType.h vtkConfigure.h vtkOStreamWrapper.h vtkOStrStreamWrapper.h 
+#vtkSystemIncludes.h vtkSetGet.h vtkSystemIncludes.h vtkTimeStamp.h 
+#vtkWeakPointerBase.h vtkObjectBase.h vtkJavaUtil.h vtkCommand.h vtkObject.h 
+#vtkStdString.h 
+#vtkProp3D.h vtkAssembly.h vtkCamera.h vtkCellArray.h vtkCellCenters.h
+#vtkCellData.h vtkCubeAxesActor.h vtkCubeAxesActor2D.h vtkDataSetMapper.h
+#vtkDoubleArray.h vtkFieldData.h vtkIdTypeArray.h vtkIntArray.h
+#vtkInteractorStyleTrackballCamera.h vtkLabeledDataMapper.h
+#vtkLookupTable.h vtkPointData.h vtkPoints.h vtkPolyDataMapper.h
+#vtkProperty.h vtkProperty2D.h vtkRenderer.h vtkRenderWindow.h
+#vtkRenderWindowInteractor.h vtkSelectVisiblePoints.h
+#vtkTextProperty.h vtkTransform.h vtkTransformFilter.h
+#vtkUnstructuredGrid.h vtkUnstructuredGridWriter.h
+#CACHE STRING "VTK required includes list")
 
 set(VTK_INSTALL_LIBS "${VTK_LIBS}" CACHE STRING "VTK required install libs list" FORCE)
+
