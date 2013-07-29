@@ -957,15 +957,7 @@ function(install_prereqs)
         OWNER_WRITE OWNER_READ
         GROUP_READ WORLD_READ
              )       
-     # Install only the VTK includes we use    
-#    foreach(inc ${VTK_INCS})
-#        install(FILES ${VTK_INC_DIRS}/${inc} DESTINATION vtk/include
-       # install(FILES ${VTK_INC_DIRS}/${inc} DESTINATION include
-#        PERMISSIONS
-#        OWNER_WRITE OWNER_READ
-#        GROUP_READ WORLD_READ)
-#    endforeach()
-    
+
     # Install only the HDF includes we use 
     foreach(inc ${HDF5_INCS})
         install(FILES ${HDF5_INCLUDE_DIRS}/${inc} DESTINATION include
