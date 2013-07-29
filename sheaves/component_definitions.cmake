@@ -143,16 +143,15 @@ function(add_bindings_targets)
         # Java ################################################################
         #
  
-        set(SWIG_CXX_EXTENSION "cxx" CACHE STRING "Swig source file extension")
-        set(CMAKE_SWIG_FLAGS -package bindings.java CACHE STRING "Swig flags")
+       set(SWIG_CXX_EXTENSION "cxx" CACHE STRING "Swig source file extension")
+       set(CMAKE_SWIG_FLAGS -package bindings.java CACHE STRING "Swig flags")
 
         include_directories(${JDK_INC_DIR} ${JDK_PLATFORM_INC_DIR})
         include_directories(${${COMPONENT}_JAVA_BINDING_SRC_DIR})
         include_directories(${${COMPONENT}_COMMON_BINDING_SRC_DIR})
-        
         set_source_files_properties(${${COMPONENT}_JAVA_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_JAVA_INTERFACE} PROPERTIES CPLUSPLUS ON)
      
-        # Add the java binding library target
+         # Add the java binding library target
         swig_add_module(${${COMPONENT}_JAVA_BINDING_LIB} java ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_JAVA_INTERFACE})
         
         if(WIN64INTEL OR WIN64MSVC)
@@ -216,10 +215,8 @@ function(add_bindings_targets)
             endif()
         endif()
         set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Library Jars") 
-        mark_as_advanced(FORCE ${COMPONENT}_CLASSPATH)        
+        mark_as_advanced(FORCE ${COMPONENT}_CLASSPATH) 
 
-
-        
         #
         # CSharp ##############################################################
         #
@@ -262,7 +259,6 @@ function(add_bindings_targets)
         add_dependencies(${${COMPONENT}_CSHARP_BINDING_ASSY} ${${COMPONENT}_CSHARP_BINDING_LIB})       
         set_target_properties(${${COMPONENT}_CSHARP_BINDING_ASSY} PROPERTIES FOLDER "CSharp Assembly Targets")
 
-
         #
         # Python ############################################################## 
         #
@@ -299,7 +295,6 @@ function(add_bindings_targets)
         add_dependencies(${PROJECT_NAME}-bindings ${PROJECT_NAME}_java_binding.jar ${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_CSHARP_BINDING_LIB})
         
     endif()
-
 endfunction(add_bindings_targets)
 
 # 
