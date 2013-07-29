@@ -52,7 +52,6 @@ add_doc_targets()
 #
 add_tags_target()
 
-add_clean_files()
 #
 # Configure the environment scripts. 
 #
