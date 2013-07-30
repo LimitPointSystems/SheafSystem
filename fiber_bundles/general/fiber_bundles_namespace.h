@@ -247,13 +247,13 @@ public:
 			      const string& xfiber_suffix) const;
 
   ///
-  /// Create a standard schema path for section space of type S, base space
+  /// Create a standard schema poset path for section space of type S, base space
   /// with path xbase_space_path, section representation with path xrep_path
   /// and fiber suffix xfiber_suffix.
   ///
   template <typename S>
   poset_path
-  standard_section_space_schema_path(const poset_path& xbase_space_path,
+  standard_section_schema_space_path(const poset_path& xbase_space_path,
 				     const poset_path& xrep_path,
 				     const string& xfiber_suffix) const;
 
@@ -521,14 +521,14 @@ public:
 
   ///
   /// Find or create a section space schema poset for sections of type S
-  /// at path xsection_space_schema_path.  The representation, base space
+  /// at path xsection_schema_space_path.  The representation, base space
   /// and fiber space specified by xrep_path, xbase_space_path, and
   /// xfiber_space_path, respectively are used to create the section
   /// space schema.
   ///
   template <typename S>
-  poset_path
-  new_section_space_schema_2(const poset_path& xsection_space_schema_path,
+  typename S::schema_host_type&
+  new_section_schema_space(const poset_path& xsection_schema_space_path,
 			   const poset_path& xbase_space_path,
 			   const poset_path& xrep_path,
 			   const poset_path& xfiber_space_path,
@@ -536,14 +536,14 @@ public:
 
   ///
   /// Find or create a scalar section space schema poset for sections of type S
-  /// at path xsection_space_schema_path.  The representation, base space
+  /// at path xsection_schema_space_path.  The representation, base space
   /// and fiber space specified by xrep_path, xbase_space_path, and
   /// xfiber_space_path, respectively are used to create the section
   /// space schema.
   ///
   template <typename S>
-  poset_path
-  new_scalar_section_space_schema(const poset_path& xsection_space_schema_path,
+  typename S::schema_host_type&
+  new_scalar_section_schema_space(const poset_path& xsection_schema_space_path,
 				  const poset_path& xbase_space_path,
 				  const poset_path& xrep_path,
 				  const poset_path& xfiber_space_path,
@@ -551,14 +551,14 @@ public:
 
   ///
   /// Find or create a vector section space schema poset for sections of type S
-  /// at path xsection_space_schema_path.  The representation, base space
+  /// at path xsection_schema_space_path.  The representation, base space
   /// and fiber space specified by xrep_path, xbase_space_path, and
   /// xfiber_space_path, respectively are used to create the section
   /// space schema.
   ///
   template <typename S>
-  poset_path
-  new_vector_section_space_schema(const poset_path& xsection_space_schema_path,
+  typename S::schema_host_type&
+  new_vector_section_schema_space(const poset_path& xsection_schema_space_path,
 				  const poset_path& xbase_space_path,
 				  const poset_path& xrep_path,
 				  const poset_path& xfiber_space_path,
@@ -566,14 +566,14 @@ public:
 
   ///
   /// Find or create a tensor section space schema poset for sections of type S
-  /// at path xsection_space_schema_path.  The representation, base space
+  /// at path xsection_schema_space_path.  The representation, base space
   /// and fiber space specified by xrep_path, xbase_space_path, and
   /// xfiber_space_path, respectively are used to create the section
   /// space schema.
   ///
   template <typename S>
-  poset_path
-  new_tensor_section_space_schema(const poset_path& xsection_space_schema_path,
+  typename S::schema_host_type&
+  new_tensor_section_schema_space(const poset_path& xsection_schema_space_path,
 				  const poset_path& xbase_space_path,
 				  const poset_path& xrep_path,
 				  const poset_path& xfiber_space_path,
@@ -595,44 +595,44 @@ public:
 
   ///
   /// Find or create a section space schema poset for sections of type S
-  /// at path standard_section_space_schema_path(xbase_space_path, xrep_path, xfiber_suffix).
+  /// at path standard_section_schema_space_path(xbase_space_path, xrep_path, xfiber_suffix).
   ///
   template <typename S>
-  poset_path
-  new_section_space_schema(const poset_path& xbase_space_path,
+  typename S::schema_host_type&
+  new_section_schema_space(const poset_path& xbase_space_path,
 			   const poset_path& xrep_path,
 			   const string& xfiber_suffix,
 			   bool xauto_access);
   
   ///
   /// Find or create a scalar section space schema poset for sections of type S
-  /// at path standard_section_space_schema_path(xbase_space_path, xrep_path, xfiber_suffix).
+  /// at path standard_section_schema_space_path(xbase_space_path, xrep_path, xfiber_suffix).
   ///
   template <typename S>
-  poset_path
-  new_scalar_section_space_schema(const poset_path& xbase_space_path,
+  typename S::schema_host_type&
+  new_scalar_section_schema_space(const poset_path& xbase_space_path,
 				  const poset_path& xrep_path,
 				  const string& xfiber_suffix,
 				  bool xauto_access);
   
   ///
   /// Find or create a vector section space schema poset for sections of type S
-  /// at path standard_section_space_schema_path(xbase_space_path, xrep_path, xfiber_suffix).
+  /// at path standard_section_schema_space_path(xbase_space_path, xrep_path, xfiber_suffix).
   ///
   template <typename S>
-  poset_path
-  new_vector_section_space_schema(const poset_path& xbase_space_path,
+  typename S::schema_host_type&
+  new_vector_section_schema_space(const poset_path& xbase_space_path,
 				  const poset_path& xrep_path,
 				  const string& xfiber_suffix,
 				  bool xauto_access);
   
   ///
   /// Find or create a tensor section space schema poset for sections of type S
-  /// at path standard_section_space_schema_path(xbase_space_path, xrep_path, xfiber_suffix).
+  /// at path standard_section_schema_space_path(xbase_space_path, xrep_path, xfiber_suffix).
   ///
   template <typename S>
-  poset_path
-  new_tensor_section_space_schema(const poset_path& xbase_space_path,
+  typename S::schema_host_type&
+  new_tensor_section_schema_space(const poset_path& xbase_space_path,
 				  const poset_path& xrep_path,
 				  const string& xfiber_suffix,
 				  bool xauto_access);
