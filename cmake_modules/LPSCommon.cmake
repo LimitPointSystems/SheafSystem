@@ -753,7 +753,7 @@ function(export_install_config_file_vars)
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_INC_DIR @SHEAFSYSTEM_HOME@/vtk/include CACHE PATH \"VTK library path\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")            
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/lib/vtk CACHE PATH \"VTK library path\")\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/vtk/lib CACHE PATH \"VTK library path\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(JMF_JAR ${JMF_JAR} CACHE STRING \"JMF jar location\")\n")
@@ -904,19 +904,26 @@ endmacro(get_date)
 function(install_prereqs)
     # Prerequisite components install
     if(LINUX64INTEL OR LINUX64GNU)
-        foreach(name ${VTK_LIBS})
-            file(GLOB files "${VTK_LIB_DIR}/lib${name}.*")
-            string(REPLACE "${VTK_LIB_DIR}/lib${name}.a" "" files "${files}")
-            set(VTK_INST_LIBS ${VTK_INST_LIBS} "${files}")
-        endforeach()
-        install(FILES ${VTK_INST_LIBS} DESTINATION lib/vtk/
-        PERMISSIONS
-        OWNER_WRITE OWNER_READ OWNER_EXECUTE
-        GROUP_READ GROUP_EXECUTE
-        WORLD_READ WORLD_EXECUTE   
-        )
+    install(DIRECTORY ${VTK_LIB_DIR}/ DESTINATION vtk/lib/ USE_SOURCE_PERMISSIONS
+        PATTERN "CMake" EXCLUDE 
+        PATTERN "doc" EXCLUDE 
+        PATTERN "doxygen" EXCLUDE
+        PATTERN "hints" EXCLUDE
+        PATTERN "testing" EXCLUDE 
+        PATTERN "*.cmake" EXCLUDE) 
+#        foreach(name ${VTK_LIBS})
+#            file(GLOB files "${VTK_LIB_DIR}/lib${name}.*")
+#            string(REPLACE "${VTK_LIB_DIR}/lib${name}.a" "" files "${files}")
+#            set(VTK_INST_LIBS ${VTK_INST_LIBS} "${files}")
+#        endforeach()
+#        install(FILES ${VTK_INST_LIBS} DESTINATION lib/vtk/
+#        PERMISSIONS
+#        OWNER_WRITE OWNER_READ OWNER_EXECUTE
+#        GROUP_READ GROUP_EXECUTE
+#        WORLD_READ WORLD_EXECUTE   
+#        )
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/lib/vtk CACHE STRING \"Location of VTK libs\")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/vtk/lib CACHE STRING \"Location of VTK libs\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
 
     elseif(WIN32) 
