@@ -1,6 +1,3 @@
-
-//
-//
 //
 // Copyright (c) 2007.save Limit Point Systems, Inc.
 //
