@@ -1,10 +1,5 @@
 
 /**
- * Classname: ViewerConstants
- *
- * @author $Author: jebutler $
- *
- * $Date: 2013/01/12 17:17:57 $
  *
  * Copyright (c) 2013 Limit Point Systems, Inc. 
  *
@@ -19,12 +14,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
-
-//$$TODO: Need to consolidate "Constants" classes to
-//        provide consistency and avoid repetition.
-//        Better yet, replace them with Properties/ResourceBundle
-//        implementations.
 
 package tools.viewer.common;
 
