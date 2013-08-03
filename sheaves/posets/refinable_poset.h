@@ -373,7 +373,7 @@ protected:
 		  poset_dof_map* xdof_map = 0, 
 		  bool xcopy_dof_map = false)
   {
-    poset::new_member(xindex, xis_jim, xdof_map, xcopy_dof_map);
+    poset::new_member(xindex.hub_pod(), xis_jim, xdof_map, xcopy_dof_map);
   };
 
   // Using declaration for new_member_interval in public scope above.

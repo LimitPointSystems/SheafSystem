@@ -1904,7 +1904,7 @@ operator<<(ostream &os, const poset_crg_state& p)
 
   for(scoped_index i = p.begin(); i < p.end(); ++i)
   {
-    if(p.contains_member(i))
+    if(p.contains_member(i.hub_pod()))
     {
       os << "index: " << setw(5) << i.hub_pod();
 
@@ -1926,11 +1926,11 @@ operator<<(ostream &os, const poset_crg_state& p)
       os << "    " << setw(36) << left << lfirst_name << right;
 
       os << "dof_map: "
-      << setw(2*sizeof(int)+3)
-      << p.member_dof_tuple_id(i);
+	 << setw(2*sizeof(int)+3)
+	 << p.member_dof_tuple_id(i.hub_pod());
 
       os << "    upper_cover:";
-      index_space_iterator& uc_itr = p.get_cover_id_space_iterator(UPPER, i);
+      index_space_iterator& uc_itr = p.get_cover_id_space_iterator(UPPER, i.hub_pod());
       while(!uc_itr.is_done())
       {
         os << " " << uc_itr.hub_pod();
@@ -1940,7 +1940,7 @@ operator<<(ostream &os, const poset_crg_state& p)
 
       // Note set::size() returns an unsigned integer.
 
-      int ltab_ct = 3 - (3*static_cast<int>(p.cover_ct(UPPER, i)))/8;
+      int ltab_ct = 3 - (3*static_cast<int>(p.cover_ct(UPPER, i.hub_pod())))/8;
 
       for(int ltab = 0; ltab < ltab_ct; ltab++)
       {
@@ -1948,7 +1948,7 @@ operator<<(ostream &os, const poset_crg_state& p)
       }
 
       os << "lower_cover:";
-      index_space_iterator& lc_itr = p.get_cover_id_space_iterator(LOWER, i);
+      index_space_iterator& lc_itr = p.get_cover_id_space_iterator(LOWER, i.hub_pod());
       while(!lc_itr.is_done())
       {
         os << " " << lc_itr.hub_pod();

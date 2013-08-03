@@ -1369,7 +1369,7 @@ dof_tuple_id(scoped_index& result, bool xauto_access) const
 
   // Postconditions:
 
-  ensure(host()->contains_row_dof_tuple(result) || (!is_valid(result)));
+  ensure(host()->contains_row_dof_tuple(result) || (!result.is_valid()));
 
   // Exit
 
@@ -1405,7 +1405,7 @@ put_dof_tuple_id(const scoped_index& xtuple_index, bool xauto_access)
   // Preconditions:
 
   require(state_is_auto_read_write_accessible(xauto_access));
-  require(host()->contains_row_dof_tuple(xtuple_index) || !is_valid(xtuple_index));
+  require(host()->contains_row_dof_tuple(xtuple_index) || !xtuple_index.is_valid());
 
   // Body:
 
@@ -1722,7 +1722,7 @@ put_dof(const scoped_index& xdof_id, const primitive_value& xdof, bool xauto_acc
 
   // Postconditions:
 
-  ensure(dof(xdof_id) == xdof);
+  ensure(dof(xdof_id.hub_pod()) == xdof);
 
   // Exit:
 
@@ -3024,7 +3024,7 @@ delete_down(bool xdelete_exterior, bool xenter_jim_edit_mode)
   // Block containing a single element is a special case:
 
   total_poset_member lbdy(host(), poset_path::boundary_name(name()));
-  pod_index_type lblock_bdy_index = lbdy.index();
+  pod_index_type lblock_bdy_index = lbdy.index().pod();
 
   subposet lelements(lhost, "__elements");
   if(_host->cover_is_singleton(LOWER, _index.pod()))
@@ -4785,7 +4785,7 @@ delete_state(bool xauto_access)
 
   // Now just detach and delete the state.
 
-  pod_index_type lindex = _index;
+  pod_index_type lindex = _index.pod();
   detach_from_state();
   lhost->delete_member(lindex);
 

@@ -785,7 +785,7 @@ read_row_decomposition(poset_state_handle& xposet,
 
   poset_bounds_descriptor lrow_bounds(poset_bounds_descriptor::MEMBER_SUBPOSET,
                                       BOTTOM_INDEX,
-                                      xdecomp_id);
+                                      xdecomp_id.hub_pod());
 
   read(xposet, lrow_bounds);
 
@@ -882,7 +882,7 @@ write_toc(poset_state_handle& xposet, const scoped_index& xtoc_id)
   // Body:
 
   poset_bounds_descriptor lrow_bounds(poset_bounds_descriptor::SUBPOSET_MEMBER,
-                                      xtoc_id,
+                                      xtoc_id.hub_pod(),
                                       TOP_INDEX);
 
   write(xposet, lrow_bounds);
@@ -916,7 +916,7 @@ write_row_decomposition(poset_state_handle& xposet,
 
   poset_bounds_descriptor lrow_bounds(poset_bounds_descriptor::MEMBER_SUBPOSET,
                                       BOTTOM_INDEX,
-                                      xdecomp_id);
+                                      xdecomp_id.hub_pod());
 
   write(xposet, lrow_bounds);
 
@@ -959,7 +959,7 @@ write_col_decomposition(poset_state_handle& xposet,
 
   poset_bounds_descriptor lcol_bounds(poset_bounds_descriptor::MEMBER_SUBPOSET,
                                       BOTTOM_INDEX,
-                                      xdecomp_id);
+                                      xdecomp_id.hub_pod());
 
   write(xposet, lrow_bounds, lcol_bounds);
 
@@ -1005,7 +1005,7 @@ write_dof_tuple(const abstract_poset_member& xmbr,
 
   poset_bounds_descriptor lcol_bounds(poset_bounds_descriptor::MEMBER_SUBPOSET,
                                       BOTTOM_INDEX,
-                                      xdecomp_id);
+                                      xdecomp_id.hub_pod());
 
   begin_write_transaction(*(xmbr.host()), lrow_bounds, lcol_bounds);
 
@@ -1093,20 +1093,20 @@ commit_dof_tuple_transaction(const abstract_poset_member& xmbr,
     // Save the dof tuple type and class name to be written in the
     // respective map; map must not already contain an entry for lext_dof_tuple_id.
 
-    assertion(lscaffold.dof_tuple_types().find(lext_dof_tuple_id) ==
+    assertion(lscaffold.dof_tuple_types().find(lext_dof_tuple_id.pod()) ==
            lscaffold.dof_tuple_types().end());
 
     dof_tuple_type ltype_id = xmbr.dof_map().type_id();
     pair<pod_index_type, dof_tuple_type>
-    lmap_pair(lext_dof_tuple_id, ltype_id);
+      lmap_pair(lext_dof_tuple_id.pod(), ltype_id);
 
     lscaffold.dof_tuple_types().insert(lmap_pair);
 
-    assertion(lscaffold.dof_tuple_class_names().find(lext_dof_tuple_id) ==
+    assertion(lscaffold.dof_tuple_class_names().find(lext_dof_tuple_id.pod()) ==
            lscaffold.dof_tuple_class_names().end());
 
     string lclass_name = xmbr.dof_map().class_name();
-    pair<pod_index_type, string> lname_map_pair(lext_dof_tuple_id, lclass_name);
+    pair<pod_index_type, string> lname_map_pair(lext_dof_tuple_id.pod(), lclass_name);
 
     lscaffold.dof_tuple_class_names().insert(lname_map_pair);
   }
