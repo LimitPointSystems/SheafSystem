@@ -38,13 +38,8 @@ endif()
 # Tell hdf to use static libs
 set(HDF5_USE_STATIC_LIBRARIES ON)
 
-find_package(HDF5)
-#find_package(HDF5 1.8.11 REQUIRED)
+find_package(HDF5 1.8.9 REQUIRED)
 if(HDF5_FOUND)
-    message(STATUS "HDF5_FOUND is ${HDF5_FOUND}")
-#    configure_file(${CMAKE_MODULE_PATH}/hdf_definitions.cmake.in ${CMAKE_BINARY_DIR}/hdf_definitions.cmake)
-#    include(${CMAKE_BINARY_DIR}/hdf_definitions.cmake)
-    link_directories(${HDF5_LIB_DIR})
     include_directories(${HDF5_INCLUDE_DIRS})
 endif()
 
@@ -61,8 +56,6 @@ endif()
 find_package(Java 1.7 REQUIRED)
 find_package(JNI)
 if(JAVA_FOUND)
-#    configure_file(${CMAKE_MODULE_PATH}/java_definitions.cmake.in ${CMAKE_BINARY_DIR}/java_definitions.cmake)
-#    include(${CMAKE_BINARY_DIR}/java_definitions.cmake)
     set(JAVA_BINDING_COMPILE_OPTIONS "-I${JNI_INCLUDE_DIRS}" "-I${JAVA_INCLUDE_PATH}" "-I${JAVA_INCLUDE_PATH2}""-I${JAVA_AWT_INCLUDE_PATH}" CACHE STRING "JDK compile includes") 
 endif()
 
