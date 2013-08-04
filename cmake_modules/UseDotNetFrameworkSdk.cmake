@@ -5,7 +5,7 @@
 #   (none)
 #
 # This file is based on the work of GDCM:
-#   http://gdcm.svn.sf.net/viewvc/gdcm/trunk/CMake/UseDotNETFrameworkSDK.cmake
+#  http://gdcm.svn.sf.net/viewvc/gdcm/trunk/CMake/UseDotNETFrameworkSDK.cmake
 # Copyright (c) 2006-2010 Mathieu Malaterre <mathieu.malaterre@gmail.com>
 #
 

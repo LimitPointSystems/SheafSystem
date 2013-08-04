@@ -20,7 +20,7 @@
 #   CSHARP_ADD_EXECUTABLE( MyExecutable "ref1.dll;ref2.dll" "Program.cs;File1.cs" )
 #
 # This file is based on the work of GDCM:
-#   http://gdcm.svn.sf.net/viewvc/gdcm/trunk/CMake/UseCSharp.cmake
+#  http://gdcm.svn.sf.net/viewvc/gdcm/trunk/CMake/UseCSharp.cmake
 # Copyright (c) 2006-2010 Mathieu Malaterre <mathieu.malaterre@gmail.com>
 #
 
