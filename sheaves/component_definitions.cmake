@@ -98,7 +98,7 @@ configure_std_headers()
 #
 function(add_library_targets)
     if(WIN64INTEL OR WIN64MSVC)
-        
+        showincs()
         # Tell the linker where to look for this project's libraries.
         link_directories(${${COMPONENT}_OUTPUT_DIR})
 
