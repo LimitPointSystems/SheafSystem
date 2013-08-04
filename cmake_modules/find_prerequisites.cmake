@@ -42,8 +42,8 @@ find_package(HDF5)
 #find_package(HDF5 1.8.11 REQUIRED)
 if(HDF5_FOUND)
     message(STATUS "HDF5_FOUND is ${HDF5_FOUND}")
-    configure_file(${CMAKE_MODULE_PATH}/hdf_definitions.cmake.in ${CMAKE_BINARY_DIR}/hdf_definitions.cmake)
-    include(${CMAKE_BINARY_DIR}/hdf_definitions.cmake)
+#    configure_file(${CMAKE_MODULE_PATH}/hdf_definitions.cmake.in ${CMAKE_BINARY_DIR}/hdf_definitions.cmake)
+#    include(${CMAKE_BINARY_DIR}/hdf_definitions.cmake)
     link_directories(${HDF5_LIB_DIR})
     include_directories(${HDF5_INCLUDE_DIRS})
 endif()
@@ -59,23 +59,12 @@ endif()
 
 # Find the JDK
 find_package(Java 1.7 REQUIRED)
+find_package(JNI)
 if(JAVA_FOUND)
-    configure_file(${CMAKE_MODULE_PATH}/java_definitions.cmake.in ${CMAKE_BINARY_DIR}/java_definitions.cmake)
-    include(${CMAKE_BINARY_DIR}/java_definitions.cmake)
-    set(JAVA_BINDING_COMPILE_OPTIONS "-I${JDK_INC_DIR}" "-I${JDK_PLATFORM_INC_DIR}" CACHE STRING "JDK compile includes") 
+#    configure_file(${CMAKE_MODULE_PATH}/java_definitions.cmake.in ${CMAKE_BINARY_DIR}/java_definitions.cmake)
+#    include(${CMAKE_BINARY_DIR}/java_definitions.cmake)
+    set(JAVA_BINDING_COMPILE_OPTIONS "-I${JNI_INCLUDE_DIRS}" "-I${JAVA_INCLUDE_PATH}" "-I${JAVA_INCLUDE_PATH2}""-I${JAVA_AWT_INCLUDE_PATH}" CACHE STRING "JDK compile includes") 
 endif()
-    
-#
-# Find tetgen
-#
-#find_package(Tetgen REQUIRED)
-#if(TETGEN_FOUND)
-#    configure_file(${CMAKE_MODULE_PATH}/tetgen_definitions.cmake.in ${CMAKE_BINARY_DIR}/tetgen_definitions.cmake)
-#    include(${CMAKE_BINARY_DIR}/tetgen_definitions.cmake)
-#    include_directories(${TETGEN_INC_DIR})
-#    link_directories(${TETGEN_LIB_DIR})    
-#endif()
-
 
     
 #

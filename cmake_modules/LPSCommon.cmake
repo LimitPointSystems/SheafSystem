@@ -212,30 +212,30 @@ function(set_compiler_flags)
     if(WIN64MSVC)
     
        set(LPS_CXX_FLAGS "${MP} /GR /nologo /DWIN32 /D_WINDOWS /W1 /EHsc  " CACHE STRING "C++ Compiler Flags")       
-       set(LPS_SHARED_LINKER_FLAGS "/INCREMENTAL:NO /NOLOGO /DLL /SUBSYSTEM:CONSOLE /MACHINE:X64 " CACHE STRING "Linker Flags for Shared Libs")
+       set(LPS_SHARED_LINKER_FLAGS "/INCREMENTAL:NO /NOLOGO /DLL /SUBSYSTEM:CONSOLE /MACHINE:X64 /NODEFAULTLIB:MSVCRT " CACHE STRING "Linker Flags for Shared Libs")
        set(LPS_EXE_LINKER_FLAGS "/INCREMENTAL:NO /NOLOGO /DLL /SUBSYSTEM:CONSOLE /MACHINE:X64" CACHE STRING "Linker Flags for Executables")
     elseif(WIN64INTEL)
-       set(LPS_CXX_FLAGS "/D_USRDLL ${MP} /GR /nologo /DWIN32 /D_WINDOWS /W1 /wd2651 /EHsc ${OPTIMIZATION} /Qprof-gen:srcpos /D_HDF5USEDLL_" CACHE STRING "C++ Compiler Flags")
+       set(LPS_CXX_FLAGS "/D_USRDLL ${MP} /GR /nologo /DWIN32 /D_WINDOWS /W1 /wd2651 /EHsc  /Qprof-gen:srcpos /D_HDF5USEDLL_" CACHE STRING "C++ Compiler Flags")
        set(LPS_SHARED_LINKER_FLAGS "/INCREMENTAL:NO /NOLOGO /DLL /SUBSYSTEM:CONSOLE  /NXCOMPAT /MACHINE:X64" CACHE STRING "Linker Flags") 
     elseif(LINUX64INTEL)
         if(ENABLE_COVERAGE)
             if(INTELWARN)
-               set(LPS_CXX_FLAGS "-ansi -m64 -w1 -wd186,1125 -Wno-deprecated ${OPTIMIZATION} -prof-gen=srcpos")
+               set(LPS_CXX_FLAGS "-ansi -m64 -w1 -wd186,1125 -Wno-deprecated  -prof-gen=srcpos")
             else()
-               set(LPS_CXX_FLAGS "-ansi -m64 -w0 -Wno-deprecated ${OPTIMIZATION} -prof-gen=srcpos")
+               set(LPS_CXX_FLAGS "-ansi -m64 -w0 -Wno-deprecated  -prof-gen=srcpos")
             endif()
         else()
             if(INTELWARN)
-               set(LPS_CXX_FLAGS "-ansi -m64 -w1 -wd186,1125 -Wno-deprecated ${OPTIMIZATION}")
+               set(LPS_CXX_FLAGS "-ansi -m64 -w1 -wd186,1125 -Wno-deprecated ")
             else()
-               set(LPS_CXX_FLAGS "-ansi -m64 -w0 -Wno-deprecated ${OPTIMIZATION}")
+               set(LPS_CXX_FLAGS "-ansi -m64 -w0 -Wno-deprecated ")
             endif()
        endif() # ENABLE_COVERAGE        
     elseif(LINUX64GNU)
         set(LPS_CXX_FLAGS "-ansi -m64 -Wno-deprecated")       
     #$$TODO: A 32 bit option is not needed. Do away with this case.
     else() # Assume 32-bit i686 linux for the present
-       set(LPS_CXX_FLAGS "-ansi -m32 -Wno-deprecated ${OPTIMIZATION}")
+       set(LPS_CXX_FLAGS "-ansi -m32 -Wno-deprecated ")
     endif()
 
     #                 
@@ -295,7 +295,7 @@ function(set_compiler_flags)
         set(CMAKE_SHARED_LINKER_FLAGS_RELEASE-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD  /NXCOMPAT " CACHE
             STRING "Flags used by the linker for shared libraries for Release-contracts builds" ) 
     else()
-        set(CMAKE_CXX_FLAGS_RELEASE-CONTRACTS "${LPS_CXX_FLAGS} ${OPTIMIZATION}" CACHE
+        set(CMAKE_CXX_FLAGS_RELEASE-CONTRACTS "${LPS_CXX_FLAGS} " CACHE
             STRING "Flags used by the C++ compiler for Release-contracts builds" )
         set(CMAKE_EXE_LINKER_FLAGS_RELEASE-CONTRACTS "${LPS_EXE_LINKER_FLAGS}"  CACHE
             STRING "Flags used by the linker for executables for Release-contracts builds" )
@@ -320,7 +320,7 @@ function(set_compiler_flags)
         set(CMAKE_SHARED_LINKER_FLAGS_RELEASE-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD  /NXCOMPAT" CACHE
             STRING "Flags used by the linker for shared libraries for Release-no-contracts builds" )
     else()
-        set(CMAKE_CXX_FLAGS_RELEASE-NO-CONTRACTS "${LPS_CXX_FLAGS} ${OPTIMIZATION} -DNDEBUG" CACHE
+        set(CMAKE_CXX_FLAGS_RELEASE-NO-CONTRACTS "${LPS_CXX_FLAGS}  -DNDEBUG" CACHE
             STRING "Flags used by the C++ compiler for Release-no-contracts builds" )
         set(CMAKE_EXE_LINKER_FLAGS_RELEASE-NO-CONTRACTS "${CMAKE_EXE_LINKER_FLAGS}" CACHE
             STRING "Flags used by the linker for executables for Release-no-contracts builds" )
@@ -346,7 +346,7 @@ function(set_compiler_flags)
         set(CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD  /NXCOMPAT " CACHE
             STRING "RelWithDebInfo-contracts linker flags - shared libs" ) 
     else()
-        set(CMAKE_CXX_FLAGS_RELWITHDEBINFO-CONTRACTS "${LPS_CXX_FLAGS} ${OPTIMIZATION}" CACHE
+        set(CMAKE_CXX_FLAGS_RELWITHDEBINFO-CONTRACTS "${LPS_CXX_FLAGS} " CACHE
             STRING "RelWithDebInfo-contracts compiler flags" )
         set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-CONTRACTS "${LPS_EXE_LINKER_FLAGS}"  CACHE
             STRING "RelWithDebInfo-contracts linker flags - executables" )
@@ -371,7 +371,7 @@ function(set_compiler_flags)
         set(CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD  /NXCOMPAT" CACHE
             STRING "RelWithDebInfo-no-contracts linker flags - shared libs" )
     else()
-        set(CMAKE_CXX_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${LPS_CXX_FLAGS} ${OPTIMIZATION} -DNDEBUG" CACHE
+        set(CMAKE_CXX_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${LPS_CXX_FLAGS}  -DNDEBUG" CACHE
             STRING "RelWithDebInfo-no-contracts compiler flags" )
         set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${CMAKE_EXE_LINKER_FLAGS}" CACHE
             STRING "RelWithDebInfo-no-contracts linker flags - executables" )

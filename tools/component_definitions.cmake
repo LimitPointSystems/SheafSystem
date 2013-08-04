@@ -82,15 +82,17 @@ set(${COMPONENT}_PYTHON_BINDING_LIBS ${FIELDS_PYTHON_BINDING_LIBS} ${${COMPONENT
 #
 # Set the cumulative include path for this component.
 #
-set(${COMPONENT}_IPATHS ${FIELDS_IPATHS} ${${COMPONENT}_IPATH} ${VTK_INC_DIRS} ${JDK_INC_DIR} ${JDK_PLATFORM_INC_DIR} ${TETGEN_INC_DIR} CACHE STRING " Cumulative include paths for ${PROJECT_NAME}")
+set(${COMPONENT}_IPATHS ${FIELDS_IPATHS} ${${COMPONENT}_IPATH} ${VTK_INCLUDE_DIRS} ${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2} ${TETGEN_INC_DIR} CACHE STRING " Cumulative include paths for ${PROJECT_NAME}")
 
+message(STATUS "VTK_INCLUDE_DIRS is: ${VTK_INCLUDE_DIRS}")
 #
 # Specify component prerequisite include directories.
 #
-include_directories(${FIELDS_IPATHS})
-include_directories(${VTK_INC_DIRS})
-include_directories(${JDK_INC_DIR} ${JDK_PLATFORM_INC_DIR})
-
+include_directories(${${COMPONENT}_IPATHS})
+#include_directories(${FIELDS_IPATHS})
+include_directories(${VTK_INCLUDE_DIRS})
+#include_directories(${JDK_INC_DIR} ${JDK_PLATFORM_INC_DIR})
+#include_directories(${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})
 
 #------------------------------------------------------------------------------
 # FUNCTION DEFINITION SECTION
@@ -122,10 +124,10 @@ endfunction(set_scope_sources)
 #
 function(add_library_targets)
 
-        link_directories(${VTK_LIB_DIR})
-        link_directories(${JDK_LIB_DIR})
-        link_directories(${JVM_LIB_DIR})
-        link_directories(${XAWT_LIB_DIR})
+        link_directories(${VTK_LIBRARY_DIRS})
+#        link_directories(${JDK_LIB_DIR})
+#       link_directories(${JVM_LIB_DIR})
+#        link_directories(${XAWT_LIB_DIR})
         
     if(WIN64INTEL OR WIN64MSVC)
     
@@ -136,8 +138,8 @@ function(add_library_targets)
         add_library(${${COMPONENT}_DYNAMIC_LIB} SHARED ${${COMPONENT}_SRCS})
         add_dependencies(${${COMPONENT}_DYNAMIC_LIB} ${FIELDS_IMPORT_LIBS})
                  
-       # target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} debug ${FIELDS_DEBUG_IMPORT_LIBS} optimized ${FIELDS_IMPORT_LIBS} ${JDK_LIBS} ${VTK_LIBS})        
-        target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${FIELDS_IMPORT_LIBS} ${JDK_LIBS} ${VTK_LIBS}) 
+   #     target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} debug ${FIELDS_DEBUG_IMPORT_LIBS} optimized ${FIELDS_IMPORT_LIBS} ${JDK_LIBS} ${VTK_LIBS})        
+        target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${FIELDS_IMPORT_LIBS} ${JNI_LIBRARIES} ${JAVA_AWT_LIBRARY} ${JAVA_JVM_LIBRARY} ${VTK_LIBS} ) 
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")        
         
         # Override cmake's placing of "${${COMPONENT}_DYNAMIC_LIB}_EXPORTS into the preproc symbol table.
