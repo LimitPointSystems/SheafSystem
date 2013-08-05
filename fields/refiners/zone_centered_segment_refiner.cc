@@ -151,7 +151,7 @@ modify_crg(field_refinement_buffer& xbuffer)
 
   // Link the current zone to the first new segment.
 
-  lbase->new_link(lzone_id, _new_seg_0_id.pod());
+  lbase->new_link(lzone_id, _new_seg_0_id);
 
   // Create a second new segment.
 

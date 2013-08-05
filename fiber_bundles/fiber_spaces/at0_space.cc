@@ -564,7 +564,7 @@ prereq_id(int xi) const
 
       // The first prerequisite is always the schema.
 
-      result = schema().host()->index();
+      result = schema().host()->index().pod();
       break;
 
     default:

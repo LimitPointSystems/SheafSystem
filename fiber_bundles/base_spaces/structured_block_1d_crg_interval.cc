@@ -562,9 +562,9 @@ get_dof_tuple_ids(poset_state_handle& xhost,
   result.set_ct(MEMBER_CLASS_END);
 
 
-  result[BLOCK]  = structured_block_1d::new_row_dof_map(xhost, xi_size, true);
-  result[ZONE]   = base_space_member::new_row_dof_map(xhost, "segment_complex", true);
-  result[VERTEX] = base_space_member::new_row_dof_map(xhost, "point", true);
+  result[BLOCK]  = structured_block_1d::new_row_dof_map(xhost, xi_size, true).hub_pod();
+  result[ZONE]   = base_space_member::new_row_dof_map(xhost, "segment_complex", true).hub_pod();
+  result[VERTEX] = base_space_member::new_row_dof_map(xhost, "point", true).hub_pod();
 
   // Postconditions:
 

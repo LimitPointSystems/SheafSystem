@@ -132,13 +132,13 @@ modify_crg(field_refinement_buffer& xbuffer)
 
   // Unlink the lower cover of the current zone.
 
-  pod_index_type lpoint0_id = lbase->first_cover_member(LOWER, lzone_id);
+  pod_index_type lpoint0_id = lbase->first_cover_member(LOWER, lzone_id.pod());
   lbase->delete_link(lzone_id.pod(), lpoint0_id);
 
-  pod_index_type lpoint1_id = lbase->first_cover_member(LOWER, lzone_id);
+  pod_index_type lpoint1_id = lbase->first_cover_member(LOWER, lzone_id.pod());
   lbase->delete_link(lzone_id.pod(), lpoint1_id);
 
-  pod_index_type lpoint2_id = lbase->first_cover_member(LOWER, lzone_id);
+  pod_index_type lpoint2_id = lbase->first_cover_member(LOWER, lzone_id.pod());
   lbase->delete_link(lzone_id.pod(), lpoint2_id);
 
 

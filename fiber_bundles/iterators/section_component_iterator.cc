@@ -548,7 +548,7 @@ put_has_visited(const scoped_index& xid, bool xvalue)
   require(is_initialized());
   require(anchor().state_is_read_accessible());
   require(anchor().host()->contains_member(xid));
-  require(anchor().base_space_id() == anchor().host()->get_base_space_id_from_index(xid));
+  require(anchor().base_space_id() == anchor().host()->get_base_space_id_from_index(xid.hub_pod()));
 
   // Body:
 
@@ -707,7 +707,7 @@ update_item()
     /// reset_item. Would be more efficient to just reset indices; avoids
     /// call to _item.init_handle_data_members
 
-    _item->attach_to_state(_anchor->host(), _anchor->base_space_id(), _itr.index());
+    _item->attach_to_state(_anchor->host(), _anchor->base_space_id(), _itr.index().pod());
   }
 
   // Postconditions:

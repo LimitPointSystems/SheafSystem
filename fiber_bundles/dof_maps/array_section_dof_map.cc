@@ -277,7 +277,7 @@ invariant() const
 
 fiber_bundle::array_section_dof_map::
 array_section_dof_map(sec_rep_space* xhost, void* xdofs, size_t xdofs_ub)
-    : section_dof_map(xhost, xhost->base().index(), xhost->version())
+  : section_dof_map(xhost, xhost->base().index().pod(), xhost->version())
 {
 
   // Preconditions:

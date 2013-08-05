@@ -297,7 +297,8 @@ set_vtk_data(const sec_vd& xcoords,
   for(size_type i=0; i<ldisc_ct; ++i)
   {
     scoped_index ldisc_id = ldisc_mbrs[i].disc_id;
-    iterator_type lmap_itr = lmap->find(ldisc_id);
+    pod_index_type ldisc_pod = ldisc_id.hub_pod();
+    iterator_type lmap_itr = lmap->find(ldisc_pod);
 
 #ifdef DIAGNOSTIC_OUTPUT
     cout << "\tdisc_id: " << setw(6) << ldisc_id;
@@ -311,7 +312,7 @@ set_vtk_data(const sec_vd& xcoords,
       // Create a seq id for it.
 
       lseq_id = _vis_state.next_seq_id++;
-      (*lmap)[ldisc_id] = lseq_id;
+      (*lmap)[ldisc_pod] = lseq_id;
 
 #ifdef DIAGNOSTIC_OUTPUT
       cout << " seq_id:" << setw(6) << lseq_id;
@@ -439,7 +440,8 @@ set_vtk_data(const sec_vd& xcoords,
   for(size_type i=0; i<ldisc_ct; ++i)
   {
     scoped_index ldisc_id = ldisc_mbrs[i].disc_id;
-    iterator_type lmap_itr = lmap->find(ldisc_id);
+    pod_index_type ldisc_pod = ldisc_id.hub_pod();
+    iterator_type lmap_itr = lmap->find(ldisc_pod);
 
 #ifdef DIAGNOSTIC_OUTPUT
     cout << "\tdisc_id: " << setw(6) << ldisc_id;
@@ -453,7 +455,7 @@ set_vtk_data(const sec_vd& xcoords,
       // Create a seq id for it.
 
       lseq_id = _vis_state.next_seq_id++;
-      (*lmap)[ldisc_id] = lseq_id;
+      (*lmap)[ldisc_pod] = lseq_id;
 
 #ifdef DIAGNOSTIC_OUTPUT
       cout << " seq_id:" << setw(6) << lseq_id;

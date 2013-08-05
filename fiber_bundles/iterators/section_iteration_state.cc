@@ -350,7 +350,7 @@ ensure_discretization_order(const scoped_index& xgreater_index)
   // order should be reversed.
 
   pod_index_type  first_eval =
-    base_space_host->first_cover_member(UPPER, xgreater_index);
+    base_space_host->first_cover_member(UPPER, xgreater_index.hub_pod());
 
   bool is_reversed = (eval_id != first_eval);
 

@@ -301,7 +301,7 @@ attach_handle_data_members()
   // Attach the handle data members for the different member.
 
   _interval = 
-    dynamic_cast<homogeneous_block_crg_interval*>(crg()->implicit_member(_index));
+    dynamic_cast<homogeneous_block_crg_interval*>(crg()->implicit_member(_index.pod()));
 
   // Postconditions:
 
@@ -677,7 +677,7 @@ contains_connectivity_id_space(const scoped_index& xzone_id, bool xauto_access) 
   // Preconditions:
 
   require(state_is_auto_read_accessible(xauto_access));
-  require(local_id_space().contains_hub(xzone_id));
+  require(local_id_space().contains(xzone_id));
 
   // Body:
 
@@ -728,7 +728,7 @@ get_connectivity_id_space(const scoped_index& xzone_id, bool xauto_access) const
   // Preconditions:
 
   require(state_is_auto_read_accessible(xauto_access));
-  require(local_id_space().contains_hub(xzone_id));
+  require(local_id_space().contains(xzone_id));
   require(contains_connectivity_id_space(xzone_id, xauto_access));
 
   // Body:
@@ -808,7 +808,7 @@ get_connectivity_id_space_iterator(const scoped_index& xzone_id, bool xauto_acce
   // Preconditions:
 
   require(state_is_auto_read_accessible(xauto_access));
-  require(local_id_space().contains_hub(xzone_id));
+  require(local_id_space().contains_hub(xzone_id.hub_pod()));
   require(contains_connectivity_id_space(xzone_id, xauto_access));
 
   // Body:
@@ -897,7 +897,7 @@ contains_adjacency_id_space(const scoped_index& xvertex_id, bool xauto_access) c
   // Preconditions:
 
   require(state_is_auto_read_accessible(xauto_access));
-  require(local_id_space().contains_hub(xvertex_id));
+  require(local_id_space().contains(xvertex_id));
 
   // Body:
 
@@ -948,7 +948,7 @@ get_adjacency_id_space(const scoped_index& xvertex_id, bool xauto_access) const
   // Preconditions:
 
   require(state_is_auto_read_accessible(xauto_access));
-  require(local_id_space().contains_hub(xvertex_id));
+  require(local_id_space().contains(xvertex_id));
   require(contains_adjacency_id_space(xvertex_id, xauto_access));
 
   // Body:
@@ -1028,7 +1028,7 @@ get_adjacency_id_space_iterator(const scoped_index& xvertex_id, bool xauto_acces
   // Preconditions:
 
   require(state_is_auto_read_accessible(xauto_access));
-  require(local_id_space().contains_hub(xvertex_id));
+  require(local_id_space().contains(xvertex_id));
   require(contains_adjacency_id_space(xvertex_id, xauto_access));
 
   // Body:
