@@ -1523,16 +1523,6 @@ public:
     ensure((x == NOT_A_PRIMITIVE_TYPE) == (!is_valid()));
   };
 
-  /// @todo Remove.
-
-//   ///
-//   /// Conversion to primitive_type
-//   ///
-//   operator primitive_type() const
-//   {
-//     return primitive_attributes::id(_pod);
-//   };
-
   ///
   /// Assignment from primitive_type.
   ///
@@ -1625,16 +1615,6 @@ public:
   {
     ensure((x == NOT_A_STANDARD_MEMBER_INDEX) == (!is_valid()));
   };
-
-  /// @todo Remove.
-
-//   ///
-//   /// Conversion to standard_member_index
-//   ///
-//   operator standard_member_index() const
-//   {
-//     return standard_member_index_from_index(_pod);
-//   };
 
   ///
   /// Assignment from standard_member_index.
@@ -1729,16 +1709,6 @@ public:
     ensure((x == NOT_A_PRIMITIVES_SCHEMA_MEMBER_INDEX) == (!is_valid()));
   };
 
-  /// @todo Remove.
-
-//   ///
-//   /// Conversion to primitives_schema_member_index
-//   ///
-//   operator primitives_schema_member_index() const
-//   {
-//     return primitives_schema_member_index_from_index(_pod);
-//   };
-
   ///
   /// Assignment from primitives_schema_member_index.
   ///
@@ -1831,16 +1801,6 @@ public:
   {
     ensure((x == NOT_A_NAMESPACE_SCHEMA_MEMBER_INDEX) == (!is_valid()));
   };
-
-  /// @todo Remove.
-
-//   ///
-//   /// Conversion to namespace_schema_member_index
-//   ///
-//   operator namespace_schema_member_index() const
-//   {
-//     return namespace_schema_member_index_from_index(_pod);
-//   };
 
   ///
   /// Assignment from namespace_schema_member_index.
@@ -1935,16 +1895,6 @@ public:
     ensure((x == NOT_A_NAMESPACE_MEMBER_INDEX) == (!is_valid()));
   };
 
-  /// @todo Remove.
-
-//   ///
-//   /// Conversion to namespace_member_index
-//   ///
-//   operator namespace_member_index() const
-//   {
-//     return namespace_member_index_from_index(_pod);
-//   };
-
   ///
   /// Assignment from namespace_member_index.
   ///
@@ -2037,16 +1987,6 @@ public:
   {
     ensure((x == NOT_A_STANDARD_SUBPOSET_INDEX) == (!is_valid()));
   };
-
-  /// @todo Remove.
-
-//   ///
-//   /// Conversion to standard_subposet_index
-//   ///
-//   operator standard_subposet_index() const
-//   {
-//     return standard_subposet_index_from_index(_pod);
-//   };
 
   ///
   /// Assignment from standard_subposet_index.
@@ -2141,16 +2081,6 @@ public:
     ensure((x == NOT_A_STANDARD_VERSION_INDEX) == (!is_valid()));
   };
 
-  /// @todo Remove.
-
-//   ///
-//   /// Conversion to standard_version_index
-//   ///
-//   operator standard_version_index() const
-//   {
-//     return standard_version_index_from_index(_pod);
-//   };
-
   ///
   /// Assignment from standard_version_index.
   ///
@@ -2244,16 +2174,6 @@ public:
     ensure((x == NOT_A_STANDARD_DOF_TUPLE_INDEX) == (!is_valid()));
   };
 
-  /// @todo Remove.
-
-//   ///
-//   /// Conversion to standard_dof_tuple_index
-//   ///
-//   operator standard_dof_tuple_index() const
-//   {
-//     return standard_dof_tuple_index_from_index(_pod);
-//   };
-
   ///
   /// Assignment from standard_dof_tuple_index.
   ///
@@ -2345,16 +2265,6 @@ public:
       _pod(static_cast<pod_type>(xother))
   {
   };
-
-  /// @todo Remove.
-
-//   ///
-//   /// Conversion to unsigned char
-//   ///
-//   operator unsigned char() const
-//   {
-//     return static_cast<unsigned char>(_pod);
-//   };
 
   ///
   /// Assignment from unsigned char.
@@ -2538,16 +2448,6 @@ public:
   {
   };
 
-  /// @todo Remove.
-
-//   ///
-//   /// Conversion to unsigned short int
-//   ///
-//   operator unsigned short int() const
-//   {
-//     return static_cast<unsigned short int>(_pod);
-//   };
-
   ///
   /// Assignment from unsigned short int.
   ///
@@ -2729,16 +2629,6 @@ public:
       _pod(static_cast<pod_type>(xother))
   {
   };
-
-  /// @todo Remove.
-
-//   ///
-//   /// Conversion to unsigned int
-//   ///
-//   operator unsigned int() const
-//   {
-//     return static_cast<unsigned int>(_pod);
-//   };
 
   ///
   /// Assignment from unsigned int.
@@ -2922,16 +2812,6 @@ public:
   {
   };
 
-  /// @todo Remove.
-
-//   ///
-//   /// Conversion to unsigned long int
-//   ///
-//   operator unsigned long int() const
-//   {
-//     return static_cast<unsigned long int>(_pod);
-//   };
-
   ///
   /// Assignment from unsigned long int.
   ///
@@ -3113,16 +2993,6 @@ public:
       _pod(static_cast<pod_type>(xother))
   {
   };
-
-  /// @todo Remove.
-
-//   ///
-//   /// Conversion to signed char
-//   ///
-//   operator signed char() const
-//   {
-//     return static_cast<signed char>(_pod);
-//   };
 
   ///
   /// Assignment from signed char.
@@ -3306,16 +3176,6 @@ public:
   {
   };
 
-  /// @todo Remove.
-
-//   ///
-//   /// Conversion to short int
-//   ///
-//   operator short int() const
-//   {
-//     return static_cast<short int>(_pod);
-//   };
-
   ///
   /// Assignment from short int.
   ///
@@ -3498,16 +3358,6 @@ public:
   {
   };
 
-  /// @todo Remove.
-
-//   ///
-//   /// Conversion to int
-//   ///
-//   operator int() const
-//   {
-//     return static_cast<int>(_pod);
-//   };
-
   ///
   /// Assignment from int.
   ///
@@ -3689,16 +3539,6 @@ public:
       _pod(static_cast<pod_type>(xother))
   {
   };
-
-  /// @todo Remove.
-
-//   ///
-//   /// Conversion to long int
-//   ///
-//   operator long int() const
-//   {
-//     return static_cast<long int>(_pod);
-//   };
 
   ///
   /// Assignment from long int.
