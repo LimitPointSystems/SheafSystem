@@ -585,9 +585,9 @@ get_dof_tuple_ids(poset_state_handle& xhost,
   result.set_ct(MEMBER_CLASS_END);
 
 
-  result[BLOCK]  = point_block_1d::new_row_dof_map(xhost, xi_size, true);
-  result[ZONE]   = base_space_member::new_row_dof_map(xhost, "point", true);
-  result[VERTEX] = base_space_member::new_row_dof_map(xhost, "point", true);
+  result[BLOCK]  = point_block_1d::new_row_dof_map(xhost, xi_size, true).hub_pod();
+  result[ZONE]   = base_space_member::new_row_dof_map(xhost, "point", true).hub_pod();
+  result[VERTEX] = base_space_member::new_row_dof_map(xhost, "point", true).hub_pod();
 
   // Postconditions:
 
@@ -613,9 +613,9 @@ get_dof_tuple_ids(poset_state_handle& xhost,
   result.set_ct(MEMBER_CLASS_END);
 
 
-  result[BLOCK]  = point_block_2d::new_row_dof_map(xhost, xi_size, xj_size, true);
-  result[ZONE]   = base_space_member::new_row_dof_map(xhost, "point", true);
-  result[VERTEX] = base_space_member::new_row_dof_map(xhost, "point", true);
+  result[BLOCK]  = point_block_2d::new_row_dof_map(xhost, xi_size, xj_size, true).hub_pod();
+  result[ZONE]   = base_space_member::new_row_dof_map(xhost, "point", true).hub_pod();
+  result[VERTEX] = base_space_member::new_row_dof_map(xhost, "point", true).hub_pod();
 
   // Postconditions:
 
@@ -642,9 +642,9 @@ get_dof_tuple_ids(poset_state_handle& xhost,
   result.set_ct(MEMBER_CLASS_END);
 
 
-  result[BLOCK]  = point_block_3d::new_row_dof_map(xhost, xi_size, xj_size, xk_size, true);
-  result[ZONE]   = base_space_member::new_row_dof_map(xhost, "point", true);
-  result[VERTEX] = base_space_member::new_row_dof_map(xhost, "point", true);
+  result[BLOCK]  = point_block_3d::new_row_dof_map(xhost, xi_size, xj_size, xk_size, true).hub_pod();
+  result[ZONE]   = base_space_member::new_row_dof_map(xhost, "point", true).hub_pod();
+  result[VERTEX] = base_space_member::new_row_dof_map(xhost, "point", true).hub_pod();
 
   // Postconditions:
 

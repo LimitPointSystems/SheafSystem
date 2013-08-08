@@ -1518,7 +1518,6 @@ private:
 
   //@}
 
-
   // ===========================================================
   /// @name PRIMITIVE_TYPE FACET
   // ===========================================================
@@ -1535,14 +1534,6 @@ public:
       _pod(x)
   {
     ensure((x == NOT_A_PRIMITIVE_TYPE) == (!is_valid()));
-  };
-
-  ///
-  /// Conversion to primitive_type
-  ///
-  operator primitive_type() const
-  {
-    return primitive_attributes::id(_pod);
   };
 
   ///
@@ -1639,14 +1630,6 @@ public:
   };
 
   ///
-  /// Conversion to standard_member_index
-  ///
-  operator standard_member_index() const
-  {
-    return standard_member_index_from_index(_pod);
-  };
-
-  ///
   /// Assignment from standard_member_index.
   ///
   scoped_index& operator=(standard_member_index x)
@@ -1737,14 +1720,6 @@ public:
       _pod(x)
   {
     ensure((x == NOT_A_PRIMITIVES_SCHEMA_MEMBER_INDEX) == (!is_valid()));
-  };
-
-  ///
-  /// Conversion to primitives_schema_member_index
-  ///
-  operator primitives_schema_member_index() const
-  {
-    return primitives_schema_member_index_from_index(_pod);
   };
 
   ///
@@ -1841,14 +1816,6 @@ public:
   };
 
   ///
-  /// Conversion to namespace_schema_member_index
-  ///
-  operator namespace_schema_member_index() const
-  {
-    return namespace_schema_member_index_from_index(_pod);
-  };
-
-  ///
   /// Assignment from namespace_schema_member_index.
   ///
   scoped_index& operator=(namespace_schema_member_index x)
@@ -1939,14 +1906,6 @@ public:
       _pod(x)
   {
     ensure((x == NOT_A_NAMESPACE_MEMBER_INDEX) == (!is_valid()));
-  };
-
-  ///
-  /// Conversion to namespace_member_index
-  ///
-  operator namespace_member_index() const
-  {
-    return namespace_member_index_from_index(_pod);
   };
 
   ///
@@ -2043,14 +2002,6 @@ public:
   };
 
   ///
-  /// Conversion to standard_subposet_index
-  ///
-  operator standard_subposet_index() const
-  {
-    return standard_subposet_index_from_index(_pod);
-  };
-
-  ///
   /// Assignment from standard_subposet_index.
   ///
   scoped_index& operator=(standard_subposet_index x)
@@ -2141,14 +2092,6 @@ public:
       _pod(x)
   {
     ensure((x == NOT_A_STANDARD_VERSION_INDEX) == (!is_valid()));
-  };
-
-  ///
-  /// Conversion to standard_version_index
-  ///
-  operator standard_version_index() const
-  {
-    return standard_version_index_from_index(_pod);
   };
 
   ///
@@ -2245,14 +2188,6 @@ public:
   };
 
   ///
-  /// Conversion to standard_dof_tuple_index
-  ///
-  operator standard_dof_tuple_index() const
-  {
-    return standard_dof_tuple_index_from_index(_pod);
-  };
-
-  ///
   /// Assignment from standard_dof_tuple_index.
   ///
   scoped_index& operator=(standard_dof_tuple_index x)
@@ -2342,14 +2277,6 @@ public:
       _scope_id(xid_space.index()),
       _pod(static_cast<pod_type>(xother))
   {
-  };
-
-  ///
-  /// Conversion to unsigned char
-  ///
-  operator unsigned char() const
-  {
-    return static_cast<unsigned char>(_pod);
   };
 
   ///
@@ -2535,14 +2462,6 @@ public:
   };
 
   ///
-  /// Conversion to unsigned short int
-  ///
-  operator unsigned short int() const
-  {
-    return static_cast<unsigned short int>(_pod);
-  };
-
-  ///
   /// Assignment from unsigned short int.
   ///
   scoped_index& operator=(unsigned short int xother)
@@ -2722,14 +2641,6 @@ public:
       _scope_id(xid_space.index()),
       _pod(static_cast<pod_type>(xother))
   {
-  };
-
-  ///
-  /// Conversion to unsigned int
-  ///
-  operator unsigned int() const
-  {
-    return static_cast<unsigned int>(_pod);
   };
 
   ///
@@ -2915,14 +2826,6 @@ public:
   };
 
   ///
-  /// Conversion to unsigned long int
-  ///
-  operator unsigned long int() const
-  {
-    return static_cast<unsigned long int>(_pod);
-  };
-
-  ///
   /// Assignment from unsigned long int.
   ///
   scoped_index& operator=(unsigned long int xother)
@@ -3102,14 +3005,6 @@ public:
       _scope_id(xid_space.index()),
       _pod(static_cast<pod_type>(xother))
   {
-  };
-
-  ///
-  /// Conversion to signed char
-  ///
-  operator signed char() const
-  {
-    return static_cast<signed char>(_pod);
   };
 
   ///
@@ -3295,14 +3190,6 @@ public:
   };
 
   ///
-  /// Conversion to short int
-  ///
-  operator short int() const
-  {
-    return static_cast<short int>(_pod);
-  };
-
-  ///
   /// Assignment from short int.
   ///
   scoped_index& operator=(short int xother)
@@ -3485,14 +3372,6 @@ public:
   };
 
   ///
-  /// Conversion to int
-  ///
-  operator int() const
-  {
-    return static_cast<int>(_pod);
-  };
-
-  ///
   /// Assignment from int.
   ///
   scoped_index& operator=(int xother)
@@ -3672,14 +3551,6 @@ public:
       _scope_id(xid_space.index()),
       _pod(static_cast<pod_type>(xother))
   {
-  };
-
-  ///
-  /// Conversion to long int
-  ///
-  operator long int() const
-  {
-    return static_cast<long int>(_pod);
   };
 
   ///

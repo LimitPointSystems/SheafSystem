@@ -680,7 +680,7 @@ new_member(const scoped_index& xindex, bool xis_jim, const scoped_index& xdof_tu
 
   // Create the new member
 
-  poset::new_member(xindex, xis_jim, xdof_tuple_id);
+  poset::new_member(xindex.hub_pod(), xis_jim, xdof_tuple_id);
 
   // Insert the new member in the ccr.
 
@@ -758,9 +758,9 @@ new_member_interval(const scoped_index& xindex, const string& xinterval_type, si
 
   // Create the new member
 
-  poset::new_member_interval(xindex, xinterval_type, xsize);
+  poset::new_member_interval(xindex.hub_pod(), xinterval_type, xsize);
 
-  implicit_crg_interval& linterval = *crg().implicit_member(xindex);
+  implicit_crg_interval& linterval = *crg().implicit_member(xindex.hub_pod());
 
   // Insert the new member in the ccr.
 

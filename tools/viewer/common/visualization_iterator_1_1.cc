@@ -312,7 +312,8 @@ set_vtk_data(const sec_vd& xcoords,
   for(size_type i=0; i<ldisc_ct; ++i)
   {
     scoped_index ldisc_id = ldisc_mbrs[i].disc_id;
-    iterator_type lmap_itr = lmap->find(ldisc_id);
+    pod_index_type ldisc_pod = ldisc_id.hub_pod();
+    iterator_type lmap_itr = lmap->find(ldisc_pod);
 
 #ifdef DIAGNOSTIC_OUTPUT
     cout << "\tdisc_id: " << setw(6) << ldisc_id;
@@ -326,7 +327,7 @@ set_vtk_data(const sec_vd& xcoords,
       // Create a seq id for it.
 
       lseq_id = _vis_state.next_seq_id++;
-      (*lmap)[ldisc_id] = lseq_id;
+      (*lmap)[ldisc_pod] = lseq_id;
 
 #ifdef DIAGNOSTIC_OUTPUT
       cout << " seq_id:" << setw(6) << lseq_id;
@@ -551,12 +552,13 @@ set_vtk_data(const sec_vd& xprop,
   for(size_type i=0; i<ldisc_ct; ++i)
   {
     scoped_index ldisc_id = ldisc_mbrs[i].disc_id;
+    pod_index_type ldisc_pod = ldisc_id.hub_pod();
 
 #ifdef DIAGNOSTIC_OUTPUT
     cout << "\tdisc_id: " << setw(6) << ldisc_id;
 #endif
 
-    if(!_vis_state.visited[ldisc_id.pod()])
+    if(!_vis_state.visited[ldisc_pod])
     {
       // Haven't visited this vertex before.
       // Transfer the property data and increment the pt seq id.
@@ -572,7 +574,7 @@ set_vtk_data(const sec_vd& xprop,
       put_prop_dofs(_prop_dofs, lprop_df, xprop_tensor_rank, xvtk_prop,
                     _pt_seq_id++);
 
-      _vis_state.visited.put(ldisc_id.pod(), true);
+      _vis_state.visited.put(ldisc_pod, true);
     }
 
 #ifdef DIAGNOSTIC_OUTPUT

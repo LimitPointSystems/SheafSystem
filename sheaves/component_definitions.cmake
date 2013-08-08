@@ -147,7 +147,7 @@ function(add_bindings_targets)
     if(SWIG_FOUND AND BUILD_BINDINGS)
 
         include(${SWIG_USE_FILE})
-        
+     
         #
         # Java ################################################################
         #
@@ -275,13 +275,13 @@ function(add_bindings_targets)
         set(CMAKE_SWIG_FLAGS -c++ )
         
         include_directories(${PYTHON_INCLUDE_DIRS})
-        
+
         set_source_files_properties(${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE} PROPERTIES CPLUSPLUS ON)
         swig_add_module(${${COMPONENT}_PYTHON_BINDING_LIB} python ${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE})
         
         if(WIN64INTEL OR WIN64MSVC)
             add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB} ${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE} ${${COMPONENT}_SWIG_COMMON_INTERFACE})
-            target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB} ${PYTHON_LIBRARY} )
+            target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB} ${PYTHON_LIBRARY})
             set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} PROPERTIES FOLDER "Binding Targets - Python")
         else()
             add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_SHARED_LIB}${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE} ${${COMPONENT}_SWIG_COMMON_INTERFACE})
@@ -298,7 +298,7 @@ function(add_bindings_targets)
             add_dependencies(${PROJECT_NAME}-java-binding ${PROJECT_NAME}_java_binding.jar)    
             add_dependencies(${PROJECT_NAME}-python-binding ${${COMPONENT}_PYTHON_BINDING_LIB})
             add_dependencies(${PROJECT_NAME}-csharp-binding ${${COMPONENT}_CSHARP_BINDING_LIB})
-        endif()
+        endif()   
 
         # Bindings target aliases already declared at system level. Add dependencies here.
         add_dependencies(${PROJECT_NAME}-bindings ${PROJECT_NAME}_java_binding.jar ${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_CSHARP_BINDING_LIB})

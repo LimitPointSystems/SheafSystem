@@ -204,7 +204,7 @@ new_subposet(bool xinitialize)
   // Create the subposet
 
   _subposets.force_item(result, new subposet_state());
-  _subposets[result]->initialize(_subposet_member_index_ub,
+  _subposets[result]->initialize(_subposet_member_index_ub.pod(),
 				 hub_id(result), xinitialize);
 
   // Set the subposet index upper bound.
@@ -278,7 +278,7 @@ new_subposet(const block<pod_index_type>& xmembers)
   // Create the subposet
 
   _subposets.force_item(result, new subposet_state());
-  _subposets[result]->initialize(_subposet_member_index_ub,
+  _subposets[result]->initialize(_subposet_member_index_ub.pod(),
 				 hub_id(result), xmembers);
 
   // Set the subposet index upper bound.
@@ -322,9 +322,9 @@ new_subposet(const block<scoped_index>& xmembers, scoped_index& result)
 
   // Create the subposet
 
-  _subposets.force_item(result, new subposet_state());
-  _subposets[result]->initialize(_subposet_member_index_ub,
-				 result, xmembers);
+  _subposets.force_item(result.pod(), new subposet_state());
+  _subposets[result.pod()]->initialize(_subposet_member_index_ub.pod(),
+				       result, xmembers);
 
   // Set the subposet index upper bound.
 
@@ -602,7 +602,7 @@ put_subposet_member_index_ub(const scoped_index& xub)
     index_space_iterator& itr = hub_id_space().get_iterator();
     while(!itr.is_done())
     {
-      _subposets[itr.pod()]->members()->extend_to(_subposet_member_index_ub);
+      _subposets[itr.pod()]->members()->extend_to(_subposet_member_index_ub.pod());
       itr.next();
     }
     hub_id_space().release_iterator(itr);

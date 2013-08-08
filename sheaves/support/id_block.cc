@@ -272,7 +272,7 @@ put_id_space(const index_space_handle& xnew_id_space, bool xauto_access)
 
       for(int i=0; i<_ct; ++i)
       {
-        item(i).put(xnew_id_space, _id_space->hub_pod(item(i)));
+        item(i).put(xnew_id_space, item(i).hub_pod());
       }
     }
     else
@@ -281,7 +281,7 @@ put_id_space(const index_space_handle& xnew_id_space, bool xauto_access)
 
       for(int i=0; i<_ct; ++i)
       {
-        item(i).put(xnew_id_space, xnew_id_space.pod(_id_space->hub_pod(item(i))));
+        item(i).put(xnew_id_space, xnew_id_space.pod(item(i).hub_pod()));
       }
     }
 

@@ -301,7 +301,7 @@ transfer_poset_to_internal_buffer()
     }
     else
     {
-      lb_ext_id = scaffold().subposet_ext_id(ldesc.lb_id());
+      lb_ext_id = scaffold().subposet_ext_id(ldesc.lb_id()).hub_pod();
     }
     ldesc.put_lb_id(lb_ext_id);
 
@@ -315,7 +315,7 @@ transfer_poset_to_internal_buffer()
     }
     else
     {
-      ub_ext_id = scaffold().subposet_ext_id(ldesc.ub_id());
+      ub_ext_id = scaffold().subposet_ext_id(ldesc.ub_id()).hub_pod();
     }
     ldesc.put_ub_id(ub_ext_id);
 

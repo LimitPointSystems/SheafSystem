@@ -648,7 +648,7 @@ make_new_vertices(field_refinement_buffer& xbuffer)
   lc_itr.reset();
   while(!lc_itr.is_done())
   {
-    lbase->remove_cover_member(lzone_id, UPPER, lc_itr.hub_pod());
+    lbase->remove_cover_member(lzone_id.pod(), UPPER, lc_itr.hub_pod());
     lc_itr.next();
   }
   lbase->clear_cover(LOWER, lzone_id);

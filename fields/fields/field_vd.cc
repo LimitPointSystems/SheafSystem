@@ -968,7 +968,7 @@ embed_property(const string& xresult_name,
   // Body:
 
   total_poset_member&  lbase = property().schema().base_space();
-  const scoped_index& lbase_id = lbase.index();
+  pod_index_type lbase_id = lbase.index().pod();
   poset_state_handle* lbase_host = property().schema().base_space().host();
 
   // Create the decomposition subposet.
@@ -979,8 +979,8 @@ embed_property(const string& xresult_name,
   result->new_id_space("hash_index_space_state", hash_index_space_state::make_arg_list(0));
   mutable_index_space_handle& lresult_space = result->id_space();
 
-  scoped_index lresult_mbr_client_id(property().schema().discretization_id_space());
-  scoped_index lresult_mbr_id = lbase_host->member_id(false);
+  pod_index_type lresult_mbr_client_id;
+  pod_index_type lresult_mbr_id;
 
   // Get the client id map for the evaluation subposet,
   // which the precondition requires to be the zones subposet.
@@ -1012,7 +1012,7 @@ embed_property(const string& xresult_name,
 
     lresult_mbr_id = lresult_space.hub_pod(lresult_mbr_client_id);
 
-    if(!lresult_mbr_id.is_valid())
+    if(!is_valid(lresult_mbr_id))
     {
       // Decomposition member for this property value
       // does not exist yet; create it.
@@ -1021,7 +1021,7 @@ embed_property(const string& xresult_name,
 
       // Give it a name, if the client has provided one.
 
-      string lresult_mbr_name = xresult_member_names.name(lresult_mbr_client_id.pod());
+      string lresult_mbr_name = xresult_member_names.name(lresult_mbr_client_id);
       if(!lresult_mbr_name.empty())
       {
         lbase_host->put_member_name(lresult_mbr_id, lresult_mbr_name, true, false);
@@ -1040,7 +1040,7 @@ embed_property(const string& xresult_name,
 
     // Link the decomposition member to the zone.
 
-    lbase_host->new_link(lresult_mbr_id, lzone_id);
+    lbase_host->new_link(lresult_mbr_id, lzone_id.pod());
 
     // Delete the link from the base space to the zone.
     // Since lzone_id is at the front of llc, this
@@ -1048,7 +1048,7 @@ embed_property(const string& xresult_name,
     // Eventually we reach the decomp members at the
     // back of llc and the iteration terminates.
 
-    lbase_host->delete_link(lbase_id, lzone_id);
+    lbase_host->delete_link(lbase_id, lzone_id.pod());
   }
 
   // Clean up.

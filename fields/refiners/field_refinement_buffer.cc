@@ -580,7 +580,7 @@ reserve_coord_fiber(const scoped_index& xdisc_id)
   // Preconditions:
 
   require(dynamic_cast<array_section_dof_map*>(&target.coordinates().dof_map(true)) != 0);
-  require(coord_disc_seq_id_space->contains_hub(xdisc_id));
+  require(coord_disc_seq_id_space->contains(xdisc_id));
   
   // Body:
 
@@ -607,7 +607,7 @@ reserve_prop_fiber(const scoped_index& xdisc_id)
   // Preconditions:
 
   require(dynamic_cast<array_section_dof_map*>(&target.property().dof_map(true)) != 0);
-  require(prop_disc_seq_id_space->contains_hub(xdisc_id));
+  require(prop_disc_seq_id_space->contains(xdisc_id));
   
   // Body:
 

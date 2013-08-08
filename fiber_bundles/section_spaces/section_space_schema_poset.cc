@@ -708,7 +708,7 @@ update_hub_id_space(bool xauto_access)
 
   extend_last_member_term(lmember_id_ub, false);
 
-  _product->put_ubs(base_space().member_index_ub(), base_space_stride());
+  _product->put_ubs(base_space().member_index_ub().pod(), base_space_stride());
 
   if(xauto_access)
   {
@@ -1547,7 +1547,7 @@ initialize_standard_members()
   pod_index_type lspace_id = new_term(lmember_id_ub, false);
   primary_index_space_handle lproduct_id_space(member_id_spaces(false), lspace_id);
 
-  ij_product_structure lproduct(base_space().member_index_ub(), lbase_space_stride);
+  ij_product_structure lproduct(base_space().member_index_ub().pod(), lbase_space_stride);
   lproduct_id_space.new_product_structure(lproduct);
 
   _product = &lproduct_id_space.product_structure<ij_product_structure>();

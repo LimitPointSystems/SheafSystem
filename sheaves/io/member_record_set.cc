@@ -1121,7 +1121,7 @@ clean_upper_covers()
   {
     // Clean up the upper cover.
 
-    lcrg.clean_cover(UPPER, litr.index());
+    lcrg.clean_cover(UPPER, litr.index().pod());
     litr.next();
   }
     

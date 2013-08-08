@@ -888,7 +888,7 @@ link_poset(const namespace_poset_member& xmbr)
 
   // Body:
 
-  pod_index_type lmbr_id = xmbr.index();
+  pod_index_type lmbr_id = xmbr.index().pod();
   pod_index_type lmbr_schema_id = xmbr.poset_prereq_id(0);
 
   if(lmbr_schema_id == PRIMITIVES_SCHEMA_INDEX)
