@@ -99,4 +99,4 @@ else()
     install(FILES ${PROJECT_BINARY_DIR}/${EXPORTS_FILE}.in DESTINATION config/\${BUILD_TYPE})
 endif()    
 
-
+add_clean_files()

@@ -439,8 +439,10 @@ function(add_clean_files)
     
     #Define the file types to be included in the clean operation.
     
-    file(GLOB_RECURSE HDF_FILES ${CMAKE_BINARY_DIR}/*.hdf)
-    file(GLOB_RECURSE JAR_FILES ${CMAKE_BINARY_DIR}/*.jar)
+    file(GLOB_RECURSE HDF_FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/*.hdf)
+    file(GLOB_RECURSE JAR_FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/*.jar)
+    
+    message(STATUS "HDF_FILES are ${HDF_FILES}")
    
     # Clean up the mess left by the Intel coverage tool
     #file(GLOB_RECURSE DYN_FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/*.dyn)
@@ -455,8 +457,13 @@ function(add_clean_files)
     list(APPEND CLEAN_FILES ${JAR_FILES})
     list(APPEND CLEAN_FILES ${SCOPE_FILE_LIST})
   
-    set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "${CLEAN_FILES}")
-
+    set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${CLEAN_FILES})
+get_directory_property(CLEANDIRS [DIRECTORY ${CMAKE_BINARY_DIR} ADDITIONAL_MAKE_CLEAN_FILES)
+message(STATUS "CLEANDIRS is: ${CLEANDIRS}")
+get_directory_property(CLEANDIRS [DIRECTORY ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY} ADDITIONAL_MAKE_CLEAN_FILES)
+message(STATUS "CLEANDIRS is: ${CLEANDIRS}")
+get_directory_property(CLEANDIRS [DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} ADDITIONAL_MAKE_CLEAN_FILES)
+message(STATUS "CLEANDIRS is: ${CLEANDIRS}")
 endfunction(add_clean_files) 
 
 # 
@@ -479,9 +486,9 @@ function(add_test_targets)
 
     # link_directories only applies to targets created after it is called.
     if(LINUX64GNU OR LINUX64INTEL)
-        link_directories($CMAKE_ARCHIVE_OUTPUT_DIRECTORY} ${HDF5_LIBRARY_DIRS})
+        link_directories(${CMAKE_ARCHIVE_OUTPUT_DIRECTORY} ${HDF5_LIBRARY_DIRS})
     else()
-        link_directories($CMAKE_ARCHIVE_OUTPUT_DIRECTORY} ${HDF5_LIBRARY_DIRS})        
+        link_directories(${CMAKE_ARCHIVE_OUTPUT_DIRECTORY} ${HDF5_LIBRARY_DIRS})        
     endif()    
     # Let the user know what's being configured
     status_message("Configuring Unit Tests for ${PROJECT_NAME}")   
