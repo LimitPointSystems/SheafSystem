@@ -33,6 +33,7 @@ set(clusters concurrency dof_iterators dof_maps examples id_spaces io general
 # Initialize all variables for this component.
 #
 set_component_vars()
+
 #
 # Add the clusters to the project
 #
@@ -278,7 +279,8 @@ function(add_bindings_targets)
 
         set_source_files_properties(${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE} PROPERTIES CPLUSPLUS ON)
         swig_add_module(${${COMPONENT}_PYTHON_BINDING_LIB} python ${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE})
-        
+        message(STATUS "${${COMPONENT}_PYTHON_BINDING_LIB}")
+        message(STATUS " ${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE} ${${COMPONENT}_SWIG_COMMON_INTERFACE} ${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE}")
         if(WIN64INTEL OR WIN64MSVC)
             add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB} ${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE} ${${COMPONENT}_SWIG_COMMON_INTERFACE})
             target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB} ${PYTHON_LIBRARY})
