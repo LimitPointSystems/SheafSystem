@@ -441,13 +441,6 @@ function(add_clean_files)
     
     file(GLOB_RECURSE HDF_FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/*.hdf)
     file(GLOB_RECURSE JAR_FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/*.jar)
-    
-    message(STATUS "HDF_FILES are ${HDF_FILES}")
-   
-    # Clean up the mess left by the Intel coverage tool
-    #file(GLOB_RECURSE DYN_FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/*.dyn)
-    #file(GLOB_RECURSE DPI_FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/*.dpi)
-    #file(GLOB_RECURSE SPI_FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/*.spi)
    
     # List of files with paths for SheafScope.jar build
     file(GLOB SCOPE_FILE_LIST ${CMAKE_BINARY_DIR}/scopesrcs/*)
@@ -457,18 +450,10 @@ function(add_clean_files)
     list(APPEND CLEAN_FILES ${JAR_FILES})
     list(APPEND CLEAN_FILES ${SCOPE_FILE_LIST})
   
-    set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES ${CLEAN_FILES})
-get_directory_property(CLEANDIRS [DIRECTORY ${CMAKE_BINARY_DIR} ADDITIONAL_MAKE_CLEAN_FILES)
-message(STATUS "CLEANDIRS is: ${CLEANDIRS}")
-get_directory_property(CLEANDIRS [DIRECTORY ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY} ADDITIONAL_MAKE_CLEAN_FILES)
-message(STATUS "CLEANDIRS is: ${CLEANDIRS}")
-get_directory_property(CLEANDIRS [DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} ADDITIONAL_MAKE_CLEAN_FILES)
-message(STATUS "CLEANDIRS is: ${CLEANDIRS}")
+    set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "${CLEAN_FILES}")
+
 endfunction(add_clean_files) 
 
-# 
-#  Clean up. Remove everything, not just the build products.
-#
 
 #$$TODO: Expand this to cover windows/intel as well.
 function(add_coverage_target)
