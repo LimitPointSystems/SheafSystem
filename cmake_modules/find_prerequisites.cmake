@@ -75,7 +75,7 @@ endif()
 if(BUILD_BINDINGS)
     
     # Find Swig
-    find_package(SWIG)
+    find_package(SWIG REQUIRED)
     if(SWIG_FOUND)
         configure_file(${CMAKE_MODULE_PATH}/swig_definitions.cmake.in ${CMAKE_BINARY_DIR}/swig_definitions.cmake)
         include(${CMAKE_BINARY_DIR}/swig_definitions.cmake)
