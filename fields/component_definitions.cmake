@@ -1,3 +1,5 @@
+#
+#
 # Copyright (c) 2013 Limit Point Systems, Inc. 
 
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -178,14 +180,12 @@ function(add_bindings_targets)
         # Define the library version.
         set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES VERSION ${LIB_VERSION})  
  
-        #list(APPEND ${COMPONENT}_CLASSPATH ${GEOMETRY_CLASSPATH} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR} ${VTK_JAR} ${JMF_JAR})       
         list(APPEND ${COMPONENT}_CLASSPATH ${GEOMETRY_CLASSPATH} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} ${JMF_JAR})
         set(${COMPONENT}_CLASSPATH ${${COMPONENT}_CLASSPATH} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
 
         # Create the bindings jar file 
         if(WIN64INTEL OR WIN64MSVC)
 
-            #set(${COMPONENT}_CLASSPATH ${GEOMETRY_CLASSPATH} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
             add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
                                DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${GEOMETRY_JAVA_BINDING_JAR}
                                set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Component Binding Jars")                           

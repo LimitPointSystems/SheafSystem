@@ -83,11 +83,6 @@ endif()
 install(DIRECTORY ${CMAKE_BINARY_DIR}/documentation/ DESTINATION documentation)
 
 #
-# Install what few prerequisite resources we need
-#
-install_prereqs()
-
-#
 # Generate some info about the release, and write it to the RELEASE file in install root folder.
 #
 set(RELEASE_DATE)

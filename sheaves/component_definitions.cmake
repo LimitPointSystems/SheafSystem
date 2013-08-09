@@ -1,3 +1,4 @@
+#
 # Copyright (c) 2013 Limit Point Systems, Inc. 
 
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,7 +42,6 @@ add_clusters("${clusters}")
 # We don't have to use this decision structure. Windows and linux will ignore the other's lib vars. Just keeps things tidy in the CMake GUI.
 #
 if(WIN64INTEL OR WIN64MSVC)
-
     #
     # Set the cumulative import library (win32) var for this component.
     #
@@ -191,6 +191,7 @@ function(add_bindings_targets)
                            COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
                            COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
             )
+            
             # Java documentation
             if(DOC_TARGETS)
                 add_custom_target(${PROJECT_NAME}-java-docs ALL
