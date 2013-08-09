@@ -53,6 +53,7 @@ class namespace_poset_member;
 class poset_path;
 class poset;
 class sheaf_file;
+class storage_agent;  
 
 ///
 /// The default name space; a poset which contains other posets as members.
@@ -61,6 +62,7 @@ class SHEAF_DLL_SPEC namespace_poset : public poset_state_handle
 {
 
   friend class poset_state_handle;
+  friend class storage_agent;
 
   // ===========================================================
   /// @name NAMESPACE_POSET FACET
@@ -820,9 +822,15 @@ public:
   ///
   /// The id of the xi-th prerequisite poset for this.
   ///
-  virtual pod_index_type prereq_id(int xi) const;
+  virtual pod_index_type prereq_id(int xi) const;  
 
 protected:
+
+  ///
+  /// Sets name() to xname.
+  /// Intended for use only by storage_agent::begin_read_transaction(namespace_poset&).
+  ///
+  void put_name(const string& xname);
 
 private:
 

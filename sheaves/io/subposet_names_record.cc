@@ -169,13 +169,13 @@ transfer_internal_buffer_to_poset()
 
   // Body:
 
-  if(scaffold().structure_is_namespace())
-  {
-    // Delete the existing name for the namespace;
-    // let it be reset from the file.
+//   if(scaffold().structure_is_namespace())
+//   {
+//     // Delete the existing name for the namespace;
+//     // let it be reset from the file.
 
-    scaffold().structure().powerset().whole().delete_all_names();
-  }
+//     scaffold().structure().powerset().whole().delete_all_names();
+//   }
 
   if(scaffold().is_versioned())
   {

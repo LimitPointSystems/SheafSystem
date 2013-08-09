@@ -2782,6 +2782,32 @@ prereq_id(int xi) const
 
 // PROTECTED FUNCTIONS
 
+void
+sheaf::namespace_poset::
+put_name(const string& xname)
+{
+  // cout << endl << "Entering namespace_poset::put_name." << endl;
+
+  // Preconditions:
+
+  require(state_is_read_write_accessible());
+  require(poset_path::is_valid_name(xname));
+  
+  // Body:
+
+  state_obj()->put_name(xname);
+
+  // Postconditions:
+
+  ensure(name() == xname);
+
+  // Exit:
+
+  // cout << "Leaving namespace_poset::put_name." << endl;
+  return;
+}
+
+
 // PRIVATE FUNCTIONS
 
 

@@ -255,14 +255,12 @@ storage_agent(const string& xfile_name,
   {
     // Turn on the standard HDF error reporting.
 
-    //    H5Eset_auto(reinterpret_cast<herr_t (*)(void*)>(H5Eprint), stderr);
     H5Eset_auto1(reinterpret_cast<herr_t (*)(void*)>(H5Eprint), stderr);
   }
   else
   {
     // Turn off HDF error reporting.
 
-    //    H5Eset_auto(NULL, NULL);
     H5Eset_auto1(NULL, NULL);
   }
 
@@ -1144,7 +1142,6 @@ begin_read_transaction(namespace_poset& xns)
   // Body:
 
 #ifdef DIAGNOSTIC_OUTPUT
-
   cout << endl << SOURCE_CODE_LOCATION;
   cout << "reading poset " << xns.name() << endl;
 #endif
@@ -1206,15 +1203,18 @@ begin_read_transaction(namespace_poset& xns)
   lmember_records.internalize(lscaffold.row_bounds().ub_id());
   ldof_tuple_records.internalize();
 
-  // Finished with the bounds; detach them.
-
-  //  lscaffold.detach_bounds();
-
   // Close the record sets.
 
   lmember_records.close();
   ldof_tuple_records.close();
   lattributes_records.close();
+
+  //
+  // Reset the namespace name from whatever the client
+  // chose initially to the name in the file.
+  //
+  string lns_name = lattributes_records.poset_name();
+  xns.put_name(lns_name);
 
   // The non-standard dof tuples all have void pointers in them.
   // Allocate external handles instead.
@@ -1243,8 +1243,6 @@ begin_read_transaction(namespace_poset& xns)
       /// Patch this up by extending the schema to top.
 
       lns_mbr.dof_map().extend_to_top();
-
-      cout << "in storage_agent::begin_read_transaction: ns mbr dof map:" << lns_mbr.dof_map() << endl;
     }
 
     itr.next();

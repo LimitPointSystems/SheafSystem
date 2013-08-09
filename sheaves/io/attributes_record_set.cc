@@ -463,6 +463,31 @@ externalize()
   return;
 }
 
+string
+sheaf::attributes_record_set::
+poset_name() const
+{
+  // cout << endl << "Entering attributes_record_set::poset_name." << endl;
+
+  // Preconditions:
+
+
+  // Body:
+
+  const string::size_type lsuffix_len = 11; // == len(".attributes")
+  string::size_type lname_len = _name.size() - lsuffix_len;
+  string result(_name.substr(0, lname_len));
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving attributes_record_set::poset_name." << endl;
+  return result;
+}
+
+
 ///
 hid_t
 sheaf::attributes_record_set::
@@ -486,7 +511,6 @@ create_dataset()
   // Create the dataset with the internal data type.
   // External data type will be set in record_set::open by querying the dataset.
 
-  //  result = H5Dcreate(file().hdf_id(),
   result = H5Dcreate1(file().hdf_id(),
                      name().c_str(),
                      _int_data_type_hdf_id,

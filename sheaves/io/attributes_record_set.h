@@ -125,6 +125,11 @@ public:
   ///
   void externalize();
 
+  ///
+  /// The name of the poset, extracted from the name of the dataset.
+  ///
+  string poset_name() const;
+  
 protected:
 
   // Default constructor;

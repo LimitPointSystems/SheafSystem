@@ -328,7 +328,6 @@ open()
   // Need to use alias because if we're reading the namespace,
   // we don't yet know its name.
 
-  //  _hdf_id = H5Dopen(_file.hdf_id(), _alias.c_str());
   _hdf_id = H5Dopen1(_file.hdf_id(), _alias.c_str());
 
   if(_hdf_id < 0)

@@ -71,6 +71,11 @@ public:
   const string& name() const;
 
   ///
+  /// Sets name() to xname.
+  ///
+  void put_name(const string& xname);
+
+  ///
   /// Identifier for the type of this poset.
   ///
   poset_type type_id() const;

@@ -6167,6 +6167,11 @@ subposet_name(pod_index_type xsubposet_hub_id, bool xauto_access) const
     get_read_access();
   }
 
+//   cout << "poset_state_handle::subposet_name: poset " << name() << endl;
+//   cout << powerset() << endl;
+//   cout << "  subposet namemap:" << endl;
+//   cout << powerset().subposet_name_map() << endl;
+  
   string result(powerset().subposet_name_map().name(xsubposet_hub_id));
 
   if(xauto_access)

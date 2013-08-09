@@ -159,6 +159,30 @@ name() const
   return _name;
 }
 
+void
+sheaf::poset_state::
+put_name(const string& xname)
+{
+  // cout << endl << "Entering poset_state::put_name." << endl;
+
+  // Preconditions:
+
+  require(poset_path::is_valid_name(xname));
+  
+  // Body:
+
+  _name = xname;
+
+  // Postconditions:
+
+  ensure(name() == xname);
+  
+  // Exit:
+
+  // cout << "Leaving poset_state::put_name." << endl;
+  return;
+}
+
 sheaf::poset_type
 sheaf::poset_state::
 type_id() const
