@@ -1,4 +1,3 @@
-
 #
 # Copyright (c) 2013 Limit Point Systems, Inc. 
 #
@@ -199,7 +198,6 @@ endfunction(configure_std_headers)
 # Set the compiler flags per build configuration
 #
 function(set_compiler_flags)
-
        
        # Toggle multi-process compilation in Windows
        # Set in system_definitions.cmake
@@ -454,21 +452,12 @@ function(add_clean_files)
     
     #Define the file types to be included in the clean operation.
     
-    file(GLOB_RECURSE HDF_FILES ${CMAKE_BINARY_DIR}/*.hdf)
-    file(GLOB_RECURSE JAR_FILES ${CMAKE_BINARY_DIR}/*.jar)
-   
-    # Clean up the mess left by the Intel coverage tool
-    #file(GLOB_RECURSE DYN_FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/*.dyn)
-    #file(GLOB_RECURSE DPI_FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/*.dpi)
-    #file(GLOB_RECURSE SPI_FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/*.spi)
-   
-    # List of files with paths for SheafScope.jar build
-    file(GLOB SCOPE_FILE_LIST ${CMAKE_BINARY_DIR}/scopesrcs/*)
-                
+    file(GLOB_RECURSE HDF_FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/*.hdf)
+    file(GLOB_RECURSE JAR_FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/*.jar)
+
     # Append them to the list
     list(APPEND CLEAN_FILES ${HDF_FILES})
     list(APPEND CLEAN_FILES ${JAR_FILES})
-    list(APPEND CLEAN_FILES ${SCOPE_FILE_LIST})
   
     set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "${CLEAN_FILES}")
 
@@ -734,11 +723,7 @@ function(export_install_config_file_vars)
     if(WIN64MSVC OR WIN64INTEL)
         export(TARGETS ${${COMPONENT}_DYNAMIC_LIB} APPEND FILE ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE})
         # $$HACK: the below is a temporary measure until we completely sort out the static link issues. JEB 01.17.13
-        if("${COMPONENT}" MATCHES "SHEAVES")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(${COMPONENT}_IMPORT_LIBS ${${COMPONENT}_IMPORT_LIB} CACHE STRING \"${PROJECT_NAME} cumulative import library list\")\n")
-        else()
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(${COMPONENT}_IMPORT_LIBS ${${COMPONENT}_IMPORT_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative import library list\")\n")
-        endif()
+        file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(${COMPONENT}_IMPORT_LIBS ${${COMPONENT}_IMPORT_LIB} CACHE STRING \"${PROJECT_NAME} cumulative import library list\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
         if("${COMPONENT}" MATCHES "TOOLS")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
@@ -875,7 +860,7 @@ function(collect_example_sources)
 endfunction(collect_example_sources)
 
 # 
-# Convenience routine for diagnostic output during configure phase.
+# Add diagnostic output during configure phase.
 #
 function(status_message txt)
 
@@ -926,17 +911,7 @@ function(install_prereqs)
         PATTERN "hints" EXCLUDE
         PATTERN "testing" EXCLUDE 
         PATTERN "*.cmake" EXCLUDE) 
-#        foreach(name ${VTK_LIBS})
-#            file(GLOB files "${VTK_LIB_DIR}/lib${name}.*")
-#            string(REPLACE "${VTK_LIB_DIR}/lib${name}.a" "" files "${files}")
-#            set(VTK_INST_LIBS ${VTK_INST_LIBS} "${files}")
-#        endforeach()
-#        install(FILES ${VTK_INST_LIBS} DESTINATION lib/vtk/
-#        PERMISSIONS
-#        OWNER_WRITE OWNER_READ OWNER_EXECUTE
-#        GROUP_READ GROUP_EXECUTE
-#        WORLD_READ WORLD_EXECUTE   
-#        )
+
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/vtk/lib CACHE STRING \"Location of VTK libs\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
@@ -948,7 +923,6 @@ function(install_prereqs)
             set(VTK_INST_LIBS ${VTK_INST_LIBS} ${files})
         endforeach()
         install(FILES ${VTK_INST_LIBS} DESTINATION vtk/lib
-        #install(FILES ${VTK_INST_LIBS} DESTINATION lib/vtk/
         PERMISSIONS
         OWNER_WRITE OWNER_READ OWNER_EXECUTE
         GROUP_READ GROUP_EXECUTE
@@ -960,7 +934,6 @@ function(install_prereqs)
             set(VTK_RUNTIME_LIBS ${VTK_RUNTIME_LIBS} ${files})
         endforeach()
         
-        #install(FILES ${VTK_RUNTIME_LIBS} DESTINATION bin/vtk/
         install(FILES ${VTK_RUNTIME_LIBS} DESTINATION vtk/bin
         PERMISSIONS
         OWNER_WRITE OWNER_READ OWNER_EXECUTE
@@ -968,7 +941,6 @@ function(install_prereqs)
         WORLD_READ WORLD_EXECUTE   
         )
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        #file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/bin/vtk CACHE STRING \"Location of VTK libs\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/vtk/lib CACHE STRING \"Location of VTK libs\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")            
     endif()

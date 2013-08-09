@@ -38,7 +38,7 @@ endif()
 # Tell hdf to use static libs
 set(HDF5_USE_STATIC_LIBRARIES ON)
 
-find_package(HDF5 1.8.9 REQUIRED)
+find_package(HDF5)
 if(HDF5_FOUND)
     include_directories(${HDF5_INCLUDE_DIRS})
 endif()
