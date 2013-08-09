@@ -1,3 +1,5 @@
+#
+#
 # Copyright (c) 2013 Limit Point Systems, Inc. 
 
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -84,15 +86,11 @@ set(${COMPONENT}_PYTHON_BINDING_LIBS ${FIELDS_PYTHON_BINDING_LIBS} ${${COMPONENT
 #
 set(${COMPONENT}_IPATHS ${FIELDS_IPATHS} ${${COMPONENT}_IPATH} ${VTK_INCLUDE_DIRS} ${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2} ${TETGEN_INC_DIR} CACHE STRING " Cumulative include paths for ${PROJECT_NAME}")
 
-message(STATUS "VTK_INCLUDE_DIRS is: ${VTK_INCLUDE_DIRS}")
 #
 # Specify component prerequisite include directories.
 #
 include_directories(${${COMPONENT}_IPATHS})
-#include_directories(${FIELDS_IPATHS})
 include_directories(${VTK_INCLUDE_DIRS})
-#include_directories(${JDK_INC_DIR} ${JDK_PLATFORM_INC_DIR})
-#include_directories(${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})
 
 #------------------------------------------------------------------------------
 # FUNCTION DEFINITION SECTION
@@ -124,10 +122,7 @@ endfunction(set_scope_sources)
 #
 function(add_library_targets)
 
-        link_directories(${VTK_LIBRARY_DIRS})
-#        link_directories(${JDK_LIB_DIR})
-#       link_directories(${JVM_LIB_DIR})
-#        link_directories(${XAWT_LIB_DIR})
+    link_directories(${VTK_LIBRARY_DIRS})
         
     if(WIN64INTEL OR WIN64MSVC)
     
