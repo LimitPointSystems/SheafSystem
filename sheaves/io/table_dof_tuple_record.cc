@@ -251,8 +251,9 @@ transfer_internal_buffer_to_poset()
     // Get read write access.
 
     lposet.get_read_write_access();
-
+    
   }
+  
 
   // Poset is guaranteed to have a state now.
 

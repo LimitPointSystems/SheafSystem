@@ -26,6 +26,115 @@ class index_iterator;
 
 // PUBLIC FUNCTIONS
 
+void
+sheaf::poset::
+new_table(namespace_type& xns, const poset_path& xpath, const poset_path& xschema_path, bool xauto_access)
+{
+  // cout << endl << "Entering tuple_space::new_table." << endl;
+
+  // Preconditions:
+
+
+  require(!xpath.empty());
+  require(!xns.contains_path(xpath, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(unexecutable("xschema_path conforms to standard_schema_path"));
+  //  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));
+
+  // Body:
+
+  // Create the table; have to new it because namespace keeps a pointer.
+
+  typedef poset table_type;
+
+  table_type* ltable = new table_type();
+
+  if(xauto_access)
+  {
+    xns.member_poset(xschema_path, false).get_read_access();
+  }
+
+  // Create a handle of the right type for the schema member.
+
+  schema_poset_member lschema(&xns, xschema_path, false);
+
+  // Create the table dof map and set dof values;
+  // must be newed because poset_state::_table keep a pointer to it.
+
+  array_poset_dof_map* lmap = new array_poset_dof_map(&lschema, true);
+  
+  // Create the state.
+
+  ltable->new_state(lschema, *lmap);
+
+  // Insert the poset in the namespace.
+  // $$SCRIBBLE: why isn't this done in new_state(schema, map)?
+
+  ltable->get_read_access();
+  ltable->initialize_namespace(xns, xpath.poset_name(), true);
+  ltable->release_access();
+
+  if(xauto_access)
+  {
+    xns.member_poset(xschema_path, false).release_access();
+  }
+
+  // Postconditions:
+
+  ensure(xns.contains_path(xpath, xauto_access));
+  //  ensure(!xns.path_is_read_accessible(result, xauto_access));
+  ensure(!xns.poset_state_is_read_accessible(xpath, xauto_access));
+  ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == xschema_path);
+
+  // Exit:
+
+  // cout << "Leaving tuple_space::new_table." << endl;
+  return;
+}
+
+// sheaf::poset_path
+// sheaf::poset::
+// new_table(namespace_poset& xns, const string& xname, const poset_path& xschema_path, bool xauto_access)
+// {
+//   // cout << endl << "Entering poset::new_table." << endl;
+
+//   // Preconditions:
+
+
+//   require(!xname.empty());
+//   require(!xns.contains_member(xname, xauto_access));
+
+//   require(xschema_path.full());
+//   require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+//   require(unexecutable("xschema_path conforms to standard_schema_path"));
+
+//   // Body:
+
+//   // Create the poset; have to new it because namespace keeps a pointer.
+
+//   poset* lposet = new poset();
+//   lposet->new_state(xns, xname, xschema_path, xauto_access);
+
+//   // Return the path of the poset.
+
+//   poset_path result = lposet->path(true);
+
+//   // Postconditions:
+
+//   ensure(xns.contains_path(result, xauto_access));
+//   //  ensure(!xns.path_is_read_accessible(result, xauto_access));
+//   ensure(!xns.poset_state_is_read_accessible(result, xauto_access));
+//   ensure(xns.member_poset(result, xauto_access).schema(true).path(true) == xschema_path);
+
+//   // Exit:
+
+//   // cout << "Leaving poset::new_table." << endl;
+//   return result;
+// }
+
+
 // PROTECTED FUNCTIONS
 
 sheaf::poset::
@@ -86,291 +195,6 @@ poset(abstract_poset_member* xtop, abstract_poset_member* xbottom)
   return;
 }
 
-sheaf::poset::
-poset(namespace_poset* xhost,
-      const poset_path& xschema_path,
-      const string& xname,
-      bool xauto_access)
-{
-
-  // Preconditions:
-
-  require(precondition_of(poset::new_state(same args)));
-
-  // Body:
-
-  new_state(xhost, xschema_path, xname, xauto_access);
-
-  // Postconditions:
-
-  ensure(postcondition_of(poset::new_state(same args)));
-
-  // Exit:
-
-  return;
-}
-
-sheaf::poset::
-poset(namespace_poset* xhost,
-      const poset_path& xschema_path,
-      const string& xname,
-      void* xtable_dofs,
-      size_t xtable_dofs_ub,
-      bool xauto_access)
-{
-
-  // Preconditions:
-
-  require(precondition_of(poset::new_state(same args)));
-
-  // Body:
-
-  new_state(xhost, xschema_path, xname, xtable_dofs, xtable_dofs_ub, xauto_access);
-
-  // Postconditions:
-
-  ensure(postcondition_of(poset::new_state(same args)));
-
-  // Exit:
-
-  return;
-}
-
-sheaf::poset::
-poset(namespace_poset* xhost,
-      const poset_path& xschema_path,
-      const string& xname,
-      arg_list& xargs,
-      bool xauto_access)
-{
-
-  // Preconditions:
-
-  require(precondition_of(poset::new_state(same args)));
-
-  // Body:
-
-  new_state(xhost, xschema_path, xname, xargs, xauto_access);
-
-  // Postconditions:
-
-  ensure(postcondition_of(poset::new_state(same args)));
-
-  // Exit:
-
-  return;
-}
-
-sheaf::poset::
-poset(namespace_poset* xhost,
-      const poset_path& xschema_path,
-      const string& xname,
-      array_poset_dof_map* xtable_dof_tuple,
-      bool xauto_access)
-{
-  // Preconditions:
-
-  require(precondition_of(poset::new_state(same args)));
-
-  // Body:
-
-  new_state(xhost, xschema_path, xname, xtable_dof_tuple, xauto_access);
-
-  // Postconditions:
-
-  ensure(postcondition_of(poset::new_state()));
-
-  // Exit:
-
-  return;
-}
-
-sheaf::poset::
-poset(namespace_poset* xhost,
-      abstract_poset_member* xschema,
-      const string& xname,
-      bool xauto_access)
-{
-
-  // Preconditions:
-
-  require(precondition_of(poset::new_state(same args)));
-
-  // Body:
-
-  new_state(xhost, xschema, xname, xauto_access);
-
-  // Postconditions:
-
-  ensure(postcondition_of(poset::new_state(same args)));
-
-  // Exit:
-
-  return;
-}
-
-sheaf::poset::
-poset(namespace_poset* xhost,
-      abstract_poset_member* xschema,
-      const string& xname,
-      void* xtable_dofs,
-      size_t xtable_dofs_ub,
-      bool xauto_access)
-{
-  // Preconditions:
-
-  require(precondition_of(poset::new_state(same args)));
-
-  // Body:
-
-  new_state(xhost, xschema, xname, xtable_dofs, xtable_dofs_ub, xauto_access);
-
-  // Postconditions:
-
-  ensure(postcondition_of(poset::new_state()));
-
-  // Exit:
-
-  return;
-}
-
-sheaf::poset::
-poset(namespace_poset* xhost,
-      abstract_poset_member* xschema,
-      const string& xname,
-      arg_list& xargs,
-      bool xauto_access)
-{
-  // Preconditions:
-
-  require(precondition_of(poset::new_state(same args)));
-
-  // Body:
-
-  new_state(xhost, xschema, xname, xargs, xauto_access);
-
-  // Postconditions:
-
-  ensure(postcondition_of(poset::new_state()));
-
-  // Exit:
-
-  return;
-}
-
-sheaf::poset::
-poset(namespace_poset* xhost,
-      abstract_poset_member* xschema,
-      const string& xname,
-      array_poset_dof_map* xtable_dof_tuple,
-      bool xauto_access)
-{
-  // Preconditions:
-
-  require(precondition_of(poset::new_state(same args)));
-
-  // Body:
-
-  new_state(xhost, xschema, xname, xtable_dof_tuple, xauto_access);
-
-  // Postconditions:
-
-  ensure(postcondition_of(poset::new_state(same args)));
-
-  // Exit:
-
-  return;
-}
-
-sheaf::poset::
-poset(const namespace_poset* xhost, pod_index_type xindex)
-{
-  // Preconditions:
-
-  require(xhost != 0);
-  require(xhost->state_is_read_accessible());
-  require(xhost->contains_member(xindex));
-  require(xhost->is_jim(xindex));
-
-  // Body:
-
-  attach_to_state(xhost, xindex);
-
-  // Postconditions:
-
-  ensure(postcondition_of(poset_state_handle::attach_to_state()));
-
-  // Exit:
-
-  return;
-}
-
-sheaf::poset::
-poset(const namespace_poset* xhost, const scoped_index& xindex)
-{
-  // Preconditions:
-
-  require(xhost != 0);
-  require(xhost->state_is_read_accessible());
-  require(xhost->contains_member(xindex));
-  require(xhost->is_jim(xindex));
-
-  // Body:
-
-  attach_to_state(xhost, xindex.hub_pod());
-
-  // Postconditions:
-
-  ensure(postcondition_of(poset_state_handle::attach_to_state()));
-
-  // Exit:
-
-  return;
-}
-
-sheaf::poset::
-poset(const namespace_poset* xhost, const string& xname)
-{
-  // Preconditions:
-
-  require(xhost != 0);
-  require(xhost->state_is_read_accessible());
-  require(xhost->contains_member(xname));
-
-  // Body:
-
-  attach_to_state(xhost, xname);
-
-  // Postconditions:
-
-  ensure(postcondition_of(poset_state_handle::attach_to_state()));
-
-  // Exit:
-
-  return;
-}
-
-sheaf::poset::
-poset(const abstract_poset_member* xmbr)
-{
-  // Preconditions:
-
-  require(xmbr != 0);
-  require(xmbr->is_jim());
-  require(xmbr->state_is_read_accessible());
-
-  // Body:
-
-  attach_to_state(xmbr);
-
-  // Postconditions:
-
-  ensure(postcondition_of(state_handle::attach_to_state(abstract_poset_member*)));
-
-  // Exit:
-
-  return;
-}
 
 sheaf::poset::
 poset(const poset& xother)
@@ -438,6 +262,68 @@ make_prototype()
 // PUBLIC FUNCTIONS
 
 // PROTECTED FUNCTIONS
+
+void
+sheaf::poset::
+new_state(namespace_poset& xns, const string& xname, const poset_path& xschema_path, bool xauto_access)
+{
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xname.empty());
+  require(!xns.contains_member(xname, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(unexecutable("xschema_path conforms to standard_schema_path"));
+
+  if(xauto_access)
+  {
+    xns.begin_jim_edit_mode(true);
+    xns.member_poset(xschema_path, false).get_read_access();
+  }
+
+  // Create a handle for the schema member.
+
+  schema_poset_member lschema(&xns, xschema_path, false);
+
+  // Create the table dof map with default values;
+  // must be newed because poset_state::_table keep a pointer to it.
+
+  // $$SCRIBBLE: may need arglist here, defaults may not be enough.
+
+  array_poset_dof_map* lmap = new array_poset_dof_map(&lschema, true);
+  lmap->put_defaults();
+  
+  // Create the state.
+
+  new_state(lschema, *lmap);
+
+  // Insert the poset in the namespace.
+  // $$SCRIBBLE: why isn't this done in new_state(schema, map)?
+
+  get_read_access();
+  initialize_namespace(xns, xname, true);
+  release_access();
+
+  if(xauto_access)
+  {
+    xns.member_poset(xschema_path, false).release_access();
+    xns.end_jim_edit_mode(false, true);
+  }
+
+  // Postconditions:
+
+  ensure(state_is_not_read_accessible());
+  ensure(name(true) == xname);
+  ensure(schema(true).path(true) == xschema_path);
+
+  // Exit:
+
+  return;
+}
 
 void
 sheaf::poset::
@@ -937,7 +823,7 @@ new_state(namespace_poset* xhost,
   // Create the poset state object;
   // Allocates the data structures but does not (fully) initialize them
 
-  _state = new poset_state(xschema, type_id());
+  _state = new poset_state(xschema, type_id(), xname);
 
   // Get write access.
   // Descendants may have data members, which aren't attached yet,
@@ -1118,10 +1004,12 @@ new_state(const schema_poset_member& xschema, array_poset_dof_map& xdof_map)
 
   disable_invariant_check();
 
+  string lname = name_space()->member_name(index());
+
   // Create the poset state object;
   // Allocates the data structures but does not (fully) initialize them
 
-  _state = new poset_state(&xschema, type_id());
+  _state = new poset_state(&xschema, type_id(), lname);
 
   // Get write access.
   // Descendants may have data members, which aren't attached yet,
@@ -1138,7 +1026,7 @@ new_state(const schema_poset_member& xschema, array_poset_dof_map& xdof_map)
 
   // Initialize the row structure
 
-  initialize_standard_subposets(name_space()->member_name(index()));
+  initialize_standard_subposets(lname);
   initialize_standard_members();
 
   /// @issue automatic vs explicit version subposet membership.
@@ -1176,7 +1064,7 @@ new_state(const schema_poset_member& xschema, array_poset_dof_map& xdof_map)
   // Initialize any additional handle data members.
 
   initialize_handle_data_members(*name_space());
-
+  
   // Release and regain access;
   // will get access to handle data members.
 

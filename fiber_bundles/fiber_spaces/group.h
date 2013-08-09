@@ -142,7 +142,7 @@ private:
 /// The general, abstract mathematical group
 /// (persistent version)
 ///
-class SHEAF_DLL_SPEC group : public partial_poset_member
+class SHEAF_DLL_SPEC group : public total_poset_member
 {
 
   //============================================================================
@@ -220,8 +220,7 @@ public:
   ///
   inline group* clone(bool xnew_state, bool xauto_access = true) const
   {
-    return static_cast<group*>(partial_poset_member::clone(xnew_state,
-                               xauto_access));
+    return static_cast<group*>(total_poset_member::clone(xnew_state, xauto_access));
   }
 
 protected:

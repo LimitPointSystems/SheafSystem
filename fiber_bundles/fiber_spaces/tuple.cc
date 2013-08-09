@@ -227,9 +227,11 @@ invariant() const
 // CLASS TUPLE
 //==============================================================================
 
-//==============================================================================
-// CARTESIAN ALGEBRA (TUPLE) FACET
-//==============================================================================
+// ===========================================================
+// HOST FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
 
 const string&
 fiber_bundle::tuple::
@@ -305,6 +307,53 @@ make_standard_schema(namespace_poset& xns)
   return;
 }
 
+
+void
+fiber_bundle::tuple::
+new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xschema_path, int xfactor_ct, bool xauto_access)
+{
+  // cout << endl << "Entering tuple::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path()));
+
+  require(xfactor_ct > 0);
+
+  // Body:
+
+  host_type::new_table(xns, xhost_path, xschema_path, xfactor_ct, xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.contains_path(xhost_path, xauto_access));
+  ensure(!xns.poset_state_is_read_accessible(xhost_path, xauto_access));
+  ensure(xns.member_poset(xhost_path, xauto_access).schema(true).path(true) == xschema_path);
+
+  // Exit:
+
+  // cout << "Leaving tuple::new_host." << endl;
+  return;
+}
+
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+// ===========================================================
+// CARTESIAN ALGEBRA (TUPLE) FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+ 
 fiber_bundle::tuple::
 tuple()
 {
@@ -593,6 +642,10 @@ dof_map_is_ancestor_of(const poset_dof_map* xdof_map) const
 
   return result;
 }
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
 
 //==============================================================================
 // ABSTRACT POSET MEMBER FACET

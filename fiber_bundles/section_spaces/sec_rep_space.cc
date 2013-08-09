@@ -1255,7 +1255,7 @@ new_state(namespace_poset& xns,
   // Create the poset state object;
   // allocates the data structures but does not (fully) initialize them.
 
-  _state = new poset_state(&lschema, type_id());
+  _state = new poset_state(&lschema, type_id(), xname);
 
   // Set any class specific args in arg list.
 
@@ -1371,12 +1371,14 @@ new_state(const schema_poset_member& xschema, array_poset_dof_map& xdof_map)
 
   disable_invariant_check();
 
+  string lname = name_space()->member_name(index());
+
   // Create the state object;
   // Allocates the data structures but does not (fully) initialize them
 
   const section_space_schema_member& lschema = reinterpret_cast<const section_space_schema_member&>(xschema);
 
-  _state = new poset_state(&lschema, type_id());
+  _state = new poset_state(&lschema, type_id(), lname);
 
   // Get write access
 
@@ -1388,7 +1390,7 @@ new_state(const schema_poset_member& xschema, array_poset_dof_map& xdof_map)
 
   // Initialize the row structure
 
-  initialize_standard_subposets(name_space()->member_name(index()));
+  initialize_standard_subposets(lname);
   initialize_standard_members();
 
   // Set the standard id spaces.

@@ -10,6 +10,7 @@
 #include "abstract_poset_member.impl.h"
 #include "arg_list.h"
 #include "assert_contract.h"
+#include "fiber_bundles_namespace.h"
 #include "namespace_poset.impl.h"
 #include "namespace_poset_member.h"
 #include "poset_handle_factory.h"
@@ -90,6 +91,108 @@ make_arg_list(int xfactor_ct)
   // Exit:
 
   return result;
+}
+
+void
+fiber_bundle::tuple_space::
+new_table(namespace_type& xns, const poset_path& xpath, const poset_path& xschema_path, int xfactor_ct, bool xauto_access)
+{
+  // cout << endl << "Entering tuple_space::new_table." << endl;
+
+  // Preconditions:
+
+
+  require(!xpath.empty());
+  require(!xns.contains_path(xpath, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));
+
+  require(xfactor_ct > 0);
+
+  // Body:
+
+  // Create the table; have to new it because namespace keeps a pointer.
+
+  typedef tuple_space table_type;
+
+  table_type* ltable = new table_type();
+
+  if(xauto_access)
+  {
+    xns.member_poset(xschema_path, false).get_read_access();
+  }
+
+  // Create a handle of the right type for the schema member.
+
+  schema_poset_member lschema(&xns, xschema_path, false);
+
+  // Create the table dof map and set dof values;
+  // must be newed because poset_state::_table keep a pointer to it.
+
+  array_poset_dof_map* lmap = new array_poset_dof_map(&lschema, true);
+  lmap->put_dof("factor_ct", xfactor_ct);
+  
+  // Create the state.
+
+  ltable->new_state(lschema, *lmap);
+
+  // Insert the poset in the namespace.
+  // $$SCRIBBLE: why isn't this done in new_state(schema, map)?
+
+  ltable->get_read_access();
+  ltable->initialize_namespace(xns, xpath.poset_name(), true);
+  ltable->release_access();
+
+  if(xauto_access)
+  {
+    xns.member_poset(xschema_path, false).release_access();
+  }
+
+  //////////////////////////////
+
+
+//   // Create the table; have to new it because namespace keeps a pointer.
+
+//   typedef tuple_space table_type;
+
+//   table_type* ltable = new table_type();
+
+//   // Create a handle of the right type for the schema member.
+
+//   schema_poset_member lschema(&xns, xschema_path, true);
+//   lschema.get_read_access();
+
+//   // Create the table dof map and set dof values;
+//   // must be newed because poset_state::_table keep a pointer to it.
+
+//   array_poset_dof_map* lmap = new array_poset_dof_map(&lschema, true, true);
+//   lmap->put_dof("factor_ct", xfactor_ct);
+
+  arg_list largs = make_arg_list(xfactor_ct);
+  
+  
+//   // Create the state.
+
+//   ltable->new_state(lschema, largs, false);
+
+//   ltable->initialize_namespace(xns, xpath.poset_name(), true);
+
+//   lschema.release_access();
+
+
+  // Postconditions:
+
+  ensure(xns.contains_path(xpath, xauto_access));
+  //  ensure(!xns.path_is_read_accessible(result, xauto_access));
+  ensure(!xns.poset_state_is_read_accessible(xpath, xauto_access));
+  ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == xschema_path);
+
+  // Exit:
+
+  // cout << "Leaving tuple_space::new_table." << endl;
+  return;
 }
 
 int

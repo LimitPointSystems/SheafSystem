@@ -47,12 +47,23 @@ using namespace sheaf;
 ///
 class SHEAF_DLL_SPEC base_space_member : public total_poset_member
 {
+
   // ===========================================================
-  /// @name BASE_SPACE_MEMBER FACET
+  /// @name HOST FACTORY FACET
   // ===========================================================
   //@{
 
 public:
+
+  ///
+  /// The type of namespace for this type of member.
+  ///
+  typedef fiber_bundles_namespace namespace_type;
+
+  ///
+  /// The type of host poset for this type of member.
+  ///
+  typedef poset host_type;
 
   ///
   /// The name of the standard schema poset for this class.
@@ -78,6 +89,36 @@ public:
   /// The name of the prototypes poset.
   ///
   static const string& prototypes_poset_name();
+
+  ///
+  /// Manual, shallow factory method; creates a new host poset for members of this type.
+  /// The poset is created in namespace xns with path xpath and schema specified by xschema_path.
+  ///
+  static void new_host(namespace_type& xns, 
+                       const poset_path& xpath, 
+                       const poset_path& xschema_path, 
+                       bool xauto_access);
+
+  ///
+  /// Auto, deep factory method; creates a new host poset and any prerequisite posets
+  /// for members of this type. The poset is created in namespace xns with path xpath
+  /// and schema specified by standard_schema_path().
+  ///
+  static void new_host(namespace_type& xns, const poset_path& xpath, bool xauto_access);
+  
+
+protected:
+
+private:
+
+  //@}
+
+  // ===========================================================
+  /// @name BASE_SPACE_MEMBER FACET
+  // ===========================================================
+  //@{
+
+public:
 
   ///
   /// Default constructor; creates a new, unattached base_space_member handle.

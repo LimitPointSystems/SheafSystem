@@ -572,7 +572,7 @@ new_state(namespace_poset* xns,
   // Create the poset state object;
   // allocates the data structures but does not (fully) initialize them.
 
-  _state = new poset_state(&lschema, BINARY_SECTION_SPACE_SCHEMA_POSET_ID);
+  _state = new poset_state(&lschema, BINARY_SECTION_SPACE_SCHEMA_POSET_ID, xname);
 
   // Cleanup temporary schema handle.
 
@@ -841,7 +841,7 @@ new_state(namespace_poset& xns,
   // Create the poset state object;
   // allocates the data structures but does not (fully) initialize them.
 
-  _state = new poset_state(&lschema, BINARY_SECTION_SPACE_SCHEMA_POSET_ID);
+  _state = new poset_state(&lschema, BINARY_SECTION_SPACE_SCHEMA_POSET_ID, xname);
 
   // Get write access;
   // handle data members aren't attached yet, 
@@ -974,10 +974,12 @@ new_state(const schema_poset_member& xschema,
 
   disable_invariant_check();
 
+  string lname = name_space()->member_name(index());
+
   // Create the poset state object;
   // allocates the data structures but does not (fully) initialize them.
 
-  _state = new poset_state(&xschema, BINARY_SECTION_SPACE_SCHEMA_POSET_ID);
+  _state = new poset_state(&xschema, BINARY_SECTION_SPACE_SCHEMA_POSET_ID, lname);
 
   // Get write access;
   // handle data members aren't attached yet, 
@@ -1005,7 +1007,7 @@ new_state(const schema_poset_member& xschema,
 
   // Initialize the row structure.
 
-  initialize_standard_subposets(name_space()->member_name(index()));
+  initialize_standard_subposets(lname);
   initialize_standard_members();
 
   // Set the standard id spaces.

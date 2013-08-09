@@ -49,16 +49,26 @@ public:
   ///
   /// Constructor
   ///
-  poset_state(const abstract_poset_member* xschema,
-              poset_type xtype_id,
-              size_type xmbr_ct = 16,
-              size_type xlink_ct = 64,
-              size_type xsubset_ct = 4);
+  poset_state(const abstract_poset_member* xschema, poset_type xtype_id, const string& xname);
+
+//   ///
+//   /// Constructor
+//   ///
+//   poset_state(const abstract_poset_member* xschema,
+//               poset_type xtype_id,
+//               size_type xmbr_ct = 16,
+//               size_type xlink_ct = 64,
+//               size_type xsubset_ct = 4);
 
   ///
   /// Destructor
   ///
   ~poset_state();
+
+  ///
+  /// The name of this poset.
+  ///
+  const string& name() const;
 
   ///
   /// Identifier for the type of this poset.
@@ -92,6 +102,11 @@ protected:
   /// private to disable default construction.
   ///
   poset_state() {};
+
+  ///
+  /// The name of this poset.
+  ///
+  string _name;
 
   ///
   /// Identifier for the type of poset.

@@ -2153,11 +2153,13 @@ new_state(const string& xname)
 
   // Now we have a schema, create the poset state object.
 
-  _state = new poset_state(&(_namespace_schema.top()),
-                           NAMESPACE_POSET_ID,
-                           8,   // arbitrary
-                           16,  // arbitrary
-                           4);  // arbitrary
+//   _state = new poset_state(&(_namespace_schema.top()),
+//                            NAMESPACE_POSET_ID,
+//                            8,   // arbitrary
+//                            16,  // arbitrary
+//                            4);  // arbitrary
+
+  _state = new poset_state(&(_namespace_schema.top()), NAMESPACE_POSET_ID, xname);
 
   // Create the primitives poset using the primitives schema
   // Inserted in the namespace in routine initialize_standard_members.

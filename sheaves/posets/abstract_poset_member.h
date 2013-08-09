@@ -43,13 +43,15 @@ namespace sheaf
 {
 
 template <typename T> class block;
-class subposet;
-class tern;
-class storage_agent;
 class poset_dof_map;
 class poset_member_iterator;
 class poset_path;
 class schema_poset_member;
+class sheaves_namespace;
+class storage_agent;
+class subposet;
+class tern;
+  
 
 // ============================================================================
 // CLASS ABSTRACT_POSET_MEMBER_TABLE_DOFS_TYPE
@@ -154,18 +156,7 @@ private:
 // ============================================================================
   
 ///
-/// A client handle for a member of a poset.
-/// A abstract_poset_member is a handle for a specific poset member state
-/// within the poset_state of a specific poset object. The poset member state
-/// is identified by a unique poset member index within a host poset object.
-/// The abstract_poset_member can be created either attached to a specific
-/// poset member state, or it can be created unattached. In the latter case it
-/// is treated as if attached to a unique "void" poset member state. When a
-/// abstract_poset_member object is deleted, the poset member state it is
-/// attached to, if any, is also deleted. If the client wishes to delete the
-/// abstract_poset_member object, but leave the poset member state in the
-/// poset_state for later use, the abstract_poset_member object must be
-/// detached before it is deleted.
+/// An abstract client handle for a member of a poset.
 ///
 class SHEAF_DLL_SPEC abstract_poset_member : public poset_component
 {
@@ -181,12 +172,15 @@ class SHEAF_DLL_SPEC abstract_poset_member : public poset_component
   friend class storage_agent;
   // friend ostream & operator << (ostream &os, abstract_poset_member& p);
 
+
   // ===========================================================
-  /// @name ABSTRACT_POSET_MEMBER FACET
+  /// @name HOST FACTORY FACET
   // ===========================================================
   //@{
 
 public:
+
+  // Typedefs:
 
   ///
   /// The type of the table dofs.
@@ -197,6 +191,61 @@ public:
   /// The type of the row dofs.
   ///
   typedef abstract_poset_member_row_dofs_type row_dofs_type;
+
+  // $$SCRIBBLE: need the following for consistency,
+  // but it is not clear what they should be. We could
+  // implement a single standard schema space that would
+  // include the fiber_space_schema. The standard schema for
+  // abstract_poset_member would be bottom of this space.
+
+  //   ///
+  //   /// The name of the standard schema poset for this class.
+  //   ///
+  //   static const string& standard_schema_poset_name();
+
+  //   ///
+  //   /// The path to the standard schema for this class.
+  //   ///
+  //   static const poset_path& standard_schema_path();
+
+  //   ///
+  //   /// Creates the standard schema for this class in namespace xns.
+  //   ///
+  //   static void make_standard_schema(namespace_poset& xns);
+
+  ///
+  /// The type of namespace for this type of member.
+  ///
+  typedef sheaves_namespace namespace_type;
+
+  ///
+  /// The type of host poset for this type of member.
+  ///
+  typedef poset host_type;
+
+  ///
+  /// Creates a new host poset for members of this type.
+  ///
+  static void new_host(namespace_type& xns, 
+                       const poset_path& xpath, 
+                       const poset_path& xschema_path, 
+                       bool xauto_access);
+  
+
+protected:
+
+private:
+
+  //@}
+
+  // ===========================================================
+  /// @name ABSTRACT_POSET_MEMBER FACET
+  // ===========================================================
+  //@{
+
+public:
+
+
 
   ///
   /// Assignment operator; attaches this to the same state as xother.
@@ -332,21 +381,6 @@ public:
 		     bool xauto_access);
 
 protected:
-
-private:
-
-  //@}
-
-
-  // ===========================================================
-  /// @name HOST FACTORY FACET
-  // ===========================================================
-  //@{
-
-public:
-
-protected:
-
   ///
   /// Default constructor; creates a new, unattached abstract_poset_member handle.
   ///
@@ -372,6 +406,7 @@ protected:
 private:
 
   //@}
+
 
 
   // ===========================================================

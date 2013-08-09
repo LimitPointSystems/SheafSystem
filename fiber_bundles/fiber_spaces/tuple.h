@@ -59,6 +59,8 @@ namespace fiber_bundle
 {
 
 using namespace sheaf;
+
+class fiber_bundles_namespace;
 class tuple_space;
 
 //==============================================================================
@@ -182,14 +184,17 @@ private:
 class SHEAF_DLL_SPEC tuple : public total_poset_member
 {
 
-  //============================================================================
-  /// @name  CARTESIAN ALGEBRA (TUPLE) FACET OF CLASS TUPLE
-  //============================================================================
+  // ===========================================================
+  /// @name HOST FACTORY FACET
+  // ===========================================================
   //@{
 
 public:
 
-  // Typedefs:
+  ///
+  /// The type of namespace for this type of member.
+  ///
+  typedef fiber_bundles_namespace namespace_type;
 
   ///
   /// The type of host poset.
@@ -212,7 +217,7 @@ public:
   static const string& standard_schema_poset_name();
 
   ///
-  /// The path to the standard schema for this class.
+  /// The path of the schema required by this class.
   ///
   static const poset_path& standard_schema_path();
 
@@ -221,6 +226,30 @@ public:
   ///
   static void make_standard_schema(namespace_poset& xns);
 
+  ///
+  /// Manual, shallow factory method; creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path and schema specified by xschema_path.
+  ///
+  static void new_host(namespace_type& xns, 
+                       const poset_path& xhost_path, 
+                       const poset_path& xschema_path,
+                       int xfactor_ct,
+                       bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+
+  //============================================================================
+  /// @name  CARTESIAN ALGEBRA (TUPLE) FACET OF CLASS TUPLE
+  //============================================================================
+  //@{
+
+public:
+
+  // Typedefs:
   ///
   /// Default constructor.
   ///

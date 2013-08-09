@@ -1235,6 +1235,7 @@ begin_read_transaction(namespace_poset& xns)
 
       poset_state_handle* lmbr_poset =
         poset_state_handle::new_poset_handle(lns_mbr.poset_class(), lns_mbr.poset_type_id());
+
       lmbr_poset->attach_to_state(&lns_mbr);
 
       /// @hack all the non-standard members are restricted to
@@ -1242,11 +1243,14 @@ begin_read_transaction(namespace_poset& xns)
       /// Patch this up by extending the schema to top.
 
       lns_mbr.dof_map().extend_to_top();
+
+      cout << "in storage_agent::begin_read_transaction: ns mbr dof map:" << lns_mbr.dof_map() << endl;
     }
 
     itr.next();
   }
 
+  
   lns_mbr.detach_from_state();
 
   // Postconditions:

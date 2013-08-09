@@ -33,6 +33,7 @@ namespace fiber_bundle
 
   using namespace sheaf;  
 
+  class fiber_bundles_namespace;
   class tuple;
   
 ///
@@ -48,6 +49,11 @@ class SHEAF_DLL_SPEC tuple_space : public poset
   //@{
 
 public:
+
+  ///
+  /// The type of namespace for this type of member.
+  ///
+  typedef fiber_bundles_namespace namespace_type;
 
   ///
   /// The type of member associated with this space.
@@ -73,6 +79,16 @@ public:
   /// Creates an arg list which conforms to the schema of this.
   ///
   static arg_list make_arg_list(int xfactor_ct);
+
+  ///
+  /// Creates a new tuple_space in namespace xns wiih patrh xpath 
+  /// and schema specified by xschema_path.
+  ///
+  static void new_table(namespace_type& xhost, 
+                        const poset_path& xpath, 
+                        const poset_path& xschema_path,
+                        int xfactor_ct,
+                        bool xauto_access);
   
   //============================================================================
   // TABLE DOFS

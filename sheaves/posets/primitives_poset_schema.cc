@@ -521,7 +521,8 @@ new_state()
   // Create the poset state object without a schema because we don't have one yet.
   // Initial space for 4 members, 8 links, 4 subposets
 
-  _state = new poset_state(0, PRIMITIVES_POSET_SCHEMA_ID, 8, 16, 32);
+  //  _state = new poset_state(0, PRIMITIVES_POSET_SCHEMA_ID, 8, 16, 32);
+  _state = new poset_state(0, PRIMITIVES_POSET_SCHEMA_ID, standard_name());
 
   // Get write access.
 

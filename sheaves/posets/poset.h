@@ -44,6 +44,31 @@ class SHEAF_DLL_SPEC poset : public poset_state_handle
 
 public:
 
+  ///
+  /// The type of namespace for this type of member.
+  ///
+  typedef namespace_poset namespace_type;
+  
+
+  ///
+  /// Creates a new poset in namespace xns with pah xpath 
+  /// and schema specified by xschema_path.
+  ///
+  static void  new_table(namespace_type& xhost, 
+                         const poset_path& xpath, 
+                         const poset_path& xschema_path, 
+                         bool xauto_access);
+
+//   ///
+//   /// Creates a new poset in namespace xns wiih name xname 
+//   /// and schema specified by xschema_path.
+//   ///
+//   static poset_path new_table(namespace_poset& xhost, 
+//                               const string& xname, 
+//                               const poset_path& xschema_path, 
+//                               bool xauto_access);
+  
+
 protected:
 
   ///
@@ -60,114 +85,6 @@ protected:
   /// Covariant constructor
   ///
   poset(abstract_poset_member* xtop, abstract_poset_member* xbottom);
-
-  ///
-  /// Creates a new poset handle attached to a new state in namespace xhost,
-  /// with schema specified by xschema_path,  name xname, and
-  /// table dofs not initialized.
-  ///
-  poset(namespace_poset* xhost,
-        const poset_path& xschema_path,
-        const string& xname,
-        bool xauto_access = true);
-
-  ///
-  /// Creates a new poset handle attached to a new state in namespace xhost,
-  /// with schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xtable_dofs.
-  ///
-  poset(namespace_poset* xhost,
-        const poset_path& xschema_path,
-        const string& xname,
-        void* xtable_dofs,
-        size_t xtable_dofs_ub,
-        bool xauto_access = true);
-
-  ///
-  /// Creates a new poset handle attached to a new state in namespace xhost,
-  /// with schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  poset(namespace_poset* xhost,
-        const poset_path& xschema_path,
-        const string& xname,
-        arg_list& xargs,
-        bool xauto_access = true);
-
-  ///
-  /// Creates a new poset handle attached to a new state in namespace xhost,
-  /// with schema specified by xschema_path,  name xname, and
-  /// table dof map xdof_tuple.
-  ///
-  poset(namespace_poset* xhost,
-        const poset_path& xschema_path,
-        const string& xname,
-        array_poset_dof_map* xdof_tuple,
-        bool xauto_access = true);
-
-  ///
-  /// Creates a new poset handle attached to a new state in namespace xhost,
-  /// with schema xschema, name xname, and uninitialized table dofs.
-  ///
-  poset(namespace_poset* xname_space,
-        abstract_poset_member* xschema,
-        const string& xname,
-        bool xauto_access = true);
-
-  ///
-  /// Creates a new poset handle attached to a new state in namespace xhost,
-  /// with schema xschema, name xname, and table dofs initialized by xtable_dofs.
-  ///
-  poset(namespace_poset* xname_space,
-        abstract_poset_member* xschema,
-        const string& xname,
-        void* xtable_dofs,
-        size_t xtable_dofs_ub,
-        bool xauto_access = true);
-
-  ///
-  /// Creates a new poset handle attached to a new state in namespace xhost,
-  /// with schema xschema, name xname, and table dofs initialized by xargs.
-  ///
-  poset(namespace_poset* xname_space,
-        abstract_poset_member* xschema,
-        const string& xname,
-        arg_list& xargs,
-        bool xauto_access = true);
-
-  ///
-  /// Creates a new poset handle attached to a new state in namespace xhost,
-  /// with schema  xschema, name xname, and table dof map xdof_tuple.
-  ///
-  poset(namespace_poset* xhost,
-        abstract_poset_member* xschema,
-        const string& xname,
-        array_poset_dof_map* xdof_tuple,
-        bool xauto_access = true);
-
-  ///
-  /// Creates a new handle attached to the poset with
-  /// index xindex in namespace xhost.
-  ///
-  poset(const namespace_poset* xhost, pod_index_type xindex);
-
-  ///
-  /// Creates a new handle attached to the poset with
-  /// index xindex in namespace xhost.
-  ///
-  poset(const namespace_poset* xhost, const scoped_index& xindex);
-
-  ///
-  /// Creates a new handle attached to the poset with
-  /// name xname in namespace xhost.
-  ///
-  poset(const namespace_poset* xhost, const string& xname);
-
-  ///
-  /// Creates a new handle attached to the poset associated
-  /// with namespace member xmbr
-  ///
-  poset(const abstract_poset_member* xmbr);
 
   ///
   /// Copy constructor; attaches this to the same state as xother
@@ -197,6 +114,16 @@ private:
 public:
 
 protected:
+
+  ///
+  /// Attaches this to a new poset state in namespace xhost,
+  /// schema specified by name xname, xschema_path, and
+  /// table dofs not initialized.
+  ///
+  void new_state(namespace_poset& xhost,
+                 const string& xname,
+                 const poset_path& xschema_path,
+                 bool xauto_access);
 
   ///
   /// Attaches this to a new poset state in namespace xhost,
@@ -325,13 +252,20 @@ protected:
 
   using poset_state_handle::new_state;
 
+
+//   ///
+//   /// Creates a new poset state with schema xschema and table dof map xdof_map,
+//   /// attaches this to the state and creates and initializes the associated
+//   /// namespace member. Intended for use by new_table factory methods.
+//   ///
+//   virtual void new_internal_state(const schema_poset_member& xschema, array_poset_dof_map& xdof_map);
+
   ///
-  /// Attaches this external poset to a new poset state with schema
-  /// given by xschema and table dofs by xdof_map.
-  /// Intended for use by i/o subsystem.
+  /// Creates a new poset state with schema xschema and table dof map xdof_map,
+  /// attaches this to the state. Assumes the associated namespace member has
+  /// already been created and initialized. Intended for use by i/o subsystem.
   ///
-  virtual void new_state(const schema_poset_member& xschema,
-                         array_poset_dof_map& xdof_map);
+  virtual void new_state(const schema_poset_member& xschema, array_poset_dof_map& xdof_map);
 
 private:
 

@@ -1189,7 +1189,8 @@ name() const
   {
     // Retrieve the name from the state.
 
-    result = subposet_name(WHOLE_INDEX);
+    //    result = subposet_name(WHOLE_INDEX);
+    result = _state->name();
   }
 
   // Postconditions:
@@ -1269,7 +1270,7 @@ initialize_namespace(namespace_poset& xns,
 
   require(state_is_read_accessible());
 
-  /// @hack previously this routine entered and exited jim_edit_mode
+  /// @hack previously insert_poset called from this routine entered and exited jim_edit_mode
   /// without exporting any precondition. As a result, numerous new_state
   /// routines do not properly provide access before calling this routine.
   /// Continue the old practice until we get a chance to clean the mess up.
@@ -1281,17 +1282,10 @@ initialize_namespace(namespace_poset& xns,
 
   require(xns.state_is_read_write_accessible());
 
-  /// @issue the pre- and post-conditions established here
-  /// can not be satisfied in descendant namespace_poset.
-  /// This is a symptom of a fundamental error in the poset class hierarchy.
-
   // Body:
 
   // Insert this into the namespace and
   // set the namespace and index features.
-
-  /// @hack must call insert_poset before setting _namespace,
-  /// otherwise an invariance is violated somewhere below insert_poset.
 
   disable_invariant_check();
 
@@ -7082,7 +7076,8 @@ initialize_standard_subposets(const string& xname)
 
   subposet& lccr = powerset().coarsest_common_refinement();
   lccr.new_state(this, true, false);
-  lccr.put_name(xname, true, false);
+  //  lccr.put_name(xname, true, false);
+  lccr.put_name("__CCR", true, false);
 
   // CCR and version 0 are the same thing until we move to version 1.
 
@@ -7994,7 +7989,8 @@ version_to_name(int xversion) const
 
   if(xversion == COARSEST_COMMON_REFINEMENT_VERSION)
   {
-    result = name();
+    //    result = name();
+    result = "__CCR";
   }
   else
   {
@@ -8006,7 +8002,8 @@ version_to_name(int xversion) const
   // Postconditions:
 
   ensure(!result.empty());
-  ensure(xversion == COARSEST_COMMON_REFINEMENT_VERSION ? (result == name()) : is_version_name(result));
+  //  ensure(xversion == COARSEST_COMMON_REFINEMENT_VERSION ? (result == name()) : is_version_name(result));
+  ensure(xversion == COARSEST_COMMON_REFINEMENT_VERSION ? (result == "__CCR") : is_version_name(result));
 
   // Exit
 
@@ -8021,13 +8018,14 @@ version_from_name(const string& xname) const
 
   // Preconditions:
 
-  require(is_version_name(xname) || xname == name());
+  require(is_version_name(xname) || xname == "__CCR");
 
   // Body:
 
   /// @todo replace poset name == whole name with something more reasonable!
 
-  if(xname == name())
+    //  if(xname == name())
+  if(xname == "__CCR")
   {
     // Result is coarsest common refinement.
 
