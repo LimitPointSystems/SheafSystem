@@ -76,9 +76,9 @@ endif()
 set(EXPORTS_FILE ${PROJECT_NAME}-exports.cmake CACHE STRING "System exports file name")
 set(INSTALL_CONFIG_FILE ${PROJECT_NAME}-install.cmake CACHE STRING "Install config file name")
 
-# Windows has a notion of Debug and Release builds. For practical purposes, "Release" is
-# equivalent to "not Debug". We'll carry that notion through to linux/gcc as well for now, with
-# "Release" equivalent to "!-g"
+#
+# Set the Configuartion types. Only relevant for Linux.
+#
 set(CMAKE_CONFIGURATION_TYPES Debug-contracts Debug-no-contracts Release-contracts Release-no-contracts 
      RelWithDebInfo-contracts RelWithDebInfo-no-contracts CACHE STRING "Supported configuration types"
     FORCE)
@@ -98,8 +98,14 @@ if(NOT CMAKE_BUILD_TYPE)
       FORCE)
 endif(NOT CMAKE_BUILD_TYPE)
 
+#
+# Tell CMake which configurations are "debug"
+#
 set_property(GLOBAL PROPERTY DEBUG_CONFIGURATIONS "Debug-contracts" "Debug-no-contracts") 
 
+#
+# Establish the file name suffix for debug type compuiler output
+#
 if(WIN64MSVC OR WIN64INTEL)
     set(CMAKE_DEBUG-CONTRACTS_POSTFIX "_d" CACHE STRING "Debug libs suffix")
     set(CMAKE_DEBUG-NO-CONTRACTS_POSTFIX "_d" CACHE STRING "Debug libs suffix")
@@ -119,14 +125,16 @@ set(BUILD_BINDINGS NO CACHE BOOL "Toggle build of language bindings.")
 set(ENABLE_WIN32_MP ON CACHE BOOL "Toggle win32 compiler MP directive. Works for MS and Intel. Default is ON.")
 
 #
-# $$HACK Toggle intel compiler warnings.
+# Toggle intel compiler warnings.
 #
 set(INTELWARN CACHE BOOL "Toggle Intel compiler warnings")
 
 #   
 #  Type of system documentation to build: Dev or User
+#  User docs do not contain source code listing. Otherwise,
+#  Dev and User are identical.
 #
-set(LPS_DOC_STATE User CACHE STRING "Type of documentation to build: [Dev|User]")
+set(DOC_STATE Dev CACHE STRING "Type of documentation to build: [Dev|User]")
 
 #
 # Enable coverage results
@@ -135,7 +143,9 @@ if(LINUX64GNU OR LINUX64INTEL)
     set(ENABLE_COVERAGE OFF CACHE BOOL "Set to ON to compile with coverage support. Default is OFF.")
 endif()
 
-# Set the Coverage dir variable (used by compiler) and create the coverage dir.
+#
+# Set the location of the coverage foilder and create it.
+#
 if(ENABLE_COVERAGE)
     set(COVERAGE_DIR ${CMAKE_BINARY_DIR}/coverage CACHE STRING "Directory for coverage files")
     execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${COVERAGE_DIR})
@@ -193,6 +203,7 @@ endfunction(add_components)
 
 #
 # Clear cached variables at the start of each cmake run.
+# This prevents the variables from containing diplicate entries.
 #
 function(clear_component_variables comp)
 

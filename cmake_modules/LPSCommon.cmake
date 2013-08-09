@@ -429,7 +429,7 @@ endfunction()
     function(add_doc_targets)
         if(DOC_TARGETS)
             if(DOXYGEN_FOUND)
-                if(LPS_DOC_STATE MATCHES Dev OR LPS_DOC_STATE MATCHES dev OR LPS_DOC_STATE MATCHES DEV)
+                if(DOC_STATE MATCHES Dev OR DOC_STATE MATCHES dev OR DOC_STATE MATCHES DEV)
                     add_custom_target(doc ALL
                             COMMAND ${CMAKE_COMMAND} -E echo "Generating Developer Documentation ... " 
                             COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/documentation                    

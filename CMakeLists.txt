@@ -80,9 +80,6 @@ endif()
 # You need only specify the sub-directory within ${CMAKE_INSTALL_PREFIX}, cmake will create the dir.
 # With no value specified for DESTINATION, all files are placed in ${CMAKE_INSTALL_PREFIX}.
 #
-# Only install the documentation when Release-no-contracts is being installed. This prevents 4 iterations of doc generation.
-# The rationale here is that Release-no-contracts will always be released.
-#
 install(DIRECTORY ${CMAKE_BINARY_DIR}/documentation/ DESTINATION documentation)
 
 #
@@ -91,7 +88,7 @@ install(DIRECTORY ${CMAKE_BINARY_DIR}/documentation/ DESTINATION documentation)
 install_prereqs()
 
 #
-# Generate some info about the release
+# Generate some info about the release, and write it to the RELEASE file in install root folder.
 #
 set(RELEASE_DATE)
 get_date(RELEASE_DATE)
