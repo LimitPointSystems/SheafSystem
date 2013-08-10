@@ -19,6 +19,10 @@
 #
 
 #
+# We have to set this so cmake will allow us to link against swig modules
+#
+
+#
 # Establish the version number for this build.
 # This is only relevant for releases. 0.0.0.0 is chosen here
 # simply as a stub.

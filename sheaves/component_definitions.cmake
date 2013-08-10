@@ -146,8 +146,8 @@ function(add_bindings_targets)
 
     if(SWIG_FOUND AND BUILD_BINDINGS)
 
-        include(${SWIG_USE_FILE})
-     
+     #   include(${SWIG_USE_FILE})
+         include(UseSWIG)    
         #
         # Java ################################################################
         #
@@ -279,21 +279,20 @@ function(add_bindings_targets)
         
         set_source_files_properties(${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE} PROPERTIES CPLUSPLUS ON)
         swig_add_module(${${COMPONENT}_PYTHON_BINDING_LIB} python ${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE})
-        message(STATUS "${${COMPONENT}_PYTHON_BINDING_LIB}")
-        message(STATUS " ${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE} ${${COMPONENT}_SWIG_COMMON_INTERFACE} ${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE}")
         if(WIN64INTEL OR WIN64MSVC)
-            add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB} ${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE} ${${COMPONENT}_SWIG_COMMON_INTERFACE})
-            target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB} ${PYTHON_LIBRARIES})
-            set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} PROPERTIES FOLDER "Binding Targets - Python")
+            add_dependencies(_${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB} ${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE} ${${COMPONENT}_SWIG_COMMON_INTERFACE})
+           target_link_libraries(_${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB} debug ${PYTHON_LIBRARY} optimized ${PYTHON_DEBUG_LIBRARY}})
+ #           swig_link_libraries(${PYTHON_LIBRARIES})
+            set_target_properties(_${${COMPONENT}_PYTHON_BINDING_LIB} PROPERTIES FOLDER "Binding Targets - Python")
         else()
             add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_SHARED_LIB}${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE} ${${COMPONENT}_SWIG_COMMON_INTERFACE})
             target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_SHARED_LIB})
         endif()
         
-        set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} PROPERTIES LINKER_LANGUAGE CXX)
-    
+        set_target_properties(_${${COMPONENT}_PYTHON_BINDING_LIB} PROPERTIES LINKER_LANGUAGE CXX)
+    message(STATUS "${${COMPONENT}_PYTHON_BINDING_LIB}")
         # Define the library version.
-        set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} PROPERTIES VERSION ${LIB_VERSION})  
+        set_target_properties(_${${COMPONENT}_PYTHON_BINDING_LIB} PROPERTIES VERSION ${LIB_VERSION})  
  
         # Guard these until we can get the VS solution explorer aesthetic issues sorted
         if(LINUX64GNU OR LINUX64INTEL) 

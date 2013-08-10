@@ -17,6 +17,8 @@
 #
 #
 
+
+
 # Setting CMAKE_CONFIGURATION_TYPES prior to the project function call
 # will eliminate the default configuration types (debug,release,RelWithDebugInfo, et al.) --
 # or at least stop them from appearing in the VS configuration list.

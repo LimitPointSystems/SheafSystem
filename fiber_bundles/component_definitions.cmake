@@ -22,6 +22,8 @@
 # 
 include(${CMAKE_MODULE_PATH}/LPSCommon.cmake)
 
+cmake_policy(SET CMP0001 OLD)
+
 #
 # Define the clusters for this component.
 #
@@ -145,6 +147,7 @@ endfunction(add_library_targets)
 # Create the bindings targets for this component.
 #
 function(add_bindings_targets)
+#set(CMAKE_BACKWARDS_COMPATIBILITY 2.2)
 
     if(SWIG_FOUND AND BUILD_BINDINGS)  
         
@@ -166,8 +169,7 @@ function(add_bindings_targets)
         swig_add_module(${${COMPONENT}_JAVA_BINDING_LIB} java ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_JAVA_INTERFACE})
         
         if(WIN64INTEL OR WIN64MSVC)
-            add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} ${SHEAVES_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})
-           # target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${JDK_LIBS} ${SHEAVES_JAVA_BINDING_LIBS} debug ${${COMPONENT}_DEBUG_IMPORT_LIBS} optimized ${${COMPONENT}_IMPORT_LIBS})   
+            add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} _${SHEAVES_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})
             target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${JDK_LIBS} ${SHEAVES_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})
             set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES FOLDER "Binding Targets - Java")
         else()
