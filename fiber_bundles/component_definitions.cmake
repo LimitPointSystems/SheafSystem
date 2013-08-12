@@ -22,6 +22,9 @@
 # 
 include(${CMAKE_MODULE_PATH}/LPSCommon.cmake)
 
+# Force Cmake to allow linking to bindings libraries, AKA "modules"
+
+set(CMAKE_BACKWARDS_COMPATIBILITY 2.2) 
 cmake_policy(SET CMP0001 OLD)
 
 #
@@ -147,7 +150,6 @@ endfunction(add_library_targets)
 # Create the bindings targets for this component.
 #
 function(add_bindings_targets)
-#set(CMAKE_BACKWARDS_COMPATIBILITY 2.2)
 
     if(SWIG_FOUND AND BUILD_BINDINGS)  
         
@@ -155,9 +157,7 @@ function(add_bindings_targets)
         # Java ################################################################
         #
         
-        #set(CMAKE_SWIG_FLAGS -package bindings.java)
-                    
-        include_directories(${JDK_INC_DIR} ${JDK_PLATFORM_INC_DIR})
+        include_directories(${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})
         include_directories(${SHEAVES_JAVA_BINDING_SRC_DIR})
         include_directories(${SHEAVES_COMMON_BINDING_SRC_DIR})
         include_directories(${${COMPONENT}_JAVA_BINDING_SRC_DIR})
@@ -169,8 +169,9 @@ function(add_bindings_targets)
         swig_add_module(${${COMPONENT}_JAVA_BINDING_LIB} java ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_JAVA_INTERFACE})
         
         if(WIN64INTEL OR WIN64MSVC)
-            add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} _${SHEAVES_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})
-            target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${JDK_LIBS} ${SHEAVES_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})
+#            add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} ${SHEAVES_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})
+ #           target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${JDK_LIBS} ${SHEAVES_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})
+            swig_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${SHEAVES_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})
             set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES FOLDER "Binding Targets - Java")
         else()
             add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} ${SHEAVES_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB})
@@ -187,10 +188,10 @@ function(add_bindings_targets)
             add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
                            DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${SHEAVES_JAVA_BINDING_JAR}
                            set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Component Binding Jars")
-                           COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
-                           COMMAND ${JAVAC_EXECUTABLE} -classpath "${SHEAVES_CLASSPATH}" -d . *.java
-                           COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                           COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
+                       COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
+                       COMMAND ${Java_JAVAC_EXECUTABLE} -classpath . -d . *.java
+                       COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
+                       COMMAND ${Java_JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
                )
                
             # Java documentation
@@ -243,9 +244,9 @@ function(add_bindings_targets)
         set_source_files_properties(${${COMPONENT}_CSHARP_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_CSHARP_INTERFACE} PROPERTIES CPLUSPLUS ON)
         swig_add_module(${${COMPONENT}_CSHARP_BINDING_LIB} csharp ${${COMPONENT}_CSHARP_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_CSHARP_INTERFACE})
         if(WIN64INTEL OR WIN64MSVC)
-            add_dependencies(${${COMPONENT}_CSHARP_BINDING_LIB} ${SHEAVES_CSHARP_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB})
+        #    add_dependencies(${${COMPONENT}_CSHARP_BINDING_LIB} ${SHEAVES_CSHARP_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB})
           # target_link_libraries(${${COMPONENT}_CSHARP_BINDING_LIB} ${SHEAVES_CSHARP_BINDING_LIB} debug ${${COMPONENT}_DEBUG_IMPORT_LIB} optimized ${${COMPONENT}_IMPORT_LIB} ${CSHARP_LIBRARY})
-           target_link_libraries(${${COMPONENT}_CSHARP_BINDING_LIB} ${SHEAVES_CSHARP_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB} ${CSHARP_LIBRARY})
+            swig_link_libraries(${${COMPONENT}_CSHARP_BINDING_LIB} ${SHEAVES_CSHARP_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB} ${CSHARP_LIBRARY})
             set_target_properties(${${COMPONENT}_CSHARP_BINDING_LIB} PROPERTIES FOLDER "Binding Targets - CSharp")
         else()
             add_dependencies(${${COMPONENT}_CSHARP_BINDING_LIB} ${SHEAVES_CSHARP_BINDING_LIB} ${${COMPONENT}_SHARED_LIB})
@@ -287,12 +288,12 @@ function(add_bindings_targets)
         swig_add_module(${${COMPONENT}_PYTHON_BINDING_LIB} python ${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE})
         
         if(WIN64INTEL OR WIN64MSVC)
-            add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} ${SHEAVES_PYTHON_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})
+    #        add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} ${SHEAVES_PYTHON_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})
             # Including both release and debug libs here. Linker is smart enough to know which one to use, and since the build type is a run-time decision in VS
             # we have no way to choose when generating the make file.
  #           #target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${SHEAVES_PYTHON_BINDING_LIBS} debug ${${COMPONENT}_DEBUG_IMPORT_LIB} optimized ${${COMPONENT}_IMPORT_LIB} optimized ${PYTHON_LIBRARY} debug ${PYTHON_DEBUG_LIBRARY})
             #target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${SHEAVES_PYTHON_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIB} optimized ${PYTHON_LIBRARY} debug ${PYTHON_DEBUG_LIBRARY})
-            target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${SHEAVES_PYTHON_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIB} ${PYTHON_LIBRARY} )
+            swig_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${SHEAVES_PYTHON_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIB} ${PYTHON_LIBRARY} )
             set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} PROPERTIES FOLDER "Binding Targets - Python")
         else()
             add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} ${SHEAVES_PYTHON_BINDING_LIBS} ${${COMPONENT}_SHARED_LIBS})
