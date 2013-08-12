@@ -7031,11 +7031,28 @@ row_dof_subposet() const
   return powerset().row_dof_subposet();
 }
 
- 
-// $$ISSUE jebutler const correctness.
-// making resident const wreaks havoc on the system.
-// Leaving it as is for now.
-// Tue Dec 23 16:38:01 2008
+const string&
+sheaf::poset_state_handle::
+coarsest_common_refinement_name()
+{
+  // cout << endl << "Entering poset_state_handle::coarsest_common_refinement_name." << endl;
+
+  // Preconditions:
+
+
+  // Body:
+
+  //  static const string result(poset_path::reserved_prefix() + "coarsest_common_refinement");
+  static const string result("whole");
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving poset_state_handle::coarsest_common_refinement_name." << endl;
+  return result;
+}
 
 // PROTECTED FUNCTIONS
 
@@ -7081,8 +7098,7 @@ initialize_standard_subposets(const string& xname)
 
   subposet& lccr = powerset().coarsest_common_refinement();
   lccr.new_state(this, true, false);
-  //  lccr.put_name(xname, true, false);
-  lccr.put_name("__CCR", true, false);
+  lccr.put_name(coarsest_common_refinement_name(), true, false);
 
   // CCR and version 0 are the same thing until we move to version 1.
 
@@ -7994,8 +8010,7 @@ version_to_name(int xversion) const
 
   if(xversion == COARSEST_COMMON_REFINEMENT_VERSION)
   {
-    //    result = name();
-    result = "__CCR";
+    result = coarsest_common_refinement_name();
   }
   else
   {
@@ -8007,8 +8022,7 @@ version_to_name(int xversion) const
   // Postconditions:
 
   ensure(!result.empty());
-  //  ensure(xversion == COARSEST_COMMON_REFINEMENT_VERSION ? (result == name()) : is_version_name(result));
-  ensure(xversion == COARSEST_COMMON_REFINEMENT_VERSION ? (result == "__CCR") : is_version_name(result));
+  ensure(xversion == COARSEST_COMMON_REFINEMENT_VERSION ? (result == coarsest_common_refinement_name()) : is_version_name(result));
 
   // Exit
 
@@ -8023,14 +8037,13 @@ version_from_name(const string& xname) const
 
   // Preconditions:
 
-  require(is_version_name(xname) || xname == "__CCR");
+  require(is_version_name(xname) || xname == coarsest_common_refinement_name());
 
   // Body:
 
   /// @todo replace poset name == whole name with something more reasonable!
 
-    //  if(xname == name())
-  if(xname == "__CCR")
+  if(xname == coarsest_common_refinement_name())
   {
     // Result is coarsest common refinement.
 

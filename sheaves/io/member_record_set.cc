@@ -84,7 +84,7 @@ invariant() const
 
     disable_invariant_check();
 
-    result = result && (is_open() ? _ext_dataspace_rank == DATASPACE_RANK : true);
+    invariance(is_open() ? _ext_dataspace_rank == DATASPACE_RANK : true);
 
     // Finished, turn invariant checking back on.
 
@@ -170,8 +170,8 @@ member_record_set(const sheaf_file& xfile,
   // _name has been initialized to poset name in record_set;
   // add members dataset suffix to it.
 
-  _name  += ".members";
-  _alias += ".members";
+  _name  = data_set_name(scaffold().structure().name());
+  _alias  = data_set_alias(scaffold().structure().name());
 
   _ext_dataspace_rank = DATASPACE_RANK;
   _ext_dataspace_dims = new hsize_t[DATASPACE_RANK];
@@ -193,7 +193,8 @@ member_record_set(const sheaf_file& xfile,
   // Postconditions:
 
   ensure(invariant());
-  ensure(name() == xscaffold.structure().name() + ".members");
+  ensure(name() == data_set_name(scaffold().structure().name()));
+  ensure(alias() == data_set_alias(scaffold().structure().name()));
   ensure(!is_open());
   ensure(record_buffer_ub() == xrecord_buffer_ub);
   ensure(record_buffer_is_empty());
@@ -252,6 +253,30 @@ sheaf::member_record_set::
 
   return;
 }
+
+
+const string&
+sheaf::member_record_set::
+suffix() const
+{
+  // cout << endl << "Entering member_record_set::suffix." << endl;
+
+  // Preconditions:
+
+
+  // Body:
+
+  static const string result(".members");
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving member_record_set::suffix." << endl;
+  return result;
+}
+
 
 ///
 void

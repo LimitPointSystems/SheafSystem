@@ -2006,6 +2006,11 @@ public:
   ///
   const subposet& row_dof_subposet() const;
 
+  ///
+  /// The name of the coarsest common refinement subposet.
+  ///
+  static const string& coarsest_common_refinement_name();
+
 protected:
 
   ///
@@ -2270,7 +2275,7 @@ public:
   ///
   /// True if this poset is a version.
   ///
-  bool is_version() const;
+  bool is_version() const;  
 
 protected:
 

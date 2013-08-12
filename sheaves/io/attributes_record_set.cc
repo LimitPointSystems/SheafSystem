@@ -135,7 +135,7 @@ invariant() const
 
     disable_invariant_check();
 
-    result = result && ( record_buffer_ub() == RECORD_BUFFER_UB );
+    invariance(record_buffer_ub() == RECORD_BUFFER_UB);
 
     // Finished, turn invariant checking back on.
 
@@ -203,8 +203,8 @@ attributes_record_set(const sheaf_file& xfile, const poset_scaffold& xscaffold)
   // _name has been initialized to poset name in record_set;
   // add attributes dataset suffix to it.
 
-  _name  += ".attributes";
-  _alias += ".attributes";
+  _name  = data_set_name(scaffold().structure().name());
+  _alias  = data_set_alias(scaffold().structure().name());
 
   _ext_dataspace_rank = DATASPACE_RANK;
   _ext_dataspace_dims = new hsize_t[DATASPACE_RANK];
@@ -231,10 +231,33 @@ attributes_record_set(const sheaf_file& xfile, const poset_scaffold& xscaffold)
   // Postconditions:
 
   ensure(invariant());
-  ensure(name() == xscaffold.structure().name() + ".attributes");
+  ensure(name() == data_set_name(scaffold().structure().name()));
+  ensure(alias() == data_set_alias(scaffold().structure().name()));
   ensure(!is_open());
   ensure(record_buffer_ub() == RECORD_BUFFER_UB);
   ensure(record_buffer_ct() == 0);
+}
+
+const string&
+sheaf::attributes_record_set::
+suffix() const
+{
+  // cout << endl << "Entering attributes_record_set::suffix." << endl;
+
+  // Preconditions:
+
+
+  // Body:
+
+  static const string result(".attributes");
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving attributes_record_set::suffix." << endl;
+  return result;
 }
 
 
@@ -461,30 +484,6 @@ externalize()
   // Exit
 
   return;
-}
-
-string
-sheaf::attributes_record_set::
-poset_name() const
-{
-  // cout << endl << "Entering attributes_record_set::poset_name." << endl;
-
-  // Preconditions:
-
-
-  // Body:
-
-  const string::size_type lsuffix_len = 11; // == len(".attributes")
-  string::size_type lname_len = _name.size() - lsuffix_len;
-  string result(_name.substr(0, lname_len));
-
-  // Postconditions:
-
-
-  // Exit:
-
-  // cout << "Leaving attributes_record_set::poset_name." << endl;
-  return result;
 }
 
 

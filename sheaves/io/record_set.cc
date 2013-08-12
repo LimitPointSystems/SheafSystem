@@ -76,7 +76,6 @@ invariant() const
 
     invariance(file().is_open());
     invariance(!name().empty());
-    invariance(!scaffold().structure_is_namespace() == (name() == alias()));
     invariance(record_buffer_ub() >= 0);
     invariance(record_buffer_ct() >= 0);
     invariance(record_buffer_ct() <= record_buffer_ub());
@@ -134,23 +133,7 @@ record_set(const sheaf_file& xfile, int xrecord_buffer_ub, const poset_scaffold&
   require(xfile.is_open());
   require(xrecord_buffer_ub > 0);
 
-  // Body:
-
-  if(scaffold().structure_is_namespace())
-  {
-    // Poset is a namespace poset;
-    // construct the standard alias.
-
-    _alias = NAME_SPACE_ALIAS();
-  }
-  else
-  {
-    // Poset is not a namespace;
-    // alias is same as name.
-
-    _alias = _name;
-  }
-
+  // Body:  
 
   // Set hdf ids to indicate invalid status
 
@@ -168,7 +151,6 @@ record_set(const sheaf_file& xfile, int xrecord_buffer_ub, const poset_scaffold&
   // Postconditions:
 
   ensure(invariant());
-  ensure(name() == xscaffold.structure().name());
   ensure(!is_open());
   ensure(record_buffer_ub() == xrecord_buffer_ub);
   ensure(record_buffer_ct() == 0);
@@ -261,13 +243,159 @@ alias() const
 
   // Postconditions:
 
-  ensure(!scaffold().structure_is_namespace() == (name() == result));
+  //  ensure(!scaffold().structure_is_namespace() == (name() == result));
 
   // Exit
 
   return result;
 }
 
+
+const string&
+sheaf::record_set::
+name_space_alias()
+{
+  static const string result(poset_path::reserved_prefix() + "name_space");
+  return result;
+}
+
+const string&
+sheaf::record_set::
+name_space_prefix()
+{
+  static const string result(poset_path::reserved_prefix() + "name_space.");
+  return result;
+}
+
+const string&
+sheaf::record_set::
+suffix() const
+{
+  // cout << endl << "Entering record_set::suffix." << endl;
+
+  // Preconditions:
+
+
+  // Body:
+
+  // Empty in this call, redefined in descendants.
+
+  static const string result;
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving record_set::suffix." << endl;
+  return result;
+}
+
+string
+sheaf::record_set::
+data_set_name(const string& xname) const
+{
+  // cout << endl << "Entering record_set::data_set_name." << endl;
+
+  // Preconditions:
+
+
+  // Body:
+
+  string result;
+  if(scaffold().structure_is_namespace())
+  {
+    result = name_space_prefix() + xname + suffix();
+  }
+  else
+  {
+    result = xname + suffix();
+  }
+
+  // Postconditions:
+
+  ensure(scaffold().structure_is_namespace() ? result == name_space_prefix() + xname + suffix() : result == xname + suffix());
+  
+
+  // Exit:
+
+  // cout << "Leaving record_set::data_set_name." << endl;
+  return result;
+}
+
+string
+sheaf::record_set::
+data_set_alias(const string& xname) const
+{
+  // cout << endl << "Entering record_set::data_set_alias." << endl;
+
+  // Preconditions:
+
+
+  // Body:
+
+  string result;
+  if(scaffold().structure_is_namespace())
+  {
+    result = name_space_alias() + suffix();
+  }
+  else
+  {
+    result = xname + suffix();
+  }
+
+  // Postconditions:
+
+  ensure(scaffold().structure_is_namespace() ? result == name_space_alias() + suffix() : result == xname + suffix());
+  
+
+  // Exit:
+
+  // cout << "Leaving record_set::data_set_alias." << endl;
+  return result;
+}
+
+
+string
+sheaf::record_set::
+poset_name() const
+{
+  // cout << endl << "Entering attributes_record_set::poset_name." << endl;
+
+  // Preconditions:
+
+  // Body:
+
+  // Skip past namespace prefix, if there is one.
+
+  string::size_type lprefix_len = name_space_prefix().size();
+
+  string::size_type lname_begin;
+  if(_name.substr(0, lprefix_len) == name_space_prefix())
+  {
+    lname_begin = lprefix_len;
+  }
+  else
+  {
+    lname_begin = 0;
+  }
+  
+  string::size_type lsuffix_begin = suffix().empty() ? _name.size() : _name.rfind(suffix());
+  
+  // Extract the name.
+
+  string::size_type lname_len = lsuffix_begin - lname_begin;
+  
+  string result(_name.substr(lname_begin, lname_len));
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving attributes_record_set::poset_name." << endl;
+  return result;
+}
 
 
 ///
@@ -726,8 +854,7 @@ create_alias()
 
   // Postconditions:
 
-  ensure(unexecutable(link from alias to data set
-                        exists));
+  ensure(unexecutable("link from alias to data set exists"));
 
   // Exit
 
@@ -852,20 +979,10 @@ int_data_type_hdf_id()
   return _int_data_type_hdf_id;
 }
 
-///
-const string&
-sheaf::record_set::
-NAME_SPACE_ALIAS()
-{
-  static const string result("__name_space");
-  return result;
-}
-
 
 
 const hid_t sheaf::record_set::NOT_AN_HDF_ID = -1;
 
-///
 void
 sheaf::record_set::
 read_dataset_attributes()
@@ -888,7 +1005,6 @@ read_dataset_attributes()
   return;
 }
 
-///
 void
 sheaf::record_set::
 write_dataset_attributes()

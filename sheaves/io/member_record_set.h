@@ -91,6 +91,11 @@ public:
   virtual ~member_record_set();
 
   ///
+  /// The name suffix for this data set.
+  ///
+  virtual const string& suffix() const;
+
+  ///
   /// Internalize the members of scafold().structure() from disk.
   ///
   void internalize(pod_index_type xmax_row_int_id);

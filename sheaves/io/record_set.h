@@ -201,6 +201,37 @@ public:
   string alias() const;
 
   ///
+  /// The reserved, standard alias for the namespace in the file
+  ///
+  static const string& name_space_alias();
+
+  ///
+  /// The reserved, standard prefix for namespace dataser names.
+  ///
+  static const string& name_space_prefix();
+
+  ///
+  /// The name suffix for this data set.
+  ///
+  virtual const string& suffix() const;
+
+  ///
+  /// The data set name for a poset with name xname.
+  ///
+  string data_set_name(const string& xname) const;
+
+  ///
+  /// The data set alias for a poset with name xname.
+  ///
+  string data_set_alias(const string& xname) const;
+
+  ///
+  /// The name of the poset this represents, 
+  /// extracted from the name of the dataset.
+  ///
+  string poset_name() const;
+
+  ///
   /// Scaffold for constructing poset associated with this record set (mutable version).
   ///
   poset_scaffold& scaffold();
@@ -350,11 +381,6 @@ protected:
   /// The standard alias for this record_set
   ///
   string _alias;
-
-  ///
-  /// The reserved, standard alias for the namespace in the file
-  ///
-  static const string& NAME_SPACE_ALIAS();
 
   ///
   /// The poset scaffold associated with this.
