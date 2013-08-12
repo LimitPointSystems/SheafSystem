@@ -41,6 +41,56 @@ class SHEAF_DLL_SPEC structured_block_1d : public structured_block
   friend class structured_block_1d_crg_interval;
 
   // ===========================================================
+  /// @name HOST FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// The path of the schema required by this class.
+  ///
+  static const poset_path& standard_schema_path();
+
+  ///
+  /// The path of the schema required by this.
+  ///
+  virtual const poset_path& schema_path() const;
+
+  ///
+  /// Creates the standard schema for this class in namespace xns.
+  ///
+  static void make_standard_schema(namespace_poset& xns);
+
+  ///
+  /// The path of the prototype required by this class.
+  ///
+  static const poset_path& static_prototype_path();
+
+  ///
+  /// Manual, shallow factory method; creates a new host poset for members of this type.
+  /// The poset is created in namespace xns with path xpath and schema specified by xschema_path.
+  ///
+  static void new_host(namespace_type& xns, 
+                       const poset_path& xpath, 
+                       const poset_path& xschema_path, 
+                       bool xauto_access);
+
+  ///
+  /// Auto, deep factory method; creates a new host poset and any prerequisite posets
+  /// for members of this type. The poset is created in namespace xns with path xpath
+  /// and schema specified by standard_schema_path().
+  ///
+  static void new_host(namespace_type& xns, const poset_path& xpath, bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
   /// @name STRUCTURED_BLOCK_1D FACET
   // ===========================================================
   //@{
@@ -348,26 +398,6 @@ private:
   //@{
 
 public:
-
-  ///
-  /// The path of the schema required by this class.
-  ///
-  static const poset_path& standard_schema_path();
-
-  ///
-  /// The path of the schema required by this.
-  ///
-  virtual const poset_path& schema_path() const;
-
-  ///
-  /// Creates the standard schema for this class in namespace xns.
-  ///
-  static void make_standard_schema(namespace_poset& xns);
-
-  ///
-  /// The path of the prototype required by this class.
-  ///
-  static const poset_path& static_prototype_path();
 
 protected:
 

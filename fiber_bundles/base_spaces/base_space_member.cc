@@ -144,7 +144,7 @@ prototypes_poset_name()
 
 void
 fiber_bundle::base_space_member::
-new_host(namespace_type& xns, const poset_path& xpath, const poset_path& xschema_path, bool xauto_access)
+new_host(namespace_type& xns, const poset_path& xpath, const poset_path& xschema_path, int xmax_db, bool xauto_access)
 {
   // cout << endl << "Entering base_space_member::new_host." << endl;
 
@@ -159,15 +159,18 @@ new_host(namespace_type& xns, const poset_path& xpath, const poset_path& xschema
   require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
   require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));  
 
+  require(xmax_db >= 0);
+
   // Body:
 
-  host_type::new_table(xns, xpath, xschema_path, xauto_access);
+  host_type::new_table(xns, xpath, xschema_path, xmax_db, xauto_access);
 
   // Postconditions:
 
   ensure(xns.contains_path(xpath, xauto_access));
-  ensure(!xns.poset_state_is_read_accessible(xpath, xauto_access));
+  ensure(xns.poset_state_is_read_accessible(xpath, xauto_access));
   ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == xschema_path);
+  ensure(xns.member_poset<host_type>(xpath, xauto_access).max_db() == xmax_db);
 
   // Exit:
 
@@ -177,7 +180,7 @@ new_host(namespace_type& xns, const poset_path& xpath, const poset_path& xschema
 
 void
 fiber_bundle::base_space_member::
-new_host(namespace_type& xns, const poset_path& xpath, bool xauto_access)
+new_host(namespace_type& xns, const poset_path& xpath, int xmax_db, bool xauto_access)
 {
   // cout << endl << "Entering base_space_member::new_host." << endl;
 
@@ -188,17 +191,19 @@ new_host(namespace_type& xns, const poset_path& xpath, bool xauto_access)
   require(!xns.contains_path(xpath, xauto_access));
   require(xns.path_is_auto_read_accessible(standard_schema_path(), xauto_access));
   
+  require(xmax_db >= 0);
 
   // Body:
 
-  host_type::new_table(xns, xpath, standard_schema_path(), xauto_access);
+  host_type::new_table(xns, xpath, standard_schema_path(), xmax_db, xauto_access);
 
   // Postconditions:
 
   ensure(xns.contains_path(xpath, xauto_access));
-  ensure(!xns.poset_state_is_read_accessible(xpath, xauto_access));
+  ensure(xns.poset_state_is_read_accessible(xpath, xauto_access));
   ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == standard_schema_path());
-
+  ensure(xns.member_poset<host_type>(xpath, xauto_access).max_db() == xmax_db);
+  
   // Exit:
 
   // cout << "Leaving base_space_member::new_host." << endl;
@@ -208,6 +213,7 @@ new_host(namespace_type& xns, const poset_path& xpath, bool xauto_access)
 // PROTECTED MEMBER FUNCTIONS
 
 // PRIVATE MEMBER FUNCTIONS
+
 
 // ===========================================================
 // BASE_SPACE_MEMBER FACET
