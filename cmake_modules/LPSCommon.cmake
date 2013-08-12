@@ -251,6 +251,8 @@ function(set_compiler_flags)
             STRING "Flags used by the linker for shared libraries for Debug-contracts builds" )
         set(CMAKE_EXE_LINKER_FLAGS_DEBUG-CONTRACTS "${LPS_EXE_LINKER_FLAGS} /DEBUG" CACHE
             STRING "Flags used by the linker for executables for Debug-contracts builds")            
+        set(CMAKE_MODULE_LINKER_FLAGS_DEBUG-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG" CACHE
+            STRING "Debugno-contracts linker flags - binding libs" )
     else() # Linux
         set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} -g " CACHE
             STRING "Flags used by the C++ compiler for Debug-contracts builds" )
@@ -274,6 +276,8 @@ function(set_compiler_flags)
          STRING "Flags used by the linker for shared libraries for Debug-contracts builds" )
      set(CMAKE_EXE_LINKER_FLAGS_DEBUG-NO-CONTRACTS "${LPS_EXE_LINKER_FLAGS} /DEBUG" CACHE
          STRING "Flags used by the linker for executables for Debug-contracts builds")                  
+        set(CMAKE_MODULE_LINKER_FLAGS_DEBUG-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG" CACHE
+            STRING "Debugno-no-contracts linker flags - binding libs" )
     else()
     set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} -g -DNDEBUG" CACHE
         STRING "Flags used by the C++ compiler for Debug-no-contracts builds" )
@@ -292,8 +296,10 @@ function(set_compiler_flags)
             STRING "Flags used by the C++ compiler for Release-contracts builds" )
         set(CMAKE_EXE_LINKER_FLAGS_RELEASE-CONTRACTS "${LPS_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD  /NXCOMPAT"  CACHE
             STRING "Flags used by the linker for executables for Release-contracts builds" )
-        set(CMAKE_SHARED_LINKER_FLAGS_RELEASE-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD  /NXCOMPAT " CACHE
+        set(CMAKE_SHARED_LINKER_FLAGS_RELEASE-CONTRACTS "${LPS_SHARED_LINKER_FLAGS}" CACHE
             STRING "Flags used by the linker for shared libraries for Release-contracts builds" ) 
+        set(CMAKE_MODULE_LINKER_FLAGS_RELEASE-CONTRACTS "${LPS_SHARED_LINKER_FLAGS}" CACHE
+            STRING "Release-contracts linker flags - binding libs" )
     else()
         set(CMAKE_CXX_FLAGS_RELEASE-CONTRACTS "${LPS_CXX_FLAGS} " CACHE
             STRING "Flags used by the C++ compiler for Release-contracts builds" )
@@ -317,8 +323,10 @@ function(set_compiler_flags)
             STRING "Flags used by the C++ compiler for Release-no-contracts builds" )
         set(CMAKE_EXE_LINKER_FLAGS_RELEASE-NO-CONTRACTS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD  /NXCOMPAT" CACHE
             STRING "Flags used by the linker for executables for Release-no-contracts builds" )
-        set(CMAKE_SHARED_LINKER_FLAGS_RELEASE-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD  /NXCOMPAT" CACHE
+        set(CMAKE_SHARED_LINKER_FLAGS_RELEASE-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS}" CACHE
             STRING "Flags used by the linker for shared libraries for Release-no-contracts builds" )
+        set(CMAKE_MODULE_LINKER_FLAGS_RELEASE-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS}" CACHE
+            STRING "Release-no-contracts linker flags - binding libs" )
     else()
         set(CMAKE_CXX_FLAGS_RELEASE-NO-CONTRACTS "${LPS_CXX_FLAGS}  -DNDEBUG" CACHE
             STRING "Flags used by the C++ compiler for Release-no-contracts builds" )
@@ -343,15 +351,17 @@ function(set_compiler_flags)
             STRING "RelWithDebInfo-contracts compiler flags" )
         set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-CONTRACTS "${LPS_EXE_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD  /NXCOMPAT"  CACHE
             STRING "RelWithDebInfo-contracts linker flags - executables" )
-        set(CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD  /NXCOMPAT " CACHE
+        set(CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG" CACHE
             STRING "RelWithDebInfo-contracts linker flags - shared libs" ) 
-    else()
-        set(CMAKE_CXX_FLAGS_RELWITHDEBINFO-CONTRACTS "${LPS_CXX_FLAGS} " CACHE
-            STRING "RelWithDebInfo-contracts compiler flags" )
-        set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-CONTRACTS "${LPS_EXE_LINKER_FLAGS}"  CACHE
-            STRING "RelWithDebInfo-contracts linker flags - executables" )
-        set(CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS}" CACHE
-            STRING "RelWithDebInfo-contracts linker flags - shared libs" )
+        set(CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG" CACHE
+            STRING "RelWithDebInfo-contracts linker flags - binding libs" )
+#    else()
+#        set(CMAKE_CXX_FLAGS_RELWITHDEBINFO-CONTRACTS "${LPS_CXX_FLAGS} " CACHE
+#            STRING "RelWithDebInfo-contracts compiler flags" )
+#        set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-CONTRACTS "${LPS_EXE_LINKER_FLAGS}"  CACHE
+#            STRING "RelWithDebInfo-contracts linker flags - executables" )
+#        set(CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS}" CACHE
+#            STRING "RelWithDebInfo-contracts linker flags - shared libs" )
     endif()
     
     # True for all currently supported platforms        
@@ -368,15 +378,17 @@ function(set_compiler_flags)
             STRING "RelWithDebInfo-no-contracts compiler flags" )
         set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${CMAKE_EXE_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD  /NXCOMPAT" CACHE
             STRING "RelWithDebInfo-no-contracts linker flags - executables" )
-        set(CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD  /NXCOMPAT" CACHE
+        set(CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG" CACHE
             STRING "RelWithDebInfo-no-contracts linker flags - shared libs" )
-    else()
-        set(CMAKE_CXX_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${LPS_CXX_FLAGS}  -DNDEBUG" CACHE
-            STRING "RelWithDebInfo-no-contracts compiler flags" )
-        set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${CMAKE_EXE_LINKER_FLAGS}" CACHE
-            STRING "RelWithDebInfo-no-contracts linker flags - executables" )
-        set(CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS}" CACHE
-            STRING "RelWithDebInfo-no-contracts linker flags - shared libs" )
+        set(CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG" CACHE
+            STRING "RelWithDebInfo-no-contracts linker flags - binding libs" )
+#    else()
+#        set(CMAKE_CXX_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${LPS_CXX_FLAGS}  -DNDEBUG" CACHE
+#            STRING "RelWithDebInfo-no-contracts compiler flags" )
+#        set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${CMAKE_EXE_LINKER_FLAGS}" CACHE
+#            STRING "RelWithDebInfo-no-contracts linker flags - executables" )
+#        set(CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS}" CACHE
+#            STRING "RelWithDebInfo-no-contracts linker flags - shared libs" )
     endif()
     
     # True for all currently supported platforms        
@@ -478,109 +490,6 @@ function(add_coverage_target)
 
 endfunction()
 
-# 
-# Create a cmake test for each unit test executable.
-#
-function(add_test_targets)
-
-    # link_directories only applies to targets created after it is called.
-    if(LINUX64GNU OR LINUX64INTEL)
-        link_directories($CMAKE_ARCHIVE_OUTPUT_DIRECTORY} ${HDF5_LIBRARY_DIRS})
-    else()
-        link_directories($CMAKE_ARCHIVE_OUTPUT_DIRECTORY} ${HDF5_LIBRARY_DIRS})        
-    endif()    
-    # Let the user know what's being configured
-    status_message("Configuring Unit Tests for ${PROJECT_NAME}")   
-    foreach(t_cc_file ${${COMPONENT}_UNIT_TEST_SRCS})
-
-        # Extract name of executable from source filename
-        string(REPLACE .t.cc .t t_file_with_path ${t_cc_file})
-        # Remove path information  
-        get_filename_component(t_file ${t_file_with_path} NAME)
-
-        set(${COMPONENT}_UNIT_TESTS ${${COMPONENT}_UNIT_TESTS} ${t_file} CACHE STRING "List of unit test binaries" FORCE)
-        mark_as_advanced(${COMPONENT}_UNIT_TESTS)
-        # If the target already exists, don't try to create it.
-        if(NOT TARGET ${t_file})
-             message(STATUS "Creating ${t_file} from ${t_cc_file}")
-             add_executable(${t_file} ${t_cc_file})
-            # Make sure the library is up to date
-            if(WIN64MSVC OR WIN64INTEL)
-                # Supply the *_DLL_IMPORTS directive to preprocessor
-                set_target_properties(${t_file} PROPERTIES COMPILE_DEFINITIONS "SHEAF_DLL_IMPORTS")
-                add_dependencies(${t_file} ${${COMPONENT}_IMPORT_LIBS})
-            else()
-                add_dependencies(${t_file} ${${COMPONENT}_SHARED_LIB})
-            endif()
-
-            if(LINUX64GNU OR LINUX64INTEL)
-                target_link_libraries(${t_file} ${${COMPONENT}_SHARED_LIB} ${HDF5_LIBRARIES})
-            elseif(WIN64MSVC OR WIN64INTEL)
-                target_link_libraries(${t_file} ${${COMPONENT}_IMPORT_LIBS} ${HDF5_LIBRARIES})                                         
-                # Insert the unit tests into the VS folder "unit test targets"
-                set_target_properties(${t_file} PROPERTIES FOLDER "Unit Test Targets")
-            endif()
-
-            # Add a test target for ${t_file}
-         
-            add_test(${t_file} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${t_file})
-            # Tag the test with the name of the current component.
-            set_property(TEST ${t_file} PROPERTY LABELS "${PROJECT_NAME}")
-
-            if(WIN64MSVC OR WIN64INTEL)
-                # Set the PATH environment variable for CTest so the HDF5 and Fields dlls lie in it.
-                set_tests_properties(${t_file} PROPERTIES ENVIRONMENT
-                                     "PATH=${HDF5_LIBRARY_DIRS};$CMAKE_ARCHIVE_OUTPUT_DIRECTORY}:${CMAKE_CFG_INTDIR}")
-            endif()
-        endif()
-    endforeach()
-
-endfunction(add_test_targets)
-
-# 
-# Create a target for each example.
-#
-function(add_example_targets)
-
-    foreach(t_cc_file ${${COMPONENT}_EXAMPLE_SRCS})
-        # link_directories only applies to targets created after it is called.
-        if(LINUX64GNU OR LINUX64INTEL)
-            link_directories($CMAKE_ARCHIVE_OUTPUT_DIRECTORY} ${HDF5_LIBRARY_DIRS})
-        else()
-            link_directories($CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_BUILD_TYPE} ${HDF5_LIBRARY_DIRS})
-        endif()    
-        # Let the user know what's being configured
-        status_message("Configuring example executables for ${PROJECT_NAME}")   
-        # Deduce name of executable from source filename
-        string(REPLACE .cc "" t_file_with_path ${t_cc_file})
-        # Remove path information so the executable goes into build/bin (or build/VisualStudio)
-        # and not into build/bin/examples (or build/VisualStudio/examples)
-        get_filename_component(t_file ${t_file_with_path} NAME)
-        set(${COMPONENT}_EXAMPLES ${${COMPONENT}_EXAMPLES} ${t_file} CACHE STRING "List of example binaries" FORCE)
-        mark_as_advanced(${COMPONENT}_EXAMPLES)    
-        # Add building of executable and link with shared library
-        message(STATUS "Creating ${t_file} from ${t_cc_file}")
-        add_executable(${t_file} ${t_cc_file})
-    
-        # Make sure the library is up to date
-        if(WIN64MSVC OR WIN64INTEL)
-            add_dependencies(${t_file} ${${COMPONENT}_IMPORT_LIB})
-            link_directories(${${COMPONENT}_OUTPUT_DIR}/$(OutDir))
-            target_link_libraries(${t_file} ${${COMPONENT}_IMPORT_LIBS})
-            # Insert the unit tests into the VS folder "unit_tests"
-            set_target_properties(${t_file} PROPERTIES FOLDER "Example Targets")
-        else()
-            add_dependencies(${t_file} ${${COMPONENT}_STATIC_LIB})
-            link_directories(${${COMPONENT}_OUTPUT_DIR} ${HDF5_LIBRARY_DIRS})
-            target_link_libraries(${t_file} ${${COMPONENT}_SHARED_LIB} ${HDF5_LIBRARIES})
-            endif()
-        endif()
-
-    add_custom_command(TARGET clean POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E rm -f ${CMAKE_BINARY_DIR}/bin/${CMAKE_CFG_INTDIR}/*
-        COMMAND ${CMAKE_COMMAND} -E rm -f ${CMAKE_BINARY_DIR}/lib/${CMAKE_CFG_INTDIR}/*    
-        )
-endfunction()
     
 #
 # Add the list of clusters to this component.

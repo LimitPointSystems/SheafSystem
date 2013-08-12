@@ -155,7 +155,7 @@ function(add_bindings_targets)
        set(SWIG_CXX_EXTENSION "cxx" CACHE STRING "Swig source file extension")
        set(CMAKE_SWIG_FLAGS -package bindings.java CACHE STRING "Swig flags")
 
-        include_directories(${JDK_INC_DIR} ${JDK_PLATFORM_INC_DIR})
+        include_directories(${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})
         include_directories(${${COMPONENT}_JAVA_BINDING_SRC_DIR})
         include_directories(${${COMPONENT}_COMMON_BINDING_SRC_DIR})
         set_source_files_properties(${${COMPONENT}_JAVA_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_JAVA_INTERFACE} PROPERTIES CPLUSPLUS ON)
@@ -274,15 +274,12 @@ function(add_bindings_targets)
         #
 
         set(CMAKE_SWIG_FLAGS -c++ )
-        
         include_directories(${PYTHON_INCLUDE_PATH})
         
         set_source_files_properties(${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE} PROPERTIES CPLUSPLUS ON)
         swig_add_module(${${COMPONENT}_PYTHON_BINDING_LIB} python ${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE})
         if(WIN64INTEL OR WIN64MSVC)
-            add_dependencies(_${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB} ${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE} ${${COMPONENT}_SWIG_COMMON_INTERFACE})
-           target_link_libraries(_${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB} debug ${PYTHON_LIBRARY} optimized ${PYTHON_DEBUG_LIBRARY}})
- #           swig_link_libraries(${PYTHON_LIBRARIES})
+            swig_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB} ${PYTHON_LIBRARIES})
             set_target_properties(_${${COMPONENT}_PYTHON_BINDING_LIB} PROPERTIES FOLDER "Binding Targets - Python")
         else()
             add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_SHARED_LIB}${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE} ${${COMPONENT}_SWIG_COMMON_INTERFACE})

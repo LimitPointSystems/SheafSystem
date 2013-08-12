@@ -290,7 +290,7 @@ function(add_bindings_targets)
             add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} ${SHEAVES_PYTHON_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})
             # Including both release and debug libs here. Linker is smart enough to know which one to use, and since the build type is a run-time decision in VS
             # we have no way to choose when generating the make file.
-            #target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${SHEAVES_PYTHON_BINDING_LIBS} debug ${${COMPONENT}_DEBUG_IMPORT_LIB} optimized ${${COMPONENT}_IMPORT_LIB} optimized ${PYTHON_LIBRARY} debug ${PYTHON_DEBUG_LIBRARY})
+ #           #target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${SHEAVES_PYTHON_BINDING_LIBS} debug ${${COMPONENT}_DEBUG_IMPORT_LIB} optimized ${${COMPONENT}_IMPORT_LIB} optimized ${PYTHON_LIBRARY} debug ${PYTHON_DEBUG_LIBRARY})
             #target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${SHEAVES_PYTHON_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIB} optimized ${PYTHON_LIBRARY} debug ${PYTHON_DEBUG_LIBRARY})
             target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${SHEAVES_PYTHON_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIB} ${PYTHON_LIBRARY} )
             set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} PROPERTIES FOLDER "Binding Targets - Python")

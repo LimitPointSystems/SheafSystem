@@ -33,8 +33,8 @@ mark_as_advanced(LIB_VERSION)
 #
 # Establish the list of components in this system
 #
-set(COMPONENTS sheaves fiber_bundles geometry fields tools CACHE STRING "List of components in this system" FORCE)
-
+set(COMPONENTS sheaves CACHE STRING "List of components in this system" FORCE)
+#set(COMPONENTS sheaves fiber_bundles geometry fields tools CACHE STRING "List of components in this system" FORCE)
 #
 # Set the default value for install location
 #
