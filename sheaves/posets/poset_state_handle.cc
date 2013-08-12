@@ -858,6 +858,95 @@ detach_from_state()
 
 void
 sheaf::poset_state_handle::
+new_state(namespace_poset& xns, const poset_path& xpath, const schema_poset_member& xschema, array_poset_dof_map& xdof_map)
+{
+  // cout << endl << "Entering poset_state_handle::new_state." << endl;
+
+  // Preconditions:
+
+  require(!xpath.empty());
+  require(!xns.contains_path(xpath, true));
+
+  require(schema_is_ancestor_of(&xschema));
+  require(xschema.state_is_read_accessible());
+  require(xschema.host()->name_space()->is_same_state(&xns));
+
+  // Body:
+
+  // Create the state.
+
+  new_state(xpath, xschema, xdof_map);
+  
+  // Insert it in the namespace.
+
+  initialize_namespace(xns, xpath.poset_name(), true);
+
+  // Postconditions:
+
+  ensure(is_attached());
+  ensure(path(true) == xpath);
+  ensure(schema(true).is_same_state(&xschema));
+
+  get_read_access();
+  ensure(&table_dof_map(false) == &xdof_map);
+  release_access();
+
+
+  // Exit:
+
+  // cout << "Leaving poset_state_handle::new_state." << endl;
+  return;
+}
+
+
+void
+sheaf::poset_state_handle::
+new_state(const poset_path& xpath, const schema_poset_member& xschema, array_poset_dof_map& xdof_map)
+{
+  // cout << endl << "Entering poset_state_handle::new_state." << endl;
+
+  // Preconditions:
+
+  require(schema_is_ancestor_of(&xschema));
+  require(xschema.state_is_read_accessible());
+
+  /// @issue the following is unexecutable because dof maps don't have
+  /// a schema until attached to a host; requires covariant schema feature to implement.
+
+  /// @todo fix dof maps schema feature and make this precondition executable.
+
+  require(unexecutable(xschema.is_same_state(xdof_map.schema())));
+
+  // Body:
+
+  is_abstract();
+  
+  // Postconditions:
+
+  ensure(invariant());
+  ensure(is_attached());
+  ensure(!in_jim_edit_mode());
+  ensure(schema().is_same_state(&xschema));
+  ensure(has_standard_member_ct());
+  ensure(has_standard_row_dof_tuple_ct());
+  ensure(version() == COARSEST_COMMON_REFINEMENT_VERSION);
+
+  // Now we're finished, release all access
+
+  release_access();
+
+  // One final postcondition
+
+  ensure(state_is_not_read_accessible());
+
+  // Exit:
+
+  // cout << "Leaving poset_state_handle::new_state." << endl;
+  return;
+}
+
+void
+sheaf::poset_state_handle::
 new_state(const schema_poset_member& xschema, array_poset_dof_map& xdof_map)
 {
   // Preconditions:
@@ -875,7 +964,7 @@ new_state(const schema_poset_member& xschema, array_poset_dof_map& xdof_map)
   // All poset classes instantiated by the i/o subsystem should
   // redefine this routine.
 
-  not_implemented();
+  is_abstract();
 
 
   // Postconditions:
@@ -1262,9 +1351,7 @@ path(bool xauto_access) const
 
 void
 sheaf::poset_state_handle::
-initialize_namespace(namespace_poset& xns,
-                     const string& xposet_name,
-                     bool xauto_link)
+initialize_namespace(namespace_poset& xns, const string& xposet_name, bool xauto_link)
 {
   // Preconditions:
 
@@ -1290,7 +1377,7 @@ initialize_namespace(namespace_poset& xns,
   disable_invariant_check();
 
   _name_space = &xns;
-  _index = xns.insert_poset(*this, xposet_name, xauto_link);
+  _index = xns.insert_poset(*this, xposet_name, xauto_link, true);
 
   enable_invariant_check();
 
@@ -7084,7 +7171,6 @@ initialize_standard_subposets(const string& xname)
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(poset_path::is_valid_name(xname));
 
   // Body:
 

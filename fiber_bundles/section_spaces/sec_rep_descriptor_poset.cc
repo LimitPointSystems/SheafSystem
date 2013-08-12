@@ -481,8 +481,7 @@ new_state(namespace_poset& xns,
 
 void
 fiber_bundle::sec_rep_descriptor_poset::
-new_state(const schema_poset_member& xschema,
-          array_poset_dof_map& xdof_map)
+new_state(const schema_poset_member& xschema, array_poset_dof_map& xdof_map)
 {
 
   // Preconditions:

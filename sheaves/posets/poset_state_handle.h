@@ -367,6 +367,20 @@ protected:
 //   void delete_state(bool xauto_access);
 
   ///
+  /// Creates a new poset state with schema xschema and table dof map xdof_map,
+  /// attaches this to the state and creates and initializes the associated
+  /// namespace member. Intended for use by new_table factory methods.
+  ///
+  void new_state(namespace_poset& xns, const poset_path& xpath, const schema_poset_member& xschema, array_poset_dof_map& xdof_map);
+
+  ///
+  /// Creates a new poset state with path xpath, schema xschema and table dof map xdof_map,
+  /// attaches this to the state.
+  ///
+  virtual void new_state(const poset_path& xpath, const schema_poset_member& xschema, array_poset_dof_map& xdof_map);
+
+  ///
+  /// @deprecated Use new_state(const poset_path& xpath, const schema_poset_member& xschema, array_poset_dof_map& xdof_map).
   /// Attaches this external poset to a new poset state with schema
   /// given by xschema and table dofs xdof_map.
   /// Intended for use by i/o subsystem.

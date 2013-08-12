@@ -26,7 +26,6 @@ poset_state(const abstract_poset_member* xschema, poset_type xtype_id, const str
   // Preconditions:
   
   require(xschema != 0 ? xschema->is_attached() : true);
-  require(!xname.empty()); // Only for debugging?
 
   // Body:
 

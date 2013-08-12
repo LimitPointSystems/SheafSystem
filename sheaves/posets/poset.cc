@@ -51,41 +51,35 @@ new_table(namespace_type& xns, const poset_path& xpath, const poset_path& xschem
 
   table_type* ltable = new table_type();
 
-  if(xauto_access)
-  {
-    xns.member_poset(xschema_path, false).get_read_access();
-  }
-
   // Create a handle of the right type for the schema member.
 
-  schema_poset_member lschema(&xns, xschema_path, false);
+  schema_poset_member lschema(&xns, xschema_path, xauto_access);
+
+  if(xauto_access)
+  {
+    lschema.get_read_access();
+  }
 
   // Create the table dof map and set dof values;
   // must be newed because poset_state::_table keep a pointer to it.
+
+  // $$SCRIBBLE: should just copy the table dof map in _table.
 
   array_poset_dof_map* lmap = new array_poset_dof_map(&lschema, true);
   
   // Create the state.
 
-  ltable->new_state(lschema, *lmap);
-
-  // Insert the poset in the namespace.
-  // $$SCRIBBLE: why isn't this done in new_state(schema, map)?
-
-  ltable->get_read_access();
-  ltable->initialize_namespace(xns, xpath.poset_name(), true);
-  ltable->release_access();
+  ltable->new_state(xns, xpath, lschema, *lmap);
 
   if(xauto_access)
   {
-    xns.member_poset(xschema_path, false).release_access();
+    lschema.release_access();
   }
 
   // Postconditions:
 
   ensure(xns.contains_path(xpath, xauto_access));
-  //  ensure(!xns.path_is_read_accessible(result, xauto_access));
-  ensure(!xns.poset_state_is_read_accessible(xpath, xauto_access));
+  ensure(xns.member_poset(xpath, xauto_access).state_is_not_read_accessible());
   ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == xschema_path);
 
   // Exit:
@@ -977,6 +971,161 @@ end_jim_edit_mode(bool xensure_lattice_invariant,
 }
 
 // PROTECTED FUNCTIONS
+
+// void
+// sheaf::poset::
+// new_state(namespace_poset& xns, const poset_path& xpath, const schema_poset_member& xschema, array_poset_dof_map& xdof_map)
+// {
+//   // cout << endl << "Entering poset::new_internal_state." << endl;
+
+//   // Preconditions:
+
+//   require(!xpath.empty());
+//   require(!xns.contains_path(xpath, true));
+
+//   require(schema_is_ancestor_of(&xschema));
+//   require(xschema.state_is_read_accessible());
+//   require(xschema.host()->name_space()->is_same_state(&xns));
+
+//   // Body:
+
+//   // Create the state.
+
+//   new_state(xpath, xschema, xdof_map);
+  
+//   // Insert it in the namespace.
+
+//   initialize_namespace(xns, xpath.poset_name(), true);
+
+//   // Postconditions:
+
+//   ensure(is_attached());
+//   ensure(path(true) == xpath);
+//   ensure(schema(true).is_same_state(&xschema));
+
+//   get_read_access();
+//   ensure(&table_dof_map(false) == &xdof_map);
+//   release_access();
+
+
+//   // Exit:
+
+//   // cout << "Leaving poset::new_internal_state." << endl;
+//   return;
+// }
+
+
+void
+sheaf::poset::
+new_state(const poset_path& xpath, const schema_poset_member& xschema, array_poset_dof_map& xdof_map)
+{
+
+  // Preconditions:
+
+  require(schema_is_ancestor_of(&xschema));
+  require(xschema.state_is_read_accessible());
+
+  /// @issue the following is unexecutable because dof maps don't have
+  /// a schema until attached to a host; requires covariant schema feature to implement.
+
+  /// @todo fix dof maps schema feature and make this precondition executable.
+
+  require(unexecutable(xschema.is_same_state(xdof_map.schema())));
+
+  // Body:
+
+  // Disable invariant checking in
+  // member functions until construction finished
+
+  disable_invariant_check();
+
+  // Create the poset state object;
+  // Allocates the data structures but does not (fully) initialize them
+
+  _state = new poset_state(&xschema, type_id(), xpath.poset_name());
+
+  // Get write access.
+  // Descendants may have data members, which aren't attached yet,
+  // Derived get access routines will try to get access to data members,
+  // so force current scope.
+
+  poset::get_read_write_access();
+
+  // Initialize the table dofs ("class variables");
+  // must be done before row structure since row structure
+  // may depend on table dofs.
+
+  initialize_table_dof_tuple(&xdof_map);
+
+  // Initialize the row structure
+
+  initialize_standard_subposets(xpath.poset_name());
+  initialize_standard_members();
+
+  /// @issue automatic vs explicit version subposet membership.
+  /// The crg of the coarsest_common_refinement (CCR) is what is
+  /// written to disk, along with membership info for each of the
+  /// version subposets. When we read the file, we want to reconstruct
+  /// the CCR graph and the membership for each of the versions.
+  /// The CCR graph gets reconstructed without issue, since that
+  /// is what is in the file. For non-versioned posets, the subposet
+  /// membership gets reconstructed correctly as well, since there
+  /// are no version subposets and both CCR and whole() refer to the
+  /// same subposet. But for refinable posets, when a member is created
+  /// it is automatically entered into the CCR and, separately, into
+  /// the current version subposet. This automatic subposet membership
+  /// management conflicts with the explicit subposet membership
+  /// management provided by the i/o subsystem.
+
+  /// @hack version subposet membership management. We can resolve
+  /// the above version subposet membership management issue by setting
+  /// the current version to CCR. This makes the refineable posets
+  /// behave like non-version posets, at the cost of inserting every member
+  /// into the CCR subposet twice, once for the CCR and once for the
+  /// current version.
+
+  /// @issue current version. The above hack leaves the poset with
+  /// CCR as the current version. What should the current version be,
+  /// and where should we restore it?
+
+  put_version(COARSEST_COMMON_REFINEMENT_VERSION);
+
+  // Set the standard id spaces.
+
+  update_standard_member_id_spaces();
+
+  // Initialize any additional handle data members.
+
+  initialize_handle_data_members(*name_space());
+  
+  // Release and regain access;
+  // will get access to handle data members.
+
+  poset::release_access();
+  get_read_write_access();
+
+  // Now invariant should be satisfied
+
+  enable_invariant_check();
+
+  // Postconditions:
+
+  ensure(invariant());
+  ensure(is_attached());
+  ensure(!in_jim_edit_mode());
+  ensure(schema().is_same_state(&xschema));
+  ensure(has_standard_member_ct());
+  ensure(has_standard_row_dof_tuple_ct());
+  ensure(version() == COARSEST_COMMON_REFINEMENT_VERSION);
+
+  // Now we're finished, release all access
+
+  release_access();
+
+  // One final postcondition
+
+  ensure(state_is_not_read_accessible());
+}
 
 void
 sheaf::poset::

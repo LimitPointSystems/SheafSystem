@@ -232,6 +232,14 @@ protected:
 			    bool xauto_link);
 
   ///
+  /// Inserts xposet into this namespace with member name xposet_name.
+  ///
+  scoped_index insert_poset(const poset_state_handle& xposet,
+			    const string& xposet_name,
+			    bool xauto_link,
+                            bool xauto_access);
+
+  ///
   /// Links xmbr into the appropriate group.
   ///
   virtual void link_poset(const namespace_poset_member& xmbr);
@@ -687,11 +695,11 @@ public:
 
 protected:
 
+  using poset_state_handle::initialize_namespace;
+
   ///
   /// Installs this as a member of xns.
-  ///
-  using poset_state_handle::initialize_namespace;
-    
+  ///    
   virtual void initialize_namespace(namespace_poset& xns, bool xauto_link = true);
 
 private:

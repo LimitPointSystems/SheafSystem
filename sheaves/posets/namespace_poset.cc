@@ -864,6 +864,70 @@ insert_poset(const poset_state_handle& xposet, const string& xposet_name, bool x
   return result;
 }
 
+sheaf::scoped_index
+sheaf::namespace_poset::
+insert_poset(const poset_state_handle& xposet, const string& xposet_name, bool xauto_link, bool xauto_access)
+{
+  // Preconditions:
+
+  require(!contains_member(xposet_name));
+  require(xauto_access || in_jim_edit_mode());
+  require(xposet.state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  namespace_poset_member lns_mbr;
+
+  // Member corresponding to xposet has not yet been created;
+  // Create it with same name as xposet.
+
+  if(xauto_access)
+  {
+    begin_jim_edit_mode(true);
+    xposet.get_read_access();
+  }
+  
+
+  lns_mbr.new_jim_state(this, 0, false, false);
+  lns_mbr.put_name(xposet_name, true, false);
+
+  // Add member poset to sequence id space.
+
+  mutable_index_space_handle& lid_space = 
+    member_id_spaces(false).get_id_space<mutable_index_space_handle>("member_poset_id_space");
+  lid_space.push_back(lns_mbr.index());
+  release_member_poset_id_space(lid_space, false);
+
+  // Set the name space member dofs:
+
+  lns_mbr.put_poset(xposet);
+
+  // Link the member into the appropriate group.
+
+  if(xauto_link)
+  {
+    link_poset(lns_mbr);
+  }
+
+
+  if(xauto_access)
+  {
+    end_jim_edit_mode(true, true);
+    xposet.release_access();
+  }
+
+  scoped_index result = lns_mbr.index();
+
+  // Postconditions:
+
+  ensure(contains_member(result));
+  ensure(&member_poset(result) == &xposet);
+
+  // Exit:
+
+  return result;
+}
+
 void
 sheaf::namespace_poset::
 link_poset(const namespace_poset_member& xmbr)
@@ -2152,12 +2216,6 @@ new_state(const string& xname)
   _namespace_schema.get_read_access();
 
   // Now we have a schema, create the poset state object.
-
-//   _state = new poset_state(&(_namespace_schema.top()),
-//                            NAMESPACE_POSET_ID,
-//                            8,   // arbitrary
-//                            16,  // arbitrary
-//                            4);  // arbitrary
 
   _state = new poset_state(&(_namespace_schema.top()), NAMESPACE_POSET_ID, xname);
 
