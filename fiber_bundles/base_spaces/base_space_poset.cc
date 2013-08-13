@@ -80,11 +80,6 @@ new_table(namespace_type& xns, const poset_path& xpath, const poset_path& xschem
 
   table_type* ltable = new table_type();
 
-  if(xauto_access)
-  {
-    xns.member_poset(xschema_path, false).get_read_access();
-  }
-
   // Create a handle of the right type for the schema member.
 
   schema_poset_member lschema(&xns, xschema_path, xauto_access);
