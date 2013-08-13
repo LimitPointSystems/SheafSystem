@@ -1,5 +1,4 @@
 #
-# $RCSfile: CMakeLists.txt,v $ $Revision: 1.19 $ $Date: 2013/03/27 17:31:37 $
 #
 #
 # Copyright (c) 2013 Limit Point Systems, Inc.

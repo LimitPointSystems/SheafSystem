@@ -555,7 +555,7 @@ attach_handle_data_members()
   // Attach _interval first; need it to call i_size().
 
   _interval = 
-    dynamic_cast<structured_block_1d_crg_interval*>(crg()->implicit_member(_index));
+    dynamic_cast<structured_block_1d_crg_interval*>(crg()->implicit_member(_index.pod()));
 
   // Postconditions:
 

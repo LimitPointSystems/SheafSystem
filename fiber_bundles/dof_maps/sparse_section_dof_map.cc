@@ -110,7 +110,7 @@ sparse_section_dof_map(const sparse_section_dof_map& xother)
 
 fiber_bundle::sparse_section_dof_map::
 sparse_section_dof_map(sec_rep_space* xhost, sec_vd_dof_type xdefault_value)
-    : section_dof_map(xhost, xhost->base().index(), xhost->version())
+  : section_dof_map(xhost, xhost->base().index().pod(), xhost->version())
 {
 
   // Preconditions:

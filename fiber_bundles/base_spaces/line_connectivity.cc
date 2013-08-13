@@ -49,6 +49,29 @@ line_connectivity(const line_connectivity& xother)
 }
 
 fiber_bundle::line_connectivity::
+line_connectivity(const pod_index_type* xnode_ids, size_type xnode_id_ct, size_type xnode_ct)
+  : block_connectivity(xnode_ids, xnode_id_ct, NODES_PER_ELEMENT, xnode_ct)
+{
+  // Preconditions:
+
+  require(xnode_id_ct > 0);
+  require((xnode_id_ct % NODES_PER_ELEMENT) == 0);
+
+  // Body:
+
+  // Postconditions:
+
+  ensure(element_ct() == xnode_id_ct/NODES_PER_ELEMENT);
+  ensure(xnode_ct > 0 ? node_ct() == xnode_ct : node_ct() > 0);
+  ensure(node_id_ct() == xnode_id_ct);
+  ensure(node_ids() == xnode_ids);
+  ensure(!delete_node_ids());
+  ensure(nodes_per_element() == NODES_PER_ELEMENT);
+
+  // Exit:
+}
+
+fiber_bundle::line_connectivity::
 line_connectivity(size_type xi_size, pod_index_type xstart_id)
     : block_connectivity(xstart_id)
 {

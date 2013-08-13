@@ -3128,7 +3128,7 @@ new_row_dof_tuple(pod_index_type xext_dof_tuple_pod)
     // Internal schema is less than external schema;
     // use internal schema.
 
-    ltuple_schema_id = lposet_schema.index();
+    ltuple_schema_id = lposet_schema.index().pod();
   }
   else
   {

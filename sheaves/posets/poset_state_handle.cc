@@ -2096,7 +2096,7 @@ put_member_dof_tuple_id(const scoped_index& xmbr_id,
 
   // Postconditions:
 
-  ensure(member_dof_tuple_id(xmbr_id, xauto_access) == xtuple_id.hub_pod());
+  ensure(member_dof_tuple_id(xmbr_id.hub_pod(), xauto_access) == xtuple_id.hub_pod());
 
   // Exit
 
@@ -2653,7 +2653,7 @@ new_member(bool xis_jim, const scoped_index& xtuple_id, scoped_index& result)
 
   // Body:
 
-  result.put(member_hub_id_space(false), new_member(xis_jim, xtuple_id));
+  result.put(member_hub_id_space(false), new_member(xis_jim, xtuple_id.hub_pod()));
 
   // Postconditions:
 
@@ -2737,7 +2737,7 @@ new_member(bool xis_jim, poset_dof_map* xdof_map, bool xcopy_dof_map)
 
   // Create the new member.
 
-  pod_index_type result = new_member(xis_jim, ldof_map_id);
+  pod_index_type result = new_member(xis_jim, ldof_map_id.hub_pod());
 
   // Postconditions:
 
@@ -4726,8 +4726,8 @@ link_greatest_jem(const scoped_index& xjem1, const scoped_index& xjem2)
   // Postconditions:
 
   ensure(is_jem(xjem2, xjem1));
-  ensure(greatest_jem(xjem2) != TOP_INDEX ?
-         greatest_jem(xjem2) == xjem1.hub_pod() :
+  ensure(greatest_jem(xjem2.hub_pod()) != TOP_INDEX ?
+         greatest_jem(xjem2.hub_pod()) == xjem1.hub_pod() :
          true );
 
   // Exit
@@ -4805,9 +4805,9 @@ link_least_jem(const scoped_index& xjem1, const scoped_index& xjem2)
   // Postconditions:
 
   ensure(is_jem(xjem2, xjem1));
-  ensure((least_jem(xjem2) == xjem1.hub_pod()) ||
-         is_jim(least_jem(xjem2)) ||
-         (least_jem(xjem2) == BOTTOM_INDEX));
+  ensure((least_jem(xjem2.hub_pod()) == xjem1.hub_pod()) ||
+         is_jim(least_jem(xjem2.hub_pod())) ||
+         (least_jem(xjem2.hub_pod()) == BOTTOM_INDEX));
 
   // Exit
 
@@ -5868,7 +5868,7 @@ append_upper_cover_of_bottom(const scoped_index& xmbr_begin,
 
   // Postconditions:
 
-  ensure_for_range(scoped_index i=xmbr_begin, i<xmbr_end, ++i, cover_contains_member(UPPER, BOTTOM_INDEX, i));
+  ensure_for_range(scoped_index i=xmbr_begin, i<xmbr_end, ++i, cover_contains_member(UPPER, BOTTOM_INDEX, i.hub_pod()));
 
   // Exit:
 
@@ -7577,7 +7577,7 @@ bound_contains_member(const poset_bounds& xbounds,
   }
   else
   {
-    result = powerset().subposet_contains_member(lbnd_id, xindex);
+    result = powerset().subposet_contains_member(lbnd_id, xindex.hub_pod());
   }
   
   // Postconditions:

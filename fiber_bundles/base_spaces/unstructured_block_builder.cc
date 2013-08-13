@@ -785,7 +785,7 @@ initialize_dof_maps()
     scoped_index lblk_tuple_id = _block_host.dof_tuple_id(false);
     scoped_index lindex = itr.index();
     pod_index_type ltmp_tuple_id =
-      _template_host.member_dof_tuple_id(lindex, false);
+      _template_host.member_dof_tuple_id(lindex.pod(), false);
 
     if(is_valid(ltmp_tuple_id))
     {
@@ -922,7 +922,7 @@ make_block(bool xcompute_upper_cover)
     size_type lct = _block_mbrs.ct();
     for(size_type i=0; i<lct; ++i)
     {
-      lhost->new_link(TOP_INDEX, _block_mbrs[i]);
+      lhost->new_link(TOP_INDEX, _block_mbrs[i].hub_pod());
     }
 
     // Now join them.
@@ -969,7 +969,7 @@ make_block(bool xcompute_upper_cover)
   {
     scoped_index lseq_id(_block_host.blocks().id_space(), _block->index());
 
-    _block->put_name(poset_path::make_name("__block_", lseq_id, ""), true, false);
+    _block->put_name(poset_path::make_name("__block_", lseq_id.pod(), ""), true, false);
   }
 
 
@@ -1106,7 +1106,7 @@ postvisit_action(const triorder_iterator& xtmplt_itr)
       // using the block's copy of the template member's dof tuple.
 
       const scoped_index& lblk_tuple_id =
-	_dof_tuple_id_map[ltmplt_mbr_id];
+	_dof_tuple_id_map[ltmplt_mbr_id.pod()];
 
       _block_host.new_member(_template_host.is_jim(ltmplt_mbr_id.pod()),
 			     lblk_tuple_id,

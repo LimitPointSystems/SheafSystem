@@ -22,8 +22,7 @@ namespace fiber_bundle
   using namespace sheaf;
 
 ///
-/// Cnnectivity for a triangle mesh with the elements arranged
-/// so the vertices form a regular rectangular array.
+/// Nodal connectivity for a block containing zones of type triangle.
 ///
 class SHEAF_DLL_SPEC triangle_connectivity : public block_connectivity
 {
@@ -47,6 +46,17 @@ public:
   triangle_connectivity(const triangle_connectivity& xother);
 
   ///
+  /// Creates an instance corresponding to the general arrangement
+  /// of vertices given by node_ids() == xnode_ids,
+  /// and node_id_ct() == xnode_id_ct. If xnode_ct == 0,
+  /// node_ct() will be computed from node_ids(), otherwise,
+  /// node_ct() == xnode_ct.
+  ///
+  triangle_connectivity(const pod_index_type* xnode_ids, 
+			size_type xnode_id_ct, 
+			size_type xnode_ct);
+
+  ///
   /// Creates an instance corresponding to a rectangular array of
   /// vertices xi_size + 1 by  x_jsize + 1, that is, xi_size and xj_size
   /// are the number of edges in the i and j direction, respectively.
@@ -59,16 +69,6 @@ public:
                         size_type xj_size,
                         pod_index_type xstart_id = 0,
                         bool xlower_left_to_upper_right_diagonals = true);
-
-  ///
-  /// Creates an instance with node_ids() == xnode_ids,
-  /// and node_id_ct() == xnode_id_ct. If xnode_ct == 0,
-  /// node_ct() will be computed from node_ids(), otherwise,
-  /// node_ct() == xnode_ct.
-  ///
-  triangle_connectivity(const pod_index_type* xnode_ids, 
-			size_type xnode_id_ct, 
-			size_type xnode_ct);
 
   ///
   /// Destructor.

@@ -1,6 +1,4 @@
 #
-# $RCSfile: CMakeLists.txt,v $ $Revision: 1.8 $ $Date: 2013/01/12 17:17:30 $
-#
 #
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
@@ -29,7 +27,7 @@ set(SRCS
     d_uniform_point_locator.cc
     line_surface_intersecter.cc
     point_locator.cc 
-)
+   )
 
 collect_sources()
 
@@ -46,7 +44,7 @@ set(ADDITIONAL_INCS
     d_tree_point_locator_node.impl.h 
     d_tree_point_locator_path.impl.h 
     d_uniform_point_locator.impl.h
-  )
+   )
 
 collect_includes()
 
@@ -54,7 +52,7 @@ collect_includes()
 # Source for unit test executables.
 #
 set(UNIT_TEST_SRCS
-)
+   )
 
 collect_unit_test_sources()
 
@@ -63,6 +61,6 @@ collect_unit_test_sources()
 #
 set(EXAMPLE_SRCS
 
- )
+   )
 
 collect_example_sources()

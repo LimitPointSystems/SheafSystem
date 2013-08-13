@@ -185,20 +185,7 @@ endfunction(configure_std_headers)
 #
 function(set_compiler_flags)
 
-       # Clear all cmake's intrinsic vars. If we don't, then their values will be appended to our
-       # compile and link lines.
-       set(CMAKE_CXX_FLAGS "" CACHE STRING "CXX Flags")
-       set(CMAKE_SHARED_LINKER_FLAGS "" CACHE STRING "Shared Linker Flags")
-       set(CMAKE_SHARED_LINKER_FLAGS_DEBUG "" CACHE STRING "Debug Shared Linker Flags")
-       set(CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO "" CACHE STRING "Debug Shared Linker Flags")
-       set(CMAKE_SHARED_LINKER_FLAGS_DEBUG "" CACHE STRING "Debug Shared Linker Flags")
-       set(CMAKE_EXE_LINKER_FLAGS "" CACHE STRING "Exe Linker Flags")
-       set(CMAKE_EXE_LINKER_FLAGS_DEBUG "" CACHE STRING "Exe Linker Flags")
-       set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO "" CACHE STRING "Exe Linker Flags")
-       set(CMAKE_MODULE_LINKER_FLAGS "" CACHE STRING "Module Linker Flags")
-       set(CMAKE_MODULE_LINKER_FLAGS_DEBUG "" CACHE STRING "Module Linker Flags")
-       set(CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO "" CACHE STRING "Module Linker Flags") 
-        
+       
        # Toggle multi-process compilation in Windows
        # Set in system_definitions.cmake
        if(ENABLE_WIN32_MP)
@@ -242,28 +229,16 @@ function(set_compiler_flags)
         
     # Configuration specific flags 
     if(WIN64MSVC OR WIN64INTEL)
- 
-        if(${USE_VTK})     
-            set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od /DUSE_VTK" CACHE
-                STRING "Flags used by the C++ compiler for Debug-contracts builds" )
-        else()
-             set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od" CACHE
-                STRING "Flags used by the C++ compiler for Debug-contracts builds" )       
-        endif()
-        
+
+         set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od" CACHE
+            STRING "Flags used by the C++ compiler for Debug-contracts builds" )       
         set(CMAKE_SHARED_LINKER_FLAGS_DEBUG-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG" CACHE
             STRING "Flags used by the linker for shared libraries for Debug-contracts builds" )
         set(CMAKE_EXE_LINKER_FLAGS_DEBUG-CONTRACTS "${LPS_EXE_LINKER_FLAGS} /DEBUG" CACHE
             STRING "Flags used by the linker for executables for Debug-contracts builds")            
-    
     else() # Linux
-        if(${USE_VTK})
-            set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} -g -DUSE_VTK " CACHE
-                STRING "Flags used by the C++ compiler for Debug-contracts builds" )
-        else()         
-            set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} -g " CACHE
-                STRING "Flags used by the C++ compiler for Debug-contracts builds" )
-        endif()
+        set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} -g " CACHE
+            STRING "Flags used by the C++ compiler for Debug-contracts builds" )
         set(CMAKE_EXE_LINKER_FLAGS_DEBUG-CONTRACTS ${CMAKE_EXE_LINKER_FLAGS}  CACHE
             STRING "Flags used by the linker for executables for Debug-contracts builds")        
     endif()
@@ -277,28 +252,16 @@ function(set_compiler_flags)
 
     # Configuration specific flags 
     if(WIN64MSVC OR WIN64INTEL)
-    
-        if(${USE_VTK})
-             set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od /DUSE_VTK /DNDEBUG" CACHE
-                STRING "Flags used by the C++ compiler for Debug-no-contracts builds" )
-         else()
-            set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od /DNDEBUG" CACHE
-                STRING "Flags used by the C++ compiler for Debug-no-contracts builds" )            
-         endif()
-    
+
+     set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od /DNDEBUG" CACHE
+         STRING "Flags used by the C++ compiler for Debug-no-contracts builds" )            
      set(CMAKE_SHARED_LINKER_FLAGS_DEBUG-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG" CACHE
          STRING "Flags used by the linker for shared libraries for Debug-contracts builds" )
      set(CMAKE_EXE_LINKER_FLAGS_DEBUG-NO-CONTRACTS "${LPS_EXE_LINKER_FLAGS} /DEBUG" CACHE
          STRING "Flags used by the linker for executables for Debug-contracts builds")                  
-    
     else()
-        if(${USE_VTK})    
-            set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} -g -DNDEBUG -DUSE_VTK" CACHE
-                STRING "Flags used by the C++ compiler for Debug-no-contracts builds" )
-        else()
-            set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} -g -DNDEBUG" CACHE
-                STRING "Flags used by the C++ compiler for Debug-no-contracts builds" )
-        endif()
+    set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} -g -DNDEBUG" CACHE
+        STRING "Flags used by the C++ compiler for Debug-no-contracts builds" )
     endif()
 
     mark_as_advanced(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS
@@ -309,15 +272,9 @@ function(set_compiler_flags)
 
     # Configuration specific flags 
     if(WIN64MSVC OR WIN64INTEL)
-    
-        if(${USE_VTK})
-            set(CMAKE_CXX_FLAGS_RELEASE-CONTRACTS "${LPS_CXX_FLAGS} /DUSE_VTK /MD /LD /O2 " CACHE
-                STRING "Flags used by the C++ compiler for Release-contracts builds" )
-        else()   
-            set(CMAKE_CXX_FLAGS_RELEASE-CONTRACTS "${LPS_CXX_FLAGS} /MD /LD /O2 " CACHE
-                STRING "Flags used by the C++ compiler for Release-contracts builds" )
-        endif()
-  
+ 
+        set(CMAKE_CXX_FLAGS_RELEASE-CONTRACTS "${LPS_CXX_FLAGS} /MD /LD /O2 " CACHE
+            STRING "Flags used by the C++ compiler for Release-contracts builds" )
         set(CMAKE_EXE_LINKER_FLAGS_RELEASE-CONTRACTS "${LPS_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD  /NXCOMPAT"  CACHE
             STRING "Flags used by the linker for executables for Release-contracts builds" )
         set(CMAKE_SHARED_LINKER_FLAGS_RELEASE-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD  /NXCOMPAT " CACHE
@@ -341,19 +298,12 @@ function(set_compiler_flags)
 
     # Configuration specific flags         
     if(WIN64MSVC OR WIN64INTEL)
-    
-       if(${USE_VTK})
-            set(CMAKE_CXX_FLAGS_RELEASE-NO-CONTRACTS "${LPS_CXX_FLAGS} /MD /LD /O2 /DUSE_VTK /DNDEBUG" CACHE
-                STRING "Flags used by the C++ compiler for Release-no-contracts builds" )
-       else()        
-            set(CMAKE_CXX_FLAGS_RELEASE-NO-CONTRACTS "${LPS_CXX_FLAGS}  /MD /LD /O2 /DNDEBUG" CACHE
-                STRING "Flags used by the C++ compiler for Release-no-contracts builds" )
-      endif()     
-                
-    set(CMAKE_EXE_LINKER_FLAGS_RELEASE-NO-CONTRACTS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD  /NXCOMPAT" CACHE
-        STRING "Flags used by the linker for executables for Release-no-contracts builds" )
-    set(CMAKE_SHARED_LINKER_FLAGS_RELEASE-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD  /NXCOMPAT" CACHE
-        STRING "Flags used by the linker for shared libraries for Release-no-contracts builds" )
+        set(CMAKE_CXX_FLAGS_RELEASE-NO-CONTRACTS "${LPS_CXX_FLAGS}  /MD /LD /O2 /DNDEBUG" CACHE
+            STRING "Flags used by the C++ compiler for Release-no-contracts builds" )
+        set(CMAKE_EXE_LINKER_FLAGS_RELEASE-NO-CONTRACTS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD  /NXCOMPAT" CACHE
+            STRING "Flags used by the linker for executables for Release-no-contracts builds" )
+        set(CMAKE_SHARED_LINKER_FLAGS_RELEASE-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD  /NXCOMPAT" CACHE
+            STRING "Flags used by the linker for shared libraries for Release-no-contracts builds" )
     else()
         set(CMAKE_CXX_FLAGS_RELEASE-NO-CONTRACTS "${LPS_CXX_FLAGS} ${OPTIMIZATION} -DNDEBUG" CACHE
             STRING "Flags used by the C++ compiler for Release-no-contracts builds" )
@@ -374,15 +324,8 @@ function(set_compiler_flags)
 
     # Configuration specific flags 
     if(WIN64MSVC OR WIN64INTEL)
-    
-        if(${USE_VTK})
-            set(CMAKE_CXX_FLAGS_RELWITHDEBINFO-CONTRACTS "${LPS_CXX_FLAGS} /DUSE_VTK /MD /LD /O2 " CACHE
-                STRING "RelWithDebInfo-contracts compiler flags" )
-        else()   
-            set(CMAKE_CXX_FLAGS_RELWITHDEBINFO-CONTRACTS "${LPS_CXX_FLAGS} /MD /LD /O2 " CACHE
-                STRING "RelWithDebInfo-contracts compiler flags" )
-        endif()
-  
+        set(CMAKE_CXX_FLAGS_RELWITHDEBINFO-CONTRACTS "${LPS_CXX_FLAGS} /MD /LD /O2 " CACHE
+            STRING "RelWithDebInfo-contracts compiler flags" )
         set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-CONTRACTS "${LPS_EXE_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD  /NXCOMPAT"  CACHE
             STRING "RelWithDebInfo-contracts linker flags - executables" )
         set(CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD  /NXCOMPAT " CACHE
@@ -406,19 +349,12 @@ function(set_compiler_flags)
 
     # Configuration specific flags         
     if(WIN64MSVC OR WIN64INTEL)
-    
-       if(${USE_VTK})
-            set(CMAKE_CXX_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${LPS_CXX_FLAGS} /MD /LD /O2 /DUSE_VTK /DNDEBUG" CACHE
-                STRING "RelWithDebInfo-no-contracts compiler flags" )
-       else()        
-            set(CMAKE_CXX_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${LPS_CXX_FLAGS}  /MD /LD /O2 /DNDEBUG" CACHE
-                STRING "RelWithDebInfo-no-contracts compiler flags" )
-      endif()     
-                
-    set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${CMAKE_EXE_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD  /NXCOMPAT" CACHE
-        STRING "RelWithDebInfo-no-contracts linker flags - executables" )
-    set(CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD  /NXCOMPAT" CACHE
-        STRING "RelWithDebInfo-no-contracts linker flags - shared libs" )
+        set(CMAKE_CXX_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${LPS_CXX_FLAGS}  /MD /LD /O2 /DNDEBUG" CACHE
+            STRING "RelWithDebInfo-no-contracts compiler flags" )
+        set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${CMAKE_EXE_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD  /NXCOMPAT" CACHE
+            STRING "RelWithDebInfo-no-contracts linker flags - executables" )
+        set(CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD  /NXCOMPAT" CACHE
+            STRING "RelWithDebInfo-no-contracts linker flags - shared libs" )
     else()
         set(CMAKE_CXX_FLAGS_RELWITHDEBINFO-NO-CONTRACTS "${LPS_CXX_FLAGS} ${OPTIMIZATION} -DNDEBUG" CACHE
             STRING "RelWithDebInfo-no-contracts compiler flags" )
@@ -474,26 +410,27 @@ endfunction()
 # Add the documentation targets.
 # Default Doc state is "User"
 #
-function(add_doc_targets)
 
-    if(DOXYGEN_FOUND)
-        if(LPS_DOC_STATE MATCHES Dev OR LPS_DOC_STATE MATCHES dev OR LPS_DOC_STATE MATCHES DEV)
-            add_custom_target(doc ALL
-                    COMMAND ${CMAKE_COMMAND} -E echo "Generating Developer Documentation ... " 
-                    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/documentation                    
-                    COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/dev_doxyfile
-                            )
-        else()
-            add_custom_target(doc ALL
-                    COMMAND ${CMAKE_COMMAND} -E echo "Generating User Documentation ... "  
-                    COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/documentation                     
-                    COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/user_doxyfile
-                             )
-        endif()
-                set_target_properties(doc PROPERTIES FOLDER "Documentation Targets")    
-    endif()
-                    
-endfunction(add_doc_targets)
+    function(add_doc_targets)
+        if(DOC_TARGETS)
+            if(DOXYGEN_FOUND)
+                if(LPS_DOC_STATE MATCHES Dev OR LPS_DOC_STATE MATCHES dev OR LPS_DOC_STATE MATCHES DEV)
+                    add_custom_target(doc ALL
+                            COMMAND ${CMAKE_COMMAND} -E echo "Generating Developer Documentation ... " 
+                            COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/documentation                    
+                            COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/dev_doxyfile
+                                    )
+                else()
+                    add_custom_target(doc ALL
+                            COMMAND ${CMAKE_COMMAND} -E echo "Generating User Documentation ... "  
+                            COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/documentation                     
+                            COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/user_doxyfile
+                                     )
+                endif()
+                        set_target_properties(doc PROPERTIES FOLDER "Documentation Targets")    
+            endif()
+        endif() 
+    endfunction(add_doc_targets)
 
 # 
 #  Append file types to CMake's default clean list.
@@ -502,13 +439,8 @@ function(add_clean_files)
     
     #Define the file types to be included in the clean operation.
     
-    file(GLOB_RECURSE HDF_FILES ${CMAKE_BINARY_DIR}/*.hdf)
-    file(GLOB_RECURSE JAR_FILES ${CMAKE_BINARY_DIR}/*.jar)
-   
-    # Clean up the mess left by the Intel coverage tool
-    #file(GLOB_RECURSE DYN_FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/*.dyn)
-    #file(GLOB_RECURSE DPI_FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/*.dpi)
-    #file(GLOB_RECURSE SPI_FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/*.spi)
+    file(GLOB_RECURSE HDF_FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/*.hdf)
+    file(GLOB_RECURSE JAR_FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/*.jar)
    
     # List of files with paths for SheafScope.jar build
     file(GLOB SCOPE_FILE_LIST ${CMAKE_BINARY_DIR}/scopesrcs/*)
@@ -522,13 +454,119 @@ function(add_clean_files)
 
 endfunction(add_clean_files) 
 
+
+#$$TODO: Expand this to cover windows/intel as well.
+function(add_coverage_target)
+
+    if(LINUX64INTEL)
+        add_custom_target(coverage DEPENDS ${ALL_COVERAGE_TARGETS})
+    endif()
+
+endfunction()
+
 # 
-#  Clean up. Remove everything, not just the build products.
+# Create a cmake test for each unit test executable.
 #
-add_custom_command(TARGET clean POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E rm -f ${CMAKE_BINARY_DIR}/bin/${CMAKE_CFG_INTDIR}/*
-    COMMAND ${CMAKE_COMMAND} -E rm -f ${CMAKE_BINARY_DIR}/lib/${CMAKE_CFG_INTDIR}/*    
-    )
+function(add_test_targets)
+
+    # link_directories only applies to targets created after it is called.
+    if(LINUX64GNU OR LINUX64INTEL)
+        link_directories(${CMAKE_ARCHIVE_OUTPUT_DIRECTORY} ${HDF5_LIBRARY_DIRS})
+    else()
+        link_directories(${CMAKE_ARCHIVE_OUTPUT_DIRECTORY} ${HDF5_LIBRARY_DIRS})        
+    endif()    
+    # Let the user know what's being configured
+    status_message("Configuring Unit Tests for ${PROJECT_NAME}")   
+    foreach(t_cc_file ${${COMPONENT}_UNIT_TEST_SRCS})
+
+        # Extract name of executable from source filename
+        string(REPLACE .t.cc .t t_file_with_path ${t_cc_file})
+        # Remove path information  
+        get_filename_component(t_file ${t_file_with_path} NAME)
+
+        set(${COMPONENT}_UNIT_TESTS ${${COMPONENT}_UNIT_TESTS} ${t_file} CACHE STRING "List of unit test binaries" FORCE)
+        mark_as_advanced(${COMPONENT}_UNIT_TESTS)
+        # If the target already exists, don't try to create it.
+        if(NOT TARGET ${t_file})
+             message(STATUS "Creating ${t_file} from ${t_cc_file}")
+             add_executable(${t_file} ${t_cc_file})
+            # Make sure the library is up to date
+            if(WIN64MSVC OR WIN64INTEL)
+                # Supply the *_DLL_IMPORTS directive to preprocessor
+                set_target_properties(${t_file} PROPERTIES COMPILE_DEFINITIONS "SHEAF_DLL_IMPORTS")
+                add_dependencies(${t_file} ${${COMPONENT}_IMPORT_LIBS})
+            else()
+                add_dependencies(${t_file} ${${COMPONENT}_SHARED_LIB})
+            endif()
+
+            if(LINUX64GNU OR LINUX64INTEL)
+                target_link_libraries(${t_file} ${${COMPONENT}_SHARED_LIB} ${HDF5_LIBRARIES})
+            elseif(WIN64MSVC OR WIN64INTEL)
+                target_link_libraries(${t_file} ${${COMPONENT}_IMPORT_LIBS} ${HDF5_LIBRARIES})                                         
+                # Insert the unit tests into the VS folder "unit test targets"
+                set_target_properties(${t_file} PROPERTIES FOLDER "Unit Test Targets")
+            endif()
+
+            # Add a test target for ${t_file}
+         
+            add_test(${t_file} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${t_file})
+            # Tag the test with the name of the current component.
+            set_property(TEST ${t_file} PROPERTY LABELS "${PROJECT_NAME}")
+
+            if(WIN64MSVC OR WIN64INTEL)
+                # Set the PATH environment variable for CTest so the HDF5 and Fields dlls lie in it.
+                set_tests_properties(${t_file} PROPERTIES ENVIRONMENT
+                                     "PATH=${HDF5_LIBRARY_DIRS};$CMAKE_ARCHIVE_OUTPUT_DIRECTORY}:${CMAKE_CFG_INTDIR}")
+            endif()
+        endif()
+    endforeach()
+
+endfunction(add_test_targets)
+
+# 
+# Create a target for each example.
+#
+function(add_example_targets)
+
+    foreach(t_cc_file ${${COMPONENT}_EXAMPLE_SRCS})
+        # link_directories only applies to targets created after it is called.
+        if(LINUX64GNU OR LINUX64INTEL)
+            link_directories($CMAKE_ARCHIVE_OUTPUT_DIRECTORY} ${HDF5_LIBRARY_DIRS})
+        else()
+            link_directories($CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_BUILD_TYPE} ${HDF5_LIBRARY_DIRS})
+        endif()    
+        # Let the user know what's being configured
+        status_message("Configuring example executables for ${PROJECT_NAME}")   
+        # Deduce name of executable from source filename
+        string(REPLACE .cc "" t_file_with_path ${t_cc_file})
+        # Remove path information so the executable goes into build/bin (or build/VisualStudio)
+        # and not into build/bin/examples (or build/VisualStudio/examples)
+        get_filename_component(t_file ${t_file_with_path} NAME)
+        set(${COMPONENT}_EXAMPLES ${${COMPONENT}_EXAMPLES} ${t_file} CACHE STRING "List of example binaries" FORCE)
+        mark_as_advanced(${COMPONENT}_EXAMPLES)    
+        # Add building of executable and link with shared library
+        message(STATUS "Creating ${t_file} from ${t_cc_file}")
+        add_executable(${t_file} ${t_cc_file})
+    
+        # Make sure the library is up to date
+        if(WIN64MSVC OR WIN64INTEL)
+            add_dependencies(${t_file} ${${COMPONENT}_IMPORT_LIB})
+            link_directories(${${COMPONENT}_OUTPUT_DIR}/$(OutDir))
+            target_link_libraries(${t_file} ${${COMPONENT}_IMPORT_LIBS})
+            # Insert the unit tests into the VS folder "unit_tests"
+            set_target_properties(${t_file} PROPERTIES FOLDER "Example Targets")
+        else()
+            add_dependencies(${t_file} ${${COMPONENT}_STATIC_LIB})
+            link_directories(${${COMPONENT}_OUTPUT_DIR} ${HDF5_LIBRARY_DIRS})
+            target_link_libraries(${t_file} ${${COMPONENT}_SHARED_LIB} ${HDF5_LIBRARIES})
+            endif()
+        endif()
+
+    add_custom_command(TARGET clean POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E rm -f ${CMAKE_BINARY_DIR}/bin/${CMAKE_CFG_INTDIR}/*
+        COMMAND ${CMAKE_COMMAND} -E rm -f ${CMAKE_BINARY_DIR}/lib/${CMAKE_CFG_INTDIR}/*    
+        )
+endfunction()
     
 #
 # Add the list of clusters to this component.
@@ -643,11 +681,7 @@ function(export_targets)
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(HDF_INCLUDE_DIR ${HDF5_INCLUDE_DIRS} CACHE STRING \"HDF5 Include Path \")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     endif()
-    #$$TODO: "GEOMETRY" will change to "TOOLS" when we pull kd_lattice out of SheafSystem
-    # Note that although USE_VTK is on by default for production, we ship with USE_VTK off.
-    if("${COMPONENT}" MATCHES "GEOMETRY")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK @USE_VTK@ CACHE BOOL \"Set to link against VTK libs\")\n")
+    if("${COMPONENT}" MATCHES "TOOLS")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @VTK_LIB_DIR@ CACHE PATH \"VTK library path\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
@@ -655,12 +689,14 @@ function(export_targets)
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")        
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_BIN_DIR @VTK_BIN_DIR@ CACHE PATH  \"VTK DLL path\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_INC_DIRS @VTK_INC_DIRS@ CACHE PATH  \"VTK DLL path\")\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")        
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(TETGEN_INCLUDE_DIR ${TETGEN_INC_DIR} CACHE STRING \"Tetgen Include Path \")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_INC_DIR @VTK_INC_DIRS@ CACHE PATH  \"VTK DLL path\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIBS ${VTK_LIBS} CACHE STRING \"VTK Libraries\")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")                  
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")        
         file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(JMF_JAR ${JMF_JAR} CACHE STRING \"JMF jar location\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")        
+
     endif()             
 endfunction(export_targets)
 
@@ -681,9 +717,7 @@ function(export_install_config_file_vars)
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(${COMPONENT}_IMPORT_LIBS ${${COMPONENT}_IMPORT_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative import library list\")\n")
         endif()
         file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-        if("${COMPONENT}" MATCHES "GEOMETRY")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(USE_VTK @USE_VTK@ CACHE BOOL \"Set to link against VTK libs\")\n")
+        if("${COMPONENT}" MATCHES "TOOLS")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/vtk/lib CACHE PATH \"VTK library path\" FORCE)\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
@@ -706,14 +740,12 @@ function(export_install_config_file_vars)
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(${COMPONENT}_SHARED_LIBS ${${COMPONENT}_SHARED_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative shared library list\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
         endif()
-        #$$TODO: "GEOMETRY" will change to "TOOLS" when we pull kd_lattice out of SheafSystem
-        if("${COMPONENT}" MATCHES "GEOMETRY")        
+
+        if("${COMPONENT}" MATCHES "TOOLS")        
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(USE_VTK @USE_VTK@ CACHE BOOL \"Set ON to link against VTK libs\")\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_INC_DIR @SHEAFSYSTEM_HOME@/include/vtk CACHE PATH \"VTK library path\")\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_INC_DIR @SHEAFSYSTEM_HOME@/vtk/include CACHE PATH \"VTK library path\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")            
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/lib/vtk CACHE PATH \"VTK library path\")\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/vtk/lib CACHE PATH \"VTK library path\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(JMF_JAR ${JMF_JAR} CACHE STRING \"JMF jar location\")\n")
@@ -738,16 +770,12 @@ function(generate_install_config_file)
     file(WRITE ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "${MASSAGED_OUTPUT}")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "\n")
     if(WIN64MSVC OR WIN64INTEL)
-        #file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "set(INSTALLED_VTK_LIB_DIR "\@SHEAFSYSTEM_HOME\@"/lib/vtk CACHE STRING \"VTK Base Dir\" FORCE)\n")
-        #file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "set(VTK_BIN_DIR "\@SHEAFSYSTEM_HOME\@"/bin/vtk CACHE STRING \"VTK Base Dir\" FORCE)\n")
-        #file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "set(VTK_INC_DIR "\@SHEAFSYSTEM_HOME\@"/include/vtk CACHE STRING \"VTK Base Dir\" FORCE)\n") 
-        
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "set(INSTALLED_VTK_LIB_DIR "\@SHEAFSYSTEM_HOME\@"/vtk/lib CACHE STRING \"VTK Base Dir\" FORCE)\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "set(VTK_BIN_DIR "\@SHEAFSYSTEM_HOME\@"/vtk/bin CACHE STRING \"VTK Base Dir\" FORCE)\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "set(VTK_INC_DIR "\@SHEAFSYSTEM_HOME\@"/vtk/include CACHE STRING \"VTK Base Dir\" FORCE)\n") 
     endif()
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "set(VTK_LIBS ${VTK_LIBS} CACHE STRING \"VTK Runtime Libraries\" FORCE)\n")      
-    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "set(HDF_INCLUDE_DIR ${HDF_INCLUDE_DIR} CACHE STRING \"HDF Include Directory\" FORCE)\n")  
+#    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "set(HDF_INCLUDE_DIR ${HDF_INCLUDE_DIR} CACHE STRING \"HDF Include Directory\" FORCE)\n")  
 endfunction(generate_install_config_file)
 
 #
@@ -868,22 +896,26 @@ endmacro(get_date)
 function(install_prereqs)
     # Prerequisite components install
     if(LINUX64INTEL OR LINUX64GNU)
-    
-        foreach(name ${VTK_LIBS})
-            file(GLOB files "${VTK_LIB_DIR}/lib${name}.*")
-            string(REPLACE "${VTK_LIB_DIR}/lib${name}.a" "" files "${files}")
-            set(VTK_INST_LIBS ${VTK_INST_LIBS} "${files}")
-        endforeach()
-        install(FILES ${VTK_INST_LIBS} DESTINATION lib/vtk/
-        PERMISSIONS
-        OWNER_WRITE OWNER_READ OWNER_EXECUTE
-        GROUP_READ GROUP_EXECUTE
-        WORLD_READ WORLD_EXECUTE   
-        )
+    install(DIRECTORY ${VTK_LIB_DIR}/ DESTINATION vtk/lib/ USE_SOURCE_PERMISSIONS
+        PATTERN "CMake" EXCLUDE 
+        PATTERN "doc" EXCLUDE 
+        PATTERN "doxygen" EXCLUDE
+        PATTERN "hints" EXCLUDE
+        PATTERN "testing" EXCLUDE 
+        PATTERN "*.cmake" EXCLUDE) 
+#        foreach(name ${VTK_LIBS})
+#            file(GLOB files "${VTK_LIB_DIR}/lib${name}.*")
+#            string(REPLACE "${VTK_LIB_DIR}/lib${name}.a" "" files "${files}")
+#            set(VTK_INST_LIBS ${VTK_INST_LIBS} "${files}")
+#        endforeach()
+#        install(FILES ${VTK_INST_LIBS} DESTINATION lib/vtk/
+#        PERMISSIONS
+#        OWNER_WRITE OWNER_READ OWNER_EXECUTE
+#        GROUP_READ GROUP_EXECUTE
+#        WORLD_READ WORLD_EXECUTE   
+#        )
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK OFF CACHE BOOL \"Set to link against VTK libs\")\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/lib/vtk CACHE STRING \"Location of VTK libs\")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/vtk/lib CACHE STRING \"Location of VTK libs\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
 
     elseif(WIN32) 
@@ -913,29 +945,17 @@ function(install_prereqs)
         WORLD_READ WORLD_EXECUTE   
         )
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK OFF CACHE BOOL \"Set to link against VTK libs\")\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(USE_VTK @USE_VTK@ CACHE BOOL \"Set to link against VTK libs\")\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         #file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/bin/vtk CACHE STRING \"Location of VTK libs\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/vtk/lib CACHE STRING \"Location of VTK libs\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")            
     endif()
 
-        
-     # Install only the VTK includes we use    
-    foreach(inc ${VTK_INCS})
-        install(FILES ${VTK_INC_DIRS}/${inc} DESTINATION vtk/include
-       # install(FILES ${VTK_INC_DIRS}/${inc} DESTINATION include
+     file(GLOB vtk_includes "${VTK_INC_DIRS}/*.h")
+     install(FILES ${vtk_includes} DESTINATION vtk/include
         PERMISSIONS
         OWNER_WRITE OWNER_READ
-        GROUP_READ WORLD_READ)
-    endforeach()
-    
-    # Tetgen header
-    install(FILES ${TETGEN_INC_DIR}/tetgen.h DESTINATION include
-        PERMISSIONS
-        OWNER_WRITE OWNER_READ 
-        GROUP_READ WORLD_READ)  
+        GROUP_READ WORLD_READ
+             )       
 
     # Install only the HDF includes we use 
     foreach(inc ${HDF5_INCS})
@@ -945,4 +965,12 @@ function(install_prereqs)
         GROUP_READ WORLD_READ)
     endforeach()
 
+    configure_file(${CMAKE_MODULE_PATH}/index.html.in ${CMAKE_BINARY_DIR}/index.html)
+    configure_file(${CMAKE_MODULE_PATH}/jindex.html.in ${CMAKE_BINARY_DIR}/jindex.html)
+    install(DIRECTORY ${PROJECT_BINARY_DIR}/documentation/ DESTINATION documentation)
+    install(DIRECTORY ${CMAKE_MODULE_PATH}/css DESTINATION documentation)
+    install(DIRECTORY ${CMAKE_MODULE_PATH}/images DESTINATION documentation)
+    install(FILES ${CMAKE_BINARY_DIR}/index.html DESTINATION documentation)
+    install(FILES ${CMAKE_BINARY_DIR}/jindex.html DESTINATION documentation/java)
+    
 endfunction(install_prereqs)

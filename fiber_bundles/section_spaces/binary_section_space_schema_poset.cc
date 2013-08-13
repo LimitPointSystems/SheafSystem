@@ -758,9 +758,9 @@ new_state(namespace_poset& xns,
   }
 
   pod_index_type lbase_poset_id  =
-    xns.member_poset(xbase_path, xauto_access).index();
+    xns.member_poset(xbase_path, xauto_access).index().pod();
   pod_index_type lfiber_poset_id =
-    xns.member_poset(xfiber_path, xauto_access).index();
+    xns.member_poset(xfiber_path, xauto_access).index().pod();
 
   new_state(&xns,
             xname,

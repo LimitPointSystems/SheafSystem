@@ -138,21 +138,20 @@ function(add_bindings_targets)
     if(SWIG_FOUND AND BUILD_BINDINGS)
 
         include(${SWIG_USE_FILE})
-        
+     
         #
         # Java ################################################################
         #
  
-        set(SWIG_CXX_EXTENSION "cxx" CACHE STRING "Swig source file extension")
-        set(CMAKE_SWIG_FLAGS -package bindings.java CACHE STRING "Swig flags")
+       set(SWIG_CXX_EXTENSION "cxx" CACHE STRING "Swig source file extension")
+       set(CMAKE_SWIG_FLAGS -package bindings.java CACHE STRING "Swig flags")
 
         include_directories(${JDK_INC_DIR} ${JDK_PLATFORM_INC_DIR})
         include_directories(${${COMPONENT}_JAVA_BINDING_SRC_DIR})
         include_directories(${${COMPONENT}_COMMON_BINDING_SRC_DIR})
-        
         set_source_files_properties(${${COMPONENT}_JAVA_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_JAVA_INTERFACE} PROPERTIES CPLUSPLUS ON)
      
-        # Add the java binding library target
+         # Add the java binding library target
         swig_add_module(${${COMPONENT}_JAVA_BINDING_LIB} java ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_JAVA_INTERFACE})
         
         if(WIN64INTEL OR WIN64MSVC)
@@ -172,7 +171,7 @@ function(add_bindings_targets)
         # Output path in windows differs slightly from Linux. Cmake wont allow a conditional inside add_custom_target
         # So we have to do it outside.
         if(WIN64INTEL OR WIN64MSVC)
-            set(${COMPONENT}_CLASSPATH ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)         
+            set(${COMPONENT}_CLASSPATH ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)         
             add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
                            DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB}
                            set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Component Binding Jars")
@@ -181,8 +180,18 @@ function(add_bindings_targets)
                            COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
                            COMMAND ${JAVAC_EXECUTABLE} -classpath . -d . *.java
                            COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                           COMMAND ${JAR_EXECUTABLE} cvf ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
+                           COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
             )
+            # Java documentation
+            if(DOC_TARGETS)
+                add_custom_target(${PROJECT_NAME}-java-docs ALL
+                                    COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${${COMPONENT}_CLASSPATH}" 
+                                    -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
+                                    *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                                    DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
+                                 )
+             set_target_properties(${PROJECT_NAME}-java-docs PROPERTIES FOLDER "Documentation Targets")                                 
+            endif()
         else()
             set(${COMPONENT}_CLASSPATH ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)   
             add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
@@ -194,18 +203,19 @@ function(add_bindings_targets)
                            COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
                            COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
              )        
+
+            # Java documentation
+            if(DOC_TARGETS)
+                add_custom_target(${PROJECT_NAME}-java-docs ALL
+                                    COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${${COMPONENT}_CLASSPATH}" 
+                                    -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
+                                    *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                                    DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
+                                 )
+            endif()
         endif()
         set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Library Jars") 
-        mark_as_advanced(FORCE ${COMPONENT}_CLASSPATH)        
-
-        # Java documentation
-        add_custom_target(${PROJECT_NAME}-java-docs ALL
-                            COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${${COMPONENT}_CLASSPATH}" 
-                            -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
-                            *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-                            DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
-                         )
-        set_target_properties(${PROJECT_NAME}-java-docs PROPERTIES FOLDER "Documentation Targets")
+        mark_as_advanced(FORCE ${COMPONENT}_CLASSPATH) 
 
         #
         # CSharp ##############################################################
@@ -237,7 +247,7 @@ function(add_bindings_targets)
                         COMMAND ${CMAKE_COMMAND} -E echo ""
                         COMMAND ${CMAKE_COMMAND} -E echo "Creating Csharp Binding for ${PROJECT_NAME} ..."
                         COMMAND ${CMAKE_COMMAND} -E echo ""                           
-                        COMMAND ${CSHARP_COMPILER} /nologo /noconfig /warn:1 /errorreport:prompt /target:library /out:${OUTDIR}/${${COMPONENT}_CSHARP_BINDING_ASSY}  ${CMAKE_CURRENT_BINARY_DIR}/*.cs
+                        COMMAND ${CSHARP_COMPILER} /nologo /noconfig /warn:1 /errorreport:prompt /target:library /out:${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_CSHARP_BINDING_ASSY}  ${CMAKE_CURRENT_BINARY_DIR}/*.cs
                             DEPENDS ${${COMPONENT}_CSHARP_BINDING_ASSY} ${${COMPONENT}_CSHARP_BINDING_LIB}
             )
         else()
@@ -249,7 +259,6 @@ function(add_bindings_targets)
         add_dependencies(${${COMPONENT}_CSHARP_BINDING_ASSY} ${${COMPONENT}_CSHARP_BINDING_LIB})       
         set_target_properties(${${COMPONENT}_CSHARP_BINDING_ASSY} PROPERTIES FOLDER "CSharp Assembly Targets")
 
-
         #
         # Python ############################################################## 
         #
@@ -257,13 +266,13 @@ function(add_bindings_targets)
         set(CMAKE_SWIG_FLAGS -c++ )
         
         include_directories(${PYTHON_INCLUDE_DIRS})
-        
+
         set_source_files_properties(${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE} PROPERTIES CPLUSPLUS ON)
         swig_add_module(${${COMPONENT}_PYTHON_BINDING_LIB} python ${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE})
         
         if(WIN64INTEL OR WIN64MSVC)
             add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB} ${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE} ${${COMPONENT}_SWIG_COMMON_INTERFACE})
-            target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB} ${PYTHON_LIBRARY} )
+            target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB} ${PYTHON_LIBRARY})
             set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} PROPERTIES FOLDER "Binding Targets - Python")
         else()
             add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_SHARED_LIB}${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE} ${${COMPONENT}_SWIG_COMMON_INTERFACE})
@@ -280,13 +289,12 @@ function(add_bindings_targets)
             add_dependencies(${PROJECT_NAME}-java-binding ${PROJECT_NAME}_java_binding.jar)    
             add_dependencies(${PROJECT_NAME}-python-binding ${${COMPONENT}_PYTHON_BINDING_LIB})
             add_dependencies(${PROJECT_NAME}-csharp-binding ${${COMPONENT}_CSHARP_BINDING_LIB})
-        endif()
+        endif()   
 
         # Bindings target aliases already declared at system level. Add dependencies here.
         add_dependencies(${PROJECT_NAME}-bindings ${PROJECT_NAME}_java_binding.jar ${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_CSHARP_BINDING_LIB})
         
     endif()
-
 endfunction(add_bindings_targets)
 
 # 
@@ -313,25 +321,23 @@ function(add_install_target)
 
             # The BUILD_TYPE variable will be set while CMake is processing the install files. It is not set at configure time
             # for this project. We pass it literally here.
-            
             install(TARGETS ${${COMPONENT}_IMPORT_LIB} EXPORT ${${COMPONENT}_IMPORT_LIB} ARCHIVE DESTINATION lib/\${BUILD_TYPE})
             install(TARGETS ${${COMPONENT}_DYNAMIC_LIB} RUNTIME DESTINATION bin/\${BUILD_TYPE})
-
-            # Only try to install the pdb files if they exist. Easier to determine existence than the current config type in win32.
-             if(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb")
-                 install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb DESTINATION bin/Debug-contracts)
-            elseif(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb")
-                 install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb DESTINATION bin/Debug-no-contracts)               
-            endif()
-                         
+            install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_DYNAMIC_LIB}_d.pdb DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
+            install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_DYNAMIC_LIB}.pdb DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
+                                
             if(SWIG_FOUND AND BUILD_BINDINGS)
-                install(TARGETS ${${COMPONENT}_JAVA_BINDING_LIB} RUNTIME DESTINATION bin/\${BUILD_TYPE})
-                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_JAR} DESTINATION lib/\${BUILD_TYPE})  
-                # Only install python binding if the component has a target for it.
-                if(TARGET ${${COMPONENT}_PYTHON_BINDING_LIB})
-                    install(TARGETS ${${COMPONENT}_PYTHON_BINDING_LIB} ARCHIVE DESTINATION lib/\${BUILD_TYPE})
-                endif()
-                install(TARGETS ${${COMPONENT}_CSHARP_BINDING_LIB} RUNTIME DESTINATION bin/\${BUILD_TYPE})
+                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_LIB}_d.pdb DESTINATION bin/\${BUILD_TYPE} OPTIONAL)                
+                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_CSHARP_BINDING_LIB}_d.pdb DESTINATION bin/\${BUILD_TYPE} OPTIONAL) 
+
+                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_LIB}.pdb DESTINATION bin/\${BUILD_TYPE} OPTIONAL)                
+                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_CSHARP_BINDING_LIB}.pdb DESTINATION bin/\${BUILD_TYPE} OPTIONAL) 
+
+                install(FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_JAR} DESTINATION lib/\${BUILD_TYPE})  
+                
+                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_PYTHON_BINDING_LIB}_d.pdb DESTINATION bin/\${BUILD_TYPE} OPTIONAL) 
+                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_PYTHON_BINDING_LIB}.pdb DESTINATION bin/\${BUILD_TYPE} OPTIONAL) 
+                
                 install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_CSHARP_BINDING_ASSY} DESTINATION bin/\${BUILD_TYPE})              
             endif()
         endif()

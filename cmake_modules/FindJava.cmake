@@ -1,8 +1,6 @@
 #
-# $RCSfile: FindJava.cmake,v $ $Revision: 1.7 $ $Date: 2013/01/17 01:45:12 $
 #
-#
-# Some portions Copyright (c) 2013 Limit Point Systems, Inc.
+# Copyright (c) 2013 Limit Point Systems, Inc.
 #
 #
 # - Find Java
@@ -162,7 +160,7 @@ IF(Java_JAVA_EXECUTABLE)
       # display info
       #MESSAGE( STATUS "Java version ${Java_VERSION_STRING} configured successfully!" ) # keep me, used for debug
       IF(NOT Java_FIND_QUIETLY)
-        MESSAGE( STATUS "Java version ${Java_VERSION} configured successfully!" )
+        MESSAGE( STATUS "Java version is: ${Java_VERSION}" )
       ENDIF(NOT Java_FIND_QUIETLY)
     ENDIF()
 

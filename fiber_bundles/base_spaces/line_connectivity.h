@@ -23,7 +23,7 @@ namespace fiber_bundle
   using namespace sheaf;
 
 ///
-/// Connectivity for a line segment mesh.
+/// Nodal connectivity for a block containing zones of type segment.
 ///
 class SHEAF_DLL_SPEC line_connectivity : public block_connectivity
 {
@@ -45,7 +45,20 @@ public:
   line_connectivity(const line_connectivity& xother);
 
   ///
-  /// Creates an instance with i_size() == xi_size.
+  /// Creates an instance corresponding to the general arrangement
+  /// of vertices given by node_ids() == xnode_ids,
+  /// and node_id_ct() == xnode_id_ct. If xnode_ct == 0,
+  /// node_ct() will be computed from node_ids(), otherwise,
+  /// node_ct() == xnode_ct.
+  ///
+  line_connectivity(const pod_index_type* xnode_ids, 
+                    size_type xnode_id_ct, 
+                    size_type xnode_ct);
+
+  ///
+  ///
+  /// Creates an instance corresponding to a linear array of
+  /// vertices of size xi_size + 1, that is, xi_size is the number of segments.
   ///
   line_connectivity(size_type xi_size, pod_index_type xstart=0);
 

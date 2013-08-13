@@ -715,9 +715,9 @@ get_dof_tuple_ids(poset_state_handle& xhost,
   size_type lzone_ct = xconn.element_ct();
 
   result[BLOCK]  =
-    homogeneous_block::new_row_dof_map(xhost, "unstructured_block", lname, lzone_ct, true);
-  result[ZONE]   = base_space_member::new_row_dof_map(xhost, lname, true);
-  result[VERTEX] = base_space_member::new_row_dof_map(xhost, "point", true);
+    homogeneous_block::new_row_dof_map(xhost, "unstructured_block", lname, lzone_ct, true).hub_pod();
+  result[ZONE]   = base_space_member::new_row_dof_map(xhost, lname, true).hub_pod();
+  result[VERTEX] = base_space_member::new_row_dof_map(xhost, "point", true).hub_pod();
 
   // Postconditions:
 

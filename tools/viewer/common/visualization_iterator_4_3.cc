@@ -323,7 +323,8 @@ set_vtk_data(const sec_vd& xcoords,
   {
     discretization_context& ldisc_mbr = ldisc_mbrs[i];
     scoped_index ldisc_id = ldisc_mbr.disc_id;
-    iterator_type lmap_itr = lmap->find(ldisc_id);
+    pod_index_type ldisc_pod = ldisc_id.hub_pod();
+    iterator_type lmap_itr = lmap->find(ldisc_pod);
 
 #ifdef DIAGNOSTIC_OUTPUT
 
@@ -338,7 +339,7 @@ set_vtk_data(const sec_vd& xcoords,
       // Create a seq id for it.
 
       lseq_id = _vis_state.next_seq_id++;
-      (*lmap)[ldisc_id] = lseq_id;
+      (*lmap)[ldisc_pod] = lseq_id;
 
 #ifdef DIAGNOSTIC_OUTPUT
 
@@ -496,7 +497,8 @@ set_vtk_data(const sec_vd& xcoords,
   {
     discretization_context& ldisc_mbr = ldisc_mbrs[i];
     scoped_index ldisc_id = ldisc_mbr.disc_id;
-    iterator_type lmap_itr = lmap->find(ldisc_id);
+    pod_index_type ldisc_pod = ldisc_id.hub_pod();
+    iterator_type lmap_itr = lmap->find(ldisc_pod);
 
 #ifdef DIAGNOSTIC_OUTPUT
 
@@ -511,7 +513,7 @@ set_vtk_data(const sec_vd& xcoords,
       // Create a seq id for it.
 
       lseq_id = _vis_state.next_seq_id++;
-      (*lmap)[ldisc_id] = lseq_id;
+      (*lmap)[ldisc_pod] = lseq_id;
 
 #ifdef DIAGNOSTIC_OUTPUT
 

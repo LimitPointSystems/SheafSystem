@@ -1,6 +1,4 @@
 #
-# $RCSfile: CMakeLists.txt,v $ $Revision: 1.9 $ $Date: 2013/01/12 17:17:45 $
-#
 #
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
@@ -10,7 +8,7 @@
 # Programmer Filename Entry Section
 #------------------------------------------------
 
-set(CLUSTER support)
+set(CLUSTER ${CMAKE_CURRENT_BINARY_DIR})
 
 #
 # Library sources.
@@ -46,7 +44,7 @@ set(SRCS
     tolerance_comparison.cc
     zn_to_bool.cc
     wsv_block.cc
-)
+   )
 
 collect_sources()
 
@@ -76,7 +74,7 @@ set(ADDITIONAL_INCS
     stl_scoped_index.impl.h 
     wsv_block.impl.h 
     zn_to_bool_filter.h
-  )
+   )
   
 collect_includes()
 
@@ -84,7 +82,7 @@ collect_includes()
 # Source for unit test executables.
 #
 set(UNIT_TEST_SRCS
-)
+   )
 
 collect_unit_test_sources()
 
@@ -93,6 +91,6 @@ collect_unit_test_sources()
 #
 set(EXAMPLE_SRCS
 
- )
+   )
 
 collect_example_sources()

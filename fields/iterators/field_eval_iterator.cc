@@ -708,7 +708,7 @@ ensure_discretization_order(block<scoped_index>& xdisc_mbrs)
 
   poset_state_handle* lanchor_host =_anchor->host();
 
-  pod_index_type first_eval = lanchor_host->first_cover_member(UPPER, greater_index());
+  pod_index_type first_eval = lanchor_host->first_cover_member(UPPER, greater_index().hub_pod());
 
   bool is_reversed = (_evaluator_id.hub_pod() != first_eval);
 

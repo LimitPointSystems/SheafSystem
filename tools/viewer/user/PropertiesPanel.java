@@ -3,8 +3,6 @@
  *
  * @author $Author: jebutler $
  *
- * @version $RCSfile: PropertiesPanel.java,v $ $Revision: 1.8 $
- *
  * $Date: 2013/01/12 17:18:02 $
  *
  * Copyright (c) 2013 Limit Point Systems, Inc.

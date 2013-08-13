@@ -27,13 +27,12 @@
 
 namespace fiber_bundle
 {
-  
 
-
-class block_connectivity;
+  class block_connectivity;
   using namespace sheaf;
+
 ///
-/// Vertex to zone adjacency relation for a zone_nodes block.
+/// Node to zone adjacency relation for a block of zones of a given type.
 ///
 class SHEAF_DLL_SPEC block_adjacency : public block_relation
 {

@@ -133,7 +133,7 @@ modify_crg(field_refinement_buffer& xbuffer)
 
   while(!lbase->cover_is_empty(LOWER, lzone_id))
   {
-    lbegin = lbase->first_cover_member(LOWER, lzone_id);
+    lbegin = lbase->first_cover_member(LOWER, lzone_id.pod());
     _vertex_ids.push_back(lbegin);
     lbase->delete_link(lzone_id.pod(), lbegin.pod());
   }

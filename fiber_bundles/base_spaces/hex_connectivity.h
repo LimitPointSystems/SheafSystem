@@ -23,8 +23,7 @@ namespace fiber_bundle
   using namespace sheaf;
 
 ///
-/// Connectivity for a hexahedral mesh with elements arranged
-/// in a regular cubical array.
+/// Nodal connectivity for a block containing zones of type hex.
 ///
 class SHEAF_DLL_SPEC hex_connectivity : public block_connectivity
 {
@@ -49,7 +48,8 @@ public:
   hex_connectivity(const hex_connectivity& xother);
  
   ///
-  /// Creates an instance with node_ids() == xnode_ids,
+  /// Creates an instance corresponding to the general arrangement
+  /// of vertices given by node_ids() == xnode_ids
   /// and node_id_ct() == xnode_id_ct. If xnode_ct == 0,
   /// node_ct() will be computed from node_ids(), otherwise,
   /// node_ct() == xnode_ct.
@@ -59,8 +59,11 @@ public:
                    size_type xnode_ct);
 
   ///
-  /// Creates an instance with i_size() == xi_size, j_size() == x_jsize,
-  /// k_size() == xk_size.
+  /// Creates an instance corresponding to a cubical array of
+  /// vertices (xi_size + 1)*(x_jsize + 1)*(xk_size + 1), 
+  /// that is, xi_size, xj_size and xk_size
+  /// are the number of edges in the i, j, and k direction, respectively.
+  /// Xstart_id is the id of the first vertex, that is, i=0, j=0.
   ///
   hex_connectivity(size_type xi_size,
                    size_type xj_size,

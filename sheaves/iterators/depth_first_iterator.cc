@@ -810,7 +810,7 @@ reset(bool xreset_markers)
   // Size of host poset may have changed since last reset.
   // Make sure _has_visited is large enough.
 
-  _has_visited->extend_to(_anchor->host()->member_index_ub());
+  _has_visited->extend_to(_anchor->host()->member_index_ub().pod());
 
   // Reset the markers as requested.
 

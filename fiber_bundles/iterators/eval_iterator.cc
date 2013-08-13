@@ -372,7 +372,7 @@ next(bool xtruncate)
 
           // Only swap _discretization_members if the base space is 2D.
 
-          pod_index_type first_eval = _anchor->host()->first_cover_member(UPPER, greater_index());
+          pod_index_type first_eval = _anchor->host()->first_cover_member(UPPER, greater_index().hub_pod());
           bool is_reversed = (_evaluator_id != first_eval);
 
           if(is_reversed && _discretization_members.ct() == 2)

@@ -2246,7 +2246,7 @@ db(pod_index_type xhub_id) const
   // Postconditions:
 
   ensure(result >= -1);
-  ensure( (result == -1) == is_jem(xhub_id, bottom().index()) );
+  ensure( (result == -1) == is_jem(xhub_id, bottom().index().pod()) );
 
   // Exit
 
@@ -2547,7 +2547,7 @@ prototype_dof_tuple_id(const string& xname,
     }
   }
 
-  if(!is_valid(result))
+  if(!result.is_valid())
   {
     // Couldn't find a dof tuple, have to make one.
 

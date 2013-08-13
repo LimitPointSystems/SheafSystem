@@ -169,33 +169,36 @@ function(add_bindings_targets)
         set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES LINKER_LANGUAGE CXX)
         # Define the library version.
         set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES VERSION ${LIB_VERSION})
-          
+
         # Create the bindings jar file 
         if(WIN64INTEL OR WIN64MSVC)
-            set(${COMPONENT}_CLASSPATH  ${SHEAVES_CLASSPATH} ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
+            set(${COMPONENT}_CLASSPATH  ${SHEAVES_CLASSPATH} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
             add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
-               DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${SHEAVES_JAVA_BINDING_JAR}
-               set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Component Binding Jars")
-               COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
-               COMMAND ${JAVAC_EXECUTABLE} -classpath "${SHEAVES_CLASSPATH}" -d . *.java
-               COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-               COMMAND ${JAR_EXECUTABLE} cvf ${OUTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
+                           DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${SHEAVES_JAVA_BINDING_JAR}
+                           set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Component Binding Jars")
+                           COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
+                           COMMAND ${JAVAC_EXECUTABLE} -classpath "${SHEAVES_CLASSPATH}" -d . *.java
+                           COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
+                           COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
                )
                
             # Java documentation
-            add_custom_target(${PROJECT_NAME}-java-docs ALL
-                                COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${SHEAVES_CLASSPATH}" 
-                                -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
-                                *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-                                DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
-                             )
-                                            
+            if(DOC_TARGETS)
+                add_custom_target(${PROJECT_NAME}-java-docs ALL
+                                    COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${SHEAVES_CLASSPATH}" 
+                                    -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
+                                    *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                                    DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
+                                 )
+              set_target_properties(${PROJECT_NAME}-java-docs PROPERTIES FOLDER "Documentation Targets") 
+              endif()                              
         else()
         
             set(${COMPONENT}_CLASSPATH ${SHEAVES_CLASSPATH} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR} CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
             # The default list item separator in cmake is ";". If Linux, then exchange ";" for  the UNIX style ":"
             # and store the result in parent_classpath.
             string(REGEX REPLACE ";" ":" parent_classpath "${SHEAVES_CLASSPATH}")
+            string(REGEX REPLACE ";" ":" this_classpath "${${COMPONENT}_CLASSPATH}")            
             add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
                                DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${SHEAVES_JAVA_BINDING_JAR}
                                COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
@@ -203,19 +206,19 @@ function(add_bindings_targets)
                                COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
                                COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
                              )
-               
             # Java documentation
-            add_custom_target(${PROJECT_NAME}-java-docs ALL
-                                COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${parent_classpath}" 
-                                -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
-                                *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-                                DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
-                             )                
+            if(DOC_TARGETS)
+                add_custom_target(${PROJECT_NAME}-java-docs ALL
+                                    COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${this_classpath}" 
+                                    -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
+                                    *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                                    DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
+                                 )
+            endif()
         endif()
               
         set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Library Jars") 
         mark_as_advanced(FORCE ${COMPONENT}_CLASSPATH) 
-        set_target_properties(${PROJECT_NAME}-java-docs PROPERTIES FOLDER "Documentation Targets")
 
         #
         # CSharp ##############################################################
@@ -248,7 +251,7 @@ function(add_bindings_targets)
                 COMMAND ${CMAKE_COMMAND} -E echo ""
                 COMMAND ${CMAKE_COMMAND} -E echo "Creating Csharp Binding for ${PROJECT_NAME} ..."
                 COMMAND ${CMAKE_COMMAND} -E echo ""                 
-                COMMAND ${CSHARP_COMPILER} /nologo /noconfig /warn:1 /errorreport:prompt /target:library /out:${OUTDIR}/${${COMPONENT}_CSHARP_BINDING_ASSY}  ${CMAKE_CURRENT_BINARY_DIR}/*.cs
+                COMMAND ${CSHARP_COMPILER} /nologo /noconfig /warn:1 /errorreport:prompt /target:library /out:${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_CSHARP_BINDING_ASSY}  ${CMAKE_CURRENT_BINARY_DIR}/*.cs
                 )
         else()
             add_custom_target(${${COMPONENT}_CSHARP_BINDING_ASSY} ALL
@@ -326,28 +329,26 @@ function(add_install_target)
         elseif(WIN64INTEL OR WIN64MSVC)
 
             # The BUILD_TYPE variable will be set while CMake is processing the install files. It is not set at configure time
-            # for this project. We pass it literally here. 
+            # for this project. We pass it literally here.
             install(TARGETS ${${COMPONENT}_IMPORT_LIB} EXPORT ${${COMPONENT}_IMPORT_LIB} ARCHIVE DESTINATION lib/\${BUILD_TYPE})
             install(TARGETS ${${COMPONENT}_DYNAMIC_LIB} RUNTIME DESTINATION bin/\${BUILD_TYPE})
-            
-            # Only try to install the pdb files if they exist. Easier to determine existence than the current config type in win32.
-             if(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb")
-                 install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb DESTINATION bin/Debug-contracts)
-            elseif(EXISTS "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb")
-                 install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Debug-no-contracts/${${COMPONENT}_DYNAMIC_LIB}_d.pdb DESTINATION bin/Debug-no-contracts)               
-            endif()
-                     
+            install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_DYNAMIC_LIB}_d.pdb DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
+            install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_DYNAMIC_LIB}.pdb DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
+                                
             if(SWIG_FOUND AND BUILD_BINDINGS)
-                install(TARGETS ${${COMPONENT}_JAVA_BINDING_LIB} RUNTIME DESTINATION bin/\${BUILD_TYPE})
-                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_JAR} DESTINATION lib/\${BUILD_TYPE})  
-                # Only install python binding if the component has a target for it.
-                if(TARGET ${${COMPONENT}_PYTHON_BINDING_LIB})
-                    install(TARGETS ${${COMPONENT}_PYTHON_BINDING_LIB} ARCHIVE DESTINATION lib/\${BUILD_TYPE})
-                endif()
-                install(TARGETS ${${COMPONENT}_CSHARP_BINDING_LIB} RUNTIME DESTINATION bin/\${BUILD_TYPE})
-                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_CSHARP_BINDING_ASSY} DESTINATION bin/\${BUILD_TYPE}) 
+                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_LIB}_d.pdb DESTINATION bin/\${BUILD_TYPE} OPTIONAL)                
+                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_CSHARP_BINDING_LIB}_d.pdb DESTINATION bin/\${BUILD_TYPE} OPTIONAL) 
+
+                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_LIB}.pdb DESTINATION bin/\${BUILD_TYPE} OPTIONAL)                
+                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_CSHARP_BINDING_LIB}.pdb DESTINATION bin/\${BUILD_TYPE} OPTIONAL) 
+
+                install(FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_JAR} DESTINATION lib/\${BUILD_TYPE})  
+                
+                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_PYTHON_BINDING_LIB}_d.pdb DESTINATION bin/\${BUILD_TYPE} OPTIONAL) 
+                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_PYTHON_BINDING_LIB}.pdb DESTINATION bin/\${BUILD_TYPE} OPTIONAL) 
+                
+                install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_CSHARP_BINDING_ASSY} DESTINATION bin/\${BUILD_TYPE})              
             endif()
-            
         endif()
 
         install(FILES ${${COMPONENT}_INCS} DESTINATION include) 

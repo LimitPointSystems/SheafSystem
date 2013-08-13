@@ -205,7 +205,7 @@ intersect(const e3_lite& xp0, const e3_lite& xp1, intersection_set_type& xresult
       // two triangles in the same surface, but not what we want if two
       // surfaces happen to overlap at the intersection point.
 
-      intersection_set_type::value_type lval(lintersection[2],(*lbox_itr)->branch_id());
+      intersection_set_type::value_type lval(lintersection[2],(*lbox_itr)->branch_id().pod());
       xresult.insert(lval);
     }
     

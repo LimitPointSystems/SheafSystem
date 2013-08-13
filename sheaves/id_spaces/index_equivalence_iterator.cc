@@ -60,7 +60,7 @@ index_equivalence_iterator(const index_space_family& xid_spaces,
 {
   // Preconditions:
 
-  require(is_valid(xrep_id) ? xid_spaces.hub_id_space().contains(xrep_id) : true);
+  require(xrep_id.is_valid() ? xid_spaces.hub_id_space().contains(xrep_id.hub_pod()) : true);
 
   // Body:
 
@@ -190,7 +190,7 @@ put_rep_id(const scoped_index& xrep_id)
 {
   // Preconditions:
 
-  require(is_valid(xrep_id) ? id_spaces().hub_id_space().contains(xrep_id) : true);
+  require(xrep_id.is_valid() ? id_spaces().hub_id_space().contains(xrep_id.hub_pod()) : true);
   // Body:
 
   _rep_id = xrep_id.hub_pod();

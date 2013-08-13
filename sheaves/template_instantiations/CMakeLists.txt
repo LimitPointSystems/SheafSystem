@@ -1,6 +1,4 @@
 #
-# $RCSfile: CMakeLists.txt,v $ $Revision: 1.4 $ $Date: 2013/01/12 17:17:49 $
-#
 #
 # Copyright (c) 2013 Limit Point Systems, Inc.
 #
@@ -10,7 +8,7 @@
 # Programmer Filename Entry Section
 #------------------------------------------------
 
-set(CLUSTER template_instantiations)
+set(CLUSTER ${CMAKE_CURRENT_BINARY_DIR})
 
 #
 # Library sources.
@@ -42,7 +40,7 @@ set(SRCS
     stl_scoped_index.inst.cc
     triorder_itr.inst.cc
     wsv_block.inst.cc
-)
+   )
 
 collect_sources()
 
@@ -50,7 +48,7 @@ collect_sources()
 # Headers that are NOT associated with a .cc file.
 #
 set(ADDITIONAL_INCS
-)
+   )
   
 collect_includes()
 
@@ -59,7 +57,7 @@ collect_includes()
 #
 set(UNIT_TEST_SRCS
 
-)
+   )
 
 collect_unit_test_sources()
 
@@ -68,6 +66,6 @@ collect_unit_test_sources()
 #
 set(EXAMPLE_SRCS
 
- )
+   )
 
 collect_example_sources()

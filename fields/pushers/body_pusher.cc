@@ -70,7 +70,7 @@ body_pusher(const geometry::sec_ed_invertible& xdomain_coord, const sec_ed& xran
 
   string lschema_name =
     poset_path::make_name(poset_path::reserved_prefix() + _range->name(),
-                          xrange_coord.index(),
+                          xrange_coord.index().pod(),
                           "body_pusher_schema" );
 
   string lschema_poset_name =

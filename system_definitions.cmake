@@ -106,11 +106,6 @@ endif()
 set(BUILD_BINDINGS NO CACHE BOOL "Toggle build of language bindings.")
 
 #
-# True if we want geometry to link against VTK
-#
-set(USE_VTK ON CACHE BOOL "Set to link geometry against VTK libs.")
-
-#
 # Toggle multi-process compilation in win32.
 #
 set(ENABLE_WIN32_MP ON CACHE BOOL "Toggle win32 compiler MP directive. Works for MS and Intel. Default is ON.")
@@ -124,22 +119,6 @@ set(INTELWARN CACHE BOOL "Toggle Intel compiler warnings")
 #  Type of system documentation to build: Dev or User
 #
 set(LPS_DOC_STATE User CACHE STRING "Type of documentation to build: [Dev|User]")
-
-#
-# Set compiler optimization level.
-# Default is zero.
-#
-if(LINUX64GNU OR LINUX64INTEL)
-    if(CMAKE_BUILD_TYPE STREQUAL "Debug-contracts" OR CMAKE_BUILD_TYPE STREQUAL "Debug-no-contracts")
-        set(OPTIMIZATION_LEVEL "0" CACHE STRING "Compiler optimization level. Valid values for are 0,1,2,3, and \"s\(Linux only\)\". Default is 0. \n Linux values translate to -On. \n\n Windows values are: \n\n 0 = /0d \(no optimization\) \n 1 = /O1 \(Minimize Size\) \n 2 = /O2 \(Maximize Speed\) \n 3 = /GL \(Whole Program Optimization\) \n " FORCE)
-    else()
-        # Optimize for execution speed.
-        set(OPTIMIZATION_LEVEL "2" CACHE STRING "Compiler optimization level. Valid values for are 0,1,2,3, and \"s\(Linux only\)\". Default is 0. \n Linux values translate to -On. \n\n Windows values are: \n\n 0 = /0d \(no optimization\) \n 1 = /O1 \(Minimize Size\) \n 2 = /O2 \(Maximize Speed\) \n 3 = /GL \(Whole Program Optimization\) \n " FORCE)
-    endif()
-else()
-        set(OPTIMIZATION_LEVEL "0" CACHE STRING "Compiler optimization level. Valid values for are 0,1,2,3, and \"s\(Linux only\)\". Default is 0. \n Linux values translate to -On. \n\n Windows values are: \n\n 0 = /0d \(no optimization\) \n 1 = /O1 \(Minimize Size\) \n 2 = /O2 \(Maximize Speed\) \n 3 = /GL \(Whole Program Optimization\) \n ")
-endif()
-mark_as_advanced(CLEAR OPTIMIZATION_LEVEL)
 
 #
 # Enable coverage results
@@ -235,40 +214,11 @@ function(clear_component_variables comp)
     # list the same include paths n times.
     unset(${COMP}_IPATH CACHE)
 
+    # clear the ipath var so consecutive cmake runs don't
+    # list the same include paths n times.
+    unset(${COMP}_CLASSPATH CACHE)
+    
 endfunction(clear_component_variables)
-
-#
-# Set compiler optimization level.
-#
-function(set_optimization_level)
-
-    if(LINUX64GNU OR LINUX64INTEL)
-        if(${OPTIMIZATION_LEVEL} EQUAL 0)
-            set(OPTIMIZATION "-O0" PARENT_SCOPE)
-        elseif(${OPTIMIZATION_LEVEL} EQUAL 1)
-            set(OPTIMIZATION "-O1" PARENT_SCOPE)
-        elseif(${OPTIMIZATION_LEVEL} EQUAL 2)
-            set(OPTIMIZATION "-O2" PARENT_SCOPE)
-        elseif(${OPTIMIZATION_LEVEL} EQUAL 3)
-            set(OPTIMIZATION "-O3" PARENT_SCOPE)
-        elseif(${OPTIMIZATION_LEVEL} STREQUAL s)
-            set(OPTIMIZATION "-Os" PARENT_SCOPE)
-        else()
-            break()
-        endif()   # anything else, exit.
-    elseif(WIN64MSVC OR WIN64INTEL)
-        if(${OPTIMIZATION_LEVEL} EQUAL "0")
-            set(OPTIMIZATION "/Od" PARENT_SCOPE)    
-        elseif(${OPTIMIZATION_LEVEL} EQUAL 1)
-            set(OPTIMIZATION "/O1" PARENT_SCOPE)
-        elseif(${OPTIMIZATION_LEVEL} EQUAL 2)
-            set(OPTIMIZATION "/O2" PARENT_SCOPE)
-        elseif(${OPTIMIZATION_LEVEL} EQUAL 3)
-            set(OPTIMIZATION "/Ox" PARENT_SCOPE)    
-        endif()
-    endif()    
-
-endfunction(set_optimization_level)
 
 # 
 #  Make emacs tags
