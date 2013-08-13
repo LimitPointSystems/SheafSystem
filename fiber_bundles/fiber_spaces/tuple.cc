@@ -334,7 +334,7 @@ new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xs
   // Postconditions:
 
   ensure(xns.contains_path(xhost_path, xauto_access));
-  ensure(!xns.poset_state_is_read_accessible(xhost_path, xauto_access));
+  ensure(xns.member_poset(xhost_path, xauto_access).state_is_not_read_accessible());
   ensure(xns.member_poset(xhost_path, xauto_access).schema(true).path(true) == xschema_path);
 
   // Exit:

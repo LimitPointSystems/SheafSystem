@@ -119,11 +119,6 @@ new_table(namespace_type& xns, const poset_path& xpath, const poset_path& xschem
 
   table_type* ltable = new table_type();
 
-  if(xauto_access)
-  {
-    xns.member_poset(xschema_path, false).get_read_access();
-  }
-
   // Create a handle of the right type for the schema member.
 
   schema_poset_member lschema(&xns, xschema_path, xauto_access);
@@ -154,6 +149,8 @@ new_table(namespace_type& xns, const poset_path& xpath, const poset_path& xschem
   ensure(xns.contains_path(xpath, xauto_access));
   ensure(xns.member_poset(xpath, xauto_access).state_is_not_read_accessible());
   ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == xschema_path);
+
+  ensure(xns.member_poset<tuple_space>(xpath, xauto_access).factor_ct(true) == xfactor_ct);
 
   // Exit:
 

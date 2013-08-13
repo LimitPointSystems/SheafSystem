@@ -25,6 +25,7 @@ namespace fiber_bundle
 {
 
   using namespace sheaf;  
+  class at1_space;
   class tensor_variance;
   class tp;
   
@@ -38,6 +39,8 @@ class SHEAF_DLL_SPEC tp_space : public vd_space
 
 public:
 
+
+
   // ===========================================================
   /// @name TP_SPACE FACET
   // ===========================================================
@@ -49,6 +52,11 @@ public:
   /// The type of member associated with this space.
   ///
   typedef tp member_type;
+
+  ///
+  /// The type of domain vector space.
+  ///
+  typedef at1_space vector_space_type;
 
   ///
   /// The name of the standard schema poset for this class.
@@ -69,6 +77,33 @@ public:
   /// Creates an arg list which conforms to the schema of this.
   ///
   static arg_list make_arg_list(int xp, const poset_path& xvector_space_path);
+
+  ///
+  /// True if and only if d == dd**p for some integer p, where
+  /// d is the number of row dofs in the schema specified by xschema_path
+  /// and dd is the dimension of the vector space specified by xvector_space_path.
+  ///
+  static bool d_is_valid(const namespace_poset& xns, 
+                         const poset_path& xschema_path, 
+                         const poset_path& xvector_space_path, 
+                         bool xauto_access);
+
+  ///
+  /// Tensor degree as a function of tensor dimension xd
+  /// and domain dimension xdd.
+  ///
+  static int p(int xd, int xdd);
+
+  ///
+  /// Creates a new tp_space in namespace xns with path xpath,
+  /// schema specified by xschema_path, and table attribute 
+  /// vector_space_path specified by xvector_space_path.
+  ///
+  static void new_table(namespace_type& xhost, 
+                        const poset_path& xpath, 
+                        const poset_path& xschema_path,
+                        const poset_path& xvector_space_path,
+                        bool xauto_access);
   
   //============================================================================
   // TABLE DOFS
@@ -90,7 +125,7 @@ public:
   bool d_is_valid(const namespace_poset& xns, 
 		  const poset_path& xschema_path, 
 		  const arg_list& xargs,
-		  bool xautuo_access) const;
+		  bool xauto_access) const;
   
   
   ///

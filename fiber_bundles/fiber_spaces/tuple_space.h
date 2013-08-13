@@ -81,8 +81,9 @@ public:
   static arg_list make_arg_list(int xfactor_ct);
 
   ///
-  /// Creates a new tuple_space in namespace xns wiih patrh xpath 
-  /// and schema specified by xschema_path.
+  /// Creates a new tuple_space in namespace xns with path xpath,
+  /// schema specified by xschema_path, and table attribute 
+  /// factor_ct specified by xfactor_ct.
   ///
   static void new_table(namespace_type& xhost, 
                         const poset_path& xpath, 

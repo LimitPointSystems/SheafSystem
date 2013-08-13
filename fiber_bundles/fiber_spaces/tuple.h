@@ -228,7 +228,8 @@ public:
 
   ///
   /// Manual, shallow factory method; creates a new host table for members of this type.
-  /// The poset is created in namespace xns with path xhost_path and schema specified by xschema_path.
+  /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
+  /// and table attribute factor_ct specified by xfactor_ct.
   ///
   static void new_host(namespace_type& xns, 
                        const poset_path& xhost_path, 

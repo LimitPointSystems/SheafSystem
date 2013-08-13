@@ -27,6 +27,7 @@ namespace fiber_bundle
   using namespace sheaf;  
 
   class vd;
+  class at0_space;
   
   
 ///
@@ -51,6 +52,11 @@ public:
   typedef vd member_type;
 
   ///
+  /// The type of scalar space associated with this space.
+  ///
+  typedef at0_space scalar_space_type;
+  
+  ///
   /// The name of the standard schema poset for this class.
   ///
   static const string& standard_schema_poset_name();
@@ -69,6 +75,17 @@ public:
   /// Creates an arg list which conforms to the schema of this.
   ///
   static arg_list make_arg_list(const poset_path& xscalar_space_path);
+
+  ///
+  /// Creates a new vd_space in namespace xns with path xpath,
+  /// schema specified by xschema_path, and table attribute 
+  /// scalar_space_path specified by xscalar_space_path.
+  ///
+  static void new_table(namespace_type& xhost, 
+                        const poset_path& xpath, 
+                        const poset_path& xschema_path,
+                        const poset_path& xscalar_space_path,
+                        bool xauto_access);
   
   //============================================================================
   // TABLE DOFS

@@ -131,7 +131,7 @@ clone() const
 
 void
 sheaf::abstract_poset_member::
-new_host(namespace_type& xns, const poset_path& xpath, const poset_path& xschema_path, bool xauto_access)
+new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xschema_path, bool xauto_access)
 {
   // cout << endl << "Entering abstract_poset_member::new_host." << endl;
 
@@ -139,8 +139,8 @@ new_host(namespace_type& xns, const poset_path& xpath, const poset_path& xschema
 
   require(xns.state_is_auto_read_write_accessible(xauto_access));
 
-  require(!xpath.empty());
-  require(!xns.contains_path(xpath, xauto_access));
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
 
   require(xschema_path.full());
   require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
@@ -149,13 +149,13 @@ new_host(namespace_type& xns, const poset_path& xpath, const poset_path& xschema
 
   // Body:
 
-  host_type::new_table(xns, xpath, xschema_path, xauto_access);
+  host_type::new_table(xns, xhost_path, xschema_path, xauto_access);
 
   // Postconditions:
 
-  ensure(xns.contains_path(xpath, xauto_access));
-  ensure(xns.member_poset(xpath, xauto_access).state_is_not_read_accessible());
-  ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == xschema_path);  
+  ensure(xns.contains_path(xhost_path, xauto_access));
+  ensure(xns.member_poset(xhost_path, xauto_access).state_is_not_read_accessible());
+  ensure(xns.member_poset(xhost_path, xauto_access).schema(true).path(true) == xschema_path);  
 
   // Exit:
 

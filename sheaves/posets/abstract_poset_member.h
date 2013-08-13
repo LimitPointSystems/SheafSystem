@@ -224,10 +224,11 @@ public:
   typedef poset host_type;
 
   ///
-  /// Creates a new host poset for members of this type.
+  /// Creates a new host poset for members of this type
+  /// with path xhost_path and schema specified by xschema_path.
   ///
   static void new_host(namespace_type& xns, 
-                       const poset_path& xpath, 
+                       const poset_path& xhost_path, 
                        const poset_path& xschema_path, 
                        bool xauto_access);
   
