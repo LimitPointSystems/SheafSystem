@@ -53,6 +53,71 @@ make_args(int xmax_db)
   return result;
 }
 
+void
+fiber_bundle::base_space_poset::
+new_table(namespace_type& xns, const poset_path& xpath, const poset_path& xschema_path, int xmax_db, bool xauto_access)
+{
+  // cout << endl << "Entering base_space_poset::new_table." << endl;
+
+  // Preconditions:
+
+
+  require(!xpath.empty());
+  require(!xns.contains_path(xpath, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(unexecutable("xschema_path conforms to standard_schema_path"));
+  //  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));
+
+  require(xmax_db >= 0);
+
+  // Body:
+
+  // Create the table; have to new it because namespace keeps a pointer.
+
+  typedef base_space_poset table_type;
+
+  table_type* ltable = new table_type();
+
+  // Create a handle of the right type for the schema member.
+
+  schema_poset_member lschema(&xns, xschema_path, xauto_access);
+
+  if(xauto_access)
+  {
+    lschema.get_read_access();
+  }
+
+  // Create the table dof map and set dof values;
+  // must be newed because poset_state::_table keep a pointer to it.
+
+  array_poset_dof_map* lmap = new array_poset_dof_map(&lschema, true);
+  lmap->put_dof("max_db", xmax_db);
+  
+  // Create the state.
+
+  ltable->new_state(xns, xpath, lschema, *lmap);
+
+  if(xauto_access)
+  {
+    lschema.release_access();
+  }
+
+
+  // Postconditions:
+
+  ensure(xns.contains_path(xpath, xauto_access));
+  ensure(xns.member_poset(xpath, xauto_access).state_is_not_read_accessible());
+  ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == xschema_path);
+  ensure(xns.member_poset<base_space_poset>(xpath, xauto_access).max_db() == xmax_db);
+
+  // Exit:
+
+  // cout << "Leaving base_space_poset::new_table." << endl;
+  return;
+}
+
 // PROTECTED FUNCTIONS
 
 fiber_bundle::base_space_poset::

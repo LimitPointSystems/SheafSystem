@@ -1334,28 +1334,33 @@ make_base_space_member_prototypes_poset()
   // Create the prototypes poset.
 
   string lname = standard_base_space_member_prototypes_poset_name();
-  base_space_poset* lprototypes_poset =
-    &new_base_space<base_space_member_prototype>(lname, "", "", 3, true);
-  lprototypes_poset->begin_jim_edit_mode(true);
+  /// @todo Remove.
+//   base_space_poset* lprototypes_poset =
+//     &new_base_space<base_space_member_prototype>(lname, "", "", 3, true);
+
+  base_space_member_prototype::new_host(*this, lname, 3, false);
+  base_space_poset& lprototypes_poset = member_poset<base_space_poset>(lname, false);
+
+  lprototypes_poset.begin_jim_edit_mode(true);
 
   // Create the id space for cell types.
 
   arg_list largs = array_index_space_state::make_arg_list(0);
 
-  lprototypes_poset->member_id_spaces(false).
+  lprototypes_poset.member_id_spaces(false).
     new_secondary_state("cell_types",
 			"array_index_space_state",
 			largs, true);
 
   // Create the prototypes:
 
-  make_base_space_member_prototypes(lprototypes_poset);
+  make_base_space_member_prototypes(&lprototypes_poset);
 
   // Clean up.
 
-  lprototypes_poset->end_jim_edit_mode(true, true);
+  lprototypes_poset.end_jim_edit_mode(true, true);
 
-  _base_space_member_prototypes_poset = lprototypes_poset;
+  _base_space_member_prototypes_poset = &lprototypes_poset;
 
   // Postconditions:
 

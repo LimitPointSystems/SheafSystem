@@ -336,11 +336,14 @@ new_space(fiber_bundles_namespace& xns)
   }
   else
   {
-    result = &xns.new_base_space<zone_nodes_block>(path.poset_name(),
-						   "",
-						   "",
-						   ldb,
-						   true);
+    /// @todo Remove.
+//     result = &xns.new_base_space<zone_nodes_block>(path.poset_name(),
+// 						   "",
+// 						   "",
+// 						   ldb,
+// 						   true);
+    zone_nodes_block::new_host(xns, path.poset_name(), ldb, false);
+    result = &xns.member_poset<base_space_poset>(path.poset_name());
   }
 
   // Get
@@ -465,11 +468,13 @@ new_space(fiber_bundles_namespace& xns)
   }
   else
   {
-    result = &xns.new_base_space<unstructured_block>(path.poset_name(),
-						     "",
-						     "",
-						     ldb,
-						     true);
+//     result = &xns.new_base_space<unstructured_block>(path.poset_name(),
+// 						     "",
+// 						     "",
+// 						     ldb,
+// 						     true);
+    zone_nodes_block::new_host(xns, path.poset_name(), ldb, false);
+    result = &xns.member_poset<base_space_poset>(path.poset_name());
   }
 
   // Get

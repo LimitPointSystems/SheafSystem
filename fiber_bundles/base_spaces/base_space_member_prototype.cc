@@ -20,11 +20,11 @@
 using namespace fiber_bundle;
 
 // ===========================================================
-// BASE_SPACE_MEMBER_PROTOTYPE FACET
+// HOST FACTORY FACET
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
-
+ 
 const string&
 fiber_bundle::base_space_member_prototype::
 standard_schema_poset_name()
@@ -125,6 +125,85 @@ prototypes_poset_name()
 
   return result;
 }
+
+void
+fiber_bundle::base_space_member_prototype::
+new_host(namespace_type& xns, const poset_path& xpath, const poset_path& xschema_path, int xmax_db, bool xauto_access)
+{
+  // cout << endl << "Entering base_space_member_prototype::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xpath.empty());
+  require(!xns.contains_path(xpath, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));  
+
+  require(xmax_db >= 0);
+
+  // Body:
+
+  host_type::new_table(xns, xpath, xschema_path, xmax_db, xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.contains_path(xpath, xauto_access));
+  ensure(xns.poset_state_is_read_accessible(xpath, xauto_access));
+  ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == xschema_path);
+  ensure(xns.member_poset<host_type>(xpath, xauto_access).max_db() == xmax_db);
+
+  // Exit:
+
+  // cout << "Leaving base_space_member_prototype::new_host." << endl;
+  return;
+}
+
+void
+fiber_bundle::base_space_member_prototype::
+new_host(namespace_type& xns, const poset_path& xpath, int xmax_db, bool xauto_access)
+{
+  // cout << endl << "Entering base_space_member_prototype::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+  require(!xpath.empty());
+  require(!xns.contains_path(xpath, xauto_access));
+  require(xns.path_is_auto_read_accessible(standard_schema_path(), xauto_access));
+  
+  require(xmax_db >= 0);
+
+  // Body:
+
+  host_type::new_table(xns, xpath, standard_schema_path(), xmax_db, xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.contains_path(xpath, xauto_access));
+  ensure(xns.poset_state_is_read_accessible(xpath, xauto_access));
+  ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == standard_schema_path());
+  ensure(xns.member_poset<host_type>(xpath, xauto_access).max_db() == xmax_db);
+  
+  // Exit:
+
+  // cout << "Leaving base_space_member_prototype::new_host." << endl;
+  return;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// ===========================================================
+// BASE_SPACE_MEMBER_PROTOTYPE FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
 
 fiber_bundle::base_space_member_prototype::
 base_space_member_prototype()

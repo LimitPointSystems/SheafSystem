@@ -28,6 +28,173 @@
 //#define DIAGNOSTIC_OUTPUT
 
 // ===========================================================
+// HOST FACTORY FACET
+// ===========================================================
+
+const sheaf::poset_path&
+fiber_bundle::unstructured_block::
+standard_schema_path()
+{
+
+  // Preconditions:
+
+  // Body:
+
+  static const poset_path result(standard_schema_poset_name(),
+                                 "unstructured_block_schema");
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+
+const sheaf::poset_path&
+fiber_bundle::unstructured_block::
+schema_path() const
+{
+  // Preconditions:
+
+  // Body:
+
+  const poset_path& result = standard_schema_path();
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+
+void
+fiber_bundle::unstructured_block::
+make_standard_schema(namespace_poset& xns)
+{
+  // Preconditions:
+
+  require(xns.state_is_read_write_accessible());
+  require(xns.contains_poset(standard_schema_poset_name(), false));
+  require(!xns.contains_poset_member(standard_schema_path(), false));
+
+  // Body:
+
+  // Unstructured_block schema does not introduce any new dofs.
+
+  schema_poset_member lschema(xns,
+                              standard_schema_path().member_name(),
+                              homogeneous_block::standard_schema_path(),
+                              "",
+                              false);
+
+  lschema.detach_from_state();
+
+  // Postconditions:
+
+  ensure(xns.contains_poset_member(standard_schema_path(), false));
+
+  // Exit:
+
+  return;
+}
+
+const sheaf::poset_path&
+fiber_bundle::unstructured_block::
+static_prototype_path()
+{
+
+  // Preconditions:
+
+  // Body:
+
+  static const poset_path
+  STATIC_PROTOTYPE_PATH(base_space_member::prototypes_poset_name(),
+                        "unstructured_block");
+
+  const poset_path& result = STATIC_PROTOTYPE_PATH;
+
+  // Postconditions:
+
+  ensure(result.poset_name() == base_space_member::prototypes_poset_name());
+  ensure(result.member_name() == "unstructured_block");
+
+  // Exit
+
+  return result;
+}
+
+void
+fiber_bundle::unstructured_block::
+new_host(namespace_type& xns, const poset_path& xpath, const poset_path& xschema_path, int xmax_db, bool xauto_access)
+{
+  // cout << endl << "Entering unstructured_block::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xpath.empty());
+  require(!xns.contains_path(xpath, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));  
+
+  require(xmax_db >= 0);
+
+  // Body:
+
+  host_type::new_table(xns, xpath, xschema_path, xmax_db, xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.contains_path(xpath, xauto_access));
+  ensure(xns.poset_state_is_read_accessible(xpath, xauto_access));
+  ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == xschema_path);
+  ensure(xns.member_poset<host_type>(xpath, xauto_access).max_db() == xmax_db);
+
+  // Exit:
+
+  // cout << "Leaving unstructured_block::new_host." << endl;
+  return;
+}
+
+void
+fiber_bundle::unstructured_block::
+new_host(namespace_type& xns, const poset_path& xpath, int xmax_db, bool xauto_access)
+{
+  // cout << endl << "Entering unstructured_block::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+  require(!xpath.empty());
+  require(!xns.contains_path(xpath, xauto_access));
+  require(xns.path_is_auto_read_accessible(standard_schema_path(), xauto_access));
+  
+  require(xmax_db >= 0);
+
+  // Body:
+
+  host_type::new_table(xns, xpath, standard_schema_path(), xmax_db, xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.contains_path(xpath, xauto_access));
+  ensure(xns.poset_state_is_read_accessible(xpath, xauto_access));
+  ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == standard_schema_path());
+  ensure(xns.member_poset<host_type>(xpath, xauto_access).max_db() == xmax_db);
+  
+  // Exit:
+
+  // cout << "Leaving unstructured_block::new_host." << endl;
+  return;
+}
+
+
+// ===========================================================
 // ANY FACET
 // ===========================================================
 
@@ -160,100 +327,6 @@ clone() const
 // UNSTRUCTURED_BLOCK FACET
 // ===========================================================
 
-
-const sheaf::poset_path&
-fiber_bundle::unstructured_block::
-standard_schema_path()
-{
-
-  // Preconditions:
-
-  // Body:
-
-  static const poset_path result(standard_schema_poset_name(),
-                                 "unstructured_block_schema");
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-
-const sheaf::poset_path&
-fiber_bundle::unstructured_block::
-schema_path() const
-{
-  // Preconditions:
-
-  // Body:
-
-  const poset_path& result = standard_schema_path();
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-
-void
-fiber_bundle::unstructured_block::
-make_standard_schema(namespace_poset& xns)
-{
-  // Preconditions:
-
-  require(xns.state_is_read_write_accessible());
-  require(xns.contains_poset(standard_schema_poset_name(), false));
-  require(!xns.contains_poset_member(standard_schema_path(), false));
-
-  // Body:
-
-  // Unstructured_block schema does not introduce any new dofs.
-
-  schema_poset_member lschema(xns,
-                              standard_schema_path().member_name(),
-                              homogeneous_block::standard_schema_path(),
-                              "",
-                              false);
-
-  lschema.detach_from_state();
-
-  // Postconditions:
-
-  ensure(xns.contains_poset_member(standard_schema_path(), false));
-
-  // Exit:
-
-  return;
-}
-
-const sheaf::poset_path&
-fiber_bundle::unstructured_block::
-static_prototype_path()
-{
-
-  // Preconditions:
-
-  // Body:
-
-  static const poset_path
-  STATIC_PROTOTYPE_PATH(base_space_member::prototypes_poset_name(),
-                        "unstructured_block");
-
-  const poset_path& result = STATIC_PROTOTYPE_PATH;
-
-  // Postconditions:
-
-  ensure(result.poset_name() == base_space_member::prototypes_poset_name());
-  ensure(result.member_name() == "unstructured_block");
-
-  // Exit
-
-  return result;
-}
 
 fiber_bundle::unstructured_block::
 unstructured_block()

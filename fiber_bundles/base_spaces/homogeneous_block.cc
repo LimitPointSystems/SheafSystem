@@ -33,20 +33,6 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 // PUBLIC DATA MEMBERS
 
 fiber_bundle::homogeneous_block::
-homogeneous_block()
-{
-
-  // Preconditions:
-
-  // Body:
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(! is_attached() );
-}
-
-fiber_bundle::homogeneous_block::
 ~homogeneous_block()
 {
 
@@ -285,6 +271,19 @@ new_row_dof_map(poset_state_handle& xhost,
 }
 
 // PROTECTED DATA MEMBERS
+
+fiber_bundle::homogeneous_block::
+homogeneous_block()
+{
+  // Preconditions:
+
+  // Body:
+
+  // Postconditions:
+
+  ensure(invariant());
+  ensure(! is_attached() );
+}
 
 void
 fiber_bundle::homogeneous_block::

@@ -47,11 +47,6 @@ class SHEAF_DLL_SPEC homogeneous_block : public base_space_member
 public:
 
   ///
-  /// Default constructor; creates a new, unattached homogeneous_block handle.
-  ///
-  homogeneous_block();
-
-  ///
   /// Destructor; deletes a poset member and its attached state, if any.
   ///
   virtual ~homogeneous_block();
@@ -108,6 +103,11 @@ public:
 					     bool xauto_access);
 
 protected:
+
+  ///
+  /// Default constructor; creates a new, unattached homogeneous_block handle.
+  ///
+  homogeneous_block();
 
   ///
   /// Initializes handle data members when attaching

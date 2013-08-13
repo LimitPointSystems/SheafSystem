@@ -24,6 +24,178 @@
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // ===========================================================
+// HOST FACTORY FACET
+// ===========================================================
+
+// PUBLIC DATA MEMBERS
+
+const sheaf::poset_path&
+fiber_bundle::point_block_3d::
+standard_schema_path()
+{
+  // Preconditions:
+
+  // Body:
+
+  static const poset_path
+  STATIC_SCHEMA_PATH(base_space_member::standard_schema_path().poset_name(),
+                     "point_block_3d_schema");
+
+  const poset_path& result = STATIC_SCHEMA_PATH;
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+const sheaf::poset_path&
+fiber_bundle::point_block_3d::
+schema_path() const
+{
+  // Preconditions:
+
+  // Body:
+
+  const poset_path& result = standard_schema_path();
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+void
+fiber_bundle::point_block_3d::
+make_standard_schema(namespace_poset& xns)
+{
+  // Preconditions:
+
+  require(xns.state_is_read_write_accessible());
+  require(xns.contains_poset(standard_schema_poset_name(), false));
+  require(!xns.contains_poset_member(standard_schema_path(), false));
+
+  // Body:
+
+  string ldof_specs = "i_size SIZE_TYPE false";
+  ldof_specs       += " j_size SIZE_TYPE false";
+  ldof_specs       += " k_size SIZE_TYPE false";
+
+
+  schema_poset_member lschema(xns,
+                              standard_schema_path().member_name(),
+                              homogeneous_block::standard_schema_path(),
+                              ldof_specs,
+                              false);
+
+  lschema.detach_from_state();
+
+  // Postconditions:
+
+  ensure(xns.contains_poset_member(standard_schema_path(), false));
+
+  // Exit:
+
+  return;
+}
+
+const sheaf::poset_path&
+fiber_bundle::point_block_3d::
+static_prototype_path()
+{
+
+  // Preconditions:
+
+  // Body:
+
+  static const poset_path
+  STATIC_PROTOTYPE_PATH(base_space_member::prototypes_poset_name(),
+                        "point_block_3d");
+
+  const poset_path& result = STATIC_PROTOTYPE_PATH;
+
+  // Postconditions:
+
+  ensure(result.poset_name() == base_space_member::prototypes_poset_name());
+  ensure(result.member_name() == "point_block_3d");
+
+  // Exit
+
+  return result;
+}
+
+void
+fiber_bundle::point_block_3d::
+new_host(namespace_type& xns, const poset_path& xpath, const poset_path& xschema_path, bool xauto_access)
+{
+  // cout << endl << "Entering point_block_3d::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xpath.empty());
+  require(!xns.contains_path(xpath, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));  
+
+  // Body:
+
+  host_type::new_table(xns, xpath, xschema_path, DB, xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.contains_path(xpath, xauto_access));
+  ensure(xns.poset_state_is_read_accessible(xpath, xauto_access));
+  ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == xschema_path);
+  ensure(xns.member_poset<host_type>(xpath, xauto_access).max_db() == DB);
+
+  // Exit:
+
+  // cout << "Leaving point_block_3d::new_host." << endl;
+  return;
+}
+
+void
+fiber_bundle::point_block_3d::
+new_host(namespace_type& xns, const poset_path& xpath, bool xauto_access)
+{
+  // cout << endl << "Entering point_block_3d::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+  require(!xpath.empty());
+  require(!xns.contains_path(xpath, xauto_access));
+  require(xns.path_is_auto_read_accessible(standard_schema_path(), xauto_access));
+
+  // Body:
+
+  host_type::new_table(xns, xpath, standard_schema_path(), DB, xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.contains_path(xpath, xauto_access));
+  ensure(xns.poset_state_is_read_accessible(xpath, xauto_access));
+  ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == standard_schema_path());
+  ensure(xns.member_poset<host_type>(xpath, xauto_access).max_db() == DB);
+  
+  // Exit:
+
+  // cout << "Leaving point_block_3d::new_host." << endl;
+  return;
+}
+
+// PROTECTED DATA MEMBERS
+
+// PRIVATE DATA MEMBERS
+
+
+// ===========================================================
 // POINT_BLOCK_3D FACET
 // ===========================================================
 
@@ -589,103 +761,6 @@ static_local_cell_prototype_path()
 // ===========================================================
 
 // PUBLIC DATA MEMBERS
-
-const sheaf::poset_path&
-fiber_bundle::point_block_3d::
-standard_schema_path()
-{
-  // Preconditions:
-
-  // Body:
-
-  static const poset_path
-  STATIC_SCHEMA_PATH(base_space_member::standard_schema_path().poset_name(),
-                     "point_block_3d_schema");
-
-  const poset_path& result = STATIC_SCHEMA_PATH;
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-const sheaf::poset_path&
-fiber_bundle::point_block_3d::
-schema_path() const
-{
-  // Preconditions:
-
-  // Body:
-
-  const poset_path& result = standard_schema_path();
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-void
-fiber_bundle::point_block_3d::
-make_standard_schema(namespace_poset& xns)
-{
-  // Preconditions:
-
-  require(xns.state_is_read_write_accessible());
-  require(xns.contains_poset(standard_schema_poset_name(), false));
-  require(!xns.contains_poset_member(standard_schema_path(), false));
-
-  // Body:
-
-  string ldof_specs = "i_size SIZE_TYPE false";
-  ldof_specs       += " j_size SIZE_TYPE false";
-  ldof_specs       += " k_size SIZE_TYPE false";
-
-
-  schema_poset_member lschema(xns,
-                              standard_schema_path().member_name(),
-                              homogeneous_block::standard_schema_path(),
-                              ldof_specs,
-                              false);
-
-  lschema.detach_from_state();
-
-  // Postconditions:
-
-  ensure(xns.contains_poset_member(standard_schema_path(), false));
-
-  // Exit:
-
-  return;
-}
-
-const sheaf::poset_path&
-fiber_bundle::point_block_3d::
-static_prototype_path()
-{
-
-  // Preconditions:
-
-  // Body:
-
-  static const poset_path
-  STATIC_PROTOTYPE_PATH(base_space_member::prototypes_poset_name(),
-                        "point_block_3d");
-
-  const poset_path& result = STATIC_PROTOTYPE_PATH;
-
-  // Postconditions:
-
-  ensure(result.poset_name() == base_space_member::prototypes_poset_name());
-  ensure(result.member_name() == "point_block_3d");
-
-  // Exit
-
-  return result;
-}
 
 // PROTECTED DATA MEMBERS
 

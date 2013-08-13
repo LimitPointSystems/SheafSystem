@@ -100,7 +100,11 @@ new_space(fiber_bundles_namespace& xns)
   }
   else
   {
-    result = &xns.new_base_space<base_type>(path.poset_name());
+    /// @todo Remove.
+    //result = &xns.new_base_space<base_type>(path.poset_name());
+
+    base_type::new_host(xns, path.poset_name(), false);
+    result = &xns.member_poset<base_space_poset>(path.poset_name());
   }
 
   // Get

@@ -56,6 +56,16 @@ public:
   ///
   static arg_list make_args(int xmax_db);
 
+  ///
+  /// Creates a new tuple_space in namespace xns with path xpath 
+  /// and schema specified by xschema_path.
+  ///
+  static void new_table(namespace_type& xhost, 
+                        const poset_path& xpath, 
+                        const poset_path& xschema_path,
+                        int xmax_db,
+                        bool xauto_access);
+  
 protected:
 
   ///
