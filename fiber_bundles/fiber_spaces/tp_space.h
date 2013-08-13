@@ -74,6 +74,7 @@ public:
   typedef tp_table_dofs_type table_dofs_type;
 
   ///
+  /// @deprecated
   /// Creates an arg list which conforms to the schema of this.
   ///
   static arg_list make_arg_list(int xp, const poset_path& xvector_space_path);
@@ -93,6 +94,11 @@ public:
   /// and domain dimension xdd.
   ///
   static int p(int xd, int xdd);
+  
+  ///
+  /// Dimension d() as a function of degree xp and domain dimension xdd.
+  ///
+  static int static_d(int xp, int xdd);
 
   ///
   /// Creates a new tp_space in namespace xns with path xpath,
@@ -117,6 +123,7 @@ public:
   virtual int d(int xp, int xdd) const;
 
   ///
+  /// @deprecated
   /// True if and only if the dimension d implied by the row dofs
   /// specified in the schema with path xschema_path is equal to
   /// the dimension implied by p and the underlying vector space 
@@ -372,6 +379,7 @@ public:
 protected:
 
   ///
+  /// @deprecated
   /// Initializes xarg to satisfy class invariants.
   ///
   virtual void initialize_arg_list(const namespace_poset& xns, 

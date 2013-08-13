@@ -141,19 +141,39 @@ p(int xd, int xdd)
   // Body:
 
   int lp = 0;
-  int ltmpd = 1;
-  while(ltmpd < xd)
-  {
-    ltmpd *= xdd;
-    lp++;
-  }
-
-  int result = (ltmpd == xd) ? lp : -1;
+  while(static_d(lp, xdd) < xd) lp++;
+  
+  int result = (static_d(lp, xdd) == xd) ? lp : -1;
 
   // Postconditions:
 
   //  ensure((xd == pow(xdd, result)) || result = -1);
 
+  // Exit:
+
+  // cout << "Leaving tp_space::p." << endl;
+  return result;
+}
+
+int
+fiber_bundle::tp_space::
+static_d(int xp, int xdd)
+{
+  // cout << endl << "Entering tp_space::p." << endl;
+
+  // Preconditions:
+
+  require(xp >= 0);
+  require(xdd > 0);
+  
+  // Body:
+
+  int result =  static_cast<int>(pow(static_cast<double>(xdd), xp));
+
+  // Postconditions:
+
+  ensure(result > 0);
+  
   // Exit:
 
   // cout << "Leaving tp_space::p." << endl;
@@ -256,7 +276,7 @@ int
 fiber_bundle::tp_space::
 d(int xp, int xdd) const
 {
-  return static_cast<int>(pow(static_cast<double>(xdd), xp));
+  return static_d(xp, xdd);
 }
 
 bool
