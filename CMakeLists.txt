@@ -14,10 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#
-#
-
-
 
 # Setting CMAKE_CONFIGURATION_TYPES prior to the project function call
 # will eliminate the default configuration types (debug,release,RelWithDebugInfo, et al.) --
@@ -34,7 +30,7 @@ set(CMAKE_CONFIGURATION_TYPES Debug-contracts Debug-no-contracts Release-contrac
 project(SheafSystem)
 
 #
-# Ensure that we have the required cmake version.
+# Specify the minimum cmake version.
 #
 cmake_minimum_required(VERSION 2.8.8)
 

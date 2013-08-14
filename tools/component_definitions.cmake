@@ -18,7 +18,6 @@
 #
 # This file contains declarations and functions unique to this component.
 #
-set(CMAKE_BACKWARDS_COMPATIBILITY 2.2)
 
 #
 # Include functions and definitions common to all components.

@@ -13,14 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
+##
 # This file is the system level counterpart to the component_definitions file
 # found in the top level of any component. Functions and variables
 # that need to have system scope should be declared and/or defined here.
-#
-
-#
-# We have to set this so cmake will allow us to link against swig modules
-#
+##
 
 #
 # Establish the version number for this build.
@@ -33,7 +31,8 @@ mark_as_advanced(LIB_VERSION)
 #
 # Establish the list of components in this system
 #
-set(COMPONENTS sheaves fiber_bundles CACHE STRING "List of components in this system" FORCE)
+set(COMPONENTS sheaves CACHE STRING "List of components in this system" FORCE)
+#set(COMPONENTS sheaves fiber_bundles CACHE STRING "List of components in this system" FORCE)
 #set(COMPONENTS sheaves fiber_bundles geometry fields tools CACHE STRING "List of components in this system" FORCE)
 #
 # Set the default value for install location

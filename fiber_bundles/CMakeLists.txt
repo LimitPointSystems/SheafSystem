@@ -16,9 +16,6 @@
 
 project(fiber_bundles)
 
-cmake_minimum_required(VERSION 2.8.8)
-set(CMAKE_BACKWARDS_COMPATIBILITY 2.2)
-
 #
 # Include the functions and variable definitions unique to this component.
 #

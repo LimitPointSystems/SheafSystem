@@ -23,8 +23,6 @@
 # Variable Definition Section
 #------------------------------------------------------------------------------
 
-cmake_policy(SET CMP0001 OLD)
-
 #
 # Turn on project folders for Visual Studio.
 #

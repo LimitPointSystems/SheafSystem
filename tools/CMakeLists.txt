@@ -15,12 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-#
-#
-
 project(tools)
-
-cmake_minimum_required(VERSION 2.8.3)
 
 #
 # Include the functions and variable definitions unique to this component.

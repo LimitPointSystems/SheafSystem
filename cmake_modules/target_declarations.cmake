@@ -51,13 +51,10 @@ if(LINUX64GNU OR LINUX64INTEL)
     #
     # clean targets
     #
-     
     add_custom_target(realclean 
             COMMAND ${CMAKE_COMMAND} --build  ${CMAKE_BINARY_DIR} --target clean
             COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/documentation) 
 endif()
-
-
 
     #
     # Documentation targets
