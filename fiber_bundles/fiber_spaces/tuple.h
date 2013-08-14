@@ -227,6 +227,11 @@ public:
   static void make_standard_schema(namespace_poset& xns);
 
   ///
+  /// The standard path with poset name suffix xsuffix for host spaces for type F..
+  ///
+  static const poset_path& standard_host_path(const string& xclass_name, const string& xsuffix);
+
+  ///
   /// Manual, shallow factory method; creates a new host table for members of this type.
   /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
   /// and table attribute factor_ct specified by xfactor_ct.

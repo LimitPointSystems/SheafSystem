@@ -409,8 +409,6 @@ new_host(namespace_type& xns,
   require(xns.path_is_auto_read_accessible(xscalar_space_path, xauto_access));
   require(xns.contains_poset<scalar_type::host_type>(xscalar_space_path, xauto_access));
 
-  require(host_type::p(xns, xschema_path, xscalar_space_path, xauto_access) >= 0);
-
   // Body:
 
   host_type::new_table(xns, xhost_path, xschema_path, xscalar_space_path, xauto_access);
