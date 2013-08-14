@@ -65,8 +65,10 @@ endif()
 #
 # Set the cumulative Java binding library var for this component.
 #
-set(${COMPONENT}_JAVA_BINDING_LIBS ${${COMPONENT}_JAVA_BINDING_LIB} 
-    CACHE STRING " Cumulative Java binding libraries for ${PROJECT_NAME}" FORCE)
+set(${COMPONENT}_JAVA_BINDING_LIBS 
+    ${${COMPONENT}_JAVA_BINDING_LIB} 
+    CACHE STRING " Cumulative Java binding libraries for ${PROJECT_NAME}" 
+    FORCE)
 
 #
 # Set the cumulative Java binding jar variable for this component.
@@ -77,14 +79,18 @@ set(${COMPONENT}_JAVA_BINDING_JARS ${PROJECT_NAME}_java_binding.jar
 #
 # Set the cumulative Python binding library var for this component.
 #
-set(${COMPONENT}_PYTHON_BINDING_LIBS ${${COMPONENT}_PYTHON_BINDING_LIB} 
-    CACHE STRING " Cumulative Python binding libraries for ${PROJECT_NAME}" FORCE)
+set(${COMPONENT}_PYTHON_BINDING_LIBS 
+    ${${COMPONENT}_PYTHON_BINDING_LIB} 
+    CACHE STRING " Cumulative Python binding libraries for ${PROJECT_NAME}" 
+    FORCE)
 
 #
 # Set the cumulative include path for this component.
 #
-set(${COMPONENT}_IPATHS ${${COMPONENT}_IPATH} ${CMAKE_BINARY_DIR}/include 
-    CACHE STRING " Cumulative include paths for ${PROJECT_NAME}" FORCE)
+set(${COMPONENT}_IPATHS ${${COMPONENT}_IPATH} 
+    ${CMAKE_BINARY_DIR}/include 
+    CACHE STRING " Cumulative include paths for ${PROJECT_NAME}" 
+    FORCE)
 
 include_directories(${${COMPONENT}_IPATHS})
 
@@ -111,9 +117,12 @@ function(add_library_targets)
         link_directories(${${COMPONENT}_OUTPUT_DIR})
 
         # Create the DLL.
-        add_library(${${COMPONENT}_DYNAMIC_LIB} SHARED ${${COMPONENT}_SRCS})
-        target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} LINK_PRIVATE hdf5_cpp )        
-        set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")
+        add_library(${${COMPONENT}_DYNAMIC_LIB} 
+            SHARED ${${COMPONENT}_SRCS})
+        target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} 
+            LINK_PRIVATE hdf5_cpp )        
+        set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES 
+            FOLDER "Library Targets")
 
         # Override cmake's placing of "${${COMPONENT}_DYNAMIC_LIB}_EXPORTS 
         # into the preproc symbol table.
@@ -123,30 +132,41 @@ function(add_library_targets)
     else()
         
         # Static library
-        add_library(${${COMPONENT}_STATIC_LIB} STATIC ${${COMPONENT}_SRCS})
-        set_target_properties(${${COMPONENT}_STATIC_LIB} PROPERTIES OUTPUT_NAME 
+        add_library(${${COMPONENT}_STATIC_LIB} 
+            STATIC ${${COMPONENT}_SRCS})
+        set_target_properties(${${COMPONENT}_STATIC_LIB} 
+            PROPERTIES OUTPUT_NAME 
             ${PROJECT_NAME} LINKER_LANGUAGE CXX)
         target_link_libraries(${${COMPONENT}_STATIC_LIB} hdf5_cpp )       
 
         # Shared library
-        add_library(${${COMPONENT}_SHARED_LIB} SHARED ${${COMPONENT}_SRCS})
-        set_target_properties(${${COMPONENT}_SHARED_LIB} PROPERTIES OUTPUT_NAME 
+        add_library(${${COMPONENT}_SHARED_LIB} 
+            SHARED ${${COMPONENT}_SRCS})
+        set_target_properties(${${COMPONENT}_SHARED_LIB} 
+            PROPERTIES OUTPUT_NAME 
             ${PROJECT_NAME} LINKER_LANGUAGE CXX)
-        set_target_properties(${${COMPONENT}_SHARED_LIB} PROPERTIES 
+        set_target_properties(${${COMPONENT}_SHARED_LIB} 
+            PROPERTIES 
             LINK_INTERFACE_LIBRARIES "")          
-        target_link_libraries(${${COMPONENT}_SHARED_LIB} -Wl,-Bstatic hdf5_cpp -Wl,-Bdynamic)  
+        target_link_libraries(${${COMPONENT}_SHARED_LIB} 
+            -Wl,-Bstatic hdf5_cpp -Wl,-Bdynamic)  
 
-        # Override cmake's placing of "${COMPONENT_LIB}_EXPORTS into the preproc symbol table.
-        # CMake apparently detects the presence of cdecl_dllspec in the source and places
-        # -D<LIBRARY>_EXPORTS into the preproc symbol table no matter the platform.
-        set_target_properties(${${COMPONENT}_SHARED_LIB} PROPERTIES DEFINE_SYMBOL "")
+        # Override cmake's placing of "${COMPONENT_LIB}_EXPORTS into the preproc 
+        # symbol table. CMake apparently detects the presence of cdecl_dllspec in 
+        # the source and places -D<LIBRARY>_EXPORTS into the preproc symbol 
+        # table no matter the platform.
+        set_target_properties(${${COMPONENT}_SHARED_LIB} 
+            PROPERTIES DEFINE_SYMBOL "")
  
         # Define the library version.
-        set_target_properties(${${COMPONENT}_SHARED_LIB} PROPERTIES VERSION ${LIB_VERSION})  
+        set_target_properties(${${COMPONENT}_SHARED_LIB} 
+            PROPERTIES VERSION ${LIB_VERSION})  
     
         # Library alias definitions
-        add_dependencies(${PROJECT_NAME}-shared-lib ${${COMPONENT}_SHARED_LIB})
-        add_dependencies(${PROJECT_NAME}-static-lib ${${COMPONENT}_STATIC_LIB})
+        add_dependencies(${PROJECT_NAME}-shared-lib 
+            ${${COMPONENT}_SHARED_LIB})
+        add_dependencies(${PROJECT_NAME}-static-lib 
+            ${${COMPONENT}_STATIC_LIB})
 
     endif()
 
@@ -162,7 +182,7 @@ function(add_bindings_targets)
     include(${SWIG_USE_FILE})
 
     #
-    # Java ################################################################
+    # Java #################################################
     #
  
     set(SWIG_CXX_EXTENSION "cxx" CACHE STRING "Swig source file extension")
@@ -172,7 +192,8 @@ function(add_bindings_targets)
     include_directories(${${COMPONENT}_JAVA_BINDING_SRC_DIR})
     include_directories(${${COMPONENT}_COMMON_BINDING_SRC_DIR})
     
-    set_source_files_properties(${${COMPONENT}_JAVA_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_JAVA_INTERFACE} 
+    set_source_files_properties(
+        ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_JAVA_INTERFACE} 
         PROPERTIES CPLUSPLUS ON)
  
     # Add the java binding library target
@@ -180,7 +201,8 @@ function(add_bindings_targets)
         ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_JAVA_INTERFACE})
     
     # Establish CXX as the linker language for this library
-    set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES LINKER_LANGUAGE CXX)
+    set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES 
+        LINKER_LANGUAGE CXX)
     
     if(WIN64INTEL OR WIN64MSVC)
         swig_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${JDK_LIBS} 
@@ -188,7 +210,8 @@ function(add_bindings_targets)
         set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES 
             FOLDER "Binding Targets - Java")   
     else()
-        add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB} 
+        add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} 
+            ${${COMPONENT}_SHARED_LIB} 
             ${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE} 
             ${${COMPONENT}_SWIG_COMMON_INTERFACE})
         target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${JDK_LIBS} 
@@ -201,8 +224,8 @@ function(add_bindings_targets)
         VERSION ${LIB_VERSION})
       
     # Create the bindings jar file
-    # Output path in windows differs slightly from Linux. Cmake wont allow a conditional inside add_custom_target
-    # So we have to do it outside.
+    # Output path in windows differs slightly from Linux. Cmake wont allow a 
+    # conditional inside add_custom_target, so we have to do it outside.
     if(WIN64INTEL OR WIN64MSVC)
         # Set the cumulative classpath variable for this component
         set(${COMPONENT}_CLASSPATH 
@@ -210,26 +233,36 @@ function(add_bindings_targets)
             CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)         
         add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
                DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB}
-               set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Component Binding Jars")
-        	   COMMAND ${CMAKE_COMMAND} -E copy ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/base_client.java ${CMAKE_CURRENT_BINARY_DIR}
-               COMMAND ${CMAKE_COMMAND} -E copy ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/base_server.java ${CMAKE_CURRENT_BINARY_DIR}
+               set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES 
+                   FOLDER "Component Binding Jars")
+        	   COMMAND ${CMAKE_COMMAND} -E copy 
+        	       ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/base_client.java 
+        	       ${CMAKE_CURRENT_BINARY_DIR}
+               COMMAND ${CMAKE_COMMAND} -E copy 
+                   ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/base_server.java 
+                   ${CMAKE_CURRENT_BINARY_DIR}
                COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
                COMMAND ${Java_JAVAC_EXECUTABLE} -classpath . -d . *.java
                COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-               COMMAND ${Java_JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
+               COMMAND ${Java_JAR_EXECUTABLE} cvf 
+                   ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  
+                   bindings/java/*.class
                )
         
         # Java documentation
         if(DOC_TARGETS)
             add_custom_target(${PROJECT_NAME}-java-docs ALL
-                    COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${${COMPONENT}_CLASSPATH}" 
-                    -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
-                    *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-                    DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
+                    COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} 
+                        documentation" -classpath "${${COMPONENT}_CLASSPATH}" 
+                        -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
+                        *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                        DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
                     )
-            set_target_properties(${PROJECT_NAME}-java-docs PROPERTIES FOLDER "Documentation Targets")                                 
+            set_target_properties(${PROJECT_NAME}-java-docs PROPERTIES 
+                FOLDER "Documentation Targets")                                 
         endif()
-    set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Library Jars") 
+    set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES 
+        FOLDER "Library Jars") 
     else()
         # Set the cumulative classpath variable for this component
         set(${COMPONENT}_CLASSPATH 
@@ -237,21 +270,28 @@ function(add_bindings_targets)
             CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)   
         add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
                DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB}
-        	   COMMAND ${CMAKE_COMMAND} -E copy_if_different ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/base_client.java ${CMAKE_CURRENT_BINARY_DIR}
-               COMMAND ${CMAKE_COMMAND} -E copy_if_different ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/base_server.java ${CMAKE_CURRENT_BINARY_DIR}
+        	   COMMAND ${CMAKE_COMMAND} -E copy_if_different 
+        	       ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/base_client.java 
+        	       ${CMAKE_CURRENT_BINARY_DIR}
+               COMMAND ${CMAKE_COMMAND} -E copy_if_different 
+                   ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/base_server.java 
+                   ${CMAKE_CURRENT_BINARY_DIR}
                COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
                COMMAND ${JAVAC_EXECUTABLE} -classpath . -d . *.java
                COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-               COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  bindings/java/*.class
+               COMMAND ${JAR_EXECUTABLE} cvf 
+                   ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  
+                   bindings/java/*.class
                )        
 
         # Java documentation
         if(DOC_TARGETS)
             add_custom_target(${PROJECT_NAME}-java-docs ALL
-                    COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" -classpath "${${COMPONENT}_CLASSPATH}" 
-                    -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
-                    *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-                    DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
+                    COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} 
+                        documentation" -classpath "${${COMPONENT}_CLASSPATH}" 
+                        -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
+                        *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                        DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
                    )
         endif()
     endif()
@@ -259,7 +299,7 @@ function(add_bindings_targets)
     mark_as_advanced(FORCE ${COMPONENT}_CLASSPATH) 
 
     #
-    # CSharp ##############################################################
+    # CSharp ###############################################
     #
     
     set(CMAKE_SWIG_FLAGS -c++ -namespace sheaf)        
