@@ -59,6 +59,17 @@ public:
   /// Creates an arg list which conforms to the schema of this.
   ///
   static arg_list make_arg_list(const poset_path& xscalar_space_path);
+
+  ///
+  /// Creates a new at1_space in namespace xns with path xpath,
+  /// schema specified by xschema_path, and table attribute 
+  /// scalar_space_path specified by xscalar_space_path.
+  ///
+  static void new_table(namespace_type& xhost, 
+                        const poset_path& xpath, 
+                        const poset_path& xschema_path,
+                        const poset_path& xscalar_space_path,
+                        bool xauto_access);
   
 protected:
 

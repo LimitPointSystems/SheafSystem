@@ -243,7 +243,7 @@ class SHEAF_DLL_SPEC tp : public vd
 {
 
   // ===========================================================
-  /// @name HOST FACTORY FACET
+  /// @name HOST FACTORY FACET OF CLASS TP
   // ===========================================================
   //@{
 

@@ -94,12 +94,12 @@ make_arg_list(int xp, const poset_path& xvector_space_path)
   return result;
 }
 
-bool
+int
 fiber_bundle::tp_space::
-d_is_valid(const namespace_poset& xns, 
-	   const poset_path& xschema_path,
-	   const poset_path& xvector_space_path,
-	   bool xauto_access)
+p(const namespace_poset& xns, 
+  const poset_path& xschema_path,
+  const poset_path& xvector_space_path,
+  bool xauto_access)
 {
   // Preconditions:
 
@@ -116,50 +116,18 @@ d_is_valid(const namespace_poset& xns,
   int ld = schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access);
 
   int ldd = xns.member_poset<vector_space_type>(xvector_space_path, xauto_access).d();  
-  
-  bool result = (p(ld, ldd) >= 0);
+
+  tp_space ltmp;
+  int result = ltmp.p(ld, ldd);
 
   // Postconditions:
 
+  ensure(unexecutable("result < 0 implies schema dimension inconsistent with vector space dimension"));
 
   // Exit:
 
   return result;
 }
-
-int
-fiber_bundle::tp_space::
-p(int xd, int xdd)
-{
-  // cout << endl << "Entering tp_space::p." << endl;
-
-  // Preconditions:
-
-  require(xd > 0);
-  require(xdd > 0);
-  
-  // Body:
-
-  int lp = 0;
-  int ltmpd = 1;
-  while(ltmpd < xd)
-  {
-    ltmpd *= xdd;
-    lp++;
-  }
-
-  int result = (ltmpd == xd) ? lp : -1;
-
-  // Postconditions:
-
-  //  ensure((xd == pow(xdd, result)) || result = -1);
-
-  // Exit:
-
-  // cout << "Leaving tp_space::p." << endl;
-  return result;
-}
-
 
 void
 fiber_bundle::tp_space::
@@ -185,7 +153,7 @@ new_table(namespace_type& xns,
   require(xns.path_is_auto_read_accessible(xvector_space_path, xauto_access));
   require(xns.contains_poset<vector_space_type>(xvector_space_path, xauto_access));
 
-  require(d_is_valid(xns, xschema_path, xvector_space_path, xauto_access));
+  require(p(xns, xschema_path, xvector_space_path, xauto_access) >= 0);
 
   // Body:
 
@@ -214,7 +182,11 @@ new_table(namespace_type& xns,
 
   // Compute the tensor degree.
 
-  int lp = p(ld, ldd);
+  int lp = ltable->p(ld, ldd);
+
+  // Get the scalar space path from the domain vector space.
+
+  poset_path lscalar_space_path = xns.member_poset<vector_space_type>(xvector_space_path, xauto_access).scalar_space_path(xauto_access);
   
   // Create the table dof map and set dof values;
   // must be newed because poset_state::_table keep a pointer to it.
@@ -225,6 +197,7 @@ new_table(namespace_type& xns,
   lmap->put_dof("dd", ldd);
   lmap->put_dof("p", lp);
   lmap->put_dof("vector_space_path", xvector_space_path);
+  lmap->put_dof("scalar_space_path", lscalar_space_path);
   
   // Create the state.
 
@@ -244,7 +217,10 @@ new_table(namespace_type& xns,
 
   ensure(xns.member_poset<tp_space>(xpath, xauto_access).factor_ct(true) == xns.member_poset<tp_space>(xpath, xauto_access).d(true));
   ensure(xns.member_poset<tp_space>(xpath, xauto_access).d(true) == schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access));
+  ensure(xns.member_poset<tp_space>(xpath, xauto_access).p(true) == p(xns, xschema_path, xvector_space_path, xauto_access));
   ensure(xns.member_poset<tp_space>(xpath, xauto_access).vector_space_path(true) == xvector_space_path );
+  ensure(xns.member_poset<tp_space>(xpath, xauto_access).scalar_space_path(true) == 
+         xns.member_poset<vector_space_type>(xvector_space_path, xauto_access).scalar_space_path(xauto_access) );
 
   // Exit:
 
@@ -295,6 +271,40 @@ d_is_valid(const namespace_poset& xns,
 
   // Exit:
 
+  return result;
+}
+
+
+int
+fiber_bundle::tp_space::
+p(int xd, int xdd) const
+{
+  // cout << endl << "Entering tp_space::p." << endl;
+
+  // Preconditions:
+
+  require(xd > 0);
+  require(xdd > 0);
+  
+  // Body:
+
+  int lp = 0;
+  int lpd = 1;
+  while(lpd < xd)
+  {
+    lpd  = d(lp, xdd);
+    lp++;
+  }
+
+  int result = (lpd == xd) ? lp : -1;
+
+  // Postconditions:
+
+  ensure(unexecutable("result < 0 implies schema dimension inconsistent with vector space dimension"));
+
+  // Exit:
+
+  // cout << "Leaving tp_space::p." << endl;
   return result;
 }
 

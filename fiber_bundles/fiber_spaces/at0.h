@@ -412,6 +412,51 @@ class tp_space;
 ///
 class SHEAF_DLL_SPEC at0 : public atp
 {
+  // ===========================================================
+  /// @name HOST FACTORY FACET OF CLASS AT0
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// The type of host poset.
+  ///
+  typedef at0_space host_type;
+
+  ///
+  /// The path to the standard schema for this class.
+  ///
+  static const poset_path& standard_schema_path();
+
+  ///
+  /// Creates the standard schema for this class in namespace xns.
+  ///
+  static void make_standard_schema(namespace_poset& xns);
+
+  ///
+  /// Manual, shallow factory method; creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path and
+  /// schema specified by xschema_path.
+  ///
+  static void new_host(namespace_type& xns, 
+                       const poset_path& xhost_path, 
+                       const poset_path& xschema_path,
+                       bool xauto_access);
+
+  ///
+  /// Auto, deep factory method; creates a new host poset and any prerequisite posets
+  /// for members of this type. The poset is created in namespace xns with the 
+  /// standard_host_path for this class and xsuffix, schema specified by standard_schema_path(), 
+  /// and standard paths for prerequisites. Returns the path of the new host poset.
+  ///
+  static poset_path new_host(namespace_type& xns, const string& xsuffix, bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
 
   //============================================================================
   /// @name AT0 FACET OF CLASS AT0
@@ -421,11 +466,6 @@ class SHEAF_DLL_SPEC at0 : public atp
 public:
 
   // Typedefs:
-
-  ///
-  /// The type of host poset.
-  ///
-  typedef at0_space host_type;
 
   ///
   /// The type of the row dofs.
@@ -582,16 +622,6 @@ private:
   //@{
 
 public:
-
-  ///
-  /// The path to the standard schema for this class.
-  ///
-  static const poset_path& standard_schema_path();
-
-  ///
-  /// Creates the standard schema for this class in namespace xns.
-  ///
-  static void make_standard_schema(namespace_poset& xns);
 
   using atp::factor_ct;
   

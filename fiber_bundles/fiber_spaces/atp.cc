@@ -11,8 +11,10 @@
 
 #include "abstract_poset_member.impl.h"
 #include "assert_contract.h"
+#include "at1.h"
+#include "at1_space.h"
 #include "atp_space.h"
-#include "namespace_poset.h"
+#include "fiber_bundles_namespace.h"
 #include "schema_poset_member.h"
 #include "wsv_block.h"
 
@@ -187,6 +189,117 @@ d() const
 
 // PUBLIC MEMBER FUNCTIONS
 
+const sheaf::poset_path&
+fiber_bundle::atp::
+standard_schema_path()
+{
+  // Preconditions:
+
+
+  // Body:
+
+  static const poset_path result(standard_schema_poset_name(), "atp_schema");
+
+  // Postconditions:
+
+  ensure(result.full());
+  ensure(result.poset_name() == standard_schema_poset_name());
+
+  // Exit:
+
+  return result;
+}
+
+void
+fiber_bundle::atp::
+make_standard_schema(namespace_poset& xns)
+{
+  // Preconditions:
+
+  require(xns.state_is_read_write_accessible());
+  require(xns.contains_poset(standard_schema_poset_name()));
+  require(!xns.contains_poset_member(standard_schema_path()));
+
+  // Body:
+
+  schema_poset_member lschema(xns,
+                              standard_schema_path().member_name(),
+                              tp::standard_schema_path(),
+                              "",
+                              false);
+
+  lschema.detach_from_state();
+
+  // Postconditions:
+
+  ensure(xns.contains_poset_member(standard_schema_path()));
+
+  // Exit:
+
+  return;
+}
+
+void
+fiber_bundle::atp::
+new_host(namespace_type& xns, 
+         const poset_path& xhost_path, 
+         const poset_path& xschema_path, 
+         const poset_path& xvector_space_path, 
+         bool xauto_access)
+{
+  // cout << endl << "Entering atp::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path()));
+
+  require(xvector_space_path.full());
+  require(xns.path_is_auto_read_accessible(xvector_space_path, xauto_access));
+  require(xns.contains_poset<vector_space_type::host_type>(xvector_space_path, xauto_access));
+
+  require(host_type::p(xns, xschema_path, xvector_space_path, xauto_access) >= 0);
+
+  // Body:
+
+  host_type::new_table(xns, xhost_path, xschema_path, xvector_space_path, xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.contains_path(xhost_path, xauto_access));
+  ensure(xns.member_poset(xhost_path, xauto_access).state_is_not_read_accessible());
+  ensure(xns.member_poset(xhost_path, xauto_access).schema(true).path(true) == xschema_path);
+
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).factor_ct(true) == 
+         xns.member_poset<host_type>(xhost_path, xauto_access).d(true));
+
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).d(true) == 
+         schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access));
+
+  ensure(xns.member_poset<atp_space>(xhost_path, xauto_access).scalar_space_path(true) == 
+         xns.member_poset<vector_space_type>(xvector_space_path, xauto_access).scalar_space_path(xauto_access) );
+
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).p(true) == 
+         host_type::p(xns, xschema_path, xvector_space_path, xauto_access));
+
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).dd(true) == 
+         xns.member_poset<vector_space_type::host_type>(xvector_space_path, xauto_access).d());
+
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).vector_space_path(true) == 
+         xvector_space_path );
+
+  // Exit:
+
+  // cout << "Leaving atp::new_host." << endl;
+  return;
+}
+
 // PROTECTED MEMBER FUNCTIONS
 
 // PRIVATE MEMBER FUNCTIONS
@@ -325,6 +438,16 @@ invariant() const
 // CLASS ATP
 //==============================================================================
 
+// ===========================================================
+// HOST FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+ 
 
 //==============================================================================
 // EXTERIOR ALGEBRA (ATP) FACET OF CLASS ATP
@@ -653,67 +776,6 @@ put_is_p_vector(bool xauto_access)
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
-
-// PROTECTED MEMBER FUNCTIONS
-
-// PRIVATE MEMBER FUNCTIONS
-
-
-//==============================================================================
-// TUPLE FACET OF CLASS ATP
-//==============================================================================
-
-// PUBLIC MEMBER FUNCTIONS
-
-const sheaf::poset_path&
-fiber_bundle::atp::
-standard_schema_path()
-{
-  // Preconditions:
-
-
-  // Body:
-
-  static const poset_path result(standard_schema_poset_name(), "atp_schema");
-
-  // Postconditions:
-
-  ensure(result.full());
-  ensure(result.poset_name() == standard_schema_poset_name());
-
-  // Exit:
-
-  return result;
-}
-
-void
-fiber_bundle::atp::
-make_standard_schema(namespace_poset& xns)
-{
-  // Preconditions:
-
-  require(xns.state_is_read_write_accessible());
-  require(xns.contains_poset(standard_schema_poset_name()));
-  require(!xns.contains_poset_member(standard_schema_path()));
-
-  // Body:
-
-  schema_poset_member lschema(xns,
-                              standard_schema_path().member_name(),
-                              tp::standard_schema_path(),
-                              "",
-                              false);
-
-  lschema.detach_from_state();
-
-  // Postconditions:
-
-  ensure(xns.contains_poset_member(standard_schema_path()));
-
-  // Exit:
-
-  return;
-}
 
 // PROTECTED MEMBER FUNCTIONS
 

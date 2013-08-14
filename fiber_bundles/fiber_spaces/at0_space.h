@@ -59,6 +59,15 @@ public:
   /// Creates an arg list which conforms to the schema of this.
   ///
   static arg_list make_arg_list();
+
+  ///
+  /// Creates a new at0_space in namespace xns with path xpath,
+  /// and schema specified by xschema_path.
+  ///
+  static void new_table(namespace_type& xhost, 
+                        const poset_path& xpath, 
+                        const poset_path& xschema_path,
+                        bool xauto_access);
   
 protected:
 
