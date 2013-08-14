@@ -539,16 +539,24 @@ make_base_space(fiber_bundles_namespace& xns,
   }
   else
   {
-    base_space_poset* lhost;
+    /// @todo Remove.
+//     base_space_poset* lhost;
 
-    if(xns.contains_poset(xbase_path, false))
+//     if(xns.contains_poset(xbase_path, false))
+//     {
+//       lhost = dynamic_cast<base_space_poset*>(&xns.member_poset(xbase_path, false));
+//     }
+//     else
+//     {
+//       lhost = &xns.new_base_space<structured_block_1d>(xbase_path.poset_name());
+//     }
+
+    if(!xns.contains_poset(xbase_path, false))
     {
-      lhost = dynamic_cast<base_space_poset*>(&xns.member_poset(xbase_path, false));
+      structured_block_1d::new_host(xns, xbase_path.poset_name(), false);
     }
-    else
-    {
-      lhost = &xns.new_base_space<structured_block_1d>(xbase_path.poset_name());
-    }
+    
+    base_space_poset* lhost = dynamic_cast<base_space_poset*>(&xns.member_poset(xbase_path, false));
 
     xresult.new_state(lhost, xbase_index_ubs[0], true);
     xresult.put_name(xbase_path.member_name(), true, true);
@@ -589,16 +597,24 @@ make_base_space(fiber_bundles_namespace& xns,
   }
   else
   {
-    base_space_poset* lhost;
+    /// @todo Remove.
+//     base_space_poset* lhost;
 
-    if(xns.contains_poset(xbase_path, false))
+//     if(xns.contains_poset(xbase_path, false))
+//     {
+//       lhost = dynamic_cast<base_space_poset*>(&xns.member_poset(xbase_path, false));
+//     }
+//     else
+//     {
+//       lhost = &xns.new_base_space<structured_block_2d>(xbase_path.poset_name());
+//     }
+
+    if(!xns.contains_poset(xbase_path, false))
     {
-      lhost = dynamic_cast<base_space_poset*>(&xns.member_poset(xbase_path, false));
+      structured_block_2d::new_host(xns, xbase_path.poset_name(), false);
     }
-    else
-    {
-      lhost = &xns.new_base_space<structured_block_2d>(xbase_path.poset_name());
-    }
+    
+    base_space_poset* lhost = dynamic_cast<base_space_poset*>(&xns.member_poset(xbase_path, false));
 
     xresult.new_state(lhost, xbase_index_ubs[0], xbase_index_ubs[1], true);
     xresult.put_name(xbase_path.member_name(), true, true);
@@ -641,16 +657,24 @@ make_base_space(fiber_bundles_namespace& xns,
   }
   else
   {
-    base_space_poset* lhost;
+    /// @todo Remove.
+//     base_space_poset* lhost;
 
-    if(xns.contains_poset(xbase_path, false))
+//     if(xns.contains_poset(xbase_path, false))
+//     {
+//       lhost = dynamic_cast<base_space_poset*>(&xns.member_poset(xbase_path, false));
+//     }
+//     else
+//     {
+//       lhost = &xns.new_base_space<structured_block_3d>(xbase_path.poset_name());
+//     }
+
+    if(!xns.contains_poset(xbase_path, false))
     {
-      lhost = dynamic_cast<base_space_poset*>(&xns.member_poset(xbase_path, false));
+      structured_block_3d::new_host(xns, xbase_path.poset_name(), false);
     }
-    else
-    {
-      lhost = &xns.new_base_space<structured_block_3d>(xbase_path.poset_name());
-    }
+    
+    base_space_poset* lhost = dynamic_cast<base_space_poset*>(&xns.member_poset(xbase_path, false));
 
     xresult.new_state(lhost,
                       xbase_index_ubs[0],
@@ -695,16 +719,24 @@ make_base_space(fiber_bundles_namespace& xns,
   }
   else
   {
-    base_space_poset* lhost;
+    /// @todo Remove.
+//     base_space_poset* lhost;
 
-    if(xns.contains_poset(xbase_path, false))
+//     if(xns.contains_poset(xbase_path, false))
+//     {
+//       lhost = dynamic_cast<base_space_poset*>(&xns.member_poset(xbase_path, false));
+//     }
+//     else
+//     {
+//       lhost = &xns.new_base_space<point_block_1d>(xbase_path.poset_name());
+//     }
+
+    if(!xns.contains_poset(xbase_path, false))
     {
-      lhost = dynamic_cast<base_space_poset*>(&xns.member_poset(xbase_path, false));
+      point_block_1d::new_host(xns, xbase_path.poset_name(), false);
     }
-    else
-    {
-      lhost = &xns.new_base_space<point_block_1d>(xbase_path.poset_name());
-    }
+    
+    base_space_poset* lhost = dynamic_cast<base_space_poset*>(&xns.member_poset(xbase_path, false));
 
     xresult.new_state(lhost, xbase_index_ubs[0], true);
     xresult.put_name(xbase_path.member_name(), true, true);
@@ -745,16 +777,24 @@ make_base_space(fiber_bundles_namespace& xns,
   }
   else
   {
-    base_space_poset* lhost;
+    /// @todo Remove.
+//     base_space_poset* lhost;
 
-    if(xns.contains_poset(xbase_path, false))
+//     if(xns.contains_poset(xbase_path, false))
+//     {
+//       lhost = dynamic_cast<base_space_poset*>(&xns.member_poset(xbase_path, false));
+//     }
+//     else
+//     {
+//       lhost = &xns.new_base_space<point_block_2d>(xbase_path.poset_name());
+//     }
+
+    if(!xns.contains_poset(xbase_path, false))
     {
-      lhost = dynamic_cast<base_space_poset*>(&xns.member_poset(xbase_path, false));
+      point_block_2d::new_host(xns, xbase_path.poset_name(), false);
     }
-    else
-    {
-      lhost = &xns.new_base_space<point_block_2d>(xbase_path.poset_name());
-    }
+    
+    base_space_poset* lhost = dynamic_cast<base_space_poset*>(&xns.member_poset(xbase_path, false));
 
     xresult.new_state(lhost, xbase_index_ubs[0], xbase_index_ubs[1], true);
     xresult.put_name(xbase_path.member_name(), true, true);
@@ -795,16 +835,24 @@ make_base_space(fiber_bundles_namespace& xns,
   }
   else
   {
-    base_space_poset* lhost;
+    /// @todo Remove.
+//     base_space_poset* lhost;
 
-    if(xns.contains_poset(xbase_path, false))
+//     if(xns.contains_poset(xbase_path, false))
+//     {
+//       lhost = dynamic_cast<base_space_poset*>(&xns.member_poset(xbase_path, false));
+//     }
+//     else
+//     {
+//       lhost = &xns.new_base_space<point_block_3d>(xbase_path.poset_name());
+//     }
+
+    if(!xns.contains_poset(xbase_path, false))
     {
-      lhost = dynamic_cast<base_space_poset*>(&xns.member_poset(xbase_path, false));
+      point_block_3d::new_host(xns, xbase_path.poset_name(), false);
     }
-    else
-    {
-      lhost = &xns.new_base_space<point_block_3d>(xbase_path.poset_name());
-    }
+    
+    base_space_poset* lhost = dynamic_cast<base_space_poset*>(&xns.member_poset(xbase_path, false));
 
     xresult.new_state(lhost,
                       xbase_index_ubs[0],
@@ -855,20 +903,28 @@ make_base_space(fiber_bundles_namespace& xns,
   {
     int ldb = xbase_index_ubs.ct();
 
-    base_space_poset* lhost;
+    /// @todo Remove.
+ //    base_space_poset* lhost;
 
-    if(xns.contains_poset(xbase_path, true))
+//     if(xns.contains_poset(xbase_path, true))
+//     {
+//       lhost = dynamic_cast<base_space_poset*>(&xns.member_poset(xbase_path, false));
+//     }
+//     else
+//     {
+//       lhost = &xns.new_base_space<unstructured_block>(xbase_path.poset_name(),
+// 						      "",
+// 						      "",
+// 						      ldb,
+// 						      true);
+//     }
+
+    if(!xns.contains_poset(xbase_path, false))
     {
-      lhost = dynamic_cast<base_space_poset*>(&xns.member_poset(xbase_path, false));
+      unstructured_block::new_host(xns, xbase_path.poset_name(), ldb, false);
     }
-    else
-    {
-      lhost = &xns.new_base_space<unstructured_block>(xbase_path.poset_name(),
-						      "",
-						      "",
-						      ldb,
-						      true);
-    }
+    
+    base_space_poset* lhost = dynamic_cast<base_space_poset*>(&xns.member_poset(xbase_path, false));
 
     string lposet_name(xns.standard_base_space_member_prototypes_poset_name());
 

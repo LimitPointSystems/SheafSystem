@@ -2595,13 +2595,17 @@ new_0d_point_base_space(namespace_poset& xns, const string& xname, size_type xi_
   // Make the base space.
 
   fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
-  base_space_poset* lhost = &lns.new_base_space<unstructured_block>(xname+"_base_space",
-								    "",
-								    "",
-								    0,
-								    true);
+  /// @todo Remove.
+//   base_space_poset* lhost = &lns.new_base_space<unstructured_block>(xname+"_base_space",
+// 								    "",
+// 								    "",
+// 								    0,
+// 								    true);
+  string lbase_name(xname+"_base_space");
+  unstructured_block::new_host(lns, lbase_name, 0, false);
+  base_space_poset& lhost = lns.member_poset<base_space_poset>(lbase_name, false);
   
-  lhost->get_read_write_access();
+  lhost.get_read_write_access();
 
   string proto_member_name("point");
 
@@ -2624,7 +2628,7 @@ new_0d_point_base_space(namespace_poset& xns, const string& xname, size_type xi_
   // Create a block of points.
 
   unstructured_block* result =
-    new unstructured_block(lhost,
+    new unstructured_block(&lhost,
                            lproto_path,
                            lclient_ids.base(),
                            lclient_ids.ct(),
@@ -2633,13 +2637,12 @@ new_0d_point_base_space(namespace_poset& xns, const string& xname, size_type xi_
   result->put_name(xname + "_unstructured_block", true, false);
 
 #ifdef DIAGNOSTIC_OUTPUT
-  cout << *lhost << endl;
+  cout << lhost << endl;
 #endif
 
   // Clean up.
 
-  lhost->release_access();
-  result->release_access();
+  lhost.release_access();
 
   // Postconditions:
 
@@ -2670,14 +2673,18 @@ new_0d_point_base_space(namespace_poset& xns,
 
   // Make the base space.
 
-  fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
-  base_space_poset* lhost = &lns.new_base_space<unstructured_block>(xname+"_base_space",
-								   "",
-								   "",
-								   0,
-								   true);
+  fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);  /// @todo Remove.
+  /// @todo Remove.
+//   base_space_poset* lhost = &lns.new_base_space<unstructured_block>(xname+"_base_space",
+// 								   "",
+// 								   "",
+// 								   0,
+// 								   true);
+  string lbase_name(xname+"_base_space");
+  unstructured_block::new_host(lns, lbase_name, 0, false);
+  base_space_poset& lhost = lns.member_poset<base_space_poset>(lbase_name, false);
   
-  lhost->get_read_write_access();
+  lhost.get_read_write_access();
 
   string proto_member_name("point");
 
@@ -2700,7 +2707,7 @@ new_0d_point_base_space(namespace_poset& xns,
   // Create a block of points.
 
   unstructured_block* result =
-    new unstructured_block(lhost,
+    new unstructured_block(&lhost,
                            lproto_path,
                            lclient_ids.base(),
                            lclient_ids.ct(),
@@ -2709,13 +2716,12 @@ new_0d_point_base_space(namespace_poset& xns,
   result->put_name(xname + "_unstructured_block", true, false);
 
 #ifdef DIAGNOSTIC_OUTPUT
-  cout << *lhost << endl;
+  cout << lhost << endl;
 #endif
 
   // Clean up.
 
-  lhost->release_access();
-  result->release_access();
+  lhost.release_access();
 
   // Postconditions:
 
@@ -2749,13 +2755,16 @@ new_0d_point_base_space(namespace_poset& xns,
   // Make the base space.
 
   fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
-  base_space_poset* lhost = &lns.new_base_space<unstructured_block>(xname+"_base_space",
-								    "",
-								    "",
-								    0,
-								    true);
+//   base_space_poset* lhost = &lns.new_base_space<unstructured_block>(xname+"_base_space",
+// 								    "",
+// 								    "",
+// 								    0,
+// 								    true);
+  string lbase_name(xname+"_base_space");
+  unstructured_block::new_host(lns, lbase_name, 0, false);
+  base_space_poset& lhost = lns.member_poset<base_space_poset>(lbase_name, false);
   
-  lhost->get_read_write_access();
+  lhost.get_read_write_access();
 
   string proto_member_name("point");
 
@@ -2778,7 +2787,7 @@ new_0d_point_base_space(namespace_poset& xns,
   // Create a block of points.
 
   unstructured_block* result =
-    new unstructured_block(lhost,
+    new unstructured_block(&lhost,
                            lproto_path,
                            lclient_ids.base(),
                            lclient_ids.ct(),
@@ -2787,13 +2796,12 @@ new_0d_point_base_space(namespace_poset& xns,
   result->put_name(xname + "_unstructured_block", true, false);
 
 #ifdef DIAGNOSTIC_OUTPUT
-  cout << *lhost << endl;
+  cout << lhost << endl;
 #endif
 
   // Clean up.
 
-  lhost->release_access();
-  result->release_access();
+  lhost.release_access();
 
   // Postconditions:
 
@@ -2823,13 +2831,16 @@ new_1d_unstructured_base_space(namespace_poset& xns,
   // Make the base space.
 
   fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
-  base_space_poset* lhost = &lns.new_base_space<unstructured_block>(xname,
-								    "",
-								    "",
-								    1,
-								    true);
+  /// @todo Remove.
+//   base_space_poset* lhost = &lns.new_base_space<unstructured_block>(xname,
+// 								    "",
+// 								    "",
+// 								    1,
+// 								    true);
+  unstructured_block::new_host(lns, xname, 1, false);
+  base_space_poset& lhost = lns.member_poset<base_space_poset>(xname, false);
   
-  lhost->get_read_write_access();
+  lhost.get_read_write_access();
 
   string proto_member_name("segment_complex");
 
@@ -2837,17 +2848,16 @@ new_1d_unstructured_base_space(namespace_poset& xns,
                          proto_member_name);
 
   unstructured_block* result =
-    new unstructured_block(lhost, lproto_path, xi_size);
+    new unstructured_block(&lhost, lproto_path, xi_size);
   result->put_name(xname + "_unstructured_block", true, false);
 
 #ifdef DIAGNOSTIC_OUTPUT
-  cout << *lhost << endl;
+  cout << lhost << endl;
 #endif
 
   // Clean up.
 
-  lhost->release_access();
-  result->release_access();
+  lhost.release_access();
 
   // Postconditions:
 
@@ -2945,22 +2955,25 @@ new_1d_structured_base_space(namespace_poset& xns,
   // Make the base space.
 
   fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
-  base_space_poset* lhost = &lns.new_base_space<structured_block_1d>(xname);
+  /// @todo Remove.
+//   base_space_poset* lhost = &lns.new_base_space<structured_block_1d>(xname);
+
+  structured_block_1d::new_host(lns, xname, false);
+  base_space_poset& lhost = lns.member_poset<base_space_poset>(xname, false);
   
-  lhost->get_read_write_access();
+  lhost.get_read_write_access();
 
   structured_block_1d* result =
-    new structured_block_1d(lhost, xi_size, true);
+    new structured_block_1d(&lhost, xi_size, true);
   result->put_name(xname + "_structured_block_1d", true, false);
 
 #ifdef DIAGNOSTIC_OUTPUT
-  cout << *lhost << endl;
+  cout << lhost << endl;
 #endif
 
   // Clean up.
 
-  lhost->release_access();
-  result->release_access();
+  lhost.release_access();
 
   // Postconditions:
 
@@ -3065,13 +3078,19 @@ new_2d_unstructured_base_space(namespace_poset& xns,
   // Make the base space.
 
   fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
-  base_space_poset* lhost = &lns.new_base_space<unstructured_block>(xname+"_base_space",
-								    "",
-								    "",
-								    2,
-								    true);
+
+  /// @todo Remove.
+//   base_space_poset* lhost = &lns.new_base_space<unstructured_block>(xname+"_base_space",
+// 								    "",
+// 								    "",
+// 								    2,
+// 								    true);
+
+  string lbase_name(xname+"_base_space");
+  unstructured_block::new_host(lns, lbase_name, 2, false);
+  base_space_poset& lhost = lns.member_poset<base_space_poset>(lbase_name, false);
   
-  lhost->get_read_write_access();
+  lhost.get_read_write_access();
 
   string proto_member_name(xuse_quads ? "quad_nodes" : "triangle_nodes");
 
@@ -3079,17 +3098,16 @@ new_2d_unstructured_base_space(namespace_poset& xns,
                          proto_member_name);
 
   unstructured_block* result =
-    new unstructured_block(lhost, lproto_path, xi_size, xj_size);
+    new unstructured_block(&lhost, lproto_path, xi_size, xj_size);
   result->put_name(xname + "_unstructured_block", true, false);
 
 #ifdef DIAGNOSTIC_OUTPUT
-  cout << *lhost << endl;
+  cout << lhost << endl;
 #endif
 
   // Clean up.
 
-  lhost->release_access();
-  result->release_access();
+  lhost.release_access();
 
   // Postconditions:
 
@@ -3266,27 +3284,32 @@ new_2d_unstructured_base_space(namespace_poset& xns,
   // Make the base space using the connectivy from the triangulation.
 
   fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
-  base_space_poset* lhost = &lns.new_base_space<unstructured_block>(xname+"_base_space",
-								    "",
-								    "",
-								    2,
-								    true);
+  /// @todo Remove.
+//   base_space_poset* lhost = &lns.new_base_space<unstructured_block>(xname+"_base_space",
+// 								    "",
+// 								    "",
+// 								    2,
+// 								    true);
+
+  string lbase_name(xname+"_base_space");
+  unstructured_block::new_host(lns, lbase_name, 2, false);
+  base_space_poset& lhost = lns.member_poset<base_space_poset>(lbase_name, false);
   
-  lhost->get_read_write_access();
+  lhost.get_read_write_access();
 
   poset_path lproto_path(base_space_member::prototypes_poset_name(), "triangle_nodes");
 
   unstructured_block* result =
-    new unstructured_block(lhost, lproto_path, lconn.base(), lconn.ct(), true);
+    new unstructured_block(&lhost, lproto_path, lconn.base(), lconn.ct(), true);
   result->put_name(xname + "_unstructured_block", true, false);
 
 #ifdef DIAGNOSTIC_OUTPUT
-  cout << *lhost << endl;
+  cout << lhost << endl;
 #endif
 
   // Clean up.
 
-  lhost->release_access();
+  lhost.release_access();
 
   // Postconditions:
 
@@ -3389,22 +3412,25 @@ new_2d_structured_base_space(namespace_poset& xns,
   // Make the base space.
 
   fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
-  base_space_poset* lhost = &lns.new_base_space<structured_block_2d>(xname);
+  /// @todo Remove.
+//   base_space_poset* lhost = &lns.new_base_space<structured_block_2d>(xname);
   
-  lhost->get_read_write_access();
+  structured_block_2d::new_host(lns, xname, false);
+  base_space_poset& lhost = lns.member_poset<base_space_poset>(xname, false);
+
+  lhost.get_read_write_access();
 
   structured_block_2d* result =
-    new structured_block_2d(lhost, xi_size, xj_size, true);
+    new structured_block_2d(&lhost, xi_size, xj_size, true);
   result->put_name(xname + "_structured_block_2d", true, false);
 
 #ifdef DIAGNOSTIC_OUTPUT
-  cout << *lhost << endl;
+  cout << lhost << endl;
 #endif
 
   // Clean up.
 
-  lhost->release_access();
-  result->release_access();
+  lhost.release_access();
 
   // Postconditions:
 
@@ -3512,13 +3538,19 @@ new_3d_unstructured_base_space(namespace_poset& xns,
   // Make the base space.
 
   fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
-  base_space_poset* lhost = &lns.new_base_space<unstructured_block>(xname+"_base_space",
-								    "",
-								    "",
-								    3,
-								    true);
+
+  /// @todo Remove.
+//   base_space_poset* lhost = &lns.new_base_space<unstructured_block>(xname+"_base_space",
+// 								    "",
+// 								    "",
+// 								    3,
+// 								    true);
   
-  lhost->get_read_write_access();
+  string lbase_name(xname+"_base_space");
+  unstructured_block::new_host(lns, lbase_name, 3, false);
+  base_space_poset& lhost = lns.member_poset<base_space_poset>(lbase_name, false);
+
+  lhost.get_read_write_access();
 
   string proto_member_name(xuse_hexs ? "hex_nodes" : "tetra_nodes");
 
@@ -3526,17 +3558,16 @@ new_3d_unstructured_base_space(namespace_poset& xns,
                          proto_member_name);
 
   unstructured_block* result =
-    new unstructured_block(lhost, lproto_path, xi_size, xj_size, xk_size);
+    new unstructured_block(&lhost, lproto_path, xi_size, xj_size, xk_size);
   result->put_name(xname + "_unstructured_block", true, false);
 
 #ifdef DIAGNOSTIC_OUTPUT
-  cout << *lhost << endl;
+  cout << lhost << endl;
 #endif
 
   // Clean up.
 
-  lhost->release_access();
-  result->release_access();
+  lhost.release_access();
 
   // Postconditions:
 
@@ -3721,28 +3752,34 @@ new_3d_unstructured_base_space(namespace_poset& xns,
   // Make the base space using the connectivy from the triangulation.
 
   fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
-  base_space_poset* lhost = &lns.new_base_space<unstructured_block>(xname+"_base_space",
-								    "",
-								    "",
-								    3,
-								    true);
+
+  /// @todo Remove.
+//   base_space_poset* lhost = &lns.new_base_space<unstructured_block>(xname+"_base_space",
+// 								    "",
+// 								    "",
+// 								    3,
+// 								    true);
   
-  lhost->get_read_write_access();
+  string lbase_name(xname+"_base_space");
+  unstructured_block::new_host(lns, lbase_name, 3, false);
+  base_space_poset& lhost = lns.member_poset<base_space_poset>(lbase_name, false);
+
+  lhost.get_read_write_access();
 
   poset_path lproto_path(base_space_member::prototypes_poset_name(), "tetra_nodes");
 
   unstructured_block* result =
-    new unstructured_block(lhost, lproto_path, lconn.base(), lconn.ct(), true);
+    new unstructured_block(&lhost, lproto_path, lconn.base(), lconn.ct(), true);
 
   result->put_name(xname + "_unstructured_block", true, false);
 
 #ifdef DIAGNOSTIC_OUTPUT
-  cout << *lhost << endl;
+  cout << lhost << endl;
 #endif
 
   // Clean up.
 
-  lhost->release_access();
+  lhost.release_access();
 
   // Postconditions:
 
@@ -3847,22 +3884,26 @@ new_3d_structured_base_space(namespace_poset& xns,
   // Make the base space.
 
   fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
-  base_space_poset* lhost = &lns.new_base_space<structured_block_3d>(xname+"_base_space");
+  /// @todo Remove.
+//   base_space_poset* lhost = &lns.new_base_space<structured_block_3d>(xname+"_base_space");
   
-  lhost->get_read_write_access();
+  string lbase_name(xname+"_base_space");
+  structured_block_3d::new_host(lns, lbase_name, false);
+  base_space_poset& lhost = lns.member_poset<base_space_poset>(lbase_name, false);
+  
+  lhost.get_read_write_access();
 
   structured_block_3d* result =
-    new structured_block_3d(lhost, xi_size, xj_size, xk_size, true);
+    new structured_block_3d(&lhost, xi_size, xj_size, xk_size, true);
   result->put_name(xname + "_structured_block_3d", true, false);
 
 #ifdef DIAGNOSTIC_OUTPUT
-  cout << *lhost << endl;
+  cout << lhost << endl;
 #endif
 
   // Clean up.
 
-  lhost->release_access();
-  result->release_access();
+  lhost.release_access();
 
   // Postconditions:
 

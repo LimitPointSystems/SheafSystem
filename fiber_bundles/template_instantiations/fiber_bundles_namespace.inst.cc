@@ -18835,142 +18835,143 @@ completed_fiber_space_path_is_available<fiber_bundle::sec_vd>(const poset_path& 
 							      const arg_list& xsection_space_schema_args,
 							      bool xauto_access) const;
 
+/// @todo Remove.
 
-//==============================================================================
-// CLASS POINT_BLOCK_1D
-//==============================================================================
+// //==============================================================================
+// // CLASS POINT_BLOCK_1D
+// //==============================================================================
 
-template
-SHEAF_DLL_SPEC 
-fiber_bundle::base_space_poset&
-fiber_bundle::fiber_bundles_namespace::
-new_base_space<fiber_bundle::point_block_1d>(
-                          const poset_path& xbase_space_path,
-						  const arg_list& xargs,
-						  const poset_path& xschema_path,
-						  int xmax_db,
-						  bool xauto_access);
+// template
+// SHEAF_DLL_SPEC 
+// fiber_bundle::base_space_poset&
+// fiber_bundle::fiber_bundles_namespace::
+// new_base_space<fiber_bundle::point_block_1d>(
+//                           const poset_path& xbase_space_path,
+// 						  const arg_list& xargs,
+// 						  const poset_path& xschema_path,
+// 						  int xmax_db,
+// 						  bool xauto_access);
 
-//==============================================================================
-// CLASS POINT_BLOCK_2D
-//==============================================================================
+// //==============================================================================
+// // CLASS POINT_BLOCK_2D
+// //==============================================================================
 
-template
-SHEAF_DLL_SPEC 
-fiber_bundle::base_space_poset&
-fiber_bundle::fiber_bundles_namespace::
-new_base_space<fiber_bundle::point_block_2d>(
-                          const poset_path& xbase_space_path,
-						  const arg_list& xargs,
-						  const poset_path& xschema_path,
-						  int xmax_db,
-						  bool xauto_access);
+// template
+// SHEAF_DLL_SPEC 
+// fiber_bundle::base_space_poset&
+// fiber_bundle::fiber_bundles_namespace::
+// new_base_space<fiber_bundle::point_block_2d>(
+//                           const poset_path& xbase_space_path,
+// 						  const arg_list& xargs,
+// 						  const poset_path& xschema_path,
+// 						  int xmax_db,
+// 						  bool xauto_access);
 
-//==============================================================================
-// CLASS POINT_BLOCK_3D
-//==============================================================================
+// //==============================================================================
+// // CLASS POINT_BLOCK_3D
+// //==============================================================================
 
-template
-SHEAF_DLL_SPEC 
-fiber_bundle::base_space_poset&
-fiber_bundle::fiber_bundles_namespace::
-new_base_space<fiber_bundle::point_block_3d>(
-                          const poset_path& xbase_space_path,
-						  const arg_list& xargs,
-						  const poset_path& xschema_path,
-						  int xmax_db,
-						  bool xauto_access);
+// template
+// SHEAF_DLL_SPEC 
+// fiber_bundle::base_space_poset&
+// fiber_bundle::fiber_bundles_namespace::
+// new_base_space<fiber_bundle::point_block_3d>(
+//                           const poset_path& xbase_space_path,
+// 						  const arg_list& xargs,
+// 						  const poset_path& xschema_path,
+// 						  int xmax_db,
+// 						  bool xauto_access);
 
 
-//==============================================================================
-// CLASS STRUCTURED_BLOCK_1D
-//==============================================================================
+// //==============================================================================
+// // CLASS STRUCTURED_BLOCK_1D
+// //==============================================================================
 
-template
-SHEAF_DLL_SPEC 
-fiber_bundle::base_space_poset&
-fiber_bundle::fiber_bundles_namespace::
-new_base_space<fiber_bundle::structured_block_1d>(
-                          const poset_path& xbase_space_path,
-						  const arg_list& xargs,
-						  const poset_path& xschema_path,
-						  int xmax_db,
-						  bool xauto_access);
+// template
+// SHEAF_DLL_SPEC 
+// fiber_bundle::base_space_poset&
+// fiber_bundle::fiber_bundles_namespace::
+// new_base_space<fiber_bundle::structured_block_1d>(
+//                           const poset_path& xbase_space_path,
+// 						  const arg_list& xargs,
+// 						  const poset_path& xschema_path,
+// 						  int xmax_db,
+// 						  bool xauto_access);
 
-//==============================================================================
-// CLASS STRUCTURED_BLOCK_2D
-//==============================================================================
+// //==============================================================================
+// // CLASS STRUCTURED_BLOCK_2D
+// //==============================================================================
 
-template
-SHEAF_DLL_SPEC 
-fiber_bundle::base_space_poset&
-fiber_bundle::fiber_bundles_namespace::
-new_base_space<fiber_bundle::structured_block_2d>(
-                          const poset_path& xbase_space_path,
-						  const arg_list& xargs,
-						  const poset_path& xschema_path,
-						  int xmax_db,
-						  bool xauto_access);
+// template
+// SHEAF_DLL_SPEC 
+// fiber_bundle::base_space_poset&
+// fiber_bundle::fiber_bundles_namespace::
+// new_base_space<fiber_bundle::structured_block_2d>(
+//                           const poset_path& xbase_space_path,
+// 						  const arg_list& xargs,
+// 						  const poset_path& xschema_path,
+// 						  int xmax_db,
+// 						  bool xauto_access);
 
-//==============================================================================
-// CLASS STRUCTURED_BLOCK_3D
-//==============================================================================
+// //==============================================================================
+// // CLASS STRUCTURED_BLOCK_3D
+// //==============================================================================
 
-template
-SHEAF_DLL_SPEC 
-fiber_bundle::base_space_poset&
-fiber_bundle::fiber_bundles_namespace::
-new_base_space<fiber_bundle::structured_block_3d>(
-                          const poset_path& xbase_space_path,
-						  const arg_list& xargs,
-						  const poset_path& xschema_path,
-						  int xmax_db,
-						  bool xauto_access);
+// template
+// SHEAF_DLL_SPEC 
+// fiber_bundle::base_space_poset&
+// fiber_bundle::fiber_bundles_namespace::
+// new_base_space<fiber_bundle::structured_block_3d>(
+//                           const poset_path& xbase_space_path,
+// 						  const arg_list& xargs,
+// 						  const poset_path& xschema_path,
+// 						  int xmax_db,
+// 						  bool xauto_access);
 
-//==============================================================================
-// CLASS ZONE_NODES_BLOCK
-//==============================================================================
+// //==============================================================================
+// // CLASS ZONE_NODES_BLOCK
+// //==============================================================================
 
-template
-SHEAF_DLL_SPEC 
-fiber_bundle::base_space_poset&
-fiber_bundle::fiber_bundles_namespace::
-new_base_space<fiber_bundle::zone_nodes_block>(
-                          const poset_path& xbase_space_path,
-						  const arg_list& xargs,
-						  const poset_path& xschema_path,
-						  int xmax_db,
-						  bool xauto_access);
+// template
+// SHEAF_DLL_SPEC 
+// fiber_bundle::base_space_poset&
+// fiber_bundle::fiber_bundles_namespace::
+// new_base_space<fiber_bundle::zone_nodes_block>(
+//                           const poset_path& xbase_space_path,
+// 						  const arg_list& xargs,
+// 						  const poset_path& xschema_path,
+// 						  int xmax_db,
+// 						  bool xauto_access);
 
-//==============================================================================
-// CLASS UNSTRUCTURED_BLOCK
-//==============================================================================
+// //==============================================================================
+// // CLASS UNSTRUCTURED_BLOCK
+// //==============================================================================
 
-template
-SHEAF_DLL_SPEC
-fiber_bundle::base_space_poset&
-fiber_bundle::fiber_bundles_namespace::
-new_base_space<fiber_bundle::unstructured_block>(
-                         const poset_path& xbase_space_path,
-						 const arg_list& xargs,
-						 const poset_path& xschema_path,
-						 int xmax_db,
-						 bool xauto_access);
+// template
+// SHEAF_DLL_SPEC
+// fiber_bundle::base_space_poset&
+// fiber_bundle::fiber_bundles_namespace::
+// new_base_space<fiber_bundle::unstructured_block>(
+//                          const poset_path& xbase_space_path,
+// 						 const arg_list& xargs,
+// 						 const poset_path& xschema_path,
+// 						 int xmax_db,
+// 						 bool xauto_access);
 
-//==============================================================================
-// CLASS BASE_SPACE_MEMBER_PROTOTYPE
-//==============================================================================
+// //==============================================================================
+// // CLASS BASE_SPACE_MEMBER_PROTOTYPE
+// //==============================================================================
 
-template
-SHEAF_DLL_SPEC
-fiber_bundle::base_space_poset&
-fiber_bundle::fiber_bundles_namespace::
-new_base_space<fiber_bundle::base_space_member_prototype>(
-                         const poset_path& xbase_space_path,
-						 const arg_list& xargs,
-						 const poset_path& xschema_path,
-						 int xmax_db,
-						 bool xauto_access);
+// template
+// SHEAF_DLL_SPEC
+// fiber_bundle::base_space_poset&
+// fiber_bundle::fiber_bundles_namespace::
+// new_base_space<fiber_bundle::base_space_member_prototype>(
+//                          const poset_path& xbase_space_path,
+// 						 const arg_list& xargs,
+// 						 const poset_path& xschema_path,
+// 						 int xmax_db,
+// 						 bool xauto_access);
 
 //==============================================================================
 //==============================================================================
