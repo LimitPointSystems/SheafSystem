@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 #
 # This file contains declarations and functions unique to this component.
 #
@@ -50,7 +49,7 @@ if(WIN64INTEL OR WIN64MSVC)
     #
     set(${COMPONENT}_IMPORT_LIBS ${SHEAVES_IMPORT_LIBS} 
         ${${COMPONENT}_IMPORT_LIB} CACHE STRING 
-        " Cumulative import libraries (win32) for ${PROJECT_NAME}" FORCE)
+        "Cumulative import libraries (win32) for ${PROJECT_NAME}" FORCE)
 
 else()
 
@@ -180,214 +179,212 @@ endfunction(add_library_targets)
 #
 function(add_bindings_targets)
 
-    if(SWIG_FOUND AND BUILD_BINDINGS)  
+if(SWIG_FOUND AND BUILD_BINDINGS)  
         
-        #
-        # Java ###############################################
-        #
-        
-        include_directories(${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})
-        include_directories(${SHEAVES_JAVA_BINDING_SRC_DIR})
-        include_directories(${SHEAVES_COMMON_BINDING_SRC_DIR})
-        include_directories(${${COMPONENT}_JAVA_BINDING_SRC_DIR})
-        include_directories(${${COMPONENT}_COMMON_BINDING_SRC_DIR})        
-           
-        set_source_files_properties(
-            ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_JAVA_INTERFACE} 
-            PROPERTIES CPLUSPLUS ON)
-        
-        # Add the java binding library target
-        swig_add_module(${${COMPONENT}_JAVA_BINDING_LIB} java 
-            ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_JAVA_INTERFACE})
-        
-        if(WIN64INTEL OR WIN64MSVC)
-            swig_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} 
-                ${SHEAVES_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})
-            set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} 
-                PROPERTIES FOLDER "Binding Targets - Java")
-        else()
-            add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} 
-                ${SHEAVES_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB})
-            target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${JDK_LIBS} 
-                ${${COMPONENT}_SHARED_LIB})   
-        endif()
-        
-        set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} 
-            PROPERTIES LINKER_LANGUAGE CXX)
-        # Define the library version.
-        set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} 
-            PROPERTIES VERSION ${LIB_VERSION})
-
-        # Create the bindings jar file 
-        if(WIN64INTEL OR WIN64MSVC)
-            set(${COMPONENT}_CLASSPATH  ${SHEAVES_CLASSPATH} 
-                ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} 
-                CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
-            add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
-               DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${SHEAVES_JAVA_BINDING_JAR}
-               set_target_properties(${PROJECT_NAME}_java_binding.jar 
-                   PROPERTIES FOLDER "Component Binding Jars")
-               COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
-               COMMAND ${Java_JAVAC_EXECUTABLE} -classpath . -d . *.java
-               COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-               COMMAND ${Java_JAR_EXECUTABLE} cvf 
-                   ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} 
-                   bindings/java/*.class
-                                       )
-               
-            # Java documentation
-            if(DOC_TARGETS)
-                add_custom_target(${PROJECT_NAME}-java-docs ALL
-                COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} 
-                    documentation" -classpath "${SHEAVES_CLASSPATH}" 
-                    -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
-                    *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-                    DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
-                )
-              set_target_properties(${PROJECT_NAME}-java-docs 
-                  PROPERTIES FOLDER "Documentation Targets") 
-              endif()                              
-        else()
-        
-            set(${COMPONENT}_CLASSPATH ${SHEAVES_CLASSPATH} 
-                ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR} 
-                CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
-            # The default list item separator in cmake is ";". If Linux, then exchange 
-            # ";" for  the UNIX style ":" and store the result in parent_classpath.
-            string(REGEX REPLACE ";" ":" parent_classpath "${SHEAVES_CLASSPATH}")
-            string(REGEX REPLACE ";" ":" this_classpath "${${COMPONENT}_CLASSPATH}")            
-            add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
-                DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${SHEAVES_JAVA_BINDING_JAR}
-                COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
-                COMMAND ${JAVAC_EXECUTABLE} -classpath "${parent_classpath}" -d . *.java
-                COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                COMMAND ${JAR_EXECUTABLE} cvf 
-                    ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR} 
-                    bindings/java/*.class
-             )
-            # Java documentation
-            if(DOC_TARGETS)
-                add_custom_target(${PROJECT_NAME}-java-docs ALL
-                                    COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle 
-                                    "${PROJECT_NAME} documentation" -classpath "${this_classpath}" 
-                                    -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
-                                    *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-                                    DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
-                                 )
-            endif()
-        endif()
-              
-        set_target_properties(${PROJECT_NAME}_java_binding.jar 
-            PROPERTIES FOLDER "Library Jars") 
-        mark_as_advanced(FORCE ${COMPONENT}_CLASSPATH) 
-
-        #
-        # CSharp #############################################
-        #
-        
-        set(CMAKE_SWIG_FLAGS -c++ -w842 -namespace fiber_bundle)
-        
-        include_directories(${SHEAVES_CSHARP_BINDING_SRC_DIR})
-           
-        # Add the csharp binding library target
-        set_source_files_properties(
-            ${${COMPONENT}_CSHARP_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_CSHARP_INTERFACE} 
-            PROPERTIES CPLUSPLUS ON)
-        swig_add_module(${${COMPONENT}_CSHARP_BINDING_LIB} csharp 
-            ${${COMPONENT}_CSHARP_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_CSHARP_INTERFACE})
-        if(WIN64INTEL OR WIN64MSVC)
-            swig_link_libraries(${${COMPONENT}_CSHARP_BINDING_LIB} 
-                ${SHEAVES_CSHARP_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB} ${CSHARP_LIBRARY})
-            set_target_properties(${${COMPONENT}_CSHARP_BINDING_LIB} 
-                PROPERTIES FOLDER "Binding Targets - CSharp")
-        else()
-            add_dependencies(${${COMPONENT}_CSHARP_BINDING_LIB} 
-                ${SHEAVES_CSHARP_BINDING_LIB} ${${COMPONENT}_SHARED_LIB})
-            target_link_libraries(${${COMPONENT}_CSHARP_BINDING_LIB} 
-                ${SHEAVES_CSHARP_BINDING_LIB} ${${COMPONENT}_SHARED_LIB})
-        endif()    
-            set_target_properties(${${COMPONENT}_CSHARP_BINDING_LIB} 
-                PROPERTIES LINKER_LANGUAGE CXX)
+    #
+    # Java ###############################################
+    #
     
-        # Define the library version.
-        set_target_properties(${${COMPONENT}_CSHARP_BINDING_LIB} 
-            PROPERTIES VERSION ${LIB_VERSION})
-        
-        # Create the csharp assembly
-        if(WIN64INTEL OR WIN64MSVC)
-            add_custom_target(${${COMPONENT}_CSHARP_BINDING_ASSY} ALL
-                COMMAND ${CMAKE_COMMAND} -E echo ""
-                COMMAND ${CMAKE_COMMAND} -E echo "Creating Csharp Binding for ${PROJECT_NAME} ..."
-                COMMAND ${CMAKE_COMMAND} -E echo ""                 
-                COMMAND ${CSHARP_COMPILER} /nologo /noconfig /warn:1 
-                /errorreport:prompt /target:library 
-                /out:${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_CSHARP_BINDING_ASSY} 
-                ${CMAKE_CURRENT_BINARY_DIR}/*.cs
-                )
-        else()
-            add_custom_target(${${COMPONENT}_CSHARP_BINDING_ASSY} ALL
-                        COMMAND ${CSHARP_COMPILER} -target:library 
-                        -nowarn:0114,0108 
-                        -out:${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_CSHARP_BINDING_ASSY} 
-                        ${CMAKE_CURRENT_BINARY_DIR}/*.cs
+    include_directories(${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})
+    include_directories(${SHEAVES_JAVA_BINDING_SRC_DIR})
+    include_directories(${SHEAVES_COMMON_BINDING_SRC_DIR})
+    include_directories(${${COMPONENT}_JAVA_BINDING_SRC_DIR})
+    include_directories(${${COMPONENT}_COMMON_BINDING_SRC_DIR})        
+       
+    set_source_files_properties(
+        ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_JAVA_INTERFACE} 
+        PROPERTIES CPLUSPLUS ON)
+    
+    # Add the java binding library target
+    swig_add_module(${${COMPONENT}_JAVA_BINDING_LIB} java 
+        ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_JAVA_INTERFACE})
+    
+    if(WIN64INTEL OR WIN64MSVC)
+        swig_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} 
+            ${SHEAVES_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})
+        set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} 
+            PROPERTIES FOLDER "Binding Targets - Java")
+    else()
+        add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} 
+            ${SHEAVES_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB})
+        target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${JDK_LIBS} 
+            ${${COMPONENT}_SHARED_LIB})   
+    endif()
+    
+    set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} 
+        PROPERTIES LINKER_LANGUAGE CXX)
+    # Define the library version.
+    set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} 
+        PROPERTIES VERSION ${LIB_VERSION})
+
+    # Create the bindings jar file 
+    if(WIN64INTEL OR WIN64MSVC)
+        set(${COMPONENT}_CLASSPATH  ${SHEAVES_CLASSPATH} 
+            ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} 
+            CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
+        add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
+           DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${SHEAVES_JAVA_BINDING_JAR}
+           set_target_properties(${PROJECT_NAME}_java_binding.jar 
+               PROPERTIES FOLDER "Component Binding Jars")
+           COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
+           COMMAND ${Java_JAVAC_EXECUTABLE} -classpath . -d . *.java
+           COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
+           COMMAND ${Java_JAR_EXECUTABLE} cvf 
+               ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} 
+               bindings/java/*.class
+                                   )
+           
+        # Java documentation
+        if(DOC_TARGETS)
+            add_custom_target(${PROJECT_NAME}-java-docs ALL
+            COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} 
+                documentation" -classpath "${SHEAVES_CLASSPATH}" 
+                -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
+                *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
             )
-        endif()
-
-        add_dependencies(${${COMPONENT}_CSHARP_BINDING_ASSY} 
-            ${${COMPONENT}_CSHARP_BINDING_LIB})        
-        set_target_properties(${${COMPONENT}_CSHARP_BINDING_ASSY} 
-            PROPERTIES FOLDER "CSharp Assembly Targets")
-                 
-        #
-        # Python ############################################# 
-        #
-        
-        set(CMAKE_SWIG_FLAGS -c++ )
-        
-        include_directories(${PYTHON_INCLUDE_DIRS})
-        
-        include_directories(${SHEAVES_PYTHON_BINDING_SRC_DIR})
-               
-        set_source_files_properties(
-            ${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE} 
-            PROPERTIES CPLUSPLUS ON)
-        swig_add_module(${${COMPONENT}_PYTHON_BINDING_LIB} python 
-            ${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE})
-        
-        if(WIN64INTEL OR WIN64MSVC)
-            swig_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} 
-                ${SHEAVES_PYTHON_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIB} 
-                ${PYTHON_LIBRARY} )
-            set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} 
-                PROPERTIES FOLDER "Binding Targets - Python")
-        else()
-            add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} 
-                ${SHEAVES_PYTHON_BINDING_LIBS} 
-                ${${COMPONENT}_SHARED_LIBS})
-            target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} 
-                ${SHEAVES_PYTHON_BINDING_LIBS} 
-                ${${COMPONENT}_SHARED_LIBS})
-        endif()
-        
-        set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} 
-            PROPERTIES LINKER_LANGUAGE CXX)
+          set_target_properties(${PROJECT_NAME}-java-docs 
+              PROPERTIES FOLDER "Documentation Targets") 
+          endif()                              
+    else()
     
-        # Define the library version.
-        set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} 
-            PROPERTIES VERSION ${LIB_VERSION})  
-        # Guard these until we can get the VS solution explorer aesthetic issues sorted
+        set(${COMPONENT}_CLASSPATH ${SHEAVES_CLASSPATH} 
+            ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR} 
+            CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
+        # The default list item separator in cmake is ";". If Linux, then exchange 
+        # ";" for  the UNIX style ":" and store the result in parent_classpath.
+        string(REGEX REPLACE ";" ":" parent_classpath "${SHEAVES_CLASSPATH}")
+        string(REGEX REPLACE ";" ":" this_classpath "${${COMPONENT}_CLASSPATH}")            
+        add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
+            DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${SHEAVES_JAVA_BINDING_JAR}
+            COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
+            COMMAND ${JAVAC_EXECUTABLE} -classpath "${parent_classpath}" -d . *.java
+            COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
+            COMMAND ${JAR_EXECUTABLE} cvf 
+                ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR} 
+                bindings/java/*.class
+         )
+        # Java documentation
+        if(DOC_TARGETS)
+            add_custom_target(${PROJECT_NAME}-java-docs ALL
+                                COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle 
+                                "${PROJECT_NAME} documentation" -classpath "${this_classpath}" 
+                                -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
+                                *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                                DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
+                             )
+        endif()
+    endif()
+          
+    set_target_properties(${PROJECT_NAME}_java_binding.jar 
+        PROPERTIES FOLDER "Library Jars") 
+    mark_as_advanced(FORCE ${COMPONENT}_CLASSPATH) 
+
+    #
+    # CSharp #############################################
+    #
+    
+    set(CMAKE_SWIG_FLAGS -c++ -w842 -namespace fiber_bundle)
+    
+    include_directories(${SHEAVES_CSHARP_BINDING_SRC_DIR})
+       
+    # Add the csharp binding library target
+    set_source_files_properties(
+        ${${COMPONENT}_CSHARP_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_CSHARP_INTERFACE} 
+        PROPERTIES CPLUSPLUS ON)
+    swig_add_module(${${COMPONENT}_CSHARP_BINDING_LIB} csharp 
+        ${${COMPONENT}_CSHARP_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_CSHARP_INTERFACE})
+    if(WIN64INTEL OR WIN64MSVC)
+        swig_link_libraries(${${COMPONENT}_CSHARP_BINDING_LIB} 
+            ${SHEAVES_CSHARP_BINDING_LIB} ${${COMPONENT}_IMPORT_LIB} ${CSHARP_LIBRARY})
+        set_target_properties(${${COMPONENT}_CSHARP_BINDING_LIB} 
+            PROPERTIES FOLDER "Binding Targets - CSharp")
+    else()
+        add_dependencies(${${COMPONENT}_CSHARP_BINDING_LIB} 
+            ${SHEAVES_CSHARP_BINDING_LIB} ${${COMPONENT}_SHARED_LIB})
+        target_link_libraries(${${COMPONENT}_CSHARP_BINDING_LIB} 
+            ${SHEAVES_CSHARP_BINDING_LIB} ${${COMPONENT}_SHARED_LIB})
+    endif()    
+        set_target_properties(${${COMPONENT}_CSHARP_BINDING_LIB} 
+            PROPERTIES LINKER_LANGUAGE CXX)
+
+    # Define the library version.
+    set_target_properties(${${COMPONENT}_CSHARP_BINDING_LIB} 
+        PROPERTIES VERSION ${LIB_VERSION})
+    
+    # Create the csharp assembly
+    if(WIN64INTEL OR WIN64MSVC)
+        add_custom_target(${${COMPONENT}_CSHARP_BINDING_ASSY} ALL
+            COMMAND ${CMAKE_COMMAND} -E echo ""
+            COMMAND ${CMAKE_COMMAND} -E echo "Creating Csharp Binding for ${PROJECT_NAME} ..."
+            COMMAND ${CMAKE_COMMAND} -E echo ""                 
+            COMMAND ${CSHARP_COMPILER} /nologo /noconfig /warn:1 
+            /errorreport:prompt /target:library 
+            /out:${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_CSHARP_BINDING_ASSY} 
+            ${CMAKE_CURRENT_BINARY_DIR}/*.cs
+            )
+    else()
+        add_custom_target(${${COMPONENT}_CSHARP_BINDING_ASSY} ALL
+                    COMMAND ${CSHARP_COMPILER} -target:library 
+                    -nowarn:0114,0108 
+                    -out:${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_CSHARP_BINDING_ASSY} 
+                    ${CMAKE_CURRENT_BINARY_DIR}/*.cs
+        )
+    endif()
+
+    add_dependencies(${${COMPONENT}_CSHARP_BINDING_ASSY} 
+        ${${COMPONENT}_CSHARP_BINDING_LIB})        
+    set_target_properties(${${COMPONENT}_CSHARP_BINDING_ASSY} 
+        PROPERTIES FOLDER "CSharp Assembly Targets")
+             
+    #
+    # Python ############################################# 
+    #
+    
+    set(CMAKE_SWIG_FLAGS -c++ )
+    include_directories(${PYTHON_INCLUDE_PATH})
+    
+    include_directories(${SHEAVES_PYTHON_BINDING_SRC_DIR})
+           
+    set_source_files_properties(${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE} 
+        PROPERTIES CPLUSPLUS ON)
+    swig_add_module(${${COMPONENT}_PYTHON_BINDING_LIB} python 
+        ${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE})
+    
+    if(WIN64INTEL OR WIN64MSVC)
+        swig_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} 
+            ${SHEAVES_PYTHON_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIB} 
+            ${PYTHON_LIBRARY} )
+        set_target_properties(_${${COMPONENT}_PYTHON_BINDING_LIB} 
+            PROPERTIES FOLDER "Binding Targets - Python")
+    else()
+        add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} 
+            ${SHEAVES_PYTHON_BINDING_LIBS} 
+            ${${COMPONENT}_SHARED_LIBS})
+        swig_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} 
+            ${SHEAVES_PYTHON_BINDING_LIBS} 
+            ${${COMPONENT}_SHARED_LIBS})
+    endif()
+    
+    set_target_properties(_${${COMPONENT}_PYTHON_BINDING_LIB} 
+        PROPERTIES LINKER_LANGUAGE CXX)
+
+    # Define the library version.
+    set_target_properties(_${${COMPONENT}_PYTHON_BINDING_LIB} 
+        PROPERTIES VERSION ${LIB_VERSION})  
+    # Guard these until we can get the VS solution explorer aesthetic issues sorted
 #        if(LINUX64GNU OR LINUX64INTEL) 
 #            add_dependencies(${PROJECT_NAME}-java-binding ${PROJECT_NAME}_java_binding.jar)    
 #            add_dependencies(${PROJECT_NAME}-python-binding ${${COMPONENT}_PYTHON_BINDING_LIB})
 #            add_dependencies(${PROJECT_NAME}-csharp-binding ${${COMPONENT}_CSHARP_BINDING_LIB})
 #        endif()
 
-        # Bindings target aliases already declared at system level. 
-        # Add dependencies here.
-       add_dependencies(${PROJECT_NAME}-bindings 
-           ${PROJECT_NAME}_java_binding.jar ${${COMPONENT}_PYTHON_BINDING_LIB} 
-           ${${COMPONENT}_CSHARP_BINDING_LIB})
-    endif()
+    # Bindings target aliases already declared at system level. 
+    # Add dependencies here.
+   add_dependencies(${PROJECT_NAME}-bindings 
+       ${PROJECT_NAME}_java_binding.jar ${${COMPONENT}_PYTHON_BINDING_LIB} 
+       ${${COMPONENT}_CSHARP_BINDING_LIB})
+endif()
 
 endfunction(add_bindings_targets)
 

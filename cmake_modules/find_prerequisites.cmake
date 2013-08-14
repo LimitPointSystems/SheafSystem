@@ -76,12 +76,9 @@ if(BUILD_BINDINGS)
     
     # Find Swig
     find_package(SWIG REQUIRED)
-#    if(SWIG_FOUND)
-#        configure_file(${CMAKE_MODULE_PATH}/swig_definitions.cmake.in ${CMAKE_BINARY_DIR}/swig_definitions.cmake)
-#        include(${CMAKE_BINARY_DIR}/swig_definitions.cmake)
- #       message(STATUS "Swig version is: ${SWIG_VERSION}")        
-#        include(${CMAKE_MODULE_PATH}/UseSWIG.cmake)
-#    endif()
+    if(SWIG_FOUND)
+        include(${CMAKE_MODULE_PATH}/UseSWIG.cmake)
+    endif()
     
     # Find C#
         find_package(CSharp)
@@ -100,7 +97,7 @@ if(BUILD_BINDINGS)
     # Find the JMF
     find_package(JMF REQUIRED)
         if(JMF_FOUND)
-            configure_file(${CMAKE_MODULE_PATH}/jmf_definitions.cmake.in ${CMAKE_BINARY_DIR}/jmf_definitions.cmake)
+           configure_file(${CMAKE_MODULE_PATH}/jmf_definitions.cmake.in ${CMAKE_BINARY_DIR}/jmf_definitions.cmake)
            include(${CMAKE_BINARY_DIR}/jmf_definitions.cmake)
         endif()   
 endif()

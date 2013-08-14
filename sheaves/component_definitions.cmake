@@ -179,8 +179,6 @@ function(add_bindings_targets)
 
     if(SWIG_FOUND AND BUILD_BINDINGS)
 
-    include(${SWIG_USE_FILE})
-
     #
     # Java #################################################
     #
