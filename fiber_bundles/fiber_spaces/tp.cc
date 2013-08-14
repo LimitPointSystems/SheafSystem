@@ -14,9 +14,8 @@
 #include "at1.h"
 #include "fiber_bundles_namespace.h"
 #include "schema_poset_member.h"
-#include "wsv_block.h"
-
 #include "tp_space.h"
+#include "wsv_block.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
@@ -497,6 +496,8 @@ new_host(namespace_type& xns,
   require(xns.path_is_auto_read_accessible(xvector_space_path, xauto_access));
   require(xns.contains_poset<vector_space_type::host_type>(xvector_space_path, xauto_access));
 
+  require(host_type::p(xns, xschema_path, xvector_space_path, xauto_access) >= 0);
+
   // Body:
 
   host_type::new_table(xns, xhost_path, xschema_path, xvector_space_path, xauto_access);
@@ -507,8 +508,9 @@ new_host(namespace_type& xns,
   ensure(xns.member_poset(xhost_path, xauto_access).state_is_not_read_accessible());
   ensure(xns.member_poset(xhost_path, xauto_access).schema(true).path(true) == xschema_path);
 
-  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).factor_ct(true) == 0);
-  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).d(true) == 0);
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).factor_ct(true) == xns.member_poset<host_type>(xhost_path, xauto_access).d(true));
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).d(true) == schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access));
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).p(true) == host_type::p(xns, xschema_path, xvector_space_path, xauto_access));
   ensure(xns.member_poset<host_type>(xhost_path, xauto_access).vector_space_path(true) == xvector_space_path );
 
   // Exit:

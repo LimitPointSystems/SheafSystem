@@ -60,6 +60,29 @@ public:
   /// Creates an arg list which conforms to the schema of this.
   ///
   static arg_list make_arg_list(int xp, const poset_path& xvector_space_path);
+
+  using tp_space::p;
+  
+  ///
+  /// Tensor degree implied by the tensor dimension (number of row dofs)
+  /// defined by the schema specified by xschema_path and the dimension
+  /// of the domain vector space specified by xvector_space_path.
+  ///
+  static int p(const namespace_poset& xns, 
+               const poset_path& xschema_path, 
+               const poset_path& xvector_space_path, 
+               bool xauto_access);
+
+  ///
+  /// Creates a new stp_space in namespace xns with path xpath,
+  /// schema specified by xschema_path, and table attribute 
+  /// vector_space_path specified by xvector_space_path.
+  ///
+  static void new_table(namespace_type& xhost, 
+                        const poset_path& xpath, 
+                        const poset_path& xschema_path,
+                        const poset_path& xvector_space_path,
+                        bool xauto_access);
   
 protected:
 

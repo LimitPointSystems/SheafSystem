@@ -9,7 +9,9 @@
 
 #include "abstract_poset_member.impl.h"
 #include "assert_contract.h"
+#include "at1_space.h"
 #include "atp.h"
+#include "fiber_bundles_namespace.h"
 #include "namespace_poset.impl.h"
 #include "namespace_poset_member.h"
 #include "poset_handle_factory.h"
@@ -94,6 +96,138 @@ make_arg_list(int xp, const poset_path& xvector_space_path)
 
   return result;
 }
+
+int
+fiber_bundle::atp_space::
+p(const namespace_poset& xns, 
+  const poset_path& xschema_path,
+  const poset_path& xvector_space_path,
+  bool xauto_access)
+{
+  // Preconditions:
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));
+
+  require(xvector_space_path.full());
+  require(xns.path_is_auto_read_accessible(xvector_space_path, xauto_access));
+  require(xns.contains_poset<vector_space_type>(xvector_space_path, xauto_access));
+
+  // Body:
+
+  int ld = schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access);
+
+  int ldd = xns.member_poset<vector_space_type>(xvector_space_path, xauto_access).d();  
+
+  atp_space ltmp;
+  int result = ltmp.p(ld, ldd);
+
+  // Postconditions:
+
+  ensure(unexecutable("result < 0 implies schema dimension inconsistent with vector space dimension"));
+
+  // Exit:
+
+  return result;
+}
+
+void
+fiber_bundle::atp_space::
+new_table(namespace_type& xns, 
+          const poset_path& xpath, 
+          const poset_path& xschema_path, 
+          const poset_path& xvector_space_path, 
+          bool xauto_access)
+{
+  // cout << endl << "Entering atp_space::new_table." << endl;
+
+  // Preconditions:
+
+
+  require(!xpath.empty());
+  require(!xns.contains_path(xpath, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));
+
+  require(xvector_space_path.full());
+  require(xns.path_is_auto_read_accessible(xvector_space_path, xauto_access));
+  require(xns.contains_poset<vector_space_type>(xvector_space_path, xauto_access));
+
+  require(p(xns, xschema_path, xvector_space_path, xauto_access) >= 0);
+
+  // Body:
+
+  // Create the table; have to new it because namespace keeps a pointer.
+
+  typedef atp_space table_type;
+
+  table_type* ltable = new table_type();
+
+  // Create a handle of the right type for the schema member.
+
+  schema_poset_member lschema(&xns, xschema_path, xauto_access);
+
+  if(xauto_access)
+  {
+    lschema.get_read_access();
+  }
+
+  // Get the dimension (== number of row dofs) defined by the schema.
+
+  int ld = lschema.row_dof_ct();
+
+  // Get the dimension of the domain vector space.
+
+  int ldd = xns.member_poset<vector_space_type>(xvector_space_path, xauto_access).d();
+
+  // Compute the tensor degree.
+
+  int lp = ltable->p(ld, ldd);
+
+  // Get the scalar space path from the domain vector space.
+
+  poset_path lscalar_space_path = xns.member_poset<vector_space_type>(xvector_space_path, xauto_access).scalar_space_path(xauto_access);
+  
+  // Create the table dof map and set dof values;
+  // must be newed because poset_state::_table keep a pointer to it.
+
+  array_poset_dof_map* lmap = new array_poset_dof_map(&lschema, true);
+  lmap->put_dof("factor_ct", ld);
+  lmap->put_dof("d", ld);
+  lmap->put_dof("dd", ldd);
+  lmap->put_dof("p", lp);
+  lmap->put_dof("vector_space_path", xvector_space_path);
+  lmap->put_dof("scalar_space_path", lscalar_space_path);
+  
+  // Create the state.
+
+  ltable->new_state(xns, xpath, lschema, *lmap);
+
+  if(xauto_access)
+  {
+    lschema.release_access();
+  }
+
+
+  // Postconditions:
+
+  ensure(xns.contains_path(xpath, xauto_access));
+  ensure(xns.member_poset(xpath, xauto_access).state_is_not_read_accessible());
+  ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == xschema_path);
+
+  ensure(xns.member_poset<atp_space>(xpath, xauto_access).factor_ct(true) == xns.member_poset<atp_space>(xpath, xauto_access).d(true));
+  ensure(xns.member_poset<atp_space>(xpath, xauto_access).d(true) == schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access));
+  ensure(xns.member_poset<atp_space>(xpath, xauto_access).p(true) == p(xns, xschema_path, xvector_space_path, xauto_access));
+  ensure(xns.member_poset<atp_space>(xpath, xauto_access).vector_space_path(true) == xvector_space_path );
+
+  // Exit:
+
+  // cout << "Leaving atp_space::new_table." << endl;
+  return;
+} 
 
 bool
 fiber_bundle::atp_space::

@@ -80,25 +80,14 @@ public:
   static arg_list make_arg_list(int xp, const poset_path& xvector_space_path);
 
   ///
-  /// True if and only if d == dd**p for some integer p, where
-  /// d is the number of row dofs in the schema specified by xschema_path
-  /// and dd is the dimension of the vector space specified by xvector_space_path.
+  /// Tensor degree implied by the tensor dimension (number of row dofs)
+  /// defined by the schema specified by xschema_path and the dimension
+  /// of the domain vector space specified by xvector_space_path.
   ///
-  static bool d_is_valid(const namespace_poset& xns, 
-                         const poset_path& xschema_path, 
-                         const poset_path& xvector_space_path, 
-                         bool xauto_access);
-
-  ///
-  /// Tensor degree as a function of tensor dimension xd
-  /// and domain dimension xdd.
-  ///
-  static int p(int xd, int xdd);
-  
-  ///
-  /// Dimension d() as a function of degree xp and domain dimension xdd.
-  ///
-  static int static_d(int xp, int xdd);
+  static int p(const namespace_poset& xns, 
+               const poset_path& xschema_path, 
+               const poset_path& xvector_space_path, 
+               bool xauto_access);
 
   ///
   /// Creates a new tp_space in namespace xns with path xpath,
@@ -134,6 +123,11 @@ public:
 		  const arg_list& xargs,
 		  bool xauto_access) const;
   
+  
+  ///
+  /// Tensor degree as a function of tensor dimension xd and domain dimension xdd.
+  ///
+  int p(int xd, int xdd) const;
   
   ///
   /// The tensor degree of this space.

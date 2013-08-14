@@ -11,8 +11,9 @@
 
 #include "abstract_poset_member.impl.h"
 #include "assert_contract.h"
+#include "at0.h"
 #include "at1_space.h"
-#include "namespace_poset.h"
+#include "fiber_bundles_namespace.h"
 #include "schema_poset_member.h"
 #include "wsv_block.h"
 
@@ -23,7 +24,7 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 //==============================================================================
 
 //==============================================================================
-// AT1 FACET
+// AT1 FACET OF CLASS AT1_LITE
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -131,10 +132,9 @@ operator=(const row_dofs_type& xrow_dofs)
 // PROTECTED MEMBER FUNCTIONS
 
 // PRIVATE MEMBER FUNCTIONS
-
-
+ 
 //==============================================================================
-// EXTERIOR ALGEBRA (ATP) FACET
+// EXTERIOR ALGEBRA (ATP) FACET OF CLASS AT1_LITE
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -165,7 +165,7 @@ p() const
 
 
 //==============================================================================
-// TENSOR ALGEBRA (TP) FACET
+// TENSOR ALGEBRA (TP) FACET OF CLASS AT1_LITE
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -176,7 +176,7 @@ p() const
 
 
 //==============================================================================
-// VECTOR ALGEBRA (VD) FACET
+// VECTOR ALGEBRA (VD) FACET OF CLASS AT1_LITE
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -187,7 +187,7 @@ p() const
 
 
 //==============================================================================
-// CARTESIAN ALGEBRA (TUPLE) FACET
+// CARTESIAN ALGEBRA (TUPLE) FACET OF CLASS AT1_LITE
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -198,7 +198,7 @@ p() const
 
 
 //==============================================================================
-// ABSTRACT POSET MEMBER FACET
+// ABSTRACT POSET MEMBER FACET OF CLASS AT1_LITE
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -269,7 +269,7 @@ clone() const
 
 
 //==============================================================================
-// ANY FACET
+// ANY FACET OF CLASS AT1_LITE
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -329,9 +329,116 @@ invariant() const
 //==============================================================================
 // CLASS AT1
 //==============================================================================
+ 
+// ===========================================================
+// HOST FACTORY FACET OF CLASS AT1
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+const sheaf::poset_path&
+fiber_bundle::at1::
+standard_schema_path()
+{
+  // Preconditions:
+
+
+  // Body:
+
+  static const poset_path result(standard_schema_poset_name(), "at1_schema");
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+void
+fiber_bundle::at1::
+make_standard_schema(namespace_poset& xns)
+{
+  // Preconditions:
+
+  require(xns.state_is_read_write_accessible());
+  require(xns.contains_poset(standard_schema_poset_name()));
+  require(!xns.contains_poset_member(standard_schema_path()));
+
+
+  // Body:
+
+  schema_poset_member lschema(xns,
+                              standard_schema_path().member_name(),
+                              atp::standard_schema_path(),
+                              "",
+                              false);
+
+  lschema.detach_from_state();
+
+  // Postconditions:
+
+  ensure(xns.contains_poset_member(standard_schema_path()));
+
+  // Exit:
+
+  return;
+}
+
+void
+fiber_bundle::at1::
+new_host(namespace_type& xns, 
+         const poset_path& xhost_path, 
+         const poset_path& xschema_path, 
+         const poset_path& xscalar_space_path, 
+         bool xauto_access)
+{
+  // cout << endl << "Entering at1::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path()));
+
+  require(xscalar_space_path.full());
+  require(xns.path_is_auto_read_accessible(xscalar_space_path, xauto_access));
+  require(xns.contains_poset<scalar_type::host_type>(xscalar_space_path, xauto_access));
+
+  require(host_type::p(xns, xschema_path, xscalar_space_path, xauto_access) >= 0);
+
+  // Body:
+
+  host_type::new_table(xns, xhost_path, xschema_path, xscalar_space_path, xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.contains_path(xhost_path, xauto_access));
+  ensure(xns.member_poset(xhost_path, xauto_access).state_is_not_read_accessible());
+  ensure(xns.member_poset(xhost_path, xauto_access).schema(true).path(true) == xschema_path);
+
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).factor_ct(true) == xns.member_poset<host_type>(xhost_path, xauto_access).d(true));
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).d(true) == schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access));
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).p(true) == 1);
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).vector_space_path(true) == xhost_path );
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).scalar_space_path(true) == xscalar_space_path );
+
+  // Exit:
+
+  // cout << "Leaving at1::new_host." << endl;
+  return;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
 
 //==============================================================================
-// AT1 FACET
+// AT1 FACET OF CLASS AT1
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -549,7 +656,7 @@ lite_type() const
 
 
 //==============================================================================
-// EXTERIOR ALGEBRA (ATP) FACET
+// EXTERIOR ALGEBRA (ATP) FACET OF CLASS AT1
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -560,7 +667,7 @@ lite_type() const
 
 
 //==============================================================================
-// TENSOR ALGEBRA (TP) FACET
+// TENSOR ALGEBRA (TP) FACET OF CLASS AT1
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -571,7 +678,7 @@ lite_type() const
 
 
 //==============================================================================
-// VECTOR ALGEBRA (VD) FACET
+// VECTOR ALGEBRA (VD) FACET OF CLASS AT1
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -582,66 +689,7 @@ lite_type() const
 
 
 //==============================================================================
-// CARTESIAN ALGEBRA (TUPLE) FACET
-//==============================================================================
-
-// PUBLIC MEMBER FUNCTIONS
-
-const sheaf::poset_path&
-fiber_bundle::at1::
-standard_schema_path()
-{
-  // Preconditions:
-
-
-  // Body:
-
-  static const poset_path result(standard_schema_poset_name(), "at1_schema");
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-void
-fiber_bundle::at1::
-make_standard_schema(namespace_poset& xns)
-{
-  // Preconditions:
-
-  require(xns.state_is_read_write_accessible());
-  require(xns.contains_poset(standard_schema_poset_name()));
-  require(!xns.contains_poset_member(standard_schema_path()));
-
-
-  // Body:
-
-  schema_poset_member lschema(xns,
-                              standard_schema_path().member_name(),
-                              atp::standard_schema_path(),
-                              "",
-                              false);
-
-  lschema.detach_from_state();
-
-  // Postconditions:
-
-  ensure(xns.contains_poset_member(standard_schema_path()));
-
-  // Exit:
-
-  return;
-}
-
-// PROTECTED MEMBER FUNCTIONS
-
-// PRIVATE MEMBER FUNCTIONS
-
-
-//==============================================================================
-// ABSTRACT POSET MEMBER FACET
+// ABSTRACT POSET MEMBER FACET OF CLASS AT1
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -690,7 +738,7 @@ static_class_name()
 
 
 // ===========================================================
-// POSET_COMPONENT FACET
+// POSET_COMPONENT FACET OF CLASS AT1
 // ===========================================================
  
 // PUBLIC MEMBER FUNCTIONS
@@ -715,7 +763,7 @@ host_is_ancestor_of(const poset_state_handle* xother) const
 
 
 //==============================================================================
-// ANY FACET
+// ANY FACET OF CLASS AT1
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
