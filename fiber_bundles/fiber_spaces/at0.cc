@@ -745,9 +745,10 @@ new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xs
 
   ensure(xns.member_poset<host_type>(xhost_path, xauto_access).factor_ct(true) == 1);
   ensure(xns.member_poset<host_type>(xhost_path, xauto_access).d(true) == 1);
-  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).p(true) == 0);
-  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).vector_space_path(true) == xhost_path );
   ensure(xns.member_poset<host_type>(xhost_path, xauto_access).scalar_space_path(true) == xhost_path );
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).p(true) == 0);
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).dd(true) == 1);
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).vector_space_path(true) == xhost_path );
 
   // Exit:
 
@@ -785,9 +786,10 @@ new_host(namespace_type& xns, const string& xsuffix, bool xauto_access)
 
   ensure(xns.member_poset<host_type>(result, xauto_access).factor_ct(true) == 1);
   ensure(xns.member_poset<host_type>(result, xauto_access).d(true) == 1);
-  ensure(xns.member_poset<host_type>(result, xauto_access).p(true) == 0);
-  ensure(xns.member_poset<host_type>(result, xauto_access).vector_space_path(true) == result );
   ensure(xns.member_poset<host_type>(result, xauto_access).scalar_space_path(true) == result );
+  ensure(xns.member_poset<host_type>(result, xauto_access).p(true) == 0);
+  ensure(xns.member_poset<host_type>(result, xauto_access).dd(true) == 1);
+  ensure(xns.member_poset<host_type>(result, xauto_access).vector_space_path(true) == result );
 
   // Exit:
 
