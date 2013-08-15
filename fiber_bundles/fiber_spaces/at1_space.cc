@@ -163,10 +163,10 @@ new_table(namespace_type& xns,
   array_poset_dof_map* lmap = new array_poset_dof_map(&lschema, true);
   lmap->put_dof("factor_ct", ld);
   lmap->put_dof("d", ld);
-  lmap->put_dof("dd", ldd);
-  lmap->put_dof("p", lp);
-  lmap->put_dof("vector_space_path", xpath);
   lmap->put_dof("scalar_space_path", xscalar_space_path);
+  lmap->put_dof("p", lp);
+  lmap->put_dof("dd", ldd);
+  lmap->put_dof("vector_space_path", xpath);
   
   // Create the state.
 
@@ -184,11 +184,20 @@ new_table(namespace_type& xns,
   ensure(xns.member_poset(xpath, xauto_access).state_is_not_read_accessible());
   ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == xschema_path);
 
-  ensure(xns.member_poset<at1_space>(xpath, xauto_access).factor_ct(true) == xns.member_poset<at1_space>(xpath, xauto_access).d(true));
-  ensure(xns.member_poset<at1_space>(xpath, xauto_access).d(true) == schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access));
-  ensure(xns.member_poset<at1_space>(xpath, xauto_access).p(true) == 1);
-  ensure(xns.member_poset<at1_space>(xpath, xauto_access).vector_space_path(true) == xpath );
+  ensure(xns.member_poset<at1_space>(xpath, xauto_access).factor_ct(true) == 
+         xns.member_poset<at1_space>(xpath, xauto_access).d(true));
+
+  ensure(xns.member_poset<at1_space>(xpath, xauto_access).d(true) == 
+         schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access));
+
   ensure(xns.member_poset<at1_space>(xpath, xauto_access).scalar_space_path(true) == xscalar_space_path);
+
+  ensure(xns.member_poset<at1_space>(xpath, xauto_access).p(true) == 1);
+
+  ensure(xns.member_poset<at1_space>(xpath, xauto_access).dd(true) == 
+         xns.member_poset<at1_space>(xpath, xauto_access).d(true));
+
+  ensure(xns.member_poset<at1_space>(xpath, xauto_access).vector_space_path(true) == xpath );
 
   // Exit:
 

@@ -419,11 +419,20 @@ new_host(namespace_type& xns,
   ensure(xns.member_poset(xhost_path, xauto_access).state_is_not_read_accessible());
   ensure(xns.member_poset(xhost_path, xauto_access).schema(true).path(true) == xschema_path);
 
-  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).factor_ct(true) == xns.member_poset<host_type>(xhost_path, xauto_access).d(true));
-  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).d(true) == schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access));
-  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).p(true) == 1);
-  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).vector_space_path(true) == xhost_path );
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).factor_ct(true) == 
+         xns.member_poset<host_type>(xhost_path, xauto_access).d(true));
+
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).d(true) == 
+         schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access));
+
   ensure(xns.member_poset<host_type>(xhost_path, xauto_access).scalar_space_path(true) == xscalar_space_path );
+
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).p(true) == 1);
+
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).dd(true) == 
+         xns.member_poset<host_type>(xhost_path, xauto_access).d(true));
+
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).vector_space_path(true) == xhost_path );
 
   // Exit:
 

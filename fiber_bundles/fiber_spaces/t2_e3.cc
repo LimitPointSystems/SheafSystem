@@ -773,16 +773,11 @@ new_host(namespace_type& xns,
   ensure(xns.member_poset(xhost_path, xauto_access).schema(true).path(true) == xschema_path);
 
   ensure(xns.member_poset<host_type>(xhost_path, xauto_access).factor_ct(true) == 9);
-
   ensure(xns.member_poset<host_type>(xhost_path, xauto_access).d(true) == 9);
-
   ensure(xns.member_poset<host_type>(xhost_path, xauto_access).scalar_space_path(true) == 
          xns.member_poset<vector_space_type::host_type>(xvector_space_path, xauto_access).scalar_space_path());
-
   ensure(xns.member_poset<host_type>(xhost_path, xauto_access).p(true) == 2);
-
   ensure(xns.member_poset<host_type>(xhost_path, xauto_access).dd(true) == 3);
-
   ensure(xns.member_poset<host_type>(xhost_path, xauto_access).vector_space_path(true) == xvector_space_path);
 
   // Exit:
