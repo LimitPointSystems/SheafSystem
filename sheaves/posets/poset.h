@@ -48,7 +48,6 @@ public:
   /// The type of namespace for this type of member.
   ///
   typedef namespace_poset namespace_type;
-  
 
   ///
   /// Creates a new poset in namespace xns with pah xpath 
@@ -57,17 +56,7 @@ public:
   static void  new_table(namespace_type& xhost, 
                          const poset_path& xpath, 
                          const poset_path& xschema_path, 
-                         bool xauto_access);
-
-//   ///
-//   /// Creates a new poset in namespace xns wiih name xname 
-//   /// and schema specified by xschema_path.
-//   ///
-//   static poset_path new_table(namespace_poset& xhost, 
-//                               const string& xname, 
-//                               const poset_path& xschema_path, 
-//                               bool xauto_access);
-  
+                         bool xauto_access);  
 
 protected:
 
@@ -251,13 +240,6 @@ protected:
   // makes the following new_state method public also.
 
   using poset_state_handle::new_state;
-
-//   ///
-//   /// Creates a new poset state with schema xschema and table dof map xdof_map,
-//   /// attaches this to the state and creates and initializes the associated
-//   /// namespace member. Intended for use by new_table factory methods.
-//   ///
-//   virtual void new_state(namespace_poset& xns, const poset_path& xpath, const schema_poset_member& xschema, array_poset_dof_map& xdof_map);
 
   ///
   /// Creates a new poset state with path xpath, schema xschema and table dof map xdof_map,

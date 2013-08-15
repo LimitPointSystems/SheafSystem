@@ -35,6 +35,8 @@ using namespace sheaf;
 
 class sec_tuple;
 class tuple;
+class fiber_bundles_namespace;
+  
 
 ///
 /// A Cartesian product section space.
@@ -49,6 +51,11 @@ class SHEAF_DLL_SPEC sec_tuple_space : public sec_rep_space
   //@{
 
 public:
+
+  ///
+  /// The type of namespace for this type of member.
+  ///
+  typedef fiber_bundles_namespace namespace_type;
 
   ///
   /// The type of member associated with this space.
@@ -74,6 +81,15 @@ public:
   /// Creates an arg list which conforms to the schema of this.
   ///
   static arg_list make_arg_list(int xfactor_ct);
+
+  ///
+  /// Creates a new sec_tuple_space in namespace xns with path xpath
+  /// and schema specified by xschema_path.
+  ///
+  static void new_table(namespace_type& xhost, 
+                        const poset_path& xpath, 
+                        const poset_path& xschema_path,
+                        bool xauto_access);
   
   //============================================================================
   // TABLE DOFS

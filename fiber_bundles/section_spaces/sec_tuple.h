@@ -42,15 +42,20 @@ class fiber_bundles_namespace;
 ///
 class SHEAF_DLL_SPEC sec_tuple : public sec_rep_space_member
 {
-  //============================================================================
-  /// @name TUPLE FACET OF CLASS SEC_TUPLE
-  //============================================================================
-  //@{
 
+  // ===========================================================
+  /// @name HOST FACTORY FACET OF CLASS SEC_TUPLE
+  // ===========================================================
+  //@{
 
 public:
 
   // Typedefs:
+
+  ///
+  /// The type of namespace for this type of member.
+  ///
+  typedef fiber_bundles_namespace namespace_type;
 
   ///
   /// The type of host poset.
@@ -71,6 +76,36 @@ public:
   /// The path to the standard rep for sections of this type.
   ///
   static const poset_path& standard_rep_path();
+
+  ///
+  /// The standard path with poset name suffix xsuffix for host spaces for type F..
+  ///
+  static const poset_path& standard_host_path(const string& xclass_name, const string& xsuffix);
+
+  ///
+  /// Manual, shallow factory method; creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
+  /// and table attribute factor_ct specified by xfactor_ct.
+  ///
+  static void new_host(namespace_type& xns, 
+                       const poset_path& xhost_path, 
+                       const poset_path& xschema_path,
+                       bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+ 
+
+  //============================================================================
+  /// @name TUPLE FACET OF CLASS SEC_TUPLE
+  //============================================================================
+  //@{
+
+
+public:
 
   ///
   /// Default constructor.

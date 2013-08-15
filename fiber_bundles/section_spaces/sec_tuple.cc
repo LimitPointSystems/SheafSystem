@@ -11,7 +11,8 @@
 #include "sec_tuple.h"
 
 #include "assert_contract.h"
-#include "namespace_poset.h"
+#include "fiber_bundles_namespace.h"
+#include "section_space_schema_poset.h"
 
 #include "sec_tuple_space.h"
 
@@ -22,9 +23,9 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 // CLASS SEC_TUPLE
 //==============================================================================
 
-//==============================================================================
-// TUPLE FACET OF CLASS SEC_TUPLE
-//==============================================================================
+// ===========================================================
+// HOST FACTORY FACET
+// ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
 
@@ -47,6 +48,54 @@ standard_rep_path()
 
   return result;
 }
+
+void
+fiber_bundle::sec_tuple::
+new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xschema_path, bool xauto_access)
+{
+  // cout << endl << "Entering sec_tuple::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(unexecutable("fiber schema specified by xschema_path conforms to fiber_type::standard_schema_path"));
+  
+
+  // Body:
+
+  host_type::new_table(xns, xhost_path, xschema_path, xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.contains_path(xhost_path, xauto_access));
+  ensure(xns.member_poset(xhost_path, xauto_access).state_is_not_read_accessible());
+  ensure(xns.member_poset(xhost_path, xauto_access).schema(true).path(true) == xschema_path);
+
+  // Unexecutable because no operator== for array_poset_dof_map.
+  ensure(unexecutable("table dof map of result is copy of table dof map of fiber space"));
+
+  // Exit:
+
+  // cout << "Leaving sec_tuple::new_host." << endl;
+  return;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+ 
+
+//==============================================================================
+// TUPLE FACET OF CLASS SEC_TUPLE
+//==============================================================================
+
+// PUBLIC MEMBER FUNCTIONS
 
 
 fiber_bundle::sec_tuple::

@@ -88,46 +88,6 @@ new_table(namespace_type& xns, const poset_path& xpath, const poset_path& xschem
   return;
 }
 
-// sheaf::poset_path
-// sheaf::poset::
-// new_table(namespace_poset& xns, const string& xname, const poset_path& xschema_path, bool xauto_access)
-// {
-//   // cout << endl << "Entering poset::new_table." << endl;
-
-//   // Preconditions:
-
-
-//   require(!xname.empty());
-//   require(!xns.contains_member(xname, xauto_access));
-
-//   require(xschema_path.full());
-//   require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
-//   require(unexecutable("xschema_path conforms to standard_schema_path"));
-
-//   // Body:
-
-//   // Create the poset; have to new it because namespace keeps a pointer.
-
-//   poset* lposet = new poset();
-//   lposet->new_state(xns, xname, xschema_path, xauto_access);
-
-//   // Return the path of the poset.
-
-//   poset_path result = lposet->path(true);
-
-//   // Postconditions:
-
-//   ensure(xns.contains_path(result, xauto_access));
-//   //  ensure(!xns.path_is_read_accessible(result, xauto_access));
-//   ensure(!xns.poset_state_is_read_accessible(result, xauto_access));
-//   ensure(xns.member_poset(result, xauto_access).schema(true).path(true) == xschema_path);
-
-//   // Exit:
-
-//   // cout << "Leaving poset::new_table." << endl;
-//   return result;
-// }
-
 
 // PROTECTED FUNCTIONS
 
@@ -972,49 +932,6 @@ end_jim_edit_mode(bool xensure_lattice_invariant,
 
 // PROTECTED FUNCTIONS
 
-// void
-// sheaf::poset::
-// new_state(namespace_poset& xns, const poset_path& xpath, const schema_poset_member& xschema, array_poset_dof_map& xdof_map)
-// {
-//   // cout << endl << "Entering poset::new_internal_state." << endl;
-
-//   // Preconditions:
-
-//   require(!xpath.empty());
-//   require(!xns.contains_path(xpath, true));
-
-//   require(schema_is_ancestor_of(&xschema));
-//   require(xschema.state_is_read_accessible());
-//   require(xschema.host()->name_space()->is_same_state(&xns));
-
-//   // Body:
-
-//   // Create the state.
-
-//   new_state(xpath, xschema, xdof_map);
-  
-//   // Insert it in the namespace.
-
-//   initialize_namespace(xns, xpath.poset_name(), true);
-
-//   // Postconditions:
-
-//   ensure(is_attached());
-//   ensure(path(true) == xpath);
-//   ensure(schema(true).is_same_state(&xschema));
-
-//   get_read_access();
-//   ensure(&table_dof_map(false) == &xdof_map);
-//   release_access();
-
-
-//   // Exit:
-
-//   // cout << "Leaving poset::new_internal_state." << endl;
-//   return;
-// }
-
-
 void
 sheaf::poset::
 new_state(const poset_path& xpath, const schema_poset_member& xschema, array_poset_dof_map& xdof_map)
@@ -1030,7 +947,7 @@ new_state(const poset_path& xpath, const schema_poset_member& xschema, array_pos
 
   /// @todo fix dof maps schema feature and make this precondition executable.
 
-  require(unexecutable(xschema.is_same_state(xdof_map.schema())));
+  require(unexecutable("xschema.is_same_state(xdof_map.schema())"));
 
   // Body:
 
