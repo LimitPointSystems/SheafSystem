@@ -210,7 +210,7 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
     swig_add_module(${${COMPONENT}_JAVA_BINDING_LIB} java 
         ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_JAVA_INTERFACE})
  
-        if(WIN64INTEL OR WIN64MSVC)
+    if(WIN64INTEL OR WIN64MSVC)
         add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} 
             ${FIBER_BUNDLES_JAVA_BINDING_LIBS} 
             ${${COMPONENT}_IMPORT_LIB})
@@ -324,7 +324,7 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
     mark_as_advanced(FORCE ${COMPONENT}_CLASSPATH) 
 
     #
-    # CSharp ##############################################################
+    # CSharp ###############################################
     #
     
     set(CMAKE_SWIG_FLAGS -c++ -w842 -namespace geometry)
@@ -405,6 +405,9 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
         ${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE})
 
     if(WIN64INTEL OR WIN64MSVC)
+        add_dependencies(_${${COMPONENT}_PYTHON_BINDING_LIB} 
+            ${FIBER_BUNDLES_PYTHON_BINDING_LIBS} 
+            ${${COMPONENT}_IMPORT_LIBS})
         swig_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} 
             ${FIBER_BUNDLES_PYTHON_BINDING_LIBS} 
             ${${COMPONENT}_IMPORT_LIB} ${PYTHON_LIBRARY} )

@@ -203,6 +203,8 @@ function(add_bindings_targets)
         LINKER_LANGUAGE CXX)
     
     if(WIN64INTEL OR WIN64MSVC)
+        add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} 
+            ${${COMPONENT}_IMPORT_LIB})
         swig_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${JDK_LIBS} 
             ${${COMPONENT}_IMPORT_LIB})
         set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES 
