@@ -394,7 +394,7 @@ class stp;
 class SHEAF_DLL_SPEC e2 : public ed
 {
   // ===========================================================
-  /// @name HOST FACTORY FACET OF CLASS E3
+  /// @name HOST FACTORY FACET OF CLASS E2
   // ===========================================================
   //@{
 

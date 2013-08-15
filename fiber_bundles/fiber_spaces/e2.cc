@@ -17,7 +17,6 @@
 #include "at2_e2.h"
 #include "fiber_bundles_namespace.h"
 #include "atp_space.h"
-#include "namespace_poset.h"
 #include "schema_poset_member.h"
 #include "st2_e2.h"
 #include "st4_e2.h"

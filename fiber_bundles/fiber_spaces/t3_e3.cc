@@ -11,7 +11,9 @@
 
 #include "abstract_poset_member.impl.h"
 #include "assert_contract.h"
-#include "namespace_poset.h"
+#include "at0.h"
+#include "at1_space.h"
+#include "fiber_bundles_namespace.h"
 #include "schema_poset_member.h"
 #include "tp_space.h"
 #include "wsv_block.h"
@@ -530,6 +532,200 @@ row_dofs() const
 // CLASS T3_E3
 //==============================================================================
 
+// ===========================================================
+// HOST FACTORY FACET OF CLASS T3_E3
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+const sheaf::poset_path&
+fiber_bundle::t3_e3::
+standard_schema_path()
+{
+  // Preconditions:
+
+
+  // Body:
+
+  static const poset_path result(standard_schema_poset_name(), "t3_e3_schema");
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+void
+fiber_bundle::t3_e3::
+make_standard_schema(namespace_poset& xns)
+{
+  // Preconditions:
+
+  require(xns.state_is_read_write_accessible());
+  require(xns.contains_poset(standard_schema_poset_name()));
+  require(!xns.contains_poset_member(standard_schema_path()));
+
+  // Body:
+
+  string lmember_names = "xxx DOUBLE false ";
+  lmember_names       += "xxy DOUBLE false ";
+  lmember_names       += "xxz DOUBLE false ";
+  lmember_names       += "xyx DOUBLE false ";
+  lmember_names       += "xyy DOUBLE false ";
+  lmember_names       += "xyz DOUBLE false ";
+  lmember_names       += "xzx DOUBLE false ";
+  lmember_names       += "xzy DOUBLE false ";
+  lmember_names       += "xzz DOUBLE false ";
+  lmember_names       += "yxx DOUBLE false ";
+  lmember_names       += "yxy DOUBLE false ";
+  lmember_names       += "yxz DOUBLE false ";
+  lmember_names       += "yyx DOUBLE false ";
+  lmember_names       += "yyy DOUBLE false ";
+  lmember_names       += "yyz DOUBLE false ";
+  lmember_names       += "yzx DOUBLE false ";
+  lmember_names       += "yzy DOUBLE false ";
+  lmember_names       += "yzz DOUBLE false ";
+  lmember_names       += "zxx DOUBLE false ";
+  lmember_names       += "zxy DOUBLE false ";
+  lmember_names       += "zxz DOUBLE false ";
+  lmember_names       += "zyx DOUBLE false ";
+  lmember_names       += "zyy DOUBLE false ";
+  lmember_names       += "zyz DOUBLE false ";
+  lmember_names       += "zzx DOUBLE false ";
+  lmember_names       += "zzy DOUBLE false ";
+  lmember_names       += "zzz DOUBLE false";
+
+  schema_poset_member lschema(xns,
+                              standard_schema_path().member_name(),
+                              t3::standard_schema_path(),
+                              lmember_names,
+                              false);
+
+  lschema.detach_from_state();
+
+  // Postconditions:
+
+  ensure(xns.contains_poset_member(standard_schema_path()));
+
+  // Exit:
+
+  return;
+}
+
+void
+fiber_bundle::t3_e3::
+new_host(namespace_type& xns, 
+         const poset_path& xhost_path, 
+         const poset_path& xschema_path, 
+         const poset_path& xvector_space_path, 
+         bool xauto_access)
+{
+  // cout << endl << "Entering t3_e3::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path()));
+  require(schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access) == 27);
+  
+  require(xvector_space_path.full());
+  require(xns.path_is_auto_read_accessible(xvector_space_path, xauto_access));
+  require(xns.contains_poset<vector_space_type::host_type>(xvector_space_path, xauto_access));
+  require(xns.member_poset(xvector_space_path, xauto_access).schema(xauto_access).conforms_to(vector_space_type::standard_schema_path()));
+  require(xns.member_poset<vector_space_type::host_type>(xvector_space_path, xauto_access).d(xauto_access) == 3);
+
+  require(host_type::p(xns, xschema_path, xvector_space_path, xauto_access) == 3);
+
+  // Body:
+
+  host_type::new_table(xns, xhost_path, xschema_path, xvector_space_path, xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.contains_path(xhost_path, xauto_access));
+  ensure(xns.member_poset(xhost_path, xauto_access).state_is_not_read_accessible());
+  ensure(xns.member_poset(xhost_path, xauto_access).schema(true).path(true) == xschema_path);
+
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).factor_ct(true) == 27);
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).d(true) == 27);
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).scalar_space_path(true) == 
+         xns.member_poset<vector_space_type::host_type>(xvector_space_path, xauto_access).scalar_space_path());
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).p(true) == 3);
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).dd(true) == 3);
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).vector_space_path(true) == xvector_space_path);
+
+  // Exit:
+
+  // cout << "Leaving t3_e3::new_host." << endl;
+  return;
+}
+
+sheaf::poset_path
+fiber_bundle::t3_e3::
+new_host(namespace_type& xns, const string& xsuffix, bool xauto_access)
+{
+  // cout << endl << "Entering t3_e3::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(xsuffix.empty() || poset_path::is_valid_name(xsuffix));
+  require(!xns.contains_path(standard_host_path(static_class_name(), xsuffix), xauto_access));
+
+  require(xns.path_is_auto_read_accessible(standard_schema_path(), xauto_access));
+  
+  require(xns.path_is_auto_read_available(standard_host_path(vector_space_type::static_class_name(), xsuffix), xauto_access));
+
+  // Body:
+
+  // Create the vector space if necessary.
+
+  poset_path lvector_space_path(standard_host_path(vector_space_type::static_class_name(), xsuffix));
+
+  if(!xns.contains_path(lvector_space_path, xauto_access))
+  {
+    vector_space_type::new_host(xns, xsuffix, xauto_access);
+  }
+
+  poset_path result(standard_host_path(static_class_name(), xsuffix));
+
+  host_type::new_table(xns, result, standard_schema_path(), lvector_space_path, xauto_access);
+
+  // Postconditions:
+
+  ensure(result == standard_host_path(static_class_name(), xsuffix));
+  ensure(xns.contains_path(result, xauto_access));
+  ensure(xns.member_poset(result, xauto_access).state_is_not_read_accessible());
+  ensure(xns.member_poset(result, xauto_access).schema(true).path(true) == standard_schema_path());
+
+  ensure(xns.member_poset<host_type>(result, xauto_access).factor_ct(true) == 27);
+  ensure(xns.member_poset<host_type>(result, xauto_access).d(true) == 27);
+  ensure(xns.member_poset<host_type>(result, xauto_access).scalar_space_path(true) == 
+         standard_host_path(vector_space_type::scalar_type::static_class_name(), xsuffix) );
+  ensure(xns.member_poset<host_type>(result, xauto_access).p(true) == 3);
+  ensure(xns.member_poset<host_type>(result, xauto_access).dd(true) == 3);
+  ensure(xns.member_poset<host_type>(result, xauto_access).vector_space_path(true) == 
+         standard_host_path(vector_space_type::static_class_name(), xsuffix) );
+
+  // Exit:
+
+  // cout << "Leaving t3_e3::new_host." << endl;
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+ 
+
 //==============================================================================
 // T3_E3 FACET OF CLASS T3_E3
 //==============================================================================
@@ -893,81 +1089,6 @@ operator const t3_e3::row_dofs_type& () const
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
-
-const sheaf::poset_path&
-fiber_bundle::t3_e3::
-standard_schema_path()
-{
-  // Preconditions:
-
-
-  // Body:
-
-  static const poset_path result(standard_schema_poset_name(), "t3_e3_schema");
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-void
-fiber_bundle::t3_e3::
-make_standard_schema(namespace_poset& xns)
-{
-  // Preconditions:
-
-  require(xns.state_is_read_write_accessible());
-  require(xns.contains_poset(standard_schema_poset_name()));
-  require(!xns.contains_poset_member(standard_schema_path()));
-
-  // Body:
-
-  string lmember_names = "xxx DOUBLE false ";
-  lmember_names       += "xxy DOUBLE false ";
-  lmember_names       += "xxz DOUBLE false ";
-  lmember_names       += "xyx DOUBLE false ";
-  lmember_names       += "xyy DOUBLE false ";
-  lmember_names       += "xyz DOUBLE false ";
-  lmember_names       += "xzx DOUBLE false ";
-  lmember_names       += "xzy DOUBLE false ";
-  lmember_names       += "xzz DOUBLE false ";
-  lmember_names       += "yxx DOUBLE false ";
-  lmember_names       += "yxy DOUBLE false ";
-  lmember_names       += "yxz DOUBLE false ";
-  lmember_names       += "yyx DOUBLE false ";
-  lmember_names       += "yyy DOUBLE false ";
-  lmember_names       += "yyz DOUBLE false ";
-  lmember_names       += "yzx DOUBLE false ";
-  lmember_names       += "yzy DOUBLE false ";
-  lmember_names       += "yzz DOUBLE false ";
-  lmember_names       += "zxx DOUBLE false ";
-  lmember_names       += "zxy DOUBLE false ";
-  lmember_names       += "zxz DOUBLE false ";
-  lmember_names       += "zyx DOUBLE false ";
-  lmember_names       += "zyy DOUBLE false ";
-  lmember_names       += "zyz DOUBLE false ";
-  lmember_names       += "zzx DOUBLE false ";
-  lmember_names       += "zzy DOUBLE false ";
-  lmember_names       += "zzz DOUBLE false";
-
-  schema_poset_member lschema(xns,
-                              standard_schema_path().member_name(),
-                              t3::standard_schema_path(),
-                              lmember_names,
-                              false);
-
-  lschema.detach_from_state();
-
-  // Postconditions:
-
-  ensure(xns.contains_poset_member(standard_schema_path()));
-
-  // Exit:
-
-  return;
-}
 
 fiber_bundle::tp*
 fiber_bundle::t3_e3::
