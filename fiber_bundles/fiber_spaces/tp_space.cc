@@ -107,9 +107,8 @@ p(const namespace_poset& xns,
   require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
   require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));
 
-  require(xns.path_is_auto_read_accessible(xvector_space_path, xauto_access));
-  require(xns.contains_poset<vector_space_type>(xvector_space_path, xauto_access));
-
+  require(xns.path_is_auto_read_accessible<vector_space_type>(xvector_space_path, xauto_access));
+ 
   // Body:
 
   int ld = schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access);
@@ -148,8 +147,7 @@ new_table(namespace_type& xns,
   require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
   require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));
 
-  require(xns.path_is_auto_read_accessible(xvector_space_path, xauto_access));
-  require(xns.contains_poset<vector_space_type>(xvector_space_path, xauto_access));
+  require(xns.path_is_auto_read_accessible<vector_space_type>(xvector_space_path, xauto_access));
 
   require(p(xns, xschema_path, xvector_space_path, xauto_access) >= 0);
 
