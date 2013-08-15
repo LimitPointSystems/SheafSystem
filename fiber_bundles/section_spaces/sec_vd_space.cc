@@ -63,6 +63,76 @@ make_arg_list(const poset_path& xscalar_space_path)
   return result;
 }
 
+void
+fiber_bundle::sec_vd_space::
+new_table(namespace_type& xns, const poset_path& xpath, 
+          const poset_path& xschema_path,
+          const poset_path& xscalar_space_path, 
+          bool xauto_access)
+{
+  // cout << endl << "Entering sec_vd_space::new_table." << endl;
+
+  // Preconditions:
+
+
+  require(!xpath.empty());
+  require(!xns.contains_path(xpath, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(unexecutable("fiber schema specified by xschema_path conforms to fiber_type::standard_schema_path"));
+
+  require(xns.path_is_auto_read_accessible<scalar_type::host_type>(xschema_path, xauto_access));
+
+  // Body:
+
+  // Create the table; have to new it because namespace keeps a pointer.
+
+  typedef sec_vd_space table_type;
+
+  table_type* ltable = new table_type();
+
+  // Create a handle of the right type for the schema member.
+
+  binary_section_space_schema_member lschema(xns, xschema_path, xauto_access);
+
+  if(xauto_access)
+  {
+    lschema.get_read_access();
+  }
+
+  // The table dof map for a section space is the same as the table dof map
+  // of the fiber schema, so just copy it. Have to new it because poset_state keeps a pointer.
+
+  array_poset_dof_map& lfiber_map = lschema.fiber_space().table_dof_map();
+  array_poset_dof_map* lmap = new array_poset_dof_map(lfiber_map);
+  
+  // Create the state.
+
+  ltable->new_state(xns, xpath, lschema, *lmap);
+
+  if(xauto_access)
+  {
+    lschema.release_access();
+  }
+
+  // Postconditions:
+
+  ensure(xns.contains_path(xpath, xauto_access));
+  ensure(xns.member_poset(xpath, xauto_access).state_is_not_read_accessible());
+  ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == xschema_path);
+
+  // Unexecutable because no operator== for array_poset_dof_map.
+  ensure(unexecutable("table dof map of result is copy of table dof map of fiber space"));
+
+  ensure(xns.member_poset(xpath, xauto_access).scalar_space_path(true) == xscalar_space_path);
+
+  // Exit:
+
+  // cout << "Leaving sec_vd_space::new_table." << endl;
+  return;
+}
+
 //==============================================================================
 // TABLE DOFS
 //==============================================================================

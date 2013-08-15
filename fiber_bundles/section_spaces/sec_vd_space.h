@@ -33,6 +33,7 @@ namespace fiber_bundle
 {
 using namespace sheaf;
 
+class sec_at0;
 class sec_vd;
 class vd;
 
@@ -63,7 +64,7 @@ public:
   ///
   /// The scalar type definition.
   ///
-  typedef sec_vd scalar_type;
+  typedef sec_at0 scalar_type;
 
   ///
   /// The table dofs type defined by the standard schema.
@@ -74,6 +75,17 @@ public:
   /// Creates an arg list which conforms to the schema of this.
   ///
   static arg_list make_arg_list(const poset_path& xscalar_space_path);
+
+  ///
+  /// Creates a new sec_vd_space in namespace xns with path xpath,
+  /// schema specified by xschema_path, and scalar space specified
+  /// by xscalar_space_path.
+  ///
+  static void new_table(namespace_type& xhost, 
+                        const poset_path& xpath, 
+                        const poset_path& xschema_path,
+                        const poset_path& xsclar_space_path,
+                        bool xauto_access);
   
   //============================================================================
   // TABLE DOFS
