@@ -107,7 +107,6 @@ p(const namespace_poset& xns,
   require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
   require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));
 
-  require(xvector_space_path.full());
   require(xns.path_is_auto_read_accessible(xvector_space_path, xauto_access));
   require(xns.contains_poset<vector_space_type>(xvector_space_path, xauto_access));
 
@@ -149,7 +148,6 @@ new_table(namespace_type& xns,
   require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
   require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));
 
-  require(xvector_space_path.full());
   require(xns.path_is_auto_read_accessible(xvector_space_path, xauto_access));
   require(xns.contains_poset<vector_space_type>(xvector_space_path, xauto_access));
 
@@ -303,8 +301,8 @@ p(int xd, int xdd) const
   int lpd = 1;
   while(lpd < xd)
   {
-    lpd  = d(lp, xdd);
     lp++;
+    lpd  = d(lp, xdd);
   }
 
   int result = (lpd == xd) ? lp : -1;

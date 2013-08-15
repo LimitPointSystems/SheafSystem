@@ -229,7 +229,7 @@ public:
   ///
   /// The standard path with poset name suffix xsuffix for host spaces for type F..
   ///
-  static const poset_path& standard_host_path(const string& xclass_name, const string& xsuffix);
+  static poset_path standard_host_path(const string& xclass_name, const string& xsuffix);
 
   ///
   /// Manual, shallow factory method; creates a new host table for members of this type.

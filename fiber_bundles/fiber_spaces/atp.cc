@@ -283,7 +283,7 @@ new_host(namespace_type& xns,
          schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access));
 
   ensure(xns.member_poset<atp_space>(xhost_path, xauto_access).scalar_space_path(true) == 
-         xns.member_poset<vector_space_type>(xvector_space_path, xauto_access).scalar_space_path(xauto_access) );
+         xns.member_poset<vector_space_type::host_type>(xvector_space_path, xauto_access).scalar_space_path(xauto_access) );
 
   ensure(xns.member_poset<host_type>(xhost_path, xauto_access).p(true) == 
          host_type::p(xns, xschema_path, xvector_space_path, xauto_access));

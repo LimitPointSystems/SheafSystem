@@ -308,7 +308,7 @@ make_standard_schema(namespace_poset& xns)
 }
 
 
-const sheaf::poset_path&
+sheaf::poset_path
 fiber_bundle::tuple::
 standard_host_path(const string& xclass_name, const string& xsuffix)
 {
@@ -319,7 +319,7 @@ standard_host_path(const string& xclass_name, const string& xsuffix)
   
   // Body:
 
-  static const poset_path result(xclass_name + xsuffix, "");
+  poset_path result(xclass_name + xsuffix, "");
 
   // Postconditions:
 
