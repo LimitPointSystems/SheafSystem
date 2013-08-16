@@ -511,37 +511,57 @@ endfunction(add_clusters)
 function(set_component_vars)
 
     if(WIN64MSVC OR WIN64INTEL)
-        set(${COMPONENT}_DYNAMIC_LIB ${PROJECT_NAME} CACHE STRING "${PROJECT_NAME} dynamic link library")
-        set(${COMPONENT}_IMPORT_LIB ${PROJECT_NAME} CACHE STRING "${PROJECT_NAME} import library")
-        set(${COMPONENT}_CSHARP_BINDING_ASSY ${PROJECT_NAME}_csharp_assembly.dll CACHE STRING "${PROJECT_NAME} csharp binding assembly name")
+        set(${COMPONENT}_DYNAMIC_LIB ${PROJECT_NAME} 
+            CACHE STRING "${PROJECT_NAME} dynamic link library")
+        set(${COMPONENT}_IMPORT_LIB ${PROJECT_NAME} 
+            CACHE STRING "${PROJECT_NAME} import library")
+        set(${COMPONENT}_CSHARP_BINDING_ASSY ${PROJECT_NAME}_csharp_assembly.dll 
+            CACHE STRING "${PROJECT_NAME} csharp binding assembly name")
         # swig_add_module will prepend "_" to the value of the python lib name string we hand it.
         # Either we append the underscore everywhere we refer to it, or we use a separate var.
-        set(${COMPONENT}_PYTHON_BINDING_LIB_BASE ${PROJECT_NAME}_python_binding CACHE STRING "${PROJECT_NAME} python binding library name")
-        set(${COMPONENT}_PYTHON_BINDING_LIB _${PROJECT_NAME}_python_binding CACHE STRING "${PROJECT_NAME} python binding library name")
+        set(${COMPONENT}_PYTHON_BINDING_LIB_BASE ${PROJECT_NAME}_python_binding 
+            CACHE STRING "${PROJECT_NAME} python binding library name")
+        set(${COMPONENT}_PYTHON_BINDING_LIB _${PROJECT_NAME}_python_binding 
+            CACHE STRING "${PROJECT_NAME} python binding library name")
     else()
-        set(${COMPONENT}_SHARED_LIB lib${PROJECT_NAME}.so CACHE STRING "${PROJECT_NAME} shared library")
-        set(${COMPONENT}_STATIC_LIB lib${PROJECT_NAME}.a CACHE STRING "${PROJECT_NAME} static library")
-        set(${COMPONENT}_CSHARP_BINDING_ASSY ${PROJECT_NAME}_csharp_assembly.so CACHE STRING "${PROJECT_NAME} csharp binding assembly name")
-        set(${COMPONENT}_PYTHON_BINDING_LIB _${PROJECT_NAME}_python_binding CACHE STRING "${PROJECT_NAME} python binding library name")
+        set(${COMPONENT}_SHARED_LIB lib${PROJECT_NAME}.so 
+            CACHE STRING "${PROJECT_NAME} shared library")
+        set(${COMPONENT}_STATIC_LIB lib${PROJECT_NAME}.a 
+            CACHE STRING "${PROJECT_NAME} static library")
+        set(${COMPONENT}_CSHARP_BINDING_ASSY ${PROJECT_NAME}_csharp_assembly.so 
+            CACHE STRING "${PROJECT_NAME} csharp binding assembly name")
+        set(${COMPONENT}_PYTHON_BINDING_LIB _${PROJECT_NAME}_python_binding 
+            CACHE STRING "${PROJECT_NAME} python binding library name")
     endif()
 
-    set(${COMPONENT}_COMMON_BINDING_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bindings/common/src CACHE STRING "${PROJECT_NAME} common binding source directory")
-    set(${COMPONENT}_SWIG_COMMON_INTERFACE ${PROJECT_NAME}_common_binding.i CACHE STRING "${PROJECT_NAME} common interface filename")
-    set(${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE ${PROJECT_NAME}_common_binding_includes.i CACHE STRING "${PROJECT_NAME} common includes interface filename" )
+    set(${COMPONENT}_COMMON_BINDING_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bindings/common/src 
+        CACHE STRING "${PROJECT_NAME} common binding source directory")
+    set(${COMPONENT}_SWIG_COMMON_INTERFACE ${PROJECT_NAME}_common_binding.i 
+        CACHE STRING "${PROJECT_NAME} common interface filename")
+    set(${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE ${PROJECT_NAME}_common_binding_includes.i 
+        CACHE STRING "${PROJECT_NAME} common includes interface filename" )
       
-    set(${COMPONENT}_JAVA_BINDING_LIB ${PROJECT_NAME}_java_binding CACHE STRING "${PROJECT_NAME} java binding library basename")
-    set(${COMPONENT}_JAVA_BINDING_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bindings/java/src CACHE STRING "${PROJECT_NAME} java binding source directory")
-    set(${COMPONENT}_SWIG_JAVA_INTERFACE ${PROJECT_NAME}_java_binding.i CACHE STRING "${PROJECT_NAME} java binding interface file")
+    set(${COMPONENT}_JAVA_BINDING_LIB ${PROJECT_NAME}_java_binding 
+        CACHE STRING "${PROJECT_NAME} java binding library basename")
+    set(${COMPONENT}_JAVA_BINDING_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bindings/java/src 
+        CACHE STRING "${PROJECT_NAME} java binding source directory")
+    set(${COMPONENT}_SWIG_JAVA_INTERFACE ${PROJECT_NAME}_java_binding.i 
+        CACHE STRING "${PROJECT_NAME} java binding interface file")
 
-    set(${COMPONENT}_JAVA_BINDING_JAR ${PROJECT_NAME}_java_binding.jar CACHE STRING "${PROJECT_NAME} java binding jar name")
+    set(${COMPONENT}_JAVA_BINDING_JAR ${PROJECT_NAME}_java_binding.jar 
+        CACHE STRING "${PROJECT_NAME} java binding jar name")
     
-
-    set(${COMPONENT}_PYTHON_BINDING_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bindings/python/src CACHE STRING "${PROJECT_NAME} python source directory")
-    set(${COMPONENT}_SWIG_PYTHON_INTERFACE ${PROJECT_NAME}_python_binding.i CACHE STRING "${PROJECT_NAME} python binding interface file")
+    set(${COMPONENT}_PYTHON_BINDING_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bindings/python/src 
+        CACHE STRING "${PROJECT_NAME} python source directory")
+    set(${COMPONENT}_SWIG_PYTHON_INTERFACE ${PROJECT_NAME}_python_binding.i 
+        CACHE STRING "${PROJECT_NAME} python binding interface file")
     
-    set(${COMPONENT}_CSHARP_BINDING_LIB ${PROJECT_NAME}_csharp_binding CACHE STRING "${PROJECT_NAME} csharp binding library name")
-    set(${COMPONENT}_CSHARP_BINDING_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bindings/csharp/src CACHE STRING "${PROJECT_NAME} csharp source directory")
-    set(${COMPONENT}_SWIG_CSHARP_INTERFACE ${PROJECT_NAME}_csharp_binding.i CACHE STRING "${PROJECT_NAME} csharp binding interface file")
+    set(${COMPONENT}_CSHARP_BINDING_LIB ${PROJECT_NAME}_csharp_binding 
+        CACHE STRING "${PROJECT_NAME} csharp binding library name")
+    set(${COMPONENT}_CSHARP_BINDING_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bindings/csharp/src 
+        CACHE STRING "${PROJECT_NAME} csharp source directory")
+    set(${COMPONENT}_SWIG_CSHARP_INTERFACE ${PROJECT_NAME}_csharp_binding.i 
+        CACHE STRING "${PROJECT_NAME} csharp binding interface file")
 
     
     # Mark all the above as "advanced"
