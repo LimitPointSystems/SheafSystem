@@ -222,6 +222,41 @@ class tp_space;
 class SHEAF_DLL_SPEC at2 : public atp
 {
 
+  // ===========================================================
+  /// @name HOST FACTORY FACET OF CLASS AT1
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// The path to the standard schema for this class.
+  ///
+  static const poset_path& standard_schema_path();
+
+  ///
+  /// Creates the standard schema for this class in namespace xns.
+  ///
+  static void make_standard_schema(namespace_poset& xns);
+
+  ///
+  /// Manual, shallow factory method; creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
+  /// and table attribute scalar_space_path specified by xscalar_space_path.
+  ///
+  static void new_host(namespace_type& xns, 
+                       const poset_path& xhost_path, 
+                       const poset_path& xschema_path,
+                       const poset_path& xscalar_space_path,
+                       bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+
+
   //============================================================================
   /// @name AT2 FACET OF CLASS AT2
   //============================================================================
@@ -388,17 +423,8 @@ private:
 
 public:
 
-  ///
-  /// The path to the standard schema for this class.
-  ///
-  static const poset_path& standard_schema_path();
-
-  ///
-  /// Creates the standard schema for this class in namespace xns.
-  ///
-  static void make_standard_schema(namespace_poset& xns);
-
 protected:
+
 private:
 
   //@}
