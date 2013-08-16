@@ -214,16 +214,16 @@ function(add_bindings_targets)
                                DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${GEOMETRY_JAVA_BINDING_JAR}
                                set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Component Binding Jars")                           
                                COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
-                               COMMAND ${JAVAC_EXECUTABLE} -classpath "${GEOMETRY_CLASSPATH}" -d . *.java
+                               COMMAND ${Java_JAVAC_EXECUTABLE} -classpath "${GEOMETRY_CLASSPATH}" -d . *.java
                                COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                               COMMAND ${JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  
+                               COMMAND ${Java_JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  
                                bindings/java/*.class
                              )
             
             # Java documentation
             if(DOC_TARGETS)
                 add_custom_target(${PROJECT_NAME}-java-docs ALL
-                        COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} documentation" 
+                        COMMAND ${Java_JAVADOC_EXECUTABLE} -windowtitle "${PROJECT_NAME} documentation" 
                         -classpath "${GEOMETRY_CLASSPATH}" 
                         -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
                         *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
@@ -243,9 +243,9 @@ function(add_bindings_targets)
             add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
                    DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${GEOMETRY_JAVA_BINDING_JAR}
                    COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
-                   COMMAND ${JAVAC_EXECUTABLE} -classpath "${parent_classpath}" -d . *.java
+                   COMMAND ${Java_JAVAC_EXECUTABLE} -classpath "${parent_classpath}" -d . *.java
                    COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                   COMMAND ${JAR_EXECUTABLE} cvf 
+                   COMMAND ${Java_JAR_EXECUTABLE} cvf 
                    ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  
                    bindings/java/*.class
                              )
@@ -253,7 +253,7 @@ function(add_bindings_targets)
              # Java documentation
             if(DOC_TARGETS)
                 add_custom_target(${PROJECT_NAME}-java-docs ALL
-                        COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle 
+                        COMMAND ${Java_JAVADOC_EXECUTABLE} -windowtitle 
                         "${PROJECT_NAME} documentation" -classpath "${this_classpath}" 
                         -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
                         *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}

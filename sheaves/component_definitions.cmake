@@ -252,11 +252,11 @@ function(add_bindings_targets)
         # Java documentation
         if(DOC_TARGETS)
             add_custom_target(${PROJECT_NAME}-java-docs ALL
-                    COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} 
-                        documentation" -classpath "${${COMPONENT}_CLASSPATH}" 
-                        -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
-                        *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-                        DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
+                    COMMAND ${Java_JAVADOC_EXECUTABLE} -windowtitle "${PROJECT_NAME} documentation" 
+                    -classpath "${${COMPONENT}_CLASSPATH}" 
+                     -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
+                     *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                     DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
                     )
             set_target_properties(${PROJECT_NAME}-java-docs PROPERTIES 
                 FOLDER "Documentation Targets")                                 
@@ -277,9 +277,9 @@ function(add_bindings_targets)
                    ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/base_server.java 
                    ${CMAKE_CURRENT_BINARY_DIR}
                COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
-               COMMAND ${JAVAC_EXECUTABLE} -classpath . -d . *.java
+               COMMAND ${Java_JAVAC_EXECUTABLE} -classpath . -d . *.java
                COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-               COMMAND ${JAR_EXECUTABLE} cvf 
+               COMMAND ${Java_JAR_EXECUTABLE} cvf 
                    ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  
                    bindings/java/*.class
                )        
@@ -287,11 +287,11 @@ function(add_bindings_targets)
         # Java documentation
         if(DOC_TARGETS)
             add_custom_target(${PROJECT_NAME}-java-docs ALL
-                    COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME} 
-                        documentation" -classpath "${${COMPONENT}_CLASSPATH}" 
-                        -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
-                        *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-                        DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
+                    COMMAND ${Java_JAVADOC_EXECUTABLE} -windowtitle "${PROJECT_NAME} documentation" 
+                    -classpath "${${COMPONENT}_CLASSPATH}" 
+                    -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
+                    *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                    DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
                    )
         endif()
     endif()

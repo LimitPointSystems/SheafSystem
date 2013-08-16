@@ -262,11 +262,11 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
                    PROPERTIES FOLDER "Component Binding Jars")                           
                COMMAND ${CMAKE_COMMAND} -E echo 
                    "Compiling Java files..."
-               COMMAND ${JAVAC_EXECUTABLE} -classpath 
+               COMMAND ${Java_JAVAC_EXECUTABLE} -classpath 
                    "${FIBER_BUNDLES_CLASSPATH}" -d . *.java
                COMMAND ${CMAKE_COMMAND} -E echo 
                    "Creating jar file..."
-               COMMAND ${JAR_EXECUTABLE} cvf 
+               COMMAND ${Java_JAR_EXECUTABLE} cvf 
                    ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  
                    bindings/java/*.class
              )
@@ -274,7 +274,7 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
          # Java documentation
          if(DOC_TARGETS)
             add_custom_target(${PROJECT_NAME}-java-docs ALL
-                COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle "${PROJECT_NAME}
+                COMMAND ${Java_JAVADOC_EXECUTABLE} -windowtitle "${PROJECT_NAME}
                      documentation" -classpath "${FIBER_BUNDLES_CLASSPATH}"
                     -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
                     *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
@@ -299,9 +299,9 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
                DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} 
                ${FIBER_BUNDLES_JAVA_BINDING_JAR}
                COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
-               COMMAND ${JAVAC_EXECUTABLE} -classpath "${parent_classpath}" -d . *.java
+               COMMAND ${Java_JAVAC_EXECUTABLE} -classpath "${parent_classpath}" -d . *.java
                COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-               COMMAND ${JAR_EXECUTABLE} cvf 
+               COMMAND ${Java_JAR_EXECUTABLE} cvf 
                ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  
                bindings/java/*.class
              )
@@ -309,7 +309,7 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
      # Java documentation
          if(DOC_TARGETS)
             add_custom_target(${PROJECT_NAME}-java-docs ALL
-                    COMMAND ${JDK_BIN_DIR}/javadoc -windowtitle 
+                    COMMAND ${Java_JAVADOC_EXECUTABLE} -windowtitle 
                     "${PROJECT_NAME} documentation" -classpath "${this_classpath}" 
                     -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
                     *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
