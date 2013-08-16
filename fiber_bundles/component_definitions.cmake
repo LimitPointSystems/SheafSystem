@@ -348,17 +348,17 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
            
     set_source_files_properties(${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE} 
         PROPERTIES CPLUSPLUS ON)
-    swig_add_module(${${COMPONENT}_PYTHON_BINDING_LIB} python 
+    swig_add_module(${${COMPONENT}_PYTHON_BINDING_LIB_BASE} python 
         ${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE})
     
     if(WIN64INTEL OR WIN64MSVC)
-        add_dependencies(_${${COMPONENT}_PYTHON_BINDING_LIB} 
+        add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} 
             ${SHEAVES_PYTHON_BINDING_LIBS} 
             ${${COMPONENT}_IMPORT_LIBS})
-        swig_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} 
+        swig_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB_BASE} 
             ${SHEAVES_PYTHON_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIB} 
             ${PYTHON_LIBRARY} )
-        set_target_properties(_${${COMPONENT}_PYTHON_BINDING_LIB} 
+        set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} 
             PROPERTIES FOLDER "Binding Targets - Python")
     else()
         add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} 
@@ -369,11 +369,11 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
             ${${COMPONENT}_SHARED_LIBS})
     endif()
     
-    set_target_properties(_${${COMPONENT}_PYTHON_BINDING_LIB} 
+    set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} 
         PROPERTIES LINKER_LANGUAGE CXX)
 
     # Define the library version.
-    set_target_properties(_${${COMPONENT}_PYTHON_BINDING_LIB} 
+    set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} 
         PROPERTIES VERSION ${LIB_VERSION})  
     # Guard these until we can get the VS solution explorer aesthetic issues sorted
 #        if(LINUX64GNU OR LINUX64INTEL) 

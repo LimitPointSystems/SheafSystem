@@ -243,7 +243,7 @@ function(set_compiler_flags)
     # Configuration specific flags 
     if(WIN64MSVC OR WIN64INTEL)
 
-         set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od" CACHE
+        set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od" CACHE
             STRING "Flags used by the C++ compiler for Debug-contracts builds" )       
         set(CMAKE_SHARED_LINKER_FLAGS_DEBUG-CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG" CACHE
             STRING "Flags used by the linker for shared libraries for Debug-contracts builds" )
@@ -514,7 +514,10 @@ function(set_component_vars)
         set(${COMPONENT}_DYNAMIC_LIB ${PROJECT_NAME} CACHE STRING "${PROJECT_NAME} dynamic link library")
         set(${COMPONENT}_IMPORT_LIB ${PROJECT_NAME} CACHE STRING "${PROJECT_NAME} import library")
         set(${COMPONENT}_CSHARP_BINDING_ASSY ${PROJECT_NAME}_csharp_assembly.dll CACHE STRING "${PROJECT_NAME} csharp binding assembly name")
-        set(${COMPONENT}_PYTHON_BINDING_LIB ${PROJECT_NAME}_python_binding CACHE STRING "${PROJECT_NAME} python binding library name")
+        # swig_add_module will prepend "_" to the value of the python lib name string we hand it.
+        # Either we append the underscore everywhere we refer to it, or we use a separate var.
+        set(${COMPONENT}_PYTHON_BINDING_LIB_BASE ${PROJECT_NAME}_python_binding CACHE STRING "${PROJECT_NAME} python binding library name")
+        set(${COMPONENT}_PYTHON_BINDING_LIB _${PROJECT_NAME}_python_binding CACHE STRING "${PROJECT_NAME} python binding library name")
     else()
         set(${COMPONENT}_SHARED_LIB lib${PROJECT_NAME}.so CACHE STRING "${PROJECT_NAME} shared library")
         set(${COMPONENT}_STATIC_LIB lib${PROJECT_NAME}.a CACHE STRING "${PROJECT_NAME} static library")
