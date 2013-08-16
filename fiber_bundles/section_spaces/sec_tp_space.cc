@@ -74,12 +74,14 @@ new_table(namespace_type& xns, const poset_path& xpath,
   require(!xns.contains_path(xpath, xauto_access));
 
   require(xschema_path.full());
-  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
-  require(unexecutable("fiber schema specified by xschema_path conforms to fiber_type::standard_schema_path"));
+  require(xns.path_is_auto_read_accessible<section_space_schema_poset>(xschema_path, xauto_access));
+  require(fiber_space(xns, xschema_path, xauto_access).schema(xauto_access).conforms_to(fiber_type::standard_schema_path()));
 
-  require(xns.path_is_auto_read_accessible<scalar_type::host_type>(xvector_space_path, xauto_access));
+  require(xns.path_is_auto_read_accessible<vector_type::host_type>(xvector_space_path, xauto_access));
 
   require(unexecutable("schema.fiber_space.vector_space_path == vector_space.schema.fiber_space.path"));
+  require<xns.member_poset<vector_type::host_type>(xvector_space_path, xauto_access).schema(xauto_access).fiber_space<vector_type::fiber_type::host_type>().vector_space_path(xauto_access) ==
+    
 
   // Body:
 

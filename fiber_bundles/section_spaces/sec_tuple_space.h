@@ -83,6 +83,17 @@ public:
   static arg_list make_arg_list(int xfactor_ct);
 
   ///
+  /// The fiber space associated with the section space schema specified by xschema_path.
+  ///
+  static const poset& fiber_space(const namespace_poset& xns, const poset_path& xschema_path, bool xauto_access);
+
+  ///
+  /// True if and only if the schema of the fiber space of the schema
+  /// specified by xschema_path conforms to the standard schema of fiber_type.
+  ///
+  static bool fiber_schema_conforms(const namespace_poset& xns, const poset_path& xschema_path, bool xauto_access);
+  
+  ///
   /// Creates a new sec_tuple_space in namespace xns with path xpath
   /// and schema specified by xschema_path.
   ///

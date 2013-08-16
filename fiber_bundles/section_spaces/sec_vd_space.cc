@@ -63,6 +63,38 @@ make_arg_list(const poset_path& xscalar_space_path)
   return result;
 }
 
+bool
+fiber_bundle::sec_vd_space::
+same_scalar_fiber_space(const namespace_poset& xns, 
+                        const poset_path& xschema_path, 
+                        const poset_path& xscalar_space_path, 
+                        bool xauto_access)
+{
+  // cout << endl << "Entering sec_vd_space::same_scalar_fiber_space." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_accessible(xauto_access));
+  require(xns.path_is_auto_read_accessible<section_space_schema_poset>(xschema_path, xauto_access));
+  require(xns.path_is_auto_read_accessible<scalar_type::host_type>>(xscalar_space_path, xauto_access));
+  
+  // Body:
+
+  section_space_schema_poset& lschema_host = xns.member_poset<section_space_schema_poset>(xschema_path, xauto_access);
+  scalar_type::host_type& lscalar_host = xns.member_poset<scalar_type::host_type>(xschema_path, xauto_access);
+
+  bool result = (lschema_host.fiber_space().scalar_space_path(xauto_access) == lscalar_host.schema().fiber_space().path(xauto_access));
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving sec_vd_space::same_scalar_fiber_space." << endl;
+  return result;
+}
+
+
 void
 fiber_bundle::sec_vd_space::
 new_table(namespace_type& xns, const poset_path& xpath, 
@@ -79,12 +111,12 @@ new_table(namespace_type& xns, const poset_path& xpath,
   require(!xns.contains_path(xpath, xauto_access));
 
   require(xschema_path.full());
-  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
-  require(unexecutable("fiber schema specified by xschema_path conforms to fiber_type::standard_schema_path"));
+  require(xns.path_is_auto_read_accessible<<schema_type::host_type>>(xschema_path, xauto_access));
+  require(fiber_schema_conforms(xns, xschema_path, xauto_access));
 
   require(xns.path_is_auto_read_accessible<scalar_type::host_type>(xscalar_space_path, xauto_access));
 
-  require(unexecutable("schema.fiber_space.scalar_space_path == scalar_space.schema.fiber_space.path"));
+  require(same_scalar_fiber_space(xns, xschema_path, xscalar_space_path, xauto_access));
 
   // Body:
 
