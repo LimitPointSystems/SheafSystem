@@ -130,11 +130,41 @@ p(const namespace_poset& xns,
   return result;
 }
 
+// begin dmb new
+
+int
+fiber_bundle::stp_space::
+d(const namespace_poset& xns, int xp, const poset_path& xvector_space_path, bool xauto_access)
+{
+  // Preconditions:
+
+  require(xp >= 0);
+  
+  require(xns.path_is_auto_read_accessible<vector_space_type>(xvector_space_path, xauto_access));
+ 
+  // Body:
+
+  int ldd = xns.member_poset<vector_space_type>(xvector_space_path, xauto_access).d();  
+
+  stp_space ltmp;
+  int result = ltmp.d(xp, ldd);
+
+  // Postconditions:
+
+  ensure(result >= 0);
+
+  // Exit:
+
+  return result;
+}
+// end dmb new
+
 void
 fiber_bundle::stp_space::
 new_table(namespace_type& xns, 
           const poset_path& xpath, 
           const poset_path& xschema_path, 
+          int xp, // dmb new
           const poset_path& xvector_space_path, 
           bool xauto_access)
 {
@@ -152,7 +182,8 @@ new_table(namespace_type& xns,
 
   require(xns.path_is_auto_read_accessible<vector_space_type>(xvector_space_path, xauto_access));
 
-  require(p(xns, xschema_path, xvector_space_path, xauto_access) >= 0);
+  //  require(p(xns, xschema_path, xvector_space_path, xauto_access) >= 0);
+  require(d(xns, xschema_path, xauto_access) == d(xns, xp, xvector_space_path, xauto_access)); // dmb new  
 
   // Body:
 
@@ -179,9 +210,9 @@ new_table(namespace_type& xns,
 
   int ldd = xns.member_poset<vector_space_type>(xvector_space_path, xauto_access).d();
 
-  // Compute the tensor degree.
+//   // Compute the tensor degree.
 
-  int lp = ltable->p(ld, ldd);
+//   int lp = ltable->p(ld, ldd);
 
   // Get the scalar space path from the domain vector space.
 
@@ -194,7 +225,8 @@ new_table(namespace_type& xns,
   lmap->put_dof("factor_ct", ld);
   lmap->put_dof("d", ld);
   lmap->put_dof("scalar_space_path", lscalar_space_path);
-  lmap->put_dof("p", lp);
+  //  lmap->put_dof("p", lp);
+  lmap->put_dof("p", xp); // dmb new
   lmap->put_dof("dd", ldd);
   lmap->put_dof("vector_space_path", xvector_space_path);
   
@@ -218,13 +250,15 @@ new_table(namespace_type& xns,
          xns.member_poset<stp_space>(xpath, xauto_access).d(true));
 
   ensure(xns.member_poset<stp_space>(xpath, xauto_access).d(true) == 
-         schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access));
+         //         schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access));
+         d(xns, xschema_path, xauto_access)); // dmb new  
 
   ensure(xns.member_poset<stp_space>(xpath, xauto_access).scalar_space_path(true) == 
          xns.member_poset<vector_space_type>(xvector_space_path, xauto_access).scalar_space_path(xauto_access) );
 
-  ensure(xns.member_poset<stp_space>(xpath, xauto_access).p(true) == 
-         p(xns, xschema_path, xvector_space_path, xauto_access));
+//   ensure(xns.member_poset<stp_space>(xpath, xauto_access).p(true) == 
+//          p(xns, xschema_path, xvector_space_path, xauto_access));
+  ensure(xns.member_poset<tp_space>(xpath, xauto_access).p(true) == xp); // dmb new
 
   ensure(xns.member_poset<tp_space>(xpath, xauto_access).dd(true) == 
          xns.member_poset<vector_space_type>(xvector_space_path, xauto_access).d());

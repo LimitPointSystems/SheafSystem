@@ -272,6 +272,7 @@ public:
   static void new_host(namespace_type& xns, 
                        const poset_path& xhost_path, 
                        const poset_path& xschema_path,
+                       int xp, // dmb new
                        const poset_path& xvector_space_path,
                        bool xauto_access);
 

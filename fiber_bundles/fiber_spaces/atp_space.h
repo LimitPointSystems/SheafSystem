@@ -73,14 +73,28 @@ public:
                const poset_path& xvector_space_path, 
                bool xauto_access);
 
+  // begin dmb new
+
+  using tp_space::d;
+  
+  ///
+  /// The tensor dimension implied by tensor degree xp and
+  /// the dimension of the domain vector space specified by xvector_space_path.
+  ///
+  static int d(const namespace_poset& xns, int xp, const poset_path& xvector_space_path, bool xauto_access);
+
+  // end dmb new  
+
   ///
   /// Creates a new atp_space in namespace xns with path xpath,
-  /// schema specified by xschema_path, and table attribute 
-  /// vector_space_path specified by xvector_space_path.
+  /// schema specified by xschema_path, and table attributes 
+  /// p and vector_space_path specified by xp and xvector_space_path,
+  /// respectively.
   ///
   static void new_table(namespace_type& xhost, 
                         const poset_path& xpath, 
                         const poset_path& xschema_path,
+                        int xp, // dmb new
                         const poset_path& xvector_space_path,
                         bool xauto_access);
   
@@ -208,8 +222,6 @@ private:
   //@{
 
 public:
-
-  using tp_space::d;
   
   ///
   /// Dimension d() as a function of degree xp and domain dimension xdd.
