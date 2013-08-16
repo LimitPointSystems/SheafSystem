@@ -49,6 +49,25 @@ standard_rep_path()
   return result;
 }
 
+sheaf::poset_path
+fiber_bundle::sec_tuple::
+standard_host_path(const string& xclass_name, const string& xsuffix)
+{
+  // Preconditions:
+
+
+  // Body:
+
+  poset_path result(xclass_name + xsuffix, "");
+
+  // Postconditions:
+
+  
+  // Exit:
+
+  return result;
+}
+
 void
 fiber_bundle::sec_tuple::
 new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xschema_path, bool xauto_access)
@@ -77,8 +96,7 @@ new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xs
   ensure(xns.member_poset(xhost_path, xauto_access).state_is_not_read_accessible());
   ensure(xns.member_poset(xhost_path, xauto_access).schema(true).path(true) == xschema_path);
 
-  // Unexecutable because no operator== for array_poset_dof_map.
-  ensure(unexecutable("table dof map of result is copy of table dof map of fiber space"));
+  ensure(unexecutable("result.factor_ct == result.fiber_space.factor_ct"));
 
   // Exit:
 

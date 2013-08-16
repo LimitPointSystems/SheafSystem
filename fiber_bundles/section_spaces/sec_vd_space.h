@@ -62,7 +62,7 @@ public:
   typedef vd fiber_type;
 
   ///
-  /// The scalar type definition.
+  /// The type of scalar for the module of sections.
   ///
   typedef sec_at0 scalar_type;
 
@@ -84,7 +84,7 @@ public:
   static void new_table(namespace_type& xhost, 
                         const poset_path& xpath, 
                         const poset_path& xschema_path,
-                        const poset_path& xsclar_space_path,
+                        const poset_path& xscalar_space_path,
                         bool xauto_access);
   
   //============================================================================

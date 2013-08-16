@@ -82,7 +82,9 @@ new_table(namespace_type& xns, const poset_path& xpath,
   require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
   require(unexecutable("fiber schema specified by xschema_path conforms to fiber_type::standard_schema_path"));
 
-  require(xns.path_is_auto_read_accessible<scalar_type::host_type>(xschema_path, xauto_access));
+  require(xns.path_is_auto_read_accessible<scalar_type::host_type>(xscalar_space_path, xauto_access));
+
+  require(unexecutable("schema.fiber_space.scalar_space_path == scalar_space.schema.fiber_space.path"));
 
   // Body:
 
@@ -101,11 +103,15 @@ new_table(namespace_type& xns, const poset_path& xpath,
     lschema.get_read_access();
   }
 
-  // The table dof map for a section space is the same as the table dof map
+  // The table dof map for a section space is mostly the same as the table dof map
   // of the fiber schema, so just copy it. Have to new it because poset_state keeps a pointer.
 
   array_poset_dof_map& lfiber_map = lschema.fiber_space().table_dof_map();
   array_poset_dof_map* lmap = new array_poset_dof_map(lfiber_map);
+
+  // Replace the fiber scalar space path with the section scalar space path.
+
+  lmap.put_pof("scalar_space_path", xscalar_space_path);
   
   // Create the state.
 
@@ -122,10 +128,8 @@ new_table(namespace_type& xns, const poset_path& xpath,
   ensure(xns.member_poset(xpath, xauto_access).state_is_not_read_accessible());
   ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == xschema_path);
 
-  // Unexecutable because no operator== for array_poset_dof_map.
-  ensure(unexecutable("table dof map of result is copy of table dof map of fiber space"));
-
-  ensure(xns.member_poset(xpath, xauto_access).scalar_space_path(true) == xscalar_space_path);
+  ensure(unexecutable("result.factor_ct == result.fiber_space.factor_ct"));
+  ensure(xns.member_poset<sec_vd_space>(xpath, xauto_access).scalar_space_path(true) == xscalar_space_path);
 
   // Exit:
 

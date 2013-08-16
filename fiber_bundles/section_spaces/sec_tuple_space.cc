@@ -109,8 +109,8 @@ new_table(namespace_type& xns, const poset_path& xpath, const poset_path& xschem
   ensure(xns.member_poset(xpath, xauto_access).state_is_not_read_accessible());
   ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == xschema_path);
 
-  // Unexecutable because no operator== for array_poset_dof_map.
-  ensure(unexecutable("table dof map of result is copy of table dof map of fiber space"));
+  ensure(unexecutable("result.factor_ct == result.fiber_space.factor_ct"));
+  
 
   // Exit:
 

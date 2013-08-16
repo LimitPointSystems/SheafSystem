@@ -62,9 +62,9 @@ public:
   typedef tp fiber_type;
 
   ///
-  /// The scalar type definition.
+  /// The type of vector sections that form the domain of tensor sections of this type.
   ///
-  typedef sec_tp scalar_type;
+  typedef sec_at1 vector_type;
 
   ///
   /// The table dofs type defined by the standard schema.
@@ -75,6 +75,17 @@ public:
   /// Creates an arg list which conforms to the schema of this.
   ///
   static arg_list make_arg_list(int xp, const poset_path& xvector_space_path);
+
+  ///
+  /// Creates a new sec_tp_space in namespace xns with path xpath,
+  /// schema specified by xschema_path, and vector space specified
+  /// by xvector_space_path.
+  ///
+  static void new_table(namespace_type& xhost, 
+                        const poset_path& xpath, 
+                        const poset_path& xschema_path,
+                        const poset_path& xvector_space_path,
+                        bool xauto_access);
   
   //============================================================================
   // TABLE DOFS

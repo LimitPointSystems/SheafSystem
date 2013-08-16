@@ -29,7 +29,54 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 //==============================================================================
 // CLASS SEC_VD
 //==============================================================================
+// ===========================================================
+// HOST FACTORY FACET
+// ===========================================================
 
+// PUBLIC MEMBER FUNCTIONS
+
+void
+fiber_bundle::sec_vd::
+new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xschema_path, bool xauto_access)
+{
+  // cout << endl << "Entering sec_vd::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(unexecutable("fiber schema specified by xschema_path conforms to fiber_type::standard_schema_path"));
+  
+
+  // Body:
+
+  host_type::new_table(xns, xhost_path, xschema_path, xscalar_space_path, xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.contains_path(xhost_path, xauto_access));
+  ensure(xns.member_poset(xhost_path, xauto_access).state_is_not_read_accessible());
+  ensure(xns.member_poset(xhost_path, xauto_access).schema(true).path(true) == xschema_path);
+
+
+  ensure(unexecutable("result.factor_ct == result.fiber_space.factor_ct"));
+  ensure(xns.member_poset<sec_vd_space>(xhost_path, xauto_access).scalar_space_path(true) == xscalar_space_path);
+
+  // Exit:
+
+  // cout << "Leaving sec_vd::new_host." << endl;
+  return;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+ 
 //==============================================================================
 // VD FACET OF CLASS SEC_VD
 //==============================================================================

@@ -78,14 +78,13 @@ public:
   static const poset_path& standard_rep_path();
 
   ///
-  /// The standard path with poset name suffix xsuffix for host spaces for type F..
+  /// The standard host path for fiber types with class name xclass_name and suffix xsuffix..
   ///
   static const poset_path& standard_host_path(const string& xclass_name, const string& xsuffix);
 
   ///
   /// Manual, shallow factory method; creates a new host table for members of this type.
-  /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
-  /// and table attribute factor_ct specified by xfactor_ct.
+  /// The poset is created in namespace xns with path xhost_path and schema specified by xschema_path,
   ///
   static void new_host(namespace_type& xns, 
                        const poset_path& xhost_path, 
