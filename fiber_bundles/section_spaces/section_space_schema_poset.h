@@ -213,20 +213,6 @@ public:
   /// The fiber space for section spaces on this schema, const version.
   ///
   const poset& fiber_space() const;
-
-  ///
-  /// The fiber space for section spaces on this schema,
-  /// downcast to fiber space type F.
-  ///
-  template<typename F>
-  F& fiber_space();
-
-  ///
-  /// The fiber space for section spaces on this schema,
-  /// downcast to fiber space type F, const version.
-  ///
-  template<typename F>
-  const F& fiber_space() const;
   
   ///
   /// The discretization subposet for section spaces on this schema.

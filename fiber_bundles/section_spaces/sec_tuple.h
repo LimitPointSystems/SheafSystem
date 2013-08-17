@@ -80,16 +80,16 @@ public:
   ///
   /// The standard host path for fiber types with class name xclass_name and suffix xsuffix..
   ///
-  static const poset_path& standard_host_path(const string& xclass_name, const string& xsuffix);
+  static poset_path standard_host_path(const string& xclass_name, const string& xsuffix);
 
   ///
   /// Manual, shallow factory method; creates a new host table for members of this type.
   /// The poset is created in namespace xns with path xhost_path and schema specified by xschema_path,
   ///
-  static void new_host(namespace_type& xns, 
-                       const poset_path& xhost_path, 
-                       const poset_path& xschema_path,
-                       bool xauto_access);
+  static host_type& new_host(namespace_type& xns, 
+                             const poset_path& xhost_path, 
+                             const poset_path& xschema_path,
+                             bool xauto_access);
 
 protected:
 

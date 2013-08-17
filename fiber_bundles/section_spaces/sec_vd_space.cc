@@ -12,13 +12,20 @@
 
 #include "abstract_poset_member.impl.h"
 #include "assert_contract.h"
+#include "binary_section_space_schema_member.h"
+#include "binary_section_space_schema_poset.h"
+#include "fiber_bundles_namespace.h"
 #include "namespace_poset.impl.h"
 #include "namespace_poset_member.h"
 #include "poset_handle_factory.h"
+#include "sec_at0.h"
 #include "sec_at0_space.h"
+#include "sec_at1.h"
 #include "sec_at1_space.h"
 #include "sec_vd.h"
+#include "section_space_schema_member.impl.h"
 #include "section_space_schema_poset.h"
+#include "vd.h"
 #include "vd_space.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
@@ -76,14 +83,19 @@ same_scalar_fiber_space(const namespace_poset& xns,
 
   require(xns.state_is_auto_read_accessible(xauto_access));
   require(xns.path_is_auto_read_accessible<section_space_schema_poset>(xschema_path, xauto_access));
-  require(xns.path_is_auto_read_accessible<scalar_type::host_type>>(xscalar_space_path, xauto_access));
+  require(xns.path_is_auto_read_accessible<scalar_type::host_type>(xscalar_space_path, xauto_access));
   
   // Body:
 
   section_space_schema_poset& lschema_host = xns.member_poset<section_space_schema_poset>(xschema_path, xauto_access);
   scalar_type::host_type& lscalar_host = xns.member_poset<scalar_type::host_type>(xschema_path, xauto_access);
 
-  bool result = (lschema_host.fiber_space().scalar_space_path(xauto_access) == lscalar_host.schema().fiber_space().path(xauto_access));
+  fiber_type::host_type* lfiber_space = dynamic_cast<fiber_type::host_type*>(&lschema_host.fiber_space());
+  bool result = false;
+  if(lfiber_space != 0)
+  {
+    result = lfiber_space->scalar_space_path(xauto_access) == lscalar_host.schema().fiber_space().path(xauto_access);
+  }
 
   // Postconditions:
 
@@ -95,7 +107,8 @@ same_scalar_fiber_space(const namespace_poset& xns,
 }
 
 
-void
+
+fiber_bundle::sec_vd_space&
 fiber_bundle::sec_vd_space::
 new_table(namespace_type& xns, const poset_path& xpath, 
           const poset_path& xschema_path,
@@ -106,13 +119,14 @@ new_table(namespace_type& xns, const poset_path& xpath,
 
   // Preconditions:
 
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
 
   require(!xpath.empty());
   require(!xns.contains_path(xpath, xauto_access));
 
   require(xschema_path.full());
-  require(xns.path_is_auto_read_accessible<<schema_type::host_type>>(xschema_path, xauto_access));
-  require(fiber_schema_conforms(xns, xschema_path, xauto_access));
+  require(xns.path_is_auto_read_accessible<schema_type::host_type>(xschema_path, xauto_access));
+  require(fiber_schema_conforms(xns, xschema_path, fiber_type::standard_schema_path(), xauto_access));
 
   require(xns.path_is_auto_read_accessible<scalar_type::host_type>(xscalar_space_path, xauto_access));
 
@@ -124,7 +138,7 @@ new_table(namespace_type& xns, const poset_path& xpath,
 
   typedef sec_vd_space table_type;
 
-  table_type* ltable = new table_type();
+  table_type& result = *(new table_type());
 
   // Create a handle of the right type for the schema member.
 
@@ -143,11 +157,11 @@ new_table(namespace_type& xns, const poset_path& xpath,
 
   // Replace the fiber scalar space path with the section scalar space path.
 
-  lmap.put_pof("scalar_space_path", xscalar_space_path);
+  lmap->put_dof("scalar_space_path", xscalar_space_path);
   
   // Create the state.
 
-  ltable->new_state(xns, xpath, lschema, *lmap);
+  result.new_state(xns, xpath, lschema, *lmap);
 
   if(xauto_access)
   {
@@ -156,17 +170,19 @@ new_table(namespace_type& xns, const poset_path& xpath,
 
   // Postconditions:
 
-  ensure(xns.contains_path(xpath, xauto_access));
-  ensure(xns.member_poset(xpath, xauto_access).state_is_not_read_accessible());
-  ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == xschema_path);
+  //  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xpath);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
 
-  ensure(unexecutable("result.factor_ct == result.fiber_space.factor_ct"));
-  ensure(xns.member_poset<sec_vd_space>(xpath, xauto_access).scalar_space_path(true) == xscalar_space_path);
+  ensure(result.factor_ct(true) == result.schema(true).fiber_space<fiber_type::host_type>().factor_ct(xauto_access));
+  ensure(result.d(true) == result.schema(true).fiber_space<fiber_type::host_type>().d(xauto_access));
+  ensure(result.scalar_space_path(true) == xscalar_space_path);
 
   // Exit:
 
   // cout << "Leaving sec_vd_space::new_table." << endl;
-  return;
+  return result;
 }
 
 //==============================================================================

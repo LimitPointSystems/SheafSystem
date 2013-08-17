@@ -302,6 +302,20 @@ public:
   const poset& fiber_space() const;
 
   ///
+  /// The fiber space for section spaces on this schema,
+  /// downcast to fiber space type F.
+  ///
+  template<typename F>
+  F& fiber_space();
+
+  ///
+  /// The fiber space for section spaces on this schema,
+  /// downcast to fiber space type F, const version.
+  ///
+  template<typename F>
+  const F& fiber_space() const;
+
+  ///
   /// The dimension of the base space component.
   ///
   int db() const;

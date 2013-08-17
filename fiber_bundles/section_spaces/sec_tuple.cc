@@ -12,9 +12,12 @@
 
 #include "assert_contract.h"
 #include "fiber_bundles_namespace.h"
+#include "section_space_schema_member.impl.h"
 #include "section_space_schema_poset.h"
-
 #include "sec_tuple_space.h"
+#include "tuple.h"
+#include "tuple_space.h"
+
 
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
@@ -68,7 +71,7 @@ standard_host_path(const string& xclass_name, const string& xsuffix)
   return result;
 }
 
-void
+fiber_bundle::sec_tuple::host_type&
 fiber_bundle::sec_tuple::
 new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xschema_path, bool xauto_access)
 {
@@ -88,20 +91,21 @@ new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xs
 
   // Body:
 
-  host_type::new_table(xns, xhost_path, xschema_path, xauto_access);
+  host_type& result = host_type::new_table(xns, xhost_path, xschema_path, xauto_access);
 
   // Postconditions:
 
-  ensure(xns.contains_path(xhost_path, xauto_access));
-  ensure(xns.member_poset(xhost_path, xauto_access).state_is_not_read_accessible());
-  ensure(xns.member_poset(xhost_path, xauto_access).schema(true).path(true) == xschema_path);
+  //  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
 
-  ensure(unexecutable("result.factor_ct == result.fiber_space.factor_ct"));
+  ensure(result.factor_ct(true) == result.schema(true).fiber_space<fiber_type::host_type>().factor_ct(xauto_access));
 
   // Exit:
 
   // cout << "Leaving sec_tuple::new_host." << endl;
-  return;
+  return result;
 }
 
 // PROTECTED MEMBER FUNCTIONS

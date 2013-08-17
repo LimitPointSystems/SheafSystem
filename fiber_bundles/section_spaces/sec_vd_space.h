@@ -77,10 +77,10 @@ public:
   static arg_list make_arg_list(const poset_path& xscalar_space_path);
 
   ///
-  /// True if and only if the scalar space of the fiber space of
-  /// the schema specified by xschema_path is the same as the
-  /// fiber space of the schema of the scalar section space specified
-  /// by xscalar_space_path.
+  /// True if and only if scalar space of fiber space == fiber space of scalar space. 
+  /// More precisely, true if and only if the scalar space of the fiber space of the 
+  /// vector section schema specified by  xschema_path is the same as the fiber space 
+  /// of the schema of the scalar section space specified by xscalar_space_path.
   ///
   static bool same_scalar_fiber_space(const namespace_poset& xns, 
                                       const poset_path& xschema_path, 
@@ -92,11 +92,11 @@ public:
   /// schema specified by xschema_path, and scalar space specified
   /// by xscalar_space_path.
   ///
-  static void new_table(namespace_type& xhost, 
-                        const poset_path& xpath, 
-                        const poset_path& xschema_path,
-                        const poset_path& xscalar_space_path,
-                        bool xauto_access);
+  static sec_vd_space& new_table(namespace_type& xhost, 
+                                 const poset_path& xpath, 
+                                 const poset_path& xschema_path,
+                                 const poset_path& xscalar_space_path,
+                                 bool xauto_access);
   
   //============================================================================
   // TABLE DOFS

@@ -12,11 +12,18 @@
 
 #include "abstract_poset_member.impl.h"
 #include "assert_contract.h"
+#include "binary_section_space_schema_member.h"
+#include "fiber_bundles_namespace.h"
 #include "namespace_poset.impl.h"
 #include "namespace_poset_member.h"
 #include "poset_handle_factory.h"
+#include "sec_at1.h"
+#include "sec_at1_space.h"
 #include "sec_tp.h"
+#include "section_space_schema_member.impl.h"
 #include "section_space_schema_poset.h"
+#include "tp.h"
+#include "tp_space.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
@@ -58,7 +65,8 @@ make_arg_list(int xp, const poset_path& xvector_space_path)
 }
 
 
-void
+
+fiber_bundle::sec_tp_space&
 fiber_bundle::sec_tp_space::
 new_table(namespace_type& xns, const poset_path& xpath, 
           const poset_path& xschema_path,
@@ -75,13 +83,11 @@ new_table(namespace_type& xns, const poset_path& xpath,
 
   require(xschema_path.full());
   require(xns.path_is_auto_read_accessible<section_space_schema_poset>(xschema_path, xauto_access));
-  require(fiber_space(xns, xschema_path, xauto_access).schema(xauto_access).conforms_to(fiber_type::standard_schema_path()));
+  require(fiber_schema_conforms(xns, xschema_path, fiber_type::standard_schema_path(), xauto_access));
 
   require(xns.path_is_auto_read_accessible<vector_type::host_type>(xvector_space_path, xauto_access));
 
-  require(unexecutable("schema.fiber_space.vector_space_path == vector_space.schema.fiber_space.path"));
-  require<xns.member_poset<vector_type::host_type>(xvector_space_path, xauto_access).schema(xauto_access).fiber_space<vector_type::fiber_type::host_type>().vector_space_path(xauto_access) ==
-    
+  require(same_vector_fiber_space(xns, xschema_path, xvector_space_path, xauto_access));
 
   // Body:
 
@@ -89,7 +95,7 @@ new_table(namespace_type& xns, const poset_path& xpath,
 
   typedef sec_tp_space table_type;
 
-  table_type* ltable = new table_type();
+  table_type& result = *(new table_type());
 
   // Create a handle of the right type for the schema member.
 
@@ -113,15 +119,15 @@ new_table(namespace_type& xns, const poset_path& xpath,
 
   // Replace the fiber scalar space path with the section scalar space path.
 
-  lmap.put_pof("scalar_space_path", lscalar_space_path);
+  lmap->put_dof("scalar_space_path", lscalar_space_path);
 
   // Replace the fiber vector space path with the section vector space path.
 
-  lmap.put_pof("vector_space_path", xvector_space_path);
+  lmap->put_dof("vector_space_path", xvector_space_path);
   
   // Create the state.
 
-  ltable->new_state(xns, xpath, lschema, *lmap);
+  result.new_state(xns, xpath, lschema, *lmap);
 
   if(xauto_access)
   {
@@ -130,27 +136,23 @@ new_table(namespace_type& xns, const poset_path& xpath,
 
   // Postconditions:
 
-  ensure(xns.contains_path(xpath, xauto_access));
-  ensure(xns.member_poset(xpath, xauto_access).state_is_not_read_accessible());
-  ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == xschema_path);
+  //  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xpath);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
 
-  ensure(unexecutable("result.factor_ct == result.fiber_space.factor_ct"));
-
-  ensure(unexecutable("result.d == result.fiber_space.d"));
-
-  ensure(xns.member_poset<sec_tp_space>(xpath, xauto_access).scalar_space_path(true) == 
+  ensure(result.factor_ct(true) == result.schema(true).fiber_space<fiber_type::host_type>().factor_ct(xauto_access));
+  ensure(result.d(true) == result.schema(true).fiber_space<fiber_type::host_type>().d(xauto_access));
+  ensure(result.scalar_space_path(true) == 
          xns.member_poset<vector_type::host_type>(xvector_space_path, xauto_access).scalar_space_path(xauto_access));
-
-  ensure(unexecutable("result.p == result.fiber_space.p"));
-
-  ensure(unexecutable("result.dd == result.fiber_space.dd"));
-
-  ensure(xns.member_poset<sec_tp_space>(xpath, xauto_access).vector_space_path(true) == xvector_space_path);
+  ensure(result.p(true) == result.schema(true).fiber_space<fiber_type::host_type>().p(xauto_access));
+  ensure(result.dd(true) == result.schema(true).fiber_space<fiber_type::host_type>().dd(xauto_access));
+  ensure(result.vector_space_path(true) == xvector_space_path);
 
   // Exit:
 
   // cout << "Leaving sec_tp_space::new_table." << endl;
-  return;
+  return result;
 }
 
 

@@ -393,16 +393,6 @@ public:
   ///
   poset_path vector_space_path(bool xauto_access) const;
 
-//   ///
-//   /// Index of the underlying vector space.
-//   ///
-//   virtual pod_index_type vector_space_index() const;
-
-//   ///
-//   /// Index of the underlying vector space (auto-access version).
-//   ///
-//   virtual pod_index_type vector_space_index(bool xauto_access) const;
-
   ///
   /// The underlying vector space.
   ///

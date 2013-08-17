@@ -94,7 +94,7 @@ set(ADDITIONAL_INCS
     sec_st2.impl.h
     sec_stp.impl.h
     section_space_factory.impl.h 
-    section_space_schema_poset.impl.h
+    section_space_schema_member.impl.h
     sec_tp.impl.h
     sec_vd.impl.h 
     sec_rep_descriptor_table_dofs_type.h 
