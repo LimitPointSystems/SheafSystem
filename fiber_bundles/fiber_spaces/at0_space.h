@@ -64,10 +64,14 @@ public:
   /// Creates a new at0_space in namespace xns with path xpath,
   /// and schema specified by xschema_path.
   ///
-  static void new_table(namespace_type& xhost, 
-                        const poset_path& xpath, 
-                        const poset_path& xschema_path,
-                        bool xauto_access);
+//   static void new_table(namespace_type& xhost, 
+//                         const poset_path& xpath, 
+//                         const poset_path& xschema_path,
+//                         bool xauto_access);
+  static at0_space& new_table(namespace_type& xhost, 
+			      const poset_path& xpath, 
+			      const poset_path& xschema_path,
+			      bool xauto_access); // kab new
   
 protected:
 

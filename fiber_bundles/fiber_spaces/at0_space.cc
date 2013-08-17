@@ -97,7 +97,8 @@ make_arg_list()
   return result;
 }
 
-void
+// void
+fiber_bundle::at0_space& // kab new
 fiber_bundle::at0_space::
 new_table(namespace_type& xns, 
           const poset_path& xpath, 
@@ -164,24 +165,41 @@ new_table(namespace_type& xns,
     lschema.release_access();
   }
 
+  at0_space& result = *ltable; // kab new
 
   // Postconditions:
 
-  ensure(xns.contains_path(xpath, xauto_access));
-  ensure(xns.member_poset(xpath, xauto_access).state_is_not_read_accessible());
-  ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == xschema_path);
+//   ensure(xns.contains_path(xpath, xauto_access));
+//   ensure(xns.member_poset(xpath, xauto_access).state_is_not_read_accessible());
+//   ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == xschema_path);
 
-  ensure(xns.member_poset<at0_space>(xpath, xauto_access).factor_ct(true) == 1);
-  ensure(xns.member_poset<at0_space>(xpath, xauto_access).d(true) == 1);
-  ensure(xns.member_poset<at0_space>(xpath, xauto_access).scalar_space_path(true) == xpath);
-  ensure(xns.member_poset<at0_space>(xpath, xauto_access).p(true) == 0);
-  ensure(xns.member_poset<at0_space>(xpath, xauto_access).dd(true) == 1);
-  ensure(xns.member_poset<at0_space>(xpath, xauto_access).vector_space_path(true) == xpath );
+//   ensure(xns.member_poset<at0_space>(xpath, xauto_access).factor_ct(true) == 1);
+//   ensure(xns.member_poset<at0_space>(xpath, xauto_access).d(true) == 1);
+//   ensure(xns.member_poset<at0_space>(xpath, xauto_access).scalar_space_path(true) == xpath);
+//   ensure(xns.member_poset<at0_space>(xpath, xauto_access).p(true) == 0);
+//   ensure(xns.member_poset<at0_space>(xpath, xauto_access).dd(true) == 1);
+//   ensure(xns.member_poset<at0_space>(xpath, xauto_access).vector_space_path(true) == xpath );
+
+  // kab begin
+
+  ensure(xns.owns(result));
+  ensure(result.path(true) == xpath);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(true) == xschema_path);
+
+  ensure(result.factor_ct(true) == 1);
+  ensure(result.d(true) == 1);
+  ensure(result.scalar_space_path(true) == xpath);
+  ensure(result.p(true) == 0);
+  ensure(result.dd(true) == 1);
+  ensure(result.vector_space_path(true) == xpath );
+
+  // kab end
 
   // Exit:
 
   // cout << "Leaving at0_space::new_table." << endl;
-  return;
+  return result;
 } 
 
 // ===========================================================
