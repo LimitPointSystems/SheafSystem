@@ -102,7 +102,7 @@ make_arg_list(const poset_path& xscalar_space_path)
 }
 
 
-void
+fiber_bundle::vd_space&
 fiber_bundle::vd_space::
 new_table(namespace_type& xns, 
           const poset_path& xpath, 
@@ -163,21 +163,23 @@ new_table(namespace_type& xns,
     lschema.release_access();
   }
 
+  vd_space& result = *ltable;
 
   // Postconditions:
 
-  ensure(xns.contains_path(xpath, xauto_access));
-  ensure(xns.member_poset(xpath, xauto_access).state_is_not_read_accessible());
-  ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == xschema_path);
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xpath);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
 
-  ensure(xns.member_poset<vd_space>(xpath, xauto_access).factor_ct(true) == xns.member_poset<vd_space>(xpath, xauto_access).d(true));
-  ensure(xns.member_poset<vd_space>(xpath, xauto_access).d(true) == schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access));
-  ensure(xns.member_poset<vd_space>(xpath, xauto_access).scalar_space_path(true) == xscalar_space_path );
+  ensure(result.factor_ct(true) == result.d(true));
+  ensure(result.d(true) == schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access));
+  ensure(result.scalar_space_path(true) == xscalar_space_path );
 
   // Exit:
 
   // cout << "Leaving vd_space::new_table." << endl;
-  return;
+  return result;
 } 
 
 int

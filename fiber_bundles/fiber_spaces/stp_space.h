@@ -75,12 +75,12 @@ public:
   /// p and vector_space_path specified by xp and xvector_space_path,
   /// respectively.
   ///
-  static void new_table(namespace_type& xhost, 
-                        const poset_path& xpath, 
-                        const poset_path& xschema_path,
-                        int xp,
-                        const poset_path& xvector_space_path,
-                        bool xauto_access);
+  static stp_space& new_table(namespace_type& xhost, 
+			      const poset_path& xpath, 
+			      const poset_path& xschema_path,
+			      int xp,
+			      const poset_path& xvector_space_path,
+			      bool xauto_access);
   
 protected:
 

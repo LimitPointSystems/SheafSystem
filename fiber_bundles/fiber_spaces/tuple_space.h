@@ -85,11 +85,11 @@ public:
   /// schema specified by xschema_path, and table attribute 
   /// factor_ct specified by xfactor_ct.
   ///
-  static void new_table(namespace_type& xhost, 
-                        const poset_path& xpath, 
-                        const poset_path& xschema_path,
-                        int xfactor_ct,
-                        bool xauto_access);
+  static tuple_space& new_table(namespace_type& xhost, 
+				const poset_path& xpath, 
+				const poset_path& xschema_path,
+				int xfactor_ct,
+				bool xauto_access);
   
   //============================================================================
   // TABLE DOFS

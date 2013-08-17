@@ -427,15 +427,11 @@ public:
   SHEAF_DLL_SPEC
   bool contains_poset(const poset_path& xpath, bool xauto_access = true) const;
 
-  // kab begin
-
   ///
   /// True if and only if this contains the poset xposet.
   /// synonym for contains_poset(xposet.poset_path(true), xauto_access)
   ///
   bool owns(const poset_state_handle& xposet, bool xauto_access) const;
-
-  // kab end
 
   ///
   /// True if the poset referred to by xpath is read accessible.

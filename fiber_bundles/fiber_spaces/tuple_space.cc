@@ -93,7 +93,7 @@ make_arg_list(int xfactor_ct)
   return result;
 }
 
-void
+fiber_bundle::tuple_space&
 fiber_bundle::tuple_space::
 new_table(namespace_type& xns, const poset_path& xpath, const poset_path& xschema_path, int xfactor_ct, bool xauto_access)
 {
@@ -144,19 +144,21 @@ new_table(namespace_type& xns, const poset_path& xpath, const poset_path& xschem
     lschema.release_access();
   }
 
+  tuple_space& result = *ltable;
 
   // Postconditions:
 
-  ensure(xns.contains_path(xpath, xauto_access));
-  ensure(xns.member_poset(xpath, xauto_access).state_is_not_read_accessible());
-  ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == xschema_path);
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xpath);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
 
-  ensure(xns.member_poset<tuple_space>(xpath, xauto_access).factor_ct(true) == xfactor_ct);
+  ensure(result.factor_ct(true) == xfactor_ct);
 
   // Exit:
 
   // cout << "Leaving tuple_space::new_table." << endl;
-  return;
+  return result;
 }
 
 int

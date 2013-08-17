@@ -142,7 +142,7 @@ d(const namespace_poset& xns, int xp, const poset_path& xvector_space_path, bool
   return result;
 }
 
-void
+fiber_bundle::tp_space&
 fiber_bundle::tp_space::
 new_table(namespace_type& xns, 
           const poset_path& xpath, 
@@ -217,34 +217,26 @@ new_table(namespace_type& xns,
     lschema.release_access();
   }
 
+  tp_space& result = *ltable;
 
   // Postconditions:
 
-  ensure(xns.contains_path(xpath, xauto_access));
-  ensure(xns.member_poset(xpath, xauto_access).state_is_not_read_accessible());
-  ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == xschema_path);
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xpath);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
 
-  ensure(xns.member_poset<tp_space>(xpath, xauto_access).factor_ct(true) == 
-         xns.member_poset<tp_space>(xpath, xauto_access).d(true));
-
-  ensure(xns.member_poset<tp_space>(xpath, xauto_access).d(true) == 
-         d(xns, xschema_path, xauto_access));
-
-  ensure(xns.member_poset<tp_space>(xpath, xauto_access).scalar_space_path(true) == 
-         xns.member_poset<vector_space_type>(xvector_space_path, xauto_access).scalar_space_path(xauto_access) );
-
-  ensure(xns.member_poset<tp_space>(xpath, xauto_access).p(true) == xp);
-
-  ensure(xns.member_poset<tp_space>(xpath, xauto_access).dd(true) == 
-         xns.member_poset<vector_space_type>(xvector_space_path, xauto_access).d());
-
-  ensure(xns.member_poset<tp_space>(xpath, xauto_access).vector_space_path(true) 
-         == xvector_space_path );
+  ensure(result.factor_ct(true) == result.d(true));
+  ensure(result.d(true) == d(xns, xschema_path, xauto_access));
+  ensure(result.scalar_space_path(true) == xns.member_poset<vector_space_type>(xvector_space_path, xauto_access).scalar_space_path(xauto_access) );
+  ensure(result.p(true) == xp);
+  ensure(result.dd(true) == xns.member_poset<vector_space_type>(xvector_space_path, xauto_access).d());
+  ensure(result.vector_space_path(true) == xvector_space_path );
 
   // Exit:
 
   // cout << "Leaving tp_space::new_table." << endl;
-  return;
+  return result;
 } 
 
 int

@@ -103,7 +103,7 @@ make_arg_list(const poset_path& xscalar_space_path)
   return result;
 }
 
-void
+fiber_bundle::at1_space&
 fiber_bundle::at1_space::
 new_table(namespace_type& xns, 
           const poset_path& xpath, 
@@ -176,32 +176,26 @@ new_table(namespace_type& xns,
     lschema.release_access();
   }
 
+  at1_space& result = *ltable;
 
   // Postconditions:
 
-  ensure(xns.contains_path(xpath, xauto_access));
-  ensure(xns.member_poset(xpath, xauto_access).state_is_not_read_accessible());
-  ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == xschema_path);
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xpath);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
 
-  ensure(xns.member_poset<at1_space>(xpath, xauto_access).factor_ct(true) == 
-         xns.member_poset<at1_space>(xpath, xauto_access).d(true));
-
-  ensure(xns.member_poset<at1_space>(xpath, xauto_access).d(true) == 
-         schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access));
-
-  ensure(xns.member_poset<at1_space>(xpath, xauto_access).scalar_space_path(true) == xscalar_space_path);
-
-  ensure(xns.member_poset<at1_space>(xpath, xauto_access).p(true) == 1);
-
-  ensure(xns.member_poset<at1_space>(xpath, xauto_access).dd(true) == 
-         xns.member_poset<at1_space>(xpath, xauto_access).d(true));
-
-  ensure(xns.member_poset<at1_space>(xpath, xauto_access).vector_space_path(true) == xpath );
+  ensure(result.factor_ct(true) == result.d(true));
+  ensure(result.d(true) == schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access));
+  ensure(result.scalar_space_path(true) == xscalar_space_path);
+  ensure(result.p(true) == 1);
+  ensure(result.dd(true) == result.d(true));
+  ensure(result.vector_space_path(true) == xpath );
 
   // Exit:
 
   // cout << "Leaving at1_space::new_table." << endl;
-  return;
+  return result;
 } 
 
 // ===========================================================

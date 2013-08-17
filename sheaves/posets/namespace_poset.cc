@@ -1435,8 +1435,6 @@ contains_poset(const poset_path& xpath, bool xauto_access) const
   return result;
 }
 
-// kab begin
-
 bool
 sheaf::namespace_poset::
 owns(const poset_state_handle& xposet, bool xauto_access) const
@@ -1457,8 +1455,6 @@ owns(const poset_state_handle& xposet, bool xauto_access) const
 
   return result;
 }
-
-// kab end
 
 bool
 sheaf::namespace_poset::
