@@ -13,16 +13,143 @@
 #include "sec_at0.h"
 
 #include "assert_contract.h"
-#include "namespace_poset.h"
+#include "base_space_poset.h"
+#include "binary_section_space_schema_member.h"
+#include "binary_section_space_schema_poset.h"
+#include "fiber_bundles_namespace.h"
 #include "index_space_iterator.h"
 #include "sec_at0_space.h"
+#include "sec_at1_space.h"
+#include "sec_rep_descriptor_poset.h"
+#include "sec_tuple_space.impl.h"
+#include "section_space_schema_member.impl.h"
+#include "section_space_schema_poset.h"
+#include "at0.h"
+#include "at0_space.h"
+
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //==============================================================================
 // CLASS SEC_AT0
 //==============================================================================
+// ===========================================================
+// HOST FACTORY FACET OF CLASS SEC_AT0
+// ===========================================================
 
+// PUBLIC MEMBER FUNCTIONS
+
+fiber_bundle::sec_at0::host_type&
+fiber_bundle::sec_at0::
+new_host(namespace_type& xns, 
+         const poset_path& xhost_path, 
+         const poset_path& xschema_path, 
+         bool xauto_access)
+{
+  // cout << endl << "Entering sec_at0::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible<schema_type::host_type>(xschema_path, xauto_access));
+  require(host_type::fiber_space_conforms<fiber_type::host_type>(xns, xschema_path, xauto_access));
+
+  // Body:
+
+  host_type& result = host_type::new_table(xns, xhost_path, xschema_path, xauto_access);
+
+  // Postconditions:
+
+  //  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(result.factor_ct(true) == result.schema(true).fiber_space<fiber_type::host_type>().factor_ct(xauto_access));
+  ensure(result.d(true) == result.schema(true).fiber_space<fiber_type::host_type>().d(xauto_access));
+  ensure(result.d(true) == result.dd(true));
+  ensure(result.d(true) == 1);
+  ensure(result.scalar_space_path(true) == xhost_path);
+  ensure(result.p(true) == result.schema(true).fiber_space<fiber_type::host_type>().p(xauto_access));
+  ensure(result.p(true) == 0);
+  ensure(result.dd(true) == result.schema(true).fiber_space<fiber_type::host_type>().dd(xauto_access));
+  ensure(result.dd(true) == 1);
+  ensure(result.vector_space_path(true) == xhost_path);
+
+  // Exit:
+
+  // cout << "Leaving sec_at0::new_host." << endl;
+  return result;
+}
+
+fiber_bundle::sec_at0::host_type&
+fiber_bundle::sec_at0::
+new_host(namespace_type& xns, 
+         const poset_path& xbase_space_path, 
+         const poset_path& xrep_path, 
+         const string& xsection_suffix, 
+         const string& xfiber_suffix, 
+         bool xauto_access)
+{
+  // cout << endl << "Entering sec_at0::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(xbase_space_path.full());
+  require(xns.contains_path<base_space_poset>(xbase_space_path));
+
+  require(xrep_path.full());
+  require(xns.contains_path<sec_rep_descriptor_poset>(xrep_path));  
+
+  require(xsection_suffix.empty() || poset_path::is_valid_name(xsection_suffix));
+
+  require(xfiber_suffix.empty() || poset_path::is_valid_name(xfiber_suffix));
+
+  // !!!! start here - need templated standard_host_path sec_tuple, section_space_schema_member, and maybe in tuple.
+
+  require(!xns.contains_path(standard_host_path<fiber_type>(xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix), xauto_access));
+
+  require(xns.path_is_auto_read_available<schema_type::host_type>(schema_type::standard_host_path(xbase_space_path, fiber_type::static_class_name(), xrep_path), xauto_access));
+  
+  // Body:
+
+  host_type& result = host_type::new_table(xns, xhost_path, xschema_path, xauto_access);
+
+  // Postconditions:
+
+  //  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(result.factor_ct(true) == result.schema(true).fiber_space<fiber_type::host_type>().factor_ct(xauto_access));
+  ensure(result.d(true) == result.schema(true).fiber_space<fiber_type::host_type>().d(xauto_access));
+  ensure(result.d(true) == result.dd(true));
+  ensure(result.d(true) == 1);
+  ensure(result.scalar_space_path(true) == xhost_path);
+  ensure(result.p(true) == result.schema(true).fiber_space<fiber_type::host_type>().p(xauto_access));
+  ensure(result.p(true) == 0);
+  ensure(result.dd(true) == result.schema(true).fiber_space<fiber_type::host_type>().dd(xauto_access));
+  ensure(result.dd(true) == 1);
+  ensure(result.vector_space_path(true) == xhost_path);
+
+  // Exit:
+
+  // cout << "Leaving sec_at0::new_host." << endl;
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+ 
 //==============================================================================
 // AT0 FACET OF CLASS SEC_AT0
 //==============================================================================

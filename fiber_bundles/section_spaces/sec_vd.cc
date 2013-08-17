@@ -12,6 +12,8 @@
 #include "array_section_dof_map.h"
 #include "assert_contract.h"
 #include "at0.h"
+#include "binary_section_space_schema_member.h"
+#include "binary_section_space_schema_poset.h"
 #include "chart_point.h"
 #include "eval_family.h"
 #include "eval_iterator.h"
@@ -19,6 +21,7 @@
 #include "index_space_iterator.h"
 #include "namespace_poset.h"
 #include "sec_at0.h"
+#include "sec_tuple_space.impl.h"
 #include "sec_vd_space.h"
 #include "section_evaluator.h"
 #include "section_space_schema_member.impl.h"
@@ -55,8 +58,8 @@ new_host(namespace_type& xns,
   require(!xns.contains_path(xhost_path, xauto_access));
 
   require(xschema_path.full());
-  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
-  require(host_type::fiber_schema_conforms(xns, xschema_path, fiber_type::standard_schema_path(), xauto_access));
+  require(xns.path_is_auto_read_accessible<schema_type::host_type>(xschema_path, xauto_access));
+  require(host_type::fiber_space_conforms<fiber_type::host_type>(xns, xschema_path, xauto_access));
 
   require(xns.path_is_auto_read_accessible<scalar_type::host_type>(xscalar_space_path, xauto_access));
 

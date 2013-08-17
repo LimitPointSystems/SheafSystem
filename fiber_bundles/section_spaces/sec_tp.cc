@@ -11,12 +11,15 @@
 #include "sec_tp.h"
 
 #include "assert_contract.h"
+#include "binary_section_space_schema_member.h"
+#include "binary_section_space_schema_poset.h"
 #include "fiber_bundles_namespace.h"
 #include "section_space_schema_member.impl.h"
 #include "section_space_schema_poset.h"
 #include "sec_at1.h"
 #include "sec_at1_space.h"
 #include "sec_tp_space.h"
+#include "sec_tuple_space.impl.h"
 #include "tp.h"
 #include "tp_space.h"
 
@@ -50,8 +53,8 @@ new_host(namespace_type& xns,
   require(!xns.contains_path(xhost_path, xauto_access));
 
   require(xschema_path.full());
-  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
-  require(host_type::fiber_schema_conforms(xns, xschema_path, fiber_type::standard_schema_path(), xauto_access));
+  require(xns.path_is_auto_read_accessible<schema_type::host_type>(xschema_path, xauto_access));
+  require(host_type::fiber_space_conforms<fiber_type::host_type>(xns, xschema_path, xauto_access));
 
   require(xns.path_is_auto_read_accessible<vector_space_type::host_type>(xvector_space_path, xauto_access));
 

@@ -11,10 +11,12 @@
 #include "sec_tuple.h"
 
 #include "assert_contract.h"
+#include "binary_section_space_schema_member.h"
+#include "binary_section_space_schema_poset.h"
 #include "fiber_bundles_namespace.h"
 #include "section_space_schema_member.impl.h"
 #include "section_space_schema_poset.h"
-#include "sec_tuple_space.h"
+#include "sec_tuple_space.impl.h"
 #include "tuple.h"
 #include "tuple_space.h"
 
@@ -54,17 +56,35 @@ standard_rep_path()
 
 sheaf::poset_path
 fiber_bundle::sec_tuple::
-standard_host_path(const string& xclass_name, const string& xsuffix)
+standard_host_path(const poset_path& xbase_path,
+                   const string& xfiber_name, 
+                   const poset_path& xrep_path, 
+                   const string& xsection_suffix)
 {
   // Preconditions:
 
-
+  require(xbase_path.full());
+  require(poset_path::is_valid_name(xfiber_name));
+  require(rep_path.full());
+  require(xsection_suffix.empty() || poset_path::is_valid_name(xsection_suffix));
+  
   // Body:
 
-  poset_path result(xclass_name + xsuffix, "");
+  string lposet_name(xfiber_name);
+  lposet_name += "_on_";
+  lposet_name += xbase_path.poset_name();
+  lposet_name += "_";
+  lposet_name += xbase_path.member_name();
+  lposet_name += "_";
+  lposet_name += xrep_path.member_name();
+  lposet_name += xsection_suffix;
+  
+  poset_path result(lposet_name, "");
 
   // Postconditions:
 
+  ensure(!result.empty());
+  ensure(!result.full());
   
   // Exit:
 
@@ -85,8 +105,8 @@ new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xs
   require(!xns.contains_path(xhost_path, xauto_access));
 
   require(xschema_path.full());
-  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
-  require(unexecutable("fiber schema specified by xschema_path conforms to fiber_type::standard_schema_path"));
+  require(xns.path_is_auto_read_accessible<schema_type::host_type>(xschema_path, xauto_access));
+  require(host_type::fiber_space_conforms<fiber_type::host_type>(xns, xschema_path, xauto_access));
   
 
   // Body:

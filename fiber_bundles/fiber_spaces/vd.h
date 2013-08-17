@@ -351,6 +351,11 @@ public:
   typedef vd_space host_type;
 
   ///
+  /// The type of scalar.
+  ///
+  typedef at0 scalar_type;
+
+  ///
   /// The path to the standard schema for this class.
   ///
   static const poset_path& standard_schema_path();
@@ -385,11 +390,6 @@ private:
 public:
 
   // Typedefs:
-
-  ///
-  /// The type of scalar.
-  ///
-  typedef at0 scalar_type;
 
   ///
   /// The type of the table dofs.

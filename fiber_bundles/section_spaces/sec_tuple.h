@@ -80,7 +80,10 @@ public:
   ///
   /// The standard host path for fiber types with class name xclass_name and suffix xsuffix..
   ///
-  static poset_path standard_host_path(const string& xclass_name, const string& xsuffix);
+  static poset_path standard_host_path(const poset_path& xbase_path,
+                                       const string& xfiber_name,
+                                       const poset_path& xrep_path,
+                                       const string& xsection_suffix);
 
   ///
   /// Manual, shallow factory method; creates a new host table for members of this type.

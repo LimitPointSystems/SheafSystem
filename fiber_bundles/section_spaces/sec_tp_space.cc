@@ -20,6 +20,7 @@
 #include "sec_at1.h"
 #include "sec_at1_space.h"
 #include "sec_tp.h"
+#include "sec_tuple_space.impl.h"
 #include "section_space_schema_member.impl.h"
 #include "section_space_schema_poset.h"
 #include "tp.h"
@@ -68,7 +69,8 @@ make_arg_list(int xp, const poset_path& xvector_space_path)
 
 fiber_bundle::sec_tp_space&
 fiber_bundle::sec_tp_space::
-new_table(namespace_type& xns, const poset_path& xpath, 
+new_table(namespace_type& xns, 
+          const poset_path& xpath, 
           const poset_path& xschema_path,
           const poset_path& xvector_space_path, 
           bool xauto_access)
@@ -82,8 +84,8 @@ new_table(namespace_type& xns, const poset_path& xpath,
   require(!xns.contains_path(xpath, xauto_access));
 
   require(xschema_path.full());
-  require(xns.path_is_auto_read_accessible<section_space_schema_poset>(xschema_path, xauto_access));
-  require(fiber_schema_conforms(xns, xschema_path, fiber_type::standard_schema_path(), xauto_access));
+  require(xns.path_is_auto_read_accessible<schema_type::host_type>(xschema_path, xauto_access));
+  require(fiber_space_conforms<fiber_type::host_type>(xns, xschema_path, xauto_access));
 
   require(xns.path_is_auto_read_accessible<vector_type::host_type>(xvector_space_path, xauto_access));
 
@@ -99,7 +101,7 @@ new_table(namespace_type& xns, const poset_path& xpath,
 
   // Create a handle of the right type for the schema member.
 
-  binary_section_space_schema_member lschema(xns, xschema_path, xauto_access);
+  schema_type lschema(xns, xschema_path, xauto_access);
 
   if(xauto_access)
   {

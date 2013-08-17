@@ -8,7 +8,7 @@
 /// @file
 /// Implementation for class sec_tuple_space.
 
-#include "sec_tuple_space.h"
+#include "sec_tuple_space.impl.h"
 
 #include "abstract_poset_member.impl.h"
 #include "assert_contract.h"
@@ -57,30 +57,6 @@ make_arg_list(int xfactor_ct)
 
   return result;
 }
-
-// const sheaf::poset&
-// fiber_bundle::sec_tuple_space::
-// fiber_space(const namespace_poset& xns, const poset_path& xschema_path, bool xauto_access)
-// {
-//   // cout << endl << "Entering sec_tuple_space::fiber_space." << endl;
-
-//   // Preconditions:
-
-//   require(xschema_path.full());
-//   require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
-
-//   // Body:
-
-//   const poset& result = xns.member_poset<section_space_schema_poset>(xschema_path, xauto_access).fiber_space();
-
-//   // Postconditions:
-
-
-//   // Exit:
-
-//   // cout << "Leaving sec_tuple_space::fiber_space." << endl;
-//   return result;
-// }
 
 bool
 fiber_bundle::sec_tuple_space::
@@ -132,7 +108,7 @@ new_table(namespace_type& xns, const poset_path& xpath, const poset_path& xschem
 
   require(xschema_path.full());
   require(xns.path_is_auto_read_accessible<schema_type::host_type>(xschema_path, xauto_access));
-  require(fiber_schema_conforms(xns, xschema_path, fiber_type::standard_schema_path(), xauto_access));
+  require(fiber_space_conforms<fiber_type::host_type>(xns, xschema_path, xauto_access));
 
   // Body:
 
@@ -144,7 +120,7 @@ new_table(namespace_type& xns, const poset_path& xpath, const poset_path& xschem
 
   // Create a handle of the right type for the schema member.
 
-  binary_section_space_schema_member lschema(xns, xschema_path, xauto_access);
+  schema_type lschema(xns, xschema_path, xauto_access);
 
   if(xauto_access)
   {

@@ -255,6 +255,11 @@ public:
   typedef tp_space host_type;
 
   ///
+  /// The type of the underlying vector space.
+  ///
+  typedef at1 vector_space_type;
+
+  ///
   /// The path to the standard schema for this class.
   ///
   static const poset_path& standard_schema_path();
@@ -290,11 +295,6 @@ private:
 public:
 
   // Typedefs:
-
-  ///
-  /// The type of the underlying vector space.
-  ///
-  typedef at1 vector_space_type;
 
   ///
   /// The associated volatile type.

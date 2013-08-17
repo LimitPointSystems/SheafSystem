@@ -40,9 +40,10 @@ class sec_at0_space;
 ///
 class SHEAF_DLL_SPEC sec_at0 : public sec_atp
 {
-  //============================================================================
-  /// @name AT0 FACET OF CLASS SEC_AT0
-  //============================================================================
+
+  // ===========================================================
+  /// @name HOST FACTORY FACET OF CLASS SEC_AT0
+  // ===========================================================
   //@{
 
 public:
@@ -58,6 +59,42 @@ public:
   /// The fiber type.
   ///
   typedef at0 fiber_type;
+
+  ///
+  /// Manual, shallow factory method; creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path and schema specified by xschema_path,
+  ///
+  static host_type& new_host(namespace_type& xns, 
+                             const poset_path& xhost_path, 
+                             const poset_path& xschema_path,
+                             bool xauto_access);
+
+  ///
+  /// Auto, deep factory method; creates a new host poset and any prerequisite posets
+  /// for members of this type. The poset is created in namespace xns with the 
+  /// standard_host_path for fiber_type, xbase_space_path, xrep_path, and xsection_suffix, 
+  /// and standard paths for prerequisites.
+  ///
+  static host_type& new_host(namespace_type& xns, 
+                             const poset_path& xbase_space_path,
+                             const poset_path& xrep_path,
+                             const string& xsection_suffix, 
+                             const string& xfiber_suffix, 
+                             bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+ 
+
+  //============================================================================
+  /// @name AT0 FACET OF CLASS SEC_AT0
+  //============================================================================
+  //@{
+
+public:
 
   ///
   /// Default constructor.

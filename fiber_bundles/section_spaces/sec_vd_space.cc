@@ -22,6 +22,7 @@
 #include "sec_at0_space.h"
 #include "sec_at1.h"
 #include "sec_at1_space.h"
+#include "sec_tuple_space.impl.h"
 #include "sec_vd.h"
 #include "section_space_schema_member.impl.h"
 #include "section_space_schema_poset.h"
@@ -126,7 +127,7 @@ new_table(namespace_type& xns, const poset_path& xpath,
 
   require(xschema_path.full());
   require(xns.path_is_auto_read_accessible<schema_type::host_type>(xschema_path, xauto_access));
-  require(fiber_schema_conforms(xns, xschema_path, fiber_type::standard_schema_path(), xauto_access));
+  require(fiber_space_conforms<fiber_type::host_type>(xns, xschema_path, xauto_access));
 
   require(xns.path_is_auto_read_accessible<scalar_type::host_type>(xscalar_space_path, xauto_access));
 
@@ -142,7 +143,7 @@ new_table(namespace_type& xns, const poset_path& xpath,
 
   // Create a handle of the right type for the schema member.
 
-  binary_section_space_schema_member lschema(xns, xschema_path, xauto_access);
+  schema_type lschema(xns, xschema_path, xauto_access);
 
   if(xauto_access)
   {
