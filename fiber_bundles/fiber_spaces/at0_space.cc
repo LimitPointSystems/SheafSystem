@@ -182,10 +182,10 @@ new_table(namespace_type& xns,
 
   // kab begin
 
-  ensure(xns.owns(result));
+  ensure(xns.owns(result, xauto_access));
   ensure(result.path(true) == xpath);
   ensure(result.state_is_not_read_accessible());
-  ensure(result.schema(true).path(true) == xschema_path);
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
 
   ensure(result.factor_ct(true) == 1);
   ensure(result.d(true) == 1);

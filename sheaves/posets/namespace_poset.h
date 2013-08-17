@@ -431,14 +431,9 @@ public:
 
   ///
   /// True if and only if this contains the poset xposet.
+  /// synonym for contains_poset(xposet.poset_path(true), xauto_access)
   ///
-  bool contains_poset(const poset_state_handle& xposet, bool xauto_access = true) const;
-
-  ///
-  /// True if and only if this contains the poset xposet.
-  /// synonym for contains_poset(xposet, xauto_access)
-  ///
-  bool owns(const poset_state_handle& xposet, bool xauto_access = true) const;
+  bool owns(const poset_state_handle& xposet, bool xauto_access) const;
 
   // kab end
 

@@ -754,10 +754,10 @@ new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xs
 
   // kab begin
 
-  ensure(xns.owns(result));
+  ensure(xns.owns(result, xauto_access));
   ensure(result.path(true) == xhost_path);
   ensure(result.state_is_not_read_accessible());
-  ensure(result.schema(true).path(true) == xschema_path);
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
 
   ensure(result.factor_ct(true) == 1);
   ensure(result.d(true) == 1);
@@ -816,10 +816,10 @@ new_host(namespace_type& xns, const string& xsuffix, bool xauto_access)
 
   // kab begin
 
-  ensure(xns.owns(result));
+  ensure(xns.owns(result, xauto_access));
   ensure(result.path(true) == standard_host_path(static_class_name(), xsuffix));
   ensure(result.state_is_not_read_accessible());
-  ensure(result.schema(true).path(true) == standard_schema_path());
+  ensure(result.schema(true).path(xauto_access) == standard_schema_path());
 
   ensure(result.factor_ct(true) == 1);
   ensure(result.d(true) == 1);

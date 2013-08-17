@@ -1439,27 +1439,6 @@ contains_poset(const poset_path& xpath, bool xauto_access) const
 
 bool
 sheaf::namespace_poset::
-contains_poset(const poset_state_handle& xposet, bool xauto_access) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-
-  // Body:
-
-  result = contains_poset(xposet.path(), xauto_access);
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-bool
-sheaf::namespace_poset::
 owns(const poset_state_handle& xposet, bool xauto_access) const
 {
   bool result;
@@ -1470,7 +1449,7 @@ owns(const poset_state_handle& xposet, bool xauto_access) const
 
   // Body:
 
-  result = contains_poset(xposet, xauto_access);
+  result = contains_poset(xposet.path(true), xauto_access);
 
   // Postconditions:
 
