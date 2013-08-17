@@ -542,17 +542,16 @@ new_host(namespace_type& xns,
   require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path()));
   require(schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access) == 81);
   
-  require(xvector_space_path.full());
   require(xns.path_is_auto_read_accessible(xvector_space_path, xauto_access));
   require(xns.contains_poset<vector_space_type::host_type>(xvector_space_path, xauto_access));
   require(xns.member_poset(xvector_space_path, xauto_access).schema(xauto_access).conforms_to(vector_space_type::standard_schema_path()));
   require(xns.member_poset<vector_space_type::host_type>(xvector_space_path, xauto_access).d(xauto_access) == 3);
 
-  require(host_type::p(xns, xschema_path, xvector_space_path, xauto_access) == 4);
+  require(host_type::d(xns, xschema_path, xauto_access) == host_type::d(xns, 4, xvector_space_path, xauto_access));   
 
   // Body:
 
-  host_type::new_table(xns, xhost_path, xschema_path, xvector_space_path, xauto_access);
+  host_type::new_table(xns, xhost_path, xschema_path, 4, xvector_space_path, xauto_access);
 
   // Postconditions:
 
@@ -604,7 +603,7 @@ new_host(namespace_type& xns, const string& xsuffix, bool xauto_access)
 
   poset_path result(standard_host_path(static_class_name(), xsuffix));
 
-  host_type::new_table(xns, result, standard_schema_path(), lvector_space_path, xauto_access);
+  new_host(xns, result, standard_schema_path(), lvector_space_path, xauto_access);
 
   // Postconditions:
 

@@ -402,7 +402,7 @@ invariant() const
 
 
 //==============================================================================
-// CLASS T2
+// CLASS T2 OF CLASS T2
 //==============================================================================
 
 // ===========================================================
@@ -479,15 +479,14 @@ new_host(namespace_type& xns,
   require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
   require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path()));
 
-  require(xvector_space_path.full());
   require(xns.path_is_auto_read_accessible(xvector_space_path, xauto_access));
   require(xns.contains_poset<vector_space_type::host_type>(xvector_space_path, xauto_access));
 
-  require(host_type::p(xns, xschema_path, xvector_space_path, xauto_access) >= 0);
+  require(host_type::d(xns, xschema_path, xauto_access) == host_type::d(xns, 2, xvector_space_path, xauto_access));   
 
   // Body:
 
-  host_type::new_table(xns, xhost_path, xschema_path, xvector_space_path, xauto_access);
+  host_type::new_table(xns, xhost_path, xschema_path, 2, xvector_space_path, xauto_access);
 
   // Postconditions:
 

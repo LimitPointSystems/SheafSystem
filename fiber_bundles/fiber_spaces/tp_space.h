@@ -79,19 +79,6 @@ public:
   ///
   static arg_list make_arg_list(int xp, const poset_path& xvector_space_path);
 
-  ///
-  /// @deprecated
-  /// Tensor degree implied by the tensor dimension (number of row dofs)
-  /// defined by the schema specified by xschema_path and the dimension
-  /// of the domain vector space specified by xvector_space_path.
-  ///
-  static int p(const namespace_poset& xns, 
-               const poset_path& xschema_path, 
-               const poset_path& xvector_space_path, 
-               bool xauto_access);
-
-  // begin dmb new
-
   using vd_space::d;
 
   ///
@@ -105,8 +92,6 @@ public:
   ///
   static int d(const namespace_poset& xns, int xp, const poset_path& xvector_space_path, bool xauto_access);
 
-  // end dmb new  
-
   ///
   /// Creates a new tp_space in namespace xns with path xpath,
   /// schema specified by xschema_path, and table attributes 
@@ -116,7 +101,7 @@ public:
   static void new_table(namespace_type& xhost, 
                         const poset_path& xpath, 
                         const poset_path& xschema_path,
-                        int xp, // dmb new
+                        int xp,
                         const poset_path& xvector_space_path,
                         bool xauto_access);
   

@@ -170,12 +170,11 @@ new_host(namespace_type& xns, const poset_path& xpath, int xmax_db, bool xauto_a
   require(!xpath.empty());
   require(!xns.contains_path(xpath, xauto_access));
   require(xns.path_is_auto_read_accessible(standard_schema_path(), xauto_access));
-  
   require(xmax_db >= 0);
 
   // Body:
 
-  host_type::new_table(xns, xpath, standard_schema_path(), xmax_db, xauto_access);
+  new_host(xns, xpath, standard_schema_path(), xmax_db, xauto_access);
 
   // Postconditions:
 

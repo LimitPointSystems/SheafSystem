@@ -477,7 +477,7 @@ fiber_bundle::tp::
 new_host(namespace_type& xns, 
          const poset_path& xhost_path, 
          const poset_path& xschema_path, 
-         int xp, // dmb new
+         int xp,
          const poset_path& xvector_space_path, 
          bool xauto_access)
 {
@@ -494,18 +494,15 @@ new_host(namespace_type& xns,
   require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
   require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path()));
 
-  require(xvector_space_path.full());
   require(xns.path_is_auto_read_accessible(xvector_space_path, xauto_access));
   require(xns.contains_poset<vector_space_type::host_type>(xvector_space_path, xauto_access));
 
-  //  require(host_type::p(xns, xschema_path, xvector_space_path, xauto_access) >= 0);
-  require(host_type::d(xns, xschema_path, xauto_access) == host_type::d(xns, xp, xvector_space_path, xauto_access)); // dmb new  
+  require(host_type::d(xns, xschema_path, xauto_access) == host_type::d(xns, xp, xvector_space_path, xauto_access));   
 
 
   // Body:
 
-  //  host_type::new_table(xns, xhost_path, xschema_path, xvector_space_path, xauto_access);
-  host_type::new_table(xns, xhost_path, xschema_path, xp, xvector_space_path, xauto_access); // dmb new
+  host_type::new_table(xns, xhost_path, xschema_path, xp, xvector_space_path, xauto_access); 
 
   // Postconditions:
 
@@ -517,15 +514,12 @@ new_host(namespace_type& xns,
          xns.member_poset<host_type>(xhost_path, xauto_access).d(true));
 
   ensure(xns.member_poset<host_type>(xhost_path, xauto_access).d(true) == 
-         //         schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access));
-         host_type::d(xns, xschema_path, xauto_access)); // dmb new  
+         host_type::d(xns, xschema_path, xauto_access));
 
   ensure(xns.member_poset<host_type>(xhost_path, xauto_access).scalar_space_path(true) == 
          xns.member_poset<vector_space_type::host_type>(xvector_space_path, xauto_access).scalar_space_path());
 
-//   ensure(xns.member_poset<host_type>(xhost_path, xauto_access).p(true) == 
-//          host_type::p(xns, xschema_path, xvector_space_path, xauto_access));
-  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).p(true) == xp); // dmb new
+  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).p(true) == xp);
 
   ensure(xns.member_poset<host_type>(xhost_path, xauto_access).dd(true) == 
          xns.member_poset<vector_space_type::host_type>(xvector_space_path, xauto_access).d());

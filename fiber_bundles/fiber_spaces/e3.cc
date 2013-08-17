@@ -1156,7 +1156,6 @@ new_host(namespace_type& xns,
   require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path()));
   require(schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access) == 3);
   
-  require(xscalar_space_path.full());
   require(xns.path_is_auto_read_accessible(xscalar_space_path, xauto_access));
   require(xns.contains_poset<scalar_type::host_type>(xscalar_space_path, xauto_access));
 
@@ -1213,7 +1212,7 @@ new_host(namespace_type& xns, const string& xsuffix, bool xauto_access)
 
   poset_path result(standard_host_path(static_class_name(), xsuffix));
 
-  host_type::new_table(xns, result, standard_schema_path(), lscalar_space_path, xauto_access);
+  new_host(xns, result, standard_schema_path(), lscalar_space_path, xauto_access);
 
   // Postconditions:
 

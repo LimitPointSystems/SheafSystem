@@ -115,6 +115,7 @@ new_table(namespace_type& xns,
 
   // Preconditions:
 
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
 
   require(!xpath.empty());
   require(!xns.contains_path(xpath, xauto_access));

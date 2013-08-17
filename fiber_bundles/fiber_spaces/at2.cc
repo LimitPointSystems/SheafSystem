@@ -519,13 +519,12 @@ new_host(namespace_type& xns,
   require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
   require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path()));
 
-  require(xscalar_space_path.full());
   require(xns.path_is_auto_read_accessible(xscalar_space_path, xauto_access));
   require(xns.contains_poset<scalar_type::host_type>(xscalar_space_path, xauto_access));
 
   // Body:
 
-  host_type::new_table(xns, xhost_path, xschema_path, xscalar_space_path, xauto_access);
+  host_type::new_table(xns, xhost_path, xschema_path, 2, xscalar_space_path, xauto_access);
 
   // Postconditions:
 
