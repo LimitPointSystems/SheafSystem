@@ -455,11 +455,11 @@ public:
   /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
   /// and table attribute vector_space_path specified by xvector_space_path.
   ///
-  static void new_host(namespace_type& xns, 
-                       const poset_path& xhost_path, 
-                       const poset_path& xschema_path,
-                       const poset_path& xvector_space_path,
-                       bool xauto_access);
+  static host_type& new_host(namespace_type& xns, 
+			     const poset_path& xhost_path, 
+			     const poset_path& xschema_path,
+			     const poset_path& xvector_space_path,
+			     bool xauto_access);
 
   ///
   /// Auto, deep factory method; creates a new host poset and any prerequisite posets
@@ -467,7 +467,7 @@ public:
   /// standard_host_path for this class and xsuffix, schema specified by standard_schema_path(), 
   /// and standard paths for prerequisites. Returns the path of the new host poset.
   ///
-  static poset_path new_host(namespace_type& xns, const string& xsuffix, bool xauto_access);
+  static host_type& new_host(namespace_type& xns, const string& xsuffix, bool xauto_access);
 
 protected:
 

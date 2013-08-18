@@ -199,7 +199,7 @@ new_host(namespace_type& xns, const poset_path& xhost_path, int xmax_db, bool xa
   // Body:
 
   host_type& result =
-    host_type::new_table(xns, xhost_path, standard_schema_path(), xmax_db, xauto_access);
+    new_host(xns, xhost_path, standard_schema_path(), xmax_db, xauto_access);
 
   // Postconditions:
 

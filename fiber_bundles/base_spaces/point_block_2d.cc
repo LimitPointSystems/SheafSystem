@@ -124,9 +124,9 @@ static_prototype_path()
   return result;
 }
 
-void
+fiber_bundle::point_block_2d::host_type&
 fiber_bundle::point_block_2d::
-new_host(namespace_type& xns, const poset_path& xpath, const poset_path& xschema_path, bool xauto_access)
+new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xschema_path, bool xauto_access)
 {
   // cout << endl << "Entering point_block_2d::new_host." << endl;
 
@@ -134,8 +134,8 @@ new_host(namespace_type& xns, const poset_path& xpath, const poset_path& xschema
 
   require(xns.state_is_auto_read_write_accessible(xauto_access));
 
-  require(!xpath.empty());
-  require(!xns.contains_path(xpath, xauto_access));
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
 
   require(xschema_path.full());
   require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
@@ -143,49 +143,55 @@ new_host(namespace_type& xns, const poset_path& xpath, const poset_path& xschema
 
   // Body:
 
-  host_type::new_table(xns, xpath, xschema_path, DB, xauto_access);
+  host_type& result =
+    host_type::new_table(xns, xhost_path, xschema_path, 0, xauto_access);
 
   // Postconditions:
 
-  ensure(xns.contains_path(xpath, xauto_access));
-  ensure(xns.poset_state_is_read_accessible(xpath, xauto_access));
-  ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == xschema_path);
-  ensure(xns.member_poset<host_type>(xpath, xauto_access).max_db() == DB);
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(result.max_db() == 0);
 
   // Exit:
 
   // cout << "Leaving point_block_2d::new_host." << endl;
-  return;
+  return result;
 }
 
-void
+fiber_bundle::point_block_2d::host_type&
 fiber_bundle::point_block_2d::
-new_host(namespace_type& xns, const poset_path& xpath, bool xauto_access)
+new_host(namespace_type& xns, const poset_path& xhost_path, bool xauto_access)
 {
   // cout << endl << "Entering point_block_2d::new_host." << endl;
 
   // Preconditions:
 
   require(xns.state_is_auto_read_write_accessible(xauto_access));
-  require(!xpath.empty());
-  require(!xns.contains_path(xpath, xauto_access));
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
   require(xns.path_is_auto_read_accessible(standard_schema_path(), xauto_access));
 
   // Body:
 
-  host_type::new_table(xns, xpath, standard_schema_path(), DB, xauto_access);
+  host_type& result =
+    new_host(xns, xhost_path, standard_schema_path(), xauto_access);
 
   // Postconditions:
 
-  ensure(xns.contains_path(xpath, xauto_access));
-  ensure(xns.poset_state_is_read_accessible(xpath, xauto_access));
-  ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == standard_schema_path());
-  ensure(xns.member_poset<host_type>(xpath, xauto_access).max_db() == DB);
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == standard_schema_path());
+
+  ensure(result.max_db() == 0);
   
   // Exit:
 
   // cout << "Leaving point_block_2d::new_host." << endl;
-  return;
+  return result;
 }
 
 // PROTECTED DATA MEMBERS
