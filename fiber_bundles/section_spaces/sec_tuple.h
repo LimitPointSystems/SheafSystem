@@ -78,12 +78,48 @@ public:
   static const poset_path& standard_rep_path();
 
   ///
-  /// The standard host path for fiber types with class name xclass_name and suffix xsuffix..
+  /// The standard host path for section type S with base path xbase_path,
+  /// representation path xrep_path, and section and fiber suffixes 
+  /// xsection_suffix and xfiber_suffix, respectively.
   ///
+  template <typename S>
   static poset_path standard_host_path(const poset_path& xbase_path,
-                                       const string& xfiber_name,
                                        const poset_path& xrep_path,
-                                       const string& xsection_suffix);
+                                       const string& xsection_suffix,
+                                       const string& xfiber_suffix);
+
+  ///
+  /// True if and only if the host with path standard_host_path<S>(xbase_path, xrep_path, xsection_suffix, xfiber_suffix)
+  /// does not exist in namespace xns, or if it exists, conforms to S::ost_type and is auto-read-write-accessible.
+  ///
+  template <typename S>
+  static bool standard_host_available(const namespace_poset& xns,
+                                      const poset_path& xbase_path,
+                                      const poset_path& xrep_path,
+                                      const string& xsection_suffix,
+                                      const string& xfiber_suffix,
+                                      bool xauto_access);
+
+  ///
+  /// The standard schema path for section type S with base path xbase_path,
+  /// representation path xrep_path, and section and fiber suffixes 
+  /// xsection_suffix and xfiber_suffix, respectively.
+  ///
+  template <typename S>
+  static poset_path standard_schema_path(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
+
+  ///
+  /// True if and only if the host with path standard_host_path<S>(xbase_path, xrep_path, xsection_suffix, xfiber_suffix)
+  /// does not exist in namespace xns, or if it exists, conforms to S::ost_type and is auto-read-write-accessible.
+  ///
+  template <typename S>
+  static bool standard_schema_available(const namespace_poset& xns,
+                                        const poset_path& xbase_path,
+                                        const poset_path& xrep_path,
+                                        const string& xfiber_suffix,
+                                        bool xauto_access);
 
   ///
   /// Manual, shallow factory method; creates a new host table for members of this type.

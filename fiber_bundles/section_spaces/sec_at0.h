@@ -70,17 +70,17 @@ public:
                              bool xauto_access);
 
   ///
-  /// Auto, deep factory method; creates a new host poset and any prerequisite posets
-  /// for members of this type. The poset is created in namespace xns with the 
-  /// standard_host_path for fiber_type, xbase_space_path, xrep_path, and xsection_suffix, 
-  /// and standard paths for prerequisites.
+  /// The host with path standard_host_path(xbase_space_path, static_class_name(), xrep_path, xsection_suffix, xfiber_suffix).
+  /// Returns the host if it already exists, otherwise, creates it in namespace xns with schema specified by 
+  /// standard_schema_path(xbase_space_path, fiber_type::standard_schema_path,, xrep_path, xfiber_suffix) 
+  /// and standard paths for other prerequisites, which are also created if needed.
   ///
-  static host_type& new_host(namespace_type& xns, 
-                             const poset_path& xbase_space_path,
-                             const poset_path& xrep_path,
-                             const string& xsection_suffix, 
-                             const string& xfiber_suffix, 
-                             bool xauto_access);
+  static host_type& standard_host(namespace_type& xns, 
+                                  const poset_path& xbase_space_path,
+                                  const poset_path& xrep_path,
+                                  const string& xsection_suffix, 
+                                  const string& xfiber_suffix, 
+                                  bool xauto_access);
 
 protected:
 

@@ -81,6 +81,21 @@ public:
 				    const poset_path& xschema_path,
 				    bool xauto_access);
 
+  
+  ///
+  /// Creates a new binary_section_space_schema_poset in namespace xns with path xpath,
+  /// schema specified by xschema_path, and table attributes base_space_path, fiber_space_path,
+  /// and rep_path specified by xbase_path, xfiber_path, and xrep_path, respectively.
+  ///
+  static binary_section_space_schema_poset& new_table(namespace_type& xhost, 
+                                                      const poset_path& xpath, 
+                                                      const poset_path& xschema_path,
+                                                      const poset_path& xbase_path,
+                                                      const poset_path& xfiber_path,
+                                                      const poset_path& xrep_path,
+                                                      bool xauto_access);
+
+
 protected:
 
   ///

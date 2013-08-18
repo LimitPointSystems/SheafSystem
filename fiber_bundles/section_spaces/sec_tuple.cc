@@ -54,43 +54,6 @@ standard_rep_path()
   return result;
 }
 
-sheaf::poset_path
-fiber_bundle::sec_tuple::
-standard_host_path(const poset_path& xbase_path,
-                   const string& xfiber_name, 
-                   const poset_path& xrep_path, 
-                   const string& xsection_suffix)
-{
-  // Preconditions:
-
-  require(xbase_path.full());
-  require(poset_path::is_valid_name(xfiber_name));
-  require(rep_path.full());
-  require(xsection_suffix.empty() || poset_path::is_valid_name(xsection_suffix));
-  
-  // Body:
-
-  string lposet_name(xfiber_name);
-  lposet_name += "_on_";
-  lposet_name += xbase_path.poset_name();
-  lposet_name += "_";
-  lposet_name += xbase_path.member_name();
-  lposet_name += "_";
-  lposet_name += xrep_path.member_name();
-  lposet_name += xsection_suffix;
-  
-  poset_path result(lposet_name, "");
-
-  // Postconditions:
-
-  ensure(!result.empty());
-  ensure(!result.full());
-  
-  // Exit:
-
-  return result;
-}
-
 fiber_bundle::sec_tuple::host_type&
 fiber_bundle::sec_tuple::
 new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xschema_path, bool xauto_access)

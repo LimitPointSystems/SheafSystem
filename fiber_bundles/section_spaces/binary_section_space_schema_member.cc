@@ -17,6 +17,71 @@
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // ===========================================================
+// HOST FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+new_host(namespace_type& xns, 
+         const poset_path& xhost_path, 
+         const poset_path& xschema_path, 
+         const poset_path& xbase_path,
+         const poset_path& xfiber_path,
+         const poset_path& xrep_path,
+         bool xauto_access)
+{
+  // cout << endl << "Entering binary_section_space_schema_member::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible<schema_type::host_type>(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, host_type::standard_schema_path(), xauto_access));
+
+  require(xbase_space_path.full());
+  require(xns.state_is_auto_read_accessible<base_space_poset>(xbase_space_path, xauto_access));
+
+  require(xfiber_space_path.full());
+  require(xns.state_is_auto_read_accessible(xfiber_space_path, xauto_access));
+
+  require(xrep_path.full());
+  require(xns.state_is_auto_read_accessible<sec_rep_descriptor_poset>(xrep_path, xauto_access));
+  
+
+  // Body:
+
+  host_type& result = host_type::new_table(xns, xhost_path, xschema_path, xbase_path, xfiber_path, xrep_path, xauto_access);
+
+  // Postconditions:
+
+  //  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(unexecutable("result.base_space_path() == xbase_space_path"));
+  ensure(unexecutable("result.fiber_space_path() == xfiber_space_path"));
+  ensure(unexecutable("result.rep_path() == xrep_path"));
+
+  // Exit:
+
+  // cout << "Leaving binary_section_space_schema_member::new_host." << endl;
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+ 
+
+// ===========================================================
 // BINARY_SECTION_SPACE_SCHEMA_MEMBER FACET
 // ===========================================================
 

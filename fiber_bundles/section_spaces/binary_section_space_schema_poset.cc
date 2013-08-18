@@ -95,6 +95,90 @@ binary_section_space_schema_poset(namespace_poset& xns,
   ensure(postcondition_of(new_state(same args)));
 }
 
+fiber_bundle::binary_section_space_schema_poset&
+fiber_bundle::binary_section_space_schema_poset::
+new_table(namespace_type& xns, 
+          const poset_path& xpath, 
+          const poset_path& xschema_path, 
+          const poset_path& xbase_path,
+          const poset_path& xfiber_path,
+          const poset_path& xrep_path,
+          bool xauto_access)
+{
+  // cout << endl << "Entering binary_section_space_schema_poset::new_table." << endl;
+
+  // Preconditions:
+
+  require(!xpath.empty());
+  require(!xns.contains_path(xpath, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));
+
+  require(xbase_space_path.full());
+  require(xns.state_is_auto_read_accessible<base_space_poset>(xbase_space_path, xauto_access));
+
+  require(xfiber_space_path.full());
+  require(xns.state_is_auto_read_accessible(xfiber_space_path, xauto_access));
+
+  require(xrep_path.full());
+  require(xns.state_is_auto_read_accessible<sec_rep_descriptor_poset>(xrep_path, xauto_access));
+  
+
+  // Body:
+
+  // Create the table; have to new it because namespace keeps a pointer.
+
+  typedef binary_section_space_schema_poset table_type;
+
+  table_type& result = *(new table_type());
+
+  // Create a handle of the right type for the schema member.
+
+  schema_poset_member lschema(&xns, xschema_path, xauto_access);
+
+  if(xauto_access)
+  {
+    lschema.get_read_access();
+  }
+
+  // Create the table dof map and set dof values;
+  // must be newed because poset_state::_table keep a pointer to it.
+
+  array_poset_dof_map* lmap = new array_poset_dof_map(&lschema, true);
+  lmap->put_dof("base_space_path", xbase_space_path);
+  lmap->put_dof("fiber_space_path", xfiber_space_path);
+  lmap->put_dof("rep_path", xrep_path);
+  
+  // Create the state.
+
+  ltable->new_state(xns, xpath, lschema, *lmap);
+
+  if(xauto_access)
+  {
+    lschema.release_access();
+  }
+
+
+  // Postconditions:
+
+  //  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xpath);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(unexecutable("result.base_space_path() == xbase_space_path"));
+  ensure(unexecutable("result.fiber_space_path() == xfiber_space_path"));
+  ensure(unexecutable("result.rep_path() == xrep_path"));
+
+
+  // Exit:
+
+  // cout << "Leaving binary_section_space_schema_poset::new_table." << endl;
+  return;
+}
+
 // PROTECTED FUNCTIONS
 
 fiber_bundle::binary_section_space_schema_poset::

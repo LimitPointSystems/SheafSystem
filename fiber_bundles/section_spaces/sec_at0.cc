@@ -89,12 +89,12 @@ new_host(namespace_type& xns,
 
 fiber_bundle::sec_at0::host_type&
 fiber_bundle::sec_at0::
-new_host(namespace_type& xns, 
-         const poset_path& xbase_space_path, 
-         const poset_path& xrep_path, 
-         const string& xsection_suffix, 
-         const string& xfiber_suffix, 
-         bool xauto_access)
+standard_host(namespace_type& xns, 
+              const poset_path& xbase_space_path, 
+              const poset_path& xrep_path, 
+              const string& xsection_suffix, 
+              const string& xfiber_suffix, 
+              bool xauto_access)
 {
   // cout << endl << "Entering sec_at0::new_host." << endl;
 
@@ -112,33 +112,59 @@ new_host(namespace_type& xns,
 
   require(xfiber_suffix.empty() || poset_path::is_valid_name(xfiber_suffix));
 
-  // !!!! start here - need templated standard_host_path sec_tuple, section_space_schema_member, and maybe in tuple.
+  require(standard_host_available<sec_at0>(xns, xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix, xauto_access));
 
-  require(!xns.contains_path(standard_host_path<fiber_type>(xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix), xauto_access));
+  require(standard_schema_available<sec_at0>(xns, xbase_space_path, xrep_path, xfiber_suffix, xauto_access));
 
-  require(xns.path_is_auto_read_available<schema_type::host_type>(schema_type::standard_host_path(xbase_space_path, fiber_type::static_class_name(), xrep_path), xauto_access));
-  
   // Body:
 
-  host_type& result = host_type::new_table(xns, xhost_path, xschema_path, xauto_access);
+  poset_path lstd_path = standard_host_path<sec_at0>(xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix);
+  
+  host_type* lresult_ptr;
+  
+  if(xns.contains_path<host_type>(lstd_path, xauto_access))
+  {
+    // Standard host already exists, just return it.
+
+    lresult_ptr = &xns.member_poset<host_type>(lstd_path, xauto_access);
+  }
+  else
+  {
+    // Standard host doesn't exist, have to create it.
+
+    // First find or create the standard schema and any other prerequisites.
+
+    poset_path lstd_schema_path = 
+      schema_type::standard_schema(xbase_space_path, fiber_type::standard_schema_path(), xrep_path, xfiber_suffix);
+    
+    // Now create the standard host.
+
+    lresult_ptr = &new_host(xns, lstd_path, lstd_schema_path, xauto_access);
+  }
+
+  host_type& result = *lresult_ptr;
 
   // Postconditions:
 
   //  ensure(xns.owns(result, xauto_access));
-  ensure(result.path(true) == xhost_path);
+  ensure(result.path(true) == 
+         standard_host_path(xbase_space_path, fiber_type::static_class_name(), xrep_path, xsection_suffix, xfiber_suffix));
+
   ensure(result.state_is_not_read_accessible());
-  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(result.schema(true).path(xauto_access) == 
+         schema_type::standard_schema<fiber_type>(xns, xbase_space_path, xrep_path, xfiber_suffix, xauto_access));
 
   ensure(result.factor_ct(true) == result.schema(true).fiber_space<fiber_type::host_type>().factor_ct(xauto_access));
   ensure(result.d(true) == result.schema(true).fiber_space<fiber_type::host_type>().d(xauto_access));
   ensure(result.d(true) == result.dd(true));
   ensure(result.d(true) == 1);
-  ensure(result.scalar_space_path(true) == xhost_path);
+  ensure(result.scalar_space_path(true) == result.path(true));
   ensure(result.p(true) == result.schema(true).fiber_space<fiber_type::host_type>().p(xauto_access));
   ensure(result.p(true) == 0);
   ensure(result.dd(true) == result.schema(true).fiber_space<fiber_type::host_type>().dd(xauto_access));
   ensure(result.dd(true) == 1);
-  ensure(result.vector_space_path(true) == xhost_path);
+  ensure(result.vector_space_path(true) == result.path(true));
 
   // Exit:
 

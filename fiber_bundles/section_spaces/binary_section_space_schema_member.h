@@ -50,6 +50,44 @@ namespace fiber_bundle
 ///
 class SHEAF_DLL_SPEC binary_section_space_schema_member : public section_space_schema_member
 {
+
+  // ===========================================================
+  /// @name HOAT FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// The type of host poset.
+  ///
+  typedef binary_section_space_schema_poset host_type;
+  
+  ///
+  /// Creates a new host for members of this type in namespace xns with path xhost_path,
+  /// schema specified by xschema_path, and table attributes base_space_path, fiber_space_path,
+  /// and rep_path specified by xbase_path, xfiber_path, and xrep_path, respectively.
+  ///
+  static host_type& new_host(namespace_type& xns, 
+                              const poset_path& xhost_path, 
+                              const poset_path& xschema_path,
+                              const poset_path& xbase_path,
+                              const poset_path& xfiber_path,
+                              const poset_path& xrep_path,
+                              bool xauto_access);
+
+  ///
+  /// The standard schema for sections base sapce specified by xbase_space_path,
+  /// fiber schema specified by xfiber_schema_path, and representation specified
+  /// by xrep_path.
+
+protected:
+
+private:
+
+  //@}
+ 
+
   // ===========================================================
   /// @name BINARY_SECTION_SPACE_SCHEMA_MEMBER FACET
   // ===========================================================
