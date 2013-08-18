@@ -269,12 +269,12 @@ public:
   /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
   /// and table attribute vector_space_path specified by xvector_space_path.
   ///
-  static void new_host(namespace_type& xns, 
-                       const poset_path& xhost_path, 
-                       const poset_path& xschema_path,
-                       int xp,
-                       const poset_path& xvector_space_path,
-                       bool xauto_access);
+  static host_type& new_host(namespace_type& xns, 
+			     const poset_path& xhost_path, 
+			     const poset_path& xschema_path,
+			     int xp,
+			     const poset_path& xvector_space_path,
+			     bool xauto_access);
 
 protected:
 

@@ -458,7 +458,7 @@ make_standard_schema(namespace_poset& xns)
   return;
 }
 
-void
+fiber_bundle::t2::host_type&
 fiber_bundle::t2::
 new_host(namespace_type& xns, 
          const poset_path& xhost_path, 
@@ -486,35 +486,27 @@ new_host(namespace_type& xns,
 
   // Body:
 
-  host_type::new_table(xns, xhost_path, xschema_path, 2, xvector_space_path, xauto_access);
+  host_type& result =
+    host_type::new_table(xns, xhost_path, xschema_path, 2, xvector_space_path, xauto_access);
 
   // Postconditions:
 
-  ensure(xns.contains_path(xhost_path, xauto_access));
-  ensure(xns.member_poset(xhost_path, xauto_access).state_is_not_read_accessible());
-  ensure(xns.member_poset(xhost_path, xauto_access).schema(true).path(true) == xschema_path);
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
 
-  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).factor_ct(true) == 
-         xns.member_poset<host_type>(xhost_path, xauto_access).d(true));
-
-  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).d(true) == 
-         schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access));
-
-  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).scalar_space_path(true) == 
-         xns.member_poset<vector_space_type::host_type>(xvector_space_path, xauto_access).scalar_space_path());
-
-  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).p(true) == 2);
-
-  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).dd(true) == 
-         xns.member_poset<vector_space_type::host_type>(xvector_space_path, xauto_access).d());
-
-  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).vector_space_path(true) == 
-         xvector_space_path );
+  ensure(result.factor_ct(true) == result.d(true));
+  ensure(result.d(true) == schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access));
+  ensure(result.scalar_space_path(true) == xns.member_poset<vector_space_type::host_type>(xvector_space_path, xauto_access).scalar_space_path());
+  ensure(result.p(true) == 2);
+  ensure(result.dd(true) == xns.member_poset<vector_space_type::host_type>(xvector_space_path, xauto_access).d());
+  ensure(result.vector_space_path(true) == xvector_space_path );
   
   // Exit:
 
   // cout << "Leaving t2::new_host." << endl;
-  return;
+  return result;
 }
 
 
