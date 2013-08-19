@@ -223,7 +223,7 @@ class SHEAF_DLL_SPEC at2 : public atp
 {
 
   // ===========================================================
-  /// @name HOST FACTORY FACET OF CLASS AT1
+  /// @name HOST FACTORY FACET OF CLASS AT2
   // ===========================================================
   //@{
 
