@@ -187,6 +187,12 @@ template
 SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
+path_is_available<fiber_bundle::at0_space>(const poset_path& xpath, bool xauto_access) const;
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
 path_is_auto_read_available<fiber_bundle::at0_space>(const poset_path& xpath, bool xauto_access) const;
 
 template
@@ -273,6 +279,12 @@ SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 path_is_auto_read_write_accessible<fiber_bundle::at1_space>(const poset_path& xpath, bool xauto_access) const;
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
+path_is_available<fiber_bundle::at1_space>(const poset_path& xpath, bool xauto_access) const;
 
 template
 SHEAF_DLL_SPEC
@@ -369,6 +381,12 @@ template
 SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
+path_is_available<fiber_bundle::atp_space>(const poset_path& xpath, bool xauto_access) const;
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
 path_is_auto_read_available<fiber_bundle::atp_space>(const poset_path& xpath, bool xauto_access) const;
 
 template
@@ -454,6 +472,12 @@ SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 path_is_auto_read_write_accessible<fiber_bundle::gln_space>(const poset_path& xpath, bool xauto_access) const;
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
+path_is_available<fiber_bundle::gln_space>(const poset_path& xpath, bool xauto_access) const;
 
 template
 SHEAF_DLL_SPEC
@@ -550,6 +574,12 @@ template
 SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
+path_is_available<fiber_bundle::jcb_space>(const poset_path& xpath, bool xauto_access) const;
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
 path_is_auto_read_available<fiber_bundle::jcb_space>(const poset_path& xpath, bool xauto_access) const;
 
 template
@@ -636,6 +666,12 @@ SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 path_is_auto_read_write_accessible<fiber_bundle::stp_space>(const poset_path& xpath, bool xauto_access) const;
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
+path_is_available<fiber_bundle::stp_space>(const poset_path& xpath, bool xauto_access) const;
 
 template
 SHEAF_DLL_SPEC
@@ -732,6 +768,12 @@ template
 SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
+path_is_available<fiber_bundle::tp_space>(const poset_path& xpath, bool xauto_access) const;
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
 path_is_auto_read_available<fiber_bundle::tp_space>(const poset_path& xpath, bool xauto_access) const;
 
 template
@@ -823,6 +865,12 @@ template
 SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
+path_is_available<fiber_bundle::tuple_space>(const poset_path& xpath, bool xauto_access) const;
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
 path_is_auto_read_available<fiber_bundle::tuple_space>(const poset_path& xpath, bool xauto_access) const;
 
 template
@@ -909,6 +957,12 @@ SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 path_is_auto_read_write_accessible<fiber_bundle::vd_space>(const poset_path& xpath, bool xauto_access) const;
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
+path_is_available<fiber_bundle::vd_space>(const poset_path& xpath, bool xauto_access) const;
 
 template
 SHEAF_DLL_SPEC
@@ -1007,6 +1061,12 @@ bool
 sheaf::namespace_poset::
 path_is_auto_read_write_accessible<fiber_bundle::sec_at0_space>(const poset_path& xpath, bool xauto_access) const;
 
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
+path_is_available<fiber_bundle::sec_at0_space>(const poset_path& xpath, bool xauto_access) const;
 
 template
 SHEAF_DLL_SPEC
@@ -1115,6 +1175,12 @@ template
 SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
+path_is_available<fiber_bundle::sec_at1_space>(const poset_path& xpath, bool xauto_access) const;
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
 path_is_auto_read_available<fiber_bundle::sec_at1_space>(const poset_path& xpath, bool xauto_access) const;
 
 
@@ -1212,6 +1278,12 @@ bool
 sheaf::namespace_poset::
 path_is_auto_read_write_accessible<fiber_bundle::sec_atp_space>(const poset_path& xpath, bool xauto_access) const;
 
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
+path_is_available<fiber_bundle::sec_atp_space>(const poset_path& xpath, bool xauto_access) const;
 
 template
 SHEAF_DLL_SPEC
@@ -1318,6 +1390,11 @@ arg_is_auto_read_write_available<fiber_bundle::sec_atp_space>(const string& xnam
 // sheaf::namespace_poset::
 // path_is_auto_read_write_accessible<fiber_bundle::sec_jcb_space>(const poset_path& xpath, bool xauto_access) const;
 
+// template
+// SHEAF_DLL_SPEC
+// bool
+// sheaf::namespace_poset::
+// path_is_available<fiber_bundle::sec_jcb_space>(const poset_path& xpath, bool xauto_access) const;
 
 // template
 // SHEAF_DLL_SPEC
@@ -1438,6 +1515,12 @@ sheaf::namespace_poset::
 path_is_auto_read_write_accessible<fiber_bundle::sec_rep_space>(const poset_path& xpath,
 								bool xauto_access) const;
 
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
+path_is_available<fiber_bundle::sec_rep_space>(const poset_path& xpath, bool xauto_access) const;
+
 
 template
 SHEAF_DLL_SPEC
@@ -1549,6 +1632,12 @@ template
 SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
+path_is_available<fiber_bundle::sec_stp_space>(const poset_path& xpath, bool xauto_access) const;
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
 path_is_auto_read_available<fiber_bundle::sec_stp_space>(const poset_path& xpath, bool xauto_access) const;
 
 
@@ -1648,6 +1737,12 @@ bool
 sheaf::namespace_poset::
 path_is_auto_read_write_accessible<fiber_bundle::sec_tp_space>(const poset_path& xpath, bool xauto_access) const;
 
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
+path_is_available<fiber_bundle::sec_tp_space>(const poset_path& xpath, bool xauto_access) const;
 
 template
 SHEAF_DLL_SPEC
@@ -1756,6 +1851,12 @@ template
 SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
+path_is_available<fiber_bundle::sec_tuple_space>(const poset_path& xpath, bool xauto_access) const;
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
 path_is_auto_read_available<fiber_bundle::sec_tuple_space>(const poset_path& xpath, bool xauto_access) const;
 
 
@@ -1854,6 +1955,12 @@ bool
 sheaf::namespace_poset::
 path_is_auto_read_write_accessible<fiber_bundle::sec_vd_space>(const poset_path& xpath, bool xauto_access) const;
 
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
+path_is_available<fiber_bundle::sec_vd_space>(const poset_path& xpath, bool xauto_access) const;
 
 template
 SHEAF_DLL_SPEC
@@ -1968,6 +2075,12 @@ path_is_auto_read_write_accessible<fiber_bundle::base_space_poset>(const poset_p
 								   bool xauto_access) const;
 
 template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
+path_is_available<fiber_bundle::base_space_poset>(const poset_path& xpath, bool xauto_access) const;
+
+template
 SHEAF_DLL_SPEC 
 bool
 sheaf::namespace_poset::
@@ -2077,6 +2190,12 @@ path_is_auto_read_write_accessible<fiber_bundle::binary_section_space_schema_pos
 										    bool xauto_access) const;
 
 template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
+path_is_available<fiber_bundle::binary_section_space_schema_poset>(const poset_path& xpath, bool xauto_access) const;
+
+template
 SHEAF_DLL_SPEC 
 bool
 sheaf::namespace_poset::
@@ -2154,6 +2273,12 @@ bool
 sheaf::namespace_poset::
 path_is_auto_read_accessible<fiber_bundle::section_space_schema_poset>(
     const poset_path& xpath, bool xauto_access) const;
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
+path_is_available<fiber_bundle::section_space_schema_poset>(const poset_path& xpath, bool xauto_access) const;
  
 template
 SHEAF_DLL_SPEC 
@@ -2231,6 +2356,12 @@ bool
 sheaf::namespace_poset::
 path_is_auto_read_write_accessible<fiber_bundle::sec_rep_descriptor_poset>(const poset_path& xpath,
 									   bool xauto_access) const;
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
+path_is_available<fiber_bundle::sec_rep_descriptor_poset>(const poset_path& xpath, bool xauto_access) const;
 
 
 template

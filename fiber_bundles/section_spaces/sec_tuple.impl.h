@@ -72,7 +72,7 @@ standard_host_path(const poset_path& xbase_path,
 template <typename S>
 bool
 fiber_bundle::sec_tuple::
-standard_host_available(xns,
+standard_host_is_available(xns,
                         const poset_path& xbase_path,
                         const poset_path& xrep_path, 
                         const string& xsection_suffix, 
@@ -89,9 +89,36 @@ standard_host_available(xns,
   
   // Body:
 
+  typedef typename S::host_type host_type;
+  
   poset_path lstd_path(S::standard_host_path<S>(xbase_path, xrep_path, xsection_suffix, xfiber_suffix));
 
-  bool result = !xns.contains_path(lstd_path, xauto_access) || xns.contains_path<S::host_type>(lstd_path, xauto_access);
+  bool result = xns.path_is_available<host_type>
+  
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+template <typename S>
+bool
+fiber_bundle::sec_tuple::
+standard_fiber_host_is_auto_read_accessible(xns, const string& xfiber_suffix, bool xauto_access)
+{
+  // Preconditions:
+
+  xns.state_is_auto_read_accessible(xauto_access);
+  require(xfiber_suffix.empty() || poset_path::is_valid_name(xfiber_suffix));
+  
+  // Body:
+
+  typedef typename S:fiber_type fiber_type;
+  
+  poset_path lstd_path(fiber_type::standard_host_path<fiber_type>(xfiber_suffix));
+
+  bool result = xns.path_is_available<fiber_type::host_type>(lstd_path, xauto_access);
   
   // Postconditions:
 
@@ -115,20 +142,24 @@ standard_schema_path(const poset_path& xbase_path, const poset_path& xrep_path, 
 
   typedef typename S::fiber_type fiber_type;
 
-  poset_path lstd_fiber_path(fiber_type::standard_host_path(fiber_type::static_class_name(), xfiber_suffix));
+//   poset_path lstd_fiber_path(fiber_type::standard_host_path(fiber_type::static_class_name(), xfiber_suffix));
   
-  string lposet_name(lstd_fiber_path.poset_name());
-  lposet_name += "_on_";
-  lposet_name += xbase_path.poset_name();
-  lposet_name += "_";
-  lposet_name += xrep_path.member_name();
-  lposet_name += "_schema";
+//   string lposet_name(lstd_fiber_path.poset_name());
+//   lposet_name += "_on_";
+//   lposet_name += xbase_path.poset_name();
+//   lposet_name += "_";
+//   lposet_name += xrep_path.member_name();
+//   lposet_name += "_schema";
 
-  string lmember_name(lstd_fiber_path.poset_name());
-  lmember_name += "_on_";
-  lmamber_name += xbase_space.member_name();
+//   string lmember_name(lstd_fiber_path.poset_name());
+//   lmember_name += "_on_";
+//   lmamber_name += xbase_space.member_name();
   
-  poset_path result(lposet_name, lmember_name);
+//   poset_path result(lposet_name, lmember_name);
+
+
+  poset_path lstd_fiber_path(fiber_type::standard_host_path<fiber_type>(xfiber_suffix));
+  poset_path result(schema_type::standard_host_path(xbase_path, lstd_fiber_path, xrep_path));
 
   // Postconditions:
 
@@ -142,11 +173,11 @@ standard_schema_path(const poset_path& xbase_path, const poset_path& xrep_path, 
 template <typename S>
 bool
 fiber_bundle::sec_tuple::
-standard_schema_available(xns,
-                          const poset_path& xbase_path,
-                          const poset_path& xrep_path, 
-                          const string& xfiber_suffix,
-                          bool xauto_access)
+standard_schema_host_is_available(xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path, 
+                                  const string& xfiber_suffix,
+                                  bool xauto_access)
 {
   // Preconditions:
 

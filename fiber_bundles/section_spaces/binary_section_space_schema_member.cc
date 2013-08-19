@@ -76,6 +76,194 @@ new_host(namespace_type& xns,
   return result;
 }
 
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path(const poset_path& xbase_path, const poset_path& xfiber_path, const poset_path& xrep_path)
+{
+  // cout << endl << "Entering binary_section_space_schema_member::standard_host_path." << endl;
+
+  // Preconditions:
+
+  require(xbase_path.full());
+  require(rep_path.full());
+  require(xfiber_suffix.empty() || poset_path::is_valid_name(xfiber_suffix));
+
+  // Body:
+  
+  string lposet_name(xfiber_path.poset_name());
+  lposet_name += "_on_";
+  lposet_name += xbase_path.poset_name();
+  lposet_name += "_";
+  lposet_name += xrep_path.member_name();
+  lposet_name += "_schema";
+
+  sheaf::poset_path result(lposet_name, "");
+
+  // Postconditions:
+
+  ensure(!result.full());
+
+  // Exit:
+
+  // cout << "Leaving binary_section_space_schema_member::standard_host_path." << endl;
+  return result;
+}
+
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_path(const poset_path& xbase_path, const poset_path& xfiber_path, const poset_path& xrep_path)
+{
+  // cout << endl << "Entering binary_section_space_schema_member::standard_path." << endl;
+
+  // Preconditions:
+
+  require(xbase_path.full());
+  require(!xfiber_path.empty());
+  require(rep_path.full());
+
+  // Body:
+
+  poset_path result(standard_host_path(xbase_path, xfiber_path, xrep_path));
+
+  string lmember_name(xfiber_path.poset_name());
+  lmember_name += "_on_";
+  lmamber_name += xbase_space.member_name();
+
+  result.put_member_name(lmember_name);
+  
+  // Postconditions:
+
+  ensure(result.full());
+
+  // Exit:
+
+  // cout << "Leaving binary_section_space_schema_member::standard_path." << endl;
+  return result;
+}
+
+
+
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host(namespace_type& xns, 
+              const poset_path& xbase_path,
+              const poset_path& xfiber_path,
+              const poset_path& xrep_path,
+              bool xauto_access)
+{
+  // cout << endl << "Entering binary_section_space_schema_member::standard_host." << endl;
+
+  // Preconditions:
+
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(xns.path_is_available<host_type>(standard_host_path(xbase_path, xfiber_path, xrep_path), xauto_access));
+  
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible<schema_type::host_type>(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, host_type::standard_schema_path(), xauto_access));
+
+  require(xbase_path.full());
+  require(xns.state_is_auto_read_accessible<base_space_poset>(xbase_path, xauto_access));
+
+  require(!xfiber_path.empty());
+  require(xns.state_is_auto_read_accessible(xfiber_path, xauto_access));
+
+  require(xrep_path.full());
+  require(xns.state_is_auto_read_accessible<sec_rep_descriptor_poset>(xrep_path, xauto_access));
+
+  // Body:
+
+  poset_path lstd_path(standard_host_path(xbase_path, xfiber_path, xrep_path));
+  poset_path lstd_schema_path(host_type::standard_schema_path());
+  
+  host_type& result = new_host(xns, lstd_path, lstd_schema_path, xbase_path, xfiber_path, xrep_path, xauto_access);
+
+  // Postconditions:
+
+  //  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == standard_host_path(xbase_path, xfiber_path, xrep_path));
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == host_type::standard_schema_path());
+
+  ensure(unexecutable("result.base_space_path() == xbase_space_path"));
+  ensure(unexecutable("result.fiber_space_path() == xfiber_space_path"));
+  ensure(unexecutable("result.rep_path() == xrep_path"));
+
+  // Exit:
+
+  // cout << "Leaving binary_section_space_schema_member::standard_host." << endl;
+  return result;
+}
+
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_schema(namespace_type& xns, 
+                const poset_path& xbase_path,
+                const poset_path& xfiber_path,
+                const poset_path& xrep_path,
+                bool xauto_access)
+{
+  // cout << endl << "Entering binary_section_space_schema_member::standard_host." << endl;
+
+  // Preconditions:
+
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(xns.path_is_available<host_type>(standard_host_path(xbase_path, xfiber_path, xrep_path), xauto_access));
+  
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible<schema_type::host_type>(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, host_type::standard_schema_path(), xauto_access));
+
+  require(xbase_path.full());
+  require(xns.state_is_auto_read_accessible<base_space_poset>(xbase_path, xauto_access));
+
+  require(!xfiber_path.empty());
+  require(xns.state_is_auto_read_accessible(xfiber_path, xauto_access));
+
+  require(xrep_path.full());
+  require(xns.state_is_auto_read_accessible<sec_rep_descriptor_poset>(xrep_path, xauto_access));
+
+  // Body:
+
+  // Find or create the standard host.
+
+  host_type& lhost = standard_host(xns, xbase_path, xfiber_path, xrep_path);
+
+  // All members of the schema exist implicitly, but a member can't 
+  // be accessed by path unless we explicitly give it a name..
+
+  poset_path lstd_path(standard_path(xbase_path, xfiber_path, xrep_path));
+  if(!lhost.contains_member(lstd_path.member_name()))
+  {  
+    binary_section_space_schema_member lmbr(&lhost, xbase_path, lhost.fiber_space().schema().name());
+    lmbr.put_name(lstd_path.member_name(), true, false);
+  }
+
+  // Postconditions:
+
+  // !!! start here - what are the postconditions?
+
+  //  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == standard_host_path(xbase_path, xfiber_path, xrep_path));
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == host_type::standard_schema_path());
+
+  ensure(unexecutable("result.base_space_path() == xbase_space_path"));
+  ensure(unexecutable("result.fiber_space_path() == xfiber_space_path"));
+  ensure(unexecutable("result.rep_path() == xrep_path"));
+
+  // Exit:
+
+  // cout << "Leaving binary_section_space_schema_member::standard_host." << endl;
+  return result;
+}
+
 // PROTECTED MEMBER FUNCTIONS
 
 // PRIVATE MEMBER FUNCTIONS

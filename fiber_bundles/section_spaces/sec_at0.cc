@@ -112,9 +112,18 @@ standard_host(namespace_type& xns,
 
   require(xfiber_suffix.empty() || poset_path::is_valid_name(xfiber_suffix));
 
-  require(standard_host_available<sec_at0>(xns, xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix, xauto_access));
+  require(standard_host_is_available<sec_at0>(xns, xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix, xauto_access));
 
-  require(standard_schema_available<sec_at0>(xns, xbase_space_path, xrep_path, xfiber_suffix, xauto_access));
+  require(standard_fiber_host_is_available<sec_at0>(xns, xfiber_suffix, xauto_access));
+  require(fiber_type::standard_host_is_available<fiber_type>(xns, xfiber_suffix, xauto_access));
+  
+
+  require(schema_type::standard_host_is_available<sec_at0>(xns, xbase_space_path, xrep_path, xfiber_suffix, xauto_access));
+  require(schema_type::standard_host_is_available(xns, xbase_space_path, fiber_type::standard_host_path<fiber_type>(xfiber_suffix), xrep_path, xauto_access));
+
+  require(standard_host_is_available<sec_at0>(xns, xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix, xauto_access));
+  require(standard_fiber_host_is_available<sec_at0>(xns, xfiber_suffix, xauto_access));
+  require(standard_schema_host_is_available<sec_at0>(xns, xbase_space_path, xrep_path, xfiber_suffix, xauto_access));
 
   // Body:
 
@@ -132,10 +141,15 @@ standard_host(namespace_type& xns,
   {
     // Standard host doesn't exist, have to create it.
 
-    // First find or create the standard schema and any other prerequisites.
+    // First, find or create the standard fiber space and its prerequisites.
+
+    fiber_type::host_type& lfiber_space = fiber_type::standard_host(xns, xfiber_suffix, xauto_access);
+    poset_path lfiber_space_path = lfiber_space.path(xauto_access);
+
+    // Second, find or create the standard schema.
 
     poset_path lstd_schema_path = 
-      schema_type::standard_schema(xbase_space_path, fiber_type::standard_schema_path(), xrep_path, xfiber_suffix);
+      schema_type::standard_schema(xbase_space_path, lfiber_space_path, xrep_path, xfiber_suffix);
     
     // Now create the standard host.
 
