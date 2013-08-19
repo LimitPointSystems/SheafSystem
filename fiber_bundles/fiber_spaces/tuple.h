@@ -227,9 +227,19 @@ public:
   static void make_standard_schema(namespace_poset& xns);
 
   ///
-  /// The standard path with poset name suffix xsuffix for host spaces for type F..
+  /// The standard path with poset name suffix xsuffix for host spaces for type F.
   ///
-  static poset_path standard_host_path(const string& xclass_name, const string& xsuffix);
+  template <typename F>
+  SHEAF_DLL_SPEC
+  static poset_path standard_host_path(const string& xsuffix);
+
+  ///
+  /// True, if standard_host_path<F>(xsuffix) does not exist or is a path
+  /// to a poset of type F::host_type.
+  ///
+  template <typename F>
+  SHEAF_DLL_SPEC
+  static bool standard_host_is_available(namespace_type& xns, const string& xsuffix, bool xauto_access);
 
   ///
   /// Manual, shallow factory method; creates a new host table for members of this type.

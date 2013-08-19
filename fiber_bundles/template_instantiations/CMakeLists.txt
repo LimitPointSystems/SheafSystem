@@ -70,6 +70,7 @@ set(SRCS
     t4_e2.inst.cc
     t4_e3.inst.cc
     tp.inst.cc
+    tuple.inst.cc
     vd.inst.cc
    )
 

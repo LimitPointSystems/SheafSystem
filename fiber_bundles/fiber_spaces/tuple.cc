@@ -308,30 +308,6 @@ make_standard_schema(namespace_poset& xns)
 }
 
 
-sheaf::poset_path
-fiber_bundle::tuple::
-standard_host_path(const string& xclass_name, const string& xsuffix)
-{
-  // Preconditions:
-
-  require(poset_path::is_valid_name(xclass_name));
-  require(xsuffix.empty() || poset_path::is_valid_name(xsuffix));
-  
-  // Body:
-
-  poset_path result(xclass_name + xsuffix, "");
-
-  // Postconditions:
-
-  ensure(result.poset_name() == xclass_name + xsuffix);
-  ensure(result.member_name().empty());
-
-  // Exit:
-
-  return result;
-}
-
-
 void
 fiber_bundle::tuple::
 new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xschema_path, int xfactor_ct, bool xauto_access)

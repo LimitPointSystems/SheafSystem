@@ -701,7 +701,7 @@ make_standard_schema(namespace_poset& xns)
   return;
 }
 
-void
+fiber_bundle::e4::host_type&
 fiber_bundle::e4::
 new_host(namespace_type& xns, 
          const poset_path& xhost_path, 
@@ -728,30 +728,32 @@ new_host(namespace_type& xns,
 
   // Body:
 
-  host_type::new_table(xns, xhost_path, xschema_path, xscalar_space_path, xauto_access);
+  host_type& result =
+    host_type::new_table(xns, xhost_path, xschema_path, xscalar_space_path, xauto_access);
 
   // Postconditions:
 
-  ensure(xns.contains_path(xhost_path, xauto_access));
-  ensure(xns.member_poset(xhost_path, xauto_access).state_is_not_read_accessible());
-  ensure(xns.member_poset(xhost_path, xauto_access).schema(true).path(true) == xschema_path);
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
 
-  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).factor_ct(true) == 4);
-  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).d(true) == 4);
-  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).scalar_space_path(true) == xscalar_space_path );
-  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).p(true) == 1);
-  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).dd(true) == 4);
-  ensure(xns.member_poset<host_type>(xhost_path, xauto_access).vector_space_path(true) == xhost_path );
+  ensure(result.factor_ct(true) == 4);
+  ensure(result.d(true) == 4);
+  ensure(result.scalar_space_path(true) == xscalar_space_path );
+  ensure(result.p(true) == 1);
+  ensure(result.dd(true) == 4);
+  ensure(result.vector_space_path(true) == xhost_path );
 
   // Exit:
 
   // cout << "Leaving e4::new_host." << endl;
-  return;
+  return result;
 }
 
-sheaf::poset_path
+fiber_bundle::e4::host_type&
 fiber_bundle::e4::
-new_host(namespace_type& xns, const string& xsuffix, bool xauto_access)
+standard_host(namespace_type& xns, const string& xsuffix, bool xauto_access)
 {
   // cout << endl << "Entering e4::new_host." << endl;
 
@@ -760,41 +762,46 @@ new_host(namespace_type& xns, const string& xsuffix, bool xauto_access)
   require(xns.state_is_auto_read_write_accessible(xauto_access));
 
   require(xsuffix.empty() || poset_path::is_valid_name(xsuffix));
-  require(!xns.contains_path(standard_host_path(static_class_name(), xsuffix), xauto_access));
+  require(standard_host_is_available<e4>(xns, xsuffix, xauto_access));
 
   require(xns.path_is_auto_read_accessible(standard_schema_path(), xauto_access));
   
-  require(xns.path_is_auto_read_available(standard_host_path(scalar_type::static_class_name(), xsuffix), xauto_access));
+  require(xns.path_is_auto_read_available(standard_host_path<scalar_type>(xsuffix), xauto_access));
 
   // Body:
 
   // Create the scalar space if necessary.
 
-  poset_path lscalar_space_path(standard_host_path(scalar_type::static_class_name(), xsuffix));
+  poset_path lscalar_space_path = scalar_type::standard_host(xns, xsuffix, xauto_access).path(true);
 
-  if(!xns.contains_path(lscalar_space_path, xauto_access))
+  poset_path lpath(standard_host_path<e4>(xsuffix));
+
+  host_type* result_ptr;
+  if(xns.contains_path(lpath, xauto_access))
   {
-    scalar_type::new_host(xns, xsuffix, xauto_access);
+    result_ptr = &xns.member_poset<host_type>(lpath, xauto_access);
+  }
+  else
+  {
+    result_ptr = &new_host(xns, lpath, standard_schema_path(), lscalar_space_path, xauto_access);
   }
 
-  poset_path result(standard_host_path(static_class_name(), xsuffix));
-
-  new_host(xns, result, standard_schema_path(), lscalar_space_path, xauto_access);
+  host_type& result = *result_ptr;
 
   // Postconditions:
 
-  ensure(result == standard_host_path(static_class_name(), xsuffix));
-  ensure(xns.contains_path(result, xauto_access));
-  ensure(xns.member_poset(result, xauto_access).state_is_not_read_accessible());
-  ensure(xns.member_poset(result, xauto_access).schema(true).path(true) == standard_schema_path());
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == standard_host_path<e4>(xsuffix));
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == standard_schema_path());
 
-  ensure(xns.member_poset<host_type>(result, xauto_access).factor_ct(true) == 4);
-  ensure(xns.member_poset<host_type>(result, xauto_access).d(true) == 4);
-  ensure(xns.member_poset<host_type>(result, xauto_access).scalar_space_path(true) == 
-         standard_host_path(scalar_type::static_class_name(), xsuffix) );
-  ensure(xns.member_poset<host_type>(result, xauto_access).p(true) == 1);
-  ensure(xns.member_poset<host_type>(result, xauto_access).dd(true) == 4);
-  ensure(xns.member_poset<host_type>(result, xauto_access).vector_space_path(true) == result );
+  ensure(result.factor_ct(true) == 4);
+  ensure(result.d(true) == 4);
+  ensure(result.scalar_space_path(true) == 
+         standard_host_path<scalar_type>(xsuffix) );
+  ensure(result.p(true) == 1);
+  ensure(result.dd(true) == 4);
+  ensure(result.vector_space_path(true) == result.path(true) );
 
   // Exit:
 

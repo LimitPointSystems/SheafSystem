@@ -760,7 +760,7 @@ new_host(namespace_type& xns,
 
 fiber_bundle::e1::host_type&
 fiber_bundle::e1::
-new_host(namespace_type& xns, const string& xsuffix, bool xauto_access)
+standard_host(namespace_type& xns, const string& xsuffix, bool xauto_access)
 {
   // cout << endl << "Entering e1::new_host." << endl;
 
@@ -769,38 +769,42 @@ new_host(namespace_type& xns, const string& xsuffix, bool xauto_access)
   require(xns.state_is_auto_read_write_accessible(xauto_access));
 
   require(xsuffix.empty() || poset_path::is_valid_name(xsuffix));
-  require(!xns.contains_path(standard_host_path(static_class_name(), xsuffix), xauto_access));
+  require(standard_host_is_available<e1>(xns, xsuffix, xauto_access));
 
   require(xns.path_is_auto_read_accessible(standard_schema_path(), xauto_access));
   
-  require(xns.path_is_auto_read_available(standard_host_path(scalar_type::static_class_name(), xsuffix), xauto_access));
+  require(xns.path_is_auto_read_available(standard_host_path<scalar_type>(xsuffix), xauto_access));
 
   // Body:
 
   // Create the scalar space if necessary.
 
-  poset_path lscalar_space_path(standard_host_path(scalar_type::static_class_name(), xsuffix));
+  poset_path lscalar_space_path = scalar_type::standard_host(xns, xsuffix, xauto_access).path(true);
 
-  if(!xns.contains_path(lscalar_space_path, xauto_access))
+  poset_path lpath(standard_host_path<e1>(xsuffix));
+
+  host_type* result_ptr;
+  if(xns.contains_path(lpath, xauto_access))
   {
-    scalar_type::new_host(xns, xsuffix, xauto_access);
+    result_ptr = &xns.member_poset<host_type>(lpath, xauto_access);
+  }
+  else
+  {
+    result_ptr = &new_host(xns, lpath, standard_schema_path(), lscalar_space_path, xauto_access);
   }
 
-  poset_path lpath(standard_host_path(static_class_name(), xsuffix));
-
-  host_type& result =
-    new_host(xns, lpath, standard_schema_path(), lscalar_space_path, xauto_access);
+  host_type& result = *result_ptr;
 
   // Postconditions:
 
   ensure(xns.owns(result, xauto_access));
-  ensure(result.path(true) == standard_host_path(static_class_name(), xsuffix));
+  ensure(result.path(true) == standard_host_path<e1>(xsuffix));
   ensure(result.state_is_not_read_accessible());
   ensure(result.schema(true).path(xauto_access) == standard_schema_path());
 
   ensure(result.factor_ct(true) == 1);
   ensure(result.d(true) == 1);
-  ensure(result.scalar_space_path(true) == standard_host_path(scalar_type::static_class_name(), xsuffix) );
+  ensure(result.scalar_space_path(true) == standard_host_path<scalar_type>(xsuffix) );
   ensure(result.p(true) == 1);
   ensure(result.dd(true) == 1);
   ensure(result.vector_space_path(true) == result.path(true));
