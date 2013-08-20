@@ -102,105 +102,105 @@ standard_host_is_available(xns,
   return result;
 }
 
-template <typename S>
-bool
-fiber_bundle::sec_tuple::
-standard_fiber_host_is_auto_read_accessible(xns, const string& xfiber_suffix, bool xauto_access)
-{
-  // Preconditions:
+// template <typename S>
+// bool
+// fiber_bundle::sec_tuple::
+// standard_fiber_host_is_auto_read_accessible(xns, const string& xfiber_suffix, bool xauto_access)
+// {
+//   // Preconditions:
 
-  xns.state_is_auto_read_accessible(xauto_access);
-  require(xfiber_suffix.empty() || poset_path::is_valid_name(xfiber_suffix));
+//   xns.state_is_auto_read_accessible(xauto_access);
+//   require(xfiber_suffix.empty() || poset_path::is_valid_name(xfiber_suffix));
   
-  // Body:
+//   // Body:
 
-  typedef typename S:fiber_type fiber_type;
+//   typedef typename S:fiber_type fiber_type;
   
-  poset_path lstd_path(fiber_type::standard_host_path<fiber_type>(xfiber_suffix));
+//   poset_path lstd_path(fiber_type::standard_host_path<fiber_type>(xfiber_suffix));
 
-  bool result = xns.path_is_available<fiber_type::host_type>(lstd_path, xauto_access);
+//   bool result = xns.path_is_available<fiber_type::host_type>(lstd_path, xauto_access);
   
-  // Postconditions:
+//   // Postconditions:
 
-  // Exit:
+//   // Exit:
 
-  return result;
-}
+//   return result;
+// }
 
-template <typename S>
-sheaf::poset_path
-fiber_bundle::sec_tuple::
-standard_schema_path(const poset_path& xbase_path, const poset_path& xrep_path, const string& xfiber_suffix)
-{
-  // Preconditions:
+// template <typename S>
+// sheaf::poset_path
+// fiber_bundle::sec_tuple::
+// standard_schema_path(const poset_path& xbase_path, const poset_path& xrep_path, const string& xfiber_suffix)
+// {
+//   // Preconditions:
 
-  require(xbase_path.full());
-  require(rep_path.full());
-  require(xfiber_suffix.empty() || poset_path::is_valid_name(xfiber_suffix));
+//   require(xbase_path.full());
+//   require(rep_path.full());
+//   require(xfiber_suffix.empty() || poset_path::is_valid_name(xfiber_suffix));
   
-  // Body:
+//   // Body:
 
-  typedef typename S::fiber_type fiber_type;
+//   typedef typename S::fiber_type fiber_type;
 
-//   poset_path lstd_fiber_path(fiber_type::standard_host_path(fiber_type::static_class_name(), xfiber_suffix));
+// //   poset_path lstd_fiber_path(fiber_type::standard_host_path(fiber_type::static_class_name(), xfiber_suffix));
   
-//   string lposet_name(lstd_fiber_path.poset_name());
-//   lposet_name += "_on_";
-//   lposet_name += xbase_path.poset_name();
-//   lposet_name += "_";
-//   lposet_name += xrep_path.member_name();
-//   lposet_name += "_schema";
+// //   string lposet_name(lstd_fiber_path.poset_name());
+// //   lposet_name += "_on_";
+// //   lposet_name += xbase_path.poset_name();
+// //   lposet_name += "_";
+// //   lposet_name += xrep_path.member_name();
+// //   lposet_name += "_schema";
 
-//   string lmember_name(lstd_fiber_path.poset_name());
-//   lmember_name += "_on_";
-//   lmamber_name += xbase_space.member_name();
+// //   string lmember_name(lstd_fiber_path.poset_name());
+// //   lmember_name += "_on_";
+// //   lmamber_name += xbase_space.member_name();
   
-//   poset_path result(lposet_name, lmember_name);
+// //   poset_path result(lposet_name, lmember_name);
 
 
-  poset_path lstd_fiber_path(fiber_type::standard_host_path<fiber_type>(xfiber_suffix));
-  poset_path result(schema_type::standard_host_path(xbase_path, lstd_fiber_path, xrep_path));
+//   poset_path lstd_fiber_path(fiber_type::standard_host_path<fiber_type>(xfiber_suffix));
+//   poset_path result(schema_type::standard_host_path(xbase_path, lstd_fiber_path, xrep_path));
 
-  // Postconditions:
+//   // Postconditions:
 
-  ensure(result.full());
+//   ensure(result.full());
   
-  // Exit:
+//   // Exit:
 
-  return result;
-}
+//   return result;
+// }
 
-template <typename S>
-bool
-fiber_bundle::sec_tuple::
-standard_schema_host_is_available(xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path, 
-                                  const string& xfiber_suffix,
-                                  bool xauto_access)
-{
-  // Preconditions:
+// template <typename S>
+// bool
+// fiber_bundle::sec_tuple::
+// standard_schema_host_is_available(xns,
+//                                   const poset_path& xbase_path,
+//                                   const poset_path& xrep_path, 
+//                                   const string& xfiber_suffix,
+//                                   bool xauto_access)
+// {
+//   // Preconditions:
 
-  xns.state_is_auto_read_accessible(xauto_access);
-  require(xbase_path.full());
-  require(rep_path.full());
-  require(xfiber_suffix.empty() || poset_path::is_valid_name(xfiber_suffix));
+//   xns.state_is_auto_read_accessible(xauto_access);
+//   require(xbase_path.full());
+//   require(rep_path.full());
+//   require(xfiber_suffix.empty() || poset_path::is_valid_name(xfiber_suffix));
   
-  // Body:
+//   // Body:
 
-  typedef typename S::schema_type::host_type schema_host_type;
+//   typedef typename S::schema_type::host_type schema_host_type;
   
 
-  poset_path lstd_path(S::standard_schema_path<S>(xbase_path, xrep_path, xfiber_suffix));
+//   poset_path lstd_path(S::standard_schema_path<S>(xbase_path, xrep_path, xfiber_suffix));
 
-  bool result = !xns.contains_path(lstd_path, xauto_access) || xns.contains_path<schema_host_type>(lstd_path, xauto_access);
+//   bool result = !xns.contains_path(lstd_path, xauto_access) || xns.contains_path<schema_host_type>(lstd_path, xauto_access);
 
-  // Postconditions:
+//   // Postconditions:
 
-  // Exit:
+//   // Exit:
 
-  return result;
-}
+//   return result;
+// }
 
 
 #endif // ifndef SEC_TUPLE_IMPL_H

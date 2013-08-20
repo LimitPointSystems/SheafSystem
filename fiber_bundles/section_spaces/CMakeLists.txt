@@ -86,6 +86,7 @@ collect_sources()
 # Headers that are NOT associated with a .cc file.
 #
 set(ADDITIONAL_INCS
+    binary_section_space_schema_member.impl.h
     sec_at0.impl.h
     sec_atp.impl.h
     sec_ed.impl.h

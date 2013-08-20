@@ -103,27 +103,18 @@ standard_host(namespace_type& xns,
   require(xns.state_is_auto_read_write_accessible(xauto_access));
 
   require(xbase_space_path.full());
-  require(xns.contains_path<base_space_poset>(xbase_space_path));
+  require(xns.path_is_auto_read_accessible<base_space_poset>(xbase_space_path));
 
   require(xrep_path.full());
-  require(xns.contains_path<sec_rep_descriptor_poset>(xrep_path));  
+  require(xns.path_is_auto_read_accessible<sec_rep_descriptor_poset>(xrep_path));  
 
   require(xsection_suffix.empty() || poset_path::is_valid_name(xsection_suffix));
 
   require(xfiber_suffix.empty() || poset_path::is_valid_name(xfiber_suffix));
 
   require(standard_host_is_available<sec_at0>(xns, xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix, xauto_access));
-
-  require(standard_fiber_host_is_available<sec_at0>(xns, xfiber_suffix, xauto_access));
   require(fiber_type::standard_host_is_available<fiber_type>(xns, xfiber_suffix, xauto_access));
-  
-
   require(schema_type::standard_host_is_available<sec_at0>(xns, xbase_space_path, xrep_path, xfiber_suffix, xauto_access));
-  require(schema_type::standard_host_is_available(xns, xbase_space_path, fiber_type::standard_host_path<fiber_type>(xfiber_suffix), xrep_path, xauto_access));
-
-  require(standard_host_is_available<sec_at0>(xns, xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix, xauto_access));
-  require(standard_fiber_host_is_available<sec_at0>(xns, xfiber_suffix, xauto_access));
-  require(standard_schema_host_is_available<sec_at0>(xns, xbase_space_path, xrep_path, xfiber_suffix, xauto_access));
 
   // Body:
 
@@ -131,7 +122,7 @@ standard_host(namespace_type& xns,
   
   host_type* lresult_ptr;
   
-  if(xns.contains_path<host_type>(lstd_path, xauto_access))
+  if(xns.contains_path(lstd_path, xauto_access))
   {
     // Standard host already exists, just return it.
 
@@ -141,15 +132,10 @@ standard_host(namespace_type& xns,
   {
     // Standard host doesn't exist, have to create it.
 
-    // First, find or create the standard fiber space and its prerequisites.
-
-    fiber_type::host_type& lfiber_space = fiber_type::standard_host(xns, xfiber_suffix, xauto_access);
-    poset_path lfiber_space_path = lfiber_space.path(xauto_access);
-
-    // Second, find or create the standard schema.
+    // First, find or create the standard schema.
 
     poset_path lstd_schema_path = 
-      schema_type::standard_schema(xbase_space_path, lfiber_space_path, xrep_path, xfiber_suffix);
+      schema_type::standard_schema<sec_at0>(xbase_space_path, lfiber_space_path, xrep_path, xfiber_suffix);
     
     // Now create the standard host.
 
@@ -161,13 +147,10 @@ standard_host(namespace_type& xns,
   // Postconditions:
 
   //  ensure(xns.owns(result, xauto_access));
-  ensure(result.path(true) == 
-         standard_host_path(xbase_space_path, fiber_type::static_class_name(), xrep_path, xsection_suffix, xfiber_suffix));
-
+  ensure(result.path(true) == standard_host_path<sec_at0>(xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix));
   ensure(result.state_is_not_read_accessible());
-
   ensure(result.schema(true).path(xauto_access) == 
-         schema_type::standard_schema<fiber_type>(xns, xbase_space_path, xrep_path, xfiber_suffix, xauto_access));
+         schema_type::standard_member_path<sec_at0>(xns, xbase_space_path, xrep_path, xfiber_suffix, xauto_access));
 
   ensure(result.factor_ct(true) == result.schema(true).fiber_space<fiber_type::host_type>().factor_ct(xauto_access));
   ensure(result.d(true) == result.schema(true).fiber_space<fiber_type::host_type>().d(xauto_access));

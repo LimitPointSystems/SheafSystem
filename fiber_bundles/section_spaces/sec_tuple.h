@@ -100,32 +100,32 @@ public:
                                          const string& xfiber_suffix,
                                          bool xauto_access);
 
-  ///
-  /// True if and only if the fiber space with path S::fiber_type::standard_host_path<S::fiber_type>(xfiber_suffix)
-  /// does not exist in namespace xns, or if it exists, conforms to S:fiber_type:host_type and is auto-read-accessible.
-  ///
-  template <typename S>
-  static bool standard_fiber_host_is_auto_read_accessible(const namespace_poset& xns, const string& xfiber_suffix, bool xauto_access);
+//   ///
+//   /// True if and only if the fiber space with path S::fiber_type::standard_host_path<S::fiber_type>(xfiber_suffix)
+//   /// does not exist in namespace xns, or if it exists, conforms to S:fiber_type:host_type and is auto-read-accessible.
+//   ///
+//   template <typename S>
+//   static bool standard_fiber_host_is_auto_read_accessible(const namespace_poset& xns, const string& xfiber_suffix, bool xauto_access);
 
-  ///
-  /// The standard schema path for section type S with base path xbase_path,
-  /// representation path xrep_path, and fiber suffix xfiber_suffix.
-  ///
-  template <typename S>
-  static poset_path standard_schema_path(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
+//   ///
+//   /// The standard schema path for section type S with base path xbase_path,
+//   /// representation path xrep_path, and fiber suffix xfiber_suffix.
+//   ///
+//   template <typename S>
+//   static poset_path standard_schema_path(const poset_path& xbase_path,
+//                                          const poset_path& xrep_path,
+//                                          const string& xfiber_suffix);
 
-  ///
-  /// True if and only if the schema host with path standard_schema_path(xbase_path, xrep_path, xfiber_suffix)
-  /// does not exist in namespace xns, or if it exists, conforms to schema_type::host_type and is auto-read-write-accessible.
-  ///
-  template <typename S>
-  static bool standard_schema_host_is_auto_read_write_accessible(const namespace_poset& xns,
-                                                                 const poset_path& xbase_path,
-                                                                 const poset_path& xrep_path,
-                                                                 const string& xfiber_suffix,
-                                                                 bool xauto_access);
+//   ///
+//   /// True if and only if the schema host with path standard_schema_path(xbase_path, xrep_path, xfiber_suffix)
+//   /// does not exist in namespace xns, or if it exists, conforms to schema_type::host_type and is auto-read-write-accessible.
+//   ///
+//   template <typename S>
+//   static bool standard_schema_host_is_auto_read_write_accessible(const namespace_poset& xns,
+//                                                                  const poset_path& xbase_path,
+//                                                                  const poset_path& xrep_path,
+//                                                                  const string& xfiber_suffix,
+//                                                                  bool xauto_access);
 
   ///
   /// Manual, shallow factory method; creates a new host table for members of this type.

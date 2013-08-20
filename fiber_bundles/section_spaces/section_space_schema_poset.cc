@@ -161,6 +161,41 @@ make_standard_schema(namespace_poset& xns)
   return;
 }
 
+sheaf::poset_path
+fiber_bundle::section_space_schema_poset::
+rep_path(bool xauto_access)
+{
+  // cout << endl << "Entering section_space_schema_poset::rep_path." << endl;
+
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  poset_path result(sheaf::table_dofs(*this).rep_path);
+
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving section_space_schema_poset::rep_path." << endl;
+  return result;
+}
+
+
 fiber_bundle::sec_rep_descriptor&
 fiber_bundle::section_space_schema_poset::
 rep()
@@ -382,6 +417,40 @@ db() const
   return result;
 }
 
+sheaf::poset_path
+fiber_bundle::section_space_schema_poset::
+base_space_path(bool xauto_access)
+{
+  // cout << endl << "Entering section_space_schema_poset::base_space_path." << endl;
+
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  poset_path result(sheaf::table_dofs(*this).base_space_path);
+
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving section_space_schema_poset::base_space_path." << endl;
+  return result;
+}
+
 fiber_bundle::base_space_poset&
 fiber_bundle::section_space_schema_poset::
 base_space()
@@ -528,6 +597,40 @@ fiber_schema() const
   require(state_is_read_accessible());
 
   return *_fiber_space->schema().host();
+}
+
+sheaf::poset_path
+fiber_bundle::section_space_schema_poset::
+fiber_space_path(bool xauto_access)
+{
+  // cout << endl << "Entering section_space_schema_poset::fiber_space_path." << endl;
+
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  poset_path result(sheaf::table_dofs(*this).fiber_space_path);
+
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving section_space_schema_poset::fiber_space_path." << endl;
+  return result;
 }
 
 sheaf::poset&
