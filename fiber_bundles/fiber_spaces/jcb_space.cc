@@ -112,7 +112,6 @@ new_table(namespace_type& xns,
           const poset_path& xschema_path,
 	  const poset_path& xdomain_path,
 	  const poset_path& xrange_path,
-          const poset_path& xscalar_space_path, 
           bool xauto_access)
 {
   // cout << endl << "Entering jcb_space::new_table." << endl;
@@ -128,11 +127,13 @@ new_table(namespace_type& xns,
   require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
   require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));
 
-  require(xns.path_is_auto_read_accessible<domain_type>(xdomain_path, xauto_access));
-  require(xns.path_is_auto_read_accessible<range_type>(xrange_path, xauto_access));
+  require(xns.path_is_auto_read_accessible<domain_space_type>(xdomain_path, xauto_access));
+  require(xns.path_is_auto_read_accessible<range_space_type>(xrange_path, xauto_access));
+
   require(d(xns, xschema_path, xauto_access) == d(xns, xdomain_path, xrange_path, xauto_access));
 
-  require(xns.path_is_auto_read_accessible<scalar_space_type>(xscalar_space_path, xauto_access));
+  require(xns.member_poset<domain_space_type>(xdomain_path, xauto_access).scalar_space_path(xauto_access) ==
+	  xns.member_poset<range_space_type>(xrange_path, xauto_access).scalar_space_path(xauto_access));
 
   // Body:
 
@@ -156,6 +157,9 @@ new_table(namespace_type& xns,
   int ld = lschema.row_dof_ct();
   int ldd = d(xns, xdomain_path, xauto_access);
   int ldr = d(xns, xrange_path, xauto_access);
+
+  poset_path lscalar_space_path =
+    xns.member_poset<domain_space_type>(xdomain_path, xauto_access).scalar_space_path(xauto_access);
   
   // Create the table dof map and set dof values;
   // must be newed because poset_state::_table keep a pointer to it.
@@ -163,7 +167,7 @@ new_table(namespace_type& xns,
   array_poset_dof_map* lmap = new array_poset_dof_map(&lschema, true);
   lmap->put_dof("factor_ct", ld);
   lmap->put_dof("d", ld);
-  lmap->put_dof("scalar_space_path", xscalar_space_path);
+  lmap->put_dof("scalar_space_path", lscalar_space_path);
   lmap->put_dof("domain_path", xdomain_path);
   lmap->put_dof("dd", ldd);
   lmap->put_dof("range_path", xrange_path);
@@ -189,11 +193,17 @@ new_table(namespace_type& xns,
 
   ensure(result.factor_ct(true) == result.d(true));
   ensure(result.d(true) == schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access));
+
   ensure(result.domain_path(true) == xdomain_path);
   ensure(result.dd(true) == d(xns, xdomain_path, xauto_access));
+
   ensure(result.range_path(true) == xrange_path);
   ensure(result.dr(true) == d(xns, xrange_path, xauto_access));
-  ensure(result.scalar_space_path(true) == xscalar_space_path );
+
+  ensure(result.scalar_space_path(true) ==
+	 xns.member_poset<domain_space_type>(xdomain_path, xauto_access).scalar_space_path(xauto_access) );
+  ensure(result.scalar_space_path(true) ==
+	 xns.member_poset<range_space_type>(xrange_path, xauto_access).scalar_space_path(xauto_access) );
 
   // Exit:
 
@@ -255,13 +265,13 @@ d(const namespace_poset& xns, const poset_path& xdomain_space_path, const poset_
 {
   // Preconditions:
 
-  require(xns.path_is_auto_read_accessible<domain_type>(xdomain_space_path, xauto_access));
-  require(xns.path_is_auto_read_accessible<range_type>(xrange_space_path, xauto_access));
+  require(xns.path_is_auto_read_accessible<domain_space_type>(xdomain_space_path, xauto_access));
+  require(xns.path_is_auto_read_accessible<range_space_type>(xrange_space_path, xauto_access));
  
   // Body:
 
-  int ldd = xns.member_poset<domain_type>(xdomain_space_path, xauto_access).d();  
-  int ldr = xns.member_poset<range_type>(xrange_space_path, xauto_access).d();  
+  int ldd = xns.member_poset<domain_space_type>(xdomain_space_path, xauto_access).d();  
+  int ldr = xns.member_poset<range_space_type>(xrange_space_path, xauto_access).d();  
 
   int result = d(ldd, ldr);
 

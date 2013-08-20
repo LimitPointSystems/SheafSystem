@@ -25,7 +25,7 @@ namespace fiber_bundle
 {
 
   using namespace sheaf;
-  class at1;
+  class at1_space;
   class jcb;
   
   
@@ -53,12 +53,12 @@ public:
   ///
   /// The type of domain vector space  associated with this space.
   ///
-  typedef at1 domain_type;
+  typedef at1_space domain_space_type;
 
   ///
   /// The type of range vector space  associated with this space.
   ///
-  typedef at1 range_type;
+  typedef at1_space range_space_type;
 
   ///
   /// The name of the standard schema poset for this class.
@@ -84,14 +84,13 @@ public:
   /// Creates a new jcb_space in namespace xns with path xpath,
   /// schema specified by xschema_path, and table attributes 
   /// domain_path, range_path, and scalar_space_path specified by
-  /// xdomain_path, xrange_path and xscalar_space_path, respectively.
+  /// xdomain_path and xrange_path, respectively.
   ///
   static jcb_space& new_table(namespace_type& xhost, 
 			      const poset_path& xpath, 
 			      const poset_path& xschema_path,
 			      const poset_path& xdomain_path,
 			      const poset_path& xrange_path,
-			      const poset_path& xscalar_space_path,
 			      bool xauto_access);
   
   //============================================================================

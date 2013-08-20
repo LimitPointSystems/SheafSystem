@@ -11,7 +11,10 @@
 
 #include "abstract_poset_member.impl.h"
 #include "assert_contract.h"
-#include "namespace_poset.h"
+#include "at1.h"
+#include "at1_space.h"
+#include "jcb_space.h"
+#include "fiber_bundles_namespace.h"
 #include "schema_poset_member.h"
 #include "wsv_block.h"
 
@@ -522,6 +525,183 @@ row_dofs() const
 // CLASS JCB_E13
 //==============================================================================
 
+// ===========================================================
+// HOST FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+const sheaf::poset_path&
+fiber_bundle::jcb_e13::
+standard_schema_path()
+{
+  // Preconditions:
+
+
+  // Body:
+
+  static const poset_path result(standard_schema_poset_name(), "jcb_e13_schema");
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+void
+fiber_bundle::jcb_e13::
+make_standard_schema(namespace_poset& xns)
+{
+  // Preconditions:
+
+  require(xns.state_is_read_write_accessible());
+  require(xns.contains_poset(standard_schema_poset_name()));
+  require(!xns.contains_poset_member(standard_schema_path()));
+
+  // Body:
+
+  string lmember_names = "dxdu DOUBLE false ";
+  lmember_names       += "dydu DOUBLE false ";
+  lmember_names       += "dzdu DOUBLE false";
+
+  schema_poset_member lschema(xns,
+                              standard_schema_path().member_name(),
+                              jcb_ed::standard_schema_path(),
+                              lmember_names,
+                              false);
+
+  lschema.detach_from_state();
+
+  // Postconditions:
+
+  ensure(xns.contains_poset_member(standard_schema_path()));
+
+  // Exit:
+
+  return;
+}
+
+fiber_bundle::jcb_e13::host_type&
+fiber_bundle::jcb_e13::
+new_host(namespace_type& xns, 
+         const poset_path& xhost_path, 
+         const poset_path& xschema_path, 
+	 const poset_path& xdomain_path,
+	 const poset_path& xrange_path,
+         bool xauto_access)
+{
+  // cout << endl << "Entering jcb_e13::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path()));
+
+  require(xns.path_is_auto_read_accessible<domain_type>(xdomain_path, xauto_access));
+  require(xns.path_is_auto_read_accessible<range_type>(xrange_path, xauto_access));
+  require(host_type::d(xns, xschema_path, xauto_access) == host_type::d(xns, xdomain_path, xrange_path, xauto_access));
+
+  require(xns.member_poset<domain_type::host_type>(xdomain_path, xauto_access).scalar_space_path(xauto_access) ==
+	  xns.member_poset<range_type::host_type>(xrange_path, xauto_access).scalar_space_path(xauto_access));
+
+  // Body:
+
+  host_type& result =
+    host_type::new_table(xns, xhost_path, xschema_path, xdomain_path, xrange_path, xauto_access); 
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(result.factor_ct(true) == result.d(true));
+  ensure(result.d(true) == host_type::d(xns, xschema_path, xauto_access));
+  ensure(result.domain_path(true) == xdomain_path);
+  ensure(result.dd(true) == host_type::d(xns, xdomain_path, xauto_access));
+  ensure(result.range_path(true) == xrange_path);
+  ensure(result.dr(true) == host_type::d(xns, xrange_path, xauto_access));
+  ensure(result.scalar_space_path(true) ==
+	 xns.member_poset<domain_type::host_type>(xdomain_path, xauto_access).scalar_space_path(xauto_access) );
+  ensure(result.scalar_space_path(true) ==
+	 xns.member_poset<range_type::host_type>(xrange_path, xauto_access).scalar_space_path(xauto_access) );
+  
+  // Exit:
+
+  // cout << "Leaving jcb_e13::new_host." << endl;
+  return result;
+}
+
+// fiber_bundle::jcb_e13::host_type&
+// fiber_bundle::jcb_e13::
+// standard_host(namespace_type& xns, const string& xsuffix, bool xauto_access)
+// {
+//   // cout << endl << "Entering jcb_e13::new_host." << endl;
+
+//   // Preconditions:
+
+//   require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+//   require(xsuffix.empty() || poset_path::is_valid_name(xsuffix));
+//   require(standard_host_is_available<jcb_e13>(xns, xsuffix, xauto_access));
+
+//   require(xns.path_is_auto_read_accessible(standard_schema_path(), xauto_access));
+  
+//   require(xns.path_is_auto_read_available(standard_host_path<scalar_type>(xsuffix), xauto_access));
+
+//   // Body:
+
+//   // Create the scalar space if necessary.
+
+//   poset_path lscalar_space_path = scalar_type::standard_host(xns, xsuffix, xauto_access).path(true);
+
+//   poset_path lpath(standard_host_path<jcb_e13>(xsuffix));
+
+//   host_type* result_ptr;
+//   if(xns.contains_path(lpath, xauto_access))
+//   {
+//     result_ptr = &xns.member_poset<host_type>(lpath, xauto_access);
+//   }
+//   else
+//   {
+//     result_ptr = &new_host(xns, lpath, standard_schema_path(), lscalar_space_path, xauto_access);
+//   }
+
+//   host_type& result = *result_ptr;
+
+//   // Postconditions:
+
+//   ensure(xns.owns(result, xauto_access));
+//   ensure(result.path(true) == standard_host_path<jcb_e13>(xsuffix));
+//   ensure(result.state_is_not_read_accessible());
+//   ensure(result.schema(true).path(xauto_access) == standard_schema_path());
+
+//   ensure(result.factor_ct(true) == 1);
+//   ensure(result.d(true) == 1);
+//   ensure(result.scalar_space_path(true) == standard_host_path<scalar_type>(xsuffix) );
+//   ensure(result.p(true) == 1);
+//   ensure(result.dd(true) == 1);
+//   ensure(result.vector_space_path(true) == result.path(true));
+
+//   // Exit:
+
+//   // cout << "Leaving jcb_e13::new_host." << endl;
+//   return result;
+// }
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+ 
+
 
 //============================================================================
 // JCB_E13 FACET OF CLASS JCB_E13
@@ -910,57 +1090,6 @@ operator const jcb_e13::row_dofs_type& () const
 //============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
-
-const sheaf::poset_path&
-fiber_bundle::jcb_e13::
-standard_schema_path()
-{
-  // Preconditions:
-
-
-  // Body:
-
-  static const poset_path result(standard_schema_poset_name(), "jcb_e13_schema");
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-void
-fiber_bundle::jcb_e13::
-make_standard_schema(namespace_poset& xns)
-{
-  // Preconditions:
-
-  require(xns.state_is_read_write_accessible());
-  require(xns.contains_poset(standard_schema_poset_name()));
-  require(!xns.contains_poset_member(standard_schema_path()));
-
-  // Body:
-
-  string lmember_names = "dxdu DOUBLE false ";
-  lmember_names       += "dydu DOUBLE false ";
-  lmember_names       += "dzdu DOUBLE false";
-
-  schema_poset_member lschema(xns,
-                              standard_schema_path().member_name(),
-                              jcb_ed::standard_schema_path(),
-                              lmember_names,
-                              false);
-
-  lschema.detach_from_state();
-
-  // Postconditions:
-
-  ensure(xns.contains_poset_member(standard_schema_path()));
-
-  // Exit:
-
-  return;
-}
 
 // PROTECTED MEMBER FUNCTIONS
 
