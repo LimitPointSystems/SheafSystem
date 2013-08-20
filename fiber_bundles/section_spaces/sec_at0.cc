@@ -103,10 +103,10 @@ standard_host(namespace_type& xns,
   require(xns.state_is_auto_read_write_accessible(xauto_access));
 
   require(xbase_space_path.full());
-  require(xns.path_is_auto_read_accessible<base_space_poset>(xbase_space_path));
+  require(xns.path_is_auto_read_accessible<base_space_poset>(xbase_space_path, xatuo_access));
 
   require(xrep_path.full());
-  require(xns.path_is_auto_read_accessible<sec_rep_descriptor_poset>(xrep_path));  
+  require(xns.path_is_auto_read_accessible<sec_rep_descriptor_poset>(xrep_path, xauto_access));  
 
   require(xsection_suffix.empty() || poset_path::is_valid_name(xsection_suffix));
 

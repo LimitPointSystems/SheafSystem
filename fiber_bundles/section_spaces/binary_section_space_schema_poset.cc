@@ -13,6 +13,7 @@
 #include "arg_list.h"
 #include "array_poset_dof_map.h"
 #include "base_space_member.h"
+#include "base_space_poset.h"
 #include "binary_section_space_schema_member.h"
 #include "index_iterator.h"
 #include "namespace_poset.impl.h"
@@ -23,6 +24,7 @@
 #include "poset_type.h"
 #include "postorder_member_iterator.h"
 #include "schema_poset_member.h"
+#include "sec_rep_descriptor_poset.h"
 #include "sheaves_namespace.h"
 #include "subposet.h"
 #include "wsv_block.h"
@@ -116,11 +118,11 @@ new_table(namespace_type& xns,
   require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
   require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));
 
-  require(xbase_space_path.full());
-  require(xns.state_is_auto_read_accessible<base_space_poset>(xbase_space_path, xauto_access));
+  require(xbase_path.full());
+  require(xns.state_is_auto_read_accessible<base_space_poset>(xbase_path, xauto_access));
 
-  require(xfiber_space_path.full());
-  require(xns.state_is_auto_read_accessible(xfiber_space_path, xauto_access));
+  require(xfiber_path.full());
+  require(xns.state_is_auto_read_accessible(xfiber_path, xauto_access));
 
   require(xrep_path.full());
   require(xns.state_is_auto_read_accessible<sec_rep_descriptor_poset>(xrep_path, xauto_access));
@@ -153,7 +155,7 @@ new_table(namespace_type& xns,
   
   // Create the state.
 
-  ltable->new_state(xns, xpath, lschema, *lmap);
+  result.new_state(xns, xpath, lschema, *lmap);
 
   if(xauto_access)
   {
@@ -176,7 +178,7 @@ new_table(namespace_type& xns,
   // Exit:
 
   // cout << "Leaving binary_section_space_schema_poset::new_table." << endl;
-  return;
+  return result;
 }
 
 // PROTECTED FUNCTIONS

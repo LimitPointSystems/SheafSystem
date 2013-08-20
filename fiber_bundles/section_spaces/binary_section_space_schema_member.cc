@@ -11,8 +11,10 @@
 
 #include "binary_section_space_schema_poset.h"
 #include "assert_contract.h"
+#include "base_space_poset.h"
 #include "fiber_bundles_namespace.h"
 #include "sec_rep_descriptor.h"
+#include "sec_rep_descriptor_poset.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
@@ -46,10 +48,10 @@ new_host(namespace_type& xns,
   require(schema_poset_member::conforms_to(xns, xschema_path, host_type::standard_schema_path(), xauto_access));
 
   require(xbase_path.full());
-  require(xns.state_is_auto_read_accessible<base_space_poset>(xbase_space_path, xauto_access));
+  require(xns.state_is_auto_read_accessible<base_space_poset>(xbase_path, xauto_access));
 
   require(!xfiber_path.empty());
-  require(xns.state_is_auto_read_accessible(xfiber_space_path, xauto_access));
+  require(xns.state_is_auto_read_accessible(xfiber_path, xauto_access));
 
   require(xrep_path.full());
   require(xns.state_is_auto_read_accessible<sec_rep_descriptor_poset>(xrep_path, xauto_access));
