@@ -195,8 +195,7 @@ function(add_bindings_targets)
         PROPERTIES CPLUSPLUS ON)
  
     # Add the java binding library target
-    swig_add_module(${${COMPONENT}_JAVA_BINDING_LIB} java 
-        ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_JAVA_INTERFACE})
+    swig_add_module(${${COMPONENT}_JAVA_BINDING_LIB} java ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_JAVA_INTERFACE})
     
     # Establish CXX as the linker language for this library
     set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES 
@@ -358,7 +357,7 @@ function(add_bindings_targets)
     # Python ############################################################## 
     #
 
-    set(CMAKE_SWIG_FLAGS -v -c++ )
+    set(CMAKE_SWIG_FLAGS -c++ )
     include_directories(${PYTHON_INCLUDE_PATH})
     
     set_source_files_properties(${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE} 
@@ -375,9 +374,7 @@ function(add_bindings_targets)
         set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} 
             PROPERTIES FOLDER "Binding Targets - Python")
     else()
-        add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} 
-            ${${COMPONENT}_SHARED_LIB} ${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE} 
-            ${${COMPONENT}_SWIG_COMMON_INTERFACE})
+        add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_SHARED_LIB})
         swig_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB_BASE} ${${COMPONENT}_SHARED_LIB} ${PYTHON_LIBRARIES})
     endif()
     

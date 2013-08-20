@@ -536,7 +536,7 @@ function(set_component_vars)
 
         set(${COMPONENT}_PYTHON_BINDING_LIB_BASE ${PROJECT_NAME}_python_binding 
             CACHE STRING "${PROJECT_NAME} python binding library name")
-        set(${COMPONENT}_PYTHON_BINDING_LIB _${PROJECT_NAME}_python_binding 
+        set(${COMPONENT}_PYTHON_BINDING_LIB ${PROJECT_NAME}_python_binding 
             CACHE STRING "${PROJECT_NAME} python binding library name")
             
     set(${COMPONENT}_COMMON_BINDING_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bindings/common/src 
