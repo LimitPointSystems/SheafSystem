@@ -142,11 +142,11 @@ public:
   /// does not exist, or it exists and conforms to host_type.
   ///
   template <typename S>
-  static poset_path standard_host_is_available(namespace_poset& xns,
-                                               const poset_path& xbase_path, 
-                                               const poset_path& xrep_path, 
-                                               const string& xfiber_suffix,
-                                               bool xauto_access);
+  static bool standard_host_is_available(namespace_poset& xns,
+                                         const poset_path& xbase_path, 
+                                         const poset_path& xrep_path, 
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
   
   ///
   /// The standard host of a schema for sections of type S with
@@ -168,7 +168,7 @@ public:
   /// member if they do not already exist.
   ///
   template <typename S>
-  static poset_path standard_schema(namespace_type& xns, 
+  static poset_path standard_member(namespace_type& xns, 
                                     const poset_path& xbase_path,
                                     const poset_path& xrep_path,
                                     const string& xfiber_suffix,

@@ -47,6 +47,7 @@ standard_host_path(const poset_path& xbase_path,
   typedef typename S::fiber_type fiber_type;
 
   poset_path lstd_fiber_path(fiber_type::standard_host_path(fiber_type::static_class_name(), xfiber_suffix));
+  poset_path lrep_path = !xrep_path.empty() ? xrep_path : S::standard_rep_path();
   
   string lposet_name(lstd_fiber_path.poset_name());
   lposet_name += "_on_";
@@ -54,7 +55,7 @@ standard_host_path(const poset_path& xbase_path,
   lposet_name += "_";
   lposet_name += xbase_path.member_name();
   lposet_name += "_";
-  lposet_name += xrep_path.member_name();
+  lposet_name += lrep_path.member_name();
   lposet_name += xsection_suffix;
   
   poset_path result(lposet_name, "");
@@ -83,7 +84,7 @@ standard_host_is_available(xns,
 
   xns.state_is_auto_read_accessible(xauto_access);
   require(xbase_path.full());
-  require(rep_path.full());
+  require(xrep_path.empty() || rep_path.full());
   require(xsection_suffix.empty() || poset_path::is_valid_name(xsection_suffix));
   require(xfiber_suffix.empty() || poset_path::is_valid_name(xfiber_suffix));
   

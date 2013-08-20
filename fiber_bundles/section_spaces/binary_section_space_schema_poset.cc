@@ -119,13 +119,13 @@ new_table(namespace_type& xns,
   require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));
 
   require(xbase_path.full());
-  require(xns.state_is_auto_read_accessible<base_space_poset>(xbase_path, xauto_access));
+  require(xns.path_is_auto_read_accessible<base_space_poset>(xbase_path, xauto_access));
 
   require(xfiber_path.full());
-  require(xns.state_is_auto_read_accessible(xfiber_path, xauto_access));
+  require(xns.path_is_auto_read_accessible(xfiber_path, xauto_access));
 
   require(xrep_path.full());
-  require(xns.state_is_auto_read_accessible<sec_rep_descriptor_poset>(xrep_path, xauto_access));
+  require(xns.path_is_auto_read_accessible<sec_rep_descriptor_poset>(xrep_path, xauto_access));
   
 
   // Body:
@@ -149,8 +149,8 @@ new_table(namespace_type& xns,
   // must be newed because poset_state::_table keep a pointer to it.
 
   array_poset_dof_map* lmap = new array_poset_dof_map(&lschema, true);
-  lmap->put_dof("base_space_path", xbase_space_path);
-  lmap->put_dof("fiber_space_path", xfiber_space_path);
+  lmap->put_dof("base_space_path", xbase_path);
+  lmap->put_dof("fiber_space_path", xfiber_path);
   lmap->put_dof("rep_path", xrep_path);
   
   // Create the state.

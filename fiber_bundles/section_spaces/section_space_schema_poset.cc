@@ -163,7 +163,7 @@ make_standard_schema(namespace_poset& xns)
 
 sheaf::poset_path
 fiber_bundle::section_space_schema_poset::
-rep_path(bool xauto_access)
+rep_path(bool xauto_access) const
 {
   // cout << endl << "Entering section_space_schema_poset::rep_path." << endl;
 
@@ -419,7 +419,7 @@ db() const
 
 sheaf::poset_path
 fiber_bundle::section_space_schema_poset::
-base_space_path(bool xauto_access)
+base_space_path(bool xauto_access) const
 {
   // cout << endl << "Entering section_space_schema_poset::base_space_path." << endl;
 
@@ -601,7 +601,7 @@ fiber_schema() const
 
 sheaf::poset_path
 fiber_bundle::section_space_schema_poset::
-fiber_space_path(bool xauto_access)
+fiber_space_path(bool xauto_access) const
 {
   // cout << endl << "Entering section_space_schema_poset::fiber_space_path." << endl;
 

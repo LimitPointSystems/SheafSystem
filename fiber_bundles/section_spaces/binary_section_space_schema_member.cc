@@ -48,13 +48,13 @@ new_host(namespace_type& xns,
   require(schema_poset_member::conforms_to(xns, xschema_path, host_type::standard_schema_path(), xauto_access));
 
   require(xbase_path.full());
-  require(xns.state_is_auto_read_accessible<base_space_poset>(xbase_path, xauto_access));
+  require(xns.path_is_auto_read_accessible<base_space_poset>(xbase_path, xauto_access));
 
   require(!xfiber_path.empty());
-  require(xns.state_is_auto_read_accessible(xfiber_path, xauto_access));
+  require(xns.path_is_auto_read_accessible(xfiber_path, xauto_access));
 
   require(xrep_path.full());
-  require(xns.state_is_auto_read_accessible<sec_rep_descriptor_poset>(xrep_path, xauto_access));
+  require(xns.path_is_auto_read_accessible<sec_rep_descriptor_poset>(xrep_path, xauto_access));
 
   // Body:
 

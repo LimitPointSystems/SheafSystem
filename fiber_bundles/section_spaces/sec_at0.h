@@ -70,13 +70,13 @@ public:
                              bool xauto_access);
 
   ///
-  /// The host with path standard_host_path(xbase_space_path, static_class_name(), xrep_path, xsection_suffix, xfiber_suffix).
-  /// Returns the host if it already exists, otherwise, creates it in namespace xns with schema specified by 
-  /// standard_schema_path(xbase_space_path, fiber_type::standard_schema_path,, xrep_path, xfiber_suffix) 
-  /// and standard paths for other prerequisites, which are also created if needed.
+  /// The standard host for sections with base space xbase_path,
+  /// representation xrep_path, section suffix xsection_suffix,
+  /// and fiber suffix xfiber_suffix. Creates the host and its prerequisites
+  /// if necessary.
   ///
   static host_type& standard_host(namespace_type& xns, 
-                                  const poset_path& xbase_space_path,
+                                  const poset_path& xbase_path,
                                   const poset_path& xrep_path,
                                   const string& xsection_suffix, 
                                   const string& xfiber_suffix, 

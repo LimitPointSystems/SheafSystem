@@ -13,8 +13,10 @@
 #include "sec_at0.h"
 
 #include "assert_contract.h"
+#include "at0.impl.h"
+#include "at0_space.h"
 #include "base_space_poset.h"
-#include "binary_section_space_schema_member.h"
+#include "binary_section_space_schema_member.impl.h"
 #include "binary_section_space_schema_poset.h"
 #include "fiber_bundles_namespace.h"
 #include "index_space_iterator.h"
@@ -24,8 +26,7 @@
 #include "sec_tuple_space.impl.h"
 #include "section_space_schema_member.impl.h"
 #include "section_space_schema_poset.h"
-#include "at0.h"
-#include "at0_space.h"
+#include "tuple.impl.h"
 
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
@@ -90,7 +91,7 @@ new_host(namespace_type& xns,
 fiber_bundle::sec_at0::host_type&
 fiber_bundle::sec_at0::
 standard_host(namespace_type& xns, 
-              const poset_path& xbase_space_path, 
+              const poset_path& xbase_path, 
               const poset_path& xrep_path, 
               const string& xsection_suffix, 
               const string& xfiber_suffix, 
@@ -102,23 +103,23 @@ standard_host(namespace_type& xns,
 
   require(xns.state_is_auto_read_write_accessible(xauto_access));
 
-  require(xbase_space_path.full());
-  require(xns.path_is_auto_read_accessible<base_space_poset>(xbase_space_path, xatuo_access));
+  require(xbase_path.full());
+  require(xns.path_is_auto_read_accessible<base_space_poset>(xbase_path, xauto_access));
 
-  require(xrep_path.full());
-  require(xns.path_is_auto_read_accessible<sec_rep_descriptor_poset>(xrep_path, xauto_access));  
+  require(xrep_path.empty() || xrep_path.full());
+  require(xrep_path.empty() || xns.path_is_auto_read_accessible<sec_rep_descriptor_poset>(xrep_path, xauto_access));  
 
   require(xsection_suffix.empty() || poset_path::is_valid_name(xsection_suffix));
 
   require(xfiber_suffix.empty() || poset_path::is_valid_name(xfiber_suffix));
 
-  require(standard_host_is_available<sec_at0>(xns, xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix, xauto_access));
+  require(standard_host_is_available<sec_at0>(xns, xbase_path, xrep_path, xsection_suffix, xfiber_suffix, xauto_access));
   require(fiber_type::standard_host_is_available<fiber_type>(xns, xfiber_suffix, xauto_access));
-  require(schema_type::standard_host_is_available<sec_at0>(xns, xbase_space_path, xrep_path, xfiber_suffix, xauto_access));
+  require(schema_type::standard_host_is_available<sec_at0>(xns, xbase_path, xrep_path, xfiber_suffix, xauto_access));
 
   // Body:
 
-  poset_path lstd_path = standard_host_path<sec_at0>(xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix);
+  poset_path lstd_path = standard_host_path<sec_at0>(xbase_path, xrep_path, xsection_suffix, xfiber_suffix);
   
   host_type* lresult_ptr;
   
@@ -132,12 +133,16 @@ standard_host(namespace_type& xns,
   {
     // Standard host doesn't exist, have to create it.
 
-    // First, find or create the standard schema.
+    // Apply default for rep path if needed.
+
+    poset_path lrep_path = (!xrep_path.empty() ? xrep_path : standard_rep_path());
+
+    // Find or create the standard schema member.
 
     poset_path lstd_schema_path = 
-      schema_type::standard_schema<sec_at0>(xbase_space_path, lfiber_space_path, xrep_path, xfiber_suffix);
+      schema_type::standard_member<sec_at0>(xns, xbase_path, lrep_path, xfiber_suffix, xauto_access);
     
-    // Now create the standard host.
+    // Create the standard host.
 
     lresult_ptr = &new_host(xns, lstd_path, lstd_schema_path, xauto_access);
   }
@@ -147,10 +152,10 @@ standard_host(namespace_type& xns,
   // Postconditions:
 
   //  ensure(xns.owns(result, xauto_access));
-  ensure(result.path(true) == standard_host_path<sec_at0>(xbase_space_path, xrep_path, xsection_suffix, xfiber_suffix));
+  ensure(result.path(true) == standard_host_path<sec_at0>(xbase_path, xrep_path, xsection_suffix, xfiber_suffix));
   ensure(result.state_is_not_read_accessible());
   ensure(result.schema(true).path(xauto_access) == 
-         schema_type::standard_member_path<sec_at0>(xns, xbase_space_path, xrep_path, xfiber_suffix, xauto_access));
+         schema_type::standard_member_path<sec_at0>(xbase_path, xrep_path, xfiber_suffix));
 
   ensure(result.factor_ct(true) == result.schema(true).fiber_space<fiber_type::host_type>().factor_ct(xauto_access));
   ensure(result.d(true) == result.schema(true).fiber_space<fiber_type::host_type>().d(xauto_access));
