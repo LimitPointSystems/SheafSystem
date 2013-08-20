@@ -32,8 +32,6 @@ mark_as_advanced(LIB_VERSION)
 # Establish the list of components in this system
 #
 set(COMPONENTS sheaves fiber_bundles geometry fields tools CACHE STRING "List of components in this system" FORCE)
-#set(COMPONENTS sheaves fiber_bundles CACHE STRING "List of components in this system" FORCE)
-#set(COMPONENTS sheaves fiber_bundles geometry fields tools CACHE STRING "List of components in this system" FORCE)
 #
 # Set the default value for install location
 #
@@ -82,10 +80,15 @@ set(INSTALL_CONFIG_FILE ${PROJECT_NAME}-install.cmake CACHE STRING "Install conf
 #
 # Set the Configuartion types. Only relevant for Linux.
 #
-set(CMAKE_CONFIGURATION_TYPES Debug-contracts Debug-no-contracts Release-contracts Release-no-contracts 
-     RelWithDebInfo-contracts RelWithDebInfo-no-contracts CACHE STRING "Supported configuration types"
-    FORCE)
-
+if(WIN64MSVC OR WIN64INTEL)
+    set(CMAKE_CONFIGURATION_TYPES Debug-contracts Debug-no-contracts Release-contracts Release-no-contracts 
+         RelWithDebInfo-contracts RelWithDebInfo-no-contracts CACHE STRING "Supported configuration types"
+        FORCE)
+else()
+    set(CMAKE_CONFIGURATION_TYPES Debug-contracts Debug-no-contracts Release-contracts Release-no-contracts 
+         CACHE STRING "Supported configuration types"
+        FORCE)
+endif()
 #
 # Delete the exports file at the start of each cmake run
 #

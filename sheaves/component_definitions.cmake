@@ -252,12 +252,12 @@ function(add_bindings_targets)
         # Java documentation
         if(DOC_TARGETS)
             add_custom_target(${PROJECT_NAME}-java-docs ALL
-                    COMMAND ${Java_JAVADOC_EXECUTABLE} -windowtitle "${PROJECT_NAME} documentation" 
-                    -classpath "${${COMPONENT}_CLASSPATH}" 
-                     -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
-                     *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-                     DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
-                    )
+                COMMAND ${Java_JAVADOC_EXECUTABLE} -windowtitle "${PROJECT_NAME} documentation" 
+                -classpath "${${COMPONENT}_CLASSPATH}" 
+                 -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
+                 *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+                 DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
+                )
             set_target_properties(${PROJECT_NAME}-java-docs PROPERTIES 
                 FOLDER "Documentation Targets")                                 
         endif()
@@ -358,7 +358,7 @@ function(add_bindings_targets)
     # Python ############################################################## 
     #
 
-    set(CMAKE_SWIG_FLAGS -c++ )
+    set(CMAKE_SWIG_FLAGS -v -c++ )
     include_directories(${PYTHON_INCLUDE_PATH})
     
     set_source_files_properties(${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE} 
@@ -376,9 +376,9 @@ function(add_bindings_targets)
             PROPERTIES FOLDER "Binding Targets - Python")
     else()
         add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} 
-            ${${COMPONENT}_SHARED_LIB}${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE} 
+            ${${COMPONENT}_SHARED_LIB} ${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE} 
             ${${COMPONENT}_SWIG_COMMON_INTERFACE})
-        target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_SHARED_LIB})
+        swig_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB_BASE} ${${COMPONENT}_SHARED_LIB} ${PYTHON_LIBRARIES})
     endif()
     
     set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} PROPERTIES 
@@ -389,11 +389,11 @@ function(add_bindings_targets)
         VERSION ${LIB_VERSION})  
  
     # Guard these until we can get the VS solution explorer aesthetic issues sorted
-#    if(LINUX64GNU OR LINUX64INTEL) 
-#        add_dependencies(${PROJECT_NAME}-java-binding ${PROJECT_NAME}_java_binding.jar)    
-#        add_dependencies(${PROJECT_NAME}-python-binding ${${COMPONENT}_PYTHON_BINDING_LIB})
-#        add_dependencies(${PROJECT_NAME}-csharp-binding ${${COMPONENT}_CSHARP_BINDING_LIB})
-#    endif()   
+    if(LINUX64GNU OR LINUX64INTEL) 
+        add_dependencies(${PROJECT_NAME}-java-binding ${PROJECT_NAME}_java_binding.jar)    
+        add_dependencies(${PROJECT_NAME}-python-binding ${${COMPONENT}_PYTHON_BINDING_LIB})
+        add_dependencies(${PROJECT_NAME}-csharp-binding ${${COMPONENT}_CSHARP_BINDING_LIB})
+    endif()   
 
     # Bindings target aliases already declared at system level. Add dependencies here.
     add_dependencies(${PROJECT_NAME}-bindings ${PROJECT_NAME}_java_binding.jar 

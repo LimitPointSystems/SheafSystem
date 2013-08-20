@@ -519,10 +519,10 @@ function(set_component_vars)
             CACHE STRING "${PROJECT_NAME} csharp binding assembly name")
         # swig_add_module will prepend "_" to the value of the python lib name string we hand it.
         # Either we append the underscore everywhere we refer to it, or we use a separate var.
-        set(${COMPONENT}_PYTHON_BINDING_LIB_BASE ${PROJECT_NAME}_python_binding 
-            CACHE STRING "${PROJECT_NAME} python binding library name")
-        set(${COMPONENT}_PYTHON_BINDING_LIB _${PROJECT_NAME}_python_binding 
-            CACHE STRING "${PROJECT_NAME} python binding library name")
+#        set(${COMPONENT}_PYTHON_BINDING_LIB_BASE ${PROJECT_NAME}_python_binding 
+#            CACHE STRING "${PROJECT_NAME} python binding library name")
+#        set(${COMPONENT}_PYTHON_BINDING_LIB _${PROJECT_NAME}_python_binding 
+#            CACHE STRING "${PROJECT_NAME} python binding library name")
     else()
         set(${COMPONENT}_SHARED_LIB lib${PROJECT_NAME}.so 
             CACHE STRING "${PROJECT_NAME} shared library")
@@ -530,10 +530,15 @@ function(set_component_vars)
             CACHE STRING "${PROJECT_NAME} static library")
         set(${COMPONENT}_CSHARP_BINDING_ASSY ${PROJECT_NAME}_csharp_assembly.so 
             CACHE STRING "${PROJECT_NAME} csharp binding assembly name")
-        set(${COMPONENT}_PYTHON_BINDING_LIB _${PROJECT_NAME}_python_binding 
-            CACHE STRING "${PROJECT_NAME} python binding library name")
+#        set(${COMPONENT}_PYTHON_BINDING_LIB _${PROJECT_NAME}_python_binding 
+#            CACHE STRING "${PROJECT_NAME} python binding library name")
     endif()
 
+        set(${COMPONENT}_PYTHON_BINDING_LIB_BASE ${PROJECT_NAME}_python_binding 
+            CACHE STRING "${PROJECT_NAME} python binding library name")
+        set(${COMPONENT}_PYTHON_BINDING_LIB _${PROJECT_NAME}_python_binding 
+            CACHE STRING "${PROJECT_NAME} python binding library name")
+            
     set(${COMPONENT}_COMMON_BINDING_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bindings/common/src 
         CACHE STRING "${PROJECT_NAME} common binding source directory")
     set(${COMPONENT}_SWIG_COMMON_INTERFACE ${PROJECT_NAME}_common_binding.i 

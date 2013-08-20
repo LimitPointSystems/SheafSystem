@@ -365,7 +365,7 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
         add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} 
             ${SHEAVES_PYTHON_BINDING_LIBS} 
             ${${COMPONENT}_SHARED_LIBS})
-        swig_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} 
+        swig_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB_BASE} 
             ${SHEAVES_PYTHON_BINDING_LIBS} 
             ${${COMPONENT}_SHARED_LIBS})
     endif()

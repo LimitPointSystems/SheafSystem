@@ -414,7 +414,7 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
         set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} 
             PROPERTIES FOLDER "Binding Targets - Python")
     else()
-        swig_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} 
+        swig_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB_BASE} 
             ${FIBER_BUNDLES_PYTHON_BINDING_LIBS} 
             ${${COMPONENT}_SHARED_LIBS})
     endif()
