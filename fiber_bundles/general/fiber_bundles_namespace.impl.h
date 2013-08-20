@@ -66,82 +66,84 @@
  
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
-// ===========================================================
-// BASE SPACE FACTORY METHOD FACET
-// ===========================================================
+/// @todo Remove.
 
-template <typename B>
-fiber_bundle::base_space_poset&
-fiber_bundle::fiber_bundles_namespace::
-new_base_space(const poset_path& xbase_space_path,
-	       const arg_list& xargs,
-	       const poset_path& xschema_path,
-	       int xmax_db,
-	       bool xauto_access)
-{
-  // Preconditions:
+// // ===========================================================
+// // BASE SPACE FACTORY METHOD FACET
+// // ===========================================================
 
-  require(state_is_auto_read_write_accessible(xauto_access));
+// template <typename B>
+// fiber_bundle::base_space_poset&
+// fiber_bundle::fiber_bundles_namespace::
+// new_base_space(const poset_path& xbase_space_path,
+// 	       const arg_list& xargs,
+// 	       const poset_path& xschema_path,
+// 	       int xmax_db,
+// 	       bool xauto_access)
+// {
+//   // Preconditions:
+
+//   require(state_is_auto_read_write_accessible(xauto_access));
   
-  require(path_is_auto_read_available<base_space_poset>(xbase_space_path, xauto_access));
-  require(path_is_auto_read_available(xschema_path, xauto_access));
+//   require(path_is_auto_read_available<base_space_poset>(xbase_space_path, xauto_access));
+//   require(path_is_auto_read_available(xschema_path, xauto_access));
 
-  // zone_nodes has B::DB == -1.
-  // Require that the client has specified a valid max_db
+//   // zone_nodes has B::DB == -1.
+//   // Require that the client has specified a valid max_db
 
-  require((B::DB > -1) || ((xargs.contains_arg("max_db") || xmax_db > -1)));
+//   require((B::DB > -1) || ((xargs.contains_arg("max_db") || xmax_db > -1)));
 
-  // Body:
+//   // Body:
 
-  // Set schema.
-  // $$SCRIBBLE dmb: need notion of completed schema path
-  // and suitable preconditions.
+//   // Set schema.
+//   // $$SCRIBBLE dmb: need notion of completed schema path
+//   // and suitable preconditions.
 
-  poset_path lschema_path(xschema_path);
-  if(lschema_path.empty())
-  {
-    lschema_path = B::standard_schema_path();
-  }
+//   poset_path lschema_path(xschema_path);
+//   if(lschema_path.empty())
+//   {
+//     lschema_path = B::standard_schema_path();
+//   }
 
-  // Construct the arg list to pass to new_member_poset.
+//   // Construct the arg list to pass to new_member_poset.
 
-  arg_list largs(xargs);
+//   arg_list largs(xargs);
 
-  // Set max_db;  default (B::DB) is overridden by arg_list is overridden by explicit arg. 
+//   // Set max_db;  default (B::DB) is overridden by arg_list is overridden by explicit arg. 
 
-  int lmax_db = B::DB;
-  if(largs.contains_arg("max_db"))
-  {
-    int larg_max_db = largs.value("max_db");
-    lmax_db = (larg_max_db > lmax_db) ? larg_max_db : lmax_db;
-  }
-  else
-  {
-    largs.push_back("max_db");
-  }
+//   int lmax_db = B::DB;
+//   if(largs.contains_arg("max_db"))
+//   {
+//     int larg_max_db = largs.value("max_db");
+//     lmax_db = (larg_max_db > lmax_db) ? larg_max_db : lmax_db;
+//   }
+//   else
+//   {
+//     largs.push_back("max_db");
+//   }
 
-  lmax_db = (xmax_db > lmax_db) ? xmax_db : lmax_db;
+//   lmax_db = (xmax_db > lmax_db) ? xmax_db : lmax_db;
 
-  largs.arg("max_db").value = lmax_db;
+//   largs.arg("max_db").value = lmax_db;
   
-  base_space_poset& result = 
-    new_member_poset<base_space_poset>(xbase_space_path.poset_name(), 
-				       lschema_path, 
-				       largs, 
-				       xauto_access);
-  result.get_read_write_access();
+//   base_space_poset& result = 
+//     new_member_poset<base_space_poset>(xbase_space_path.poset_name(), 
+// 				       lschema_path, 
+// 				       largs, 
+// 				       xauto_access);
+//   result.get_read_write_access();
 
-  // Postconditions:
+//   // Postconditions:
 
-  ensure(result.max_db() >= -1);
-  ensure(xschema_path.empty() ? 
-	 result.schema(true).path(true) == B::standard_schema_path() : 
-	 result.schema(true).path(true) == xschema_path);
+//   ensure(result.max_db() >= -1);
+//   ensure(xschema_path.empty() ? 
+// 	 result.schema(true).path(true) == B::standard_schema_path() : 
+// 	 result.schema(true).path(true) == xschema_path);
   
-  // Exit:
+//   // Exit:
 
-  return result;
-}  
+//   return result;
+// }  
   
   
 

@@ -307,32 +307,7 @@ make_standard_schema(namespace_poset& xns)
   return;
 }
 
-
-const sheaf::poset_path&
-fiber_bundle::tuple::
-standard_host_path(const string& xclass_name, const string& xsuffix)
-{
-  // Preconditions:
-
-  require(poset_path::is_valid_name(xclass_name));
-  require(xsuffix.empty() || poset_path::is_valid_name(xsuffix));
-  
-  // Body:
-
-  static const poset_path result(xclass_name + xsuffix, "");
-
-  // Postconditions:
-
-  ensure(result.poset_name() == xclass_name + xsuffix);
-  ensure(result.member_name().empty());
-
-  // Exit:
-
-  return result;
-}
-
-
-void
+fiber_bundle::tuple::host_type&
 fiber_bundle::tuple::
 new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xschema_path, int xfactor_ct, bool xauto_access)
 {
@@ -353,18 +328,22 @@ new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xs
 
   // Body:
 
-  host_type::new_table(xns, xhost_path, xschema_path, xfactor_ct, xauto_access);
+  host_type& result =
+    host_type::new_table(xns, xhost_path, xschema_path, xfactor_ct, xauto_access);
 
   // Postconditions:
 
-  ensure(xns.contains_path(xhost_path, xauto_access));
-  ensure(xns.member_poset(xhost_path, xauto_access).state_is_not_read_accessible());
-  ensure(xns.member_poset(xhost_path, xauto_access).schema(true).path(true) == xschema_path);
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(result.factor_ct(true) == xfactor_ct);
 
   // Exit:
 
   // cout << "Leaving tuple::new_host." << endl;
-  return;
+  return result;
 }
 
 

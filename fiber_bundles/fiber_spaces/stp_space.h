@@ -61,28 +61,26 @@ public:
   ///
   static arg_list make_arg_list(int xp, const poset_path& xvector_space_path);
 
-  using tp_space::p;
+  using tp_space::d;
   
   ///
-  /// Tensor degree implied by the tensor dimension (number of row dofs)
-  /// defined by the schema specified by xschema_path and the dimension
-  /// of the domain vector space specified by xvector_space_path.
+  /// The tensor dimension implied by tensor degree xp and
+  /// the dimension of the domain vector space specified by xvector_space_path.
   ///
-  static int p(const namespace_poset& xns, 
-               const poset_path& xschema_path, 
-               const poset_path& xvector_space_path, 
-               bool xauto_access);
+  static int d(const namespace_poset& xns, int xp, const poset_path& xvector_space_path, bool xauto_access);
 
   ///
   /// Creates a new stp_space in namespace xns with path xpath,
-  /// schema specified by xschema_path, and table attribute 
-  /// vector_space_path specified by xvector_space_path.
+  /// schema specified by xschema_path, and table attributes 
+  /// p and vector_space_path specified by xp and xvector_space_path,
+  /// respectively.
   ///
-  static void new_table(namespace_type& xhost, 
-                        const poset_path& xpath, 
-                        const poset_path& xschema_path,
-                        const poset_path& xvector_space_path,
-                        bool xauto_access);
+  static stp_space& new_table(namespace_type& xhost, 
+			      const poset_path& xpath, 
+			      const poset_path& xschema_path,
+			      int xp,
+			      const poset_path& xvector_space_path,
+			      bool xauto_access);
   
 protected:
 
@@ -160,8 +158,6 @@ private:
   //@{
 
 public:
-
-  using tp_space::d;
   
   ///
   /// Dimension d() as a function of degree xp and domain dimension xdd.

@@ -182,30 +182,32 @@ private:
   base_space_poset* _base_space_member_prototypes_poset;
 
   //@}
+
+  /// @todo Remove.
  
-  // ===========================================================
-  /// @name BASE SPACE FACTORY METHODS FACET
-  // ===========================================================
-  //@{
+//   // ===========================================================
+//   /// @name BASE SPACE FACTORY METHODS FACET
+//   // ===========================================================
+//   //@{
 
-public:
+// public:
 
-  ///
-  /// Find or create a new base space for meshes (blocks) of type B.
-  ///
-  template <typename B>
-  base_space_poset& new_base_space(const poset_path& xbase_space_path,
-				   const arg_list& xargs = "",
-				   const poset_path& xschema_path  = "",
-				   int xmax_db = -1,
-				   bool xauto_access = true);
+//   ///
+//   /// Find or create a new base space for meshes (blocks) of type B.
+//   ///
+//   template <typename B>
+//   base_space_poset& new_base_space(const poset_path& xbase_space_path,
+// 				   const arg_list& xargs = "",
+// 				   const poset_path& xschema_path  = "",
+// 				   int xmax_db = -1,
+// 				   bool xauto_access = true);
   
 
-protected:
+// protected:
 
-private:
+// private:
 
-  //@}
+//   //@}
 
 
   //--------------------------------------------------------------------------

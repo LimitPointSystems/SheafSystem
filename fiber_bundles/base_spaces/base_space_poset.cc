@@ -53,7 +53,7 @@ make_args(int xmax_db)
   return result;
 }
 
-void
+fiber_bundle::base_space_poset&
 fiber_bundle::base_space_poset::
 new_table(namespace_type& xns, const poset_path& xpath, const poset_path& xschema_path, int xmax_db, bool xauto_access)
 {
@@ -61,6 +61,7 @@ new_table(namespace_type& xns, const poset_path& xpath, const poset_path& xschem
 
   // Preconditions:
 
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
 
   require(!xpath.empty());
   require(!xns.contains_path(xpath, xauto_access));
@@ -104,18 +105,21 @@ new_table(namespace_type& xns, const poset_path& xpath, const poset_path& xschem
     lschema.release_access();
   }
 
+  base_space_poset& result = *ltable;
 
   // Postconditions:
 
-  ensure(xns.contains_path(xpath, xauto_access));
-  ensure(xns.member_poset(xpath, xauto_access).state_is_not_read_accessible());
-  ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == xschema_path);
-  ensure(xns.member_poset<base_space_poset>(xpath, xauto_access).max_db() == xmax_db);
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xpath);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(result.max_db() == xmax_db);
 
   // Exit:
 
   // cout << "Leaving base_space_poset::new_table." << endl;
-  return;
+  return result;
 }
 
 // PROTECTED FUNCTIONS

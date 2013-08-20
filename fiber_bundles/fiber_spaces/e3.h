@@ -472,34 +472,30 @@ public:
   static void make_standard_schema(namespace_poset& xns);
 
   ///
-  /// The standard path with poset name suffix xsuffix for host spaces for this class.
-  ///
-  static const poset_path& standard_host_space_path(const string& xsuffix);
-
-  ///
   /// Manual, shallow factory method; creates a new host table for members of this type.
   /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
   /// and table attribute scalar_space_path specified by xscalar_space_path.
   ///
-  static void new_host(namespace_type& xns, 
-                       const poset_path& xhost_path, 
-                       const poset_path& xschema_path,
-                       const poset_path& xscalar_space_path,
-                       bool xauto_access);
+  static host_type& new_host(namespace_type& xns, 
+			     const poset_path& xhost_path, 
+			     const poset_path& xschema_path,
+			     const poset_path& xscalar_space_path,
+			     bool xauto_access);
 
   ///
-  /// Auto, deep factory method; creates a new host poset and any prerequisite posets
-  /// for members of this type. The poset is created in namespace xns with the 
-  /// standard_host_path for this class and xsuffix, schema specified by standard_schema_path(), 
-  /// and standard paths for prerequisites. Returns the path of the new host poset.
+  /// The host with path standard_host_path(static_class_name(), xsuffix).
+  /// Returns the host if it already exists, otherwise, creates it in namespace xns
+  /// with schema specified by standard_schema_path() and standard paths for prerequisites,
+  /// which are also created if needed.
   ///
-  static poset_path new_host(namespace_type& xns, const string& xsuffix, bool xauto_access);
+  static host_type& standard_host(namespace_type& xns, const string& xsuffix, bool xauto_access);
 
 protected:
 
 private:
 
   //@}
+
 
   //============================================================================
   /// @name EUCLIDEAN VECTOR ALGEBRA (E3) FACET OF CLASS E3

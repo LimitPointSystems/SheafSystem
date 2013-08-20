@@ -365,6 +365,49 @@ private:
 class SHEAF_DLL_SPEC st4_e2 : public st4
 {
 
+  // ===========================================================
+  /// @name HOST FACTORY FACET OF CLASS ST4_E2
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// The path to the standard schema for this class.
+  ///
+  static const poset_path& standard_schema_path();
+
+  ///
+  /// Creates the standard schema for this class in namespace xns.
+  ///
+  static void make_standard_schema(namespace_poset& xns);
+
+  ///
+  /// Manual, shallow factory method; creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
+  /// and table attribute vector_space_path specified by xvector_space_path.
+  ///
+  static host_type& new_host(namespace_type& xns, 
+			     const poset_path& xhost_path, 
+			     const poset_path& xschema_path,
+			     const poset_path& xvector_space_path,
+			     bool xauto_access);
+
+  ///
+  /// The host with path standard_host_path(static_class_name(), xsuffix).
+  /// Returns the host if it already exists, otherwise, creates it in namespace xns
+  /// with schema specified by standard_schema_path() and standard paths for prerequisites,
+  /// which are also created if needed.
+  ///
+  static host_type& standard_host(namespace_type& xns, const string& xsuffix, bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+
+
   //============================================================================
   /// @name ST4_E2 FACET OF CLASS ST4_E2
   //============================================================================
@@ -543,16 +586,6 @@ private:
   //@{
 
 public:
-
-  ///
-  /// The path to the standard schema for this class.
-  ///
-  static const poset_path& standard_schema_path();
-
-  ///
-  /// Creates the standard schema for this class in namespace xns.
-  ///
-  static void make_standard_schema(namespace_poset& xns);
 
   ///
   /// Virtual constructor for general tensors 

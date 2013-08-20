@@ -92,23 +92,23 @@ public:
 
   ///
   /// Manual, shallow factory method; creates a new host poset for members of this type.
-  /// The poset is created in namespace xns with path xpath and schema specified by xschema_path.
+  /// The poset is created in namespace xns with path xhost_path and schema specified by xschema_path.
   ///
-  static void new_host(namespace_type& xns, 
-                       const poset_path& xpath, 
-                       const poset_path& xschema_path, 
-		       int xmax_db,
-                       bool xauto_access);
+  static host_type& new_host(namespace_type& xns, 
+			     const poset_path& xhost_path, 
+			     const poset_path& xschema_path, 
+			     int xmax_db,
+			     bool xauto_access);
 
   ///
   /// Auto, deep factory method; creates a new host poset and any prerequisite posets
-  /// for members of this type. The poset is created in namespace xns with path xpath
+  /// for members of this type. The poset is created in namespace xns with path xhost_path
   /// and schema specified by standard_schema_path().
   ///
-  static void new_host(namespace_type& xns,
-		       const poset_path& xpath,
-		       int xmax_db,
-		       bool xauto_access);
+  static host_type& new_host(namespace_type& xns,
+			     const poset_path& xhost_path,
+			     int xmax_db,
+			     bool xauto_access);
   
 
 protected:
@@ -116,6 +116,7 @@ protected:
 private:
 
   //@}
+
 
   // ===========================================================
   /// @name BASE_SPACE_MEMBER FACET

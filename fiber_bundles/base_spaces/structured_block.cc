@@ -10,7 +10,7 @@
 #include "assert_contract.h"
 #include "block.impl.h"
 #include "chart_point_3d.h"
-#include "namespace_poset.h"
+#include "fiber_bundles_namespace.h"
 #include "poset_path.h"
 #include "preorder_iterator.h"
 #include "quad_connectivity.h"
@@ -22,11 +22,11 @@
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // ===========================================================
-// STRUCTURED_BLOCK FACET
+// HOST FACTORY FACET
 // ===========================================================
 
-// PUBLIC DATA MEMBERS
-
+// PUBLIC MEMBER FUNCTIONS
+ 
 const sheaf::poset_path&
 fiber_bundle::structured_block::
 standard_schema_path()
@@ -94,6 +94,91 @@ make_standard_schema(namespace_poset& xns)
 
   return;
 }
+
+fiber_bundle::structured_block::host_type&
+fiber_bundle::structured_block::
+new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xschema_path, int xmax_db, bool xauto_access)
+{
+  // cout << endl << "Entering structured_block::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));  
+
+  require(xmax_db >= 0);
+
+  // Body:
+
+  host_type& result =
+    host_type::new_table(xns, xhost_path, xschema_path, xmax_db, xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(result.max_db() == xmax_db);
+
+  // Exit:
+
+  // cout << "Leaving structured_block::new_host." << endl;
+  return result;
+}
+
+fiber_bundle::structured_block::host_type&
+fiber_bundle::structured_block::
+new_host(namespace_type& xns, const poset_path& xhost_path, int xmax_db, bool xauto_access)
+{
+  // cout << endl << "Entering structured_block::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
+  require(xns.path_is_auto_read_accessible(standard_schema_path(), xauto_access));
+  
+  require(xmax_db >= 0);
+
+  // Body:
+
+  host_type& result =
+    new_host(xns, xhost_path, standard_schema_path(), xmax_db, xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == standard_schema_path());
+
+  ensure(result.max_db() == xmax_db);
+  
+  // Exit:
+
+  // cout << "Leaving structured_block::new_host." << endl;
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// ===========================================================
+// STRUCTURED_BLOCK FACET
+// ===========================================================
+
+// PUBLIC DATA MEMBERS
 
 fiber_bundle::structured_block::
 structured_block()

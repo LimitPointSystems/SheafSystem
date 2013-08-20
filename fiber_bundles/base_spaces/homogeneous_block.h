@@ -40,6 +40,56 @@ class homogeneous_block_crg_interval;
 class SHEAF_DLL_SPEC homogeneous_block : public base_space_member
 {
   // ===========================================================
+  /// @name HOST FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// The path of the schema required by this class.
+  ///
+  static const poset_path& standard_schema_path();
+
+  ///
+  /// The path of the schema required by this.
+  ///
+  virtual const poset_path& schema_path() const;
+
+  ///
+  /// Creates the standard schema for this class in namespace xns.
+  ///
+  static void make_standard_schema(namespace_poset& xns);
+
+  ///
+  /// Manual, shallow factory method; creates a new host poset for members of this type.
+  /// The poset is created in namespace xns with path xhost_path and schema specified by xschema_path.
+  ///
+  static host_type& new_host(namespace_type& xns, 
+			     const poset_path& xhost_path, 
+			     const poset_path& xschema_path, 
+			     int xmax_db,
+			     bool xauto_access);
+
+  ///
+  /// Auto, deep factory method; creates a new host poset and any prerequisite posets
+  /// for members of this type. The poset is created in namespace xns with path xhost_path
+  /// and schema specified by standard_schema_path().
+  ///
+  static host_type& new_host(namespace_type& xns,
+			     const poset_path& xhost_path,
+			     int xmax_db,
+			     bool xauto_access);
+  
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
   /// @name HOMOGENEOUS_BLOCK FACET
   // ===========================================================
   //@{
@@ -392,21 +442,6 @@ private:
   //@{
 
 public:
-
-  ///
-  /// The path of the schema required by this class.
-  ///
-  static const poset_path& standard_schema_path();
-
-  ///
-  /// The path of the schema required by this.
-  ///
-  virtual const poset_path& schema_path() const;
-
-  ///
-  /// Creates the standard schema for this class in namespace xns.
-  ///
-  static void make_standard_schema(namespace_poset& xns);
 
 protected:
 

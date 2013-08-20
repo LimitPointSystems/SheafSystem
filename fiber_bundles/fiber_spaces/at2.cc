@@ -11,7 +11,9 @@
 
 #include "abstract_poset_member.impl.h"
 #include "assert_contract.h"
-#include "namespace_poset.h"
+#include "at0.h"
+#include "at1_space.h"
+#include "fiber_bundles_namespace.h"
 #include "schema_poset_member.h"
 #include "wsv_block.h"
 
@@ -443,6 +445,112 @@ invariant() const
 // CLASS AT2
 //==============================================================================
 
+// ===========================================================
+// HOST FACTORY FACET OF CLASS AT2
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+const sheaf::poset_path&
+fiber_bundle::at2::
+standard_schema_path()
+{
+  // Preconditions:
+
+
+  // Body:
+
+  static const poset_path result(standard_schema_poset_name(), "at2_schema");
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+void
+fiber_bundle::at2::
+make_standard_schema(namespace_poset& xns)
+{
+  // Preconditions:
+
+  require(xns.state_is_read_write_accessible());
+  require(xns.contains_poset(standard_schema_poset_name()));
+  require(!xns.contains_poset_member(standard_schema_path()));
+
+  // Body:
+
+  schema_poset_member lschema(xns,
+                              standard_schema_path().member_name(),
+                              atp::standard_schema_path(),
+                              "",
+                              false);
+
+  lschema.detach_from_state();
+
+  // Postconditions:
+
+  ensure(xns.contains_poset_member(standard_schema_path()));
+
+  // Exit:
+
+  return;
+}
+
+fiber_bundle::at2::host_type&
+fiber_bundle::at2::
+new_host(namespace_type& xns, 
+         const poset_path& xhost_path, 
+         const poset_path& xschema_path, 
+         const poset_path& xscalar_space_path, 
+         bool xauto_access)
+{
+  // cout << endl << "Entering at2::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path()));
+
+  require(xns.path_is_auto_read_accessible(xscalar_space_path, xauto_access));
+  require(xns.contains_poset<scalar_type::host_type>(xscalar_space_path, xauto_access));
+
+  // Body:
+
+  host_type& result =
+    host_type::new_table(xns, xhost_path, xschema_path, 2, xscalar_space_path, xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(result.factor_ct(true) == result.d(true));
+  ensure(result.d(true) == schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access));
+  ensure(result.scalar_space_path(true) == xscalar_space_path );
+  ensure(result.p(true) == 2);
+  ensure(result.dd(true) == result.d(true));
+  ensure(result.vector_space_path(true) == xhost_path );
+
+  // Exit:
+
+  // cout << "Leaving at2::new_host." << endl;
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
 
 //==============================================================================
 // AT2 FACET
@@ -865,53 +973,6 @@ index_for_row_column(int xrow, int xcolumn) const
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
-
-const sheaf::poset_path&
-fiber_bundle::at2::
-standard_schema_path()
-{
-  // Preconditions:
-
-
-  // Body:
-
-  static const poset_path result(standard_schema_poset_name(), "at2_schema");
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-void
-fiber_bundle::at2::
-make_standard_schema(namespace_poset& xns)
-{
-  // Preconditions:
-
-  require(xns.state_is_read_write_accessible());
-  require(xns.contains_poset(standard_schema_poset_name()));
-  require(!xns.contains_poset_member(standard_schema_path()));
-
-  // Body:
-
-  schema_poset_member lschema(xns,
-                              standard_schema_path().member_name(),
-                              atp::standard_schema_path(),
-                              "",
-                              false);
-
-  lschema.detach_from_state();
-
-  // Postconditions:
-
-  ensure(xns.contains_poset_member(standard_schema_path()));
-
-  // Exit:
-
-  return;
-}
 
 // PROTECTED MEMBER FUNCTIONS
 

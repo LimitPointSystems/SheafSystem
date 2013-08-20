@@ -226,17 +226,18 @@ public:
   /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
   /// and table attribute scalar_space_path specified by xscalar_space_path.
   ///
-  static void new_host(namespace_type& xns, 
-                       const poset_path& xhost_path, 
-                       const poset_path& xschema_path,
-                       const poset_path& xscalar_space_path,
-                       bool xauto_access);
+  static host_type&  new_host(namespace_type& xns, 
+			      const poset_path& xhost_path, 
+			      const poset_path& xschema_path,
+			      const poset_path& xscalar_space_path,
+			      bool xauto_access);
 
 protected:
 
 private:
 
   //@}
+
 
   //============================================================================
   /// @name AT1 FACET OF CLASS AT1

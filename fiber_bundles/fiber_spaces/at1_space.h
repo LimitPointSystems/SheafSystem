@@ -65,11 +65,11 @@ public:
   /// schema specified by xschema_path, and table attribute 
   /// scalar_space_path specified by xscalar_space_path.
   ///
-  static void new_table(namespace_type& xhost, 
-                        const poset_path& xpath, 
-                        const poset_path& xschema_path,
-                        const poset_path& xscalar_space_path,
-                        bool xauto_access);
+  static at1_space& new_table(namespace_type& xhost, 
+			      const poset_path& xpath, 
+			      const poset_path& xschema_path,
+			      const poset_path& xscalar_space_path,
+			      bool xauto_access);
   
 protected:
 
