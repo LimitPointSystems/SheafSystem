@@ -177,7 +177,7 @@ endfunction(add_library_targets)
 #
 function(add_bindings_targets)
 
-    if(SWIG_FOUND AND BUILD_BINDINGS)
+if(SWIG_FOUND AND BUILD_BINDINGS)
 
     #
     # Java #################################################
@@ -195,7 +195,8 @@ function(add_bindings_targets)
         PROPERTIES CPLUSPLUS ON)
  
     # Add the java binding library target
-    swig_add_module(${${COMPONENT}_JAVA_BINDING_LIB} java ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_JAVA_INTERFACE})
+    swig_add_module(${${COMPONENT}_JAVA_BINDING_LIB} java 
+        ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_JAVA_INTERFACE})
     
     # Establish CXX as the linker language for this library
     set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES 

@@ -376,12 +376,13 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
     # Define the library version.
     set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} 
         PROPERTIES VERSION ${LIB_VERSION})  
+
     # Guard these until we can get the VS solution explorer aesthetic issues sorted
-#        if(LINUX64GNU OR LINUX64INTEL) 
-#            add_dependencies(${PROJECT_NAME}-java-binding ${PROJECT_NAME}_java_binding.jar)    
-#            add_dependencies(${PROJECT_NAME}-python-binding ${${COMPONENT}_PYTHON_BINDING_LIB})
-#            add_dependencies(${PROJECT_NAME}-csharp-binding ${${COMPONENT}_CSHARP_BINDING_LIB})
-#        endif()
+    if(LINUX64GNU OR LINUX64INTEL) 
+        add_dependencies(${PROJECT_NAME}-java-binding ${PROJECT_NAME}_java_binding.jar)    
+        add_dependencies(${PROJECT_NAME}-python-binding ${${COMPONENT}_PYTHON_BINDING_LIB})
+        add_dependencies(${PROJECT_NAME}-csharp-binding ${${COMPONENT}_CSHARP_BINDING_LIB})
+    endif()
 
     # Bindings target aliases already declared at system level. 
     # Add dependencies here.
