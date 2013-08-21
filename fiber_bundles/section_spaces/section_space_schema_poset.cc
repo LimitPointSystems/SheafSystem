@@ -1656,6 +1656,23 @@ initialize_standard_members()
   put_member_name(TOP_INDEX, "top", true, false);
   top().attach_to_state(this, TOP_INDEX);
 
+  // All the schema members exist implicitly, but they
+  // don't have names unless we expilicitly give them names.
+  // Make names for the table dof members.
+
+  // $$SCRIBBLE. The following code works because member_name creates the names.
+  // But that's the wrong approach. We should get the names from the fiber schema
+  // here and set them. Member_name should not be redefined.
+
+  poset_dof_iterator* litr = reinterpret_cast<section_space_schema_member*>(_top)->dof_iterator(true);
+  while(!litr->is_done())
+  {  
+    put_member_name(litr->item().index(), litr->item().name(), true, false);
+    litr->next();
+  }
+  delete litr;
+  
+
   // Only two standard members and no dof tuples so far.
   // (More may be added in descendants.)
 

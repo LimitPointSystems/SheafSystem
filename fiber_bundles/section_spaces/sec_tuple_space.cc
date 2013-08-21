@@ -128,15 +128,20 @@ new_table(namespace_type& xns, const poset_path& xpath, const poset_path& xschem
     lschema.get_read_access();
   }
 
-  // The table dof map for a section space is the same as the table dof map
-  // of the fiber schema, so just copy it.
+  // Create the table dof map.
+
+  array_poset_dof_map& lmap = *(new array_poset_dof_map(&lschema, true));
+
+  // The table dofs are the samae as the fiber schema,
+  // so just copy them from the fiber schema.
+  // Can't use copy constructor because schema objects are different.
 
   array_poset_dof_map& lfiber_map = lschema.fiber_space().table_dof_map();
-  array_poset_dof_map* lmap = new array_poset_dof_map(lfiber_map);
+  lmap.copy_dof_tuple(lfiber_map);
   
   // Create the state.
 
-  result.new_state(xns, xpath, lschema, *lmap);
+  result.new_state(xns, xpath, lschema, lmap);
 
   if(xauto_access)
   {

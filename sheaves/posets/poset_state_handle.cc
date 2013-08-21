@@ -142,6 +142,7 @@ poset_state_handle(abstract_poset_member* xtop, abstract_poset_member* xbottom)
 
   // Body:
 
+  _name_space = 0;
   _state = 0;
   _top = xtop;
   _bottom = xbottom;

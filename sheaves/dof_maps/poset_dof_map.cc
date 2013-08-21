@@ -828,10 +828,10 @@ put_dof_tuple(const arg_list& xargs)
 
   // Body:
 
-#ifdef DIAGNOSTIC_OUTPUT
+  //#ifdef DIAGNOSTIC_OUTPUT
   cout << "poset_dof_map::put_dof_tuple: schema:: " << schema().name()
        << "  table_dof_descriptors: " << *(schema().table_dof_descriptors()) << endl;
-#endif
+  //#endif
   
   poset_dof_iterator* litr = schema().dof_iterator(is_table_dof_map());
   while(!litr->is_done())
@@ -849,9 +849,9 @@ put_dof_tuple(const arg_list& xargs)
   }
   delete litr;
 
-#ifdef DIAGNOSTIC_OUTPUT
+  //#ifdef DIAGNOSTIC_OUTPUT
   cout << *this << endl;
-#endif
+  //#endif
 
   // Postconditions:
 
@@ -864,6 +864,36 @@ put_dof_tuple(const arg_list& xargs)
   // Exit
 
   return ;
+}
+
+
+void
+sheaf::poset_dof_map::
+copy_dof_tuple(const poset_dof_map& xother)
+{
+  // cout << endl << "Entering poset_dof_map::copy_dof_tuple." << endl;
+
+  // Preconditions:
+
+  require(dof_ct() == xother.dof_ct());
+  require(schema().state_is_read_accessible());
+  require(xother.schema().state_is_read_accessible());
+  //  require(schema().conforms_to(xother.schema(), is_table_dof_map()));
+  //  require(xother.schema().conforms_to(schema(), is_table_dof_map()));
+
+  // Body:
+
+  arg_list largs;
+  xother.get_dof_tuple(largs);
+  put_dof_tuple(largs);
+  
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving poset_dof_map::copy_dof_tuple." << endl;
+  return;
 }
 
 
@@ -1338,7 +1368,7 @@ to_string(const schema_poset_member& xschema) const
   string result;
   if(schema().contains_dof(xschema, _is_table_dof_map))
   {
-    result = dof(xschema.index()).to_string();
+    result = xschema.name() + "=" + dof(xschema.index()).to_string();
   }
 
   // Postconditions:

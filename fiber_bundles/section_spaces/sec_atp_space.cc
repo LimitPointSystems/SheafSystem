@@ -112,23 +112,28 @@ new_table(namespace_type& xns,
   poset_path lscalar_space_path = 
     xns.member_poset<vector_type::host_type>(xvector_space_path, xauto_access).scalar_space_path(xauto_access);
 
-  // The table dof map for a section space is mostly the same as the table dof map
-  // of the fiber schema, so just copy it. Have to new it because poset_state keeps a pointer.
+  // Create the table dof map.
+
+  array_poset_dof_map& lmap = *(new array_poset_dof_map(&lschema, true));
+
+  // The table dofs are mostly the same as the fiber schema,
+  // so just copy them from the fiber schema.
+  // Can't use copy constructor because schema objects are different.
 
   array_poset_dof_map& lfiber_map = lschema.fiber_space().table_dof_map();
-  array_poset_dof_map* lmap = new array_poset_dof_map(lfiber_map);
+  lmap.copy_dof_tuple(lfiber_map);
 
   // Replace the fiber scalar space path with the section scalar space path.
 
-  lmap->put_dof("scalar_space_path", lscalar_space_path);
+  lmap.put_dof("scalar_space_path", lscalar_space_path);
 
   // Replace the fiber vector space path with the section vector space path.
 
-  lmap->put_dof("vector_space_path", xvector_space_path);
+  lmap.put_dof("vector_space_path", xvector_space_path);
   
   // Create the state.
 
-  result.new_state(xns, xpath, lschema, *lmap);
+  result.new_state(xns, xpath, lschema, lmap);
 
   if(xauto_access)
   {

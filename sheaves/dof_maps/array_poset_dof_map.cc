@@ -563,7 +563,7 @@ put_dof_tuple(const void* xbuf, size_t xbuflen)
 
   // Exit
 
-  return ;
+  return;
 }
 
 ///

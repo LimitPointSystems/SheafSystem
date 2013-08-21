@@ -261,7 +261,7 @@ standard_member(namespace_type& xns,
   poset_path result(standard_member_path<S>(xbase_path, xrep_path, xfiber_suffix));
   if(!lhost.contains_member(result.member_name()))
   {  
-    binary_section_space_schema_member lmbr(&lhost, xbase_path, lhost.fiber_space().schema(xauto_access).name(xauto_access));
+    binary_section_space_schema_member lmbr(&lhost, xbase_path, lhost.fiber_space().schema(xauto_access).path(xauto_access));
     lmbr.put_name(result.member_name(), true, true);
   }
 

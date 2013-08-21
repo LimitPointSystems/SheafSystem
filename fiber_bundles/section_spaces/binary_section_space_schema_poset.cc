@@ -1077,7 +1077,10 @@ new_state(const poset_path& xpath, const schema_poset_member& xschema, array_pos
   // Initialize any additional handle data members
   // that may depend on table dofs.
 
-  initialize_handle_data_members(*name_space());
+  // $$SCRIBBLE: should merge two new_state signatures into a single routine
+  // and move to poset_state_handle.
+  //  initialize_handle_data_members(*name_space());
+  initialize_handle_data_members(*xschema.name_space());
 
   // Release and regain access;
   // will get access to handle data members.

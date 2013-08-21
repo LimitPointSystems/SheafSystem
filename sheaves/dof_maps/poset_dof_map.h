@@ -264,6 +264,11 @@ public:
   void put_dof_tuple(const arg_list& xargs);
 
   ///
+  /// Copies the dof tuple of xother into this.
+  ///
+  void copy_dof_tuple(const poset_dof_map& xother);
+
+  ///
   /// Sets all dofs to defualt values
   ///
   virtual void put_defaults();
