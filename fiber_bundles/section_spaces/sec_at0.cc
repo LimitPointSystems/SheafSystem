@@ -23,6 +23,7 @@
 #include "sec_at0_space.h"
 #include "sec_at1_space.h"
 #include "sec_rep_descriptor_poset.h"
+#include "sec_tuple.impl.h"
 #include "sec_tuple_space.impl.h"
 #include "section_space_schema_member.impl.h"
 #include "section_space_schema_poset.h"

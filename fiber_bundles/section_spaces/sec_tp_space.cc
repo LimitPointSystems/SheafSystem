@@ -67,6 +67,42 @@ make_arg_list(int xp, const poset_path& xvector_space_path)
 }
 
 
+bool
+fiber_bundle::sec_tp_space::
+same_vector_fiber_space(const namespace_poset& xns, 
+                        const poset_path& xschema_path, 
+                        const poset_path& xvector_space_path, 
+                        bool xauto_access)
+{
+  // cout << endl << "Entering sec_tp_space::same_vector_fiber_space." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_accessible(xauto_access));
+  require(xns.path_is_auto_read_accessible<section_space_schema_poset>(xschema_path, xauto_access));
+  require(xns.path_is_auto_read_accessible<vector_type::host_type>(xvector_space_path, xauto_access));
+  
+  // Body:
+
+  section_space_schema_poset& lschema_host = xns.member_poset<section_space_schema_poset>(xschema_path, xauto_access);
+  vector_type::host_type& lvector_host = xns.member_poset<vector_type::host_type>(xschema_path, xauto_access);
+
+  fiber_type::host_type* lfiber_space = dynamic_cast<fiber_type::host_type*>(&lschema_host.fiber_space());
+  bool result = false;
+  if(lfiber_space != 0)
+  {
+    result = lfiber_space->vector_space_path(xauto_access) == lvector_host.schema().fiber_space().path(xauto_access);
+  }
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving sec_tp_space::same_vector_fiber_space." << endl;
+  return result;
+}
+
 
 fiber_bundle::sec_tp_space&
 fiber_bundle::sec_tp_space::

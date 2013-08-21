@@ -18,7 +18,6 @@
 #include "section_space_schema_poset.h"
 #include "sec_at1.h"
 #include "sec_at1_space.h"
-#include "sec_tp_space.h"
 #include "sec_tuple_space.impl.h"
 #include "tp.h"
 #include "tp_space.h"

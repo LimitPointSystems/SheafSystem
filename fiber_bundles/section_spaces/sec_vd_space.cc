@@ -89,7 +89,7 @@ same_scalar_fiber_space(const namespace_poset& xns,
   // Body:
 
   section_space_schema_poset& lschema_host = xns.member_poset<section_space_schema_poset>(xschema_path, xauto_access);
-  scalar_type::host_type& lscalar_host = xns.member_poset<scalar_type::host_type>(xschema_path, xauto_access);
+  scalar_type::host_type& lscalar_host = xns.member_poset<scalar_type::host_type>(xscalar_space_path, xauto_access);
 
   fiber_type::host_type* lfiber_space = dynamic_cast<fiber_type::host_type*>(&lschema_host.fiber_space());
   bool result = false;

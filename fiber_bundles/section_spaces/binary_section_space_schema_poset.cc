@@ -121,7 +121,7 @@ new_table(namespace_type& xns,
   require(xbase_path.full());
   require(xns.path_is_auto_read_accessible<base_space_poset>(xbase_path, xauto_access));
 
-  require(xfiber_path.full());
+  require(!xfiber_path.empty());
   require(xns.path_is_auto_read_accessible(xfiber_path, xauto_access));
 
   require(xrep_path.full());
@@ -1020,8 +1020,115 @@ new_state(namespace_poset& xns,
 
 void
 fiber_bundle::binary_section_space_schema_poset::
-new_state(const schema_poset_member& xschema,
-          array_poset_dof_map& xdof_map)
+new_state(const poset_path& xpath, const schema_poset_member& xschema, array_poset_dof_map& xdof_map)
+{
+
+  // Preconditions:
+
+  require(schema_is_ancestor_of(&xschema));
+  require(xschema.state_is_read_accessible());
+
+  /// @issue the following is unexecutable because dof maps don't have
+  /// a schema until attached to a host; requires covariant schema feature to implement.
+
+  /// @todo fix dof maps schema feature and make this precondition executable.
+
+  require(unexecutable(xschema.is_same_state(xdof_map.schema())));
+
+  require(unexecutable("rep in xdof_map exists"));
+  require(unexecutable("rep in xdof_map is read accessible"));
+
+  require(unexecutable("base space in xdof_map exists"));
+  require(unexecutable("base space in xdof_map is read accessible"));
+
+  require(unexecutable("fiber space in xdof_map exists"));
+  require(unexecutable("fiber space in xdof_map is read accessible"));
+
+  require(unexecutable("rep in xdof_map is valid for base and fiber in xdof_map"));
+
+
+  // Body:
+
+  // Disable invariant checking in
+  // member functions until construction finished.
+
+  disable_invariant_check();
+
+  string lname = xpath.poset_name();
+
+  // Create the poset state object;
+  // allocates the data structures but does not (fully) initialize them.
+
+  _state = new poset_state(&xschema, BINARY_SECTION_SPACE_SCHEMA_POSET_ID, lname);
+
+  // Get write access;
+  // handle data members aren't attached yet, 
+  // so use psh version.
+
+  poset_state_handle::get_read_write_access();
+
+  // Initialize the table dofs.
+  // Must be called before initialize_standard_members
+  // because precondition contains_member in put_member_dof_tuple_id
+  // called from new_member indirectly needs table dofs.
+
+  initialize_table_dof_tuple(&xdof_map);
+
+  // Initialize any additional handle data members
+  // that may depend on table dofs.
+
+  initialize_handle_data_members(*name_space());
+
+  // Release and regain access;
+  // will get access to handle data members.
+
+  poset_state_handle::release_access();
+  get_read_write_access();
+
+  // Initialize the row structure.
+
+  initialize_standard_subposets(lname);
+  initialize_standard_members();
+
+  // Set the standard id spaces.
+
+  update_standard_member_id_spaces();
+
+  // Now invariant should be satisfied
+
+  enable_invariant_check();
+
+  // Postconditions:
+
+  ensure(invariant());
+  ensure(is_attached());
+  ensure(!in_jim_edit_mode());
+  ensure(schema().is_same_state(&xschema));
+  ensure(has_standard_row_dof_tuple_ct());
+  ensure(has_standard_subposet_ct());
+  ensure(member_id_spaces(false).has_only_standard_id_spaces());
+  ensure(&(table_dof_map()) == &xdof_map);
+  ensure(rep().is_attached());
+  ensure(base_space().is_attached());
+  ensure(fiber_schema().is_attached());
+  ensure(fiber_space().is_attached());
+
+  // Now we're finished, release all access
+
+  release_access();
+
+  // One final postcondition
+
+  ensure(state_is_not_read_accessible());
+
+  // Exit:
+
+  return;
+}
+
+void
+fiber_bundle::binary_section_space_schema_poset::
+new_state(const schema_poset_member& xschema, array_poset_dof_map& xdof_map)
 {
 
   // Preconditions:

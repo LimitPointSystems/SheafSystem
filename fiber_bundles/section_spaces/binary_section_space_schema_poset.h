@@ -300,13 +300,19 @@ protected:
                  const poset_path& xschema_path,
                  bool xauto_access);
 
+
   ///
-  /// Attaches this external poset to a new poset state with schema
+  /// Creates a new poset state with path xpath, schema xschema and table dof map xdof_map,
+  /// attaches this to the state.
+  ///
+  virtual void new_state(const poset_path& xpath, const schema_poset_member& xschema, array_poset_dof_map& xdof_map);
+
+  ///
+  /// @deprecated Attaches this external poset to a new poset state with schema
   /// given by xschema and table dofs by xdof_map.
   /// Intended for use by i/o subsystem.
   ///
-  virtual void new_state(const schema_poset_member& xschema,
-                         array_poset_dof_map& xdof_map);
+  virtual void new_state(const schema_poset_member& xschema, array_poset_dof_map& xdof_map);
 
 
 private:
