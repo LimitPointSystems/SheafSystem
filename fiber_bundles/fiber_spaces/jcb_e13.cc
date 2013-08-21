@@ -603,9 +603,18 @@ new_host(namespace_type& xns,
   require(xschema_path.full());
   require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
   require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path()));
+  require(schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access) == 3);
 
-  require(xns.path_is_auto_read_accessible<domain_type>(xdomain_path, xauto_access));
-  require(xns.path_is_auto_read_accessible<range_type>(xrange_path, xauto_access));
+  require(xns.path_is_auto_read_accessible(xdomain_path, xauto_access));
+  require(xns.contains_poset<domain_type::host_type>(xdomain_path, xauto_access));
+  require(xns.member_poset(xdomain_path, xauto_access).schema(xauto_access).conforms_to(domain_type::standard_schema_path()));
+  require(xns.member_poset<domain_type::host_type>(xdomain_path, xauto_access).d(xauto_access) == 1);
+
+  require(xns.path_is_auto_read_accessible(xrange_path, xauto_access));
+  require(xns.contains_poset<range_type::host_type>(xrange_path, xauto_access));
+  require(xns.member_poset(xrange_path, xauto_access).schema(xauto_access).conforms_to(range_type::standard_schema_path()));
+  require(xns.member_poset<range_type::host_type>(xrange_path, xauto_access).d(xauto_access) == 3);
+
   require(host_type::d(xns, xschema_path, xauto_access) == host_type::d(xns, xdomain_path, xrange_path, xauto_access));
 
   require(xns.member_poset<domain_type::host_type>(xdomain_path, xauto_access).scalar_space_path(xauto_access) ==
@@ -623,12 +632,13 @@ new_host(namespace_type& xns,
   ensure(result.state_is_not_read_accessible());
   ensure(result.schema(true).path(xauto_access) == xschema_path);
 
-  ensure(result.factor_ct(true) == result.d(true));
-  ensure(result.d(true) == host_type::d(xns, xschema_path, xauto_access));
+  ensure(result.factor_ct(true) == 3);
+  ensure(result.d(true) == 3);
+  ensure(result.dd(true) == 1);
+  ensure(result.dr(true) == 3);
   ensure(result.domain_path(true) == xdomain_path);
-  ensure(result.dd(true) == host_type::d(xns, xdomain_path, xauto_access));
   ensure(result.range_path(true) == xrange_path);
-  ensure(result.dr(true) == host_type::d(xns, xrange_path, xauto_access));
+
   ensure(result.scalar_space_path(true) ==
 	 xns.member_poset<domain_type::host_type>(xdomain_path, xauto_access).scalar_space_path(xauto_access) );
   ensure(result.scalar_space_path(true) ==
@@ -640,62 +650,70 @@ new_host(namespace_type& xns,
   return result;
 }
 
-// fiber_bundle::jcb_e13::host_type&
-// fiber_bundle::jcb_e13::
-// standard_host(namespace_type& xns, const string& xsuffix, bool xauto_access)
-// {
-//   // cout << endl << "Entering jcb_e13::new_host." << endl;
+fiber_bundle::jcb_e13::host_type&
+fiber_bundle::jcb_e13::
+standard_host(namespace_type& xns, const string& xsuffix, bool xauto_access)
+{
+  // cout << endl << "Entering jcb_e13::new_host." << endl;
 
-//   // Preconditions:
+  // Preconditions:
 
-//   require(xns.state_is_auto_read_write_accessible(xauto_access));
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
 
-//   require(xsuffix.empty() || poset_path::is_valid_name(xsuffix));
-//   require(standard_host_is_available<jcb_e13>(xns, xsuffix, xauto_access));
+  require(xsuffix.empty() || poset_path::is_valid_name(xsuffix));
+  require(standard_host_is_available<jcb_e13>(xns, xsuffix, xauto_access));
 
-//   require(xns.path_is_auto_read_accessible(standard_schema_path(), xauto_access));
+  require(xns.path_is_auto_read_accessible(standard_schema_path(), xauto_access));
   
-//   require(xns.path_is_auto_read_available(standard_host_path<scalar_type>(xsuffix), xauto_access));
+  require(xns.path_is_auto_read_available(standard_host_path<domain_type>(xsuffix), xauto_access));
+  require(xns.path_is_auto_read_available(standard_host_path<range_type>(xsuffix), xauto_access));
 
-//   // Body:
+  // Body:
 
-//   // Create the scalar space if necessary.
+  // Create the domain space if necessary.
 
-//   poset_path lscalar_space_path = scalar_type::standard_host(xns, xsuffix, xauto_access).path(true);
+  poset_path ldomain_space_path = domain_type::standard_host(xns, xsuffix, xauto_access).path(true);
 
-//   poset_path lpath(standard_host_path<jcb_e13>(xsuffix));
+  // Create the range space if necessary.
 
-//   host_type* result_ptr;
-//   if(xns.contains_path(lpath, xauto_access))
-//   {
-//     result_ptr = &xns.member_poset<host_type>(lpath, xauto_access);
-//   }
-//   else
-//   {
-//     result_ptr = &new_host(xns, lpath, standard_schema_path(), lscalar_space_path, xauto_access);
-//   }
+  poset_path lrange_space_path = range_type::standard_host(xns, xsuffix, xauto_access).path(true);
 
-//   host_type& result = *result_ptr;
+  poset_path lpath(standard_host_path<jcb_e13>(xsuffix));
 
-//   // Postconditions:
+  host_type* result_ptr;
+  if(xns.contains_path(lpath, xauto_access))
+  {
+    result_ptr = &xns.member_poset<host_type>(lpath, xauto_access);
+  }
+  else
+  {
+    result_ptr = &new_host(xns, lpath, standard_schema_path(), ldomain_space_path, lrange_space_path, xauto_access);
+  }
 
-//   ensure(xns.owns(result, xauto_access));
-//   ensure(result.path(true) == standard_host_path<jcb_e13>(xsuffix));
-//   ensure(result.state_is_not_read_accessible());
-//   ensure(result.schema(true).path(xauto_access) == standard_schema_path());
+  host_type& result = *result_ptr;
 
-//   ensure(result.factor_ct(true) == 1);
-//   ensure(result.d(true) == 1);
-//   ensure(result.scalar_space_path(true) == standard_host_path<scalar_type>(xsuffix) );
-//   ensure(result.p(true) == 1);
-//   ensure(result.dd(true) == 1);
-//   ensure(result.vector_space_path(true) == result.path(true));
+  // Postconditions:
 
-//   // Exit:
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == standard_host_path<jcb_e13>(xsuffix));
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == standard_schema_path());
 
-//   // cout << "Leaving jcb_e13::new_host." << endl;
-//   return result;
-// }
+  ensure(result.factor_ct(true) == 3);
+  ensure(result.d(true) == 3);
+  ensure(result.dd(true) == 1);
+  ensure(result.dr(true) == 3);
+  ensure(result.domain_path(true) == standard_host_path<domain_type>(xsuffix));
+  ensure(result.range_path(true) == standard_host_path<range_type>(xsuffix));
+
+  ensure(result.scalar_space_path(true) == standard_host_path<domain_type::scalar_type>(xsuffix));
+  ensure(result.scalar_space_path(true) == standard_host_path<domain_type::scalar_type>(xsuffix));
+
+  // Exit:
+
+  // cout << "Leaving jcb_e13::new_host." << endl;
+  return result;
+}
 
 // PROTECTED MEMBER FUNCTIONS
 

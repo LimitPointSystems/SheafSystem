@@ -80,6 +80,24 @@ public:
   ///
   static arg_list make_arg_list(const poset_path& xdomain_path, const poset_path& xrange_path);
   
+  using vd_space::d;
+  
+  ///
+  /// The jacobian dimension implied by the schema specified by xschema_path.
+  ///
+  static int d(const namespace_poset& xns, const poset_path& xschema_path, bool xauto_access);
+  
+  ///
+  /// The jacobian dimension implied by tensor the dimension of the domain vector space
+  /// specified by xdomain_space_path and the range vector space specified by xrange_space_path.
+  ///
+  static int d(const namespace_poset& xns, const poset_path& xdomain_space_path, const poset_path& xrange_space_path, bool xauto_access);
+
+  ///
+  /// Dimension d() as a function of domain dimension xdd and range dimension xdr.
+  ///
+  static int d(int xdd, int xdr);
+
   ///
   /// Creates a new jcb_space in namespace xns with path xpath,
   /// schema specified by xschema_path, and table attributes 
@@ -96,19 +114,6 @@ public:
   //============================================================================
   // TABLE DOFS
   //============================================================================
-
-  using vd_space::d;
-  
-  ///
-  /// Dimension d() as a function of domain vector space specified by
-  /// xdomain_space_path and range vector space specified by xrange_space_path.
-  ///
-  static int d(const namespace_poset& xns, const poset_path& xdomain_space_path, const poset_path& xrange_space_path, bool xauto_access);
-
-  ///
-  /// Dimension d() as a function of domain dimension xdd and range dimension xdr.
-  ///
-  static int d(int xdd, int xdr);
 
   ///
   /// The dimension of the underlying ("domain") vector space.

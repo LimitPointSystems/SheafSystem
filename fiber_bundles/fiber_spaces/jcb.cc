@@ -549,14 +549,13 @@ new_host(namespace_type& xns,
   require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
   require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path()));
 
-  require(xns.path_is_auto_read_accessible<domain_type>(xdomain_path, xauto_access));
-  require(xns.path_is_auto_read_accessible<range_type>(xrange_path, xauto_access));
+  require(xns.path_is_auto_read_accessible<domain_type::host_type>(xdomain_path, xauto_access));
+  require(xns.path_is_auto_read_accessible<range_type::host_type>(xrange_path, xauto_access));
 
   require(host_type::d(xns, xschema_path, xauto_access) == host_type::d(xns, xdomain_path, xrange_path, xauto_access));
 
   require(xns.member_poset<domain_type::host_type>(xdomain_path, xauto_access).scalar_space_path(xauto_access) ==
 	  xns.member_poset<range_type::host_type>(xrange_path, xauto_access).scalar_space_path(xauto_access));
-
 
   // Body:
 
@@ -572,10 +571,13 @@ new_host(namespace_type& xns,
 
   ensure(result.factor_ct(true) == result.d(true));
   ensure(result.d(true) == host_type::d(xns, xschema_path, xauto_access));
+
   ensure(result.domain_path(true) == xdomain_path);
-  ensure(result.dd(true) == host_type::d(xns, xdomain_path, xauto_access));
+  ensure(result.dd(true) == xns.member_poset<domain_type::host_type>(xdomain_path, xauto_access).d());
+
   ensure(result.range_path(true) == xrange_path);
-  ensure(result.dr(true) == host_type::d(xns, xrange_path, xauto_access));
+  ensure(result.dr(true) == xns.member_poset<range_type::host_type>(xrange_path, xauto_access).d());
+
   ensure(result.scalar_space_path(true) ==
 	 xns.member_poset<domain_type::host_type>(xdomain_path, xauto_access).scalar_space_path(xauto_access) );
   ensure(result.scalar_space_path(true) ==

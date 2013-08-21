@@ -105,6 +105,60 @@ make_arg_list(const poset_path& xdomain_path, const poset_path& xrange_path)
   return result;
 }
 
+int
+fiber_bundle::jcb_space::
+d(const namespace_poset& xns, const poset_path& xschema_path, bool xauto_access)
+{
+  // Preconditions:
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+ 
+  // Body:
+
+  int result = schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access);
+
+  // Postconditions:
+
+  ensure(result == schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access));
+
+  // Exit:
+
+  return result;
+}
+
+int
+fiber_bundle::jcb_space::
+d(const namespace_poset& xns, const poset_path& xdomain_space_path, const poset_path& xrange_space_path, bool xauto_access)
+{
+  // Preconditions:
+
+  require(xns.path_is_auto_read_accessible<domain_space_type>(xdomain_space_path, xauto_access));
+  require(xns.path_is_auto_read_accessible<range_space_type>(xrange_space_path, xauto_access));
+ 
+  // Body:
+
+  int ldd = xns.member_poset<domain_space_type>(xdomain_space_path, xauto_access).d();  
+  int ldr = xns.member_poset<range_space_type>(xrange_space_path, xauto_access).d();  
+
+  int result = d(ldd, ldr);
+
+  // Postconditions:
+
+  ensure(result >= 0);
+
+  // Exit:
+
+  return result;
+}
+
+int
+fiber_bundle::jcb_space::
+d(int xdd, int xdr)
+{
+  return xdd*xdr;
+}
+
 fiber_bundle::jcb_space&
 fiber_bundle::jcb_space::
 new_table(namespace_type& xns, 
@@ -155,8 +209,8 @@ new_table(namespace_type& xns,
   // Get the dimension (== number of row dofs) defined by the schema.
 
   int ld = lschema.row_dof_ct();
-  int ldd = d(xns, xdomain_path, xauto_access);
-  int ldr = d(xns, xrange_path, xauto_access);
+  int ldd = xns.member_poset<domain_space_type>(xdomain_path, xauto_access).d();
+  int ldr = xns.member_poset<range_space_type>(xrange_path, xauto_access).d();
 
   poset_path lscalar_space_path =
     xns.member_poset<domain_space_type>(xdomain_path, xauto_access).scalar_space_path(xauto_access);
@@ -192,13 +246,13 @@ new_table(namespace_type& xns,
   ensure(result.schema(true).path(xauto_access) == xschema_path);
 
   ensure(result.factor_ct(true) == result.d(true));
-  ensure(result.d(true) == schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access));
+  ensure(result.d(true) == d(xns, xschema_path, xauto_access));
 
   ensure(result.domain_path(true) == xdomain_path);
-  ensure(result.dd(true) == d(xns, xdomain_path, xauto_access));
+  ensure(result.dd(true) == xns.member_poset<domain_space_type>(xdomain_path, xauto_access).d());
 
   ensure(result.range_path(true) == xrange_path);
-  ensure(result.dr(true) == d(xns, xrange_path, xauto_access));
+  ensure(result.dr(true) == xns.member_poset<range_space_type>(xrange_path, xauto_access).d());
 
   ensure(result.scalar_space_path(true) ==
 	 xns.member_poset<domain_space_type>(xdomain_path, xauto_access).scalar_space_path(xauto_access) );
@@ -250,38 +304,6 @@ jcb_space(namespace_poset& xhost,
   // Exit:
 
   return;
-}
-
-int
-fiber_bundle::jcb_space::
-d(int xdd, int xdr)
-{
-  return xdd*xdr;
-}
-
-int
-fiber_bundle::jcb_space::
-d(const namespace_poset& xns, const poset_path& xdomain_space_path, const poset_path& xrange_space_path, bool xauto_access)
-{
-  // Preconditions:
-
-  require(xns.path_is_auto_read_accessible<domain_space_type>(xdomain_space_path, xauto_access));
-  require(xns.path_is_auto_read_accessible<range_space_type>(xrange_space_path, xauto_access));
- 
-  // Body:
-
-  int ldd = xns.member_poset<domain_space_type>(xdomain_space_path, xauto_access).d();  
-  int ldr = xns.member_poset<range_space_type>(xrange_space_path, xauto_access).d();  
-
-  int result = d(ldd, ldr);
-
-  // Postconditions:
-
-  ensure(result >= 0);
-
-  // Exit:
-
-  return result;
 }
 
 int
