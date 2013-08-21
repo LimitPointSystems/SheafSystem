@@ -363,11 +363,11 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
     
     set_source_files_properties(${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE} 
         PROPERTIES CPLUSPLUS ON)
-    swig_add_module(${${COMPONENT}_PYTHON_BINDING_LIB_BASE} python 
+    swig_add_module(${${COMPONENT}_PYTHON_BINDING_LIB} python 
         ${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE})
 
     if(WIN64INTEL OR WIN64MSVC)
-        swig_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB_BASE} 
+        swig_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} 
             ${${COMPONENT}_IMPORT_LIB} ${PYTHON_LIBRARIES})
         # The leading underscore on a python library's name is apparently implicit to 
         # the swig python functions. If we want to refer to it, then we need to 
@@ -375,8 +375,10 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
         set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} 
             PROPERTIES FOLDER "Binding Targets - Python")
     else()
-        add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} ${${COMPONENT}_SHARED_LIB})
-        swig_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB_BASE} ${${COMPONENT}_SHARED_LIB} ${PYTHON_LIBRARIES})
+        add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} 
+            ${${COMPONENT}_SHARED_LIB})
+        swig_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} 
+            ${${COMPONENT}_SHARED_LIB} ${PYTHON_LIBRARIES})
     endif()
     
     set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} PROPERTIES 

@@ -401,20 +401,20 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
 
     set_source_files_properties(${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE} 
         PROPERTIES CPLUSPLUS ON)
-    swig_add_module(${${COMPONENT}_PYTHON_BINDING_LIB_BASE} python 
+    swig_add_module(${${COMPONENT}_PYTHON_BINDING_LIB} python 
         ${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE})
 
     if(WIN64INTEL OR WIN64MSVC)
         add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} 
             ${FIBER_BUNDLES_PYTHON_BINDING_LIBS} 
             ${${COMPONENT}_IMPORT_LIBS})
-        swig_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB_BASE} 
+        swig_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} 
             ${FIBER_BUNDLES_PYTHON_BINDING_LIBS} 
             ${${COMPONENT}_IMPORT_LIB} ${PYTHON_LIBRARY} )
         set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} 
             PROPERTIES FOLDER "Binding Targets - Python")
     else()
-        swig_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB_BASE} 
+        swig_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} 
             ${FIBER_BUNDLES_PYTHON_BINDING_LIBS} 
             ${${COMPONENT}_SHARED_LIBS})
     endif()

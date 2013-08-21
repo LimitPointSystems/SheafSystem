@@ -332,7 +332,7 @@ function(add_bindings_targets)
         
         set_source_files_properties(${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE} 
             PROPERTIES CPLUSPLUS ON)
-        swig_add_module(${${COMPONENT}_PYTHON_BINDING_LIB_BASE} python 
+        swig_add_module(${${COMPONENT}_PYTHON_BINDING_LIB} python 
             ${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE})
                         
         if(WIN64INTEL OR WIN64MSVC)
