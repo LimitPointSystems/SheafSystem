@@ -244,10 +244,6 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
     list(APPEND ${COMPONENT}_CLASSPATH 
         ${FIBER_BUNDLES_CLASSPATH} 
         ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR})
-
-#    set(${COMPONENT}_CLASSPATH 
-#        ${${COMPONENT}_CLASSPATH} CACHE STRING 
- #       "Cumulative classpath for ${PROJECT_NAME}" FORCE)
                 
      # Create the bindings jar file 
     if(WIN64INTEL OR WIN64MSVC)
@@ -274,8 +270,8 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
          # Java documentation
          if(DOC_TARGETS)
             add_custom_target(${PROJECT_NAME}-java-docs ALL
-                COMMAND ${Java_JAVADOC_EXECUTABLE} -windowtitle "${PROJECT_NAME}
-                     documentation" -classpath "${FIBER_BUNDLES_CLASSPATH}"
+                COMMAND ${Java_JAVADOC_EXECUTABLE} -windowtitle "${PROJECT_NAME} documentation" 
+                    -classpath "${FIBER_BUNDLES_CLASSPATH}"
                     -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
                     *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
                     DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}

@@ -228,7 +228,8 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
                set_target_properties(${PROJECT_NAME}_java_binding.jar 
                    PROPERTIES FOLDER "Component Binding Jars")
                COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
-               COMMAND ${Java_JAVAC_EXECUTABLE} -classpath  "${SHEAVES_CLASSPATH}" -d . *.java
+               COMMAND ${Java_JAVAC_EXECUTABLE} -classpath  
+               "${SHEAVES_CLASSPATH}" -d . *.java
                COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
                COMMAND ${Java_JAR_EXECUTABLE} cvf 
                    ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} 

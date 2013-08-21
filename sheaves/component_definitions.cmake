@@ -112,6 +112,7 @@ configure_std_headers()
 # Create the library targets for this component.
 #
 function(add_library_targets)
+
     if(WIN64INTEL OR WIN64MSVC)
         # Tell the linker where to look for this project's libraries.
         link_directories(${${COMPONENT}_OUTPUT_DIR})
@@ -120,7 +121,7 @@ function(add_library_targets)
         add_library(${${COMPONENT}_DYNAMIC_LIB} 
             SHARED ${${COMPONENT}_SRCS})
         target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} 
-            LINK_PRIVATE hdf5_cpp )        
+            LINK_PRIVATE hdf5 )        
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES 
             FOLDER "Library Targets")
 
@@ -252,7 +253,8 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
         # Java documentation
         if(DOC_TARGETS)
             add_custom_target(${PROJECT_NAME}-java-docs ALL
-                COMMAND ${Java_JAVADOC_EXECUTABLE} -windowtitle "${PROJECT_NAME} documentation" 
+                COMMAND ${Java_JAVADOC_EXECUTABLE} 
+                -windowtitle "${PROJECT_NAME} documentation" 
                 -classpath "${${COMPONENT}_CLASSPATH}" 
                  -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
                  *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}

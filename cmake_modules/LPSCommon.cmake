@@ -47,7 +47,8 @@ link_directories(${CMAKE_BINARY_DIR}/lib)
 
 #
 # Set some variables for the Intel coverage utilities.
-# $$TODO: Linux only for now -- hook up for Windows as well (if we pursue support for Intel).
+# $$TODO: Linux only for now -- hook up for Windows as well if we pursue 
+# support for Intel.
 #
 if(LINUX64INTEL)
     set(UNCOVERED_COLOR DE0829 CACHE STRING "Color for uncovered code.")
@@ -56,16 +57,20 @@ if(LINUX64INTEL)
     # Lop the compiler name off the end of the CXX string
     string(REPLACE "/icpc" "" INTELPATH ${CMAKE_CXX_COMPILER})
     # The codecov executable
-    set(CODECOV "${INTELPATH}/bin/codecov" CACHE STRING "Intel Code coverage utility.")
+    set(CODECOV "${INTELPATH}/bin/codecov" CACHE STRING 
+        "Intel Code coverage utility.")
     # The profmerge executable
-    set(PROFMERGE "${INTELPATH}/bin/profmerge" CACHE STRING "Intel dynamic profile merge utility." )
+    set(PROFMERGE "${INTELPATH}/bin/profmerge" CACHE STRING 
+        "Intel dynamic profile merge utility." )
     # The compiler library path.
-    set(INTEL_LIBPATH "${INTELPATH}/lib/intel64" CACHE STRING "Intel C++ compiler library path." )
+    set(INTEL_LIBPATH "${INTELPATH}/lib/intel64" CACHE STRING 
+        "Intel C++ compiler library path." )
 elseif(LINUX64GNU)
     # Lop the compiler name off the end of the CXX string to get the gnu root.
     string(REPLACE "bin/g++" "" GNUPATH ${CMAKE_CXX_COMPILER})
     # The compiler library path.
-    set(GNU_LIBPATH "${GNUPATH}lib64" CACHE STRING "GNU C++ compiler library path." )
+    set(GNU_LIBPATH "${GNUPATH}lib64" CACHE STRING 
+        "GNU C++ compiler library path." )
 endif()
 
 #------------------------------------------------------------------------------
@@ -209,27 +214,26 @@ function(set_compiler_flags)
        endif()
         
     if(WIN64MSVC)
-    
        set(LPS_CXX_FLAGS "${MP} /GR /nologo /DWIN32 /D_WINDOWS /W1 /EHsc" 
            CACHE STRING "C++ Compiler Flags")       
        set(LPS_SHARED_LINKER_FLAGS 
-           "/INCREMENTAL:NO /NOLOGO /DLL /SUBSYSTEM:CONSOLE /MACHINE:X64 /NODEFAULTLIB:MSVCRT " 
+           "/INCREMENTAL:NO /NOLOGO /DLL /SUBSYSTEM:CONSOLE /MACHINE:X64"
            CACHE STRING "Linker Flags for Shared Libs")
        set(LPS_EXE_LINKER_FLAGS 
            "/INCREMENTAL:NO /NOLOGO /DLL /SUBSYSTEM:CONSOLE /MACHINE:X64" 
            CACHE STRING "Linker Flags for Executables")
     elseif(WIN64INTEL)
        set(LPS_CXX_FLAGS 
-           "/D_USRDLL ${MP} /GR /nologo /DWIN32 /D_WINDOWS /W1 /wd2651 /EHsc  /Qprof-gen:srcpos /D_HDF5USEDLL_" 
+           "/D_USRDLL ${MP} /GR /nologo /DWIN32 /D_WINDOWS /W1 /wd2651 /EHsc /Qprof-gen:srcpos /D_HDF5USEDLL_" 
            CACHE STRING "C++ Compiler Flags")
        set(LPS_SHARED_LINKER_FLAGS 
-           "/INCREMENTAL:NO /NOLOGO /DLL /SUBSYSTEM:CONSOLE  /NXCOMPAT /MACHINE:X64" 
+           "/INCREMENTAL:NO /NOLOGO /DLL /SUBSYSTEM:CONSOLE /NXCOMPAT /MACHINE:X64" 
            CACHE STRING "Linker Flags") 
     elseif(LINUX64INTEL)
         if(ENABLE_COVERAGE)
             if(INTELWARN)
                set(LPS_CXX_FLAGS 
-                   "-ansi -m64 -w1 -wd186,1125 -Wno-deprecated  -prof-gen=srcpos")
+                   "-ansi -m64 -w1 -wd186,1125 -Wno-deprecated -prof-gen=srcpos")
             else()
                set(LPS_CXX_FLAGS 
                    "-ansi -m64 -w0 -Wno-deprecated  -prof-gen=srcpos")
@@ -254,7 +258,6 @@ function(set_compiler_flags)
         
     # Configuration specific flags 
     if(WIN64MSVC OR WIN64INTEL)
-
         set(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS 
             "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od" 
             CACHE STRING "Flags used by the C++ compiler for Debug-contracts builds" )       
@@ -272,30 +275,29 @@ function(set_compiler_flags)
     endif()
     
     mark_as_advanced(CMAKE_CXX_FLAGS_DEBUG-CONTRACTS
-                     CMAKE_EXE_LINKER_FLAGS_DEBUG-CONTRACTS CMAKE_SHARED_LINKER_FLAGS_DEBUG-CONTRACTS)
+         CMAKE_EXE_LINKER_FLAGS_DEBUG-CONTRACTS 
+         CMAKE_SHARED_LINKER_FLAGS_DEBUG-CONTRACTS)
 
     #                 
     # DEBUG_NO_CONTRACTS section
     #      
 
-    # Configuration specific flags 
     if(WIN64MSVC OR WIN64INTEL)
-
-     set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS 
-         "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od /DNDEBUG" 
-         CACHE STRING "Flags used by the C++ compiler for Debug-no-contracts builds" )            
-     set(CMAKE_SHARED_LINKER_FLAGS_DEBUG-NO-CONTRACTS 
-         "${LPS_SHARED_LINKER_FLAGS} /DEBUG" 
-         CACHE STRING "Flags used by the linker for shared libraries for Debug-contracts builds" )
-     set(CMAKE_EXE_LINKER_FLAGS_DEBUG-NO-CONTRACTS 
-         "${LPS_EXE_LINKER_FLAGS} /DEBUG" 
-         CACHE STRING "Flags used by the linker for executables for Debug-contracts builds")                  
+        set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS 
+             "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od /DNDEBUG" 
+             CACHE STRING "Flags used by the C++ compiler for Debug-no-contracts builds" )            
+        set(CMAKE_SHARED_LINKER_FLAGS_DEBUG-NO-CONTRACTS 
+             "${LPS_SHARED_LINKER_FLAGS} /DEBUG" 
+             CACHE STRING "Flags used by the linker for shared libraries for Debug-contracts builds" )
+        set(CMAKE_EXE_LINKER_FLAGS_DEBUG-NO-CONTRACTS 
+             "${LPS_EXE_LINKER_FLAGS} /DEBUG" 
+             CACHE STRING "Flags used by the linker for executables for Debug-contracts builds")                  
         set(CMAKE_MODULE_LINKER_FLAGS_DEBUG-NO-CONTRACTS 
             "${LPS_SHARED_LINKER_FLAGS} /DEBUG" 
             CACHE STRING "Debugno-no-contracts linker flags - binding libs" )
     else()
-    set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} -g -DNDEBUG" CACHE
-        STRING "Flags used by the C++ compiler for Debug-no-contracts builds" )
+        set(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS "${LPS_CXX_FLAGS} -g -DNDEBUG" CACHE
+            STRING "Flags used by the C++ compiler for Debug-no-contracts builds" )
     endif()
 
     mark_as_advanced(CMAKE_CXX_FLAGS_DEBUG-NO-CONTRACTS
@@ -306,9 +308,7 @@ function(set_compiler_flags)
     # RELEASE_CONTRACTS section
     #
 
-    # Configuration specific flags 
     if(WIN64MSVC OR WIN64INTEL)
- 
         set(CMAKE_CXX_FLAGS_RELEASE-CONTRACTS 
             "${LPS_CXX_FLAGS} /MD /LD /O2 " 
             CACHE STRING "Flags used by the C++ compiler for Release-contracts builds" )
@@ -332,13 +332,13 @@ function(set_compiler_flags)
     
     # True for all currently supported platforms        
     mark_as_advanced(CMAKE_CXX_FLAGS_RELEASE-CONTRACTS
-                     CMAKE_EXE_LINKER_FLAGS_RELEASE-CONTRACTS CMAKE_SHARED_LINKER_FLAGS_RELEASE-CONTRACTS
-                    )
+         CMAKE_EXE_LINKER_FLAGS_RELEASE-CONTRACTS 
+         CMAKE_SHARED_LINKER_FLAGS_RELEASE-CONTRACTS)
+         
     #                 
     # RELEASE_NO_CONTRACTS section
     #
 
-    # Configuration specific flags         
     if(WIN64MSVC OR WIN64INTEL)
         set(CMAKE_CXX_FLAGS_RELEASE-NO-CONTRACTS 
             "${LPS_CXX_FLAGS}  /MD /LD /O2 /DNDEBUG" 
@@ -367,14 +367,12 @@ function(set_compiler_flags)
     # True for all currently supported platforms        
     mark_as_advanced(CMAKE_CXX_FLAGS_RELEASE-NO-CONTRACTS
          CMAKE_EXE_LINKER_FLAGS_RELEASE-NO-CONTRACTS 
-         CMAKE_SHARED_LINKER_FLAGS_RELEASE-NO-CONTRACTS
-          )
+         CMAKE_SHARED_LINKER_FLAGS_RELEASE-NO-CONTRACTS)
 
     #                 
     # RelWithDebInfo-contracts section
     #
 
-    # Configuration specific flags 
     if(WIN64MSVC OR WIN64INTEL)
         set(CMAKE_CXX_FLAGS_RELWITHDEBINFO-CONTRACTS 
             "${LPS_CXX_FLAGS} /MD /LD /O2 " CACHE
@@ -393,8 +391,8 @@ function(set_compiler_flags)
     # True for all currently supported platforms        
     mark_as_advanced(CMAKE_CXX_FLAGS_RELWITHDEBINFO-CONTRACTS
          CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-CONTRACTS 
-         CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-CONTRACTS
-        )
+         CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-CONTRACTS)
+        
     #                 
     # RelWithDebInfo-no-contracts section
     #
@@ -418,8 +416,8 @@ function(set_compiler_flags)
     # True for all currently supported platforms        
     mark_as_advanced(CMAKE_CXX_FLAGS_RELWITHDEBINFO-NO-CONTRACTS
          CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO-NO-CONTRACTS 
-         CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-NO-CONTRACTS
-      )
+         CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO-NO-CONTRACTS)
+         
 endfunction(set_compiler_flags)	
 
 #
@@ -438,9 +436,12 @@ function(create_output_dirs)
     # Not a good idea to change them to anything shorter and sweeter; so don't.
 
     if(WIN64MSVC OR WIN64INTEL)
-        set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib PARENT_SCOPE)
-        set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib PARENT_SCOPE)
-        set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin PARENT_SCOPE)
+        set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY 
+            ${CMAKE_BINARY_DIR}/lib PARENT_SCOPE)
+        set(CMAKE_LIBRARY_OUTPUT_DIRECTORY 
+            ${CMAKE_BINARY_DIR}/lib PARENT_SCOPE)
+        set(CMAKE_RUNTIME_OUTPUT_DIRECTORY 
+            ${CMAKE_BINARY_DIR}/bin PARENT_SCOPE)
         # Create build/lib for libraries.
         file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
         # Create build/bin for executables.
@@ -459,7 +460,6 @@ function(create_output_dirs)
         # Create build/bin for executables.
         file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/bin)        
    endif()
-    
 
 endfunction()
 
@@ -468,26 +468,30 @@ endfunction()
 # Default Doc state is "User"
 #
 
-    function(add_doc_targets)
-        if(DOC_TARGETS)
-            if(DOXYGEN_FOUND)
-                if(DOC_STATE MATCHES Dev OR DOC_STATE MATCHES dev OR DOC_STATE MATCHES DEV)
-                    add_custom_target(doc ALL
-                            COMMAND ${CMAKE_COMMAND} -E echo "Generating Developer Documentation ... " 
-                            COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/documentation                    
-                            COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/dev_doxyfile
-                                    )
-                else()
-                    add_custom_target(doc ALL
-                            COMMAND ${CMAKE_COMMAND} -E echo "Generating User Documentation ... "  
-                            COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/documentation                     
-                            COMMAND ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/user_doxyfile
-                                     )
-                endif()
-                        set_target_properties(doc PROPERTIES FOLDER "Documentation Targets")    
+function(add_doc_targets)
+    if(DOC_TARGETS)
+            if(DOC_STATE MATCHES Dev OR DOC_STATE MATCHES dev OR DOC_STATE MATCHES DEV)
+                add_custom_target(doc ALL
+                        COMMAND ${CMAKE_COMMAND} -E echo 
+                        "Generating Developer Documentation ... " 
+                        COMMAND ${CMAKE_COMMAND} -E make_directory 
+                        ${CMAKE_BINARY_DIR}/documentation                    
+                        COMMAND ${DOXYGEN_EXECUTABLE} 
+                        ${CMAKE_BINARY_DIR}/dev_doxyfile
+                                )
+            else()
+                add_custom_target(doc ALL
+                        COMMAND ${CMAKE_COMMAND} -E echo 
+                        "Generating User Documentation ... "  
+                        COMMAND ${CMAKE_COMMAND} -E make_directory 
+                        ${CMAKE_BINARY_DIR}/documentation                     
+                        COMMAND ${DOXYGEN_EXECUTABLE} 
+                        ${CMAKE_BINARY_DIR}/user_doxyfile
+                                 )
             endif()
-        endif() 
-    endfunction(add_doc_targets)
+                    set_target_properties(doc PROPERTIES FOLDER "Documentation Targets")    
+    endif() 
+endfunction(add_doc_targets)
 
 # 
 #  Append file types to CMake's default clean list.
@@ -532,7 +536,9 @@ function(add_clusters clusters)
         #Add each cluster to the compiler search path.
         include_directories(${cluster})
         # Add the fully-qualified cluster names to this component's ipath var
-        set(${COMPONENT}_IPATH ${${COMPONENT}_IPATH} ${CMAKE_CURRENT_SOURCE_DIR}/${cluster} CACHE STRING "Include paths for ${PROJECT_NAME}" FORCE)
+        set(${COMPONENT}_IPATH ${${COMPONENT}_IPATH} 
+        ${CMAKE_CURRENT_SOURCE_DIR}/${cluster} CACHE 
+        STRING "Include paths for ${PROJECT_NAME}" FORCE)
     endforeach()
 
 endfunction(add_clusters)
@@ -547,30 +553,36 @@ function(set_component_vars)
             CACHE STRING "${PROJECT_NAME} dynamic link library")
         set(${COMPONENT}_IMPORT_LIB ${PROJECT_NAME} 
             CACHE STRING "${PROJECT_NAME} import library")
-        set(${COMPONENT}_CSHARP_BINDING_ASSY ${PROJECT_NAME}_csharp_assembly.dll 
+        set(${COMPONENT}_CSHARP_BINDING_ASSY 
+            ${PROJECT_NAME}_csharp_assembly.dll 
             CACHE STRING "${PROJECT_NAME} csharp binding assembly name")
     else()
         set(${COMPONENT}_SHARED_LIB lib${PROJECT_NAME}.so 
             CACHE STRING "${PROJECT_NAME} shared library")
         set(${COMPONENT}_STATIC_LIB lib${PROJECT_NAME}.a 
             CACHE STRING "${PROJECT_NAME} static library")
-        set(${COMPONENT}_CSHARP_BINDING_ASSY ${PROJECT_NAME}_csharp_assembly.so 
+        set(${COMPONENT}_CSHARP_BINDING_ASSY 
+            ${PROJECT_NAME}_csharp_assembly.so 
             CACHE STRING "${PROJECT_NAME} csharp binding assembly name")
     endif()
 
         set(${COMPONENT}_PYTHON_BINDING_LIB ${PROJECT_NAME}_python_binding 
             CACHE STRING "${PROJECT_NAME} python binding library name")
             
-    set(${COMPONENT}_COMMON_BINDING_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bindings/common/src 
+    set(${COMPONENT}_COMMON_BINDING_SRC_DIR 
+        ${CMAKE_CURRENT_SOURCE_DIR}/bindings/common/src 
         CACHE STRING "${PROJECT_NAME} common binding source directory")
-    set(${COMPONENT}_SWIG_COMMON_INTERFACE ${PROJECT_NAME}_common_binding.i 
+    set(${COMPONENT}_SWIG_COMMON_INTERFACE 
+        ${PROJECT_NAME}_common_binding.i 
         CACHE STRING "${PROJECT_NAME} common interface filename")
-    set(${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE ${PROJECT_NAME}_common_binding_includes.i 
+    set(${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE 
+        ${PROJECT_NAME}_common_binding_includes.i 
         CACHE STRING "${PROJECT_NAME} common includes interface filename" )
       
     set(${COMPONENT}_JAVA_BINDING_LIB ${PROJECT_NAME}_java_binding 
         CACHE STRING "${PROJECT_NAME} java binding library basename")
-    set(${COMPONENT}_JAVA_BINDING_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bindings/java/src 
+    set(${COMPONENT}_JAVA_BINDING_SRC_DIR 
+        ${CMAKE_CURRENT_SOURCE_DIR}/bindings/java/src 
         CACHE STRING "${PROJECT_NAME} java binding source directory")
     set(${COMPONENT}_SWIG_JAVA_INTERFACE ${PROJECT_NAME}_java_binding.i 
         CACHE STRING "${PROJECT_NAME} java binding interface file")
@@ -578,14 +590,16 @@ function(set_component_vars)
     set(${COMPONENT}_JAVA_BINDING_JAR ${PROJECT_NAME}_java_binding.jar 
         CACHE STRING "${PROJECT_NAME} java binding jar name")
     
-    set(${COMPONENT}_PYTHON_BINDING_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bindings/python/src 
+    set(${COMPONENT}_PYTHON_BINDING_SRC_DIR 
+        ${CMAKE_CURRENT_SOURCE_DIR}/bindings/python/src 
         CACHE STRING "${PROJECT_NAME} python source directory")
     set(${COMPONENT}_SWIG_PYTHON_INTERFACE ${PROJECT_NAME}_python_binding.i 
         CACHE STRING "${PROJECT_NAME} python binding interface file")
     
     set(${COMPONENT}_CSHARP_BINDING_LIB ${PROJECT_NAME}_csharp_binding 
         CACHE STRING "${PROJECT_NAME} csharp binding library name")
-    set(${COMPONENT}_CSHARP_BINDING_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/bindings/csharp/src 
+    set(${COMPONENT}_CSHARP_BINDING_SRC_DIR 
+        ${CMAKE_CURRENT_SOURCE_DIR}/bindings/csharp/src 
         CACHE STRING "${PROJECT_NAME} csharp source directory")
     set(${COMPONENT}_SWIG_CSHARP_INTERFACE ${PROJECT_NAME}_csharp_binding.i 
         CACHE STRING "${PROJECT_NAME} csharp binding interface file")
@@ -619,55 +633,78 @@ endfunction(set_component_vars)
 #
 function(export_targets)
 
-    message(STATUS "Writing ${PROJECT_NAME} detail to ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}")
+    message(STATUS 
+        "Writing ${PROJECT_NAME} detail to ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}")
     if(WIN64MSVC OR WIN64INTEL)
-        export(TARGETS ${${COMPONENT}_IMPORT_LIB} APPEND FILE ${CMAKE_BINARY_DIR}/${EXPORTS_FILE})
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(${COMPONENT}_IMPORT_LIB ${${COMPONENT}_IMPORT_LIB} CACHE STRING \"${PROJECT_NAME} Win32 import library \")\n")
+        export(TARGETS ${${COMPONENT}_IMPORT_LIB} APPEND 
+            FILE ${CMAKE_BINARY_DIR}/${EXPORTS_FILE})
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+            "set(${COMPONENT}_IMPORT_LIB ${${COMPONENT}_IMPORT_LIB} CACHE STRING \"${PROJECT_NAME} Win32 import library \")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")     
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(${COMPONENT}_IMPORT_LIBS ${${COMPONENT}_IMPORT_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative Win32 import library list\")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+            "set(${COMPONENT}_IMPORT_LIBS ${${COMPONENT}_IMPORT_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative Win32 import library list\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     else()
-        export(TARGETS ${${COMPONENT}_SHARED_LIB} ${${COMPONENT}_STATIC_LIB} APPEND FILE ${CMAKE_BINARY_DIR}/${EXPORTS_FILE})
+        export(TARGETS ${${COMPONENT}_SHARED_LIB} 
+            ${${COMPONENT}_STATIC_LIB} APPEND FILE 
+            ${CMAKE_BINARY_DIR}/${EXPORTS_FILE})
         file(APPEND  ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     endif()
-    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(${COMPONENT}_INCS ${${COMPONENT}_INCS} CACHE STRING \"${PROJECT_NAME} includes\")\n")
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+        "set(${COMPONENT}_INCS ${${COMPONENT}_INCS} CACHE STRING \"${PROJECT_NAME} includes\")\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(${COMPONENT}_IPATH ${${COMPONENT}_IPATH} CACHE STRING \"${PROJECT_NAME} include path\")\n")
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+        "set(${COMPONENT}_IPATH ${${COMPONENT}_IPATH} CACHE STRING \"${PROJECT_NAME} include path\")\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(${COMPONENT}_IPATHS ${${COMPONENT}_IPATHS} CACHE STRING \"${PROJECT_NAME} cumulative include path\")\n")
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+        "set(${COMPONENT}_IPATHS ${${COMPONENT}_IPATHS} CACHE STRING \"${PROJECT_NAME} cumulative include path\")\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(${COMPONENT}_STATIC_LIB ${${COMPONENT}_STATIC_LIB} CACHE STRING \"${PROJECT_NAME} static library \")\n")
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+        "set(${COMPONENT}_STATIC_LIB ${${COMPONENT}_STATIC_LIB} CACHE STRING \"${PROJECT_NAME} static library \")\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")     
-    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(${COMPONENT}_STATIC_LIBS ${${COMPONENT}_STATIC_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative static library list\")\n")
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+        "set(${COMPONENT}_STATIC_LIBS ${${COMPONENT}_STATIC_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative static library list\")\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")    
-    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(${COMPONENT}_SHARED_LIB ${${COMPONENT}_SHARED_LIB} CACHE STRING \"${PROJECT_NAME} shared library \")\n")
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+        "set(${COMPONENT}_SHARED_LIB ${${COMPONENT}_SHARED_LIB} CACHE STRING \"${PROJECT_NAME} shared library \")\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")     
-    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(${COMPONENT}_SHARED_LIBS ${${COMPONENT}_SHARED_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative shared library list\")\n")
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+        "set(${COMPONENT}_SHARED_LIBS ${${COMPONENT}_SHARED_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative shared library list\")\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")    
-    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(${COMPONENT}_CLASSPATH ${${COMPONENT}_CLASSPATH} CACHE STRING \"${PROJECT_NAME} Java classpath\")\n")
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+        "set(${COMPONENT}_CLASSPATH ${${COMPONENT}_CLASSPATH} CACHE STRING \"${PROJECT_NAME} Java classpath\")\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(${COMPONENT}_BIN_OUTPUT_DIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} CACHE STRING \"${PROJECT_NAME} binary output directory\")\n")
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+        "set(${COMPONENT}_BIN_OUTPUT_DIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} CACHE STRING \"${PROJECT_NAME} binary output directory\")\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(${COMPONENT}_LIB_OUTPUT_DIR ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} CACHE STRING \"${PROJECT_NAME} library output directory\")\n")
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+        "set(${COMPONENT}_LIB_OUTPUT_DIR ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} CACHE STRING \"${PROJECT_NAME} library output directory\")\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     if("${COMPONENT}" MATCHES "SHEAVES")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(HDF_INCLUDE_DIR ${HDF5_INCLUDE_DIRS} CACHE STRING \"HDF5 Include Path \")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+            "set(HDF_INCLUDE_DIR ${HDF5_INCLUDE_DIRS} CACHE STRING \"HDF5 Include Path \")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     endif()
     if("${COMPONENT}" MATCHES "TOOLS")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @VTK_LIB_DIR@ CACHE PATH \"VTK library path\")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+            "set(VTK_LIB_DIR @VTK_LIB_DIR@ CACHE PATH \"VTK library path\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIBS @VTK_LIBS@ CACHE PATH \"VTK libraries \")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+            "set(VTK_LIBS @VTK_LIBS@ CACHE PATH \"VTK libraries \")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")        
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_BIN_DIR @VTK_BIN_DIR@ CACHE PATH  \"VTK DLL path\")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+            "set(VTK_BIN_DIR @VTK_BIN_DIR@ CACHE PATH  \"VTK DLL path\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_INC_DIR @VTK_INC_DIRS@ CACHE PATH  \"VTK DLL path\")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+            "set(VTK_INC_DIR @VTK_INC_DIRS@ CACHE PATH  \"VTK DLL path\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIBS ${VTK_LIBS} CACHE STRING \"VTK Libraries\")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+            "set(VTK_LIBS ${VTK_LIBS} CACHE STRING \"VTK Libraries\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")                  
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")        
-        file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(JMF_JAR ${JMF_JAR} CACHE STRING \"JMF jar location\")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+            "set(JMF_JAR ${JMF_JAR} CACHE STRING \"JMF jar location\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")        
 
     endif()             
@@ -682,49 +719,64 @@ endfunction(export_targets)
 function(export_install_config_file_vars)
 
     if(WIN64MSVC OR WIN64INTEL)
-        export(TARGETS ${${COMPONENT}_DYNAMIC_LIB} APPEND FILE ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE})
-        # $$HACK: the below is a temporary measure until we completely sort out the static link issues. JEB 01.17.13
-        file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(${COMPONENT}_IMPORT_LIBS ${${COMPONENT}_IMPORT_LIB} CACHE STRING \"${PROJECT_NAME} cumulative import library list\")\n")
+        export(TARGETS ${${COMPONENT}_DYNAMIC_LIB} 
+            APPEND FILE ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE})
+        file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+            "set(${COMPONENT}_IMPORT_LIBS ${${COMPONENT}_IMPORT_LIB} CACHE STRING \"${PROJECT_NAME} cumulative import library list\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
         if("${COMPONENT}" MATCHES "TOOLS")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/vtk/lib CACHE PATH \"VTK library path\" FORCE)\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+                "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/vtk/lib CACHE PATH \"VTK library path\" FORCE)\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_BIN_DIR @SHEAFSYSTEM_HOME@/vtk/bin CACHE PATH  \"Set to link against VTK libs\" FORCE)\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+                "set(VTK_BIN_DIR @SHEAFSYSTEM_HOME@/vtk/bin CACHE PATH  \"Set to link against VTK libs\" FORCE)\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
         endif()            
     else()
-        export(TARGETS ${${COMPONENT}_SHARED_LIB} ${${COMPONENT}_STATIC_LIB} APPEND FILE ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE})
+        export(TARGETS ${${COMPONENT}_SHARED_LIB} 
+            ${${COMPONENT}_STATIC_LIB} 
+            APPEND FILE ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE})
         if("${COMPONENT}" MATCHES "SHEAVES")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(${COMPONENT}_STATIC_LIBS ${${COMPONENT}_STATIC_LIB} CACHE STRING \"${PROJECT_NAME} cumulative static library list\")\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+                "set(${COMPONENT}_STATIC_LIBS ${${COMPONENT}_STATIC_LIB} CACHE STRING \"${PROJECT_NAME} cumulative static library list\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")    
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(${COMPONENT}_SHARED_LIBS ${${COMPONENT}_SHARED_LIB} CACHE STRING \"${PROJECT_NAME} cumulative shared library list\")\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+                "set(${COMPONENT}_SHARED_LIBS ${${COMPONENT}_SHARED_LIB} CACHE STRING \"${PROJECT_NAME} cumulative shared library list\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
             # This variable should be SHEAFSYSTEM_LIB_OUTPUT_DIR. Fix it.
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(${COMPONENT}_LIB_OUTPUT_DIR ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} CACHE STRING \"${PROJECT_NAME} library output directory\")\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+                "set(${COMPONENT}_LIB_OUTPUT_DIR ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} CACHE STRING \"${PROJECT_NAME} library output directory\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
         else()
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(${COMPONENT}_STATIC_LIBS ${${COMPONENT}_STATIC_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative static library list\")\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+                "set(${COMPONENT}_STATIC_LIBS ${${COMPONENT}_STATIC_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative static library list\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")    
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(${COMPONENT}_SHARED_LIBS ${${COMPONENT}_SHARED_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative shared library list\")\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+                "set(${COMPONENT}_SHARED_LIBS ${${COMPONENT}_SHARED_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative shared library list\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
         endif()
 
         if("${COMPONENT}" MATCHES "TOOLS")        
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_INC_DIR @SHEAFSYSTEM_HOME@/vtk/include CACHE PATH \"VTK library path\")\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+                "set(VTK_INC_DIR @SHEAFSYSTEM_HOME@/vtk/include CACHE PATH \"VTK library path\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")            
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/vtk/lib CACHE PATH \"VTK library path\")\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+                "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/vtk/lib CACHE PATH \"VTK library path\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(JMF_JAR ${JMF_JAR} CACHE STRING \"JMF jar location\")\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+                "set(JMF_JAR ${JMF_JAR} CACHE STRING \"JMF jar location\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
         endif()             
     endif()
     file(APPEND  ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-    file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(${COMPONENT}_IPATH @SHEAFSYSTEM_HOME@/include CACHE STRING \"${PROJECT_NAME} include path\")\n")
+    file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+        "set(${COMPONENT}_IPATH @SHEAFSYSTEM_HOME@/include CACHE STRING \"${PROJECT_NAME} include path\")\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-    file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "set(${COMPONENT}_IPATHS @SHEAFSYSTEM_HOME@/include CACHE STRING \"${PROJECT_NAME} cumulative include path\")\n")
+    file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+        "set(${COMPONENT}_IPATHS @SHEAFSYSTEM_HOME@/include CACHE STRING \"${PROJECT_NAME} cumulative include path\")\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
 
 endfunction(export_install_config_file_vars)
@@ -735,16 +787,20 @@ endfunction(export_install_config_file_vars)
 function(generate_install_config_file)
 
     file(READ ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} INSTALL_FILE_CONTENTS)
-    string(REPLACE ${CMAKE_BINARY_DIR} "\@SHEAFSYSTEM_HOME\@" MASSAGED_OUTPUT "${INSTALL_FILE_CONTENTS}")
+    string(REPLACE ${CMAKE_BINARY_DIR} "\@SHEAFSYSTEM_HOME\@" 
+        MASSAGED_OUTPUT "${INSTALL_FILE_CONTENTS}")
     file(WRITE ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "${MASSAGED_OUTPUT}")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "\n")
     if(WIN64MSVC OR WIN64INTEL)
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "set(INSTALLED_VTK_LIB_DIR "\@SHEAFSYSTEM_HOME\@"/vtk/lib CACHE STRING \"VTK Base Dir\" FORCE)\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "set(VTK_BIN_DIR "\@SHEAFSYSTEM_HOME\@"/vtk/bin CACHE STRING \"VTK Base Dir\" FORCE)\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "set(VTK_INC_DIR "\@SHEAFSYSTEM_HOME\@"/vtk/include CACHE STRING \"VTK Base Dir\" FORCE)\n") 
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in 
+            "set(INSTALLED_VTK_LIB_DIR "\@SHEAFSYSTEM_HOME\@"/vtk/lib CACHE STRING \"VTK Base Dir\" FORCE)\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in 
+            "set(VTK_BIN_DIR "\@SHEAFSYSTEM_HOME\@"/vtk/bin CACHE STRING \"VTK Base Dir\" FORCE)\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in 
+            "set(VTK_INC_DIR "\@SHEAFSYSTEM_HOME\@"/vtk/include CACHE STRING \"VTK Base Dir\" FORCE)\n") 
     endif()
-    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "set(VTK_LIBS ${VTK_LIBS} CACHE STRING \"VTK Runtime Libraries\" FORCE)\n")      
-#    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "set(HDF_INCLUDE_DIR ${HDF_INCLUDE_DIR} CACHE STRING \"HDF Include Directory\" FORCE)\n")  
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in 
+        "set(VTK_LIBS ${VTK_LIBS} CACHE STRING \"VTK Runtime Libraries\" FORCE)\n")      
 endfunction(generate_install_config_file)
 
 #
@@ -758,7 +814,8 @@ function(collect_sources)
         list(APPEND lsrcs ${CMAKE_CURRENT_SOURCE_DIR}/${src})
     endforeach()
         
-    set(${COMPONENT}_SRCS ${${COMPONENT}_SRCS} ${lsrcs} CACHE STRING "${PROJECT} sources." FORCE)
+    set(${COMPONENT}_SRCS ${${COMPONENT}_SRCS} 
+        ${lsrcs} CACHE STRING "${PROJECT} sources." FORCE)
     mark_as_advanced(FORCE ${COMPONENT}_SRCS)
 
 endfunction()
@@ -783,7 +840,8 @@ function(collect_includes)
         list(APPEND lincs ${CMAKE_CURRENT_SOURCE_DIR}/${inc})
     endforeach()
 
-    set(${COMPONENT}_INCS ${${COMPONENT}_INCS} ${lincs} CACHE STRING "${PROJECT} includes." FORCE)
+    set(${COMPONENT}_INCS ${${COMPONENT}_INCS} 
+        ${lincs} CACHE STRING "${PROJECT} includes." FORCE)
     mark_as_advanced(FORCE ${COMPONENT}_INCS)
 
 endfunction(collect_includes)
@@ -799,7 +857,8 @@ function(collect_unit_test_sources)
         list(APPEND chksrcs ${CMAKE_CURRENT_SOURCE_DIR}/${src})
     endforeach()
     
-    set(${COMPONENT}_UNIT_TEST_SRCS ${${COMPONENT}_UNIT_TEST_SRCS} ${chksrcs} CACHE STRING "Unit test sources." FORCE)
+    set(${COMPONENT}_UNIT_TEST_SRCS ${${COMPONENT}_UNIT_TEST_SRCS} 
+        ${chksrcs} CACHE STRING "Unit test sources." FORCE)
     mark_as_advanced(FORCE ${COMPONENT}_UNIT_TEST_SRCS)
     
 endfunction(collect_unit_test_sources)
@@ -815,7 +874,8 @@ function(collect_example_sources)
         list(APPEND execsrcs ${CMAKE_CURRENT_SOURCE_DIR}/${src})
     endforeach()
 
-    set(${COMPONENT}_EXAMPLE_SRCS ${${COMPONENT}_EXAMPLE_SRCS} ${execsrcs} CACHE STRING "EXEC sources." FORCE)
+    set(${COMPONENT}_EXAMPLE_SRCS ${${COMPONENT}_EXAMPLE_SRCS} 
+        ${execsrcs} CACHE STRING "EXEC sources." FORCE)
     mark_as_advanced(FORCE ${COMPONENT}_EXAMPLE_SRCS)
 
 endfunction(collect_example_sources)
@@ -874,7 +934,8 @@ function(install_prereqs)
         PATTERN "*.cmake" EXCLUDE) 
 
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/vtk/lib CACHE STRING \"Location of VTK libs\")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+            "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/vtk/lib CACHE STRING \"Location of VTK libs\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
 
     elseif(WIN32) 
@@ -902,7 +963,8 @@ function(install_prereqs)
         WORLD_READ WORLD_EXECUTE   
         )
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/vtk/lib CACHE STRING \"Location of VTK libs\")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+            "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/vtk/lib CACHE STRING \"Location of VTK libs\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")            
     endif()
 

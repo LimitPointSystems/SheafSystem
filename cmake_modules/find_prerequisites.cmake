@@ -22,14 +22,14 @@
 # discovered and included here will be visible to the entire system.
 #
 
-# HDF5, Tetgen, and Doxygen need to be found for all target platforms.
-#
-
 find_package(Doxygen)
 
 if(DOXYGEN_FOUND)
-    configure_file(${CMAKE_MODULE_PATH}/dev_doxyfile.cmake.in ${CMAKE_BINARY_DIR}/dev_doxyfile)
-    configure_file(${CMAKE_MODULE_PATH}/user_doxyfile.cmake.in ${CMAKE_BINARY_DIR}/user_doxyfile)
+    configure_file(${CMAKE_MODULE_PATH}/dev_doxyfile.cmake.in 
+        ${CMAKE_BINARY_DIR}/dev_doxyfile)
+    configure_file(${CMAKE_MODULE_PATH}/user_doxyfile.cmake.in 
+        ${CMAKE_BINARY_DIR}/user_doxyfile)
+    set(DOC_TARGETS ON CACHE BOOL "ON to generate doc targets")
 else()
     message(WARNING "Doxygen was not found. Documentation will not be generated.")
 endif()
@@ -40,6 +40,10 @@ set(HDF5_USE_STATIC_LIBRARIES ON)
 find_package(HDF5 REQUIRED)
 if(HDF5_FOUND)
     include_directories(${HDF5_INCLUDE_DIRS})
+    get_filename_component(__TMP_DIR "${HDF5_LIBRARIES}" PATH)
+    set(HDF5_LIBRARY_DIR "${__TMP_DIR}" CACHE PATH "" FORCE)
+    link_directories(${HDF5_LIBRARY_DIR})
+
 endif()
 
 #
@@ -47,7 +51,8 @@ endif()
 #
 find_package(VTK 5.10 REQUIRED MODULE)
 if(VTK_FOUND)
-    configure_file(${CMAKE_MODULE_PATH}/vtk_definitions.cmake.in ${CMAKE_BINARY_DIR}/vtk_definitions.cmake)
+    configure_file(${CMAKE_MODULE_PATH}/vtk_definitions.cmake.in 
+        ${CMAKE_BINARY_DIR}/vtk_definitions.cmake)
     include(${CMAKE_BINARY_DIR}/vtk_definitions.cmake)
 endif()
 
@@ -55,9 +60,10 @@ endif()
 find_package(Java 1.7 REQUIRED)
 find_package(JNI)
 if(JAVA_FOUND)
-    set(JAVA_BINDING_COMPILE_OPTIONS "-I${JNI_INCLUDE_DIRS}" "-I${JAVA_INCLUDE_PATH}" "-I${JAVA_INCLUDE_PATH2}""-I${JAVA_AWT_INCLUDE_PATH}" CACHE STRING "JDK compile includes") 
+    set(JAVA_BINDING_COMPILE_OPTIONS 
+        "-I${JNI_INCLUDE_DIRS}" "-I${JAVA_INCLUDE_PATH}" "-I${JAVA_INCLUDE_PATH2}""-I${JAVA_AWT_INCLUDE_PATH}" 
+        CACHE STRING "JDK compile includes") 
 endif()
-
     
 #
 # Find Java, Python, VTK, JMF, Swig, and gnuplot
@@ -81,23 +87,19 @@ if(BUILD_BINDINGS)
     endif()
     
     # Find C#
-        find_package(CSharp)
-        if(CSHARP_FOUND)
-              include(${CMAKE_MODULE_PATH}/UseCSharp.cmake)
-        endif()
-  
-    
+    find_package(CSharp)
+    if(CSHARP_FOUND)
+          include(${CMAKE_MODULE_PATH}/UseCSharp.cmake)
+    endif()
+        
+    # Find Python  
     find_package(PythonLibs REQUIRED)
-#    if(PYTHONLIBS_FOUND)
-#        configure_file(${CMAKE_MODULE_PATH}/python_definitions.cmake.in ${CMAKE_BINARY_DIR}/python_definitions.cmake)
-#        include(${CMAKE_BINARY_DIR}/python_definitions.cmake)
-#        message(STATUS "Python version is: ${PYTHONLIBS_VERSION_STRING}") 
-#    endif()
       
     # Find the JMF
     find_package(JMF REQUIRED)
         if(JMF_FOUND)
-           configure_file(${CMAKE_MODULE_PATH}/jmf_definitions.cmake.in ${CMAKE_BINARY_DIR}/jmf_definitions.cmake)
+           configure_file(${CMAKE_MODULE_PATH}/jmf_definitions.cmake.in 
+               ${CMAKE_BINARY_DIR}/jmf_definitions.cmake)
            include(${CMAKE_BINARY_DIR}/jmf_definitions.cmake)
         endif()   
 endif()

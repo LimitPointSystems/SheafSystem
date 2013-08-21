@@ -42,14 +42,16 @@ set_component_vars()
 add_clusters("${clusters}")
 
 #
-# We don't have to use this decision structure. Windows and linux will ignore the other's lib vars. Just keeps things tidy in the CMake GUI.
+# We don't have to use this decision structure. Windows and linux will ignore the other's lib vars. 
+# Linux VARS will still show up in the CMake GUI unless we choose here.
 #
 if(WIN64INTEL OR WIN64MSVC)
 
     #
     # Set the cumulative import library (win32) var for this component.
     #
-    set(${COMPONENT}_IMPORT_LIBS  ${FIELDS_IMPORT_LIBS} ${${COMPONENT}_IMPORT_LIB} 
+    set(${COMPONENT}_IMPORT_LIBS  ${FIELDS_IMPORT_LIBS} 
+        ${${COMPONENT}_IMPORT_LIB} 
         CACHE STRING " Cumulative import libraries (win32) for ${PROJECT_NAME}" FORCE)
 
 else()
@@ -57,13 +59,15 @@ else()
     #
     # Set the cumulative shared library var for this component.
     #
-    set(${COMPONENT}_STATIC_LIBS ${FIELDS_STATIC_LIBS} ${${COMPONENT}_STATIC_LIB} 
+    set(${COMPONENT}_STATIC_LIBS ${FIELDS_STATIC_LIBS} 
+        ${${COMPONENT}_STATIC_LIB} 
         CACHE STRING " Cumulative static libraries for ${PROJECT_NAME}" FORCE)
     
     #
     # Set the cumulative shared library var for this component.
     #
-    set(${COMPONENT}_SHARED_LIBS ${FIELDS_SHARED_LIBS} ${${COMPONENT}_SHARED_LIB} 
+    set(${COMPONENT}_SHARED_LIBS ${FIELDS_SHARED_LIBS} 
+        ${${COMPONENT}_SHARED_LIB} 
         CACHE STRING " Cumulative shared libraries for ${PROJECT_NAME}" FORCE)
 
 endif()
@@ -71,25 +75,29 @@ endif()
 #
 # Set the cumulative Java binding library var for this component.
 #
-set(${COMPONENT}_JAVA_BINDING_LIBS ${FIELDS_JAVA_BINDING_LIBS} ${${COMPONENT}_JAVA_BINDING_LIB} 
+set(${COMPONENT}_JAVA_BINDING_LIBS ${FIELDS_JAVA_BINDING_LIBS} 
+    ${${COMPONENT}_JAVA_BINDING_LIB} 
     CACHE STRING " Cumulative Java binding libraries for ${PROJECT_NAME}" FORCE)
 
 #
 # Set the cumulative Java binding jar variable for this component.
 #
-set(${COMPONENT}_JAVA_BINDING_JARS ${FIELDS_JAVA_BINDING_JARS} ${PROJECT_NAME}_java_binding.jar 
+set(${COMPONENT}_JAVA_BINDING_JARS ${FIELDS_JAVA_BINDING_JARS} 
+    ${PROJECT_NAME}_java_binding.jar 
     CACHE STRING "Cumulative Java bindings jars for ${PROJECT_NAME}")
 
 #
 # Set the cumulative Python binding library var for this component.
 #
-set(${COMPONENT}_PYTHON_BINDING_LIBS ${FIELDS_PYTHON_BINDING_LIBS} ${${COMPONENT}_PYTHON_BINDING_LIB} 
+set(${COMPONENT}_PYTHON_BINDING_LIBS ${FIELDS_PYTHON_BINDING_LIBS} 
+    ${${COMPONENT}_PYTHON_BINDING_LIB} 
     CACHE STRING " Cumulative Python binding libraries for ${PROJECT_NAME}" FORCE)
 
 #
 # Set the cumulative include path for this component.
 #
-set(${COMPONENT}_IPATHS ${FIELDS_IPATHS} ${${COMPONENT}_IPATH} ${VTK_INCLUDE_DIRS} 
+set(${COMPONENT}_IPATHS ${FIELDS_IPATHS} ${${COMPONENT}_IPATH} 
+    ${VTK_INCLUDE_DIRS} 
     ${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2} ${TETGEN_INC_DIR} 
     CACHE STRING " Cumulative include paths for ${PROJECT_NAME}")
 
@@ -113,7 +121,8 @@ function(set_scope_sources)
     unset(SHEAFSCOPE_SRCS CACHE)
     foreach(cluster ${clusters})
         file(GLOB scopesrcs . ${cluster}/*.java)
-        set(SHEAFSCOPE_SRCS ${SHEAFSCOPE_SRCS} ${scopesrcs} CACHE STRING "SheafScope java sources." FORCE)
+        set(SHEAFSCOPE_SRCS ${SHEAFSCOPE_SRCS} ${scopesrcs} 
+            CACHE STRING "SheafScope java sources." FORCE)
     endforeach()
    string(REPLACE "\\" "/" SHEAFSCOPE_SRCS "${SHEAFSCOPE_SRCS}")
    # Write the contents of SHEAFSCOPE_SRCS to a file on disk.
@@ -141,11 +150,15 @@ function(add_library_targets)
         add_dependencies(${${COMPONENT}_DYNAMIC_LIB} ${FIELDS_IMPORT_LIBS})
                  
         target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${FIELDS_IMPORT_LIBS} 
-            ${JNI_LIBRARIES} ${JAVA_AWT_LIBRARY} ${JAVA_JVM_LIBRARY} ${VTK_LIBS} ) 
-        set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")        
+            ${JNI_LIBRARIES} ${JAVA_AWT_LIBRARY} 
+            ${JAVA_JVM_LIBRARY} ${VTK_LIBS} ) 
+        set_target_properties(${${COMPONENT}_DYNAMIC_LIB} 
+            PROPERTIES FOLDER "Library Targets")        
         
-        # Override cmake's placing of "${${COMPONENT}_DYNAMIC_LIB}_EXPORTS into the preproc symbol table.
-        set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES DEFINE_SYMBOL "SHEAF_DLL_EXPORTS")
+        # Override cmake's placing of "${${COMPONENT}_DYNAMIC_LIB}_EXPORTS 
+        # into the preproc symbol table.
+        set_target_properties(${${COMPONENT}_DYNAMIC_LIB} 
+            PROPERTIES DEFINE_SYMBOL "SHEAF_DLL_EXPORTS")
         
     else()
 
@@ -153,14 +166,16 @@ function(add_library_targets)
         
         # Static library
         add_library(${${COMPONENT}_STATIC_LIB} STATIC ${${COMPONENT}_SRCS})
-        set_target_properties(${${COMPONENT}_STATIC_LIB} PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
+        set_target_properties(${${COMPONENT}_STATIC_LIB} 
+            PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
         add_dependencies(${${COMPONENT}_STATIC_LIB} ${FIELDS_STATIC_LIBS})
     
         # Shared library
         add_library(${${COMPONENT}_SHARED_LIB} SHARED ${${COMPONENT}_SRCS})
         set_target_properties(${${COMPONENT}_SHARED_LIB} PROPERTIES 
             OUTPUT_NAME ${PROJECT_NAME} LINKER_LANGUAGE CXX)
-        set_target_properties(${${COMPONENT}_SHARED_LIB} PROPERTIES LINK_INTERFACE_LIBRARIES "") 
+        set_target_properties(${${COMPONENT}_SHARED_LIB} 
+            PROPERTIES LINK_INTERFACE_LIBRARIES "") 
         add_dependencies(${${COMPONENT}_SHARED_LIB} ${FIELDS_SHARED_LIBS})
         
         # Override cmake's placing of "${COMPONENT_LIB}_EXPORTS into the preproc symbol table.
@@ -169,7 +184,8 @@ function(add_library_targets)
         set_target_properties(${${COMPONENT}_SHARED_LIB} PROPERTIES DEFINE_SYMBOL "")
          
         # Define the library version.
-        set_target_properties(${${COMPONENT}_SHARED_LIB} PROPERTIES VERSION ${LIB_VERSION}) 
+        set_target_properties(${${COMPONENT}_SHARED_LIB} 
+            PROPERTIES VERSION ${LIB_VERSION}) 
         
         # Library alias definitions
         add_dependencies(${PROJECT_NAME}-shared-lib ${${COMPONENT}_SHARED_LIBS})
@@ -220,7 +236,8 @@ function(add_bindings_targets)
                 ${FIELDS_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})
             target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${JDK_LIBS} 
                 ${FIELDS_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})   
-            set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES FOLDER "Binding Targets - Java")
+            set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} 
+                PROPERTIES FOLDER "Binding Targets - Java")
         else()
             add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} 
                 ${FIELDS_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB})
@@ -228,12 +245,15 @@ function(add_bindings_targets)
                 ${${COMPONENT}_SHARED_LIB})   
         endif()
         
-        set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES LINKER_LANGUAGE CXX)
+        set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} 
+            PROPERTIES LINKER_LANGUAGE CXX)
                 
         # Define the library version.
-        set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} PROPERTIES VERSION ${LIB_VERSION})
+        set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} 
+            PROPERTIES VERSION ${LIB_VERSION})
 
-        target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB} 
+        target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} 
+            ${${COMPONENT}_SHARED_LIB} 
             ${FIELDS_JAVA_BINDING_LIBS} ${VTK_LIBS} ${JDK_LIBS}) 
 
         list(APPEND ${COMPONENT}_CLASSPATH ${FIELDS_CLASSPATH} 
@@ -247,18 +267,21 @@ function(add_bindings_targets)
 
             add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
                    DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${FIELDS_JAVA_BINDING_JAR}
-                   set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Component Binding Jars")                           
+                   set_target_properties(${PROJECT_NAME}_java_binding.jar 
+                   PROPERTIES FOLDER "Component Binding Jars")                           
                    COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
                    COMMAND ${Java_JAVAC_EXECUTABLE} -classpath "${FIELDS_CLASSPATH} ${VTK_JAR} ${JMF_JAR}" -d . *.java
                    COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                   COMMAND ${Java_JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  
+                   COMMAND ${Java_JAR_EXECUTABLE} cvf 
+                    ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  
                    bindings/java/*.class
                  )
                              
             # Java documentation
             if(DOC_TARGETS)
                 add_custom_target(${PROJECT_NAME}-java-docs ALL
-                        COMMAND ${Java_JAVADOC_EXECUTABLE} -windowtitle "${PROJECT_NAME} documentation" -classpath "${FIELDS_CLASSPATH}" 
+                        COMMAND ${Java_JAVADOC_EXECUTABLE} -windowtitle 
+                        "${PROJECT_NAME} documentation" -classpath "${FIELDS_CLASSPATH}" 
                         -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
                         *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
                         DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
@@ -276,14 +299,16 @@ function(add_bindings_targets)
                    COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
                    COMMAND ${Java_JAVAC_EXECUTABLE} -classpath "${parent_classpath}" -d . *.java
                    COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                   COMMAND ${Java_JAR_EXECUTABLE} cvf ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  
+                   COMMAND ${Java_JAR_EXECUTABLE} cvf 
+                   ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  
                    bindings/java/*.class
                  )
             
             # Java documentation
              if(DOC_TARGETS)            
                 add_custom_target(${PROJECT_NAME}-java-docs ALL
-                        COMMAND ${Java_JAVADOC_EXECUTABLE} -windowtitle "${PROJECT_NAME} documentation" -classpath "${this_classpath}" 
+                        COMMAND ${Java_JAVADOC_EXECUTABLE} -windowtitle 
+                        "${PROJECT_NAME} documentation" -classpath "${this_classpath}" 
                         -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
                         *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
                         DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
@@ -303,19 +328,37 @@ function(add_bindings_targets)
                      DEPENDS ${PROJECT_NAME}_java_binding.jar 
                      COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}
                      COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
-                     COMMAND ${Java_JAVAC_EXECUTABLE} -classpath "${${COMPONENT}_CLASSPATH}" -g -d ${LIB_JAR_DIR} @${CMAKE_BINARY_DIR}/scopesrcs
-	                 COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/common/gui/resources
-	                 COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/viewer/resources/docs
-                     COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/SheafScope/resources/docs
+                     COMMAND ${Java_JAVAC_EXECUTABLE} -classpath 
+                         "${${COMPONENT}_CLASSPATH}" -g -d ${LIB_JAR_DIR} 
+                         @${CMAKE_BINARY_DIR}/scopesrcs
+	                 COMMAND ${CMAKE_COMMAND} -E make_directory 
+	                     ${LIB_JAR_DIR}/tools/common/gui/resources
+	                 COMMAND ${CMAKE_COMMAND} -E make_directory 
+	                     ${LIB_JAR_DIR}/tools/viewer/resources/docs
+                     COMMAND ${CMAKE_COMMAND} -E make_directory 
+                         ${LIB_JAR_DIR}/tools/SheafScope/resources/docs
 
-	                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/common/gui/resources      ${LIB_JAR_DIR}/tools/common/gui/resources
-	                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/viewer/resources          ${LIB_JAR_DIR}/tools/viewer/resources
-	                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/viewer/resources/docs     ${LIB_JAR_DIR}/tools/viewer/resources/docs
-	                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources      ${LIB_JAR_DIR}/tools/SheafScope/resources
-	                 COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources/docs ${LIB_JAR_DIR}/tools/SheafScope/resources/docs 
+	                 COMMAND ${CMAKE_COMMAND} -E copy_directory 
+	                     ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/common/gui/resources
+	                     ${LIB_JAR_DIR}/tools/common/gui/resources
+	                 COMMAND ${CMAKE_COMMAND} -E copy_directory 
+	                     ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/viewer/resources
+	                     ${LIB_JAR_DIR}/tools/viewer/resources
+	                 COMMAND ${CMAKE_COMMAND} -E copy_directory 
+	                     ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/viewer/resources/docs
+	                     ${LIB_JAR_DIR}/tools/viewer/resources/docs
+	                 COMMAND ${CMAKE_COMMAND} -E copy_directory 
+	                     ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources      
+	                     ${LIB_JAR_DIR}/tools/SheafScope/resources
+	                 COMMAND ${CMAKE_COMMAND} -E copy_directory 
+	                 ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources/docs 
+	                 ${LIB_JAR_DIR}/tools/SheafScope/resources/docs 
 
                      COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                     COMMAND ${Java_JAR_EXECUTABLE} cvmf ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/manifest.txt ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/SheafScope.jar  -C ${LIB_JAR_DIR} .
+                     COMMAND ${Java_JAR_EXECUTABLE} cvmf 
+                         ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/manifest.txt 
+                         ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/SheafScope.jar  
+                         -C ${LIB_JAR_DIR} .
                   )
         else()
          # Build the SheafScope jar
@@ -323,19 +366,35 @@ function(add_bindings_targets)
                      DEPENDS ${PROJECT_NAME}_java_binding.jar 
                      COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}
                      COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
-                     COMMAND ${Java_JAVAC_EXECUTABLE} -classpath "${this_classpath}" -g -d ${LIB_JAR_DIR} @${CMAKE_BINARY_DIR}/scopesrcs
-                     COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/common/gui/resources
-                     COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/viewer/resources/docs
-                     COMMAND ${CMAKE_COMMAND} -E make_directory ${LIB_JAR_DIR}/tools/SheafScope/resources/docs
+                     COMMAND ${Java_JAVAC_EXECUTABLE} -classpath 
+                     "${this_classpath}" -g -d ${LIB_JAR_DIR} @${CMAKE_BINARY_DIR}/scopesrcs
+                     COMMAND ${CMAKE_COMMAND} -E make_directory 
+                         ${LIB_JAR_DIR}/tools/common/gui/resources
+                     COMMAND ${CMAKE_COMMAND} -E make_directory 
+                         ${LIB_JAR_DIR}/tools/viewer/resources/docs
+                     COMMAND ${CMAKE_COMMAND} -E make_directory 
+                         ${LIB_JAR_DIR}/tools/SheafScope/resources/docs
         
-                     COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/common/gui/resources      ${LIB_JAR_DIR}/tools/common/gui/resources
-                     COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/viewer/resources          ${LIB_JAR_DIR}/tools/viewer/resources
-                     COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/viewer/resources/docs     ${LIB_JAR_DIR}/tools/viewer/resources/docs
-                     COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources      ${LIB_JAR_DIR}/tools/SheafScope/resources
-                     COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources/docs ${LIB_JAR_DIR}/tools/SheafScope/resources/docs 
+                     COMMAND ${CMAKE_COMMAND} -E copy_directory 
+                         ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/common/gui/resources      
+                         ${LIB_JAR_DIR}/tools/common/gui/resources
+                     COMMAND ${CMAKE_COMMAND} -E copy_directory 
+                         ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/viewer/resources          
+                         ${LIB_JAR_DIR}/tools/viewer/resources
+                     COMMAND ${CMAKE_COMMAND} -E copy_directory 
+                         ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/viewer/resources/docs     
+                         ${LIB_JAR_DIR}/tools/viewer/resources/docs
+                     COMMAND ${CMAKE_COMMAND} -E copy_directory 
+                         ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources      
+                         ${LIB_JAR_DIR}/tools/SheafScope/resources
+                     COMMAND ${CMAKE_COMMAND} -E copy_directory 
+                         ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/resources/docs 
+                         ${LIB_JAR_DIR}/tools/SheafScope/resources/docs 
         
                      COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
-                     COMMAND ${Java_JAR_EXECUTABLE} cvmf ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/manifest.txt ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/SheafScope.jar -C ${LIB_JAR_DIR} .
+                     COMMAND ${Java_JAR_EXECUTABLE} cvmf 
+                         ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/manifest.txt 
+                         ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/SheafScope.jar -C ${LIB_JAR_DIR} .
                   )
         endif()
         
@@ -388,7 +447,8 @@ function(add_install_target)
 
         # The BUILD_TYPE variable will be set while CMake is processing the install files. It is not set at configure time
         # for this project. We pass it literally here. 
-        install(TARGETS ${${COMPONENT}_IMPORT_LIB} EXPORT ${${COMPONENT}_IMPORT_LIB} ARCHIVE 
+        install(TARGETS ${${COMPONENT}_IMPORT_LIB} EXPORT 
+            ${${COMPONENT}_IMPORT_LIB} ARCHIVE 
             DESTINATION lib/\${BUILD_TYPE})
         install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_DYNAMIC_LIB}_d.pdb 
             DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
@@ -396,7 +456,8 @@ function(add_install_target)
             DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
             
         if(SWIG_FOUND AND BUILD_BINDINGS)
-            install(TARGETS ${${COMPONENT}_JAVA_BINDING_LIB} RUNTIME DESTINATION bin/\${BUILD_TYPE})
+            install(TARGETS ${${COMPONENT}_JAVA_BINDING_LIB} 
+                RUNTIME DESTINATION bin/\${BUILD_TYPE})
             # Add the pdb files               
             install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_LIB}_d.pdb 
                 DESTINATION bin/\${BUILD_TYPE} OPTIONAL)                
