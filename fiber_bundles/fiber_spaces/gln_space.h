@@ -34,6 +34,7 @@ namespace fiber_bundle
   using namespace sheaf;  
 
   class gln;
+  class vd_space;
   
 ///
 /// A Cartesian product space.
@@ -57,6 +58,11 @@ public:
   typedef gln member_type;
 
   ///
+  /// The type of the vector space associated with this space.
+  ///
+  typedef vd_space vector_space_type;
+
+  ///
   /// The name of the standard schema poset for this class.
   ///
   static const string& standard_schema_poset_name();
@@ -77,6 +83,29 @@ public:
   static arg_list make_arg_list(int xn,
 				const poset_path& xscalar_space_path,
 				const poset_path& xvector_space_path);
+  
+  ///
+  /// The dimension of the representation space; n in GL(n, R) implied by the
+  /// vector space specified by xvector_space_path.
+  ///
+  static int d(const namespace_poset& xns, const poset_path& xvector_space_path, bool xauto_access);
+
+  ///
+  /// The dimension of the representation space; n in GL(n, R) implied by the
+  /// vector space with dimension specified by xn.
+  ///
+  static int d(int xn);
+
+  ///
+  /// Creates a new tp_space in namespace xns with path xpath,
+  /// schema specified by xschema_path, and table attribute
+  /// vector_space_path specified by xvector_space_path.
+  ///
+  static gln_space& new_table(namespace_type& xhost, 
+			      const poset_path& xpath, 
+			      const poset_path& xschema_path,
+			      const poset_path& xvector_space_path,
+			      bool xauto_access);
   
   //============================================================================
   // TABLE DOFS

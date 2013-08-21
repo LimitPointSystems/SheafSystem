@@ -43,6 +43,7 @@ set(SRCS
     gl2.inst.cc
     gl3.inst.cc
     gln.inst.cc
+    group.inst.cc
     index_space_family.inst.cc
     jcb.inst.cc
     jcb_e13.inst.cc
