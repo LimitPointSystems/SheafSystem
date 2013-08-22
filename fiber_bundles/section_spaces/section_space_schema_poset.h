@@ -565,12 +565,12 @@ public:
   ///
   virtual bool is_atom(pod_index_type xmbr_hub_id) const;
 
-  using poset_state_handle::member_name;
+//   using poset_state_handle::member_name;
 
-  ///
-  /// The name of the member with hub id xmbr_hub_id
-  ///
-  virtual string member_name(pod_index_type xmbr_hub_id, bool xauto_access = false) const;
+//   ///
+//   /// The name of the member with hub id xmbr_hub_id
+//   ///
+//   virtual string member_name(pod_index_type xmbr_hub_id, bool xauto_access = false) const;
 
 protected:
 

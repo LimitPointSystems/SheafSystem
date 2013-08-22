@@ -828,10 +828,10 @@ put_dof_tuple(const arg_list& xargs)
 
   // Body:
 
-  //#ifdef DIAGNOSTIC_OUTPUT
+#ifdef DIAGNOSTIC_OUTPUT
   cout << "poset_dof_map::put_dof_tuple: schema:: " << schema().name()
        << "  table_dof_descriptors: " << *(schema().table_dof_descriptors()) << endl;
-  //#endif
+#endif
   
   poset_dof_iterator* litr = schema().dof_iterator(is_table_dof_map());
   while(!litr->is_done())
@@ -849,9 +849,9 @@ put_dof_tuple(const arg_list& xargs)
   }
   delete litr;
 
-  //#ifdef DIAGNOSTIC_OUTPUT
+#ifdef DIAGNOSTIC_OUTPUT
   cout << *this << endl;
-  //#endif
+#endif
 
   // Postconditions:
 

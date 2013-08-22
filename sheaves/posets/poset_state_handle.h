@@ -134,7 +134,7 @@ class SHEAF_DLL_SPEC poset_state_handle : public read_write_monitor_handle
   friend class poset_component; // needs version_to_name(), state_obj()
   friend class poset_handle_factory; // needs destructor.
   friend class poset_joiner; // needs cross_link()
-  friend class poset_scaffold; // needs table()
+  friend class poset_scaffold; // needs member_name_map(), table()
   friend class poset_slicer; // needs contains_members(list_cover_set*)
   friend class primitives_poset_dof_map; // needs state_obj()
   friend class schema_poset_member;

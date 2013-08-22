@@ -15,6 +15,7 @@
 #include "array_poset_dof_map.h"
 #include "ij_product_structure.h"
 #include "index_iterator.h"
+#include "index_space_iterator.h"
 #include "error_message.h"
 #include "namespace_poset.impl.h"
 #include "namespace_poset_member.h"
@@ -1451,94 +1452,94 @@ is_atom(pod_index_type xhub_id) const
   return result;
 }
 
-string
-fiber_bundle::section_space_schema_poset::
-member_name(pod_index_type xhub_id, bool xauto_access) const
-{
-  string result;
+// string
+// fiber_bundle::section_space_schema_poset::
+// member_name(pod_index_type xhub_id, bool xauto_access) const
+// {
+//   string result;
 
-  // Preconditions:
+//   // Preconditions:
 
-  require(state_is_auto_read_accessible(xauto_access));
+//   require(state_is_auto_read_accessible(xauto_access));
 
-  // Body:
+//   // Body:
 
-  if(xauto_access)
-  {
-    get_read_access();
-  }
+//   if(xauto_access)
+//   {
+//     get_read_access();
+//   }
 
-  result = poset_state_handle::member_name(xhub_id, false);
-  if(result.empty())
-  {
-    // Member does not have a client assigned name;
-    // try to construct a default name from factor names.
+//   result = poset_state_handle::member_name(xhub_id, false);
+//   if(result.empty())
+//   {
+//     // Member does not have a client assigned name;
+//     // try to construct a default name from factor names.
 
-    pod_index_type lbase_id = get_base_space_id_from_index(xhub_id);
+//     pod_index_type lbase_id = get_base_space_id_from_index(xhub_id);
 
-    pod_index_type lfiber_schema_id = get_fiber_schema_id_from_index(xhub_id);
-    string lfiber_name = fiber_schema().member_name(lfiber_schema_id);
+//     pod_index_type lfiber_schema_id = get_fiber_schema_id_from_index(xhub_id);
+//     string lfiber_name = fiber_schema().member_name(lfiber_schema_id);
 
-    if( (lbase_id == BOTTOM_INDEX) &&
-        (fiber_schema().table_dof_subposet().contains_member(lfiber_schema_id)) )
-    {
-      // This is a table dof member;
-      // name is name of fiber factor.
+//     if( (lbase_id == BOTTOM_INDEX) &&
+//         (fiber_schema().table_dof_subposet().contains_member(lfiber_schema_id)) )
+//     {
+//       // This is a table dof member;
+//       // name is name of fiber factor.
 
-      result = lfiber_name;
-    }
-    else
-    {
-      // This is not a table dof member;
-      // construct name from both base and fiber factor.
+//       result = lfiber_name;
+//     }
+//     else
+//     {
+//       // This is not a table dof member;
+//       // construct name from both base and fiber factor.
 
-      string lbase_name = base_space().member_name(lbase_id);
+//       string lbase_name = base_space().member_name(lbase_id);
 
-      if(lbase_name.empty())
-      {
-        // Construct a name from the base space id.
+//       if(lbase_name.empty())
+//       {
+//         // Construct a name from the base space id.
 
-        stringstream lstr;
-        lstr << lbase_id;
-        lbase_name = lstr.str();
-      }
+//         stringstream lstr;
+//         lstr << lbase_id;
+//         lbase_name = lstr.str();
+//       }
 
-      if(lfiber_name.empty())
-      {
-        // Construct a name from the fiber schema id.
+//       if(lfiber_name.empty())
+//       {
+//         // Construct a name from the fiber schema id.
 
-        stringstream lstr;
-        lstr << lfiber_schema_id;
-        lfiber_name = lstr.str();
-      }
+//         stringstream lstr;
+//         lstr << lfiber_schema_id;
+//         lfiber_name = lstr.str();
+//       }
 
-      result = lbase_name + "_" + lfiber_name;
+//       result = lbase_name + "_" + lfiber_name;
 
-      // ERROR: the following produces the same name for different members.
-      //       if(!lbase_name.empty() || !lfiber_name.empty())
-      //       {
-      //         result = lbase_name + '_' + lfiber_name;
-      //       }
-      //       else
-      //       {
-      //         // Both base and fiber names are empty; do nothing.
-      //       }
-    }
+//       // ERROR: the following produces the same name for different members.
+//       //       if(!lbase_name.empty() || !lfiber_name.empty())
+//       //       {
+//       //         result = lbase_name + '_' + lfiber_name;
+//       //       }
+//       //       else
+//       //       {
+//       //         // Both base and fiber names are empty; do nothing.
+//       //       }
+//     }
 
-  }
+//   }
 
-  if(xauto_access)
-  {
-    release_access();
-  }
+//   if(xauto_access)
+//   {
+//     release_access();
+//   }
 
-  // Postconditions:
+//   // Postconditions:
 
 
-  // Exit:
+//   // Exit:
 
-  return result;
-}
+//   return result;
+// }
 
 fiber_bundle::section_space_schema_member&
 fiber_bundle::section_space_schema_poset::
@@ -1656,22 +1657,30 @@ initialize_standard_members()
   put_member_name(TOP_INDEX, "top", true, false);
   top().attach_to_state(this, TOP_INDEX);
 
-  // All the schema members exist implicitly, but they
-  // don't have names unless we expilicitly give them names.
-  // Make names for the table dof members.
+  // All the members exist implicitly, but they
+  // don't have names unless we explicitly give them names.
+  // Make the names for the table schema members 
+  // the same as the corresponding members of the fiber schema
 
-  // $$SCRIBBLE. The following code works because member_name creates the names.
-  // But that's the wrong approach. We should get the names from the fiber schema
-  // here and set them. Member_name should not be redefined.
+  schema_poset_member lfiber_schema = fiber_space().schema();  
+  index_space_iterator& litr = lfiber_schema.table_dof_id_space().get_iterator();
+  while(!litr.is_done())
+  {
+    // Get the name for the table dof in the fiber schema.
 
-  poset_dof_iterator* litr = reinterpret_cast<section_space_schema_member*>(_top)->dof_iterator(true);
-  while(!litr->is_done())
-  {  
-    put_member_name(litr->item().index(), litr->item().name(), true, false);
-    litr->next();
+    string ltable_dof_name = lfiber_schema.host()->member_name(litr.hub_pod(), false);
+
+    // Get the index for the corresponding member of this poset.
+
+    pod_index_type ltable_dof_id = get_index_from_components(BOTTOM_INDEX, litr.hub_pod());
+
+    // Set the name in this poset the same as in the fiber schema.
+
+    put_member_name(ltable_dof_id, ltable_dof_name, true, false);
+
+    litr.next();
   }
-  delete litr;
-  
+  lfiber_schema.table_dof_id_space().release_iterator(litr);
 
   // Only two standard members and no dof tuples so far.
   // (More may be added in descendants.)

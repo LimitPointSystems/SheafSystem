@@ -655,6 +655,81 @@ extract_id_name_pair(pod_index_type& xid, string& xname, char*& xbuf)
   return;
 }
 
+void
+sheaf::poset_scaffold::
+get_member_names_from_poset()
+{
+  // cout << endl << "Entering poset_scaffold::get_member_names_from_poset." << endl;
+
+  // Preconditions:
+
+
+  // Body:
+
+  _member_name_map.clear();
+  _member_name_map = _structure.member_name_map();  
+
+  // Postconditions:
+
+  ensure(member_name_map() == structure().member_name_map());
+
+  // Exit:
+
+  // cout << "Leaving poset_scaffold::get_member_names_from_poset." << endl;
+  return;
+}
+
+void
+sheaf::poset_scaffold::
+put_member_names_to_poset()
+{
+  // cout << endl << "Entering poset_scaffold::get_member_names_from_poset." << endl;
+
+  // Preconditions:
+
+  require(structure().state_is_read_write_accessible());
+  
+  // Body:
+
+  name_multimap& lposet_map = _structure.member_name_map();
+  
+  name_multimap::const_iterator itr = lposet_map.begin();
+  while(itr != lposet_map.end())
+  {
+    pod_index_type lid = itr->first;
+
+    cout << "index: " << lid << "\tnames: " ;
+    
+    if(_structure.contains_member(itr->first, false))
+    {
+      const name_multimap::name_list_type& lnames = itr->second;
+      name_multimap::const_name_iterator name_itr = lnames.begin();
+      while(name_itr != lnames.end())
+      {
+        cout << "  \"" << *name_itr << "\"";
+
+        if(!lposet_map.contains_name(*name_itr))
+        {
+          lposet_map.put_entry(lid, *name_itr, false);
+        }
+        ++name_itr;
+      }
+    }
+    cout << endl;
+    ++itr;
+  }
+
+  // Postconditions:
+
+  ensure(member_name_map() == structure().member_name_map());
+
+  // Exit:
+
+  // cout << "Leaving poset_scaffold::get_member_names_from_poset." << endl;
+  return;
+}
+
+
 // PROTECTED MEMBER FUNCTIONS
 
 // PRIVATE MEMBER FUNCTIONS

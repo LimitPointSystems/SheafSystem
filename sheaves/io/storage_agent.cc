@@ -1371,6 +1371,12 @@ begin_read_transaction(poset_state_handle& xposet,
   cout << "closed record sets for poset " << lposet.name() << endl;
 #endif
 
+  // Tranfser member names from scaffold to poset.
+  // Have to do this after member_names_record in attribute record set
+  // has been internlized and after all members have been internalized.
+
+  lscaffold.put_member_names_to_poset();
+
   // Make sure client handle is attached to
   // new state created by read.
 
@@ -1555,6 +1561,12 @@ commit_transaction(poset_state_handle& xposet)
   cout << endl << SOURCE_CODE_LOCATION;
   cout << "opening record sets for poset " << xposet.name() << endl;
 #endif
+
+  // Transfeer member names from poset to scaffold.
+  // Have to do this before attributes records are externalized,
+  // but now is a good a time as any.
+
+  lscaffold.get_member_names_from_poset();
 
   // Open all the record sets.
 
