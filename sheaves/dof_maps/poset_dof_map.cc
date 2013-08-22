@@ -869,6 +869,36 @@ put_dof_tuple(const arg_list& xargs)
 
 void
 sheaf::poset_dof_map::
+copy_dof_tuple(const poset_dof_map& xother)
+{
+  // cout << endl << "Entering poset_dof_map::copy_dof_tuple." << endl;
+
+  // Preconditions:
+
+  require(dof_ct() == xother.dof_ct());
+  require(schema().state_is_read_accessible());
+  require(xother.schema().state_is_read_accessible());
+  //  require(schema().conforms_to(xother.schema(), is_table_dof_map()));
+  //  require(xother.schema().conforms_to(schema(), is_table_dof_map()));
+
+  // Body:
+
+  arg_list largs;
+  xother.get_dof_tuple(largs);
+  put_dof_tuple(largs);
+  
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving poset_dof_map::copy_dof_tuple." << endl;
+  return;
+}
+
+
+void
+sheaf::poset_dof_map::
 put_defaults()
 {
   // Preconditions:
@@ -1338,7 +1368,7 @@ to_string(const schema_poset_member& xschema) const
   string result;
   if(schema().contains_dof(xschema, _is_table_dof_map))
   {
-    result = dof(xschema.index()).to_string();
+    result = xschema.name() + "=" + dof(xschema.index()).to_string();
   }
 
   // Postconditions:

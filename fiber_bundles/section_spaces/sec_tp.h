@@ -38,9 +38,10 @@ class sec_tp_space;
 ///
 class SHEAF_DLL_SPEC sec_tp : public sec_vd
 {
-  //============================================================================
-  /// @name TP FACET OF CLASS SEC_TP
-  //============================================================================
+
+  // ===========================================================
+  /// @name HoST FACTORY FACET OF CLASS SEC_TP
+  // ===========================================================
   //@{
 
 public:
@@ -59,6 +60,31 @@ public:
   /// The fiber type.
   ///
   typedef tp fiber_type;
+
+  ///
+  /// Manual, shallow factory method; creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
+  /// and table attribute vector_space_path specified by xvector_space_path.
+  ///
+  static host_type& new_host(namespace_type& xns, 
+                             const poset_path& xhost_path, 
+                             const poset_path& xschema_path,
+                             const poset_path& xvector_space_path,
+                             bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+ 
+
+  //============================================================================
+  /// @name TP FACET OF CLASS SEC_TP
+  //============================================================================
+  //@{
+
+public:
 
   ///
   /// Default constructor.

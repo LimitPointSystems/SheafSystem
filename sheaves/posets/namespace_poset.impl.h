@@ -368,6 +368,28 @@ path_is_auto_read_accessible(const poset_path& xpath, bool xauto_access) const
 template<typename P>
 bool
 sheaf::namespace_poset::
+path_is_available(const poset_path& xpath, bool xauto_access) const
+{
+  bool result;
+
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  result = !contains_path(xpath, xauto_access) || contains_path<P>(xpath, xauto_access);
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+template<typename P>
+bool
+sheaf::namespace_poset::
 path_is_auto_read_write_accessible(const poset_path& xpath, bool xauto_access) const
 {
   bool result;

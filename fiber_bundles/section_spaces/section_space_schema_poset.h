@@ -59,7 +59,7 @@ namespace fiber_bundle
 
 using namespace sheaf;
 
-
+class fiber_bundles_namespace;
 class section_space_schema_member;
 
 ///
@@ -77,6 +77,13 @@ class SHEAF_DLL_SPEC section_space_schema_poset : public poset_state_handle
   //@{
 
 public:
+
+  // Typedefs:
+
+  ///
+  /// The type of namespace for this type of member.
+  ///
+  typedef fiber_bundles_namespace namespace_type;
 
   ///
   /// The type of member associated with this space.
@@ -102,6 +109,11 @@ public:
   /// Creates the standard schema for this class in namespace xns.
   ///
   static void make_standard_schema(namespace_poset& xns);
+
+  ///
+  /// The path to the representation for section spaces on this schema..
+  ///
+  poset_path rep_path(bool xauto_access) const;
 
   ///
   /// The representation for section spaces on this schema.
@@ -157,6 +169,11 @@ public:
   int db() const;
 
   ///
+  /// The path to the base space for section spaces on this schema.
+  ///
+  poset_path base_space_path(bool xauto_access) const;
+
+  ///
   /// The base space for section spaces on this schema.
   ///
   base_space_poset& base_space();
@@ -203,6 +220,11 @@ public:
   /// The fiber schema for section spaces on this schema (const version).
   ///
   const poset_state_handle& fiber_schema() const;
+
+  ///
+  /// The path to the fiber space for section spaces on this schema.
+  ///
+  poset_path fiber_space_path(bool xauto_access) const;
 
   ///
   /// The fiber space for section spaces on this schema.
@@ -543,12 +565,12 @@ public:
   ///
   virtual bool is_atom(pod_index_type xmbr_hub_id) const;
 
-  using poset_state_handle::member_name;
+//   using poset_state_handle::member_name;
 
-  ///
-  /// The name of the member with hub id xmbr_hub_id
-  ///
-  virtual string member_name(pod_index_type xmbr_hub_id, bool xauto_access = false) const;
+//   ///
+//   /// The name of the member with hub id xmbr_hub_id
+//   ///
+//   virtual string member_name(pod_index_type xmbr_hub_id, bool xauto_access = false) const;
 
 protected:
 

@@ -11,9 +11,15 @@
 #include "sec_tuple.h"
 
 #include "assert_contract.h"
-#include "namespace_poset.h"
+#include "binary_section_space_schema_member.h"
+#include "binary_section_space_schema_poset.h"
+#include "fiber_bundles_namespace.h"
+#include "section_space_schema_member.impl.h"
+#include "section_space_schema_poset.h"
+#include "sec_tuple_space.impl.h"
+#include "tuple.h"
+#include "tuple_space.h"
 
-#include "sec_tuple_space.h"
 
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
@@ -22,9 +28,9 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 // CLASS SEC_TUPLE
 //==============================================================================
 
-//==============================================================================
-// TUPLE FACET OF CLASS SEC_TUPLE
-//==============================================================================
+// ===========================================================
+// HOST FACTORY FACET
+// ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
 
@@ -47,6 +53,54 @@ standard_rep_path()
 
   return result;
 }
+
+fiber_bundle::sec_tuple::host_type&
+fiber_bundle::sec_tuple::
+new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xschema_path, bool xauto_access)
+{
+  // cout << endl << "Entering sec_tuple::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible<schema_type::host_type>(xschema_path, xauto_access));
+  require(host_type::fiber_space_conforms<fiber_type::host_type>(xns, xschema_path, xauto_access));
+  
+
+  // Body:
+
+  host_type& result = host_type::new_table(xns, xhost_path, xschema_path, xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(result.factor_ct(true) == result.schema(true).fiber_space<fiber_type::host_type>().factor_ct(xauto_access));
+
+  // Exit:
+
+  // cout << "Leaving sec_tuple::new_host." << endl;
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+ 
+
+//==============================================================================
+// TUPLE FACET OF CLASS SEC_TUPLE
+//==============================================================================
+
+// PUBLIC MEMBER FUNCTIONS
 
 
 fiber_bundle::sec_tuple::

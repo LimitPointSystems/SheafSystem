@@ -33,6 +33,7 @@ namespace fiber_bundle
 {
 using namespace sheaf;
 
+class sec_at0;
 class sec_vd;
 class vd;
 
@@ -61,9 +62,9 @@ public:
   typedef vd fiber_type;
 
   ///
-  /// The scalar type definition.
+  /// The type of scalar for the module of sections.
   ///
-  typedef sec_vd scalar_type;
+  typedef sec_at0 scalar_type;
 
   ///
   /// The table dofs type defined by the standard schema.
@@ -74,6 +75,28 @@ public:
   /// Creates an arg list which conforms to the schema of this.
   ///
   static arg_list make_arg_list(const poset_path& xscalar_space_path);
+
+  ///
+  /// True if and only if scalar space of fiber space == fiber space of scalar space. 
+  /// More precisely, true if and only if the scalar space of the fiber space of the 
+  /// vector section schema specified by  xschema_path is the same as the fiber space 
+  /// of the schema of the scalar section space specified by xscalar_space_path.
+  ///
+  static bool same_scalar_fiber_space(const namespace_poset& xns, 
+                                      const poset_path& xschema_path, 
+                                      const poset_path& xscalar_space_path, 
+                                      bool xauto_access);
+
+  ///
+  /// Creates a new sec_vd_space in namespace xns with path xpath,
+  /// schema specified by xschema_path, and scalar space specified
+  /// by xscalar_space_path.
+  ///
+  static sec_vd_space& new_table(namespace_type& xhost, 
+                                 const poset_path& xpath, 
+                                 const poset_path& xschema_path,
+                                 const poset_path& xscalar_space_path,
+                                 bool xauto_access);
   
   //============================================================================
   // TABLE DOFS

@@ -42,15 +42,20 @@ class fiber_bundles_namespace;
 ///
 class SHEAF_DLL_SPEC sec_tuple : public sec_rep_space_member
 {
-  //============================================================================
-  /// @name TUPLE FACET OF CLASS SEC_TUPLE
-  //============================================================================
-  //@{
 
+  // ===========================================================
+  /// @name HOST FACTORY FACET OF CLASS SEC_TUPLE
+  // ===========================================================
+  //@{
 
 public:
 
   // Typedefs:
+
+  ///
+  /// The type of namespace for this type of member.
+  ///
+  typedef fiber_bundles_namespace namespace_type;
 
   ///
   /// The type of host poset.
@@ -71,6 +76,80 @@ public:
   /// The path to the standard rep for sections of this type.
   ///
   static const poset_path& standard_rep_path();
+
+  ///
+  /// The standard host path for section type S with base path xbase_path,
+  /// representation path xrep_path, and section and fiber suffixes 
+  /// xsection_suffix and xfiber_suffix, respectively.
+  ///
+  template <typename S>
+  static poset_path standard_host_path(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xsection_suffix,
+                                       const string& xfiber_suffix);
+
+  ///
+  /// True if and only if the host with path standard_host_path<S>(xbase_path, xrep_path, xsection_suffix, xfiber_suffix)
+  /// does not exist in namespace xns, or if it exists, conforms to S::host_type.
+  ///
+  template <typename S>
+  static bool standard_host_is_available(const namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xsection_suffix,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
+
+//   ///
+//   /// True if and only if the fiber space with path S::fiber_type::standard_host_path<S::fiber_type>(xfiber_suffix)
+//   /// does not exist in namespace xns, or if it exists, conforms to S:fiber_type:host_type and is auto-read-accessible.
+//   ///
+//   template <typename S>
+//   static bool standard_fiber_host_is_auto_read_accessible(const namespace_poset& xns, const string& xfiber_suffix, bool xauto_access);
+
+//   ///
+//   /// The standard schema path for section type S with base path xbase_path,
+//   /// representation path xrep_path, and fiber suffix xfiber_suffix.
+//   ///
+//   template <typename S>
+//   static poset_path standard_schema_path(const poset_path& xbase_path,
+//                                          const poset_path& xrep_path,
+//                                          const string& xfiber_suffix);
+
+//   ///
+//   /// True if and only if the schema host with path standard_schema_path(xbase_path, xrep_path, xfiber_suffix)
+//   /// does not exist in namespace xns, or if it exists, conforms to schema_type::host_type and is auto-read-write-accessible.
+//   ///
+//   template <typename S>
+//   static bool standard_schema_host_is_auto_read_write_accessible(const namespace_poset& xns,
+//                                                                  const poset_path& xbase_path,
+//                                                                  const poset_path& xrep_path,
+//                                                                  const string& xfiber_suffix,
+//                                                                  bool xauto_access);
+
+  ///
+  /// Manual, shallow factory method; creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path and schema specified by xschema_path,
+  ///
+  static host_type& new_host(namespace_type& xns, 
+                             const poset_path& xhost_path, 
+                             const poset_path& xschema_path,
+                             bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+ 
+
+  //============================================================================
+  /// @name TUPLE FACET OF CLASS SEC_TUPLE
+  //============================================================================
+  //@{
+
+
+public:
 
   ///
   /// Default constructor.

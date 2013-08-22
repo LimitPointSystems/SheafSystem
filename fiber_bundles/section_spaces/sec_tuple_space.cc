@@ -8,15 +8,21 @@
 /// @file
 /// Implementation for class sec_tuple_space.
 
-#include "sec_tuple_space.h"
+#include "sec_tuple_space.impl.h"
 
 #include "abstract_poset_member.impl.h"
 #include "assert_contract.h"
 #include "binary_section_space_schema_member.h"
+#include "binary_section_space_schema_poset.h"
+#include "fiber_bundles_namespace.h"
 #include "namespace_poset.impl.h"
 #include "namespace_poset_member.h"
 #include "poset_handle_factory.h"
+#include "section_space_schema_member.impl.h"
+#include "section_space_schema_poset.h"
 #include "sec_tuple.h"
+#include "tuple.h"
+#include "tuple_space.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
@@ -50,6 +56,110 @@ make_arg_list(int xfactor_ct)
   
   // Exit:
 
+  return result;
+}
+
+bool
+fiber_bundle::sec_tuple_space::
+fiber_schema_conforms(const namespace_poset& xns, 
+                      const poset_path& xsection_schema_path, 
+                      const poset_path& xfiber_schema_path, 
+                      bool xauto_access)
+{
+  // cout << endl << "Entering sec_tuple_space::fiber_schema_conforms." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_accessible(xauto_access));
+  
+  require(!xsection_schema_path.empty());
+  require(xns.path_is_auto_read_accessible(xsection_schema_path, xauto_access));
+  
+  require(xfiber_schema_path.full());
+  require(xns.path_is_auto_read_accessible(xfiber_schema_path, xauto_access));
+
+  // Body:
+
+  section_space_schema_poset& lschema_host = xns.member_poset<section_space_schema_poset>(xsection_schema_path, xauto_access);
+
+  bool result = lschema_host.fiber_space().schema(xauto_access).conforms_to(xfiber_schema_path);
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving sec_tuple_space::fiber_schema_conforms." << endl;
+  return result;
+}
+
+
+fiber_bundle::sec_tuple_space&
+fiber_bundle::sec_tuple_space::
+new_table(namespace_type& xns, const poset_path& xpath, const poset_path& xschema_path, bool xauto_access)
+{
+  // cout << endl << "Entering sec_tuple_space::new_table." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+  
+  require(!xpath.empty());
+  require(!xns.contains_path(xpath, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible<schema_type::host_type>(xschema_path, xauto_access));
+  require(fiber_space_conforms<fiber_type::host_type>(xns, xschema_path, xauto_access));
+
+  // Body:
+
+  // Create the table; have to new it because namespace keeps a pointer.
+
+  typedef sec_tuple_space table_type;
+
+  table_type& result = *(new table_type());
+
+  // Create a handle of the right type for the schema member.
+
+  schema_type lschema(xns, xschema_path, xauto_access);
+
+  if(xauto_access)
+  {
+    lschema.get_read_access();
+  }
+
+  // Create the table dof map.
+
+  array_poset_dof_map& lmap = *(new array_poset_dof_map(&lschema, true));
+
+  // The table dofs are the samae as the fiber schema,
+  // so just copy them from the fiber schema.
+  // Can't use copy constructor because schema objects are different.
+
+  array_poset_dof_map& lfiber_map = lschema.fiber_space().table_dof_map();
+  lmap.copy_dof_tuple(lfiber_map);
+  
+  // Create the state.
+
+  result.new_state(xns, xpath, lschema, lmap);
+
+  if(xauto_access)
+  {
+    lschema.release_access();
+  }
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xpath);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(result.factor_ct(true) == result.schema(true).fiber_space<fiber_type::host_type>().factor_ct(xauto_access));
+
+  // Exit:
+
+  // cout << "Leaving sec_tuple_space::new_table." << endl;
   return result;
 }
 

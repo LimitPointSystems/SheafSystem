@@ -518,6 +518,13 @@ public:
 
   ///
   /// True if the state referred to xpath does not exist 
+  /// or exists and conforms to poset type P.
+  ///
+  template <typename P>
+  bool path_is_available(const poset_path& xpath, bool xauto_access) const;
+
+  ///
+  /// True if the state referred to xpath does not exist 
   /// or exists and is auto read accessible.
   ///
   bool path_is_auto_read_available(const poset_path& xpath, bool xauto_access) const;

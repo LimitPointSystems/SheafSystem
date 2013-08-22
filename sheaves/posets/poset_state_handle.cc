@@ -142,6 +142,7 @@ poset_state_handle(abstract_poset_member* xtop, abstract_poset_member* xbottom)
 
   // Body:
 
+  _name_space = 0;
   _state = 0;
   _top = xtop;
   _bottom = xbottom;
@@ -5115,7 +5116,7 @@ get_cover_id_space(bool xlower, pod_index_type xmbr_hub_id) const
   // Preconditions:
 
   require(state_is_read_accessible());
-  require(contains_member(xmbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
 
   // Body:
 
@@ -5164,7 +5165,7 @@ get_cover_id_space_iterator(bool xlower, pod_index_type xmbr_hub_id) const
   // Preconditions:
 
   require(state_is_read_accessible());
-  require(contains_member(xmbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
 
   // Body:
 
@@ -5215,7 +5216,7 @@ cover_contains_iterator(bool xlower,
   // Preconditions:
 
   require(state_is_read_accessible());
-  require(contains_member(xmbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
 
   // Body:
 
@@ -5245,7 +5246,7 @@ cover_is_empty(bool xlower, pod_index_type xmbr_hub_id) const
   // Preconditions:
 
   require(state_is_read_accessible());
-  require(contains_member(xmbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
 
   // Body:
 
@@ -5259,7 +5260,7 @@ cover_is_empty(bool xlower, const scoped_index& xmbr_id) const
   // Preconditions:
 
   require(state_is_read_accessible());
-  require(contains_member(xmbr_id));
+  require(contains_member(xmbr_id, false));
 
   // Body:
 
@@ -5273,7 +5274,7 @@ cover_is_singleton(bool xlower, pod_index_type xmbr_hub_id) const
   // Preconditions:
 
   require(state_is_read_accessible());
-  require(contains_member(xmbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
 
   // Body:
 
@@ -5287,7 +5288,7 @@ cover_is_singleton(bool xlower, const scoped_index& xmbr_id) const
   // Preconditions:
 
   require(state_is_read_accessible());
-  require(contains_member(xmbr_id));
+  require(contains_member(xmbr_id, false));
 
   // Body:
 
@@ -5351,7 +5352,7 @@ cover_contains_member(bool xlower,
   // Preconditions:
 
   require(state_is_read_accessible());
-  require(contains_member(xmbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
 
   // Body:
 
@@ -5385,8 +5386,8 @@ cover_is_equal(bool xlower,
   // Preconditions:
 
   require(state_is_read_accessible());
-  require(contains_member(xmbr_hub_id));
-  require(contains_member(xother_mbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
+  require(contains_member(xother_mbr_hub_id, false));
 
   // Body:
 
@@ -5419,7 +5420,7 @@ first_cover_member(bool xlower, pod_index_type xmbr_hub_id) const
   // Preconditions:
 
   require(state_is_read_accessible());
-  require(contains_member(xmbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
   require(!cover_is_empty(xlower, xmbr_hub_id));
 
   // Body:
@@ -5459,7 +5460,7 @@ insert_cover_member(pod_index_type xother_mbr_hub_id,
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(contains_member(xmbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
   require(!cover_contains_member(xlower, xmbr_hub_id, xother_mbr_hub_id));
 
   // Body:
@@ -5515,7 +5516,7 @@ insert_cover_member(pod_index_type xother_mbr_hub_id,
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(contains_member(xmbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
   require(cover_contains_iterator(xlower, xmbr_hub_id, xitr));
 
   // Body:
@@ -5573,7 +5574,7 @@ remove_cover_member(pod_index_type xother_mbr_hub_id,
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(contains_member(xmbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
 
   // Body:
 
@@ -5627,7 +5628,7 @@ remove_cover_member(index_space_iterator& xitr,
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(contains_member(xmbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
 
   // Body:
 
@@ -5680,7 +5681,7 @@ replace_cover_member(pod_index_type xold_other_mbr_hub_id,
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(contains_member(xmbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
 
   define_old_variable(bool old_cover_contains_old_other_mbr_hub_id = cover_contains_member(xlower, xmbr_hub_id, xold_other_mbr_hub_id));
 
@@ -5740,7 +5741,7 @@ clear_cover(bool xlower, pod_index_type xmbr_hub_id)
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(contains_member(xmbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
 
   // Body:
 
@@ -5784,8 +5785,8 @@ copy_cover(bool xlower, pod_index_type xmbr_hub_id, pod_index_type xother_mbr_hu
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(contains_member(xmbr_hub_id));
-  require(contains_member(xother_mbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
+  require(contains_member(xother_mbr_hub_id, false));
 
   // Body::
 

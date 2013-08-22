@@ -15,6 +15,7 @@
 #include "array_poset_dof_map.h"
 #include "ij_product_structure.h"
 #include "index_iterator.h"
+#include "index_space_iterator.h"
 #include "error_message.h"
 #include "namespace_poset.impl.h"
 #include "namespace_poset_member.h"
@@ -160,6 +161,41 @@ make_standard_schema(namespace_poset& xns)
 
   return;
 }
+
+sheaf::poset_path
+fiber_bundle::section_space_schema_poset::
+rep_path(bool xauto_access) const
+{
+  // cout << endl << "Entering section_space_schema_poset::rep_path." << endl;
+
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  poset_path result(sheaf::table_dofs(*this).rep_path);
+
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving section_space_schema_poset::rep_path." << endl;
+  return result;
+}
+
 
 fiber_bundle::sec_rep_descriptor&
 fiber_bundle::section_space_schema_poset::
@@ -382,6 +418,40 @@ db() const
   return result;
 }
 
+sheaf::poset_path
+fiber_bundle::section_space_schema_poset::
+base_space_path(bool xauto_access) const
+{
+  // cout << endl << "Entering section_space_schema_poset::base_space_path." << endl;
+
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  poset_path result(sheaf::table_dofs(*this).base_space_path);
+
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving section_space_schema_poset::base_space_path." << endl;
+  return result;
+}
+
 fiber_bundle::base_space_poset&
 fiber_bundle::section_space_schema_poset::
 base_space()
@@ -528,6 +598,40 @@ fiber_schema() const
   require(state_is_read_accessible());
 
   return *_fiber_space->schema().host();
+}
+
+sheaf::poset_path
+fiber_bundle::section_space_schema_poset::
+fiber_space_path(bool xauto_access) const
+{
+  // cout << endl << "Entering section_space_schema_poset::fiber_space_path." << endl;
+
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  poset_path result(sheaf::table_dofs(*this).fiber_space_path);
+
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving section_space_schema_poset::fiber_space_path." << endl;
+  return result;
 }
 
 sheaf::poset&
@@ -1348,94 +1452,94 @@ is_atom(pod_index_type xhub_id) const
   return result;
 }
 
-string
-fiber_bundle::section_space_schema_poset::
-member_name(pod_index_type xhub_id, bool xauto_access) const
-{
-  string result;
+// string
+// fiber_bundle::section_space_schema_poset::
+// member_name(pod_index_type xhub_id, bool xauto_access) const
+// {
+//   string result;
 
-  // Preconditions:
+//   // Preconditions:
 
-  require(state_is_auto_read_accessible(xauto_access));
+//   require(state_is_auto_read_accessible(xauto_access));
 
-  // Body:
+//   // Body:
 
-  if(xauto_access)
-  {
-    get_read_access();
-  }
+//   if(xauto_access)
+//   {
+//     get_read_access();
+//   }
 
-  result = poset_state_handle::member_name(xhub_id, false);
-  if(result.empty())
-  {
-    // Member does not have a client assigned name;
-    // try to construct a default name from factor names.
+//   result = poset_state_handle::member_name(xhub_id, false);
+//   if(result.empty())
+//   {
+//     // Member does not have a client assigned name;
+//     // try to construct a default name from factor names.
 
-    pod_index_type lbase_id = get_base_space_id_from_index(xhub_id);
+//     pod_index_type lbase_id = get_base_space_id_from_index(xhub_id);
 
-    pod_index_type lfiber_schema_id = get_fiber_schema_id_from_index(xhub_id);
-    string lfiber_name = fiber_schema().member_name(lfiber_schema_id);
+//     pod_index_type lfiber_schema_id = get_fiber_schema_id_from_index(xhub_id);
+//     string lfiber_name = fiber_schema().member_name(lfiber_schema_id);
 
-    if( (lbase_id == BOTTOM_INDEX) &&
-        (fiber_schema().table_dof_subposet().contains_member(lfiber_schema_id)) )
-    {
-      // This is a table dof member;
-      // name is name of fiber factor.
+//     if( (lbase_id == BOTTOM_INDEX) &&
+//         (fiber_schema().table_dof_subposet().contains_member(lfiber_schema_id)) )
+//     {
+//       // This is a table dof member;
+//       // name is name of fiber factor.
 
-      result = lfiber_name;
-    }
-    else
-    {
-      // This is not a table dof member;
-      // construct name from both base and fiber factor.
+//       result = lfiber_name;
+//     }
+//     else
+//     {
+//       // This is not a table dof member;
+//       // construct name from both base and fiber factor.
 
-      string lbase_name = base_space().member_name(lbase_id);
+//       string lbase_name = base_space().member_name(lbase_id);
 
-      if(lbase_name.empty())
-      {
-        // Construct a name from the base space id.
+//       if(lbase_name.empty())
+//       {
+//         // Construct a name from the base space id.
 
-        stringstream lstr;
-        lstr << lbase_id;
-        lbase_name = lstr.str();
-      }
+//         stringstream lstr;
+//         lstr << lbase_id;
+//         lbase_name = lstr.str();
+//       }
 
-      if(lfiber_name.empty())
-      {
-        // Construct a name from the fiber schema id.
+//       if(lfiber_name.empty())
+//       {
+//         // Construct a name from the fiber schema id.
 
-        stringstream lstr;
-        lstr << lfiber_schema_id;
-        lfiber_name = lstr.str();
-      }
+//         stringstream lstr;
+//         lstr << lfiber_schema_id;
+//         lfiber_name = lstr.str();
+//       }
 
-      result = lbase_name + "_" + lfiber_name;
+//       result = lbase_name + "_" + lfiber_name;
 
-      // ERROR: the following produces the same name for different members.
-      //       if(!lbase_name.empty() || !lfiber_name.empty())
-      //       {
-      //         result = lbase_name + '_' + lfiber_name;
-      //       }
-      //       else
-      //       {
-      //         // Both base and fiber names are empty; do nothing.
-      //       }
-    }
+//       // ERROR: the following produces the same name for different members.
+//       //       if(!lbase_name.empty() || !lfiber_name.empty())
+//       //       {
+//       //         result = lbase_name + '_' + lfiber_name;
+//       //       }
+//       //       else
+//       //       {
+//       //         // Both base and fiber names are empty; do nothing.
+//       //       }
+//     }
 
-  }
+//   }
 
-  if(xauto_access)
-  {
-    release_access();
-  }
+//   if(xauto_access)
+//   {
+//     release_access();
+//   }
 
-  // Postconditions:
+//   // Postconditions:
 
 
-  // Exit:
+//   // Exit:
 
-  return result;
-}
+//   return result;
+// }
 
 fiber_bundle::section_space_schema_member&
 fiber_bundle::section_space_schema_poset::
@@ -1552,6 +1656,31 @@ initialize_standard_members()
   new_standard_member_hack(TOP_INDEX);
   put_member_name(TOP_INDEX, "top", true, false);
   top().attach_to_state(this, TOP_INDEX);
+
+  // All the members exist implicitly, but they
+  // don't have names unless we explicitly give them names.
+  // Make the names for the table schema members 
+  // the same as the corresponding members of the fiber schema
+
+  schema_poset_member lfiber_schema = fiber_space().schema();  
+  index_space_iterator& litr = lfiber_schema.table_dof_id_space().get_iterator();
+  while(!litr.is_done())
+  {
+    // Get the name for the table dof in the fiber schema.
+
+    string ltable_dof_name = lfiber_schema.host()->member_name(litr.hub_pod(), false);
+
+    // Get the index for the corresponding member of this poset.
+
+    pod_index_type ltable_dof_id = get_index_from_components(BOTTOM_INDEX, litr.hub_pod());
+
+    // Set the name in this poset the same as in the fiber schema.
+
+    put_member_name(ltable_dof_id, ltable_dof_name, true, false);
+
+    litr.next();
+  }
+  lfiber_schema.table_dof_id_space().release_iterator(litr);
 
   // Only two standard members and no dof tuples so far.
   // (More may be added in descendants.)

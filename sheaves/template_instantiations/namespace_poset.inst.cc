@@ -30,6 +30,12 @@ bool
 sheaf::namespace_poset::
 contains_poset<sheaf::primitives_poset>(const poset_path& xpath, bool xauto_access) const;
 
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
+path_is_available<sheaf::primitives_poset>(const poset_path& xpath, bool xauto_access) const;
+
 
 //==============================================================================
 // EXPLICIT INSTANTIATIONS FOR CLASS PRIMITIVES_POSET_SCHEMA
@@ -47,6 +53,12 @@ bool
 sheaf::namespace_poset::
 contains_poset<sheaf::primitives_poset_schema>(const poset_path& xpath, bool xauto_access) const;
 
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
+path_is_available<sheaf::primitives_poset_schema>(const poset_path& xpath, bool xauto_access) const;
+
 //==============================================================================
 // EXPLICIT INSTANTIATIONS FOR CLASS NAMESPACE_POSET_SCHEMA
 //==============================================================================
@@ -62,6 +74,12 @@ SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 contains_poset<sheaf::namespace_poset_schema>(const poset_path& xpath, bool xauto_access) const;
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
+path_is_available<sheaf::namespace_poset_schema>(const poset_path& xpath, bool xauto_access) const;
 
 //==============================================================================
 // EXPLICIT INSTANTIATIONS FOR CLASS REFINABLE_POSET
@@ -86,8 +104,14 @@ bool
 sheaf::namespace_poset::
 contains_poset<sheaf::refinable_poset>(const poset_path& xpath, bool xauto_access) const;
 
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
+path_is_available<sheaf::refinable_poset>(const poset_path& xpath, bool xauto_access) const;
+
 //==============================================================================
-// EXPLICIT INSTANTIATIONS FOR POSET
+// EXPLICIT INSTANTIATIONS FOR CLASS POSET
 //==============================================================================
   
 template
@@ -108,8 +132,14 @@ bool
 sheaf::namespace_poset::
 contains_poset<sheaf::poset>(const poset_path& xpath, bool xauto_access) const;
 
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
+path_is_available<sheaf::poset>(const poset_path& xpath, bool xauto_access) const;
+
 //==============================================================================
-// EXPLICIT INSTANTIATIONS FOR POSET_STATE_HANDLE
+// EXPLICIT INSTANTIATIONS FOR CLASS POSET_STATE_HANDLE
 //==============================================================================
 
 template
@@ -123,3 +153,9 @@ SHEAF_DLL_SPEC
 bool
 sheaf::namespace_poset::
 contains_poset<sheaf::poset_state_handle>(const sheaf::poset_path& xpath, bool xauto_access) const;
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::namespace_poset::
+path_is_available<sheaf::poset_state_handle>(const poset_path& xpath, bool xauto_access) const;

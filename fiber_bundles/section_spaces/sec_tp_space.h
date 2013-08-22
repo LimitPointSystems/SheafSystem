@@ -33,6 +33,7 @@ namespace fiber_bundle
 {
 using namespace sheaf;
 
+class sec_at1;
 class sec_tp;
 class tensor_variance;
 class tp;
@@ -62,9 +63,9 @@ public:
   typedef tp fiber_type;
 
   ///
-  /// The scalar type definition.
+  /// The type of vector sections that form the domain of tensor sections of this type.
   ///
-  typedef sec_tp scalar_type;
+  typedef sec_at1 vector_space_type;
 
   ///
   /// The table dofs type defined by the standard schema.
@@ -75,6 +76,28 @@ public:
   /// Creates an arg list which conforms to the schema of this.
   ///
   static arg_list make_arg_list(int xp, const poset_path& xvector_space_path);
+
+  ///
+  /// True if and only if vector space of fiber space == fiber space of vector space. 
+  /// More precisely, true if and only if the vector space of the fiber space of the 
+  /// tensor section schema specified by  xschema_path is the same as the fiber space 
+  /// of the schema of the vector section space specified by xvector_space_path.
+  ///
+  static bool same_vector_fiber_space(const namespace_poset& xns, 
+                                      const poset_path& xschema_path, 
+                                      const poset_path& xvector_space_path, 
+                                      bool xauto_access);
+
+  ///
+  /// Creates a new sec_tp_space in namespace xns with path xpath,
+  /// schema specified by xschema_path, and vector space specified
+  /// by xvector_space_path.
+  ///
+  static sec_tp_space& new_table(namespace_type& xhost, 
+                                 const poset_path& xpath, 
+                                 const poset_path& xschema_path,
+                                 const poset_path& xvector_space_path,
+                                 bool xauto_access);
   
   //============================================================================
   // TABLE DOFS
@@ -96,8 +119,7 @@ public:
   bool d_is_valid(const namespace_poset& xns, 
 		  const poset_path& xschema_path, 
 		  const arg_list& xargs,
-		  bool xautuo_access) const;
-  
+		  bool xauto_access) const;
   
   ///
   /// The tensor degree of this space.

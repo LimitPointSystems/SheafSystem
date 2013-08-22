@@ -58,14 +58,20 @@ public:
   typedef at1 fiber_type;
 
   ///
-  /// The scalar type definition.
-  ///
-  typedef sec_at1 scalar_type;
-
-  ///
   /// Creates an arg list which conforms to the schema of this.
   ///
   static arg_list make_arg_list(const poset_path& xscalar_space_path);
+
+  ///
+  /// Creates a new sec_at1_space in namespace xns with path xpath,
+  /// schema specified by xschema_path, and scalar space specified
+  /// by xscalar_space_path.
+  ///
+  static sec_at1_space& new_table(namespace_type& xhost, 
+                                 const poset_path& xpath, 
+                                 const poset_path& xschema_path,
+                                 const poset_path& xscalar_space_path,
+                                 bool xauto_access);
   
 protected:
 

@@ -182,6 +182,16 @@ public:
   void delete_name(const string& xname);
 
   ///
+  /// Removes all entries.
+  ///
+  void clear();
+
+  ///
+  /// True if and only if the map contains no entries.
+  ///
+  bool empty() const;
+
+  ///
   /// The initial value for iterators over this map.
   ///
   const_iterator begin() const;
@@ -192,7 +202,7 @@ public:
   const_iterator end() const;
 
   ///
-  /// The number of entries in the map.
+  /// The number of index values in the map.
   ///
   int ct() const;
 

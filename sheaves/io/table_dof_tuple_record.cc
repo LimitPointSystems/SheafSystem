@@ -236,9 +236,6 @@ transfer_internal_buffer_to_poset()
     }
 
     // Create the state.
-    // $$SCRIBBLE: above conversion from record->internal ids
-    // should be eliminated and new_state should take arg_list instead of dof tuple.
-    // See other usage of new_state in namespace_poset::new_member_poset.
 
     lposet.new_state(lposet.name(), scaffold().internal_schema(), *ldof_tuple);
 

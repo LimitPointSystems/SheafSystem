@@ -255,6 +255,11 @@ public:
   typedef tp_space host_type;
 
   ///
+  /// The type of the underlying vector space.
+  ///
+  typedef at1 vector_space_type;
+
+  ///
   /// The path to the standard schema for this class.
   ///
   static const poset_path& standard_schema_path();
@@ -291,11 +296,6 @@ private:
 public:
 
   // Typedefs:
-
-  ///
-  /// The type of the underlying vector space.
-  ///
-  typedef at1 vector_space_type;
 
   ///
   /// The associated volatile type.
@@ -393,16 +393,6 @@ public:
   /// The path of the underlying vector space, auto access version.
   ///
   poset_path vector_space_path(bool xauto_access) const;
-
-//   ///
-//   /// Index of the underlying vector space.
-//   ///
-//   virtual pod_index_type vector_space_index() const;
-
-//   ///
-//   /// Index of the underlying vector space (auto-access version).
-//   ///
-//   virtual pod_index_type vector_space_index(bool xauto_access) const;
 
   ///
   /// The underlying vector space.

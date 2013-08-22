@@ -81,6 +81,21 @@ public:
 				    const poset_path& xschema_path,
 				    bool xauto_access);
 
+  
+  ///
+  /// Creates a new binary_section_space_schema_poset in namespace xns with path xpath,
+  /// schema specified by xschema_path, and table attributes base_space_path, fiber_space_path,
+  /// and rep_path specified by xbase_path, xfiber_path, and xrep_path, respectively.
+  ///
+  static binary_section_space_schema_poset& new_table(namespace_type& xhost, 
+                                                      const poset_path& xpath, 
+                                                      const poset_path& xschema_path,
+                                                      const poset_path& xbase_path,
+                                                      const poset_path& xfiber_path,
+                                                      const poset_path& xrep_path,
+                                                      bool xauto_access);
+
+
 protected:
 
   ///
@@ -285,13 +300,19 @@ protected:
                  const poset_path& xschema_path,
                  bool xauto_access);
 
+
   ///
-  /// Attaches this external poset to a new poset state with schema
+  /// Creates a new poset state with path xpath, schema xschema and table dof map xdof_map,
+  /// attaches this to the state.
+  ///
+  virtual void new_state(const poset_path& xpath, const schema_poset_member& xschema, array_poset_dof_map& xdof_map);
+
+  ///
+  /// @deprecated Attaches this external poset to a new poset state with schema
   /// given by xschema and table dofs by xdof_map.
   /// Intended for use by i/o subsystem.
   ///
-  virtual void new_state(const schema_poset_member& xschema,
-                         array_poset_dof_map& xdof_map);
+  virtual void new_state(const schema_poset_member& xschema, array_poset_dof_map& xdof_map);
 
 
 private:
