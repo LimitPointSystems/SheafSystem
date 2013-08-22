@@ -467,7 +467,6 @@ endfunction()
 # Add the documentation targets.
 # Default Doc state is "User"
 #
-
 function(add_doc_targets)
     if(DOC_TARGETS)
             if(DOC_STATE MATCHES Dev OR DOC_STATE MATCHES dev OR DOC_STATE MATCHES DEV)
@@ -514,8 +513,6 @@ endfunction(add_clean_files)
 # 
 #  Clean up. Remove everything, not just the build products.
 #
-
-#$$TODO: Expand this to cover windows/intel as well.
 function(add_coverage_target)
 
     if(LINUX64INTEL)
@@ -565,9 +562,6 @@ function(set_component_vars)
             ${PROJECT_NAME}_csharp_assembly.so 
             CACHE STRING "${PROJECT_NAME} csharp binding assembly name")
     endif()
-
-        set(${COMPONENT}_PYTHON_BINDING_LIB ${PROJECT_NAME}_python_binding 
-            CACHE STRING "${PROJECT_NAME} python binding library name")
             
     set(${COMPONENT}_COMMON_BINDING_SRC_DIR 
         ${CMAKE_CURRENT_SOURCE_DIR}/bindings/common/src 
@@ -586,10 +580,11 @@ function(set_component_vars)
         CACHE STRING "${PROJECT_NAME} java binding source directory")
     set(${COMPONENT}_SWIG_JAVA_INTERFACE ${PROJECT_NAME}_java_binding.i 
         CACHE STRING "${PROJECT_NAME} java binding interface file")
-
     set(${COMPONENT}_JAVA_BINDING_JAR ${PROJECT_NAME}_java_binding.jar 
         CACHE STRING "${PROJECT_NAME} java binding jar name")
-    
+
+    set(${COMPONENT}_PYTHON_BINDING_LIB ${PROJECT_NAME}_python_binding 
+        CACHE STRING "${PROJECT_NAME} python binding library name")    
     set(${COMPONENT}_PYTHON_BINDING_SRC_DIR 
         ${CMAKE_CURRENT_SOURCE_DIR}/bindings/python/src 
         CACHE STRING "${PROJECT_NAME} python source directory")
@@ -881,7 +876,10 @@ function(collect_example_sources)
 endfunction(collect_example_sources)
 
 # 
-# Add diagnostic output during configure phase.
+# Convenience wrapper for the massage function.
+# The Eclipse Cmakeed plugin renders this pretty much obsolete
+# from a pregramming viewpoint, but the syntax is prettier
+# than what it wraps.
 #
 function(status_message txt)
 
@@ -894,7 +892,7 @@ endfunction()
 
 # 
 # Convenience routine for diagnostic output during configure phase.
-# Displays list of included directories for module it is called in.
+# Displays a list of included directories for module it is called in.
 #
 function(showincs)
     message(STATUS "Displaying include directories for ${PROJECT_NAME}:")
@@ -922,6 +920,9 @@ macro(get_date RESULT)
     endif(WIN32)
 endmacro(get_date)
 
+# 
+# Install any prerequisites that need to ship with our libs
+#
 function(install_prereqs)
     # Prerequisite components install
     if(LINUX64INTEL OR LINUX64GNU)

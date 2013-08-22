@@ -1,4 +1,3 @@
-
 #
 # Copyright (c) 2013 Limit Point Systems, Inc. 
 #
@@ -76,10 +75,3 @@ if ( WIN32 )
     set( CSHARP_COMPILER "call ${CSHARP_COMPILER}" )
   endif ( )
 endif( )
-
-#FIND_PACKAGE_HANDLE_STANDARD_ARGS(CSHARP DEFAULT_MSG CSHARP_TYPE CSHARP_COMPILER)
-
-# Set the USE_FILE path
-# http://public.kitware.com/Bug/view.php?id=7757
-#get_filename_component( current_list_path ${CMAKE_CURRENT_LIST_FILE} PATH )
-#set( CSHARP_USE_FILE ${current_list_path}/UseCSharp.cmake )
