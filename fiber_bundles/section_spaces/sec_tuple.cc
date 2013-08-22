@@ -78,7 +78,7 @@ new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xs
 
   // Postconditions:
 
-  //  ensure(xns.owns(result, xauto_access));
+  ensure(xns.owns(result, xauto_access));
   ensure(result.path(true) == xhost_path);
   ensure(result.state_is_not_read_accessible());
   ensure(result.schema(true).path(xauto_access) == xschema_path);

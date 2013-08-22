@@ -176,7 +176,7 @@ new_table(namespace_type& xns, const poset_path& xpath,
 
   // Postconditions:
 
-  //  ensure(xns.owns(result, xauto_access));
+  ensure(xns.owns(result, xauto_access));
   ensure(result.path(true) == xpath);
   ensure(result.state_is_not_read_accessible());
   ensure(result.schema(true).path(xauto_access) == xschema_path);

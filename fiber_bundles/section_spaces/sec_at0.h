@@ -70,7 +70,7 @@ public:
                              bool xauto_access);
 
   ///
-  /// The standard host for sections with base space xbase_path,
+  /// The standard host for sections of this type with base space xbase_path,
   /// representation xrep_path, section suffix xsection_suffix,
   /// and fiber suffix xfiber_suffix. Creates the host and its prerequisites
   /// if necessary.

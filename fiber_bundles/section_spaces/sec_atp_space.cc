@@ -86,7 +86,7 @@ new_table(namespace_type& xns,
   require(xns.path_is_auto_read_accessible<schema_type::host_type>(xschema_path, xauto_access));
   require(fiber_space_conforms<fiber_type::host_type>(xns, xschema_path, xauto_access));
 
-  require(xns.path_is_auto_read_accessible<vector_type::host_type>(xvector_space_path, xauto_access));
+  require(xns.path_is_auto_read_accessible<vector_space_type::host_type>(xvector_space_path, xauto_access));
 
   require(same_vector_fiber_space(xns, xschema_path, xvector_space_path, xauto_access));
 
@@ -110,7 +110,7 @@ new_table(namespace_type& xns,
   // Get the section scalar space path from the section vector space.
 
   poset_path lscalar_space_path = 
-    xns.member_poset<vector_type::host_type>(xvector_space_path, xauto_access).scalar_space_path(xauto_access);
+    xns.member_poset<vector_space_type::host_type>(xvector_space_path, xauto_access).scalar_space_path(xauto_access);
 
   // Create the table dof map.
 
@@ -142,7 +142,7 @@ new_table(namespace_type& xns,
 
   // Postconditions:
 
-  //  ensure(xns.owns(result, xauto_access));
+  ensure(xns.owns(result, xauto_access));
   ensure(result.path(true) == xpath);
   ensure(result.state_is_not_read_accessible());
   ensure(result.schema(true).path(xauto_access) == xschema_path);
@@ -150,7 +150,7 @@ new_table(namespace_type& xns,
   ensure(result.factor_ct(true) == result.schema(true).fiber_space<fiber_type::host_type>().factor_ct(xauto_access));
   ensure(result.d(true) == result.schema(true).fiber_space<fiber_type::host_type>().d(xauto_access));
   ensure(result.scalar_space_path(true) == 
-         xns.member_poset<vector_type::host_type>(xvector_space_path, xauto_access).scalar_space_path(xauto_access));
+         xns.member_poset<vector_space_type::host_type>(xvector_space_path, xauto_access).scalar_space_path(xauto_access));
   ensure(result.p(true) == result.schema(true).fiber_space<fiber_type::host_type>().p(xauto_access));
   ensure(result.dd(true) == result.schema(true).fiber_space<fiber_type::host_type>().dd(xauto_access));
   ensure(result.vector_space_path(true) == xvector_space_path);

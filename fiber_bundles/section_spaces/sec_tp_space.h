@@ -65,7 +65,7 @@ public:
   ///
   /// The type of vector sections that form the domain of tensor sections of this type.
   ///
-  typedef sec_at1 vector_type;
+  typedef sec_at1 vector_space_type;
 
   ///
   /// The table dofs type defined by the standard schema.

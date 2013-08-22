@@ -17,17 +17,12 @@
 #include "at0_space.h"
 #include "base_space_poset.h"
 #include "binary_section_space_schema_member.impl.h"
-#include "binary_section_space_schema_poset.h"
 #include "fiber_bundles_namespace.h"
 #include "index_space_iterator.h"
 #include "sec_at0_space.h"
-#include "sec_at1_space.h"
-#include "sec_rep_descriptor_poset.h"
 #include "sec_tuple.impl.h"
 #include "sec_tuple_space.impl.h"
-#include "section_space_schema_member.impl.h"
-#include "section_space_schema_poset.h"
-#include "tuple.impl.h"
+
 
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
@@ -35,6 +30,7 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 //==============================================================================
 // CLASS SEC_AT0
 //==============================================================================
+
 // ===========================================================
 // HOST FACTORY FACET OF CLASS SEC_AT0
 // ===========================================================
@@ -67,7 +63,7 @@ new_host(namespace_type& xns,
 
   // Postconditions:
 
-  //  ensure(xns.owns(result, xauto_access));
+  ensure(xns.owns(result, xauto_access));
   ensure(result.path(true) == xhost_path);
   ensure(result.state_is_not_read_accessible());
   ensure(result.schema(true).path(xauto_access) == xschema_path);
@@ -152,7 +148,7 @@ standard_host(namespace_type& xns,
 
   // Postconditions:
 
-  //  ensure(xns.owns(result, xauto_access));
+  ensure(xns.owns(result, xauto_access));
   ensure(result.path(true) == standard_host_path<sec_at0>(xbase_path, xrep_path, xsection_suffix, xfiber_suffix));
   ensure(result.state_is_not_read_accessible());
   ensure(result.schema(true).path(xauto_access) == 

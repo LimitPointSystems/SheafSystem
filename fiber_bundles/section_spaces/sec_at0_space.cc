@@ -180,12 +180,6 @@ new_table(namespace_type& xns,
   // Replace the fiber scalar space path with the section scalar space path.
   // sec_at0 is its own scalar section space.
 
-  cout << boolalpha;
-  cout << "schema type is right: " << (dynamic_cast<binary_section_space_schema_member*>(&lschema) != 0) << endl;
-  cout << "schema host type is right: " << (dynamic_cast<binary_section_space_schema_poset*>(lschema.host()) != 0) << endl;
-  cout << "map schema type is right: " << (dynamic_cast<binary_section_space_schema_member*>(&lmap.schema()) != 0) << endl;
-  cout << "map schema host type is right: " << (dynamic_cast<binary_section_space_schema_poset*>(lmap.schema().host()) != 0) << endl;
-  
   lmap.put_dof("scalar_space_path", xpath);
 
   // Replace the fiber vector space path with the section vector space path.
@@ -204,7 +198,7 @@ new_table(namespace_type& xns,
 
   // Postconditions:
 
-  //  ensure(xns.owns(result, xauto_access));
+  ensure(xns.owns(result, xauto_access));
   ensure(result.path(true) == xpath);
   ensure(result.state_is_not_read_accessible());
   ensure(result.schema(true).path(xauto_access) == xschema_path);

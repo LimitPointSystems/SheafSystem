@@ -76,47 +76,6 @@ public:
                               const poset_path& xrep_path,
                               bool xauto_access);
  
-//   ///
-//   /// The standard path for the host of a schema with base space,
-//   /// fiber space, and representation specified by xbase_path, xfiber_path,
-//   /// and xrep_path, respectively.
-//   ///
-//   static poset_path standard_host_path(const poset_path& xbase_path, 
-//                                        const poset_path& xfiber_path, 
-//                                        const poset_path& xrep_path);
- 
-//   ///
-//   /// The standard path for a schema member with base space,
-//   /// fiber space, and representation specified by xbase_path, xfiber_path,
-//   /// and xrep_path, respectively.
-//   ///
-//   static poset_path standard_path(const poset_path& xbase_path, 
-//                                   const poset_path& xfiber_path, 
-//                                   const poset_path& xrep_path);
-  
-//   ///
-//   /// The host with path standard_host_path(xbase_path, xfiber_path, xrep_path).
-//   /// Returns the host if it already exists, otherwise, creates it in namespace xns
-//   /// with path specified by standard_host_path and schema specified by standard_schema_path. 
-//   ///
-//   static host_type& standard_host(namespace_type& xns, 
-//                                   const poset_path& xbase_path,
-//                                   const poset_path& xfiber_path,
-//                                   const poset_path& xrep_path,
-//                                   bool xauto_access);
-
-  
-//   ///
-//   /// The path for standard schema member with base space, fiber space, and representation 
-//   /// specified by xbase_path, xfiber_path, and xrep_path, respectively.
-//   /// Creates the standard host and member if they do not already exist.
-//   ///
-//   static poset_path standard_schema(namespace_type& xns, 
-//                                     const poset_path& xbase_path,
-//                                     const poset_path& xfiber_path,
-//                                     const poset_path& xrep_path,
-//                                     bool xauto_access);
- 
   ///
   /// The standard path for the host of a schema for sections of type S with
   /// base space specified by xbase_path, fiber suffix xfiber_suffix, and 

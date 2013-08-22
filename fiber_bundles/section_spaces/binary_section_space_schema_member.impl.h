@@ -219,7 +219,7 @@ standard_host(namespace_type& xns,
 
   // Postconditions:
 
-  //  ensure(xns.owns(result, xauto_access));
+  ensure(xns.owns(result, xauto_access));
   ensure(result.path(true) == standard_host_path<S>(xbase_path, xrep_path, xfiber_suffix));
   ensure(result.state_is_not_read_accessible());
   ensure(result.schema(true).path(xauto_access) == host_type::standard_schema_path());

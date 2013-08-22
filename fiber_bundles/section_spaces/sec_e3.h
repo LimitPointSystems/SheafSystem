@@ -58,7 +58,8 @@ public:
 
   ///
   /// Manual, shallow factory method; creates a new host table for members of this type.
-  /// The poset is created in namespace xns with path xhost_path and schema specified by xschema_path,
+  /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
+  /// and scalar section space specified by xscalar_space_path.
   ///
   static host_type& new_host(namespace_type& xns, 
                              const poset_path& xhost_path, 
@@ -67,7 +68,7 @@ public:
                              bool xauto_access);
 
   ///
-  /// The standard host for sections with base space xbase_path,
+  /// The standard host for sections of thie type with base space xbase_path,
   /// representation xrep_path, section suffix xsection_suffix,
   /// and fiber suffix xfiber_suffix. Creates the host and its prerequisites
   /// if necessary.
