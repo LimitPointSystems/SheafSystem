@@ -1209,6 +1209,12 @@ begin_read_transaction(namespace_poset& xns)
   ldof_tuple_records.close();
   lattributes_records.close();
 
+  // Tranfser member names from scaffold to poset.
+  // Have to do this after member_names_record in attribute record set
+  // has been internalized and after all members have been internalized.
+
+  lscaffold.put_member_names_to_poset();
+
   //
   // Reset the namespace name from whatever the client
   // chose initially to the name in the file.
@@ -1373,7 +1379,7 @@ begin_read_transaction(poset_state_handle& xposet,
 
   // Tranfser member names from scaffold to poset.
   // Have to do this after member_names_record in attribute record set
-  // has been internlized and after all members have been internalized.
+  // has been internalized and after all members have been internalized.
 
   lscaffold.put_member_names_to_poset();
 
