@@ -81,7 +81,7 @@ new_host(namespace_type& xns,
   ensure(result.scalar_space_path(true) == 
          xns.member_poset<vector_space_type::host_type>(xvector_space_path, xauto_access).scalar_space_path(xauto_access));
   ensure(result.p(true) == result.schema(true).fiber_space<fiber_type::host_type>().p(xauto_access));
-  ensure(result.p(true) == 2);
+  ensure(result.p(true) == 4);
   ensure(result.dd(true) == result.schema(true).fiber_space<fiber_type::host_type>().dd(xauto_access));
   ensure(result.vector_space_path(true) == xvector_space_path);
 
