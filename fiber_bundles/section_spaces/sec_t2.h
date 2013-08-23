@@ -36,9 +36,9 @@ namespace fiber_bundle
 class SHEAF_DLL_SPEC sec_t2 : public sec_tp
 {
 
-  //============================================================================
-  /// @name T2 FACET OF CLASS SEC_T2
-  //============================================================================
+  // ===========================================================
+  /// @name HOST_FACTORY FACET OF CLASS SEC_T2
+  // ===========================================================
   //@{
 
 public:
@@ -48,6 +48,30 @@ public:
   ///
   typedef t2 fiber_type;
 
+  ///
+  /// Manual, shallow factory method; creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
+  /// and table attribute scalar_space_path specified by xscalar_space_path.
+  ///
+  static host_type& new_host(namespace_type& xns, 
+                             const poset_path& xhost_path, 
+                             const poset_path& xschema_path,
+                             const poset_path& xscalar_space_path,
+                             bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+ 
+
+  //============================================================================
+  /// @name T2 FACET OF CLASS SEC_T2
+  //============================================================================
+  //@{
+
+public:
 
   ///
   /// Default constructor.

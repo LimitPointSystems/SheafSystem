@@ -66,6 +66,17 @@ public:
   ///
   static arg_list make_arg_list(int xp, const poset_path& xvector_space_path);
   
+  ///
+  /// Creates a new sec_atp_space in namespace xns with path xpath,
+  /// schema specified by xschema_path, and vector space specified
+  /// by xvector_space_path.
+  ///
+  static sec_stp_space& new_table(namespace_type& xhost, 
+                                 const poset_path& xpath, 
+                                 const poset_path& xschema_path,
+                                 const poset_path& xvector_space_path,
+                                 bool xauto_access);
+  
 protected:
 
   ///

@@ -40,7 +40,7 @@ class SHEAF_DLL_SPEC sec_tp : public sec_vd
 {
 
   // ===========================================================
-  /// @name HoST FACTORY FACET OF CLASS SEC_TP
+  /// @name HOST FACTORY FACET OF CLASS SEC_TP
   // ===========================================================
   //@{
 
