@@ -694,9 +694,19 @@ put_member_names_to_poset()
   _structure.member_name_map().clear();
   _structure.member_name_map() = _member_name_map;
 
-  // Postconditions:
+  name_multimap::const_iterator itr = _structure.member_name_map().begin();
+  while(itr != _structure.member_name_map().end())
+  {
+    pod_index_type lpod = itr->first;
+    ++itr;
+    
+    if(!_structure.contains_member(lpod, false))
+    {
+      _structure.member_name_map().delete_index(lpod);
+    }
+  }
 
-  ensure(structure().member_name_map() == member_name_map());
+  // Postconditions:
 
   // Exit:
 
