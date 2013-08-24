@@ -9,6 +9,10 @@
 
 #include "abstract_poset_member.impl.h"
 #include "assert_contract.h"
+#include "at0_space.h"
+#include "at1.h"
+#include "at1_space.h"
+#include "fiber_bundles_namespace.h"
 #include "namespace_poset.impl.h"
 #include "namespace_poset_member.h"
 #include "poset_handle_factory.h"
@@ -101,6 +105,166 @@ make_arg_list(const poset_path& xdomain_path, const poset_path& xrange_path)
   return result;
 }
 
+int
+fiber_bundle::jcb_space::
+d(const namespace_poset& xns, const poset_path& xschema_path, bool xauto_access)
+{
+  // Preconditions:
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+ 
+  // Body:
+
+  int result = schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access);
+
+  // Postconditions:
+
+  ensure(result == schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access));
+
+  // Exit:
+
+  return result;
+}
+
+int
+fiber_bundle::jcb_space::
+d(const namespace_poset& xns, const poset_path& xdomain_space_path, const poset_path& xrange_space_path, bool xauto_access)
+{
+  // Preconditions:
+
+  require(xns.path_is_auto_read_accessible<domain_space_type>(xdomain_space_path, xauto_access));
+  require(xns.path_is_auto_read_accessible<range_space_type>(xrange_space_path, xauto_access));
+ 
+  // Body:
+
+  int ldd = xns.member_poset<domain_space_type>(xdomain_space_path, xauto_access).d();  
+  int ldr = xns.member_poset<range_space_type>(xrange_space_path, xauto_access).d();  
+
+  int result = d(ldd, ldr);
+
+  // Postconditions:
+
+  ensure(result >= 0);
+
+  // Exit:
+
+  return result;
+}
+
+int
+fiber_bundle::jcb_space::
+d(int xdd, int xdr)
+{
+  return xdd*xdr;
+}
+
+fiber_bundle::jcb_space&
+fiber_bundle::jcb_space::
+new_table(namespace_type& xns, 
+          const poset_path& xpath, 
+          const poset_path& xschema_path,
+	  const poset_path& xdomain_path,
+	  const poset_path& xrange_path,
+          bool xauto_access)
+{
+  // cout << endl << "Entering jcb_space::new_table." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xpath.empty());
+  require(!xns.contains_path(xpath, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));
+
+  require(xns.path_is_auto_read_accessible<domain_space_type>(xdomain_path, xauto_access));
+  require(xns.path_is_auto_read_accessible<range_space_type>(xrange_path, xauto_access));
+
+  require(d(xns, xschema_path, xauto_access) == d(xns, xdomain_path, xrange_path, xauto_access));
+
+  require(xns.member_poset<domain_space_type>(xdomain_path, xauto_access).scalar_space_path(xauto_access) ==
+	  xns.member_poset<range_space_type>(xrange_path, xauto_access).scalar_space_path(xauto_access));
+
+  // Body:
+
+  // Create the table; have to new it because namespace keeps a pointer.
+
+  typedef jcb_space table_type;
+
+  table_type* ltable = new table_type();
+
+  // Create a handle of the right type for the schema member.
+
+  schema_poset_member lschema(&xns, xschema_path, xauto_access);
+
+  if(xauto_access)
+  {
+    lschema.get_read_access();
+  }
+
+  // Get the dimension (== number of row dofs) defined by the schema.
+
+  int ld = lschema.row_dof_ct();
+  int ldd = xns.member_poset<domain_space_type>(xdomain_path, xauto_access).d();
+  int ldr = xns.member_poset<range_space_type>(xrange_path, xauto_access).d();
+
+  poset_path lscalar_space_path =
+    xns.member_poset<domain_space_type>(xdomain_path, xauto_access).scalar_space_path(xauto_access);
+  
+  // Create the table dof map and set dof values;
+  // must be newed because poset_state::_table keep a pointer to it.
+
+  array_poset_dof_map* lmap = new array_poset_dof_map(&lschema, true);
+  lmap->put_dof("factor_ct", ld);
+  lmap->put_dof("d", ld);
+  lmap->put_dof("scalar_space_path", lscalar_space_path);
+  lmap->put_dof("domain_path", xdomain_path);
+  lmap->put_dof("dd", ldd);
+  lmap->put_dof("range_path", xrange_path);
+  lmap->put_dof("dr", ldr);
+  
+  // Create the state.
+
+  ltable->new_state(xns, xpath, lschema, *lmap);
+
+  if(xauto_access)
+  {
+    lschema.release_access();
+  }
+
+  jcb_space& result = *ltable;
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xpath);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(result.factor_ct(true) == result.d(true));
+  ensure(result.d(true) == d(xns, xschema_path, xauto_access));
+
+  ensure(result.domain_path(true) == xdomain_path);
+  ensure(result.dd(true) == xns.member_poset<domain_space_type>(xdomain_path, xauto_access).d());
+
+  ensure(result.range_path(true) == xrange_path);
+  ensure(result.dr(true) == xns.member_poset<range_space_type>(xrange_path, xauto_access).d());
+
+  ensure(result.scalar_space_path(true) ==
+	 xns.member_poset<domain_space_type>(xdomain_path, xauto_access).scalar_space_path(xauto_access) );
+  ensure(result.scalar_space_path(true) ==
+	 xns.member_poset<range_space_type>(xrange_path, xauto_access).scalar_space_path(xauto_access) );
+
+  // Exit:
+
+  // cout << "Leaving jcb_space::new_table." << endl;
+  return result;
+} 
+
 //==============================================================================
 // NEW HANDLE, NEW STATE CONSTRUCTORS
 //==============================================================================
@@ -140,13 +304,6 @@ jcb_space(namespace_poset& xhost,
   // Exit:
 
   return;
-}
-
-int
-fiber_bundle::jcb_space::
-d(int xdd, int xdr)
-{
-  return xdd*xdr;
 }
 
 int

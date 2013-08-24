@@ -336,14 +336,7 @@ new_space(fiber_bundles_namespace& xns)
   }
   else
   {
-    /// @todo Remove.
-//     result = &xns.new_base_space<zone_nodes_block>(path.poset_name(),
-// 						   "",
-// 						   "",
-// 						   ldb,
-// 						   true);
-    zone_nodes_block::new_host(xns, path.poset_name(), ldb, false);
-    result = &xns.member_poset<base_space_poset>(path.poset_name());
+    result = &zone_nodes_block::new_host(xns, path.poset_name(), ldb, false);
   }
 
   // Get

@@ -11,15 +11,84 @@
 #include "sec_stp.h"
 
 #include "assert_contract.h"
-#include "namespace_poset.h"
-
+#include "binary_section_space_schema_member.h"
+#include "binary_section_space_schema_poset.h"
+#include "fiber_bundles_namespace.h"
+#include "section_space_schema_member.impl.h"
+#include "section_space_schema_poset.h"
+#include "sec_at1.h"
+#include "sec_at1_space.h"
 #include "sec_stp_space.h"
+#include "sec_tuple_space.impl.h"
+#include "stp.h"
+#include "stp_space.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //==============================================================================
 // CLASS SEC_STP
 //==============================================================================
+
+// ===========================================================
+// HOST FACTORY FACET OF CLASS SEC_ATP
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+fiber_bundle::sec_stp::host_type&
+fiber_bundle::sec_stp::
+new_host(namespace_type& xns, 
+         const poset_path& xhost_path, 
+         const poset_path& xschema_path, 
+         const poset_path& xvector_space_path, 
+         bool xauto_access)
+{
+  // cout << endl << "Entering sec_stp::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible<schema_type::host_type>(xschema_path, xauto_access));
+  require(host_type::fiber_space_conforms<fiber_type::host_type>(xns, xschema_path, xauto_access));
+
+  require(xns.path_is_auto_read_accessible<vector_space_type::host_type>(xvector_space_path, xauto_access));
+
+  require(host_type::same_vector_fiber_space(xns, xschema_path, xvector_space_path, xauto_access));
+
+  // Body:
+
+  host_type& result = host_type::new_table(xns, xhost_path, xschema_path, xvector_space_path, xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(result.factor_ct(true) == result.schema(true).fiber_space<fiber_type::host_type>().factor_ct(xauto_access));
+  ensure(result.d(true) == result.schema(true).fiber_space<fiber_type::host_type>().d(xauto_access));
+  ensure(result.scalar_space_path(true) == 
+         xns.member_poset<vector_space_type::host_type>(xvector_space_path, xauto_access).scalar_space_path(xauto_access));
+  ensure(result.p(true) == result.schema(true).fiber_space<fiber_type::host_type>().p(xauto_access));
+  ensure(result.dd(true) == result.schema(true).fiber_space<fiber_type::host_type>().dd(xauto_access));
+  ensure(result.vector_space_path(true) == xvector_space_path);
+
+  // Exit:
+
+  // cout << "Leaving sec_stp::new_host." << endl;
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+ 
 
 //==============================================================================
 // STP FACET OF CLASS SEC_STP

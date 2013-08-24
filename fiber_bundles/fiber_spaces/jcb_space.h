@@ -16,7 +16,7 @@
 #ifndef VD_SPACE_H
 #include "vd_space.h"
 #endif
-  
+
 #ifndef JCB_TABLE_DOFS_TYPE_H
 #include "jcb_table_dofs_type.h"
 #endif
@@ -24,7 +24,8 @@
 namespace fiber_bundle
 {
 
-  using namespace sheaf;  
+  using namespace sheaf;
+  class at1_space;
   class jcb;
   
   
@@ -50,6 +51,16 @@ public:
   typedef jcb member_type;
 
   ///
+  /// The type of domain vector space  associated with this space.
+  ///
+  typedef at1_space domain_space_type;
+
+  ///
+  /// The type of range vector space  associated with this space.
+  ///
+  typedef at1_space range_space_type;
+
+  ///
   /// The name of the standard schema poset for this class.
   ///
   static const string& standard_schema_poset_name();
@@ -69,16 +80,40 @@ public:
   ///
   static arg_list make_arg_list(const poset_path& xdomain_path, const poset_path& xrange_path);
   
-  //============================================================================
-  // TABLE DOFS
-  //============================================================================
-
   using vd_space::d;
   
+  ///
+  /// The jacobian dimension implied by the schema specified by xschema_path.
+  ///
+  static int d(const namespace_poset& xns, const poset_path& xschema_path, bool xauto_access);
+  
+  ///
+  /// The jacobian dimension implied by tensor the dimension of the domain vector space
+  /// specified by xdomain_space_path and the range vector space specified by xrange_space_path.
+  ///
+  static int d(const namespace_poset& xns, const poset_path& xdomain_space_path, const poset_path& xrange_space_path, bool xauto_access);
+
   ///
   /// Dimension d() as a function of domain dimension xdd and range dimension xdr.
   ///
   static int d(int xdd, int xdr);
+
+  ///
+  /// Creates a new jcb_space in namespace xns with path xpath,
+  /// schema specified by xschema_path, and table attributes 
+  /// domain_path, range_path, and scalar_space_path specified by
+  /// xdomain_path and xrange_path, respectively.
+  ///
+  static jcb_space& new_table(namespace_type& xhost, 
+			      const poset_path& xpath, 
+			      const poset_path& xschema_path,
+			      const poset_path& xdomain_path,
+			      const poset_path& xrange_path,
+			      bool xauto_access);
+  
+  //============================================================================
+  // TABLE DOFS
+  //============================================================================
 
   ///
   /// The dimension of the underlying ("domain") vector space.

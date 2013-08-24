@@ -1334,12 +1334,9 @@ make_base_space_member_prototypes_poset()
   // Create the prototypes poset.
 
   string lname = standard_base_space_member_prototypes_poset_name();
-  /// @todo Remove.
-//   base_space_poset* lprototypes_poset =
-//     &new_base_space<base_space_member_prototype>(lname, "", "", 3, true);
 
-  base_space_member_prototype::new_host(*this, lname, 3, false);
-  base_space_poset& lprototypes_poset = member_poset<base_space_poset>(lname, false);
+  base_space_poset& lprototypes_poset = 
+    base_space_member_prototype::new_host(*this, lname, 3, false);
 
   lprototypes_poset.begin_jim_edit_mode(true);
 

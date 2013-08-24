@@ -36,9 +36,9 @@ namespace fiber_bundle
 class SHEAF_DLL_SPEC sec_at3 : public sec_atp
 {
 
-  //============================================================================
-  /// @name AT3 FACET OF CLASS SEC_AT3
-  //============================================================================
+  // ===========================================================
+  /// @name HOST_FACTORY FACET OF CLASS SEC_AT3
+  // ===========================================================
   //@{
 
 public:
@@ -47,6 +47,31 @@ public:
   /// The fiber type.
   ///
   typedef at3 fiber_type;
+
+  ///
+  /// Manual, shallow factory method; creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
+  /// and table attribute scalar_space_path specified by xscalar_space_path.
+  ///
+  static host_type& new_host(namespace_type& xns, 
+                             const poset_path& xhost_path, 
+                             const poset_path& xschema_path,
+                             const poset_path& xscalar_space_path,
+                             bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+ 
+
+  //============================================================================
+  /// @name AT3 FACET OF CLASS SEC_AT3
+  //============================================================================
+  //@{
+
+public:
 
   ///
   /// Default constructor.

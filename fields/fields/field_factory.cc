@@ -2595,15 +2595,8 @@ new_0d_point_base_space(namespace_poset& xns, const string& xname, size_type xi_
   // Make the base space.
 
   fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
-  /// @todo Remove.
-//   base_space_poset* lhost = &lns.new_base_space<unstructured_block>(xname+"_base_space",
-// 								    "",
-// 								    "",
-// 								    0,
-// 								    true);
   string lbase_name(xname+"_base_space");
-  unstructured_block::new_host(lns, lbase_name, 0, false);
-  base_space_poset& lhost = lns.member_poset<base_space_poset>(lbase_name, false);
+  base_space_poset& lhost = unstructured_block::new_host(lns, lbase_name, 0, false);
   
   lhost.get_read_write_access();
 
@@ -2673,16 +2666,9 @@ new_0d_point_base_space(namespace_poset& xns,
 
   // Make the base space.
 
-  fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);  /// @todo Remove.
-  /// @todo Remove.
-//   base_space_poset* lhost = &lns.new_base_space<unstructured_block>(xname+"_base_space",
-// 								   "",
-// 								   "",
-// 								   0,
-// 								   true);
+  fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
   string lbase_name(xname+"_base_space");
-  unstructured_block::new_host(lns, lbase_name, 0, false);
-  base_space_poset& lhost = lns.member_poset<base_space_poset>(lbase_name, false);
+  base_space_poset& lhost = unstructured_block::new_host(lns, lbase_name, 0, false);
   
   lhost.get_read_write_access();
 
@@ -2831,14 +2817,7 @@ new_1d_unstructured_base_space(namespace_poset& xns,
   // Make the base space.
 
   fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
-  /// @todo Remove.
-//   base_space_poset* lhost = &lns.new_base_space<unstructured_block>(xname,
-// 								    "",
-// 								    "",
-// 								    1,
-// 								    true);
-  unstructured_block::new_host(lns, xname, 1, false);
-  base_space_poset& lhost = lns.member_poset<base_space_poset>(xname, false);
+  base_space_poset& lhost = unstructured_block::new_host(lns, xname, 1, false);
   
   lhost.get_read_write_access();
 
@@ -2955,11 +2934,8 @@ new_1d_structured_base_space(namespace_poset& xns,
   // Make the base space.
 
   fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
-  /// @todo Remove.
-//   base_space_poset* lhost = &lns.new_base_space<structured_block_1d>(xname);
 
-  structured_block_1d::new_host(lns, xname, false);
-  base_space_poset& lhost = lns.member_poset<base_space_poset>(xname, false);
+  base_space_poset& lhost = structured_block_1d::new_host(lns, xname, false);
   
   lhost.get_read_write_access();
 
@@ -3079,16 +3055,8 @@ new_2d_unstructured_base_space(namespace_poset& xns,
 
   fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
 
-  /// @todo Remove.
-//   base_space_poset* lhost = &lns.new_base_space<unstructured_block>(xname+"_base_space",
-// 								    "",
-// 								    "",
-// 								    2,
-// 								    true);
-
   string lbase_name(xname+"_base_space");
-  unstructured_block::new_host(lns, lbase_name, 2, false);
-  base_space_poset& lhost = lns.member_poset<base_space_poset>(lbase_name, false);
+  base_space_poset& lhost = unstructured_block::new_host(lns, lbase_name, 2, false);
   
   lhost.get_read_write_access();
 
@@ -3284,16 +3252,9 @@ new_2d_unstructured_base_space(namespace_poset& xns,
   // Make the base space using the connectivy from the triangulation.
 
   fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
-  /// @todo Remove.
-//   base_space_poset* lhost = &lns.new_base_space<unstructured_block>(xname+"_base_space",
-// 								    "",
-// 								    "",
-// 								    2,
-// 								    true);
 
   string lbase_name(xname+"_base_space");
-  unstructured_block::new_host(lns, lbase_name, 2, false);
-  base_space_poset& lhost = lns.member_poset<base_space_poset>(lbase_name, false);
+  base_space_poset& lhost = unstructured_block::new_host(lns, lbase_name, 2, false);
   
   lhost.get_read_write_access();
 
@@ -3412,11 +3373,8 @@ new_2d_structured_base_space(namespace_poset& xns,
   // Make the base space.
 
   fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
-  /// @todo Remove.
-//   base_space_poset* lhost = &lns.new_base_space<structured_block_2d>(xname);
   
-  structured_block_2d::new_host(lns, xname, false);
-  base_space_poset& lhost = lns.member_poset<base_space_poset>(xname, false);
+  base_space_poset& lhost = structured_block_2d::new_host(lns, xname, false);
 
   lhost.get_read_write_access();
 
@@ -3539,16 +3497,8 @@ new_3d_unstructured_base_space(namespace_poset& xns,
 
   fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
 
-  /// @todo Remove.
-//   base_space_poset* lhost = &lns.new_base_space<unstructured_block>(xname+"_base_space",
-// 								    "",
-// 								    "",
-// 								    3,
-// 								    true);
-  
   string lbase_name(xname+"_base_space");
-  unstructured_block::new_host(lns, lbase_name, 3, false);
-  base_space_poset& lhost = lns.member_poset<base_space_poset>(lbase_name, false);
+  base_space_poset& lhost = unstructured_block::new_host(lns, lbase_name, 3, false);
 
   lhost.get_read_write_access();
 
@@ -3753,16 +3703,8 @@ new_3d_unstructured_base_space(namespace_poset& xns,
 
   fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
 
-  /// @todo Remove.
-//   base_space_poset* lhost = &lns.new_base_space<unstructured_block>(xname+"_base_space",
-// 								    "",
-// 								    "",
-// 								    3,
-// 								    true);
-  
   string lbase_name(xname+"_base_space");
-  unstructured_block::new_host(lns, lbase_name, 3, false);
-  base_space_poset& lhost = lns.member_poset<base_space_poset>(lbase_name, false);
+  base_space_poset& lhost = unstructured_block::new_host(lns, lbase_name, 3, false);
 
   lhost.get_read_write_access();
 
@@ -3884,12 +3826,9 @@ new_3d_structured_base_space(namespace_poset& xns,
   // Make the base space.
 
   fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
-  /// @todo Remove.
-//   base_space_poset* lhost = &lns.new_base_space<structured_block_3d>(xname+"_base_space");
   
   string lbase_name(xname+"_base_space");
-  structured_block_3d::new_host(lns, lbase_name, false);
-  base_space_poset& lhost = lns.member_poset<base_space_poset>(lbase_name, false);
+  base_space_poset& lhost = structured_block_3d::new_host(lns, lbase_name, false);
   
   lhost.get_read_write_access();
 

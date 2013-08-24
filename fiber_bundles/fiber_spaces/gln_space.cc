@@ -103,6 +103,124 @@ make_arg_list(int xn,
 
 int
 fiber_bundle::gln_space::
+d(const namespace_poset& xns,const poset_path& xvector_space_path, bool xauto_access)
+{
+  // Preconditions:
+
+  require(xns.path_is_auto_read_accessible<vector_space_type>(xvector_space_path, xauto_access));
+ 
+  // Body:
+
+  int ln = xns.member_poset<vector_space_type>(xvector_space_path, xauto_access).d();  
+
+  int result = d(ln);
+
+  // Postconditions:
+
+  ensure(result >= 0);
+
+  // Exit:
+
+  return result;
+}
+
+int
+fiber_bundle::gln_space::
+d(int xn)
+{
+  return 2*xn*xn;
+}
+
+fiber_bundle::gln_space&
+fiber_bundle::gln_space::
+new_table(namespace_type& xns, 
+          const poset_path& xpath, 
+          const poset_path& xschema_path, 
+          const poset_path& xvector_space_path, 
+          bool xauto_access)
+{
+  // cout << endl << "Entering gln_space::new_table." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xpath.empty());
+  require(!xns.contains_path(xpath, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));
+
+  require(xns.path_is_auto_read_accessible<vector_space_type>(xvector_space_path, xauto_access));
+
+  require(schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access) == d(xns, xvector_space_path, xauto_access));
+
+  // Body:
+
+  // Create the table; have to new it because namespace keeps a pointer.
+
+  typedef gln_space table_type;
+
+  table_type* ltable = new table_type();
+
+  // Create a handle of the right type for the schema member.
+
+  schema_poset_member lschema(&xns, xschema_path, xauto_access);
+
+  if(xauto_access)
+  {
+    lschema.get_read_access();
+  }
+
+  // Get the dimension of the vector space.
+
+  int ln = xns.member_poset<vector_space_type>(xvector_space_path, xauto_access).d();
+
+  // Get the scalar space path from the domain vector space.
+
+  poset_path lscalar_space_path = xns.member_poset<vector_space_type>(xvector_space_path, xauto_access).scalar_space_path(xauto_access);
+  
+  // Create the table dof map and set dof values;
+  // must be newed because poset_state::_table keep a pointer to it.
+
+  array_poset_dof_map* lmap = new array_poset_dof_map(&lschema, true);
+  lmap->put_dof("scalar_space_path", lscalar_space_path);
+  lmap->put_dof("n", ln);
+  lmap->put_dof("vector_space_path", xvector_space_path);
+  
+  // Create the state.
+
+  ltable->new_state(xns, xpath, lschema, *lmap);
+
+  if(xauto_access)
+  {
+    lschema.release_access();
+  }
+
+  gln_space& result = *ltable;
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xpath);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(result.scalar_space_path(true) == xns.member_poset<vector_space_type>(xvector_space_path, xauto_access).scalar_space_path(xauto_access) );
+  ensure(result.n(true) == xns.member_poset<vector_space_type>(xvector_space_path, xauto_access).d());
+  ensure(result.vector_space_path(true) == xvector_space_path );
+
+  ensure(result.d(true) == d(xns, xvector_space_path, xauto_access));
+
+  // Exit:
+
+  // cout << "Leaving gln_space::new_table." << endl;
+  return result;
+}
+
+int
+fiber_bundle::gln_space::
 n() const
 {
   // Preconditions:
@@ -267,8 +385,7 @@ d() const
 
   // Body:
 
-  int ln = n();
-  int result = 2*ln*ln;
+  int result = d(n());
 
   // Postconditions:
 
