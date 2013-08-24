@@ -77,6 +77,11 @@ public:
   static namespace_poset* current_namespace();
 
   ///
+  /// The schema path used for constructing schema posets.
+  ///
+  static poset_path primitives_schema_path();
+
+  ///
   /// Destructor
   ///
   virtual ~namespace_poset();

@@ -68,6 +68,45 @@ class SHEAF_DLL_SPEC schema_poset_member : public total_poset_member
   friend SHEAF_DLL_SPEC size_t deep_size(const schema_poset_member& xp, bool xinclude_shallow);
 
   // ===========================================================
+  /// @name HOST FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  // Typedefs:
+
+
+  ///
+  /// The path to the standard schema for this class.
+  ///
+  static const poset_path& standard_schema_path();
+
+  ///
+  /// Manual, shallow factory method; creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path and
+  /// schema specified by xschema_path.
+  ///
+  static host_type& new_host(namespace_type& xns, 
+			     const poset_path& xhost_path, 
+			     const poset_path& xschema_path,
+			     bool xauto_access);
+
+  ///
+  /// The host with path standard_host_path(static_class_name(), xsuffix).
+  /// Returns the host if it already exists, otherwise, creates it in namespace xns
+  /// with schema specified by standard_schema_path() and standard paths for prerequisites,
+  /// which are also created if needed.
+  ///
+  static host_type& standard_host(namespace_type& xns, const poset_path& xhost_path, bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+
+  // ===========================================================
   /// @name SCHEMA_POSET_MEMBER FACET
   // ===========================================================
   //@{

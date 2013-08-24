@@ -119,6 +119,30 @@ current_namespace()
   return _current_namespace;
 }
 
+sheaf::poset_path
+sheaf::namespace_poset::
+primitives_schema_path()
+{
+  // cout << endl << "Entering namespace_poset::primitives_schema_path." << endl;
+
+  // Preconditions:
+
+
+  // Body:
+
+  poset_path result(primitives_poset_schema::standard_name(), "top");
+
+  // Postconditions:
+
+  ensure(result.full());
+  
+  // Exit:
+
+  // cout << "Leaving namespace_poset::primitives_schema_path." << endl;
+  return result;
+}
+
+
 sheaf::namespace_poset::
 ~namespace_poset()
 {

@@ -182,17 +182,10 @@ public:
 
   // Typedefs:
 
-
-  // $$SCRIBBLE: need the following for consistency,
-  // but it is not clear what they should be. We could
-  // implement a single standard schema space that would
-  // include the fiber_space_schema. The standard schema for
-  // abstract_poset_member would be bottom of this space.
-
   ///
   /// The type of namespace for this type of member.
   ///
-  typedef sheaves_namespace namespace_type;
+  typedef namespace_poset namespace_type;
 
   ///
   /// The type of host poset for this type of member.
