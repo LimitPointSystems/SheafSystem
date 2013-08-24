@@ -182,36 +182,12 @@ public:
 
   // Typedefs:
 
-  ///
-  /// The type of the table dofs.
-  ///
-  typedef abstract_poset_member_table_dofs_type table_dofs_type;
-
-  ///
-  /// The type of the row dofs.
-  ///
-  typedef abstract_poset_member_row_dofs_type row_dofs_type;
 
   // $$SCRIBBLE: need the following for consistency,
   // but it is not clear what they should be. We could
   // implement a single standard schema space that would
   // include the fiber_space_schema. The standard schema for
   // abstract_poset_member would be bottom of this space.
-
-  //   ///
-  //   /// The name of the standard schema poset for this class.
-  //   ///
-  //   static const string& standard_schema_poset_name();
-
-  //   ///
-  //   /// The path to the standard schema for this class.
-  //   ///
-  //   static const poset_path& standard_schema_path();
-
-  //   ///
-  //   /// Creates the standard schema for this class in namespace xns.
-  //   ///
-  //   static void make_standard_schema(namespace_poset& xns);
 
   ///
   /// The type of namespace for this type of member.
@@ -221,17 +197,17 @@ public:
   ///
   /// The type of host poset for this type of member.
   ///
-  typedef poset host_type;
+  typedef poset host_type;  
 
   ///
-  /// Creates a new host poset for members of this type
-  /// with path xhost_path and schema specified by xschema_path.
+  /// Manual, shallow factory method; creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path and schema specified 
+  /// by xschema_path,
   ///
-  static void new_host(namespace_type& xns, 
-                       const poset_path& xhost_path, 
-                       const poset_path& xschema_path, 
-                       bool xauto_access);
-  
+  static host_type& new_host(namespace_type& xns, 
+			     const poset_path& xhost_path, 
+			     const poset_path& xschema_path,
+			     bool xauto_access);
 
 protected:
 
@@ -246,6 +222,17 @@ private:
 
 public:
 
+  // Typedefs:
+
+  ///
+  /// The type of the table dofs.
+  ///
+  typedef abstract_poset_member_table_dofs_type table_dofs_type;
+
+  ///
+  /// The type of the row dofs.
+  ///
+  typedef abstract_poset_member_row_dofs_type row_dofs_type;
 
 
   ///
