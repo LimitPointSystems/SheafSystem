@@ -11,16 +11,191 @@
 #include "sec_jcb_e33.h"
 
 #include "assert_contract.h"
-#include "namespace_poset.h"
-
+#include "base_space_poset.h"
+#include "binary_section_space_schema_member.impl.h"
+#include "fiber_bundles_namespace.h"
+#include "namespace_poset.impl.h"
+#include "section_space_schema_member.impl.h"
+#include "section_space_schema_poset.h"
+#include "sec_at0.h"
+#include "sec_at1.h"
+#include "sec_at1_space.h"
+#include "sec_e3.h"
 #include "sec_jcb_space.h"
-
+#include "sec_tuple.impl.h"
+#include "sec_tuple_space.impl.h"
+#include "jcb_e33.h"
+#include "jcb_space.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //==============================================================================
 // CLASS SEC_JCB_E33
 //==============================================================================
+
+// ===========================================================
+// HOST FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+fiber_bundle::sec_jcb_e33::host_type&
+fiber_bundle::sec_jcb_e33::
+new_host(namespace_type& xns, 
+         const poset_path& xhost_path, 
+         const poset_path& xschema_path, 
+         const poset_path& xdomain_path,
+	 const poset_path& xrange_path,
+         bool xauto_access)
+{
+  // cout << endl << "Entering sec_jcb_e33::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible<schema_type::host_type>(xschema_path, xauto_access));
+  require(host_type::fiber_space_conforms<fiber_type::host_type>(xns, xschema_path, xauto_access));
+
+  require(xns.path_is_auto_read_accessible<domain_type::host_type>(xdomain_path, xauto_access));
+  require(xns.path_is_auto_read_accessible<range_type::host_type>(xrange_path, xauto_access));
+
+  require(host_type::same_vector_fiber_space(xns, xschema_path, xdomain_path, xrange_path, xauto_access));
+
+  // Body:
+
+  host_type& result = host_type::new_table(xns, xhost_path, xschema_path, xdomain_path, xrange_path, xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(result.factor_ct(true) == result.schema(true).fiber_space<fiber_type::host_type>().factor_ct(xauto_access));
+  ensure(result.d(true) == result.schema(true).fiber_space<fiber_type::host_type>().d(xauto_access));
+  ensure(result.scalar_space_path(true) == 
+         xns.member_poset<domain_type::host_type>(xdomain_path, xauto_access).scalar_space_path(xauto_access));
+  ensure(result.scalar_space_path(true) == 
+         xns.member_poset<range_type::host_type>(xrange_path, xauto_access).scalar_space_path(xauto_access));
+  ensure(result.dd(true) == result.schema(true).fiber_space<fiber_type::host_type>().dd(xauto_access));
+  ensure(result.dr(true) == result.schema(true).fiber_space<fiber_type::host_type>().dr(xauto_access));
+  ensure(result.domain_path(true) == xdomain_path);
+  ensure(result.range_path(true) == xrange_path);
+
+  // Exit:
+
+  // cout << "Leaving sec_jcb_e33::new_host." << endl;
+  return result;
+}
+
+fiber_bundle::sec_jcb_e33::host_type&
+fiber_bundle::sec_jcb_e33::
+standard_host(namespace_type& xns, 
+              const poset_path& xbase_path, 
+              const poset_path& xrep_path, 
+              const string& xsection_suffix, 
+              const string& xfiber_suffix, 
+              bool xauto_access)
+{
+  // cout << endl << "Entering sec_jcb_e33::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(xbase_path.full());
+  require(xns.path_is_auto_read_accessible<base_space_poset>(xbase_path, xauto_access));
+
+  require(xrep_path.empty() || xrep_path.full());
+  require(xrep_path.empty() || xns.path_is_auto_read_accessible<sec_rep_descriptor_poset>(xrep_path, xauto_access));  
+
+  require(xsection_suffix.empty() || poset_path::is_valid_name(xsection_suffix));
+
+  require(xfiber_suffix.empty() || poset_path::is_valid_name(xfiber_suffix));
+
+  require(standard_host_is_available<sec_jcb_e33>(xns, xbase_path, xrep_path, xsection_suffix, xfiber_suffix, xauto_access));
+  require(fiber_type::standard_host_is_available<fiber_type>(xns, xfiber_suffix, xauto_access));
+  require(schema_type::standard_host_is_available<sec_jcb_e33>(xns, xbase_path, xrep_path, xfiber_suffix, xauto_access));
+
+  // Body:
+
+  poset_path lstd_path = standard_host_path<sec_jcb_e33>(xbase_path, xrep_path, xsection_suffix, xfiber_suffix);
+  
+  host_type* lresult_ptr;
+  
+  if(xns.contains_path(lstd_path, xauto_access))
+  {
+    // Standard host already exists, just return it.
+
+    lresult_ptr = &xns.member_poset<host_type>(lstd_path, xauto_access);
+  }
+  else
+  {
+    // Standard host doesn't exist, have to create it.
+
+    // Apply default for rep path if needed.
+
+    poset_path lrep_path = (!xrep_path.empty() ? xrep_path : standard_rep_path());
+
+    // Find or create the standard schema member.
+
+    poset_path lstd_schema_path = 
+      schema_type::standard_member<sec_jcb_e33>(xns, xbase_path, lrep_path, xfiber_suffix, xauto_access);
+
+    // Find or create the standard domain space.
+
+    poset_path ldomain_path = 
+      domain_type::standard_host(xns, xbase_path, lrep_path, xsection_suffix, xfiber_suffix, xauto_access).path(xauto_access);
+    
+    // Find or create the standard range space.
+
+    poset_path lrange_path = 
+      range_type::standard_host(xns, xbase_path, lrep_path, xsection_suffix, xfiber_suffix, xauto_access).path(xauto_access);
+    
+    // Create the standard host.
+
+    lresult_ptr = &new_host(xns, lstd_path, lstd_schema_path, ldomain_path, lrange_path, xauto_access);
+  }
+
+  host_type& result = *lresult_ptr;
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == standard_host_path<sec_jcb_e33>(xbase_path, xrep_path, xsection_suffix, xfiber_suffix));
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == 
+         schema_type::standard_member_path<sec_jcb_e33>(xbase_path, xrep_path, xfiber_suffix));
+
+  ensure(result.factor_ct(true) == result.schema(true).fiber_space<fiber_type::host_type>().factor_ct(xauto_access));
+  ensure(result.d(true) == result.schema(true).fiber_space<fiber_type::host_type>().d(xauto_access));
+  ensure(result.scalar_space_path(true) == 
+	 standard_host_path<domain_type::scalar_type>(xbase_path, xrep_path, xsection_suffix, xfiber_suffix));
+  ensure(result.scalar_space_path(true) == 
+	 standard_host_path<range_type::scalar_type>(xbase_path, xrep_path, xsection_suffix, xfiber_suffix));
+  ensure(result.dd(true) == result.schema(true).fiber_space<fiber_type::host_type>().dd(xauto_access));
+  ensure(result.dr(true) == result.schema(true).fiber_space<fiber_type::host_type>().dr(xauto_access));
+  ensure(result.domain_path(true) ==
+	 standard_host_path<domain_type>(xbase_path, xrep_path, xsection_suffix, xfiber_suffix));
+  ensure(result.range_path(true) ==
+	 standard_host_path<range_type>(xbase_path, xrep_path, xsection_suffix, xfiber_suffix));
+
+  // Exit:
+
+  // cout << "Leaving sec_jcb_e33::new_host." << endl;
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
 
 //==============================================================================
 // JCB_E33 FACET OF CLASS SEC_JCB_E33

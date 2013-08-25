@@ -707,7 +707,7 @@ standard_host(namespace_type& xns, const string& xsuffix, bool xauto_access)
   ensure(result.range_path(true) == standard_host_path<range_type>(xsuffix));
 
   ensure(result.scalar_space_path(true) == standard_host_path<domain_type::scalar_type>(xsuffix));
-  ensure(result.scalar_space_path(true) == standard_host_path<domain_type::scalar_type>(xsuffix));
+  ensure(result.scalar_space_path(true) == standard_host_path<range_type::scalar_type>(xsuffix));
 
   // Exit:
 

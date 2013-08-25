@@ -11,16 +11,90 @@
 #include "sec_jcb_ed.h"
 
 #include "assert_contract.h"
-#include "namespace_poset.h"
-
+#include "binary_section_space_schema_member.h"
+#include "binary_section_space_schema_poset.h"
+#include "fiber_bundles_namespace.h"
+#include "section_space_schema_member.impl.h"
+#include "section_space_schema_poset.h"
+#include "sec_at0.h"
+#include "sec_at1.h"
+#include "sec_at1_space.h"
 #include "sec_jcb_space.h"
-
+#include "sec_tuple_space.impl.h"
+#include "jcb_ed.h"
+#include "jcb_space.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //==============================================================================
 // CLASS SEC_JCB_ED
 //==============================================================================
+
+// ===========================================================
+// HOST FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+fiber_bundle::sec_jcb_ed::host_type&
+fiber_bundle::sec_jcb_ed::
+new_host(namespace_type& xns, 
+         const poset_path& xhost_path, 
+         const poset_path& xschema_path, 
+         const poset_path& xdomain_path,
+	 const poset_path& xrange_path,
+         bool xauto_access)
+{
+  // cout << endl << "Entering sec_jcb_ed::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible<schema_type::host_type>(xschema_path, xauto_access));
+  require(host_type::fiber_space_conforms<fiber_type::host_type>(xns, xschema_path, xauto_access));
+
+  require(xns.path_is_auto_read_accessible<domain_type::host_type>(xdomain_path, xauto_access));
+  require(xns.path_is_auto_read_accessible<range_type::host_type>(xrange_path, xauto_access));
+
+  require(host_type::same_vector_fiber_space(xns, xschema_path, xdomain_path, xrange_path, xauto_access));
+
+  // Body:
+
+  host_type& result = host_type::new_table(xns, xhost_path, xschema_path, xdomain_path, xrange_path, xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(result.factor_ct(true) == result.schema(true).fiber_space<fiber_type::host_type>().factor_ct(xauto_access));
+  ensure(result.d(true) == result.schema(true).fiber_space<fiber_type::host_type>().d(xauto_access));
+  ensure(result.scalar_space_path(true) == 
+         xns.member_poset<domain_type::host_type>(xdomain_path, xauto_access).scalar_space_path(xauto_access));
+  ensure(result.scalar_space_path(true) == 
+         xns.member_poset<range_type::host_type>(xrange_path, xauto_access).scalar_space_path(xauto_access));
+  ensure(result.dd(true) == result.schema(true).fiber_space<fiber_type::host_type>().dd(xauto_access));
+  ensure(result.dr(true) == result.schema(true).fiber_space<fiber_type::host_type>().dr(xauto_access));
+  ensure(result.domain_path(true) == xdomain_path);
+  ensure(result.range_path(true) == xrange_path);
+
+  // Exit:
+
+  // cout << "Leaving sec_jcb_ed::new_host." << endl;
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+ 
 
 //==============================================================================
 // JCB_ED FACET OF CLASS SEC_JCB_ED

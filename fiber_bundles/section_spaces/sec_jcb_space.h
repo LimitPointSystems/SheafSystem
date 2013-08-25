@@ -33,6 +33,8 @@ namespace fiber_bundle
 {
 using namespace sheaf;
 
+class sec_at0;
+class sec_at1;
 class sec_jcb;
 class jcb;
 
@@ -63,7 +65,17 @@ public:
   ///
   /// The scalar type definition.
   ///
-  typedef sec_jcb scalar_type;
+  typedef sec_at0 scalar_type;
+
+  ///
+  /// The type of vector sections that form the domain of jacobian sections of this type.
+  ///
+  typedef sec_at1 domain_space_type;
+
+  ///
+  /// The type of vector sections that form the range of jacobian sections of this type.
+  ///
+  typedef sec_at1 range_space_type;
 
   ///
   /// The table dofs type defined by the standard schema.
@@ -74,6 +86,32 @@ public:
   /// Creates an arg list which conforms to the schema of this.
   ///
   static arg_list make_arg_list(const poset_path& xdomain_path, const poset_path& xrange_path);
+  
+  ///
+  /// True if and only if domain space of fiber space == fiber space of domain space and
+  /// the range space of fiber space == fiber space of range space.
+  /// More precisely, true if and only if the domain and range space of the fiber space of the 
+  /// jacobian section schema specified by  xschema_path is the same as the fiber space 
+  /// of the schema of the domain section space and range section space specified by
+  /// xdomain_path and xrange_path respectively.
+  ///
+  static bool same_vector_fiber_space(const namespace_poset& xns, 
+                                      const poset_path& xschema_path, 
+                                      const poset_path& xdomain_path,
+				      const poset_path& xrange_path,
+                                      bool xauto_access);
+
+  ///
+  /// Creates a new sec_jcb_space in namespace xns with path xpath,
+  /// schema specified by xschema_path, domain vector space specified
+  /// by xdomain_path, and range vector space specified by xrange_path.
+  ///
+  static sec_jcb_space& new_table(namespace_type& xhost, 
+				  const poset_path& xpath, 
+				  const poset_path& xschema_path,
+				  const poset_path& xdomain_path,
+				  const poset_path& xrange_path,
+				  bool xauto_access);
   
   //============================================================================
   // TABLE DOFS
