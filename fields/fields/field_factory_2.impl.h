@@ -996,10 +996,10 @@ new_field(fiber_bundles_namespace& xns,
   require(unexecutable("base exists or index_ubs compatible with base_type"));
 
   require(xcoord_path.full());
-  require(xns.path_is_auto_read_accessible<typename coord_type::host_type>(xcoord_path, xauto_access));
+  require(xns.path_is_auto_read_write_accessible<typename coord_type::host_type>(xcoord_path.poset_name(), xauto_access));
   
   require(xprop_path.full());
-  require(xns.path_is_auto_read_accessible<typename prop_type::host_type>(xprop_path, xauto_access));
+  require(xns.path_is_auto_read_write_accessible<typename prop_type::host_type>(xprop_path.poset_name(), xauto_access));
 
   // Body:
 
