@@ -16,6 +16,7 @@
 #include "sec_e1_uniform.h"
 #include "sec_e2_uniform.h"
 #include "sec_e3_uniform.h"
+#include "sec_ed_invertible.h"
 #include "point_block_1d.h"
 #include "point_block_2d.h"
 #include "point_block_3d.h"
@@ -29,6 +30,9 @@
 #include "fiber_bundles_namespace.h"
 #include "poset_path.h"
 #include "wsv_block.h"
+
+#include "sec_tuple.impl.h"
+#include "sec_tuple_space.impl.h"
 
 using namespace fields; // Workaround for MS C++ bug.
 
