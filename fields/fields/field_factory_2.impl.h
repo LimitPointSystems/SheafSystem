@@ -1204,11 +1204,11 @@ standard_field(fiber_bundles_namespace& xns,
 
   typename prop_type::host_type& lprop_host =
     prop_type::standard_host(xns,
-			      xbase_path,
-			      prop_rep_path(),
-			      prop_section_suffix(),
+			     xbase_path,
+			     prop_rep_path(),
+			     prop_section_suffix(),
 			     prop_fiber_suffix(),
-			      false);
+			     false);
 
   // Find or create the property section.
 

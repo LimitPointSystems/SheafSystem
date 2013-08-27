@@ -55,7 +55,6 @@ set(SRCS
     met_e2.inst.cc
     met_e3.inst.cc
     namespace_poset.inst.cc
-    section_space_factory.inst.cc
     st2.inst.cc
     st2_e2.inst.cc
     st2_e3.inst.cc

@@ -58,10 +58,10 @@ standard_host_path(const poset_path& xbase_path, const poset_path& xrep_path, co
   
   typedef typename S::fiber_type fiber_type;
 
+  poset_path lstd_fiber_path(fiber_type::template standard_host_path<fiber_type>(xfiber_suffix));
   poset_path lrep_path = !xrep_path.empty() ? xrep_path : S::standard_rep_path();
   
-  
-  string lposet_name(fiber_type::static_class_name());
+  string lposet_name(lstd_fiber_path.poset_name());
   lposet_name += "_on_";
   lposet_name += xbase_path.poset_name();
   lposet_name += "_";

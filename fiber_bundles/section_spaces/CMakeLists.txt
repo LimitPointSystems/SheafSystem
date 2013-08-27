@@ -74,7 +74,6 @@ set(SRCS
     sec_rep_descriptor_poset.cc
     sec_rep_space.cc
     sec_rep_space_member.cc
-    section_space_factory.cc
     section_space_schema_member.cc
     section_space_schema_poset.cc
     section_traits.cc
@@ -94,7 +93,6 @@ set(ADDITIONAL_INCS
     sec_met.impl.h
     sec_st2.impl.h
     sec_stp.impl.h
-    section_space_factory.impl.h 
     section_space_schema_member.impl.h
     sec_tp.impl.h
     sec_tuple.impl.h
