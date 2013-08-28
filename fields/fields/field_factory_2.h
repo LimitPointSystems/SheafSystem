@@ -22,10 +22,6 @@
 #include "poset_path.h"
 #endif
 
-#ifndef SECTION_SPACE_FACTORY_H
-#include "section_space_factory.h"
-#endif
-
 #ifndef WSV_BLOCK_H
 #include "wsv_block.h"
 #endif
@@ -219,6 +215,10 @@ namespace fiber_bundle
 class point_block_1d;
 class point_block_2d;
 class point_block_3d;
+class fiber_bundles_namespace;
+class structured_block_1d;
+class structured_block_2d;
+class structured_block_3d;
 class unstructured_block;
 }
 
