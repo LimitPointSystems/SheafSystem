@@ -163,9 +163,9 @@ new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xs
 
 fiber_bundle::point_block_2d::host_type&
 fiber_bundle::point_block_2d::
-new_host(namespace_type& xns, const poset_path& xhost_path, bool xauto_access)
+standard_host(namespace_type& xns, const poset_path& xhost_path, bool xauto_access)
 {
-  // cout << endl << "Entering point_block_2d::new_host." << endl;
+  // cout << endl << "Entering point_block_2d::standard_host." << endl;
 
   // Preconditions:
 
@@ -190,7 +190,7 @@ new_host(namespace_type& xns, const poset_path& xhost_path, bool xauto_access)
   
   // Exit:
 
-  // cout << "Leaving point_block_2d::new_host." << endl;
+  // cout << "Leaving point_block_2d::standard_host." << endl;
   return result;
 }
 

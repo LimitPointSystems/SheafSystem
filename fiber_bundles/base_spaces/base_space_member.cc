@@ -183,9 +183,9 @@ new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xs
 
 fiber_bundle::base_space_member::host_type&
 fiber_bundle::base_space_member::
-new_host(namespace_type& xns, const poset_path& xhost_path, int xmax_db, bool xauto_access)
+standard_host(namespace_type& xns, const poset_path& xhost_path, int xmax_db, bool xauto_access)
 {
-  // cout << endl << "Entering base_space_member::new_host." << endl;
+  // cout << endl << "Entering base_space_member::standard_host." << endl;
 
   // Preconditions:
 
@@ -212,7 +212,7 @@ new_host(namespace_type& xns, const poset_path& xhost_path, int xmax_db, bool xa
   
   // Exit:
 
-  // cout << "Leaving base_space_member::new_host." << endl;
+  // cout << "Leaving base_space_member::standard_host." << endl;
   return result;
 }
 

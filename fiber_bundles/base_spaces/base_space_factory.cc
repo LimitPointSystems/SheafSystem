@@ -336,7 +336,7 @@ new_space(fiber_bundles_namespace& xns)
   }
   else
   {
-    result = &zone_nodes_block::new_host(xns, path.poset_name(), ldb, false);
+    result = &zone_nodes_block::standard_host(xns, path.poset_name(), ldb, false);
   }
 
   // Get
@@ -461,12 +461,7 @@ new_space(fiber_bundles_namespace& xns)
   }
   else
   {
-//     result = &xns.new_base_space<unstructured_block>(path.poset_name(),
-// 						     "",
-// 						     "",
-// 						     ldb,
-// 						     true);
-    zone_nodes_block::new_host(xns, path.poset_name(), ldb, false);
+    zone_nodes_block::standard_host(xns, path.poset_name(), ldb, false);
     result = &xns.member_poset<base_space_poset>(path.poset_name());
   }
 

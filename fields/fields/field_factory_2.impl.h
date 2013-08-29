@@ -547,7 +547,7 @@ make_base_space(fiber_bundles_namespace& xns,
     }
     else
     {
-      lhost = &structured_block_1d::new_host(xns, xbase_path.poset_name(), false);
+      lhost = &structured_block_1d::standard_host(xns, xbase_path.poset_name(), false);
     }
 
     xresult.new_state(lhost, xbase_index_ubs[0], true);
@@ -597,7 +597,7 @@ make_base_space(fiber_bundles_namespace& xns,
     }
     else
     {
-      lhost = &structured_block_2d::new_host(xns, xbase_path.poset_name(), false);
+      lhost = &structured_block_2d::standard_host(xns, xbase_path.poset_name(), false);
     }
 
     xresult.new_state(lhost, xbase_index_ubs[0], xbase_index_ubs[1], true);
@@ -649,7 +649,7 @@ make_base_space(fiber_bundles_namespace& xns,
     }
     else
     {
-      lhost = &structured_block_3d::new_host(xns, xbase_path.poset_name(), false);
+      lhost = &structured_block_3d::standard_host(xns, xbase_path.poset_name(), false);
     }
 
     xresult.new_state(lhost,
@@ -703,7 +703,7 @@ make_base_space(fiber_bundles_namespace& xns,
     }
     else
     {
-      lhost = &point_block_1d::new_host(xns, xbase_path.poset_name(), false);
+      lhost = &point_block_1d::standard_host(xns, xbase_path.poset_name(), false);
     }
 
     xresult.new_state(lhost, xbase_index_ubs[0], true);
@@ -753,7 +753,7 @@ make_base_space(fiber_bundles_namespace& xns,
     }
     else
     {
-      lhost = &point_block_2d::new_host(xns, xbase_path.poset_name(), false);
+      lhost = &point_block_2d::standard_host(xns, xbase_path.poset_name(), false);
     }
 
     xresult.new_state(lhost, xbase_index_ubs[0], xbase_index_ubs[1], true);
@@ -803,7 +803,7 @@ make_base_space(fiber_bundles_namespace& xns,
     }
     else
     {
-      lhost = &point_block_3d::new_host(xns, xbase_path.poset_name(), false);
+      lhost = &point_block_3d::standard_host(xns, xbase_path.poset_name(), false);
     }
 
     xresult.new_state(lhost,
@@ -863,7 +863,7 @@ make_base_space(fiber_bundles_namespace& xns,
     }
     else
     {
-      lhost = &unstructured_block::new_host(xns, xbase_path.poset_name(), ldb, false);
+      lhost = &unstructured_block::standard_host(xns, xbase_path.poset_name(), ldb, false);
     }
 
     string lposet_name(xns.standard_base_space_member_prototypes_poset_name());

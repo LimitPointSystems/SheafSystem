@@ -163,9 +163,9 @@ new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xs
 
 fiber_bundle::zone_nodes_block::host_type&
 fiber_bundle::zone_nodes_block::
-new_host(namespace_type& xns, const poset_path& xhost_path, int xmax_db, bool xauto_access)
+standard_host(namespace_type& xns, const poset_path& xhost_path, int xmax_db, bool xauto_access)
 {
-  // cout << endl << "Entering zone_nodes_block::new_host." << endl;
+  // cout << endl << "Entering zone_nodes_block::standard_host." << endl;
 
   // Preconditions:
 
@@ -191,7 +191,7 @@ new_host(namespace_type& xns, const poset_path& xhost_path, int xmax_db, bool xa
   
   // Exit:
 
-  // cout << "Leaving zone_nodes_block::new_host." << endl;
+  // cout << "Leaving zone_nodes_block::standard_host." << endl;
   return result;
 }
 

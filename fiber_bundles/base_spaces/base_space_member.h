@@ -101,14 +101,14 @@ public:
 			     bool xauto_access);
 
   ///
-  /// Auto, deep factory method; creates a new host poset and any prerequisite posets
+  /// Auto, deep factory method; finds or creates a host poset and any prerequisite posets
   /// for members of this type. The poset is created in namespace xns with path xhost_path
   /// and schema specified by standard_schema_path().
   ///
-  static host_type& new_host(namespace_type& xns,
-			     const poset_path& xhost_path,
-			     int xmax_db,
-			     bool xauto_access);
+  static host_type& standard_host(namespace_type& xns,
+				  const poset_path& xhost_path,
+				  int xmax_db,
+				  bool xauto_access);
   
 
 protected:

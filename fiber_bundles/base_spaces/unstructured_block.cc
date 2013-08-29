@@ -166,9 +166,9 @@ new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xs
 
 fiber_bundle::unstructured_block::host_type&
 fiber_bundle::unstructured_block::
-new_host(namespace_type& xns, const poset_path& xhost_path, int xmax_db, bool xauto_access)
+standard_host(namespace_type& xns, const poset_path& xhost_path, int xmax_db, bool xauto_access)
 {
-  // cout << endl << "Entering unstructured_block::new_host." << endl;
+  // cout << endl << "Entering unstructured_block::standard_host." << endl;
 
   // Preconditions:
 
@@ -195,7 +195,7 @@ new_host(namespace_type& xns, const poset_path& xhost_path, int xmax_db, bool xa
   
   // Exit:
 
-  // cout << "Leaving unstructured_block::new_host." << endl;
+  // cout << "Leaving unstructured_block::standard_host." << endl;
   return result;
 }
 
