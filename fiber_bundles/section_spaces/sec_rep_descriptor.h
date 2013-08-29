@@ -39,6 +39,7 @@ namespace fiber_bundle
 using namespace sheaf;
   
 class eval_family;
+class fiber_bundles_namespace;
 class sec_rep_descriptor_poset;
 class sec_rep_space;
 
@@ -49,6 +50,76 @@ class SHEAF_DLL_SPEC sec_rep_descriptor: public total_poset_member
 {
 
 public:
+
+  // ===========================================================
+  /// @name HOST FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// The type of namespace for this type of member.
+  ///
+  typedef fiber_bundles_namespace namespace_type;
+
+  ///
+  /// The type of host poset.
+  ///
+  typedef sec_rep_descriptor_poset host_type;
+
+  ///
+  /// The path of the schema required by this class.
+  ///
+  static const poset_path& standard_schema_path();
+
+  ///
+  /// Creates the standard schema for this class in namespace xns.
+  ///
+  static void make_standard_schema(namespace_poset& xns);
+
+  ///
+  /// The standard path for host spaces for this class.
+  ///
+  static const poset_path& standard_host_path();
+
+  ///
+  /// True, if standard_host_path() does not exist or is a path
+  /// to a poset of type host_type.
+  ///
+  static bool standard_host_is_available(namespace_type& xns, bool xauto_access);
+
+  ///
+  /// Manual, shallow factory method; creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
+  /// and table attribute prototypes_path specified by xprototypes_path.
+  ///
+  static host_type& new_host(namespace_type& xns, 
+			     const poset_path& xhost_path, 
+			     const poset_path& xschema_path,
+                             const poset_path& xprototypes_path,
+			     bool xauto_access);
+
+  ///
+  /// The host with path standard_host_path().
+  /// Returns the host if it already exists, otherwise, creates it in namespace xns
+  /// with schema specified by standard_schema_path() and standard paths for prerequisites,
+  /// which are also created if needed.
+  ///
+  static host_type& standard_host(namespace_type& xns, bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+
+  // ===========================================================
+  /// @name SEC_REP_DESCRIPTOR FACET
+  // ===========================================================
+  //@{
+
+public: 
 
   ///
   /// Assignment operator
@@ -397,6 +468,7 @@ private:
   ///
   eval_family* _evaluators;
 
+  //@}
 
 };
 

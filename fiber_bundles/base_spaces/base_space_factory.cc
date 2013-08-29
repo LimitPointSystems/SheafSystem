@@ -8,6 +8,7 @@
 
 #include "base_space_factory.impl.h"
 
+#include "base_space_member_prototype.h"
 #include "hex_connectivity.h" 
 #include "line_connectivity.h" 
 #include "point_block_1d.h"
@@ -511,7 +512,7 @@ new_base(fiber_bundles_namespace& xns, const string& xbase_name)
 
     base_space_poset* lhost = new_space(xns);
 
-    string lposet_name(xns.standard_base_space_member_prototypes_poset_name());
+    string lposet_name(base_space_member_prototype::standard_host_path().poset_name());
 
     int ldb = index_ubs.ct();
     switch(ldb)

@@ -745,7 +745,7 @@ initialize_dof_maps()
   // i.e. any member index from prototypes poset.
 
   poset& lprototypes =
-    _template->name_space()->member_poset<poset>(base_space_member_prototype::prototypes_poset_name(), false);
+    _template->name_space()->member_poset<poset>(base_space_member_prototype::standard_host_path(), false);
 
   scoped_index ltype_id_ub = lprototypes.member_index_ub();
 

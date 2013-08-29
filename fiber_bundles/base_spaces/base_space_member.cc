@@ -130,8 +130,7 @@ prototypes_poset_name()
 
   // Body:
 
-  static const string& result =
-    fiber_bundles_namespace::standard_base_space_member_prototypes_poset_name();
+  static const string result = base_space_member_prototype::standard_host_path().poset_name();
 
   // Postconditions:
 

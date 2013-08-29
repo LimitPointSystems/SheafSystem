@@ -73,9 +73,9 @@ public:
   virtual const poset_path& schema_path() const;
 
   ///
-  /// The name of the prototypes poset.
+  /// The standard path for host spaces for this class.
   ///
-  static const string& prototypes_poset_name();
+  static const poset_path& standard_host_path();
 
   ///
   /// Manual, shallow factory method; creates a new host poset for members of this type.
@@ -85,18 +85,15 @@ public:
 			     const poset_path& xhost_path, 
 			     const poset_path& xschema_path, 
 			     int xmax_db,
-			     bool xauto_access);
+			     bool xauto_access);  
 
   ///
-  /// Auto, deep factory method; creates a new host poset and any prerequisite posets
-  /// for members of this type. The poset is created in namespace xns with path xhost_path
-  /// and schema specified by standard_schema_path().
+  /// The host with path standard_host_path().
+  /// Returns the host if it already exists, otherwise, creates it in namespace xns
+  /// with schema specified by standard_schema_path() and standard paths for prerequisites,
+  /// which are also created if needed.
   ///
-  static host_type& new_host(namespace_type& xns,
-			     const poset_path& xhost_path,
-			     int xmax_db,
-			     bool xauto_access);
-  
+  static host_type& standard_host(namespace_type& xns, bool xauto_access);
 
 protected:
 

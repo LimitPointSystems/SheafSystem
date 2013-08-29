@@ -81,25 +81,35 @@ public:
   ///
   static const poset_path& standard_base_space_schema_path();
 
-  ///
-  /// The name of the standard base space member prototypes poset.
-  ///
-  static const string& standard_base_space_member_prototypes_poset_name();
+//   ///
+//   /// The name of the standard base space member prototypes poset.
+//   ///
+//   static const string& standard_base_space_member_prototypes_poset_name();
 
   ///
   /// The name of the standard fiber space schema poset.
   ///
   static const string& standard_fiber_space_schema_poset_name();
 
-  ///
-  /// The name of the standard sec_rep_descriptor schema poset.
-  ///
-  static const string& standard_sec_rep_descriptor_schema_poset_name();
+//   ///
+//   /// The name of the standard sec_rep_descriptor schema poset.
+//   ///
+//   static const string& standard_sec_rep_descriptor_schema_poset_name();
 
-  ///
-  /// The name of the standard sec_rep_descriptor poset.
-  ///
-  static const string& standard_sec_rep_descriptor_poset_name();
+//   ///
+//   /// The name of the standard sec_rep_descriptor schema poset.
+//   ///
+//   static const poset_path& standard_sec_rep_descriptor_schema_path();
+
+//   ///
+//   /// The name of the standard sec_rep_descriptor poset.
+//   ///
+//   static const string& standard_sec_rep_descriptor_poset_name();
+
+//   ///
+//   /// The path of the standard sec_rep_descriptor poset.
+//   ///
+//   static const poset_path& standard_sec_rep_descriptor_host_path();
 
   ///
   /// The name of the standard section space schema schema poset.
