@@ -50,13 +50,13 @@ public:
   typedef namespace_poset namespace_type;
 
   ///
-  /// Creates a new poset in namespace xns with pah xpath 
+  /// Creates a new poset in namespace xns with path xpath
   /// and schema specified by xschema_path.
   ///
-  static void  new_table(namespace_type& xhost, 
-                         const poset_path& xpath, 
-                         const poset_path& xschema_path, 
-                         bool xauto_access);  
+  static poset& new_table(namespace_type& xhost, 
+                          const poset_path& xpath, 
+                          const poset_path& xschema_path,
+                          bool xauto_access);
 
 protected:
 

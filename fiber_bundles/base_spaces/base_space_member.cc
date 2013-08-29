@@ -27,26 +27,26 @@ using namespace fiber_bundle;
 
 // PUBLIC MEMBER FUNCTIONS
  
-const string&
-fiber_bundle::base_space_member::
-standard_schema_poset_name()
-{
-  // Preconditions:
+// const string&
+// fiber_bundle::base_space_member::
+// standard_schema_poset_name()
+// {
+//   // Preconditions:
 
 
-  // Body:
+//   // Body:
 
-  static const string& result =
-    fiber_bundles_namespace::standard_base_space_schema_poset_name();
+//   static const string& result =
+//     fiber_bundles_namespace::standard_base_space_schema_poset_name();
 
-  // Postconditions:
+//   // Postconditions:
 
-  ensure(!result.empty());
+//   ensure(!result.empty());
 
-  // Exit:
+//   // Exit:
 
-  return result;
-}
+//   return result;
+// }
 
 const sheaf::poset_path&
 fiber_bundle::base_space_member::
@@ -57,7 +57,7 @@ standard_schema_path()
 
   // Body:
 
-  static const poset_path result(standard_schema_poset_name(),
+  static const poset_path result(base_space_member_prototype::standard_schema_path().poset_name(), 
                                  "base_space_member_schema");
 
   // Postconditions:
@@ -92,7 +92,7 @@ make_standard_schema(namespace_poset& xns)
   // Preconditions:
 
   require(xns.state_is_read_write_accessible());
-  require(xns.contains_poset(standard_schema_poset_name(), false));
+  require(xns.contains_poset(standard_schema_path(), false));
   require(!xns.contains_poset_member(standard_schema_path(), false));
 
   // Body:
@@ -106,7 +106,7 @@ make_standard_schema(namespace_poset& xns)
 
   schema_poset_member lschema(xns,
                               standard_schema_path().member_name(),
-                              poset_path(standard_schema_poset_name(), "bottom"),
+                              poset_path(standard_schema_path().poset_name(), "bottom"),
                               ldof_specs,
                               false);
 
@@ -130,8 +130,7 @@ prototypes_poset_name()
 
   // Body:
 
-  static const string& result =
-    fiber_bundles_namespace::standard_base_space_member_prototypes_poset_name();
+  static const string result = base_space_member_prototype::standard_host_path().poset_name();
 
   // Postconditions:
 

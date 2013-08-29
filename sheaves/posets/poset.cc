@@ -26,22 +26,22 @@ class index_iterator;
 
 // PUBLIC FUNCTIONS
 
-void
+
+sheaf::poset&
 sheaf::poset::
 new_table(namespace_type& xns, const poset_path& xpath, const poset_path& xschema_path, bool xauto_access)
 {
-  // cout << endl << "Entering tuple_space::new_table." << endl;
+  // cout << endl << "Entering poset::new_table." << endl;
 
   // Preconditions:
 
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
 
   require(!xpath.empty());
   require(!xns.contains_path(xpath, xauto_access));
 
   require(xschema_path.full());
   require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
-  require(unexecutable("xschema_path conforms to standard_schema_path"));
-  //  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));
 
   // Body:
 
@@ -60,13 +60,12 @@ new_table(namespace_type& xns, const poset_path& xpath, const poset_path& xschem
     lschema.get_read_access();
   }
 
-  // Create the table dof map and set dof values;
-  // must be newed because poset_state::_table keep a pointer to it.
+  // Create the table dof map; must be newed 
+  // because poset_state::_table keeps a pointer to it.
+  // No table dofs to set.
 
-  // $$SCRIBBLE: should just copy the table dof map in _table.
+  array_poset_dof_map* lmap = new array_poset_dof_map(&lschema, true);  
 
-  array_poset_dof_map* lmap = new array_poset_dof_map(&lschema, true);
-  
   // Create the state.
 
   ltable->new_state(xns, xpath, lschema, *lmap);
@@ -76,16 +75,19 @@ new_table(namespace_type& xns, const poset_path& xpath, const poset_path& xschem
     lschema.release_access();
   }
 
+  poset& result = *ltable;
+
   // Postconditions:
 
-  ensure(xns.contains_path(xpath, xauto_access));
-  ensure(xns.member_poset(xpath, xauto_access).state_is_not_read_accessible());
-  ensure(xns.member_poset(xpath, xauto_access).schema(true).path(true) == xschema_path);
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xpath);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
 
   // Exit:
 
-  // cout << "Leaving tuple_space::new_table." << endl;
-  return;
+  // cout << "Leaving poset::new_table." << endl;
+  return result;
 }
 
 
@@ -1013,7 +1015,7 @@ new_state(const poset_path& xpath, const schema_poset_member& xschema, array_pos
 
   // Initialize any additional handle data members.
 
-  initialize_handle_data_members(*name_space());
+  initialize_handle_data_members(*xschema.name_space());
   
   // Release and regain access;
   // will get access to handle data members.

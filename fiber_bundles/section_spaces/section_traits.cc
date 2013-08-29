@@ -11,6 +11,7 @@
 #include "base_space_member.h"
 #include "fiber_bundles_namespace.h"
 #include "poset_path.h"
+#include "sec_rep_descriptor.h"
 
 #include "std_string.h"
 
@@ -42,8 +43,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_at0>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "vertex_element_dlinear");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "vertex_element_dlinear");
   return result;
 };
 
@@ -83,8 +83,8 @@ fiber_bundle::section_traits<fiber_bundle::sec_at1>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "vertex_element_dlinear");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "vertex_element_dlinear");
+
   return result;
 };
 
@@ -125,8 +125,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_at2_e2>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "element_element_constant");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "element_element_constant");
   return result;
 };
 
@@ -167,8 +166,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_at2_e3>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "element_element_constant");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "element_element_constant");
   return result;
 };
 
@@ -209,8 +207,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_at3_e3>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "element_element_constant");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "element_element_constant");
   return result;
 };
 
@@ -251,8 +248,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_e1>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "vertex_element_dlinear");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "vertex_element_dlinear");
   return result;
 };
 
@@ -293,8 +289,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_e1_uniform>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "vertex_block_uniform");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "vertex_block_uniform");
   return result;
 };
 
@@ -335,8 +330,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_e2>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "vertex_element_dlinear");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "vertex_element_dlinear");
   return result;
 };
 
@@ -377,8 +371,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_e2_uniform>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "vertex_block_uniform");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "vertex_block_uniform");
   return result;
 };
 
@@ -419,8 +412,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_e3>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "vertex_element_dlinear");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "vertex_element_dlinear");
   return result;
 };
 
@@ -461,8 +453,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_e3_uniform>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "vertex_block_uniform");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "vertex_block_uniform");
   return result;
 };
 
@@ -503,8 +494,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_jcb_e13>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "vertex_element_dlinear");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "vertex_element_dlinear");
   return result;
 };
 
@@ -545,8 +535,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_jcb_e23>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "vertex_element_dlinear");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "vertex_element_dlinear");
   return result;
 };
 
@@ -587,8 +576,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_jcb_e33>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "vertex_element_dlinear");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "vertex_element_dlinear");
   return result;
 };
 
@@ -629,8 +617,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_met_e1>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "vertex_element_dlinear");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "vertex_element_dlinear");
   return result;
 };
 
@@ -671,8 +658,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_met_e2>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "vertex_element_dlinear");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "vertex_element_dlinear");
   return result;
 };
 
@@ -713,8 +699,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_met_e3>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "vertex_element_dlinear");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "vertex_element_dlinear");
   return result;
 };
 
@@ -755,8 +740,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_st2_e2>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "vertex_element_dlinear");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "vertex_element_dlinear");
   return result;
 };
 
@@ -797,8 +781,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_st2_e3>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "vertex_element_dlinear");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "vertex_element_dlinear");
   return result;
 };
 
@@ -839,8 +822,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_st3_e3>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "vertex_element_dlinear");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "vertex_element_dlinear");
   return result;
 };
 
@@ -881,8 +863,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_st4_e2>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "vertex_element_dlinear");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "vertex_element_dlinear");
   return result;
 };
 
@@ -923,8 +904,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_st4_e3>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "vertex_element_dlinear");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "vertex_element_dlinear");
   return result;
 };
 
@@ -965,8 +945,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_t2_e2>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "vertex_element_dlinear");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "vertex_element_dlinear");
   return result;
 };
 
@@ -1007,8 +986,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_t2_e3>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "vertex_element_dlinear");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "vertex_element_dlinear");
   return result;
 };
 
@@ -1049,8 +1027,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_t3_e3>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "vertex_element_dlinear");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "vertex_element_dlinear");
   return result;
 };
 
@@ -1091,8 +1068,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_t4_e2>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "vertex_element_dlinear");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "vertex_element_dlinear");
   return result;
 };
 
@@ -1133,8 +1109,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_t4_e3>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "vertex_element_dlinear");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "vertex_element_dlinear");
   return result;
 };
 
@@ -1175,8 +1150,7 @@ fiber_bundle::section_traits<fiber_bundle::sec_vd>::
 standard_rep_path()
 {
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "vertex_element_dlinear");
+  result(sec_rep_descriptor::standard_host_path().poset_name(), "vertex_element_dlinear");
   return result;
 };
 

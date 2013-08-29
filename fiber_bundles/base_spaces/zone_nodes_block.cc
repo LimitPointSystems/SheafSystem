@@ -40,7 +40,7 @@ standard_schema_path()
 
   // Body:
 
-  static const poset_path result(standard_schema_poset_name(),
+  static const poset_path result(standard_schema_path().poset_name(),
                                  "unstructured_block_schema");
 
   // Postconditions:
@@ -74,7 +74,7 @@ make_standard_schema(namespace_poset& xns)
   // Preconditions:
 
   require(xns.state_is_read_write_accessible());
-  require(xns.contains_poset(standard_schema_poset_name(), false));
+  require(xns.contains_poset(standard_schema_path(), false));
   require(!xns.contains_poset_member(standard_schema_path(), false));
 
   // Body:

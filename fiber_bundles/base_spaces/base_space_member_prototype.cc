@@ -24,46 +24,6 @@ using namespace fiber_bundle;
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
- 
-const string&
-fiber_bundle::base_space_member_prototype::
-standard_schema_poset_name()
-{
-  // Preconditions:
-
-  // Body:
-
-  static const string& result =
-    fiber_bundles_namespace::standard_base_space_schema_poset_name();
-
-  // Postconditions:
-
-  ensure(!result.empty());
-
-  // Exit:
-
-  return result;
-}
-
-const string&
-fiber_bundle::base_space_member_prototype::
-standard_schema_member_name()
-{
-  // Preconditions:
-
-  // Body:
-
-  static const string& result =
-    fiber_bundles_namespace::standard_base_space_schema_member_name();
-
-  // Postconditions:
-
-  ensure(!result.empty());
-
-  // Exit:
-
-  return result;
-}
 
 const sheaf::poset_path&
 fiber_bundle::base_space_member_prototype::
@@ -78,8 +38,7 @@ standard_schema_path()
   // so that a prototype can represent any type of base space member.
   // ("restriction polymorphism")
 
-  static const poset_path result(standard_schema_poset_name(),
-				 standard_schema_member_name());
+  static const poset_path result("base_space_schema", "base_space_schema_member");
 
   // Postconditions:
 
@@ -105,21 +64,21 @@ schema_path() const
   return result;
 }
 
-const string&
+const sheaf::poset_path&
 fiber_bundle::base_space_member_prototype::
-prototypes_poset_name()
+standard_host_path()
 {
 
   // Preconditions:
 
   // Body:
 
-  static const string& result =
-    fiber_bundles_namespace::standard_base_space_member_prototypes_poset_name();
+  static const poset_path result("base_space_member_prototypes", "");
 
   // Postconditions:
 
   ensure(!result.empty());
+  ensure(!result.full());
 
   // Exit
 
@@ -166,36 +125,44 @@ new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xs
 
 fiber_bundle::base_space_member_prototype::host_type&
 fiber_bundle::base_space_member_prototype::
-new_host(namespace_type& xns, const poset_path& xhost_path, int xmax_db, bool xauto_access)
+standard_host(namespace_type& xns, bool xauto_access)
 {
-  // cout << endl << "Entering base_space_member_prototype::new_host." << endl;
+  // cout << endl << "Entering base_space_member_prototype::standard_host." << endl;
 
   // Preconditions:
 
   require(xns.state_is_auto_read_write_accessible(xauto_access));
-  require(!xhost_path.empty());
-  require(!xns.contains_path(xhost_path, xauto_access));
+
+  require(xns.path_is_available<host_type>(standard_host_path(), true));
+
   require(xns.path_is_auto_read_accessible(standard_schema_path(), xauto_access));
   
-  require(xmax_db >= 0);
-
   // Body:
 
-  host_type& result =
-    host_type::new_table(xns, xhost_path, standard_schema_path(), xmax_db, xauto_access);
+  host_type* lresult_ptr;
+  if(xns.contains_path(standard_host_path(), xauto_access))
+  {
+    lresult_ptr = &xns.member_poset<host_type>(standard_host_path(), xauto_access);
+  }
+  else
+  {
+    lresult_ptr = &host_type::new_table(xns, standard_host_path(), standard_schema_path(), 3, xauto_access);
+  }
+  
+  host_type& result = *lresult_ptr;
 
   // Postconditions:
 
   ensure(xns.owns(result, xauto_access));
-  ensure(result.path(true) == xhost_path);
+  ensure(result.path(true) == standard_host_path());
   ensure(result.state_is_not_read_accessible());
   ensure(result.schema(true).path(xauto_access) == standard_schema_path());
 
-  ensure(result.max_db() == xmax_db);
+  ensure(result.max_db() == 3);
   
   // Exit:
 
-  // cout << "Leaving base_space_member_prototype::new_host." << endl;
+  // cout << "Leaving base_space_member_prototype::standard_host." << endl;
   return result;
 }
 

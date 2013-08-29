@@ -50,6 +50,11 @@ class SHEAF_DLL_SPEC base_space_poset : public refinable_poset
 public:
 
   ///
+  /// The path to the standard schema for this class.
+  ///
+  static const poset_path& standard_schema_path();
+
+  ///
   /// Makes a constructor arg_list for an instance
   /// with maximum intrinsic dimension xmax_db.
   /// Intended for use with fiber_bundles_namespace::new_base_space.
@@ -57,8 +62,9 @@ public:
   static arg_list make_args(int xmax_db);
 
   ///
-  /// Creates a new tuple_space in namespace xns with path xpath 
-  /// and schema specified by xschema_path.
+  /// Creates a new base_space_poset in namespace xns with path xpath,
+  /// schema specified by xschema_path, and table attribute max_db
+  /// specified by xmax_db..
   ///
   static base_space_poset& new_table(namespace_type& xhost, 
 				     const poset_path& xpath, 

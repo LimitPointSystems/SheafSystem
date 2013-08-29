@@ -65,10 +65,10 @@ public:
   ///
   typedef base_space_poset host_type;
 
-  ///
-  /// The name of the standard schema poset for this class.
-  ///
-  static const string& standard_schema_poset_name();
+//   ///
+//   /// The name of the standard schema poset for this class.
+//   ///
+//   static const string& standard_schema_poset_name();
 
   ///
   /// The path of the schema required by this class.

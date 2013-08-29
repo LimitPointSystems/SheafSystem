@@ -32,6 +32,26 @@ using namespace fiber_bundle;
 
 // PUBLIC FUNCTIONS
 
+const sheaf::poset_path&
+fiber_bundle::base_space_poset::
+standard_schema_path()
+{
+  // Preconditions:
+
+
+  // Body:
+
+  static const poset_path& result = base_space_member_prototype::standard_schema_path();
+
+  // Postconditions:
+
+  ensure(result.full());
+
+  // Exit:
+
+  return result;
+}
+
 sheaf::arg_list
 fiber_bundle::base_space_poset::
 make_args(int xmax_db)

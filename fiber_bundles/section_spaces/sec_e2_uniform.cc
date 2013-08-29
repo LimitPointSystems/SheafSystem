@@ -923,8 +923,7 @@ standard_rep_path()
   // Body:
 
   static const poset_path
-  result(fiber_bundles_namespace::standard_sec_rep_descriptor_poset_name(),
-         "vertex_block_uniform");
+    result(sec_rep_descriptor::standard_host_path().poset_name(), "vertex_block_uniform");
 
   // Postconditions:
 

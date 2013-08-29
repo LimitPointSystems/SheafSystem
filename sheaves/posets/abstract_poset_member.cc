@@ -129,7 +129,7 @@ clone() const
 
 // PUBLIC MEMBER FUNCTIONS
 
-void
+sheaf::abstract_poset_member::host_type&
 sheaf::abstract_poset_member::
 new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xschema_path, bool xauto_access)
 {
@@ -144,23 +144,23 @@ new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xs
 
   require(xschema_path.full());
   require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
-  require(unexecutable("xschema_path conforms to standard_schema_path"));
   
 
   // Body:
 
-  host_type::new_table(xns, xhost_path, xschema_path, xauto_access);
+  host_type& result = host_type::new_table(xns, xhost_path, xschema_path, xauto_access);
 
   // Postconditions:
 
-  ensure(xns.contains_path(xhost_path, xauto_access));
-  ensure(xns.member_poset(xhost_path, xauto_access).state_is_not_read_accessible());
-  ensure(xns.member_poset(xhost_path, xauto_access).schema(true).path(true) == xschema_path);  
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
 
   // Exit:
 
   // cout << "Leaving abstract_poset_member::new_host." << endl;
-  return;
+  return result;
 }
 
 

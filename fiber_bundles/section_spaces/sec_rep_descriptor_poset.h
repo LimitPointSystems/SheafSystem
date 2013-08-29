@@ -66,35 +66,20 @@ public:
   static arg_list make_arg_list(const poset_path& xprototypes_path);
 
   ///
-  /// The name of the standard schema poset for this class.
-  ///
-  static const string& standard_schema_poset_name();
-
-  ///
   /// The path to the standard schema for this class.
   ///
   static const poset_path& standard_schema_path();
 
   ///
-  /// The name of the standard sec_rep_descriptor poset.
+  /// Creates a new sec_rep_descriptor_poset in namespace xns with path xpath,
+  /// schema specified by xschema_path, and table attribute prototypes specified
+  /// by xprototypes_path.
   ///
-  static const string& standard_poset_name();
-
-  ///
-  /// Creates the standard schema for this class in namespace xns.
-  ///
-  static void make_standard_schema(namespace_poset& xns);
-
-  ///
-  /// Creates a new handle attached to a new poset state in namespace xhost,
-  /// schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  sec_rep_descriptor_poset(namespace_poset& xhost,
-			   const string& xname,
-			   const arg_list& xargs,
-			   const poset_path& xschema_path,
-			   bool xauto_access);
+  static sec_rep_descriptor_poset& new_table(namespace_type& xhost, 
+                                             const poset_path& xpath, 
+                                             const poset_path& xschema_path,
+                                             const poset_path& xprototypes_path,
+                                             bool xauto_access);
 
   ///
   /// The base space members prototypes poset.
@@ -107,6 +92,17 @@ public:
   base_space_poset& prototypes();
 
 protected:
+
+  ///
+  /// Creates a new handle attached to a new poset state in namespace xhost,
+  /// schema specified by xschema_path,  name xname, and
+  /// table dofs initialized by xargs.
+  ///
+  sec_rep_descriptor_poset(namespace_poset& xhost,
+			   const string& xname,
+			   const arg_list& xargs,
+			   const poset_path& xschema_path,
+			   bool xauto_access);
 
   ///
   /// Creates an unattached handle

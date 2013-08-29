@@ -77,6 +77,11 @@ public:
   static namespace_poset* current_namespace();
 
   ///
+  /// The schema path used for constructing schema posets.
+  ///
+  static poset_path primitives_schema_path();
+
+  ///
   /// Destructor
   ///
   virtual ~namespace_poset();
@@ -324,21 +329,18 @@ public:
   void delete_poset(namespace_poset_member& xmbr);
 
   ///
-  /// The poset_state_handle object referred to by
-  /// the member with hub id xhub_id.
+  /// The poset_state_handle object referred to by  hub id xhub_id.
   ///
   poset_state_handle& member_poset(pod_index_type xhub_id, bool xauto_access = true) const;
 
   ///
-  /// The poset_state_handle object referred to by
-  /// the member with id xid.
+  /// The poset_state_handle object referred to by id xid.
   ///
   poset_state_handle& member_poset(const scoped_index& xid, bool xauto_access = true) const;
 
   ///
   /// The poset_state_handle object referred to by
-  /// the member with hub id xhub_id
-  /// dynamically cast to type P*.
+  /// hub id xhub_id, dynamically cast to type P*.
   ///
   template <typename P>
   SHEAF_DLL_SPEC
@@ -346,8 +348,7 @@ public:
 
   ///
   /// The poset_state_handle object referred to by
-  /// the member with id xid
-  /// dynamically cast to type P*.
+  /// id xid, dynamically cast to type P*.
   ///
   template <typename P>
   SHEAF_DLL_SPEC
@@ -355,14 +356,13 @@ public:
 
   ///
   /// The poset_state_handle object referred to by
-  /// the member with name xpath.poset_name().
+  /// name xpath.poset_name().
   ///
   poset_state_handle& member_poset(const poset_path& xpath, bool xauto_access = true) const;
 
   ///
   /// The poset_state_handle object referred to by
-  /// the member with name xpath.poset_name(), 
-  /// dynamically cast to type P*.
+  /// name xpath.poset_name(), dynamically cast to type P*.
   ///
   template <typename P>
   SHEAF_DLL_SPEC

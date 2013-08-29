@@ -73,7 +73,7 @@ make_standard_schema(namespace_poset& xns)
   // Preconditions:
 
   require(xns.state_is_read_write_accessible());
-  require(xns.contains_poset(standard_schema_poset_name(), false));
+  require(xns.contains_poset(standard_schema_path(), false));
   require(!xns.contains_poset_member(standard_schema_path(), false));
 
   // Body:

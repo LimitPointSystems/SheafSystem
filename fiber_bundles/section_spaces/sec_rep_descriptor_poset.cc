@@ -15,6 +15,7 @@
 #include "fiber_bundles_namespace.h"
 #include "namespace_poset.impl.h"
 #include "poset_handle_factory.h"
+#include "sec_rep_descriptor.h"
 #include "wsv_block.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
@@ -51,25 +52,6 @@ make_arg_list(const poset_path& xprototypes_path)
   return result;
 }
 
-const string&
-fiber_bundle::sec_rep_descriptor_poset::
-standard_schema_poset_name()
-{
-  // Preconditions:
-
-  // Body:
-
-  static const string result("sec_rep_descriptor_schema");
-
-  // Postconditions:
-
-  ensure(!result.empty());
-
-  // Exit:
-
-  return result;
-}
-
 const sheaf::poset_path&
 fiber_bundle::sec_rep_descriptor_poset::
 standard_schema_path()
@@ -78,85 +60,91 @@ standard_schema_path()
 
   // Body:
 
-  static const poset_path
-  result(standard_schema_poset_name(), "sec_rep_descriptor_schema");
+  const poset_path& result = sec_rep_descriptor::standard_schema_path();
 
   // Postconditions:
 
   ensure(result.full());
-  ensure(result.poset_name() == standard_schema_poset_name());
 
   // Exit:
 
   return result;
 }
 
-const string&
+
+fiber_bundle::sec_rep_descriptor_poset& 
 fiber_bundle::sec_rep_descriptor_poset::
-standard_poset_name()
+new_table(namespace_type& xns, 
+          const poset_path& xpath, 
+          const poset_path& xschema_path, 
+          const poset_path& xprototypes_path,
+          bool xauto_access)
 {
+  // cout << endl << "Entering sec_rep_descriptor_poset::new_table." << endl;
+
   // Preconditions:
 
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xpath.empty());
+  require(!xns.contains_path(xpath, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));
+
+  require(!xprototypes_path.empty());
+  require(xns.path_is_auto_read_accessible(xprototypes_path, xauto_access));  
+  
   // Body:
 
-  static const string result("sec_rep_descriptors");
+  // Create the table; have to new it because namespace keeps a pointer.
+
+  typedef sec_rep_descriptor_poset table_type;
+
+  table_type* ltable = new table_type();
+
+  // Create a handle of the right type for the schema member.
+
+  schema_poset_member lschema(&xns, xschema_path, xauto_access);
+
+  if(xauto_access)
+  {
+    lschema.get_read_access();
+  }
+  
+  // Create the table dof map and set dof values;
+  // must be newed because poset_state::_table keep a pointer to it.
+
+  array_poset_dof_map* lmap = new array_poset_dof_map(&lschema, true);
+  lmap->put_dof("prototypes_path", xprototypes_path);
+  
+  // Create the state.
+
+  ltable->new_state(xns, xpath, lschema, *lmap);
+
+  if(xauto_access)
+  {
+    lschema.release_access();
+  }
+
+  sec_rep_descriptor_poset& result = *ltable;
 
   // Postconditions:
 
-  ensure(!result.empty());
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xpath);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(result.prototypes().path(xauto_access) == xprototypes_path);
 
   // Exit:
 
+  // cout << "Leaving sec_rep_descriptor_poset::new_table." << endl;
   return result;
-}
+} 
 
-void
-fiber_bundle::sec_rep_descriptor_poset::
-make_standard_schema(namespace_poset& xns)
-{
-  // Preconditions:
-
-  require(xns.state_is_read_write_accessible());
-  require(xns.contains_poset(standard_schema_poset_name(), false));
-  require(xns.member_poset(standard_schema_poset_name(), false).state_is_read_write_accessible());
-  require(!xns.contains_poset_member(standard_schema_path(), false));
-
-  // Body:
-
-  string ldof_specs;
-
-  ldof_specs =  "discretization_subposet_name C_STRING false";
-  ldof_specs += " multivalued_subposet_name C_STRING false";
-  ldof_specs += " evaluation_subposet_name C_STRING false";
-  ldof_specs += " evaluator_family_name C_STRING false";
-  ldof_specs += " URL C_STRING false";
-  ldof_specs += " multiplicity INT false";
-
-  /// @hack the following realy should be a bool,
-  /// but we don't support bool as a primitive.
-
-  ldof_specs += " eval_is_above_disc SIZE_TYPE false";
-
-  // Table dofs:
-
-  ldof_specs += " prototypes_path C_STRING true";
-
-  schema_poset_member lschema(xns,
-                              standard_schema_path().member_name(),
-                              poset_path(standard_schema_poset_name(), "bottom"),
-                              ldof_specs,
-                              false);
-
-  lschema.detach_from_state();
-
-  // Postconditions:
-
-  ensure(xns.contains_poset_member(standard_schema_path()));
-
-  // Exit
-
-  return;
-}
 
 fiber_bundle::sec_rep_descriptor_poset::
 sec_rep_descriptor_poset(namespace_poset& xns,

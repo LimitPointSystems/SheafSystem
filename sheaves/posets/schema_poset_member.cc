@@ -24,6 +24,134 @@
 //#define DIAGNOSTIC_OUTPUT
 
 // ===========================================================
+// SCHEMA_POSET_MEMBER FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+const sheaf::poset_path&
+sheaf::schema_poset_member::
+standard_schema_path()
+{
+  // Preconditions:
+
+
+  // Body:
+
+  static const poset_path result(namespace_poset::primitives_schema_path());
+
+  // Postconditions:
+
+  ensure(result.full());
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::schema_poset_member::host_type&
+sheaf::schema_poset_member::
+new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xschema_path, bool xauto_access)
+{
+  // cout << endl << "Entering schema_poset_member::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path()));
+
+  // Body:
+
+  host_type& result = host_type::new_table(xns, xhost_path, xschema_path, xauto_access);
+  result.get_read_write_access();  
+  
+  // Create the schema subposets of the top.
+
+  subposet ltable_dofs(&result, 0, false);
+  subposet lrow_dofs(&result, 0, false);
+
+  // Schematize the result.
+
+  result.schematize(&ltable_dofs, &lrow_dofs, true);
+
+  // Clean up.
+
+  ltable_dofs.detach_from_state();
+  lrow_dofs.detach_from_state();
+  
+  result.release_access();
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(result.is_schematized(true));
+
+  // Exit:
+
+  // cout << "Leaving schema_poset_member::new_host." << endl;
+  return result;
+}
+
+sheaf::schema_poset_member::host_type&
+sheaf::schema_poset_member::
+standard_host(namespace_type& xns, const poset_path& xhost_path, bool xauto_access)
+{
+  // cout << endl << "Entering schema_poset_member::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xhost_path.empty());
+  require(xns.path_is_available<host_type>(xhost_path, xauto_access));
+
+  require(xns.path_is_auto_read_accessible(standard_schema_path(), xauto_access));
+
+  // Body:
+
+  host_type* result_ptr;
+  if(xns.contains_path(xhost_path, xauto_access))
+  {
+    result_ptr = &xns.member_poset<host_type>(xhost_path, xauto_access);
+  }
+  else
+  {
+    result_ptr = &new_host(xns, xhost_path, standard_schema_path(), xauto_access);
+  }
+
+  host_type& result = *result_ptr;
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == standard_schema_path());
+
+  ensure(result.is_schematized(true));
+
+  // Exit:
+
+  // cout << "Leaving schema_poset_member::new_host." << endl;
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+ 
+
+// ===========================================================
 // ABSTRACT_POSET_MEMBER FACET
 // ===========================================================
 
