@@ -66,15 +66,20 @@ public:
   ///
   virtual ~fiber_bundles_namespace();
 
-  ///
-  /// The name of the standard base space schema poset.
-  ///
-  static const string& standard_base_space_schema_poset_name();
+//   ///
+//   /// The name of the standard base space schema poset.
+//   ///
+//   static const string& standard_base_space_schema_poset_name();
+
+//   ///
+//   /// The name of the standard base space schema member.
+//   ///
+//   static const string& standard_base_space_schema_member_name();
 
   ///
-  /// The name of the standard base space schema member.
+  /// The path of the standard base space schema member.
   ///
-  static const string& standard_base_space_schema_member_name();
+  static const poset_path& standard_base_space_schema_path();
 
   ///
   /// The name of the standard base space member prototypes poset.

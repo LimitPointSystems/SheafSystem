@@ -24,46 +24,6 @@ using namespace fiber_bundle;
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
- 
-const string&
-fiber_bundle::base_space_member_prototype::
-standard_schema_poset_name()
-{
-  // Preconditions:
-
-  // Body:
-
-  static const string& result =
-    fiber_bundles_namespace::standard_base_space_schema_poset_name();
-
-  // Postconditions:
-
-  ensure(!result.empty());
-
-  // Exit:
-
-  return result;
-}
-
-const string&
-fiber_bundle::base_space_member_prototype::
-standard_schema_member_name()
-{
-  // Preconditions:
-
-  // Body:
-
-  static const string& result =
-    fiber_bundles_namespace::standard_base_space_schema_member_name();
-
-  // Postconditions:
-
-  ensure(!result.empty());
-
-  // Exit:
-
-  return result;
-}
 
 const sheaf::poset_path&
 fiber_bundle::base_space_member_prototype::
@@ -78,8 +38,7 @@ standard_schema_path()
   // so that a prototype can represent any type of base space member.
   // ("restriction polymorphism")
 
-  static const poset_path result(standard_schema_poset_name(),
-				 standard_schema_member_name());
+  static const poset_path result("base_space_schema", "base_space_schema_member");
 
   // Postconditions:
 

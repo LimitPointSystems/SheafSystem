@@ -50,6 +50,11 @@ class SHEAF_DLL_SPEC base_space_poset : public refinable_poset
 public:
 
   ///
+  /// The path to the standard schema for this class.
+  ///
+  static const poset_path& standard_schema_path();
+
+  ///
   /// Makes a constructor arg_list for an instance
   /// with maximum intrinsic dimension xmax_db.
   /// Intended for use with fiber_bundles_namespace::new_base_space.
