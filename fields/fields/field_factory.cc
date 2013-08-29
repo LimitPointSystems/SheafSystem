@@ -49,475 +49,475 @@ using namespace fields; // Workaround for MS C++ bug.
 // #define DIAGNOSTIC_OUTPUT
 
 
-namespace fields
-{
-int dummy; // makes formatter work correctly
+// namespace fields
+// {
+// int dummy; // makes formatter work correctly
 
-///
-/// Creates a new fiber space schema, fiber space, section space, and section.
-///
-template <class T>
-void
-new_section(fiber_bundles_namespace& xns,
-            const poset_path& xrep_path,
-            base_space_member& xbase_space,
-            const poset_path& xfiber_schema_path,
-            const string& xfiber_name,
-            const string& xsection_space_name,
-            const arg_list& xsection_space_table_dofs,
-            const string& xsection_name,
-            T& xresult)
-{
-  // Preconditions:
+// ///
+// /// Creates a new fiber space schema, fiber space, section space, and section.
+// ///
+// template <class T>
+// void
+// new_section(fiber_bundles_namespace& xns,
+//             const poset_path& xrep_path,
+//             base_space_member& xbase_space,
+//             const poset_path& xfiber_schema_path,
+//             const string& xfiber_name,
+//             const string& xsection_space_name,
+//             const arg_list& xsection_space_table_dofs,
+//             const string& xsection_name,
+//             T& xresult)
+// {
+//   // Preconditions:
 
-  require(xns.state_is_read_write_accessible());
-  require(xns.contains_poset_member(xrep_path));
-  require(xbase_space.state_is_read_accessible());
-  require(xns.contains_poset_member(xfiber_schema_path));
-  require(!xfiber_name.empty());
-  require(!xsection_space_name.empty());
+//   require(xns.state_is_read_write_accessible());
+//   require(xns.contains_poset_member(xrep_path));
+//   require(xbase_space.state_is_read_accessible());
+//   require(xns.contains_poset_member(xfiber_schema_path));
+//   require(!xfiber_name.empty());
+//   require(!xsection_space_name.empty());
 
-  /// @hack the following is unexecutable because there is no
-  /// T:standard_fiber_schema_path for sec_vd and descendants.
-  /// @todo implement standard_fiber_schema_path.
+//   /// @hack the following is unexecutable because there is no
+//   /// T:standard_fiber_schema_path for sec_vd and descendants.
+//   /// @todo implement standard_fiber_schema_path.
 
-  require(unexecutable("xsection_space_table_dofs.conforms_to_extension(xns, xfiber_schema_path, T::standard_fiber_schema_path(), true, true)"));
-  require(!xsection_name.empty());
+//   require(unexecutable("xsection_space_table_dofs.conforms_to_extension(xns, xfiber_schema_path, T::standard_fiber_schema_path(), true, true)"));
+//   require(!xsection_name.empty());
 
-  // Body:
+//   // Body:
 
-  // Make the sec_rep_space.
+//   // Make the sec_rep_space.
 
-  sec_rep_space& lhost = xns.new_section_space<T>(xsection_space_name,
-						  xbase_space.path(),
-						  xrep_path,
-						  true);
-  lhost.get_read_write_access();
+//   sec_rep_space& lhost = xns.new_section_space<T>(xsection_space_name,
+// 						  xbase_space.path(),
+// 						  xrep_path,
+// 						  true);
+//   lhost.get_read_write_access();
   
-  // Make the section.
+//   // Make the section.
 
-  xresult.new_jim_state(&lhost, 0, false, true);
-  xresult.put_name(xsection_name, true, false);
+//   xresult.new_jim_state(&lhost, 0, false, true);
+//   xresult.put_name(xsection_name, true, false);
 
-  // Clean up.
+//   // Clean up.
 
-  lhost.release_access();
+//   lhost.release_access();
 
-  // Postconditions:
+//   // Postconditions:
 
-  ensure(xresult.state_is_not_read_accessible());
+//   ensure(xresult.state_is_not_read_accessible());
 
-  // Exit:
+//   // Exit:
 
-  return;
-};
+//   return;
+// };
 
-///
-///Creates a new section space and section.
-///
-template <class T>
-void
-new_section(fiber_bundles_namespace& xns,
-            const poset_path& xrep_path,
-            const poset_path& xbase_path,
-            const poset_path& xfiber_path,
-            const string& xsection_space_name,
-            const string& xsection_name,
-            T& xresult)
-{
-  // Preconditions:
+// ///
+// ///Creates a new section space and section.
+// ///
+// template <class T>
+// void
+// new_section(fiber_bundles_namespace& xns,
+//             const poset_path& xrep_path,
+//             const poset_path& xbase_path,
+//             const poset_path& xfiber_path,
+//             const string& xsection_space_name,
+//             const string& xsection_name,
+//             T& xresult)
+// {
+//   // Preconditions:
 
-  require(xns.state_is_read_write_accessible());
-  require(xns.contains_poset_member(xrep_path));
-  require(xns.contains_poset_member(xbase_path));
-  require(xns.contains_poset(xfiber_path));
-  require(poset_path::is_valid_name(xsection_space_name));
-  require(poset_path::is_valid_name(xsection_name));
+//   require(xns.state_is_read_write_accessible());
+//   require(xns.contains_poset_member(xrep_path));
+//   require(xns.contains_poset_member(xbase_path));
+//   require(xns.contains_poset(xfiber_path));
+//   require(poset_path::is_valid_name(xsection_space_name));
+//   require(poset_path::is_valid_name(xsection_name));
 
-  // Body:
+//   // Body:
 
-  // Make the sec_rep_space.
+//   // Make the sec_rep_space.
 
-  poset_path lschema_path =
-    xns.new_section_space_schema(xsection_space_name + "_schema",
-				 xrep_path,
-				 xbase_path,
-				 xfiber_path,
-				 true);
+//   poset_path lschema_path =
+//     xns.new_section_space_schema(xsection_space_name + "_schema",
+// 				 xrep_path,
+// 				 xbase_path,
+// 				 xfiber_path,
+// 				 true);
 
-  arg_list largs;
+//   arg_list largs;
 
-  sec_rep_space& lhost =
-    xns.new_section_space<T>(xsection_space_name, largs, lschema_path, true);
+//   sec_rep_space& lhost =
+//     xns.new_section_space<T>(xsection_space_name, largs, lschema_path, true);
 
-  lhost.get_read_write_access();
+//   lhost.get_read_write_access();
 
-  // Make the section.
+//   // Make the section.
 
-  xresult.new_jim_state(&lhost, 0, false, true);
-  xresult.put_name(xsection_name, true, false);
+//   xresult.new_jim_state(&lhost, 0, false, true);
+//   xresult.put_name(xsection_name, true, false);
 
-  // Clean up.
+//   // Clean up.
 
-  lhost.release_access();
+//   lhost.release_access();
 
-  // Postconditions:
+//   // Postconditions:
 
-  ensure(xresult.state_is_not_read_accessible());
+//   ensure(xresult.state_is_not_read_accessible());
 
-  // Exit:
+//   // Exit:
 
-  return;
-};
+//   return;
+// };
 
-} // namespace fields
+// } // namespace fields
 
 
-fields::field_vd*
-fields::field_factory::
-new_structured_field(fiber_bundles_namespace& xns,
-                     const string& xbase_space_name,
-                     const block<int>& xindex_ubs,
-                     const string& xcoord_fiber_name,
-                     const string& xcoord_name,
-                     const string& xprop_fiber_name,
-                     const string& xprop_name,
-                     const poset_path& xprop_rep_path,
-                     sec_vd& xprop)
-{
+// fields::field_vd*
+// fields::field_factory::
+// new_structured_field(fiber_bundles_namespace& xns,
+//                      const string& xbase_space_name,
+//                      const block<int>& xindex_ubs,
+//                      const string& xcoord_fiber_name,
+//                      const string& xcoord_name,
+//                      const string& xprop_fiber_name,
+//                      const string& xprop_name,
+//                      const poset_path& xprop_rep_path,
+//                      sec_vd& xprop)
+// {
 
-#ifdef DIAGNOSTIC_OUTPUT
-  post_information_message("new_field:");
-#endif
+// #ifdef DIAGNOSTIC_OUTPUT
+//   post_information_message("new_field:");
+// #endif
 
-  // Preconditions:
+//   // Preconditions:
 
-  require(xns.state_is_read_write_accessible());
+//   require(xns.state_is_read_write_accessible());
 
-  require(poset_path::is_valid_name(xbase_space_name));
+//   require(poset_path::is_valid_name(xbase_space_name));
 
-  require( (1 <= xindex_ubs.ct()) && (xindex_ubs.ct() <= 3) );
-  require_for_all(i, 0, xindex_ubs.ct(), xindex_ubs[i] > 0);
+//   require( (1 <= xindex_ubs.ct()) && (xindex_ubs.ct() <= 3) );
+//   require_for_all(i, 0, xindex_ubs.ct(), xindex_ubs[i] > 0);
 
-  require(poset_path::is_valid_name(xcoord_fiber_name));
-  require(xns.contains_poset(xcoord_fiber_name, false));
-  require(poset_path::is_valid_name(xcoord_name));
+//   require(poset_path::is_valid_name(xcoord_fiber_name));
+//   require(xns.contains_poset(xcoord_fiber_name, false));
+//   require(poset_path::is_valid_name(xcoord_name));
 
-  require(poset_path::is_valid_name(xprop_fiber_name));
-  require(xns.contains_poset(xprop_fiber_name, false));
-  require(poset_path::is_valid_name(xprop_name));
+//   require(poset_path::is_valid_name(xprop_fiber_name));
+//   require(xns.contains_poset(xprop_fiber_name, false));
+//   require(poset_path::is_valid_name(xprop_name));
 
-  require(xns.contains_poset_member(xprop_rep_path));
+//   require(xns.contains_poset_member(xprop_rep_path));
 
-  // Body:
+//   // Body:
 
-  string lcoord_section_space_name(xcoord_fiber_name + "_on_" + xbase_space_name);
-  string lprop_section_space_name(xprop_fiber_name + "_on_" + xbase_space_name);
+//   string lcoord_section_space_name(xcoord_fiber_name + "_on_" + xbase_space_name);
+//   string lprop_section_space_name(xprop_fiber_name + "_on_" + xbase_space_name);
 
-  field_vd* result = new_structured_field(xns,
-                                          xbase_space_name,
-                                          xindex_ubs,
-                                          xcoord_fiber_name,
-                                          lcoord_section_space_name,
-                                          xcoord_name,
-                                          xprop_fiber_name,
-                                          lprop_section_space_name,
-                                          xprop_name,
-                                          xprop_rep_path,
-                                          xprop);
+//   field_vd* result = new_structured_field(xns,
+//                                           xbase_space_name,
+//                                           xindex_ubs,
+//                                           xcoord_fiber_name,
+//                                           lcoord_section_space_name,
+//                                           xcoord_name,
+//                                           xprop_fiber_name,
+//                                           lprop_section_space_name,
+//                                           xprop_name,
+//                                           xprop_rep_path,
+//                                           xprop);
 
 
-  // Postconditions:
+//   // Postconditions:
 
-  ensure(result != 0);
-  ensure(result->state_is_not_read_accessible());
+//   ensure(result != 0);
+//   ensure(result->state_is_not_read_accessible());
 
-  // Exit:
+//   // Exit:
 
-  return result;
-}
+//   return result;
+// }
 
-fields::field_vd*
-fields::field_factory::
-new_structured_field(fiber_bundles_namespace& xns,
-                     const string& xbase_space_name,
-                     const block<int>& xindex_ubs,
-                     const string& xcoord_fiber_name,
-                     const string& xcoord_section_space_name,
-                     const string& xcoord_name,
-                     const string& xprop_fiber_name,
-                     const string& xprop_section_space_name,
-                     const string& xprop_name,
-                     const poset_path& xprop_rep_path,
-                     sec_vd& xprop)
-{
+// fields::field_vd*
+// fields::field_factory::
+// new_structured_field(fiber_bundles_namespace& xns,
+//                      const string& xbase_space_name,
+//                      const block<int>& xindex_ubs,
+//                      const string& xcoord_fiber_name,
+//                      const string& xcoord_section_space_name,
+//                      const string& xcoord_name,
+//                      const string& xprop_fiber_name,
+//                      const string& xprop_section_space_name,
+//                      const string& xprop_name,
+//                      const poset_path& xprop_rep_path,
+//                      sec_vd& xprop)
+// {
 
-#ifdef DIAGNOSTIC_OUTPUT
-  post_information_message("new_field:");
-#endif
+// #ifdef DIAGNOSTIC_OUTPUT
+//   post_information_message("new_field:");
+// #endif
 
-  // Preconditions:
+//   // Preconditions:
 
-  require(xns.state_is_read_write_accessible());
+//   require(xns.state_is_read_write_accessible());
 
-  require(poset_path::is_valid_name(xbase_space_name));
+//   require(poset_path::is_valid_name(xbase_space_name));
 
-  require((1 <= xindex_ubs.ct()) && (xindex_ubs.ct() <= 3));
-  require_for_all(i, 0, xindex_ubs.ct(), xindex_ubs[i] > 0);
+//   require((1 <= xindex_ubs.ct()) && (xindex_ubs.ct() <= 3));
+//   require_for_all(i, 0, xindex_ubs.ct(), xindex_ubs[i] > 0);
 
-  require(poset_path::is_valid_name(xcoord_fiber_name));
-  require(xns.contains_poset(xcoord_fiber_name, false));
-  require(poset_path::is_valid_name(xcoord_section_space_name));
-  require(poset_path::is_valid_name(xcoord_name));
+//   require(poset_path::is_valid_name(xcoord_fiber_name));
+//   require(xns.contains_poset(xcoord_fiber_name, false));
+//   require(poset_path::is_valid_name(xcoord_section_space_name));
+//   require(poset_path::is_valid_name(xcoord_name));
 
-  require(poset_path::is_valid_name(xprop_fiber_name));
-  require(xns.contains_poset(xprop_fiber_name, false));
-  require(poset_path::is_valid_name(xprop_section_space_name));
-  require(poset_path::is_valid_name(xprop_name));
+//   require(poset_path::is_valid_name(xprop_fiber_name));
+//   require(xns.contains_poset(xprop_fiber_name, false));
+//   require(poset_path::is_valid_name(xprop_section_space_name));
+//   require(poset_path::is_valid_name(xprop_name));
 
-  require(xns.contains_poset_member(xprop_rep_path));
+//   require(xns.contains_poset_member(xprop_rep_path));
 
-  require(!xprop.is_attached());
+//   require(!xprop.is_attached());
 
-  // Body:
+//   // Body:
 
-  // Create the mesh.
+//   // Create the mesh.
 
-  base_space_member* lbase_space =
-    new_structured_base_space(xns, xbase_space_name, xindex_ubs);
-  lbase_space->get_read_write_access();
+//   base_space_member* lbase_space =
+//     new_structured_base_space(xns, xbase_space_name, xindex_ubs);
+//   lbase_space->get_read_write_access();
 
-  // Create the coordinates section.
+//   // Create the coordinates section.
 
-  sec_ed* lcoords = new_coord_section_handle(xindex_ubs.ct());
+//   sec_ed* lcoords = new_coord_section_handle(xindex_ubs.ct());
 
-  new_section<sec_ed>(xns,
-		      "sec_rep_descriptors/vertex_element_dlinear",
-		      lbase_space->path(),
-		      xcoord_fiber_name,
-		      xcoord_section_space_name,
-		      xcoord_name,
-		      *lcoords);
+//   new_section<sec_ed>(xns,
+// 		      "sec_rep_descriptors/vertex_element_dlinear",
+// 		      lbase_space->path(),
+// 		      xcoord_fiber_name,
+// 		      xcoord_section_space_name,
+// 		      xcoord_name,
+// 		      *lcoords);
 
-  // Create the property section.
+//   // Create the property section.
 
-  new_section<sec_vd>(xns,
-		       xprop_rep_path,
-		       lbase_space->path(),
-		       xprop_fiber_name,
-		       xprop_section_space_name,
-		       xprop_name,
-		       xprop);
+//   new_section<sec_vd>(xns,
+// 		       xprop_rep_path,
+// 		       lbase_space->path(),
+// 		       xprop_fiber_name,
+// 		       xprop_section_space_name,
+// 		       xprop_name,
+// 		       xprop);
 
 
-  // Create the field.
+//   // Create the field.
 
-  field_vd* result = new field_vd(*lcoords, xprop, true);
+//   field_vd* result = new field_vd(*lcoords, xprop, true);
 
-  // Clean up.
+//   // Clean up.
 
-  lbase_space->release_access();
-  lbase_space->detach_from_state();
-  delete lbase_space;
+//   lbase_space->release_access();
+//   lbase_space->detach_from_state();
+//   delete lbase_space;
 
-  lcoords->detach_from_state();
-  delete lcoords;
+//   lcoords->detach_from_state();
+//   delete lcoords;
 
-  xprop.detach_from_state();
+//   xprop.detach_from_state();
 
-  // Postconditions:
+//   // Postconditions:
 
-  ensure(result != 0);
-  ensure(result->state_is_not_read_accessible());
+//   ensure(result != 0);
+//   ensure(result->state_is_not_read_accessible());
 
-  // Exit:
+//   // Exit:
 
-  return result;
-}
+//   return result;
+// }
 
-fields::field_vd*
-fields::field_factory::
-new_uniform_field(fiber_bundles_namespace& xns,
-                  const string& xbase_space_name,
-                  const block<int>& xindex_ubs,
-                  block<sec_vd_value_type>& xlower,
-                  block<sec_vd_value_type>& xupper,
-                  const string& xcoord_fiber_name,
-                  const string& xcoord_name,
-                  const string& xprop_fiber_name,
-                  const string& xprop_name,
-                  const poset_path& xprop_rep_path,
-                  sec_vd& xprop)
-{
+// fields::field_vd*
+// fields::field_factory::
+// new_uniform_field(fiber_bundles_namespace& xns,
+//                   const string& xbase_space_name,
+//                   const block<int>& xindex_ubs,
+//                   block<sec_vd_value_type>& xlower,
+//                   block<sec_vd_value_type>& xupper,
+//                   const string& xcoord_fiber_name,
+//                   const string& xcoord_name,
+//                   const string& xprop_fiber_name,
+//                   const string& xprop_name,
+//                   const poset_path& xprop_rep_path,
+//                   sec_vd& xprop)
+// {
 
-#ifdef DIAGNOSTIC_OUTPUT
-  post_information_message("new_scalar_field_2d_uniform:");
-#endif
+// #ifdef DIAGNOSTIC_OUTPUT
+//   post_information_message("new_scalar_field_2d_uniform:");
+// #endif
 
-  // Preconditions:
+//   // Preconditions:
 
-  require(xns.state_is_read_write_accessible());
+//   require(xns.state_is_read_write_accessible());
 
-  require(poset_path::is_valid_name(xbase_space_name));
-  require(!xns.contains_poset(xbase_space_name, false));
+//   require(poset_path::is_valid_name(xbase_space_name));
+//   require(!xns.contains_poset(xbase_space_name, false));
 
-  require((1 <= xindex_ubs.ct()) && (xindex_ubs.ct() <= 3));
-  require_for_all(i, 0, xindex_ubs.ct(), xindex_ubs[i] > 0);
+//   require((1 <= xindex_ubs.ct()) && (xindex_ubs.ct() <= 3));
+//   require_for_all(i, 0, xindex_ubs.ct(), xindex_ubs[i] > 0);
 
-  require(xlower.ct() >= xindex_ubs.ct());
-  require(xupper.ct() >= xindex_ubs.ct());
-  require_for_all(i, 0, xindex_ubs.ct(), xlower[i] < xupper[i]);
+//   require(xlower.ct() >= xindex_ubs.ct());
+//   require(xupper.ct() >= xindex_ubs.ct());
+//   require_for_all(i, 0, xindex_ubs.ct(), xlower[i] < xupper[i]);
 
-  require(poset_path::is_valid_name(xcoord_fiber_name));
-  require(xns.contains_poset(xcoord_fiber_name, false));
-  require(poset_path::is_valid_name(xcoord_name));
+//   require(poset_path::is_valid_name(xcoord_fiber_name));
+//   require(xns.contains_poset(xcoord_fiber_name, false));
+//   require(poset_path::is_valid_name(xcoord_name));
 
-  require(poset_path::is_valid_name(xprop_fiber_name));
-  require(xns.contains_poset(xprop_fiber_name, false));
-  require(poset_path::is_valid_name(xprop_name));
+//   require(poset_path::is_valid_name(xprop_fiber_name));
+//   require(xns.contains_poset(xprop_fiber_name, false));
+//   require(poset_path::is_valid_name(xprop_name));
 
-  require(xns.contains_poset_member(xprop_rep_path));
+//   require(xns.contains_poset_member(xprop_rep_path));
 
-  require(!xprop.is_attached());
+//   require(!xprop.is_attached());
 
-  // Body:
+//   // Body:
 
-  string lcoord_section_space_name(xcoord_fiber_name + "_on_" + xbase_space_name);
-  string lprop_section_space_name(xprop_fiber_name + "_on_" + xbase_space_name);
+//   string lcoord_section_space_name(xcoord_fiber_name + "_on_" + xbase_space_name);
+//   string lprop_section_space_name(xprop_fiber_name + "_on_" + xbase_space_name);
 
-  field_vd* result = new_uniform_field(xns,
-                                       xbase_space_name,
-                                       xindex_ubs,
-                                       xlower,
-                                       xupper,
-                                       xcoord_fiber_name,
-                                       lcoord_section_space_name,
-                                       xcoord_name,
-                                       xprop_fiber_name,
-                                       lprop_section_space_name,
-                                       xprop_name,
-                                       xprop_rep_path,
-                                       xprop);
+//   field_vd* result = new_uniform_field(xns,
+//                                        xbase_space_name,
+//                                        xindex_ubs,
+//                                        xlower,
+//                                        xupper,
+//                                        xcoord_fiber_name,
+//                                        lcoord_section_space_name,
+//                                        xcoord_name,
+//                                        xprop_fiber_name,
+//                                        lprop_section_space_name,
+//                                        xprop_name,
+//                                        xprop_rep_path,
+//                                        xprop);
 
 
-  // Postconditions:
+//   // Postconditions:
 
-  ensure(result != 0);
-  ensure(result->state_is_not_read_accessible());
+//   ensure(result != 0);
+//   ensure(result->state_is_not_read_accessible());
 
-  // Exit:
+//   // Exit:
 
-  return result;
-}
+//   return result;
+// }
 
-fields::field_vd*
-fields::field_factory::
-new_uniform_field(fiber_bundles_namespace& xns,
-                  const string& xbase_space_name,
-                  const block<int>& xindex_ubs,
-                  block<sec_vd_value_type>& xlower,
-                  block<sec_vd_value_type>& xupper,
-                  const string& xcoord_fiber_name,
-                  const string& xcoord_section_space_name,
-                  const string& xcoord_name,
-                  const string& xprop_fiber_name,
-                  const string& xprop_section_space_name,
-                  const string& xprop_name,
-                  const poset_path& xprop_rep_path,
-                  sec_vd& xprop)
-{
+// fields::field_vd*
+// fields::field_factory::
+// new_uniform_field(fiber_bundles_namespace& xns,
+//                   const string& xbase_space_name,
+//                   const block<int>& xindex_ubs,
+//                   block<sec_vd_value_type>& xlower,
+//                   block<sec_vd_value_type>& xupper,
+//                   const string& xcoord_fiber_name,
+//                   const string& xcoord_section_space_name,
+//                   const string& xcoord_name,
+//                   const string& xprop_fiber_name,
+//                   const string& xprop_section_space_name,
+//                   const string& xprop_name,
+//                   const poset_path& xprop_rep_path,
+//                   sec_vd& xprop)
+// {
 
-#ifdef DIAGNOSTIC_OUTPUT
-  post_information_message("new_scalar_field_2d_uniform:");
-#endif
+// #ifdef DIAGNOSTIC_OUTPUT
+//   post_information_message("new_scalar_field_2d_uniform:");
+// #endif
 
-  // Preconditions:
+//   // Preconditions:
 
-  require(xns.state_is_read_write_accessible());
+//   require(xns.state_is_read_write_accessible());
 
-  require(poset_path::is_valid_name(xbase_space_name));
-  require(!xns.contains_poset(xbase_space_name, false));
+//   require(poset_path::is_valid_name(xbase_space_name));
+//   require(!xns.contains_poset(xbase_space_name, false));
 
-  require((1 <= xindex_ubs.ct()) && (xindex_ubs.ct() <= 3));
-  require_for_all(i, 0, xindex_ubs.ct(), xindex_ubs[i] > 0);
+//   require((1 <= xindex_ubs.ct()) && (xindex_ubs.ct() <= 3));
+//   require_for_all(i, 0, xindex_ubs.ct(), xindex_ubs[i] > 0);
 
-  require(xlower.ct() >= xindex_ubs.ct());
-  require(xupper.ct() >= xindex_ubs.ct());
-  require_for_all(i, 0, xindex_ubs.ct(), xlower[i] < xupper[i]);
+//   require(xlower.ct() >= xindex_ubs.ct());
+//   require(xupper.ct() >= xindex_ubs.ct());
+//   require_for_all(i, 0, xindex_ubs.ct(), xlower[i] < xupper[i]);
 
-  require(poset_path::is_valid_name(xcoord_fiber_name));
-  require(xns.contains_poset(xcoord_fiber_name, false));
-  require(poset_path::is_valid_name(xcoord_section_space_name));
-  require(poset_path::is_valid_name(xcoord_name));
+//   require(poset_path::is_valid_name(xcoord_fiber_name));
+//   require(xns.contains_poset(xcoord_fiber_name, false));
+//   require(poset_path::is_valid_name(xcoord_section_space_name));
+//   require(poset_path::is_valid_name(xcoord_name));
 
-  require(poset_path::is_valid_name(xprop_fiber_name));
-  require(xns.contains_poset(xprop_fiber_name, false));
-  require(poset_path::is_valid_name(xprop_section_space_name));
-  require(poset_path::is_valid_name(xprop_name));
+//   require(poset_path::is_valid_name(xprop_fiber_name));
+//   require(xns.contains_poset(xprop_fiber_name, false));
+//   require(poset_path::is_valid_name(xprop_section_space_name));
+//   require(poset_path::is_valid_name(xprop_name));
 
-  require(xns.contains_poset_member(xprop_rep_path));
+//   require(xns.contains_poset_member(xprop_rep_path));
 
-  require(!xprop.is_attached());
+//   require(!xprop.is_attached());
 
-  // Body:
+//   // Body:
 
-  // Create the mesh.
+//   // Create the mesh.
 
-  base_space_member* lbase_space =
-    new_structured_base_space(xns, xbase_space_name, xindex_ubs);
-  lbase_space->get_read_write_access();
+//   base_space_member* lbase_space =
+//     new_structured_base_space(xns, xbase_space_name, xindex_ubs);
+//   lbase_space->get_read_write_access();
 
-  // Create the coordinates section.
+//   // Create the coordinates section.
 
-  sec_ed* lcoords = new_coord_section_handle(xindex_ubs.ct());
+//   sec_ed* lcoords = new_coord_section_handle(xindex_ubs.ct());
 
-  new_section<sec_ed>(xns,
-		      "sec_rep_descriptors/vertex_block_uniform",
-		      lbase_space->path(),
-		      xcoord_fiber_name,
-		      xcoord_section_space_name,
-		      xcoord_name,
-		      *lcoords);
+//   new_section<sec_ed>(xns,
+// 		      "sec_rep_descriptors/vertex_block_uniform",
+// 		      lbase_space->path(),
+// 		      xcoord_fiber_name,
+// 		      xcoord_section_space_name,
+// 		      xcoord_name,
+// 		      *lcoords);
 
-  // Set the coordinates dofs.
+//   // Set the coordinates dofs.
 
-  put_uniform_coord_dofs(xindex_ubs.ct(), xlower, xupper, lcoords);
+//   put_uniform_coord_dofs(xindex_ubs.ct(), xlower, xupper, lcoords);
 
-  // Create the property section.
+//   // Create the property section.
 
-  new_section<sec_vd>(xns,
-		      xprop_rep_path,
-		      lbase_space->path(),
-		      xprop_fiber_name,
-		      xprop_section_space_name,
-		      xprop_name,
-		      xprop);
+//   new_section<sec_vd>(xns,
+// 		      xprop_rep_path,
+// 		      lbase_space->path(),
+// 		      xprop_fiber_name,
+// 		      xprop_section_space_name,
+// 		      xprop_name,
+// 		      xprop);
 
 
-  // Create the field.
+//   // Create the field.
 
-  field_vd* result = new field_vd(*lcoords, xprop, true);
+//   field_vd* result = new field_vd(*lcoords, xprop, true);
 
-  // Clean up.
+//   // Clean up.
 
-  lbase_space->release_access();
-  lbase_space->detach_from_state();
-  delete lbase_space;
+//   lbase_space->release_access();
+//   lbase_space->detach_from_state();
+//   delete lbase_space;
 
-  lcoords->detach_from_state();
-  delete lcoords;
+//   lcoords->detach_from_state();
+//   delete lcoords;
 
-  xprop.detach_from_state();
+//   xprop.detach_from_state();
 
-  // Postconditions:
+//   // Postconditions:
 
-  ensure(result != 0);
-  ensure(result->state_is_not_read_accessible());
+//   ensure(result != 0);
+//   ensure(result->state_is_not_read_accessible());
 
-  // Exit:
+//   // Exit:
 
-  return result;
-}
+//   return result;
+// }
 
 
 fields::field_vd*
@@ -602,108 +602,108 @@ new_scalar_field_1d_points(fiber_bundles_namespace& xns,
 }
 
 
-fields::field_vd*
-fields::field_factory::
-new_scalar_field_1d(fiber_bundles_namespace& xns,
-                    const string& xbase_space_name,
-                    size_type xi_size,
-                    const poset_path& xcoord_fiber_schema_path,
-                    const string& xcoord_fiber_name,
-                    const string& xcoord_section_space_name,
-                    const arg_list& xcoord_section_space_table_dofs,
-                    const string& xcoord_name,
-                    const poset_path& xprop_fiber_schema_path,
-                    const string& xprop_fiber_name,
-                    const string& xprop_section_space_name,
-                    const arg_list& xprop_section_space_table_dofs,
-                    const string& xprop_name,
-                    const poset_path& xprop_rep_path)
-{
+// fields::field_vd*
+// fields::field_factory::
+// new_scalar_field_1d(fiber_bundles_namespace& xns,
+//                     const string& xbase_space_name,
+//                     size_type xi_size,
+//                     const poset_path& xcoord_fiber_schema_path,
+//                     const string& xcoord_fiber_name,
+//                     const string& xcoord_section_space_name,
+//                     const arg_list& xcoord_section_space_table_dofs,
+//                     const string& xcoord_name,
+//                     const poset_path& xprop_fiber_schema_path,
+//                     const string& xprop_fiber_name,
+//                     const string& xprop_section_space_name,
+//                     const arg_list& xprop_section_space_table_dofs,
+//                     const string& xprop_name,
+//                     const poset_path& xprop_rep_path)
+// {
 
-#ifdef DIAGNOSTIC_OUTPUT
-  post_information_message("new_scalar_field_1d_unstructured:");
-#endif
+// #ifdef DIAGNOSTIC_OUTPUT
+//   post_information_message("new_scalar_field_1d_unstructured:");
+// #endif
 
-  // Preconditions:
+//   // Preconditions:
 
-  require(xns.state_is_read_write_accessible());
+//   require(xns.state_is_read_write_accessible());
 
-  require(!xbase_space_name.empty());
-  require(xi_size > 0);
+//   require(!xbase_space_name.empty());
+//   require(xi_size > 0);
 
-  require(xns.contains_poset_member(xcoord_fiber_schema_path));
-  require(!xcoord_fiber_name.empty());
-  require(!xcoord_section_space_name.empty());
-  require(xcoord_section_space_table_dofs.conforms_to_extension(xns, xcoord_fiber_schema_path, e1::standard_schema_path(), true, true));
-  require(!xcoord_name.empty());
+//   require(xns.contains_poset_member(xcoord_fiber_schema_path));
+//   require(!xcoord_fiber_name.empty());
+//   require(!xcoord_section_space_name.empty());
+//   require(xcoord_section_space_table_dofs.conforms_to_extension(xns, xcoord_fiber_schema_path, e1::standard_schema_path(), true, true));
+//   require(!xcoord_name.empty());
 
-  require(xns.contains_poset_member(xprop_fiber_schema_path));
-  require(!xprop_fiber_name.empty());
-  require(!xprop_section_space_name.empty());
-  require(xprop_section_space_table_dofs.conforms_to_extension(xns, xprop_fiber_schema_path, at0::standard_schema_path(), true, true));
-  require(!xprop_name.empty());
+//   require(xns.contains_poset_member(xprop_fiber_schema_path));
+//   require(!xprop_fiber_name.empty());
+//   require(!xprop_section_space_name.empty());
+//   require(xprop_section_space_table_dofs.conforms_to_extension(xns, xprop_fiber_schema_path, at0::standard_schema_path(), true, true));
+//   require(!xprop_name.empty());
 
-  require(xns.contains_poset_member(xprop_rep_path));
+//   require(xns.contains_poset_member(xprop_rep_path));
 
-  // Body:
+//   // Body:
 
-  // Create the mesh.
+//   // Create the mesh.
 
-  unstructured_block* lbase_space =
-    new_1d_unstructured_base_space(xns, xbase_space_name, xi_size);
+//   unstructured_block* lbase_space =
+//     new_1d_unstructured_base_space(xns, xbase_space_name, xi_size);
 
-  lbase_space->get_read_write_access();
+//   lbase_space->get_read_write_access();
 
-  // Create the coordinates section.
+//   // Create the coordinates section.
 
-  sec_e1 lcoords;
+//   sec_e1 lcoords;
 
-  new_section<sec_e1>(xns,
-		      "sec_rep_descriptors/vertex_element_dlinear",
-		      *lbase_space,
-		      xcoord_fiber_schema_path,
-		      xcoord_fiber_name,
-		      xcoord_section_space_name,
-		      xcoord_section_space_table_dofs,
-		      xcoord_name,
-		      lcoords);
+//   new_section<sec_e1>(xns,
+// 		      "sec_rep_descriptors/vertex_element_dlinear",
+// 		      *lbase_space,
+// 		      xcoord_fiber_schema_path,
+// 		      xcoord_fiber_name,
+// 		      xcoord_section_space_name,
+// 		      xcoord_section_space_table_dofs,
+// 		      xcoord_name,
+// 		      lcoords);
 
-  // Create the property section.
+//   // Create the property section.
 
-  sec_at0 lprop;
+//   sec_at0 lprop;
 
-  new_section<sec_at0>(xns,
-		       xprop_rep_path,
-		       *lbase_space,
-		       xprop_fiber_schema_path,
-		       xprop_fiber_name,
-		       xprop_section_space_name,
-		       xprop_section_space_table_dofs,
-		       xprop_name,
-		       lprop);
+//   new_section<sec_at0>(xns,
+// 		       xprop_rep_path,
+// 		       *lbase_space,
+// 		       xprop_fiber_schema_path,
+// 		       xprop_fiber_name,
+// 		       xprop_section_space_name,
+// 		       xprop_section_space_table_dofs,
+// 		       xprop_name,
+// 		       lprop);
 
-  // Create the field.
+//   // Create the field.
 
-  field_vd* result = new field_vd(lcoords, lprop, true);
+//   field_vd* result = new field_vd(lcoords, lprop, true);
 
-  // Clean up.
+//   // Clean up.
 
-  lbase_space->release_access();
-  lbase_space->detach_from_state();
-  delete lbase_space;
+//   lbase_space->release_access();
+//   lbase_space->detach_from_state();
+//   delete lbase_space;
 
-  lcoords.detach_from_state();
-  lprop.detach_from_state();
+//   lcoords.detach_from_state();
+//   lprop.detach_from_state();
 
-  // Postconditions:
+//   // Postconditions:
 
-  ensure(result != 0);
-  ensure(result->state_is_not_read_accessible());
+//   ensure(result != 0);
+//   ensure(result->state_is_not_read_accessible());
 
-  // Exit:
+//   // Exit:
 
-  return result;
-}
+//   return result;
+// }
 
 
 fields::field_vd*
@@ -1112,145 +1112,145 @@ new_scalar_field_2d_unstructured(fiber_bundles_namespace& xns,
 #endif
 
 
-fields::field_vd*
-fields::field_factory::
-new_scalar_field_2d_structured(fiber_bundles_namespace& xns,
-                               const string& xbase_space_name,
-                               size_type xi_size,
-                               size_type xj_size,
-                               block<sec_vd_value_type>& xlower,
-                               block<sec_vd_value_type>& xupper,
-                               const poset_path& xcoord_fiber_schema_path,
-                               const string& xcoord_fiber_name,
-                               const string& xcoord_section_space_name,
-                               const arg_list& xcoord_section_space_table_dofs,
-                               const string& xcoord_name,
-                               const poset_path& xprop_fiber_schema_path,
-                               const string& xprop_fiber_name,
-                               const string& xprop_section_space_name,
-                               const arg_list& xprop_section_space_table_dofs,
-                               const string& xprop_name,
-                               const poset_path& xprop_rep_path)
-{
+// fields::field_vd*
+// fields::field_factory::
+// new_scalar_field_2d_structured(fiber_bundles_namespace& xns,
+//                                const string& xbase_space_name,
+//                                size_type xi_size,
+//                                size_type xj_size,
+//                                block<sec_vd_value_type>& xlower,
+//                                block<sec_vd_value_type>& xupper,
+//                                const poset_path& xcoord_fiber_schema_path,
+//                                const string& xcoord_fiber_name,
+//                                const string& xcoord_section_space_name,
+//                                const arg_list& xcoord_section_space_table_dofs,
+//                                const string& xcoord_name,
+//                                const poset_path& xprop_fiber_schema_path,
+//                                const string& xprop_fiber_name,
+//                                const string& xprop_section_space_name,
+//                                const arg_list& xprop_section_space_table_dofs,
+//                                const string& xprop_name,
+//                                const poset_path& xprop_rep_path)
+// {
 
-#ifdef DIAGNOSTIC_OUTPUT
-  post_information_message("new_scalar_field_1d_unstructured:");
-#endif
+// #ifdef DIAGNOSTIC_OUTPUT
+//   post_information_message("new_scalar_field_1d_unstructured:");
+// #endif
 
-  // Preconditions:
+//   // Preconditions:
 
-  require(xns.state_is_read_write_accessible());
+//   require(xns.state_is_read_write_accessible());
 
-  require(!xbase_space_name.empty());
-  require(xi_size > 0);
-  require(xj_size > 0);
+//   require(!xbase_space_name.empty());
+//   require(xi_size > 0);
+//   require(xj_size > 0);
 
-  require(xlower.ct() >= 2);
-  require(xupper.ct() >= 2);
-  require_for_all(i, 0, 2, xlower[i] < xupper[i]);
+//   require(xlower.ct() >= 2);
+//   require(xupper.ct() >= 2);
+//   require_for_all(i, 0, 2, xlower[i] < xupper[i]);
 
-  require(xns.contains_poset_member(xcoord_fiber_schema_path));
-  require(!xcoord_fiber_name.empty());
-  require(!xcoord_section_space_name.empty());
-  require(xcoord_section_space_table_dofs.conforms_to_extension(xns, xcoord_fiber_schema_path, e2::standard_schema_path(), true, true));
-  require(!xcoord_name.empty());
+//   require(xns.contains_poset_member(xcoord_fiber_schema_path));
+//   require(!xcoord_fiber_name.empty());
+//   require(!xcoord_section_space_name.empty());
+//   require(xcoord_section_space_table_dofs.conforms_to_extension(xns, xcoord_fiber_schema_path, e2::standard_schema_path(), true, true));
+//   require(!xcoord_name.empty());
 
-  require(xns.contains_poset_member(xprop_fiber_schema_path));
-  require(!xprop_fiber_name.empty());
-  require(!xprop_section_space_name.empty());
-  require(xprop_section_space_table_dofs.conforms_to_extension(xns, xprop_fiber_schema_path, at0::standard_schema_path(), true, true));
-  require(!xprop_name.empty());
+//   require(xns.contains_poset_member(xprop_fiber_schema_path));
+//   require(!xprop_fiber_name.empty());
+//   require(!xprop_section_space_name.empty());
+//   require(xprop_section_space_table_dofs.conforms_to_extension(xns, xprop_fiber_schema_path, at0::standard_schema_path(), true, true));
+//   require(!xprop_name.empty());
 
-  require(xns.contains_poset_member(xprop_rep_path));
+//   require(xns.contains_poset_member(xprop_rep_path));
 
-  // Body:
+//   // Body:
 
-  // Create the mesh.
+//   // Create the mesh.
 
-  structured_block_2d* lbase_space =
-    new_2d_structured_base_space(xns, xbase_space_name, xi_size, xj_size);
+//   structured_block_2d* lbase_space =
+//     new_2d_structured_base_space(xns, xbase_space_name, xi_size, xj_size);
 
-  lbase_space->get_read_write_access();
+//   lbase_space->get_read_write_access();
 
-  // Create the coordinates section.
+//   // Create the coordinates section.
 
-  sec_e2 lcoords;
+//   sec_e2 lcoords;
 
-  new_section<sec_e2>(xns,
-		      "sec_rep_descriptors/vertex_element_dlinear",
-		      *lbase_space,
-		      xcoord_fiber_schema_path,
-		      xcoord_fiber_name,
-		      xcoord_section_space_name,
-		      xcoord_section_space_table_dofs,
-		      xcoord_name,
-		      lcoords);
+//   new_section<sec_e2>(xns,
+// 		      "sec_rep_descriptors/vertex_element_dlinear",
+// 		      *lbase_space,
+// 		      xcoord_fiber_schema_path,
+// 		      xcoord_fiber_name,
+// 		      xcoord_section_space_name,
+// 		      xcoord_section_space_table_dofs,
+// 		      xcoord_name,
+// 		      lcoords);
 
-  // Set the coordinates dofs.
+//   // Set the coordinates dofs.
 
-  lcoords.get_read_write_access();
+//   lcoords.get_read_write_access();
 
-  size_type lvertex_ct_i = xi_size + 1;
-  size_type lvertex_ct_j = xj_size + 1;
+//   size_type lvertex_ct_i = xi_size + 1;
+//   size_type lvertex_ct_j = xj_size + 1;
 
-  sec_vd_value_type delx = (xupper[0] - xlower[0])/xi_size;
-  sec_vd_value_type dely = (xupper[1] - xlower[1])/xj_size;
-  sec_e2::fiber_type::volatile_type lfiber;
+//   sec_vd_value_type delx = (xupper[0] - xlower[0])/xi_size;
+//   sec_vd_value_type dely = (xupper[1] - xlower[1])/xj_size;
+//   sec_e2::fiber_type::volatile_type lfiber;
 
-  pod_index_type lcid;
+//   pod_index_type lcid;
   
-  for(size_type i=0; i<lvertex_ct_i; ++i)
-  {
-    lfiber[0] = i*delx + xlower[0];
+//   for(size_type i=0; i<lvertex_ct_i; ++i)
+//   {
+//     lfiber[0] = i*delx + xlower[0];
 
-    for(size_type j=0; j<lvertex_ct_j; ++j)
-    {
-      lfiber[1] = j*dely + xlower[1];
+//     for(size_type j=0; j<lvertex_ct_j; ++j)
+//     {
+//       lfiber[1] = j*dely + xlower[1];
 
-      lcid = i*lvertex_ct_j + j;
+//       lcid = i*lvertex_ct_j + j;
 
-      lcoords.put_fiber(lcid, lfiber);
-    }
-  }
+//       lcoords.put_fiber(lcid, lfiber);
+//     }
+//   }
 
-  lcoords.release_access();
+//   lcoords.release_access();
 
-  // Create the property section.
+//   // Create the property section.
 
-  sec_at0 lprop;
+//   sec_at0 lprop;
 
-  new_section<sec_at0>(xns,
-		       xprop_rep_path,
-		       *lbase_space,
-		       xprop_fiber_schema_path,
-		       xprop_fiber_name,
-		       xprop_section_space_name,
-		       xprop_section_space_table_dofs,
-		       xprop_name,
-		       lprop);
+//   new_section<sec_at0>(xns,
+// 		       xprop_rep_path,
+// 		       *lbase_space,
+// 		       xprop_fiber_schema_path,
+// 		       xprop_fiber_name,
+// 		       xprop_section_space_name,
+// 		       xprop_section_space_table_dofs,
+// 		       xprop_name,
+// 		       lprop);
 
-  // Create the field.
+//   // Create the field.
 
-  field_vd* result = new field_vd(lcoords, lprop, true);
+//   field_vd* result = new field_vd(lcoords, lprop, true);
 
-  // Clean up.
+//   // Clean up.
 
-  lbase_space->release_access();
-  lbase_space->detach_from_state();
-  delete lbase_space;
+//   lbase_space->release_access();
+//   lbase_space->detach_from_state();
+//   delete lbase_space;
 
-  lcoords.detach_from_state();
-  lprop.detach_from_state();
+//   lcoords.detach_from_state();
+//   lprop.detach_from_state();
 
-  // Postconditions:
+//   // Postconditions:
 
-  ensure(result != 0);
-  ensure(result->state_is_not_read_accessible());
+//   ensure(result != 0);
+//   ensure(result->state_is_not_read_accessible());
 
-  // Exit:
+//   // Exit:
 
-  return result;
-}
+//   return result;
+// }
 
 
 
@@ -1332,365 +1332,365 @@ new_scalar_field_2d_uniform(fiber_bundles_namespace& xns,
   return result;
 }
 
-fields::field_vd*
-fields::field_factory::
-new_scalar_field_2d_uniform(fiber_bundles_namespace& xns,
-                            const string& xbase_space_name,
-                            size_type xi_size,
-                            size_type xj_size,
-                            block<sec_vd_value_type>& xlower,
-                            block<sec_vd_value_type>& xupper,
-                            const string& xcoord_fiber_name,
-                            const string& xcoord_name,
-                            const string& xprop_fiber_name,
-                            const string& xprop_name,
-                            const poset_path& xprop_rep_path)
-{
-
-#ifdef DIAGNOSTIC_OUTPUT
-  post_information_message("new_scalar_field_2d_uniform:");
-#endif
-
-  // Preconditions:
-
-  require(xns.state_is_read_write_accessible());
-
-  require(poset_path::is_valid_name(xbase_space_name));
-  require(!xns.contains_poset(xbase_space_name, false));
-  require(xi_size > 0);
-  require(xj_size > 0);
-  require(xlower.ct() >= 2);
-  require(xupper.ct() >= 2);
-  require_for_all(i, 0, 2, xlower[i] < xupper[i]);
-
-  require(poset_path::is_valid_name(xcoord_fiber_name));
-  require(xns.contains_poset(xcoord_fiber_name, false));
-  require(poset_path::is_valid_name(xcoord_name));
-
-  require(poset_path::is_valid_name(xprop_fiber_name));
-  require(xns.contains_poset(xprop_fiber_name, false));
-  require(poset_path::is_valid_name(xprop_name));
-
-  require(xns.contains_poset_member(xprop_rep_path));
-
-  // Body:
-
-  string lcoord_section_space_name(xcoord_fiber_name + "_on_" + xbase_space_name);
-  string lprop_section_space_name(xprop_fiber_name + "_on_" + xbase_space_name);
-
-  field_vd* result = new_scalar_field_2d_uniform(xns,
-                     xbase_space_name,
-                     xi_size,
-                     xj_size,
-                     xlower,
-                     xupper,
-                     xcoord_fiber_name,
-                     lcoord_section_space_name,
-                     xcoord_name,
-                     xprop_fiber_name,
-                     lprop_section_space_name,
-                     xprop_name,
-                     xprop_rep_path);
-
-
-  // Postconditions:
-
-  ensure(result != 0);
-  ensure(result->state_is_not_read_accessible());
-
-  // Exit:
-
-  return result;
-}
-
-fields::field_vd*
-fields::field_factory::
-new_scalar_field_2d_uniform(fiber_bundles_namespace& xns,
-                            const string& xbase_space_name,
-                            size_type xi_size,
-                            size_type xj_size,
-                            block<sec_vd_value_type>& xlower,
-                            block<sec_vd_value_type>& xupper,
-                            const string& xcoord_fiber_name,
-                            const string& xcoord_section_space_name,
-                            const string& xcoord_name,
-                            const string& xprop_fiber_name,
-                            const string& xprop_section_space_name,
-                            const string& xprop_name,
-                            const poset_path& xprop_rep_path)
-{
+// fields::field_vd*
+// fields::field_factory::
+// new_scalar_field_2d_uniform(fiber_bundles_namespace& xns,
+//                             const string& xbase_space_name,
+//                             size_type xi_size,
+//                             size_type xj_size,
+//                             block<sec_vd_value_type>& xlower,
+//                             block<sec_vd_value_type>& xupper,
+//                             const string& xcoord_fiber_name,
+//                             const string& xcoord_name,
+//                             const string& xprop_fiber_name,
+//                             const string& xprop_name,
+//                             const poset_path& xprop_rep_path)
+// {
+
+// #ifdef DIAGNOSTIC_OUTPUT
+//   post_information_message("new_scalar_field_2d_uniform:");
+// #endif
+
+//   // Preconditions:
+
+//   require(xns.state_is_read_write_accessible());
+
+//   require(poset_path::is_valid_name(xbase_space_name));
+//   require(!xns.contains_poset(xbase_space_name, false));
+//   require(xi_size > 0);
+//   require(xj_size > 0);
+//   require(xlower.ct() >= 2);
+//   require(xupper.ct() >= 2);
+//   require_for_all(i, 0, 2, xlower[i] < xupper[i]);
+
+//   require(poset_path::is_valid_name(xcoord_fiber_name));
+//   require(xns.contains_poset(xcoord_fiber_name, false));
+//   require(poset_path::is_valid_name(xcoord_name));
+
+//   require(poset_path::is_valid_name(xprop_fiber_name));
+//   require(xns.contains_poset(xprop_fiber_name, false));
+//   require(poset_path::is_valid_name(xprop_name));
+
+//   require(xns.contains_poset_member(xprop_rep_path));
+
+//   // Body:
+
+//   string lcoord_section_space_name(xcoord_fiber_name + "_on_" + xbase_space_name);
+//   string lprop_section_space_name(xprop_fiber_name + "_on_" + xbase_space_name);
+
+//   field_vd* result = new_scalar_field_2d_uniform(xns,
+//                      xbase_space_name,
+//                      xi_size,
+//                      xj_size,
+//                      xlower,
+//                      xupper,
+//                      xcoord_fiber_name,
+//                      lcoord_section_space_name,
+//                      xcoord_name,
+//                      xprop_fiber_name,
+//                      lprop_section_space_name,
+//                      xprop_name,
+//                      xprop_rep_path);
+
+
+//   // Postconditions:
+
+//   ensure(result != 0);
+//   ensure(result->state_is_not_read_accessible());
+
+//   // Exit:
+
+//   return result;
+// }
+
+// fields::field_vd*
+// fields::field_factory::
+// new_scalar_field_2d_uniform(fiber_bundles_namespace& xns,
+//                             const string& xbase_space_name,
+//                             size_type xi_size,
+//                             size_type xj_size,
+//                             block<sec_vd_value_type>& xlower,
+//                             block<sec_vd_value_type>& xupper,
+//                             const string& xcoord_fiber_name,
+//                             const string& xcoord_section_space_name,
+//                             const string& xcoord_name,
+//                             const string& xprop_fiber_name,
+//                             const string& xprop_section_space_name,
+//                             const string& xprop_name,
+//                             const poset_path& xprop_rep_path)
+// {
 
-#ifdef DIAGNOSTIC_OUTPUT
-  post_information_message("new_scalar_field_2d_uniform:");
-#endif
+// #ifdef DIAGNOSTIC_OUTPUT
+//   post_information_message("new_scalar_field_2d_uniform:");
+// #endif
 
-  // Preconditions:
+//   // Preconditions:
 
-  require(xns.state_is_read_write_accessible());
+//   require(xns.state_is_read_write_accessible());
 
-  require(poset_path::is_valid_name(xbase_space_name));
-  require(!xns.contains_poset(xbase_space_name, false));
-  require(xi_size > 0);
-  require(xj_size > 0);
-  require(xlower.ct() >= 2);
-  require(xupper.ct() >= 2);
-  require_for_all(i, 0, 2, xlower[i] < xupper[i]);
+//   require(poset_path::is_valid_name(xbase_space_name));
+//   require(!xns.contains_poset(xbase_space_name, false));
+//   require(xi_size > 0);
+//   require(xj_size > 0);
+//   require(xlower.ct() >= 2);
+//   require(xupper.ct() >= 2);
+//   require_for_all(i, 0, 2, xlower[i] < xupper[i]);
 
-  require(poset_path::is_valid_name(xcoord_fiber_name));
-  require(xns.contains_poset(xcoord_fiber_name, false));
-  require(poset_path::is_valid_name(xcoord_section_space_name));
-  require(poset_path::is_valid_name(xcoord_name));
+//   require(poset_path::is_valid_name(xcoord_fiber_name));
+//   require(xns.contains_poset(xcoord_fiber_name, false));
+//   require(poset_path::is_valid_name(xcoord_section_space_name));
+//   require(poset_path::is_valid_name(xcoord_name));
 
-  require(poset_path::is_valid_name(xprop_fiber_name));
-  require(xns.contains_poset(xprop_fiber_name, false));
-  require(poset_path::is_valid_name(xprop_section_space_name));
-  require(poset_path::is_valid_name(xprop_name));
+//   require(poset_path::is_valid_name(xprop_fiber_name));
+//   require(xns.contains_poset(xprop_fiber_name, false));
+//   require(poset_path::is_valid_name(xprop_section_space_name));
+//   require(poset_path::is_valid_name(xprop_name));
 
-  require(xns.contains_poset_member(xprop_rep_path));
+//   require(xns.contains_poset_member(xprop_rep_path));
 
-  // Body:
+//   // Body:
 
-  // Create the mesh.
+//   // Create the mesh.
 
-  structured_block_2d* lbase_space =
-    new_2d_structured_base_space(xns, xbase_space_name, xi_size, xj_size);
+//   structured_block_2d* lbase_space =
+//     new_2d_structured_base_space(xns, xbase_space_name, xi_size, xj_size);
 
-  lbase_space->get_read_write_access();
+//   lbase_space->get_read_write_access();
 
-  // Create the coordinates section.
+//   // Create the coordinates section.
 
-  sec_e2 lcoords;
+//   sec_e2 lcoords;
 
-  new_section<sec_e2>(xns,
-		      "sec_rep_descriptors/vertex_block_uniform",
-		      lbase_space->path(),
-		      xcoord_fiber_name,
-		      xcoord_section_space_name,
-		      xcoord_name,
-		      lcoords);
+//   new_section<sec_e2>(xns,
+// 		      "sec_rep_descriptors/vertex_block_uniform",
+// 		      lbase_space->path(),
+// 		      xcoord_fiber_name,
+// 		      xcoord_section_space_name,
+// 		      xcoord_name,
+// 		      lcoords);
 
-  lcoords.get_read_write_access();
+//   lcoords.get_read_write_access();
 
-  // Set the coordinates dofs;
-  // uniform coordinates have only 8 dofs in 2d,
-  // the x,y coordinates at the corners of the domain.
-  // (Even these aren't all independent).
+//   // Set the coordinates dofs;
+//   // uniform coordinates have only 8 dofs in 2d,
+//   // the x,y coordinates at the corners of the domain.
+//   // (Even these aren't all independent).
 
-  sec_e2::fiber_type::volatile_type lfiber;
+//   sec_e2::fiber_type::volatile_type lfiber;
 
-  // Structured_block_2d ctor sets client ids to match the order
-  // for a normal quad.
+//   // Structured_block_2d ctor sets client ids to match the order
+//   // for a normal quad.
 
-  // xmin, ymin; client id 0.
+//   // xmin, ymin; client id 0.
 
-  lfiber[0] = xlower[0];
-  lfiber[1] = xlower[1];  
-  lcoords.put_fiber(0, lfiber);
+//   lfiber[0] = xlower[0];
+//   lfiber[1] = xlower[1];  
+//   lcoords.put_fiber(0, lfiber);
 
-  // xmax, ymin; client id 1:
+//   // xmax, ymin; client id 1:
 
-  lfiber[0] = xupper[0];
-  lfiber[1] = xlower[1];
-  lcoords.put_fiber(1, lfiber);
+//   lfiber[0] = xupper[0];
+//   lfiber[1] = xlower[1];
+//   lcoords.put_fiber(1, lfiber);
 
-  // xmax, ymax; client id 2.
+//   // xmax, ymax; client id 2.
 
-  lfiber[0] = xupper[0];
-  lfiber[1] = xupper[1];
-  lcoords.put_fiber(2, lfiber);
+//   lfiber[0] = xupper[0];
+//   lfiber[1] = xupper[1];
+//   lcoords.put_fiber(2, lfiber);
 
-  // xmin, ymax; client id 3.
+//   // xmin, ymax; client id 3.
 
-  lfiber[0] = xlower[0];
-  lfiber[1] = xupper[1];
-  lcoords.put_fiber(3, lfiber);
+//   lfiber[0] = xlower[0];
+//   lfiber[1] = xupper[1];
+//   lcoords.put_fiber(3, lfiber);
 
-  lcoords.release_access();
+//   lcoords.release_access();
 
-  // Create the property section.
+//   // Create the property section.
 
-  sec_at0 lprop;
+//   sec_at0 lprop;
 
-  new_section<sec_at0>(xns,
-		       xprop_rep_path,
-		       lbase_space->path(),
-		       xprop_fiber_name,
-		       xprop_section_space_name,
-		       xprop_name,
-		       lprop);
+//   new_section<sec_at0>(xns,
+// 		       xprop_rep_path,
+// 		       lbase_space->path(),
+// 		       xprop_fiber_name,
+// 		       xprop_section_space_name,
+// 		       xprop_name,
+// 		       lprop);
 
 
-  // Create the field.
+//   // Create the field.
 
-  field_vd* result = new field_vd(lcoords, lprop, true);
+//   field_vd* result = new field_vd(lcoords, lprop, true);
 
-  // Clean up.
+//   // Clean up.
 
-  lbase_space->release_access();
-  lbase_space->detach_from_state();
-  delete lbase_space;
+//   lbase_space->release_access();
+//   lbase_space->detach_from_state();
+//   delete lbase_space;
 
-  lcoords.detach_from_state();
-  lprop.detach_from_state();
+//   lcoords.detach_from_state();
+//   lprop.detach_from_state();
 
-  // Postconditions:
+//   // Postconditions:
 
-  ensure(result != 0);
-  ensure(result->state_is_not_read_accessible());
+//   ensure(result != 0);
+//   ensure(result->state_is_not_read_accessible());
 
-  // Exit:
+//   // Exit:
 
-  return result;
-}
+//   return result;
+// }
 
-fields::field_vd*
-fields::field_factory::
-new_scalar_field_2d_uniform(fiber_bundles_namespace& xns,
-                            const string& xbase_space_name,
-                            size_type xi_size,
-                            size_type xj_size,
-                            block<sec_vd_value_type>& xlower,
-                            block<sec_vd_value_type>& xupper,
-                            const poset_path& xcoord_fiber_schema_path,
-                            const string& xcoord_fiber_name,
-                            const string& xcoord_section_space_name,
-                            const arg_list& xcoord_section_space_table_dofs,
-                            const string& xcoord_name,
-                            const poset_path& xprop_fiber_schema_path,
-                            const string& xprop_fiber_name,
-                            const string& xprop_section_space_name,
-                            const arg_list& xprop_section_space_table_dofs,
-                            const string& xprop_name,
-                            const poset_path& xprop_rep_path)
-{
+// fields::field_vd*
+// fields::field_factory::
+// new_scalar_field_2d_uniform(fiber_bundles_namespace& xns,
+//                             const string& xbase_space_name,
+//                             size_type xi_size,
+//                             size_type xj_size,
+//                             block<sec_vd_value_type>& xlower,
+//                             block<sec_vd_value_type>& xupper,
+//                             const poset_path& xcoord_fiber_schema_path,
+//                             const string& xcoord_fiber_name,
+//                             const string& xcoord_section_space_name,
+//                             const arg_list& xcoord_section_space_table_dofs,
+//                             const string& xcoord_name,
+//                             const poset_path& xprop_fiber_schema_path,
+//                             const string& xprop_fiber_name,
+//                             const string& xprop_section_space_name,
+//                             const arg_list& xprop_section_space_table_dofs,
+//                             const string& xprop_name,
+//                             const poset_path& xprop_rep_path)
+// {
 
-#ifdef DIAGNOSTIC_OUTPUT
-  post_information_message("new_scalar_field_2d_uniform:");
-#endif
+// #ifdef DIAGNOSTIC_OUTPUT
+//   post_information_message("new_scalar_field_2d_uniform:");
+// #endif
 
-  // Preconditions:
+//   // Preconditions:
 
-  require(xns.state_is_read_write_accessible());
+//   require(xns.state_is_read_write_accessible());
 
-  require(!xbase_space_name.empty());
-  require(xi_size > 0);
-  require(xj_size > 0);
-  require(xlower.ct() >= 2);
-  require(xupper.ct() >= 2);
-  require_for_all(i, 0, 2, xlower[i] < xupper[i]);
+//   require(!xbase_space_name.empty());
+//   require(xi_size > 0);
+//   require(xj_size > 0);
+//   require(xlower.ct() >= 2);
+//   require(xupper.ct() >= 2);
+//   require_for_all(i, 0, 2, xlower[i] < xupper[i]);
 
-  require(xns.contains_poset_member(xcoord_fiber_schema_path));
-  require(!xcoord_fiber_name.empty());
-  require(!xcoord_section_space_name.empty());
-  require(xcoord_section_space_table_dofs.conforms_to_extension(xns, xcoord_fiber_schema_path, e2::standard_schema_path(), true, true));
-  require(!xcoord_name.empty());
+//   require(xns.contains_poset_member(xcoord_fiber_schema_path));
+//   require(!xcoord_fiber_name.empty());
+//   require(!xcoord_section_space_name.empty());
+//   require(xcoord_section_space_table_dofs.conforms_to_extension(xns, xcoord_fiber_schema_path, e2::standard_schema_path(), true, true));
+//   require(!xcoord_name.empty());
 
-  require(xns.contains_poset_member(xprop_fiber_schema_path));
-  require(!xprop_fiber_name.empty());
-  require(!xprop_section_space_name.empty());
-  require(xprop_section_space_table_dofs.conforms_to_extension(xns, xprop_fiber_schema_path, at0::standard_schema_path(), true, true));
-  require(!xprop_name.empty());
+//   require(xns.contains_poset_member(xprop_fiber_schema_path));
+//   require(!xprop_fiber_name.empty());
+//   require(!xprop_section_space_name.empty());
+//   require(xprop_section_space_table_dofs.conforms_to_extension(xns, xprop_fiber_schema_path, at0::standard_schema_path(), true, true));
+//   require(!xprop_name.empty());
 
-  require(xns.contains_poset_member(xprop_rep_path));
+//   require(xns.contains_poset_member(xprop_rep_path));
 
-  // Body:
+//   // Body:
 
-  // Create the mesh.
+//   // Create the mesh.
 
-  structured_block_2d* lbase_space =
-    new_2d_structured_base_space(xns, xbase_space_name, xi_size, xj_size);
+//   structured_block_2d* lbase_space =
+//     new_2d_structured_base_space(xns, xbase_space_name, xi_size, xj_size);
 
-  lbase_space->get_read_write_access();
+//   lbase_space->get_read_write_access();
 
-  // Create the coordinates section.
+//   // Create the coordinates section.
 
-  sec_e2 lcoords;
+//   sec_e2 lcoords;
 
-  new_section<sec_e2>(xns,
-		      "sec_rep_descriptors/vertex_block_uniform",
-		      *lbase_space,
-		      xcoord_fiber_schema_path,
-		      xcoord_fiber_name,
-		      xcoord_section_space_name,
-		      xcoord_section_space_table_dofs,
-		      xcoord_name,
-		      lcoords);
+//   new_section<sec_e2>(xns,
+// 		      "sec_rep_descriptors/vertex_block_uniform",
+// 		      *lbase_space,
+// 		      xcoord_fiber_schema_path,
+// 		      xcoord_fiber_name,
+// 		      xcoord_section_space_name,
+// 		      xcoord_section_space_table_dofs,
+// 		      xcoord_name,
+// 		      lcoords);
 
-  lcoords.get_read_write_access();
+//   lcoords.get_read_write_access();
 
-  // Set the coordinates dofs;
-  // uniform coordinates have only 8 dofs in 2d,
-  // the x,y coordinates at the corners of the domain.
-  // (Even these aren't all independent).
+//   // Set the coordinates dofs;
+//   // uniform coordinates have only 8 dofs in 2d,
+//   // the x,y coordinates at the corners of the domain.
+//   // (Even these aren't all independent).
 
-  sec_e2::fiber_type::volatile_type lfiber;
+//   sec_e2::fiber_type::volatile_type lfiber;
 
-  // Structured_block_2d ctor sets client ids to match the order
-  // for a normal quad.
+//   // Structured_block_2d ctor sets client ids to match the order
+//   // for a normal quad.
 
-  // xmin, ymin; client id 0.
+//   // xmin, ymin; client id 0.
 
-  lfiber[0] = xlower[0];
-  lfiber[1] = xlower[1];
-  lcoords.put_fiber(0, lfiber);
+//   lfiber[0] = xlower[0];
+//   lfiber[1] = xlower[1];
+//   lcoords.put_fiber(0, lfiber);
 
-  // xmax, ymin; client id 1:
+//   // xmax, ymin; client id 1:
 
-  lfiber[0] = xupper[0];
-  lfiber[1] = xlower[1];
-  lcoords.put_fiber(1, lfiber);
+//   lfiber[0] = xupper[0];
+//   lfiber[1] = xlower[1];
+//   lcoords.put_fiber(1, lfiber);
 
-  // xmax, ymax; client id 2.
+//   // xmax, ymax; client id 2.
 
-  lfiber[0] = xupper[0];
-  lfiber[1] = xupper[1];
-  lcoords.put_fiber(2, lfiber);
+//   lfiber[0] = xupper[0];
+//   lfiber[1] = xupper[1];
+//   lcoords.put_fiber(2, lfiber);
 
-  // xmin, ymax; client id 3.
+//   // xmin, ymax; client id 3.
 
-  lfiber[0] = xlower[0];
-  lfiber[1] = xupper[1];
-  lcoords.put_fiber(3, lfiber);
+//   lfiber[0] = xlower[0];
+//   lfiber[1] = xupper[1];
+//   lcoords.put_fiber(3, lfiber);
 
-  lcoords.release_access();
+//   lcoords.release_access();
 
-  // Create the property section.
+//   // Create the property section.
 
-  sec_at0 lprop;
+//   sec_at0 lprop;
 
-  new_section<sec_at0>(xns,
-		       xprop_rep_path,
-		       *lbase_space,
-		       xprop_fiber_schema_path,
-		       xprop_fiber_name,
-		       xprop_section_space_name,
-		       xprop_section_space_table_dofs,
-		       xprop_name,
-		       lprop);
+//   new_section<sec_at0>(xns,
+// 		       xprop_rep_path,
+// 		       *lbase_space,
+// 		       xprop_fiber_schema_path,
+// 		       xprop_fiber_name,
+// 		       xprop_section_space_name,
+// 		       xprop_section_space_table_dofs,
+// 		       xprop_name,
+// 		       lprop);
 
 
-  // Create the field.
+//   // Create the field.
 
-  field_vd* result = new field_vd(lcoords, lprop, true);
+//   field_vd* result = new field_vd(lcoords, lprop, true);
 
-  // Clean up.
+//   // Clean up.
 
-  lbase_space->release_access();
-  lbase_space->detach_from_state();
-  delete lbase_space;
+//   lbase_space->release_access();
+//   lbase_space->detach_from_state();
+//   delete lbase_space;
 
-  lcoords.detach_from_state();
-  lprop.detach_from_state();
+//   lcoords.detach_from_state();
+//   lprop.detach_from_state();
 
-  // Postconditions:
+//   // Postconditions:
 
-  ensure(result != 0);
-  ensure(result->state_is_not_read_accessible());
+//   ensure(result != 0);
+//   ensure(result->state_is_not_read_accessible());
 
-  // Exit:
+//   // Exit:
 
-  return result;
-}
+//   return result;
+// }
 
 fields::field_vd*
 fields::field_factory::
@@ -2875,7 +2875,11 @@ new_1d_unstructured_coordinates(fiber_bundles_namespace& xns,
 
   string lname = xname + "_coordinates_section_space";
 
-  sec_rep_space& lhost = xns.new_section_space<sec_e1>(lname, xbase_space.path(), xrep_path, true);
+  /// @todo Remove.
+  //sec_rep_space& lhost = xns.new_section_space<sec_e1>(lname, xbase_space.path(), xrep_path, true);
+
+  sec_rep_space& lhost =
+    sec_e1::standard_host(xns, xbase_space.path(true), xrep_path, "", "", false);
 
   lhost.get_read_write_access(); 
   
@@ -3003,9 +3007,13 @@ new_1d_uniform_coordinates(fiber_bundles_namespace& xns,
   string lname = xname + "_coordinates_section_space";
   poset_path lpath("sec_rep_descriptors", "vertex_block_uniform");
 
-  sec_rep_space& lhost = xns.new_section_space<sec_e1>(lname, xbase_space.path(), lpath, true);
-  lhost.get_read_write_access(); 
+  /// @todo Remove.
+//   sec_rep_space& lhost = xns.new_section_space<sec_e1>(lname, xbase_space.path(), lpath, true);
 
+  sec_rep_space& lhost =
+    sec_e1::standard_host(xns, xbase_space.path(true), lpath, "", "", false);
+
+  lhost.get_read_write_access();
 
   // Make the coordinates section.
 
@@ -3116,7 +3124,12 @@ new_2d_unstructured_coordinates(fiber_bundles_namespace& xns,
 
   string lname = xname + "_coordinates_section_space";
 
-  sec_rep_space& lhost = xns.new_section_space<sec_e2>(lname, xbase_space.path(), xrep_path, true);
+  /// @todo Remove.
+//   sec_rep_space& lhost = xns.new_section_space<sec_e2>(lname, xbase_space.path(), xrep_path, true);
+
+  sec_rep_space& lhost =
+    sec_e2::standard_host(xns, xbase_space.path(true), xrep_path, "", "", false);
+
   lhost.get_read_write_access(); 
 
   // Make the coordinates section.
@@ -3312,7 +3325,12 @@ new_2d_unstructured_coordinates(fiber_bundles_namespace& xns,
   string lname = xname + "_coordinates_section_space";
   poset_path lpath("sec_rep_descriptors", "vertex_element_dlinear");
 
-  sec_rep_space& lhost = xns.new_section_space<sec_e2>(lname, xbase_space.path(), lpath, true);
+  /// @todo Remove.
+//   sec_rep_space& lhost = xns.new_section_space<sec_e2>(lname, xbase_space.path(), lpath, true);
+
+  sec_rep_space& lhost =
+    sec_e2::standard_host(xns, xbase_space.path(true), lpath, "", "", false);
+
   lhost.get_read_write_access();
 
   // Make the coordinates section.
@@ -3444,7 +3462,12 @@ new_2d_uniform_coordinates(fiber_bundles_namespace& xns,
   string lname = xname + "_coordinates_section_space";
   poset_path lpath("sec_rep_descriptors", "vertex_block_uniform");
 
-  sec_rep_space& lhost = xns.new_section_space<sec_e2>(lname, xbase_space.path(), lpath, true);
+  /// @todo Remove.
+//   sec_rep_space& lhost = xns.new_section_space<sec_e2>(lname, xbase_space.path(), lpath, true);
+
+  sec_rep_space& lhost =
+    sec_e2::standard_host(xns, xbase_space.path(true), lpath, "", "", false);
+
   lhost.get_read_write_access();
 
   // Make the coordinates section.
@@ -3560,7 +3583,12 @@ new_3d_unstructured_coordinates(fiber_bundles_namespace& xns,
 
   string lname = xname + "_coordinates_section_space";
 
-  sec_rep_space& lhost = xns.new_section_space<sec_e3>(lname, xbase_space.path(), xrep_path, true);
+  /// @todo Remove.
+//   sec_rep_space& lhost = xns.new_section_space<sec_e3>(lname, xbase_space.path(), xrep_path, true);
+
+  sec_rep_space& lhost =
+    sec_e3::standard_host(xns, xbase_space.path(true), xrep_path, "", "", false);
+
   lhost.get_read_write_access();
 
   // Make the coordinates section.
@@ -3763,7 +3791,12 @@ new_3d_unstructured_coordinates(fiber_bundles_namespace& xns,
   string lname = xname + "_coordinates_section_space";
   poset_path lpath("sec_rep_descriptors", "vertex_element_dlinear");
 
-  sec_rep_space& lhost = xns.new_section_space<sec_e3>(lname, xbase_space.path(), lpath, true);
+  /// @todo Remove.
+//   sec_rep_space& lhost = xns.new_section_space<sec_e3>(lname, xbase_space.path(), lpath, true);
+
+  sec_rep_space& lhost =
+    sec_e3::standard_host(xns, xbase_space.path(true), lpath, "", "", false);
+
   lhost.get_read_write_access();
 
   // Make the coordinates section.
@@ -3900,7 +3933,12 @@ new_3d_uniform_coordinates(fiber_bundles_namespace& xns,
   string lname = xname + "_coordinates_section_space";
   poset_path lpath("sec_rep_descriptors", "vertex_block_uniform");
 
-  sec_rep_space& lhost = xns.new_section_space<sec_e3>(lname, xbase_space.path(), lpath, true);
+  /// @todo Remove.
+//   sec_rep_space& lhost = xns.new_section_space<sec_e3>(lname, xbase_space.path(), lpath, true);
+
+  sec_rep_space& lhost =
+    sec_e3::standard_host(xns, xbase_space.path(true), lpath, "", "", false);
+
   lhost.get_read_write_access();
 
   // Make the coordinates section.
@@ -3950,8 +3988,12 @@ new_property(fiber_bundles_namespace& xns,
 
   string lname = xname + "_property_section_space";
 
+  /// @todo Remove.
+//   sec_rep_space& lhost = xns.new_section_space<sec_at0>(lname, xbase_space.path(), xrep_path, true);
 
-  sec_rep_space& lhost = xns.new_section_space<sec_at0>(lname, xbase_space.path(), xrep_path, true);
+  sec_rep_space& lhost =
+    sec_at0::standard_host(xns, xbase_space.path(true), xrep_path, "", "", false);
+
   lhost.get_read_write_access();
 
   // Create the property section;
