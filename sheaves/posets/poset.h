@@ -50,7 +50,7 @@ public:
   typedef namespace_poset namespace_type;
 
   ///
-  /// Creates a new poset in namespace xns with path xpath,
+  /// Creates a new poset in namespace xns with path xpath
   /// and schema specified by xschema_path.
   ///
   static poset& new_table(namespace_type& xhost, 

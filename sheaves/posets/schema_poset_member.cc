@@ -69,6 +69,23 @@ new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xs
   // Body:
 
   host_type& result = host_type::new_table(xns, xhost_path, xschema_path, xauto_access);
+  result.get_read_write_access();  
+  
+  // Create the schema subposets of the top.
+
+  subposet ltable_dofs(&result, 0, false);
+  subposet lrow_dofs(&result, 0, false);
+
+  // Schematize the result.
+
+  result.schematize(&ltable_dofs, &lrow_dofs, true);
+
+  // Clean up.
+
+  ltable_dofs.detach_from_state();
+  lrow_dofs.detach_from_state();
+  
+  result.release_access();
 
   // Postconditions:
 
@@ -76,6 +93,8 @@ new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xs
   ensure(result.path(true) == xhost_path);
   ensure(result.state_is_not_read_accessible());
   ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(result.is_schematized(true));
 
   // Exit:
 
@@ -118,6 +137,8 @@ standard_host(namespace_type& xns, const poset_path& xhost_path, bool xauto_acce
   ensure(result.path(true) == xhost_path);
   ensure(result.state_is_not_read_accessible());
   ensure(result.schema(true).path(xauto_access) == standard_schema_path());
+
+  ensure(result.is_schematized(true));
 
   // Exit:
 

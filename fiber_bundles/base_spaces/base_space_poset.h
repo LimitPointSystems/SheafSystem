@@ -57,8 +57,9 @@ public:
   static arg_list make_args(int xmax_db);
 
   ///
-  /// Creates a new tuple_space in namespace xns with path xpath 
-  /// and schema specified by xschema_path.
+  /// Creates a new base_space_poset in namespace xns with path xpath,
+  /// schema specified by xschema_path, and table attribute max_db
+  /// specified by xmax_db..
   ///
   static base_space_poset& new_table(namespace_type& xhost, 
 				     const poset_path& xpath, 

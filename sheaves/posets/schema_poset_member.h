@@ -83,7 +83,7 @@ public:
   static const poset_path& standard_schema_path();
 
   ///
-  /// Manual, shallow factory method; creates a new host table for members of this type.
+  /// Creates a new host table for members of this type.
   /// The poset is created in namespace xns with path xhost_path and
   /// schema specified by xschema_path.
   ///
@@ -93,10 +93,8 @@ public:
 			     bool xauto_access);
 
   ///
-  /// The host with path standard_host_path(static_class_name(), xsuffix).
-  /// Returns the host if it already exists, otherwise, creates it in namespace xns
-  /// with schema specified by standard_schema_path() and standard paths for prerequisites,
-  /// which are also created if needed.
+  /// The host with path xhost_path.Returns the host if it already exists, 
+  /// otherwise, creates it in namespace xns with schema specified by standard_schema_path().
   ///
   static host_type& standard_host(namespace_type& xns, const poset_path& xhost_path, bool xauto_access);
 
