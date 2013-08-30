@@ -126,28 +126,6 @@ standard_host_path()
   return result;
 }
 
-bool
-fiber_bundle::sec_rep_descriptor::
-standard_host_is_available(namespace_type& xns, bool xauto_access)
-{
-  // cout << endl << "Entering sec_rep_descriptor::standard_host_is_available." << endl;
-
-  // Preconditions:
-
-
-  // Body:
-
-  bool result = xns.path_is_available<host_type>(standard_host_path(), xauto_access);
-
-  // Postconditions:
-
-
-  // Exit:
-
-  // cout << "Leaving sec_rep_descriptor::standard_host_is_available." << endl;
-  return result;
-}
-
 fiber_bundle::sec_rep_descriptor::host_type&
 fiber_bundle::sec_rep_descriptor::
 new_host(namespace_type& xns, 
@@ -201,7 +179,7 @@ standard_host(namespace_type& xns, bool xauto_access)
 
   require(xns.state_is_auto_read_write_accessible(xauto_access));
 
-  require(standard_host_is_available(xns, xauto_access));
+  require(xns.path_is_available<host_type>(standard_host_path(), xauto_access));  
 
   require(xns.path_is_auto_read_accessible(standard_schema_path(), xauto_access));
 

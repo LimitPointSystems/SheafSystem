@@ -64,6 +64,11 @@ class SHEAF_DLL_SPEC binary_section_space_schema_poset : public section_space_sc
 public:
 
   ///
+  /// The path to the standard schema for this class.
+  ///
+  static const poset_path& standard_schema_path();
+
+  ///
   /// Creates an arg list which conforms to the schema of this.
   ///
   static arg_list make_arg_list(const poset_path& xrep_path, 
@@ -188,16 +193,6 @@ private:
   //@{
 
 public:
-
-  ///
-  /// The path to the standard schema for this class.
-  ///
-  static const poset_path& standard_schema_path();
-
-  ///
-  /// Creates standard schema for this class in namespace xns.
-  ///
-  static void make_standard_schema(namespace_poset& xns);
 
   using section_space_schema_poset::get_index_from_components;
 

@@ -38,7 +38,7 @@ standard_schema_path()
   // so that a prototype can represent any type of base space member.
   // ("restriction polymorphism")
 
-  static const poset_path result("base_space_schema", "base_space_schema_member");
+  static const poset_path result("base_space_schema", "base_space_member_prototype_schema");
 
   // Postconditions:
 
@@ -62,6 +62,35 @@ schema_path() const
   // Exit
 
   return result;
+}
+
+void
+fiber_bundle::base_space_member_prototype::
+make_standard_schema(namespace_poset& xns)
+{
+  // Preconditions:
+
+  require(xns.state_is_read_write_accessible());
+  require(xns.contains_poset(standard_schema_path(), false));
+  require(!xns.contains_poset_member(standard_schema_path(), false));
+
+  // Body:
+
+  // Schema for prototypes has to conform to every other base space member schema,
+  // so it is the join of all the other members, which means it is a jem of top.
+  
+  poset_path lschema_top_path(standard_schema_path().poset_name(), "top");  
+  schema_poset_member lschema_top(&xns, lschema_top_path, false);
+  schema_poset_member lmember(lschema_top, true, false);
+  lmember.put_name(standard_schema_path().member_name(), true, false);
+
+  // Postconditions:
+
+  ensure(xns.contains_poset_member(standard_schema_path(), false));
+
+  // Exit:
+
+  return;
 }
 
 const sheaf::poset_path&

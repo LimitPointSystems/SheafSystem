@@ -242,8 +242,7 @@ standard_schema_poset_name()
 
   // Body:
 
-  static const string& result =
-    fiber_bundles_namespace::standard_fiber_space_schema_poset_name();
+  static const string result("fiber_space_schema");
 
   // Postconditions:
 

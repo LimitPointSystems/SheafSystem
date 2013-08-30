@@ -49,8 +49,6 @@ class sec_rep_space;
 class SHEAF_DLL_SPEC sec_rep_descriptor: public total_poset_member
 {
 
-public:
-
   // ===========================================================
   /// @name HOST FACTORY FACET
   // ===========================================================
@@ -82,12 +80,6 @@ public:
   /// The standard path for host spaces for this class.
   ///
   static const poset_path& standard_host_path();
-
-  ///
-  /// True, if standard_host_path() does not exist or is a path
-  /// to a poset of type host_type.
-  ///
-  static bool standard_host_is_available(namespace_type& xns, bool xauto_access);
 
   ///
   /// Manual, shallow factory method; creates a new host table for members of this type.

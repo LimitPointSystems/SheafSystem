@@ -96,19 +96,9 @@ public:
   typedef section_space_schema_table_dofs_type table_dofs_type;
 
   ///
-  /// The name of the standard schema poset for this class.
-  ///
-  static const string& standard_schema_poset_name();
-
-  ///
   /// The path to the standard schema for this class.
   ///
   static const poset_path& standard_schema_path();
-
-  ///
-  /// Creates the standard schema for this class in namespace xns.
-  ///
-  static void make_standard_schema(namespace_poset& xns);
 
   ///
   /// The path to the representation for section spaces on this schema..

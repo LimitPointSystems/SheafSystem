@@ -29,7 +29,6 @@
 #include "section_space_schema_table_dofs_type.h"
 #include "std_limits.h"
 #include "std_sstream.h"
-#include "wsv_block.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
@@ -68,27 +67,6 @@ namespace
 
 // PUBLIC FUNCTIONS
 
-const string&
-fiber_bundle::section_space_schema_poset::
-standard_schema_poset_name()
-{
-
-  // Preconditions:
-
-
-  // Body:
-
-  static const string result("section_space_schema_schema");
-
-  // Postconditions:
-
-  ensure(!result.empty());
-
-  // Exit:
-
-  return result;
-}
-
 const sheaf::poset_path&
 fiber_bundle::section_space_schema_poset::
 standard_schema_path()
@@ -98,68 +76,15 @@ standard_schema_path()
 
   // Body:
 
-  static const poset_path
-  result(standard_schema_poset_name(), "section_space_schema_schema");
+  const poset_path& result = section_space_schema_member::standard_schema_path();
 
   // Postconditions:
 
   ensure(result.full());
-  ensure(result.poset_name() == standard_schema_poset_name());
 
   // Exit:
 
   return result;
-}
-
-void
-fiber_bundle::section_space_schema_poset::
-make_standard_schema(namespace_poset& xns)
-{
-  // Preconditions:
-
-  require(xns.state_is_read_write_accessible());
-  require(xns.contains_poset(standard_schema_poset_name(), false));
-  require(xns.member_poset(standard_schema_poset_name(), false).state_is_read_write_accessible());
-  require(!xns.contains_poset_member(standard_schema_path(), false));
-
-  // Body:
-
-  string ldof_specs;
-
-  // Row dofs are same as row dofs of primitives:
-
-  ldof_specs =  "size SIZE_TYPE false";
-  ldof_specs += " alignment SIZE_TYPE false";
-  ldof_specs += " type POD_INDEX_TYPE false";
-
-  // Table dofs:
-
-  ldof_specs += " rep_path C_STRING true";
-  ldof_specs += " base_space_path C_STRING true";
-  ldof_specs += " fiber_space_path C_STRING true";
-  //   ldof_specs += " base_space_member_id_ub INT true";
-  //   ldof_specs += " base_space_stride INT true";
-  //   ldof_specs += " db INT true";
-  //   ldof_specs += " fiber_schema_path C_STRING true";
-  //   ldof_specs += " fiber_schema_member_id_ub INT true";
-  //   ldof_specs += " fiber_schema_stride INT true";
-  //   ldof_specs += " df INT true";
-
-  schema_poset_member lschema(xns,
-                              standard_schema_path().member_name(),
-                              poset_path(standard_schema_poset_name(), "bottom"),
-                              ldof_specs,
-                              false);
-
-  lschema.detach_from_state();
-
-  // Postconditions:
-
-  ensure(xns.contains_poset_member(standard_schema_path()));
-
-  // Exit
-
-  return;
 }
 
 sheaf::poset_path

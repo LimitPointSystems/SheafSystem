@@ -1,7 +1,7 @@
 
 
 //
-// Copyright (c) 2013 Limit Point Systems, Inc.
+// Copyright(c) 2013 Limit Point Systems, Inc.
 //
 
 /// @file
@@ -168,142 +168,6 @@ fiber_bundle::fiber_bundles_namespace::
   // Exit:
 
   return;
-}
-
-// const string&
-// fiber_bundle::fiber_bundles_namespace::
-// standard_base_space_schema_poset_name()
-// {
-
-//   // Preconditions:
-
-
-//   // Body:
-
-//   static const string result("base_space_schema");
-
-//   // Postconditions:
-
-//   ensure(!result.empty());
-
-//   // Exit:
-
-//   return result;
-// }
-
-// const string&
-// fiber_bundle::fiber_bundles_namespace::
-// standard_base_space_schema_member_name()
-// {
-//   // Preconditions:
-
-//   // Body:
-
-//   static const string result("base_space_schema_member");
-
-//   // Postconditions:
-
-//   ensure(!result.empty());
-
-//   // Exit:
-
-//   return result;
-// }
-
-const sheaf::poset_path&
-fiber_bundle::fiber_bundles_namespace::
-standard_base_space_schema_path()
-{
-  // Preconditions:
-
-  // Body:
-
-  static const poset_path& result(base_space_poset::standard_schema_path());
-
-  // Postconditions:
-
-  ensure(result.full());
-
-  // Exit:
-
-  return result;
-}
-
-// const string&
-// fiber_bundle::fiber_bundles_namespace::
-// standard_base_space_member_prototypes_poset_name()
-// {
-
-//   // Preconditions:
-
-
-//   // Body:
-
-//   static const string result("base_space_member_prototypes");
-
-//   // Postconditions:
-
-//   ensure(!result.empty());
-
-//   // Exit:
-
-//   return result;
-// }
-
-const string&
-fiber_bundle::fiber_bundles_namespace::
-standard_fiber_space_schema_poset_name()
-{
-
-  // Preconditions:
-
-
-  // Body:
-
-  static const string result("fiber_space_schema");
-
-  // Postconditions:
-
-  ensure(!result.empty());
-
-  // Exit:
-
-  return result;
-}
-
-// const string&
-// fiber_bundle::fiber_bundles_namespace::
-// standard_sec_rep_descriptor_schema_poset_name()
-// {
-//   return sec_rep_descriptor_poset::standard_schema_poset_name();
-// }
-
-// const sheaf::poset_path&
-// fiber_bundle::fiber_bundles_namespace::
-// standard_sec_rep_descriptor_schema_path()
-// {
-//   return sec_rep_descriptor::standard_schema_path();
-// }
-
-// const string&
-// fiber_bundle::fiber_bundles_namespace::
-// standard_sec_rep_descriptor_poset_name()
-// {
-//   return sec_rep_descriptor_poset::standard_poset_name();
-// }
-
-// const sheaf::poset_path&
-// fiber_bundle::fiber_bundles_namespace::
-// standard_sec_rep_descriptor_host_path()
-// {
-//   return sec_rep_descriptor::standard_host_path();
-// }
-
-const string&
-fiber_bundle::fiber_bundles_namespace::
-standard_section_space_schema_schema_poset_name()
-{
-  return section_space_schema_poset::standard_schema_poset_name();
 }
 
 void
@@ -1240,7 +1104,7 @@ make_base_space_definitions()
 
   require(state_is_read_write_accessible());
   //  require(!contains_poset(standard_base_space_schema_poset_name(), false));
-  require(!contains_poset(standard_base_space_schema_path(), false));
+  require(!contains_poset(base_space_member::standard_schema_path(), false));
   require(!contains_poset(base_space_member_prototype::standard_host_path(), false));
 
   // Body:
@@ -1255,7 +1119,7 @@ make_base_space_definitions()
 
   // Postconditions:
 
-  ensure(contains_poset(standard_base_space_schema_path(), false));
+  ensure(contains_poset(base_space_member::standard_schema_path(), false));
 
   // Exit:
 
@@ -1271,13 +1135,13 @@ make_base_space_schema_poset()
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(!contains_poset(standard_base_space_schema_path(), false));
+  require(!contains_poset(base_space_member::standard_schema_path(), false));
 
   // Body:
 
   // Create the schema poset.
 
-  string lname = standard_base_space_schema_path().poset_name();
+  string lname = base_space_member::standard_schema_path().poset_name();
   poset_path lschema_path = primitives().schema().path(false);
   arg_list largs = poset::make_args();
 
@@ -1308,7 +1172,7 @@ make_base_space_schema_poset()
 
   // Postconditions:
 
-  ensure(contains_poset(standard_base_space_schema_path(), false));
+  ensure(contains_poset(base_space_member::standard_schema_path(), false));
 
   // Exit:
 
@@ -1324,8 +1188,8 @@ make_base_space_schema_members()
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(contains_poset(standard_base_space_schema_path(), false));
-  require(member_poset(standard_base_space_schema_path(), false).state_is_read_write_accessible());
+  require(contains_poset(base_space_member::standard_schema_path(), false));
+  require(member_poset(base_space_member::standard_schema_path(), false).state_is_read_write_accessible());
 
   // Body:
 
@@ -1340,12 +1204,18 @@ make_base_space_schema_members()
   point_block_2d::make_standard_schema(*this);
   point_block_1d::make_standard_schema(*this);
 
-  // Construct the standard base space schema member
-  // (the join of the down set of the standard base space schema poset top).
+  // Schema for prototypes is join of allother schema,
+  // so it hase to be constructed last.
 
-  base_space_member lmember(_base_space_schema_poset->top(), true, false);
-  lmember.put_name(standard_base_space_schema_path().member_name(), true, false);
-  lmember.detach_from_state();
+  base_space_member_prototype::make_standard_schema(*this);
+  
+
+//   // Construct the standard base space schema member
+//   // (the join of the down set of the standard base space schema poset top).
+
+//   base_space_member lmember(_base_space_schema_poset->top(), true, false);
+//   lmember.put_name(base_space_member::standard_schema_path().member_name(), true, false);
+//   lmember.detach_from_state();
 
   // Postconditions:
 
@@ -2820,7 +2690,7 @@ make_fiber_space_definitions()
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(!contains_poset(standard_fiber_space_schema_poset_name(), false));
+  require(!contains_poset(tuple::standard_schema_path(), false));
 
   // Body:
 
@@ -2829,7 +2699,7 @@ make_fiber_space_definitions()
 
   // Postconditions:
 
-  ensure(contains_poset(standard_fiber_space_schema_poset_name(), false));
+  ensure(contains_poset(tuple::standard_schema_path(), false));
 
   // Exit:
 
@@ -2842,11 +2712,11 @@ make_fiber_space_schema_poset()
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(!contains_poset(standard_fiber_space_schema_poset_name(), false));
+  require(!contains_poset(tuple::standard_schema_path(), false));
 
   // Body:
 
-  string lname = standard_fiber_space_schema_poset_name();
+  string lname = tuple::standard_schema_path().poset_name();
   poset_path lschema_path = primitives().schema().path(false);
   arg_list largs = poset::make_args();
 
@@ -3219,7 +3089,7 @@ make_fiber_space_schema_poset()
 
   // Postconditions:
 
-  ensure(contains_poset(standard_fiber_space_schema_poset_name(), false));
+  ensure(contains_poset(tuple::standard_schema_path(), false));
 
   // Exit:
 
@@ -3232,7 +3102,7 @@ make_fiber_space_schema_members()
 {
   // Preconditions:
 
-  require(contains_poset(standard_fiber_space_schema_poset_name(), false));
+  require(contains_poset(tuple::standard_schema_path(), false));
   require(state_is_read_write_accessible());
 
   // Body:
@@ -3333,7 +3203,7 @@ make_section_space_definitions()
   require(state_is_read_write_accessible());
   require(!contains_poset(sec_rep_descriptor::standard_schema_path(), false));
   require(!contains_poset(sec_rep_descriptor::standard_host_path(), false));
-  require(!contains_member(standard_section_space_schema_schema_poset_name(), false));
+  require(!contains_poset(section_space_schema_member::standard_schema_path(), false));
 
   // Body:
 
@@ -3346,7 +3216,7 @@ make_section_space_definitions()
 
   ensure(contains_poset(sec_rep_descriptor::standard_schema_path(), false));
   ensure(contains_poset(sec_rep_descriptor::standard_host_path(), false));
-  ensure(contains_member(standard_section_space_schema_schema_poset_name(), false));
+  ensure(contains_poset(section_space_schema_member::standard_schema_path(), false));
 
   // Exit
 
@@ -3644,14 +3514,14 @@ make_section_space_schema_schema_poset()
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(!contains_poset(standard_section_space_schema_schema_poset_name(), false));
+  require(!contains_poset(section_space_schema_member::standard_schema_path(), false));
 
 
   // Body:
 
   // Create the poset.
 
-  string lname = standard_section_space_schema_schema_poset_name();
+  string lname = section_space_schema_member::standard_schema_path().poset_name();
   poset_path lschema_path = primitives().schema().path(false);
   arg_list largs = poset::make_args();
 
@@ -3683,7 +3553,7 @@ make_section_space_schema_schema_poset()
 
   // Postconditions:
 
-  require(contains_poset(standard_section_space_schema_schema_poset_name(), false));
+  require(contains_poset(section_space_schema_member::standard_schema_path(), false));
 
   // Exit:
 
@@ -3697,13 +3567,13 @@ make_section_space_schema_schema_members()
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(contains_poset(standard_section_space_schema_schema_poset_name(), false));
-  require(member_poset(standard_section_space_schema_schema_poset_name(), false).state_is_read_write_accessible());
+  require(contains_poset(section_space_schema_member::standard_schema_path(), false));
+  require(member_poset(section_space_schema_member::standard_schema_path(), false).state_is_read_write_accessible());
 
   // Body:
 
-  section_space_schema_poset::make_standard_schema(*this);
-  binary_section_space_schema_poset::make_standard_schema(*this);
+  section_space_schema_member::make_standard_schema(*this);
+  binary_section_space_schema_member::make_standard_schema(*this);
 
   // Postconditions:
 
@@ -3773,7 +3643,7 @@ link_poset(const namespace_poset_member& xmbr)
 
     new_link(xmbr.index().pod(), BOTTOM_INDEX);
   }
-  else if(lmbr_schema_id == member_id(standard_base_space_schema_path().poset_name(), false))
+  else if(lmbr_schema_id == member_id(base_space_member::standard_schema_path().poset_name(), false))
   {
     // This is a base space poset; link it under the base space group.
 
@@ -3792,7 +3662,7 @@ link_poset(const namespace_poset_member& xmbr)
 
     new_link(xmbr.index().pod(), BOTTOM_INDEX);
   }
-  else if(lmbr_schema_id == member_id(standard_fiber_space_schema_poset_name(), false))
+  else if(lmbr_schema_id == member_id(tuple::standard_schema_path().poset_name(), false))
   {
     pod_index_type lfiber_spaces_id = member_id("fiber_spaces", false);
 
@@ -3808,8 +3678,8 @@ link_poset(const namespace_poset_member& xmbr)
 
     // Test to see if this member comforms to tp.
 
-    poset_path lpath(standard_fiber_space_schema_poset_name(), "tp_schema");
-    bool lconforms = xmbr.poset_pointer()->schema().conforms_to(lpath);
+    //    poset_path lpath(tp::standard_schema_path());
+    bool lconforms = xmbr.poset_pointer()->schema().conforms_to(tp::standard_schema_path());
 
     // If it conforms, create the tensor space family if necessary
     // and link this member to that group.
@@ -3945,7 +3815,7 @@ attach_handle_data_members()
   sheaves_namespace::attach_handle_data_members();
 
   _base_space_schema_poset =
-    &member_poset<poset>(standard_base_space_schema_path(), false);
+    &member_poset<poset>(base_space_member::standard_schema_path(), false);
 
   _base_space_member_prototypes_poset =
     &member_poset<base_space_poset>(base_space_member_prototype::standard_host_path(), false);

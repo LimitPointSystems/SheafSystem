@@ -27,7 +27,6 @@
 #include "sec_rep_descriptor_poset.h"
 #include "sheaves_namespace.h"
 #include "subposet.h"
-#include "wsv_block.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
@@ -36,6 +35,25 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 // ===========================================================
 
 // PUBLIC FUNCTIONS
+
+const sheaf::poset_path&
+fiber_bundle::binary_section_space_schema_poset::
+standard_schema_path()
+{
+  // Preconditions:
+
+  // Body:
+
+  const poset_path& result = binary_section_space_schema_member::standard_schema_path();
+
+  // Postconditions:
+
+  ensure(result.full());
+
+  // Exit:
+
+  return result;
+}
 
 sheaf::arg_list
 fiber_bundle::binary_section_space_schema_poset::
@@ -440,59 +458,6 @@ make_prototype()
 // ===========================================================
 
 // PUBLIC FUNCTIONS
-
-const sheaf::poset_path&
-fiber_bundle::binary_section_space_schema_poset::
-standard_schema_path()
-{
-  // Preconditions:
-
-  // Body:
-
-  static const poset_path
-  result(standard_schema_poset_name(), "binary_section_space_schema_schema");
-
-  // Postconditions:
-
-  ensure(result.full());
-  ensure(result.poset_name() == standard_schema_poset_name());
-
-  // Exit:
-
-  return result;
-}
-
-void
-fiber_bundle::binary_section_space_schema_poset::
-make_standard_schema(namespace_poset& xns)
-{
-  // Preconditions:
-
-  require(xns.state_is_read_write_accessible());
-  require(xns.contains_poset(standard_schema_poset_name(), false));
-  require(xns.member_poset(standard_schema_poset_name(), false).state_is_read_write_accessible());
-  require(!xns.contains_poset_member(standard_schema_path(), false));
-
-  // Body:
-
-  // This class doesn't add any dofs.
-
-  schema_poset_member lschema(xns,
-                              standard_schema_path().member_name(),
-                              section_space_schema_poset::standard_schema_path(),
-                              "",
-                              false);
-
-  lschema.detach_from_state();
-
-  // Postconditions:
-
-  ensure(xns.contains_poset_member(standard_schema_path()));
-
-  // Exit
-
-  return;
-}
 
 sheaf::pod_index_type
 fiber_bundle::binary_section_space_schema_poset::

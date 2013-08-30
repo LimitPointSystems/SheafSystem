@@ -73,6 +73,11 @@ public:
   virtual const poset_path& schema_path() const;
 
   ///
+  /// Creates the standard schema for this class in namespace xns.
+  ///
+  static void make_standard_schema(namespace_poset& xns);
+
+  ///
   /// The standard path for host spaces for this class.
   ///
   static const poset_path& standard_host_path();

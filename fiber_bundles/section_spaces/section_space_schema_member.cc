@@ -29,8 +29,88 @@
 #include "section_space_schema_poset.h"
 #include "sheaves_namespace.h"
 #include "std_set.h"
+#include "wsv_block.h"
+
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
+
+// ===========================================================
+// HOST FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+
+const sheaf::poset_path&
+fiber_bundle::section_space_schema_member::
+standard_schema_path()
+{
+  // Preconditions:
+
+
+  // Body:
+
+  static const poset_path result("section_space_schema_schema", "section_space_schema_schema");
+
+  // Postconditions:
+
+  ensure(result.full());
+
+  // Exit:
+
+  return result;
+}
+
+
+void
+fiber_bundle::section_space_schema_member::
+make_standard_schema(namespace_poset& xns)
+{
+  // Preconditions:
+
+  require(xns.state_is_read_write_accessible());
+  require(xns.contains_poset(standard_schema_path(), false));
+  require(xns.member_poset(standard_schema_path(), false).state_is_read_write_accessible());
+  require(!xns.contains_poset_member(standard_schema_path(), false));
+
+  // Body:
+
+  string ldof_specs;
+
+  // Row dofs are same as row dofs of primitives:
+
+  ldof_specs =  "size SIZE_TYPE false";
+  ldof_specs += " alignment SIZE_TYPE false";
+  ldof_specs += " type POD_INDEX_TYPE false";
+
+  // Table dofs:
+
+  ldof_specs += " rep_path C_STRING true";
+  ldof_specs += " base_space_path C_STRING true";
+  ldof_specs += " fiber_space_path C_STRING true";
+
+  schema_poset_member lschema(xns,
+                              standard_schema_path().member_name(),
+                              poset_path(standard_schema_path().member_name(), "bottom"),
+                              ldof_specs,
+                              false);
+
+  lschema.detach_from_state();
+
+  // Postconditions:
+
+  ensure(xns.contains_poset_member(standard_schema_path()));
+
+  // Exit
+
+  return;
+}
+
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+ 
 
 // ===========================================================
 // SECTION_SPACE_SCHEMA_MEMBER FACET

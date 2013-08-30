@@ -56,14 +56,13 @@ class SHEAF_DLL_SPEC section_space_schema_member : public schema_poset_member
 {
   friend class section_space_schema_poset; // For access to get_ext_ids.
 
+
   // ===========================================================
-  /// @name SECTION_SPACE_SCHEMA_MEMBER FACET
+  /// @name HOAT FACTORY FACET
   // ===========================================================
   //@{
 
 public:
-
-  // Typedefs:
 
   ///
   /// The type of namespace for this type of member.
@@ -74,6 +73,30 @@ public:
   /// The type of host poset.
   ///
   typedef section_space_schema_poset host_type;
+
+  ///
+  /// The path of the schema required by this class.
+  ///
+  static const poset_path& standard_schema_path();
+
+  ///
+  /// Creates the standard schema for this class in namespace xns.
+  ///
+  static void make_standard_schema(namespace_poset& xns);
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
+  /// @name SECTION_SPACE_SCHEMA_MEMBER FACET
+  // ===========================================================
+  //@{
+
+public:
 
   ///
   /// The name of this class.

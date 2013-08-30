@@ -62,6 +62,16 @@ public:
   /// The type of host poset.
   ///
   typedef binary_section_space_schema_poset host_type;
+
+  ///
+  /// The path to the standard schema for this class.
+  ///
+  static const poset_path& standard_schema_path();
+
+  ///
+  /// Creates standard schema for this class in namespace xns.
+  ///
+  static void make_standard_schema(namespace_poset& xns);
   
   ///
   /// Creates a new host for members of this type in namespace xns with path xhost_path,
