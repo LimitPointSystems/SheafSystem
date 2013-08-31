@@ -13,7 +13,7 @@
 #include "arg_list.h"
 #include "base_space_poset.h"
 #include "block_connectivity.h"
-#include "fiber_bundles_namespace.impl.h"
+#include "fiber_bundles_namespace.h"
 #include "index_space_iterator.h"
 #include "namespace_poset.h"
 #include "poset_path.h"

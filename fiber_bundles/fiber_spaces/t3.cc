@@ -25,7 +25,7 @@
 // #include "at1.h"
 // #include "at1_space.h"
 // #include "tp_space.h"
-// #include "fiber_bundles_namespace.impl.h"
+// #include "fiber_bundles_namespace.h"
 // #include "namespace_poset.impl.h"
 // #include "poset.h"
 // #include "schema_descriptor.h"

@@ -31,7 +31,6 @@ set(SRCS
     e4.inst.cc
     ed.inst.cc
     factory.inst.cc
-    fiber_bundles_namespace.inst.cc
     general_matrix_1x2.inst.cc
     general_matrix_1x3.inst.cc
     general_matrix_2x1.inst.cc

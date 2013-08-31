@@ -115,7 +115,6 @@
 #include "sec_tuple_space.h"
 #include "sec_vd_space.h"
 
-#include "fiber_bundles_namespace.impl.h"
 #include "namespace_poset.impl.h"
 
 #include "abstract_poset_member.h"
@@ -127,6 +126,7 @@
 
 #include "base_space_poset.h"
 #include "binary_section_space_schema_poset.h"
+#include "binary_section_space_schema_member.h"
 #include "section_space_schema_poset.h"
 #include "sec_rep_descriptor_poset.h"
 

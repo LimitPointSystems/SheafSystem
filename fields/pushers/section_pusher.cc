@@ -192,25 +192,25 @@ section_pusher(const field_vd& xsrc, const sec_ed& xdst_coords,
 		   "_on_" + 
 		   xdst_coords.schema().base_space().path().member_name());
 
-  poset_path lrange_schema_path =
-    lns->new_section_space_schema(lsssp,
-				  ldomain_schema.rep().path(),
-				  xdst_coords.schema().base_space().path(),
-				  ldomain_schema.fiber_space().path(),
-				  true);
+//   poset_path lrange_schema_path =
+//     lns->new_section_space_schema(lsssp,
+// 				  ldomain_schema.rep().path(),
+// 				  xdst_coords.schema().base_space().path(),
+// 				  ldomain_schema.fiber_space().path(),
+// 				  true);
 
-  arg_list largs;
-  largs << "factor_ct" << -1
-	<< "d" << -1
-	<< "scalar_space_path" << ""
-	<< "p" << -1
-	<< "dd" << -1
-	<<"vector_space_path" << "";
+//   arg_list largs;
+//   largs << "factor_ct" << -1
+// 	<< "d" << -1
+// 	<< "scalar_space_path" << ""
+// 	<< "p" << -1
+// 	<< "dd" << -1
+// 	<<"vector_space_path" << "";
 
-  _range =
-    &lns->clone_section_space(_domain->path(), lrange_name, largs, lrange_schema_path, true);
+//   _range =
+//     &lns->clone_section_space(_domain->path(), lrange_name, largs, lrange_schema_path, true);
 
-  _range->get_read_access();
+//   _range->get_read_access();
 
   // Perform common initialization.
 

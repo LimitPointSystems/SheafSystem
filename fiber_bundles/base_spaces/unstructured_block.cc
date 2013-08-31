@@ -9,7 +9,7 @@
 #include "assert_contract.h"
 #include "arg_list.h"
 #include "base_space_member_prototype.h"
-#include "fiber_bundles_namespace.impl.h"
+#include "fiber_bundles_namespace.h"
 #include "hex_connectivity.h"
 #include "line_connectivity.h"
 #include "namespace_poset.h"

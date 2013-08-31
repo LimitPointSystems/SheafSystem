@@ -101,12 +101,23 @@ body_pusher(const geometry::sec_ed_invertible& xdomain_coord, const sec_ed& xran
     {
       lrep_path.put_member_name("vertex_element_dlinear");
     }
+
+    /// @todo Remove.
     
-    lschema_path = lns.new_section_space_schema(lschema_path,
-						lrep_path,
-						xrange_coord.schema().base_space().path(),
-						xdomain_coord.schema().fiber_space().path(),
-						true);
+//     lschema_path = lns.new_section_space_schema(lschema_path,
+// 						lrep_path,
+// 						xrange_coord.schema().base_space().path(),
+// 						xdomain_coord.schema().fiber_space().path(),
+// 						true);
+
+      lschema_path =
+	binary_section_space_schema_poset::new_table(lns,
+						     lschema_path,
+						     binary_section_space_schema_poset::standard_schema_path(),
+						     xrange_coord.schema().base_space().path(true),
+						     xdomain_coord.schema().fiber_space().path(true),
+						     lrep_path,
+						     true).path(true);
   }
   
   _body_schema.attach_to_state(&lns, lschema_path);
