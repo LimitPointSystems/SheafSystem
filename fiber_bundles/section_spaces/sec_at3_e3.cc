@@ -166,12 +166,12 @@ standard_host(namespace_type& xns,
   ensure(result.factor_ct(true) == result.schema(true).fiber_space<fiber_type::host_type>().factor_ct(xauto_access));
   ensure(result.d(true) == result.schema(true).fiber_space<fiber_type::host_type>().d(xauto_access));
   ensure(result.scalar_space_path(true) == 
-         scalar_type::standard_host_path<scalar_type>(xbase_path, xrep_path, xsection_suffix, xfiber_suffix));
+         scalar_type::standard_host_path<scalar_type>(xbase_path, result.rep().path(xauto_access), xsection_suffix, xfiber_suffix));
   ensure(result.p(true) == result.schema(true).fiber_space<fiber_type::host_type>().p(xauto_access));
   ensure(result.p(true) == 3);
   ensure(result.dd(true) == result.schema(true).fiber_space<fiber_type::host_type>().dd(xauto_access));
   ensure(result.vector_space_path(true) == 
-         vector_space_type::standard_host_path<vector_space_type>(xbase_path, xrep_path, xsection_suffix, xfiber_suffix));
+         vector_space_type::standard_host_path<vector_space_type>(xbase_path, result.rep().path(xauto_access), xsection_suffix, xfiber_suffix));
 
   // Exit:
 
