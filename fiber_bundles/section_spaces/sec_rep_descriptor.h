@@ -82,7 +82,7 @@ public:
   static const poset_path& standard_host_path();
 
   ///
-  /// Manual, shallow factory method; creates a new host table for members of this type.
+  /// Creates a new host table for members of this type.
   /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
   /// and table attribute prototypes_path specified by xprototypes_path.
   ///

@@ -66,7 +66,7 @@ public:
   static const poset_path& static_prototype_path();
 
   ///
-  /// Manual, shallow factory method; creates a new host poset for members of this type.
+  /// Creates a new host poset for members of this type.
   /// The poset is created in namespace xns with path xhost_path and schema specified by xschema_path.
   ///
   static host_type& new_host(namespace_type& xns, 
@@ -75,7 +75,7 @@ public:
 			     bool xauto_access);
 
   ///
-  /// Auto, deep factory method; finds or creates a host poset and any prerequisite posets
+  /// Finds or creates a host poset and any prerequisite posets
   /// for members of this type. The poset is created in namespace xns with path xhost_path
   /// and schema specified by standard_schema_path().
   ///

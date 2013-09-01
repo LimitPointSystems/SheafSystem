@@ -242,7 +242,7 @@ public:
   static bool standard_host_is_available(namespace_type& xns, const string& xsuffix, bool xauto_access);
 
   ///
-  /// Manual, shallow factory method; creates a new host table for members of this type.
+  /// Creates a new host table for members of this type.
   /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
   /// and table attribute factor_ct specified by xfactor_ct.
   ///

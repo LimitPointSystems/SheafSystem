@@ -61,7 +61,7 @@ public:
   typedef sec_e3 range_type;
 
   ///
-  /// Manual, shallow factory method; creates a new host table for members of this type.
+  /// Creates a new host table for members of this type.
   /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
   /// and table attribute domain_path and range_path specified by xdomain_path and xrange_path, respectively..
   ///

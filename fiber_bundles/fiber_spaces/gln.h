@@ -310,7 +310,7 @@ public:
   static void make_standard_schema(namespace_poset& xns);
 
   ///
-  /// Manual, shallow factory method; creates a new host table for members of this type.
+  /// Creates a new host table for members of this type.
   /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
   /// and table attribute vector_space_path specified by xvector_space_path.
   ///

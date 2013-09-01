@@ -62,7 +62,7 @@ public:
   static void make_standard_schema(namespace_poset& xns);
 
   ///
-  /// Manual, shallow factory method; creates a new host poset for members of this type.
+  /// Creates a new host poset for members of this type.
   /// The poset is created in namespace xns with path xhost_path and schema specified by xschema_path.
   ///
   static host_type& new_host(namespace_type& xns, 

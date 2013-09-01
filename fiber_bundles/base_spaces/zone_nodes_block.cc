@@ -40,8 +40,8 @@ standard_schema_path()
 
   // Body:
 
-  static const poset_path result(standard_schema_path().poset_name(),
-                                 "unstructured_block_schema");
+  static const poset_path 
+    result(homogeneous_block::standard_schema_path().poset_name(), "unstructured_block_schema");
 
   // Postconditions:
 

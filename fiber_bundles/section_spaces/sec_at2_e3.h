@@ -58,7 +58,7 @@ public:
   typedef sec_e3 vector_space_type;
 
   ///
-  /// Manual, shallow factory method; creates a new host table for members of this type.
+  /// Creates a new host table for members of this type.
   /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
   /// and vector section space specified by xvector_space_path.
   ///

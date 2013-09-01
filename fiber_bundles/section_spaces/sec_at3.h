@@ -49,7 +49,7 @@ public:
   typedef at3 fiber_type;
 
   ///
-  /// Manual, shallow factory method; creates a new host table for members of this type.
+  /// Creates a new host table for members of this type.
   /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
   /// and table attribute scalar_space_path specified by xscalar_space_path.
   ///
