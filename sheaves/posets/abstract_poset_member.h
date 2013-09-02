@@ -261,15 +261,13 @@ public:
   /// Creates a new jim (join-irreducible member) state in host() and attaches
   /// this to it. The existing dof map with index xtuple_id is used as the dof map.
   ///
-  virtual void new_jim_state(pod_index_type xtuple_id,
-			     bool xauto_access = true);
+  virtual void new_jim_state(pod_index_type xtuple_id, bool xauto_access = true);
 
   ///
   /// Creates a new jim (join-irreducible member) state in host() and attaches
   /// this to it. The existing dof map with index xtuple_id is used as the dof map.
   ///
-  void new_jim_state(const scoped_index& xtuple_id,
-		     bool xauto_access = true);
+  void new_jim_state(const scoped_index& xtuple_id, bool xauto_access = true);
 
   ///
   /// Creates a new jim (join-irreducible member) state in xhost and attaches
@@ -281,7 +279,7 @@ public:
                              bool xauto_access = true);
 
   ///
-  /// Creates a new jim (join-irreducible member) state in host() and attaches
+  /// Creates a new jim (join-irreducible member) state in xhost and attaches
   /// this to it. The existing dof map with index xtuple_id is used as the dof map.
   ///
   virtual void new_jim_state(poset_state_handle* xhost,
@@ -289,7 +287,7 @@ public:
 			     bool xauto_access = true);
 
   ///
-  /// Creates a new jim (join-irreducible member) state in host() and attaches
+  /// Creates a new jim (join-irreducible member) state in xhost and attaches
   /// this to it. The existing dof map with index xtuple_id is used as the dof map.
   ///
   void new_jim_state(poset_state_handle* xhost,
@@ -306,8 +304,7 @@ public:
   /// Creates a new jrm (join-reducible member) state in xhost and attaches
   /// this to it.
   ///
-  virtual void new_jrm_state(poset_state_handle* xhost,
-                             bool xauto_access = true);
+  virtual void new_jrm_state(poset_state_handle* xhost, bool xauto_access = true);
 
   ///
   /// Computes the join of the members with the indices given in xexpansion.

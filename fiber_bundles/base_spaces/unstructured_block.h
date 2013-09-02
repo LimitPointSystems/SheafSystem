@@ -21,7 +21,6 @@ namespace fiber_bundle
   
   using namespace sheaf;
 
-class base_space_member_prototype;
 class unstructured_block_builder;
 
 ///
@@ -41,21 +40,6 @@ public:
   // ===========================================================
   // HOST FACTORY FACET
   // ===========================================================
-
-  ///
-  /// The path of the schema required by this class.
-  ///
-  static const poset_path& standard_schema_path();
-
-  ///
-  /// The path of the schema required by this.
-  ///
-  virtual const poset_path& schema_path() const;
-
-  ///
-  /// Creates the standard schema for this class in namespace xns.
-  ///
-  static void make_standard_schema(namespace_poset& xns);
 
   ///
   /// The path of the prototype required by this class.
@@ -275,7 +259,7 @@ public:
   /// glued together with the atomic equivalences ("element connectivity") in xids.
   ///
   unstructured_block(poset* xhost,
-                     const base_space_member_prototype& xlocal_cell_prototype,
+                     const base_space_member& xlocal_cell_prototype,
                      const scoped_index* xids,
                      int xub,
                      bool xauto_access);
@@ -299,7 +283,7 @@ public:
   /// glued together with the atomic equivalences ("element connectivity") in xids.
   ///
   unstructured_block(poset* xhost,
-                     const base_space_member_prototype& xlocal_cell_prototype,
+                     const base_space_member& xlocal_cell_prototype,
                      const pod_index_type* xids,
                      int xub,
                      bool xauto_access);
@@ -324,7 +308,7 @@ public:
   /// generated for the one-dimensional case with xi_size segments.
   ///
   unstructured_block(poset* xhost,
-                     const base_space_member_prototype& xlocal_cell_prototype,
+                     const base_space_member& xlocal_cell_prototype,
                      const size_type& xi_size,
                      bool xauto_access = true);
 
@@ -350,7 +334,7 @@ public:
   /// edge segments.
   ///
   unstructured_block(poset* xhost,
-                     const base_space_member_prototype& xlocal_cell_prototype,
+                     const base_space_member& xlocal_cell_prototype,
                      const size_type& xi_size,
                      const size_type& xj_size,
                      bool xauto_access = true);
@@ -378,7 +362,7 @@ public:
   /// xk_size edge segments.
   ///
   unstructured_block(poset* xhost,
-                     const base_space_member_prototype& xlocal_cell_prototype,
+                     const base_space_member& xlocal_cell_prototype,
                      const size_type& xi_size,
                      const size_type& xj_size,
                      const size_type& xk_size,
@@ -440,7 +424,7 @@ public:
   ///
   /// Creates a new unstructured block state in xhost and attaches this to it.
   ///
-  virtual void new_state(const base_space_member_prototype& xlocal_cell_prototype,
+  virtual void new_state(const base_space_member& xlocal_cell_prototype,
                          const scoped_index* ids,
                          int xub,
                          bool xauto_access);
@@ -458,7 +442,7 @@ public:
   /// Creates a new unstructured block state in xhost and attaches this to it.
   ///
   virtual void new_state(poset* xhost,
-                         const base_space_member_prototype& xlocal_cell_prototype,
+                         const base_space_member& xlocal_cell_prototype,
                          const scoped_index* ids,
                          int xub,
                          bool xauto_access);
@@ -474,7 +458,7 @@ public:
   ///
   /// Creates a new unstructured block state in xhost and attaches this to it.
   ///
-  virtual void new_state(const base_space_member_prototype& xlocal_cell_prototype,
+  virtual void new_state(const base_space_member& xlocal_cell_prototype,
                          const pod_index_type* ids,
                          int xub,
                          bool xauto_access);
@@ -492,7 +476,7 @@ public:
   /// Creates a new unstructured block state in xhost and attaches this to it.
   ///
   virtual void new_state(poset* xhost,
-                         const base_space_member_prototype& xlocal_cell_prototype,
+                         const base_space_member& xlocal_cell_prototype,
                          const pod_index_type* ids,
                          int xub,
                          bool xauto_access);
@@ -507,7 +491,7 @@ public:
   ///
   /// Creates a new unstructured block state in xhost and attaches this to it.
   ///
-  virtual void new_state(const base_space_member_prototype& xlocal_cell_prototype,
+  virtual void new_state(const base_space_member& xlocal_cell_prototype,
                          const size_type& xi_size,
                          bool xauto_access);
 
@@ -523,7 +507,7 @@ public:
   /// Creates a new unstructured block state in xhost and attaches this to it.
   ///
   virtual void new_state(poset* xhost,
-                         const base_space_member_prototype& xlocal_cell_prototype,
+                         const base_space_member& xlocal_cell_prototype,
                          const size_type& xi_size,
                          bool xauto_access);
 
@@ -539,7 +523,7 @@ public:
   ///
   /// Creates a new unstructured block state in xhost and attaches this to it.
   ///
-  virtual void new_state(const base_space_member_prototype& xlocal_cell_prototype,
+  virtual void new_state(const base_space_member& xlocal_cell_prototype,
                          const size_type& xi_size,
                          const size_type& xj_size,
                          bool xauto_access);
@@ -557,7 +541,7 @@ public:
   /// Creates a new unstructured block state in xhost and attaches this to it.
   ///
   virtual void new_state(poset* xhost,
-                         const base_space_member_prototype& xlocal_cell_prototype,
+                         const base_space_member& xlocal_cell_prototype,
                          const size_type& xi_size,
                          const size_type& xj_size,
                          bool xauto_access);
@@ -574,7 +558,7 @@ public:
   ///
   /// Creates a new unstructured block state in xhost and attaches this to it.
   ///
-  virtual void new_state(const base_space_member_prototype& xlocal_cell_prototype,
+  virtual void new_state(const base_space_member& xlocal_cell_prototype,
                          const size_type& xi_size,
                          const size_type& xj_size,
                          const size_type& xk_size,
@@ -594,7 +578,7 @@ public:
   /// Creates a new unstructured block state in xhost and attaches this to it.
   ///
   virtual void new_state(poset* xhost,
-                         const base_space_member_prototype& xlocal_cell_prototype,
+                         const base_space_member& xlocal_cell_prototype,
                          const size_type& xi_size,
                          const size_type& xj_size,
                          const size_type& xk_size,
@@ -623,7 +607,7 @@ public:
   /// of the cell xlocal_cell_prototype glued together
   /// with the atomic equivalences ("element connectivity") in xids.
   ///
-  void refine(const base_space_member_prototype& xlocal_cell_prototype,
+  void refine(const base_space_member& xlocal_cell_prototype,
               const scoped_index* ids,
               int xub,
               bool xauto_access);

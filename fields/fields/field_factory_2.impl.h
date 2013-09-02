@@ -22,8 +22,8 @@
 #include "assert_contract.h"
 #endif
 
-#ifndef BASE_SPACE_MEMBER_PROTOTYPE_H
-#include "base_space_member_prototype.h"
+#ifndef BASE_SPACE_MEMBER_H
+#include "base_space_member.h"
 #endif
 
 #ifndef ERROR_MESSAGE_H
@@ -870,7 +870,7 @@ make_base_space(fiber_bundles_namespace& xns,
       lhost = &unstructured_block::standard_host(xns, xbase_path.poset_name(), ldb, false);
     }
 
-    string lposet_name(base_space_member_prototype::standard_host_path().poset_name());
+    string lposet_name(base_space_member::prototypes_poset_name());
 
     switch(ldb)
     {

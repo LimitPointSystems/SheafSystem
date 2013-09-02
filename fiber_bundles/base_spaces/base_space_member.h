@@ -65,11 +65,6 @@ public:
   ///
   typedef base_space_poset host_type;
 
-//   ///
-//   /// The name of the standard schema poset for this class.
-//   ///
-//   static const string& standard_schema_poset_name();
-
   ///
   /// The path of the schema required by this class.
   ///
@@ -160,22 +155,31 @@ public:
   ///
   /// Creates a new handle attached to a new jim
   /// state in xhost using the prototype with name xname.
-  /// Xis_prototype_name is present only to distinguish
-  /// the signature of this constructor from the existing state
-  /// constructor below and is ignored
+  /// If xcopy_dof_map or if xhost does not already contain a copy 
+  /// of the prototype dof map, create a copy of the dof map,
+  /// otherwise just refer to an existing copy.
+  ///.
+  ///
+  base_space_member(base_space_poset& xhost,
+                    const string& xprototype_name,
+                    bool xcopy_dof_map,
+                    bool xauto_access);
+
+  ///
+  /// Creates a new prototype with name xname, dimension xdb, and
+  /// local cell prototype xlocal_cell_name.
   ///
   base_space_member(poset* xhost,
-                    const string& xprototype_name,
-                    bool xis_prototype_name,
+                    const string& xname,
+                    int xdb,
+                    const string& xlocal_cell_name,
                     bool xauto_access);
 
   ///
   /// Creates a new handle attached to a new jim (join-irreducible member)
   /// state in xhost using the existing dof tuple with index xdof_tuple_id.
   ///
-  base_space_member(poset* xhost,
-                    const scoped_index& xdof_tuple_id,
-                    bool xauto_access);
+  base_space_member(poset* xhost, pod_index_type xdof_tuple_id, bool xauto_access);
 
   ///
   /// creates a new jrm (join reducible member) attached to a new member state
@@ -212,7 +216,7 @@ public:
   /// Creates a new base_space_member handle attached to the member state
   /// with specified by xpath in namespace xnamespace.
   ///
-  base_space_member(const namespace_poset* xnamespace, const poset_path& xpath);
+  base_space_member(const namespace_poset* xnamespace, const poset_path& xpath, bool xauto_access);
 
   ///
   /// Creates a new base_space_member handle attached to the member state
@@ -252,6 +256,32 @@ public:
   ///
   static bool prototype_exists(const string& xname, bool xauto_access);
 
+//   ///
+//   /// The type of row dof tuple for this.
+//   ///
+//   struct SHEAF_DLL_SPEC row_dof_tuple_type
+//   {
+//     ///
+//     /// The base space dimension.
+//     ///
+//     int db;
+
+//     ///
+//     /// The cell type id.
+//     ///
+//     int type_id;
+
+//     ///
+//     /// The cell type name.
+//     ///
+//     const char * type_name;
+
+//     ///
+//     /// The refinement depth.
+//     ///
+//     int refinement_depth;
+//   };
+
   ///
   /// The type of row dof tuple for this.
   ///
@@ -270,12 +300,42 @@ public:
     ///
     /// The cell type name.
     ///
-    const char * type_name;
+    const char* type_name;
 
     ///
     /// The refinement depth.
     ///
     int refinement_depth;
+
+    ///
+    /// The local cell type id.
+    ///
+    int local_cell_type_id;
+
+    ///
+    /// The local cell type name.
+    ///
+    const char* local_cell_type_name;
+
+    ///
+    /// The number of local cells.
+    ///
+    size_type size;
+
+    ///
+    /// The upper bound on the x direction index for structured blocks
+    ///
+    size_type i_size;
+
+    ///
+    /// The upper bound on the y direction index for structured blocks
+    ///
+    size_type j_size;
+
+    ///
+    /// The upper bound on the z direction index for structured blocks
+    ///
+    size_type k_size;
   };
 
   ///
@@ -313,6 +373,11 @@ public:
 					     bool xauto_access = true);
 
 protected:
+
+  ///
+  /// Creates a new row dof map and initializes it.
+  ///
+  void init_row_dof_tuple(int xdb, const string& xlocal_cell_name);
 
 private:
 
@@ -352,6 +417,16 @@ public:
   /// Sets the refinement depth to xdepth.
   ///
   void put_refinement_depth(int xdepth);
+
+  ///
+  /// The local cell type id.
+  ///
+  pod_index_type local_cell_type_id() const;
+
+  ///
+  /// The local cell type name.
+  ///
+  const char* local_cell_type_name() const;
 
 protected:
 

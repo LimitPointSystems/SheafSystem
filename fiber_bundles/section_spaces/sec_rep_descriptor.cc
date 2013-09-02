@@ -11,7 +11,6 @@
 
 #include "assert_contract.h"
 #include "arg_list.h"
-#include "base_space_member_prototype.h"
 #include "eval_family.h"
 #include "namespace_poset.h"
 #include "poset.h"
@@ -194,7 +193,7 @@ standard_host(namespace_type& xns, bool xauto_access)
   }
   else
   {
-    poset_path lprototypes_path(base_space_member_prototype::standard_host_path());
+    poset_path lprototypes_path(base_space_member::prototypes_poset_name());
     result_ptr = &new_host(xns, lpath, standard_schema_path(), lprototypes_path, xauto_access);
   }
 
@@ -207,7 +206,7 @@ standard_host(namespace_type& xns, bool xauto_access)
   ensure(result.state_is_not_read_accessible());
   ensure(result.schema(true).path(xauto_access) == standard_schema_path());
 
-  ensure(result.prototypes().path(xauto_access) == base_space_member_prototype::standard_host_path());
+  ensure(result.prototypes().path(xauto_access).poset_name() == base_space_member::prototypes_poset_name());
 
   // Exit:
 

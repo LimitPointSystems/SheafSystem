@@ -8,7 +8,6 @@
 
 #include "assert_contract.h"
 #include "arg_list.h"
-#include "base_space_member_prototype.h"
 #include "fiber_bundles_namespace.h"
 #include "hex_connectivity.h"
 #include "line_connectivity.h"
@@ -30,75 +29,6 @@
 // ===========================================================
 // HOST FACTORY FACET
 // ===========================================================
-
-const sheaf::poset_path&
-fiber_bundle::unstructured_block::
-standard_schema_path()
-{
-
-  // Preconditions:
-
-  // Body:
-
-  static const poset_path result(homogeneous_block::standard_schema_path().poset_name(),
-                                 "unstructured_block_schema");
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-
-const sheaf::poset_path&
-fiber_bundle::unstructured_block::
-schema_path() const
-{
-  // Preconditions:
-
-  // Body:
-
-  const poset_path& result = standard_schema_path();
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-
-void
-fiber_bundle::unstructured_block::
-make_standard_schema(namespace_poset& xns)
-{
-  // Preconditions:
-
-  require(xns.state_is_read_write_accessible());
-  require(xns.contains_poset(standard_schema_path(), false));
-  require(!xns.contains_poset_member(standard_schema_path(), false));
-
-  // Body:
-
-  // Unstructured_block schema does not introduce any new dofs.
-
-  schema_poset_member lschema(xns,
-                              standard_schema_path().member_name(),
-                              homogeneous_block::standard_schema_path(),
-                              "",
-                              false);
-
-  lschema.detach_from_state();
-
-  // Postconditions:
-
-  ensure(xns.contains_poset_member(standard_schema_path(), false));
-
-  // Exit:
-
-  return;
-}
 
 const sheaf::poset_path&
 fiber_bundle::unstructured_block::
@@ -440,7 +370,7 @@ unstructured_block(poset* xhost,
 
 fiber_bundle::unstructured_block::
 unstructured_block(poset* xhost,
-                   const base_space_member_prototype& xlocal_cell_prototype,
+                   const base_space_member& xlocal_cell_prototype,
                    const scoped_index* xids,
                    int xub,
                    bool xauto_access)
@@ -488,7 +418,7 @@ unstructured_block(poset* xhost,
 
 fiber_bundle::unstructured_block::
 unstructured_block(poset* xhost,
-                   const base_space_member_prototype& xlocal_cell_prototype,
+                   const base_space_member& xlocal_cell_prototype,
                    const pod_index_type* xids,
                    int xub,
                    bool xauto_access)
@@ -535,7 +465,7 @@ unstructured_block(poset* xhost,
 
 fiber_bundle::unstructured_block::
 unstructured_block(poset* xhost,
-                   const base_space_member_prototype& xlocal_cell_prototype,
+                   const base_space_member& xlocal_cell_prototype,
                    const size_type& xi_size,
                    bool xauto_access)
 {
@@ -582,7 +512,7 @@ unstructured_block(poset* xhost,
 
 fiber_bundle::unstructured_block::
 unstructured_block(poset* xhost,
-                   const base_space_member_prototype& xlocal_cell_prototype,
+                   const base_space_member& xlocal_cell_prototype,
                    const size_type& xi_size,
                    const size_type& xj_size,
                    bool xauto_access)
@@ -632,7 +562,7 @@ unstructured_block(poset* xhost,
 
 fiber_bundle::unstructured_block::
 unstructured_block(poset* xhost,
-                   const base_space_member_prototype& xlocal_cell_prototype,
+                   const base_space_member& xlocal_cell_prototype,
                    const size_type& xi_size,
                    const size_type& xj_size,
                    const size_type& xk_size,
@@ -841,7 +771,7 @@ new_state(const poset_path& xlocal_cell_prototype_path,
 
 void
 fiber_bundle::unstructured_block::
-new_state(const base_space_member_prototype& xlocal_cell_prototype,
+new_state(const base_space_member& xlocal_cell_prototype,
           const scoped_index* xids,
           int xub,
           bool xauto_access)
@@ -883,9 +813,7 @@ new_state(poset* xhost,
 
   // Body:
 
-  base_space_member_prototype lproto(xhost->name_space(),
-                                     xlocal_cell_prototype_path,
-                                     xauto_access);
+  base_space_member lproto(xhost->name_space(), xlocal_cell_prototype_path, xauto_access);
 
   new_state(xhost, lproto, xids, xub, xauto_access);
 
@@ -903,7 +831,7 @@ new_state(poset* xhost,
 void
 fiber_bundle::unstructured_block::
 new_state(poset* xhost,
-          const base_space_member_prototype& xlocal_cell_prototype,
+          const base_space_member& xlocal_cell_prototype,
           const scoped_index* xids,
           int xub,
           bool xauto_access)
@@ -1026,7 +954,7 @@ new_state(const poset_path& xlocal_cell_prototype_path,
 
 void
 fiber_bundle::unstructured_block::
-new_state(const base_space_member_prototype& xlocal_cell_prototype,
+new_state(const base_space_member& xlocal_cell_prototype,
           const pod_index_type* xids,
           int xub,
           bool xauto_access)
@@ -1068,7 +996,7 @@ new_state(poset* xhost,
 
   // Body:
 
-  base_space_member_prototype lproto(xhost->name_space(),
+  base_space_member lproto(xhost->name_space(),
                                      xlocal_cell_prototype_path,
                                      xauto_access);
 
@@ -1088,7 +1016,7 @@ new_state(poset* xhost,
 void
 fiber_bundle::unstructured_block::
 new_state(poset* xhost,
-          const base_space_member_prototype& xlocal_cell_prototype,
+          const base_space_member& xlocal_cell_prototype,
           const pod_index_type* xids,
           int xub,
           bool xauto_access)
@@ -1209,7 +1137,7 @@ new_state(const poset_path& xlocal_cell_prototype_path,
 
 void
 fiber_bundle::unstructured_block::
-new_state(const base_space_member_prototype& xlocal_cell_prototype,
+new_state(const base_space_member& xlocal_cell_prototype,
           const size_type& xi_size,
           bool xauto_access)
 {
@@ -1249,7 +1177,7 @@ new_state(poset* xhost,
 
   // Body:
 
-  base_space_member_prototype lproto(xhost->name_space(),
+  base_space_member lproto(xhost->name_space(),
                                      xlocal_cell_prototype_path,
                                      xauto_access);
 
@@ -1269,7 +1197,7 @@ new_state(poset* xhost,
 void
 fiber_bundle::unstructured_block::
 new_state(poset* xhost,
-          const base_space_member_prototype& xlocal_cell_prototype,
+          const base_space_member& xlocal_cell_prototype,
           const size_type& xi_size,
           bool xauto_access)
 {
@@ -1375,7 +1303,7 @@ new_state(const poset_path& xlocal_cell_prototype_path,
 
 void
 fiber_bundle::unstructured_block::
-new_state(const base_space_member_prototype& xlocal_cell_prototype,
+new_state(const base_space_member& xlocal_cell_prototype,
           const size_type& xi_size,
           const size_type& xj_size,
           bool xauto_access)
@@ -1416,7 +1344,7 @@ new_state(poset* xhost,
   // Body:
 
 
-  base_space_member_prototype lproto(xhost->name_space(),
+  base_space_member lproto(xhost->name_space(),
                                      xlocal_cell_prototype_path,
                                      xauto_access);
 
@@ -1436,7 +1364,7 @@ new_state(poset* xhost,
 void
 fiber_bundle::unstructured_block::
 new_state(poset* xhost,
-          const base_space_member_prototype& xlocal_cell_prototype,
+          const base_space_member& xlocal_cell_prototype,
           const size_type& xi_size,
           const size_type& xj_size,
           bool xauto_access)
@@ -1559,7 +1487,7 @@ new_state(const poset_path& xlocal_cell_prototype_path,
 
 void
 fiber_bundle::unstructured_block::
-new_state(const base_space_member_prototype& xlocal_cell_prototype,
+new_state(const base_space_member& xlocal_cell_prototype,
           const size_type& xi_size,
           const size_type& xj_size,
           const size_type& xk_size,
@@ -1603,7 +1531,7 @@ new_state(poset* xhost,
 
   // Body:
 
-  base_space_member_prototype lproto(xhost->name_space(),
+  base_space_member lproto(xhost->name_space(),
                                      xlocal_cell_prototype_path,
                                      xauto_access);
 
@@ -1623,7 +1551,7 @@ new_state(poset* xhost,
 void
 fiber_bundle::unstructured_block::
 new_state(poset* xhost,
-          const base_space_member_prototype& xlocal_cell_prototype,
+          const base_space_member& xlocal_cell_prototype,
           const size_type& xi_size,
           const size_type& xj_size,
           const size_type& xk_size,
@@ -1739,7 +1667,7 @@ refine(const poset_path& xlocal_cell_prototype_path,
 
   // Body:
 
-  base_space_member_prototype lproto(name_space(),
+  base_space_member lproto(name_space(),
                                      xlocal_cell_prototype_path,
                                      xauto_access);
 
@@ -1758,7 +1686,7 @@ refine(const poset_path& xlocal_cell_prototype_path,
 
 void
 fiber_bundle::unstructured_block::
-refine(const base_space_member_prototype& xlocal_cell_prototype,
+refine(const base_space_member& xlocal_cell_prototype,
        const scoped_index* xids,
        int xub,
        bool xauto_access)

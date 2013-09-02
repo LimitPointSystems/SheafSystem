@@ -44,21 +44,6 @@ class SHEAF_DLL_SPEC zone_nodes_block : public homogeneous_block
 public:
 
   ///
-  /// The path of the schema required by this class.
-  ///
-  static const poset_path& standard_schema_path();
-
-  ///
-  /// The path of the schema required by this.
-  ///
-  virtual const poset_path& schema_path() const;
-
-  ///
-  /// Creates the standard schema for this class in namespace xns.
-  ///
-  static void make_standard_schema(namespace_poset& xns);
-
-  ///
   /// The path of the prototype required by this class.
   ///
   static const poset_path& static_prototype_path();

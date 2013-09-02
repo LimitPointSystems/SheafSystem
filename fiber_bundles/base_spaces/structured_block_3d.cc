@@ -11,7 +11,7 @@
 
 #include "assert_contract.h"
 #include "arg_list.h"
-#include "base_space_member_prototype.h"
+//#include "base_space_member_prototype.h"
 #include "chart_point_3d.h"
 #include "fiber_bundles_namespace.h"
 #include "namespace_poset.h"
@@ -27,80 +27,6 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 // ===========================================================
 
 // PUBLIC DATA MEMBERS
-
-const sheaf::poset_path&
-fiber_bundle::structured_block_3d::
-standard_schema_path()
-{
-
-  // Preconditions:
-
-  // Body:
-
-  static const poset_path
-  STATIC_SCHEMA_PATH(base_space_member::standard_schema_path().poset_name(),
-                     "structured_block_3d_schema");
-
-  const poset_path& result = STATIC_SCHEMA_PATH;
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-
-const sheaf::poset_path&
-fiber_bundle::structured_block_3d::
-schema_path() const
-{
-  // Preconditions:
-
-  // Body:
-
-  const poset_path& result = standard_schema_path();
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-void
-fiber_bundle::structured_block_3d::
-make_standard_schema(namespace_poset& xns)
-{
-  // Preconditions:
-
-  require(xns.state_is_read_write_accessible());
-  require(xns.contains_poset(standard_schema_path(), false));
-  require(!xns.contains_poset_member(standard_schema_path(), false));
-
-  // Body:
-
-  string ldof_specs = "i_size SIZE_TYPE false";
-  ldof_specs       += " j_size SIZE_TYPE false";
-  ldof_specs       += " k_size SIZE_TYPE false";
-
-
-  schema_poset_member lschema(xns,
-                              standard_schema_path().member_name(),
-                              structured_block::standard_schema_path(),
-                              ldof_specs,
-                              false);
-
-  lschema.detach_from_state();
-
-  // Postconditions:
-
-  ensure(xns.contains_poset_member(standard_schema_path(), false));
-
-  // Exit:
-
-  return;
-}
 
 const sheaf::poset_path&
 fiber_bundle::structured_block_3d::
@@ -621,13 +547,11 @@ new_row_dof_map(poset_state_handle& xhost,
 
   // Get the block prototype.
 
-  base_space_member_prototype
-  lproto(xhost.name_space(), static_prototype_path(), xauto_access);
+  base_space_member lproto(xhost.name_space(), static_prototype_path(), xauto_access);
 
   // Get the local cell prototype.
 
-  base_space_member_prototype
-  local_proto(xhost.name_space(), static_local_cell_prototype_path(), xauto_access);
+  base_space_member local_proto(xhost.name_space(), static_local_cell_prototype_path(), xauto_access);
 
   // Copy the dofs from the prototypes..
 

@@ -12,7 +12,7 @@
 #include "assert_contract.h"
 #include "array_index_space_state.h"
 #include "arg_list.h"
-#include "base_space_member_prototype.h"
+//#include "base_space_member_prototype.h"
 #include "homogeneous_block_crg_interval.h"
 #include "index_space_handle.h"
 #include "index_space_iterator.h"
@@ -31,77 +31,6 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
- 
-const sheaf::poset_path&
-fiber_bundle::homogeneous_block::
-standard_schema_path()
-{
-
-  // Preconditions:
-
-  // Body:
-
-  static const poset_path result(base_space_member::standard_schema_path().poset_name(),
-                                 "homogeneous_block_schema");
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-
-const sheaf::poset_path&
-fiber_bundle::homogeneous_block::
-schema_path() const
-{
-  // Preconditions:
-
-  // Body:
-
-  const poset_path& result = standard_schema_path();
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-void
-fiber_bundle::homogeneous_block::
-make_standard_schema(namespace_poset& xns)
-{
-  // Preconditions:
-
-  require(xns.state_is_read_write_accessible());
-  require(xns.contains_poset(standard_schema_path(), false));
-  require(!xns.contains_poset_member(standard_schema_path(), false));
-
-  // Body:
-
-  string ldof_specs = "local_cell_type_id INT false";
-  ldof_specs       += " local_cell_type_name C_STRING false";
-  ldof_specs       += " size SIZE_TYPE false";
-
-
-  schema_poset_member lschema(xns,
-                              standard_schema_path().member_name(),
-                              base_space_member::standard_schema_path(),
-                              ldof_specs,
-                              false);
-
-  lschema.detach_from_state();
-
-  // Postconditions:
-
-  ensure(xns.contains_poset_member(standard_schema_path(), false));
-
-  // Exit:
-
-  return;
-}
 
 fiber_bundle::homogeneous_block::host_type&
 fiber_bundle::homogeneous_block::
@@ -338,7 +267,7 @@ new_row_dof_map(const poset* xhost,
   // Set local cell type id and name.
 
   poset_path local_proto_path(prototypes_poset_name(), xlocal_cell_name);
-  base_space_member_prototype local_proto(xhost->name_space(), local_proto_path, true);
+  base_space_member local_proto(xhost->name_space(), local_proto_path, false);
 
   ltuple.local_cell_type_id = local_proto.type_id();
   ltuple.local_cell_type_name = strdup(local_proto.type_name());
@@ -397,7 +326,7 @@ new_row_dof_map(poset_state_handle& xhost,
   // Get the local cell prototype
 
   poset_path local_proto_path(prototypes_poset_name(), xlocal_cell_name);
-  base_space_member_prototype local_proto(xhost.name_space(), local_proto_path, false);
+  base_space_member local_proto(xhost.name_space(), local_proto_path, false);
 
   // Copy its dofs;
   // dimension of block same as local cell.

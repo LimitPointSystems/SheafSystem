@@ -19,7 +19,6 @@
 #include "assert_contract.h"
 #include "at0.h"
 #include "base_space_member.h"
-#include "base_space_member_prototype.h"
 #include "error_message.h"
 #include "e1.h"
 #include "e2.h"
@@ -168,7 +167,7 @@ make_line_prototype(base_space_poset* xspace)
 
   // Body:
 
-  base_space_member_prototype lblk(xspace, "line", 1, "", false);
+  base_space_member lblk(xspace, "line", 1, "", false);
   lblk.detach_from_state();
 
   // Postconditions:
@@ -191,7 +190,7 @@ make_plane_prototype(base_space_poset* xspace)
 
   // Body:
 
-  base_space_member_prototype lblk(xspace, "plane", 2, "", false);
+  base_space_member lblk(xspace, "plane", 2, "", false);
   lblk.detach_from_state();
 
   // Postconditions:
@@ -214,7 +213,7 @@ make_surface_prototype(base_space_poset* xspace)
 
   // Body:
 
-  base_space_member_prototype lblk(xspace, "surface", 2, "", false);
+  base_space_member lblk(xspace, "surface", 2, "", false);
   lblk.detach_from_state();
 
   // Postconditions:
@@ -237,7 +236,7 @@ make_line_web_prototype(base_space_poset* xspace)
 
   // Body:
 
-  base_space_member_prototype lblk(xspace, "line_web", 2, "", false);
+  base_space_member lblk(xspace, "line_web", 2, "", false);
   lblk.detach_from_state();
 
   // Postconditions:
@@ -260,7 +259,7 @@ make_polygon_prototype(base_space_poset* xspace)
 
   // Body:
 
-  base_space_member_prototype lblk(xspace, "polygon", 2, "", false);
+  base_space_member lblk(xspace, "polygon", 2, "", false);
   lblk.detach_from_state();
 
   // Postconditions:

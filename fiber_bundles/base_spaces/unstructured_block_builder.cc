@@ -7,7 +7,6 @@
 
 #include "unstructured_block_builder.h"
 
-#include "base_space_member_prototype.h"
 #include "error_message.h"
 #include "index_space_iterator.h"
 #include "poset.h"
@@ -148,7 +147,7 @@ fiber_bundle::unstructured_block_builder::
 ///
 void
 fiber_bundle::unstructured_block_builder::
-build_block_pa(const base_space_member_prototype* xtemplate,
+build_block_pa(const base_space_member* xtemplate,
                const int* xglue,
                size_type xglue_ub,
                unstructured_block* result,
@@ -285,7 +284,7 @@ build_block_pa(const base_space_member_prototype* xtemplate,
 ///
 void
 fiber_bundle::unstructured_block_builder::
-build_block_pa(const base_space_member_prototype* xtemplate,
+build_block_pa(const base_space_member* xtemplate,
                const scoped_index* xglue,
                size_type xglue_ub,
                unstructured_block* result,
@@ -550,18 +549,18 @@ put_name_mode(bool xmode)
 ///
 void
 fiber_bundle::unstructured_block_builder::
-initialize_template(const base_space_member_prototype* xtemplate)
+initialize_template(const base_space_member* xtemplate)
 {
   // Preconditions:
 
   require(xtemplate != 0);
   require(xtemplate->state_is_read_accessible());
-  require(xtemplate->schema().row_conforms_to(base_space_member_prototype::standard_schema_path()));
+  require(xtemplate->schema().row_conforms_to(base_space_member::standard_schema_path()));
   require(unexecutable("template contains atoms"));
 
   // Body:
 
-  _template = const_cast<base_space_member_prototype*>(xtemplate);
+  _template = const_cast<base_space_member*>(xtemplate);
   _template_host.attach_to_state(xtemplate->host());
   _template_map.clear();
   _template_db = _template->db();
@@ -745,7 +744,7 @@ initialize_dof_maps()
   // i.e. any member index from prototypes poset.
 
   poset& lprototypes =
-    _template->name_space()->member_poset<poset>(base_space_member_prototype::standard_host_path(), false);
+    _template->name_space()->member_poset<poset>(base_space_member::prototypes_poset_name(), false);
 
   scoped_index ltype_id_ub = lprototypes.member_index_ub();
 

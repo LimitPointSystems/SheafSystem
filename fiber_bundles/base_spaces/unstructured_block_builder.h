@@ -55,7 +55,6 @@ namespace fiber_bundle
 {
 
 class base_space_member;
-class base_space_member_prototype;
 class unstructured_block;
  
   using namespace sheaf;
@@ -110,7 +109,7 @@ public:
   /// the block members to ensure the upper cover is correct,
   /// otherwise use the existing upper cover.
   ///
-  void build_block_pa(const base_space_member_prototype* xtemplate,
+  void build_block_pa(const base_space_member* xtemplate,
                       const int* xglue,
                       size_type xglue_ub,
                       unstructured_block* result,
@@ -124,7 +123,7 @@ public:
   /// the block members to ensure the upper cover is correct,
   /// otherwise use the existing upper cover.
   ///
-  void build_block_pa(const base_space_member_prototype* xtemplate,
+  void build_block_pa(const base_space_member* xtemplate,
                       const scoped_index* xglue,
                       size_type xglue_ub,
                       unstructured_block* result,
@@ -173,7 +172,7 @@ private:
   ///
   /// The template for making copies
   ///
-  base_space_member_prototype* _template;
+  base_space_member* _template;
 
   ///
   /// The host of the template.
@@ -194,7 +193,7 @@ private:
   ///
   /// Initializes data members associated with the template.
   ///
-  void initialize_template(const base_space_member_prototype* xtemplate);
+  void initialize_template(const base_space_member* xtemplate);
 
   ///
   /// The global equivalences for the atoms in the block.

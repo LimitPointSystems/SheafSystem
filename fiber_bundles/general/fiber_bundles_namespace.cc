@@ -21,7 +21,6 @@
 #include "atp_space.h"
 #include "array_index_space_state.h"
 #include "base_space_member.h"
-#include "base_space_member_prototype.h"
 #include "base_space_poset.h"
 #include "biorder_iterator.h"
 #include "block.impl.h"
@@ -537,7 +536,7 @@ make_base_space_definitions()
   require(state_is_read_write_accessible());
   //  require(!contains_poset(standard_base_space_schema_poset_name(), false));
   require(!contains_poset(base_space_member::standard_schema_path(), false));
-  require(!contains_poset(base_space_member_prototype::standard_host_path(), false));
+  require(!contains_poset(base_space_member::prototypes_poset_name(), false));
 
   // Body:
 
@@ -626,20 +625,20 @@ make_base_space_schema_members()
   // Body:
 
   base_space_member::make_standard_schema(*this);
-  homogeneous_block::make_standard_schema(*this);
-  unstructured_block::make_standard_schema(*this);
-  structured_block::make_standard_schema(*this);
-  structured_block_3d::make_standard_schema(*this);
-  structured_block_2d::make_standard_schema(*this);
-  structured_block_1d::make_standard_schema(*this);
-  point_block_3d::make_standard_schema(*this);
-  point_block_2d::make_standard_schema(*this);
-  point_block_1d::make_standard_schema(*this);
+//   homogeneous_block::make_standard_schema(*this);
+//   unstructured_block::make_standard_schema(*this);
+//   structured_block::make_standard_schema(*this);
+//   structured_block_3d::make_standard_schema(*this);
+//   structured_block_2d::make_standard_schema(*this);
+//   structured_block_1d::make_standard_schema(*this);
+//   point_block_3d::make_standard_schema(*this);
+//   point_block_2d::make_standard_schema(*this);
+//   point_block_1d::make_standard_schema(*this);
 
-  // Schema for prototypes is join of allother schema,
-  // so it hase to be constructed last.
+//   // Schema for prototypes is join of allother schema,
+//   // so it hase to be constructed last.
 
-  base_space_member_prototype::make_standard_schema(*this);
+//   base_space_member_prototype::make_standard_schema(*this);
   
 
 //   // Construct the standard base space schema member
@@ -663,14 +662,15 @@ make_base_space_member_prototypes_poset()
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(contains_poset_member(base_space_member_prototype::standard_schema_path(), true));
-  require(!contains_poset(base_space_member_prototype::standard_host_path()));
+  require(contains_poset_member(base_space_member::standard_schema_path(), true));
+  require(!contains_poset(base_space_member::prototypes_poset_name()));
 
   // Body:
 
   // Create the prototypes poset.
 
-  base_space_poset& lprototypes_poset = base_space_member_prototype::standard_host(*this, false);
+  base_space_poset& lprototypes_poset = 
+    base_space_member::standard_host(*this, base_space_member::prototypes_poset_name(), 3, false);
 
   lprototypes_poset.begin_jim_edit_mode(true);
 
@@ -791,7 +791,7 @@ make_point_prototype(base_space_poset* xspace)
 
   // Body:
 
-  base_space_member_prototype lpt(xspace, "point", 0, "", false);
+  base_space_member lpt(xspace, "point", 0, "", false);
 
   lpt.detach_from_state();
 
@@ -816,7 +816,7 @@ make_segment_prototype(base_space_poset* xspace)
 
   // Body:
 
-  base_space_member_prototype lseg(xspace, "segment", 1, "", false);
+  base_space_member lseg(xspace, "segment", 1, "", false);
 
   lseg.detach_from_state();
 
@@ -842,17 +842,17 @@ make_segment_complex_prototype(base_space_poset* xspace)
 
   // Create the vertices.
 
-  base_space_member_prototype lpt(xspace, "point");
+  base_space_member lpt(xspace, "point");
 
-  base_space_member_prototype v0(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v0(xspace, lpt.dof_tuple_id(false), false);
   v0.put_name("segment_complex_vertex_0", true, false);
 
-  base_space_member_prototype v1(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v1(xspace, lpt.dof_tuple_id(false), false);
   v1.put_name("segment_complex_vertex_1", true, false);
 
   // Create the segment and link it to the vertices.
 
-  base_space_member_prototype lseg(xspace, "segment_complex", 1, "", false);
+  base_space_member lseg(xspace, "segment_complex", 1, "", false);
 
   lseg.create_cover_link(&v0);
   lseg.create_cover_link(&v1);
@@ -885,7 +885,7 @@ make_triangle_prototype(base_space_poset* xspace)
 
   // Body:
 
-  base_space_member_prototype ltriangle(xspace, "triangle", 2, "", false);
+  base_space_member ltriangle(xspace, "triangle", 2, "", false);
   ltriangle.detach_from_state();
 
   // Postconditions:
@@ -910,20 +910,20 @@ make_triangle_nodes_prototype(base_space_poset* xspace)
 
   // Create the vertices.
 
-  base_space_member_prototype lpt(xspace, "point");
+  base_space_member lpt(xspace, "point");
 
-  base_space_member_prototype v0(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v0(xspace, lpt.dof_tuple_id(false), false);
   v0.put_name("triangle_nodes_vertex_0", true, false);
 
-  base_space_member_prototype v1(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v1(xspace, lpt.dof_tuple_id(false), false);
   v1.put_name("triangle_nodes_vertex_1", true, false);
 
-  base_space_member_prototype v2(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v2(xspace, lpt.dof_tuple_id(false), false);
   v2.put_name("triangle_nodes_vertex_2", true, false);
 
   // Create the triangle and link it to the vertices.
 
-  base_space_member_prototype ltriangle(xspace, "triangle_nodes", 2, "", false);
+  base_space_member ltriangle(xspace, "triangle_nodes", 2, "", false);
 
   ltriangle.create_cover_link(&v0);
   ltriangle.create_cover_link(&v1);
@@ -962,39 +962,39 @@ make_triangle_complex_prototype(base_space_poset* xspace)
 
   // Create the vertices.
 
-  base_space_member_prototype lpt(xspace, "point");
+  base_space_member lpt(xspace, "point");
 
-  base_space_member_prototype v0(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v0(xspace, lpt.dof_tuple_id(false), false);
   v0.put_name("triangle_complex_vertex_0", true, false);
 
-  base_space_member_prototype v1(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v1(xspace, lpt.dof_tuple_id(false), false);
   v1.put_name("triangle_complex_vertex_1", true, false);
 
-  base_space_member_prototype v2(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v2(xspace, lpt.dof_tuple_id(false), false);
   v2.put_name("triangle_complex_vertex_2", true, false);
 
   // Create the edges and link them to the vertices.
 
-  base_space_member_prototype lseg(xspace, "segment");
+  base_space_member lseg(xspace, "segment");
 
-  base_space_member_prototype e0(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e0(xspace, lseg.dof_tuple_id(false), false);
   e0.put_name("triangle_complex_edge_0", true, false);
   e0.create_cover_link(&v0);
   e0.create_cover_link(&v1);
 
-  base_space_member_prototype e1(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e1(xspace, lseg.dof_tuple_id(false), false);
   e1.put_name("triangle_complex_edge_1", true, false);
   e1.create_cover_link(&v1);
   e1.create_cover_link(&v2);
 
-  base_space_member_prototype e2(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e2(xspace, lseg.dof_tuple_id(false), false);
   e2.put_name("triangle_complex_edge_2", true, false);
   e2.create_cover_link(&v2);
   e2.create_cover_link(&v0);
 
   // Create the triangle and link it to the edges.
 
-  base_space_member_prototype ltriangle(xspace, "triangle_complex", 2, "", false);
+  base_space_member ltriangle(xspace, "triangle_complex", 2, "", false);
 
   ltriangle.create_cover_link(&e0);
   ltriangle.create_cover_link(&e1);
@@ -1034,7 +1034,7 @@ make_quad_prototype(base_space_poset* xspace)
 
   // Body:
 
-  base_space_member_prototype lquad(xspace, "quad", 2, "", false);
+  base_space_member lquad(xspace, "quad", 2, "", false);
 
   lquad.detach_from_state();
 
@@ -1062,23 +1062,23 @@ make_quad_nodes_prototype(base_space_poset* xspace)
 
   // Create the vertices.
 
-  base_space_member_prototype lpt(xspace, "point");
+  base_space_member lpt(xspace, "point");
 
-  base_space_member_prototype v0(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v0(xspace, lpt.dof_tuple_id(false), false);
   v0.put_name("quad_nodes_vertex_0", true, false);
 
-  base_space_member_prototype v1(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v1(xspace, lpt.dof_tuple_id(false), false);
   v1.put_name("quad_nodes_vertex_1", true, false);
 
-  base_space_member_prototype v2(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v2(xspace, lpt.dof_tuple_id(false), false);
   v2.put_name("quad_nodes_vertex_2", true, false);
 
-  base_space_member_prototype v3(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v3(xspace, lpt.dof_tuple_id(false), false);
   v3.put_name("quad_nodes_vertex_3", true, false);
 
   // Create the quad and link it to the vertices.
 
-  base_space_member_prototype lquad(xspace, "quad_nodes", 2, "", false);
+  base_space_member lquad(xspace, "quad_nodes", 2, "", false);
 
   lquad.create_cover_link(&v0);
   lquad.create_cover_link(&v1);
@@ -1118,47 +1118,47 @@ make_quad_complex_prototype(base_space_poset* xspace)
 
   // Create the vertices.
 
-  base_space_member_prototype lpt(xspace, "point");
+  base_space_member lpt(xspace, "point");
 
-  base_space_member_prototype v0(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v0(xspace, lpt.dof_tuple_id(false), false);
   v0.put_name("quad_complex_vertex_0", true, false);
 
-  base_space_member_prototype v1(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v1(xspace, lpt.dof_tuple_id(false), false);
   v1.put_name("quad_complex_vertex_1", true, false);
 
-  base_space_member_prototype v2(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v2(xspace, lpt.dof_tuple_id(false), false);
   v2.put_name("quad_complex_vertex_2", true, false);
 
-  base_space_member_prototype v3(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v3(xspace, lpt.dof_tuple_id(false), false);
   v3.put_name("quad_complex_vertex_3", true, false);
 
   // Create the edges and link them to the vertices.
 
-  base_space_member_prototype lseg(xspace, "segment");
+  base_space_member lseg(xspace, "segment");
 
-  base_space_member_prototype e0(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e0(xspace, lseg.dof_tuple_id(false), false);
   e0.put_name("quad_complex_edge_0", true, false);
   e0.create_cover_link(&v0);
   e0.create_cover_link(&v1);
 
-  base_space_member_prototype e1(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e1(xspace, lseg.dof_tuple_id(false), false);
   e1.put_name("quad_complex_edge_1", true, false);
   e1.create_cover_link(&v1);
   e1.create_cover_link(&v2);
 
-  base_space_member_prototype e2(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e2(xspace, lseg.dof_tuple_id(false), false);
   e2.put_name("quad_complex_edge_2", true, false);
   e2.create_cover_link(&v2);
   e2.create_cover_link(&v3);
 
-  base_space_member_prototype e3(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e3(xspace, lseg.dof_tuple_id(false), false);
   e3.put_name("quad_complex_edge_3", true, false);
   e3.create_cover_link(&v3);
   e3.create_cover_link(&v0);
 
   // Create the quad and link it to the edges.
 
-  base_space_member_prototype lquad(xspace, "quad_complex", 2, "", false);
+  base_space_member lquad(xspace, "quad_complex", 2, "", false);
 
   lquad.create_cover_link(&e0);
   lquad.create_cover_link(&e1);
@@ -1203,7 +1203,7 @@ make_general_polygon_prototype(base_space_poset* xspace)
 
   // Body:
 
-  base_space_member_prototype lpoly(xspace, "general_polygon", 2, "", false);
+  base_space_member lpoly(xspace, "general_polygon", 2, "", false);
   lpoly.detach_from_state();
 
   // Postconditions:
@@ -1227,7 +1227,7 @@ make_tetra_prototype(base_space_poset* xspace)
 
   // Body:
 
-  base_space_member_prototype ltetra(xspace, "tetra", 3, "", false);
+  base_space_member ltetra(xspace, "tetra", 3, "", false);
   ltetra.detach_from_state();
 
   // Postconditions:
@@ -1252,23 +1252,23 @@ make_tetra_nodes_prototype(base_space_poset* xspace)
 
   // Create the vertices.
 
-  base_space_member_prototype lpt(xspace, "point");
+  base_space_member lpt(xspace, "point");
 
-  base_space_member_prototype v0(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v0(xspace, lpt.dof_tuple_id(false), false);
   v0.put_name("tetra_nodes_vertex_0", true, false);
 
-  base_space_member_prototype v1(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v1(xspace, lpt.dof_tuple_id(false), false);
   v1.put_name("tetra_nodes_vertex_1", true, false);
 
-  base_space_member_prototype v2(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v2(xspace, lpt.dof_tuple_id(false), false);
   v2.put_name("tetra_nodes_vertex_2", true, false);
 
-  base_space_member_prototype v3(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v3(xspace, lpt.dof_tuple_id(false), false);
   v3.put_name("tetra_nodes_vertex_3", true, false);
 
   // Create the tet and link it to the vertices.
 
-  base_space_member_prototype ltetra(xspace, "tetra_nodes", 3, "", false);
+  base_space_member ltetra(xspace, "tetra_nodes", 3, "", false);
 
   ltetra.create_cover_link(&v0);
   ltetra.create_cover_link(&v1);
@@ -1308,77 +1308,77 @@ make_tetra_complex_prototype(base_space_poset* xspace)
 
   // Create the vertices.
 
-  base_space_member_prototype lpt(xspace, "point");
+  base_space_member lpt(xspace, "point");
 
-  base_space_member_prototype v0(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v0(xspace, lpt.dof_tuple_id(false), false);
   v0.put_name("tetra_complex_vertex_0", true, false);
 
-  base_space_member_prototype v1(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v1(xspace, lpt.dof_tuple_id(false), false);
   v1.put_name("tetra_complex_vertex_1", true, false);
 
-  base_space_member_prototype v2(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v2(xspace, lpt.dof_tuple_id(false), false);
   v2.put_name("tetra_complex_vertex_2", true, false);
 
-  base_space_member_prototype v3(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v3(xspace, lpt.dof_tuple_id(false), false);
   v3.put_name("tetra_complex_vertex_3", true, false);
 
   // Create the edges and link thm to the vertices.
 
-  base_space_member_prototype lseg(xspace, "segment");
+  base_space_member lseg(xspace, "segment");
 
-  base_space_member_prototype e0(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e0(xspace, lseg.dof_tuple_id(false), false);
   e0.put_name("tetra_complex_edge_0", true, false);
   e0.create_cover_link(&v0);
   e0.create_cover_link(&v1);
 
-  base_space_member_prototype e1(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e1(xspace, lseg.dof_tuple_id(false), false);
   e1.put_name("tetra_complex_edge_1", true, false);
   e1.create_cover_link(&v1);
   e1.create_cover_link(&v2);
 
-  base_space_member_prototype e2(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e2(xspace, lseg.dof_tuple_id(false), false);
   e2.put_name("tetra_complex_edge_2", true, false);
   e2.create_cover_link(&v2);
   e2.create_cover_link(&v0);
 
-  base_space_member_prototype e3(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e3(xspace, lseg.dof_tuple_id(false), false);
   e3.put_name("tetra_complex_edge_3", true, false);
   e3.create_cover_link(&v2);
   e3.create_cover_link(&v3);
 
-  base_space_member_prototype e4(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e4(xspace, lseg.dof_tuple_id(false), false);
   e4.put_name("tetra_complex_edge_4", true, false);
   e4.create_cover_link(&v3);
   e4.create_cover_link(&v1);
 
-  base_space_member_prototype e5(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e5(xspace, lseg.dof_tuple_id(false), false);
   e5.put_name("tetra_complex_edge_5", true, false);
   e5.create_cover_link(&v3);
   e5.create_cover_link(&v0);
 
   // Create the faces and link them to the edges.
 
-  base_space_member_prototype lface(xspace, "triangle");
+  base_space_member lface(xspace, "triangle");
 
-  base_space_member_prototype f0(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f0(xspace, lface.dof_tuple_id(false), false);
   f0.put_name("tetra_complex_face_0", true, false);
   f0.create_cover_link(&e0);
   f0.create_cover_link(&e1);
   f0.create_cover_link(&e2);
 
-  base_space_member_prototype f1(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f1(xspace, lface.dof_tuple_id(false), false);
   f1.put_name("tetra_complex_face_1", true, false);
   f1.create_cover_link(&e2);
   f1.create_cover_link(&e3);
   f1.create_cover_link(&e5);
 
-  base_space_member_prototype f2(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f2(xspace, lface.dof_tuple_id(false), false);
   f2.put_name("tetra_complex_face_2", true, false);
   f2.create_cover_link(&e5);
   f2.create_cover_link(&e4);
   f2.create_cover_link(&e0);
 
-  base_space_member_prototype f3(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f3(xspace, lface.dof_tuple_id(false), false);
   f3.put_name("tetra_complex_face_3", true, false);
   f3.create_cover_link(&e1);
   f3.create_cover_link(&e3);
@@ -1386,7 +1386,7 @@ make_tetra_complex_prototype(base_space_poset* xspace)
 
   // Create the tet and link it to the faces.
 
-  base_space_member_prototype ltetra(xspace, "tetra_complex", 3, "", false);
+  base_space_member ltetra(xspace, "tetra_complex", 3, "", false);
 
   ltetra.create_cover_link(&f0);
   ltetra.create_cover_link(&f1);
@@ -1438,7 +1438,7 @@ make_hex_prototype(base_space_poset* xspace)
 
   // Body:
 
-  base_space_member_prototype lhex(xspace, "hex", 3, "", false);
+  base_space_member lhex(xspace, "hex", 3, "", false);
   lhex.detach_from_state();
 
   // Postconditions:
@@ -1463,35 +1463,35 @@ make_hex_nodes_prototype(base_space_poset* xspace)
 
   // Create the vertices.
 
-  base_space_member_prototype lpt(xspace, "point");
+  base_space_member lpt(xspace, "point");
 
-  base_space_member_prototype v0(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v0(xspace, lpt.dof_tuple_id(false), false);
   v0.put_name("hex_nodes_vertex_0", true, false);
 
-  base_space_member_prototype v1(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v1(xspace, lpt.dof_tuple_id(false), false);
   v1.put_name("hex_nodes_vertex_1", true, false);
 
-  base_space_member_prototype v2(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v2(xspace, lpt.dof_tuple_id(false), false);
   v2.put_name("hex_nodes_vertex_2", true, false);
 
-  base_space_member_prototype v3(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v3(xspace, lpt.dof_tuple_id(false), false);
   v3.put_name("hex_nodes_vertex_3", true, false);
 
-  base_space_member_prototype v4(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v4(xspace, lpt.dof_tuple_id(false), false);
   v4.put_name("hex_nodes_vertex_4", true, false);
 
-  base_space_member_prototype v5(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v5(xspace, lpt.dof_tuple_id(false), false);
   v5.put_name("hex_nodes_vertex_5", true, false);
 
-  base_space_member_prototype v6(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v6(xspace, lpt.dof_tuple_id(false), false);
   v6.put_name("hex_nodes_vertex_6", true, false);
 
-  base_space_member_prototype v7(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v7(xspace, lpt.dof_tuple_id(false), false);
   v7.put_name("hex_nodes_vertex_7", true, false);
 
   // Create the hex and link it to the vertices
 
-  base_space_member_prototype lhex(xspace, "hex_nodes", 3, "", false);
+  base_space_member lhex(xspace, "hex_nodes", 3, "", false);
 
   lhex.create_cover_link(&v0);
   lhex.create_cover_link(&v1);
@@ -1539,37 +1539,37 @@ make_hex_faces_nodes_prototype(base_space_poset* xspace)
 
   // Create the vertices.
 
-  base_space_member_prototype lpt(xspace, "point");
+  base_space_member lpt(xspace, "point");
 
-  base_space_member_prototype v0(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v0(xspace, lpt.dof_tuple_id(false), false);
   v0.put_name("hex_faces_nodes_vertex_0", true, false);
 
-  base_space_member_prototype v1(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v1(xspace, lpt.dof_tuple_id(false), false);
   v1.put_name("hex_faces_nodes_vertex_1", true, false);
 
-  base_space_member_prototype v2(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v2(xspace, lpt.dof_tuple_id(false), false);
   v2.put_name("hex_faces_nodes_vertex_2", true, false);
 
-  base_space_member_prototype v3(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v3(xspace, lpt.dof_tuple_id(false), false);
   v3.put_name("hex_faces_nodes_vertex_3", true, false);
 
-  base_space_member_prototype v4(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v4(xspace, lpt.dof_tuple_id(false), false);
   v4.put_name("hex_faces_nodes_vertex_4", true, false);
 
-  base_space_member_prototype v5(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v5(xspace, lpt.dof_tuple_id(false), false);
   v5.put_name("hex_faces_nodes_vertex_5", true, false);
 
-  base_space_member_prototype v6(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v6(xspace, lpt.dof_tuple_id(false), false);
   v6.put_name("hex_faces_nodes_vertex_6", true, false);
 
-  base_space_member_prototype v7(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v7(xspace, lpt.dof_tuple_id(false), false);
   v7.put_name("hex_faces_nodes_vertex_7", true, false);
 
   // Create the faces and link them to the vertices.
 
-  base_space_member_prototype lface(xspace, "quad");
+  base_space_member lface(xspace, "quad");
 
-  base_space_member_prototype f0(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f0(xspace, lface.dof_tuple_id(false), false);
   f0.put_name("hex_faces_nodes_face_0", true, false);
 
   f0.create_cover_link(&v0);
@@ -1578,7 +1578,7 @@ make_hex_faces_nodes_prototype(base_space_poset* xspace)
   f0.create_cover_link(&v3);
 
 
-  base_space_member_prototype f1(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f1(xspace, lface.dof_tuple_id(false), false);
   f1.put_name("hex_faces_nodes_face_1", true, false);
 
   f1.create_cover_link(&v4);
@@ -1586,7 +1586,7 @@ make_hex_faces_nodes_prototype(base_space_poset* xspace)
   f1.create_cover_link(&v6);
   f1.create_cover_link(&v7);
 
-  base_space_member_prototype f2(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f2(xspace, lface.dof_tuple_id(false), false);
   f2.put_name("hex_faces_nodes_face_2", true, false);
 
   f2.create_cover_link(&v1);
@@ -1594,7 +1594,7 @@ make_hex_faces_nodes_prototype(base_space_poset* xspace)
   f2.create_cover_link(&v6);
   f2.create_cover_link(&v2);
 
-  base_space_member_prototype f3(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f3(xspace, lface.dof_tuple_id(false), false);
   f3.put_name("hex_faces_nodes_face_3", true, false);
 
   f3.create_cover_link(&v0);
@@ -1602,7 +1602,7 @@ make_hex_faces_nodes_prototype(base_space_poset* xspace)
   f3.create_cover_link(&v7);
   f3.create_cover_link(&v3);
 
-  base_space_member_prototype f4(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f4(xspace, lface.dof_tuple_id(false), false);
   f4.put_name("hex_faces_nodes_face_4", true, false);
 
   f4.create_cover_link(&v0);
@@ -1610,7 +1610,7 @@ make_hex_faces_nodes_prototype(base_space_poset* xspace)
   f4.create_cover_link(&v5);
   f4.create_cover_link(&v4);
 
-  base_space_member_prototype f5(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f5(xspace, lface.dof_tuple_id(false), false);
   f5.put_name("hex_faces_nodes_face_5", true, false);
 
   f5.create_cover_link(&v3);
@@ -1620,7 +1620,7 @@ make_hex_faces_nodes_prototype(base_space_poset* xspace)
 
   // Create the hex and link it to the faces.
 
-  base_space_member_prototype lhex(xspace, "hex_faces_nodes", 3, "", false);
+  base_space_member lhex(xspace, "hex_faces_nodes", 3, "", false);
 
   lhex.create_cover_link(&f0);
   lhex.create_cover_link(&f1);
@@ -1675,136 +1675,136 @@ make_hex_complex_prototype(base_space_poset* xspace)
 
   // Create the vertices.
 
-  base_space_member_prototype lpt(xspace, "point");
+  base_space_member lpt(xspace, "point");
 
-  base_space_member_prototype v0(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v0(xspace, lpt.dof_tuple_id(false), false);
   v0.put_name("hex_complex_vertex_0", true, false);
 
-  base_space_member_prototype v1(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v1(xspace, lpt.dof_tuple_id(false), false);
   v1.put_name("hex_complex_vertex_1", true, false);
 
-  base_space_member_prototype v2(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v2(xspace, lpt.dof_tuple_id(false), false);
   v2.put_name("hex_complex_vertex_2", true, false);
 
-  base_space_member_prototype v3(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v3(xspace, lpt.dof_tuple_id(false), false);
   v3.put_name("hex_complex_vertex_3", true, false);
 
-  base_space_member_prototype v4(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v4(xspace, lpt.dof_tuple_id(false), false);
   v4.put_name("hex_complex_vertex_4", true, false);
 
-  base_space_member_prototype v5(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v5(xspace, lpt.dof_tuple_id(false), false);
   v5.put_name("hex_complex_vertex_5", true, false);
 
-  base_space_member_prototype v6(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v6(xspace, lpt.dof_tuple_id(false), false);
   v6.put_name("hex_complex_vertex_6", true, false);
 
-  base_space_member_prototype v7(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v7(xspace, lpt.dof_tuple_id(false), false);
   v7.put_name("hex_complex_vertex_7", true, false);
 
   // Create the edges and link them to the vertices.
 
-  base_space_member_prototype lseg(xspace, "segment");
+  base_space_member lseg(xspace, "segment");
 
-  base_space_member_prototype e0(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e0(xspace, lseg.dof_tuple_id(false), false);
   e0.put_name("hex_complex_edge_0", true, false);
   e0.create_cover_link(&v0);
   e0.create_cover_link(&v1);
 
-  base_space_member_prototype e1(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e1(xspace, lseg.dof_tuple_id(false), false);
   e1.put_name("hex_complex_edge_1", true, false);
   e1.create_cover_link(&v1);
   e1.create_cover_link(&v2);
 
-  base_space_member_prototype e2(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e2(xspace, lseg.dof_tuple_id(false), false);
   e2.put_name("hex_complex_edge_2", true, false);
   e2.create_cover_link(&v2);
   e2.create_cover_link(&v3);
 
-  base_space_member_prototype e3(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e3(xspace, lseg.dof_tuple_id(false), false);
   e3.put_name("hex_complex_edge_3", true, false);
   e3.create_cover_link(&v3);
   e3.create_cover_link(&v0);
 
-  base_space_member_prototype e4(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e4(xspace, lseg.dof_tuple_id(false), false);
   e4.put_name("hex_complex_edge_4", true, false);
   e4.create_cover_link(&v4);
   e4.create_cover_link(&v5);
 
-  base_space_member_prototype e5(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e5(xspace, lseg.dof_tuple_id(false), false);
   e5.put_name("hex_complex_edge_5", true, false);
   e5.create_cover_link(&v5);
   e5.create_cover_link(&v6);
 
-  base_space_member_prototype e6(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e6(xspace, lseg.dof_tuple_id(false), false);
   e6.put_name("hex_complex_edge_6", true, false);
   e6.create_cover_link(&v6);
   e6.create_cover_link(&v7);
 
-  base_space_member_prototype e7(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e7(xspace, lseg.dof_tuple_id(false), false);
   e7.put_name("hex_complex_edge_7", true, false);
   e7.create_cover_link(&v7);
   e7.create_cover_link(&v4);
 
-  base_space_member_prototype e8(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e8(xspace, lseg.dof_tuple_id(false), false);
   e8.put_name("hex_complex_edge_8", true, false);
   e8.create_cover_link(&v3);
   e8.create_cover_link(&v7);
 
-  base_space_member_prototype e9(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e9(xspace, lseg.dof_tuple_id(false), false);
   e9.put_name("hex_complex_edge_9", true, false);
   e9.create_cover_link(&v2);
   e9.create_cover_link(&v6);
 
-  base_space_member_prototype e10(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e10(xspace, lseg.dof_tuple_id(false), false);
   e10.put_name("hex_complex_edge_10", true, false);
   e10.create_cover_link(&v1);
   e10.create_cover_link(&v5);
 
-  base_space_member_prototype e11(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e11(xspace, lseg.dof_tuple_id(false), false);
   e11.put_name("hex_complex_edge_11", true, false);
   e11.create_cover_link(&v0);
   e11.create_cover_link(&v4);
 
   // Create the faces and link them to the edges.
 
-  base_space_member_prototype lface(xspace, "quad_complex");
+  base_space_member lface(xspace, "quad_complex");
 
-  base_space_member_prototype f0(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f0(xspace, lface.dof_tuple_id(false), false);
   f0.put_name("hex_complex_face_0", true, false);
   f0.create_cover_link(&e0);
   f0.create_cover_link(&e1);
   f0.create_cover_link(&e2);
   f0.create_cover_link(&e3);
 
-  base_space_member_prototype f1(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f1(xspace, lface.dof_tuple_id(false), false);
   f1.put_name("hex_complex_face_1", true, false);
   f1.create_cover_link(&e4);
   f1.create_cover_link(&e5);
   f1.create_cover_link(&e6);
   f1.create_cover_link(&e7);
 
-  base_space_member_prototype f2(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f2(xspace, lface.dof_tuple_id(false), false);
   f2.put_name("hex_complex_face_2", true, false);
   f2.create_cover_link(&e10);
   f2.create_cover_link(&e5);
   f2.create_cover_link(&e9);
   f2.create_cover_link(&e1);
 
-  base_space_member_prototype f3(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f3(xspace, lface.dof_tuple_id(false), false);
   f3.put_name("hex_complex_face_3", true, false);
   f3.create_cover_link(&e11);
   f3.create_cover_link(&e7);
   f3.create_cover_link(&e8);
   f3.create_cover_link(&e3);
 
-  base_space_member_prototype f4(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f4(xspace, lface.dof_tuple_id(false), false);
   f4.put_name("hex_complex_face_4", true, false);
   f4.create_cover_link(&e0);
   f4.create_cover_link(&e10);
   f4.create_cover_link(&e4);
   f4.create_cover_link(&e11);
 
-  base_space_member_prototype f5(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f5(xspace, lface.dof_tuple_id(false), false);
   f5.put_name("hex_complex_face_5", true, false);
   f5.create_cover_link(&e2);
   f5.create_cover_link(&e9);
@@ -1813,7 +1813,7 @@ make_hex_complex_prototype(base_space_poset* xspace)
 
   // Create the hex and link it to the faces.
 
-  base_space_member_prototype lhex(xspace, "hex_complex", 3, "", false);
+  base_space_member lhex(xspace, "hex_complex", 3, "", false);
 
   lhex.create_cover_link(&f0);
   lhex.create_cover_link(&f1);
@@ -1880,7 +1880,7 @@ make_general_polyhedron_prototype(base_space_poset* xspace)
 
   // Body:
 
-  base_space_member_prototype lpoly(xspace, "general_polyhedron", 3, "", false);
+  base_space_member lpoly(xspace, "general_polyhedron", 3, "", false);
   lpoly.detach_from_state();
 
   // Postconditions:
@@ -1905,7 +1905,7 @@ make_unstructured_block_prototype(base_space_poset* xspace)
 
   string lproto_name(unstructured_block::static_prototype_path().member_name());
 
-  base_space_member_prototype lblk(xspace, lproto_name, 0, "", false);
+  base_space_member lblk(xspace, lproto_name, 0, "", false);
   lblk.detach_from_state();
 
   // Postconditions:
@@ -1932,7 +1932,7 @@ make_structured_block_1d_prototype(base_space_poset* xspace)
   string lproto_name(structured_block_1d::static_prototype_path().member_name());
   string lcell_name(structured_block_1d::static_local_cell_prototype_path().member_name());
 
-  base_space_member_prototype lblk(xspace, lproto_name, 1, lcell_name, false);
+  base_space_member lblk(xspace, lproto_name, 1, lcell_name, false);
   lblk.detach_from_state();
 
   // Postconditions:
@@ -1959,7 +1959,7 @@ make_structured_block_2d_prototype(base_space_poset* xspace)
   string lproto_name(structured_block_2d::static_prototype_path().member_name());
   string lcell_name(structured_block_2d::static_local_cell_prototype_path().member_name());
 
-  base_space_member_prototype lblk(xspace, lproto_name, 2, lcell_name, false);
+  base_space_member lblk(xspace, lproto_name, 2, lcell_name, false);
   lblk.detach_from_state();
 
   // Postconditions:
@@ -1985,7 +1985,7 @@ make_structured_block_3d_prototype(base_space_poset* xspace)
   string lproto_name(structured_block_3d::static_prototype_path().member_name());
   string lcell_name(structured_block_3d::static_local_cell_prototype_path().member_name());
 
-  base_space_member_prototype lblk(xspace, lproto_name, 3, lcell_name, false);
+  base_space_member lblk(xspace, lproto_name, 3, lcell_name, false);
   lblk.detach_from_state();
 
   // Postconditions:
@@ -2013,7 +2013,7 @@ make_point_block_1d_prototype(base_space_poset* xspace)
   string lproto_name(point_block_1d::static_prototype_path().member_name());
   string lcell_name(point_block_1d::static_local_cell_prototype_path().member_name());
 
-  base_space_member_prototype lblk(xspace, lproto_name, 0, lcell_name, false);
+  base_space_member lblk(xspace, lproto_name, 0, lcell_name, false);
   lblk.detach_from_state();
 
   // Postconditions:
@@ -2041,7 +2041,7 @@ make_point_block_2d_prototype(base_space_poset* xspace)
   string lproto_name(point_block_2d::static_prototype_path().member_name());
   string lcell_name(point_block_2d::static_local_cell_prototype_path().member_name());
 
-  base_space_member_prototype lblk(xspace, lproto_name, 0, lcell_name, false);
+  base_space_member lblk(xspace, lproto_name, 0, lcell_name, false);
   lblk.detach_from_state();
 
   // Postconditions:
@@ -2069,7 +2069,7 @@ make_point_block_3d_prototype(base_space_poset* xspace)
   string lproto_name(point_block_3d::static_prototype_path().member_name());
   string lcell_name(point_block_3d::static_local_cell_prototype_path().member_name());
 
-  base_space_member_prototype lblk(xspace, lproto_name, 0, lcell_name, false);
+  base_space_member lblk(xspace, lproto_name, 0, lcell_name, false);
   lblk.detach_from_state();
 
   // Postconditions:
@@ -2092,7 +2092,7 @@ make_part_prototype(base_space_poset* xspace)
 
   // Body:
 
-  base_space_member_prototype lblk(xspace, "part", 0, "", false);
+  base_space_member lblk(xspace, "part", 0, "", false);
   lblk.detach_from_state();
 
   // Postconditions:
@@ -3250,7 +3250,7 @@ attach_handle_data_members()
     &member_poset<poset>(base_space_member::standard_schema_path(), false);
 
   _base_space_member_prototypes_poset =
-    &member_poset<base_space_poset>(base_space_member_prototype::standard_host_path(), false);
+    &member_poset<base_space_poset>(base_space_member::prototypes_poset_name(), false);
 
   // Postconditions:
 

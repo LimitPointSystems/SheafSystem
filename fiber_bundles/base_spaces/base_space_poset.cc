@@ -12,7 +12,7 @@
 #include "array_index_space_state.h"
 #include "array_poset_dof_map.h"
 #include "base_space_member.h"
-#include "base_space_member_prototype.h"
+//#include "base_space_member_prototype.h"
 #include "index_space_handle.h"
 #include "index_space_iterator.h"
 #include "interval_index_space_state.h"
@@ -41,7 +41,7 @@ standard_schema_path()
 
   // Body:
 
-  static const poset_path& result = base_space_member_prototype::standard_schema_path();
+  static const poset_path& result = base_space_member::standard_schema_path();
 
   // Postconditions:
 
@@ -2519,7 +2519,7 @@ prototype_type_id(const string& xname, bool xauto_access) const
     lproto_host.get_read_access();
   }
 
-  base_space_member_prototype lmbr(reinterpret_cast<poset*>(&lproto_host), xname);
+  base_space_member lmbr(reinterpret_cast<poset*>(&lproto_host), xname);
   pod_index_type result = lmbr.type_id();
   lmbr.detach_from_state();
 
@@ -2825,7 +2825,7 @@ new_row_dof_map(const string& xprototype_name)
   // Get the prototype.
 
   poset_path lproto_path(prototypes_poset_name(), xprototype_name);
-  base_space_member_prototype lproto(name_space(), lproto_path, true);
+  base_space_member lproto(name_space(), lproto_path, true);
   lproto.get_read_access();
 
   // Copy its dofs.

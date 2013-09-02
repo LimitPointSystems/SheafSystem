@@ -11,7 +11,7 @@
 
 #include "assert_contract.h"
 #include "arg_list.h"
-#include "base_space_member_prototype.h"
+//#include "base_space_member_prototype.h"
 #include "base_space_poset.h"
 #include "fiber_bundles_namespace.h"
 #include "poset_path.h"
@@ -27,26 +27,6 @@ using namespace fiber_bundle;
 
 // PUBLIC MEMBER FUNCTIONS
  
-// const string&
-// fiber_bundle::base_space_member::
-// standard_schema_poset_name()
-// {
-//   // Preconditions:
-
-
-//   // Body:
-
-//   static const string& result =
-//     fiber_bundles_namespace::standard_base_space_schema_poset_name();
-
-//   // Postconditions:
-
-//   ensure(!result.empty());
-
-//   // Exit:
-
-//   return result;
-// }
 
 const sheaf::poset_path&
 fiber_bundle::base_space_member::
@@ -57,8 +37,7 @@ standard_schema_path()
 
   // Body:
 
-  static const poset_path result(base_space_member_prototype::standard_schema_path().poset_name(), 
-                                 "base_space_member_schema");
+  static const poset_path result("base_space_schema", "base_space_member_schema");
 
   // Postconditions:
 
@@ -102,6 +81,12 @@ make_standard_schema(namespace_poset& xns)
   ldof_specs       += " type_id INT false";
   ldof_specs       += " type_name C_STRING false";
   ldof_specs       += " refinement_depth INT false";
+  ldof_specs       += " local_cell_type_id INT false";
+  ldof_specs       += " local_cell_type_name C_STRING false";
+  ldof_specs       += " size SIZE_TYPE false";
+  ldof_specs       += " i_size SIZE_TYPE false";
+  ldof_specs       += " j_size SIZE_TYPE false";
+  ldof_specs       += " k_size SIZE_TYPE false";
 
 
   schema_poset_member lschema(xns,
@@ -130,7 +115,8 @@ prototypes_poset_name()
 
   // Body:
 
-  static const string result = base_space_member_prototype::standard_host_path().poset_name();
+  //  static const string result = base_space_member_prototype::standard_host_path().poset_name();
+  static const string result = "base_space_member_prototypes";
 
   // Postconditions:
 
@@ -309,36 +295,43 @@ base_space_member(poset* xhost,
 
 
 fiber_bundle::base_space_member::
-base_space_member(poset* xhost,
+base_space_member(base_space_poset& xhost,
                   const string& xprototype_name,
-                  bool xis_prototype_name,
+                  bool xcopy_dof_map,
                   bool xauto_access)
 {
 
   // Preconditions:
 
-  require(xhost != 0);
-  require(xauto_access ? xhost->is_attached() : xhost->in_jim_edit_mode());
-  require(xauto_access || xhost->name_space()->member_poset(prototypes_poset_name(), true).state_is_read_accessible());
+  require(xauto_access ? xhost.is_attached() : xhost.in_jim_edit_mode());
+  require(xauto_access || xhost.name_space()->member_poset(prototypes_poset_name(), true).state_is_read_accessible());
   require(!xprototype_name.empty());
-  require(xhost->name_space()->contains_poset_member(poset_path(prototypes_poset_name(), xprototype_name), true));
+  require(xhost.name_space()->contains_poset_member(poset_path(prototypes_poset_name(), xprototype_name), true));
 
 
   // Body:
 
   if(xauto_access)
   {
-    xhost->begin_jim_edit_mode(true);
-    xhost->name_space()->member_poset(prototypes_poset_name(), true).get_read_access();
+    xhost.begin_jim_edit_mode(true);
+    xhost.name_space()->member_poset(prototypes_poset_name(), true).get_read_access();
   }
 
-  array_poset_dof_map* lmap = new_row_dof_map(xhost, xprototype_name);
-  new_jim_state(xhost, lmap, false, false);
+  if(xcopy_dof_map)
+  {
+    array_poset_dof_map* lmap = new_row_dof_map(&xhost, xprototype_name);
+    new_jim_state(&xhost, lmap, false, false);
+  }
+  else
+  {
+    scoped_index ldof_tuple_id = xhost.prototype_dof_tuple_id(xprototype_name, 0, true, xauto_access);
+    new_jim_state(&xhost, ldof_tuple_id, xauto_access);
+  }
 
   if(xauto_access)
   {
-    xhost->name_space()->member_poset(prototypes_poset_name(), true).release_access();
-    xhost->end_jim_edit_mode(true, true);
+    xhost.name_space()->member_poset(prototypes_poset_name(), true).release_access();
+    xhost.end_jim_edit_mode(true, true);
   }
 
   // Postconditions:
@@ -351,8 +344,63 @@ base_space_member(poset* xhost,
 
 fiber_bundle::base_space_member::
 base_space_member(poset* xhost,
-                  const scoped_index& xdof_tuple_id,
+                  const string& xname,
+                  int xdb,
+                  const string& xlocal_cell_name,
                   bool xauto_access)
+{
+  // Preconditions:
+
+  require(xauto_access || xhost->in_jim_edit_mode());
+  require(!xname.empty());
+  require(!xhost->contains_member(xname, true));
+  require(xlocal_cell_name.empty() || xhost->contains_member(xlocal_cell_name));
+
+  // Body:
+
+  // Can't check invariant until construction done.
+
+  disable_invariant_check();
+
+  if(xauto_access)
+  {
+    xhost->begin_jim_edit_mode(true);
+  }
+
+  // Create the member and set its name.
+
+  new_jim_state(xhost, 0, false, false);
+  put_name(xname, true, false);
+
+  // Initialize the dofs.
+
+  init_row_dof_tuple(xdb, xlocal_cell_name);
+
+  // Now we can check the invaraint.
+
+  enable_invariant_check();
+
+  // Postconditions:
+
+  ensure(invariant());
+  ensure(host() == xhost);
+  ensure(name() == xname);
+  ensure(db() == xdb);
+  ensure(local_cell_type_name() == xlocal_cell_name);
+
+
+  if(xauto_access)
+  {
+    xhost->end_jim_edit_mode(true, true);
+  }
+
+  // Exit:
+
+  return;
+}
+
+fiber_bundle::base_space_member::
+base_space_member(poset* xhost, pod_index_type xdof_tuple_id, bool xauto_access)
 {
 
   // Preconditions:
@@ -451,7 +499,7 @@ base_space_member(const poset* xhost, const string& xname)
 }
 
 fiber_bundle::base_space_member::
-base_space_member(const namespace_poset* xnamespace, const poset_path& xpath)
+base_space_member(const namespace_poset* xnamespace, const poset_path& xpath, bool xauto_access)
 {
 
   // Preconditions:
@@ -462,7 +510,7 @@ base_space_member(const namespace_poset* xnamespace, const poset_path& xpath)
 
   // Body:
 
-  attach_to_state(xnamespace, xpath);
+  attach_to_state(xnamespace, xpath, xauto_access);
 
   // Postconditions:
 
@@ -717,7 +765,7 @@ new_row_dof_map(const poset* xhost, const string& xprototype_name)
   // Get a handle for the prototype.
 
   poset_path lproto_path(prototypes_poset_name(), xprototype_name);
-  base_space_member_prototype lproto(xhost->name_space(), lproto_path, true);
+  base_space_member lproto(xhost->name_space(), lproto_path, false);
 
   // Initialize the dofs.
 
@@ -772,7 +820,7 @@ new_row_dof_map(poset_state_handle& xhost, const string& xprototype_name, bool x
   // Get the prototype.
 
   poset_path lproto_path(prototypes_poset_name(), xprototype_name);
-  base_space_member_prototype lproto(xhost.name_space(), lproto_path, false);
+  base_space_member lproto(xhost.name_space(), lproto_path, false);
 
   // Copy its dofs.
 
@@ -800,6 +848,80 @@ new_row_dof_map(poset_state_handle& xhost, const string& xprototype_name, bool x
 }
 
 // PROTECTED MEMBER FUNCTIONS
+
+void
+fiber_bundle::base_space_member::
+init_row_dof_tuple(int xdb, const string& xlocal_cell_name)
+{
+  // Preconditions:
+
+  require(state_is_read_accessible());
+  require(host()->member_id_spaces(false).contains("cell_types"));
+  require(xlocal_cell_name.empty() || host()->contains_member(xlocal_cell_name));
+
+
+  // Body:
+  row_dof_tuple_type& ltuple = *row_dof_tuple();
+
+  // Set db.
+
+  ltuple.db = xdb;
+
+  // Set type id.
+
+  mutable_index_space_handle& ltype_id_space =
+    host()->member_id_spaces(false).get_id_space<mutable_index_space_handle>("cell_types");
+  ltype_id_space.push_back(index());
+
+  ltuple.type_id = ltype_id_space.pod(index());
+
+  ltype_id_space.release_id_space();
+
+  // Set type name.
+
+  /// @error where does this string get deleted?
+
+  ltuple.type_name = strdup(name().c_str());
+
+  // Set the refinement depth.
+
+  ltuple.refinement_depth = 0;
+
+  // Set local cell type id and type name.
+
+  if(xlocal_cell_name.empty())
+  {
+    ltuple.local_cell_type_id = sheaf::invalid_pod_index();
+
+    /// @error where does this string get deleted?
+
+    ltuple.local_cell_type_name = strdup("");
+  }
+  else
+  {
+    base_space_member lcell(host(), xlocal_cell_name);
+    ltuple.local_cell_type_id = lcell.type_id();
+
+    /// @error where does this string get deleted?
+
+    ltuple.local_cell_type_name = strdup(lcell.type_name());
+    lcell.detach_from_state();
+  }
+
+
+  // Set the remaining dofs to default values.
+
+  ltuple.size = 0;
+  ltuple.i_size = 0;
+  ltuple.j_size = 0;
+  ltuple.k_size = 0;
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
 
 // PRIVATE MEMBER FUNCTIONS
 
@@ -948,6 +1070,54 @@ put_refinement_depth(int xdepth)
   // Exit:
 
   return;
+}
+
+sheaf::pod_index_type
+fiber_bundle::base_space_member::
+local_cell_type_id() const
+{
+  pod_index_type result;
+
+  // Preconditions:
+
+  require(state_is_read_accessible());
+
+  // Body:
+
+  base_space_member* cthis = const_cast<base_space_member*>(this);
+  result = cthis->row_dof_tuple(false)->local_cell_type_id;
+
+  // Postconditions:
+
+
+  // Exit:
+
+  return result;
+}
+
+
+const char*
+fiber_bundle::base_space_member::
+local_cell_type_name() const
+{
+  const char* result;
+
+  // Preconditions:
+
+  require(state_is_read_accessible());
+
+  // Body:
+
+  base_space_member* cthis = const_cast<base_space_member*>(this);
+  result = cthis->row_dof_tuple(false)->local_cell_type_name;
+
+  // Postconditions:
+
+  ensure(result != 0);
+
+  // Exit:
+
+  return result;
 }
 
 // PROTECTED MEMBER FUNCTIONS
