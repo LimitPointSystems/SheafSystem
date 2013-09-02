@@ -101,15 +101,32 @@ body_pusher(const geometry::sec_ed_invertible& xdomain_coord, const sec_ed& xran
     {
       lrep_path.put_member_name("vertex_element_dlinear");
     }
+
+    /// @todo Remove.
     
-    lschema_path = lns.new_section_space_schema(lschema_path,
-						lrep_path,
-						xrange_coord.schema().base_space().path(),
-						xdomain_coord.schema().fiber_space().path(),
-						true);
+//     lschema_path = lns.new_section_space_schema(lschema_path,
+// 						lrep_path,
+// 						xrange_coord.schema().base_space().path(),
+// 						xdomain_coord.schema().fiber_space().path(),
+// 						true);
+
+      binary_section_space_schema_poset& lhost =
+	binary_section_space_schema_poset::new_table(lns,
+						     lschema_path.poset_name(),
+						     binary_section_space_schema_poset::standard_schema_path(),
+						     xrange_coord.schema().base_space().path(true),
+						     xdomain_coord.schema().fiber_space().path(true),
+						     lrep_path,
+						     true);
+
+      _body_schema = new binary_section_space_schema_member(&lhost, xrange_coord.schema().base_space().path(true),
+							    lhost.fiber_space().schema(true).path(true));
+      _body_schema->put_name(lschema_path.member_name(), true, true);
   }
-  
-  _body_schema.attach_to_state(&lns, lschema_path);
+  else
+  {
+    _body_schema = new binary_section_space_schema_member(lns, lschema_path, true);
+  }
   
   // Pull the discretization points from the range back to the domain.
   
@@ -621,7 +638,7 @@ pull_back_range_disc()
   pb_type lpb;
   block<chart_point_3d> ldomain_pts(32); // Arbitrary size.
 
-  _body_schema.get_read_access();
+  _body_schema->get_read_access();
 
   if(!_domain_coord->is_invertible())
   {
@@ -634,7 +651,7 @@ pull_back_range_disc()
 
   property_disc_iterator* litr =
     property_disc_iterator::new_property_disc_iterator(_range_coord.schema(),
-        _body_schema);
+						       *_body_schema);
   while(!litr->is_done())
   {
     // Get the conext for all the property disc members associated
@@ -673,7 +690,7 @@ pull_back_range_disc()
   }
 
   delete litr;
-  _body_schema.release_access();
+  _body_schema->release_access();
 
   // Postconditions:
 
@@ -734,7 +751,9 @@ fields::body_pusher::
   // Body:
 
   _range_coord.detach_from_state();
-  _body_schema.detach_from_state();
+  _body_schema->detach_from_state();
+
+  delete _body_schema;
 
   // Postconditions:
 

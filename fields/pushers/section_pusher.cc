@@ -131,113 +131,113 @@ section_pusher(const field_vd& xsrc, const field_vd& xdst, bool xauto_access)
   return;
 }
 
-fields::section_pusher::
-section_pusher(const field_vd& xsrc, const sec_ed& xdst_coords,
-               bool xauto_access)
-{
-  // Preconditions:
+// fields::section_pusher::
+// section_pusher(const field_vd& xsrc, const sec_ed& xdst_coords,
+//                bool xauto_access)
+// {
+//   // Preconditions:
 
-  require(xauto_access || xsrc.state_is_read_accessible());
-  require(xauto_access || xdst_coords.state_is_read_accessible());
-  require(xauto_access || xdst_coords.name_space()->state_is_read_accessible());
+//   require(xauto_access || xsrc.state_is_read_accessible());
+//   require(xauto_access || xdst_coords.state_is_read_accessible());
+//   require(xauto_access || xdst_coords.name_space()->state_is_read_accessible());
 
-  define_old_variable(int old_xsrc_access_request_depth = xsrc.access_request_depth());
-  define_old_variable(int old_xdst_coords_access_request_depth = xdst_coords.access_request_depth());
+//   define_old_variable(int old_xsrc_access_request_depth = xsrc.access_request_depth());
+//   define_old_variable(int old_xdst_coords_access_request_depth = xdst_coords.access_request_depth());
 
-  if(xauto_access)
-  {
-    xsrc.get_read_access();
-    xdst_coords.get_read_access();
-    xdst_coords.name_space()->get_read_access();
-  }
+//   if(xauto_access)
+//   {
+//     xsrc.get_read_access();
+//     xdst_coords.get_read_access();
+//     xdst_coords.name_space()->get_read_access();
+//   }
 
-  require(!xsrc.name_space().contains_poset(sec_rep_space_member::standard_section_space_name(xsrc.property().schema().fiber_space().name(),
-          xdst_coords.schema().base_space().host()->name()), false));
+//   require(!xsrc.name_space().contains_poset(sec_rep_space_member::standard_section_space_name(xsrc.property().schema().fiber_space().name(),
+//           xdst_coords.schema().base_space().host()->name()), false));
 
-  require(same_fiber(*xsrc.coordinates().host(), *xdst_coords.host()));
+//   require(same_fiber(*xsrc.coordinates().host(), *xdst_coords.host()));
 
-  // Currently only support binary schema, not ternary schema;
-  // see push_pa and discretizaion_pusher.
+//   // Currently only support binary schema, not ternary schema;
+//   // see push_pa and discretizaion_pusher.
 
-  require(dynamic_cast<const binary_section_space_schema_member*>(&(xdst_coords.schema())));
+//   require(dynamic_cast<const binary_section_space_schema_member*>(&(xdst_coords.schema())));
 
-  // Body:
+//   // Body:
 
-  // Get the domain.
+//   // Get the domain.
 
-  _domain = xsrc.property().host();
+//   _domain = xsrc.property().host();
 
-  _domain_coords.attach_to_state(&xsrc.coordinates());
-  _range_coords.attach_to_state(&xdst_coords);
+//   _domain_coords.attach_to_state(&xsrc.coordinates());
+//   _range_coords.attach_to_state(&xdst_coords);
 
-  section_space_schema_member& ldomain_schema = _domain->schema();
+//   section_space_schema_member& ldomain_schema = _domain->schema();
 
-  // Create the range.
+//   // Create the range.
 
-  string lrange_prop_fiber_name = ldomain_schema.fiber_space().name();
-  string lrange_base_name = xdst_coords.schema().base_space().host()->name();
-  string lrange_name =
-    sec_rep_space_member::standard_section_space_name(lrange_prop_fiber_name,
-						      lrange_base_name);
+//   string lrange_prop_fiber_name = ldomain_schema.fiber_space().name();
+//   string lrange_base_name = xdst_coords.schema().base_space().host()->name();
+//   string lrange_name =
+//     sec_rep_space_member::standard_section_space_name(lrange_prop_fiber_name,
+// 						      lrange_base_name);
 
-  fiber_bundles_namespace* lns = dynamic_cast<fiber_bundles_namespace*>(xdst_coords.name_space());
+//   fiber_bundles_namespace* lns = dynamic_cast<fiber_bundles_namespace*>(xdst_coords.name_space());
 
-  poset_path lsssp(ldomain_schema.fiber_space().path().poset_name() + 
-		   "_on_" + 
-		   xdst_coords.schema().base_space().path().poset_name() +
-		   "_" +
-		   ldomain_schema.rep().path().member_name() +
-		   "_schema",
-		   ldomain_schema.fiber_space().path().poset_name() + 
-		   "_on_" + 
-		   xdst_coords.schema().base_space().path().member_name());
+//   poset_path lsssp(ldomain_schema.fiber_space().path().poset_name() + 
+// 		   "_on_" + 
+// 		   xdst_coords.schema().base_space().path().poset_name() +
+// 		   "_" +
+// 		   ldomain_schema.rep().path().member_name() +
+// 		   "_schema",
+// 		   ldomain_schema.fiber_space().path().poset_name() + 
+// 		   "_on_" + 
+// 		   xdst_coords.schema().base_space().path().member_name());
 
-  poset_path lrange_schema_path =
-    lns->new_section_space_schema(lsssp,
-				  ldomain_schema.rep().path(),
-				  xdst_coords.schema().base_space().path(),
-				  ldomain_schema.fiber_space().path(),
-				  true);
+//   poset_path lrange_schema_path =
+//     lns->new_section_space_schema(lsssp,
+// 				  ldomain_schema.rep().path(),
+// 				  xdst_coords.schema().base_space().path(),
+// 				  ldomain_schema.fiber_space().path(),
+// 				  true);
 
-  arg_list largs;
-  largs << "factor_ct" << -1
-	<< "d" << -1
-	<< "scalar_space_path" << ""
-	<< "p" << -1
-	<< "dd" << -1
-	<<"vector_space_path" << "";
+//   arg_list largs;
+//   largs << "factor_ct" << -1
+// 	<< "d" << -1
+// 	<< "scalar_space_path" << ""
+// 	<< "p" << -1
+// 	<< "dd" << -1
+// 	<<"vector_space_path" << "";
 
-  _range =
-    &lns->clone_section_space(_domain->path(), lrange_name, largs, lrange_schema_path, true);
+//   _range =
+//     &lns->clone_section_space(_domain->path(), lrange_name, largs, lrange_schema_path, true);
 
-  _range->get_read_access();
+//   _range->get_read_access();
 
-  // Perform common initialization.
+//   // Perform common initialization.
 
-  initialize();
+//   initialize();
 
-  // Postconditions:
+//   // Postconditions:
 
-  ensure(invariant());
-  ensure(domain().is_same_state(xsrc.property().host()));
-  ensure(same_fiber(range(), domain()));
+//   ensure(invariant());
+//   ensure(domain().is_same_state(xsrc.property().host()));
+//   ensure(same_fiber(range(), domain()));
 
-  _range->release_access();
+//   _range->release_access();
 
-  if(xauto_access)
-  {
-    xdst_coords.name_space()->release_access();
-    xdst_coords.release_access();
-    xsrc.release_access();
-  }
+//   if(xauto_access)
+//   {
+//     xdst_coords.name_space()->release_access();
+//     xdst_coords.release_access();
+//     xsrc.release_access();
+//   }
 
-  ensure(xsrc.access_request_depth() == old_xsrc_access_request_depth);
-  ensure(xdst_coords.access_request_depth() == old_xdst_coords_access_request_depth);
+//   ensure(xsrc.access_request_depth() == old_xsrc_access_request_depth);
+//   ensure(xdst_coords.access_request_depth() == old_xdst_coords_access_request_depth);
 
-  // Exit:
+//   // Exit:
 
-  return;
-}
+//   return;
+// }
 
 
 fields::section_pusher::

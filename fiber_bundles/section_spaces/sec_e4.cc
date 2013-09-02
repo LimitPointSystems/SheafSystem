@@ -142,7 +142,7 @@ standard_host(namespace_type& xns,
     // Find or create the standard scalar space.
 
     poset_path lscalar_space_path = 
-      scalar_type::standard_host(xns, xbase_path, xrep_path, xsection_suffix, xfiber_suffix, xauto_access).path(xauto_access);
+      scalar_type::standard_host(xns, xbase_path, lrep_path, xsection_suffix, xfiber_suffix, xauto_access).path(xauto_access);
     
     // Create the standard host.
 
@@ -163,7 +163,7 @@ standard_host(namespace_type& xns,
   ensure(result.d(true) == result.schema(true).fiber_space<fiber_type::host_type>().d(xauto_access));
   ensure(result.d(true) == result.dd(true));
   ensure(result.scalar_space_path(true) == 
-         scalar_type::standard_host_path<scalar_type>(xbase_path, xrep_path, xsection_suffix, xfiber_suffix));
+         scalar_type::standard_host_path<scalar_type>(xbase_path, result.rep().path(xauto_access), xsection_suffix, xfiber_suffix));
   ensure(result.p(true) == result.schema(true).fiber_space<fiber_type::host_type>().p(xauto_access));
   ensure(result.p(true) == 1);
   ensure(result.dd(true) == result.schema(true).fiber_space<fiber_type::host_type>().dd(xauto_access));

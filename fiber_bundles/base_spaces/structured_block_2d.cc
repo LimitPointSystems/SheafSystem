@@ -13,7 +13,7 @@
 #include "arg_list.h"
 #include "base_space_member_prototype.h"
 #include "chart_point_3d.h"
-#include "fiber_bundles_namespace.impl.h"
+#include "fiber_bundles_namespace.h"
 #include "namespace_poset.h"
 #include "poset_path.h"
 #include "preorder_iterator.h"
