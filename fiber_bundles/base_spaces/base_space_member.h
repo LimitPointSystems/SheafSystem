@@ -160,7 +160,7 @@ public:
   /// otherwise just refer to an existing copy.
   ///.
   ///
-  base_space_member(base_space_poset& xhost,
+  base_space_member(base_space_poset* xhost,
                     const string& xprototype_name,
                     bool xcopy_dof_map,
                     bool xauto_access);
@@ -174,12 +174,6 @@ public:
                     int xdb,
                     const string& xlocal_cell_name,
                     bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to a new jim (join-irreducible member)
-  /// state in xhost using the existing dof tuple with index xdof_tuple_id.
-  ///
-  base_space_member(poset* xhost, pod_index_type xdof_tuple_id, bool xauto_access);
 
   ///
   /// creates a new jrm (join reducible member) attached to a new member state

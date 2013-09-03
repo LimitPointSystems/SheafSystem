@@ -295,7 +295,7 @@ base_space_member(poset* xhost,
 
 
 fiber_bundle::base_space_member::
-base_space_member(base_space_poset& xhost,
+base_space_member(base_space_poset* xhost,
                   const string& xprototype_name,
                   bool xcopy_dof_map,
                   bool xauto_access)
@@ -303,35 +303,35 @@ base_space_member(base_space_poset& xhost,
 
   // Preconditions:
 
-  require(xauto_access ? xhost.is_attached() : xhost.in_jim_edit_mode());
-  require(xauto_access || xhost.name_space()->member_poset(prototypes_poset_name(), true).state_is_read_accessible());
+  require(xauto_access ? xhost->is_attached() : xhost->in_jim_edit_mode());
+  require(xauto_access || xhost->name_space()->member_poset(prototypes_poset_name(), true).state_is_read_accessible());
   require(!xprototype_name.empty());
-  require(xhost.name_space()->contains_poset_member(poset_path(prototypes_poset_name(), xprototype_name), true));
+  require(xhost->name_space()->contains_poset_member(poset_path(prototypes_poset_name(), xprototype_name), true));
 
 
   // Body:
 
   if(xauto_access)
   {
-    xhost.begin_jim_edit_mode(true);
-    xhost.name_space()->member_poset(prototypes_poset_name(), true).get_read_access();
+    xhost->begin_jim_edit_mode(true);
+    xhost->name_space()->member_poset(prototypes_poset_name(), true).get_read_access();
   }
 
   if(xcopy_dof_map)
   {
-    array_poset_dof_map* lmap = new_row_dof_map(&xhost, xprototype_name);
-    new_jim_state(&xhost, lmap, false, false);
+    array_poset_dof_map* lmap = new_row_dof_map(xhost, xprototype_name);
+    new_jim_state(xhost, lmap, false, false);
   }
   else
   {
-    scoped_index ldof_tuple_id = xhost.prototype_dof_tuple_id(xprototype_name, 0, true, xauto_access);
-    new_jim_state(&xhost, ldof_tuple_id, xauto_access);
+    scoped_index ldof_tuple_id = xhost->prototype_dof_tuple_id(xprototype_name, 0, true, xauto_access);
+    new_jim_state(xhost, ldof_tuple_id, xauto_access);
   }
 
   if(xauto_access)
   {
-    xhost.name_space()->member_poset(prototypes_poset_name(), true).release_access();
-    xhost.end_jim_edit_mode(true, true);
+    xhost->name_space()->member_poset(prototypes_poset_name(), true).release_access();
+    xhost->end_jim_edit_mode(true, true);
   }
 
   // Postconditions:
@@ -393,27 +393,6 @@ base_space_member(poset* xhost,
   {
     xhost->end_jim_edit_mode(true, true);
   }
-
-  // Exit:
-
-  return;
-}
-
-fiber_bundle::base_space_member::
-base_space_member(poset* xhost, pod_index_type xdof_tuple_id, bool xauto_access)
-{
-
-  // Preconditions:
-
-  require(precondition_of(new_jim_state(same args)));
-
-  // Body:
-
-  new_jim_state(xhost, xdof_tuple_id, xauto_access);
-
-  // Postconditions:
-
-  ensure(postcondition_of(new_jim_state(same args)));
 
   // Exit:
 

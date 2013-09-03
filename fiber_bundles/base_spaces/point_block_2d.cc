@@ -39,8 +39,7 @@ static_prototype_path()
   // Body:
 
   static const poset_path
-  STATIC_PROTOTYPE_PATH(base_space_member::prototypes_poset_name(),
-                        "point_block_2d");
+  STATIC_PROTOTYPE_PATH(base_space_member::prototypes_poset_name(), "point_block_2d");
 
   const poset_path& result = STATIC_PROTOTYPE_PATH;
 

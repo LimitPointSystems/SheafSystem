@@ -40,8 +40,7 @@ static_prototype_path()
   // Body:
 
   static const poset_path
-  STATIC_PROTOTYPE_PATH(base_space_member::prototypes_poset_name(),
-                        "unstructured_block");
+  STATIC_PROTOTYPE_PATH(base_space_member::prototypes_poset_name(), "zone_nodes_block");
 
   const poset_path& result = STATIC_PROTOTYPE_PATH;
 

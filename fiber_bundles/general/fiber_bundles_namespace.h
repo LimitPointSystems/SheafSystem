@@ -269,6 +269,11 @@ protected:
   void make_general_polyhedron_prototype(base_space_poset* xspace);
 
   ///
+  /// Create prototype for an zone_nodes block in poset xspace.
+  ///
+  void make_zone_nodes_block_prototype(base_space_poset* xspace);
+
+  ///
   /// Create prototype for an unstructured block in poset xspace.
   ///
   void make_unstructured_block_prototype(base_space_poset* xspace);
