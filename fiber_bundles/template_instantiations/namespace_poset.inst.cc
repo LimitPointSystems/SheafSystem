@@ -1454,16 +1454,6 @@ template
 SHEAF_DLL_SPEC
 fiber_bundle::sec_rep_space&
 sheaf::namespace_poset::
-new_member_poset<fiber_bundle::sec_rep_space>(const string& xname,
-					      const poset_path& xschema_path,
-					      const arg_list& xargs,
-					      bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::sec_rep_space&
-sheaf::namespace_poset::
 member_poset<fiber_bundle::sec_rep_space>(const scoped_index& xindex,
 					  bool xauto_access) const;
  
@@ -2020,15 +2010,6 @@ template
 SHEAF_DLL_SPEC 
 fiber_bundle::base_space_poset&
 sheaf::namespace_poset::
-new_member_poset<fiber_bundle::base_space_poset>(const string& xname,
-						 const poset_path& xschema_path,
-						 const arg_list& xargs,
-						 bool xauto_access);
-
-template
-SHEAF_DLL_SPEC 
-fiber_bundle::base_space_poset&
-sheaf::namespace_poset::
 member_poset<fiber_bundle::base_space_poset>(const scoped_index& xindex,
 					     bool xauto_access) const;
  
@@ -2131,15 +2112,6 @@ arg_is_auto_read_write_available<fiber_bundle::base_space_poset>(const string& x
 // CLASS BINARY_SECTION_SPACE_SCHEMA_POSET
 //==============================================================================
  
-template
-SHEAF_DLL_SPEC 
-fiber_bundle::binary_section_space_schema_poset&
-sheaf::namespace_poset::
-new_member_poset<fiber_bundle::binary_section_space_schema_poset>(const string& xname,
-								  const poset_path& xschema_path,
-								  const arg_list& xargs,
-								  bool xauto_access);
-
 template
 SHEAF_DLL_SPEC 
 fiber_bundle::binary_section_space_schema_poset&
@@ -2291,16 +2263,6 @@ path_is_auto_read_available<fiber_bundle::section_space_schema_poset>(
 //==============================================================================
 // CLASS SEC_REP_DESCRIPTOR_POSET
 //==============================================================================
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::sec_rep_descriptor_poset&
-sheaf::namespace_poset::
-new_member_poset<fiber_bundle::sec_rep_descriptor_poset>(const string& xname,
-		                                         const poset_path& xschema_path,
-		                                         const arg_list& xargs,
-		                                         bool xauto_access);
-
 
 template
 SHEAF_DLL_SPEC

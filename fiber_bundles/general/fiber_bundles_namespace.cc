@@ -622,10 +622,8 @@ make_base_space_schema_poset()
 
   string lname = standard_base_space_schema_path().poset_name();
   poset_path lschema_path = primitives().schema().path(false);
-  arg_list largs = poset::make_args();
 
-  _base_space_schema_poset =
-    &new_member_poset<poset>(lname, lschema_path, largs, true);
+  _base_space_schema_poset = &poset::new_table(const_cast<fiber_bundles_namespace&>(*this), lname, lschema_path, false);
 
   _base_space_schema_poset->get_read_write_access();
 
@@ -2191,10 +2189,8 @@ make_fiber_space_schema_poset()
 
   string lname = standard_fiber_space_schema_poset_name();
   poset_path lschema_path = primitives().schema().path(false);
-  arg_list largs = poset::make_args();
 
-  poset* lfiber_space_schema_poset =
-    &new_member_poset<poset>(lname, lschema_path, largs, true);
+  poset* lfiber_space_schema_poset = &poset::new_table(const_cast<fiber_bundles_namespace&>(*this), lname, lschema_path, false);
   lfiber_space_schema_poset->get_read_write_access();
 
   subposet table_dofs(lfiber_space_schema_poset);
@@ -2709,9 +2705,8 @@ make_sec_rep_descriptor_schema_poset()
 
   string lname = sec_rep_descriptor::standard_schema_path().poset_name();
   poset_path lschema_path = primitives().schema().path(false);
-  arg_list largs = poset::make_args();
   
-  poset* lschema_host = &new_member_poset<poset>(lname, lschema_path, largs, true);
+  poset* lschema_host = &poset::new_table(const_cast<fiber_bundles_namespace&>(*this), lname, lschema_path, false);
   lschema_host->get_read_write_access();
 
   subposet table_dofs(lschema_host);
@@ -2996,9 +2991,8 @@ make_section_space_schema_schema_poset()
 
   string lname = standard_section_space_schema_schema_poset_name();
   poset_path lschema_path = primitives().schema().path(false);
-  arg_list largs = poset::make_args();
 
-  poset* lschema_host = &new_member_poset<poset>(lname, lschema_path, largs, true);
+  poset* lschema_host = &poset::new_table(const_cast<fiber_bundles_namespace&>(*this), lname, lschema_path, false);
   lschema_host->get_read_write_access();
 
   subposet table_dofs(lschema_host);

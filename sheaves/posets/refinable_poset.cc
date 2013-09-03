@@ -29,6 +29,69 @@ class index_iterator;
 
 // PUBLIC FUNCTIONS
 
+sheaf::refinable_poset&
+sheaf::refinable_poset::
+new_table(namespace_type& xns, const poset_path& xpath, const poset_path& xschema_path, bool xauto_access)
+{
+  // cout << endl << "Entering refinable_poset::new_table." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xpath.empty());
+  require(!xns.contains_path(xpath, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+
+  // Body:
+
+  // Create the table; have to new it because namespace keeps a pointer.
+
+  typedef refinable_poset table_type;
+
+  table_type* ltable = new table_type();
+
+  // Create a handle of the right type for the schema member.
+
+  schema_poset_member lschema(&xns, xschema_path, xauto_access);
+
+  if(xauto_access)
+  {
+    lschema.get_read_access();
+  }
+
+  // Create the table dof map; must be newed 
+  // because poset_state::_table keeps a pointer to it.
+  // No table dofs to set.
+
+  array_poset_dof_map* lmap = new array_poset_dof_map(&lschema, true);  
+
+  // Create the state.
+
+  ltable->new_state(xns, xpath, lschema, *lmap);
+
+  if(xauto_access)
+  {
+    lschema.release_access();
+  }
+
+  refinable_poset& result = *ltable;
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xpath);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  // Exit:
+
+  // cout << "Leaving refinable_poset::new_table." << endl;
+  return result;
+}
+
 void
 sheaf::refinable_poset::
 put_version(int xversion)

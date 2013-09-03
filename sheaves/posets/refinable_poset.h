@@ -46,6 +46,15 @@ class SHEAF_DLL_SPEC refinable_poset : public poset
 public:
 
   ///
+  /// Creates a new poset in namespace xns with path xpath
+  /// and schema specified by xschema_path.
+  ///
+  static refinable_poset& new_table(namespace_type& xhost, 
+				    const poset_path& xpath, 
+				    const poset_path& xschema_path,
+				    bool xauto_access);
+
+  ///
   /// Set the current level to xversion
   ///
   void put_version(int xversion);

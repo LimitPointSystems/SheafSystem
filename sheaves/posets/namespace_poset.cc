@@ -1033,48 +1033,6 @@ make_prototype()
 
 // PUBLIC FUNCTIONS
 
-sheaf::poset&
-sheaf::namespace_poset::
-new_schema_poset(const string& xname, bool xauto_access)
-{
-  // Preconditions:
-
-  require(xauto_access || in_jim_edit_mode());
-  require(!contains_member(xname, true));
-
-  // Body:
-
-  arg_list largs = poset::make_args();
-  poset& result = new_member_poset<poset>(xname, "primitives_schema/top",
-					  largs, xauto_access);
-  result.get_read_write_access();  
-  
-  // Create the schema subposets of the top.
-
-  subposet ltable_dofs(&result, 0, false);
-  subposet lrow_dofs(&result, 0, false);
-
-  // Schematize the result.
-
-  result.schematize(&ltable_dofs, &lrow_dofs, true);
-
-  // Clean up.
-
-  ltable_dofs.detach_from_state();
-  lrow_dofs.detach_from_state();
-
-  // Postconditions:
-
-  ensure(result.name() == xname);
-  ensure(result.is_schematized(false));
-  
-  result.release_access();
-
-  // Exit:
-
-  return result;
-}
-
 void
 sheaf::namespace_poset::
 delete_poset(pod_index_type xhub_id, bool xauto_access)

@@ -179,10 +179,7 @@ make_triangle(sheaves_namespace* xns)
 
   abstract_poset_member& ref_type = primitives.int_type();
 
-  poset& cells = xns->new_member_poset<refinable_poset>("cells",
-							ref_type.path(),
-							refinable_poset::make_args(),
-							true);
+  poset& cells = refinable_poset::new_table(*xns, "cells", ref_type.path(true), false);
 
   cells.begin_jim_edit_mode();
 

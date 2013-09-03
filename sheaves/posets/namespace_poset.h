@@ -287,23 +287,6 @@ private:
 public:
 
   ///
-  /// Creates a new poset with name xname, schema specified by xschema_path,  
-  /// and table dofs initialzied by xargs.
-  ///
-  template <typename T>
-  SHEAF_DLL_SPEC
-  T& new_member_poset(const string& xname,
-		      const poset_path& xschema_path,
-		      const arg_list& xargs,
-		      bool xauto_access);
-
-  ///
-  /// Creates a new schema poset with name xname.
-  ///
-  
-  poset& new_schema_poset(const string& xname, bool xauto_access);
-
-  ///
   /// Delete the poset with hub id xhub_id.
   ///
   void delete_poset(pod_index_type xhub_id, bool xauto_access);
