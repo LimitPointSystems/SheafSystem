@@ -84,6 +84,13 @@ public:
   /// The name of this class.
   ///
   static const string& static_class_name();
+
+  ///
+  /// The standard member name for a schema with fiber schema member with name
+  /// xfiber_schema_member_name and base space member with name xbase_member_name.
+  ///
+  static string standard_member_name(const string& xfiber_schema_member_name,
+				     const string& xbase_member_name);
   
   ///
   /// Assignment operator; attaches this to the same state as xother
@@ -1237,6 +1244,26 @@ public:
   /// set version to the actual version alias refers to.
   ///
   virtual void put_version(int xversion, bool xunalias = false);
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
+  /// @name COMPONENT NAME FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Sets the name of this member to a standard name; if xunique,
+  /// make xname the only name.
+  ///
+  void put_standard_name(bool xunique, bool xauto_access);
 
 protected:
 

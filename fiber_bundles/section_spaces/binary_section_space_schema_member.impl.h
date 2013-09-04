@@ -100,10 +100,9 @@ standard_member_path(const poset_path& xbase_path, const poset_path& xrep_path, 
 
   poset_path result(standard_host_path<S>(xbase_path, xrep_path, xfiber_suffix));
 
-  string lmember_name(fiber_type::static_class_name());
-  lmember_name += "_on_";
-  lmember_name += xbase_path.member_name();
-  lmember_name += "_schema";
+  string lmember_name =
+    standard_member_name(fiber_type::standard_schema_path().member_name(),
+			 xbase_path.member_name());
 
   result.put_member_name(lmember_name);
   
@@ -176,8 +175,8 @@ standard_host(namespace_type& xns,
   require(xbase_path.full());
   require(xns.path_is_auto_read_accessible<base_space_poset>(xbase_path, xauto_access));
 
-  require(xrep_path.empty() || xrep_path.full());
-  require(xrep_path.empty() || xns.path_is_auto_read_accessible<sec_rep_descriptor_poset>(xrep_path, xauto_access));
+  require(xrep_path.full());
+  require(xns.path_is_auto_read_accessible<sec_rep_descriptor_poset>(xrep_path, xauto_access));
 
   require(xfiber_suffix.empty() || poset_path::is_valid_name(xfiber_suffix));
   require(S::fiber_type::template standard_host_is_available<typename S::fiber_type>(xns, xfiber_suffix, xauto_access));
