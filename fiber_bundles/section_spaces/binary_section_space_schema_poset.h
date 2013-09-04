@@ -64,25 +64,6 @@ class SHEAF_DLL_SPEC binary_section_space_schema_poset : public section_space_sc
 public:
 
   ///
-  /// Creates an arg list which conforms to the schema of this.
-  ///
-  static arg_list make_arg_list(const poset_path& xrep_path, 
-				const poset_path& xbase_space_path, 
-				const poset_path& xfiber_space_path);
-
-  ///
-  /// Creates a new handle attached to a new poset state in namespace xhost,
-  /// schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  binary_section_space_schema_poset(namespace_poset& xhost,
-				    const string& xname,
-				    const arg_list& xargs,
-				    const poset_path& xschema_path,
-				    bool xauto_access);
-
-  
-  ///
   /// Creates a new binary_section_space_schema_poset in namespace xns with path xpath,
   /// schema specified by xschema_path, and table attributes base_space_path, fiber_space_path,
   /// and rep_path specified by xbase_path, xfiber_path, and xrep_path, respectively.
@@ -114,68 +95,9 @@ protected:
   virtual ~binary_section_space_schema_poset();
 
   ///
-  /// Creates a new handle attached to a new binary_section_space_schema_poset state
-  /// in namespace xns with name xname, representation xrep, base xbase, and
-  /// fiber space xfiber_space.
-  ///
-  binary_section_space_schema_poset(namespace_poset* xns,
-                                    const string& xname,
-                                    const sec_rep_descriptor& xrep,
-                                    poset_state_handle& xbase_space,
-                                    const poset_state_handle& xfiber_space,
-                                    bool xauto_access = true);
-
-  ///
-  /// Creates a new handle and attaches it to a new state in namespace xns,
-  /// with name xname, representation specified by xrep_path,
-  /// base specified by xbase_path, and fiber space specified by xfiber_path.
-  ///
-  binary_section_space_schema_poset(namespace_poset& xns,
-                                    const string& xname,
-                                    const poset_path& xrep_path,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xfiber_path,
-                                    bool xauto_access = true);
-
-  ///
-  /// Creates a new handle attached to the binary_section_space_schema_poset with
-  /// index xindex in namespace xhost.
-  ///
-  binary_section_space_schema_poset(const namespace_poset* xhost, pod_index_type xindex);
-
-  ///
-  /// Creates a new handle attached to the binary_section_space_schema_poset with
-  /// index xindex in namespace xhost.
-  ///
-  binary_section_space_schema_poset(const namespace_poset* xhost, const scoped_index& xindex);
-
-  ///
-  /// Creates a new handle attached to the binary_section_space_schema_poset with
-  /// name xname in namespace xhost.
-  ///
-  binary_section_space_schema_poset(const namespace_poset* xhost, const string& xname);
-
-  ///
-  /// Creates a new handle attached to the binary_section_space_schema_poset associated
-  /// with namespace member xmbr
-  ///
-  binary_section_space_schema_poset(const namespace_poset_member* xmbr);
-
-  ///
-  /// Initializes xarg to satisfy class invariants.
-  ///
-  virtual void initialize_arg_list(const namespace_poset& xns,
-				   const string& xname,
-				   arg_list& xargs,
-				   const poset_path& xschema_path,
-				   bool xauto_access);
-
-  ///
   /// Creates prototype for this class and enters in in factory.
   ///
   static bool make_prototype();
-
-
 
 private:
 
@@ -288,18 +210,6 @@ protected:
                  const poset_path& xbase_path,
                  const poset_path& xfiber_path,
                  bool xauto_access = true);
-
-  ///
-  /// Attaches this to a new poset state in namespace xhost,
-  /// schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  void new_state(namespace_poset& xhost,
-                 const string& xname,
-                 const arg_list& xargs,
-                 const poset_path& xschema_path,
-                 bool xauto_access);
-
 
   ///
   /// Creates a new poset state with path xpath, schema xschema and table dof map xdof_map,

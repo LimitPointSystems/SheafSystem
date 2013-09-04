@@ -9,6 +9,7 @@
 
 #include "primitives_poset_schema.h"
 
+#include "arg_list.h"
 #include "assert_contract.h"
 #include "array_index_space_state.h"
 #include "array_poset_dof_map.h"

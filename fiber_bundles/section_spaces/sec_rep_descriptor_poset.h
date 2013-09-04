@@ -61,11 +61,6 @@ public:
   typedef sec_rep_descriptor_table_dofs_type table_dofs_type;
 
   ///
-  /// Creates an arg list which conforms to the schema of this.
-  ///
-  static arg_list make_arg_list(const poset_path& xprototypes_path);
-
-  ///
   /// The path to the standard schema for this class.
   ///
   static const poset_path& standard_schema_path();
@@ -94,17 +89,6 @@ public:
 protected:
 
   ///
-  /// Creates a new handle attached to a new poset state in namespace xhost,
-  /// schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  sec_rep_descriptor_poset(namespace_poset& xhost,
-			   const string& xname,
-			   const arg_list& xargs,
-			   const poset_path& xschema_path,
-			   bool xauto_access);
-
-  ///
   /// Creates an unattached handle
   ///
   sec_rep_descriptor_poset();
@@ -123,15 +107,6 @@ protected:
   /// Base space members prototypes poset.
   ///
   base_space_poset* _prototypes;  
-
-  ///
-  /// Initializes xarg to satisfy class invariants.
-  ///
-  virtual void initialize_arg_list(const namespace_poset& xns,
-				   const string& xname,
-				   arg_list& xargs,
-				   const poset_path& xschema_path,
-				   bool xauto_access);
 
   ///
   /// Creates prototype for this class and enters in in factory.
@@ -196,17 +171,6 @@ public:
 protected:
 
   using poset::new_state;
-
-  ///
-  /// Attaches this to a new poset state in namespace xhost,
-  /// schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  void new_state(namespace_poset& xhost,
-                 const string& xname,
-                 const arg_list& xargs,
-                 const poset_path& xschema_path,
-                 bool xauto_access);
 
   ///
   /// Attaches this external poset to a new poset state with schema

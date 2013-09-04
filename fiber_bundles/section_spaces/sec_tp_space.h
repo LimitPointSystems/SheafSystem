@@ -25,7 +25,6 @@
 
 namespace sheaf
 {
-class arg_list;
 class namespace_poset;
 }
 
@@ -73,11 +72,6 @@ public:
   typedef tp_table_dofs_type table_dofs_type;
 
   ///
-  /// Creates an arg list which conforms to the schema of this.
-  ///
-  static arg_list make_arg_list(int xp, const poset_path& xvector_space_path);
-
-  ///
   /// True if and only if vector space of fiber space == fiber space of vector space. 
   /// More precisely, true if and only if the vector space of the fiber space of the 
   /// tensor section schema specified by  xschema_path is the same as the fiber space 
@@ -109,17 +103,6 @@ public:
   /// Dimension d() as a function of degree xp and domain dimension xdd.
   ///
   virtual int d(int xp, int xdd) const;
-  
-  ///
-  /// True if and only if the dimension d implied by the row dofs
-  /// specified in the schema with path xschema_path is equal to
-  /// the dimension implied by p and the underlying vector space 
-  /// specifed in xargs.
-  ///
-  bool d_is_valid(const namespace_poset& xns, 
-		  const poset_path& xschema_path, 
-		  const arg_list& xargs,
-		  bool xauto_access) const;
   
   ///
   /// The tensor degree of this space.
@@ -304,49 +287,6 @@ protected:
   ///
   sec_tp_space(sec_tp* xtop, sec_tp* xbottom);
 
-  //============================================================================
-  // NEW HANDLE, NEW STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new poset handle attached to a new state in namespace xhost,
-  /// with schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  sec_tp_space(namespace_poset& xhost,
-	       const string& xname,
-	       const arg_list& xargs,
-	       const poset_path& xschema_path,
-	       bool xauto_access);
-
-  //============================================================================
-  // NEW HANDLE, EXISTING STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new handle attached to the sec_tp_space with
-  /// index xindex in namespace xhost.
-  ///
-  sec_tp_space(const namespace_poset& xhost, pod_index_type xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the sec_tp_space with
-  /// index xindex in namespace xhost.
-  ///
-  sec_tp_space(const namespace_poset& xhost, const scoped_index& xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the sec_tp_space with
-  /// name xname in namespace xhost.
-  ///
-  sec_tp_space(const namespace_poset& xhost, const string& xname, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the sec_tp_space associated
-  /// with namespace member xmbr.
-  ///
-  sec_tp_space(const namespace_poset_member& xmbr, bool xauto_access);
-
 private:
 
   //@}
@@ -393,15 +333,6 @@ private:
 public:
 
 protected:
-
-  ///
-  /// Initializes xarg to satisfy class invariants.
-  ///
-  virtual void initialize_arg_list(const namespace_poset& xns, 
-				   const string& xname,
-				   arg_list& xargs,
-				   const poset_path& xschema_path,
-				   bool xauto_access);
 
 private:
 

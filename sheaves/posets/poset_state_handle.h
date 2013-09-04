@@ -18,10 +18,6 @@
 #include "abstract_poset_member.h"
 #endif
 
-#ifndef ARG_LIST_H
-#include "arg_list.h"
-#endif
-
 #ifndef POOL_H
 #include "pool.h"
 #endif
@@ -95,7 +91,6 @@
 namespace sheaf
 {
 
-class arg_list;
 template <typename T> class block;
 template <typename T> class depth_first_itr;
 class namespace_poset;
@@ -202,26 +197,6 @@ protected:
   /// Assignment operator; attaches this to the same state as xother
   ///
   poset_state_handle& operator=(const poset_state_handle& xother);
-
-private:
-
-  //@}
-
-
-  // ===========================================================
-  /// @name NEW CONSTRUCTOR FACET
-  // ===========================================================
-  //@{
-
-public:
-
-  ///
-  /// Makes a constructor arg_list for an instance with uninitialized 
-  /// table dofs. Intended for use with namespace_poset::new_poset.
-  ///
-  static arg_list make_args();
-
-protected:
 
 private:
 

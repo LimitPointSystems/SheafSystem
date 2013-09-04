@@ -25,7 +25,6 @@
 
 namespace sheaf
 {
-class arg_list;
 class namespace_poset;
 }
 
@@ -76,11 +75,6 @@ public:
   /// The table dofs type defined by the standard schema.
   ///
   typedef tuple_table_dofs_type table_dofs_type;
-
-  ///
-  /// Creates an arg list which conforms to the schema of this.
-  ///
-  static arg_list make_arg_list(int xfactor_ct);
 
   ///
   /// True if and only if the schema of the fiber space of the section schema
@@ -145,49 +139,6 @@ protected:
   ///
   sec_tuple_space(sec_tuple* xtop, sec_tuple* xbottom);
 
-  //============================================================================
-  // NEW HANDLE, NEW STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new poset handle attached to a new state in namespace xhost,
-  /// with schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  sec_tuple_space(namespace_poset& xhost,
-		  const string& xname,
-		  const arg_list& xargs,
-		  const poset_path& xschema_path,
-		  bool xauto_access);
-
-  //============================================================================
-  // NEW HANDLE, EXISTING STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new handle attached to the sec_tuple_space with
-  /// index xindex in namespace xhost.
-  ///
-  sec_tuple_space(const namespace_poset& xhost, pod_index_type xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the sec_tuple_space with
-  /// index xindex in namespace xhost.
-  ///
-  sec_tuple_space(const namespace_poset& xhost, const scoped_index& xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the sec_tuple_space with
-  /// name xname in namespace xhost.
-  ///
-  sec_tuple_space(const namespace_poset& xhost, const string& xname, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the sec_tuple_space associated
-  /// with namespace member xmbr.
-  ///
-  sec_tuple_space(const namespace_poset_member& xmbr, bool xauto_access);
-
 private:
 
   //@}
@@ -201,15 +152,6 @@ private:
 public:
 
 protected:
-
-  ///
-  /// Initializes xarg to satisfy class invariants.
-  ///
-  virtual void initialize_arg_list(const namespace_poset& xns, 
-				   const string& xname,
-				   arg_list& xargs,
-				   const poset_path& xschema_path,
-				   bool xauto_access);
 
 private:
 

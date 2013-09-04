@@ -532,62 +532,6 @@ public:
   template <typename P>
   bool path_is_auto_read_write_available(const poset_path& xpath, bool xauto_access) const;
 
-  ///
-  /// True if the argument with name xname in xargs exists, contains a non-empty
-  /// path and the state it refers to exists and is auto read accessible.
-  ///
-  bool arg_is_auto_read_accessible(const string& xname, const arg_list& xargs, bool xauto_access) const;
-
-  ///
-  /// True if the argument with name xname in xargs exists, contains a non-empty
-  /// path and the state it refers to exists, conforms to poset type P
-  /// and is auto read accessible.
-  ///
-  template <typename P>
-  bool arg_is_auto_read_accessible(const string& xname, const arg_list& xargs, bool xauto_access) const;
-
-  ///
-  /// True if the argument with name xname in xargs exists, contains a non-empty
-  /// path and the state it refers to exists and is auto read-write accessible.
-  ///
-  bool arg_is_auto_read_write_accessible(const string& xname, const arg_list& xargs, bool xauto_access) const;
-
-  ///
-  /// True if the argument with name xname in xargs exists, contains a non-empty
-  /// path and the state it refers to exists, conforms to poset type P
-  /// and is auto read-write accessible.
-  ///
-  template <typename P>
-  bool arg_is_auto_read_write_accessible(const string& xname, const arg_list& xargs, bool xauto_access) const;
-
-  ///
-  /// True if the argument with name xname in xargs exists, contains a non-empty
-  /// path and the state it refers to exists and is auto read available.
-  ///
-  bool arg_is_auto_read_available(const string& xname, const arg_list& xargs, bool xauto_access) const;
-
-  ///
-  /// True if the argument with name xname in xargs exists, contains a non-empty
-  /// path and the state it refers to exists, conforms to poset type P
-  /// and is auto read available.
-  ///
-  template <typename P>
-  bool arg_is_auto_read_available(const string& xname, const arg_list& xargs, bool xauto_access) const;
-
-  ///
-  /// True if the argument with name xname in xargs exists, contains a non-empty
-  /// path and the state it refers to exists and is auto read available.
-  ///
-  bool arg_is_auto_read_write_available(const string& xname, const arg_list& xargs, bool xauto_access) const;
-
-  ///
-  /// True if the argument with name xname in xargs exists, contains a non-empty
-  /// path and the state it refers to exists, conforms to poset type P
-  /// and is auto read available.
-  ///
-  template <typename P>
-  bool arg_is_auto_read_write_available(const string& xname, const arg_list& xargs, bool xauto_access) const;
-
 protected:
 
 private:

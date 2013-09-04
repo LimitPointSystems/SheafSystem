@@ -184,37 +184,6 @@ operator=(const poset_state_handle& xother)
 
 
 // ===========================================================
-// NEW CONSTRUCTOR FACET
-// ===========================================================
-
-// PUBLIC FUNCTIONS
-
-sheaf::arg_list
-sheaf::poset_state_handle::
-make_args()
-{
-  // Preconditions:
-
-
-  // Body:
-
-  arg_list result;
-
-  // Postconditions:
-
-  ensure(result.ct() == 0);
-
-  // Exit:
-
-  return result;
-}
-
-// PROTECTED FUNCTIONS
-
-// PRIVATE FUNCTIONS
-
-
-// ===========================================================
 // STATE FACET
 // ===========================================================
 

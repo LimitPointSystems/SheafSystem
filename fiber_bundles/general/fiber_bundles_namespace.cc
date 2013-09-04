@@ -7,6 +7,7 @@
 /// @file
 /// Implementation for class fiber_bundles_namespace
 
+#include "arg_list.h"
 #include "assert_contract.h"
 #include "at0.h"
 #include "at0_space.h"

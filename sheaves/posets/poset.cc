@@ -8,7 +8,6 @@
 /// Implementation for class poset.
 
 #include "abstract_poset_member.h"
-#include "arg_list.h"
 #include "array_poset_dof_map.h"
 class index_iterator;
 #include "namespace_poset.impl.h"
@@ -402,62 +401,6 @@ sheaf::poset::
 new_state(namespace_poset* xhost,
           const poset_path& xschema_path,
           const string& xname,
-          arg_list& xargs,
-          bool xauto_access)
-{
-
-  // Preconditions:
-
-  require(xhost != 0);
-  require(!xauto_access ? xhost->state_is_read_write_accessible() : true);
-  require(precondition_of(new_state(xhost, xschema, xname, xargs, xauto_access)));
-
-  // Get access if auto access is requested.  Need to do it here so the
-  // remaining preconditions can be executed.
-
-  if(xauto_access)
-    xhost->get_read_write_access(true);
-
-  require(xschema_path.full());
-  require(xhost->contains_poset_member(xschema_path));
-
-  // Body:
-
-  // Create a handle to the schema
-
-  schema_poset_member lschema(xhost, xschema_path);
-
-  lschema.get_read_access();
-
-  // Create the new state with the given schema
-
-  new_state(xhost, &lschema, xname, xargs, false);
-
-  // Clean up
-
-  lschema.release_access();
-  lschema.detach_from_state();
-
-  // Postconditions:
-
-  ensure(postcondition_of(new_state(xhost, xschema, xname, xargs, xauto_access)));
-  ensure(unexecutable("schema().path() == xschema_path"));
-
-  // Release access if auto access was requested.
-
-  if(xauto_access)
-    xhost->release_access();
-
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::poset::
-new_state(namespace_poset* xhost,
-          const poset_path& xschema_path,
-          const string& xname,
           array_poset_dof_map* xdof_tuple,
           bool xauto_access)
 {
@@ -637,84 +580,6 @@ new_state(namespace_poset* xhost,
 
   ensure(postcondition_of(new_state(xhost, xschema, xname, xdof_tuple, xauto_access)));
   ensure(unexecutable("table dofs initialized by xtable_dofs"));
-
-  // Release access if auto access was requested.
-
-  if(xauto_access)
-  {
-    xschema->release_access();
-
-    if(xhost != 0)
-      xhost->release_access();
-  }
-
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::poset::
-new_state(namespace_poset* xhost,
-          const abstract_poset_member* xschema,
-          const string& xname,
-          arg_list& xargs,
-          bool xauto_access)
-{
-  // Preconditions:
-
-  /// @issue why do we not require xhost != 0?
-
-  require(xhost != 0 && !xauto_access ? xhost->state_is_read_write_accessible() : true);
-  require(xschema != 0);
-  require(!xname.empty());
-
-  // Get access if auto access is requested.  Need to do it here so the
-  // remaining preconditions can be executed.
-
-  if(xauto_access)
-  {
-    xschema->get_read_access();
-
-    if(xhost != 0)
-      xhost->get_read_write_access(true);
-  }
-
-  require(xhost != 0 ? !xhost->contains_poset(xname) : true);
-
-  /// @hack the following is necessary because
-  /// the i/o subsystem can't handle poset with same name as namespace.
-  /// @todo fix the i/o subsystem and remove these preconditions.
-
-  require(xhost != 0 ? xname != xhost->name() : true);
-
-  /// @hack temporarily avoid changing signature of this routine
-
-  //require(xargs.conforms_to(xschema));
-
-
-  // Body:
-
-  // Create and initialize the table dofs.
-
-  /// @hack temporarily avoid changing signature of this routine
-
-  schema_poset_member lschema(xschema->host(), xschema->index());
-
-  array_poset_dof_map* lmap = new array_poset_dof_map(&lschema, true);
-
-  lschema.detach_from_state();
-
-  lmap->put_dof_tuple(xargs);
-
-  // Create the new state.
-
-  new_state(xhost, xschema, xname, lmap, false);
-
-  // Postconditions:
-
-  ensure(postcondition_of(new_state(xhost, xschema, xname, xdof_tuple, xauto_access)));
-  ensure(unexecutable("table dofs initialized by xargs"));
 
   // Release access if auto access was requested.
 

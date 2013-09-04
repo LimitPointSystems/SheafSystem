@@ -55,13 +55,6 @@ public:
   static const poset_path& standard_schema_path();
 
   ///
-  /// Makes a constructor arg_list for an instance
-  /// with maximum intrinsic dimension xmax_db.
-  /// Intended for use with fiber_bundles_namespace::new_base_space.
-  ///
-  static arg_list make_args(int xmax_db);
-
-  ///
   /// Creates a new base_space_poset in namespace xns with path xpath,
   /// schema specified by xschema_path, and table attribute max_db
   /// specified by xmax_db..
@@ -95,50 +88,6 @@ protected:
   /// Destructor
   ///
   virtual ~base_space_poset();
-
-  ///
-  /// Creates a new base_space_poset in namespace xhost with schema
-  /// specified by xschema_path, name xname, and maximum dimension xmax_db.
-  ///
-  base_space_poset(namespace_poset* xhost,
-                   const poset_path& xschema_path,
-                   const string& xname,
-                   int xmax_db,
-                   bool xauto_access = true);
-
-  ///
-  /// Creates a new base_space_poset with schema xschema,
-  /// name xname and maximum dimension xmax_db.
-  ///
-  base_space_poset(namespace_poset* xhost,
-                   schema_poset_member* xschema,
-                   const string& xname,
-                   int xmax_db,
-                   bool xauto_access = true);
-
-  ///
-  /// Creates a new handle attached to the base_space_poset with
-  /// index xindex in namespace xhost.
-  ///
-  base_space_poset(const namespace_poset* xhost, pod_index_type xindex);
-
-  ///
-  /// Creates a new handle attached to the base_space_poset with
-  /// index xindex in namespace xhost.
-  ///
-  base_space_poset(const namespace_poset* xhost, const scoped_index& xindex);
-
-  ///
-  /// Creates a new handle attached to the base_space_poset with
-  /// name xname in namespace xhost.
-  ///
-  base_space_poset(const namespace_poset* xhost, const string& xname);
-
-  ///
-  /// Creates a new handle attached to the base_space_poset associated
-  /// with namespace member xmbr
-  ///
-  base_space_poset(const abstract_poset_member* xmbr);
 
 private:
 

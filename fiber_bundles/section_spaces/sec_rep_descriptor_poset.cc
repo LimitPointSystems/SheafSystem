@@ -26,32 +26,6 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // PUBLIC MEMBER FUNCTIONS
 
-sheaf::arg_list
-fiber_bundle::sec_rep_descriptor_poset::
-make_arg_list(const poset_path& xprototypes_path)
-{
-  // Preconditions:
-
-  // Body:
-
-  sheaf::arg_list result;
-
-  result << "prototypes_path" << xprototypes_path.path();
-  
-#ifdef DIAGNOSTIC_OUTPUT
-  cout << "sec_rep_descriptor_poset::make_arg_list:result: " << result << endl;
-#endif
-
-  // Postconditions:
-
-  ensure(unexecutable("result.conforms_to(schema of this class)"));
-  ensure(result.value("prototypes_path") == xprototypes_path);
-  
-  // Exit:
-
-  return result;
-}
-
 const sheaf::poset_path&
 fiber_bundle::sec_rep_descriptor_poset::
 standard_schema_path()
@@ -143,30 +117,6 @@ new_table(namespace_type& xns,
 
   // cout << "Leaving sec_rep_descriptor_poset::new_table." << endl;
   return result;
-} 
-
-
-fiber_bundle::sec_rep_descriptor_poset::
-sec_rep_descriptor_poset(namespace_poset& xns,
-			 const string& xname,
-			 const arg_list& xargs,
-			 const poset_path& xschema_path,
-			 bool xauto_access)
-{
-
-  // Preconditions:
-
-  require(precondition_of(new_state(same args)));
-
-  // Body:
-
-  // Make the new state.
-
-  new_state(xns, xname, xargs, xschema_path, xauto_access);
-
-  // Postconditions:
-
-  ensure(postcondition_of(new_state(same args)));
 }
 
 const fiber_bundle::base_space_poset&
@@ -259,40 +209,6 @@ operator=(const poset_state_handle& xother)
   return *this;
 }
 
-void
-fiber_bundle::sec_rep_descriptor_poset::
-initialize_arg_list(const namespace_poset& xns, 
-		    const string& xname,
-		    arg_list& xargs, 
-		    const poset_path& xschema_path,
-		    bool xauto_access)
-{
-  // Preconditions:
-
-  require(xns.state_is_auto_read_accessible(xauto_access));
-
-  require(!xschema_path.empty());
-  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
-  require(xschema_path.conforms_to(xns, standard_schema_path(), xauto_access));
-
-  require(xns.arg_is_auto_read_accessible("prototypes_path", xargs, xauto_access));
-
-  // Body:
-
-  // Nothing to do.
-
-#ifdef DIAGNOSTIC_OUTPUT
-  cout << "sec_rep_descriptor_poset::initialize_arg_list:xargs: " << endl 
-       << xargs << endl;
-#endif
-
-  // Postconditions:
-  
-  // Exit:
-
-  return;
-}
-
 bool
 fiber_bundle::sec_rep_descriptor_poset::
 make_prototype()
@@ -326,146 +242,6 @@ make_prototype()
 // PUBLIC MEMBER FUNCTIONS
 
 // PROTECTED MEMBER FUNCTIONS
-
-void
-fiber_bundle::sec_rep_descriptor_poset::
-new_state(namespace_poset& xns,
-          const string& xname,
-	  const arg_list& xargs,
-	  const poset_path& xschema_path,
-          bool xauto_access)
-{
-
-  // Preconditions:
-
-  require(xauto_access || xns.in_jim_edit_mode());
-
-  require(poset_path::is_valid_name(xname));
-  require(!xns.contains_poset(xname, xauto_access));
-
-  /// @hack the following is necessary because
-  /// the i/o subsystem can't handle poset with same name as namespace.
-  /// @todo fix the i/o subsystem and remove these preconditions.
-  /// @hack unexecutable because may not have access.
-
-  require(unexecutable(xname != xns.name()));
-
-  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
-  require(xschema_path.conforms_to(xns, standard_schema_path(), xauto_access));
-
-  require(xargs.conforms_to(xns, xschema_path, true, xauto_access));
-  
-  require(xns.arg_is_auto_read_accessible("prototypes_path", xargs, xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    xns.get_read_write_access();
-  }
-
-  // Set any class specific args in arg list.
-
-  arg_list largs(xargs);
-  initialize_arg_list(xns, xname, largs, xschema_path, xauto_access);
-
-  // Disable invariant checking in
-  // member functions until construction finished.
-
-  disable_invariant_check();
-
-  // Get a temporary handle to the schema.
-
-  schema_poset_member lschema(&xns, xschema_path, xauto_access);
-  if(xauto_access)
-  {
-    lschema.get_read_access();
-  }
-
-  // Create the poset state object;
-  // allocates the data structures but does not (fully) initialize them.
-
-  _state = new poset_state(&lschema, type_id(), xname);
-
-  // Get write access;
-  // handle data members aren't attached yet, 
-  // so use psh version.
-
-  poset_state_handle::get_read_write_access();
-
-  // Initialize the table dofs ("class variables").
-  // Do this before initializing the row structure so the subposet
-  // and member initialization routines can use the table dofs if needed.
-
-  array_poset_dof_map* lmap = new array_poset_dof_map(&lschema, true);
-  lmap->put_dof_tuple(xargs);
-  initialize_table_dof_tuple(lmap);
-
-  // Initialize any additional handle data members
-  // that may depend on table dofs.
-
-  initialize_handle_data_members(xns);
-
-  // Release and regain access;
-  // will get access to handle data members.
-
-  poset_state_handle::release_access();
-  get_read_write_access();
-
-  // Initialize the row structure.
-
-  initialize_standard_subposets(xname);
-  initialize_standard_members();
-
-  // Initialize the namespace features.
-
-  initialize_namespace(xns, xname);
-
-  // Set the standard id spaces.
-
-  update_standard_member_id_spaces();
-
-  // Cleanup temporary schema handle.
-
-  if(xauto_access)
-  {
-    lschema.release_access();
-  }
-  lschema.detach_from_state();
-
-  // Now invariant should be satisfied
-
-  enable_invariant_check();
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(is_attached());
-  ensure(schema().path() == xschema_path);
-  ensure(name() == xname);
-  ensure(!in_jim_edit_mode());
-  ensure(has_standard_row_dof_tuple_ct());
-  ensure(has_standard_subposet_ct());
-  ensure(member_id_spaces(false).has_only_standard_id_spaces());
-  ensure(prototypes().is_attached());
-
-  // Now we're finished, release all access
-
-  release_access();
-
-  // One final postcondition
-
-  ensure(state_is_not_read_accessible());
-
-  if(xauto_access)
-  {
-    xns.release_access();
-  }
-
-  // Exit:
-
-  return;
-}
 
 void
 fiber_bundle::sec_rep_descriptor_poset::

@@ -21,7 +21,6 @@
 namespace sheaf
 {
 
-class arg_list;
 class namespace_poset; 
 
 ///
@@ -137,17 +136,6 @@ protected:
                  bool xauto_access = true);
 
   ///
-  /// Attaches this to a new poset state in namespace xhost,
-  /// schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  void new_state(namespace_poset* xhost,
-                 const poset_path& xschema_path,
-                 const string& xname,
-                 arg_list& xargs,
-                 bool xauto_access = true);
-
-  ///
   /// Attaches this to a new poset state with schema given by
   /// the member specified by path xschema_path in namespace xhost,
   /// and with name xname, and table dofs xdof_tuple.
@@ -177,16 +165,6 @@ protected:
                  const string& xname,
                  void* xtable_dofs,
                  size_t xtable_dofs_ub,
-                 bool xauto_access = true);
-
-  ///
-  /// Attaches this to a new poset state in namespace xhost,
-  /// schema xschema,  name xname, and table dofs initialized by xargs.
-  ///
-  void new_state(namespace_poset* xhost,
-                 const abstract_poset_member* xschema,
-                 const string& xname,
-                 arg_list& xargs,
                  bool xauto_access = true);
 
   ///

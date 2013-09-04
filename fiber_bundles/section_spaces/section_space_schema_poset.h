@@ -133,14 +133,6 @@ public:
   static bool rep_is_valid(const sec_rep_descriptor& xrep, const poset_state_handle& xbase_space);
 
   ///
-  /// True if and only if the section representation specified in xargs 
-  /// is valid in the base space specified in xargs; that is, if the 
-  /// discretization and evaluation subposets named in xrep are included
-  ///  in xbase_space and the discretization subposet has a non-empty id space.
-  ///
-  bool rep_is_valid(const namespace_poset& xns, const arg_list& xaregs, bool xauto_access) const;
-
-  ///
   /// The upper bound of the member id of the base space
   /// for section spaces on this schema.
   ///
