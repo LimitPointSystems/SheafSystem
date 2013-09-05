@@ -355,14 +355,6 @@ protected:
   virtual void new_state(const poset_path& xpath, const schema_poset_member& xschema, array_poset_dof_map& xdof_map);
 
   ///
-  /// @deprecated Use new_state(const poset_path& xpath, const schema_poset_member& xschema, array_poset_dof_map& xdof_map).
-  /// Attaches this external poset to a new poset state with schema
-  /// given by xschema and table dofs xdof_map.
-  /// Intended for use by i/o subsystem.
-  ///
-  virtual void new_state(const schema_poset_member& xschema, array_poset_dof_map& xdof_map);
-
-  ///
   /// Initializes the handle data members that depend on the
   /// table dofs and are required to get access when this handle
   /// is used to create a new state. Intended to be called only

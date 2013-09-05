@@ -160,70 +160,10 @@ protected:
   using section_space_schema_poset::new_state;
 
   ///
-  /// Attaches this to a new binary_section_space_schema_poset state
-  /// in namespace xns with name xname, representation xrep, base xbase,
-  /// and fiber space xfiber_space.
-  ///
-  void new_state(namespace_poset* xns,
-                 const string& xname,
-                 const sec_rep_descriptor& xrep,
-                 poset_state_handle& xbase_space,
-                 const poset_state_handle& xfiber_space,
-                 bool xauto_access = true);
-
-  ///
-  /// Attaches this to a new binary_section_space_schema_poset state in namespace xns with name xname,
-  /// representation the member with index xrep_member_id in the poset with index xrep_poset_id,
-  /// base the poset with index xbase_space_poset_id, and
-  /// fiber space the poset with index xfiber_space_poset_id.
-  ///
-  virtual void new_state(namespace_poset* xns,
-                         const string& xname,
-                         pod_index_type xrep_poset_id,
-                         pod_index_type xrep_member_id,
-                         pod_index_type xbase_space_poset_id,
-                         pod_index_type xfiber_space_poset_id,
-                         bool xauto_access = true);
-
-  ///
-  /// Attaches this to a new binary_section_space_schema_poset state in namespace xns with name xname,
-  /// representation the member with index xrep_member_id in the poset with index xrep_poset_id,
-  /// base the poset with index xbase_space_poset_id, and
-  /// fiber space the poset with index xfiber_space_poset_id.
-  ///
-  void new_state(namespace_poset* xns,
-		 const string& xname,
-		 const scoped_index& xrep_poset_id,
-		 const scoped_index& xrep_member_id,
-		 const scoped_index& xbase_space_poset_id,
-		 const scoped_index& xfiber_space_poset_id,
-		 bool xauto_access = true);
-
-  ///
-  /// Attaches this to a new state in namespace xns, with name xname,
-  /// representation specified by xrep_path, base specified by xbase_path,
-  /// and fiber space specified by xfiber_path.
-  ///
-  void new_state(namespace_poset& xns,
-                 const string& xname,
-                 const poset_path& xrep_path,
-                 const poset_path& xbase_path,
-                 const poset_path& xfiber_path,
-                 bool xauto_access = true);
-
-  ///
   /// Creates a new poset state with path xpath, schema xschema and table dof map xdof_map,
   /// attaches this to the state.
   ///
   virtual void new_state(const poset_path& xpath, const schema_poset_member& xschema, array_poset_dof_map& xdof_map);
-
-  ///
-  /// @deprecated Attaches this external poset to a new poset state with schema
-  /// given by xschema and table dofs by xdof_map.
-  /// Intended for use by i/o subsystem.
-  ///
-  virtual void new_state(const schema_poset_member& xschema, array_poset_dof_map& xdof_map);
-
 
 private:
 

@@ -103,31 +103,6 @@ public:
 
 protected:
 
-  using refinable_poset::new_state;
-
-  // Following definitions hide the inherited new_state routines.
-
-  ///
-  /// Attaches this to a new poset state in namespace xhost,
-  /// schema specified by xschema_path,  name xname, and
-  /// maximum dimension xmax_db.
-  ///
-  void new_state(namespace_poset* xhost,
-                 const poset_path& xschema_path,
-                 const string& xname,
-                 int xmax_db,
-                 bool xauto_access = true);
-
-  ///
-  /// Attaches this to a new poset state in namespace xhost,
-  /// schema xschema,  name xname, and maximum dimension xmax_db.
-  ///
-  void new_state(namespace_poset* xname_space,
-                 schema_poset_member* xschema,
-                 const string& xname,
-                 int xmax_db,
-                 bool xauto_access = true);
-
 private:
 
   //@}

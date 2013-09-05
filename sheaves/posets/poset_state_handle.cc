@@ -917,52 +917,6 @@ new_state(const poset_path& xpath, const schema_poset_member& xschema, array_pos
 
 void
 sheaf::poset_state_handle::
-new_state(const schema_poset_member& xschema, array_poset_dof_map& xdof_map)
-{
-  // Preconditions:
-
-  require(is_external());
-  require(schema_is_ancestor_of(&xschema));
-  require(xschema.state_is_read_accessible());
-  require(xschema.host()->name_space()->is_same_state(name_space()));
-  require(name_space()->member_poset_schema_id(index(), true) == xschema.host()->index().pod());
-
-  // Body:
-
-  // Intended for use only in table_dof_tuple_record:internalize.
-  // Version defined in this class should never be called.
-  // All poset classes instantiated by the i/o subsystem should
-  // redefine this routine.
-
-  is_abstract();
-
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(is_attached());
-  ensure(!in_jim_edit_mode());
-  ensure(has_standard_member_ct());
-  ensure(has_standard_row_dof_tuple_ct());
-  ensure(has_standard_subposet_ct());
-
-  // The file always contains the coarsest common refinement,
-  // so thats the version we have to operate on when we're reading the file.
-  // Make sure that's the current version.
-
-  ensure(version() == COARSEST_COMMON_REFINEMENT_VERSION);
-
-  // Now we're finished, release all access
-
-  release_access();
-
-  // One final postcondition
-
-  ensure(state_is_not_read_accessible());
-}
-
-void
-sheaf::poset_state_handle::
 initialize_handle_data_members(const namespace_poset& xns)
 {
   // Preconditions:
