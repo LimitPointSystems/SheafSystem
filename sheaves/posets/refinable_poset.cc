@@ -29,6 +29,69 @@ class index_iterator;
 
 // PUBLIC FUNCTIONS
 
+sheaf::refinable_poset&
+sheaf::refinable_poset::
+new_table(namespace_type& xns, const poset_path& xpath, const poset_path& xschema_path, bool xauto_access)
+{
+  // cout << endl << "Entering refinable_poset::new_table." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xpath.empty());
+  require(!xns.contains_path(xpath, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+
+  // Body:
+
+  // Create the table; have to new it because namespace keeps a pointer.
+
+  typedef refinable_poset table_type;
+
+  table_type* ltable = new table_type();
+
+  // Create a handle of the right type for the schema member.
+
+  schema_poset_member lschema(&xns, xschema_path, xauto_access);
+
+  if(xauto_access)
+  {
+    lschema.get_read_access();
+  }
+
+  // Create the table dof map; must be newed 
+  // because poset_state::_table keeps a pointer to it.
+  // No table dofs to set.
+
+  array_poset_dof_map* lmap = new array_poset_dof_map(&lschema, true);  
+
+  // Create the state.
+
+  ltable->new_state(xns, xpath, lschema, *lmap);
+
+  if(xauto_access)
+  {
+    lschema.release_access();
+  }
+
+  refinable_poset& result = *ltable;
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xpath);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  // Exit:
+
+  // cout << "Leaving refinable_poset::new_table." << endl;
+  return result;
+}
+
 void
 sheaf::refinable_poset::
 put_version(int xversion)
@@ -248,219 +311,6 @@ sheaf::refinable_poset::
   // Exit
 
   return;
-}
-
-sheaf::refinable_poset::
-refinable_poset(namespace_poset* xhost,
-                const poset_path& xschema_path,
-                const string& xname,
-                bool xauto_access)
-{
-
-  // Preconditions:
-
-  require(precondition_of(refinable_poset::new_state(same args)));
-
-  // Body:
-
-  // make the new state
-
-  new_state(xhost, xschema_path, xname, xauto_access);
-
-  // Postconditions:
-
-  ensure(postcondition_of(refinable_poset::new_state(same args)));
-}
-
-sheaf::refinable_poset::
-refinable_poset(namespace_poset* xhost,
-                const poset_path& xschema_path,
-                const string& xname,
-                void* xtable_dofs,
-                size_t xtable_dofs_ub,
-                bool xauto_access)
-{
-
-  // Preconditions:
-
-  require(precondition_of(refinable_poset::new_state(same args)));
-
-  // Body:
-
-  // make the new state
-
-  new_state(xhost, xschema_path, xname, xtable_dofs, xtable_dofs_ub, xauto_access);
-
-  // Postconditions:
-
-  ensure(postcondition_of(refinable_poset::new_state(same args)));
-}
-
-sheaf::refinable_poset::
-refinable_poset(namespace_poset* xhost,
-                const poset_path& xschema_path,
-                const string& xname,
-                array_poset_dof_map* xdof_map,
-                bool xauto_access)
-{
-
-  // Preconditions:
-
-  require(precondition_of(refinable_poset::new_state(same args)));
-
-  // Body:
-
-  // make the new state
-
-  new_state(xhost, xschema_path, xname, xdof_map, xauto_access);
-
-  // Postconditions:
-
-  ensure(postcondition_of(refinable_poset::new_state(same args)));
-}
-
-
-sheaf::refinable_poset::
-refinable_poset(namespace_poset* xhost,
-                abstract_poset_member* xschema,
-                const string& xname,
-                bool xauto_access)
-{
-
-  // Preconditions:
-
-  require(precondition_of(refinable_poset::new_state(same args)));
-
-  // Body:
-
-  // make the new state
-
-  new_state(xhost, xschema, xname, xauto_access);
-
-  // Postconditions:
-
-  ensure(postcondition_of(refinable_poset::new_state(same args)));
-}
-
-sheaf::refinable_poset::
-refinable_poset(namespace_poset* xhost,
-                abstract_poset_member* xschema,
-                const string& xname,
-                void* xtable_dofs,
-                size_t xtable_dofs_ub,
-                bool xauto_access)
-{
-
-  // Preconditions:
-
-  require(precondition_of(refinable_poset::new_state(same args)));
-
-  // Body:
-
-  // make the new state
-
-  new_state(xhost, xschema, xname, xtable_dofs, xtable_dofs_ub, xauto_access);
-
-  // Postconditions:
-
-  ensure(postcondition_of(refinable_poset::new_state(same args)));
-}
-
-sheaf::refinable_poset::
-refinable_poset(namespace_poset* xhost,
-                abstract_poset_member* xschema,
-                const string& xname,
-                array_poset_dof_map* xdof_map,
-                bool xauto_access)
-{
-
-  // Preconditions:
-
-  require(precondition_of(refinable_poset::new_state(same args)));
-
-  // Body:
-
-  // make the new state
-
-  new_state(xhost, xschema, xname, xdof_map, xauto_access);
-
-  // Postconditions:
-
-  ensure(postcondition_of(refinable_poset::new_state(same args)));
-}
-
-sheaf::refinable_poset::
-refinable_poset(const namespace_poset* xhost, pod_index_type xindex)
-{
-  // Preconditions:
-
-  require(xhost != 0);
-  require(xhost->state_is_read_accessible());
-  require(xhost->contains_member(xindex));
-  require(xhost->is_jim(xindex));
-
-  // Body:
-
-  attach_to_state(xhost, xindex);
-
-  // Postconditions:
-
-  ensure(postcondition_of(poset_state_handle::attach_to_state()));
-}
-
-sheaf::refinable_poset::
-refinable_poset(const namespace_poset* xhost, const scoped_index& xindex)
-{
-  // Preconditions:
-
-  require(xhost != 0);
-  require(xhost->state_is_read_accessible());
-  require(xhost->contains_member(xindex));
-  require(xhost->is_jim(xindex));
-
-  // Body:
-
-  attach_to_state(xhost, xindex.hub_pod());
-
-  // Postconditions:
-
-  ensure(postcondition_of(poset_state_handle::attach_to_state()));
-}
-
-sheaf::refinable_poset::
-refinable_poset(const namespace_poset* xhost, const string& xname)
-{
-  // Preconditions:
-
-  require(xhost != 0);
-  require(xhost->state_is_read_accessible());
-  require(xhost->contains_member(xname));
-
-  // Body:
-
-  attach_to_state(xhost, xname);
-
-  // Postconditions:
-
-  ensure(postcondition_of(poset_state_handle::attach_to_state()));
-}
-
-sheaf::refinable_poset::
-refinable_poset(const abstract_poset_member* xmbr)
-{
-  // Preconditions:
-
-  require(xmbr != 0);
-  require(dynamic_cast<namespace_poset*>(xmbr->host()) != 0);
-  require(xmbr->state_is_read_accessible());
-
-  // Body:
-
-  attach_to_state(xmbr);
-
-  // Postconditions:
-
-  ensure(postcondition_of(state_handle::attach_to_state(abstract_poset_member*)));
 }
 
 sheaf::refinable_poset::

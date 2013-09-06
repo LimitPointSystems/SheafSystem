@@ -9,6 +9,7 @@
 
 #include "section_space_schema_member.h"
 
+#include "arg_list.h"
 #include "assert_contract.h"
 #include "array_index_space_state.h"
 #include "binary_section_space_schema_member.h"
@@ -150,6 +151,31 @@ static_class_name()
   // Postconditions:
 
   ensure(!result.empty());
+
+  // Exit:
+
+  return result;
+}
+
+string
+fiber_bundle::section_space_schema_member::
+standard_member_name(const string& xfiber_schema_member_name,
+		     const string& xbase_member_name)
+{
+  // Preconditions:
+
+  require(poset_path::is_valid_name(xfiber_schema_member_name));
+  require(poset_path::is_valid_name(xbase_member_name));
+
+  // Body:
+
+  string result(xfiber_schema_member_name);
+  result += "_on_";
+  result += xbase_member_name;
+
+  // Postconditions:
+
+  ensure(poset_path::is_valid_name(result));
 
   // Exit:
 
@@ -2618,6 +2644,44 @@ put_version(int xversion, bool xunalias)
 }
 
 // PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// ===========================================================
+// COMPONENT NAME FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+// PROTECTED MEMBER FUNCTIONS
+
+void
+fiber_bundle::section_space_schema_member::
+put_standard_name(bool xunique, bool xauto_access)
+{
+  // Preconditions:
+
+  require(is_attached());
+  require(state_is_auto_read_write_accessible(xauto_access));
+
+  // Body:
+
+  string lname = standard_member_name(fiber_schema().name(true),
+				      base_space().name(true));
+
+  put_name(lname, xunique, xauto_access);
+				      
+  // Postconditions:
+
+  ensure(xunique ?
+	 name(xauto_access) == standard_member_name(fiber_schema().name(true), base_space().name(true)) :
+	 has_name(standard_member_name(fiber_schema().name(true), base_space().name(true)), xauto_access));
+
+  // Exit:
+
+  return;
+}
 
 // PRIVATE MEMBER FUNCTIONS
 

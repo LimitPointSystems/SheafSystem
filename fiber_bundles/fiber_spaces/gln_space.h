@@ -24,7 +24,6 @@
 
 namespace sheaf
 {
-  class arg_list;
   class namespace_poset;
 }
 
@@ -77,13 +76,6 @@ public:
   ///
   typedef gln_table_dofs_type table_dofs_type;
 
-  ///
-  /// Creates an arg list which conforms to the schema of this.
-  ///
-  static arg_list make_arg_list(int xn,
-				const poset_path& xscalar_space_path,
-				const poset_path& xvector_space_path);
-  
   ///
   /// The dimension of the representation space; n in GL(n, R) implied by the
   /// vector space specified by xvector_space_path.
@@ -175,49 +167,6 @@ protected:
   ///
   gln_space(gln* xtop, gln* xbottom);
 
-  //============================================================================
-  // NEW HANDLE, NEW STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new poset handle attached to a new state in namespace xhost,
-  /// with schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  gln_space(namespace_poset& xhost,
-	      const string& xname,
-	      const arg_list& xargs,
-	      const poset_path& xschema_path,
-	      bool xauto_access);
-
-  //============================================================================
-  // NEW HANDLE, EXISTING STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new handle attached to the gln_space with
-  /// index xindex in namespace xhost.
-  ///
-  gln_space(const namespace_poset& xhost, pod_index_type xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the gln_space with
-  /// index xindex in namespace xhost.
-  ///
-  gln_space(const namespace_poset& xhost, const scoped_index& xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the gln_space with
-  /// name xname in namespace xhost.
-  ///
-  gln_space(const namespace_poset& xhost, const string& xname, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the gln_space associated
-  /// with namespace member xmbr.
-  ///
-  gln_space(const namespace_poset_member& xmbr, bool xauto_access);
-
 private:
 
   //@}
@@ -230,27 +179,6 @@ private:
 public:
 
 protected:
-
-  using poset::new_state;
- 
-  ///
-  /// Attaches this to a new poset state in namespace xhost,
-  /// schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  void new_state(namespace_poset& xhost,
-                 const string& xname,
-                 const arg_list& xargs,
-                 const poset_path& xschema_path,
-                 bool xauto_access);
-
-  ///
-  /// Initializes xarg to satisfy class invariants.
-  ///
-  virtual void initialize_arg_list(const namespace_poset& xns, 
-				   const string& xname,
-				   arg_list& xargs,
-				   bool xauto_access);
 
 private:
 

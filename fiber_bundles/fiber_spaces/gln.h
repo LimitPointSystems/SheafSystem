@@ -14,10 +14,6 @@
 #include "sheaf_dll_spec.h"
 #endif
 
-#ifndef ARG_LIST_H
-#include "arg_list.h"
-#endif
-
 #ifndef GROUP_H
 #include "group.h"
 #endif

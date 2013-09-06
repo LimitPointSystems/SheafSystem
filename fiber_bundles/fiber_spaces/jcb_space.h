@@ -75,11 +75,6 @@ public:
   ///
   typedef jcb_table_dofs_type table_dofs_type;
 
-  ///
-  /// Creates an arg list which conforms to the schema of this.
-  ///
-  static arg_list make_arg_list(const poset_path& xdomain_path, const poset_path& xrange_path);
-  
   using vd_space::d;
   
   ///
@@ -178,49 +173,6 @@ protected:
   ///
   jcb_space(jcb* xtop, jcb* xbottom);
 
-  //============================================================================
-  // NEW HANDLE, NEW STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new poset handle attached to a new state in namespace xhost,
-  /// with schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  jcb_space(namespace_poset& xhost,
-	    const string& xname,
-	    const arg_list& xargs,
-	    const poset_path& xschema_path,
-	    bool xauto_access);
-
-  //============================================================================
-  // NEW HANDLE, EXISTING STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new handle attached to the jcb_space with
-  /// index xindex in namespace xhost.
-  ///
-  jcb_space(const namespace_poset& xhost, pod_index_type xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the jcb_space with
-  /// index xindex in namespace xhost.
-  ///
-  jcb_space(const namespace_poset& xhost, const scoped_index& xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the jcb_space with
-  /// name xname in namespace xhost.
-  ///
-  jcb_space(const namespace_poset& xhost, const string& xname, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the jcb_space associated
-  /// with namespace member xmbr.
-  ///
-  jcb_space(const namespace_poset_member& xmbr, bool xauto_access);
-
 private:
 
   //@}
@@ -231,16 +183,8 @@ private:
   //@{
 
 public:
-protected:
 
-  ///
-  /// Initializes xarg to satisfy class invariants.
-  ///
-  virtual void initialize_arg_list(const namespace_poset& xns, 
-				   const string& xname,
-				   arg_list& xargs,
-				   const poset_path& xschema_path,
-				   bool xauto_access);
+protected:
 
 private:
 

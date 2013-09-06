@@ -13,10 +13,6 @@
 #include "sheaf_dll_spec.h"
 #endif
 
-#ifndef ARG_LIST_H
-#include "arg_list.h"
-#endif
-
 #ifndef POSET_PATH_H
 #include "poset_path.h"
 #endif

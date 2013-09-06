@@ -11,7 +11,6 @@
 #include "section_space_schema_poset.h"
 
 #include "abstract_poset_member.impl.h"
-#include "arg_list.h"
 #include "array_poset_dof_map.h"
 #include "ij_product_structure.h"
 #include "index_iterator.h"
@@ -188,50 +187,6 @@ rep_is_valid(const sec_rep_descriptor& xrep, const poset_state_handle& xbase_spa
   /// @todo check for compatibility between base space and evaluator family.
   /// Just instantiate the evaluator family and see if it contains an entry
   /// for each dof tuple of the base space.
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-bool
-fiber_bundle::section_space_schema_poset::
-rep_is_valid(const namespace_poset& xns, const arg_list& xargs, bool xauto_access) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(xargs.conforms_to(xns, standard_schema_path(), true, xauto_access));
-  
-  require(xns.contains_poset_member(poset_path(xargs.value("rep_path")), xauto_access));
-  require(xns.member_poset(poset_path(xargs.value("rep_path")), xauto_access).state_is_auto_read_accessible(xauto_access));
-
-  require(xns.contains_poset(poset_path(xargs.value("base_space_path")), xauto_access));
-  require(xns.member_poset(poset_path(xargs.value("base_space_path")), xauto_access).state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  poset_state_handle& lbase_space = xns.member_poset(poset_path(xargs.value("base_space_path")), xauto_access);
-  sec_rep_descriptor lrep(&xns, xargs.value("rep_path"), xauto_access);
-
-  if(xauto_access)
-  {
-    lbase_space.get_read_access();
-    lrep.get_read_access();
-  }
-
-  result = rep_is_valid(lrep, lbase_space);
-
-  if(xauto_access)
-  {
-    lrep.release_access();
-    lbase_space.release_access();
-  }
-
-  lrep.detach_from_state();
 
   // Postconditions:
 

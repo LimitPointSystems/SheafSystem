@@ -287,23 +287,6 @@ private:
 public:
 
   ///
-  /// Creates a new poset with name xname, schema specified by xschema_path,  
-  /// and table dofs initialzied by xargs.
-  ///
-  template <typename T>
-  SHEAF_DLL_SPEC
-  T& new_member_poset(const string& xname,
-		      const poset_path& xschema_path,
-		      const arg_list& xargs,
-		      bool xauto_access);
-
-  ///
-  /// Creates a new schema poset with name xname.
-  ///
-  
-  poset& new_schema_poset(const string& xname, bool xauto_access);
-
-  ///
   /// Delete the poset with hub id xhub_id.
   ///
   void delete_poset(pod_index_type xhub_id, bool xauto_access);
@@ -548,62 +531,6 @@ public:
   ///
   template <typename P>
   bool path_is_auto_read_write_available(const poset_path& xpath, bool xauto_access) const;
-
-  ///
-  /// True if the argument with name xname in xargs exists, contains a non-empty
-  /// path and the state it refers to exists and is auto read accessible.
-  ///
-  bool arg_is_auto_read_accessible(const string& xname, const arg_list& xargs, bool xauto_access) const;
-
-  ///
-  /// True if the argument with name xname in xargs exists, contains a non-empty
-  /// path and the state it refers to exists, conforms to poset type P
-  /// and is auto read accessible.
-  ///
-  template <typename P>
-  bool arg_is_auto_read_accessible(const string& xname, const arg_list& xargs, bool xauto_access) const;
-
-  ///
-  /// True if the argument with name xname in xargs exists, contains a non-empty
-  /// path and the state it refers to exists and is auto read-write accessible.
-  ///
-  bool arg_is_auto_read_write_accessible(const string& xname, const arg_list& xargs, bool xauto_access) const;
-
-  ///
-  /// True if the argument with name xname in xargs exists, contains a non-empty
-  /// path and the state it refers to exists, conforms to poset type P
-  /// and is auto read-write accessible.
-  ///
-  template <typename P>
-  bool arg_is_auto_read_write_accessible(const string& xname, const arg_list& xargs, bool xauto_access) const;
-
-  ///
-  /// True if the argument with name xname in xargs exists, contains a non-empty
-  /// path and the state it refers to exists and is auto read available.
-  ///
-  bool arg_is_auto_read_available(const string& xname, const arg_list& xargs, bool xauto_access) const;
-
-  ///
-  /// True if the argument with name xname in xargs exists, contains a non-empty
-  /// path and the state it refers to exists, conforms to poset type P
-  /// and is auto read available.
-  ///
-  template <typename P>
-  bool arg_is_auto_read_available(const string& xname, const arg_list& xargs, bool xauto_access) const;
-
-  ///
-  /// True if the argument with name xname in xargs exists, contains a non-empty
-  /// path and the state it refers to exists and is auto read available.
-  ///
-  bool arg_is_auto_read_write_available(const string& xname, const arg_list& xargs, bool xauto_access) const;
-
-  ///
-  /// True if the argument with name xname in xargs exists, contains a non-empty
-  /// path and the state it refers to exists, conforms to poset type P
-  /// and is auto read available.
-  ///
-  template <typename P>
-  bool arg_is_auto_read_write_available(const string& xname, const arg_list& xargs, bool xauto_access) const;
 
 protected:
 

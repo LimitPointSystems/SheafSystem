@@ -9,6 +9,7 @@
 
 #include "base_space_poset.h"
 
+#include "arg_list.h"
 #include "array_index_space_state.h"
 #include "array_poset_dof_map.h"
 #include "base_space_member.h"
@@ -47,27 +48,6 @@ standard_schema_path()
 
   ensure(result.full());
 
-  // Exit:
-
-  return result;
-}
-
-sheaf::arg_list
-fiber_bundle::base_space_poset::
-make_args(int xmax_db)
-{
-  // Preconditions:
-
-  // Body:
-
-  arg_list result;
-  result << "max_db" << xmax_db;
-
-  // Postconditions:
-
-  ensure(result.ct() == 1);
-  ensure(result.contains_arg("max_db"));
-  
   // Exit:
 
   return result;
@@ -204,126 +184,6 @@ fiber_bundle::base_space_poset::
   return;
 }
 
-fiber_bundle::base_space_poset::
-base_space_poset(namespace_poset* xhost,
-                 const poset_path& xschema_path,
-                 const string& xname,
-                 int xmax_db,
-                 bool xauto_access)
-{
-
-  // Preconditions:
-
-  require(precondition_of(new_state(same args)));
-
-  // Body:
-
-  // make the new state
-
-  new_state(xhost, xschema_path, xname, xmax_db, xauto_access);
-
-  // Postconditions:
-
-  ensure(postcondition_of(new_state(same args)));
-}
-
-fiber_bundle::base_space_poset::
-base_space_poset(namespace_poset* xhost,
-                 schema_poset_member* xschema,
-                 const string& xname,
-                 int xmax_db,
-                 bool xauto_access)
-{
-
-  // Preconditions:
-
-  require(precondition_of(new_state(same args)));
-
-  // Body:
-
-  // make the new state
-
-  new_state(xhost, xschema, xname, xmax_db, xauto_access);
-
-  // Postconditions:
-
-  ensure(postcondition_of(new_state(same args)));
-}
-
-fiber_bundle::base_space_poset::
-base_space_poset(const namespace_poset* xhost, pod_index_type xindex)
-{
-  // Preconditions:
-
-  require(xhost != 0);
-  require(xhost->state_is_read_accessible());
-  require(xhost->contains_member(xindex));
-  require(xhost->is_jim(xindex));
-
-  // Body:
-
-  attach_to_state(xhost, xindex);
-
-  // Postconditions:
-
-  ensure(postcondition_of(refinable_poset::attach_to_state()));
-}
-
-fiber_bundle::base_space_poset::
-base_space_poset(const namespace_poset* xhost, const scoped_index& xindex)
-{
-  // Preconditions:
-
-  require(xhost != 0);
-  require(xhost->state_is_read_accessible());
-  require(xhost->contains_member(xindex));
-  require(xhost->is_jim(xindex));
-
-  // Body:
-
-  attach_to_state(xhost, xindex);
-
-  // Postconditions:
-
-  ensure(postcondition_of(refinable_poset::attach_to_state()));
-}
-
-fiber_bundle::base_space_poset::
-base_space_poset(const namespace_poset* xhost, const string& xname)
-{
-  // Preconditions:
-
-  require(xhost != 0);
-  require(xhost->state_is_read_accessible());
-  require(xhost->contains_member(xname));
-
-  // Body:
-
-  attach_to_state(xhost, xname);
-
-  // Postconditions:
-
-  ensure(postcondition_of(refinable_poset::attach_to_state()));
-}
-
-fiber_bundle::base_space_poset::
-base_space_poset(const abstract_poset_member* xmbr)
-{
-  // Preconditions:
-
-  require(xmbr != 0);
-  require(dynamic_cast<namespace_poset*>(xmbr->host()) != 0);
-  require(xmbr->state_is_read_accessible());
-
-  // Body:
-
-  attach_to_state(xmbr);
-
-  // Postconditions:
-
-  ensure(postcondition_of(state_handle::attach_to_state(abstract_poset_member*)));
-}
-
 // PRIVATE FUNCTIONS
 
 
@@ -334,108 +194,6 @@ base_space_poset(const abstract_poset_member* xmbr)
 // PUBLIC FUNCTIONS
 
 // PROTECTED FUNCTIONS
-
-void
-fiber_bundle::base_space_poset::
-new_state(namespace_poset* xhost,
-          const poset_path& xschema_path,
-          const string& xname,
-          int xmax_db,
-          bool xauto_access)
-{
-  // Preconditions:
-
-  require(precondition_of(refinable_poset::new_state(xhost, xschema_path, xname, false)));
-  require(xmax_db >= 0);
-
-  // Body:
-
-  if(xauto_access)
-    xhost->get_read_write_access(true);
-
-  // Create and initialize the table dof map.
-  // Must explicitly create and initialized dof map to pass to new_state
-  // so the dof tuple is initialized before call to attach_handle_data_members
-  // from new_state.
-
-  schema_poset_member lschema(xhost, xschema_path);
-
-  lschema.get_read_access();
-
-  new_state(xhost, &lschema, xname, xmax_db, false);
-
-  // Clean up
-
-  lschema.release_access();
-  lschema.detach_from_state();
-
-  if(xauto_access)
-    xhost->release_access();
-
-  // Postconditions:
-
-  ensure(postcondition_of(refinable_poset::new_state(xhost, xschema_path, xname, false)));
-  if_contract(get_read_access());
-  ensure(max_db() == xmax_db);
-  ensure(includes_subposet(blocks_name()));
-  ensure(includes_subposet(block_vertices_name()));
-  ensure_for_all(i, 0, max_db(), includes_subposet(d_cells_name(i, max_db())));
-  if_contract(release_access());
-
-  // Exit:
-
-  return;
-}
-
-void
-fiber_bundle::base_space_poset::
-new_state(namespace_poset* xhost,
-          schema_poset_member* xschema,
-          const string& xname,
-          int xmax_db,
-          bool xauto_access)
-{
-  // Preconditions:
-
-  require(precondition_of(refinable_poset::new_state(xhost, xschema, xname, false)));
-  require(xmax_db >= 0);
-
-  // Body:
-
-  if(xauto_access)
-    xhost->get_read_write_access(true);
-
-  // Create and initialize the table dof map.
-  // Must explicitly create and initialized dof map to pass to new_state
-  // so the dof tuple is initialized before call to attach_handle_data_members
-  // from new_state.
-
-  array_poset_dof_map* lmap = new array_poset_dof_map(xschema, true);
-  lmap->put_defaults();
-
-  table_dof_tuple_type* ltuple =
-    reinterpret_cast<table_dof_tuple_type*>(lmap->dof_tuple());
-  ltuple->max_db = xmax_db;
-
-  refinable_poset::new_state(xhost, xschema, xname, lmap, false);
-
-  if(xauto_access)
-    xhost->release_access();
-
-  // Postconditions:
-
-  ensure(postcondition_of(refinable_poset::new_state(xhost, xschema, xname, false)));
-  if_contract(get_read_access());
-  ensure(max_db() == xmax_db);
-  ensure(includes_subposet(blocks_name()));
-  ensure(includes_subposet(block_vertices_name()));
-  ensure_for_all(i, 0, max_db(), includes_subposet(d_cells_name(i, max_db())));
-  if_contract(release_access());
-
-  // Exit:
-
-  return;
-}
 
 // PRIVATE FUNCTIONS
 

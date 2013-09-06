@@ -24,7 +24,6 @@
 
 namespace sheaf
 {
-  class arg_list;
   class namespace_poset;
 }
 
@@ -76,11 +75,6 @@ public:
   typedef tuple_table_dofs_type table_dofs_type;
 
   ///
-  /// Creates an arg list which conforms to the schema of this.
-  ///
-  static arg_list make_arg_list(int xfactor_ct);
-
-  ///
   /// Creates a new tuple_space in namespace xns with path xpath,
   /// schema specified by xschema_path, and table attribute 
   /// factor_ct specified by xfactor_ct.
@@ -129,49 +123,6 @@ protected:
   ///
   tuple_space(tuple* xtop, tuple* xbottom);
 
-  //============================================================================
-  // NEW HANDLE, NEW STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new poset handle attached to a new state in namespace xhost,
-  /// with schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  tuple_space(namespace_poset& xhost,
-	      const string& xname,
-	      const arg_list& xargs,
-	      const poset_path& xschema_path,
-	      bool xauto_access);
-
-  //============================================================================
-  // NEW HANDLE, EXISTING STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new handle attached to the tuple_space with
-  /// index xindex in namespace xhost.
-  ///
-  tuple_space(const namespace_poset& xhost, pod_index_type xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the tuple_space with
-  /// index xindex in namespace xhost.
-  ///
-  tuple_space(const namespace_poset& xhost, const scoped_index& xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the tuple_space with
-  /// name xname in namespace xhost.
-  ///
-  tuple_space(const namespace_poset& xhost, const string& xname, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the tuple_space associated
-  /// with namespace member xmbr.
-  ///
-  tuple_space(const namespace_poset_member& xmbr, bool xauto_access);
-
 private:
 
   //@}
@@ -184,28 +135,6 @@ private:
 public:
 
 protected:
-
-  using poset::new_state;
- 
-  ///
-  /// Attaches this to a new poset state in namespace xhost,
-  /// schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  void new_state(namespace_poset& xhost,
-                 const string& xname,
-                 const arg_list& xargs,
-                 const poset_path& xschema_path,
-                 bool xauto_access);
-
-  ///
-  /// Initializes xarg to satisfy class invariants.
-  ///
-  virtual void initialize_arg_list(const namespace_poset& xns, 
-				   const string& xname,
-				   arg_list& xargs,
-				   const poset_path& xschema_path,
-				   bool xauto_access);
 
 private:
 

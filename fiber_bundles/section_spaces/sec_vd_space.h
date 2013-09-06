@@ -25,7 +25,6 @@
 
 namespace sheaf
 {
-class arg_list;
 class namespace_poset;
 }
 
@@ -70,11 +69,6 @@ public:
   /// The table dofs type defined by the standard schema.
   ///
   typedef vd_table_dofs_type table_dofs_type;
-
-  ///
-  /// Creates an arg list which conforms to the schema of this.
-  ///
-  static arg_list make_arg_list(const poset_path& xscalar_space_path);
 
   ///
   /// True if and only if scalar space of fiber space == fiber space of scalar space. 
@@ -210,6 +204,11 @@ protected:
   sec_vd_space(const sec_vd_space& xother);
 
   ///
+  /// Covariant constructor
+  ///
+  sec_vd_space(sec_vd* xtop, sec_vd* xbottom);
+
+  ///
   /// Destructor.
   ///
   virtual ~sec_vd_space();
@@ -223,54 +222,6 @@ protected:
   /// The number of covariant subposets.
   ///
   virtual size_type covariant_subposet_ct() const;
-
-  //============================================================================
-  // NEW HANDLE, NEW STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new poset handle attached to a new state in namespace xhost,
-  /// with schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  sec_vd_space(namespace_poset& xhost,
-	       const string& xname,
-	       const arg_list& xargs,
-	       const poset_path& xschema_path,
-	       bool xauto_access);
-
-  //============================================================================
-  // NEW HANDLE, EXISTING STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Covariant constructor
-  ///
-  sec_vd_space(sec_vd* xtop, sec_vd* xbottom);
-
-  ///
-  /// Creates a new handle attached to the sec_vd_space with
-  /// index xindex in namespace xhost.
-  ///
-  sec_vd_space(const namespace_poset& xhost, pod_index_type xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the sec_vd_space with
-  /// index xindex in namespace xhost.
-  ///
-  sec_vd_space(const namespace_poset& xhost, const scoped_index& xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the sec_vd_space with
-  /// name xname in namespace xhost.
-  ///
-  sec_vd_space(const namespace_poset& xhost, const string& xname, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the sec_vd_space associated
-  /// with namespace member xmbr.
-  ///
-  sec_vd_space(const namespace_poset_member& xmbr, bool xauto_access);
 
 private:
 
@@ -299,15 +250,6 @@ private:
 public:
 
 protected:
-
-  ///
-  /// Initializes xarg to satisfy class invariants.
-  ///
-  virtual void initialize_arg_list(const namespace_poset& xns,
-				   const string& xname,
-				   arg_list& xargs,
-				   const poset_path& xschema_path,
-				   bool xauto_access);
 
 private:
 

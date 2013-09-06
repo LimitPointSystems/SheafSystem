@@ -56,11 +56,6 @@ public:
   ///
   static const poset_path& standard_schema_path();
 
-  ///
-  /// Creates an arg list which conforms to the schema of this.
-  ///
-  static arg_list make_arg_list(int xp, const poset_path& xvector_space_path);
-
   using tp_space::d;
   
   ///
@@ -104,49 +99,6 @@ protected:
   /// Covariant constructor
   ///
   stp_space(stp* xtop, stp* xbottom);
-
-  //============================================================================
-  // NEW HANDLE, NEW STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new poset handle attached to a new state in namespace xhost,
-  /// with schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  stp_space(namespace_poset& xhost,
-	      const string& xname,
-	      const arg_list& xargs,
-	      const poset_path& xschema_path,
-	      bool xauto_access);
-
-  //============================================================================
-  // NEW HANDLE, EXISTING STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new handle attached to the stp_space with
-  /// index xindex in namespace xhost.
-  ///
-  stp_space(const namespace_poset& xhost, pod_index_type xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the stp_space with
-  /// index xindex in namespace xhost.
-  ///
-  stp_space(const namespace_poset& xhost, const scoped_index& xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the stp_space with
-  /// name xname in namespace xhost.
-  ///
-  stp_space(const namespace_poset& xhost, const string& xname, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the stp_space associated
-  /// with namespace member xmbr.
-  ///
-  stp_space(const namespace_poset_member& xmbr, bool xauto_access);
 
 private:
 

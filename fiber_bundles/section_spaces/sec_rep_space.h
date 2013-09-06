@@ -175,6 +175,11 @@ protected:
   sec_rep_space(const sec_rep_space& xother);
 
   ///
+  /// Covariant constructor
+  ///
+  sec_rep_space(sec_rep_space_member* xtop, sec_rep_space_member* xbottom);
+
+  ///
   /// Assignment operator.
   ///
   sec_rep_space& operator=(const sec_rep_space& xother);
@@ -183,63 +188,6 @@ protected:
   /// Destructor.
   ///
   virtual ~sec_rep_space();
-
-  ///
-  /// Initializes xarg to satisfy class invariants.
-  ///
-  virtual void initialize_arg_list(const namespace_poset& xns,
-				   const string& xname,
-				   arg_list& xargs,
-				   const poset_path& xschema_path,
-				   bool xauto_access);
-
-  //============================================================================
-  // NEW HANDLE, NEW STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new poset handle attached to a new state in namespace xhost,
-  /// with schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  sec_rep_space(namespace_poset& xns,
-                const string& xname,
-		const arg_list& xargs,
-                const poset_path& xschema_path,
-                bool xauto_access = true);
-
-  //============================================================================
-  // NEW HANDLE, EXISTING STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new handle attached to the sec_rep_space with
-  /// index xindex in namespace xhost.
-  ///
-  sec_rep_space(const namespace_poset* xhost, pod_index_type xindex);
-
-  ///
-  /// Creates a new handle attached to the sec_rep_space with
-  /// index xindex in namespace xhost.
-  ///
-  sec_rep_space(const namespace_poset* xhost, const scoped_index& xindex);
-
-  ///
-  /// Creates a new handle attached to the sec_rep_space with
-  /// name xname in namespace xhost.
-  ///
-  sec_rep_space(const namespace_poset* xhost, const string& xname);
-
-  ///
-  /// Creates a new handle attached to the sec_rep_space associated
-  /// with namespace member xmbr
-  ///
-  sec_rep_space(const abstract_poset_member* xmbr);
-
-  ///
-  /// Covariant constructor
-  ///
-  sec_rep_space(sec_rep_space_member* xtop, sec_rep_space_member* xbottom);
 
 private:
 
@@ -379,30 +327,10 @@ protected:
   using poset_state_handle::new_state;
 
   ///
-  /// @deprecated
-  /// Attaches this to a new poset state in namespace xhost,
-  /// schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  void new_state(namespace_poset& xhost,
-                 const string& xname,
-                 const arg_list& xargs,
-                 const poset_path& xschema_path,
-                 bool xauto_access);
-
-  ///
   /// Creates a new poset state with path xpath, schema xschema and table dof map xdof_map,
   /// attaches this to the state.
   ///
   virtual void new_state(const poset_path& xpath, const schema_poset_member& xschema, array_poset_dof_map& xdof_map);
-
-  ///
-  /// @deprecated
-  /// Attaches this external poset to a new poset state with schema
-  /// given by xschema and table dofs xdof_map.
-  /// Intended for use by i/o subsystem.
-  ///
-  virtual void new_state(const schema_poset_member& xschema, array_poset_dof_map& xdof_map);
 
 private:
 
