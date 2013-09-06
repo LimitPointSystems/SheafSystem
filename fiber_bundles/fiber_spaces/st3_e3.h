@@ -388,7 +388,7 @@ public:
 			     bool xauto_access);
 
   ///
-  /// The host with path standard_host_path(static_class_name(), xsuffix).
+  /// The host with path standard_host_path<st3_e3>(xsuffix).
   /// Returns the host if it already exists, otherwise, creates it in namespace xns
   /// with schema specified by standard_schema_path() and standard paths for prerequisites,
   /// which are also created if needed.
