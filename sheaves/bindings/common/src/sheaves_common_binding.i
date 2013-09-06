@@ -318,16 +318,11 @@ typedef sheaf::arg_list::arg_type arg_type;
 // Template directives.
 //=============================================================================
 
-%include "sheaves_templates.i"
-
 //$$ISSUE: Use %template directive to instantiate a ragged_array<scoped_index > type. 
 //%template(ragged_array_pmi) sheaf::ragged_array<sheaf::scoped_index >;
 
 %template(block_double) sheaf::block<double>; 
 %template(wsv_block_double) sheaf::wsv_block<double>; 
-
-%poset_factory_templates(poset);
-%poset_factory_templates(refinable_poset);
 
 //=============================================================================
 // Swig warning messages to suppress.
