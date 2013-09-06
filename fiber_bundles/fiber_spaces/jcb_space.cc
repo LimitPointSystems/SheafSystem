@@ -449,24 +449,6 @@ jcb_space()
   ensure(postcondition_of(vd_space::vd_space()));
 }
 
-
-
-fiber_bundle::jcb_space::
-jcb_space(const jcb_space& xother)
-  : vd_space(new jcb, new jcb)
-{
-  // Preconditions:
-
-  // Body:
-
-  attach_to_state(&xother);
-  
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-}
-
-
 fiber_bundle::jcb_space::
 ~jcb_space()
 {
@@ -616,27 +598,6 @@ prereq_id(int xi) const
   // Exit:
 
   return result;
-}
-
-fiber_bundle::jcb_space&
-fiber_bundle::jcb_space::
-operator=(const poset_state_handle& xother)
-{
-  // Preconditions:
-
-  require(is_ancestor_of(&xother));
-
-  // Body:
-
-  poset_state_handle::operator=(xother);
-
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-
-  // Exit:
-
-  return *this;
 }
 
 //==============================================================================

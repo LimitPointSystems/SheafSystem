@@ -201,21 +201,6 @@ tuple_space()
 }
 
 fiber_bundle::tuple_space::
-tuple_space(const tuple_space& xother)
-  : poset(new tuple, new tuple)
-{
-  // Preconditions:
-
-  // Body:
-
-  attach_to_state(&xother);
-  
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-}
-
-fiber_bundle::tuple_space::
 ~tuple_space()
 {
   // Preconditions:
@@ -317,27 +302,6 @@ class_name() const
   return result;
 }
 
-
-fiber_bundle::tuple_space&
-fiber_bundle::tuple_space::
-operator=(const poset_state_handle& xother)
-{
-  // Preconditions:
-
-  require(is_ancestor_of(&xother));
-
-  // Body:
-
-  poset_state_handle::operator=(xother);
-
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-
-  // Exit:
-
-  return *this;
-}
 
 //==============================================================================
 // ANY FACET

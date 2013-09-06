@@ -139,38 +139,6 @@ base_space_poset()
 }
 
 fiber_bundle::base_space_poset::
-base_space_poset(const base_space_poset& xother)
-    : refinable_poset(xother)
-{
-  // Preconditions:
-
-  // Body:
-
-  // Nothing to do, handled by base class
-
-  // Postconditions:
-
-  ensure(postcondition_of(refinable_poset::refinable_poset(const refinable_poset&)));
-}
-
-fiber_bundle::base_space_poset::
-base_space_poset(const poset& xother)
-{
-  /// @hack needed only because base_space_member::host() is type poset.
-  /// @todo remove when finished refactoring sheanves and fiber_bundles.
-
-  _name_space = 0;
-
-  _index.put_pod(0);
-
-  _state = 0;
-  _top = new total_poset_member;
-  _bottom = new total_poset_member;
-
-  attach_to_state(&xother);
-}
-
-fiber_bundle::base_space_poset::
 ~base_space_poset()
 {
   // Preconditions:
@@ -2854,27 +2822,6 @@ clone() const
   // Exit
 
   return result;
-}
-
-fiber_bundle::base_space_poset&
-fiber_bundle::base_space_poset::
-operator=(const poset_state_handle& xother)
-{
-  // Preconditions:
-
-  require(dynamic_cast<base_space_poset*>(&const_cast<poset_state_handle&>(xother))!=0);
-
-  // Body:
-
-  refinable_poset::operator=(xother);
-
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-
-  // Exit:
-
-  return *this;
 }
 
 // PRIVATE FUNCTIONS

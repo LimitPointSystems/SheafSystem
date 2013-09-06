@@ -73,16 +73,9 @@ protected:
   base_space_poset();
 
   ///
-  /// Copy constructor; attaches this to the same state as xother
+  /// Copy constructor; disabled.
   ///
-  base_space_poset(const base_space_poset& xother);
-
-  ///
-  /// Copy constructor; attaches this to the same state as xother.
-  //// @hack needed only because base_space_member::host() is type poset.
-  //// @todo remove when finished refactoring sheaves and fiber_bundles.
-  ////
-  base_space_poset(const poset& xother);
+  base_space_poset(const base_space_poset& xother) { };
 
   ///
   /// Destructor
@@ -872,9 +865,9 @@ protected:
   virtual base_space_poset* clone() const;
 
   ///
-  /// Assignment operator; attaches this to the same state as xother
+  /// Assignment operator; disabled.
   ///
-  base_space_poset& operator=(const poset_state_handle& xother);
+  base_space_poset& operator=(const poset_state_handle& xother) { };
 
 private:
 

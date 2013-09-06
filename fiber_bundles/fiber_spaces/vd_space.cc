@@ -624,24 +624,6 @@ vd_space()
   ensure(postcondition_of(tuple_space::tuple_space()));
 }
 
-
-
-fiber_bundle::vd_space::
-vd_space(const vd_space& xother)
-  : tuple_space(new vd, new vd)
-{
-  // Preconditions:
-
-  // Body:
-
-  attach_to_state(&xother);
-  
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-}
-
-
 fiber_bundle::vd_space::
 ~vd_space()
 {
@@ -867,29 +849,6 @@ prereq_id(int xi) const
   return result;
 }
 
-
-fiber_bundle::vd_space&
-fiber_bundle::vd_space::
-operator=(const poset_state_handle& xother)
-{
-  // Preconditions:
-
-  require(is_ancestor_of(&xother));
-
-  // Body:
-
-  poset_state_handle::operator=(xother);
-
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-
-  // Exit:
-
-  return *this;
-}
-
-///
 void
 fiber_bundle::vd_space::
 initialize_standard_subposets(const string& xname)

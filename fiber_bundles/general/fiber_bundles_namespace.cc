@@ -543,28 +543,6 @@ fiber_bundles_namespace(namespace_poset_member* xtop, namespace_poset_member* xb
   return;
 }
 
-fiber_bundle::fiber_bundles_namespace::
-fiber_bundles_namespace(const fiber_bundles_namespace& xother)
-    : sheaves_namespace(xother)
-{
-  // Preconditions:
-
-  require(precondition_of(sheaves_namespace(xother)));
-
-  // Body:
-
-  _base_space_schema_poset = 0;
-  _base_space_member_prototypes_poset = 0;
-
-  // Postconditions
-
-  ensure(postcondition_of(sheaves_namespace(xother)));
-
-  // Exit:
-
-  return;
-}
-
 // PRIVATE MEMBER FUNCTIONS
 
 

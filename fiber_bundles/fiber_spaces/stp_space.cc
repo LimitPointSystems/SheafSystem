@@ -210,24 +210,6 @@ stp_space()
   ensure(postcondition_of(tp_space::tp_space()));
 }
 
-
-
-fiber_bundle::stp_space::
-stp_space(const stp_space& xother)
-  : tp_space(new stp, new stp)
-{
-  // Preconditions:
-
-  // Body:
-
-  attach_to_state(&xother);
-  
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-}
-
-
 fiber_bundle::stp_space::
 ~stp_space()
 {
@@ -370,27 +352,6 @@ class_name() const
   // Exit:
 
   return result;
-}
-
-fiber_bundle::stp_space&
-fiber_bundle::stp_space::
-operator=(const poset_state_handle& xother)
-{
-  // Preconditions:
-
-  require(is_ancestor_of(&xother));
-
-  // Body:
-
-  poset_state_handle::operator=(xother);
-
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-
-  // Exit:
-
-  return *this;
 }
 
 //==============================================================================

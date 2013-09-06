@@ -188,31 +188,19 @@ protected:
   namespace_poset(namespace_poset_member* xtop, namespace_poset_member* xbottom);
 
   ///
-  /// Copy constructor; attaches this to the same state as xother
+  /// Copy constructor; disabled
   ///
-  namespace_poset(const namespace_poset& xother);
+  namespace_poset(const namespace_poset& xother) { };
 
   ///
-  /// Assignment operator; attaches this to the same state as xother
+  /// Assignment operator; disabled
   ///
-  namespace_poset& operator=(const namespace_poset& xother);
+  namespace_poset& operator=(const namespace_poset& xother) { };
 
   ///
-  /// Assignment operator; attaches this to the same state as xother
+  /// Assignment operator; disabled
   ///
-  namespace_poset& operator=(const poset_state_handle& xother);
-
-  ///
-  /// Creates a new handle attached to the namespace with index xindex
-  /// in namespace xhost
-  ///
-  namespace_poset(const namespace_poset* xhost, pod_index_type xindex);
-
-  ///
-  /// Creates a new handle attached to the namespace with index xindex
-  /// in namespace xhost
-  ///
-  namespace_poset(const namespace_poset* xhost, const scoped_index& xindex);
+  namespace_poset& operator=(const poset_state_handle& xother) { };
 
   ///
   /// Sets the current working namespace to xns.

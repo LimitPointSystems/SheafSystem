@@ -65,9 +65,9 @@ protected:
   geometry_namespace();
 
   ///
-  /// Copy constructor; attaches this to the same state as xother
+  /// Copy constructor; disabled.
   ///
-  geometry_namespace(const geometry_namespace& xother);
+  geometry_namespace(const geometry_namespace& xother) { };
 
 private:
 

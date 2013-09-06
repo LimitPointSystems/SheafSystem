@@ -76,9 +76,9 @@ protected:
   sheaves_namespace(namespace_poset_member* xtop, namespace_poset_member* xbottom);
 
   ///
-  /// Copy constructor; attaches this to the same state as xother
+  /// Copy constructor; disabled.
   ///
-  sheaves_namespace(const sheaves_namespace& xother);
+  sheaves_namespace(const sheaves_namespace& xother) { };
 
 
 };

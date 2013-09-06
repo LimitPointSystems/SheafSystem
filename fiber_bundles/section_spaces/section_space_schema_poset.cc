@@ -2195,27 +2195,6 @@ invariant() const
 
 // PROTECTED FUNCTIONS
 
-fiber_bundle::section_space_schema_poset&
-fiber_bundle::section_space_schema_poset::
-operator=(const poset_state_handle& xother)
-{
-  // Preconditions:
-
-  require(is_ancestor_of(&xother));
-
-  // Body:
-
-  poset_state_handle::operator=(xother);
-
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-
-  // Exit:
-
-  return *this;
-}
-
 // PRIVATE FUNCTIONS
 
 

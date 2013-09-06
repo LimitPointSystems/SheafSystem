@@ -282,9 +282,9 @@ protected:
   tp_space();
 
   ///
-  /// Copy constructor; attaches this to the same state as xother.
+  /// Copy constructor; disabled.
   ///
-  tp_space(const tp_space& xother);
+  tp_space(const tp_space& xother) { };
 
   ///
   /// Destructor.
@@ -345,17 +345,12 @@ public:
   ///
   virtual pod_index_type prereq_id(int xi) const;
 
+protected:
+
   ///
-  /// Assignment operator; attaches this to the same state as xother.
-  /// @issue This is probably the wrong signature for operator=,
-  /// see thread Misc/Language/covariance in C++/covariance and operator=
-  /// in the discusion forum. But it is consistent with all the
-  /// other derivatives of poset_state_handle and it will soon be refactored
-  /// out of existence any way.
+  /// Assignment operator; disabled.
   ///
   tp_space& operator=(const poset_state_handle& xother);
-
-protected:
 
 private:
 

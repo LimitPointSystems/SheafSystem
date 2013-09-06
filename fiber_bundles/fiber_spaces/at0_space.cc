@@ -174,24 +174,6 @@ at0_space()
   ensure(postcondition_of(atp_space::atp_space()));
 }
 
-
-
-fiber_bundle::at0_space::
-at0_space(const at0_space& xother)
-  : atp_space(new at0, new at0)
-{
-  // Preconditions:
-
-  // Body:
-
-  attach_to_state(&xother);
-  
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-}
-
-
 fiber_bundle::at0_space::
 ~at0_space()
 {
@@ -429,27 +411,6 @@ prereq_id(int xi) const
   // Exit:
 
   return result;
-}
-
-fiber_bundle::at0_space&
-fiber_bundle::at0_space::
-operator=(const poset_state_handle& xother)
-{
-  // Preconditions:
-
-  require(is_ancestor_of(&xother));
-
-  // Body:
-
-  poset_state_handle::operator=(xother);
-
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-
-  // Exit:
-
-  return *this;
 }
 
 //==============================================================================

@@ -209,22 +209,6 @@ sec_tuple_space()
 }
 
 fiber_bundle::sec_tuple_space::
-sec_tuple_space(const sec_tuple_space& xother)
-  : sec_rep_space(new sec_tuple, new sec_tuple)
-{
-  // Preconditions:
-
-  // Body:
-
-  attach_to_state(&xother);
-  
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-}
-
-
-fiber_bundle::sec_tuple_space::
 ~sec_tuple_space()
 {
   // Preconditions:
@@ -328,27 +312,6 @@ class_name() const
   // Exit:
 
   return result;
-}
-
-fiber_bundle::sec_tuple_space&
-fiber_bundle::sec_tuple_space::
-operator=(const poset_state_handle& xother)
-{
-  // Preconditions:
-
-  require(is_ancestor_of(&xother));
-
-  // Body:
-
-  poset_state_handle::operator=(xother);
-
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-
-  // Exit:
-
-  return *this;
 }
 
 // PROTECTED MEMBER FUNCTIONS

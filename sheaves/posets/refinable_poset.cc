@@ -313,42 +313,6 @@ sheaf::refinable_poset::
   return;
 }
 
-sheaf::refinable_poset::
-refinable_poset(const refinable_poset& xother)
-    : poset(xother)
-{
-  // Preconditions:
-
-  // Body:
-
-  // Nothing to do, handled by base class
-
-  // Postconditions:
-
-  ensure(postcondition_of(poset::poset(const poset&)));
-}
-
-sheaf::refinable_poset&
-sheaf::refinable_poset::
-operator=(const poset_state_handle& xother)
-{
-  // Preconditions:
-
-  require(dynamic_cast<refinable_poset*>(&const_cast<poset_state_handle&>(xother))!=0);
-
-  // Body:
-
-  poset::operator=(const_cast<poset_state_handle&>(xother));
-
-  // Postconditions:
-
-  ensure(is_same_state(&const_cast<poset_state_handle&>(xother)));
-
-  // Exit:
-
-  return *this;
-}
-
 // PRIVATE FUNCTIONS
 
 void
