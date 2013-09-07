@@ -11,7 +11,6 @@
 
 #include "assert_contract.h"
 #include "arg_list.h"
-//#include "base_space_member_prototype.h"
 #include "base_space_poset.h"
 #include "fiber_bundles_namespace.h"
 #include "poset_path.h"
@@ -374,7 +373,7 @@ base_space_member(poset* xhost,
 
   // Initialize the dofs.
 
-  init_row_dof_tuple(xdb, xlocal_cell_name);
+  init_member_prototype(xdb, xlocal_cell_name);
 
   // Now we can check the invaraint.
 
@@ -386,6 +385,8 @@ base_space_member(poset* xhost,
   ensure(host() == xhost);
   ensure(name() == xname);
   ensure(db() == xdb);
+  ensure(type_name() == xname);
+  ensure(refinement_depth() == 0);
   ensure(local_cell_type_name() == xlocal_cell_name);
 
 
@@ -657,68 +658,6 @@ row_dof_tuple(bool xrequire_write_access)
   return result;
 }
 
-
-fiber_bundle::base_space_member::row_dof_tuple_type*
-fiber_bundle::base_space_member::
-row_dof_tuple(poset_state_handle* xhost,
-              pod_index_type xhub_id,
-              bool xrequire_write_access)
-{
-  row_dof_tuple_type* result;
-
-  // Preconditions:
-
-  require(xhost != 0);
-  require(xrequire_write_access ?
-          xhost->state_is_read_write_accessible() :
-          xhost->state_is_read_accessible());
-  require(xhost->contains_member(xhub_id));
-  require(xhost->is_jim(xhub_id, false));
-
-  // Body:
-
-  poset_dof_map& ldof_map = xhost->member_dof_map(xhub_id, xrequire_write_access);
-  result = reinterpret_cast<row_dof_tuple_type*>(ldof_map.dof_tuple());
-
-  // Postconditions:
-
-  ensure(result != 0);
-
-  // Exit:
-
-  return result;
-}
-
-fiber_bundle::base_space_member::row_dof_tuple_type*
-fiber_bundle::base_space_member::
-row_dof_tuple(poset_state_handle* xhost,
-              const scoped_index& xid,
-              bool xrequire_write_access)
-{
-  row_dof_tuple_type* result;
-
-  // Preconditions:
-
-  require(xhost != 0);
-  require(xrequire_write_access ?
-          xhost->state_is_read_write_accessible() :
-          xhost->state_is_read_accessible());
-  require(xhost->contains_member(xid));
-  require(xhost->is_jim(xid, false));
-
-  // Body:
-
-  result = row_dof_tuple(xhost, xid.hub_pod(), xrequire_write_access);
-
-  // Postconditions:
-
-  ensure(result != 0);
-
-  // Exit:
-
-  return result;
-}
-
 sheaf::array_poset_dof_map*
 fiber_bundle::base_space_member::
 new_row_dof_map(const poset* xhost, const string& xprototype_name)
@@ -830,16 +769,17 @@ new_row_dof_map(poset_state_handle& xhost, const string& xprototype_name, bool x
 
 void
 fiber_bundle::base_space_member::
-init_row_dof_tuple(int xdb, const string& xlocal_cell_name)
+init_member_prototype(int xdb, const string& xlocal_cell_name)
 {
   // Preconditions:
 
-  require(state_is_read_accessible());
+  require(state_is_read_write_accessible());
   require(host()->member_id_spaces(false).contains("cell_types"));
-  require(xlocal_cell_name.empty() || host()->contains_member(xlocal_cell_name));
-
+  require(xlocal_cell_name.empty() || host()->contains_member(xlocal_cell_name, false));
+  require(!name().empty());
 
   // Body:
+
   row_dof_tuple_type& ltuple = *row_dof_tuple();
 
   // Set db.
@@ -850,6 +790,7 @@ init_row_dof_tuple(int xdb, const string& xlocal_cell_name)
 
   mutable_index_space_handle& ltype_id_space =
     host()->member_id_spaces(false).get_id_space<mutable_index_space_handle>("cell_types");
+
   ltype_id_space.push_back(index());
 
   ltuple.type_id = ltype_id_space.pod(index());
@@ -896,6 +837,11 @@ init_row_dof_tuple(int xdb, const string& xlocal_cell_name)
   ltuple.k_size = 0;
 
   // Postconditions:
+
+  ensure(db() == xdb);
+  ensure(type_name() == name());
+  ensure(refinement_depth() == 0);
+  ensure(local_cell_type_name() == xlocal_cell_name);
 
   // Exit:
 

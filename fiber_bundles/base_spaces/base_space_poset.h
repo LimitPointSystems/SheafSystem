@@ -578,15 +578,10 @@ protected:
   ///
   block<mutable_index_space_handle*> _d_cells_id_spaces;
 
-  //########################################################################
-  //$$MASON
-
   ///
   /// The subposet containing all the cells.
   ///
   subposet _cells;
-
-  //########################################################################
 
 private:
 

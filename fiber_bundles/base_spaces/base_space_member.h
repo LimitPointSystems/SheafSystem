@@ -176,7 +176,7 @@ public:
                     bool xauto_access);
 
   ///
-  /// creates a new jrm (join reducible member) attached to a new member state
+  /// Creates a new jrm (join reducible member) attached to a new member state
   /// in xhost The jrm created is the join of the members with the indices
   /// given in xexpansion.
   ///
@@ -250,32 +250,6 @@ public:
   ///
   static bool prototype_exists(const string& xname, bool xauto_access);
 
-//   ///
-//   /// The type of row dof tuple for this.
-//   ///
-//   struct SHEAF_DLL_SPEC row_dof_tuple_type
-//   {
-//     ///
-//     /// The base space dimension.
-//     ///
-//     int db;
-
-//     ///
-//     /// The cell type id.
-//     ///
-//     int type_id;
-
-//     ///
-//     /// The cell type name.
-//     ///
-//     const char * type_name;
-
-//     ///
-//     /// The refinement depth.
-//     ///
-//     int refinement_depth;
-//   };
-
   ///
   /// The type of row dof tuple for this.
   ///
@@ -338,20 +312,6 @@ public:
   row_dof_tuple_type* row_dof_tuple(bool xrequire_write_access = false);
 
   ///
-  /// The row dof tuple for the member with hub id xhub_id in poset xhost.
-  ///
-  static row_dof_tuple_type* row_dof_tuple(poset_state_handle* xhost,
-					   pod_index_type xhub_id,
-					   bool xrequire_write_access = false);
-
-  ///
-  /// The row dof tuple for the member with id xid in poset xhost.
-  ///
-  static row_dof_tuple_type* row_dof_tuple(poset_state_handle* xhost,
-					   const scoped_index& xid,
-					   bool xrequire_write_access = false);
-
-  ///
   /// @deprecated Use scoped_index new_row_dof_map(poset_state_handle&...).
   /// Creates a new row dof map and initializes it
   /// from the prototype with name xprototype_name.
@@ -366,12 +326,13 @@ public:
 					     const string& xprototype_name,
 					     bool xauto_access = true);
 
-protected:
+  ///
+  /// Sets the attibutes of this to be a member prototype with
+  /// dimension xdb and local cell xlocal_cell_name.
+  ///
+  void init_member_prototype(int xdb, const string& xlocal_cell_name);
 
-  ///
-  /// Creates a new row dof map and initializes it.
-  ///
-  void init_row_dof_tuple(int xdb, const string& xlocal_cell_name);
+protected:
 
 private:
 
