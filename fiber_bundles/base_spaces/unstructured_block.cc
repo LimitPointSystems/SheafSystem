@@ -23,7 +23,7 @@
 #include "wsv_block.h"
 
 
-//using namespace fiber_bundle; // Workaround for MS C++ bug.
+using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //#define DIAGNOSTIC_OUTPUT
 
