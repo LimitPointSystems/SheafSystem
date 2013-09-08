@@ -867,7 +867,10 @@ protected:
   ///
   /// Assignment operator; disabled.
   ///
-  base_space_poset& operator=(const poset_state_handle& xother) { };
+  base_space_poset& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<base_space_poset&>(*this);
+  };
 
 private:
 

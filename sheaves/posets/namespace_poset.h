@@ -195,12 +195,18 @@ protected:
   ///
   /// Assignment operator; disabled
   ///
-  namespace_poset& operator=(const namespace_poset& xother) { };
+  namespace_poset& operator=(const namespace_poset& xother) 
+  {
+    return const_cast<namespace_poset&>(*this);
+  };
 
   ///
   /// Assignment operator; disabled
   ///
-  namespace_poset& operator=(const poset_state_handle& xother) { };
+  namespace_poset& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<namespace_poset&>(*this);
+  };
 
   ///
   /// Sets the current working namespace to xns.

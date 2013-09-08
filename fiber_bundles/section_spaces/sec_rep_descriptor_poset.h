@@ -106,7 +106,10 @@ protected:
   ///
   /// Assignment operator; disabled.
   ///
-  sec_rep_descriptor_poset& operator=(const poset_state_handle& xother) { };
+  sec_rep_descriptor_poset& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<sec_rep_descriptor_poset&>(*this);
+  };
 
   ///
   /// Base space members prototypes poset.

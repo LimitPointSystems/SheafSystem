@@ -197,7 +197,10 @@ protected:
   ///
   /// Assignment operator; disabled.
   ///
-  sec_at1_space& operator=(const poset_state_handle& xother);
+  sec_at1_space& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<sec_at1_space&>(*this);
+  };;
 
 private:
 

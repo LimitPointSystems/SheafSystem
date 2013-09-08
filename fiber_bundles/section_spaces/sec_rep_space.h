@@ -182,7 +182,10 @@ protected:
   ///
   /// Assignment operator; disabled.
   ///
-  sec_rep_space& operator=(const sec_rep_space& xother) { };
+  sec_rep_space& operator=(const sec_rep_space& xother)
+  {
+    return const_cast<sec_rep_space&>(*this);
+  };
 
   ///
   /// Destructor.

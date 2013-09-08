@@ -288,7 +288,10 @@ protected:
   ///
   /// Assignment operator; disabled.
   ///
-  sec_vd_space& operator=(const poset_state_handle& xother);
+  sec_vd_space& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<sec_vd_space&>(*this);
+  };
 
   ///
   /// Creates the standard subposets.

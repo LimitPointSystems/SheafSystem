@@ -778,7 +778,10 @@ protected:
   ///
   /// Assignment operator; disabled.
   ///
-  section_space_schema_poset& operator=(const poset_state_handle& xother) { };
+  section_space_schema_poset& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<section_space_schema_poset&>(*this);
+  };
 
 private:
 

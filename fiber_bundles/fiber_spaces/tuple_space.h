@@ -167,7 +167,10 @@ protected:
   ///
   /// Assignment operator; disabled.
   ///
-  tuple_space& operator=(const poset_state_handle& xother) { };
+  tuple_space& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<tuple_space&>(*this);
+  };
 
 private:
 

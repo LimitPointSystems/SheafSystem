@@ -260,7 +260,10 @@ protected:
   ///
   /// Assignment operator; disabled.
   ///
-  sec_jcb_space& operator=(const poset_state_handle& xother) { };
+  sec_jcb_space& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<sec_jcb_space&>(*this);
+  };
 
 private:
 

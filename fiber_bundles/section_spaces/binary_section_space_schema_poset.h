@@ -301,7 +301,10 @@ protected:
   ///
   /// Assignment operator; disabled.
   ///
-  binary_section_space_schema_poset& operator=(const poset_state_handle& xother) { };
+  binary_section_space_schema_poset& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<binary_section_space_schema_poset&>(*this);
+  };
 
 private:
 

@@ -185,7 +185,10 @@ protected:
   ///
   /// Assignment operator; disabled.
   ///
-  sec_tuple_space& operator=(const poset_state_handle& xother) { };
+  sec_tuple_space& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<sec_tuple_space&>(*this);
+  };
 
 private:
 

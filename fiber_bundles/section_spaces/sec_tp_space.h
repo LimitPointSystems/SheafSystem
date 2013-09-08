@@ -371,7 +371,10 @@ protected:
   ///
   /// Assignment operator; disabled.
   ///
-  sec_tp_space& operator=(const poset_state_handle& xother) { };
+  sec_tp_space& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<sec_tp_space&>(*this);
+  };
 
 private:
 

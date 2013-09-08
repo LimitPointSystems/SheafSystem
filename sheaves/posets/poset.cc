@@ -150,43 +150,6 @@ poset(abstract_poset_member* xtop, abstract_poset_member* xbottom)
   return;
 }
 
-
-sheaf::poset::
-poset(const poset& xother)
-    : poset_state_handle(xother)
-{
-  // Preconditions:
-
-  // Body:
-
-  // Nothing to do, handled by base class
-
-  // Postconditions:
-
-  ensure(postcondition_of(poset_state_handle::poset_state_handle(const poset_state_handle&)));
-}
-
-sheaf::poset&
-sheaf::poset::
-operator=(const poset_state_handle& xother)
-{
-  // Preconditions:
-
-  require(dynamic_cast<poset*>(&const_cast<poset_state_handle&>(xother))!=0);
-
-  // Body:
-
-  poset_state_handle::operator=(xother);
-
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-
-  // Exit:
-
-  return *this;
-}
-
 // PRIVATE FUNCTIONS
 
 bool

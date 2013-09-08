@@ -216,7 +216,10 @@ protected:
   ///
   /// Assignment operator; disabled.
   ///
-  gln_space& operator=(const poset_state_handle& xother) { };
+  gln_space& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<gln_space&>(*this);
+  };
 
 private:
 

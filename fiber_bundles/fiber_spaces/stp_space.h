@@ -172,7 +172,10 @@ protected:
   ///
   /// Assignment operator; disabled.
   ///
-  stp_space& operator=(const poset_state_handle& xother) { };
+  stp_space& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<stp_space&>(*this);
+  };
 
 private:
 

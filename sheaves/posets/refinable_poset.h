@@ -111,7 +111,10 @@ protected:
   ///
   /// Assignment operator; disabled.
   ///
-  refinable_poset& operator=(const poset_state_handle& xother) { };
+  refinable_poset& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<refinable_poset&>(*this);
+  };
 
 private:
 
