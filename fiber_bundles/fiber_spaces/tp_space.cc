@@ -1109,24 +1109,6 @@ tp_space()
   ensure(postcondition_of(vd_space::vd_space()));
 }
 
-
-
-fiber_bundle::tp_space::
-tp_space(const tp_space& xother)
-  : vd_space(new tp, new tp)
-{
-  // Preconditions:
-
-  // Body:
-
-  attach_to_state(&xother);
-  
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-}
-
-
 fiber_bundle::tp_space::
 ~tp_space()
 {
@@ -1287,27 +1269,6 @@ prereq_id(int xi) const
   // Exit:
 
   return result;
-}
-
-fiber_bundle::tp_space&
-fiber_bundle::tp_space::
-operator=(const poset_state_handle& xother)
-{
-  // Preconditions:
-
-  require(is_ancestor_of(&xother));
-
-  // Body:
-
-  poset_state_handle::operator=(xother);
-
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-
-  // Exit:
-
-  return *this;
 }
 
 //==============================================================================

@@ -109,9 +109,9 @@ protected:
   tuple_space();
 
   ///
-  /// Copy constructor; attaches this to the same state as xother.
+  /// Copy constructor; disabled.
   ///
-  tuple_space(const tuple_space& xother);
+  tuple_space(const tuple_space& xother) { };
 
   ///
   /// Destructor.
@@ -162,15 +162,17 @@ public:
   ///
   virtual const char* class_name() const;
 
+protected:
+
   ///
-  /// Assignment operator; attaches this to the same state as xother.
-  /// @issue This is probably the wrong signature for operator=,
-  /// see thread Misc/Language/covariance in C++/covariance and operator=
-  /// in the discusion forum. But it is consistent with all the
-  /// other derivatives of poset_state_handle and it will soon be refactored
-  /// out of existence any way.
+  /// Assignment operator; disabled.
   ///
-  tuple_space& operator=(const poset_state_handle& xother);
+  tuple_space& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<tuple_space&>(*this);
+  };
+
+private:
 
   //@}
  

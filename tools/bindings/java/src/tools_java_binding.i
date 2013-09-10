@@ -15,7 +15,15 @@
 
 //=============================================================================
 
+%include "sheaves_common_binding_includes.i"
+%include "fiber_bundles_common_binding_includes.i"
+%include "geometry_common_binding_includes.i"
+%include "fields_common_binding_includes.i"
+%import  "sheaves_java_binding.i"
+%import  "fiber_bundles_java_binding.i"
+%import  "geometry_java_binding.i"
 %import "fields_java_binding.i"
+
 %include "tools_common_binding.i"
 
 //=============================================================================

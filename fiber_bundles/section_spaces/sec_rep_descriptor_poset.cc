@@ -188,27 +188,6 @@ fiber_bundle::sec_rep_descriptor_poset::
   return;
 }
 
-fiber_bundle::sec_rep_descriptor_poset&
-fiber_bundle::sec_rep_descriptor_poset::
-operator=(const poset_state_handle& xother)
-{
-  // Preconditions:
-
-  require(is_ancestor_of(&xother));
-
-  // Body:
-
-  poset::operator=(xother);
-
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-
-  // Exit:
-
-  return *this;
-}
-
 bool
 fiber_bundle::sec_rep_descriptor_poset::
 make_prototype()

@@ -104,14 +104,17 @@ protected:
   virtual ~refinable_poset();
 
   ///
-  /// Copy constructor; attaches this to the same state as xother
+  /// Copy constructor; disabled.
   ///
-  refinable_poset(const refinable_poset& xother);
+  refinable_poset(const refinable_poset& xother) { };
 
   ///
-  /// Assignment operator; attaches this to the same state as xother
+  /// Assignment operator; disabled.
   ///
-  refinable_poset& operator=(const poset_state_handle& xother);
+  refinable_poset& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<refinable_poset&>(*this);
+  };
 
 private:
 

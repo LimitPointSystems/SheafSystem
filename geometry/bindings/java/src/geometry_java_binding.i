@@ -14,10 +14,11 @@
 
 %include "arrays_java.i"
 
-//$$ISSUE: We might want to build the geometry bindings but not components/tools.
-//         So what do we do here?
+%include "sheaves_common_binding_includes.i"
+%include "fiber_bundles_common_binding_includes.i"
+%import  "sheaves_java_binding.i"
+%import  "fiber_bundles_java_binding.i"
 
-%import "fiber_bundles_java_binding.i"
 %include "geometry_common_binding.i"
 
 //=============================================================================

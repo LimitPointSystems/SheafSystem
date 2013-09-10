@@ -199,9 +199,9 @@ protected:
   sec_vd_space();
 
   ///
-  /// Copy constructor; attaches this to the same state as xother.
+  /// Copy constructor; disabled.
   ///
-  sec_vd_space(const sec_vd_space& xother);
+  sec_vd_space(const sec_vd_space& xother) { };
 
   ///
   /// Covariant constructor
@@ -283,17 +283,15 @@ public:
   ///
   virtual pod_index_type prereq_id(int xi) const;
 
-  ///
-  /// Assignment operator; attaches this to the same state as xother.
-  /// @issue This is probably the wrong signature for operator=,
-  /// see thread Misc/Language/covariance in C++/covariance and operator=
-  /// in the discusion forum. But it is consistent with all the
-  /// other derivatives of poset_state_handle and it will soon be refactored
-  /// out of existence any way.
-  ///
-  sec_vd_space& operator=(const poset_state_handle& xother);
-
 protected:
+
+  ///
+  /// Assignment operator; disabled.
+  ///
+  sec_vd_space& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<sec_vd_space&>(*this);
+  };
 
   ///
   /// Creates the standard subposets.

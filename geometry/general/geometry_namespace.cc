@@ -84,30 +84,6 @@ geometry_namespace()
   return;
 }
 
-
-geometry::geometry_namespace::
-geometry_namespace(const geometry_namespace& xother)
-    : fiber_bundles_namespace(xother)
-{
-
-  // Preconditions:
-
-  require(precondition_of(fiber_bundles_namespace(xother)));
-
-  // Body:
-
-  // Nothing to do.
-
-  // Postconditions:
-
-  ensure(postcondition_of(fiber_bundles_namespace(xother)));
-
-  // Exit:
-
-  return;
-}
-
-///
 geometry::geometry_namespace::
 ~geometry_namespace()
 {

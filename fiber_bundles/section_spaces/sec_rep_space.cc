@@ -422,20 +422,6 @@ sec_rep_space()
 }
 
 fiber_bundle::sec_rep_space::
-sec_rep_space(const sec_rep_space& xother)
-  : poset_state_handle(new sec_rep_space_member, new sec_rep_space_member)
-{
-  // Preconditions:
-
-  // Body:
-
-  attach_to_state(&xother);
-
-  // Postconditions:
-
-}
-
-fiber_bundle::sec_rep_space::
 sec_rep_space(sec_rep_space_member* xtop, sec_rep_space_member* xbottom)
   : poset_state_handle(xtop, xbottom)
 {
@@ -455,15 +441,6 @@ sec_rep_space(sec_rep_space_member* xtop, sec_rep_space_member* xbottom)
   // Exit:
 
   return;
-}
-
-fiber_bundle::sec_rep_space&
-fiber_bundle::sec_rep_space::
-operator=(const sec_rep_space& xother)
-{
-  attach_to_state(&xother);
-
-  return *this;
 }
 
 fiber_bundle::sec_rep_space::

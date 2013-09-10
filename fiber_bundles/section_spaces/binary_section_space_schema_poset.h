@@ -85,9 +85,9 @@ protected:
   binary_section_space_schema_poset();
 
   ///
-  /// Copy constructor; attaches this to the same state as xother
+  /// Copy constructor; disabled.
   ///
-  binary_section_space_schema_poset(const binary_section_space_schema_poset& xother);
+  binary_section_space_schema_poset(const binary_section_space_schema_poset& xother) { };
 
   ///
   /// Destructor
@@ -289,9 +289,12 @@ protected:
   virtual binary_section_space_schema_poset* clone() const;
 
   ///
-  /// Assignment operator; attaches this to the same state as xother
+  /// Assignment operator; disabled.
   ///
-  binary_section_space_schema_poset& operator=(const poset_state_handle& xother);
+  binary_section_space_schema_poset& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<binary_section_space_schema_poset&>(*this);
+  };
 
 private:
 

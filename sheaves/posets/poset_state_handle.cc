@@ -160,26 +160,6 @@ poset_state_handle(abstract_poset_member* xtop, abstract_poset_member* xbottom)
   return;
 }
 
-sheaf::poset_state_handle::
-poset_state_handle(const poset_state_handle& xother)
-{
-  _name_space = 0;
-  _state = 0;
-  _top = new total_poset_member;
-  _bottom = new total_poset_member;
-
-  attach_to_state(&xother);
-}
-
-sheaf::poset_state_handle&
-sheaf::poset_state_handle::
-operator=(const poset_state_handle& xother)
-{
-  attach_to_state(&xother);
-
-  return *this;
-}
-
 // PRIVATE FUNCTIONS
 
 

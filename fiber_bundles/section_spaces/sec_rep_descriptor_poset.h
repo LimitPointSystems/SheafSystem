@@ -99,9 +99,17 @@ protected:
   virtual ~sec_rep_descriptor_poset();
 
   ///
-  /// Assignment operator; attaches this to the same state as xother
+  /// Copy constructor; disabled.
   ///
-  sec_rep_descriptor_poset& operator=(const poset_state_handle& xother);
+  sec_rep_descriptor_poset(const sec_rep_descriptor& xother) { };
+
+  ///
+  /// Assignment operator; disabled.
+  ///
+  sec_rep_descriptor_poset& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<sec_rep_descriptor_poset&>(*this);
+  };
 
   ///
   /// Base space members prototypes poset.

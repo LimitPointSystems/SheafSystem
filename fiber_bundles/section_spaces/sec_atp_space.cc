@@ -320,22 +320,6 @@ sec_atp_space()
 }
 
 fiber_bundle::sec_atp_space::
-sec_atp_space(const sec_atp_space& xother)
-  : sec_tp_space(new sec_atp, new sec_atp)
-{
-  // Preconditions:
-
-  // Body:
-
-  attach_to_state(&xother);
-  
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-}
-
-
-fiber_bundle::sec_atp_space::
 ~sec_atp_space()
 {
   // Preconditions:
@@ -507,27 +491,6 @@ class_name() const
   // Exit:
 
   return result;
-}
-
-fiber_bundle::sec_atp_space&
-fiber_bundle::sec_atp_space::
-operator=(const poset_state_handle& xother)
-{
-  // Preconditions:
-
-  require(is_ancestor_of(&xother));
-
-  // Body:
-
-  poset_state_handle::operator=(xother);
-
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-
-  // Exit:
-
-  return *this;
 }
 
 // PROTECTED MEMBER FUNCTIONS

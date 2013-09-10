@@ -283,38 +283,6 @@ public:
 			     const string& xprop_name,
 			     bool xauto_access);
 
-  /// @todo Remove.
-//   ///
-//   /// Creates a new field with base specified by xbase_path,
-//   /// coordinates specified by xcoord_path, and property
-//   /// specified by xprop_path. Note that the paths specify
-//   /// the posets names as well as the member names.
-//   ///
-//   field_type* new_field(fiber_bundles_namespace& xns,
-//                         const poset_path& xbase_path,
-//                         const poset_path& xcoord_path,
-//                         const poset_path& xprop_path);
-
-//   ///
-//   /// Creates a new field with base specified by xbase_path,
-//   /// coordinates with name xcoord_name, and property with name xprop_name.
-//   /// Section space and fiber space names are specified by defaults.
-//   ///
-//   field_type* new_field(fiber_bundles_namespace& xns,
-//                         const poset_path& xbase_path,
-//                         const char* xcoord_name,
-//                         const char* xprop_name);
-
-//   ///
-//   /// Creates a new field with base specified by xbase_path,
-//   /// coordinates with name xcoord_name, and property with name xprop_name.
-//   /// Section space and fiber space names are specified by defaults.
-//   ///
-//   field_type* new_field(fiber_bundles_namespace& xns,
-//                         const poset_path& xbase_path,
-//                         const string& xcoord_name,
-//                         const string& xprop_name);
-
   //@}
 
 
@@ -383,32 +351,6 @@ public:
   ///
   string& coord_section_suffix();
 
-  /// @todo Remove.
-//   ///
-//   /// The coordinates fiber schema path.
-//   ///
-//   poset_path& coord_fiber_schema_path();
-
-//   ///
-//   /// The coordinates fiber path.
-//   ///
-//   poset_path& coord_fiber_path();
-
-//   ///
-//   /// The table dofs for the coordinates fiber space, if any.
-//   ///
-//   arg_list& coord_fiber_args();
-
-//   ///
-//   /// The path for the coordinates section space.
-//   ///
-//   poset_path& coord_section_space_path();
-
-//   ///
-//   /// The table dofs for the coordinate section space, if any.
-//   ///
-//   arg_list& coord_section_space_args();
-
   ///
   /// The coordinates lower bound.
   ///
@@ -436,32 +378,6 @@ private:
   /// The section suffix for the coordinates section space.
   ///
   string _coord_section_suffix;
-
-  /// @todo Remove.
-//   ///
-//   /// The coordinates fiber schema path.
-//   ///
-//   poset_path _coord_fiber_schema_path;
-
-//   ///
-//   /// The coordinates fiber path.
-//   ///
-//   poset_path _coord_fiber_path;
-
-//   ///
-//   /// The table dofs for the coordinates fiber space, if any.
-//   ///
-//   arg_list _coord_fiber_args;
-
-//   ///
-//   /// The path for the coordinates section space.
-//   ///
-//   poset_path _coord_section_space_path;
-
-//   ///
-//   /// The table dofs for the coordinate section space, if any.
-//   ///
-//   arg_list _coord_section_space_args;  
 
   ///
   /// The coordinates lower bound.
@@ -498,32 +414,6 @@ public:
   ///
   string& prop_section_suffix();
 
-  /// @todo Remove.
-//   ///
-//   /// The property fiber schema path.
-//   ///
-//   poset_path& prop_fiber_schema_path();
-
-//   ///
-//   /// The property fiber path.
-//   ///
-//   poset_path& prop_fiber_path();
-
-//   ///
-//   /// The table dofs for the property fiber space, if any.
-//   ///
-//   arg_list& prop_fiber_args();
-
-//   ///
-//   /// The path for the property section space.
-//   ///
-//   poset_path& prop_section_space_path();
-
-//   ///
-//   /// The table dofs for the property section space, if any.
-//   ///
-//   arg_list& prop_section_space_args();  
-
   ///
   /// The property lower bound.
   ///
@@ -551,32 +441,6 @@ private:
   /// The section suffix for the property section space.
   ///
   string _prop_section_suffix;
-
-  /// @todo Remove.
-//   ///
-//   /// The property fiber schema path.
-//   ///
-//   poset_path _prop_fiber_schema_path;
-
-//   ///
-//   /// The property fiber path.
-//   ///
-//   poset_path _prop_fiber_path;
-
-//   ///
-//   /// The table dofs for the property fiber space, if any.
-//   ///
-//   arg_list _prop_fiber_args;
-
-//   ///
-//   /// The path for the property section space.
-//   ///
-//   poset_path _prop_section_space_path;
-
-//   ///
-//   /// The table dofs for the property section space, if any.
-//   ///
-//   arg_list _prop_section_space_args;
 
   ///
   /// The property lower bound.

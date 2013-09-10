@@ -41,6 +41,8 @@
 #include "tuple.h"
 #endif
 
+using namespace fiber_bundle; // Workaround for MS C++ bug.
+
 template <typename S>
 sheaf::poset_path
 fiber_bundle::binary_section_space_schema_member::

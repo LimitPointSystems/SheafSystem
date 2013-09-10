@@ -170,9 +170,9 @@ protected:
   sec_rep_space();
 
   ///
-  /// Copy constructor.
+  /// Copy constructor; disabled.
   ///
-  sec_rep_space(const sec_rep_space& xother);
+  sec_rep_space(const sec_rep_space& xother) { };
 
   ///
   /// Covariant constructor
@@ -180,9 +180,12 @@ protected:
   sec_rep_space(sec_rep_space_member* xtop, sec_rep_space_member* xbottom);
 
   ///
-  /// Assignment operator.
+  /// Assignment operator; disabled.
   ///
-  sec_rep_space& operator=(const sec_rep_space& xother);
+  sec_rep_space& operator=(const sec_rep_space& xother)
+  {
+    return const_cast<sec_rep_space&>(*this);
+  };
 
   ///
   /// Destructor.

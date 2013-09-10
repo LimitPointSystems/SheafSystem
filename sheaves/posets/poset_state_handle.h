@@ -186,17 +186,17 @@ protected:
   poset_state_handle(abstract_poset_member* xtop, abstract_poset_member* xbottom);
 
   ///
-  /// Copy constructor; attaches this to the same state as xother
+  /// Copy constructor; disabled
   ///
-  poset_state_handle(const poset_state_handle& xother);
-
-  /// @error shouldn't operator= be virtual so that it's result
-  /// can be down-cast to the actual type?
+  poset_state_handle(const poset_state_handle& xother) { };
 
   ///
-  /// Assignment operator; attaches this to the same state as xother
+  /// Assignment operator; disabled.
   ///
-  poset_state_handle& operator=(const poset_state_handle& xother);
+  poset_state_handle& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<poset_state_handle&>(*this);
+  };
 
 private:
 

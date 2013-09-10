@@ -6,7 +6,7 @@
 //
 
 /// @file
-/// Interface for class sec_tuple.impl
+/// Implementation of template member functions for class sec_tuple
 
 #ifndef SEC_TUPLE_IMPL_H
 #define SEC_TUPLE_IMPL_H
@@ -26,6 +26,8 @@
 #ifndef BINARY_SECTION_SPACE_SCHEMA_POSET_H
 #include "binary_section_space_schema_poset.h"
 #endif
+
+using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 template <typename S>
 sheaf::poset_path

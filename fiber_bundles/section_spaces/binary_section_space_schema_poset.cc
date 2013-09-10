@@ -140,22 +140,6 @@ binary_section_space_schema_poset()
 }
 
 fiber_bundle::binary_section_space_schema_poset::
-binary_section_space_schema_poset(const binary_section_space_schema_poset& xother)
-    : section_space_schema_poset(new binary_section_space_schema_member,
-                                 new binary_section_space_schema_member)
-{
-  // Preconditions:
-
-  // Body:
-
-  *this = xother;
-
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-}
-
-fiber_bundle::binary_section_space_schema_poset::
 ~binary_section_space_schema_poset()
 {
   // Preconditions:
@@ -739,27 +723,6 @@ clone() const
   // Exit
 
   return result;
-}
-
-fiber_bundle::binary_section_space_schema_poset&
-fiber_bundle::binary_section_space_schema_poset::
-operator=(const poset_state_handle& xother)
-{
-  // Preconditions:
-
-  require(is_ancestor_of(&xother));
-
-  // Body:
-
-  poset_state_handle::operator=(xother);
-
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-
-  // Exit:
-
-  return *this;
 }
 
 // PRIVATE FUNCTIONS

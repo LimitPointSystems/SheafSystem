@@ -333,6 +333,11 @@ protected:
   ij_product_structure* _product;
 
   ///
+  /// Default constructor; disabled.
+  ///
+  section_space_schema_poset() { };
+
+  ///
   /// Destructor
   ///
   virtual ~section_space_schema_poset();
@@ -761,9 +766,12 @@ protected:
   virtual section_space_schema_poset* clone() const = 0;
 
   ///
-  /// Assignment operator; attaches this to the same state as xother
+  /// Assignment operator; disabled.
   ///
-  section_space_schema_poset& operator=(const poset_state_handle& xother);
+  section_space_schema_poset& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<section_space_schema_poset&>(*this);
+  };
 
 private:
 

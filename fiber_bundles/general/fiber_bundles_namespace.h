@@ -124,9 +124,9 @@ protected:
   fiber_bundles_namespace(namespace_poset_member* xtop, namespace_poset_member* xbottom);
 
   ///
-  /// Copy constructor; attaches this to the same state as xother
+  /// Copy constructor; disabled.
   ///
-  fiber_bundles_namespace(const fiber_bundles_namespace& xother);
+  fiber_bundles_namespace(const fiber_bundles_namespace& xother) { };
 
 private:
 

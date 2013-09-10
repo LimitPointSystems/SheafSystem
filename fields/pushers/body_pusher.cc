@@ -102,14 +102,6 @@ body_pusher(const geometry::sec_ed_invertible& xdomain_coord, const sec_ed& xran
       lrep_path.put_member_name("vertex_element_dlinear");
     }
 
-    /// @todo Remove.
-    
-//     lschema_path = lns.new_section_space_schema(lschema_path,
-// 						lrep_path,
-// 						xrange_coord.schema().base_space().path(),
-// 						xdomain_coord.schema().fiber_space().path(),
-// 						true);
-
       binary_section_space_schema_poset& lhost =
 	binary_section_space_schema_poset::new_table(lns,
 						     lschema_path.poset_name(),

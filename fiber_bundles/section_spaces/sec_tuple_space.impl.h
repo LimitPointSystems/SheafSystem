@@ -23,6 +23,8 @@
 #include "section_space_schema_poset.h"
 #endif
 
+using namespace fiber_bundle; // Workaround for MS C++ bug.
+
 template <typename F>
 bool
 fiber_bundle::sec_tuple_space::

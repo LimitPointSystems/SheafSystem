@@ -75,14 +75,17 @@ protected:
   poset(abstract_poset_member* xtop, abstract_poset_member* xbottom);
 
   ///
-  /// Copy constructor; attaches this to the same state as xother
+  /// Copy constructor; disabled.
   ///
-  poset(const poset& xother);
+  poset(const poset& xother) { };
 
   ///
-  /// Assignment operator; attaches this to the same state as xother
+  /// Assignment operator; disabled.
   ///
-  poset& operator=(const poset_state_handle& xother);
+  poset& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<poset&>(*this);
+  };
 
 private:
 
