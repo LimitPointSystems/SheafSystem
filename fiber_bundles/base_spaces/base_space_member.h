@@ -166,7 +166,7 @@ public:
                     bool xauto_access);
 
   ///
-  /// Creates a new handle attached to anew jim state in xhist
+  /// Creates a new handle attached to a new jim state in xhost
   /// and initializes it for use as a prototype with type_name xtype_name, 
   /// dimension xdb, and local cell prototype xlocal_cell_name.
   ///

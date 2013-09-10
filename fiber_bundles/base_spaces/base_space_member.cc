@@ -774,7 +774,7 @@ init_member_prototype(const string& xtype_name, int xdb, const string& xlocal_ce
 
   require(state_is_read_write_accessible());
   require(!xtype_name.empty());
-  require(!host()->contains_member(xtype_name, true));
+  require(!host()->contains_member(xtype_name, false));
   require(host()->member_id_spaces(false).contains("cell_types"));
   require(xlocal_cell_name.empty() || host()->contains_member(xlocal_cell_name, false));
 
