@@ -166,11 +166,12 @@ public:
                     bool xauto_access);
 
   ///
-  /// Creates a new prototype with name xname, dimension xdb, and
-  /// local cell prototype xlocal_cell_name.
+  /// Creates a new handle attached to anew jim state in xhist
+  /// and initializes it for use as a prototype with type_name xtype_name, 
+  /// dimension xdb, and local cell prototype xlocal_cell_name.
   ///
   base_space_member(poset* xhost,
-                    const string& xname,
+                    const string& xtype_name,
                     int xdb,
                     const string& xlocal_cell_name,
                     bool xauto_access);
@@ -328,9 +329,9 @@ public:
 
   ///
   /// Sets the attibutes of this to be a member prototype with
-  /// dimension xdb and local cell xlocal_cell_name.
+  /// type_name xtype_name, dimension xdb and local cell xlocal_cell_name.
   ///
-  void init_member_prototype(int xdb, const string& xlocal_cell_name);
+  void init_member_prototype(const string& xtype_name, int xdb, const string& xlocal_cell_name);
 
 protected:
 

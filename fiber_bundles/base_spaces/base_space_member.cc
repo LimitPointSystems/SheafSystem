@@ -343,7 +343,7 @@ base_space_member(base_space_poset* xhost,
 
 fiber_bundle::base_space_member::
 base_space_member(poset* xhost,
-                  const string& xname,
+                  const string& xtype_name,
                   int xdb,
                   const string& xlocal_cell_name,
                   bool xauto_access)
@@ -351,8 +351,8 @@ base_space_member(poset* xhost,
   // Preconditions:
 
   require(xauto_access || xhost->in_jim_edit_mode());
-  require(!xname.empty());
-  require(!xhost->contains_member(xname, true));
+  require(!xtype_name.empty());
+  require(!xhost->contains_member(xtype_name, true));
   require(xlocal_cell_name.empty() || xhost->contains_member(xlocal_cell_name));
 
   // Body:
@@ -369,11 +369,10 @@ base_space_member(poset* xhost,
   // Create the member and set its name.
 
   new_jim_state(xhost, 0, false, false);
-  put_name(xname, true, false);
 
   // Initialize the dofs.
 
-  init_member_prototype(xdb, xlocal_cell_name);
+  init_member_prototype(xtype_name, xdb, xlocal_cell_name);
 
   // Now we can check the invaraint.
 
@@ -383,9 +382,9 @@ base_space_member(poset* xhost,
 
   ensure(invariant());
   ensure(host() == xhost);
-  ensure(name() == xname);
+  ensure(name() == xtype_name);
   ensure(db() == xdb);
-  ensure(type_name() == xname);
+  ensure(type_name() == xtype_name);
   ensure(refinement_depth() == 0);
   ensure(local_cell_type_name() == xlocal_cell_name);
 
@@ -769,16 +768,21 @@ new_row_dof_map(poset_state_handle& xhost, const string& xprototype_name, bool x
 
 void
 fiber_bundle::base_space_member::
-init_member_prototype(int xdb, const string& xlocal_cell_name)
+init_member_prototype(const string& xtype_name, int xdb, const string& xlocal_cell_name)
 {
   // Preconditions:
 
   require(state_is_read_write_accessible());
+  require(!xtype_name.empty());
+  require(!host()->contains_member(xtype_name, true));
   require(host()->member_id_spaces(false).contains("cell_types"));
   require(xlocal_cell_name.empty() || host()->contains_member(xlocal_cell_name, false));
-  require(!name().empty());
 
   // Body:
+
+  // Set name to type name.
+
+  put_name(xtype_name, true, false);
 
   row_dof_tuple_type& ltuple = *row_dof_tuple();
 
@@ -801,7 +805,7 @@ init_member_prototype(int xdb, const string& xlocal_cell_name)
 
   /// @error where does this string get deleted?
 
-  ltuple.type_name = strdup(name().c_str());
+  ltuple.type_name = strdup(xtype_name.c_str());
 
   // Set the refinement depth.
 
