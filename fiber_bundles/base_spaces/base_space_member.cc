@@ -316,16 +316,20 @@ base_space_member(base_space_poset* xhost,
     xhost->name_space()->member_poset(prototypes_poset_name(), true).get_read_access();
   }
 
-  if(xcopy_dof_map)
-  {
-    array_poset_dof_map* lmap = new_row_dof_map(xhost, xprototype_name);
-    new_jim_state(xhost, lmap, false, false);
-  }
-  else
-  {
-    scoped_index ldof_tuple_id = xhost->prototype_dof_tuple_id(xprototype_name, 0, true, xauto_access);
-    new_jim_state(xhost, ldof_tuple_id, xauto_access);
-  }
+//   if(xcopy_dof_map)
+//   {
+//     array_poset_dof_map* lmap = new_row_dof_map(xhost, xprototype_name);
+//     new_jim_state(xhost, lmap, false, false);
+//   }
+//   else
+//   {
+//     scoped_index ldof_tuple_id = xhost->prototype_dof_tuple_id(xprototype_name, 0, true, xauto_access);
+//     new_jim_state(xhost, ldof_tuple_id, xauto_access);
+//   }
+
+
+  pod_index_type lid = xhost->new_member(xprototype_name, xcopy_dof_map);
+  attach_to_state(xhost, lid);
 
   if(xauto_access)
   {

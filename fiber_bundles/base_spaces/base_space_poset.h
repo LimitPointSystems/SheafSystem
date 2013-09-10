@@ -29,6 +29,8 @@ namespace fiber_bundle
 using namespace sheaf;  
   
 class base_space_crg_interval;
+class base_space_member_row_dof_tuple_type;
+  
 
 ///
 /// The lattice of closed cells of a cellular space;
@@ -48,6 +50,11 @@ class SHEAF_DLL_SPEC base_space_poset : public refinable_poset
   //@{
 
 public:
+
+  ///
+  /// The type of rowe dof tuple for this.
+  ///
+  typedef base_space_member_row_dof_tuple_type row_dof_tuple_type;
 
   ///
   /// The path to the standard schema for this class.
@@ -694,57 +701,57 @@ public:
   ///
   table_dof_tuple_type* table_dof_tuple();
 
-  /// @issue why do we define row_dof_tuple_type
-  /// both here and in base_space_member?
+//   /// @issue why do we define row_dof_tuple_type
+//   /// both here and in base_space_member?
+
+//   ///
+//   /// The type of row dof tuple for this.
+//   ///
+//   struct SHEAF_DLL_SPEC row_dof_tuple_type
+//   {
+//     ///
+//     /// The base space dimension.
+//     ///
+//     int db;
+
+//     ///
+//     /// The cell type id.
+//     ///
+//     int type_id;
+
+//     ///
+//     /// The cell type name.
+//     ///
+//     const char * type_name;
+
+//     ///
+//     /// The refinement depth.
+//     ///
+//     int refinement_depth;
+//   };
 
   ///
-  /// The type of row dof tuple for this.
-  ///
-  struct SHEAF_DLL_SPEC row_dof_tuple_type
-  {
-    ///
-    /// The base space dimension.
-    ///
-    int db;
-
-    ///
-    /// The cell type id.
-    ///
-    int type_id;
-
-    ///
-    /// The cell type name.
-    ///
-    const char * type_name;
-
-    ///
-    /// The refinement depth.
-    ///
-    int refinement_depth;
-  };
-
-  ///
-  /// The row dof tuple for the member with hub id xmbr_hub_id.
+  /// The row dof tuple for the member with member hub id xmbr_hub_id.
   ///
   row_dof_tuple_type* member_dof_tuple(pod_index_type xmbr_hub_id,
                                        bool xrequire_write_access = false) const;
 
   ///
-  /// The row dof tuple for the member with id xmbr_id.
+  /// The row dof tuple for the member with member id xmbr_id.
   ///
   row_dof_tuple_type* member_dof_tuple(const scoped_index& xmbr_id,
                                        bool xrequire_write_access = false) const;
 
   ///
-  /// The row dof tuple with hub id xmbr_hub_id.
+  /// The row dof tuple with tuple hub id xtuple_hub_id.
   ///
-  row_dof_tuple_type* row_dof_tuple(pod_index_type xmbr_hub_id,
+  row_dof_tuple_type* row_dof_tuple(pod_index_type xtuple_hub_id,
                                     bool xrequire_write_access = false) const;
 
   ///
-  /// The row dof tuple with id xmbr_id.
+  /// The row dof tuple with tuple id xtuple_id.
   ///
-  row_dof_tuple_type* row_dof_tuple(const scoped_index& xmbr_id,
+  row_dof_tuple_type* row_dof_tuple(const scoped_index& xtuple_id,
                                     bool xrequire_write_access = false) const;
 
 protected:
@@ -775,6 +782,17 @@ public:
   /// The name of this class.
   ///
   virtual const char* class_name() const;
+
+  using refinable_poset::new_member;
+  
+  ///
+  /// Creates a disconnected jim using the prototype with name xprototype_name.
+  /// If xcopy_dof_map or if xhost does not already contain a copy 
+  /// of the prototype dof map, create a copy of the dof map,
+  /// otherwise just refer to an existing copy.
+  ///.
+  ///
+  pod_index_type new_member(const string& xprototype_name, bool xcopy_dof_map);
 
   using refinable_poset::new_row_dof_map;
 

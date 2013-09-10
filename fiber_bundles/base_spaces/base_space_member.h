@@ -41,6 +41,71 @@ namespace fiber_bundle
 class base_space_poset;
 
 using namespace sheaf;
+
+
+///
+/// The type of row dof tuple for base_space_member.
+///
+class SHEAF_DLL_SPEC base_space_member_row_dof_tuple_type
+{
+public:
+
+  ///
+  /// The base space dimension.
+  ///
+  int db;
+
+  ///
+  /// The cell type id.
+  ///
+  int type_id;
+
+  ///
+  /// The cell type name.
+  ///
+  const char* type_name;
+
+  ///
+  /// The refinement depth.
+  ///
+  int refinement_depth;
+
+  ///
+  /// The local cell type id.
+  ///
+  int local_cell_type_id;
+
+  ///
+  /// The local cell type name.
+  ///
+  const char* local_cell_type_name;
+
+  ///
+  /// The number of local cells.
+  ///
+  size_type size;
+
+  ///
+  /// The upper bound on the x direction index for structured blocks
+  ///
+  size_type i_size;
+
+  ///
+  /// The upper bound on the y direction index for structured blocks
+  ///
+  size_type j_size;
+
+  ///
+  /// The upper bound on the z direction index for structured blocks
+  ///
+  size_type k_size;
+
+protected:
+
+private:
+
+};
+
  
 ///
 /// A client handle for a member of a base space poset.
@@ -121,6 +186,11 @@ private:
 public:
 
   ///
+  /// The type of rowe dof tuple for this.
+  ///
+  typedef base_space_member_row_dof_tuple_type row_dof_tuple_type;
+  
+  ///
   /// Default constructor; creates a new, unattached base_space_member handle.
   ///
   base_space_member();
@@ -154,7 +224,7 @@ public:
 
   ///
   /// Creates a new handle attached to a new jim
-  /// state in xhost using the prototype with name xname.
+  /// state in xhost using the prototype with name xprototype_name.
   /// If xcopy_dof_map or if xhost does not already contain a copy 
   /// of the prototype dof map, create a copy of the dof map,
   /// otherwise just refer to an existing copy.
@@ -250,62 +320,6 @@ public:
   /// the current name space contains a member with name xname.
   ///
   static bool prototype_exists(const string& xname, bool xauto_access);
-
-  ///
-  /// The type of row dof tuple for this.
-  ///
-  struct SHEAF_DLL_SPEC row_dof_tuple_type
-  {
-    ///
-    /// The base space dimension.
-    ///
-    int db;
-
-    ///
-    /// The cell type id.
-    ///
-    int type_id;
-
-    ///
-    /// The cell type name.
-    ///
-    const char* type_name;
-
-    ///
-    /// The refinement depth.
-    ///
-    int refinement_depth;
-
-    ///
-    /// The local cell type id.
-    ///
-    int local_cell_type_id;
-
-    ///
-    /// The local cell type name.
-    ///
-    const char* local_cell_type_name;
-
-    ///
-    /// The number of local cells.
-    ///
-    size_type size;
-
-    ///
-    /// The upper bound on the x direction index for structured blocks
-    ///
-    size_type i_size;
-
-    ///
-    /// The upper bound on the y direction index for structured blocks
-    ///
-    size_type j_size;
-
-    ///
-    /// The upper bound on the z direction index for structured blocks
-    ///
-    size_type k_size;
-  };
 
   ///
   /// The row dof tuple for this.

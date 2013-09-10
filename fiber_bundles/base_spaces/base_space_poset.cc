@@ -13,7 +13,6 @@
 #include "array_index_space_state.h"
 #include "array_poset_dof_map.h"
 #include "base_space_member.h"
-//#include "base_space_member_prototype.h"
 #include "index_space_handle.h"
 #include "index_space_iterator.h"
 #include "interval_index_space_state.h"
@@ -2297,7 +2296,7 @@ prototype_dof_tuple_id(const string& xname,
     }
   }
 
-  if(!result.is_valid())
+  if(!result.is_valid() && xcreate)
   {
     // Couldn't find a dof tuple, have to make one.
 
@@ -2312,9 +2311,9 @@ prototype_dof_tuple_id(const string& xname,
 
   // Postconditions:
 
-  ensure(contains_row_dof_tuple(result));
-  ensure(xname == row_dof_tuple(result)->type_name);
-  ensure(xdepth == row_dof_tuple(result)->refinement_depth);
+  ensure(!result.is_valid() || contains_row_dof_tuple(result));
+  ensure(!result.is_valid() || (xname == row_dof_tuple(result)->type_name));
+  ensure(!result.is_valid() || (xdepth == row_dof_tuple(result)->refinement_depth));
 
   // Exit:
 
@@ -2420,7 +2419,7 @@ member_dof_tuple(const scoped_index& xid, bool xrequire_write_access) const
 
 fiber_bundle::base_space_poset::row_dof_tuple_type*
 fiber_bundle::base_space_poset::
-row_dof_tuple(pod_index_type xhub_id, bool xrequire_write_access) const
+row_dof_tuple(pod_index_type xtuple_hub_id, bool xrequire_write_access) const
 {
   row_dof_tuple_type* result;
 
@@ -2429,11 +2428,11 @@ row_dof_tuple(pod_index_type xhub_id, bool xrequire_write_access) const
   require(xrequire_write_access ?
           state_is_read_write_accessible() :
           state_is_read_accessible());
-  require(contains_row_dof_tuple(xhub_id));
+  require(contains_row_dof_tuple(xtuple_hub_id));
 
   // Body:
 
-  poset_dof_map& ldof_map = row_dof_map(xhub_id, xrequire_write_access);
+  poset_dof_map& ldof_map = row_dof_map(xtuple_hub_id, xrequire_write_access);
   result = reinterpret_cast<row_dof_tuple_type*>(ldof_map.dof_tuple());
 
   // Postconditions:
@@ -2447,7 +2446,7 @@ row_dof_tuple(pod_index_type xhub_id, bool xrequire_write_access) const
 
 fiber_bundle::base_space_poset::row_dof_tuple_type*
 fiber_bundle::base_space_poset::
-row_dof_tuple(const scoped_index& xid, bool xrequire_write_access) const
+row_dof_tuple(const scoped_index& xtuple_id, bool xrequire_write_access) const
 {
   row_dof_tuple_type* result;
 
@@ -2456,11 +2455,11 @@ row_dof_tuple(const scoped_index& xid, bool xrequire_write_access) const
   require(xrequire_write_access ?
           state_is_read_write_accessible() :
           state_is_read_accessible());
-  require(contains_row_dof_tuple(xid));
+  require(contains_row_dof_tuple(xtuple_id));
 
   // Body:
 
-  result = row_dof_tuple(xid.hub_pod(), xrequire_write_access);
+  result = row_dof_tuple(xtuple_id.hub_pod(), xrequire_write_access);
 
   // Postconditions:
 
@@ -2530,6 +2529,51 @@ class_name() const
   return result;
 }
 
+sheaf::pod_index_type
+fiber_bundle::base_space_poset::
+new_member(const string& xprototype_name, bool xcopy_dof_map)
+{
+  // cout << endl << "Entering base_space_poset::new_member." << endl;
+
+  // Preconditions:
+
+  require(in_jim_edit_mode());
+  require(name_space()->state_is_read_accessible());
+  require(name_space()->member_poset(prototypes_poset_name(), false).state_is_read_accessible());
+  require(!xprototype_name.empty());
+  require(name_space()->contains_poset_member(poset_path(prototypes_poset_name(), xprototype_name), false));
+
+  // Body:
+
+  scoped_index ltuple_id;
+  
+  if(xcopy_dof_map)
+  {
+    ltuple_id = new_row_dof_map(xprototype_name);
+  }
+  else
+  {
+    ltuple_id = prototype_dof_tuple_id(xprototype_name, 0, true, false);
+  }
+
+  pod_index_type result = new_member(true, ltuple_id.hub_pod());
+
+  // Postconditions:
+
+  ensure(invariant());
+  ensure(contains_member(result, false));
+  ensure(type_name(result) == xprototype_name);
+  ensure(cover_is_empty(LOWER, result));
+  ensure(cover_is_empty(UPPER, result));
+
+  // Exit:
+
+  // cout << "Leaving base_space_poset::new_member." << endl;
+  return result;
+}
+
+
+
 const sheaf::scoped_index&
 fiber_bundle::base_space_poset::
 new_row_dof_map(const string& xprototype_name)
@@ -2537,7 +2581,8 @@ new_row_dof_map(const string& xprototype_name)
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(name_space()->contains_poset_member(prototypes_poset_name()+"/"+xprototype_name));
+  require(name_space()->member_poset(prototypes_poset_name()).state_is_auto_read_accessible(true));
+  require(name_space()->contains_poset_member(prototypes_poset_name()+"/"+xprototype_name, false));
 
   // Body:
 
@@ -2551,20 +2596,26 @@ new_row_dof_map(const string& xprototype_name)
   // Get the prototype.
 
   poset_path lproto_path(prototypes_poset_name(), xprototype_name);
-  base_space_member lproto(name_space(), lproto_path, true);
+  base_space_member lproto(name_space(), lproto_path, false);
   lproto.get_read_access();
+  row_dof_tuple_type* lproto_tuple = lproto.row_dof_tuple(false);
 
   // Copy its dofs.
 
-  ltuple->db               = lproto.db();
-  ltuple->type_id          = lproto.type_id();
-  ltuple->type_name        = strdup(lproto.type_name());
-  ltuple->refinement_depth = lproto.refinement_depth();
-
+  ltuple->db                   = lproto_tuple->db;
+  ltuple->type_id              = lproto_tuple->type_id;
+  ltuple->type_name            = strdup(lproto_tuple->type_name);
+  ltuple->refinement_depth     = lproto_tuple->refinement_depth;
+  ltuple->local_cell_type_id   = lproto_tuple->local_cell_type_id;
+  ltuple->local_cell_type_name = strdup(lproto_tuple->local_cell_type_name);
+  ltuple->size                 = lproto_tuple->size;
+  ltuple->i_size               = lproto_tuple->i_size;
+  ltuple->j_size               = lproto_tuple->j_size;
+  ltuple->k_size               = lproto_tuple->k_size;
+  
   // Release the prototype.
 
   lproto.release_access();
-  lproto.detach_from_state();
 
   // Postconditions:
 

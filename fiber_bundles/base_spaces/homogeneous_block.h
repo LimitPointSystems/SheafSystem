@@ -161,55 +161,55 @@ protected:
   ///
   void put_size(const size_type& xsize);
 
-  ///
-  /// The type of row dof tuple for this.
-  ///
-  struct SHEAF_DLL_SPEC row_dof_tuple_type
-  {
-    ///
-    /// The base space dimension.
-    ///
-    int db;
+//   ///
+//   /// The type of row dof tuple for this.
+//   ///
+//   struct SHEAF_DLL_SPEC row_dof_tuple_type
+//   {
+//     ///
+//     /// The base space dimension.
+//     ///
+//     int db;
 
-    ///
-    /// The cell type id.
-    ///
-    int type_id;
+//     ///
+//     /// The cell type id.
+//     ///
+//     int type_id;
 
-    ///
-    /// The cell type name.
-    ///
-    const char* type_name;
+//     ///
+//     /// The cell type name.
+//     ///
+//     const char* type_name;
 
-    ///
-    /// The refinement depth.
-    ///
-    int refinement_depth;
+//     ///
+//     /// The refinement depth.
+//     ///
+//     int refinement_depth;
 
-    ///
-    /// The local cell type id.
-    ///
-    int local_cell_type_id;
+//     ///
+//     /// The local cell type id.
+//     ///
+//     int local_cell_type_id;
 
-    ///
-    /// The local cell type name.
-    ///
-    const char * local_cell_type_name;
+//     ///
+//     /// The local cell type name.
+//     ///
+//     const char * local_cell_type_name;
 
-    ///
-    /// The number of local cell instances in this block.
-    ///
-    size_type size;
-  };
+//     ///
+//     /// The number of local cell instances in this block.
+//     ///
+//     size_type size;
+//   };
 
 
-  ///
-  /// The row dof tuple for this.
-  ///
-  inline row_dof_tuple_type* row_dof_tuple()
-  {
-    return reinterpret_cast<row_dof_tuple_type*>(dof_map().dof_tuple());
-  }
+//   ///
+//   /// The row dof tuple for this.
+//   ///
+//   inline row_dof_tuple_type* row_dof_tuple()
+//   {
+//     return reinterpret_cast<row_dof_tuple_type*>(dof_map().dof_tuple());
+//   }
 
   ///
   /// The implicit interval posetmember for this block.
