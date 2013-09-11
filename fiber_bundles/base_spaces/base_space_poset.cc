@@ -153,37 +153,22 @@ fiber_bundle::base_space_poset::
 
 // PRIVATE FUNCTIONS
 
-
-// ===========================================================
-// STATE FACET
-// ===========================================================
-
-// PUBLIC FUNCTIONS
-
-// PROTECTED FUNCTIONS
-
-// PRIVATE FUNCTIONS
-
-
-// ===========================================================
-// TABLE DOFS FACET
-// ===========================================================
-
-// PUBLIC FUNCTIONS
-
-int
+bool
 fiber_bundle::base_space_poset::
-max_db() const
+make_prototype()
 {
-  int result;
+  bool result = false;
 
   // Preconditions:
 
-  require(state_is_read_accessible());
-
   // Body:
 
-  result = table_dof_tuple()->max_db;
+  poset_type ltype = POSET_ID;
+
+  base_space_poset* lproto = new base_space_poset;
+
+  factory().insert_prototype(lproto);
+  factory().insert_prototype(ltype, lproto);
 
   // Postconditions:
 
@@ -191,58 +176,6 @@ max_db() const
 
   return result;
 }
-
-void
-fiber_bundle::base_space_poset::
-put_max_db(int xmax_db)
-{
-  // Preconditions:
-
-  require(state_is_read_write_accessible());
-
-  // Body:
-
-  table_dof_tuple()->max_db = xmax_db;
-
-  // Postconditions:
-
-  ensure(max_db() == xmax_db);
-
-  // Exit:
-
-  return;
-}
-
-void
-fiber_bundle::base_space_poset::
-update_max_db(int xmax_db)
-{
-  // Preconditions:
-
-  require(state_is_read_write_accessible());
-
-  // Body:
-
-  define_old_variable(int old_max_db = max_db());
-
-  if(xmax_db > max_db())
-  {
-    table_dof_tuple()->max_db = xmax_db;
-  }
-
-  // Postconditions:
-
-  ensure(max_db() == ((xmax_db > old_max_db) ? xmax_db : old_max_db));
-
-  // Exit:
-
-  return;
-}
-
-// PROTECTED FUNCTIONS
-
-// PRIVATE FUNCTIONS
-
 
 // ===========================================================
 // ZONE ID SPACE FACET
@@ -750,6 +683,261 @@ release_vertex_id_space_iterator(index_space_iterator& xitr, bool xauto_access) 
 // PROTECTED FUNCTIONS
 
 // PRIVATE FUNCTIONS
+
+
+// ===========================================================
+// VERTEX CLIENT ID SPACE FACET
+// ===========================================================
+
+// PUBLIC FUNCTIONS
+
+bool
+fiber_bundle::base_space_poset::
+contains_vertex_client_id_space(pod_index_type xmbr_id, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  require(contains_member(xmbr_id, xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  const zone_nodes_block_crg_interval* linterval =
+    dynamic_cast<const zone_nodes_block_crg_interval*>(&crg().interval(xmbr_id));
+
+  bool result = (linterval != 0) && linterval->vertex_client_id_space_initialized();
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return result;
+}
+
+bool
+fiber_bundle::base_space_poset::
+contains_vertex_client_id_space(const scoped_index& xmbr_id, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  require(contains_member(xmbr_id, xauto_access));
+
+  // Body:
+
+  bool result = contains_vertex_client_id_space(xmbr_id.hub_pod(), xauto_access);
+
+  // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::index_space_handle&
+fiber_bundle::base_space_poset::
+get_vertex_client_id_space(pod_index_type xmbr_id, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  require(contains_member(xmbr_id, xauto_access));
+  require(contains_vertex_client_id_space(xmbr_id, xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  const zone_nodes_block_crg_interval& linterval =
+    reinterpret_cast<const zone_nodes_block_crg_interval&>(crg().interval(xmbr_id));
+
+  index_space_handle& result = crg().id_spaces().get_id_space(linterval.vertex_client_space_id());
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(result.is_attached());
+  ensure(member_id_spaces(xauto_access).allocated_id_space(result));
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::index_space_handle&
+fiber_bundle::base_space_poset::
+get_vertex_client_id_space(const scoped_index& xmbr_id, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  require(contains_member(xmbr_id, xauto_access));
+  require(contains_vertex_client_id_space(xmbr_id, xauto_access));
+
+  // Body:
+
+  index_space_handle& result = get_vertex_client_id_space(xmbr_id.hub_pod(), xauto_access);
+
+  // Postconditions:
+
+  ensure(result.is_attached());
+  ensure(member_id_spaces(xauto_access).allocated_id_space(result));
+
+  // Exit:
+
+  return result;
+}
+
+void
+fiber_bundle::base_space_poset::
+release_vertex_client_id_space(index_space_handle& xid_space, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  require(member_id_spaces(xauto_access).allocated_id_space(xid_space));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  crg().id_spaces().release_id_space(xid_space);
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(!xid_space.is_attached());
+
+  // Exit:
+
+  return;
+}
+
+sheaf::index_space_iterator&
+fiber_bundle::base_space_poset::
+get_vertex_client_id_space_iterator(pod_index_type xmbr_id, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  require(contains_member(xmbr_id, xauto_access));
+  require(contains_vertex_client_id_space(xmbr_id, xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  const zone_nodes_block_crg_interval& linterval =
+    reinterpret_cast<const zone_nodes_block_crg_interval&>(crg().interval(xmbr_id));
+
+  index_space_iterator& result = crg().id_spaces().get_id_space_iterator(linterval.vertex_client_space_id());
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(result.is_attached());
+  ensure(member_id_spaces(xauto_access).allocated_id_space_iterator(result));
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::index_space_iterator&
+fiber_bundle::base_space_poset::
+get_vertex_client_id_space_iterator(const scoped_index& xmbr_id, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  require(contains_member(xmbr_id, xauto_access));
+  require(contains_vertex_client_id_space(xmbr_id, xauto_access));
+
+  // Body:
+
+  index_space_iterator& result = get_vertex_client_id_space_iterator(xmbr_id.hub_pod(), xauto_access);
+
+  // Postconditions:
+
+  ensure(result.is_attached());
+  ensure(member_id_spaces(xauto_access).allocated_id_space_iterator(result));
+
+  // Exit:
+
+  return result;
+}
+
+void
+fiber_bundle::base_space_poset::
+release_vertex_client_id_space_iterator(index_space_iterator& xitr, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  require(member_id_spaces(xauto_access).allocated_id_space_iterator(xitr));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  crg().id_spaces().release_id_space_iterator(xitr);
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(!xitr.is_attached());
+
+  // Exit:
+
+  return;
+}
+
+// PROTECTED FUNCTIONS
+
+// PRIVATE FUNCTIONS
+
 
 
 // ===========================================================
@@ -1269,31 +1457,120 @@ release_adjacency_id_space_iterator(index_space_iterator& xitr, bool xauto_acces
 
 
 // ===========================================================
-// VERTEX CLIENT ID SPACE FACET
+// MEMBER PROTOTYPES FACET
 // ===========================================================
 
 // PUBLIC FUNCTIONS
 
-bool
+const string&
 fiber_bundle::base_space_poset::
-contains_vertex_client_id_space(pod_index_type xmbr_id, bool xauto_access) const
+prototypes_poset_name()
 {
+
   // Preconditions:
 
-  require(state_is_auto_read_accessible(xauto_access));
-  require(contains_member(xmbr_id, xauto_access));
+  // Body:
+
+  const string& result = base_space_member::prototypes_poset_name();
+
+  // Postconditions:
+
+  ensure(result == base_space_member::prototypes_poset_name());
+
+  // Exit
+
+  return result;
+}
+
+sheaf::pod_index_type
+fiber_bundle::base_space_poset::
+prototype_type_id(const string& xname, bool xauto_access) const
+{
+
+  // Preconditions:
+
+  require(xauto_access ? is_attached() : state_is_read_accessible());
+  require(xauto_access || name_space()->state_is_read_accessible());
+  require(xauto_access || name_space()->member_poset(prototypes_poset_name(), true).state_is_read_accessible());
+  require(name_space()->contains_poset_member(prototypes_poset_name()+"/"+xname, true));
+  require(unexecutable("!xauto_access ? prototypes poset is read accessible : true"));
+
 
   // Body:
 
   if(xauto_access)
   {
     get_read_access();
+    name_space()->get_read_access();
   }
 
-  const zone_nodes_block_crg_interval* linterval =
-    dynamic_cast<const zone_nodes_block_crg_interval*>(&crg().interval(xmbr_id));
+  poset_state_handle& lproto_host =
+    name_space()->member_poset(prototypes_poset_name(), false);
 
-  bool result = (linterval != 0) && linterval->vertex_client_id_space_initialized();
+  if(xauto_access)
+  {
+    lproto_host.get_read_access();
+  }
+
+  base_space_member lmbr(reinterpret_cast<poset*>(&lproto_host), xname);
+  pod_index_type result = lmbr.type_id();
+  lmbr.detach_from_state();
+
+  if(xauto_access)
+  {
+    lproto_host.release_access();
+    name_space()->release_access();
+    release_access();
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::scoped_index
+fiber_bundle::base_space_poset::
+prototype_dof_tuple_id(const string& xname,
+                       int xdepth,
+                       bool xcreate,
+                       bool xauto_access) const
+{
+  // Preconditions:
+
+  require(is_attached());
+  require(xauto_access || (xcreate ? state_is_read_write_accessible() : state_is_read_accessible()));
+
+  // Body:
+
+  base_space_poset* cthis = const_cast<base_space_poset*>(this); 
+
+  if(xauto_access)
+  {
+    xcreate ? cthis->get_read_write_access(true) : get_read_access();
+  }
+
+  scoped_index result;
+
+  size_type ltuple_ct = row_dof_tuple_ct();
+  for(pod_index_type ltuple_id = 0; ltuple_id < ltuple_ct; ++ltuple_id)
+  {
+    row_dof_tuple_type* ltuple = row_dof_tuple(ltuple_id);
+    if((xname == ltuple->type_name) && xdepth == ltuple->refinement_depth)
+    {
+      result = dof_tuple_id(ltuple_id, false);
+      break;
+    }
+  }
+
+  if(!result.is_valid() && xcreate)
+  {
+    // Couldn't find a dof tuple, have to make one.
+
+    result = cthis->new_row_dof_map(xname);
+    row_dof_tuple(result, true)->refinement_depth = xdepth;
+  }
 
   if(xauto_access)
   {
@@ -1302,228 +1579,257 @@ contains_vertex_client_id_space(pod_index_type xmbr_id, bool xauto_access) const
 
   // Postconditions:
 
-  ensure(is_basic_query);
+  ensure(!result.is_valid() || contains_row_dof_tuple(result));
+  ensure(!result.is_valid() || (xname == row_dof_tuple(result)->type_name));
+  ensure(!result.is_valid() || (xdepth == row_dof_tuple(result)->refinement_depth));
 
   // Exit:
 
   return result;
-}
-
-bool
-fiber_bundle::base_space_poset::
-contains_vertex_client_id_space(const scoped_index& xmbr_id, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-  require(contains_member(xmbr_id, xauto_access));
-
-  // Body:
-
-  bool result = contains_vertex_client_id_space(xmbr_id.hub_pod(), xauto_access);
-
-  // Postconditions:
-
-  ensure(is_basic_query);
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::index_space_handle&
-fiber_bundle::base_space_poset::
-get_vertex_client_id_space(pod_index_type xmbr_id, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-  require(contains_member(xmbr_id, xauto_access));
-  require(contains_vertex_client_id_space(xmbr_id, xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  const zone_nodes_block_crg_interval& linterval =
-    reinterpret_cast<const zone_nodes_block_crg_interval&>(crg().interval(xmbr_id));
-
-  index_space_handle& result = crg().id_spaces().get_id_space(linterval.vertex_client_space_id());
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(result.is_attached());
-  ensure(member_id_spaces(xauto_access).allocated_id_space(result));
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::index_space_handle&
-fiber_bundle::base_space_poset::
-get_vertex_client_id_space(const scoped_index& xmbr_id, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-  require(contains_member(xmbr_id, xauto_access));
-  require(contains_vertex_client_id_space(xmbr_id, xauto_access));
-
-  // Body:
-
-  index_space_handle& result = get_vertex_client_id_space(xmbr_id.hub_pod(), xauto_access);
-
-  // Postconditions:
-
-  ensure(result.is_attached());
-  ensure(member_id_spaces(xauto_access).allocated_id_space(result));
-
-  // Exit:
-
-  return result;
-}
-
-void
-fiber_bundle::base_space_poset::
-release_vertex_client_id_space(index_space_handle& xid_space, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-  require(member_id_spaces(xauto_access).allocated_id_space(xid_space));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  crg().id_spaces().release_id_space(xid_space);
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(!xid_space.is_attached());
-
-  // Exit:
-
-  return;
-}
-
-sheaf::index_space_iterator&
-fiber_bundle::base_space_poset::
-get_vertex_client_id_space_iterator(pod_index_type xmbr_id, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-  require(contains_member(xmbr_id, xauto_access));
-  require(contains_vertex_client_id_space(xmbr_id, xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  const zone_nodes_block_crg_interval& linterval =
-    reinterpret_cast<const zone_nodes_block_crg_interval&>(crg().interval(xmbr_id));
-
-  index_space_iterator& result = crg().id_spaces().get_id_space_iterator(linterval.vertex_client_space_id());
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(result.is_attached());
-  ensure(member_id_spaces(xauto_access).allocated_id_space_iterator(result));
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::index_space_iterator&
-fiber_bundle::base_space_poset::
-get_vertex_client_id_space_iterator(const scoped_index& xmbr_id, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-  require(contains_member(xmbr_id, xauto_access));
-  require(contains_vertex_client_id_space(xmbr_id, xauto_access));
-
-  // Body:
-
-  index_space_iterator& result = get_vertex_client_id_space_iterator(xmbr_id.hub_pod(), xauto_access);
-
-  // Postconditions:
-
-  ensure(result.is_attached());
-  ensure(member_id_spaces(xauto_access).allocated_id_space_iterator(result));
-
-  // Exit:
-
-  return result;
-}
-
-void
-fiber_bundle::base_space_poset::
-release_vertex_client_id_space_iterator(index_space_iterator& xitr, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-  require(member_id_spaces(xauto_access).allocated_id_space_iterator(xitr));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  crg().id_spaces().release_id_space_iterator(xitr);
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(!xitr.is_attached());
-
-  // Exit:
-
-  return;
 }
 
 // PROTECTED FUNCTIONS
 
 // PRIVATE FUNCTIONS
 
+// ===========================================================
+// POSET_STATE_HANDLE FACET
+// ===========================================================
+
+// PUBLIC FUNCTIONS
+
+// PROTECTED FUNCTIONS
+
+// PRIVATE FUNCTIONS
 
 // ===========================================================
-// STANDARD SUBPOSETS FACET
+// STATE FACET
+// ===========================================================
+
+// PUBLIC FUNCTIONS
+
+sheaf::poset_type
+fiber_bundle::base_space_poset::
+type_id() const
+{
+  return BASE_SPACE_POSET_ID;
+}
+
+const char*
+fiber_bundle::base_space_poset::
+class_name() const
+{
+  // Preconditions:
+
+  // Body:
+
+  static const char* result = "base_space_poset";
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED FUNCTIONS
+
+void
+fiber_bundle::base_space_poset::
+attach_handle_data_members()
+{
+  // Preconditions:
+
+  require(state_is_read_accessible());
+
+  // Body:
+
+  refinable_poset::attach_handle_data_members();
+
+  // Attch the standard subposets.
+
+  _blocks.attach_to_state(this, blocks_name());
+  _block_vertices.attach_to_state(this, block_vertices_name());
+
+  int lmax_db = max_db();
+  _d_cells.reserve(lmax_db+1);
+  _d_cells.set_ct(lmax_db+1);
+
+  _d_cells_id_spaces.reserve(lmax_db+1);
+  _d_cells_id_spaces.set_ct(lmax_db+1);
+
+  for(int i=0; i<=lmax_db; i++)
+  {
+    _d_cells[i].attach_to_state(this, d_cells_name(i, lmax_db));
+    _d_cells_id_spaces[i] = &_d_cells[i].id_space();
+  }
+
+  _cells.attach_to_state(this, cells_name());
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+// PRIVATE FUNCTIONS
+
+// ===========================================================
+// MEMBERSHIP FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+sheaf::pod_index_type
+fiber_bundle::base_space_poset::
+new_member(const string& xprototype_name, bool xcopy_dof_map)
+{
+  // cout << endl << "Entering base_space_poset::new_member." << endl;
+
+  // Preconditions:
+
+  require(in_jim_edit_mode());
+  require(name_space()->state_is_read_accessible());
+  require(name_space()->member_poset(prototypes_poset_name(), false).state_is_read_accessible());
+  require(!xprototype_name.empty());
+  require(name_space()->contains_poset_member(poset_path(prototypes_poset_name(), xprototype_name), false));
+
+  // Body:
+
+  scoped_index ltuple_id;
+  
+  if(xcopy_dof_map)
+  {
+    ltuple_id = new_row_dof_map(xprototype_name);
+  }
+  else
+  {
+    ltuple_id = prototype_dof_tuple_id(xprototype_name, 0, true, false);
+  }
+
+  pod_index_type result = new_member(true, ltuple_id.hub_pod());
+
+  // Postconditions:
+
+  ensure(invariant());
+  ensure(contains_member(result, false));
+  ensure(type_name(result) == xprototype_name);
+  ensure(cover_is_empty(LOWER, result));
+  ensure(cover_is_empty(UPPER, result));
+
+  // Exit:
+
+  // cout << "Leaving base_space_poset::new_member." << endl;
+  return result;
+}
+
+sheaf::pod_index_type
+fiber_bundle::base_space_poset::
+new_member(const string& xtype_name, int xdb, const string& xlocal_cell_name)
+{
+  // cout << endl << "Entering base_space_poset::new_member." << endl;
+
+  // Preconditions:
+
+  require(in_jim_edit_mode());
+  require(name_space()->state_is_read_accessible());
+  require(poset_path::is_valid_name(xtype_name));
+  require(!contains_member(xtype_name, true));
+  require(member_id_spaces(false).contains("cell_types"));
+  require(xlocal_cell_name.empty() || contains_member(xlocal_cell_name));
+
+  // Body:
+
+  // Create the dof map and set dofs to defaults.
+
+  pod_index_type result = new_member(true, 0, false);
+
+  // Set name to type name.
+
+  put_member_name(result, xtype_name, true, false);
+
+  // Get the row dof tuple.
+
+  row_dof_tuple_type* ltuple = member_dof_tuple(result, true);
+
+  // Set db.
+
+  ltuple->db = xdb;
+
+  // Set type id.
+
+  mutable_index_space_handle& ltype_id_space =
+    member_id_spaces(false).get_id_space<mutable_index_space_handle>("cell_types");
+
+  ltype_id_space.push_back(result);
+
+  ltuple->type_id = ltype_id_space.pod(result);
+
+  ltype_id_space.release_id_space();
+
+  // Set type name.
+
+  /// @error where does this string get deleted?
+
+  ltuple->type_name = strdup(xtype_name.c_str());
+
+  // Set the refinement depth.
+
+  ltuple->refinement_depth = 0;
+
+  // Set local cell type id and type name.
+
+  if(xlocal_cell_name.empty())
+  {
+    ltuple->local_cell_type_id = sheaf::invalid_pod_index();
+
+    /// @error where does this string get deleted?
+
+    ltuple->local_cell_type_name = strdup("");
+  }
+  else
+  {
+    base_space_member lcell(this, xlocal_cell_name);
+    ltuple->local_cell_type_id = lcell.type_id();
+
+    /// @error where does this string get deleted?
+
+    ltuple->local_cell_type_name = strdup(lcell.type_name());
+    lcell.detach_from_state();
+  }
+
+  // Set the remaining dofs to default values.
+
+  ltuple->size = 0;
+  ltuple->i_size = 0;
+  ltuple->j_size = 0;
+  ltuple->k_size = 0;
+
+  // Postconditions:
+
+  ensure(invariant());
+  ensure(contains_member(result, false));
+  ensure(member_name(result, false) == xtype_name);
+  ensure(db(result) == xdb);
+  ensure(type_name(result) == xtype_name);
+  ensure(unexecutable("local_cell_type_name(result) == xlocal_cell_name"));
+  ensure(cover_is_empty(LOWER, result));
+  ensure(cover_is_empty(UPPER, result));
+
+  // Exit:
+
+  // cout << "Leaving base_space_poset::new_member." << endl;
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+ 
+
+// ===========================================================
+// POWERSET FACET
 // ===========================================================
 
 // PUBLIC FUNCTIONS
@@ -1818,8 +2124,6 @@ d_cells_name(int xdb, int xmax_db)
   return result;
 }
 
-//########################################################################
-
 sheaf::subposet&
 fiber_bundle::base_space_poset::
 cells()
@@ -1951,7 +2255,215 @@ insert_interval_in_standard_subposets(base_space_crg_interval& xinterval)
 
 // PROTECTED FUNCTIONS
 
+void
+fiber_bundle::base_space_poset::
+initialize_standard_subposets(const string& xname)
+{
+  // Preconditions:
+
+  require(poset_path::is_valid_name(xname));
+  require(state_is_read_write_accessible());
+
+  // Body:
+
+  // Create the usual subposets
+
+  refinable_poset::initialize_standard_subposets(xname);
+
+  string lsp_name;
+
+  arg_list largs = array_index_space_state::make_arg_list(0);
+
+  // Make the blocks subposet.
+
+  _blocks.new_state(this);
+  lsp_name = blocks_name();
+  _blocks.put_name(lsp_name, true, false);
+  _blocks.new_id_space("array_index_space_state", largs);
+  _blocks.put_is_persistent(false);
+
+  // Make the block vertices subposet.
+
+  _block_vertices.new_state(this);
+  lsp_name = block_vertices_name();
+  _block_vertices.put_name(lsp_name, true, false);
+  _block_vertices.new_id_space("array_index_space_state", largs);
+  _block_vertices.put_is_persistent(false);
+
+  // Make the d-cells subposets.
+
+  arg_list li_args = interval_index_space_state::make_arg_list(true);
+
+  int lmax_db = max_db();
+  _d_cells.reserve(lmax_db + 1);
+  _d_cells_id_spaces.reserve(lmax_db + 1);
+
+  for(int i=0; i<=lmax_db; i++)
+  {
+    _d_cells[i].new_state(this);
+    lsp_name = d_cells_name(i, lmax_db);
+    _d_cells[i].put_name(lsp_name, true, false);
+    _d_cells[i].new_id_space("interval_index_space_state", li_args);
+    _d_cells_id_spaces[i] = &_d_cells[i].id_space();
+    _d_cells[i].put_is_persistent(false);
+  }
+
+  // Make the cells subposet.
+
+  _cells.new_state(this);
+  lsp_name = cells_name();
+  _cells.put_name(lsp_name, true, false);
+  _cells.new_id_space("interval_index_space_state", li_args);
+  _cells.put_is_persistent(false);
+
+  // Version subposets are not standard subposets;
+  // don't change the standard subposet count.
+
+  //   // All the subposets are standard.
+
+  //   put_standard_subposet_ct(subposet_ct());
+
+  // Postconditions:
+
+  ensure(state_obj()->powerset()->invariant());
+  ensure(jims().is_attached());
+  ensure(whole().is_attached());
+  ensure(resident().is_attached() && resident().index() == RESIDENT_INDEX);
+  //   ensure(has_standard_subposet_ct());
+  ensure(includes_subposet(blocks_name()));
+  ensure(includes_subposet(block_vertices_name()));
+  ensure_for_all(i, 0, max_db(), includes_subposet(d_cells_name(i, max_db())));
+  ensure(includes_subposet("__cells"));
+
+  // Exit
+
+  return;
+}
+
 // PRIVATE FUNCTIONS
+
+
+// ===========================================================
+// TABLE DOFS FACET
+// ===========================================================
+
+// PUBLIC FUNCTIONS
+
+int
+fiber_bundle::base_space_poset::
+max_db() const
+{
+  int result;
+
+  // Preconditions:
+
+  require(state_is_read_accessible());
+
+  // Body:
+
+  result = table_dof_tuple()->max_db;
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+void
+fiber_bundle::base_space_poset::
+put_max_db(int xmax_db)
+{
+  // Preconditions:
+
+  require(state_is_read_write_accessible());
+
+  // Body:
+
+  table_dof_tuple()->max_db = xmax_db;
+
+  // Postconditions:
+
+  ensure(max_db() == xmax_db);
+
+  // Exit:
+
+  return;
+}
+
+void
+fiber_bundle::base_space_poset::
+update_max_db(int xmax_db)
+{
+  // Preconditions:
+
+  require(state_is_read_write_accessible());
+
+  // Body:
+
+  define_old_variable(int old_max_db = max_db());
+
+  if(xmax_db > max_db())
+  {
+    table_dof_tuple()->max_db = xmax_db;
+  }
+
+  // Postconditions:
+
+  ensure(max_db() == ((xmax_db > old_max_db) ? xmax_db : old_max_db));
+
+  // Exit:
+
+  return;
+}
+
+
+const fiber_bundle::base_space_poset::table_dof_tuple_type*
+fiber_bundle::base_space_poset::
+table_dof_tuple() const
+{
+  const table_dof_tuple_type* result;
+
+  // Preconditions:
+
+
+  // Body:
+
+  result = reinterpret_cast<const table_dof_tuple_type*>(table_dof_map().dof_tuple());
+
+  // Postconditions:
+
+
+  // Exit:
+
+  return result;
+}
+
+fiber_bundle::base_space_poset::table_dof_tuple_type*
+fiber_bundle::base_space_poset::
+table_dof_tuple()
+{
+  table_dof_tuple_type* result;
+
+  // Preconditions:
+
+
+  // Body:
+
+  result = reinterpret_cast<table_dof_tuple_type*>(table_dof_map().dof_tuple());
+
+  // Postconditions:
+
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED FUNCTIONS
+
+// PRIVATE FUNCTIONS
+
 
 // ===========================================================
 // ROW DOFS FACET
@@ -2183,185 +2695,6 @@ put_refinement_depth(const scoped_index& xid, int xdepth)
   return;
 }
 
-// PROTECTED FUNCTIONS
-
-// PRIVATE FUNCTIONS
-
-
-// ===========================================================
-// OTHER FEATURES FACET
-// ===========================================================
-
-// PUBLIC FUNCTIONS
-
-const string&
-fiber_bundle::base_space_poset::
-prototypes_poset_name()
-{
-
-  // Preconditions:
-
-  // Body:
-
-  const string& result = base_space_member::prototypes_poset_name();
-
-  // Postconditions:
-
-  ensure(result == base_space_member::prototypes_poset_name());
-
-  // Exit
-
-  return result;
-}
-
-sheaf::pod_index_type
-fiber_bundle::base_space_poset::
-prototype_type_id(const string& xname, bool xauto_access) const
-{
-
-  // Preconditions:
-
-  require(xauto_access ? is_attached() : state_is_read_accessible());
-  require(xauto_access || name_space()->state_is_read_accessible());
-  require(xauto_access || name_space()->member_poset(prototypes_poset_name(), true).state_is_read_accessible());
-  require(name_space()->contains_poset_member(prototypes_poset_name()+"/"+xname, true));
-  require(unexecutable("!xauto_access ? prototypes poset is read accessible : true"));
-
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-    name_space()->get_read_access();
-  }
-
-  poset_state_handle& lproto_host =
-    name_space()->member_poset(prototypes_poset_name(), false);
-
-  if(xauto_access)
-  {
-    lproto_host.get_read_access();
-  }
-
-  base_space_member lmbr(reinterpret_cast<poset*>(&lproto_host), xname);
-  pod_index_type result = lmbr.type_id();
-  lmbr.detach_from_state();
-
-  if(xauto_access)
-  {
-    lproto_host.release_access();
-    name_space()->release_access();
-    release_access();
-  }
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::scoped_index
-fiber_bundle::base_space_poset::
-prototype_dof_tuple_id(const string& xname,
-                       int xdepth,
-                       bool xcreate,
-                       bool xauto_access) const
-{
-  // Preconditions:
-
-  require(is_attached());
-  require(xauto_access || (xcreate ? state_is_read_write_accessible() : state_is_read_accessible()));
-
-  // Body:
-
-  base_space_poset* cthis = const_cast<base_space_poset*>(this); 
-
-  if(xauto_access)
-  {
-    xcreate ? cthis->get_read_write_access(true) : get_read_access();
-  }
-
-  scoped_index result;
-
-  size_type ltuple_ct = row_dof_tuple_ct();
-  for(pod_index_type ltuple_id = 0; ltuple_id < ltuple_ct; ++ltuple_id)
-  {
-    row_dof_tuple_type* ltuple = row_dof_tuple(ltuple_id);
-    if((xname == ltuple->type_name) && xdepth == ltuple->refinement_depth)
-    {
-      result = dof_tuple_id(ltuple_id, false);
-      break;
-    }
-  }
-
-  if(!result.is_valid() && xcreate)
-  {
-    // Couldn't find a dof tuple, have to make one.
-
-    result = cthis->new_row_dof_map(xname);
-    row_dof_tuple(result, true)->refinement_depth = xdepth;
-  }
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(!result.is_valid() || contains_row_dof_tuple(result));
-  ensure(!result.is_valid() || (xname == row_dof_tuple(result)->type_name));
-  ensure(!result.is_valid() || (xdepth == row_dof_tuple(result)->refinement_depth));
-
-  // Exit:
-
-  return result;
-}
-
-const fiber_bundle::base_space_poset::table_dof_tuple_type*
-fiber_bundle::base_space_poset::
-table_dof_tuple() const
-{
-  const table_dof_tuple_type* result;
-
-  // Preconditions:
-
-
-  // Body:
-
-  result = reinterpret_cast<const table_dof_tuple_type*>(table_dof_map().dof_tuple());
-
-  // Postconditions:
-
-
-  // Exit:
-
-  return result;
-}
-
-fiber_bundle::base_space_poset::table_dof_tuple_type*
-fiber_bundle::base_space_poset::
-table_dof_tuple()
-{
-  table_dof_tuple_type* result;
-
-  // Preconditions:
-
-
-  // Body:
-
-  result = reinterpret_cast<table_dof_tuple_type*>(table_dof_map().dof_tuple());
-
-  // Postconditions:
-
-
-  // Exit:
-
-  return result;
-}
-
 fiber_bundle::base_space_poset::row_dof_tuple_type*
 fiber_bundle::base_space_poset::
 member_dof_tuple(pod_index_type xhub_id, bool xrequire_write_access) const
@@ -2470,110 +2803,6 @@ row_dof_tuple(const scoped_index& xtuple_id, bool xrequire_write_access) const
   return result;
 }
 
-// PROTECTED FUNCTIONS
-
-bool
-fiber_bundle::base_space_poset::
-make_prototype()
-{
-  bool result = false;
-
-  // Preconditions:
-
-  // Body:
-
-  poset_type ltype = POSET_ID;
-
-  base_space_poset* lproto = new base_space_poset;
-
-  factory().insert_prototype(lproto);
-  factory().insert_prototype(ltype, lproto);
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-// PRIVATE FUNCTIONS
-
-
-// ===========================================================
-// POSET_STATE_HANDLE FACET
-// ===========================================================
-
-// PUBLIC FUNCTIONS
-
-sheaf::poset_type
-fiber_bundle::base_space_poset::
-type_id() const
-{
-  return BASE_SPACE_POSET_ID;
-}
-
-const char*
-fiber_bundle::base_space_poset::
-class_name() const
-{
-  // Preconditions:
-
-  // Body:
-
-  static const char* result = "base_space_poset";
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::pod_index_type
-fiber_bundle::base_space_poset::
-new_member(const string& xprototype_name, bool xcopy_dof_map)
-{
-  // cout << endl << "Entering base_space_poset::new_member." << endl;
-
-  // Preconditions:
-
-  require(in_jim_edit_mode());
-  require(name_space()->state_is_read_accessible());
-  require(name_space()->member_poset(prototypes_poset_name(), false).state_is_read_accessible());
-  require(!xprototype_name.empty());
-  require(name_space()->contains_poset_member(poset_path(prototypes_poset_name(), xprototype_name), false));
-
-  // Body:
-
-  scoped_index ltuple_id;
-  
-  if(xcopy_dof_map)
-  {
-    ltuple_id = new_row_dof_map(xprototype_name);
-  }
-  else
-  {
-    ltuple_id = prototype_dof_tuple_id(xprototype_name, 0, true, false);
-  }
-
-  pod_index_type result = new_member(true, ltuple_id.hub_pod());
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(contains_member(result, false));
-  ensure(type_name(result) == xprototype_name);
-  ensure(cover_is_empty(LOWER, result));
-  ensure(cover_is_empty(UPPER, result));
-
-  // Exit:
-
-  // cout << "Leaving base_space_poset::new_member." << endl;
-  return result;
-}
-
-
-
 const sheaf::scoped_index&
 fiber_bundle::base_space_poset::
 new_row_dof_map(const string& xprototype_name)
@@ -2628,130 +2857,6 @@ new_row_dof_map(const string& xprototype_name)
 }
 
 // PROTECTED FUNCTIONS
-
-void
-fiber_bundle::base_space_poset::
-initialize_standard_subposets(const string& xname)
-{
-  // Preconditions:
-
-  require(poset_path::is_valid_name(xname));
-  require(state_is_read_write_accessible());
-
-  // Body:
-
-  // Create the usual subposets
-
-  refinable_poset::initialize_standard_subposets(xname);
-
-  string lsp_name;
-
-  arg_list largs = array_index_space_state::make_arg_list(0);
-
-  // Make the blocks subposet.
-
-  _blocks.new_state(this);
-  lsp_name = blocks_name();
-  _blocks.put_name(lsp_name, true, false);
-  _blocks.new_id_space("array_index_space_state", largs);
-  _blocks.put_is_persistent(false);
-
-  // Make the block vertices subposet.
-
-  _block_vertices.new_state(this);
-  lsp_name = block_vertices_name();
-  _block_vertices.put_name(lsp_name, true, false);
-  _block_vertices.new_id_space("array_index_space_state", largs);
-  _block_vertices.put_is_persistent(false);
-
-  // Make the d-cells subposets.
-
-  arg_list li_args = interval_index_space_state::make_arg_list(true);
-
-  int lmax_db = max_db();
-  _d_cells.reserve(lmax_db + 1);
-  _d_cells_id_spaces.reserve(lmax_db + 1);
-
-  for(int i=0; i<=lmax_db; i++)
-  {
-    _d_cells[i].new_state(this);
-    lsp_name = d_cells_name(i, lmax_db);
-    _d_cells[i].put_name(lsp_name, true, false);
-    _d_cells[i].new_id_space("interval_index_space_state", li_args);
-    _d_cells_id_spaces[i] = &_d_cells[i].id_space();
-    _d_cells[i].put_is_persistent(false);
-  }
-
-  // Make the cells subposet.
-
-  _cells.new_state(this);
-  lsp_name = cells_name();
-  _cells.put_name(lsp_name, true, false);
-  _cells.new_id_space("interval_index_space_state", li_args);
-  _cells.put_is_persistent(false);
-
-  // Version subposets are not standard subposets;
-  // don't change the standard subposet count.
-
-  //   // All the subposets are standard.
-
-  //   put_standard_subposet_ct(subposet_ct());
-
-  // Postconditions:
-
-  ensure(state_obj()->powerset()->invariant());
-  ensure(jims().is_attached());
-  ensure(whole().is_attached());
-  ensure(resident().is_attached() && resident().index() == RESIDENT_INDEX);
-  //   ensure(has_standard_subposet_ct());
-  ensure(includes_subposet(blocks_name()));
-  ensure(includes_subposet(block_vertices_name()));
-  ensure_for_all(i, 0, max_db(), includes_subposet(d_cells_name(i, max_db())));
-  ensure(includes_subposet("__cells"));
-
-  // Exit
-
-  return;
-}
-
-void
-fiber_bundle::base_space_poset::
-attach_handle_data_members()
-{
-  // Preconditions:
-
-  require(state_is_read_accessible());
-
-  // Body:
-
-  refinable_poset::attach_handle_data_members();
-
-  // Attch the standard subposets.
-
-  _blocks.attach_to_state(this, blocks_name());
-  _block_vertices.attach_to_state(this, block_vertices_name());
-
-  int lmax_db = max_db();
-  _d_cells.reserve(lmax_db+1);
-  _d_cells.set_ct(lmax_db+1);
-
-  _d_cells_id_spaces.reserve(lmax_db+1);
-  _d_cells_id_spaces.set_ct(lmax_db+1);
-
-  for(int i=0; i<=lmax_db; i++)
-  {
-    _d_cells[i].attach_to_state(this, d_cells_name(i, lmax_db));
-    _d_cells_id_spaces[i] = &_d_cells[i].id_space();
-  }
-
-  _cells.attach_to_state(this, cells_name());
-
-  // Postconditions:
-
-  // Exit:
-
-  return;
-}
 
 // PRIVATE FUNCTIONS
 

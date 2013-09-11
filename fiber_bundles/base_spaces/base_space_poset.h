@@ -30,7 +30,25 @@ using namespace sheaf;
   
 class base_space_crg_interval;
 class base_space_member_row_dof_tuple_type;
-  
+class base_space_poset;
+
+///
+/// The type of table dof tuple for base_space_poset.
+///
+class SHEAF_DLL_SPEC base_space_poset_table_dof_tuple_type
+{
+public:
+
+  ///
+  /// The maximum dimension of the members of this base space.
+  ///
+  int max_db;
+
+protected:
+
+private:
+
+};  
 
 ///
 /// The lattice of closed cells of a cellular space;
@@ -42,7 +60,7 @@ class SHEAF_DLL_SPEC base_space_poset : public refinable_poset
   friend class sheaf::namespace_poset;
   friend class unstructured_block_builder;
   friend class fiber_bundles_namespace;
-  friend SHEAF_DLL_SPEC size_t deep_size(const base_space_poset& xp, bool xinclude_shallow, size_t xresults[4]);
+  friend SHEAF_DLL_SPEC size_t fiber_bundle::deep_size(const base_space_poset& xp, bool xinclude_shallow, size_t xresults[4]);
   
   // ===========================================================
   /// @name BASE_SPACE_POSET FACET
@@ -52,7 +70,12 @@ class SHEAF_DLL_SPEC base_space_poset : public refinable_poset
 public:
 
   ///
-  /// The type of rowe dof tuple for this.
+  /// The type of table dof tuple for this.
+  ///
+  typedef base_space_poset_table_dof_tuple_type table_dof_tuple_type;
+
+  ///
+  /// The type of row dof tuple for this.
   ///
   typedef base_space_member_row_dof_tuple_type row_dof_tuple_type;
 
@@ -91,50 +114,13 @@ protected:
 
 private:
 
-  //@}
-
-
-  // ===========================================================
-  /// @name STATE FACET
-  // ===========================================================
-  //@{
-
-public:
-
-protected:
-
-private:
+  ///
+  /// Creates prototype for this class and enters in factory.
+  ///
+  static bool make_prototype();
 
   //@}
 
-
-  // ===========================================================
-  /// @name TABLE DOFS FACET
-  // ===========================================================
-  //@{
-
-public:
-
-  ///
-  /// The maximum dimension of the members of this base space.
-  ///
-  int max_db() const;
-
-  ///
-  /// Sets max_db() to xmax_db.
-  ///
-  void put_max_db(int xmax_db);
-
-  ///
-  /// Sets max_db() to the larger of old max_db() and xmax_db.
-  ///
-  void update_max_db(int xmax_db);
-
-protected:
-
-private:
-
-  //@}
 
 
   // ===========================================================
@@ -168,6 +154,7 @@ public:
   /// the member with index xmbr_id from the pool of handles.
   /// synonym for get_zone_id_space(xmbr_id.hub_pod()).
   ///
+
   index_space_handle& get_zone_id_space(const scoped_index& xmbr_id, bool xauto_access) const;
 
   ///
@@ -259,6 +246,71 @@ public:
   /// pool of id space iterators.
   ///
   void release_vertex_id_space_iterator(index_space_iterator& xitr, bool xauto_access) const;
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
+  /// @name VERTEX CLIENT ID SPACE FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// True, if and only if the block containing the member with index
+  /// xmbr_id has a vertex client id space.
+  ///
+  bool contains_vertex_client_id_space(pod_index_type xmbr_id, bool xauto_access) const;
+
+  ///
+  /// True, if and only if the block containing the member with index
+  /// xmbr_id has a vertex client id space.
+  /// synonym for contains_vertex_client_id_space(xmbr_id.hub_pod()).
+  ///
+  bool contains_vertex_client_id_space(const scoped_index& xmbr_id, bool xauto_access) const;
+
+  ///
+  /// Allocates an vertex client id space handle for the block containing
+  /// the member with index xmbr_id for the pool of id spaces.
+  ///
+  index_space_handle& get_vertex_client_id_space(pod_index_type xmbr_id, bool xauto_access) const;
+
+  ///
+  /// Allocates an vertex client id space handle for the block containing
+  /// the member with index xmbr_id for the pool of id spaces.
+  /// synonym for get_vertex_client_id_space(xmbr_id.hub_pod()).
+  ///
+  index_space_handle& get_vertex_client_id_space(const scoped_index& xmbr_id, bool xauto_access) const;
+
+  ///
+  /// Returns the handle to the vertex client id space, xid_space to the
+  /// pool of id space handles.
+  ///
+  void release_vertex_client_id_space(index_space_handle& xid_space, bool xauto_access) const;
+
+  ///
+  /// Allocates an vertex client id space iterator for the block containing
+  /// the member with index xmbr_id for the pool of id spaces.
+  ///
+  index_space_iterator& get_vertex_client_id_space_iterator(pod_index_type xmbr_id, bool xauto_access) const;
+
+  ///
+  /// Allocates an vertex client id space iterator for the block containing
+  /// the member with index xmbr_id for the pool of id spaces.
+  /// synonym for get_vertex_client_id_space_iterator(xmbr_id.hub_pod()).
+  ///
+  index_space_iterator& get_vertex_client_id_space_iterator(const scoped_index& xmbr_id, bool xauto_access) const;
+
+  ///
+  /// Returns the iterator to the vertex client id space, xitr to the
+  /// pool of id space iterators.
+  ///
+  void release_vertex_client_id_space_iterator(index_space_iterator& xitr, bool xauto_access) const;
 
 protected:
 
@@ -389,63 +441,34 @@ private:
   //@}
 
 
+
   // ===========================================================
-  /// @name VERTEX CLIENT ID SPACE FACET
+  /// @name MEMBER PROTOTYPES FACET
   // ===========================================================
   //@{
 
 public:
 
   ///
-  /// True, if and only if the block containing the member with index
-  /// xmbr_id has a vertex client id space.
+  /// The name of the prototypes poset;
+  /// a synonym for bsae_space_member::prototypes_poset_name().
   ///
-  bool contains_vertex_client_id_space(pod_index_type xmbr_id, bool xauto_access) const;
+  static const string& prototypes_poset_name();
 
   ///
-  /// True, if and only if the block containing the member with index
-  /// xmbr_id has a vertex client id space.
-  /// synonym for contains_vertex_client_id_space(xmbr_id.hub_pod()).
+  /// The type id of the base space member prototype with name xname.
   ///
-  bool contains_vertex_client_id_space(const scoped_index& xmbr_id, bool xauto_access) const;
+  pod_index_type prototype_type_id(const string& xname, bool xauto_access = true) const;
 
   ///
-  /// Allocates an vertex client id space handle for the block containing
-  /// the member with index xmbr_id for the pool of id spaces.
+  /// The dof tuple id in this of the base space member prototype
+  /// with name xname and refinememnt_depth xdepth. If xcreate,
+  /// create the dof tuple if it doesn't already exist.
   ///
-  index_space_handle& get_vertex_client_id_space(pod_index_type xmbr_id, bool xauto_access) const;
-
-  ///
-  /// Allocates an vertex client id space handle for the block containing
-  /// the member with index xmbr_id for the pool of id spaces.
-  /// synonym for get_vertex_client_id_space(xmbr_id.hub_pod()).
-  ///
-  index_space_handle& get_vertex_client_id_space(const scoped_index& xmbr_id, bool xauto_access) const;
-
-  ///
-  /// Returns the handle to the vertex client id space, xid_space to the
-  /// pool of id space handles.
-  ///
-  void release_vertex_client_id_space(index_space_handle& xid_space, bool xauto_access) const;
-
-  ///
-  /// Allocates an vertex client id space iterator for the block containing
-  /// the member with index xmbr_id for the pool of id spaces.
-  ///
-  index_space_iterator& get_vertex_client_id_space_iterator(pod_index_type xmbr_id, bool xauto_access) const;
-
-  ///
-  /// Allocates an vertex client id space iterator for the block containing
-  /// the member with index xmbr_id for the pool of id spaces.
-  /// synonym for get_vertex_client_id_space_iterator(xmbr_id.hub_pod()).
-  ///
-  index_space_iterator& get_vertex_client_id_space_iterator(const scoped_index& xmbr_id, bool xauto_access) const;
-
-  ///
-  /// Returns the iterator to the vertex client id space, xitr to the
-  /// pool of id space iterators.
-  ///
-  void release_vertex_client_id_space_iterator(index_space_iterator& xitr, bool xauto_access) const;
+  scoped_index prototype_dof_tuple_id(const string& xname,
+				      int xdepth,
+				      bool xcreate,
+				      bool xauto_access) const;
 
 protected:
 
@@ -455,7 +478,80 @@ private:
 
 
   // ===========================================================
-  /// @name STANDARD SUBPOSETS FACET
+  /// @name POSET_STATE_HANDLE FACET
+  // ===========================================================
+  //@{
+
+public:
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
+  /// @name STATE FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Identifier for the type of this poset.
+  ///
+  virtual poset_type type_id() const;
+
+  ///
+  /// The name of this class.
+  ///
+  virtual const char* class_name() const;
+
+protected:
+
+  ///
+  /// Initializes the handle data members when this handle
+  /// is attached to a state.
+  ///
+  virtual void attach_handle_data_members();
+
+private:
+
+  //@}
+
+  // ===========================================================
+  /// @name MEMBERSHIP FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  using refinable_poset::new_member;
+  
+  ///
+  /// Creates a disconnected jim using the prototype with name xprototype_name.
+  /// If xcopy_dof_map or if xhost does not already contain a copy 
+  /// of the prototype dof map, create a copy of the dof map,
+  /// otherwise just refer to an existing copy.
+  ///.
+  ///
+  pod_index_type new_member(const string& xprototype_name, bool xcopy_dof_map);
+
+  ///
+  /// Creates a new jim and initializes it for use as a prototype with 
+  /// type_name xtype_name, dimension xdb, and local cell prototype xlocal_cell_name.
+  ///
+  pod_index_type new_member(const string& xtype_name, int xdb, const string& xlocal_cell_name);
+  
+protected:
+
+private:
+
+  //@}
+
+  // ===========================================================
+  /// @name SUBPOSET FACET
   // ===========================================================
   //@{
 
@@ -583,10 +679,53 @@ protected:
   ///
   subposet _cells;
 
+  ///
+  /// Creates the subposets common to every poset (i.e._whole and _jims).
+  ///
+  virtual void initialize_standard_subposets(const string& xname);
+
 private:
 
   //@}
+ 
+ 
+  // ===========================================================
+  /// @name TABLE DOFS FACET
+  // ===========================================================
+  //@{
 
+public:
+
+  ///
+  /// The maximum dimension of the members of this base space.
+  ///
+  int max_db() const;
+
+  ///
+  /// Sets max_db() to xmax_db.
+  ///
+  void put_max_db(int xmax_db);
+
+  ///
+  /// Sets max_db() to the larger of old max_db() and xmax_db.
+  ///
+  void update_max_db(int xmax_db);
+
+  ///
+  /// The table dof tuple for this (const version).
+  ///
+  const table_dof_tuple_type* table_dof_tuple() const;
+
+  ///
+  /// The table dof tuple for this (mutable version).
+  ///
+  table_dof_tuple_type* table_dof_tuple();
+
+protected:
+
+private:
+
+  //@}
 
   // ===========================================================
   /// @name ROW DOFS FACET
@@ -645,91 +784,6 @@ public:
   ///
   void put_refinement_depth(const scoped_index& xmbr_id, int xdepth);
 
-protected:
-
-private:
-
-  //@}
-
-
-  // ===========================================================
-  /// @name OTHER FEATURES FACET
-  // ===========================================================
-  //@{
-
-public:
-
-  ///
-  /// The name of the prototypes poset;
-  /// a synonym for bsae_space_member::prototypes_poset_name().
-  ///
-  static const string& prototypes_poset_name();
-
-  ///
-  /// The type id of the base space member prototype with name xname.
-  ///
-  pod_index_type prototype_type_id(const string& xname, bool xauto_access = true) const;
-
-  ///
-  /// The dof tuple id in this of the base space member prototype
-  /// with name xname and refinememnt_depth xdepth. If xcreate,
-  /// create the dof tuple if it doesn't already exist.
-  ///
-  scoped_index prototype_dof_tuple_id(const string& xname,
-				      int xdepth,
-				      bool xcreate,
-				      bool xauto_access) const;
-
-  ///
-  /// The type of table dof tuple for this.
-  ///
-  struct SHEAF_DLL_SPEC table_dof_tuple_type
-  {
-    ///
-    /// The maximum dimension of the members of this base space.
-    ///
-    int max_db;
-  };
-
-  ///
-  /// The table dof tuple for this (const version).
-  ///
-  const table_dof_tuple_type* table_dof_tuple() const;
-
-  ///
-  /// The table dof tuple for this (mutable version).
-  ///
-  table_dof_tuple_type* table_dof_tuple();
-
-//   /// @issue why do we define row_dof_tuple_type
-//   /// both here and in base_space_member?
-
-//   ///
-//   /// The type of row dof tuple for this.
-//   ///
-//   struct SHEAF_DLL_SPEC row_dof_tuple_type
-//   {
-//     ///
-//     /// The base space dimension.
-//     ///
-//     int db;
-
-//     ///
-//     /// The cell type id.
-//     ///
-//     int type_id;
-
-//     ///
-//     /// The cell type name.
-//     ///
-//     const char * type_name;
-
-//     ///
-//     /// The refinement depth.
-//     ///
-//     int refinement_depth;
-//   };
-
   ///
   /// The row dof tuple for the member with member hub id xmbr_hub_id.
   ///
@@ -754,46 +808,6 @@ public:
   row_dof_tuple_type* row_dof_tuple(const scoped_index& xtuple_id,
                                     bool xrequire_write_access = false) const;
 
-protected:
-
-  ///
-  /// Creates prototype for this class and enters in factory.
-  ///
-  static bool make_prototype();
-
-private:
-
-  //@}
-
-
-  // ===========================================================
-  /// @name POSET_STATE_HANDLE FACET
-  // ===========================================================
-  //@{
-
-public:
-
-  ///
-  /// Identifier for the type of this poset.
-  ///
-  virtual poset_type type_id() const;
-
-  ///
-  /// The name of this class.
-  ///
-  virtual const char* class_name() const;
-
-  using refinable_poset::new_member;
-  
-  ///
-  /// Creates a disconnected jim using the prototype with name xprototype_name.
-  /// If xcopy_dof_map or if xhost does not already contain a copy 
-  /// of the prototype dof map, create a copy of the dof map,
-  /// otherwise just refer to an existing copy.
-  ///.
-  ///
-  pod_index_type new_member(const string& xprototype_name, bool xcopy_dof_map);
-
   using refinable_poset::new_row_dof_map;
 
   ///
@@ -804,21 +818,9 @@ public:
 
 protected:
 
-  ///
-  /// Creates the subposets common to every poset (i.e._whole and _jims).
-  ///
-  virtual void initialize_standard_subposets(const string& xname);
-
-  ///
-  /// Initializes the handle data members when this handle
-  /// is attached to a state.
-  ///
-  virtual void attach_handle_data_members();
-
 private:
 
   //@}
-
 
   // ===========================================================
   /// @name I/O SUPPORT FACET

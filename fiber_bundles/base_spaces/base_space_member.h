@@ -240,7 +240,7 @@ public:
   /// and initializes it for use as a prototype with type_name xtype_name, 
   /// dimension xdb, and local cell prototype xlocal_cell_name.
   ///
-  base_space_member(poset* xhost,
+  base_space_member(base_space_poset* xhost,
                     const string& xtype_name,
                     int xdb,
                     const string& xlocal_cell_name,
@@ -341,12 +341,6 @@ public:
 					     const string& xprototype_name,
 					     bool xauto_access = true);
 
-  ///
-  /// Sets the attibutes of this to be a member prototype with
-  /// type_name xtype_name, dimension xdb and local cell xlocal_cell_name.
-  ///
-  void init_member_prototype(const string& xtype_name, int xdb, const string& xlocal_cell_name);
-
 protected:
 
 private:
@@ -355,7 +349,7 @@ private:
 
 
   // ===========================================================
-  /// @name ROW DOFS
+  /// @name ROW DOFS FACET
   // ===========================================================
   //@{
 

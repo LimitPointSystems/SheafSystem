@@ -316,18 +316,6 @@ base_space_member(base_space_poset* xhost,
     xhost->name_space()->member_poset(prototypes_poset_name(), true).get_read_access();
   }
 
-//   if(xcopy_dof_map)
-//   {
-//     array_poset_dof_map* lmap = new_row_dof_map(xhost, xprototype_name);
-//     new_jim_state(xhost, lmap, false, false);
-//   }
-//   else
-//   {
-//     scoped_index ldof_tuple_id = xhost->prototype_dof_tuple_id(xprototype_name, 0, true, xauto_access);
-//     new_jim_state(xhost, ldof_tuple_id, xauto_access);
-//   }
-
-
   pod_index_type lid = xhost->new_member(xprototype_name, xcopy_dof_map);
   attach_to_state(xhost, lid);
 
@@ -346,7 +334,7 @@ base_space_member(base_space_poset* xhost,
 }
 
 fiber_bundle::base_space_member::
-base_space_member(poset* xhost,
+base_space_member(base_space_poset* xhost,
                   const string& xtype_name,
                   int xdb,
                   const string& xlocal_cell_name,
@@ -370,13 +358,17 @@ base_space_member(poset* xhost,
     xhost->begin_jim_edit_mode(true);
   }
 
-  // Create the member and set its name.
+//   // Create the member and set its name.
 
-  new_jim_state(xhost, 0, false, false);
+//   new_jim_state(xhost, 0, false, false);
 
-  // Initialize the dofs.
+//   // Initialize the dofs.
 
-  init_member_prototype(xtype_name, xdb, xlocal_cell_name);
+//   init_member_prototype(xtype_name, xdb, xlocal_cell_name);
+
+  pod_index_type lid = xhost->new_member(xtype_name, xdb, xlocal_cell_name);
+  attach_to_state(xhost, lid);
+  
 
   // Now we can check the invaraint.
 
@@ -770,91 +762,6 @@ new_row_dof_map(poset_state_handle& xhost, const string& xprototype_name, bool x
 
 // PROTECTED MEMBER FUNCTIONS
 
-void
-fiber_bundle::base_space_member::
-init_member_prototype(const string& xtype_name, int xdb, const string& xlocal_cell_name)
-{
-  // Preconditions:
-
-  require(state_is_read_write_accessible());
-  require(!xtype_name.empty());
-  require(!host()->contains_member(xtype_name, false));
-  require(host()->member_id_spaces(false).contains("cell_types"));
-  require(xlocal_cell_name.empty() || host()->contains_member(xlocal_cell_name, false));
-
-  // Body:
-
-  // Set name to type name.
-
-  put_name(xtype_name, true, false);
-
-  row_dof_tuple_type& ltuple = *row_dof_tuple();
-
-  // Set db.
-
-  ltuple.db = xdb;
-
-  // Set type id.
-
-  mutable_index_space_handle& ltype_id_space =
-    host()->member_id_spaces(false).get_id_space<mutable_index_space_handle>("cell_types");
-
-  ltype_id_space.push_back(index());
-
-  ltuple.type_id = ltype_id_space.pod(index());
-
-  ltype_id_space.release_id_space();
-
-  // Set type name.
-
-  /// @error where does this string get deleted?
-
-  ltuple.type_name = strdup(xtype_name.c_str());
-
-  // Set the refinement depth.
-
-  ltuple.refinement_depth = 0;
-
-  // Set local cell type id and type name.
-
-  if(xlocal_cell_name.empty())
-  {
-    ltuple.local_cell_type_id = sheaf::invalid_pod_index();
-
-    /// @error where does this string get deleted?
-
-    ltuple.local_cell_type_name = strdup("");
-  }
-  else
-  {
-    base_space_member lcell(host(), xlocal_cell_name);
-    ltuple.local_cell_type_id = lcell.type_id();
-
-    /// @error where does this string get deleted?
-
-    ltuple.local_cell_type_name = strdup(lcell.type_name());
-    lcell.detach_from_state();
-  }
-
-
-  // Set the remaining dofs to default values.
-
-  ltuple.size = 0;
-  ltuple.i_size = 0;
-  ltuple.j_size = 0;
-  ltuple.k_size = 0;
-
-  // Postconditions:
-
-  ensure(db() == xdb);
-  ensure(type_name() == name());
-  ensure(refinement_depth() == 0);
-  ensure(local_cell_type_name() == xlocal_cell_name);
-
-  // Exit:
-
-  return;
-}
 
 // PRIVATE MEMBER FUNCTIONS
 

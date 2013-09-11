@@ -54,10 +54,6 @@ class index_iterator;
 
 // PUBLIC FUNCTIONS
 
-const
-string
-sheaf::poset_state_handle::
-default_name;
 
 sheaf::poset_state_handle*
 sheaf::poset_state_handle::
@@ -1298,1182 +1294,13 @@ initialize_namespace(namespace_poset& xns, const string& xposet_name, bool xauto
 
 // PRIVATE FUNCTIONS
 
-
 // ===========================================================
-// SCHEMA FACET
-// ===========================================================
-
-// PUBLIC FUNCTIONS
-
-sheaf::schema_poset_member&
-sheaf::poset_state_handle::
-schema()
-{
-  // Preconditions:
-
-  require(state_is_read_accessible());
-
-  // Body:
-
-  schema_poset_member& result = table().schema();
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-const sheaf::schema_poset_member&
-sheaf::poset_state_handle::
-schema() const
-{
-
-  // Preconditions:
-
-  require(state_is_read_accessible());
-
-  // Body:
-
-  const schema_poset_member& result = table().schema();
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-sheaf::schema_poset_member&
-sheaf::poset_state_handle::
-schema(bool xauto_access)
-{
-
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  schema_poset_member& result = schema();
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-const sheaf::schema_poset_member&
-sheaf::poset_state_handle::
-schema(bool xauto_access) const
-{
-
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  const schema_poset_member& result = schema();
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-bool
-sheaf::poset_state_handle::
-schema_is_ancestor_of(const schema_poset_member* xother_schema) const
-{
-  bool result;
-
-  // Preconditions:
-
-  // Body:
-
-  // Always true in this class;
-  // intended for redefinition in descendants.
-
-  result = true;
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-bool
-sheaf::poset_state_handle::
-schema_is(const string& xschema_name) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(state_is_read_accessible());
-
-  // Body:
-
-  result = schema().name() == xschema_name;
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-bool
-sheaf::poset_state_handle::
-same_schema(const poset_state_handle* xother) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(state_is_read_accessible());
-  require(xother != 0);
-  require(xother->state_is_read_accessible());
-
-  // Body:
-
-  result = schema().is_same_state(&(xother->schema()));
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-bool
-sheaf::poset_state_handle::
-same_schema(const abstract_poset_member* xother) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(state_is_read_accessible());
-  require(xother != 0);
-  require(xother->state_is_read_accessible());
-
-
-  // Body:
-
-  result = same_schema(xother->host());
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-bool
-sheaf::poset_state_handle::
-table_dof_map_conforms(const poset_dof_map* xdof_map) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(xdof_map != 0);
-
-  // Body:
-
-  // Table dofs must be an array_poset_dof_map.
-
-  result = (dynamic_cast<const array_poset_dof_map*>(xdof_map) != 0);
-
-  // Postconditions:
-
-  ensure(result == (dynamic_cast<const array_poset_dof_map*>(xdof_map) != 0));
-
-  // Exit
-
-  return result;
-}
-
-bool
-sheaf::poset_state_handle::
-row_dof_map_conforms(const poset_dof_map* xdof_map) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(xdof_map != 0);
-
-  // Body:
-
-  /// @issue This routine tests only for covariant conformance.
-  /// So an instance of section_dof_map will pass this test because section_dof_map
-  /// inherits poset_dof_map. However, section_dof_map does not really functionally
-  /// conform to poset_dof_map currently because some member functions
-  /// are unimplemented. So passing this test doesn't really ensure the dof map
-  /// will work in this poset.
-
-  /// @error dof map schema must conform to poset schema as well.
-  /// @todo add schema conformance test.
-
-  // In principle any dof map will do.
-
-  result = true;
-
-  // Postconditions:
-
-  ensure(result ? (dynamic_cast<const poset_dof_map*>(xdof_map) != 0) : true);
-
-  // Exit
-
-  return result;
-}
-
-sheaf::array_poset_dof_map&
-sheaf::poset_state_handle::
-table_dof_map(bool xrequire_write_access)
-{
-  // Preconditions:
-
-  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
-
-  // Body:
-
-  // Postconditions:
-
-  // Exit
-
-  return *(table().table_dofs());
-}
-
-const sheaf::array_poset_dof_map&
-sheaf::poset_state_handle::
-table_dof_map(bool xrequire_write_access) const
-{
-  // Preconditions:
-
-  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
-
-  // Body:
-
-  // Postconditions:
-
-  // Exit
-
-  return *(table().table_dofs());
-}
-
-void
-sheaf::poset_state_handle::
-table_dof_tuple(void* xbuf, size_t xbuflen) const
-{
-  // Preconditions:
-
-  require(state_is_read_accessible());
-  require(schema().table_dof_tuple_ub() > 0);
-  require(xbuflen >= schema().table_dof_tuple_ub());
-
-  // Body:
-
-  table_dof_map().get_dof_tuple(xbuf, xbuflen);
-
-  // Postconditions:
-
-  // Exit
-
-  return;
-}
-
-void*
-sheaf::poset_state_handle::
-table_dofs()
-{
-  // Preconditions:
-
-  require(state_is_read_write_accessible());
-  
-  // Body:
-
-  void* result = table_dof_map(true).dof_tuple();
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-const void*
-sheaf::poset_state_handle::
-table_dofs() const
-{
-  // Preconditions:
-
-  require(state_is_read_accessible());
-  
-  // Body:
-
-  const void* result = table_dof_map(false).dof_tuple();
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-void*
-sheaf::poset_state_handle::
-table_dofs(bool xauto_access)
-{
-  // Preconditions:
-
-  require(state_is_auto_read_write_accessible(xauto_access));
-  
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_write_access(true);
-  }
-
-  void* result = table_dofs();
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-
-  // Exit:
-
-  return result;
-}
-
-const void*
-sheaf::poset_state_handle::
-table_dofs(bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-  
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  const void* result = table_dofs();
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::poset_dof_map&
-sheaf::poset_state_handle::
-row_dof_map(pod_index_type xtuple_hub_id, bool xrequire_write_access) const
-{
-  poset_dof_map* result_ptr;
-
-  // Preconditions:
-
-  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
-  require(contains_row_dof_tuple(xtuple_hub_id));
-
-  // Body:
-
-  result_ptr = table().row_dof_tuple(xtuple_hub_id);
-
-  // Postconditions:
-
-  // Exit
-
-  return *result_ptr;
-}
-
-sheaf::poset_dof_map&
-sheaf::poset_state_handle::
-row_dof_map(const scoped_index& xtuple_id, bool xrequire_write_access) const
-{
-  poset_dof_map* result_ptr;
-
-  // Preconditions:
-
-  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
-  require(contains_row_dof_tuple(xtuple_id));
-
-  // Body:
-
-  return row_dof_map(xtuple_id.hub_pod(), xrequire_write_access);
-}
-
-const sheaf::scoped_index&
-sheaf::poset_state_handle::
-new_row_dof_map()
-{
-  // Preconditions:
-
-  require(state_is_read_write_accessible());
-
-  // Body:
-
-  define_old_variable(int old_row_dof_tuple_ct = row_dof_tuple_ct());
-
-  // Create a new dof map using contiguous array rep
-
-  poset_dof_map* lmap = new array_poset_dof_map(this, false);
-  lmap->put_defaults();
-  table().put_row_dof_tuple(lmap);
-  const scoped_index& result = lmap->index();
-
-  // Postconditions:
-
-  ensure(row_dof_tuple_ct() == old_row_dof_tuple_ct+1);
-  ensure(contains_row_dof_tuple(result));
-
-  // Exit
-
-  return result;
-}
-
-const sheaf::scoped_index&
-sheaf::poset_state_handle::
-clone_row_dof_map(const poset_dof_map& xprototype)
-{
-  // Preconditions:
-
-  require(state_is_read_write_accessible());
-  require(row_dof_map_conforms(&xprototype));
-  require(xprototype.schema().row_conforms_to(schema()));
-
-  // Body:
-
-  define_old_variable(int old_row_dof_tuple_ct = row_dof_tuple_ct());
-
-  // Create a new dof map by copying the given prototype.
-
-  poset_dof_map* lmap = xprototype.copy();
-  lmap->put_host(this);
-  table().put_row_dof_tuple(lmap);
-  const scoped_index& result = lmap->index(); // Set by put_row_dof_tuple.
-
-  // Postconditions:
-
-  ensure(row_dof_tuple_ct() == old_row_dof_tuple_ct+1);
-  ensure(contains_row_dof_tuple(result));
-
-  // Exit
-
-  return result;
-}
-
-sheaf::poset_dof_map&
-sheaf::poset_state_handle::
-member_dof_map(pod_index_type xmbr_hub_id, bool xrequire_write_access)
-{
-  // Preconditions:
-
-  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
-  require(contains_member(xmbr_hub_id, false));
-  require(is_jim(xmbr_hub_id, false));
-
-  // Body:
-
-  poset_dof_map& result =
-    row_dof_map(member_dof_tuple_id(xmbr_hub_id, false), xrequire_write_access);
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::poset_dof_map&
-sheaf::poset_state_handle::
-member_dof_map(const scoped_index& xmbr_id, bool xrequire_write_access)
-{
-  // Preconditions:
-
-  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
-  require(contains_member(xmbr_id, false));
-  require(is_jim(xmbr_id, false));
-
-  // Body:
-
-  return member_dof_map(xmbr_id.hub_pod(), xrequire_write_access);
-}
-
-const sheaf::poset_dof_map&
-sheaf::poset_state_handle::
-member_dof_map(pod_index_type xmbr_hub_id, bool xrequire_write_access) const
-{
-  // Preconditions:
-
-  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
-  require(contains_member(xmbr_hub_id, false));
-  require(is_jim(xmbr_hub_id, false));
-
-  // Body:
-
-  poset_dof_map& result =
-    row_dof_map(member_dof_tuple_id(xmbr_hub_id, false), xrequire_write_access);
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-const sheaf::poset_dof_map&
-sheaf::poset_state_handle::
-member_dof_map(const scoped_index& xmbr_id, bool xrequire_write_access) const
-{
-  // Preconditions:
-
-  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
-  require(contains_member(xmbr_id, false));
-  require(is_jim(xmbr_id, false));
-
-  // Body:
-
-  return member_dof_map(xmbr_id.hub_pod(), xrequire_write_access);
-}
-
-sheaf::pod_index_type
-sheaf::poset_state_handle::
-member_dof_tuple_id(pod_index_type xmbr_hub_id, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-  require(contains_member(xmbr_hub_id, false));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  pod_index_type result = crg().member_dof_tuple_id(xmbr_hub_id);
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(!is_valid(result) || contains_row_dof_tuple(result));
-
-  // Exit
-
-  return result;
-}
-
-void
-sheaf::poset_state_handle::
-member_dof_tuple_id(const scoped_index& xmbr_id,
-		    scoped_index& result,
-		    bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-  require(contains_member(xmbr_id, false));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  result.put(dof_tuple_hub_id_space(false),
-	     member_dof_tuple_id(xmbr_id.hub_pod(), false));
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(!result.is_valid() || contains_row_dof_tuple(result));
-
-  // Exit
-
-  return;
-}
-
-void
-sheaf::poset_state_handle::
-put_member_dof_tuple_id(pod_index_type xmbr_hub_id,
-			pod_index_type xtuple_hub_id,
-			bool xauto_access)
-{
-  // Preconditions:
-
-  require(state_is_auto_read_write_accessible(xauto_access));
-  require(contains_member(xmbr_hub_id, false));
-  require(contains_row_dof_tuple(xtuple_hub_id) || !is_valid(xtuple_hub_id));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_write_access(true);
-  }
-
-  crg().put_member_dof_tuple_id(xmbr_hub_id, xtuple_hub_id);
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(member_dof_tuple_id(xmbr_hub_id, xauto_access) == xtuple_hub_id);
-
-  // Exit
-
-  return;
-}
-
-void
-sheaf::poset_state_handle::
-put_member_dof_tuple_id(const scoped_index& xmbr_id,
-			const scoped_index& xtuple_id,
-			bool xauto_access)
-{
-  // Preconditions:
-
-  require(state_is_auto_read_write_accessible(xauto_access));
-  require(contains_member(xmbr_id, false));
-  require(contains_row_dof_tuple(xtuple_id) || !xtuple_id.is_valid());
-
-  // Body:
-
-  put_member_dof_tuple_id(xmbr_id.hub_pod(),
-			  xtuple_id.hub_pod(),
-			  xauto_access);
-
-  // Postconditions:
-
-  ensure(member_dof_tuple_id(xmbr_id.hub_pod(), xauto_access) == xtuple_id.hub_pod());
-
-  // Exit
-
-  return;
-}
-
-bool
-sheaf::poset_state_handle::
-contains_row_dof_tuple(pod_index_type xtuple_hub_id) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(state_is_read_accessible());
-
-  // Body:
-
-  result = table().contains_row_dof_tuple(xtuple_hub_id);
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-bool
-sheaf::poset_state_handle::
-contains_row_dof_tuple(const scoped_index& xtuple_id) const
-{
-  // Preconditions:
-
-  require(state_is_read_accessible());
-
-  // Body:
-
-  return contains_row_dof_tuple(xtuple_id.hub_pod());
-}
-
-sheaf::size_type
-sheaf::poset_state_handle::
-row_dof_tuple_ct() const
-{
-  // Preconditions:
-
-  require(state_is_read_accessible());
-
-  // Body:
-
-  int result = table().row_dof_tuple_ct();
-
-  // Postconditions:
-
-  ensure(result >= 0);
-
-  return result;
-}
-
-int
-sheaf::poset_state_handle::
-standard_row_dof_tuple_ct() const
-{
-  int result;
-
-  // Preconditions:
-
-  require(state_is_read_accessible());
-
-  // Body:
-
-  result = table().standard_row_dof_tuple_ct();
-
-  // Postconditions:
-
-  ensure(result >= 0);
-
-  // Exit:
-
-  return result;
-}
-
-bool
-sheaf::poset_state_handle::
-has_standard_row_dof_tuple_ct() const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(state_is_read_accessible());
-
-  // Body:
-
-  result = (row_dof_tuple_ct() == standard_row_dof_tuple_ct());
-
-  // Postconditions:
-
-  ensure(result == (row_dof_tuple_ct() == standard_row_dof_tuple_ct()));
-
-  return result;
-}
-
-
-// PROTECTED FUNCTIONS
-
-sheaf::poset_table_state&
-sheaf::poset_state_handle::
-table() const
-{
-  return *(state_obj()->table());
-}
-
-void
-sheaf::poset_state_handle::
-initialize_table_dofs(void* xtable_dofs, size_t xtable_dof_ub)
-{
-
-  // Preconditions:
-
-  require(state_is_read_write_accessible());
-  require(xtable_dofs != 0 ? xtable_dof_ub >= schema().table_dof_tuple_ub() : true);
-
-
-  // Body:
-
-  array_poset_dof_map* lmap = new array_poset_dof_map(this, true);
-  lmap->inc_ref_ct();
-
-  if((xtable_dofs != 0) && (lmap->dof_ct() > 0))
-  {
-    lmap->put_dof_tuple(xtable_dofs, schema().table_dof_tuple_ub());
-  }
-  table().put_table_dofs(lmap);
-
-  // Postconditions:
-
-  ensure(table().table_dofs() != 0);
-
-  // Exit
-
-  return;
-}
-
-void
-sheaf::poset_state_handle::
-initialize_table_dof_tuple(array_poset_dof_map* xdof_tuple)
-{
-
-  // Preconditions:
-
-  require(xdof_tuple != 0);
-  require(state_is_read_write_accessible());
-
-  // Body:
-
-  xdof_tuple->put_host(this);
-  xdof_tuple->inc_ref_ct();
-  table().put_table_dofs(xdof_tuple);
-
-  // Postconditions:
-
-  ensure(&(table_dof_map()) == xdof_tuple);
-
-  // Exit
-
-  return;
-}
-
-// PRIVATE FUNCTIONS
-
-
-// ===========================================================
-// DOF TUPLE ID SPACE FAMILY FACET
+// POSET ALGEBRA FACET
 // ===========================================================
 
 // PUBLIC FUNCTIONS
 
-const sheaf::index_space_family&
-sheaf::poset_state_handle::
-dof_tuple_id_spaces(bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  const index_space_family& result = table()._id_spaces;
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(is_basic_query);
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::index_space_family&
-sheaf::poset_state_handle::
-dof_tuple_id_spaces(bool xauto_access)
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  index_space_family& result = table()._id_spaces;
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(is_basic_query);
-
-  // Exit:
-
-  return result;
-}
-
-const sheaf::hub_index_space_handle&
-sheaf::poset_state_handle::
-dof_tuple_hub_id_space(bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  const hub_index_space_handle& result = table().id_spaces().hub_id_space();
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(result.is_attached());
-
-  // Exit:
-
-  return result;
-}
-
-const sheaf::scoped_index&
-sheaf::poset_state_handle::
-dof_tuple_id(bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  const scoped_index& result = table().hub_id();
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(result.same_scope(dof_tuple_hub_id_space(xauto_access)));
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::scoped_index
-sheaf::poset_state_handle::
-dof_tuple_id(pod_index_type xid, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  scoped_index result(dof_tuple_id(false));
-  result = xid;
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(result.same_scope(dof_tuple_hub_id_space(xauto_access)));
-  ensure(result.pod() == xid);
-
-  // Exit:
-
-  return result;
-}
-
 // PROTECTED FUNCTIONS
-
-// PRIVATE FUNCTIONS
-
-
-// ===========================================================
-// SCHEMATIZATION FACET
-// ===========================================================
-
-// PUBLIC FUNCTIONS
-
-bool
-sheaf::poset_state_handle::
-is_schematized(bool xauto_access) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  result = includes_subposet(schema_poset_member::table_dof_subposet_name("top")) &&
-           includes_subposet(schema_poset_member::row_dof_subposet_name("top"));
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  /// @todo make the following executable.
-
-  ensure(unexecutable(result == top member has been schematized));
-
-  // Exit
-
-  return result;
-}
-
-void
-sheaf::poset_state_handle::
-schematize(subposet* xtable_dof_subposet,
-           subposet* xrow_dof_subposet,
-           bool xall_members)
-{
-  // Preconditions:
-
-  require(state_is_read_write_accessible());
-  require(xtable_dof_subposet != 0);
-  require(includes_subposet(xtable_dof_subposet));
-  require(xrow_dof_subposet != 0);
-  require(includes_subposet(xrow_dof_subposet));
-
-  // Body:
-
-  string ltop_table_dof_sp_name(schema_poset_member::table_dof_subposet_name("top"));
-  if(xtable_dof_subposet->name() != ltop_table_dof_sp_name)
-  {
-    xtable_dof_subposet->put_name(ltop_table_dof_sp_name, true, false);
-  }
-  table_dof_subposet().attach_to_state(xtable_dof_subposet, false);
-
-  if(!table_dof_subposet().has_id_space())
-  {
-    initialize_dof_id_space(table_dof_subposet());
-  }
-  
-  string ltop_row_dof_sp_name(schema_poset_member::row_dof_subposet_name("top"));
-  if(xrow_dof_subposet->name() != ltop_row_dof_sp_name)
-  {
-    xrow_dof_subposet->put_name(ltop_row_dof_sp_name, true, false);
-  }
-  row_dof_subposet().attach_to_state(xrow_dof_subposet, false);
-
-  if(!row_dof_subposet().has_id_space())
-  {
-    initialize_dof_id_space(row_dof_subposet());
-  }
-  
-  // Postconditions:
-
-  ensure(is_schematized(false));
-
-  // Exit
-
-  return;
-}
-
-// PROTECTED FUNCTIONS
-
-void
-sheaf::poset_state_handle::
-initialize_dof_id_space(subposet& xdof_subposet)
-{
-  // Preconditions:
-
-  require(state_is_read_write_accessible());
-
-  // Body:
-
-  xdof_subposet.put_is_persistent(true);
-  if(member_id_spaces(false).contains(xdof_subposet.id_space_name()))
-  {
-    xdof_subposet.attach_id_space();
-  }
-  else
-  {
-    xdof_subposet.new_id_space("array_index_space_state",
-			       array_index_space_state::
-			       make_arg_list(xdof_subposet.member_ct()));
-
-    mutable_index_space_handle& ldof_id_space = xdof_subposet.id_space();
-
-    index_iterator ldof_itr = xdof_subposet.indexed_member_iterator();
-    while(!ldof_itr.is_done())
-    {
-      ldof_id_space.push_back(ldof_itr.index());
-      
-      ldof_itr.next();
-    }
-  }
-
-  // Postconditions:
-
-  ensure(xdof_subposet.has_id_space());
-
-  // Exit:
-
-  return;
-}
 
 // PRIVATE FUNCTIONS
 
@@ -2483,6 +1310,7 @@ initialize_dof_id_space(subposet& xdof_subposet)
 // ===========================================================
 
 // PUBLIC FUNCTIONS
+
 
 sheaf::pod_index_type
 sheaf::poset_state_handle::
@@ -4286,6 +3114,290 @@ new_member_interval(pod_index_type xmbr_hub_id, const string& xinterval_type, si
 
 // PRIVATE FUNCTIONS
 
+// ===========================================================
+// MEMBER ID SPACE FAMILY FACET
+// ===========================================================
+
+// PUBLIC FUNCTIONS
+
+const sheaf::index_space_family&
+sheaf::poset_state_handle::
+member_id_spaces(bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  const index_space_family& result = crg()._id_spaces;
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::index_space_family&
+sheaf::poset_state_handle::
+member_id_spaces(bool xauto_access)
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  index_space_family& result = crg()._id_spaces;
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return result;
+}
+
+const sheaf::hub_index_space_handle&
+sheaf::poset_state_handle::
+member_hub_id_space(bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  const hub_index_space_handle& result = crg().id_spaces().hub_id_space();
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(result.is_attached());
+
+  // Exit:
+
+  return result;
+}
+
+const sheaf::scoped_index&
+sheaf::poset_state_handle::
+member_id(bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  const scoped_index& result = crg().hub_id();
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(result.same_scope(member_hub_id_space(xauto_access)));
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::scoped_index
+sheaf::poset_state_handle::
+member_id(pod_index_type xid, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  scoped_index result(member_id(false));
+  result = xid;
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(result.same_scope(member_hub_id_space(xauto_access)));
+  ensure(result.pod() == xid);
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED FUNCTIONS
+
+void
+sheaf::poset_state_handle::
+update_standard_member_id_spaces()
+{
+  // Preconditions:
+
+  require(state_is_read_write_accessible());
+
+  // Body:
+
+  crg()._id_spaces.update_standard_id_spaces();
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::poset_state_handle::
+clear_member_id_spaces(bool xauto_access)
+{
+  // Preconditions:
+
+  require(state_is_auto_read_write_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_write_access(true);
+  }
+
+  crg()._id_spaces.clear_id_spaces();
+
+  // Postconditions:
+
+  ensure(member_id_spaces(false).has_only_standard_id_spaces());
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::poset_state_handle::
+extend_last_member_term(size_type xct, bool xauto_access)
+{
+  // Preconditions:
+
+  require(state_is_auto_read_write_accessible(xauto_access));
+  require(!member_hub_id_space(xauto_access).is_empty());
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_write_access();
+  }
+
+  define_old_variable(const index_space_handle& last_term = member_id_spaces(false).last_term());
+  define_old_variable(scoped_index old_last_term_begin(last_term, last_term.begin()));
+
+  if(xct > crg()._id_spaces.last_term().ct())
+  {
+    crg()._id_spaces.extend_last_term(xct);
+  }
+  
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postcondtions:
+
+  ensure_for_range(scoped_index i=old_last_term_begin, i<old_last_term_begin+xct, ++i, i.in_scope());
+
+  // Exit:
+
+  return;
+}
+
+sheaf::pod_index_type
+sheaf::poset_state_handle::
+new_term(size_type xct, bool xauto_access)
+{
+  // Preconditions:
+
+  require(state_is_auto_read_write_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_write_access();
+  }
+
+  pod_index_type result = crg()._id_spaces.new_primary_state(xct);
+  
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postcondtions:
+
+  // Exit:
+
+  return result;
+}
+
+// PRIVATE FUNCTIONS
+
 
 // ===========================================================
 // ORDER RELATION FACET
@@ -5833,291 +4945,6 @@ transfer_cover(pod_index_type xsrc, pod_index_type xdst, bool xlower)
 
 
 // ===========================================================
-// MEMBER ID SPACE FAMILY FACET
-// ===========================================================
-
-// PUBLIC FUNCTIONS
-
-const sheaf::index_space_family&
-sheaf::poset_state_handle::
-member_id_spaces(bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  const index_space_family& result = crg()._id_spaces;
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(is_basic_query);
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::index_space_family&
-sheaf::poset_state_handle::
-member_id_spaces(bool xauto_access)
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  index_space_family& result = crg()._id_spaces;
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(is_basic_query);
-
-  // Exit:
-
-  return result;
-}
-
-const sheaf::hub_index_space_handle&
-sheaf::poset_state_handle::
-member_hub_id_space(bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  const hub_index_space_handle& result = crg().id_spaces().hub_id_space();
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(result.is_attached());
-
-  // Exit:
-
-  return result;
-}
-
-const sheaf::scoped_index&
-sheaf::poset_state_handle::
-member_id(bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  const scoped_index& result = crg().hub_id();
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(result.same_scope(member_hub_id_space(xauto_access)));
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::scoped_index
-sheaf::poset_state_handle::
-member_id(pod_index_type xid, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  scoped_index result(member_id(false));
-  result = xid;
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(result.same_scope(member_hub_id_space(xauto_access)));
-  ensure(result.pod() == xid);
-
-  // Exit:
-
-  return result;
-}
-
-// PROTECTED FUNCTIONS
-
-void
-sheaf::poset_state_handle::
-update_standard_member_id_spaces()
-{
-  // Preconditions:
-
-  require(state_is_read_write_accessible());
-
-  // Body:
-
-  crg()._id_spaces.update_standard_id_spaces();
-
-  // Postconditions:
-
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::poset_state_handle::
-clear_member_id_spaces(bool xauto_access)
-{
-  // Preconditions:
-
-  require(state_is_auto_read_write_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_write_access(true);
-  }
-
-  crg()._id_spaces.clear_id_spaces();
-
-  // Postconditions:
-
-  ensure(member_id_spaces(false).has_only_standard_id_spaces());
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::poset_state_handle::
-extend_last_member_term(size_type xct, bool xauto_access)
-{
-  // Preconditions:
-
-  require(state_is_auto_read_write_accessible(xauto_access));
-  require(!member_hub_id_space(xauto_access).is_empty());
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_write_access();
-  }
-
-  define_old_variable(const index_space_handle& last_term = member_id_spaces(false).last_term());
-  define_old_variable(scoped_index old_last_term_begin(last_term, last_term.begin()));
-
-  if(xct > crg()._id_spaces.last_term().ct())
-  {
-    crg()._id_spaces.extend_last_term(xct);
-  }
-  
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postcondtions:
-
-  ensure_for_range(scoped_index i=old_last_term_begin, i<old_last_term_begin+xct, ++i, i.in_scope());
-
-  // Exit:
-
-  return;
-}
-
-sheaf::pod_index_type
-sheaf::poset_state_handle::
-new_term(size_type xct, bool xauto_access)
-{
-  // Preconditions:
-
-  require(state_is_auto_read_write_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_write_access();
-  }
-
-  pod_index_type result = crg()._id_spaces.new_primary_state(xct);
-  
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postcondtions:
-
-  // Exit:
-
-  return result;
-}
-
-// PRIVATE FUNCTIONS
-
-
-// ===========================================================
 // POWERSET FACET
 // ===========================================================
 
@@ -7313,330 +6140,377 @@ subposet_id(pod_index_type xid, bool xauto_access) const
 
 
 // ===========================================================
-// POSET ALGEBRA FACET
+// SCHEMA FACET
 // ===========================================================
 
 // PUBLIC FUNCTIONS
 
-// PROTECTED FUNCTIONS
-
-// PRIVATE FUNCTIONS
-
-
-// ===========================================================
-// I/O SUPPORT FACET
-// ===========================================================
-
-// PUBLIC FUNCTIONS
-
-sheaf::schema_poset_member*
+sheaf::schema_poset_member&
 sheaf::poset_state_handle::
-new_schema_handle(const string& xid_space_name,
-                  pod_index_type xschema_member_ext_id,
-                  pod_index_type xbase_space_ext_id,
-                  pod_index_type xfiber_schema_ext_id,
-                  pod_index_type xlocal_schema_ext_id)
+schema()
 {
-
-  /// @hack this function should be const, but descendants call
-  /// mmber functions that are not currently const.
-
   // Preconditions:
+
+  require(state_is_read_accessible());
 
   // Body:
 
-  // Create a handle of the type appropriate for members of this
-  // which will be used as a schema.
-
-  schema_poset_member* result = new schema_poset_member();
-
-  // Get the internal id for the schema member.
-
-  pod_index_type lint_id =
-    get_int_id(xschema_member_ext_id, xid_space_name, false);
-
-  // Attach the handle.
-
-  result->attach_to_state(this, lint_id);
+  schema_poset_member& result = table().schema();
 
   // Postconditions:
-
-  ensure(result != 0);
-  ensure(schema_is_ancestor_of(result));
-  ensure(result->is_attached());
 
   // Exit
 
   return result;
 }
 
-sheaf::index_iterator*
+const sheaf::schema_poset_member&
 sheaf::poset_state_handle::
-get_decomposition(pod_index_type xindex) const
+schema() const
 {
-  /// @hack the product subposet hack, version 2.
-  /// This member exists only to encapsulate the hack.
 
   // Preconditions:
 
   require(state_is_read_accessible());
-  require(includes_subposet(xindex));
 
   // Body:
 
-  subposet ldecomp_sp(this, xindex);
-  index_iterator* result =
-    new index_iterator(ldecomp_sp.members(), ldecomp_sp.id_space(), false);
-  ldecomp_sp.detach_from_state();
+  const schema_poset_member& result = table().schema();
 
   // Postconditions:
 
-
-  // Exit:
+  // Exit
 
   return result;
 }
 
-sheaf::index_iterator*
+sheaf::schema_poset_member&
 sheaf::poset_state_handle::
-bound_iterator(const poset_bounds& xbounds, bool xis_ub) const
+schema(bool xauto_access)
 {
-  index_iterator* result;
-  
+
   // Preconditions:
 
-  require(state_is_read_accessible());
+  require(xauto_access || state_is_read_accessible());
 
   // Body:
 
-  pod_index_type lbnd_id;
-  bool lsingleton;
-
-  if(xis_ub)
+  if(xauto_access)
   {
-    lbnd_id = xbounds.ub_id();
-    lsingleton = xbounds.ub_is_singleton();
-  }
-  else
-  {
-    lbnd_id = xbounds.lb_id();
-    lsingleton = xbounds.lb_is_singleton();
+    get_read_access();
   }
 
-  if(lsingleton)  
+  schema_poset_member& result = schema();
+
+  if(xauto_access)
   {
-    zn_to_bool* l_lb = new zn_to_bool();
-    l_lb->force(lbnd_id, true);
-    result = new index_iterator(l_lb, member_hub_id_space(false), true);
-  }
-  else
-  {
-    result = get_decomposition(lbnd_id);
+    release_access();
   }
 
   // Postconditions:
 
-  ensure(result != 0);
+  // Exit
 
-  // Exit:
+  return result;
+}
+
+const sheaf::schema_poset_member&
+sheaf::poset_state_handle::
+schema(bool xauto_access) const
+{
+
+  // Preconditions:
+
+  require(xauto_access || state_is_read_accessible());
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  const schema_poset_member& result = schema();
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  // Exit
 
   return result;
 }
 
 bool
 sheaf::poset_state_handle::
-bound_contains_member(const poset_bounds& xbounds,
-		      bool xis_ub,
-		      const scoped_index& xindex) const
+schema_is_ancestor_of(const schema_poset_member* xother_schema) const
+{
+  bool result;
+
+  // Preconditions:
+
+  // Body:
+
+  // Always true in this class;
+  // intended for redefinition in descendants.
+
+  result = true;
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+bool
+sheaf::poset_state_handle::
+schema_is(const string& xschema_name) const
 {
   bool result;
 
   // Preconditions:
 
   require(state_is_read_accessible());
-  require(xis_ub ?
-	  xbounds.descriptor().ub_is_valid_for(*this) :
-	  xbounds.descriptor().lb_is_valid_for(*this));
-  require(contains_member(xindex, false));
 
   // Body:
 
-  pod_index_type lbnd_id;
-  bool lsingleton;
-
-  if(xis_ub)
-  {
-    lbnd_id = xbounds.ub_id();
-    lsingleton = xbounds.ub_is_singleton();
-  }
-  else
-  {
-    lbnd_id = xbounds.lb_id();
-    lsingleton = xbounds.lb_is_singleton();
-  }
-
-  if(lsingleton)
-  {
-    result = (xindex == lbnd_id);
-  }
-  else
-  {
-    result = powerset().subposet_contains_member(lbnd_id, xindex.hub_pod());
-  }
-  
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::pod_index_type
-sheaf::poset_state_handle::
-get_int_id(pod_index_type xext_id,
-           const string& xid_space_name,
-           bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  require(xext_id >= standard_member_ct() ?
-          member_id_spaces(false).contains(xid_space_name) : true);
-  require(xext_id >= standard_member_ct() ?
-	  member_id_spaces(false).contains(xid_space_name, xext_id) : true);
-
-
-  // Body:
-
-  pod_index_type result;
-
-  if(xext_id < standard_member_ct())
-  {
-    // Xext_id is standard member;
-    // internal id is same as external id.
-
-    result = xext_id;
-  }
-  else
-  {
-    // Get internal id from map.
-
-    result = member_id_spaces(false).hub_pod(xid_space_name, xext_id);
-  }
+  result = schema().name() == xschema_name;
 
   // Postconditions:
 
-  ensure(contains_member(result, false));
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Exit:
+  // Exit
 
   return result;
 }
 
 bool
 sheaf::poset_state_handle::
-is_valid_int_id(pod_index_type xint_id,
-		const string& xid_space_name,
-		bool xauto_access) const
+same_schema(const poset_state_handle* xother) const
 {
+  bool result;
+
   // Preconditions:
 
-  require(state_is_auto_read_accessible(xauto_access));
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
+  require(state_is_read_accessible());
+  require(xother != 0);
+  require(xother->state_is_read_accessible());
 
   // Body:
 
-  bool result = true;
-
-  if(xint_id >= standard_member_ct())
-  {
-    result = member_id_spaces(false).contains(xid_space_name);
-    if(result)
-    {
-      result = member_id_spaces(false).contains_hub(xid_space_name, xint_id);
-    }
-  }
-
-  if(xauto_access)
-  {
-    release_access();
-  }
+  result = schema().is_same_state(&(xother->schema()));
 
   // Postconditions:
 
-  // Exit:
+  // Exit
 
   return result;
 }
 
 bool
 sheaf::poset_state_handle::
-is_valid_int_id(const scoped_index& xint_id,
-		const string& xid_space_name,
-		bool xauto_access) const
+same_schema(const abstract_poset_member* xother) const
 {
+  bool result;
+
   // Preconditions:
 
-  require(state_is_auto_read_accessible(xauto_access));
+  require(state_is_read_accessible());
+  require(xother != 0);
+  require(xother->state_is_read_accessible());
 
-  if(xauto_access)
-  {
-    get_read_access();
-  }
 
   // Body:
 
-  return is_valid_int_id(xint_id.hub_pod(), xid_space_name, xauto_access);
+  result = same_schema(xother->host());
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
 }
 
-sheaf::pod_index_type
+
+// ===========================================================
+// TABLE DOF FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+ 
+
+bool
 sheaf::poset_state_handle::
-get_ext_id(pod_index_type xint_id,
-           const string& xid_space_name,
-           bool xauto_access) const
+table_dof_map_conforms(const poset_dof_map* xdof_map) const
 {
-  pod_index_type result;
+  bool result;
 
   // Preconditions:
 
-  require(state_is_auto_read_accessible(xauto_access));
-  require(is_valid_int_id(xint_id, xid_space_name, xauto_access));
+  require(xdof_map != 0);
+
+  // Body:
+
+  // Table dofs must be an array_poset_dof_map.
+
+  result = (dynamic_cast<const array_poset_dof_map*>(xdof_map) != 0);
+
+  // Postconditions:
+
+  ensure(result == (dynamic_cast<const array_poset_dof_map*>(xdof_map) != 0));
+
+  // Exit
+
+  return result;
+}
+
+bool
+sheaf::poset_state_handle::
+row_dof_map_conforms(const poset_dof_map* xdof_map) const
+{
+  bool result;
+
+  // Preconditions:
+
+  require(xdof_map != 0);
+
+  // Body:
+
+  /// @issue This routine tests only for covariant conformance.
+  /// So an instance of section_dof_map will pass this test because section_dof_map
+  /// inherits poset_dof_map. However, section_dof_map does not really functionally
+  /// conform to poset_dof_map currently because some member functions
+  /// are unimplemented. So passing this test doesn't really ensure the dof map
+  /// will work in this poset.
+
+  /// @error dof map schema must conform to poset schema as well.
+  /// @todo add schema conformance test.
+
+  // In principle any dof map will do.
+
+  result = true;
+
+  // Postconditions:
+
+  ensure(result ? (dynamic_cast<const poset_dof_map*>(xdof_map) != 0) : true);
+
+  // Exit
+
+  return result;
+}
+
+sheaf::array_poset_dof_map&
+sheaf::poset_state_handle::
+table_dof_map(bool xrequire_write_access)
+{
+  // Preconditions:
+
+  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
+
+  // Body:
+
+  // Postconditions:
+
+  // Exit
+
+  return *(table().table_dofs());
+}
+
+const sheaf::array_poset_dof_map&
+sheaf::poset_state_handle::
+table_dof_map(bool xrequire_write_access) const
+{
+  // Preconditions:
+
+  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
+
+  // Body:
+
+  // Postconditions:
+
+  // Exit
+
+  return *(table().table_dofs());
+}
+
+void
+sheaf::poset_state_handle::
+table_dof_tuple(void* xbuf, size_t xbuflen) const
+{
+  // Preconditions:
+
+  require(state_is_read_accessible());
+  require(schema().table_dof_tuple_ub() > 0);
+  require(xbuflen >= schema().table_dof_tuple_ub());
+
+  // Body:
+
+  table_dof_map().get_dof_tuple(xbuf, xbuflen);
+
+  // Postconditions:
+
+  // Exit
+
+  return;
+}
+
+void*
+sheaf::poset_state_handle::
+table_dofs()
+{
+  // Preconditions:
+
+  require(state_is_read_write_accessible());
+  
+  // Body:
+
+  void* result = table_dof_map(true).dof_tuple();
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+const void*
+sheaf::poset_state_handle::
+table_dofs() const
+{
+  // Preconditions:
+
+  require(state_is_read_accessible());
+  
+  // Body:
+
+  const void* result = table_dof_map(false).dof_tuple();
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+void*
+sheaf::poset_state_handle::
+table_dofs(bool xauto_access)
+{
+  // Preconditions:
+
+  require(state_is_auto_read_write_accessible(xauto_access));
   
   // Body:
 
   if(xauto_access)
   {
-    get_read_access();
+    get_read_write_access(true);
   }
 
-  if(xint_id < standard_member_ct())
-  {
-    // Xint_id is standard member;
-    // external id is same as internal id.
-
-    result = xint_id;
-  }
-  else
-  {
-    // Get external id from map.
-
-    result = member_id_spaces(false).pod(xid_space_name, xint_id);
-  }
+  void* result = table_dofs();
 
   if(xauto_access)
   {
@@ -7645,44 +6519,420 @@ get_ext_id(pod_index_type xint_id,
 
   // Postconditions:
 
-  ensure(result >= 0);
 
   // Exit:
 
   return result;
 }
 
-sheaf::pod_index_type
+const void*
 sheaf::poset_state_handle::
-get_ext_id(const scoped_index& xint_id,
-           const string& xid_space_name,
-           bool xauto_access) const
+table_dofs(bool xauto_access) const
 {
-  pod_index_type result;
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  const void* result = table_dofs();
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::poset_dof_map&
+sheaf::poset_state_handle::
+row_dof_map(pod_index_type xtuple_hub_id, bool xrequire_write_access) const
+{
+  poset_dof_map* result_ptr;
 
   // Preconditions:
 
-  require(xauto_access || state_is_read_accessible());
-  require(is_valid_int_id(xint_id, xid_space_name, xauto_access));
+  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
+  require(contains_row_dof_tuple(xtuple_hub_id));
 
   // Body:
 
-  result = get_ext_id(xint_id.hub_pod(), xid_space_name, xauto_access);
-  
+  result_ptr = table().row_dof_tuple(xtuple_hub_id);
+
   // Postconditions:
 
-  ensure(result >= 0);
+  // Exit
+
+  return *result_ptr;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+sheaf::poset_table_state&
+sheaf::poset_state_handle::
+table() const
+{
+  return *(state_obj()->table());
+}
+
+void
+sheaf::poset_state_handle::
+initialize_table_dofs(void* xtable_dofs, size_t xtable_dof_ub)
+{
+
+  // Preconditions:
+
+  require(state_is_read_write_accessible());
+  require(xtable_dofs != 0 ? xtable_dof_ub >= schema().table_dof_tuple_ub() : true);
+
+
+  // Body:
+
+  array_poset_dof_map* lmap = new array_poset_dof_map(this, true);
+  lmap->inc_ref_ct();
+
+  if((xtable_dofs != 0) && (lmap->dof_ct() > 0))
+  {
+    lmap->put_dof_tuple(xtable_dofs, schema().table_dof_tuple_ub());
+  }
+  table().put_table_dofs(lmap);
+
+  // Postconditions:
+
+  ensure(table().table_dofs() != 0);
+
+  // Exit
+
+  return;
+}
+
+void
+sheaf::poset_state_handle::
+initialize_table_dof_tuple(array_poset_dof_map* xdof_tuple)
+{
+
+  // Preconditions:
+
+  require(xdof_tuple != 0);
+  require(state_is_read_write_accessible());
+
+  // Body:
+
+  xdof_tuple->put_host(this);
+  xdof_tuple->inc_ref_ct();
+  table().put_table_dofs(xdof_tuple);
+
+  // Postconditions:
+
+  ensure(&(table_dof_map()) == xdof_tuple);
+
+  // Exit
+
+  return;
+}
+
+// PRIVATE MEMBER FUNCTIONS
+
+// ===========================================================
+// ROW DOF FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+ 
+sheaf::poset_dof_map&
+sheaf::poset_state_handle::
+row_dof_map(const scoped_index& xtuple_id, bool xrequire_write_access) const
+{
+  poset_dof_map* result_ptr;
+
+  // Preconditions:
+
+  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
+  require(contains_row_dof_tuple(xtuple_id));
+
+  // Body:
+
+  return row_dof_map(xtuple_id.hub_pod(), xrequire_write_access);
+}
+
+const sheaf::scoped_index&
+sheaf::poset_state_handle::
+new_row_dof_map()
+{
+  // Preconditions:
+
+  require(state_is_read_write_accessible());
+
+  // Body:
+
+  define_old_variable(int old_row_dof_tuple_ct = row_dof_tuple_ct());
+
+  // Create a new dof map using contiguous array rep
+
+  poset_dof_map* lmap = new array_poset_dof_map(this, false);
+  lmap->put_defaults();
+  table().put_row_dof_tuple(lmap);
+  const scoped_index& result = lmap->index();
+
+  // Postconditions:
+
+  ensure(row_dof_tuple_ct() == old_row_dof_tuple_ct+1);
+  ensure(contains_row_dof_tuple(result));
+
+  // Exit
+
+  return result;
+}
+
+const sheaf::scoped_index&
+sheaf::poset_state_handle::
+clone_row_dof_map(const poset_dof_map& xprototype)
+{
+  // Preconditions:
+
+  require(state_is_read_write_accessible());
+  require(row_dof_map_conforms(&xprototype));
+  require(xprototype.schema().row_conforms_to(schema()));
+
+  // Body:
+
+  define_old_variable(int old_row_dof_tuple_ct = row_dof_tuple_ct());
+
+  // Create a new dof map by copying the given prototype.
+
+  poset_dof_map* lmap = xprototype.copy();
+  lmap->put_host(this);
+  table().put_row_dof_tuple(lmap);
+  const scoped_index& result = lmap->index(); // Set by put_row_dof_tuple.
+
+  // Postconditions:
+
+  ensure(row_dof_tuple_ct() == old_row_dof_tuple_ct+1);
+  ensure(contains_row_dof_tuple(result));
+
+  // Exit
+
+  return result;
+}
+
+sheaf::poset_dof_map&
+sheaf::poset_state_handle::
+member_dof_map(pod_index_type xmbr_hub_id, bool xrequire_write_access)
+{
+  // Preconditions:
+
+  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
+  require(contains_member(xmbr_hub_id, false));
+  require(is_jim(xmbr_hub_id, false));
+
+  // Body:
+
+  poset_dof_map& result =
+    row_dof_map(member_dof_tuple_id(xmbr_hub_id, false), xrequire_write_access);
+
+  // Postconditions:
 
   // Exit:
 
   return result;
 }
 
+sheaf::poset_dof_map&
+sheaf::poset_state_handle::
+member_dof_map(const scoped_index& xmbr_id, bool xrequire_write_access)
+{
+  // Preconditions:
+
+  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
+  require(contains_member(xmbr_id, false));
+  require(is_jim(xmbr_id, false));
+
+  // Body:
+
+  return member_dof_map(xmbr_id.hub_pod(), xrequire_write_access);
+}
+
+const sheaf::poset_dof_map&
+sheaf::poset_state_handle::
+member_dof_map(pod_index_type xmbr_hub_id, bool xrequire_write_access) const
+{
+  // Preconditions:
+
+  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
+  require(contains_member(xmbr_hub_id, false));
+  require(is_jim(xmbr_hub_id, false));
+
+  // Body:
+
+  poset_dof_map& result =
+    row_dof_map(member_dof_tuple_id(xmbr_hub_id, false), xrequire_write_access);
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+const sheaf::poset_dof_map&
+sheaf::poset_state_handle::
+member_dof_map(const scoped_index& xmbr_id, bool xrequire_write_access) const
+{
+  // Preconditions:
+
+  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
+  require(contains_member(xmbr_id, false));
+  require(is_jim(xmbr_id, false));
+
+  // Body:
+
+  return member_dof_map(xmbr_id.hub_pod(), xrequire_write_access);
+}
+
 sheaf::pod_index_type
 sheaf::poset_state_handle::
-prereq_id(int xi) const
+member_dof_tuple_id(pod_index_type xmbr_hub_id, bool xauto_access) const
 {
-  pod_index_type result;
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  require(contains_member(xmbr_hub_id, false));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  pod_index_type result = crg().member_dof_tuple_id(xmbr_hub_id);
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(!is_valid(result) || contains_row_dof_tuple(result));
+
+  // Exit
+
+  return result;
+}
+
+void
+sheaf::poset_state_handle::
+member_dof_tuple_id(const scoped_index& xmbr_id,
+		    scoped_index& result,
+		    bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  require(contains_member(xmbr_id, false));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  result.put(dof_tuple_hub_id_space(false),
+	     member_dof_tuple_id(xmbr_id.hub_pod(), false));
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(!result.is_valid() || contains_row_dof_tuple(result));
+
+  // Exit
+
+  return;
+}
+
+void
+sheaf::poset_state_handle::
+put_member_dof_tuple_id(pod_index_type xmbr_hub_id,
+			pod_index_type xtuple_hub_id,
+			bool xauto_access)
+{
+  // Preconditions:
+
+  require(state_is_auto_read_write_accessible(xauto_access));
+  require(contains_member(xmbr_hub_id, false));
+  require(contains_row_dof_tuple(xtuple_hub_id) || !is_valid(xtuple_hub_id));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_write_access(true);
+  }
+
+  crg().put_member_dof_tuple_id(xmbr_hub_id, xtuple_hub_id);
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(member_dof_tuple_id(xmbr_hub_id, xauto_access) == xtuple_hub_id);
+
+  // Exit
+
+  return;
+}
+
+void
+sheaf::poset_state_handle::
+put_member_dof_tuple_id(const scoped_index& xmbr_id,
+			const scoped_index& xtuple_id,
+			bool xauto_access)
+{
+  // Preconditions:
+
+  require(state_is_auto_read_write_accessible(xauto_access));
+  require(contains_member(xmbr_id, false));
+  require(contains_row_dof_tuple(xtuple_id) || !xtuple_id.is_valid());
+
+  // Body:
+
+  put_member_dof_tuple_id(xmbr_id.hub_pod(),
+			  xtuple_id.hub_pod(),
+			  xauto_access);
+
+  // Postconditions:
+
+  ensure(member_dof_tuple_id(xmbr_id.hub_pod(), xauto_access) == xtuple_id.hub_pod());
+
+  // Exit
+
+  return;
+}
+
+bool
+sheaf::poset_state_handle::
+contains_row_dof_tuple(pod_index_type xtuple_hub_id) const
+{
+  bool result;
 
   // Preconditions:
 
@@ -7690,17 +6940,258 @@ prereq_id(int xi) const
 
   // Body:
 
-  switch(xi)
+  result = table().contains_row_dof_tuple(xtuple_hub_id);
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+bool
+sheaf::poset_state_handle::
+contains_row_dof_tuple(const scoped_index& xtuple_id) const
+{
+  // Preconditions:
+
+  require(state_is_read_accessible());
+
+  // Body:
+
+  return contains_row_dof_tuple(xtuple_id.hub_pod());
+}
+
+sheaf::size_type
+sheaf::poset_state_handle::
+row_dof_tuple_ct() const
+{
+  // Preconditions:
+
+  require(state_is_read_accessible());
+
+  // Body:
+
+  int result = table().row_dof_tuple_ct();
+
+  // Postconditions:
+
+  ensure(result >= 0);
+
+  return result;
+}
+
+int
+sheaf::poset_state_handle::
+standard_row_dof_tuple_ct() const
+{
+  int result;
+
+  // Preconditions:
+
+  require(state_is_read_accessible());
+
+  // Body:
+
+  result = table().standard_row_dof_tuple_ct();
+
+  // Postconditions:
+
+  ensure(result >= 0);
+
+  // Exit:
+
+  return result;
+}
+
+bool
+sheaf::poset_state_handle::
+has_standard_row_dof_tuple_ct() const
+{
+  bool result;
+
+  // Preconditions:
+
+  require(state_is_read_accessible());
+
+  // Body:
+
+  result = (row_dof_tuple_ct() == standard_row_dof_tuple_ct());
+
+  // Postconditions:
+
+  ensure(result == (row_dof_tuple_ct() == standard_row_dof_tuple_ct()));
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// PROTECTED FUNCTIONS
+
+// PRIVATE FUNCTIONS
+
+
+// ===========================================================
+// DOF TUPLE ID SPACE FAMILY FACET
+// ===========================================================
+
+// PUBLIC FUNCTIONS
+
+const sheaf::index_space_family&
+sheaf::poset_state_handle::
+dof_tuple_id_spaces(bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
   {
-  case 0:
-    result = schema().host()->index().pod();
-    break;
-  default:
-    result = invalid_pod_index();
-    break;
+    get_read_access();
+  }
+
+  const index_space_family& result = table()._id_spaces;
+
+  if(xauto_access)
+  {
+    release_access();
   }
 
   // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::index_space_family&
+sheaf::poset_state_handle::
+dof_tuple_id_spaces(bool xauto_access)
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  index_space_family& result = table()._id_spaces;
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return result;
+}
+
+const sheaf::hub_index_space_handle&
+sheaf::poset_state_handle::
+dof_tuple_hub_id_space(bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  const hub_index_space_handle& result = table().id_spaces().hub_id_space();
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(result.is_attached());
+
+  // Exit:
+
+  return result;
+}
+
+const sheaf::scoped_index&
+sheaf::poset_state_handle::
+dof_tuple_id(bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  const scoped_index& result = table().hub_id();
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(result.same_scope(dof_tuple_hub_id_space(xauto_access)));
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::scoped_index
+sheaf::poset_state_handle::
+dof_tuple_id(pod_index_type xid, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  scoped_index result(dof_tuple_id(false));
+  result = xid;
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(result.same_scope(dof_tuple_hub_id_space(xauto_access)));
+  ensure(result.pod() == xid);
 
   // Exit:
 
@@ -7710,6 +7201,145 @@ prereq_id(int xi) const
 // PROTECTED FUNCTIONS
 
 // PRIVATE FUNCTIONS
+
+
+// ===========================================================
+// SCHEMATIZATION FACET
+// ===========================================================
+
+// PUBLIC FUNCTIONS
+
+bool
+sheaf::poset_state_handle::
+is_schematized(bool xauto_access) const
+{
+  bool result;
+
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  result = includes_subposet(schema_poset_member::table_dof_subposet_name("top")) &&
+           includes_subposet(schema_poset_member::row_dof_subposet_name("top"));
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  /// @todo make the following executable.
+
+  ensure(unexecutable(result == top member has been schematized));
+
+  // Exit
+
+  return result;
+}
+
+void
+sheaf::poset_state_handle::
+schematize(subposet* xtable_dof_subposet,
+           subposet* xrow_dof_subposet,
+           bool xall_members)
+{
+  // Preconditions:
+
+  require(state_is_read_write_accessible());
+  require(xtable_dof_subposet != 0);
+  require(includes_subposet(xtable_dof_subposet));
+  require(xrow_dof_subposet != 0);
+  require(includes_subposet(xrow_dof_subposet));
+
+  // Body:
+
+  string ltop_table_dof_sp_name(schema_poset_member::table_dof_subposet_name("top"));
+  if(xtable_dof_subposet->name() != ltop_table_dof_sp_name)
+  {
+    xtable_dof_subposet->put_name(ltop_table_dof_sp_name, true, false);
+  }
+  table_dof_subposet().attach_to_state(xtable_dof_subposet, false);
+
+  if(!table_dof_subposet().has_id_space())
+  {
+    initialize_dof_id_space(table_dof_subposet());
+  }
+  
+  string ltop_row_dof_sp_name(schema_poset_member::row_dof_subposet_name("top"));
+  if(xrow_dof_subposet->name() != ltop_row_dof_sp_name)
+  {
+    xrow_dof_subposet->put_name(ltop_row_dof_sp_name, true, false);
+  }
+  row_dof_subposet().attach_to_state(xrow_dof_subposet, false);
+
+  if(!row_dof_subposet().has_id_space())
+  {
+    initialize_dof_id_space(row_dof_subposet());
+  }
+  
+  // Postconditions:
+
+  ensure(is_schematized(false));
+
+  // Exit
+
+  return;
+}
+
+// PROTECTED FUNCTIONS
+
+void
+sheaf::poset_state_handle::
+initialize_dof_id_space(subposet& xdof_subposet)
+{
+  // Preconditions:
+
+  require(state_is_read_write_accessible());
+
+  // Body:
+
+  xdof_subposet.put_is_persistent(true);
+  if(member_id_spaces(false).contains(xdof_subposet.id_space_name()))
+  {
+    xdof_subposet.attach_id_space();
+  }
+  else
+  {
+    xdof_subposet.new_id_space("array_index_space_state",
+			       array_index_space_state::
+			       make_arg_list(xdof_subposet.member_ct()));
+
+    mutable_index_space_handle& ldof_id_space = xdof_subposet.id_space();
+
+    index_iterator ldof_itr = xdof_subposet.indexed_member_iterator();
+    while(!ldof_itr.is_done())
+    {
+      ldof_id_space.push_back(ldof_itr.index());
+      
+      ldof_itr.next();
+    }
+  }
+
+  // Postconditions:
+
+  ensure(xdof_subposet.has_id_space());
+
+  // Exit:
+
+  return;
+}
+
+// PRIVATE FUNCTIONS
+
+
 
 
 // ===========================================================
@@ -8112,6 +7742,395 @@ put_version(int xversion)
 
   return;
 }
+
+// PRIVATE FUNCTIONS
+
+
+// ===========================================================
+// I/O SUPPORT FACET
+// ===========================================================
+
+// PUBLIC FUNCTIONS
+
+sheaf::schema_poset_member*
+sheaf::poset_state_handle::
+new_schema_handle(const string& xid_space_name,
+                  pod_index_type xschema_member_ext_id,
+                  pod_index_type xbase_space_ext_id,
+                  pod_index_type xfiber_schema_ext_id,
+                  pod_index_type xlocal_schema_ext_id)
+{
+
+  /// @hack this function should be const, but descendants call
+  /// mmber functions that are not currently const.
+
+  // Preconditions:
+
+  // Body:
+
+  // Create a handle of the type appropriate for members of this
+  // which will be used as a schema.
+
+  schema_poset_member* result = new schema_poset_member();
+
+  // Get the internal id for the schema member.
+
+  pod_index_type lint_id =
+    get_int_id(xschema_member_ext_id, xid_space_name, false);
+
+  // Attach the handle.
+
+  result->attach_to_state(this, lint_id);
+
+  // Postconditions:
+
+  ensure(result != 0);
+  ensure(schema_is_ancestor_of(result));
+  ensure(result->is_attached());
+
+  // Exit
+
+  return result;
+}
+
+sheaf::index_iterator*
+sheaf::poset_state_handle::
+get_decomposition(pod_index_type xindex) const
+{
+  /// @hack the product subposet hack, version 2.
+  /// This member exists only to encapsulate the hack.
+
+  // Preconditions:
+
+  require(state_is_read_accessible());
+  require(includes_subposet(xindex));
+
+  // Body:
+
+  subposet ldecomp_sp(this, xindex);
+  index_iterator* result =
+    new index_iterator(ldecomp_sp.members(), ldecomp_sp.id_space(), false);
+  ldecomp_sp.detach_from_state();
+
+  // Postconditions:
+
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::index_iterator*
+sheaf::poset_state_handle::
+bound_iterator(const poset_bounds& xbounds, bool xis_ub) const
+{
+  index_iterator* result;
+  
+  // Preconditions:
+
+  require(state_is_read_accessible());
+
+  // Body:
+
+  pod_index_type lbnd_id;
+  bool lsingleton;
+
+  if(xis_ub)
+  {
+    lbnd_id = xbounds.ub_id();
+    lsingleton = xbounds.ub_is_singleton();
+  }
+  else
+  {
+    lbnd_id = xbounds.lb_id();
+    lsingleton = xbounds.lb_is_singleton();
+  }
+
+  if(lsingleton)  
+  {
+    zn_to_bool* l_lb = new zn_to_bool();
+    l_lb->force(lbnd_id, true);
+    result = new index_iterator(l_lb, member_hub_id_space(false), true);
+  }
+  else
+  {
+    result = get_decomposition(lbnd_id);
+  }
+
+  // Postconditions:
+
+  ensure(result != 0);
+
+  // Exit:
+
+  return result;
+}
+
+bool
+sheaf::poset_state_handle::
+bound_contains_member(const poset_bounds& xbounds,
+		      bool xis_ub,
+		      const scoped_index& xindex) const
+{
+  bool result;
+
+  // Preconditions:
+
+  require(state_is_read_accessible());
+  require(xis_ub ?
+	  xbounds.descriptor().ub_is_valid_for(*this) :
+	  xbounds.descriptor().lb_is_valid_for(*this));
+  require(contains_member(xindex, false));
+
+  // Body:
+
+  pod_index_type lbnd_id;
+  bool lsingleton;
+
+  if(xis_ub)
+  {
+    lbnd_id = xbounds.ub_id();
+    lsingleton = xbounds.ub_is_singleton();
+  }
+  else
+  {
+    lbnd_id = xbounds.lb_id();
+    lsingleton = xbounds.lb_is_singleton();
+  }
+
+  if(lsingleton)
+  {
+    result = (xindex == lbnd_id);
+  }
+  else
+  {
+    result = powerset().subposet_contains_member(lbnd_id, xindex.hub_pod());
+  }
+  
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::pod_index_type
+sheaf::poset_state_handle::
+get_int_id(pod_index_type xext_id,
+           const string& xid_space_name,
+           bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  require(xext_id >= standard_member_ct() ?
+          member_id_spaces(false).contains(xid_space_name) : true);
+  require(xext_id >= standard_member_ct() ?
+	  member_id_spaces(false).contains(xid_space_name, xext_id) : true);
+
+
+  // Body:
+
+  pod_index_type result;
+
+  if(xext_id < standard_member_ct())
+  {
+    // Xext_id is standard member;
+    // internal id is same as external id.
+
+    result = xext_id;
+  }
+  else
+  {
+    // Get internal id from map.
+
+    result = member_id_spaces(false).hub_pod(xid_space_name, xext_id);
+  }
+
+  // Postconditions:
+
+  ensure(contains_member(result, false));
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Exit:
+
+  return result;
+}
+
+bool
+sheaf::poset_state_handle::
+is_valid_int_id(pod_index_type xint_id,
+		const string& xid_space_name,
+		bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  // Body:
+
+  bool result = true;
+
+  if(xint_id >= standard_member_ct())
+  {
+    result = member_id_spaces(false).contains(xid_space_name);
+    if(result)
+    {
+      result = member_id_spaces(false).contains_hub(xid_space_name, xint_id);
+    }
+  }
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+bool
+sheaf::poset_state_handle::
+is_valid_int_id(const scoped_index& xint_id,
+		const string& xid_space_name,
+		bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  // Body:
+
+  return is_valid_int_id(xint_id.hub_pod(), xid_space_name, xauto_access);
+}
+
+sheaf::pod_index_type
+sheaf::poset_state_handle::
+get_ext_id(pod_index_type xint_id,
+           const string& xid_space_name,
+           bool xauto_access) const
+{
+  pod_index_type result;
+
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  require(is_valid_int_id(xint_id, xid_space_name, xauto_access));
+  
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  if(xint_id < standard_member_ct())
+  {
+    // Xint_id is standard member;
+    // external id is same as internal id.
+
+    result = xint_id;
+  }
+  else
+  {
+    // Get external id from map.
+
+    result = member_id_spaces(false).pod(xid_space_name, xint_id);
+  }
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(result >= 0);
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::pod_index_type
+sheaf::poset_state_handle::
+get_ext_id(const scoped_index& xint_id,
+           const string& xid_space_name,
+           bool xauto_access) const
+{
+  pod_index_type result;
+
+  // Preconditions:
+
+  require(xauto_access || state_is_read_accessible());
+  require(is_valid_int_id(xint_id, xid_space_name, xauto_access));
+
+  // Body:
+
+  result = get_ext_id(xint_id.hub_pod(), xid_space_name, xauto_access);
+  
+  // Postconditions:
+
+  ensure(result >= 0);
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::pod_index_type
+sheaf::poset_state_handle::
+prereq_id(int xi) const
+{
+  pod_index_type result;
+
+  // Preconditions:
+
+  require(state_is_read_accessible());
+
+  // Body:
+
+  switch(xi)
+  {
+  case 0:
+    result = schema().host()->index().pod();
+    break;
+  default:
+    result = invalid_pod_index();
+    break;
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED FUNCTIONS
 
 // PRIVATE FUNCTIONS
 
