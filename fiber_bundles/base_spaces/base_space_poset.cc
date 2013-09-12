@@ -1726,6 +1726,32 @@ new_member(const string& xprototype_name, bool xcopy_dof_map)
 
 sheaf::pod_index_type
 fiber_bundle::base_space_poset::
+new_member(const char* xprototype_name, bool xcopy_dof_map)
+{
+  // cout << endl << "Entering base_space_poset::new_member." << endl;
+
+  // Preconditions:
+
+  require(precondition_of(new_member(string(xprototype_name), xcopy_dof_map)));
+
+  // Body:
+
+  string lprotoname(xprototype_name);
+  
+  pod_index_type result = new_member(lprotoname, xcopy_dof_map);
+
+  // Postconditions:
+
+  ensure(postcondition_of(new_member(string(xprototype_name), xcopy_dof_map)));
+
+  // Exit:
+
+  // cout << "Leaving base_space_poset::new_member." << endl;
+  return result;
+}
+
+sheaf::pod_index_type
+fiber_bundle::base_space_poset::
 new_member(const string& xtype_name, int xdb, const string& xlocal_cell_name)
 {
   // cout << endl << "Entering base_space_poset::new_member." << endl;

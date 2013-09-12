@@ -534,13 +534,19 @@ public:
   /// If xcopy_dof_map or if xhost does not already contain a copy 
   /// of the prototype dof map, create a copy of the dof map,
   /// otherwise just refer to an existing copy.
-  ///.
   ///
   pod_index_type new_member(const string& xprototype_name, bool xcopy_dof_map);
+  
+  ///
+  /// Synonym for new_member(const string& xprototype_name, bool xcopy_dof_map),
+  /// provided only to eliminate ambiguity with refinable_poset::new_member(bool, pod_index_type)
+  /// when xprototype_name is provided as a string literal.
+  ///
+  pod_index_type new_member(const char* xprototype_name, bool xcopy_dof_map);
 
   ///
   /// Creates a new jim and initializes it for use as a prototype with 
-  /// type_name xtype_name, dimension xdb, and local cell prototype xlocal_cell_name.
+  /// type name xtype_name, dimension xdb, and local cell prototype xlocal_cell_name.
   ///
   pod_index_type new_member(const string& xtype_name, int xdb, const string& xlocal_cell_name);
   
