@@ -43,6 +43,7 @@
 #include "primitives_poset_dof_map.h"
 #include "primitives_poset_schema.h"
 #include "schema_poset_member.h"
+#include "sheaves_namespace.h"
 #include "hub_index_space_handle.h"
 #include "std_set.h"
 #include "std_strstream.h"
@@ -132,6 +133,51 @@ clone() const
 // ============================================================================
 // CLASS ABSTRACT_POSET_MEMBER
 // ============================================================================
+
+// ===========================================================
+// HOST FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+sheaf::abstract_poset_member::host_type&
+sheaf::abstract_poset_member::
+new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xschema_path, bool xauto_access)
+{
+  // cout << endl << "Entering abstract_poset_member::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  
+
+  // Body:
+
+  host_type& result = host_type::new_table(xns, xhost_path, xschema_path, xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  // Exit:
+
+  // cout << "Leaving abstract_poset_member::new_host." << endl;
+  return result;
+}
+
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
   
 // ===========================================================
 // ABSTRACT_POSET_MEMBER FACET
@@ -773,17 +819,6 @@ new_jem_state(poset_state_handle* xhost,
 
   return;
 }
-
-// PROTECTED MEMBER FUNCTIONS
-
-// PRIVATE MEMBER FUNCTIONS
-
-
-// ===========================================================
-// HOST FACTORY FACET
-// ===========================================================
-
-// PUBLIC MEMBER FUNCTIONS
 
 // PROTECTED MEMBER FUNCTIONS
 

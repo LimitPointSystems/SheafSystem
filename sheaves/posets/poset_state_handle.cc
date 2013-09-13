@@ -65,10 +65,6 @@ class index_iterator;
 
 // PUBLIC FUNCTIONS
 
-const
-string
-sheaf::poset_state_handle::
-default_name;
 
 sheaf::poset_state_handle*
 sheaf::poset_state_handle::
@@ -153,6 +149,7 @@ poset_state_handle(abstract_poset_member* xtop, abstract_poset_member* xbottom)
 
   // Body:
 
+  _name_space = 0;
   _state = 0;
   _top = xtop;
   _bottom = xbottom;
@@ -169,57 +166,6 @@ poset_state_handle(abstract_poset_member* xtop, abstract_poset_member* xbottom)
 
   return;
 }
-
-sheaf::poset_state_handle::
-poset_state_handle(const poset_state_handle& xother)
-{
-  _name_space = 0;
-  _state = 0;
-  _top = new total_poset_member;
-  _bottom = new total_poset_member;
-
-  attach_to_state(&xother);
-}
-
-sheaf::poset_state_handle&
-sheaf::poset_state_handle::
-operator=(const poset_state_handle& xother)
-{
-  attach_to_state(&xother);
-
-  return *this;
-}
-
-// PRIVATE FUNCTIONS
-
-
-// ===========================================================
-// NEW CONSTRUCTOR FACET
-// ===========================================================
-
-// PUBLIC FUNCTIONS
-
-sheaf::arg_list
-sheaf::poset_state_handle::
-make_args()
-{
-  // Preconditions:
-
-
-  // Body:
-
-  arg_list result;
-
-  // Postconditions:
-
-  ensure(result.ct() == 0);
-
-  // Exit:
-
-  return result;
-}
-
-// PROTECTED FUNCTIONS
 
 // PRIVATE FUNCTIONS
 
@@ -869,39 +815,77 @@ detach_from_state()
 
 void
 sheaf::poset_state_handle::
-new_state(const schema_poset_member& xschema, array_poset_dof_map& xdof_map)
+new_state(namespace_poset& xns, const poset_path& xpath, const schema_poset_member& xschema, array_poset_dof_map& xdof_map)
 {
+  // cout << endl << "Entering poset_state_handle::new_state." << endl;
+
   // Preconditions:
 
-  require(is_external());
+  require(!xpath.empty());
+  require(!xns.contains_path(xpath, true));
+
   require(schema_is_ancestor_of(&xschema));
   require(xschema.state_is_read_accessible());
-  require(xschema.host()->name_space()->is_same_state(name_space()));
-  require(name_space()->member_poset_schema_id(index(), true) == xschema.host()->index().pod());
+  require(xschema.host()->name_space()->is_same_state(&xns));
 
   // Body:
 
-  // Intended for use only in table_dof_tuple_record:internalize.
-  // Version defined in this class should never be called.
-  // All poset classes instantiated by the i/o subsystem should
-  // redefine this routine.
+  // Create the state.
 
-  not_implemented();
+  new_state(xpath, xschema, xdof_map);
+  
+  // Insert it in the namespace.
+
+  initialize_namespace(xns, xpath.poset_name(), true);
+
+  // Postconditions:
+
+  ensure(is_attached());
+  ensure(path(true) == xpath);
+  ensure(schema(true).is_same_state(&xschema));
+
+  get_read_access();
+  ensure(&table_dof_map(false) == &xdof_map);
+  release_access();
 
 
+  // Exit:
+
+  // cout << "Leaving poset_state_handle::new_state." << endl;
+  return;
+}
+
+
+void
+sheaf::poset_state_handle::
+new_state(const poset_path& xpath, const schema_poset_member& xschema, array_poset_dof_map& xdof_map)
+{
+  // cout << endl << "Entering poset_state_handle::new_state." << endl;
+
+  // Preconditions:
+
+  require(schema_is_ancestor_of(&xschema));
+  require(xschema.state_is_read_accessible());
+
+  /// @issue the following is unexecutable because dof maps don't have
+  /// a schema until attached to a host; requires covariant schema feature to implement.
+
+  /// @todo fix dof maps schema feature and make this precondition executable.
+
+  require(unexecutable(xschema.is_same_state(xdof_map.schema())));
+
+  // Body:
+
+  is_abstract();
+  
   // Postconditions:
 
   ensure(invariant());
   ensure(is_attached());
   ensure(!in_jim_edit_mode());
+  ensure(schema().is_same_state(&xschema));
   ensure(has_standard_member_ct());
   ensure(has_standard_row_dof_tuple_ct());
-  ensure(has_standard_subposet_ct());
-
-  // The file always contains the coarsest common refinement,
-  // so thats the version we have to operate on when we're reading the file.
-  // Make sure that's the current version.
-
   ensure(version() == COARSEST_COMMON_REFINEMENT_VERSION);
 
   // Now we're finished, release all access
@@ -911,6 +895,11 @@ new_state(const schema_poset_member& xschema, array_poset_dof_map& xdof_map)
   // One final postcondition
 
   ensure(state_is_not_read_accessible());
+
+  // Exit:
+
+  // cout << "Leaving poset_state_handle::new_state." << endl;
+  return;
 }
 
 void
@@ -1200,7 +1189,8 @@ name() const
   {
     // Retrieve the name from the state.
 
-    result = subposet_name(WHOLE_INDEX);
+    //    result = subposet_name(WHOLE_INDEX);
+    result = _state->name();
   }
 
   // Postconditions:
@@ -1272,15 +1262,13 @@ path(bool xauto_access) const
 
 void
 sheaf::poset_state_handle::
-initialize_namespace(namespace_poset& xns,
-                     const string& xposet_name,
-                     bool xauto_link)
+initialize_namespace(namespace_poset& xns, const string& xposet_name, bool xauto_link)
 {
   // Preconditions:
 
   require(state_is_read_accessible());
 
-  /// @hack previously this routine entered and exited jim_edit_mode
+  /// @hack previously insert_poset called from this routine entered and exited jim_edit_mode
   /// without exporting any precondition. As a result, numerous new_state
   /// routines do not properly provide access before calling this routine.
   /// Continue the old practice until we get a chance to clean the mess up.
@@ -1292,22 +1280,15 @@ initialize_namespace(namespace_poset& xns,
 
   require(xns.state_is_read_write_accessible());
 
-  /// @issue the pre- and post-conditions established here
-  /// can not be satisfied in descendant namespace_poset.
-  /// This is a symptom of a fundamental error in the poset class hierarchy.
-
   // Body:
 
   // Insert this into the namespace and
   // set the namespace and index features.
 
-  /// @hack must call insert_poset before setting _namespace,
-  /// otherwise an invariance is violated somewhere below insert_poset.
-
   disable_invariant_check();
 
   _name_space = &xns;
-  _index = xns.insert_poset(*this, xposet_name, xauto_link);
+  _index = xns.insert_poset(*this, xposet_name, xauto_link, true);
 
   enable_invariant_check();
 
@@ -1324,1182 +1305,13 @@ initialize_namespace(namespace_poset& xns,
 
 // PRIVATE FUNCTIONS
 
-
 // ===========================================================
-// SCHEMA FACET
-// ===========================================================
-
-// PUBLIC FUNCTIONS
-
-sheaf::schema_poset_member&
-sheaf::poset_state_handle::
-schema()
-{
-  // Preconditions:
-
-  require(state_is_read_accessible());
-
-  // Body:
-
-  schema_poset_member& result = table().schema();
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-const sheaf::schema_poset_member&
-sheaf::poset_state_handle::
-schema() const
-{
-
-  // Preconditions:
-
-  require(state_is_read_accessible());
-
-  // Body:
-
-  const schema_poset_member& result = table().schema();
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-sheaf::schema_poset_member&
-sheaf::poset_state_handle::
-schema(bool xauto_access)
-{
-
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  schema_poset_member& result = schema();
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-const sheaf::schema_poset_member&
-sheaf::poset_state_handle::
-schema(bool xauto_access) const
-{
-
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  const schema_poset_member& result = schema();
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-bool
-sheaf::poset_state_handle::
-schema_is_ancestor_of(const schema_poset_member* xother_schema) const
-{
-  bool result;
-
-  // Preconditions:
-
-  // Body:
-
-  // Always true in this class;
-  // intended for redefinition in descendants.
-
-  result = true;
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-bool
-sheaf::poset_state_handle::
-schema_is(const string& xschema_name) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(state_is_read_accessible());
-
-  // Body:
-
-  result = schema().name() == xschema_name;
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-bool
-sheaf::poset_state_handle::
-same_schema(const poset_state_handle* xother) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(state_is_read_accessible());
-  require(xother != 0);
-  require(xother->state_is_read_accessible());
-
-  // Body:
-
-  result = schema().is_same_state(&(xother->schema()));
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-bool
-sheaf::poset_state_handle::
-same_schema(const abstract_poset_member* xother) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(state_is_read_accessible());
-  require(xother != 0);
-  require(xother->state_is_read_accessible());
-
-
-  // Body:
-
-  result = same_schema(xother->host());
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-bool
-sheaf::poset_state_handle::
-table_dof_map_conforms(const poset_dof_map* xdof_map) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(xdof_map != 0);
-
-  // Body:
-
-  // Table dofs must be an array_poset_dof_map.
-
-  result = (dynamic_cast<const array_poset_dof_map*>(xdof_map) != 0);
-
-  // Postconditions:
-
-  ensure(result == (dynamic_cast<const array_poset_dof_map*>(xdof_map) != 0));
-
-  // Exit
-
-  return result;
-}
-
-bool
-sheaf::poset_state_handle::
-row_dof_map_conforms(const poset_dof_map* xdof_map) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(xdof_map != 0);
-
-  // Body:
-
-  /// @issue This routine tests only for covariant conformance.
-  /// So an instance of section_dof_map will pass this test because section_dof_map
-  /// inherits poset_dof_map. However, section_dof_map does not really functionally
-  /// conform to poset_dof_map currently because some member functions
-  /// are unimplemented. So passing this test doesn't really ensure the dof map
-  /// will work in this poset.
-
-  /// @error dof map schema must conform to poset schema as well.
-  /// @todo add schema conformance test.
-
-  // In principle any dof map will do.
-
-  result = true;
-
-  // Postconditions:
-
-  ensure(result ? (dynamic_cast<const poset_dof_map*>(xdof_map) != 0) : true);
-
-  // Exit
-
-  return result;
-}
-
-sheaf::array_poset_dof_map&
-sheaf::poset_state_handle::
-table_dof_map(bool xrequire_write_access)
-{
-  // Preconditions:
-
-  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
-
-  // Body:
-
-  // Postconditions:
-
-  // Exit
-
-  return *(table().table_dofs());
-}
-
-const sheaf::array_poset_dof_map&
-sheaf::poset_state_handle::
-table_dof_map(bool xrequire_write_access) const
-{
-  // Preconditions:
-
-  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
-
-  // Body:
-
-  // Postconditions:
-
-  // Exit
-
-  return *(table().table_dofs());
-}
-
-void
-sheaf::poset_state_handle::
-table_dof_tuple(void* xbuf, size_t xbuflen) const
-{
-  // Preconditions:
-
-  require(state_is_read_accessible());
-  require(schema().table_dof_tuple_ub() > 0);
-  require(xbuflen >= schema().table_dof_tuple_ub());
-
-  // Body:
-
-  table_dof_map().get_dof_tuple(xbuf, xbuflen);
-
-  // Postconditions:
-
-  // Exit
-
-  return;
-}
-
-void*
-sheaf::poset_state_handle::
-table_dofs()
-{
-  // Preconditions:
-
-  require(state_is_read_write_accessible());
-  
-  // Body:
-
-  void* result = table_dof_map(true).dof_tuple();
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-const void*
-sheaf::poset_state_handle::
-table_dofs() const
-{
-  // Preconditions:
-
-  require(state_is_read_accessible());
-  
-  // Body:
-
-  const void* result = table_dof_map(false).dof_tuple();
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-void*
-sheaf::poset_state_handle::
-table_dofs(bool xauto_access)
-{
-  // Preconditions:
-
-  require(state_is_auto_read_write_accessible(xauto_access));
-  
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_write_access(true);
-  }
-
-  void* result = table_dofs();
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-
-  // Exit:
-
-  return result;
-}
-
-const void*
-sheaf::poset_state_handle::
-table_dofs(bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-  
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  const void* result = table_dofs();
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::poset_dof_map&
-sheaf::poset_state_handle::
-row_dof_map(pod_index_type xtuple_hub_id, bool xrequire_write_access) const
-{
-  poset_dof_map* result_ptr;
-
-  // Preconditions:
-
-  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
-  require(contains_row_dof_tuple(xtuple_hub_id));
-
-  // Body:
-
-  result_ptr = table().row_dof_tuple(xtuple_hub_id);
-
-  // Postconditions:
-
-  // Exit
-
-  return *result_ptr;
-}
-
-sheaf::poset_dof_map&
-sheaf::poset_state_handle::
-row_dof_map(const scoped_index& xtuple_id, bool xrequire_write_access) const
-{
-  poset_dof_map* result_ptr;
-
-  // Preconditions:
-
-  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
-  require(contains_row_dof_tuple(xtuple_id));
-
-  // Body:
-
-  return row_dof_map(xtuple_id.hub_pod(), xrequire_write_access);
-}
-
-const sheaf::scoped_index&
-sheaf::poset_state_handle::
-new_row_dof_map()
-{
-  // Preconditions:
-
-  require(state_is_read_write_accessible());
-
-  // Body:
-
-  define_old_variable(int old_row_dof_tuple_ct = row_dof_tuple_ct());
-
-  // Create a new dof map using contiguous array rep
-
-  poset_dof_map* lmap = new array_poset_dof_map(this, false);
-  lmap->put_defaults();
-  table().put_row_dof_tuple(lmap);
-  const scoped_index& result = lmap->index();
-
-  // Postconditions:
-
-  ensure(row_dof_tuple_ct() == old_row_dof_tuple_ct+1);
-  ensure(contains_row_dof_tuple(result));
-
-  // Exit
-
-  return result;
-}
-
-const sheaf::scoped_index&
-sheaf::poset_state_handle::
-clone_row_dof_map(const poset_dof_map& xprototype)
-{
-  // Preconditions:
-
-  require(state_is_read_write_accessible());
-  require(row_dof_map_conforms(&xprototype));
-  require(xprototype.schema().row_conforms_to(schema()));
-
-  // Body:
-
-  define_old_variable(int old_row_dof_tuple_ct = row_dof_tuple_ct());
-
-  // Create a new dof map by copying the given prototype.
-
-  poset_dof_map* lmap = xprototype.copy();
-  lmap->put_host(this);
-  table().put_row_dof_tuple(lmap);
-  const scoped_index& result = lmap->index(); // Set by put_row_dof_tuple.
-
-  // Postconditions:
-
-  ensure(row_dof_tuple_ct() == old_row_dof_tuple_ct+1);
-  ensure(contains_row_dof_tuple(result));
-
-  // Exit
-
-  return result;
-}
-
-sheaf::poset_dof_map&
-sheaf::poset_state_handle::
-member_dof_map(pod_index_type xmbr_hub_id, bool xrequire_write_access)
-{
-  // Preconditions:
-
-  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
-  require(contains_member(xmbr_hub_id, false));
-  require(is_jim(xmbr_hub_id, false));
-
-  // Body:
-
-  poset_dof_map& result =
-    row_dof_map(member_dof_tuple_id(xmbr_hub_id, false), xrequire_write_access);
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::poset_dof_map&
-sheaf::poset_state_handle::
-member_dof_map(const scoped_index& xmbr_id, bool xrequire_write_access)
-{
-  // Preconditions:
-
-  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
-  require(contains_member(xmbr_id, false));
-  require(is_jim(xmbr_id, false));
-
-  // Body:
-
-  return member_dof_map(xmbr_id.hub_pod(), xrequire_write_access);
-}
-
-const sheaf::poset_dof_map&
-sheaf::poset_state_handle::
-member_dof_map(pod_index_type xmbr_hub_id, bool xrequire_write_access) const
-{
-  // Preconditions:
-
-  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
-  require(contains_member(xmbr_hub_id, false));
-  require(is_jim(xmbr_hub_id, false));
-
-  // Body:
-
-  poset_dof_map& result =
-    row_dof_map(member_dof_tuple_id(xmbr_hub_id, false), xrequire_write_access);
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-const sheaf::poset_dof_map&
-sheaf::poset_state_handle::
-member_dof_map(const scoped_index& xmbr_id, bool xrequire_write_access) const
-{
-  // Preconditions:
-
-  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
-  require(contains_member(xmbr_id, false));
-  require(is_jim(xmbr_id, false));
-
-  // Body:
-
-  return member_dof_map(xmbr_id.hub_pod(), xrequire_write_access);
-}
-
-sheaf::pod_index_type
-sheaf::poset_state_handle::
-member_dof_tuple_id(pod_index_type xmbr_hub_id, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-  require(contains_member(xmbr_hub_id, false));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  pod_index_type result = crg().member_dof_tuple_id(xmbr_hub_id);
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(!is_valid(result) || contains_row_dof_tuple(result));
-
-  // Exit
-
-  return result;
-}
-
-void
-sheaf::poset_state_handle::
-member_dof_tuple_id(const scoped_index& xmbr_id,
-		    scoped_index& result,
-		    bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-  require(contains_member(xmbr_id, false));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  result.put(dof_tuple_hub_id_space(false),
-	     member_dof_tuple_id(xmbr_id.hub_pod(), false));
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(!result.is_valid() || contains_row_dof_tuple(result));
-
-  // Exit
-
-  return;
-}
-
-void
-sheaf::poset_state_handle::
-put_member_dof_tuple_id(pod_index_type xmbr_hub_id,
-			pod_index_type xtuple_hub_id,
-			bool xauto_access)
-{
-  // Preconditions:
-
-  require(state_is_auto_read_write_accessible(xauto_access));
-  require(contains_member(xmbr_hub_id, false));
-  require(contains_row_dof_tuple(xtuple_hub_id) || !is_valid(xtuple_hub_id));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_write_access(true);
-  }
-
-  crg().put_member_dof_tuple_id(xmbr_hub_id, xtuple_hub_id);
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(member_dof_tuple_id(xmbr_hub_id, xauto_access) == xtuple_hub_id);
-
-  // Exit
-
-  return;
-}
-
-void
-sheaf::poset_state_handle::
-put_member_dof_tuple_id(const scoped_index& xmbr_id,
-			const scoped_index& xtuple_id,
-			bool xauto_access)
-{
-  // Preconditions:
-
-  require(state_is_auto_read_write_accessible(xauto_access));
-  require(contains_member(xmbr_id, false));
-  require(contains_row_dof_tuple(xtuple_id) || !xtuple_id.is_valid());
-
-  // Body:
-
-  put_member_dof_tuple_id(xmbr_id.hub_pod(),
-			  xtuple_id.hub_pod(),
-			  xauto_access);
-
-  // Postconditions:
-
-  ensure(member_dof_tuple_id(xmbr_id.hub_pod(), xauto_access) == xtuple_id.hub_pod());
-
-  // Exit
-
-  return;
-}
-
-bool
-sheaf::poset_state_handle::
-contains_row_dof_tuple(pod_index_type xtuple_hub_id) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(state_is_read_accessible());
-
-  // Body:
-
-  result = table().contains_row_dof_tuple(xtuple_hub_id);
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-bool
-sheaf::poset_state_handle::
-contains_row_dof_tuple(const scoped_index& xtuple_id) const
-{
-  // Preconditions:
-
-  require(state_is_read_accessible());
-
-  // Body:
-
-  return contains_row_dof_tuple(xtuple_id.hub_pod());
-}
-
-sheaf::size_type
-sheaf::poset_state_handle::
-row_dof_tuple_ct() const
-{
-  // Preconditions:
-
-  require(state_is_read_accessible());
-
-  // Body:
-
-  int result = table().row_dof_tuple_ct();
-
-  // Postconditions:
-
-  ensure(result >= 0);
-
-  return result;
-}
-
-int
-sheaf::poset_state_handle::
-standard_row_dof_tuple_ct() const
-{
-  int result;
-
-  // Preconditions:
-
-  require(state_is_read_accessible());
-
-  // Body:
-
-  result = table().standard_row_dof_tuple_ct();
-
-  // Postconditions:
-
-  ensure(result >= 0);
-
-  // Exit:
-
-  return result;
-}
-
-bool
-sheaf::poset_state_handle::
-has_standard_row_dof_tuple_ct() const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(state_is_read_accessible());
-
-  // Body:
-
-  result = (row_dof_tuple_ct() == standard_row_dof_tuple_ct());
-
-  // Postconditions:
-
-  ensure(result == (row_dof_tuple_ct() == standard_row_dof_tuple_ct()));
-
-  return result;
-}
-
-
-// PROTECTED FUNCTIONS
-
-sheaf::poset_table_state&
-sheaf::poset_state_handle::
-table() const
-{
-  return *(state_obj()->table());
-}
-
-void
-sheaf::poset_state_handle::
-initialize_table_dofs(void* xtable_dofs, size_t xtable_dof_ub)
-{
-
-  // Preconditions:
-
-  require(state_is_read_write_accessible());
-  require(xtable_dofs != 0 ? xtable_dof_ub >= schema().table_dof_tuple_ub() : true);
-
-
-  // Body:
-
-  array_poset_dof_map* lmap = new array_poset_dof_map(this, true);
-  lmap->inc_ref_ct();
-
-  if((xtable_dofs != 0) && (lmap->dof_ct() > 0))
-  {
-    lmap->put_dof_tuple(xtable_dofs, schema().table_dof_tuple_ub());
-  }
-  table().put_table_dofs(lmap);
-
-  // Postconditions:
-
-  ensure(table().table_dofs() != 0);
-
-  // Exit
-
-  return;
-}
-
-void
-sheaf::poset_state_handle::
-initialize_table_dof_tuple(array_poset_dof_map* xdof_tuple)
-{
-
-  // Preconditions:
-
-  require(xdof_tuple != 0);
-  require(state_is_read_write_accessible());
-
-  // Body:
-
-  xdof_tuple->put_host(this);
-  xdof_tuple->inc_ref_ct();
-  table().put_table_dofs(xdof_tuple);
-
-  // Postconditions:
-
-  ensure(&(table_dof_map()) == xdof_tuple);
-
-  // Exit
-
-  return;
-}
-
-// PRIVATE FUNCTIONS
-
-
-// ===========================================================
-// DOF TUPLE ID SPACE FAMILY FACET
+// POSET ALGEBRA FACET
 // ===========================================================
 
 // PUBLIC FUNCTIONS
 
-const sheaf::index_space_family&
-sheaf::poset_state_handle::
-dof_tuple_id_spaces(bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  const index_space_family& result = table()._id_spaces;
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(is_basic_query);
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::index_space_family&
-sheaf::poset_state_handle::
-dof_tuple_id_spaces(bool xauto_access)
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  index_space_family& result = table()._id_spaces;
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(is_basic_query);
-
-  // Exit:
-
-  return result;
-}
-
-const sheaf::hub_index_space_handle&
-sheaf::poset_state_handle::
-dof_tuple_hub_id_space(bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  const hub_index_space_handle& result = table().id_spaces().hub_id_space();
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(result.is_attached());
-
-  // Exit:
-
-  return result;
-}
-
-const sheaf::scoped_index&
-sheaf::poset_state_handle::
-dof_tuple_id(bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  const scoped_index& result = table().hub_id();
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(result.same_scope(dof_tuple_hub_id_space(xauto_access)));
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::scoped_index
-sheaf::poset_state_handle::
-dof_tuple_id(pod_index_type xid, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  scoped_index result(dof_tuple_id(false));
-  result = xid;
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(result.same_scope(dof_tuple_hub_id_space(xauto_access)));
-  ensure(result.pod() == xid);
-
-  // Exit:
-
-  return result;
-}
-
 // PROTECTED FUNCTIONS
-
-// PRIVATE FUNCTIONS
-
-
-// ===========================================================
-// SCHEMATIZATION FACET
-// ===========================================================
-
-// PUBLIC FUNCTIONS
-
-bool
-sheaf::poset_state_handle::
-is_schematized(bool xauto_access) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  result = includes_subposet(schema_poset_member::table_dof_subposet_name("top")) &&
-           includes_subposet(schema_poset_member::row_dof_subposet_name("top"));
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  /// @todo make the following executable.
-
-  ensure(unexecutable(result == top member has been schematized));
-
-  // Exit
-
-  return result;
-}
-
-void
-sheaf::poset_state_handle::
-schematize(subposet* xtable_dof_subposet,
-           subposet* xrow_dof_subposet,
-           bool xall_members)
-{
-  // Preconditions:
-
-  require(state_is_read_write_accessible());
-  require(xtable_dof_subposet != 0);
-  require(includes_subposet(xtable_dof_subposet));
-  require(xrow_dof_subposet != 0);
-  require(includes_subposet(xrow_dof_subposet));
-
-  // Body:
-
-  string ltop_table_dof_sp_name(schema_poset_member::table_dof_subposet_name("top"));
-  if(xtable_dof_subposet->name() != ltop_table_dof_sp_name)
-  {
-    xtable_dof_subposet->put_name(ltop_table_dof_sp_name, true, false);
-  }
-  table_dof_subposet().attach_to_state(xtable_dof_subposet, false);
-
-  if(!table_dof_subposet().has_id_space())
-  {
-    initialize_dof_id_space(table_dof_subposet());
-  }
-  
-  string ltop_row_dof_sp_name(schema_poset_member::row_dof_subposet_name("top"));
-  if(xrow_dof_subposet->name() != ltop_row_dof_sp_name)
-  {
-    xrow_dof_subposet->put_name(ltop_row_dof_sp_name, true, false);
-  }
-  row_dof_subposet().attach_to_state(xrow_dof_subposet, false);
-
-  if(!row_dof_subposet().has_id_space())
-  {
-    initialize_dof_id_space(row_dof_subposet());
-  }
-  
-  // Postconditions:
-
-  ensure(is_schematized(false));
-
-  // Exit
-
-  return;
-}
-
-// PROTECTED FUNCTIONS
-
-void
-sheaf::poset_state_handle::
-initialize_dof_id_space(subposet& xdof_subposet)
-{
-  // Preconditions:
-
-  require(state_is_read_write_accessible());
-
-  // Body:
-
-  xdof_subposet.put_is_persistent(true);
-  if(member_id_spaces(false).contains(xdof_subposet.id_space_name()))
-  {
-    xdof_subposet.attach_id_space();
-  }
-  else
-  {
-    xdof_subposet.new_id_space("array_index_space_state",
-			       array_index_space_state::
-			       make_arg_list(xdof_subposet.member_ct()));
-
-    mutable_index_space_handle& ldof_id_space = xdof_subposet.id_space();
-
-    index_iterator ldof_itr = xdof_subposet.indexed_member_iterator();
-    while(!ldof_itr.is_done())
-    {
-      ldof_id_space.push_back(ldof_itr.index());
-      
-      ldof_itr.next();
-    }
-  }
-
-  // Postconditions:
-
-  ensure(xdof_subposet.has_id_space());
-
-  // Exit:
-
-  return;
-}
 
 // PRIVATE FUNCTIONS
 
@@ -2509,6 +1321,7 @@ initialize_dof_id_space(subposet& xdof_subposet)
 // ===========================================================
 
 // PUBLIC FUNCTIONS
+
 
 sheaf::pod_index_type
 sheaf::poset_state_handle::
@@ -4312,6 +3125,290 @@ new_member_interval(pod_index_type xmbr_hub_id, const string& xinterval_type, si
 
 // PRIVATE FUNCTIONS
 
+// ===========================================================
+// MEMBER ID SPACE FAMILY FACET
+// ===========================================================
+
+// PUBLIC FUNCTIONS
+
+const sheaf::index_space_family&
+sheaf::poset_state_handle::
+member_id_spaces(bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  const index_space_family& result = crg()._id_spaces;
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::index_space_family&
+sheaf::poset_state_handle::
+member_id_spaces(bool xauto_access)
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  index_space_family& result = crg()._id_spaces;
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return result;
+}
+
+const sheaf::hub_index_space_handle&
+sheaf::poset_state_handle::
+member_hub_id_space(bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  const hub_index_space_handle& result = crg().id_spaces().hub_id_space();
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(result.is_attached());
+
+  // Exit:
+
+  return result;
+}
+
+const sheaf::scoped_index&
+sheaf::poset_state_handle::
+member_id(bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  const scoped_index& result = crg().hub_id();
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(result.same_scope(member_hub_id_space(xauto_access)));
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::scoped_index
+sheaf::poset_state_handle::
+member_id(pod_index_type xid, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  scoped_index result(member_id(false));
+  result = xid;
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(result.same_scope(member_hub_id_space(xauto_access)));
+  ensure(result.pod() == xid);
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED FUNCTIONS
+
+void
+sheaf::poset_state_handle::
+update_standard_member_id_spaces()
+{
+  // Preconditions:
+
+  require(state_is_read_write_accessible());
+
+  // Body:
+
+  crg()._id_spaces.update_standard_id_spaces();
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::poset_state_handle::
+clear_member_id_spaces(bool xauto_access)
+{
+  // Preconditions:
+
+  require(state_is_auto_read_write_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_write_access(true);
+  }
+
+  crg()._id_spaces.clear_id_spaces();
+
+  // Postconditions:
+
+  ensure(member_id_spaces(false).has_only_standard_id_spaces());
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::poset_state_handle::
+extend_last_member_term(size_type xct, bool xauto_access)
+{
+  // Preconditions:
+
+  require(state_is_auto_read_write_accessible(xauto_access));
+  require(!member_hub_id_space(xauto_access).is_empty());
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_write_access();
+  }
+
+  define_old_variable(const index_space_handle& last_term = member_id_spaces(false).last_term());
+  define_old_variable(scoped_index old_last_term_begin(last_term, last_term.begin()));
+
+  if(xct > crg()._id_spaces.last_term().ct())
+  {
+    crg()._id_spaces.extend_last_term(xct);
+  }
+  
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postcondtions:
+
+  ensure_for_range(scoped_index i=old_last_term_begin, i<old_last_term_begin+xct, ++i, i.in_scope());
+
+  // Exit:
+
+  return;
+}
+
+sheaf::pod_index_type
+sheaf::poset_state_handle::
+new_term(size_type xct, bool xauto_access)
+{
+  // Preconditions:
+
+  require(state_is_auto_read_write_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_write_access();
+  }
+
+  pod_index_type result = crg()._id_spaces.new_primary_state(xct);
+  
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postcondtions:
+
+  // Exit:
+
+  return result;
+}
+
+// PRIVATE FUNCTIONS
+
 
 // ===========================================================
 // ORDER RELATION FACET
@@ -5045,7 +4142,7 @@ get_cover_id_space(bool xlower, pod_index_type xmbr_hub_id) const
   // Preconditions:
 
   require(state_is_read_accessible());
-  require(contains_member(xmbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
 
   // Body:
 
@@ -5094,7 +4191,7 @@ get_cover_id_space_iterator(bool xlower, pod_index_type xmbr_hub_id) const
   // Preconditions:
 
   require(state_is_read_accessible());
-  require(contains_member(xmbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
 
   // Body:
 
@@ -5145,7 +4242,7 @@ cover_contains_iterator(bool xlower,
   // Preconditions:
 
   require(state_is_read_accessible());
-  require(contains_member(xmbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
 
   // Body:
 
@@ -5175,7 +4272,7 @@ cover_is_empty(bool xlower, pod_index_type xmbr_hub_id) const
   // Preconditions:
 
   require(state_is_read_accessible());
-  require(contains_member(xmbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
 
   // Body:
 
@@ -5189,7 +4286,7 @@ cover_is_empty(bool xlower, const scoped_index& xmbr_id) const
   // Preconditions:
 
   require(state_is_read_accessible());
-  require(contains_member(xmbr_id));
+  require(contains_member(xmbr_id, false));
 
   // Body:
 
@@ -5203,7 +4300,7 @@ cover_is_singleton(bool xlower, pod_index_type xmbr_hub_id) const
   // Preconditions:
 
   require(state_is_read_accessible());
-  require(contains_member(xmbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
 
   // Body:
 
@@ -5217,7 +4314,7 @@ cover_is_singleton(bool xlower, const scoped_index& xmbr_id) const
   // Preconditions:
 
   require(state_is_read_accessible());
-  require(contains_member(xmbr_id));
+  require(contains_member(xmbr_id, false));
 
   // Body:
 
@@ -5281,7 +4378,7 @@ cover_contains_member(bool xlower,
   // Preconditions:
 
   require(state_is_read_accessible());
-  require(contains_member(xmbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
 
   // Body:
 
@@ -5315,8 +4412,8 @@ cover_is_equal(bool xlower,
   // Preconditions:
 
   require(state_is_read_accessible());
-  require(contains_member(xmbr_hub_id));
-  require(contains_member(xother_mbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
+  require(contains_member(xother_mbr_hub_id, false));
 
   // Body:
 
@@ -5349,7 +4446,7 @@ first_cover_member(bool xlower, pod_index_type xmbr_hub_id) const
   // Preconditions:
 
   require(state_is_read_accessible());
-  require(contains_member(xmbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
   require(!cover_is_empty(xlower, xmbr_hub_id));
 
   // Body:
@@ -5389,7 +4486,7 @@ insert_cover_member(pod_index_type xother_mbr_hub_id,
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(contains_member(xmbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
   require(!cover_contains_member(xlower, xmbr_hub_id, xother_mbr_hub_id));
 
   // Body:
@@ -5445,7 +4542,7 @@ insert_cover_member(pod_index_type xother_mbr_hub_id,
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(contains_member(xmbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
   require(cover_contains_iterator(xlower, xmbr_hub_id, xitr));
 
   // Body:
@@ -5503,7 +4600,7 @@ remove_cover_member(pod_index_type xother_mbr_hub_id,
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(contains_member(xmbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
 
   // Body:
 
@@ -5557,7 +4654,7 @@ remove_cover_member(index_space_iterator& xitr,
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(contains_member(xmbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
 
   // Body:
 
@@ -5610,7 +4707,7 @@ replace_cover_member(pod_index_type xold_other_mbr_hub_id,
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(contains_member(xmbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
 
   define_old_variable(bool old_cover_contains_old_other_mbr_hub_id = cover_contains_member(xlower, xmbr_hub_id, xold_other_mbr_hub_id));
 
@@ -5670,7 +4767,7 @@ clear_cover(bool xlower, pod_index_type xmbr_hub_id)
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(contains_member(xmbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
 
   // Body:
 
@@ -5714,8 +4811,8 @@ copy_cover(bool xlower, pod_index_type xmbr_hub_id, pod_index_type xother_mbr_hu
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(contains_member(xmbr_hub_id));
-  require(contains_member(xother_mbr_hub_id));
+  require(contains_member(xmbr_hub_id, false));
+  require(contains_member(xother_mbr_hub_id, false));
 
   // Body::
 
@@ -5859,291 +4956,6 @@ transfer_cover(pod_index_type xsrc, pod_index_type xdst, bool xlower)
 
 
 // ===========================================================
-// MEMBER ID SPACE FAMILY FACET
-// ===========================================================
-
-// PUBLIC FUNCTIONS
-
-const sheaf::index_space_family&
-sheaf::poset_state_handle::
-member_id_spaces(bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  const index_space_family& result = crg()._id_spaces;
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(is_basic_query);
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::index_space_family&
-sheaf::poset_state_handle::
-member_id_spaces(bool xauto_access)
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  index_space_family& result = crg()._id_spaces;
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(is_basic_query);
-
-  // Exit:
-
-  return result;
-}
-
-const sheaf::hub_index_space_handle&
-sheaf::poset_state_handle::
-member_hub_id_space(bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  const hub_index_space_handle& result = crg().id_spaces().hub_id_space();
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(result.is_attached());
-
-  // Exit:
-
-  return result;
-}
-
-const sheaf::scoped_index&
-sheaf::poset_state_handle::
-member_id(bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  const scoped_index& result = crg().hub_id();
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(result.same_scope(member_hub_id_space(xauto_access)));
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::scoped_index
-sheaf::poset_state_handle::
-member_id(pod_index_type xid, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  scoped_index result(member_id(false));
-  result = xid;
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(result.same_scope(member_hub_id_space(xauto_access)));
-  ensure(result.pod() == xid);
-
-  // Exit:
-
-  return result;
-}
-
-// PROTECTED FUNCTIONS
-
-void
-sheaf::poset_state_handle::
-update_standard_member_id_spaces()
-{
-  // Preconditions:
-
-  require(state_is_read_write_accessible());
-
-  // Body:
-
-  crg()._id_spaces.update_standard_id_spaces();
-
-  // Postconditions:
-
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::poset_state_handle::
-clear_member_id_spaces(bool xauto_access)
-{
-  // Preconditions:
-
-  require(state_is_auto_read_write_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_write_access(true);
-  }
-
-  crg()._id_spaces.clear_id_spaces();
-
-  // Postconditions:
-
-  ensure(member_id_spaces(false).has_only_standard_id_spaces());
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::poset_state_handle::
-extend_last_member_term(size_type xct, bool xauto_access)
-{
-  // Preconditions:
-
-  require(state_is_auto_read_write_accessible(xauto_access));
-  require(!member_hub_id_space(xauto_access).is_empty());
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_write_access();
-  }
-
-  define_old_variable(const index_space_handle& last_term = member_id_spaces(false).last_term());
-  define_old_variable(scoped_index old_last_term_begin(last_term, last_term.begin()));
-
-  if(xct > crg()._id_spaces.last_term().ct())
-  {
-    crg()._id_spaces.extend_last_term(xct);
-  }
-  
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postcondtions:
-
-  ensure_for_range(scoped_index i=old_last_term_begin, i<old_last_term_begin+xct, ++i, i.in_scope());
-
-  // Exit:
-
-  return;
-}
-
-sheaf::pod_index_type
-sheaf::poset_state_handle::
-new_term(size_type xct, bool xauto_access)
-{
-  // Preconditions:
-
-  require(state_is_auto_read_write_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_write_access();
-  }
-
-  pod_index_type result = crg()._id_spaces.new_primary_state(xct);
-  
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postcondtions:
-
-  // Exit:
-
-  return result;
-}
-
-// PRIVATE FUNCTIONS
-
-
-// ===========================================================
 // POWERSET FACET
 // ===========================================================
 
@@ -6184,6 +4996,11 @@ subposet_name(pod_index_type xsubposet_hub_id, bool xauto_access) const
     get_read_access();
   }
 
+//   cout << "poset_state_handle::subposet_name: poset " << name() << endl;
+//   cout << powerset() << endl;
+//   cout << "  subposet namemap:" << endl;
+//   cout << powerset().subposet_name_map() << endl;
+  
   string result(powerset().subposet_name_map().name(xsubposet_hub_id));
 
   if(xauto_access)
@@ -7043,11 +5860,28 @@ row_dof_subposet() const
   return powerset().row_dof_subposet();
 }
 
- 
-// $$ISSUE jebutler const correctness.
-// making resident const wreaks havoc on the system.
-// Leaving it as is for now.
-// Tue Dec 23 16:38:01 2008
+const string&
+sheaf::poset_state_handle::
+coarsest_common_refinement_name()
+{
+  // cout << endl << "Entering poset_state_handle::coarsest_common_refinement_name." << endl;
+
+  // Preconditions:
+
+
+  // Body:
+
+  //  static const string result(poset_path::reserved_prefix() + "coarsest_common_refinement");
+  static const string result("whole");
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving poset_state_handle::coarsest_common_refinement_name." << endl;
+  return result;
+}
 
 // PROTECTED FUNCTIONS
 
@@ -7079,7 +5913,6 @@ initialize_standard_subposets(const string& xname)
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(poset_path::is_valid_name(xname));
 
   // Body:
 
@@ -7093,7 +5926,7 @@ initialize_standard_subposets(const string& xname)
 
   subposet& lccr = powerset().coarsest_common_refinement();
   lccr.new_state(this, true, false);
-  lccr.put_name(xname, true, false);
+  lccr.put_name(coarsest_common_refinement_name(), true, false);
 
   // CCR and version 0 are the same thing until we move to version 1.
 
@@ -7318,12 +6151,1608 @@ subposet_id(pod_index_type xid, bool xauto_access) const
 
 
 // ===========================================================
-// POSET ALGEBRA FACET
+// SCHEMA FACET
 // ===========================================================
 
 // PUBLIC FUNCTIONS
 
+sheaf::schema_poset_member&
+sheaf::poset_state_handle::
+schema()
+{
+  // Preconditions:
+
+  require(state_is_read_accessible());
+
+  // Body:
+
+  schema_poset_member& result = table().schema();
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+const sheaf::schema_poset_member&
+sheaf::poset_state_handle::
+schema() const
+{
+
+  // Preconditions:
+
+  require(state_is_read_accessible());
+
+  // Body:
+
+  const schema_poset_member& result = table().schema();
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+sheaf::schema_poset_member&
+sheaf::poset_state_handle::
+schema(bool xauto_access)
+{
+
+  // Preconditions:
+
+  require(xauto_access || state_is_read_accessible());
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  schema_poset_member& result = schema();
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+const sheaf::schema_poset_member&
+sheaf::poset_state_handle::
+schema(bool xauto_access) const
+{
+
+  // Preconditions:
+
+  require(xauto_access || state_is_read_accessible());
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  const schema_poset_member& result = schema();
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+bool
+sheaf::poset_state_handle::
+schema_is_ancestor_of(const schema_poset_member* xother_schema) const
+{
+  bool result;
+
+  // Preconditions:
+
+  // Body:
+
+  // Always true in this class;
+  // intended for redefinition in descendants.
+
+  result = true;
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+bool
+sheaf::poset_state_handle::
+schema_is(const string& xschema_name) const
+{
+  bool result;
+
+  // Preconditions:
+
+  require(state_is_read_accessible());
+
+  // Body:
+
+  result = schema().name() == xschema_name;
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+bool
+sheaf::poset_state_handle::
+same_schema(const poset_state_handle* xother) const
+{
+  bool result;
+
+  // Preconditions:
+
+  require(state_is_read_accessible());
+  require(xother != 0);
+  require(xother->state_is_read_accessible());
+
+  // Body:
+
+  result = schema().is_same_state(&(xother->schema()));
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+bool
+sheaf::poset_state_handle::
+same_schema(const abstract_poset_member* xother) const
+{
+  bool result;
+
+  // Preconditions:
+
+  require(state_is_read_accessible());
+  require(xother != 0);
+  require(xother->state_is_read_accessible());
+
+
+  // Body:
+
+  result = same_schema(xother->host());
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+
+// ===========================================================
+// TABLE DOF FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+ 
+
+bool
+sheaf::poset_state_handle::
+table_dof_map_conforms(const poset_dof_map* xdof_map) const
+{
+  bool result;
+
+  // Preconditions:
+
+  require(xdof_map != 0);
+
+  // Body:
+
+  // Table dofs must be an array_poset_dof_map.
+
+  result = (dynamic_cast<const array_poset_dof_map*>(xdof_map) != 0);
+
+  // Postconditions:
+
+  ensure(result == (dynamic_cast<const array_poset_dof_map*>(xdof_map) != 0));
+
+  // Exit
+
+  return result;
+}
+
+bool
+sheaf::poset_state_handle::
+row_dof_map_conforms(const poset_dof_map* xdof_map) const
+{
+  bool result;
+
+  // Preconditions:
+
+  require(xdof_map != 0);
+
+  // Body:
+
+  /// @issue This routine tests only for covariant conformance.
+  /// So an instance of section_dof_map will pass this test because section_dof_map
+  /// inherits poset_dof_map. However, section_dof_map does not really functionally
+  /// conform to poset_dof_map currently because some member functions
+  /// are unimplemented. So passing this test doesn't really ensure the dof map
+  /// will work in this poset.
+
+  /// @error dof map schema must conform to poset schema as well.
+  /// @todo add schema conformance test.
+
+  // In principle any dof map will do.
+
+  result = true;
+
+  // Postconditions:
+
+  ensure(result ? (dynamic_cast<const poset_dof_map*>(xdof_map) != 0) : true);
+
+  // Exit
+
+  return result;
+}
+
+sheaf::array_poset_dof_map&
+sheaf::poset_state_handle::
+table_dof_map(bool xrequire_write_access)
+{
+  // Preconditions:
+
+  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
+
+  // Body:
+
+  // Postconditions:
+
+  // Exit
+
+  return *(table().table_dofs());
+}
+
+const sheaf::array_poset_dof_map&
+sheaf::poset_state_handle::
+table_dof_map(bool xrequire_write_access) const
+{
+  // Preconditions:
+
+  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
+
+  // Body:
+
+  // Postconditions:
+
+  // Exit
+
+  return *(table().table_dofs());
+}
+
+void
+sheaf::poset_state_handle::
+table_dof_tuple(void* xbuf, size_t xbuflen) const
+{
+  // Preconditions:
+
+  require(state_is_read_accessible());
+  require(schema().table_dof_tuple_ub() > 0);
+  require(xbuflen >= schema().table_dof_tuple_ub());
+
+  // Body:
+
+  table_dof_map().get_dof_tuple(xbuf, xbuflen);
+
+  // Postconditions:
+
+  // Exit
+
+  return;
+}
+
+void*
+sheaf::poset_state_handle::
+table_dofs()
+{
+  // Preconditions:
+
+  require(state_is_read_write_accessible());
+  
+  // Body:
+
+  void* result = table_dof_map(true).dof_tuple();
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+const void*
+sheaf::poset_state_handle::
+table_dofs() const
+{
+  // Preconditions:
+
+  require(state_is_read_accessible());
+  
+  // Body:
+
+  const void* result = table_dof_map(false).dof_tuple();
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+void*
+sheaf::poset_state_handle::
+table_dofs(bool xauto_access)
+{
+  // Preconditions:
+
+  require(state_is_auto_read_write_accessible(xauto_access));
+  
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_write_access(true);
+  }
+
+  void* result = table_dofs();
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+
+  // Exit:
+
+  return result;
+}
+
+const void*
+sheaf::poset_state_handle::
+table_dofs(bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  const void* result = table_dofs();
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::poset_dof_map&
+sheaf::poset_state_handle::
+row_dof_map(pod_index_type xtuple_hub_id, bool xrequire_write_access) const
+{
+  poset_dof_map* result_ptr;
+
+  // Preconditions:
+
+  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
+  require(contains_row_dof_tuple(xtuple_hub_id));
+
+  // Body:
+
+  result_ptr = table().row_dof_tuple(xtuple_hub_id);
+
+  // Postconditions:
+
+  // Exit
+
+  return *result_ptr;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+sheaf::poset_table_state&
+sheaf::poset_state_handle::
+table() const
+{
+  return *(state_obj()->table());
+}
+
+void
+sheaf::poset_state_handle::
+initialize_table_dofs(void* xtable_dofs, size_t xtable_dof_ub)
+{
+
+  // Preconditions:
+
+  require(state_is_read_write_accessible());
+  require(xtable_dofs != 0 ? xtable_dof_ub >= schema().table_dof_tuple_ub() : true);
+
+
+  // Body:
+
+  array_poset_dof_map* lmap = new array_poset_dof_map(this, true);
+  lmap->inc_ref_ct();
+
+  if((xtable_dofs != 0) && (lmap->dof_ct() > 0))
+  {
+    lmap->put_dof_tuple(xtable_dofs, schema().table_dof_tuple_ub());
+  }
+  table().put_table_dofs(lmap);
+
+  // Postconditions:
+
+  ensure(table().table_dofs() != 0);
+
+  // Exit
+
+  return;
+}
+
+void
+sheaf::poset_state_handle::
+initialize_table_dof_tuple(array_poset_dof_map* xdof_tuple)
+{
+
+  // Preconditions:
+
+  require(xdof_tuple != 0);
+  require(state_is_read_write_accessible());
+
+  // Body:
+
+  xdof_tuple->put_host(this);
+  xdof_tuple->inc_ref_ct();
+  table().put_table_dofs(xdof_tuple);
+
+  // Postconditions:
+
+  ensure(&(table_dof_map()) == xdof_tuple);
+
+  // Exit
+
+  return;
+}
+
+// PRIVATE MEMBER FUNCTIONS
+
+// ===========================================================
+// ROW DOF FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+ 
+sheaf::poset_dof_map&
+sheaf::poset_state_handle::
+row_dof_map(const scoped_index& xtuple_id, bool xrequire_write_access) const
+{
+  poset_dof_map* result_ptr;
+
+  // Preconditions:
+
+  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
+  require(contains_row_dof_tuple(xtuple_id));
+
+  // Body:
+
+  return row_dof_map(xtuple_id.hub_pod(), xrequire_write_access);
+}
+
+const sheaf::scoped_index&
+sheaf::poset_state_handle::
+new_row_dof_map()
+{
+  // Preconditions:
+
+  require(state_is_read_write_accessible());
+
+  // Body:
+
+  define_old_variable(int old_row_dof_tuple_ct = row_dof_tuple_ct());
+
+  // Create a new dof map using contiguous array rep
+
+  poset_dof_map* lmap = new array_poset_dof_map(this, false);
+  lmap->put_defaults();
+  table().put_row_dof_tuple(lmap);
+  const scoped_index& result = lmap->index();
+
+  // Postconditions:
+
+  ensure(row_dof_tuple_ct() == old_row_dof_tuple_ct+1);
+  ensure(contains_row_dof_tuple(result));
+
+  // Exit
+
+  return result;
+}
+
+const sheaf::scoped_index&
+sheaf::poset_state_handle::
+clone_row_dof_map(const poset_dof_map& xprototype)
+{
+  // Preconditions:
+
+  require(state_is_read_write_accessible());
+  require(row_dof_map_conforms(&xprototype));
+  require(xprototype.schema().row_conforms_to(schema()));
+
+  // Body:
+
+  define_old_variable(int old_row_dof_tuple_ct = row_dof_tuple_ct());
+
+  // Create a new dof map by copying the given prototype.
+
+  poset_dof_map* lmap = xprototype.copy();
+  lmap->put_host(this);
+  table().put_row_dof_tuple(lmap);
+  const scoped_index& result = lmap->index(); // Set by put_row_dof_tuple.
+
+  // Postconditions:
+
+  ensure(row_dof_tuple_ct() == old_row_dof_tuple_ct+1);
+  ensure(contains_row_dof_tuple(result));
+
+  // Exit
+
+  return result;
+}
+
+sheaf::poset_dof_map&
+sheaf::poset_state_handle::
+member_dof_map(pod_index_type xmbr_hub_id, bool xrequire_write_access)
+{
+  // Preconditions:
+
+  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
+  require(contains_member(xmbr_hub_id, false));
+  require(is_jim(xmbr_hub_id, false));
+
+  // Body:
+
+  poset_dof_map& result =
+    row_dof_map(member_dof_tuple_id(xmbr_hub_id, false), xrequire_write_access);
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::poset_dof_map&
+sheaf::poset_state_handle::
+member_dof_map(const scoped_index& xmbr_id, bool xrequire_write_access)
+{
+  // Preconditions:
+
+  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
+  require(contains_member(xmbr_id, false));
+  require(is_jim(xmbr_id, false));
+
+  // Body:
+
+  return member_dof_map(xmbr_id.hub_pod(), xrequire_write_access);
+}
+
+const sheaf::poset_dof_map&
+sheaf::poset_state_handle::
+member_dof_map(pod_index_type xmbr_hub_id, bool xrequire_write_access) const
+{
+  // Preconditions:
+
+  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
+  require(contains_member(xmbr_hub_id, false));
+  require(is_jim(xmbr_hub_id, false));
+
+  // Body:
+
+  poset_dof_map& result =
+    row_dof_map(member_dof_tuple_id(xmbr_hub_id, false), xrequire_write_access);
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+const sheaf::poset_dof_map&
+sheaf::poset_state_handle::
+member_dof_map(const scoped_index& xmbr_id, bool xrequire_write_access) const
+{
+  // Preconditions:
+
+  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
+  require(contains_member(xmbr_id, false));
+  require(is_jim(xmbr_id, false));
+
+  // Body:
+
+  return member_dof_map(xmbr_id.hub_pod(), xrequire_write_access);
+}
+
+sheaf::pod_index_type
+sheaf::poset_state_handle::
+member_dof_tuple_id(pod_index_type xmbr_hub_id, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  require(contains_member(xmbr_hub_id, false));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  pod_index_type result = crg().member_dof_tuple_id(xmbr_hub_id);
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(!is_valid(result) || contains_row_dof_tuple(result));
+
+  // Exit
+
+  return result;
+}
+
+void
+sheaf::poset_state_handle::
+member_dof_tuple_id(const scoped_index& xmbr_id,
+		    scoped_index& result,
+		    bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  require(contains_member(xmbr_id, false));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  result.put(dof_tuple_hub_id_space(false),
+	     member_dof_tuple_id(xmbr_id.hub_pod(), false));
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(!result.is_valid() || contains_row_dof_tuple(result));
+
+  // Exit
+
+  return;
+}
+
+void
+sheaf::poset_state_handle::
+put_member_dof_tuple_id(pod_index_type xmbr_hub_id,
+			pod_index_type xtuple_hub_id,
+			bool xauto_access)
+{
+  // Preconditions:
+
+  require(state_is_auto_read_write_accessible(xauto_access));
+  require(contains_member(xmbr_hub_id, false));
+  require(contains_row_dof_tuple(xtuple_hub_id) || !is_valid(xtuple_hub_id));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_write_access(true);
+  }
+
+  crg().put_member_dof_tuple_id(xmbr_hub_id, xtuple_hub_id);
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(member_dof_tuple_id(xmbr_hub_id, xauto_access) == xtuple_hub_id);
+
+  // Exit
+
+  return;
+}
+
+void
+sheaf::poset_state_handle::
+put_member_dof_tuple_id(const scoped_index& xmbr_id,
+			const scoped_index& xtuple_id,
+			bool xauto_access)
+{
+  // Preconditions:
+
+  require(state_is_auto_read_write_accessible(xauto_access));
+  require(contains_member(xmbr_id, false));
+  require(contains_row_dof_tuple(xtuple_id) || !xtuple_id.is_valid());
+
+  // Body:
+
+  put_member_dof_tuple_id(xmbr_id.hub_pod(),
+			  xtuple_id.hub_pod(),
+			  xauto_access);
+
+  // Postconditions:
+
+  ensure(member_dof_tuple_id(xmbr_id.hub_pod(), xauto_access) == xtuple_id.hub_pod());
+
+  // Exit
+
+  return;
+}
+
+bool
+sheaf::poset_state_handle::
+contains_row_dof_tuple(pod_index_type xtuple_hub_id) const
+{
+  bool result;
+
+  // Preconditions:
+
+  require(state_is_read_accessible());
+
+  // Body:
+
+  result = table().contains_row_dof_tuple(xtuple_hub_id);
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+bool
+sheaf::poset_state_handle::
+contains_row_dof_tuple(const scoped_index& xtuple_id) const
+{
+  // Preconditions:
+
+  require(state_is_read_accessible());
+
+  // Body:
+
+  return contains_row_dof_tuple(xtuple_id.hub_pod());
+}
+
+sheaf::size_type
+sheaf::poset_state_handle::
+row_dof_tuple_ct() const
+{
+  // Preconditions:
+
+  require(state_is_read_accessible());
+
+  // Body:
+
+  int result = table().row_dof_tuple_ct();
+
+  // Postconditions:
+
+  ensure(result >= 0);
+
+  return result;
+}
+
+int
+sheaf::poset_state_handle::
+standard_row_dof_tuple_ct() const
+{
+  int result;
+
+  // Preconditions:
+
+  require(state_is_read_accessible());
+
+  // Body:
+
+  result = table().standard_row_dof_tuple_ct();
+
+  // Postconditions:
+
+  ensure(result >= 0);
+
+  // Exit:
+
+  return result;
+}
+
+bool
+sheaf::poset_state_handle::
+has_standard_row_dof_tuple_ct() const
+{
+  bool result;
+
+  // Preconditions:
+
+  require(state_is_read_accessible());
+
+  // Body:
+
+  result = (row_dof_tuple_ct() == standard_row_dof_tuple_ct());
+
+  // Postconditions:
+
+  ensure(result == (row_dof_tuple_ct() == standard_row_dof_tuple_ct()));
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
 // PROTECTED FUNCTIONS
+
+// PRIVATE FUNCTIONS
+
+
+// ===========================================================
+// DOF TUPLE ID SPACE FAMILY FACET
+// ===========================================================
+
+// PUBLIC FUNCTIONS
+
+const sheaf::index_space_family&
+sheaf::poset_state_handle::
+dof_tuple_id_spaces(bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  const index_space_family& result = table()._id_spaces;
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::index_space_family&
+sheaf::poset_state_handle::
+dof_tuple_id_spaces(bool xauto_access)
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  index_space_family& result = table()._id_spaces;
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return result;
+}
+
+const sheaf::hub_index_space_handle&
+sheaf::poset_state_handle::
+dof_tuple_hub_id_space(bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  const hub_index_space_handle& result = table().id_spaces().hub_id_space();
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(result.is_attached());
+
+  // Exit:
+
+  return result;
+}
+
+const sheaf::scoped_index&
+sheaf::poset_state_handle::
+dof_tuple_id(bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  const scoped_index& result = table().hub_id();
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(result.same_scope(dof_tuple_hub_id_space(xauto_access)));
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::scoped_index
+sheaf::poset_state_handle::
+dof_tuple_id(pod_index_type xid, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  scoped_index result(dof_tuple_id(false));
+  result = xid;
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(result.same_scope(dof_tuple_hub_id_space(xauto_access)));
+  ensure(result.pod() == xid);
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED FUNCTIONS
+
+// PRIVATE FUNCTIONS
+
+
+// ===========================================================
+// SCHEMATIZATION FACET
+// ===========================================================
+
+// PUBLIC FUNCTIONS
+
+bool
+sheaf::poset_state_handle::
+is_schematized(bool xauto_access) const
+{
+  bool result;
+
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  result = includes_subposet(schema_poset_member::table_dof_subposet_name("top")) &&
+           includes_subposet(schema_poset_member::row_dof_subposet_name("top"));
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  /// @todo make the following executable.
+
+  ensure(unexecutable(result == top member has been schematized));
+
+  // Exit
+
+  return result;
+}
+
+void
+sheaf::poset_state_handle::
+schematize(subposet* xtable_dof_subposet,
+           subposet* xrow_dof_subposet,
+           bool xall_members)
+{
+  // Preconditions:
+
+  require(state_is_read_write_accessible());
+  require(xtable_dof_subposet != 0);
+  require(includes_subposet(xtable_dof_subposet));
+  require(xrow_dof_subposet != 0);
+  require(includes_subposet(xrow_dof_subposet));
+
+  // Body:
+
+  string ltop_table_dof_sp_name(schema_poset_member::table_dof_subposet_name("top"));
+  if(xtable_dof_subposet->name() != ltop_table_dof_sp_name)
+  {
+    xtable_dof_subposet->put_name(ltop_table_dof_sp_name, true, false);
+  }
+  table_dof_subposet().attach_to_state(xtable_dof_subposet, false);
+
+  if(!table_dof_subposet().has_id_space())
+  {
+    initialize_dof_id_space(table_dof_subposet());
+  }
+  
+  string ltop_row_dof_sp_name(schema_poset_member::row_dof_subposet_name("top"));
+  if(xrow_dof_subposet->name() != ltop_row_dof_sp_name)
+  {
+    xrow_dof_subposet->put_name(ltop_row_dof_sp_name, true, false);
+  }
+  row_dof_subposet().attach_to_state(xrow_dof_subposet, false);
+
+  if(!row_dof_subposet().has_id_space())
+  {
+    initialize_dof_id_space(row_dof_subposet());
+  }
+  
+  // Postconditions:
+
+  ensure(is_schematized(false));
+
+  // Exit
+
+  return;
+}
+
+// PROTECTED FUNCTIONS
+
+void
+sheaf::poset_state_handle::
+initialize_dof_id_space(subposet& xdof_subposet)
+{
+  // Preconditions:
+
+  require(state_is_read_write_accessible());
+
+  // Body:
+
+  xdof_subposet.put_is_persistent(true);
+  if(member_id_spaces(false).contains(xdof_subposet.id_space_name()))
+  {
+    xdof_subposet.attach_id_space();
+  }
+  else
+  {
+    xdof_subposet.new_id_space("array_index_space_state",
+			       array_index_space_state::
+			       make_arg_list(xdof_subposet.member_ct()));
+
+    mutable_index_space_handle& ldof_id_space = xdof_subposet.id_space();
+
+    index_iterator ldof_itr = xdof_subposet.indexed_member_iterator();
+    while(!ldof_itr.is_done())
+    {
+      ldof_id_space.push_back(ldof_itr.index());
+      
+      ldof_itr.next();
+    }
+  }
+
+  // Postconditions:
+
+  ensure(xdof_subposet.has_id_space());
+
+  // Exit:
+
+  return;
+}
+
+// PRIVATE FUNCTIONS
+
+
+
+
+// ===========================================================
+// VERSION FACET
+// ===========================================================
+
+// PUBLIC FUNCTIONS
+
+int
+sheaf::poset_state_handle::
+version_ct() const
+{
+  int result = 0;
+
+  // Preconditions:
+
+  // Body:
+
+  /// @hack this implementation avoids the need to
+  /// modify poset_state or introduce table dofs, but it is slow.
+  /// @todo find some more efficient implementation.
+
+//   subposet sp;
+
+//   index_iterator itr = subposet_iterator();
+//   while(!itr.is_done())
+//   {
+//     sp.attach_to_state(this, itr.index());
+
+//     // Count all subposets with names beginning with "__version_".
+
+//     if(is_version_name(sp.name()))
+//     {
+//       result++;
+//     }
+
+//     itr.next();
+//   }
+//   sp.detach_from_state();
+
+
+  typedef poset_powerset_state::subposet_name_map_type name_map_type;
+  typedef name_map_type::const_iterator name_map_itr_type;
+  typedef name_map_type::const_name_iterator name_itr_type;  
+  
+  for(name_map_itr_type lmap_itr = powerset().subposet_name_map().begin();
+      lmap_itr != powerset().subposet_name_map().end();
+      ++lmap_itr)
+  {
+    for(name_itr_type lname_itr = lmap_itr->second.begin();
+	lname_itr != lmap_itr->second.end();
+	++lname_itr)
+    {
+      if(is_version_name(*lname_itr))
+      {
+	result++;
+      }
+    }
+  }
+
+  // Have now double counted the levels, because each
+  // level has a whole subposet and a jims subposet.
+
+  assertion(result % 2 == 0);
+
+  result = result/2;
+
+  // Have also counted
+
+  ensure(result >= 0);
+
+  // Exit
+
+  return result;
+}
+
+int
+sheaf::poset_state_handle::
+version() const
+{
+  int result;
+
+  // Preconditions:
+
+  require(state_is_read_accessible());
+
+  // Body:
+
+  result = version_from_name(whole().name());
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+sheaf::pod_index_type
+sheaf::poset_state_handle::
+version_index(int xversion) const
+{
+  pod_index_type result;
+
+  // Preconditions:
+
+  require(state_is_read_accessible());
+  require(has_version(xversion));
+
+  // Body:
+
+  if(xversion == CURRENT_HOST_VERSION)
+  {
+    result = WHOLE_INDEX;
+  }
+  else
+  {
+    string lvl_name = version_to_name(xversion);
+    result = subposet_id(lvl_name);
+  }
+
+  // Postconditions:
+
+  ensure(includes_subposet(result, false));
+
+  // Exit
+
+  return result;
+}
+
+void
+sheaf::poset_state_handle::
+version_index(int xversion, scoped_index& result) const
+{
+  // Preconditions:
+
+  require(state_is_read_accessible());
+  require(has_version(xversion));
+
+  // Body:
+
+  result.put(subposet_hub_id_space(false), version_index(xversion));
+
+  // Postconditions:
+
+  ensure(includes_subposet(result, false));
+
+  // Exit
+
+  return;
+}
+
+sheaf::pod_index_type
+sheaf::poset_state_handle::
+version_jims_index(int xversion) const
+{
+  // Preconditions:
+
+  require(state_is_read_accessible());
+  require(has_version(xversion));
+
+  // Body:
+
+  string lvl_name = version_to_name(xversion);
+  lvl_name += "_jims";
+  pod_index_type result = subposet_id(lvl_name);
+
+  // Postconditions:
+
+  ensure(includes_subposet(result));
+
+  // Exit
+
+  return result;
+}
+
+void
+sheaf::poset_state_handle::
+version_jims_index(int xversion, scoped_index& result) const
+{
+  // Preconditions:
+
+  require(state_is_read_accessible());
+  require(has_version(xversion));
+
+  // Body:
+
+  result.put(subposet_hub_id_space(false), version_jims_index(xversion));
+
+  // Postconditions:
+
+  ensure(includes_subposet(result));
+
+  // Exit
+
+  return;
+}
+
+bool
+sheaf::poset_state_handle::
+has_version( int xversion ) const
+{
+  bool result;
+
+  // Preconditions:
+
+  // Body:
+
+  result = ( (xversion == CURRENT_HOST_VERSION) ||
+             ( (0 <= xversion) && (xversion < version_ct()) )    ||
+             (xversion == COARSEST_COMMON_REFINEMENT_VERSION) );
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+bool
+sheaf::poset_state_handle::
+is_version() const
+{
+  bool result;
+
+  // Preconditions:
+
+  // Body:
+
+  result = version() != COARSEST_COMMON_REFINEMENT_VERSION;
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+// PROTECTED FUNCTIONS
+
+const string&
+sheaf::poset_state_handle::
+VERSION_PREFIX()
+{
+  static const string result("__version_");
+  return result;
+}
+
+int
+sheaf::poset_state_handle::
+VERSION_PREFIX_LENGTH()
+{
+  static const int result = VERSION_PREFIX().size();
+  return result;
+}
+
+bool
+sheaf::poset_state_handle::
+is_version_name(const string& xname) const
+{
+  bool result;
+
+  // Preconditions:
+
+  // Body:
+
+  // Coarsest_common_refinement has same name as this.
+  // Other version names have form "__version_n";
+  // number n begins at character position 10.
+
+  result = (xname.substr(0, VERSION_PREFIX_LENGTH()) == VERSION_PREFIX());
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+string
+sheaf::poset_state_handle::
+version_to_name(int xversion) const
+{
+  string result;
+
+  // Preconditions:
+
+  // Body:
+
+  if(xversion == COARSEST_COMMON_REFINEMENT_VERSION)
+  {
+    result = coarsest_common_refinement_name();
+  }
+  else
+  {
+    strstream str;
+    str << VERSION_PREFIX() << xversion;
+    str >> result;
+  }
+
+  // Postconditions:
+
+  ensure(!result.empty());
+  ensure(xversion == COARSEST_COMMON_REFINEMENT_VERSION ? (result == coarsest_common_refinement_name()) : is_version_name(result));
+
+  // Exit
+
+  return result;
+}
+
+int
+sheaf::poset_state_handle::
+version_from_name(const string& xname) const
+{
+  int result;
+
+  // Preconditions:
+
+  require(is_version_name(xname) || xname == coarsest_common_refinement_name());
+
+  // Body:
+
+  /// @todo replace poset name == whole name with something more reasonable!
+
+  if(xname == coarsest_common_refinement_name())
+  {
+    // Result is coarsest common refinement.
+
+    result = COARSEST_COMMON_REFINEMENT_VERSION;
+  }
+  else
+  {
+    // Name of subposet whole() is of form "__version_n";
+    // number n begins at c_str[10].
+
+    result = atoi(xname.c_str()+VERSION_PREFIX_LENGTH());
+  }
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+void
+sheaf::poset_state_handle::
+put_version(int xversion)
+{
+  // Preconditions:
+
+  require( has_version(xversion) );
+
+  // Body:
+
+  // The version of a poset is defined by the subposet state that
+  // whole() is attached to. So attaching whole() to a new state changes
+  // the version. This conflicts with the polcy for managing the version
+  // data member in poset_component and leads to a postcondition violation
+  // in certain of the attach functions, so we have to use attach_to_state(xindex)
+  // and update the version data member in the handle directly.
+
+  if(xversion == COARSEST_COMMON_REFINEMENT_VERSION)
+  {
+    // Select the coarsest common refinement.
+
+    powerset().whole().attach_to_state(WHOLE_INDEX);
+    jims().attach_to_state(JIMS_INDEX);
+  }
+  else
+  {
+    // Select version xversion
+
+    // Attach the whole subposet to the new level
+
+    string lname = version_to_name(xversion);
+    pod_index_type lid = subposet_id(lname);
+    powerset().whole().attach_to_state(lid);
+
+    // Attach the jims subposet to the new level
+
+    lname += "_jims";
+    lid = subposet_id(lname);
+    jims().attach_to_state(lid);
+  }
+
+  // For whole() and jims() the version should always
+  // be the alias CURRENT_HOST_VERSION.
+  // poset_component::attach_to_state(xindex) ensures that it does not
+  // change version(), but there's no way to ensure the client hasn't
+  // changed it. So force it just to be sure.
+
+  powerset().whole().put_version(CURRENT_HOST_VERSION);
+  jims().put_version(CURRENT_HOST_VERSION);
+
+  // Postconditions:
+
+  ensure(version() == xversion);
+
+  // Exit
+
+  return;
+}
 
 // PRIVATE FUNCTIONS
 
@@ -7713,410 +8142,6 @@ prereq_id(int xi) const
 }
 
 // PROTECTED FUNCTIONS
-
-// PRIVATE FUNCTIONS
-
-
-// ===========================================================
-// VERSION FACET
-// ===========================================================
-
-// PUBLIC FUNCTIONS
-
-int
-sheaf::poset_state_handle::
-version_ct() const
-{
-  int result = 0;
-
-  // Preconditions:
-
-  // Body:
-
-  /// @hack this implementation avoids the need to
-  /// modify poset_state or introduce table dofs, but it is slow.
-  /// @todo find some more efficient implementation.
-
-//   subposet sp;
-
-//   index_iterator itr = subposet_iterator();
-//   while(!itr.is_done())
-//   {
-//     sp.attach_to_state(this, itr.index());
-
-//     // Count all subposets with names beginning with "__version_".
-
-//     if(is_version_name(sp.name()))
-//     {
-//       result++;
-//     }
-
-//     itr.next();
-//   }
-//   sp.detach_from_state();
-
-
-  typedef poset_powerset_state::subposet_name_map_type name_map_type;
-  typedef name_map_type::const_iterator name_map_itr_type;
-  typedef name_map_type::const_name_iterator name_itr_type;  
-  
-  for(name_map_itr_type lmap_itr = powerset().subposet_name_map().begin();
-      lmap_itr != powerset().subposet_name_map().end();
-      ++lmap_itr)
-  {
-    for(name_itr_type lname_itr = lmap_itr->second.begin();
-	lname_itr != lmap_itr->second.end();
-	++lname_itr)
-    {
-      if(is_version_name(*lname_itr))
-      {
-	result++;
-      }
-    }
-  }
-
-  // Have now double counted the levels, because each
-  // level has a whole subposet and a jims subposet.
-
-  assertion(result % 2 == 0);
-
-  result = result/2;
-
-  // Have also counted
-
-  ensure(result >= 0);
-
-  // Exit
-
-  return result;
-}
-
-int
-sheaf::poset_state_handle::
-version() const
-{
-  int result;
-
-  // Preconditions:
-
-  require(state_is_read_accessible());
-
-  // Body:
-
-  result = version_from_name(whole().name());
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-sheaf::pod_index_type
-sheaf::poset_state_handle::
-version_index(int xversion) const
-{
-  pod_index_type result;
-
-  // Preconditions:
-
-  require(state_is_read_accessible());
-  require(has_version(xversion));
-
-  // Body:
-
-  if(xversion == CURRENT_HOST_VERSION)
-  {
-    result = WHOLE_INDEX;
-  }
-  else
-  {
-    string lvl_name = version_to_name(xversion);
-    result = subposet_id(lvl_name);
-  }
-
-  // Postconditions:
-
-  ensure(includes_subposet(result, false));
-
-  // Exit
-
-  return result;
-}
-
-void
-sheaf::poset_state_handle::
-version_index(int xversion, scoped_index& result) const
-{
-  // Preconditions:
-
-  require(state_is_read_accessible());
-  require(has_version(xversion));
-
-  // Body:
-
-  result.put(subposet_hub_id_space(false), version_index(xversion));
-
-  // Postconditions:
-
-  ensure(includes_subposet(result, false));
-
-  // Exit
-
-  return;
-}
-
-sheaf::pod_index_type
-sheaf::poset_state_handle::
-version_jims_index(int xversion) const
-{
-  // Preconditions:
-
-  require(state_is_read_accessible());
-  require(has_version(xversion));
-
-  // Body:
-
-  string lvl_name = version_to_name(xversion);
-  lvl_name += "_jims";
-  pod_index_type result = subposet_id(lvl_name);
-
-  // Postconditions:
-
-  ensure(includes_subposet(result));
-
-  // Exit
-
-  return result;
-}
-
-void
-sheaf::poset_state_handle::
-version_jims_index(int xversion, scoped_index& result) const
-{
-  // Preconditions:
-
-  require(state_is_read_accessible());
-  require(has_version(xversion));
-
-  // Body:
-
-  result.put(subposet_hub_id_space(false), version_jims_index(xversion));
-
-  // Postconditions:
-
-  ensure(includes_subposet(result));
-
-  // Exit
-
-  return;
-}
-
-bool
-sheaf::poset_state_handle::
-has_version( int xversion ) const
-{
-  bool result;
-
-  // Preconditions:
-
-  // Body:
-
-  result = ( (xversion == CURRENT_HOST_VERSION) ||
-             ( (0 <= xversion) && (xversion < version_ct()) )    ||
-             (xversion == COARSEST_COMMON_REFINEMENT_VERSION) );
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-bool
-sheaf::poset_state_handle::
-is_version() const
-{
-  bool result;
-
-  // Preconditions:
-
-  // Body:
-
-  result = version() != COARSEST_COMMON_REFINEMENT_VERSION;
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-// PROTECTED FUNCTIONS
-
-const string&
-sheaf::poset_state_handle::
-VERSION_PREFIX()
-{
-  static const string result("__version_");
-  return result;
-}
-
-int
-sheaf::poset_state_handle::
-VERSION_PREFIX_LENGTH()
-{
-  static const int result = VERSION_PREFIX().size();
-  return result;
-}
-
-bool
-sheaf::poset_state_handle::
-is_version_name(const string& xname) const
-{
-  bool result;
-
-  // Preconditions:
-
-  // Body:
-
-  // Coarsest_common_refinement has same name as this.
-  // Other version names have form "__version_n";
-  // number n begins at character position 10.
-
-  result = (xname.substr(0, VERSION_PREFIX_LENGTH()) == VERSION_PREFIX());
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-string
-sheaf::poset_state_handle::
-version_to_name(int xversion) const
-{
-  string result;
-
-  // Preconditions:
-
-  // Body:
-
-  if(xversion == COARSEST_COMMON_REFINEMENT_VERSION)
-  {
-    result = name();
-  }
-  else
-  {
-    strstream str;
-    str << VERSION_PREFIX() << xversion;
-    str >> result;
-  }
-
-  // Postconditions:
-
-  ensure(!result.empty());
-  ensure(xversion == COARSEST_COMMON_REFINEMENT_VERSION ? (result == name()) : is_version_name(result));
-
-  // Exit
-
-  return result;
-}
-
-int
-sheaf::poset_state_handle::
-version_from_name(const string& xname) const
-{
-  int result;
-
-  // Preconditions:
-
-  require(is_version_name(xname) || xname == name());
-
-  // Body:
-
-  /// @todo replace poset name == whole name with something more reasonable!
-
-  if(xname == name())
-  {
-    // Result is coarsest common refinement.
-
-    result = COARSEST_COMMON_REFINEMENT_VERSION;
-  }
-  else
-  {
-    // Name of subposet whole() is of form "__version_n";
-    // number n begins at c_str[10].
-
-    result = atoi(xname.c_str()+VERSION_PREFIX_LENGTH());
-  }
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-void
-sheaf::poset_state_handle::
-put_version(int xversion)
-{
-  // Preconditions:
-
-  require( has_version(xversion) );
-
-  // Body:
-
-  // The version of a poset is defined by the subposet state that
-  // whole() is attached to. So attaching whole() to a new state changes
-  // the version. This conflicts with the polcy for managing the version
-  // data member in poset_component and leads to a postcondition violation
-  // in certain of the attach functions, so we have to use attach_to_state(xindex)
-  // and update the version data member in the handle directly.
-
-  if(xversion == COARSEST_COMMON_REFINEMENT_VERSION)
-  {
-    // Select the coarsest common refinement.
-
-    powerset().whole().attach_to_state(WHOLE_INDEX);
-    jims().attach_to_state(JIMS_INDEX);
-  }
-  else
-  {
-    // Select version xversion
-
-    // Attach the whole subposet to the new level
-
-    string lname = version_to_name(xversion);
-    pod_index_type lid = subposet_id(lname);
-    powerset().whole().attach_to_state(lid);
-
-    // Attach the jims subposet to the new level
-
-    lname += "_jims";
-    lid = subposet_id(lname);
-    jims().attach_to_state(lid);
-  }
-
-  // For whole() and jims() the version should always
-  // be the alias CURRENT_HOST_VERSION.
-  // poset_component::attach_to_state(xindex) ensures that it does not
-  // change version(), but there's no way to ensure the client hasn't
-  // changed it. So force it just to be sure.
-
-  powerset().whole().put_version(CURRENT_HOST_VERSION);
-  jims().put_version(CURRENT_HOST_VERSION);
-
-  // Postconditions:
-
-  ensure(version() == xversion);
-
-  // Exit
-
-  return;
-}
 
 // PRIVATE FUNCTIONS
 

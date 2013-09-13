@@ -265,10 +265,6 @@ transfer_internal_buffer_to_poset()
   int lub_id;
   lstream >> lskip_name >> lub_id;
 
-  // Usage of *_id_pod in following calls implicitly invokes
-  // conversion from pod_type, creating unscoped ids,
-  // which is what we want, at least for now.
-
   // Translate the schema poset external id to internal.
 
   namespace_poset* lns = scaffold().name_space();

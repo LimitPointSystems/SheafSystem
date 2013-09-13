@@ -170,7 +170,7 @@ public:
   /// Copies the entire dof tuple from xbuf into internal storage
   ///
   virtual void put_dof_tuple(const void* xbuf, size_t xbuflen);
-
+  
   ///
   /// Pointer to the first byte of the dof associated with xschema_mbr
   ///

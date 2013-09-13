@@ -58,6 +58,8 @@ namespace fiber_bundle
 
 using namespace sheaf;
 class sec_rep_space;
+class binary_section_space_schema_member;
+class binary_section_space_schema_poset;
 
 ///
 /// A member of a sec_rep_space; a section.
@@ -70,6 +72,18 @@ class SHEAF_DLL_SPEC sec_rep_space_member : public poset_member
   //@{
 
 public:
+
+  // Typedefs:
+
+  ///
+  /// The schema type.
+  ///
+  typedef binary_section_space_schema_member schema_type;
+
+  ///
+  /// The host type of the schema.
+  ///
+  typedef binary_section_space_schema_poset schema_host_type;
 
   ///
   /// The name of this class.

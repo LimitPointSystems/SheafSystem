@@ -68,9 +68,13 @@ public:
   static const poset_path& standard_schema_path();
 
   ///
-  /// Creates an arg list which conforms to the schema of this.
+  /// Creates a new at0_space in namespace xns with path xpath,
+  /// and schema specified by xschema_path.
   ///
-  static arg_list make_arg_list();
+  static at0_space& new_table(namespace_type& xhost, 
+			      const poset_path& xpath, 
+			      const poset_path& xschema_path,
+			      bool xauto_access);
   
 protected:
 
@@ -81,9 +85,9 @@ protected:
   at0_space();
 
   ///
-  /// Copy constructor; attaches this to the same state as xother.
+  /// Copy constructor; disabled.
   ///
-  at0_space(const at0_space& xother);
+  at0_space(const at0_space& xother) { };
 
   ///
   /// Destructor.
@@ -94,49 +98,6 @@ protected:
   /// Covariant constructor
   ///
   at0_space(at0* xtop, at0* xbottom);
-
-  //============================================================================
-  // NEW HANDLE, NEW STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new poset handle attached to a new state in namespace xhost,
-  /// with schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  at0_space(namespace_poset& xhost,
-	      const string& xname,
-	      const arg_list& xargs,
-	      const poset_path& xschema_path,
-	      bool xauto_access);
-
-  //============================================================================
-  // NEW HANDLE, EXISTING STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new handle attached to the at0_space with
-  /// index xindex in namespace xhost.
-  ///
-  at0_space(const namespace_poset& xhost, pod_index_type xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the at0_space with
-  /// index xindex in namespace xhost.
-  ///
-  at0_space(const namespace_poset& xhost, const scoped_index& xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the at0_space with
-  /// name xname in namespace xhost.
-  ///
-  at0_space(const namespace_poset& xhost, const string& xname, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the at0_space associated
-  /// with namespace member xmbr.
-  ///
-  at0_space(const namespace_poset_member& xmbr, bool xauto_access);
 
 private:
 
@@ -208,16 +169,8 @@ private:
   //@{
 
 public:
-protected:
 
-  ///
-  /// Initializes xarg to satisfy class invariants.
-  ///
-  virtual void initialize_arg_list(const namespace_poset& xns,
-				   const string& xname,
-				   arg_list& xargs,
-				   const poset_path& xschema_path,
-				   bool xauto_access);
+protected:
 
 private:
 
@@ -250,17 +203,15 @@ public:
   ///
   virtual pod_index_type prereq_id(int xi) const;
 
-  ///
-  /// Assignment operator; attaches this to the same state as xother.
-  /// @issue This is probably the wrong signature for operator=,
-  /// see thread Misc/Language/covariance in C++/covariance and operator=
-  /// in the discusion forum. But it is consistent with all the
-  /// other derivatives of poset_state_handle and it will soon be refactored
-  /// out of existence any way.
-  ///
-  at0_space& operator=(const poset_state_handle& xother);
-
 protected:
+
+  ///
+  /// Assignment operator; disabled.
+  ///
+  at0_space& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<at0_space&>(*this);
+  };
 
 private:
 

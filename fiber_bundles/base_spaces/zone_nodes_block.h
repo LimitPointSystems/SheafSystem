@@ -48,6 +48,45 @@ class SHEAF_DLL_SPEC zone_nodes_block : public homogeneous_block
 {
 
   // ===========================================================
+  /// @name HOST FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// The path of the prototype required by this class.
+  ///
+  static const poset_path& static_prototype_path();
+
+  ///
+  /// Creates a new host poset for members of this type.
+  /// The poset is created in namespace xns with path xhost_path and schema specified by xschema_path.
+  ///
+  static host_type& new_host(namespace_type& xns, 
+			     const poset_path& xhost_path, 
+			     const poset_path& xschema_path, 
+			     int xmax_db,
+			     bool xauto_access);
+
+  ///
+  /// Finds or creates a host poset and any prerequisite posets
+  /// for members of this type. The poset is created in namespace xns with path xhost_path
+  /// and schema specified by standard_schema_path().
+  ///
+  static host_type& standard_host(namespace_type& xns,
+				  const poset_path& xhost_path,
+				  int xmax_db,
+				  bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
   /// @name ZONE_NODES_BLOCK FACET
   // ===========================================================
   //@{
@@ -222,26 +261,6 @@ private:
   //@{
 
 public:
-
-  ///
-  /// The path of the schema required by this class.
-  ///
-  static const poset_path& standard_schema_path();
-
-  ///
-  /// The path of the schema required by this.
-  ///
-  virtual const poset_path& schema_path() const;
-
-  ///
-  /// Creates the standard schema for this class in namespace xns.
-  ///
-  static void make_standard_schema(namespace_poset& xns);
-
-  ///
-  /// The path of the prototype required by this class.
-  ///
-  static const poset_path& static_prototype_path();
 
 protected:
 

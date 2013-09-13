@@ -750,6 +750,13 @@ section_dof_map(sec_rep_space* xhost, pod_index_type xbase_id, int xversion)
                            xbase_id,
                            xhost->schema().fiber_schema_id());
 
+  // Give the schema member a name if it does not already have one.
+
+  if(lschema->name(true).empty())
+  {
+    lschema->put_standard_name(true, true);
+  }
+
   // Make sure the version is unalised, so it can't magically change
   // after the dof storage has been allocated.
 

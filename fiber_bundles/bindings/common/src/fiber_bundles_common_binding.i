@@ -432,7 +432,6 @@
 %include             "uniform_2d.h"
 %include             "uniform_3d.h"
 %include "section_iteration_state.h"
-%include "section_space_factory.h"
 %include "section_space_schema_jims_index_space_handle.h"
 %include "section_space_schema_jims_index_space_iterator.h"
 %include "section_space_schema_jims_index_space_state.h"
@@ -497,100 +496,5 @@
 %include "unstructured_block_builder.h"
 
 //=============================================================================
-
-%include "fiber_bundles_templates.i"
-
-// Base space factory templates.
-
-%base_space_factory_templates(point_block_1d);
-%base_space_factory_templates(point_block_2d);
-%base_space_factory_templates(point_block_3d);
-%base_space_factory_templates(structured_block_1d);
-%base_space_factory_templates(structured_block_2d);
-%base_space_factory_templates(structured_block_3d);
-%base_space_factory_templates(zone_nodes_block);
-
-// Fiber space factory templates.
-
-%fiber_space_factory_templates(at0);
-%fiber_space_factory_templates(at1);
-%fiber_space_factory_templates(at2);
-%fiber_space_factory_templates(at2_e2);
-%fiber_space_factory_templates(at2_e3);
-%fiber_space_factory_templates(at3);
-%fiber_space_factory_templates(at3_e3);
-%fiber_space_factory_templates(atp);
-%fiber_space_factory_templates(e1);
-%fiber_space_factory_templates(e2);
-%fiber_space_factory_templates(e3);
-%fiber_space_factory_templates(e4);
-%fiber_space_factory_templates(ed);
-%fiber_space_factory_templates(met);
-%fiber_space_factory_templates(met_e1);
-%fiber_space_factory_templates(met_e2);
-%fiber_space_factory_templates(met_e3);
-%fiber_space_factory_templates(met_ed);
-%fiber_space_factory_templates(st2);
-%fiber_space_factory_templates(st2_e2);
-%fiber_space_factory_templates(st2_e3);
-%fiber_space_factory_templates(st3);
-%fiber_space_factory_templates(st3_e3);
-%fiber_space_factory_templates(st4);
-%fiber_space_factory_templates(st4_e2);
-%fiber_space_factory_templates(st4_e3);
-%fiber_space_factory_templates(stp);
-%fiber_space_factory_templates(t2);
-%fiber_space_factory_templates(t2_e2);
-%fiber_space_factory_templates(t2_e3);
-%fiber_space_factory_templates(t3);
-%fiber_space_factory_templates(t3_e3);
-%fiber_space_factory_templates(t4);
-%fiber_space_factory_templates(t4_e2);
-%fiber_space_factory_templates(t4_e3);
-%fiber_space_factory_templates(tp);
-%fiber_space_factory_templates(vd);
-
-// section space factory templates.
-
-%section_space_factory_templates(sec_at0);
-%section_space_factory_templates(sec_at1);
-%section_space_factory_templates(sec_at2);
-%section_space_factory_templates(sec_at2_e2);
-%section_space_factory_templates(sec_at2_e3);
-%section_space_factory_templates(sec_at3);
-%section_space_factory_templates(sec_at3_e3);
-%section_space_factory_templates(sec_atp);
-%section_space_factory_templates(sec_e1);
-%section_space_factory_templates(sec_e1_uniform);
-%section_space_factory_templates(sec_e2);
-%section_space_factory_templates(sec_e2_uniform);
-%section_space_factory_templates(sec_e3);
-%section_space_factory_templates(sec_e3_uniform);
-%section_space_factory_templates(sec_e4);
-%section_space_factory_templates(sec_ed);
-%section_space_factory_templates(sec_met);
-%section_space_factory_templates(sec_met_e1);
-%section_space_factory_templates(sec_met_e2);
-%section_space_factory_templates(sec_met_e3);
-%section_space_factory_templates(sec_met_ed);
-%section_space_factory_templates(sec_st2);
-%section_space_factory_templates(sec_st2_e2);
-%section_space_factory_templates(sec_st2_e3);
-%section_space_factory_templates(sec_st3);
-%section_space_factory_templates(sec_st3_e3);
-%section_space_factory_templates(sec_st4);
-%section_space_factory_templates(sec_st4_e2);
-%section_space_factory_templates(sec_st4_e3);
-%section_space_factory_templates(sec_stp);
-%section_space_factory_templates(sec_t2);
-%section_space_factory_templates(sec_t2_e2);
-%section_space_factory_templates(sec_t2_e3);
-%section_space_factory_templates(sec_t3);
-%section_space_factory_templates(sec_t3_e3);
-%section_space_factory_templates(sec_t4);
-%section_space_factory_templates(sec_t4_e2);
-%section_space_factory_templates(sec_t4_e3);
-%section_space_factory_templates(sec_tp);
-%section_space_factory_templates(sec_vd);
 
 //=============================================================================

@@ -21,6 +21,10 @@
 
 #include "abstract_poset_member.impl.h"
 #include "assert_contract.h"
+#include "at0_space.h"
+#include "at1.h"
+#include "at1_space.h"
+#include "fiber_bundles_namespace.h"
 #include "namespace_poset.impl.h"
 #include "namespace_poset_member.h"
 #include "poset_handle_factory.h"
@@ -77,81 +81,51 @@ standard_schema_path()
   return result;
 }
 
-sheaf::arg_list
+int
 fiber_bundle::jcb_space::
-make_arg_list(const poset_path& xdomain_path, const poset_path& xrange_path)
+d(const namespace_poset& xns, const poset_path& xschema_path, bool xauto_access)
 {
   // Preconditions:
 
-
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+ 
   // Body:
 
-  // Order has to conform to order in schema,
-  // which has to conform to order in dof id space of top.
-
-  arg_list result;
-  result << "factor_ct" << -1
-	 << "d" << -1
-	 << "scalar_space_path" << ""
-	 << "dd" << -1
-	 << "domain_path" << xdomain_path
-	 << "range_path" << xrange_path
-	 << "dr" << -1;
-  
-#ifdef DIAGNOSTIC_OUTPUT
-  cout << "jcb_space::make_arg_list:result: " << endl << result << endl;
-#endif
+  int result = schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access);
 
   // Postconditions:
 
-  ensure(result.value("domain_path") == xdomain_path);
-  ensure(result.value("range_path") == xrange_path);
-  ensure(unexecutable("result.conforms_to(schema of this class)"));
-  
+  ensure(result == schema_poset_member::row_dof_ct(xns, xschema_path, xauto_access));
+
   // Exit:
 
   return result;
 }
 
-//==============================================================================
-// NEW HANDLE, NEW STATE CONSTRUCTORS
-//==============================================================================
-
-
-
+int
 fiber_bundle::jcb_space::
-jcb_space(namespace_poset& xhost,
-	    const string& xname,
-	    const arg_list& xargs,
-	    const poset_path& xschema_path,
-	    bool xauto_access)
-  : vd_space(new jcb, new jcb)
+d(const namespace_poset& xns, const poset_path& xdomain_space_path, const poset_path& xrange_space_path, bool xauto_access)
 {
-
   // Preconditions:
 
-  require(xhost.state_is_auto_read_accessible(xauto_access));
-
-  require(!xhost.contains_poset(xname, xauto_access));
-
-  require(xhost.path_is_auto_read_accessible(xschema_path, xauto_access));
-  require(xschema_path.conforms_to(xhost, standard_schema_path(), xauto_access));
-  require(xargs.conforms_to(xhost, xschema_path, true, xauto_access));
-
-  require(xhost.path_is_auto_read_accessible(poset_path(xargs.value("domain_path")), xauto_access));
-  require(xhost.path_is_auto_read_accessible(poset_path(xargs.value("range_path")), xauto_access));
-
+  require(xns.path_is_auto_read_accessible<domain_space_type>(xdomain_space_path, xauto_access));
+  require(xns.path_is_auto_read_accessible<range_space_type>(xrange_space_path, xauto_access));
+ 
   // Body:
 
-  new_state(xhost, xname, xargs, xschema_path, xauto_access);
+  int ldd = xns.member_poset<domain_space_type>(xdomain_space_path, xauto_access).d();  
+  int ldr = xns.member_poset<range_space_type>(xrange_space_path, xauto_access).d();  
+
+  int result = d(ldd, ldr);
 
   // Postconditions:
 
-  ensure(postcondition_of(jcb_space::new_state(same args)));
+  ensure(result >= 0);
 
   // Exit:
 
-  return;
+  return result;
 }
 
 int
@@ -160,6 +134,113 @@ d(int xdd, int xdr)
 {
   return xdd*xdr;
 }
+
+fiber_bundle::jcb_space&
+fiber_bundle::jcb_space::
+new_table(namespace_type& xns, 
+          const poset_path& xpath, 
+          const poset_path& xschema_path,
+	  const poset_path& xdomain_path,
+	  const poset_path& xrange_path,
+          bool xauto_access)
+{
+  // cout << endl << "Entering jcb_space::new_table." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xpath.empty());
+  require(!xns.contains_path(xpath, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));
+
+  require(xns.path_is_auto_read_accessible<domain_space_type>(xdomain_path, xauto_access));
+  require(xns.path_is_auto_read_accessible<range_space_type>(xrange_path, xauto_access));
+
+  require(d(xns, xschema_path, xauto_access) == d(xns, xdomain_path, xrange_path, xauto_access));
+
+  require(xns.member_poset<domain_space_type>(xdomain_path, xauto_access).scalar_space_path(xauto_access) ==
+	  xns.member_poset<range_space_type>(xrange_path, xauto_access).scalar_space_path(xauto_access));
+
+  // Body:
+
+  // Create the table; have to new it because namespace keeps a pointer.
+
+  typedef jcb_space table_type;
+
+  table_type* ltable = new table_type();
+
+  // Create a handle of the right type for the schema member.
+
+  schema_poset_member lschema(&xns, xschema_path, xauto_access);
+
+  if(xauto_access)
+  {
+    lschema.get_read_access();
+  }
+
+  // Get the dimension (== number of row dofs) defined by the schema.
+
+  int ld = lschema.row_dof_ct();
+  int ldd = xns.member_poset<domain_space_type>(xdomain_path, xauto_access).d();
+  int ldr = xns.member_poset<range_space_type>(xrange_path, xauto_access).d();
+
+  poset_path lscalar_space_path =
+    xns.member_poset<domain_space_type>(xdomain_path, xauto_access).scalar_space_path(xauto_access);
+  
+  // Create the table dof map and set dof values;
+  // must be newed because poset_state::_table keep a pointer to it.
+
+  array_poset_dof_map* lmap = new array_poset_dof_map(&lschema, true);
+  lmap->put_dof("factor_ct", ld);
+  lmap->put_dof("d", ld);
+  lmap->put_dof("scalar_space_path", lscalar_space_path);
+  lmap->put_dof("domain_path", xdomain_path);
+  lmap->put_dof("dd", ldd);
+  lmap->put_dof("range_path", xrange_path);
+  lmap->put_dof("dr", ldr);
+  
+  // Create the state.
+
+  ltable->new_state(xns, xpath, lschema, *lmap);
+
+  if(xauto_access)
+  {
+    lschema.release_access();
+  }
+
+  jcb_space& result = *ltable;
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xpath);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(result.factor_ct(true) == result.d(true));
+  ensure(result.d(true) == d(xns, xschema_path, xauto_access));
+
+  ensure(result.domain_path(true) == xdomain_path);
+  ensure(result.dd(true) == xns.member_poset<domain_space_type>(xdomain_path, xauto_access).d());
+
+  ensure(result.range_path(true) == xrange_path);
+  ensure(result.dr(true) == xns.member_poset<range_space_type>(xrange_path, xauto_access).d());
+
+  ensure(result.scalar_space_path(true) ==
+	 xns.member_poset<domain_space_type>(xdomain_path, xauto_access).scalar_space_path(xauto_access) );
+  ensure(result.scalar_space_path(true) ==
+	 xns.member_poset<range_space_type>(xrange_path, xauto_access).scalar_space_path(xauto_access) );
+
+  // Exit:
+
+  // cout << "Leaving jcb_space::new_table." << endl;
+  return result;
+} 
+
 
 int
 fiber_bundle::jcb_space::
@@ -380,24 +461,6 @@ jcb_space()
   ensure(postcondition_of(vd_space::vd_space()));
 }
 
-
-
-fiber_bundle::jcb_space::
-jcb_space(const jcb_space& xother)
-  : vd_space(new jcb, new jcb)
-{
-  // Preconditions:
-
-  // Body:
-
-  attach_to_state(&xother);
-  
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-}
-
-
 fiber_bundle::jcb_space::
 ~jcb_space()
 {
@@ -434,192 +497,9 @@ jcb_space(jcb* xtop, jcb* xbottom)
   return;
 }
 
-//==============================================================================
-// NEW HANDLE, EXISTING STATE CONSTRUCTORS
-//==============================================================================
-
-
-fiber_bundle::jcb_space::
-jcb_space(const namespace_poset& xhost, pod_index_type xindex, bool xauto_access)
-  : vd_space(new jcb, new jcb)
-{
-  // Preconditions:
-
-  require(xhost.state_is_auto_read_accessible(xauto_access));
-  require(xhost.contains_member(xindex, xauto_access));
-
-  if(xauto_access)
-  {
-    xhost.get_read_access();
-  }
-  
-  require(xhost.is_jim(xindex));
-
-  // Body:
-
-  attach_to_state(&xhost, xindex);
-
-  if(xauto_access)
-  {
-    xhost.release_access();
-  }
-
-  // Postconditions:
-
-  ensure(host() == &xhost);
-  ensure(index() == xindex);
-}
-
-fiber_bundle::jcb_space::
-jcb_space(const namespace_poset& xhost, const scoped_index& xindex, bool xauto_access)
-  : vd_space(new jcb, new jcb)
-{
-  // Preconditions:
-
-  require(xhost.state_is_auto_read_accessible(xauto_access));
-  require(xhost.contains_member(xindex, xauto_access));
-
-  if(xauto_access)
-  {
-    xhost.get_read_access();
-  }
-  
-  require(xhost.is_jim(xindex));
-
-  // Body:
-
-  attach_to_state(&xhost, xindex.hub_pod());
-
-  if(xauto_access)
-  {
-    xhost.release_access();
-  }
-
-  // Postconditions:
-
-  ensure(host() == &xhost);
-  ensure(index() ==~ xindex);
-}
-
-fiber_bundle::jcb_space::
-jcb_space(const namespace_poset& xhost, const string& xname, bool xauto_access)
-  : vd_space(new jcb, new jcb)
-{
-  // Preconditions:
-
-  require(xhost.state_is_auto_read_accessible(xauto_access));
-  require(xhost.contains_member(xname));
-
-  // Body:
-
-
-  if(xauto_access)
-  {
-    xhost.get_read_access();
-  }
-
-  attach_to_state(&xhost, xname);
-
-  // Postconditions:
-
-  ensure(host() == &xhost);
-  ensure(name() == xname);
-
-  if(xauto_access)
-  {
-    xhost.release_access();
-  }
-}
-
-
-
-fiber_bundle::jcb_space::
-jcb_space(const namespace_poset_member& xmbr, bool xauto_access)
-  : vd_space(new jcb, new jcb)
-{
-  // Preconditions:
-
-  require(xmbr.state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-
-  if(xauto_access)
-  {
-    xmbr.get_read_access();
-  }
-
-  attach_to_state(&xmbr);
-
-  if(xauto_access)
-  {
-    xmbr.release_access();
-  }
-
-  // Postconditions:
-
-  ensure(index() ==~ xmbr.index());
-}
-
 // ===========================================================
 // POSET FACET
 // =========================================================== 
-
-void
-fiber_bundle::jcb_space::
-initialize_arg_list(const namespace_poset& xns, 
-		    const string& xname,
-		    arg_list& xargs, 
-		    const poset_path& xschema_path,
-		    bool xauto_access)
-{
-  // Preconditions:
-
-  require(xns.state_is_auto_read_accessible(xauto_access));
-
-  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
-  require(xschema_path.conforms_to(xns, standard_schema_path(), xauto_access));
-  require(xargs.conforms_to(xns, xschema_path, true, xauto_access));
-
-  require(xns.path_is_auto_read_accessible(poset_path(xargs.value("domain_path")), xauto_access));
-  require(xns.path_is_auto_read_accessible(poset_path(xargs.value("range_path")), xauto_access));
-  
-  // Body:
-
-  poset_path ldomain_path(xargs.value("domain_path"));
-  poset_path lrange_path(xargs.value("range_path"));
-  
-  // Set args required by parent.
-
-  xargs.value("scalar_space_path") = scalar_space_path(xns, ldomain_path, xauto_access);
-
-  // Initialize inherited args (factor_ct, d).
-
-  vd_space::initialize_arg_list(xns, xname, xargs, xschema_path, xauto_access);
-
-  // Initialize args defined in this class; domain_path and range_path already set.
-
-  xargs.value("dd") = d(xns, ldomain_path, xauto_access);
-  xargs.value("dr") = d(xns, lrange_path, xauto_access);
-
-  // Done.
-  
-#ifdef DIAGNOSTIC_OUTPUT
-  cout << "jcb_space::initialize_arg_list:xargs: " << result << endl;
-#endif
-
-  // Postconditions:
-
-  ensure(xargs.value("dr") == d(xns, xargs.value("range_path"), xauto_access));
-  ensure(xargs.value("dd") == d(xns, xargs.value("domain_path"), xauto_access));
-  ensure(xargs.value("scalar_space_path") == scalar_space_path(xns, xargs.value("domain_path"), xauto_access));
-  ensure(xargs.value("d") == d(xargs.value("dd"), xargs.value("dr")));
-  ensure(xargs.value("factor_ct") == xargs.value("d"));
-  
-  // Exit:
-
-  return;
-}
 
 bool
 fiber_bundle::jcb_space::
@@ -730,27 +610,6 @@ prereq_id(int xi) const
   // Exit:
 
   return result;
-}
-
-fiber_bundle::jcb_space&
-fiber_bundle::jcb_space::
-operator=(const poset_state_handle& xother)
-{
-  // Preconditions:
-
-  require(is_ancestor_of(&xother));
-
-  // Body:
-
-  poset_state_handle::operator=(xother);
-
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-
-  // Exit:
-
-  return *this;
 }
 
 //==============================================================================

@@ -36,6 +36,9 @@
 namespace fiber_bundle
 {
 
+class sec_e1;
+class sec_e3;
+
 //==============================================================================
 // CLASS SEC_JCB_E13
 //==============================================================================
@@ -45,9 +48,9 @@ namespace fiber_bundle
 ///
 class SHEAF_DLL_SPEC sec_jcb_e13: public sec_jcb_ed
 {
-  //============================================================================
-  /// @name JCB_E13 FACET OF CLASS SEC_JCB_E13
-  //============================================================================
+  // ===========================================================
+  /// @name HOST FACTORY FACET OF CLASS SEC_JCB_E13
+  // ===========================================================
   //@{
 
 public:
@@ -56,6 +59,55 @@ public:
   /// The fiber type.
   ///
   typedef jcb_e13 fiber_type;
+
+  ///
+  /// The type of domain vector space.
+  ///
+  typedef sec_e1 domain_type;
+
+  ///
+  /// The type of range vector space.
+  ///
+  typedef sec_e3 range_type;
+
+  ///
+  /// Creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
+  /// and table attribute domain_path and range_path specified by xdomain_path and xrange_path, respectively..
+  ///
+  static host_type& new_host(namespace_type& xns, 
+                             const poset_path& xhost_path, 
+                             const poset_path& xschema_path,
+                             const poset_path& xdomain_space_path,
+                             const poset_path& xrange_space_path,
+                             bool xauto_access);
+
+  ///
+  /// The standard host for sections of this type with base space xbase_path,
+  /// representation xrep_path, section suffix xsection_suffix,
+  /// and fiber suffix xfiber_suffix. Creates the host and its prerequisites
+  /// if necessary.
+  ///
+  static host_type& standard_host(namespace_type& xns, 
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xsection_suffix, 
+                                  const string& xfiber_suffix, 
+                                  bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+ 
+
+  //============================================================================
+  /// @name JCB_E13 FACET OF CLASS SEC_JCB_E13
+  //============================================================================
+  //@{
+
+public:
 
   ///
   /// Default constructor.

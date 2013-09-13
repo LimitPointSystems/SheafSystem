@@ -22,9 +22,9 @@
 
 #include "assert_contract.h"
 #include "arg_list.h"
-#include "base_space_member_prototype.h"
+//#include "base_space_member_prototype.h"
 #include "chart_point_3d.h"
-#include "fiber_bundles_namespace.impl.h"
+#include "fiber_bundles_namespace.h"
 #include "namespace_poset.h"
 #include "point_block_crg_interval.h"
 #include "poset_path.h"
@@ -33,6 +33,109 @@
 #include "wsv_block.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
+
+// ===========================================================
+// HOST FACTORY FACET
+// ===========================================================
+
+// PUBLIC DATA MEMBERS
+
+const sheaf::poset_path&
+fiber_bundle::point_block_1d::
+static_prototype_path()
+{
+
+  // Preconditions:
+
+  // Body:
+
+  static const poset_path
+  result(base_space_member::prototypes_poset_name(), "point_block_1d");
+
+  // Postconditions:
+
+  ensure(result.poset_name() == base_space_member::prototypes_poset_name());
+  ensure(result.member_name() == "point_block_1d");
+
+  // Exit
+
+  return result;
+}
+
+fiber_bundle::point_block_1d::host_type&
+fiber_bundle::point_block_1d::
+new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xschema_path, bool xauto_access)
+{
+  // cout << endl << "Entering point_block_1d::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));  
+
+  // Body:
+
+  host_type& result =
+    host_type::new_table(xns, xhost_path, xschema_path, 0, xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(result.max_db() == 0);
+
+  // Exit:
+
+  // cout << "Leaving point_block_1d::new_host." << endl;
+  return result;
+}
+
+fiber_bundle::point_block_1d::host_type&
+fiber_bundle::point_block_1d::
+standard_host(namespace_type& xns, const poset_path& xhost_path, bool xauto_access)
+{
+  // cout << endl << "Entering point_block_1d::standard_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
+  require(xns.path_is_auto_read_accessible(standard_schema_path(), xauto_access));
+
+  // Body:
+
+  host_type& result =
+    new_host(xns, xhost_path, standard_schema_path(), xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == standard_schema_path());
+
+  ensure(result.max_db() == 0);
+  
+  // Exit:
+
+  // cout << "Leaving point_block_1d::standard_host." << endl;
+  return result;
+}
+
+// PROTECTED DATA MEMBERS
+
+// PRIVATE DATA MEMBERS
+
 
 // ===========================================================
 // POINT_BLOCK_1D FACET
@@ -497,97 +600,6 @@ static_local_cell_prototype_path()
 // ===========================================================
 
 // PUBLIC DATA MEMBERS
-
-const sheaf::poset_path&
-fiber_bundle::point_block_1d::
-standard_schema_path()
-{
-
-  // Preconditions:
-
-  // Body:
-
-  static const poset_path
-  result(base_space_member::standard_schema_path().poset_name(),
-         "point_block_1d_schema");
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-const sheaf::poset_path&
-fiber_bundle::point_block_1d::
-schema_path() const
-{
-  // Preconditions:
-
-  // Body:
-
-  const poset_path& result = standard_schema_path();
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-void
-fiber_bundle::point_block_1d::
-make_standard_schema(namespace_poset& xns)
-{
-  // Preconditions:
-
-  require(xns.state_is_read_write_accessible());
-  require(xns.contains_poset(standard_schema_poset_name(), false));
-  require(!xns.contains_poset_member(standard_schema_path(), false));
-
-  // Body:
-
-  string ldof_specs = "i_size SIZE_TYPE false";
-
-
-  schema_poset_member lschema(xns,
-                              standard_schema_path().member_name(),
-                              homogeneous_block::standard_schema_path(),
-                              ldof_specs,
-                              false);
-
-  lschema.detach_from_state();
-
-  // Postconditions:
-
-  ensure(xns.contains_poset_member(standard_schema_path(), false));
-
-  // Exit:
-
-  return;
-}
-
-const sheaf::poset_path&
-fiber_bundle::point_block_1d::
-static_prototype_path()
-{
-
-  // Preconditions:
-
-  // Body:
-
-  static const poset_path
-  result(base_space_member::prototypes_poset_name(), "point_block_1d");
-
-  // Postconditions:
-
-  ensure(result.poset_name() == base_space_member::prototypes_poset_name());
-  ensure(result.member_name() == "point_block_1d");
-
-  // Exit
-
-  return result;
-}
 
 // PROTECTED DATA MEMBERS
 

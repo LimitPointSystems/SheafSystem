@@ -412,7 +412,7 @@ invariant() const
 
   // Must satisfy base class invariant.
 
-  invariance(partial_poset_member::invariant());
+  invariance(total_poset_member::invariant());
 
   if (invariant_check())
   {

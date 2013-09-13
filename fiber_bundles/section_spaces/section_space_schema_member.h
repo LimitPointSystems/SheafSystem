@@ -46,6 +46,7 @@ namespace fiber_bundle
 
 using namespace sheaf;
 
+class fiber_bundles_namespace;
 class sec_rep_descriptor;
 class section_component_iterator;
 class section_space_schema_poset;
@@ -66,6 +67,41 @@ class SHEAF_DLL_SPEC section_space_schema_member : public schema_poset_member
 {
   friend class section_space_schema_poset; // For access to get_ext_ids.
 
+
+  // ===========================================================
+  /// @name HOAT FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// The type of namespace for this type of member.
+  ///
+  typedef fiber_bundles_namespace namespace_type;
+
+  ///
+  /// The type of host poset.
+  ///
+  typedef section_space_schema_poset host_type;
+
+  ///
+  /// The path of the schema required by this class.
+  ///
+  static const poset_path& standard_schema_path();
+
+  ///
+  /// Creates the standard schema for this class in namespace xns.
+  ///
+  static void make_standard_schema(namespace_poset& xns);
+
+protected:
+
+private:
+
+  //@}
+
+
   // ===========================================================
   /// @name SECTION_SPACE_SCHEMA_MEMBER FACET
   // ===========================================================
@@ -82,6 +118,13 @@ public:
   /// The name of this class.
   ///
   static const string& static_class_name();
+
+  ///
+  /// The standard member name for a schema with fiber schema member with name
+  /// xfiber_schema_member_name and base space member with name xbase_member_name.
+  ///
+  static string standard_member_name(const string& xfiber_schema_member_name,
+				     const string& xbase_member_name);
   
   ///
   /// Assignment operator; attaches this to the same state as xother
@@ -311,6 +354,20 @@ public:
   /// The fiber space for section spaces on this schema (const version).
   ///
   const poset& fiber_space() const;
+
+  ///
+  /// The fiber space for section spaces on this schema,
+  /// downcast to fiber space type F.
+  ///
+  template<typename F>
+  F& fiber_space();
+
+  ///
+  /// The fiber space for section spaces on this schema,
+  /// downcast to fiber space type F, const version.
+  ///
+  template<typename F>
+  const F& fiber_space() const;
 
   ///
   /// The dimension of the base space component.
@@ -1221,6 +1278,26 @@ public:
   /// set version to the actual version alias refers to.
   ///
   virtual void put_version(int xversion, bool xunalias = false);
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
+  /// @name COMPONENT NAME FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Sets the name of this member to a standard name; if xunique,
+  /// make xname the only name.
+  ///
+  void put_standard_name(bool xunique, bool xauto_access);
 
 protected:
 

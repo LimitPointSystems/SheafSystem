@@ -466,6 +466,48 @@ class tp_space;
 ///
 class SHEAF_DLL_SPEC e3 : public ed
 {
+  // ===========================================================
+  /// @name HOST FACTORY FACET OF CLASS E3
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// The path to the standard schema for this class.
+  ///
+  static const poset_path& standard_schema_path();
+
+  ///
+  /// Creates the standard schema for this class in namespace xns.
+  ///
+  static void make_standard_schema(namespace_poset& xns);
+
+  ///
+  /// Creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
+  /// and table attribute scalar_space_path specified by xscalar_space_path.
+  ///
+  static host_type& new_host(namespace_type& xns, 
+			     const poset_path& xhost_path, 
+			     const poset_path& xschema_path,
+			     const poset_path& xscalar_space_path,
+			     bool xauto_access);
+
+  ///
+  /// The host with path standard_host_path<e3>(xsuffix).
+  /// Returns the host if it already exists, otherwise, creates it in namespace xns
+  /// with schema specified by standard_schema_path() and standard paths for prerequisites,
+  /// which are also created if needed.
+  ///
+  static host_type& standard_host(namespace_type& xns, const string& xsuffix, bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+
 
   //============================================================================
   /// @name EUCLIDEAN VECTOR ALGEBRA (E3) FACET OF CLASS E3
@@ -660,69 +702,38 @@ private:
 public:
 
   ///
-  /// The path to the standard schema for this class.
-  ///
-  static const poset_path& standard_schema_path();
-
-  ///
-  /// Creates the standard schema for this class in namespace xns.
-  ///
-  static void make_standard_schema(namespace_poset& xns);
-
-//   ///
-  //@todo: Reword comments.
-  ///
-  /// Static prototype for general tensors 
-  /// of degree xp over this vector space.
+  /// Static constructor for general tensors 
+  /// of degree xp over vector space xvector_space.
   ///
   static tp* new_tp(tp_space& xvector_space, int xp);
 
   ///
-  /// Prototype for general tensors 
-  /// of degree xp over this vector space.
-  ///
-  //virtual const tp_lite& tp_prototype(int xp) const;
-
-  ///
-  /// Static prototype for antisymmetric tensors 
-  /// of degree xp over this vector space.
+  /// Static constructor for antisymmetric tensors 
+  /// of degree xp over vector space xvector_space.
   ///
   static atp* new_atp(tp_space& xvector_space, int xp);
 
   ///
-  /// Prototype for antisymmetric tensors 
-  /// of degree xp over this vector space.
-  ///
-  //virtual const atp_lite& atp_prototype(int xp) const;
-
-  ///
-  /// Static prototype for symmetric tensors 
-  /// of degree xp over this vector space.
+  /// Static constructor for symmetric tensors 
+  /// of degree xp over vector space xvector_space.
   ///
   static stp* new_stp(tp_space& xvector_space, int xp);
 
   ///
-  /// Prototype for symmetric tensors 
-  /// of degree xp over this vector space.
-  ///
-  //virtual const stp_lite& stp_prototype(int xp) const;
-
-  ///@todo: Reword these comments.
-  ///
   /// Virtual constructor for general tensors 
-  /// of degree xp over vector space xvector_space.
+  /// of degree xp over this vector space.
   ///
   virtual tp* new_tp(int xp, bool xauto_access) const;
 
   ///
   /// Virtual constructor for antisymmetric tensors 
-  /// of degree xp over vector space xvector_space.
+  /// of degree xp over this vector space.
   ///
   virtual atp* new_atp(int xp, bool xauto_access) const;
 
   ///
   /// Virtual constructor for symmetric tensors 
-  /// of degree xp over vector space xvector_space.
+  /// of degree xp over this vector space.
   ///
   virtual stp* new_stp(int xp, bool xauto_access) const;
 

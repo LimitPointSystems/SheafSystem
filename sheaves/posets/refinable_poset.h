@@ -57,6 +57,15 @@ class SHEAF_DLL_SPEC refinable_poset : public poset
 public:
 
   ///
+  /// Creates a new poset in namespace xns with path xpath
+  /// and schema specified by xschema_path.
+  ///
+  static refinable_poset& new_table(namespace_type& xhost, 
+				    const poset_path& xpath, 
+				    const poset_path& xschema_path,
+				    bool xauto_access);
+
+  ///
   /// Set the current level to xversion
   ///
   void put_version(int xversion);
@@ -106,99 +115,17 @@ protected:
   virtual ~refinable_poset();
 
   ///
-  /// Creates a new refinable_poset in namespace xhost with schema
-  /// specified by xschema_path, name xname, and uninitialized table dofs.
+  /// Copy constructor; disabled.
   ///
-  refinable_poset(namespace_poset* xhost,
-                  const poset_path& xschema_path,
-                  const string& xname,
-                  bool xauto_access = true);
+  refinable_poset(const refinable_poset& xother) { };
 
   ///
-  /// Creates a new refinable_poset in namespace xhost with schema
-  /// specified by xschema_path, name xname, and table dofs
-  /// initialized by xtable_dofs.
+  /// Assignment operator; disabled.
   ///
-  refinable_poset(namespace_poset* xhost,
-                  const poset_path& xschema_path,
-                  const string& xname,
-                  void* xtable_dofs,
-                  size_t xtable_dofs_ub,
-                  bool xauto_access = true);
-
-  ///
-  /// Creates a new refinable_poset in namespace xhost with schema
-  /// specified by xschema_path, name xname, and table dof map xdof_map.
-  ///
-  refinable_poset(namespace_poset* xhost,
-                  const poset_path& xschema_path,
-                  const string& xname,
-                  array_poset_dof_map* xdof_map,
-                  bool xauto_access = true);
-
-  ///
-  /// Creates a new refinable_poset with schema xschema,
-  /// name xname and uninitialized table dofs.
-  ///
-  refinable_poset(namespace_poset* xhost,
-                  abstract_poset_member* xschema,
-                  const string& xname,
-                  bool xauto_access = true);
-
-  ///
-  /// Creates a new refinable_poset with schema xschema,
-  /// name xname and table dofs initialized with xtable_dofs
-  ///
-  refinable_poset(namespace_poset* xhost,
-                  abstract_poset_member* xschema,
-                  const string& xname,
-                  void* xtable_dofs,
-                  size_t xtable_dofs_ub,
-                  bool xauto_access = true);
-
-  ///
-  /// Creates a new refinable_poset with schema xschema,
-  /// name xname and table dof map xdof_map.
-  ///
-  refinable_poset(namespace_poset* xhost,
-                  abstract_poset_member* xschema,
-                  const string& xname,
-                  array_poset_dof_map* xdof_map,
-                  bool xauto_access = true);
-
-  ///
-  /// Creates a new handle attached to the refinable_poset with
-  /// index xindex in namespace xhost.
-  ///
-  refinable_poset(const namespace_poset* xhost, pod_index_type xindex);
-
-  ///
-  /// Creates a new handle attached to the refinable_poset with
-  /// index xindex in namespace xhost.
-  ///
-  refinable_poset(const namespace_poset* xhost, const scoped_index& xindex);
-
-  ///
-  /// Creates a new handle attached to the refinable_poset with
-  /// name xname in namespace xhost.
-  ///
-  refinable_poset(const namespace_poset* xhost, const string& xname);
-
-  ///
-  /// Creates a new handle attached to the refinable_poset associated
-  /// with namespace member xmbr
-  ///
-  refinable_poset(const abstract_poset_member* xmbr);
-
-  ///
-  /// Copy constructor; attaches this to the same state as xother
-  ///
-  refinable_poset(const refinable_poset& xother);
-
-  ///
-  /// Assignment operator; attaches this to the same state as xother
-  ///
-  refinable_poset& operator=(const poset_state_handle& xother);
+  refinable_poset& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<refinable_poset&>(*this);
+  };
 
 private:
 

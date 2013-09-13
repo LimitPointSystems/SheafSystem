@@ -35,7 +35,6 @@
 
 namespace sheaf
 {
-class arg_list;
 class namespace_poset;
 }
 
@@ -43,6 +42,7 @@ namespace fiber_bundle
 {
 using namespace sheaf;
 
+class sec_at0;
 class sec_vd;
 class vd;
 
@@ -71,9 +71,9 @@ public:
   typedef vd fiber_type;
 
   ///
-  /// The scalar type definition.
+  /// The type of scalar for the module of sections.
   ///
-  typedef sec_vd scalar_type;
+  typedef sec_at0 scalar_type;
 
   ///
   /// The table dofs type defined by the standard schema.
@@ -81,9 +81,26 @@ public:
   typedef vd_table_dofs_type table_dofs_type;
 
   ///
-  /// Creates an arg list which conforms to the schema of this.
+  /// True if and only if scalar space of fiber space == fiber space of scalar space. 
+  /// More precisely, true if and only if the scalar space of the fiber space of the 
+  /// vector section schema specified by  xschema_path is the same as the fiber space 
+  /// of the schema of the scalar section space specified by xscalar_space_path.
   ///
-  static arg_list make_arg_list(const poset_path& xscalar_space_path);
+  static bool same_scalar_fiber_space(const namespace_poset& xns, 
+                                      const poset_path& xschema_path, 
+                                      const poset_path& xscalar_space_path, 
+                                      bool xauto_access);
+
+  ///
+  /// Creates a new sec_vd_space in namespace xns with path xpath,
+  /// schema specified by xschema_path, and scalar space specified
+  /// by xscalar_space_path.
+  ///
+  static sec_vd_space& new_table(namespace_type& xhost, 
+                                 const poset_path& xpath, 
+                                 const poset_path& xschema_path,
+                                 const poset_path& xscalar_space_path,
+                                 bool xauto_access);
   
   //============================================================================
   // TABLE DOFS
@@ -192,9 +209,14 @@ protected:
   sec_vd_space();
 
   ///
-  /// Copy constructor; attaches this to the same state as xother.
+  /// Copy constructor; disabled.
   ///
-  sec_vd_space(const sec_vd_space& xother);
+  sec_vd_space(const sec_vd_space& xother) { };
+
+  ///
+  /// Covariant constructor
+  ///
+  sec_vd_space(sec_vd* xtop, sec_vd* xbottom);
 
   ///
   /// Destructor.
@@ -210,54 +232,6 @@ protected:
   /// The number of covariant subposets.
   ///
   virtual size_type covariant_subposet_ct() const;
-
-  //============================================================================
-  // NEW HANDLE, NEW STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new poset handle attached to a new state in namespace xhost,
-  /// with schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  sec_vd_space(namespace_poset& xhost,
-	       const string& xname,
-	       const arg_list& xargs,
-	       const poset_path& xschema_path,
-	       bool xauto_access);
-
-  //============================================================================
-  // NEW HANDLE, EXISTING STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Covariant constructor
-  ///
-  sec_vd_space(sec_vd* xtop, sec_vd* xbottom);
-
-  ///
-  /// Creates a new handle attached to the sec_vd_space with
-  /// index xindex in namespace xhost.
-  ///
-  sec_vd_space(const namespace_poset& xhost, pod_index_type xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the sec_vd_space with
-  /// index xindex in namespace xhost.
-  ///
-  sec_vd_space(const namespace_poset& xhost, const scoped_index& xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the sec_vd_space with
-  /// name xname in namespace xhost.
-  ///
-  sec_vd_space(const namespace_poset& xhost, const string& xname, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the sec_vd_space associated
-  /// with namespace member xmbr.
-  ///
-  sec_vd_space(const namespace_poset_member& xmbr, bool xauto_access);
 
 private:
 
@@ -286,15 +260,6 @@ private:
 public:
 
 protected:
-
-  ///
-  /// Initializes xarg to satisfy class invariants.
-  ///
-  virtual void initialize_arg_list(const namespace_poset& xns,
-				   const string& xname,
-				   arg_list& xargs,
-				   const poset_path& xschema_path,
-				   bool xauto_access);
 
 private:
 
@@ -328,17 +293,15 @@ public:
   ///
   virtual pod_index_type prereq_id(int xi) const;
 
-  ///
-  /// Assignment operator; attaches this to the same state as xother.
-  /// @issue This is probably the wrong signature for operator=,
-  /// see thread Misc/Language/covariance in C++/covariance and operator=
-  /// in the discusion forum. But it is consistent with all the
-  /// other derivatives of poset_state_handle and it will soon be refactored
-  /// out of existence any way.
-  ///
-  sec_vd_space& operator=(const poset_state_handle& xother);
-
 protected:
+
+  ///
+  /// Assignment operator; disabled.
+  ///
+  sec_vd_space& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<sec_vd_space&>(*this);
+  };
 
   ///
   /// Creates the standard subposets.

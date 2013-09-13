@@ -1913,6 +1913,34 @@ operator<<(ostream &os, const poset_crg_state& p)
      << endl
      << endl;
 
+  // Some convenient typedefs.
+
+  typedef poset_crg_state::member_name_map_type name_map_type;
+  typedef name_map_type::name_list_type name_list_type;
+  typedef name_map_type::const_name_iterator name_itr_type;
+
+  // Find the length of the longest name to set width of name column.
+
+  int lname_width = 0;
+  for(scoped_index i = p.begin(); i < p.end(); ++i)
+  {
+    if(p.contains_member(i.hub_pod()))
+    {
+      const name_list_type lname_list = p.member_name_map().all_names(i.hub_pod());
+      for(name_itr_type lname_itr = lname_list.begin(); lname_itr != lname_list.end(); ++lname_itr)
+      {
+        int lname_len = lname_itr->size();
+        lname_width = (lname_width >= lname_len) ? lname_width : lname_len;
+      }
+    }
+  }
+  
+  // Add a little extra.
+
+  lname_width += 2;
+
+  // Now write the member lines.
+
   for(scoped_index i = p.begin(); i < p.end(); ++i)
   {
     if(p.contains_member(i.hub_pod()))
@@ -1934,7 +1962,7 @@ operator<<(ostream &os, const poset_crg_state& p)
         ++lname_itr;
       }
 
-      os << "    " << setw(36) << left << lfirst_name << right;
+      os << "    " << setw(lname_width) << left << lfirst_name << right;
 
       os << "dof_map: "
 	 << setw(2*sizeof(int)+3)
@@ -1972,7 +2000,7 @@ operator<<(ostream &os, const poset_crg_state& p)
       while(lname_itr != lname_list.end())
       {
         os << "            ";
-        os << "    " << setw(36) << left << *lname_itr << right << endl;
+        os << "    " << setw(lname_width) << left << *lname_itr << right << endl;
         ++lname_itr;
       }
     } // end if contains_member

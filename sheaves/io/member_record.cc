@@ -837,9 +837,11 @@ transfer_member_to_internal_buffer(const scoped_index& xmbr_id)
 
   transfer_member_to_eqv_ids(xmbr_id);
 
-  // Names:
 
-  transfer_member_to_names(xmbr_id);
+  // Names:
+  // Names now transferred directly by storage agent::commit_transaction
+  // using poset_scaffold::get_member_names_from_poset.
+  //  transfer_member_to_names(xmbr_id);
 
 
 #ifdef DIAGNOSTIC_OUTPUT
@@ -2778,8 +2780,10 @@ transfer_internal_buffer_to_member(const scoped_index& xmbr_id)
   }
 
   // Names.
+  // Names now transferred directly by storage agent::begin_read_transaction
+  // using poset_scaffold::get_member_names_from_poset.
 
-  transfer_names_to_member(xmbr_id);
+  //  transfer_names_to_member(xmbr_id);
 
   // Postconditions:
 

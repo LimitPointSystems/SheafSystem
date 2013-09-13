@@ -54,13 +54,15 @@ namespace sheaf
 {
 
 template <typename T> class block;
-class subposet;
-class tern;
-class storage_agent;
 class poset_dof_map;
 class poset_member_iterator;
 class poset_path;
 class schema_poset_member;
+class sheaves_namespace;
+class storage_agent;
+class subposet;
+class tern;
+  
 
 // ============================================================================
 // CLASS ABSTRACT_POSET_MEMBER_TABLE_DOFS_TYPE
@@ -165,18 +167,7 @@ private:
 // ============================================================================
   
 ///
-/// A client handle for a member of a poset.
-/// A abstract_poset_member is a handle for a specific poset member state
-/// within the poset_state of a specific poset object. The poset member state
-/// is identified by a unique poset member index within a host poset object.
-/// The abstract_poset_member can be created either attached to a specific
-/// poset member state, or it can be created unattached. In the latter case it
-/// is treated as if attached to a unique "void" poset member state. When a
-/// abstract_poset_member object is deleted, the poset member state it is
-/// attached to, if any, is also deleted. If the client wishes to delete the
-/// abstract_poset_member object, but leave the poset member state in the
-/// poset_state for later use, the abstract_poset_member object must be
-/// detached before it is deleted.
+/// An abstract client handle for a member of a poset.
 ///
 class SHEAF_DLL_SPEC abstract_poset_member : public poset_component
 {
@@ -192,12 +183,50 @@ class SHEAF_DLL_SPEC abstract_poset_member : public poset_component
   friend class storage_agent;
   // friend ostream & operator << (ostream &os, abstract_poset_member& p);
 
+
+  // ===========================================================
+  /// @name HOST FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  // Typedefs:
+
+  ///
+  /// The type of namespace for this type of member.
+  ///
+  typedef namespace_poset namespace_type;
+
+  ///
+  /// The type of host poset for this type of member.
+  ///
+  typedef poset host_type;  
+
+  ///
+  /// Creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path and schema specified 
+  /// by xschema_path.
+  ///
+  static host_type& new_host(namespace_type& xns, 
+			     const poset_path& xhost_path, 
+			     const poset_path& xschema_path,
+			     bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+
   // ===========================================================
   /// @name ABSTRACT_POSET_MEMBER FACET
   // ===========================================================
   //@{
 
 public:
+
+  // Typedefs:
 
   ///
   /// The type of the table dofs.
@@ -208,6 +237,7 @@ public:
   /// The type of the row dofs.
   ///
   typedef abstract_poset_member_row_dofs_type row_dofs_type;
+
 
   ///
   /// Assignment operator; attaches this to the same state as xother.
@@ -242,15 +272,13 @@ public:
   /// Creates a new jim (join-irreducible member) state in host() and attaches
   /// this to it. The existing dof map with index xtuple_id is used as the dof map.
   ///
-  virtual void new_jim_state(pod_index_type xtuple_id,
-			     bool xauto_access = true);
+  virtual void new_jim_state(pod_index_type xtuple_id, bool xauto_access = true);
 
   ///
   /// Creates a new jim (join-irreducible member) state in host() and attaches
   /// this to it. The existing dof map with index xtuple_id is used as the dof map.
   ///
-  void new_jim_state(const scoped_index& xtuple_id,
-		     bool xauto_access = true);
+  void new_jim_state(const scoped_index& xtuple_id, bool xauto_access = true);
 
   ///
   /// Creates a new jim (join-irreducible member) state in xhost and attaches
@@ -262,7 +290,7 @@ public:
                              bool xauto_access = true);
 
   ///
-  /// Creates a new jim (join-irreducible member) state in host() and attaches
+  /// Creates a new jim (join-irreducible member) state in xhost and attaches
   /// this to it. The existing dof map with index xtuple_id is used as the dof map.
   ///
   virtual void new_jim_state(poset_state_handle* xhost,
@@ -270,7 +298,7 @@ public:
 			     bool xauto_access = true);
 
   ///
-  /// Creates a new jim (join-irreducible member) state in host() and attaches
+  /// Creates a new jim (join-irreducible member) state in xhost and attaches
   /// this to it. The existing dof map with index xtuple_id is used as the dof map.
   ///
   void new_jim_state(poset_state_handle* xhost,
@@ -287,8 +315,7 @@ public:
   /// Creates a new jrm (join-reducible member) state in xhost and attaches
   /// this to it.
   ///
-  virtual void new_jrm_state(poset_state_handle* xhost,
-                             bool xauto_access = true);
+  virtual void new_jrm_state(poset_state_handle* xhost, bool xauto_access = true);
 
   ///
   /// Computes the join of the members with the indices given in xexpansion.
@@ -343,21 +370,6 @@ public:
 		     bool xauto_access);
 
 protected:
-
-private:
-
-  //@}
-
-
-  // ===========================================================
-  /// @name HOST FACTORY FACET
-  // ===========================================================
-  //@{
-
-public:
-
-protected:
-
   ///
   /// Default constructor; creates a new, unattached abstract_poset_member handle.
   ///
@@ -383,6 +395,7 @@ protected:
 private:
 
   //@}
+
 
 
   // ===========================================================

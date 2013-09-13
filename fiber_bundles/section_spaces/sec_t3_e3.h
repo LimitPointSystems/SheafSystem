@@ -48,12 +48,14 @@ class sec_e3;
 class SHEAF_DLL_SPEC sec_t3_e3 : public sec_t3
 {
 
-  //============================================================================
-  /// @name T3_E3 FACET OF CLASS SEC_T3_E3
-  //============================================================================
+  // ===========================================================
+  /// @name HOST FACTORY FACET OF CLASS SEC_T3_E3
+  // ===========================================================
   //@{
 
 public:
+
+  // Typedefs:
 
   ///
   /// The fiber type.
@@ -64,6 +66,44 @@ public:
   /// Type of underlying vector space.
   ///
   typedef sec_e3 vector_space_type;
+
+  ///
+  /// Creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
+  /// and vector section space specified by xvector_space_path.
+  ///
+  static host_type& new_host(namespace_type& xns, 
+                             const poset_path& xhost_path, 
+                             const poset_path& xschema_path,
+                             const poset_path& xvector_space_path,
+                             bool xauto_access);
+
+  ///
+  /// The standard host for sections of this type with base space xbase_path,
+  /// representation xrep_path, section suffix xsection_suffix,
+  /// and fiber suffix xfiber_suffix. Creates the host and its prerequisites
+  /// if necessary.
+  ///
+  static host_type& standard_host(namespace_type& xns, 
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xsection_suffix, 
+                                  const string& xfiber_suffix, 
+                                  bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+
+
+  //============================================================================
+  /// @name T3_E3 FACET OF CLASS SEC_T3_E3
+  //============================================================================
+  //@{
+
+public:
 
   ///
   /// Default constructor; creates an unattached handle.

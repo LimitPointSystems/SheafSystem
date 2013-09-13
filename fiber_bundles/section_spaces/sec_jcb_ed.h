@@ -45,9 +45,9 @@ namespace fiber_bundle
 ///
 class SHEAF_DLL_SPEC sec_jcb_ed : public sec_jcb
 {
-  //============================================================================
-  /// @name JCB_ED FACET OF CLASS SEC_JCB_ED
-  //============================================================================
+  // ===========================================================
+  /// @name HOST FACTORY FACET OF CLASS SEC_JCB_ED
+  // ===========================================================
   //@{
 
 public:
@@ -56,6 +56,33 @@ public:
   /// The fiber type.
   ///
   typedef jcb_ed fiber_type;
+
+
+  ///
+  /// Creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
+  /// and table attribute domain_path and range_path specified by xdomain_path and xrange_path, respectively..
+  ///
+  static host_type& new_host(namespace_type& xns, 
+                             const poset_path& xhost_path, 
+                             const poset_path& xschema_path,
+                             const poset_path& xdomain_space_path,
+                             const poset_path& xrange_space_path,
+                             bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+ 
+
+  //============================================================================
+  /// @name JCB_ED FACET OF CLASS SEC_JCB_ED
+  //============================================================================
+  //@{
+
+public:
 
   ///
   /// Default constructor.

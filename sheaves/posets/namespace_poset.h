@@ -64,6 +64,7 @@ class namespace_poset_member;
 class poset_path;
 class poset;
 class sheaf_file;
+class storage_agent;  
 
 ///
 /// The default name space; a poset which contains other posets as members.
@@ -72,6 +73,7 @@ class SHEAF_DLL_SPEC namespace_poset : public poset_state_handle
 {
 
   friend class poset_state_handle;
+  friend class storage_agent;
 
   // ===========================================================
   /// @name NAMESPACE_POSET FACET
@@ -84,6 +86,11 @@ public:
   /// The current working namespace.
   ///
   static namespace_poset* current_namespace();
+
+  ///
+  /// The schema path used for constructing schema posets.
+  ///
+  static poset_path primitives_schema_path();
 
   ///
   /// Destructor
@@ -192,31 +199,25 @@ protected:
   namespace_poset(namespace_poset_member* xtop, namespace_poset_member* xbottom);
 
   ///
-  /// Copy constructor; attaches this to the same state as xother
+  /// Copy constructor; disabled
   ///
-  namespace_poset(const namespace_poset& xother);
+  namespace_poset(const namespace_poset& xother) { };
 
   ///
-  /// Assignment operator; attaches this to the same state as xother
+  /// Assignment operator; disabled
   ///
-  namespace_poset& operator=(const namespace_poset& xother);
+  namespace_poset& operator=(const namespace_poset& xother) 
+  {
+    return const_cast<namespace_poset&>(*this);
+  };
 
   ///
-  /// Assignment operator; attaches this to the same state as xother
+  /// Assignment operator; disabled
   ///
-  namespace_poset& operator=(const poset_state_handle& xother);
-
-  ///
-  /// Creates a new handle attached to the namespace with index xindex
-  /// in namespace xhost
-  ///
-  namespace_poset(const namespace_poset* xhost, pod_index_type xindex);
-
-  ///
-  /// Creates a new handle attached to the namespace with index xindex
-  /// in namespace xhost
-  ///
-  namespace_poset(const namespace_poset* xhost, const scoped_index& xindex);
+  namespace_poset& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<namespace_poset&>(*this);
+  };
 
   ///
   /// Sets the current working namespace to xns.
@@ -239,6 +240,14 @@ protected:
   scoped_index insert_poset(const poset_state_handle& xposet,
 			    const string& xposet_name,
 			    bool xauto_link);
+
+  ///
+  /// Inserts xposet into this namespace with member name xposet_name.
+  ///
+  scoped_index insert_poset(const poset_state_handle& xposet,
+			    const string& xposet_name,
+			    bool xauto_link,
+                            bool xauto_access);
 
   ///
   /// Links xmbr into the appropriate group.
@@ -283,23 +292,6 @@ private:
 public:
 
   ///
-  /// Creates a new poset with name xname, schema specified by xschema_path,  
-  /// and table dofs initialzied by xargs.
-  ///
-  template <typename T>
-  SHEAF_DLL_SPEC
-  T& new_member_poset(const string& xname,
-		      const poset_path& xschema_path,
-		      const arg_list& xargs,
-		      bool xauto_access);
-
-  ///
-  /// Creates a new schema poset with name xname.
-  ///
-  
-  poset& new_schema_poset(const string& xname, bool xauto_access);
-
-  ///
   /// Delete the poset with hub id xhub_id.
   ///
   void delete_poset(pod_index_type xhub_id, bool xauto_access);
@@ -325,21 +317,18 @@ public:
   void delete_poset(namespace_poset_member& xmbr);
 
   ///
-  /// The poset_state_handle object referred to by
-  /// the member with hub id xhub_id.
+  /// The poset_state_handle object referred to by  hub id xhub_id.
   ///
   poset_state_handle& member_poset(pod_index_type xhub_id, bool xauto_access = true) const;
 
   ///
-  /// The poset_state_handle object referred to by
-  /// the member with id xid.
+  /// The poset_state_handle object referred to by id xid.
   ///
   poset_state_handle& member_poset(const scoped_index& xid, bool xauto_access = true) const;
 
   ///
   /// The poset_state_handle object referred to by
-  /// the member with hub id xhub_id
-  /// dynamically cast to type P*.
+  /// hub id xhub_id, dynamically cast to type P*.
   ///
   template <typename P>
   SHEAF_DLL_SPEC
@@ -347,8 +336,7 @@ public:
 
   ///
   /// The poset_state_handle object referred to by
-  /// the member with id xid
-  /// dynamically cast to type P*.
+  /// id xid, dynamically cast to type P*.
   ///
   template <typename P>
   SHEAF_DLL_SPEC
@@ -356,14 +344,13 @@ public:
 
   ///
   /// The poset_state_handle object referred to by
-  /// the member with name xpath.poset_name().
+  /// name xpath.poset_name().
   ///
   poset_state_handle& member_poset(const poset_path& xpath, bool xauto_access = true) const;
 
   ///
   /// The poset_state_handle object referred to by
-  /// the member with name xpath.poset_name(), 
-  /// dynamically cast to type P*.
+  /// name xpath.poset_name(), dynamically cast to type P*.
   ///
   template <typename P>
   SHEAF_DLL_SPEC
@@ -427,6 +414,12 @@ public:
   template <typename P>
   SHEAF_DLL_SPEC
   bool contains_poset(const poset_path& xpath, bool xauto_access = true) const;
+
+  ///
+  /// True if and only if this contains the poset xposet.
+  /// synonym for contains_poset(xposet.poset_path(true), xauto_access)
+  ///
+  bool owns(const poset_state_handle& xposet, bool xauto_access) const;
 
   ///
   /// True if the poset referred to by xpath is read accessible.
@@ -513,6 +506,13 @@ public:
 
   ///
   /// True if the state referred to xpath does not exist 
+  /// or exists and conforms to poset type P.
+  ///
+  template <typename P>
+  bool path_is_available(const poset_path& xpath, bool xauto_access) const;
+
+  ///
+  /// True if the state referred to xpath does not exist 
   /// or exists and is auto read accessible.
   ///
   bool path_is_auto_read_available(const poset_path& xpath, bool xauto_access) const;
@@ -536,62 +536,6 @@ public:
   ///
   template <typename P>
   bool path_is_auto_read_write_available(const poset_path& xpath, bool xauto_access) const;
-
-  ///
-  /// True if the argument with name xname in xargs exists, contains a non-empty
-  /// path and the state it refers to exists and is auto read accessible.
-  ///
-  bool arg_is_auto_read_accessible(const string& xname, const arg_list& xargs, bool xauto_access) const;
-
-  ///
-  /// True if the argument with name xname in xargs exists, contains a non-empty
-  /// path and the state it refers to exists, conforms to poset type P
-  /// and is auto read accessible.
-  ///
-  template <typename P>
-  bool arg_is_auto_read_accessible(const string& xname, const arg_list& xargs, bool xauto_access) const;
-
-  ///
-  /// True if the argument with name xname in xargs exists, contains a non-empty
-  /// path and the state it refers to exists and is auto read-write accessible.
-  ///
-  bool arg_is_auto_read_write_accessible(const string& xname, const arg_list& xargs, bool xauto_access) const;
-
-  ///
-  /// True if the argument with name xname in xargs exists, contains a non-empty
-  /// path and the state it refers to exists, conforms to poset type P
-  /// and is auto read-write accessible.
-  ///
-  template <typename P>
-  bool arg_is_auto_read_write_accessible(const string& xname, const arg_list& xargs, bool xauto_access) const;
-
-  ///
-  /// True if the argument with name xname in xargs exists, contains a non-empty
-  /// path and the state it refers to exists and is auto read available.
-  ///
-  bool arg_is_auto_read_available(const string& xname, const arg_list& xargs, bool xauto_access) const;
-
-  ///
-  /// True if the argument with name xname in xargs exists, contains a non-empty
-  /// path and the state it refers to exists, conforms to poset type P
-  /// and is auto read available.
-  ///
-  template <typename P>
-  bool arg_is_auto_read_available(const string& xname, const arg_list& xargs, bool xauto_access) const;
-
-  ///
-  /// True if the argument with name xname in xargs exists, contains a non-empty
-  /// path and the state it refers to exists and is auto read available.
-  ///
-  bool arg_is_auto_read_write_available(const string& xname, const arg_list& xargs, bool xauto_access) const;
-
-  ///
-  /// True if the argument with name xname in xargs exists, contains a non-empty
-  /// path and the state it refers to exists, conforms to poset type P
-  /// and is auto read available.
-  ///
-  template <typename P>
-  bool arg_is_auto_read_write_available(const string& xname, const arg_list& xargs, bool xauto_access) const;
 
 protected:
 
@@ -696,11 +640,11 @@ public:
 
 protected:
 
+  using poset_state_handle::initialize_namespace;
+
   ///
   /// Installs this as a member of xns.
-  ///
-  using poset_state_handle::initialize_namespace;
-    
+  ///    
   virtual void initialize_namespace(namespace_poset& xns, bool xauto_link = true);
 
 private:
@@ -831,9 +775,15 @@ public:
   ///
   /// The id of the xi-th prerequisite poset for this.
   ///
-  virtual pod_index_type prereq_id(int xi) const;
+  virtual pod_index_type prereq_id(int xi) const;  
 
 protected:
+
+  ///
+  /// Sets name() to xname.
+  /// Intended for use only by storage_agent::begin_read_transaction(namespace_poset&).
+  ///
+  void put_name(const string& xname);
 
 private:
 

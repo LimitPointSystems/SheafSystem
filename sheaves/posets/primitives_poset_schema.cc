@@ -20,6 +20,7 @@
 
 #include "primitives_poset_schema.h"
 
+#include "arg_list.h"
 #include "assert_contract.h"
 #include "array_index_space_state.h"
 #include "array_poset_dof_map.h"
@@ -532,7 +533,8 @@ new_state()
   // Create the poset state object without a schema because we don't have one yet.
   // Initial space for 4 members, 8 links, 4 subposets
 
-  _state = new poset_state(0, PRIMITIVES_POSET_SCHEMA_ID, 8, 16, 32);
+  //  _state = new poset_state(0, PRIMITIVES_POSET_SCHEMA_ID, 8, 16, 32);
+  _state = new poset_state(0, PRIMITIVES_POSET_SCHEMA_ID, standard_name());
 
   // Get write access.
 

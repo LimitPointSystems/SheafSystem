@@ -248,11 +248,8 @@ transfer_internal_buffer_to_poset()
     }
 
     // Create the state.
-    // $$SCRIBBLE: above conversion from record->internal ids
-    // should be eliminated and new_state should take arg_list instead of dof tuple.
-    // See other usage of new_state in namespace_poset::new_member_poset.
 
-    lposet.new_state(scaffold().internal_schema(), *ldof_tuple);
+    lposet.new_state(lposet.name(), scaffold().internal_schema(), *ldof_tuple);
 
     // We previously got read access to the schema and other prerequisites in
     // storage_agent::read_prerequisites in order to build the poset.
@@ -263,8 +260,9 @@ transfer_internal_buffer_to_poset()
     // Get read write access.
 
     lposet.get_read_write_access();
-
+    
   }
+  
 
   // Poset is guaranteed to have a state now.
 

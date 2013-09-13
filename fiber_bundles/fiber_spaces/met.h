@@ -208,6 +208,46 @@ private:
 class SHEAF_DLL_SPEC met : public st2
 {
 
+  // ===========================================================
+  /// @name HOST FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// The type of host poset.
+  ///
+  typedef stp_space host_type;
+
+  ///
+  /// The path to the standard schema for this class.
+  ///
+  static const poset_path& standard_schema_path();
+
+  ///
+  /// Creates the standard schema for this class in namespace xns.
+  ///
+  static void make_standard_schema(namespace_poset& xns);
+
+  ///
+  /// Creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
+  /// and table attribute vector_space_path specified by xvector_space_path.
+  ///
+  static host_type& new_host(namespace_type& xns, 
+			     const poset_path& xhost_path, 
+			     const poset_path& xschema_path,
+			     const poset_path& xvector_space_path,
+			     bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+
+
   //============================================================================
   /// @name MET FACET OF CLASS MET
   //============================================================================
@@ -340,17 +380,8 @@ private:
 
 public:
 
-  ///
-  /// The path to the standard schema for this class.
-  ///
-  static const poset_path& standard_schema_path();
-
-  ///
-  /// Creates the standard schema for this class in namespace xns.
-  ///
-  static void make_standard_schema(namespace_poset& xns);
-
 protected:
+
 private:
 
   //@}

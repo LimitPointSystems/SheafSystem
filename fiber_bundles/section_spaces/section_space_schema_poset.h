@@ -69,7 +69,7 @@ namespace fiber_bundle
 
 using namespace sheaf;
 
-
+class fiber_bundles_namespace;
 class section_space_schema_member;
 
 ///
@@ -88,6 +88,13 @@ class SHEAF_DLL_SPEC section_space_schema_poset : public poset_state_handle
 
 public:
 
+  // Typedefs:
+
+  ///
+  /// The type of namespace for this type of member.
+  ///
+  typedef fiber_bundles_namespace namespace_type;
+
   ///
   /// The type of member associated with this space.
   ///
@@ -99,19 +106,14 @@ public:
   typedef section_space_schema_table_dofs_type table_dofs_type;
 
   ///
-  /// The name of the standard schema poset for this class.
-  ///
-  static const string& standard_schema_poset_name();
-
-  ///
   /// The path to the standard schema for this class.
   ///
   static const poset_path& standard_schema_path();
 
   ///
-  /// Creates the standard schema for this class in namespace xns.
+  /// The path to the representation for section spaces on this schema..
   ///
-  static void make_standard_schema(namespace_poset& xns);
+  poset_path rep_path(bool xauto_access) const;
 
   ///
   /// The representation for section spaces on this schema.
@@ -129,14 +131,6 @@ public:
   /// subposet has a non-empty id space.
   ///
   static bool rep_is_valid(const sec_rep_descriptor& xrep, const poset_state_handle& xbase_space);
-
-  ///
-  /// True if and only if the section representation specified in xargs 
-  /// is valid in the base space specified in xargs; that is, if the 
-  /// discretization and evaluation subposets named in xrep are included
-  ///  in xbase_space and the discretization subposet has a non-empty id space.
-  ///
-  bool rep_is_valid(const namespace_poset& xns, const arg_list& xaregs, bool xauto_access) const;
 
   ///
   /// The upper bound of the member id of the base space
@@ -165,6 +159,11 @@ public:
   /// The dimension of the base space.
   ///
   int db() const;
+
+  ///
+  /// The path to the base space for section spaces on this schema.
+  ///
+  poset_path base_space_path(bool xauto_access) const;
 
   ///
   /// The base space for section spaces on this schema.
@@ -213,6 +212,11 @@ public:
   /// The fiber schema for section spaces on this schema (const version).
   ///
   const poset_state_handle& fiber_schema() const;
+
+  ///
+  /// The path to the fiber space for section spaces on this schema.
+  ///
+  poset_path fiber_space_path(bool xauto_access) const;
 
   ///
   /// The fiber space for section spaces on this schema.
@@ -337,6 +341,11 @@ protected:
   /// The Cartisian product subspace structure.
   ///
   ij_product_structure* _product;
+
+  ///
+  /// Default constructor; disabled.
+  ///
+  section_space_schema_poset() { };
 
   ///
   /// Destructor
@@ -553,12 +562,12 @@ public:
   ///
   virtual bool is_atom(pod_index_type xmbr_hub_id) const;
 
-  using poset_state_handle::member_name;
+//   using poset_state_handle::member_name;
 
-  ///
-  /// The name of the member with hub id xmbr_hub_id
-  ///
-  virtual string member_name(pod_index_type xmbr_hub_id, bool xauto_access = false) const;
+//   ///
+//   /// The name of the member with hub id xmbr_hub_id
+//   ///
+//   virtual string member_name(pod_index_type xmbr_hub_id, bool xauto_access = false) const;
 
 protected:
 
@@ -637,7 +646,7 @@ private:
   //@}
 
   // ===========================================================
-  /// @name POWERSET FACET
+  /// @name SUBPOSET FACET
   // ===========================================================
   //@{
 
@@ -767,9 +776,12 @@ protected:
   virtual section_space_schema_poset* clone() const = 0;
 
   ///
-  /// Assignment operator; attaches this to the same state as xother
+  /// Assignment operator; disabled.
   ///
-  section_space_schema_poset& operator=(const poset_state_handle& xother);
+  section_space_schema_poset& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<section_space_schema_poset&>(*this);
+  };
 
 private:
 

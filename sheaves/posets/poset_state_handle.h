@@ -29,10 +29,6 @@
 #include "abstract_poset_member.h"
 #endif
 
-#ifndef ARG_LIST_H
-#include "arg_list.h"
-#endif
-
 #ifndef POOL_H
 #include "pool.h"
 #endif
@@ -106,7 +102,6 @@
 namespace sheaf
 {
 
-class arg_list;
 template <typename T> class block;
 template <typename T> class depth_first_itr;
 class namespace_poset;
@@ -145,7 +140,7 @@ class SHEAF_DLL_SPEC poset_state_handle : public read_write_monitor_handle
   friend class poset_component; // needs version_to_name(), state_obj()
   friend class poset_handle_factory; // needs destructor.
   friend class poset_joiner; // needs cross_link()
-  friend class poset_scaffold; // needs table()
+  friend class poset_scaffold; // needs member_name_map(), table()
   friend class poset_slicer; // needs contains_members(list_cover_set*)
   friend class primitives_poset_dof_map; // needs state_obj()
   friend class schema_poset_member;
@@ -153,8 +148,8 @@ class SHEAF_DLL_SPEC poset_state_handle : public read_write_monitor_handle
   friend class subposet_joiner; // needs cross_link()
   friend class subposet_names_record; // needs version_to_name()
   friend class table_dof_tuple_record; // needs new_state()
-  friend SHEAF_DLL_SPEC ostream & operator << (ostream &os, const poset_state_handle& p); // needs state_obj()
-  friend SHEAF_DLL_SPEC size_t deep_size(const poset_state_handle& xp, bool xinclude_shallow, size_t xresults[4]);
+  friend SHEAF_DLL_SPEC ostream & sheaf::operator << (ostream &os, const poset_state_handle& p); // needs state_obj()
+  friend SHEAF_DLL_SPEC size_t sheaf::deep_size(const poset_state_handle& xp, bool xinclude_shallow, size_t xresults[4]);
 
 
   // ===========================================================
@@ -164,10 +159,7 @@ class SHEAF_DLL_SPEC poset_state_handle : public read_write_monitor_handle
 
 public:
 
-  ///
-  /// Default name for posets and subposets, currently the empty string
-  ///
-  static const string default_name;
+protected:
 
   ///
   /// Creates an unattached handle of type xclass_name, if a prototype
@@ -176,10 +168,7 @@ public:
   /// @todo Move this functionality to namespace_poset.
   ///
   static poset_state_handle*
-  new_poset_handle(const string& xclass_name,
-                   poset_type xsheaf_base_class_id);
-
-protected:
+  new_poset_handle(const string& xclass_name, poset_type xsheaf_base_class_id);
 
   ///
   /// The poset handle factory.
@@ -202,37 +191,17 @@ protected:
   poset_state_handle(abstract_poset_member* xtop, abstract_poset_member* xbottom);
 
   ///
-  /// Copy constructor; attaches this to the same state as xother
+  /// Copy constructor; disabled
   ///
-  poset_state_handle(const poset_state_handle& xother);
-
-  /// @error shouldn't operator= be virtual so that it's result
-  /// can be down-cast to the actual type?
+  poset_state_handle(const poset_state_handle& xother) { };
 
   ///
-  /// Assignment operator; attaches this to the same state as xother
+  /// Assignment operator; disabled.
   ///
-  poset_state_handle& operator=(const poset_state_handle& xother);
-
-private:
-
-  //@}
-
-
-  // ===========================================================
-  /// @name NEW CONSTRUCTOR FACET
-  // ===========================================================
-  //@{
-
-public:
-
-  ///
-  /// Makes a constructor arg_list for an instance with uninitialized 
-  /// table dofs. Intended for use with namespace_poset::new_poset.
-  ///
-  static arg_list make_args();
-
-protected:
+  poset_state_handle& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<poset_state_handle&>(*this);
+  };
 
 private:
 
@@ -378,11 +347,17 @@ protected:
 //   void delete_state(bool xauto_access);
 
   ///
-  /// Attaches this external poset to a new poset state with schema
-  /// given by xschema and table dofs xdof_map.
-  /// Intended for use by i/o subsystem.
+  /// Creates a new poset state with schema xschema and table dof map xdof_map,
+  /// attaches this to the state and creates and initializes the associated
+  /// namespace member. Intended for use by new_table factory methods.
   ///
-  virtual void new_state(const schema_poset_member& xschema, array_poset_dof_map& xdof_map);
+  void new_state(namespace_poset& xns, const poset_path& xpath, const schema_poset_member& xschema, array_poset_dof_map& xdof_map);
+
+  ///
+  /// Creates a new poset state with path xpath, schema xschema and table dof map xdof_map,
+  /// attaches this to the state.
+  ///
+  virtual void new_state(const poset_path& xpath, const schema_poset_member& xschema, array_poset_dof_map& xdof_map);
 
   ///
   /// Initializes the handle data members that depend on the
@@ -485,303 +460,23 @@ private:
 
 
   // ===========================================================
-  /// @name SCHEMA FACET
+  /// @name POSET ALGEBRA FACET
   // ===========================================================
   //@{
 
 public:
 
-  ///
-  /// The type of schema member for this class.
-  ///
-  typedef schema_poset_member schema_type;
+  //   poset_state_handle* hplus(poset_state_handle* other);
+  //   void hplus_pa(poset_state_handle* other, poset_state_handle* result);
+  //   void hplus_sa(poset_state_handle* other);
+  //   // horizontal sum of this and other (this hplus other), auto- and pre-, and self-allocated versions
 
-  ///
-  /// The schema for this poset (mutable version).
-  ///
-  virtual schema_poset_member& schema();
-
-  ///
-  /// The schema for this poset (const version).
-  ///
-  virtual const schema_poset_member& schema() const;
-
-  ///
-  /// The schema for this poset, auto_accessible (mutable version).
-  ///
-  schema_poset_member& schema(bool xauto_access);
-
-  ///
-  /// The schema for this poset, auto_accessible (const version).
-  ///
-  const schema_poset_member& schema(bool xauto_access) const;
-
-  ///
-  /// True if xother_schema conforms to the type of schema required by this.
-  ///
-  virtual bool schema_is_ancestor_of(const schema_poset_member* xother_schema) const;
-
-  ///
-  /// True if the schema of this has name xname
-  ///
-  bool schema_is(const string& xschema_name) const;
-
-  ///
-  /// True if other has the same schema as this.
-  ///
-  bool same_schema(const poset_state_handle* xother) const;
-
-  ///
-  /// True if other has the same schema as this.
-  ///
-  bool same_schema(const abstract_poset_member* xother) const;
-
-  ///
-  /// True if xdof_map conforms to (is derived from) the type of
-  /// table dof map required by this poset state and handle.
-  ///
-  virtual bool table_dof_map_conforms(const poset_dof_map* xdof_map) const;
-
-  ///
-  /// True if xdof_map conforms to (is derived from) the type of
-  /// row dof map required by this poset state and handle.
-  ///
-  virtual bool row_dof_map_conforms(const poset_dof_map* xdof_map) const;
-
-  ///
-  /// The map from table dof client_ids to table dof values for this poset (mutable version)
-  ///
-  virtual array_poset_dof_map& table_dof_map(bool xrequire_write_access = false);
-
-  ///
-  /// The map from table dof client_ids to table dof values for this poset (const version)
-  ///
-  virtual const array_poset_dof_map& table_dof_map(bool xrequire_write_access = false) const;
-
-  ///
-  /// OBSOLETE: use table_dofs().
-  /// Copies the entire table dof tuple from internal storage to xbuf
-  ///
-  void table_dof_tuple(void* xbuf, size_t xbuflen) const;
-
-  ///
-  /// The table dofs for this instance (mutable version).
-  ///
-  void* table_dofs();
-
-  ///
-  /// The table dofs for this instance (const version).
-  ///
-  const void* table_dofs() const;
-
-  ///
-  /// The table dofs for this instance (mutable auto-access version).
-  ///
-  void* table_dofs(bool xauto_access);
-
-  ///
-  /// The table dofs for this instance (const auto-access version).
-  ///
-  const void* table_dofs(bool xauto_access) const;
-
-  ///
-  /// The map from row dof client_ids to row dof values
-  /// for dof tuple hub id xtuple_hub_id.
-  ///
-  virtual poset_dof_map& row_dof_map(pod_index_type xtuple_hub_id,
-				     bool xrequire_write_access = false) const;
-
-  ///
-  /// The map from row dof client_ids to row dof values
-  /// for dof tuple id xtuple_id.
-  ///
-  poset_dof_map& row_dof_map(const scoped_index& xtuple_id,
-			     bool xrequire_write_access = false) const;
-
-  ///
-  /// Creates a new row dof map.
-  ///
-  virtual const scoped_index& new_row_dof_map();
-
-  ///
-  /// Creates a new row dof map which is a clone of xprototype.
-  ///
-  virtual const scoped_index& clone_row_dof_map(const poset_dof_map& xprototype);
-
-  ///
-  /// The dof map associated with the member identified by
-  /// hub id xmbr_hub_id (mutable version).
-  ///
-  poset_dof_map& member_dof_map(pod_index_type xmbr_hub_id,
-                                bool xrequire_write_access = false);
-
-  ///
-  /// The dof map associated with the member identified by xmbr_index (mutable version).
-  ///
-  poset_dof_map& member_dof_map(const scoped_index& xmbr_id,
-                                bool xrequire_write_access = false);
-
-  ///
-  /// The dof map associated with the member identified by
-  /// hub id xmbr_hub_id (const version).
-  ///
-  const poset_dof_map& member_dof_map(pod_index_type xmbr_hub_id,
-				      bool xrequire_write_access = false) const;
-
-  ///
-  /// The dof map associated with the member identified by xmbr_index (const version).
-  ///
-  const poset_dof_map& member_dof_map(const scoped_index& xmbr_id,
-				      bool xrequire_write_access = false) const;
-
-  ///
-  /// The dof tuple hub id of the member with hub id xmbr_hub_id
-  ///
-  pod_index_type member_dof_tuple_id(pod_index_type xmbr_hub_id, bool xauto_access) const;
-
-  ///
-  /// The dof tuple index of the member with id xmbr_id
-  ///
-  void member_dof_tuple_id(const scoped_index& xmbr_id, scoped_index& result, bool xauto_access) const;
-
-  ///
-  /// Sets the dof tuple hub id of the member
-  /// with hub id xmbr_hub_id to xtuple_hub_id
-  ///
-  void put_member_dof_tuple_id(pod_index_type xmbr_hub_id,
-			       pod_index_type xtuple_hub_id,
-			       bool xauto_access);
-
-  ///
-  /// Sets the dof tuple id of the member
-  /// with id xmbr_id to xtuple_id
-  ///
-  void put_member_dof_tuple_id(const scoped_index& xmbr_id,
-			       const scoped_index& xtuple_id,
-			       bool xauto_access);
-
-  ///
-  /// True if this contains a tuple with hub id xtuple_hub_id.
-  ///
-  bool contains_row_dof_tuple(pod_index_type xtuple_hub_id) const;
-
-  ///
-  /// True if this contains a tuple with id xtuple_id.
-  ///
-  bool contains_row_dof_tuple(const scoped_index& xtuple_id) const;
-
-  ///
-  /// The number of row_dof_tuples of this poset
-  ///
-  size_type row_dof_tuple_ct() const;
-
-  ///
-  /// The number of standard row_dof_tuples automatically
-  /// allocated by the constructor.
-  ///
-  int standard_row_dof_tuple_ct() const;
-
-  ///
-  /// True if poset is in its initial state,
-  /// that is, it contains just the standard row_dof_tuples.
-  ///
-  bool has_standard_row_dof_tuple_ct() const;
+  //   poset_state_handle* vplus(poset_state_handle* other);
+  //   void vplus_pa(poset_state_handle* other, poset_state_handle* result);
+  //   void vplus_sa(poset_state_handle* other);
+  //   // vertical sum of this and other (this vplus other), auto- and pre-, and self-allocated versions
 
 protected:
-
-  ///
-  /// The table of dof tuples of this poset.
-  ///
-  poset_table_state& table() const;
-
-  ///
-  /// Initializes the table dofs ("class variables")
-  ///
-  void initialize_table_dofs(void* xtable_dofs, size_t xtable_dof_ub);
-
-  ///
-  /// Installs xdof_tuple as the table dof tuple.
-  ///
-  void initialize_table_dof_tuple(array_poset_dof_map* xdof_tuple);
-
-  ///
-  /// True if 0 <= xmbr_id < state_obj()->member_index_ub().
-  ///
-  bool index_in_bounds(const scoped_index& xmbr_id) const;
-
-private:
-
-  //@}
-
-
-  // ===========================================================
-  /// @name DOF TUPLE ID SPACE FAMILY FACET
-  // ===========================================================
-  //@{
-
-public:
-
-  ///
-  /// Collection of dof tuple id spaces for this (const version).
-  ///
-  const index_space_family& dof_tuple_id_spaces(bool xauto_access) const;
-
-  ///
-  /// Collection of dof tuple id spaces for this (mutable version).
-  ///
-  index_space_family& dof_tuple_id_spaces(bool xauto_access);
-
-  ///
-  /// The dof tuple hub id space.
-  ///
-  const hub_index_space_handle& dof_tuple_hub_id_space(bool xauto_access) const;  
-
-  ///
-  /// An id in the dof tuple hub id space;
-  /// intended for copying to initialize ids
-  /// to the dof tuple id space.
-  ///
-  virtual const scoped_index& dof_tuple_id(bool xauto_access) const;
-
-  ///
-  /// An id in the dof tuple hub id space with pod xid.
-  ///
-  scoped_index dof_tuple_id(pod_index_type xid, bool xauto_access) const;
-
-protected:
-
-private:
-
-  //@}
-
-
-  // ===========================================================
-  /// @name SCHEMATIZATION FACET
-  // ===========================================================
-  //@{
-
-public:
-
-  ///
-  /// True if this poset has been prepared for use as a schema,
-  /// that is, if the top member has been schematized.
-  ///
-  virtual bool is_schematized(bool xauto_access) const;
-
-  ///
-  /// Prepare this poset and its top member for use as a schema.
-  /// If xall_members = true, schematize all other members as well.
-  ///
-  virtual void schematize(subposet* xtable_dof_subposet,
-                          subposet* xrow_dof_subposet,
-                          bool xall_members = false);
-
-protected:
-
-  ///
-  /// Initialize the id space for the dof subposet, xdof_subposet.
-  ///
-  void initialize_dof_id_space(subposet& xdof_subposet);
 
 private:
 
@@ -1175,6 +870,11 @@ protected:
   };
 
   ///
+  /// True if 0 <= xmbr_id < state_obj()->member_index_ub().
+  ///
+  bool index_in_bounds(const scoped_index& xmbr_id) const;
+
+  ///
   /// True if for all i: 0 <= indices[i] < state_obj()->member_index_ub().
   ///
   bool index_in_bounds(const block<scoped_index>& indices) const;
@@ -1235,6 +935,72 @@ protected:
   virtual void new_member_interval(pod_index_type xmbr_hub_id,
 				   const string& xinterval_type, 
 				   size_type xsize);
+
+private:
+
+  //@}
+
+
+
+  // ===========================================================
+  /// @name MEMBER ID SPACE FAMILY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Collection of member id spaces for this (const version).
+  ///
+  const index_space_family& member_id_spaces(bool xauto_access) const;
+
+  ///
+  /// Collection of member id spaces for this (mutable version).
+  ///
+  index_space_family& member_id_spaces(bool xauto_access);
+
+  ///
+  /// The member hub id space.
+  ///
+  const hub_index_space_handle& member_hub_id_space(bool xauto_access) const;  
+
+  ///
+  /// An id in the member hub id space;
+  /// intended for copying to initialize ids
+  /// to the member id space.
+  ///
+  virtual const scoped_index& member_id(bool xauto_access) const;
+
+  ///
+  /// An id in the member hub id space with pod xid.
+  ///
+  scoped_index member_id(pod_index_type xid, bool xauto_access) const;
+
+protected:
+
+  ///
+  /// Update the initially allocated id spaces
+  ///
+  void update_standard_member_id_spaces();
+
+  ///
+  /// Deletes all non-standard id spaces.
+  ///
+  void clear_member_id_spaces(bool xauto_access);
+
+  ///
+  /// Creates a new term in the member hub id space with xct number of ids.
+  /// Returns the index of the id space state created.
+  ///
+  pod_index_type new_term(size_type xct, bool xauto_access);
+
+  ///
+  /// Extends the last term of the member hub id space to ct == xct.
+  /// @hack A temporary method to support extension
+  /// of section space schema when the underlying base
+  /// space is extended.
+  ///
+  void extend_last_member_term(size_type xct, bool xauto_access);
 
 private:
 
@@ -1722,73 +1488,9 @@ private:
   //@}
 
 
-  // ===========================================================
-  /// @name MEMBER ID SPACE FAMILY FACET
-  // ===========================================================
-  //@{
-
-public:
-
-  ///
-  /// Collection of member id spaces for this (const version).
-  ///
-  const index_space_family& member_id_spaces(bool xauto_access) const;
-
-  ///
-  /// Collection of member id spaces for this (mutable version).
-  ///
-  index_space_family& member_id_spaces(bool xauto_access);
-
-  ///
-  /// The member hub id space.
-  ///
-  const hub_index_space_handle& member_hub_id_space(bool xauto_access) const;  
-
-  ///
-  /// An id in the member hub id space;
-  /// intended for copying to initialize ids
-  /// to the member id space.
-  ///
-  virtual const scoped_index& member_id(bool xauto_access) const;
-
-  ///
-  /// An id in the member hub id space with pod xid.
-  ///
-  scoped_index member_id(pod_index_type xid, bool xauto_access) const;
-
-protected:
-
-  ///
-  /// Update the initially allocated id spaces
-  ///
-  void update_standard_member_id_spaces();
-
-  ///
-  /// Deletes all non-standard id spaces.
-  ///
-  void clear_member_id_spaces(bool xauto_access);
-
-  ///
-  /// Creates a new term in the member hub id space with xct number of ids.
-  /// Returns the index of the id space state created.
-  ///
-  pod_index_type new_term(size_type xct, bool xauto_access);
-
-  ///
-  /// Extends the last term of the member hub id space to ct == xct.
-  /// @hack A temporary method to support extension
-  /// of section space schema when the underlying base
-  /// space is extended.
-  ///
-  void extend_last_member_term(size_type xct, bool xauto_access);
-
-private:
-
-  //@}
-
 
   // ===========================================================
-  /// @name POWERSET FACET
+  /// @name SUBPOSET FACET
   // ===========================================================
   //@{
 
@@ -2017,6 +1719,11 @@ public:
   ///
   const subposet& row_dof_subposet() const;
 
+  ///
+  /// The name of the coarsest common refinement subposet.
+  ///
+  static const string& coarsest_common_refinement_name();
+
 protected:
 
   ///
@@ -2095,24 +1802,410 @@ private:
   //@}
 
 
+
   // ===========================================================
-  /// @name POSET ALGEBRA FACET
+  /// @name SCHEMA FACET
   // ===========================================================
   //@{
 
 public:
 
-  //   poset_state_handle* hplus(poset_state_handle* other);
-  //   void hplus_pa(poset_state_handle* other, poset_state_handle* result);
-  //   void hplus_sa(poset_state_handle* other);
-  //   // horizontal sum of this and other (this hplus other), auto- and pre-, and self-allocated versions
+  ///
+  /// The type of schema member for this class.
+  ///
+  typedef schema_poset_member schema_type;
 
-  //   poset_state_handle* vplus(poset_state_handle* other);
-  //   void vplus_pa(poset_state_handle* other, poset_state_handle* result);
-  //   void vplus_sa(poset_state_handle* other);
-  //   // vertical sum of this and other (this vplus other), auto- and pre-, and self-allocated versions
+  ///
+  /// The schema for this poset (mutable version).
+  ///
+  virtual schema_poset_member& schema();
+
+  ///
+  /// The schema for this poset (const version).
+  ///
+  virtual const schema_poset_member& schema() const;
+
+  ///
+  /// The schema for this poset, auto_accessible (mutable version).
+  ///
+  schema_poset_member& schema(bool xauto_access);
+
+  ///
+  /// The schema for this poset, auto_accessible (const version).
+  ///
+  const schema_poset_member& schema(bool xauto_access) const;
+
+  ///
+  /// True if xother_schema conforms to the type of schema required by this.
+  ///
+  virtual bool schema_is_ancestor_of(const schema_poset_member* xother_schema) const;
+
+  ///
+  /// True if the schema of this has name xname
+  ///
+  bool schema_is(const string& xschema_name) const;
+
+  ///
+  /// True if other has the same schema as this.
+  ///
+  bool same_schema(const poset_state_handle* xother) const;
+
+  ///
+  /// True if other has the same schema as this.
+  ///
+  bool same_schema(const abstract_poset_member* xother) const;
 
 protected:
+
+private:
+
+  //@}
+
+  // ===========================================================
+  /// @name TABLE DOF FACET
+  // ===========================================================
+  //@{
+
+public:
+ 
+
+  ///
+  /// True if xdof_map conforms to (is derived from) the type of
+  /// table dof map required by this poset state and handle.
+  ///
+  virtual bool table_dof_map_conforms(const poset_dof_map* xdof_map) const;
+
+  ///
+  /// True if xdof_map conforms to (is derived from) the type of
+  /// row dof map required by this poset state and handle.
+  ///
+  virtual bool row_dof_map_conforms(const poset_dof_map* xdof_map) const;
+
+  ///
+  /// The map from table dof client_ids to table dof values for this poset (mutable version)
+  ///
+  virtual array_poset_dof_map& table_dof_map(bool xrequire_write_access = false);
+
+  ///
+  /// The map from table dof client_ids to table dof values for this poset (const version)
+  ///
+  virtual const array_poset_dof_map& table_dof_map(bool xrequire_write_access = false) const;
+
+  ///
+  /// OBSOLETE: use table_dofs().
+  /// Copies the entire table dof tuple from internal storage to xbuf
+  ///
+  void table_dof_tuple(void* xbuf, size_t xbuflen) const;
+
+  ///
+  /// The table dofs for this instance (mutable version).
+  ///
+  void* table_dofs();
+
+  ///
+  /// The table dofs for this instance (const version).
+  ///
+  const void* table_dofs() const;
+
+  ///
+  /// The table dofs for this instance (mutable auto-access version).
+  ///
+  void* table_dofs(bool xauto_access);
+
+  ///
+  /// The table dofs for this instance (const auto-access version).
+  ///
+  const void* table_dofs(bool xauto_access) const;
+
+protected:
+
+  ///
+  /// The table of dof tuples of this poset.
+  ///
+  poset_table_state& table() const;
+
+  ///
+  /// Initializes the table dofs ("class variables")
+  ///
+  void initialize_table_dofs(void* xtable_dofs, size_t xtable_dof_ub);
+
+  ///
+  /// Installs xdof_tuple as the table dof tuple.
+  ///
+  void initialize_table_dof_tuple(array_poset_dof_map* xdof_tuple);
+
+private:
+
+  //@}
+
+  // ===========================================================
+  /// @name ROW DOF FACET
+  // ===========================================================
+  //@{
+
+public:
+ 
+  ///
+  /// The map from row dof client_ids to row dof values
+  /// for dof tuple hub id xtuple_hub_id.
+  ///
+  virtual poset_dof_map& row_dof_map(pod_index_type xtuple_hub_id,
+				     bool xrequire_write_access = false) const;
+
+  ///
+  /// The map from row dof client_ids to row dof values
+  /// for dof tuple id xtuple_id.
+  ///
+  poset_dof_map& row_dof_map(const scoped_index& xtuple_id,
+			     bool xrequire_write_access = false) const;
+
+  ///
+  /// Creates a new row dof map.
+  ///
+  virtual const scoped_index& new_row_dof_map();
+
+  ///
+  /// Creates a new row dof map which is a clone of xprototype.
+  ///
+  virtual const scoped_index& clone_row_dof_map(const poset_dof_map& xprototype);
+
+  ///
+  /// The dof map associated with the member identified by
+  /// hub id xmbr_hub_id (mutable version).
+  ///
+  poset_dof_map& member_dof_map(pod_index_type xmbr_hub_id,
+                                bool xrequire_write_access = false);
+
+  ///
+  /// The dof map associated with the member identified by xmbr_index (mutable version).
+  ///
+  poset_dof_map& member_dof_map(const scoped_index& xmbr_id,
+                                bool xrequire_write_access = false);
+
+  ///
+  /// The dof map associated with the member identified by
+  /// hub id xmbr_hub_id (const version).
+  ///
+  const poset_dof_map& member_dof_map(pod_index_type xmbr_hub_id,
+				      bool xrequire_write_access = false) const;
+
+  ///
+  /// The dof map associated with the member identified by xmbr_index (const version).
+  ///
+  const poset_dof_map& member_dof_map(const scoped_index& xmbr_id,
+				      bool xrequire_write_access = false) const;
+
+  ///
+  /// The dof tuple hub id of the member with hub id xmbr_hub_id
+  ///
+  pod_index_type member_dof_tuple_id(pod_index_type xmbr_hub_id, bool xauto_access) const;
+
+  ///
+  /// The dof tuple index of the member with id xmbr_id
+  ///
+  void member_dof_tuple_id(const scoped_index& xmbr_id, scoped_index& result, bool xauto_access) const;
+
+  ///
+  /// Sets the dof tuple hub id of the member
+  /// with hub id xmbr_hub_id to xtuple_hub_id
+  ///
+  void put_member_dof_tuple_id(pod_index_type xmbr_hub_id,
+			       pod_index_type xtuple_hub_id,
+			       bool xauto_access);
+
+  ///
+  /// Sets the dof tuple id of the member
+  /// with id xmbr_id to xtuple_id
+  ///
+  void put_member_dof_tuple_id(const scoped_index& xmbr_id,
+			       const scoped_index& xtuple_id,
+			       bool xauto_access);
+
+  ///
+  /// True if this contains a tuple with hub id xtuple_hub_id.
+  ///
+  bool contains_row_dof_tuple(pod_index_type xtuple_hub_id) const;
+
+  ///
+  /// True if this contains a tuple with id xtuple_id.
+  ///
+  bool contains_row_dof_tuple(const scoped_index& xtuple_id) const;
+
+  ///
+  /// The number of row_dof_tuples of this poset
+  ///
+  size_type row_dof_tuple_ct() const;
+
+  ///
+  /// The number of standard row_dof_tuples automatically
+  /// allocated by the constructor.
+  ///
+  int standard_row_dof_tuple_ct() const;
+
+  ///
+  /// True if poset is in its initial state,
+  /// that is, it contains just the standard row_dof_tuples.
+  ///
+  bool has_standard_row_dof_tuple_ct() const;
+
+protected:
+
+private:
+
+  //@}
+
+  // ===========================================================
+  /// @name DOF TUPLE ID SPACE FAMILY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Collection of dof tuple id spaces for this (const version).
+  ///
+  const index_space_family& dof_tuple_id_spaces(bool xauto_access) const;
+
+  ///
+  /// Collection of dof tuple id spaces for this (mutable version).
+  ///
+  index_space_family& dof_tuple_id_spaces(bool xauto_access);
+
+  ///
+  /// The dof tuple hub id space.
+  ///
+  const hub_index_space_handle& dof_tuple_hub_id_space(bool xauto_access) const;  
+
+  ///
+  /// An id in the dof tuple hub id space;
+  /// intended for copying to initialize ids
+  /// to the dof tuple id space.
+  ///
+  virtual const scoped_index& dof_tuple_id(bool xauto_access) const;
+
+  ///
+  /// An id in the dof tuple hub id space with pod xid.
+  ///
+  scoped_index dof_tuple_id(pod_index_type xid, bool xauto_access) const;
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
+  /// @name SCHEMATIZATION FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// True if this poset has been prepared for use as a schema,
+  /// that is, if the top member has been schematized.
+  ///
+  virtual bool is_schematized(bool xauto_access) const;
+
+  ///
+  /// Prepare this poset and its top member for use as a schema.
+  /// If xall_members = true, schematize all other members as well.
+  ///
+  virtual void schematize(subposet* xtable_dof_subposet,
+                          subposet* xrow_dof_subposet,
+                          bool xall_members = false);
+
+protected:
+
+  ///
+  /// Initialize the id space for the dof subposet, xdof_subposet.
+  ///
+  void initialize_dof_id_space(subposet& xdof_subposet);
+
+private:
+
+  //@}
+
+
+  // ===========================================================
+  /// @name VERSION FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// The number of versions currently defined.
+  ///
+  virtual int version_ct() const;
+
+  ///
+  /// The current version
+  ///
+  virtual int version() const;
+
+  ///
+  /// The subposet hub id of the whole() subposet for version xversion.
+  ///
+  virtual pod_index_type version_index(int xversion) const;
+
+  ///
+  /// The subposet id of the whole() subposet for version xversion.
+  ///
+  void version_index(int xversion, scoped_index& result) const;
+
+  ///
+  /// The subposet hub id of the jims() subposet for version xversion.
+  ///
+  virtual pod_index_type version_jims_index(int xversion) const;
+
+  ///
+  /// The subposet id of the jims() subposet for version xversion.
+  ///
+  void version_jims_index(int xversion, scoped_index& result) const;
+
+  ///
+  /// True if xversion is a valid version.
+  ///
+  bool has_version(int xversion) const;
+
+  ///
+  /// True if this poset is a version.
+  ///
+  bool is_version() const;  
+
+protected:
+
+  ///
+  /// The prefix which begins the name of every version subposet.
+  ///
+  static const string& VERSION_PREFIX();
+
+  ///
+  /// The length of _version_prefix.
+  ///
+  static int VERSION_PREFIX_LENGTH();
+
+  ///
+  /// True if xname has the proper form for a version name.
+  ///
+  bool is_version_name(const string& xname) const;
+
+  ///
+  /// Creates the standard name for the level xversion whole subposet.
+  ///
+  string version_to_name(int xversion) const;
+
+  ///
+  /// Extracts the version from the standard name
+  ///
+  int version_from_name(const string& xname) const;
+
+  ///
+  /// Set the current level to xversion
+  ///
+  void put_version(int xversion);
 
 private:
 
@@ -2230,90 +2323,6 @@ public:
   virtual pod_index_type prereq_id(int xi) const;
 
 protected:
-
-private:
-
-  //@}
-
-
-  // ===========================================================
-  /// @name VERSION FACET
-  // ===========================================================
-  //@{
-
-public:
-
-  ///
-  /// The number of versions currently defined.
-  ///
-  virtual int version_ct() const;
-
-  ///
-  /// The current version
-  ///
-  virtual int version() const;
-
-  ///
-  /// The subposet hub id of the whole() subposet for version xversion.
-  ///
-  virtual pod_index_type version_index(int xversion) const;
-
-  ///
-  /// The subposet id of the whole() subposet for version xversion.
-  ///
-  void version_index(int xversion, scoped_index& result) const;
-
-  ///
-  /// The subposet hub id of the jims() subposet for version xversion.
-  ///
-  virtual pod_index_type version_jims_index(int xversion) const;
-
-  ///
-  /// The subposet id of the jims() subposet for version xversion.
-  ///
-  void version_jims_index(int xversion, scoped_index& result) const;
-
-  ///
-  /// True if xversion is a valid version.
-  ///
-  bool has_version(int xversion) const;
-
-  ///
-  /// True if this poset is a version.
-  ///
-  bool is_version() const;
-
-protected:
-
-  ///
-  /// The prefix which begins the name of every version subposet.
-  ///
-  static const string& VERSION_PREFIX();
-
-  ///
-  /// The length of _version_prefix.
-  ///
-  static int VERSION_PREFIX_LENGTH();
-
-  ///
-  /// True if xname has the proper form for a version name.
-  ///
-  bool is_version_name(const string& xname) const;
-
-  ///
-  /// Creates the standard name for the level xversion whole subposet.
-  ///
-  string version_to_name(int xversion) const;
-
-  ///
-  /// Extracts the version from the standard name
-  ///
-  int version_from_name(const string& xname) const;
-
-  ///
-  /// Set the current level to xversion
-  ///
-  void put_version(int xversion);
 
 private:
 

@@ -19,6 +19,7 @@
 
 #include "base_space_factory.impl.h"
 
+//#include "base_space_member_prototype.h"
 #include "hex_connectivity.h" 
 #include "line_connectivity.h" 
 #include "point_block_1d.h"
@@ -347,11 +348,7 @@ new_space(fiber_bundles_namespace& xns)
   }
   else
   {
-    result = &xns.new_base_space<zone_nodes_block>(path.poset_name(),
-						   "",
-						   "",
-						   ldb,
-						   true);
+    result = &zone_nodes_block::standard_host(xns, path.poset_name(), ldb, false);
   }
 
   // Get
@@ -476,11 +473,8 @@ new_space(fiber_bundles_namespace& xns)
   }
   else
   {
-    result = &xns.new_base_space<unstructured_block>(path.poset_name(),
-						     "",
-						     "",
-						     ldb,
-						     true);
+    zone_nodes_block::standard_host(xns, path.poset_name(), ldb, false);
+    result = &xns.member_poset<base_space_poset>(path.poset_name());
   }
 
   // Get
@@ -524,7 +518,7 @@ new_base(fiber_bundles_namespace& xns, const string& xbase_name)
 
     base_space_poset* lhost = new_space(xns);
 
-    string lposet_name(xns.standard_base_space_member_prototypes_poset_name());
+    string lposet_name(base_space_member::prototypes_poset_name());
 
     int ldb = index_ubs.ct();
     switch(ldb)

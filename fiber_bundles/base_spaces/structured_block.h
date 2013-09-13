@@ -51,26 +51,46 @@ class chart_point_3d;
 class SHEAF_DLL_SPEC structured_block : public homogeneous_block
 {
   // ===========================================================
-  /// @name STRUCTURED_BLOCK FACET
+  /// @name HOST FACTORY FACET
   // ===========================================================
   //@{
 
 public:
 
   ///
-  /// The path of the schema required by this class.
+  /// Creates a new host poset for members of this type.
+  /// The poset is created in namespace xns with path xhost_path and schema specified by xschema_path.
   ///
-  static const poset_path& standard_schema_path();
+  static host_type& new_host(namespace_type& xns, 
+			     const poset_path& xhost_path, 
+			     const poset_path& xschema_path, 
+			     int xmax_db,
+			     bool xauto_access);
 
   ///
-  /// The path of the schema required by this.
+  /// Auto, deep factory method; creates a new host poset and any prerequisite posets
+  /// for members of this type. The poset is created in namespace xns with path xhost_path
+  /// and schema specified by standard_schema_path().
   ///
-  virtual const poset_path& schema_path() const;
+  static host_type& new_host(namespace_type& xns,
+			     const poset_path& xhost_path,
+			     int xmax_db,
+			     bool xauto_access);
+  
 
-  ///
-  /// Creates the standard schema for this class in namespace xns.
-  ///
-  static void make_standard_schema(namespace_poset& xns);
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
+  /// @name STRUCTURED_BLOCK FACET
+  // ===========================================================
+  //@{
+
+public:
 
   ///
   /// Default constructor; creates a new, unattached structured_block handle.

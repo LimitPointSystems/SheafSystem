@@ -35,7 +35,6 @@
 
 namespace sheaf
 {
-class arg_list;
 class namespace_poset;
 }
 
@@ -45,6 +44,8 @@ using namespace sheaf;
 
 class sec_tuple;
 class tuple;
+class fiber_bundles_namespace;
+  
 
 ///
 /// A Cartesian product section space.
@@ -59,6 +60,11 @@ class SHEAF_DLL_SPEC sec_tuple_space : public sec_rep_space
   //@{
 
 public:
+
+  ///
+  /// The type of namespace for this type of member.
+  ///
+  typedef fiber_bundles_namespace namespace_type;
 
   ///
   /// The type of member associated with this space.
@@ -81,9 +87,29 @@ public:
   typedef tuple_table_dofs_type table_dofs_type;
 
   ///
-  /// Creates an arg list which conforms to the schema of this.
+  /// True if and only if the schema of the fiber space of the section schema
+  /// specified by xsection_schema_path conforms to the fiber schema specified by xfiber_schema_path.
   ///
-  static arg_list make_arg_list(int xfactor_ct);
+  static bool fiber_schema_conforms(const namespace_poset& xns, 
+                                    const poset_path& xsection_schema_path, 
+                                    const poset_path& xfiber_schema_path, 
+                                    bool xauto_access);
+
+  ///
+  /// True if and only if the fiber space of the section schema
+  /// specified by xsection_schema_path conforms to type F.
+  ///
+  template <typename F>
+  static bool fiber_space_conforms(const namespace_poset& xns, const poset_path& xsection_schema_path, bool xauto_access);
+  
+  ///
+  /// Creates a new sec_tuple_space in namespace xns with path xpath
+  /// and schema specified by xschema_path.
+  ///
+  static sec_tuple_space& new_table(namespace_type& xhost, 
+                                    const poset_path& xpath, 
+                                    const poset_path& xschema_path,
+                                    bool xauto_access);
   
   //============================================================================
   // TABLE DOFS
@@ -109,9 +135,9 @@ protected:
   sec_tuple_space();
 
   ///
-  /// Copy constructor; attaches this to the same state as xother.
+  /// Copy constructor; disabled.
   ///
-  sec_tuple_space(const sec_tuple_space& xother);
+  sec_tuple_space(const sec_tuple_space& xother) { };
 
   ///
   /// Destructor.
@@ -122,49 +148,6 @@ protected:
   /// Covariant constructor
   ///
   sec_tuple_space(sec_tuple* xtop, sec_tuple* xbottom);
-
-  //============================================================================
-  // NEW HANDLE, NEW STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new poset handle attached to a new state in namespace xhost,
-  /// with schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  sec_tuple_space(namespace_poset& xhost,
-		  const string& xname,
-		  const arg_list& xargs,
-		  const poset_path& xschema_path,
-		  bool xauto_access);
-
-  //============================================================================
-  // NEW HANDLE, EXISTING STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new handle attached to the sec_tuple_space with
-  /// index xindex in namespace xhost.
-  ///
-  sec_tuple_space(const namespace_poset& xhost, pod_index_type xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the sec_tuple_space with
-  /// index xindex in namespace xhost.
-  ///
-  sec_tuple_space(const namespace_poset& xhost, const scoped_index& xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the sec_tuple_space with
-  /// name xname in namespace xhost.
-  ///
-  sec_tuple_space(const namespace_poset& xhost, const string& xname, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the sec_tuple_space associated
-  /// with namespace member xmbr.
-  ///
-  sec_tuple_space(const namespace_poset_member& xmbr, bool xauto_access);
 
 private:
 
@@ -179,15 +162,6 @@ private:
 public:
 
 protected:
-
-  ///
-  /// Initializes xarg to satisfy class invariants.
-  ///
-  virtual void initialize_arg_list(const namespace_poset& xns, 
-				   const string& xname,
-				   arg_list& xargs,
-				   const poset_path& xschema_path,
-				   bool xauto_access);
 
 private:
 
@@ -216,17 +190,15 @@ public:
   ///
   virtual const char* class_name() const;
 
-  ///
-  /// Assignment operator; attaches this to the same state as xother.
-  /// @issue This is probably the wrong signature for operator=,
-  /// see thread Misc/Language/covariance in C++/covariance and operator=
-  /// in the discusion forum. But it is consistent with all the
-  /// other derivatives of poset_state_handle and it will soon be refactored
-  /// out of existence any way.
-  ///
-  sec_tuple_space& operator=(const poset_state_handle& xother);
-
 protected:
+
+  ///
+  /// Assignment operator; disabled.
+  ///
+  sec_tuple_space& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<sec_tuple_space&>(*this);
+  };
 
 private:
 

@@ -174,7 +174,6 @@
 #include             "uniform_2d.h"
 #include             "uniform_3d.h"
 #include "section_iteration_state.h"
-#include "section_space_factory.h"
 #include "section_space_schema_jims_index_space_handle.h"
 #include "section_space_schema_jims_index_space_iterator.h"
 #include "section_space_schema_jims_index_space_state.h"

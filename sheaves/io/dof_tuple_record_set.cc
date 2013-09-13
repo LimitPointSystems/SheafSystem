@@ -225,8 +225,8 @@ dof_tuple_record_set(const sheaf_file& xfile,
   // _name has been initialized to poset name in record_set;
   // add members dataset suffix to it.
 
-  _name  += ".dof_tuples";
-  _alias += ".dof_tuples";
+  _name  = data_set_name(scaffold().structure().name());
+  _alias  = data_set_alias(scaffold().structure().name());
 
   // Create the HDF selection buffers
 
@@ -263,11 +263,36 @@ dof_tuple_record_set(const sheaf_file& xfile,
   // Postconditions:
 
   ensure(invariant());
-  ensure(name() == xscaffold.structure().name()+".dof_tuples");
+  ensure(name() == data_set_name(scaffold().structure().name()));
+  ensure(alias() == data_set_alias(scaffold().structure().name()));
   ensure(!is_open());
   ensure(record_buffer_ub() == xrecord_buffer_ub);
   ensure(record_buffer_ct() == 0);
 }
+
+
+const string&
+sheaf::dof_tuple_record_set::
+suffix() const
+{
+  // cout << endl << "Entering dof_tuple_record_set::suffix." << endl;
+
+  // Preconditions:
+
+
+  // Body:
+
+  static const string result(".dof_tuples");
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving dof_tuple_record_set::suffix." << endl;
+  return result;
+}
+
 
 ///
 void

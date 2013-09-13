@@ -409,11 +409,7 @@ new_state(const abstract_poset_member* xschema, bool xauto_access)
   // schema as the primitives poset.
   // Initial space for 4 members, 8 links, 4 subposets.
 
-  _state = new poset_state(xschema,
-                           NAMESPACE_POSET_SCHEMA_ID,
-                           4,
-                           8,
-                           4);
+  _state = new poset_state(xschema, NAMESPACE_POSET_SCHEMA_ID, standard_name());
 
   // Get write access
 

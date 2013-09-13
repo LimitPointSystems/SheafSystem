@@ -267,7 +267,6 @@ open(const string &xname, access_mode xmode, bool xclobber)
       {
         // File creation failed.
 
-	//        H5Eprint(stderr);
         H5Eprint1(stderr);
         post_fatal_error_message("unable to open file in READ_WRITE mode");
       }

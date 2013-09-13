@@ -111,7 +111,7 @@ new_space(fiber_bundles_namespace& xns)
   }
   else
   {
-    result = &xns.new_base_space<base_type>(path.poset_name());
+    result = &base_type::standard_host(xns, path.poset_name(), false);
   }
 
   // Get

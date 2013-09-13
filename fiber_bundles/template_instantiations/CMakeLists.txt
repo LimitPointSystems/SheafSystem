@@ -41,7 +41,6 @@ set(SRCS
     e4.inst.cc
     ed.inst.cc
     factory.inst.cc
-    fiber_bundles_namespace.inst.cc
     general_matrix_1x2.inst.cc
     general_matrix_1x3.inst.cc
     general_matrix_2x1.inst.cc
@@ -53,6 +52,7 @@ set(SRCS
     gl2.inst.cc
     gl3.inst.cc
     gln.inst.cc
+    group.inst.cc
     index_space_family.inst.cc
     jcb.inst.cc
     jcb_e13.inst.cc
@@ -64,7 +64,6 @@ set(SRCS
     met_e2.inst.cc
     met_e3.inst.cc
     namespace_poset.inst.cc
-    section_space_factory.inst.cc
     st2.inst.cc
     st2_e2.inst.cc
     st2_e3.inst.cc
@@ -80,6 +79,7 @@ set(SRCS
     t4_e2.inst.cc
     t4_e3.inst.cc
     tp.inst.cc
+    tuple.inst.cc
     vd.inst.cc
    )
 

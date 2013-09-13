@@ -265,14 +265,12 @@ storage_agent(const string& xfile_name,
   {
     // Turn on the standard HDF error reporting.
 
-    //    H5Eset_auto(reinterpret_cast<herr_t (*)(void*)>(H5Eprint), stderr);
     H5Eset_auto1(reinterpret_cast<herr_t (*)(void*)>(H5Eprint), stderr);
   }
   else
   {
     // Turn off HDF error reporting.
 
-    //    H5Eset_auto(NULL, NULL);
     H5Eset_auto1(NULL, NULL);
   }
 
@@ -1154,7 +1152,6 @@ begin_read_transaction(namespace_poset& xns)
   // Body:
 
 #ifdef DIAGNOSTIC_OUTPUT
-
   cout << endl << SOURCE_CODE_LOCATION;
   cout << "reading poset " << xns.name() << endl;
 #endif
@@ -1216,15 +1213,24 @@ begin_read_transaction(namespace_poset& xns)
   lmember_records.internalize(lscaffold.row_bounds().ub_id());
   ldof_tuple_records.internalize();
 
-  // Finished with the bounds; detach them.
-
-  //  lscaffold.detach_bounds();
-
   // Close the record sets.
 
   lmember_records.close();
   ldof_tuple_records.close();
   lattributes_records.close();
+
+  // Tranfser member names from scaffold to poset.
+  // Have to do this after member_names_record in attribute record set
+  // has been internalized and after all members have been internalized.
+
+  lscaffold.put_member_names_to_poset();
+
+  //
+  // Reset the namespace name from whatever the client
+  // chose initially to the name in the file.
+  //
+  string lns_name = lattributes_records.poset_name();
+  xns.put_name(lns_name);
 
   // The non-standard dof tuples all have void pointers in them.
   // Allocate external handles instead.
@@ -1245,6 +1251,7 @@ begin_read_transaction(namespace_poset& xns)
 
       poset_state_handle* lmbr_poset =
         poset_state_handle::new_poset_handle(lns_mbr.poset_class(), lns_mbr.poset_type_id());
+
       lmbr_poset->attach_to_state(&lns_mbr);
 
       /// @hack all the non-standard members are restricted to
@@ -1257,6 +1264,7 @@ begin_read_transaction(namespace_poset& xns)
     itr.next();
   }
 
+  
   lns_mbr.detach_from_state();
 
   // Postconditions:
@@ -1378,6 +1386,12 @@ begin_read_transaction(poset_state_handle& xposet,
   cout << endl << SOURCE_CODE_LOCATION;
   cout << "closed record sets for poset " << lposet.name() << endl;
 #endif
+
+  // Tranfser member names from scaffold to poset.
+  // Have to do this after member_names_record in attribute record set
+  // has been internalized and after all members have been internalized.
+
+  lscaffold.put_member_names_to_poset();
 
   // Make sure client handle is attached to
   // new state created by read.
@@ -1563,6 +1577,12 @@ commit_transaction(poset_state_handle& xposet)
   cout << endl << SOURCE_CODE_LOCATION;
   cout << "opening record sets for poset " << xposet.name() << endl;
 #endif
+
+  // Transfeer member names from poset to scaffold.
+  // Have to do this before attributes records are externalized,
+  // but now is a good a time as any.
+
+  lscaffold.get_member_names_from_poset();
 
   // Open all the record sets.
 

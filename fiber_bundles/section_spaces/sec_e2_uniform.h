@@ -42,17 +42,57 @@ namespace fiber_bundle
 ///
 class SHEAF_DLL_SPEC sec_e2_uniform : public sec_e2
 {
+  // ===========================================================
+  /// @name HOST FACTORY FACET OF CLASS SEC_E2_UNIFORM
+  // ===========================================================
+  //@{
+
+public:
+
+  // Typedefs:
+
+  ///
+  /// The fiber type.
+  ///
+  typedef e2 fiber_type;
+
+  ///
+  /// Creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
+  /// and scalar section space specified by xscalar_space_path.
+  ///
+  static host_type& new_host(namespace_type& xns, 
+                             const poset_path& xhost_path, 
+                             const poset_path& xschema_path,
+                             const poset_path& xscalar_space_path,
+                             bool xauto_access);
+
+  ///
+  /// The standard host for sections of this type with base space xbase_path,
+  /// representation xrep_path, section suffix xsection_suffix,
+  /// and fiber suffix xfiber_suffix. Creates the host and its prerequisites
+  /// if necessary.
+  ///
+  static host_type& standard_host(namespace_type& xns, 
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xsection_suffix, 
+                                  const string& xfiber_suffix, 
+                                  bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+
+
   //============================================================================
   /// @name SEC_E2_UNIFORM FACET OF CLASS SEC_E2_UNIFORM
   //============================================================================
   //@{
 
 public:
-
-  ///
-  /// The fiber type.
-  ///
-  typedef e2 fiber_type;
 
   ///
   /// Default constructor; creates an unattached handle.

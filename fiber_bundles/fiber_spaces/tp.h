@@ -252,14 +252,13 @@ private:
 ///
 class SHEAF_DLL_SPEC tp : public vd
 {
-  //============================================================================
-  /// @name TENSOR ALGEBRA (TP) FACET OF CLASS TP
-  //============================================================================
+
+  // ===========================================================
+  /// @name HOST FACTORY FACET OF CLASS TP
+  // ===========================================================
   //@{
 
 public:
-
-  // Typedefs:
 
   ///
   /// The type of host poset.
@@ -270,6 +269,44 @@ public:
   /// The type of the underlying vector space.
   ///
   typedef at1 vector_space_type;
+
+  ///
+  /// The path to the standard schema for this class.
+  ///
+  static const poset_path& standard_schema_path();
+
+  ///
+  /// Creates the standard schema for this class in namespace xns.
+  ///
+  static void make_standard_schema(namespace_poset& xns);
+
+  ///
+  /// Creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
+  /// and table attribute vector_space_path specified by xvector_space_path.
+  ///
+  static host_type& new_host(namespace_type& xns, 
+			     const poset_path& xhost_path, 
+			     const poset_path& xschema_path,
+			     int xp,
+			     const poset_path& xvector_space_path,
+			     bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+ 
+
+  //============================================================================
+  /// @name TENSOR ALGEBRA (TP) FACET OF CLASS TP
+  //============================================================================
+  //@{
+
+public:
+
+  // Typedefs:
 
   ///
   /// The associated volatile type.
@@ -367,16 +404,6 @@ public:
   /// The path of the underlying vector space, auto access version.
   ///
   poset_path vector_space_path(bool xauto_access) const;
-
-//   ///
-//   /// Index of the underlying vector space.
-//   ///
-//   virtual pod_index_type vector_space_index() const;
-
-//   ///
-//   /// Index of the underlying vector space (auto-access version).
-//   ///
-//   virtual pod_index_type vector_space_index(bool xauto_access) const;
 
   ///
   /// The underlying vector space.
@@ -494,30 +521,6 @@ protected:
 private:
 
   //@}
-
-
-  //============================================================================
-  /// @name CARTESIAN ALGEBRA (TUPLE) FACET OF CLASS TP
-  //============================================================================
-  //@{
-
-public:
-
-  ///
-  /// The path to the standard schema for this class.
-  ///
-  static const poset_path& standard_schema_path();
-
-  ///
-  /// Creates the standard schema for this class in namespace xns.
-  ///
-  static void make_standard_schema(namespace_poset& xns);
-
-protected:
-private:
-
-  //@}
-
 
   //============================================================================
   /// @name ABSTRACT POSET MEMBER FACET OF CLASS TP

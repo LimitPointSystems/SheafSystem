@@ -426,8 +426,8 @@ new_state(const abstract_poset_member* xschema)
   // Create the poset state object; without a schema because we don't have one yet.
   // Initial space for 16 members, 32 links, 4 subposets.
 
-  _state =
-    new poset_state(xschema, PRIMITIVES_POSET_ID, 16, 32, 4);
+  //  _state = new poset_state(xschema, PRIMITIVES_POSET_ID, 16, 32, 4);
+  _state = new poset_state(xschema, PRIMITIVES_POSET_ID, standard_name());
 
   // Get write access
 

@@ -420,6 +420,51 @@ private:
 ///
 class SHEAF_DLL_SPEC jcb_e23 : public jcb_ed
 {
+  // ===========================================================
+  /// @name HOST FACTORY FACET OF CLASS JCB
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// The path to the standard schema for this class.
+  ///
+  static const poset_path& standard_schema_path();
+
+  ///
+  /// Creates the standard schema for this class in namespace xns.
+  ///
+  static void make_standard_schema(namespace_poset& xns);
+
+  ///
+  /// Creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
+  /// and table attributes domain_path, range_path, and scalar_space_path specified by
+  /// xdomain_path and xrange_path, respectively.
+  ///
+  static host_type& new_host(namespace_type& xns, 
+			     const poset_path& xhost_path, 
+			     const poset_path& xschema_path,
+			     const poset_path& xdomain_path,
+			     const poset_path& xrange_path,
+			     bool xauto_access);
+
+  ///
+  /// The host with path standard_host_path<jcbE_e23>(xsuffix).
+  /// Returns the host if it already exists, otherwise, creates it in namespace xns
+  /// with schema specified by standard_schema_path() and standard paths for prerequisites,
+  /// which are also created if needed.
+  ///
+  static host_type& standard_host(namespace_type& xns, const string& xsuffix, bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+ 
+
   //============================================================================
   /// @name JCB_E23 FACET OF CLASS JCB_E23
   //============================================================================
@@ -582,17 +627,8 @@ private:
 
 public:
 
-  ///
-  /// The path to the standard schema for this class.
-  ///
-  static const poset_path& standard_schema_path();
-
-  ///
-  /// Creates the standard schema for this class in namespace xns.
-  ///
-  static void make_standard_schema(namespace_poset& xns);
-
 protected:
+
 private:
 
   //@}

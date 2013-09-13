@@ -23,11 +23,11 @@
 #include "assert_contract.h"
 #include "array_index_space_state.h"
 #include "arg_list.h"
-#include "base_space_member_prototype.h"
+//#include "base_space_member_prototype.h"
 #include "homogeneous_block_crg_interval.h"
 #include "index_space_handle.h"
 #include "index_space_iterator.h"
-#include "namespace_poset.h"
+#include "fiber_bundles_namespace.h"
 #include "poset_path.h"
 #include "preorder_iterator.h"
 #include "section_space_schema_member.h"
@@ -38,24 +38,95 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 
 // ===========================================================
+// HOST FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+fiber_bundle::homogeneous_block::host_type&
+fiber_bundle::homogeneous_block::
+new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xschema_path, int xmax_db, bool xauto_access)
+{
+  // cout << endl << "Entering homogeneous_block::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));  
+
+  require(xmax_db >= 0);
+
+  // Body:
+
+  host_type& result =
+    host_type::new_table(xns, xhost_path, xschema_path, xmax_db, xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(result.max_db() == xmax_db);
+
+  // Exit:
+
+  // cout << "Leaving homogeneous_block::new_host." << endl;
+  return result;
+}
+
+fiber_bundle::homogeneous_block::host_type&
+fiber_bundle::homogeneous_block::
+new_host(namespace_type& xns, const poset_path& xhost_path, int xmax_db, bool xauto_access)
+{
+  // cout << endl << "Entering homogeneous_block::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
+  require(xns.path_is_auto_read_accessible(standard_schema_path(), xauto_access));
+  
+  require(xmax_db >= 0);
+
+  // Body:
+
+  host_type& result =
+    new_host(xns, xhost_path, standard_schema_path(), xmax_db, xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == standard_schema_path());
+
+  ensure(result.max_db() == xmax_db);
+  
+  // Exit:
+
+  // cout << "Leaving homogeneous_block::new_host." << endl;
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// ===========================================================
 // HOMOGENEOUS_BLOCK FACET
 // ===========================================================
 
 // PUBLIC DATA MEMBERS
-
-fiber_bundle::homogeneous_block::
-homogeneous_block()
-{
-
-  // Preconditions:
-
-  // Body:
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(! is_attached() );
-}
 
 fiber_bundle::homogeneous_block::
 ~homogeneous_block()
@@ -207,7 +278,7 @@ new_row_dof_map(const poset* xhost,
   // Set local cell type id and name.
 
   poset_path local_proto_path(prototypes_poset_name(), xlocal_cell_name);
-  base_space_member_prototype local_proto(xhost->name_space(), local_proto_path, true);
+  base_space_member local_proto(xhost->name_space(), local_proto_path, false);
 
   ltuple.local_cell_type_id = local_proto.type_id();
   ltuple.local_cell_type_name = strdup(local_proto.type_name());
@@ -266,7 +337,7 @@ new_row_dof_map(poset_state_handle& xhost,
   // Get the local cell prototype
 
   poset_path local_proto_path(prototypes_poset_name(), xlocal_cell_name);
-  base_space_member_prototype local_proto(xhost.name_space(), local_proto_path, false);
+  base_space_member local_proto(xhost.name_space(), local_proto_path, false);
 
   // Copy its dofs;
   // dimension of block same as local cell.
@@ -296,6 +367,19 @@ new_row_dof_map(poset_state_handle& xhost,
 }
 
 // PROTECTED DATA MEMBERS
+
+fiber_bundle::homogeneous_block::
+homogeneous_block()
+{
+  // Preconditions:
+
+  // Body:
+
+  // Postconditions:
+
+  ensure(invariant());
+  ensure(! is_attached() );
+}
 
 void
 fiber_bundle::homogeneous_block::
@@ -1093,77 +1177,6 @@ release_adjacency_id_space_iterator(index_space_iterator& xitr, bool xauto_acces
 // ===========================================================
 
 // PUBLIC DATA MEMBERS
-
-const sheaf::poset_path&
-fiber_bundle::homogeneous_block::
-standard_schema_path()
-{
-
-  // Preconditions:
-
-  // Body:
-
-  static const poset_path result(base_space_member::standard_schema_poset_name(),
-                                 "homogeneous_block_schema");
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-
-const sheaf::poset_path&
-fiber_bundle::homogeneous_block::
-schema_path() const
-{
-  // Preconditions:
-
-  // Body:
-
-  const poset_path& result = standard_schema_path();
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-void
-fiber_bundle::homogeneous_block::
-make_standard_schema(namespace_poset& xns)
-{
-  // Preconditions:
-
-  require(xns.state_is_read_write_accessible());
-  require(xns.contains_poset(standard_schema_poset_name(), false));
-  require(!xns.contains_poset_member(standard_schema_path(), false));
-
-  // Body:
-
-  string ldof_specs = "local_cell_type_id INT false";
-  ldof_specs       += " local_cell_type_name C_STRING false";
-  ldof_specs       += " size SIZE_TYPE false";
-
-
-  schema_poset_member lschema(xns,
-                              standard_schema_path().member_name(),
-                              base_space_member::standard_schema_path(),
-                              ldof_specs,
-                              false);
-
-  lschema.detach_from_state();
-
-  // Postconditions:
-
-  ensure(xns.contains_poset_member(standard_schema_path(), false));
-
-  // Exit:
-
-  return;
-}
 
 // PROTECTED DATA MEMBERS
 

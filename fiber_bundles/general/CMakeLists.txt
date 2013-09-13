@@ -34,7 +34,6 @@ collect_sources()
 # Headers that are NOT associated with a .cc file.
 #
 set(ADDITIONAL_INCS
-    fiber_bundles_namespace.impl.h
    )
 
 collect_includes()

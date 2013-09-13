@@ -24,7 +24,7 @@
 #include "arg_list.h"
 #include "base_space_poset.h"
 #include "block_connectivity.h"
-#include "fiber_bundles_namespace.impl.h"
+#include "fiber_bundles_namespace.h"
 #include "index_space_iterator.h"
 #include "namespace_poset.h"
 #include "poset_path.h"
@@ -34,6 +34,113 @@
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // #define DIAGNOSTIC_OUTPUT
+
+
+// ===========================================================
+// HOST FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+const sheaf::poset_path&
+fiber_bundle::zone_nodes_block::
+static_prototype_path()
+{
+  // Preconditions:
+
+  // Body:
+
+  static const poset_path
+  STATIC_PROTOTYPE_PATH(base_space_member::prototypes_poset_name(), "zone_nodes_block");
+
+  const poset_path& result = STATIC_PROTOTYPE_PATH;
+
+  // Postconditions:
+
+  ensure(result.poset_name() == base_space_member::prototypes_poset_name());
+  ensure(result.member_name() == "zone_nodes_block");
+
+  // Exit
+
+  return result;
+}
+
+fiber_bundle::zone_nodes_block::host_type&
+fiber_bundle::zone_nodes_block::
+new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xschema_path, int xmax_db, bool xauto_access)
+{
+  // cout << endl << "Entering zone_nodes_block::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));  
+
+  require(xmax_db >= 0);
+
+  // Body:
+
+  host_type& result =
+    host_type::new_table(xns, xhost_path, xschema_path, xmax_db, xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(result.max_db() == xmax_db);
+
+  // Exit:
+
+  // cout << "Leaving zone_nodes_block::new_host." << endl;
+  return result;
+}
+
+fiber_bundle::zone_nodes_block::host_type&
+fiber_bundle::zone_nodes_block::
+standard_host(namespace_type& xns, const poset_path& xhost_path, int xmax_db, bool xauto_access)
+{
+  // cout << endl << "Entering zone_nodes_block::standard_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
+  require(xns.path_is_auto_read_accessible(standard_schema_path(), xauto_access));
+  require(xmax_db >= 0);
+
+  // Body:
+
+  host_type& result =
+    new_host(xns, xhost_path, standard_schema_path(), xmax_db, xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == standard_schema_path());
+
+  ensure(result.max_db() == xmax_db);
+  
+  // Exit:
+
+  // cout << "Leaving zone_nodes_block::standard_host." << endl;
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
 
 
 // ===========================================================
@@ -513,97 +620,6 @@ interval() const
 // ===========================================================
 
 // PUBLIC DATA MEMBERS
-
-const sheaf::poset_path&
-fiber_bundle::zone_nodes_block::
-standard_schema_path()
-{
-
-  // Preconditions:
-
-  // Body:
-
-  static const poset_path result(standard_schema_poset_name(),
-                                 "unstructured_block_schema");
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-const sheaf::poset_path&
-fiber_bundle::zone_nodes_block::
-schema_path() const
-{
-  // Preconditions:
-
-  // Body:
-
-  const poset_path& result = standard_schema_path();
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-void
-fiber_bundle::zone_nodes_block::
-make_standard_schema(namespace_poset& xns)
-{
-  // Preconditions:
-
-  require(xns.state_is_read_write_accessible());
-  require(xns.contains_poset(standard_schema_poset_name(), false));
-  require(!xns.contains_poset_member(standard_schema_path(), false));
-
-  // Body:
-
-  // Unstructured_block schema does not introduce any new dofs.
-
-  schema_poset_member lschema(xns,
-                              standard_schema_path().member_name(),
-                              homogeneous_block::standard_schema_path(),
-                              "",
-                              false);
-
-  lschema.detach_from_state();
-
-  // Postconditions:
-
-  ensure(xns.contains_poset_member(standard_schema_path(), false));
-
-  // Exit:
-
-  return;
-}
-
-const sheaf::poset_path&
-fiber_bundle::zone_nodes_block::
-static_prototype_path()
-{
-  // Preconditions:
-
-  // Body:
-
-  static const poset_path
-  STATIC_PROTOTYPE_PATH(base_space_member::prototypes_poset_name(),
-                        "unstructured_block");
-
-  const poset_path& result = STATIC_PROTOTYPE_PATH;
-
-  // Postconditions:
-
-  ensure(result.poset_name() == base_space_member::prototypes_poset_name());
-  ensure(result.member_name() == "zone_nodes_block");
-
-  // Exit
-
-  return result;
-}
 
 // PROTECTED DATA MEMBERS
 

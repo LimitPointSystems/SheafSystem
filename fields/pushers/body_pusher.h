@@ -215,7 +215,7 @@ private:
   ///
   /// The section space schema used for body pushing.
   ///
-  binary_section_space_schema_member _body_schema;
+  binary_section_space_schema_member* _body_schema;
 
   ///
   /// The mapped type in the pullback map.

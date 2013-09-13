@@ -27,7 +27,6 @@ set(SRCS
     base_space_crg_interval.cc
     base_space_factory.cc
     base_space_member.cc
-    base_space_member_prototype.cc
     base_space_poset.cc
     binary_index.cc
     binary_index_space.cc

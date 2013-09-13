@@ -38,6 +38,7 @@ namespace fiber_bundle
   using namespace sheaf;  
 
   class vd;
+  class at0_space;
   
   
 ///
@@ -62,6 +63,11 @@ public:
   typedef vd member_type;
 
   ///
+  /// The type of scalar space associated with this space.
+  ///
+  typedef at0_space scalar_space_type;
+  
+  ///
   /// The name of the standard schema poset for this class.
   ///
   static const string& standard_schema_poset_name();
@@ -77,9 +83,15 @@ public:
   typedef vd_table_dofs_type table_dofs_type;
 
   ///
-  /// Creates an arg list which conforms to the schema of this.
+  /// Creates a new vd_space in namespace xns with path xpath,
+  /// schema specified by xschema_path, and table attribute 
+  /// scalar_space_path specified by xscalar_space_path.
   ///
-  static arg_list make_arg_list(const poset_path& xscalar_space_path);
+  static vd_space& new_table(namespace_type& xhost, 
+			     const poset_path& xpath, 
+			     const poset_path& xschema_path,
+			     const poset_path& xscalar_space_path,
+			     bool xauto_access);
   
   //============================================================================
   // TABLE DOFS
@@ -183,9 +195,9 @@ protected:
   vd_space();
 
   ///
-  /// Copy constructor; attaches this to the same state as xother.
+  /// Copy constructor; disabled.
   ///
-  vd_space(const vd_space& xother);
+  vd_space(const vd_space& xother) { };
 
   ///
   /// Destructor.
@@ -212,49 +224,6 @@ protected:
   ///
   virtual size_type covariant_subposet_ct() const;
 
-  //============================================================================
-  // NEW HANDLE, NEW STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new poset handle attached to a new state in namespace xhost,
-  /// with schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  vd_space(namespace_poset& xhost,
-	      const string& xname,
-	      const arg_list& xargs,
-	      const poset_path& xschema_path,
-	      bool xauto_access);
-
-  //============================================================================
-  // NEW HANDLE, EXISTING STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new handle attached to the vd_space with
-  /// index xindex in namespace xhost.
-  ///
-  vd_space(const namespace_poset& xhost, pod_index_type xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the vd_space with
-  /// index xindex in namespace xhost.
-  ///
-  vd_space(const namespace_poset& xhost, const scoped_index& xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the vd_space with
-  /// name xname in namespace xhost.
-  ///
-  vd_space(const namespace_poset& xhost, const string& xname, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the vd_space associated
-  /// with namespace member xmbr.
-  ///
-  vd_space(const namespace_poset_member& xmbr, bool xauto_access);
-
 private:
 
   //@}
@@ -265,16 +234,8 @@ private:
   //@{
 
 public:
-protected:
 
-  ///
-  /// Initializes xarg to satisfy class invariants.
-  ///
-  virtual void initialize_arg_list(const namespace_poset& xns,
-				   const string& xname,
-				   arg_list& xargs,
-				   const poset_path& xschema_path,
-				   bool xauto_access);
+protected:
 
 private:
 
@@ -307,17 +268,15 @@ public:
   ///
   virtual pod_index_type prereq_id(int xi) const;
 
-  ///
-  /// Assignment operator; attaches this to the same state as xother.
-  /// @issue This is probably the wrong signature for operator=,
-  /// see thread Misc/Language/covariance in C++/covariance and operator=
-  /// in the discusion forum. But it is consistent with all the
-  /// other derivatives of poset_state_handle and it will soon be refactored
-  /// out of existence any way.
-  ///
-  vd_space& operator=(const poset_state_handle& xother);
-
 protected:
+
+  ///
+  /// Assignment operator; disabled.
+  ///
+  vd_space& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<vd_space&>(*this);
+  };
 
   ///
   /// Creates the standard subposets.

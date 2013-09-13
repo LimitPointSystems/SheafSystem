@@ -92,114 +92,6 @@ class SHEAF_DLL_SPEC field_factory
 public:
 
   ///
-  /// Creates a field with property the same type as xprop
-  /// and its associated structured base space, section spaces,
-  /// and sections, with coordinate and property fiber spaces
-  /// specified by xcoord_fiber__name and xprop_fiber_name, respectively.
-  /// The section spaces are named with the standard form
-  /// fiber_space_name+"_on_"+xbase_space_name.
-  ///
-  template <typename T>
-  static field_vd*
-  new_structured_field(fiber_bundles_namespace& xns,
-                       const string& xbase_space_name,
-                       const block<int>& xindex_ubs,
-                       const string& xcoord_name,
-                       const string& xprop_name,
-                       T& xprop,
-                       const string& xcoord_fiber_schema_name = "",
-                       const string& xcoord_fiber_name = "",
-                       const string& xcoord_section_space_name = "",
-                       const string& xprop_fiber_schema_name = "",
-                       const string& xprop_fiber_name = "",
-                       const string& xprop_section_space_name = "",
-                       const string& xprop_rep_name = "");
-
-  ///
-  /// Creates a field with property the same type as xprop
-  /// and its associated structured base space, section spaces,
-  /// and sections, with coordinate and property fiber spaces
-  /// specified by xcoord_fiber_name and xprop_fiber_name, respectively.
-  /// The section spaces are named with the standard form
-  /// fiber_space_name+"_on_"+xbase_space_name.
-  ///
-  static field_vd*
-  new_structured_field(fiber_bundles_namespace& xns,
-                       const string& xbase_space_name,
-                       const block<int>& xindex_ubs,
-                       const string& xcoord_fiber_name,
-                       const string& xcoord_name,
-                       const string& xprop_fiber_name,
-                       const string& xprop_name,
-                       const poset_path& xprop_rep_path,
-                       sec_vd& xprop);
-
-  ///
-  /// Creates a field with property the same type as xprop
-  /// and its associated structured base space, section spaces,
-  /// and sections, with coordinate and property fiber spaces
-  /// specified by xcoord_fiber_name and xprop_fiber_name, respectively.
-  ///
-  static field_vd*
-  new_structured_field(fiber_bundles_namespace& xns,
-                       const string& xbase_space_name,
-                       const block<int>& xindex_ubs,
-                       const string& xcoord_fiber_name,
-                       const string& xcoord_section_space_name,
-                       const string& xcoord_name,
-                       const string& xprop_fiber_name,
-                       const string& xprop_section_space_name,
-                       const string& xprop_name,
-                       const poset_path& xprop_rep_path,
-                       sec_vd& xprop);
-
-
-  ///
-  /// Creates a field with uniform coordinates and with
-  /// property the same type as xprop
-  /// and its associated structured base space, section spaces,
-  /// and sections, with coordinate and property fiber spaces
-  /// specified by xcoord_fiber__name and xprop_fiber_name, respectively.
-  /// The section spaces are named with the standard form
-  /// fiber_space_name+"_on_"+xbase_space_name.
-  ///
-  static field_vd*
-  new_uniform_field(fiber_bundles_namespace& xns,
-                    const string& xbase_space_name,
-                    const block<int>& xindex_ubs,
-                    block<sec_vd_value_type>& xlower,
-                    block<sec_vd_value_type>& xupper,
-                    const string& xcoord_fiber_name,
-                    const string& xcoord_name,
-                    const string& xprop_fiber_name,
-                    const string& xprop_name,
-                    const poset_path& xprop_rep_path,
-                    sec_vd& xprop);
-
-
-  ///
-  /// Creates a field with uniform coordinates and with
-  /// property the same type as xprop
-  /// and its associated structured base space, section spaces,
-  /// and sections, with coordinate and property fiber spaces
-  /// specified by xcoord_fiber_name and xprop_fiber_name, respectively.
-  ///
-  static field_vd*
-  new_uniform_field(fiber_bundles_namespace& xns,
-                    const string& xbase_space_name,
-                    const block<int>& xindex_ubs,
-                    block<sec_vd_value_type>& xlower,
-                    block<sec_vd_value_type>& xupper,
-                    const string& xcoord_fiber_name,
-                    const string& xcoord_section_space_name,
-                    const string& xcoord_name,
-                    const string& xprop_fiber_name,
-                    const string& xprop_section_space_name,
-                    const string& xprop_name,
-                    const poset_path& xprop_rep_path,
-                    sec_vd& xprop);
-
-  ///
   /// Creates a scalar field with name xname+"_scalar_property" on a point mesh
   /// with coordinates which locate the points in xi_size
   /// array, with cooordinate bounds xlower and xupper, and with property values
@@ -215,31 +107,6 @@ public:
                              property_dof_function_type xfcn = 0,
                              const poset_path& xproperty_rep_path =
                                "sec_rep_descriptors/vertex_vertex_constant");
-
-
-  ///
-  /// Creates a scalar field and its associated 1D unstructured base space,
-  /// fiber spaces, section spaces, and sections, with coordinates and
-  /// property fiber schema specified by xcoord_fiber_schema_path and
-  /// xprop_fiber_schema_path, respectively.
-  ///
-  static field_vd*
-  new_scalar_field_1d(fiber_bundles_namespace& xns,
-                      const string& xbase_space_name,
-                      size_type xi_size,
-                      const poset_path& xcoord_fiber_schema_path,
-                      const string& xcoord_fiber_name,
-                      const string& xcoord_section_space_name,
-                      const arg_list& xcoord_section_space_table_dofs,
-                      const string& xcoord_name,
-                      const poset_path& xprop_fiber_schema_path,
-                      const string& xprop_fiber_name,
-                      const string& xprop_section_space_name,
-                      const arg_list& xprop_section_space_table_dofs,
-                      const string& xprop_name,
-                      const poset_path& xprop_rep_path);
-
-
 
   ///
   /// Creates a scalar field with name xname+"_scalar_property" on a 1D mesh
@@ -335,29 +202,6 @@ public:
 #endif
 
   ///
-  /// Creates a scalar field on a 2D structured base space, with
-  /// associated fibers, section spaces, and sections,
-  /// as specified by the arguments.
-  ///
-  static field_vd*
-  new_scalar_field_2d_structured(fiber_bundles_namespace& xns,
-                                 const string& xbase_space_name,
-                                 size_type xi_size,
-                                 size_type xj_size,
-                                 block<sec_vd_value_type>& xlower,
-                                 block<sec_vd_value_type>& xupper,
-                                 const poset_path& xcoord_fiber_schema_path,
-                                 const string& xcoord_fiber_name,
-                                 const string& xcoord_section_space_name,
-                                 const arg_list& xcoord_section_space_table_dofs,
-                                 const string& xcoord_name,
-                                 const poset_path& xprop_fiber_schema_path,
-                                 const string& xprop_fiber_name,
-                                 const string& xprop_section_space_name,
-                                 const arg_list& xprop_section_space_table_dofs,
-                                 const string& xprop_name,
-                                 const poset_path& xprop_rep_path);
-  ///
   /// Creates a scalar field with name xname+"_scalar_property" on a 2D uniform mesh
   /// xi_size by xj_size with cooordinate bounds xlower and xupper and
   /// with property values given by xfcn.
@@ -374,73 +218,6 @@ public:
                               const poset_path& xproperty_rep_path =
                                 "sec_rep_descriptors/vertex_element_dlinear");
                               //"sec_rep_descriptors/vertex_cells_dlinear");
-
-  ///
-  /// Creates a scalar field and its associated 2D structured base space,
-  /// section spaces, and sections, with coordinate and property fiber spaces
-  /// specified by xcoord_fiber__name and xprop_fiber_name, respectively.
-  /// The section spaces are named with the standard form
-  /// fiber_space_name+"_on_"+xbase_space_name.
-  ///
-  static field_vd*
-  new_scalar_field_2d_uniform(fiber_bundles_namespace& xns,
-                              const string& xbase_space_name,
-                              size_type xi_size,
-                              size_type xj_size,
-                              block<sec_vd_value_type>& xlower,
-                              block<sec_vd_value_type>& xupper,
-                              const string& xcoord_fiber_name,
-                              const string& xcoord_name,
-                              const string& xprop_fiber_name,
-                              const string& xprop_name,
-                              const poset_path& xprop_rep_path);
-
-  ///
-  /// Creates a scalar field and its associated 2D structured base space,
-  /// section spaces, and sections, with coordinate and property fiber spaces
-  /// specified by xcoord_fiber__name and xprop_fiber_name, respectively.
-  ///
-  static field_vd*
-  new_scalar_field_2d_uniform(fiber_bundles_namespace& xns,
-                              const string& xbase_space_name,
-                              size_type xi_size,
-                              size_type xj_size,
-                              block<sec_vd_value_type>& xlower,
-                              block<sec_vd_value_type>& xupper,
-                              const string& xcoord_fiber_name,
-                              const string& xcoord_section_space_name,
-                              const string& xcoord_name,
-                              const string& xprop_fiber_name,
-                              const string& xprop_section_space_name,
-                              const string& xprop_name,
-                              const poset_path& xprop_rep_path);
-
-
-
-
-  ///
-  /// Creates a scalar field on a 2D uniform base space, with
-  /// associated fibers, section spaces, and sections,
-  /// as specified by the arguments.
-  ///
-  static field_vd*
-  new_scalar_field_2d_uniform(fiber_bundles_namespace& xns,
-                              const string& xbase_space_name,
-                              size_type xi_size,
-                              size_type xj_size,
-                              block<sec_vd_value_type>& xlower,
-                              block<sec_vd_value_type>& xupper,
-                              const poset_path& xcoord_fiber_schema_path,
-                              const string& xcoord_fiber_name,
-                              const string& xcoord_section_space_name,
-                              const arg_list& xcoord_section_space_table_dofs,
-                              const string& xcoord_name,
-                              const poset_path& xprop_fiber_schema_path,
-                              const string& xprop_fiber_name,
-                              const string& xprop_section_space_name,
-                              const arg_list& xprop_section_space_table_dofs,
-                              const string& xprop_name,
-                              const poset_path& xprop_rep_path);
 
   ///
   /// Creates a scalar field with name xname+"_scalar_property" on a point mesh

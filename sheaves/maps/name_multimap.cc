@@ -484,6 +484,54 @@ delete_name(const string& xname)
   return;
 }
 
+void
+sheaf::name_multimap::
+clear()
+{
+  // cout << endl << "Entering name_multimap::clear." << endl;
+
+  // Preconditions:
+
+
+  // Body:
+
+  _name_to_index_map.clear();
+  _index_to_name_map.clear();
+
+  // Postconditions:
+
+  ensure(empty());
+
+  // Exit:
+
+  // cout << "Leaving name_multimap::clear." << endl;
+  return;
+}
+
+bool
+sheaf::name_multimap::
+empty() const
+{
+  // cout << endl << "Entering name_multimap::empty." << endl;
+
+  // Preconditions:
+
+
+  // Body:
+
+  bool result = (_name_to_index_map.empty() && _index_to_name_map.empty());
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving name_multimap::empty." << endl;
+  return result;
+}
+
+
+
 sheaf::name_multimap::const_iterator
 sheaf::name_multimap::
 begin() const

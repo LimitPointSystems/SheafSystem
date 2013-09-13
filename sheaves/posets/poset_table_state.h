@@ -74,12 +74,17 @@ class SHEAF_DLL_SPEC poset_table_state : public any
 
 public:
 
+//   ///
+//   /// Create an instance with schema xschema and
+//   /// initial storage for xcapacity dof tuples.
+//   ///
+//   poset_table_state(const schema_poset_member& xschema, size_type xcapacity);
+
   ///
   /// Create an instance with schema xschema and
   /// initial storage for xcapacity dof tuples.
   ///
-  poset_table_state(const abstract_poset_member* xschema,
-                    size_type xcapacity);
+  poset_table_state(const abstract_poset_member* xschema, size_type xcapacity);
 
   ///
   /// Destructor

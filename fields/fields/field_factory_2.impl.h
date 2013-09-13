@@ -33,6 +33,10 @@
 #include "assert_contract.h"
 #endif
 
+#ifndef BASE_SPACE_MEMBER_H
+#include "base_space_member.h"
+#endif
+
 #ifndef ERROR_MESSAGE_H
 #include "error_message.h"
 #endif
@@ -558,7 +562,7 @@ make_base_space(fiber_bundles_namespace& xns,
     }
     else
     {
-      lhost = &xns.new_base_space<structured_block_1d>(xbase_path.poset_name());
+      lhost = &structured_block_1d::standard_host(xns, xbase_path.poset_name(), false);
     }
 
     xresult.new_state(lhost, xbase_index_ubs[0], true);
@@ -608,7 +612,7 @@ make_base_space(fiber_bundles_namespace& xns,
     }
     else
     {
-      lhost = &xns.new_base_space<structured_block_2d>(xbase_path.poset_name());
+      lhost = &structured_block_2d::standard_host(xns, xbase_path.poset_name(), false);
     }
 
     xresult.new_state(lhost, xbase_index_ubs[0], xbase_index_ubs[1], true);
@@ -660,7 +664,7 @@ make_base_space(fiber_bundles_namespace& xns,
     }
     else
     {
-      lhost = &xns.new_base_space<structured_block_3d>(xbase_path.poset_name());
+      lhost = &structured_block_3d::standard_host(xns, xbase_path.poset_name(), false);
     }
 
     xresult.new_state(lhost,
@@ -714,7 +718,7 @@ make_base_space(fiber_bundles_namespace& xns,
     }
     else
     {
-      lhost = &xns.new_base_space<point_block_1d>(xbase_path.poset_name());
+      lhost = &point_block_1d::standard_host(xns, xbase_path.poset_name(), false);
     }
 
     xresult.new_state(lhost, xbase_index_ubs[0], true);
@@ -764,7 +768,7 @@ make_base_space(fiber_bundles_namespace& xns,
     }
     else
     {
-      lhost = &xns.new_base_space<point_block_2d>(xbase_path.poset_name());
+      lhost = &point_block_2d::standard_host(xns, xbase_path.poset_name(), false);
     }
 
     xresult.new_state(lhost, xbase_index_ubs[0], xbase_index_ubs[1], true);
@@ -814,7 +818,7 @@ make_base_space(fiber_bundles_namespace& xns,
     }
     else
     {
-      lhost = &xns.new_base_space<point_block_3d>(xbase_path.poset_name());
+      lhost = &point_block_3d::standard_host(xns, xbase_path.poset_name(), false);
     }
 
     xresult.new_state(lhost,
@@ -874,14 +878,10 @@ make_base_space(fiber_bundles_namespace& xns,
     }
     else
     {
-      lhost = &xns.new_base_space<unstructured_block>(xbase_path.poset_name(),
-						      "",
-						      "",
-						      ldb,
-						      true);
+      lhost = &unstructured_block::standard_host(xns, xbase_path.poset_name(), ldb, false);
     }
 
-    string lposet_name(xns.standard_base_space_member_prototypes_poset_name());
+    string lposet_name(base_space_member::prototypes_poset_name());
 
     switch(ldb)
     {
@@ -998,100 +998,30 @@ field_factory_2<coord_type, prop_type, base_type>::
 new_field(fiber_bundles_namespace& xns,
           const poset_path& xbase_path,
           const poset_path& xcoord_path,
-          const poset_path& xprop_path)
+          const poset_path& xprop_path,
+	  bool xauto_access)
 {
   field_type* result;
 
   // Preconditions:
 
-  require(xns.state_is_read_write_accessible());
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
 
   require(xbase_path.full());
   require(unexecutable("base exists or index_ubs compatible with base_type"));
 
   require(xcoord_path.full());
+  require(xns.path_is_auto_read_write_accessible<typename coord_type::host_type>(xcoord_path.poset_name(), xauto_access));
+  
   require(xprop_path.full());
-
-  require(!coord_fiber_schema_path().empty() ?
-          xns.contains_poset_member(coord_fiber_schema_path(), false) :
-          true);
-  require(!prop_fiber_schema_path().empty() ?
-          xns.contains_poset_member(prop_fiber_schema_path(), false) :
-          true);
+  require(xns.path_is_auto_read_write_accessible<typename prop_type::host_type>(xprop_path.poset_name(), xauto_access));
 
   // Body:
 
-
-  _coord_section_space_path = xcoord_path.poset_name();
-  _prop_section_space_path  = xprop_path.poset_name();
-
-  result =
-    new_field(xns, xbase_path, xcoord_path.member_name(), xprop_path.member_name());
-
-
-  // Postconditions:
-
-
-  // Exit:
-
-  return result;
-}
-
-template <typename coord_type, typename prop_type, typename base_type>
-typename field_traits<prop_type>::field_type*
-field_factory_2<coord_type, prop_type, base_type>::
-new_field(fiber_bundles_namespace& xns,
-          const poset_path& xbase_path,
-          const char* xcoord_name,
-          const char* xprop_name)
-{
-  field_type* result;
-
-  // Preconditions:
-
-  require(precondition_of(new_field(xns, xbase_path, string(xcoord_name), string(xprop_name))));
-
-  // Body:
-
-  string lcoord_name(xcoord_name);
-  string lprop_name(xprop_name);
-
-  result = new_field(xns, xbase_path, lcoord_name, lprop_name);
-
-  // Postconditions:
-
-  ensure(postcondition_of(new_field(xns, xbase_path, string(xcoord_name), string(xprop_name))));
-
-  // Exit:
-
-  return result;
-}
-
-template <typename coord_type, typename prop_type, typename base_type>
-typename field_traits<prop_type>::field_type*
-field_factory_2<coord_type, prop_type, base_type>::
-new_field(fiber_bundles_namespace& xns,
-          const poset_path& xbase_path,
-          const string& xcoord_name,
-          const string& xprop_name)
-{
-  field_type* result;
-
-  // Preconditions:
-
-  require(xns.state_is_read_write_accessible());
-  require(xbase_path.full());
-  require(unexecutable("base exists or index_ubs compatible with base_type"));
-  require(poset_path::is_valid_name(xcoord_name));
-  require(!coord_fiber_schema_path().empty() ?
-          xns.contains_poset_member(coord_fiber_schema_path(), false) :
-          true);
-  require(poset_path::is_valid_name(xprop_name));
-  require(!prop_fiber_schema_path().empty() ?
-          xns.contains_poset_member(prop_fiber_schema_path(), false) :
-          true);
-
-  // Body:
+  if(xauto_access)
+  {
+    xns.get_read_write_access();
+  }
 
   // Find or create the base space.
 
@@ -1118,29 +1048,156 @@ new_field(fiber_bundles_namespace& xns,
     lbase.detach_from_state();
   }
 
-  // Find or create the coord section space schema.
-
-  string lcoord_schema_name =
-    coord_section_space_path().poset_name() + "_schema";
-
-  poset_path lcoord_schema_path =
-    xns.new_section_space_schema<coord_type>(lcoord_schema_name,
-					     "", // xsection_space_schema_args
-					     "", // xsection_space_schema_schema_path
-					     coord_rep_path(),
-					     xbase_path,
-					     coord_fiber_path(),
-					     coord_fiber_args(),
-					     coord_fiber_schema_path(),
-					     true);
-
-  // Find or create the coordinates section space.
+  // Find the coordinates section space.
 
   typename coord_type::host_type& lcoords_host =
-    xns.new_section_space<coord_type>(coord_section_space_path(),
-				      coord_section_space_args(),
-				      lcoord_schema_path,
-				      true);
+    xns.member_poset<typename coord_type::host_type>(xcoord_path, false);
+
+  // Find or create the coordinate section.
+
+  string lcoord_name(xcoord_path.member_name());
+
+  coord_type lcoords;
+  if(lcoords_host.contains_member(lcoord_name))
+  {
+    lcoords_host.get_read_access();
+    lcoords.attach_to_state(&lcoords_host, lcoord_name);
+    lcoords_host.release_access();
+  }
+  else
+  {
+    lcoords.new_jim_state(&lcoords_host);
+    lcoords.put_name(lcoord_name, true, true);
+    put_bounds(&lcoords, _base_index_ubs, _coord_lb, _coord_ub);
+  }
+  
+  // Find property section space.
+
+  typename prop_type::host_type& lprop_host =
+    xns.member_poset<typename prop_type::host_type>(xprop_path, false);
+
+  // Find or create the property section.
+
+  string lprop_name(xprop_path.member_name());
+
+  prop_type lprop;
+  if(lprop_host.contains_member(lprop_name))
+  {
+    lprop_host.get_read_access();
+    lprop.attach_to_state(&lprop_host, lprop_name);
+    lprop_host.release_access();
+  }
+  else
+  {
+    lprop.new_jim_state(&lprop_host);
+    lprop.put_name(lprop_name, true, true);
+  }
+
+  // Create the field.
+
+  result = new field_type(xns, lcoords.path(), lprop.path(), true);
+
+  // Clean up.
+
+  lcoords.detach_from_state();
+  lprop.detach_from_state();
+
+  if(xauto_access)
+  {
+    xns.release_access();
+  }
+
+  // Postconditions:
+
+  ensure(result->base_space().path(true) == xbase_path);
+  ensure(result->coordinates().path(true) == xcoord_path);
+  ensure(result->property().path(true) == xprop_path);
+
+  // Exit:
+
+  return result;
+}
+
+template <typename coord_type, typename prop_type, typename base_type>
+typename field_traits<prop_type>::field_type*
+field_factory_2<coord_type, prop_type, base_type>::
+standard_field(fiber_bundles_namespace& xns,
+	       const poset_path& xbase_path,
+	       const string& xcoord_name,
+	       const string& xprop_name,
+	       bool xauto_access)
+{
+  field_type* result;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(xbase_path.full());
+  require(unexecutable("base exists or index_ubs compatible with base_type"));
+
+  require(poset_path::is_valid_name(xcoord_name));
+  require(poset_path::is_valid_name(xprop_name));
+
+  require(coord_rep_path().empty() || coord_rep_path().full());
+  require(coord_rep_path().empty() || xns.path_is_auto_read_accessible<sec_rep_descriptor_poset>(coord_rep_path(), xauto_access));  
+
+  require(coord_fiber_suffix().empty() || poset_path::is_valid_name(coord_fiber_suffix()));
+  require(coord_type::fiber_type::template standard_host_is_available<typename coord_type::fiber_type>(xns, coord_fiber_suffix(), xauto_access));
+
+  require(coord_section_suffix().empty() || poset_path::is_valid_name(coord_section_suffix()));
+  require(coord_type::template standard_host_is_available<coord_type>(xns, xbase_path, coord_rep_path(), coord_section_suffix(), coord_fiber_suffix(), xauto_access));
+
+  require(prop_rep_path().empty() || prop_rep_path().full());
+  require(prop_rep_path().empty() || xns.path_is_auto_read_accessible<sec_rep_descriptor_poset>(prop_rep_path(), xauto_access));  
+
+  require(prop_fiber_suffix().empty() || poset_path::is_valid_name(prop_fiber_suffix()));
+  require(prop_type::fiber_type::template standard_host_is_available<typename prop_type::fiber_type>(xns, prop_fiber_suffix(), xauto_access));
+
+  require(prop_section_suffix().empty() || poset_path::is_valid_name(prop_section_suffix()));
+  require(prop_type::template standard_host_is_available<prop_type>(xns, xbase_path, prop_rep_path(), prop_section_suffix(), prop_fiber_suffix(), xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    xns.get_read_write_access();
+  }
+
+  // Find or create the base space.
+
+  poset_path llocal_cell_prototype_path(_local_cell_prototype_path);
+
+  if(section_traits<coord_type>::must_use_standard_base_type())
+  {
+    typename section_traits<coord_type>::standard_base_type lbase;
+    make_base_space(xns,
+                    xbase_path,
+                    _base_index_ubs,
+                    llocal_cell_prototype_path,
+                    lbase);
+    lbase.detach_from_state();
+  }
+  else
+  {
+    base_type lbase;
+    make_base_space(xns,
+                    xbase_path,
+                    _base_index_ubs,
+                    llocal_cell_prototype_path,
+                    lbase);
+    lbase.detach_from_state();
+  }
+
+  // Find or create the standard coordinates section space.
+
+  typename coord_type::host_type& lcoords_host =
+    coord_type::standard_host(xns,
+			      xbase_path,
+			      coord_rep_path(),
+			      coord_section_suffix(),
+			      coord_fiber_suffix(),
+			      false);
 
   // Find or create the coordinate section.
 
@@ -1158,29 +1215,15 @@ new_field(fiber_bundles_namespace& xns,
     put_bounds(&lcoords, _base_index_ubs, _coord_lb, _coord_ub);
   }
   
-  // Find or create the prop section space schema.
-
-  string lprop_schema_name =
-    prop_section_space_path().poset_name() + "_schema";
-
-  poset_path lprop_schema_path =
-    xns.new_section_space_schema<prop_type>(lprop_schema_name,
-					    "", // xsection_space_schema_args
-					    "", // xsection_space_schema_schema_path
-					    prop_rep_path(),
-					    xbase_path,
-					    prop_fiber_path(),
-					    prop_fiber_args(),
-					    prop_fiber_schema_path(),
-					    true);
-
-  // Find or create the propinates section space.
+  // Find or create the standard property section space.
 
   typename prop_type::host_type& lprop_host =
-    xns.new_section_space<prop_type>(prop_section_space_path(),
-				     prop_section_space_args(),
-				     lprop_schema_path,
-				     true);
+    prop_type::standard_host(xns,
+			     xbase_path,
+			     prop_rep_path(),
+			     prop_section_suffix(),
+			     prop_fiber_suffix(),
+			     false);
 
   // Find or create the property section.
 
@@ -1206,8 +1249,22 @@ new_field(fiber_bundles_namespace& xns,
   lcoords.detach_from_state();
   lprop.detach_from_state();
 
+  if(xauto_access)
+  {
+    xns.release_access();
+  }
+
   // Postconditions:
 
+  ensure(result->base_space().path(true) == xbase_path);
+
+  ensure(result->coordinates().path(true).poset_name() ==
+	 coord_type::template standard_host_path<coord_type>(xbase_path, coord_rep_path(), coord_section_suffix(), coord_fiber_suffix()).poset_name());
+  ensure(result->coordinates().path(true).member_name() == xcoord_name);
+  
+  ensure(result->property().path(true).poset_name() ==
+	 prop_type::template standard_host_path<prop_type>(xbase_path, prop_rep_path(), prop_section_suffix(), prop_fiber_suffix()).poset_name());
+  ensure(result->property().path(true).member_name() == xprop_name);
 
   // Exit:
 
@@ -1261,43 +1318,19 @@ coord_rep_path()
 }
 
 template <typename coord_type, typename prop_type, typename base_type>
-poset_path&
+string&
 field_factory_2<coord_type, prop_type, base_type>::
-coord_fiber_schema_path()
+coord_fiber_suffix()
 {
-  return _coord_fiber_schema_path;
+  return _coord_fiber_suffix;
 }
 
 template <typename coord_type, typename prop_type, typename base_type>
-poset_path&
+string&
 field_factory_2<coord_type, prop_type, base_type>::
-coord_fiber_path()
+coord_section_suffix()
 {
-  return _coord_fiber_path;
-}
-
-template <typename coord_type, typename prop_type, typename base_type>
-arg_list&
-field_factory_2<coord_type, prop_type, base_type>::
-coord_fiber_args()
-{
-  return _coord_fiber_args;
-}
-
-template <typename coord_type, typename prop_type, typename base_type>
-poset_path&
-field_factory_2<coord_type, prop_type, base_type>::
-coord_section_space_path()
-{
-  return _coord_section_space_path;
-}
-
-template <typename coord_type, typename prop_type, typename base_type>
-arg_list&
-field_factory_2<coord_type, prop_type, base_type>::
-coord_section_space_args()
-{
-  return _coord_section_space_args;
+  return _coord_section_suffix;
 }
 
 template <typename coord_type, typename prop_type, typename base_type>
@@ -1332,43 +1365,19 @@ prop_rep_path()
 }
 
 template <typename coord_type, typename prop_type, typename base_type>
-poset_path&
+string&
 field_factory_2<coord_type, prop_type, base_type>::
-prop_fiber_schema_path()
+prop_fiber_suffix()
 {
-  return _prop_fiber_schema_path;
+  return _prop_fiber_suffix;
 }
 
 template <typename coord_type, typename prop_type, typename base_type>
-poset_path&
+string&
 field_factory_2<coord_type, prop_type, base_type>::
-prop_fiber_path()
+prop_section_suffix()
 {
-  return _prop_fiber_path;
-}
-
-template <typename coord_type, typename prop_type, typename base_type>
-arg_list&
-field_factory_2<coord_type, prop_type, base_type>::
-prop_fiber_args()
-{
-  return _prop_fiber_args;
-}
-
-template <typename coord_type, typename prop_type, typename base_type>
-poset_path&
-field_factory_2<coord_type, prop_type, base_type>::
-prop_section_space_path()
-{
-  return _prop_section_space_path;
-}
-
-template <typename coord_type, typename prop_type, typename base_type>
-arg_list&
-field_factory_2<coord_type, prop_type, base_type>::
-prop_section_space_args()
-{
-  return _prop_section_space_args;
+  return _prop_section_suffix;
 }
 
 template <typename coord_type, typename prop_type, typename base_type>

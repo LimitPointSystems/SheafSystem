@@ -20,6 +20,7 @@
 
 #include "field_vd.h"
 
+#include "arg_list.h"
 #include "assert_contract.h"
 #include "base_space_member.h"
 #include "block.impl.h"

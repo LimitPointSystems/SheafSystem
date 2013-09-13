@@ -36,9 +36,47 @@
 
 // PUBLIC MEMBER FUNCTIONS
 
+// sheaf::poset_table_state::
+// poset_table_state(const schema_poset_member& xschema, size_type xcapacity)
+// {
+//   // Preconditions:
+
+//   require(xschema->is_attached());
+
+//   // Body:
+
+//   // Prevent recursive calls to invariant.
+
+//   disable_invariant_check();
+
+//   // Initalize the upper bound of the row dofs.
+
+//   _row_dof_tuple_index_ub.put(hub_id_space(), 0);
+
+//   // Client may have provided a specialized schema member; clone it.
+
+//   _schema = lschema->clone();
+
+//   // Attach to the schema proved by the client.
+
+//   _schema->attach_to_state(xschema);
+
+//   // Can't create the dof map until we're sure we have a schema.
+
+//   _table_dofs = 0;
+
+//   _row_dof_tuples.reserve(xcapacity);
+
+//   _standard_row_dof_tuple_ct = 0;
+
+//   // Postconditions:
+
+//   ensure( (xschema != 0) == schema().is_attached() );
+//   ensure(row_dof_tuple_index_ub().is_hub_scope());
+// }
+
 sheaf::poset_table_state::
-poset_table_state(const abstract_poset_member* xschema,
-                  size_type xcapacity)
+poset_table_state(const abstract_poset_member* xschema, size_type xcapacity)
 {
   // Preconditions:
 

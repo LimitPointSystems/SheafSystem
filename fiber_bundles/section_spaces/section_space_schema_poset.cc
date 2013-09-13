@@ -35,10 +35,10 @@
 #include "section_space_schema_poset.h"
 
 #include "abstract_poset_member.impl.h"
-#include "arg_list.h"
 #include "array_poset_dof_map.h"
 #include "ij_product_structure.h"
 #include "index_iterator.h"
+#include "index_space_iterator.h"
 #include "error_message.h"
 #include "namespace_poset.impl.h"
 #include "namespace_poset_member.h"
@@ -52,7 +52,6 @@
 #include "section_space_schema_table_dofs_type.h"
 #include "std_limits.h"
 #include "std_sstream.h"
-#include "wsv_block.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
@@ -91,27 +90,6 @@ namespace
 
 // PUBLIC FUNCTIONS
 
-const string&
-fiber_bundle::section_space_schema_poset::
-standard_schema_poset_name()
-{
-
-  // Preconditions:
-
-
-  // Body:
-
-  static const string result("section_space_schema_schema");
-
-  // Postconditions:
-
-  ensure(!result.empty());
-
-  // Exit:
-
-  return result;
-}
-
 const sheaf::poset_path&
 fiber_bundle::section_space_schema_poset::
 standard_schema_path()
@@ -121,69 +99,51 @@ standard_schema_path()
 
   // Body:
 
-  static const poset_path
-  result(standard_schema_poset_name(), "section_space_schema_schema");
+  const poset_path& result = section_space_schema_member::standard_schema_path();
 
   // Postconditions:
 
   ensure(result.full());
-  ensure(result.poset_name() == standard_schema_poset_name());
 
   // Exit:
 
   return result;
 }
 
-void
+sheaf::poset_path
 fiber_bundle::section_space_schema_poset::
-make_standard_schema(namespace_poset& xns)
+rep_path(bool xauto_access) const
 {
+  // cout << endl << "Entering section_space_schema_poset::rep_path." << endl;
+
   // Preconditions:
 
-  require(xns.state_is_read_write_accessible());
-  require(xns.contains_poset(standard_schema_poset_name(), false));
-  require(xns.member_poset(standard_schema_poset_name(), false).state_is_read_write_accessible());
-  require(!xns.contains_poset_member(standard_schema_path(), false));
-
+  require(state_is_auto_read_accessible(xauto_access));
+  
   // Body:
 
-  string ldof_specs;
+  if(xauto_access)
+  {
+    get_read_access();
+  }
 
-  // Row dofs are same as row dofs of primitives:
+  poset_path result(sheaf::table_dofs(*this).rep_path);
 
-  ldof_specs =  "size SIZE_TYPE false";
-  ldof_specs += " alignment SIZE_TYPE false";
-  ldof_specs += " type POD_INDEX_TYPE false";
 
-  // Table dofs:
-
-  ldof_specs += " rep_path C_STRING true";
-  ldof_specs += " base_space_path C_STRING true";
-  ldof_specs += " fiber_space_path C_STRING true";
-  //   ldof_specs += " base_space_member_id_ub INT true";
-  //   ldof_specs += " base_space_stride INT true";
-  //   ldof_specs += " db INT true";
-  //   ldof_specs += " fiber_schema_path C_STRING true";
-  //   ldof_specs += " fiber_schema_member_id_ub INT true";
-  //   ldof_specs += " fiber_schema_stride INT true";
-  //   ldof_specs += " df INT true";
-
-  schema_poset_member lschema(xns,
-                              standard_schema_path().member_name(),
-                              poset_path(standard_schema_poset_name(), "bottom"),
-                              ldof_specs,
-                              false);
-
-  lschema.detach_from_state();
+  if(xauto_access)
+  {
+    release_access();
+  }
 
   // Postconditions:
 
-  ensure(xns.contains_poset_member(standard_schema_path()));
 
-  // Exit
+  // Exit:
 
-  return;
+  // cout << "Leaving section_space_schema_poset::rep_path." << endl;
+  return result;
 }
+
 
 fiber_bundle::sec_rep_descriptor&
 fiber_bundle::section_space_schema_poset::
@@ -251,50 +211,6 @@ rep_is_valid(const sec_rep_descriptor& xrep, const poset_state_handle& xbase_spa
   /// @todo check for compatibility between base space and evaluator family.
   /// Just instantiate the evaluator family and see if it contains an entry
   /// for each dof tuple of the base space.
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-bool
-fiber_bundle::section_space_schema_poset::
-rep_is_valid(const namespace_poset& xns, const arg_list& xargs, bool xauto_access) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(xargs.conforms_to(xns, standard_schema_path(), true, xauto_access));
-  
-  require(xns.contains_poset_member(poset_path(xargs.value("rep_path")), xauto_access));
-  require(xns.member_poset(poset_path(xargs.value("rep_path")), xauto_access).state_is_auto_read_accessible(xauto_access));
-
-  require(xns.contains_poset(poset_path(xargs.value("base_space_path")), xauto_access));
-  require(xns.member_poset(poset_path(xargs.value("base_space_path")), xauto_access).state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  poset_state_handle& lbase_space = xns.member_poset(poset_path(xargs.value("base_space_path")), xauto_access);
-  sec_rep_descriptor lrep(&xns, xargs.value("rep_path"), xauto_access);
-
-  if(xauto_access)
-  {
-    lbase_space.get_read_access();
-    lrep.get_read_access();
-  }
-
-  result = rep_is_valid(lrep, lbase_space);
-
-  if(xauto_access)
-  {
-    lrep.release_access();
-    lbase_space.release_access();
-  }
-
-  lrep.detach_from_state();
 
   // Postconditions:
 
@@ -403,6 +319,40 @@ db() const
 
   // Exit
 
+  return result;
+}
+
+sheaf::poset_path
+fiber_bundle::section_space_schema_poset::
+base_space_path(bool xauto_access) const
+{
+  // cout << endl << "Entering section_space_schema_poset::base_space_path." << endl;
+
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  poset_path result(sheaf::table_dofs(*this).base_space_path);
+
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving section_space_schema_poset::base_space_path." << endl;
   return result;
 }
 
@@ -552,6 +502,40 @@ fiber_schema() const
   require(state_is_read_accessible());
 
   return *_fiber_space->schema().host();
+}
+
+sheaf::poset_path
+fiber_bundle::section_space_schema_poset::
+fiber_space_path(bool xauto_access) const
+{
+  // cout << endl << "Entering section_space_schema_poset::fiber_space_path." << endl;
+
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  poset_path result(sheaf::table_dofs(*this).fiber_space_path);
+
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving section_space_schema_poset::fiber_space_path." << endl;
+  return result;
 }
 
 sheaf::poset&
@@ -1372,94 +1356,94 @@ is_atom(pod_index_type xhub_id) const
   return result;
 }
 
-string
-fiber_bundle::section_space_schema_poset::
-member_name(pod_index_type xhub_id, bool xauto_access) const
-{
-  string result;
+// string
+// fiber_bundle::section_space_schema_poset::
+// member_name(pod_index_type xhub_id, bool xauto_access) const
+// {
+//   string result;
 
-  // Preconditions:
+//   // Preconditions:
 
-  require(state_is_auto_read_accessible(xauto_access));
+//   require(state_is_auto_read_accessible(xauto_access));
 
-  // Body:
+//   // Body:
 
-  if(xauto_access)
-  {
-    get_read_access();
-  }
+//   if(xauto_access)
+//   {
+//     get_read_access();
+//   }
 
-  result = poset_state_handle::member_name(xhub_id, false);
-  if(result.empty())
-  {
-    // Member does not have a client assigned name;
-    // try to construct a default name from factor names.
+//   result = poset_state_handle::member_name(xhub_id, false);
+//   if(result.empty())
+//   {
+//     // Member does not have a client assigned name;
+//     // try to construct a default name from factor names.
 
-    pod_index_type lbase_id = get_base_space_id_from_index(xhub_id);
+//     pod_index_type lbase_id = get_base_space_id_from_index(xhub_id);
 
-    pod_index_type lfiber_schema_id = get_fiber_schema_id_from_index(xhub_id);
-    string lfiber_name = fiber_schema().member_name(lfiber_schema_id);
+//     pod_index_type lfiber_schema_id = get_fiber_schema_id_from_index(xhub_id);
+//     string lfiber_name = fiber_schema().member_name(lfiber_schema_id);
 
-    if( (lbase_id == BOTTOM_INDEX) &&
-        (fiber_schema().table_dof_subposet().contains_member(lfiber_schema_id)) )
-    {
-      // This is a table dof member;
-      // name is name of fiber factor.
+//     if( (lbase_id == BOTTOM_INDEX) &&
+//         (fiber_schema().table_dof_subposet().contains_member(lfiber_schema_id)) )
+//     {
+//       // This is a table dof member;
+//       // name is name of fiber factor.
 
-      result = lfiber_name;
-    }
-    else
-    {
-      // This is not a table dof member;
-      // construct name from both base and fiber factor.
+//       result = lfiber_name;
+//     }
+//     else
+//     {
+//       // This is not a table dof member;
+//       // construct name from both base and fiber factor.
 
-      string lbase_name = base_space().member_name(lbase_id);
+//       string lbase_name = base_space().member_name(lbase_id);
 
-      if(lbase_name.empty())
-      {
-        // Construct a name from the base space id.
+//       if(lbase_name.empty())
+//       {
+//         // Construct a name from the base space id.
 
-        stringstream lstr;
-        lstr << lbase_id;
-        lbase_name = lstr.str();
-      }
+//         stringstream lstr;
+//         lstr << lbase_id;
+//         lbase_name = lstr.str();
+//       }
 
-      if(lfiber_name.empty())
-      {
-        // Construct a name from the fiber schema id.
+//       if(lfiber_name.empty())
+//       {
+//         // Construct a name from the fiber schema id.
 
-        stringstream lstr;
-        lstr << lfiber_schema_id;
-        lfiber_name = lstr.str();
-      }
+//         stringstream lstr;
+//         lstr << lfiber_schema_id;
+//         lfiber_name = lstr.str();
+//       }
 
-      result = lbase_name + "_" + lfiber_name;
+//       result = lbase_name + "_" + lfiber_name;
 
-      // ERROR: the following produces the same name for different members.
-      //       if(!lbase_name.empty() || !lfiber_name.empty())
-      //       {
-      //         result = lbase_name + '_' + lfiber_name;
-      //       }
-      //       else
-      //       {
-      //         // Both base and fiber names are empty; do nothing.
-      //       }
-    }
+//       // ERROR: the following produces the same name for different members.
+//       //       if(!lbase_name.empty() || !lfiber_name.empty())
+//       //       {
+//       //         result = lbase_name + '_' + lfiber_name;
+//       //       }
+//       //       else
+//       //       {
+//       //         // Both base and fiber names are empty; do nothing.
+//       //       }
+//     }
 
-  }
+//   }
 
-  if(xauto_access)
-  {
-    release_access();
-  }
+//   if(xauto_access)
+//   {
+//     release_access();
+//   }
 
-  // Postconditions:
+//   // Postconditions:
 
 
-  // Exit:
+//   // Exit:
 
-  return result;
-}
+//   return result;
+// }
 
 fiber_bundle::section_space_schema_member&
 fiber_bundle::section_space_schema_poset::
@@ -1576,6 +1560,31 @@ initialize_standard_members()
   new_standard_member_hack(TOP_INDEX);
   put_member_name(TOP_INDEX, "top", true, false);
   top().attach_to_state(this, TOP_INDEX);
+
+  // All the members exist implicitly, but they
+  // don't have names unless we explicitly give them names.
+  // Make the names for the table schema members 
+  // the same as the corresponding members of the fiber schema
+
+  schema_poset_member lfiber_schema = fiber_space().schema();  
+  index_space_iterator& litr = lfiber_schema.table_dof_id_space().get_iterator();
+  while(!litr.is_done())
+  {
+    // Get the name for the table dof in the fiber schema.
+
+    string ltable_dof_name = lfiber_schema.host()->member_name(litr.hub_pod(), false);
+
+    // Get the index for the corresponding member of this poset.
+
+    pod_index_type ltable_dof_id = get_index_from_components(BOTTOM_INDEX, litr.hub_pod());
+
+    // Set the name in this poset the same as in the fiber schema.
+
+    put_member_name(ltable_dof_id, ltable_dof_name, true, false);
+
+    litr.next();
+  }
+  lfiber_schema.table_dof_id_space().release_iterator(litr);
 
   // Only two standard members and no dof tuples so far.
   // (More may be added in descendants.)
@@ -2134,27 +2143,6 @@ invariant() const
 }
 
 // PROTECTED FUNCTIONS
-
-fiber_bundle::section_space_schema_poset&
-fiber_bundle::section_space_schema_poset::
-operator=(const poset_state_handle& xother)
-{
-  // Preconditions:
-
-  require(is_ancestor_of(&xother));
-
-  // Body:
-
-  poset_state_handle::operator=(xother);
-
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-
-  // Exit:
-
-  return *this;
-}
 
 // PRIVATE FUNCTIONS
 

@@ -67,10 +67,26 @@ public:
   ///
   static const poset_path& standard_schema_path();
 
+  using tp_space::d;
+  
   ///
-  /// Creates an arg list which conforms to the schema of this.
+  /// The tensor dimension implied by tensor degree xp and
+  /// the dimension of the domain vector space specified by xvector_space_path.
   ///
-  static arg_list make_arg_list(int xp, const poset_path& xvector_space_path);
+  static int d(const namespace_poset& xns, int xp, const poset_path& xvector_space_path, bool xauto_access);
+
+  ///
+  /// Creates a new atp_space in namespace xns with path xpath,
+  /// schema specified by xschema_path, and table attributes 
+  /// p and vector_space_path specified by xp and xvector_space_path,
+  /// respectively.
+  ///
+  static atp_space& new_table(namespace_type& xhost, 
+			      const poset_path& xpath, 
+			      const poset_path& xschema_path,
+			      int xp,
+			      const poset_path& xvector_space_path,
+			      bool xauto_access);
   
   ///
   /// True if the member with id xmbr_id is a p-form;
@@ -129,9 +145,9 @@ protected:
   atp_space();
 
   ///
-  /// Copy constructor; attaches this to the same state as xother.
+  /// Copy constructor; disabled.
   ///
-  atp_space(const atp_space& xother);
+  atp_space(const atp_space& xother) { };
 
   ///
   /// Destructor.
@@ -143,49 +159,6 @@ protected:
   ///
   atp_space(atp* xtop, atp* xbottom);
 
-  //============================================================================
-  // NEW HANDLE, NEW STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new poset handle attached to a new state in namespace xhost,
-  /// with schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  atp_space(namespace_poset& xhost,
-	      const string& xname,
-	      const arg_list& xargs,
-	      const poset_path& xschema_path,
-	      bool xauto_access);
-
-  //============================================================================
-  // NEW HANDLE, EXISTING STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new handle attached to the atp_space with
-  /// index xindex in namespace xhost.
-  ///
-  atp_space(const namespace_poset& xhost, pod_index_type xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the atp_space with
-  /// index xindex in namespace xhost.
-  ///
-  atp_space(const namespace_poset& xhost, const scoped_index& xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the atp_space with
-  /// name xname in namespace xhost.
-  ///
-  atp_space(const namespace_poset& xhost, const string& xname, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the atp_space associated
-  /// with namespace member xmbr.
-  ///
-  atp_space(const namespace_poset_member& xmbr, bool xauto_access);
-
 private:
 
   //@}
@@ -196,13 +169,11 @@ private:
   //@{
 
 public:
-
-  using tp_space::d;
   
   ///
   /// Dimension d() as a function of degree xp and domain dimension xdd.
   ///
-  virtual int d(int xp, int xdd) const;
+  virtual int d(int xp, int xdd) const;  
 
   ///
   /// "Rounds" xvariance up or down to a supported value;
@@ -228,7 +199,9 @@ private:
   //@{
 
 public:
+
 protected:
+
 private:
 
   ///
@@ -255,17 +228,15 @@ public:
   ///
   virtual const char* class_name() const;
 
-  ///
-  /// Assignment operator; attaches this to the same state as xother.
-  /// @issue This is probably the wrong signature for operator=,
-  /// see thread Misc/Language/covariance in C++/covariance and operator=
-  /// in the discusion forum. But it is consistent with all the
-  /// other derivatives of poset_state_handle and it will soon be refactored
-  /// out of existence any way.
-  ///
-  atp_space& operator=(const poset_state_handle& xother);
-
 protected:
+
+  ///
+  /// Assignment operator; disabled.
+  ///
+  atp_space& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<atp_space&>(*this);
+  };
 
 private:
 

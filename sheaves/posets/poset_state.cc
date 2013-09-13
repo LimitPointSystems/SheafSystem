@@ -33,24 +33,19 @@
 // PUBLIC MEMBER FUNCTIONS
 
 sheaf::poset_state::
-poset_state(const abstract_poset_member* xschema,
-            poset_type xtype_id,
-            size_type xmbr_ct,
-            size_type xlink_ct,
-            size_type xsubset_ct)
+poset_state(const abstract_poset_member* xschema, poset_type xtype_id, const string& xname)
 {
   // Preconditions:
-
+  
   require(xschema != 0 ? xschema->is_attached() : true);
-  require(xmbr_ct >= 0);
-  require(xlink_ct >=0);
-  require(xsubset_ct >= 0);
 
   // Body:
 
   // Prevent recursive calls to invariant
 
   disable_invariant_check();
+
+  _name = xname;
 
   _type_id = xtype_id;
 
@@ -60,13 +55,17 @@ poset_state(const abstract_poset_member* xschema,
 
   // Create the powerset (set of subposets) data structure
 
-  _powerset = new poset_powerset_state(xsubset_ct, _crg->end());
+  const size_type lsubset_ct= 4; // arbitrary
+
+  _powerset = new poset_powerset_state(lsubset_ct, _crg->end());
 
   // Create the table (dof tuples) structure.
   // Assume one dof tuple for each member as initial guess
   // for number of row dof tuples.
 
-  _table = new poset_table_state(xschema, xmbr_ct);
+  const size_type lmbr_ct = 16; // arbitrary
+
+  _table = new poset_table_state(xschema, lmbr_ct);
 
   // Invariant is not satisfied until client initializes
   // standard subsets, standard members, and schema.
@@ -78,12 +77,65 @@ poset_state(const abstract_poset_member* xschema,
   ensure(!crg()->jim_edit_mode());
   ensure(powerset() != 0);
   ensure(powerset()->subposet_member_index_ub() >= crg()->end());
-  ensure( (xschema != 0) == table()->schema().is_attached() );
+  ensure(xschema != 0 ? table()->schema().is_same_state(xschema) : true);
 
   // Exit:
 
   return;
 }
+
+// sheaf::poset_state::
+// poset_state(const abstract_poset_member* xschema,
+//             poset_type xtype_id,
+//             size_type xmbr_ct,
+//             size_type xlink_ct,
+//             size_type xsubset_ct)
+// {
+//   // Preconditions:
+
+//   require(xschema != 0 ? xschema->is_attached() : true);
+//   require(xmbr_ct >= 0);
+//   require(xlink_ct >=0);
+//   require(xsubset_ct >= 0);
+
+//   // Body:
+
+//   // Prevent recursive calls to invariant
+
+//   disable_invariant_check();
+
+//   _type_id = xtype_id;
+
+//   // Create the cover relation graph data structure
+
+//   _crg = new poset_crg_state();
+
+//   // Create the powerset (set of subposets) data structure
+
+//   _powerset = new poset_powerset_state(xsubset_ct, _crg->end());
+
+//   // Create the table (dof tuples) structure.
+//   // Assume one dof tuple for each member as initial guess
+//   // for number of row dof tuples.
+
+//   _table = new poset_table_state(xschema, xmbr_ct);
+
+//   // Invariant is not satisfied until client initializes
+//   // standard subsets, standard members, and schema.
+//   // Leave invariant checking disabled.
+
+//   // Postconditions:
+
+//   ensure(crg() != 0);
+//   ensure(!crg()->jim_edit_mode());
+//   ensure(powerset() != 0);
+//   ensure(powerset()->subposet_member_index_ub() >= crg()->end());
+//   ensure( (xschema != 0) == table()->schema().is_attached() );
+
+//   // Exit:
+
+//   return;
+// }
 
 sheaf::poset_state::
 ~poset_state()
@@ -108,6 +160,37 @@ sheaf::poset_state::
 
   // Exit:
 
+  return;
+}
+
+const string&
+sheaf::poset_state::
+name() const
+{
+  return _name;
+}
+
+void
+sheaf::poset_state::
+put_name(const string& xname)
+{
+  // cout << endl << "Entering poset_state::put_name." << endl;
+
+  // Preconditions:
+
+  require(poset_path::is_valid_name(xname));
+  
+  // Body:
+
+  _name = xname;
+
+  // Postconditions:
+
+  ensure(name() == xname);
+  
+  // Exit:
+
+  // cout << "Leaving poset_state::put_name." << endl;
   return;
 }
 

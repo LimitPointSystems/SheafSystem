@@ -21,7 +21,9 @@
 
 #include "abstract_poset_member.impl.h"
 #include "assert_contract.h"
+#include "at1_space.h"
 #include "stp.h"
+#include "fiber_bundles_namespace.h"
 #include "namespace_poset.impl.h"
 #include "namespace_poset_member.h"
 #include "poset_handle_factory.h"
@@ -78,34 +80,128 @@ standard_schema_path()
   return result;
 }
 
-sheaf::arg_list
+int
 fiber_bundle::stp_space::
-make_arg_list(int xp, const poset_path& xvector_space_path)
+d(const namespace_poset& xns, int xp, const poset_path& xvector_space_path, bool xauto_access)
 {
   // Preconditions:
 
-
+  require(xp >= 0);
+  
+  require(xns.path_is_auto_read_accessible<vector_space_type>(xvector_space_path, xauto_access));
+ 
   // Body:
 
-  // $$SCRIBBLE: dmb I don't think we need this routine; it's the same as tp_space.
+  int ldd = xns.member_poset<vector_space_type>(xvector_space_path, xauto_access).d();  
 
-  sheaf::arg_list result = tp_space::make_arg_list(xp, xvector_space_path);
-
-  
-#ifdef DIAGNOSTIC_OUTPUT
-  cout << "stp_space::make_arg_list:result: " << result << endl;
-#endif
+  stp_space ltmp;
+  int result = ltmp.d(xp, ldd);
 
   // Postconditions:
 
-  ensure(unexecutable("result.conforms_to(schema of this class)"));
-  ensure(result.value("p") == xp);
-  ensure(result.value("vector_space_path") == xvector_space_path);
-  
+  ensure(result >= 0);
+
   // Exit:
 
   return result;
 }
+
+fiber_bundle::stp_space&
+fiber_bundle::stp_space::
+new_table(namespace_type& xns, 
+          const poset_path& xpath, 
+          const poset_path& xschema_path, 
+          int xp,
+          const poset_path& xvector_space_path, 
+          bool xauto_access)
+{
+  // cout << endl << "Entering stp_space::new_table." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xpath.empty());
+  require(!xns.contains_path(xpath, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));
+
+  require(xns.path_is_auto_read_accessible<vector_space_type>(xvector_space_path, xauto_access));
+
+  require(d(xns, xschema_path, xauto_access) == d(xns, xp, xvector_space_path, xauto_access));  
+
+  // Body:
+
+  // Create the table; have to new it because namespace keeps a pointer.
+
+  typedef stp_space table_type;
+
+  table_type* ltable = new table_type();
+
+  // Create a handle of the right type for the schema member.
+
+  schema_poset_member lschema(&xns, xschema_path, xauto_access);
+
+  if(xauto_access)
+  {
+    lschema.get_read_access();
+  }
+
+  // Get the dimension (== number of row dofs) defined by the schema.
+
+  int ld = lschema.row_dof_ct();
+
+  // Get the dimension of the domain vector space.
+
+  int ldd = xns.member_poset<vector_space_type>(xvector_space_path, xauto_access).d();
+
+  // Get the scalar space path from the domain vector space.
+
+  poset_path lscalar_space_path = xns.member_poset<vector_space_type>(xvector_space_path, xauto_access).scalar_space_path(xauto_access);
+  
+  // Create the table dof map and set dof values;
+  // must be newed because poset_state::_table keep a pointer to it.
+
+  array_poset_dof_map* lmap = new array_poset_dof_map(&lschema, true);
+  lmap->put_dof("factor_ct", ld);
+  lmap->put_dof("d", ld);
+  lmap->put_dof("scalar_space_path", lscalar_space_path);
+  lmap->put_dof("p", xp);
+  lmap->put_dof("dd", ldd);
+  lmap->put_dof("vector_space_path", xvector_space_path);
+  
+  // Create the state.
+
+  ltable->new_state(xns, xpath, lschema, *lmap);
+
+  if(xauto_access)
+  {
+    lschema.release_access();
+  }
+
+  stp_space& result = *ltable;
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xpath);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(result.factor_ct(true) == result.d(true));
+  ensure(result.d(true) == d(xns, xschema_path, xauto_access));
+  ensure(result.scalar_space_path(true) == xns.member_poset<vector_space_type>(xvector_space_path, xauto_access).scalar_space_path(xauto_access) );
+  ensure(result.p(true) == xp);
+  ensure(result.dd(true) == xns.member_poset<vector_space_type>(xvector_space_path, xauto_access).d());
+  ensure(result.vector_space_path(true) == xvector_space_path );
+
+  // Exit:
+
+  // cout << "Leaving stp_space::new_table." << endl;
+  return result;
+} 
 
 // ===========================================================
 // STP_SPACE FACET protected member functions
@@ -125,24 +221,6 @@ stp_space()
 
   ensure(postcondition_of(tp_space::tp_space()));
 }
-
-
-
-fiber_bundle::stp_space::
-stp_space(const stp_space& xother)
-  : tp_space(new stp, new stp)
-{
-  // Preconditions:
-
-  // Body:
-
-  attach_to_state(&xother);
-  
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-}
-
 
 fiber_bundle::stp_space::
 ~stp_space()
@@ -178,168 +256,6 @@ stp_space(stp* xtop, stp* xbottom)
   // Exit:
 
   return;
-}
-
-//==============================================================================
-// NEW HANDLE, NEW STATE CONSTRUCTORS
-//==============================================================================
-
-fiber_bundle::stp_space::
-stp_space(namespace_poset& xhost,
-	    const string& xname,
-	    const arg_list& xargs,
-	    const poset_path& xschema_path,
-	    bool xauto_access)
-  : tp_space(new stp, new stp)
-{
-
-  // Preconditions:
-
-  require(precondition_of(stp_space::new_state(same args)));
-
-  require(int(xargs.value("p")) >= 0);
-
-  require(!poset_path(xargs.value("vector_space_path")).empty());
-  require(xhost.contains_poset(poset_path(xargs.value("vector_space_path")), xauto_access));
-  require(xhost.member_poset(poset_path(xargs.value("vector_space_path")), xauto_access).state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  new_state(xhost, xname, xargs, xschema_path, xauto_access);
-
-  // Postconditions:
-
-  ensure(postcondition_of(stp_space::new_state(same args)));
-
-  // Exit:
-
-  return;
-}
-
-//==============================================================================
-// NEW HANDLE, EXISTING STATE CONSTRUCTORS
-//==============================================================================
-
-fiber_bundle::stp_space::
-stp_space(const namespace_poset& xhost, pod_index_type xindex, bool xauto_access)
-  : tp_space(new stp, new stp)
-{
-  // Preconditions:
-
-  require(xhost.state_is_auto_read_accessible(xauto_access));
-  require(xhost.contains_member(xindex, xauto_access));
-
-  if(xauto_access)
-  {
-    xhost.get_read_access();
-  }
-  
-  require(xhost.is_jim(xindex));
-
-  // Body:
-
-  attach_to_state(&xhost, xindex);
-
-  if(xauto_access)
-  {
-    xhost.release_access();
-  }
-
-  // Postconditions:
-
-  ensure(host() == &xhost);
-  ensure(index() == xindex);
-}
-
-fiber_bundle::stp_space::
-stp_space(const namespace_poset& xhost, const scoped_index& xindex, bool xauto_access)
-  : tp_space(new stp, new stp)
-{
-  // Preconditions:
-
-  require(xhost.state_is_auto_read_accessible(xauto_access));
-  require(xhost.contains_member(xindex, xauto_access));
-
-  if(xauto_access)
-  {
-    xhost.get_read_access();
-  }
-  
-  require(xhost.is_jim(xindex));
-
-  // Body:
-
-  attach_to_state(&xhost, xindex.hub_pod());
-
-  if(xauto_access)
-  {
-    xhost.release_access();
-  }
-
-  // Postconditions:
-
-  ensure(host() == &xhost);
-  ensure(index() ==~ xindex);
-}
-
-fiber_bundle::stp_space::
-stp_space(const namespace_poset& xhost, const string& xname, bool xauto_access)
-  : tp_space(new stp, new stp)
-{
-  // Preconditions:
-
-  require(xhost.state_is_auto_read_accessible(xauto_access));
-  require(xhost.contains_member(xname));
-
-  // Body:
-
-
-  if(xauto_access)
-  {
-    xhost.get_read_access();
-  }
-
-  attach_to_state(&xhost, xname);
-
-  // Postconditions:
-
-  ensure(host() == &xhost);
-  ensure(name() == xname);
-
-  if(xauto_access)
-  {
-    xhost.release_access();
-  }
-}
-
-
-
-fiber_bundle::stp_space::
-stp_space(const namespace_poset_member& xmbr, bool xauto_access)
-  : tp_space(new stp, new stp)
-{
-  // Preconditions:
-
-  require(xmbr.state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-
-  if(xauto_access)
-  {
-    xmbr.get_read_access();
-  }
-
-  attach_to_state(&xmbr);
-
-  if(xauto_access)
-  {
-    xmbr.release_access();
-  }
-
-  // Postconditions:
-
-  ensure(index() ==~ xmbr.index());
 }
 
 // ===========================================================
@@ -448,27 +364,6 @@ class_name() const
   // Exit:
 
   return result;
-}
-
-fiber_bundle::stp_space&
-fiber_bundle::stp_space::
-operator=(const poset_state_handle& xother)
-{
-  // Preconditions:
-
-  require(is_ancestor_of(&xother));
-
-  // Body:
-
-  poset_state_handle::operator=(xother);
-
-  // Postconditions:
-
-  ensure(is_same_state(&xother));
-
-  // Exit:
-
-  return *this;
 }
 
 //==============================================================================

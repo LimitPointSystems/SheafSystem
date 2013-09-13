@@ -209,6 +209,41 @@ private:
 ///
 class SHEAF_DLL_SPEC ed : public at1
 {
+  // ===========================================================
+  /// @name HOST FACTORY FACET OF CLASS ED
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// The path to the standard schema for this class.
+  ///
+  static const poset_path& standard_schema_path();
+
+  ///
+  /// Creates the standard schema for this class in namespace xns.
+  ///
+  static void make_standard_schema(namespace_poset& xns);
+
+  ///
+  /// Creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
+  /// and table attribute scalar_space_path specified by xscalar_space_path.
+  ///
+  static host_type& new_host(namespace_type& xns, 
+			     const poset_path& xhost_path, 
+			     const poset_path& xschema_path,
+			     const poset_path& xscalar_space_path,
+			     bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+
+
   //============================================================================
   /// @name EUCLIDEAN VECTOR ALGEBRA (ED) FACET OF CLASS ED
   //============================================================================
@@ -328,17 +363,8 @@ private:
 
 public:
 
-  ///
-  /// The path to the standard schema for this class.
-  ///
-  static const poset_path& standard_schema_path();
-
-  ///
-  /// Creates the standard schema for this class in namespace xns.
-  ///
-  static void make_standard_schema(namespace_poset& xns);
-
 protected:
+
 private:
 
   //@}

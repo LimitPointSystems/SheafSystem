@@ -52,7 +52,6 @@ namespace sheaf
 template <typename T>
 class factory;
 
-class arg_list;
 class poset_state_handle;
 class namespace_poset;
 

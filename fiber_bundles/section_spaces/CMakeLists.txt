@@ -84,7 +84,6 @@ set(SRCS
     sec_rep_descriptor_poset.cc
     sec_rep_space.cc
     sec_rep_space_member.cc
-    section_space_factory.cc
     section_space_schema_member.cc
     section_space_schema_poset.cc
     section_traits.cc
@@ -96,9 +95,20 @@ collect_sources()
 # Headers that are NOT associated with a .cc file.
 #
 set(ADDITIONAL_INCS
+    binary_section_space_schema_member.impl.h
+    sec_at0.impl.h
+    sec_atp.impl.h
+    sec_ed.impl.h
+    sec_jcb.impl.h
+    sec_met.impl.h
+    sec_st2.impl.h
+    sec_stp.impl.h
+    section_space_schema_member.impl.h
+    sec_tp.impl.h
+    sec_tuple.impl.h
+    sec_tuple_space.impl.h
     sec_vd.impl.h 
     sec_rep_descriptor_table_dofs_type.h 
-    section_space_factory.impl.h 
     section_space_schema_table_dofs_type.h 
    )
 

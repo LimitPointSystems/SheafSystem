@@ -130,6 +130,30 @@ current_namespace()
   return _current_namespace;
 }
 
+sheaf::poset_path
+sheaf::namespace_poset::
+primitives_schema_path()
+{
+  // cout << endl << "Entering namespace_poset::primitives_schema_path." << endl;
+
+  // Preconditions:
+
+
+  // Body:
+
+  poset_path result(primitives_poset_schema::standard_name(), "top");
+
+  // Postconditions:
+
+  ensure(result.full());
+  
+  // Exit:
+
+  // cout << "Leaving namespace_poset::primitives_schema_path." << endl;
+  return result;
+}
+
+
 sheaf::namespace_poset::
 ~namespace_poset()
 {
@@ -626,105 +650,6 @@ namespace_poset(namespace_poset_member* xtop, namespace_poset_member* xbottom)
   return;
 }
 
-sheaf::namespace_poset::
-namespace_poset(const namespace_poset& xother)
-    : poset_state_handle(new namespace_poset_member, new namespace_poset_member)
-{
-  // Preconditions:
-
-  require(xother.state_is_read_accessible());
-
-  // Body:
-
-  disable_invariant_check();
-
-  attach_to_state(&xother);
-
-  enable_invariant_check();
-
-  // Postconditions
-
-  ensure(is_same_state(&xother));
-
-  // Exit:
-
-  return;
-}
-
-sheaf::namespace_poset&
-sheaf::namespace_poset::
-operator=(const namespace_poset& xother)
-{
-  // Preconditions:
-
-  // Body:
-
-  attach_to_state(xother.host(), xother.index());
-
-  // Postconditions
-
-  ensure(is_same_state(&const_cast<namespace_poset&>(xother)));
-
-  // Exit:
-
-  return *this;
-}
-
-sheaf::namespace_poset&
-sheaf::namespace_poset::
-operator=(const poset_state_handle& xother)
-{
-
-  /// @hack allows successful linkage
-  require(false);
-
-  // Exit:
-
-  return *this;
-}
-
-sheaf::namespace_poset::
-namespace_poset(const namespace_poset* xhost, pod_index_type xindex)
-    : poset_state_handle(new namespace_poset_member, new namespace_poset_member)
-{
-  // Preconditions:
-
-  require(xhost != 0);
-  require(xhost->state_is_read_accessible());
-  require(xhost->contains_member(xindex));
-
-  // Body:
-
-  attach_to_state(xhost, xindex);
-
-  // Postconditions:
-
-  ensure(is_attached());
-  ensure(host() == xhost);
-  ensure(index() == xindex);
-}
-
-sheaf::namespace_poset::
-namespace_poset(const namespace_poset* xhost, const scoped_index& xindex)
-    : poset_state_handle(new namespace_poset_member, new namespace_poset_member)
-{
-  // Preconditions:
-
-  require(xhost != 0);
-  require(xhost->state_is_read_accessible());
-  require(xhost->contains_member(xindex));
-
-  // Body:
-
-  attach_to_state(xhost, xindex.hub_pod());
-
-  // Postconditions:
-
-  ensure(is_attached());
-  ensure(host() == xhost);
-  ensure(index() ==~ xindex);
-}
-
 void
 sheaf::namespace_poset::
 put_current_namespace(namespace_poset* xns)
@@ -875,6 +800,70 @@ insert_poset(const poset_state_handle& xposet, const string& xposet_name, bool x
   return result;
 }
 
+sheaf::scoped_index
+sheaf::namespace_poset::
+insert_poset(const poset_state_handle& xposet, const string& xposet_name, bool xauto_link, bool xauto_access)
+{
+  // Preconditions:
+
+  require(!contains_member(xposet_name));
+  require(xauto_access || in_jim_edit_mode());
+  require(xposet.state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  namespace_poset_member lns_mbr;
+
+  // Member corresponding to xposet has not yet been created;
+  // Create it with same name as xposet.
+
+  if(xauto_access)
+  {
+    begin_jim_edit_mode(true);
+    xposet.get_read_access();
+  }
+  
+
+  lns_mbr.new_jim_state(this, 0, false, false);
+  lns_mbr.put_name(xposet_name, true, false);
+
+  // Add member poset to sequence id space.
+
+  mutable_index_space_handle& lid_space = 
+    member_id_spaces(false).get_id_space<mutable_index_space_handle>("member_poset_id_space");
+  lid_space.push_back(lns_mbr.index());
+  release_member_poset_id_space(lid_space, false);
+
+  // Set the name space member dofs:
+
+  lns_mbr.put_poset(xposet);
+
+  // Link the member into the appropriate group.
+
+  if(xauto_link)
+  {
+    link_poset(lns_mbr);
+  }
+
+
+  if(xauto_access)
+  {
+    end_jim_edit_mode(true, true);
+    xposet.release_access();
+  }
+
+  scoped_index result = lns_mbr.index();
+
+  // Postconditions:
+
+  ensure(contains_member(result));
+  ensure(&member_poset(result) == &xposet);
+
+  // Exit:
+
+  return result;
+}
+
 void
 sheaf::namespace_poset::
 link_poset(const namespace_poset_member& xmbr)
@@ -955,48 +944,6 @@ make_prototype()
 // ===========================================================
 
 // PUBLIC FUNCTIONS
-
-sheaf::poset&
-sheaf::namespace_poset::
-new_schema_poset(const string& xname, bool xauto_access)
-{
-  // Preconditions:
-
-  require(xauto_access || in_jim_edit_mode());
-  require(!contains_member(xname, true));
-
-  // Body:
-
-  arg_list largs = poset::make_args();
-  poset& result = new_member_poset<poset>(xname, "primitives_schema/top",
-					  largs, xauto_access);
-  result.get_read_write_access();  
-  
-  // Create the schema subposets of the top.
-
-  subposet ltable_dofs(&result, 0, false);
-  subposet lrow_dofs(&result, 0, false);
-
-  // Schematize the result.
-
-  result.schematize(&ltable_dofs, &lrow_dofs, true);
-
-  // Clean up.
-
-  ltable_dofs.detach_from_state();
-  lrow_dofs.detach_from_state();
-
-  // Postconditions:
-
-  ensure(result.name() == xname);
-  ensure(result.is_schematized(false));
-  
-  result.release_access();
-
-  // Exit:
-
-  return result;
-}
 
 void
 sheaf::namespace_poset::
@@ -1384,6 +1331,27 @@ contains_poset(const poset_path& xpath, bool xauto_access) const
 
 bool
 sheaf::namespace_poset::
+owns(const poset_state_handle& xposet, bool xauto_access) const
+{
+  bool result;
+
+  // Preconditions:
+
+  require(xauto_access || state_is_read_accessible());
+
+  // Body:
+
+  result = contains_poset(xposet.path(true), xauto_access);
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+bool
+sheaf::namespace_poset::
 poset_state_is_read_accessible(const poset_path& xpath, bool xauto_access) const
 {
   bool result;
@@ -1729,146 +1697,6 @@ path_is_auto_read_write_available(const poset_path& xpath, bool xauto_access) co
   return result;
 }
 
-bool
-sheaf::namespace_poset::
-arg_is_auto_read_accessible(const string& xname, const arg_list& xargs, bool xauto_access) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  result = xargs.contains_arg(xname);
-  if(result)
-  {
-    primitive_value lval = xargs.value(xname);
-    result = (lval.id() == C_STRING);
-    if(result)
-    {
-      poset_path lpath(lval);
-      result = !lpath.empty();
-      if(result)
-      {
-	result = path_is_auto_read_accessible(lpath, xauto_access);
-      }
-    }
-  }
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-bool
-sheaf::namespace_poset::
-arg_is_auto_read_write_accessible(const string& xname, const arg_list& xargs, bool xauto_access) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  result = xargs.contains_arg(xname);
-  if(result)
-  {
-    primitive_value lval = xargs.value(xname);
-    result = (lval.id() == C_STRING);
-    if(result)
-    {
-      poset_path lpath(lval);
-      result = !lpath.empty();
-      if(result)
-      {
-	result = path_is_auto_read_write_accessible(lpath, xauto_access);
-      }
-    }
-  }
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-bool
-sheaf::namespace_poset::
-arg_is_auto_read_available(const string& xname, const arg_list& xargs, bool xauto_access) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  result = xargs.contains_arg(xname);
-  if(result)
-  {
-    primitive_value lval = xargs.value(xname);
-    result = (lval.id() == C_STRING);
-    if(result)
-    {
-      poset_path lpath(lval);
-      result = !lpath.empty();
-      if(result)
-      {
-	result = path_is_auto_read_available(lpath, xauto_access);
-      }
-    }
-  }
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-bool
-sheaf::namespace_poset::
-arg_is_auto_read_write_available(const string& xname, const arg_list& xargs, bool xauto_access) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  result = xargs.contains_arg(xname);
-  if(result)
-  {
-    primitive_value lval = xargs.value(xname);
-    result = (lval.id() == C_STRING);
-    if(result)
-    {
-      poset_path lpath(lval);
-      result = !lpath.empty();
-      if(result)
-      {
-	result = path_is_auto_read_write_available(lpath, xauto_access);
-      }
-    }
-  }
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
 // PROTECTED FUNCTIONS
 
 // PRIVATE FUNCTIONS
@@ -2164,11 +1992,7 @@ new_state(const string& xname)
 
   // Now we have a schema, create the poset state object.
 
-  _state = new poset_state(&(_namespace_schema.top()),
-                           NAMESPACE_POSET_ID,
-                           8,   // arbitrary
-                           16,  // arbitrary
-                           4);  // arbitrary
+  _state = new poset_state(&(_namespace_schema.top()), NAMESPACE_POSET_ID, xname);
 
   // Create the primitives poset using the primitives schema
   // Inserted in the namespace in routine initialize_standard_members.
@@ -2790,6 +2614,32 @@ prereq_id(int xi) const
 }
 
 // PROTECTED FUNCTIONS
+
+void
+sheaf::namespace_poset::
+put_name(const string& xname)
+{
+  // cout << endl << "Entering namespace_poset::put_name." << endl;
+
+  // Preconditions:
+
+  require(state_is_read_write_accessible());
+  require(poset_path::is_valid_name(xname));
+  
+  // Body:
+
+  state_obj()->put_name(xname);
+
+  // Postconditions:
+
+  ensure(name() == xname);
+
+  // Exit:
+
+  // cout << "Leaving namespace_poset::put_name." << endl;
+  return;
+}
+
 
 // PRIVATE FUNCTIONS
 

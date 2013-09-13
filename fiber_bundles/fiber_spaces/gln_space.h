@@ -35,7 +35,6 @@
 
 namespace sheaf
 {
-  class arg_list;
   class namespace_poset;
 }
 
@@ -45,6 +44,7 @@ namespace fiber_bundle
   using namespace sheaf;  
 
   class gln;
+  class vd_space;
   
 ///
 /// A Cartesian product space.
@@ -68,6 +68,11 @@ public:
   typedef gln member_type;
 
   ///
+  /// The type of the vector space associated with this space.
+  ///
+  typedef vd_space vector_space_type;
+
+  ///
   /// The name of the standard schema poset for this class.
   ///
   static const string& standard_schema_poset_name();
@@ -83,11 +88,27 @@ public:
   typedef gln_table_dofs_type table_dofs_type;
 
   ///
-  /// Creates an arg list which conforms to the schema of this.
+  /// The dimension of the representation space; n in GL(n, R) implied by the
+  /// vector space specified by xvector_space_path.
   ///
-  static arg_list make_arg_list(int xn,
-				const poset_path& xscalar_space_path,
-				const poset_path& xvector_space_path);
+  static int d(const namespace_poset& xns, const poset_path& xvector_space_path, bool xauto_access);
+
+  ///
+  /// The dimension of the representation space; n in GL(n, R) implied by the
+  /// vector space with dimension specified by xn.
+  ///
+  static int d(int xn);
+
+  ///
+  /// Creates a new tp_space in namespace xns with path xpath,
+  /// schema specified by xschema_path, and table attribute
+  /// vector_space_path specified by xvector_space_path.
+  ///
+  static gln_space& new_table(namespace_type& xhost, 
+			      const poset_path& xpath, 
+			      const poset_path& xschema_path,
+			      const poset_path& xvector_space_path,
+			      bool xauto_access);
   
   //============================================================================
   // TABLE DOFS
@@ -143,9 +164,9 @@ protected:
   gln_space();
 
   ///
-  /// Copy constructor; attaches this to the same state as xother.
+  /// Copy constructor; disabled.
   ///
-  gln_space(const gln_space& xother);
+  gln_space(const gln_space& xother) { };
 
   ///
   /// Destructor.
@@ -156,49 +177,6 @@ protected:
   /// Covariant constructor
   ///
   gln_space(gln* xtop, gln* xbottom);
-
-  //============================================================================
-  // NEW HANDLE, NEW STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new poset handle attached to a new state in namespace xhost,
-  /// with schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  gln_space(namespace_poset& xhost,
-	      const string& xname,
-	      const arg_list& xargs,
-	      const poset_path& xschema_path,
-	      bool xauto_access);
-
-  //============================================================================
-  // NEW HANDLE, EXISTING STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new handle attached to the gln_space with
-  /// index xindex in namespace xhost.
-  ///
-  gln_space(const namespace_poset& xhost, pod_index_type xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the gln_space with
-  /// index xindex in namespace xhost.
-  ///
-  gln_space(const namespace_poset& xhost, const scoped_index& xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the gln_space with
-  /// name xname in namespace xhost.
-  ///
-  gln_space(const namespace_poset& xhost, const string& xname, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the gln_space associated
-  /// with namespace member xmbr.
-  ///
-  gln_space(const namespace_poset_member& xmbr, bool xauto_access);
 
 private:
 
@@ -212,27 +190,6 @@ private:
 public:
 
 protected:
-
-  using poset::new_state;
- 
-  ///
-  /// Attaches this to a new poset state in namespace xhost,
-  /// schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  void new_state(namespace_poset& xhost,
-                 const string& xname,
-                 const arg_list& xargs,
-                 const poset_path& xschema_path,
-                 bool xauto_access);
-
-  ///
-  /// Initializes xarg to satisfy class invariants.
-  ///
-  virtual void initialize_arg_list(const namespace_poset& xns, 
-				   const string& xname,
-				   arg_list& xargs,
-				   bool xauto_access);
 
 private:
 
@@ -265,15 +222,17 @@ public:
   ///
   virtual pod_index_type prereq_id(int xi) const;
 
+protected:
+
   ///
-  /// Assignment operator; attaches this to the same state as xother.
-  /// @issue This is probably the wrong signature for operator=,
-  /// see thread Misc/Language/covariance in C++/covariance and operator=
-  /// in the discusion forum. But it is consistent with all the
-  /// other derivatives of poset_state_handle and it will soon be refactored
-  /// out of existence any way.
+  /// Assignment operator; disabled.
   ///
-  gln_space& operator=(const poset_state_handle& xother);
+  gln_space& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<gln_space&>(*this);
+  };
+
+private:
 
   //@}
  

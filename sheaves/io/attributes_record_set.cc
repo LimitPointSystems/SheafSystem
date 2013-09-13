@@ -147,7 +147,7 @@ invariant() const
 
     disable_invariant_check();
 
-    result = result && ( record_buffer_ub() == RECORD_BUFFER_UB );
+    invariance(record_buffer_ub() == RECORD_BUFFER_UB);
 
     // Finished, turn invariant checking back on.
 
@@ -215,8 +215,8 @@ attributes_record_set(const sheaf_file& xfile, const poset_scaffold& xscaffold)
   // _name has been initialized to poset name in record_set;
   // add attributes dataset suffix to it.
 
-  _name  += ".attributes";
-  _alias += ".attributes";
+  _name  = data_set_name(scaffold().structure().name());
+  _alias  = data_set_alias(scaffold().structure().name());
 
   _ext_dataspace_rank = DATASPACE_RANK;
   _ext_dataspace_dims = new hsize_t[DATASPACE_RANK];
@@ -243,10 +243,33 @@ attributes_record_set(const sheaf_file& xfile, const poset_scaffold& xscaffold)
   // Postconditions:
 
   ensure(invariant());
-  ensure(name() == xscaffold.structure().name() + ".attributes");
+  ensure(name() == data_set_name(scaffold().structure().name()));
+  ensure(alias() == data_set_alias(scaffold().structure().name()));
   ensure(!is_open());
   ensure(record_buffer_ub() == RECORD_BUFFER_UB);
   ensure(record_buffer_ct() == 0);
+}
+
+const string&
+sheaf::attributes_record_set::
+suffix() const
+{
+  // cout << endl << "Entering attributes_record_set::suffix." << endl;
+
+  // Preconditions:
+
+
+  // Body:
+
+  static const string result(".attributes");
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving attributes_record_set::suffix." << endl;
+  return result;
 }
 
 
@@ -475,6 +498,7 @@ externalize()
   return;
 }
 
+
 ///
 hid_t
 sheaf::attributes_record_set::
@@ -498,7 +522,6 @@ create_dataset()
   // Create the dataset with the internal data type.
   // External data type will be set in record_set::open by querying the dataset.
 
-  //  result = H5Dcreate(file().hdf_id(),
   result = H5Dcreate1(file().hdf_id(),
                      name().c_str(),
                      _int_data_type_hdf_id,

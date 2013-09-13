@@ -22,9 +22,9 @@
 
 #include "assert_contract.h"
 #include "arg_list.h"
-#include "base_space_member_prototype.h"
+//#include "base_space_member_prototype.h"
 #include "chart_point_3d.h"
-#include "fiber_bundles_namespace.impl.h"
+#include "fiber_bundles_namespace.h"
 #include "namespace_poset.h"
 #include "poset_path.h"
 #include "preorder_iterator.h"
@@ -33,6 +33,112 @@
 #include "wsv_block.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
+
+// ===========================================================
+// HOST FACTORY FACET
+// ===========================================================
+
+// PUBLIC DATA MEMBERS
+
+
+const sheaf::poset_path&
+fiber_bundle::structured_block_2d::
+static_prototype_path()
+{
+
+  // Preconditions:
+
+  // Body:
+
+  static const poset_path
+  STATIC_PROTOTYPE_PATH(base_space_member::prototypes_poset_name(), "structured_block_2d");
+
+  const poset_path& result = STATIC_PROTOTYPE_PATH;
+
+  // Postconditions:
+
+  ensure(result.poset_name() == base_space_member::prototypes_poset_name());
+  ensure(result.member_name() == "structured_block_2d");
+
+  // Exit
+
+  return result;
+}
+
+fiber_bundle::structured_block_2d::host_type&
+fiber_bundle::structured_block_2d::
+new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xschema_path, bool xauto_access)
+{
+  // cout << endl << "Entering structured_block_2d::new_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
+
+  require(xschema_path.full());
+  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
+  require(schema_poset_member::conforms_to(xns, xschema_path, standard_schema_path(), xauto_access));  
+
+  // Body:
+
+  host_type& result =
+    host_type::new_table(xns, xhost_path, xschema_path, 2, xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == xschema_path);
+
+  ensure(result.max_db() == 2);
+
+  // Exit:
+
+  // cout << "Leaving structured_block_2d::new_host." << endl;
+  return result;
+}
+
+fiber_bundle::structured_block_2d::host_type&
+fiber_bundle::structured_block_2d::
+standard_host(namespace_type& xns, const poset_path& xhost_path, bool xauto_access)
+{
+  // cout << endl << "Entering structured_block_2d::standard_host." << endl;
+
+  // Preconditions:
+
+  require(xns.state_is_auto_read_write_accessible(xauto_access));
+  require(!xhost_path.empty());
+  require(!xns.contains_path(xhost_path, xauto_access));
+  require(xns.path_is_auto_read_accessible(standard_schema_path(), xauto_access));
+
+  // Body:
+
+  host_type& result =
+    new_host(xns, xhost_path, standard_schema_path(), xauto_access);
+
+  // Postconditions:
+
+  ensure(xns.owns(result, xauto_access));
+  ensure(result.path(true) == xhost_path);
+  ensure(result.state_is_not_read_accessible());
+  ensure(result.schema(true).path(xauto_access) == standard_schema_path());
+
+  ensure(result.max_db() == 2);
+  
+  // Exit:
+
+  // cout << "Leaving structured_block_2d::standard_host." << endl;
+  return result;
+}
+
+// PROTECTED DATA MEMBERS
+
+// PRIVATE DATA MEMBERS
+
 
 // ===========================================================
 // STRUCTURED_BLOCK_2D FACET
@@ -427,13 +533,11 @@ new_row_dof_map(poset_state_handle& xhost, size_type xi_size, size_type xj_size,
 
   // Get the block prototype.
 
-  base_space_member_prototype
-  lproto(xhost.name_space(), static_prototype_path(), xauto_access);
+  base_space_member lproto(xhost.name_space(), static_prototype_path(), xauto_access);
 
   // Get the local cell prototype.
 
-  base_space_member_prototype
-  local_proto(xhost.name_space(), static_local_cell_prototype_path(), xauto_access);
+  base_space_member local_proto(xhost.name_space(), static_local_cell_prototype_path(), xauto_access);
 
   // Copy the dofs from the prototypes..
 
@@ -855,105 +959,6 @@ interval() const
 // ===========================================================
 
 // PUBLIC DATA MEMBERS
-
-const sheaf::poset_path&
-fiber_bundle::structured_block_2d::
-standard_schema_path()
-{
-
-  // Preconditions:
-
-  // Body:
-
-  static const poset_path
-  STATIC_SCHEMA_PATH(base_space_member::standard_schema_path().poset_name(),
-                     "structured_block_2d_schema");
-
-  const poset_path& result = STATIC_SCHEMA_PATH;
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-
-const sheaf::poset_path&
-fiber_bundle::structured_block_2d::
-schema_path() const
-{
-  // Preconditions:
-
-  // Body:
-
-  const poset_path& result = standard_schema_path();
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-
-void
-fiber_bundle::structured_block_2d::
-make_standard_schema(namespace_poset& xns)
-{
-  // Preconditions:
-
-  require(xns.state_is_read_write_accessible());
-  require(xns.contains_poset(standard_schema_poset_name(), false));
-  require(!xns.contains_poset_member(standard_schema_path(), false));
-
-  // Body:
-
-  string ldof_specs = "i_size SIZE_TYPE false";
-  ldof_specs       += " j_size SIZE_TYPE false";
-
-  schema_poset_member lschema(xns,
-                              standard_schema_path().member_name(),
-                              structured_block::standard_schema_path(),
-                              ldof_specs,
-                              false);
-
-  lschema.detach_from_state();
-
-  // Postconditions:
-
-  ensure(xns.contains_poset_member(standard_schema_path(), false));
-
-  // Exit:
-
-  return;
-}
-
-
-const sheaf::poset_path&
-fiber_bundle::structured_block_2d::
-static_prototype_path()
-{
-
-  // Preconditions:
-
-  // Body:
-
-  static const poset_path
-  STATIC_PROTOTYPE_PATH(base_space_member::prototypes_poset_name(),
-                        "structured_block_2d");
-
-  const poset_path& result = STATIC_PROTOTYPE_PATH;
-
-  // Postconditions:
-
-  ensure(result.poset_name() == base_space_member::prototypes_poset_name());
-  ensure(result.member_name() == "structured_block_2d");
-
-  // Exit
-
-  return result;
-}
 
 // PROTECTED DATA MEMBERS
 

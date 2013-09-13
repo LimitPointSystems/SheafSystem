@@ -72,40 +72,20 @@ public:
   typedef sec_rep_descriptor_table_dofs_type table_dofs_type;
 
   ///
-  /// Creates an arg list which conforms to the schema of this.
-  ///
-  static arg_list make_arg_list(const poset_path& xprototypes_path);
-
-  ///
-  /// The name of the standard schema poset for this class.
-  ///
-  static const string& standard_schema_poset_name();
-
-  ///
   /// The path to the standard schema for this class.
   ///
   static const poset_path& standard_schema_path();
 
   ///
-  /// The name of the standard sec_rep_descriptor poset.
+  /// Creates a new sec_rep_descriptor_poset in namespace xns with path xpath,
+  /// schema specified by xschema_path, and table attribute prototypes specified
+  /// by xprototypes_path.
   ///
-  static const string& standard_poset_name();
-
-  ///
-  /// Creates the standard schema for this class in namespace xns.
-  ///
-  static void make_standard_schema(namespace_poset& xns);
-
-  ///
-  /// Creates a new handle attached to a new poset state in namespace xhost,
-  /// schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  sec_rep_descriptor_poset(namespace_poset& xhost,
-			   const string& xname,
-			   const arg_list& xargs,
-			   const poset_path& xschema_path,
-			   bool xauto_access);
+  static sec_rep_descriptor_poset& new_table(namespace_type& xhost, 
+                                             const poset_path& xpath, 
+                                             const poset_path& xschema_path,
+                                             const poset_path& xprototypes_path,
+                                             bool xauto_access);
 
   ///
   /// The base space members prototypes poset.
@@ -130,23 +110,22 @@ protected:
   virtual ~sec_rep_descriptor_poset();
 
   ///
-  /// Assignment operator; attaches this to the same state as xother
+  /// Copy constructor; disabled.
   ///
-  sec_rep_descriptor_poset& operator=(const poset_state_handle& xother);
+  sec_rep_descriptor_poset(const sec_rep_descriptor& xother) { };
+
+  ///
+  /// Assignment operator; disabled.
+  ///
+  sec_rep_descriptor_poset& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<sec_rep_descriptor_poset&>(*this);
+  };
 
   ///
   /// Base space members prototypes poset.
   ///
   base_space_poset* _prototypes;  
-
-  ///
-  /// Initializes xarg to satisfy class invariants.
-  ///
-  virtual void initialize_arg_list(const namespace_poset& xns,
-				   const string& xname,
-				   arg_list& xargs,
-				   const poset_path& xschema_path,
-				   bool xauto_access);
 
   ///
   /// Creates prototype for this class and enters in in factory.
@@ -209,27 +188,6 @@ public:
   virtual void release_access(bool xall = false) const;
 
 protected:
-
-  using poset::new_state;
-
-  ///
-  /// Attaches this to a new poset state in namespace xhost,
-  /// schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  void new_state(namespace_poset& xhost,
-                 const string& xname,
-                 const arg_list& xargs,
-                 const poset_path& xschema_path,
-                 bool xauto_access);
-
-  ///
-  /// Attaches this external poset to a new poset state with schema
-  /// given by xschema and table dofs by xdof_map.
-  /// Intended for use by i/o subsystem.
-  ///
-  virtual void new_state(const schema_poset_member& xschema,
-                         array_poset_dof_map& xdof_map);
 
   ///
   /// Initializes the handle data members that depend on the

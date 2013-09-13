@@ -45,9 +45,9 @@ namespace fiber_bundle
 ///
 class SHEAF_DLL_SPEC sec_met_ed : public sec_met
 {
-  //============================================================================
-  /// @name MET_ED FACET OF CLASS SEC_MET_ED
-  //============================================================================
+  // ===========================================================
+  /// @name HOST_FACTORY FACET OF CLASS SEC_MET_ED
+  // ===========================================================
   //@{
 
 public:
@@ -56,6 +56,31 @@ public:
   /// The fiber type.
   ///
   typedef met_ed fiber_type;
+
+  ///
+  /// Creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
+  /// and table attribute scalar_space_path specified by xscalar_space_path.
+  ///
+  static host_type& new_host(namespace_type& xns, 
+                             const poset_path& xhost_path, 
+                             const poset_path& xschema_path,
+                             const poset_path& xscalar_space_path,
+                             bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+ 
+
+  //============================================================================
+  /// @name MET_ED FACET OF CLASS SEC_MET_ED
+  //============================================================================
+  //@{
+
+public:
 
   ///
   /// Default constructor.

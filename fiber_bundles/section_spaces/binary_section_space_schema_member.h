@@ -61,6 +61,106 @@ namespace fiber_bundle
 ///
 class SHEAF_DLL_SPEC binary_section_space_schema_member : public section_space_schema_member
 {
+
+  // ===========================================================
+  /// @name HOAT FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// The type of host poset.
+  ///
+  typedef binary_section_space_schema_poset host_type;
+
+  ///
+  /// The path to the standard schema for this class.
+  ///
+  static const poset_path& standard_schema_path();
+
+  ///
+  /// Creates standard schema for this class in namespace xns.
+  ///
+  static void make_standard_schema(namespace_poset& xns);
+  
+  ///
+  /// Creates a new host for members of this type in namespace xns with path xhost_path,
+  /// schema specified by xschema_path, and table attributes base_space_path, fiber_space_path,
+  /// and rep_path specified by xbase_path, xfiber_path, and xrep_path, respectively.
+  ///
+  static host_type& new_host(namespace_type& xns, 
+                              const poset_path& xhost_path, 
+                              const poset_path& xschema_path,
+                              const poset_path& xbase_path,
+                              const poset_path& xfiber_path,
+                              const poset_path& xrep_path,
+                              bool xauto_access);
+ 
+  ///
+  /// The standard path for the host of a schema for sections of type S with
+  /// base space specified by xbase_path, fiber suffix xfiber_suffix, and 
+  /// representation specified by xrep_path.
+  ///
+  template <typename S>
+  static poset_path standard_host_path(const poset_path& xbase_path, 
+                                       const poset_path& xrep_path, 
+                                       const string& xfiber_suffix);
+ 
+  ///
+  /// The standard path for a schema member for sections of type S with
+  /// base space sepcified by xbase_path, fiber suffix xfiber_suffix, and 
+  /// representation specified by xrep_path.
+  ///
+  template <typename S>
+  static poset_path standard_member_path(const poset_path& xbase_path, 
+                                         const poset_path& xrep_path, 
+                                         const string& xfiber_suffix);
+
+  ///
+  /// True if and only if the host specified by standard_host_path<S>(xbase_path, xrep_path, xfiber_suffix)
+  /// does not exist, or it exists and conforms to host_type.
+  ///
+  template <typename S>
+  static bool standard_host_is_available(namespace_poset& xns,
+                                         const poset_path& xbase_path, 
+                                         const poset_path& xrep_path, 
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
+  
+  ///
+  /// The standard host of a schema for sections of type S with
+  /// base space sepcified by xbase_path, fiber suffix xfiber_suffix, and 
+  /// representation specified by xrep_path.
+  ///
+  template <typename S>
+  static host_type& standard_host(namespace_type& xns, 
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
+
+  
+  ///
+  /// The path for standard schema member for sections of type S with
+  /// base space sepcified by xbase_path, fiber suffix xfiber_suffix, and 
+  /// representation specified by xrep_path.Creates the standard host and 
+  /// member if they do not already exist.
+  ///
+  template <typename S>
+  static poset_path standard_member(namespace_type& xns, 
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+ 
+
   // ===========================================================
   /// @name BINARY_SECTION_SPACE_SCHEMA_MEMBER FACET
   // ===========================================================

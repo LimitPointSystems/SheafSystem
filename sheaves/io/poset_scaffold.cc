@@ -666,6 +666,66 @@ extract_id_name_pair(pod_index_type& xid, string& xname, char*& xbuf)
   return;
 }
 
+void
+sheaf::poset_scaffold::
+get_member_names_from_poset()
+{
+  // cout << endl << "Entering poset_scaffold::get_member_names_from_poset." << endl;
+
+  // Preconditions:
+
+
+  // Body:
+
+  _member_name_map.clear();
+  _member_name_map = _structure.member_name_map();  
+
+  // Postconditions:
+
+  ensure(member_name_map() == structure().member_name_map());
+
+  // Exit:
+
+  // cout << "Leaving poset_scaffold::get_member_names_from_poset." << endl;
+  return;
+}
+
+void
+sheaf::poset_scaffold::
+put_member_names_to_poset()
+{
+  // cout << endl << "Entering poset_scaffold::get_member_names_from_poset." << endl;
+
+  // Preconditions:
+
+  require(structure().state_is_read_write_accessible());
+  
+  // Body:
+
+  _structure.member_name_map().clear();
+  _structure.member_name_map() = _member_name_map;
+
+  name_multimap::const_iterator itr = _structure.member_name_map().begin();
+  while(itr != _structure.member_name_map().end())
+  {
+    pod_index_type lpod = itr->first;
+    ++itr;
+    
+    if(!_structure.contains_member(lpod, false))
+    {
+      _structure.member_name_map().delete_index(lpod);
+    }
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  // cout << "Leaving poset_scaffold::get_member_names_from_poset." << endl;
+  return;
+}
+
+
 // PROTECTED MEMBER FUNCTIONS
 
 // PRIVATE MEMBER FUNCTIONS

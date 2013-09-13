@@ -81,14 +81,17 @@ public:
   ///
   section_pusher(const field_vd& xsrc, const field_vd& xdst, bool xauto_access);
 
-  ///
-  /// Creates the push-forward from the property space of
-  /// xsrc to a property space with the same fiber on the
-  /// base space of xdst_coords. Creates the range space
-  /// if it doesn't already exist.
-  ///
-  section_pusher(const field_vd& xsrc, const sec_ed& xdst_coords,
-                 bool xauto_access);
+  /// @hack Had to comment out this constructor due to COM-466.
+  /// @todo Reimplement once COM-466 is resolved.
+
+//   ///
+//   /// Creates the push-forward from the property space of
+//   /// xsrc to a property space with the same fiber on the
+//   /// base space of xdst_coords. Creates the range space
+//   /// if it doesn't already exist.
+//   ///
+//   section_pusher(const field_vd& xsrc, const sec_ed& xdst_coords,
+//                  bool xauto_access);
 
   ///
   /// Creates the push-forward from xdomain to xrange

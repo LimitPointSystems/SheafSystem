@@ -18,6 +18,7 @@
 /// @file
 /// Implementation for class fiber_bundles_namespace
 
+#include "arg_list.h"
 #include "assert_contract.h"
 #include "at0.h"
 #include "at0_space.h"
@@ -32,7 +33,7 @@
 #include "atp_space.h"
 #include "array_index_space_state.h"
 #include "base_space_member.h"
-#include "base_space_member_prototype.h"
+#include "base_space_poset.h"
 #include "biorder_iterator.h"
 #include "block.impl.h"
 #include "e1.h"
@@ -125,6 +126,7 @@
 #include "unstructured_block.h"
 #include "vd.h"
 #include "vd_space.h"
+#include "zone_nodes_block.h"
 #include "zone_nodes_block_crg_interval.h" // For initialize_prototypes.
 
 /// @hack force initialization of static data members:
@@ -178,109 +180,6 @@ fiber_bundle::fiber_bundles_namespace::
   // Exit:
 
   return;
-}
-
-const string&
-fiber_bundle::fiber_bundles_namespace::
-standard_base_space_schema_poset_name()
-{
-
-  // Preconditions:
-
-
-  // Body:
-
-  static const string result("base_space_schema");
-
-  // Postconditions:
-
-  ensure(!result.empty());
-
-  // Exit:
-
-  return result;
-}
-
-const string&
-fiber_bundle::fiber_bundles_namespace::
-standard_base_space_schema_member_name()
-{
-  // Preconditions:
-
-  // Body:
-
-  static const string result("base_space_schema_member");
-
-  // Postconditions:
-
-  ensure(!result.empty());
-
-  // Exit:
-
-  return result;
-}
-
-const string&
-fiber_bundle::fiber_bundles_namespace::
-standard_base_space_member_prototypes_poset_name()
-{
-
-  // Preconditions:
-
-
-  // Body:
-
-  static const string result("base_space_member_prototypes");
-
-  // Postconditions:
-
-  ensure(!result.empty());
-
-  // Exit:
-
-  return result;
-}
-
-const string&
-fiber_bundle::fiber_bundles_namespace::
-standard_fiber_space_schema_poset_name()
-{
-
-  // Preconditions:
-
-
-  // Body:
-
-  static const string result("fiber_space_schema");
-
-  // Postconditions:
-
-  ensure(!result.empty());
-
-  // Exit:
-
-  return result;
-}
-
-const string&
-fiber_bundle::fiber_bundles_namespace::
-standard_sec_rep_descriptor_poset_name()
-{
-  return sec_rep_descriptor_poset::standard_poset_name();
-}
-
-const string&
-fiber_bundle::fiber_bundles_namespace::
-standard_sec_rep_descriptor_schema_poset_name()
-{
-  return sec_rep_descriptor_poset::standard_schema_poset_name();
-}
-
-const string&
-fiber_bundle::fiber_bundles_namespace::
-standard_section_space_schema_schema_poset_name()
-{
-  return section_space_schema_poset::standard_schema_poset_name();
 }
 
 void
@@ -608,596 +507,6 @@ fiber_bundles_namespace(namespace_poset_member* xtop, namespace_poset_member* xb
   return;
 }
 
-fiber_bundle::fiber_bundles_namespace::
-fiber_bundles_namespace(const fiber_bundles_namespace& xother)
-    : sheaves_namespace(xother)
-{
-  // Preconditions:
-
-  require(precondition_of(sheaves_namespace(xother)));
-
-  // Body:
-
-  _base_space_schema_poset = 0;
-  _base_space_member_prototypes_poset = 0;
-
-  // Postconditions
-
-  ensure(postcondition_of(sheaves_namespace(xother)));
-
-  // Exit:
-
-  return;
-}
-
-// PRIVATE MEMBER FUNCTIONS
-
-// ===========================================================
-// SECTION SPACE SCHEMA FACTORY METHODS FACET
-// ===========================================================
-
-// PUBLIC MEMBER FUNCTIONS
-
-sheaf::poset_path
-fiber_bundle::fiber_bundles_namespace::
-new_section_space_schema(const poset_path& xsection_space_schema_path,
-			 const poset_path& xrep_path,
-			 const poset_path& xbase_space_path,
-			 const poset_path& xfiber_space_path,
-			 bool xauto_access)
-{
-  
-  // Preconditions:
-
-  // Conditions on namespace:
-
-  require(state_is_auto_read_write_accessible(xauto_access));
-
-  // Conditions on xsection_space_schema_path:
-
-  require(xsection_space_schema_path.full());
-  require(path_is_auto_read_write_available<binary_section_space_schema_poset>\
-	  (xsection_space_schema_path, xauto_access));
-
-  // Conditions on xrep_path:
-
-  require(xrep_path.full());
-  require(path_is_auto_read_accessible<sec_rep_descriptor_poset>(xrep_path, xauto_access));
-  
-  // Conditions on xbase_space_path:
-
-  require(xbase_space_path.full());
-  require(path_is_auto_read_accessible<base_space_poset>(xbase_space_path, xauto_access));
-
-  // Conditions on xfiber_space_path:
-
-  require(!xfiber_space_path.empty());
-  require(path_is_auto_read_accessible(xfiber_space_path, xauto_access));
-
-  // Body:
-
-  typedef binary_section_space_schema_poset schema_host_type;
-  typedef binary_section_space_schema_member schema_mbr_type;
-
-  // Find or create the result.
-  
-  poset_path result;
-
-  if(contains_poset_member(xsection_space_schema_path, xauto_access))
-  {
-    // Section space schema exists; just return path arg.
-
-    result = xsection_space_schema_path;
-  }
-  else if(contains_poset(xsection_space_schema_path, xauto_access))
-  {
-    // Section space schema poset exists but not the member; create it.
-
-    schema_host_type& lsssp = member_poset<schema_host_type>(xsection_space_schema_path, xauto_access);
-
-    // Create the schema member.
-
-    lsssp.get_read_write_access();
-    
-    poset_path lfiber_space_schema_path = member_poset(xfiber_space_path, xauto_access).schema().path();
-    
-    schema_mbr_type lschema_mbr(&lsssp, xbase_space_path, lfiber_space_schema_path);
-    lschema_mbr.put_name(xsection_space_schema_path.member_name(), true, false);
-    result = lschema_mbr.path(false);
-    lschema_mbr.detach_from_state();
-
-    lsssp.release_access();
-  }
-  else
-  {
-    // Section space doesn't exist; create it.  
-
-    arg_list lsection_space_schema_args = 
-	schema_host_type::make_arg_list(xrep_path, xbase_space_path, xfiber_space_path);
-
-    // Create the schema poset.
-
-    schema_host_type* lsssp = 
-      new schema_host_type(*this,
-			   xsection_space_schema_path.poset_name(),
-			   lsection_space_schema_args,
-			   schema_host_type::standard_schema_path(),
-			   xauto_access);
-
-    // Create the schema member.
-
-    lsssp->get_read_write_access();
-    
-    poset_path lfiber_space_schema_path = member_poset(xfiber_space_path, xauto_access).schema().path();
-    
-    schema_mbr_type lschema_mbr(lsssp, xbase_space_path, lfiber_space_schema_path);
-    lschema_mbr.put_name(xsection_space_schema_path.member_name(), true, false);
-    result = lschema_mbr.path(false);
-    lschema_mbr.detach_from_state();
-
-    lsssp->release_access();
-  }
-
-  // Postconditions:
-
-  ensure(contains_poset_member(result, xauto_access));
-  
-  // Exit:
-
-  return result;
-}
-
-// ===========================================================
-// SECTION SPACE FACTORY METHODS FACET
-// ===========================================================
- 
-fiber_bundle::sec_rep_space&
-fiber_bundle::fiber_bundles_namespace::
-clone_section_space(const poset_path& xsrc_space_path,
-		    const poset_path& xsection_space_path,
-		    const arg_list& xsection_space_args,
-		    const poset_path& xsection_space_schema_path,
-		    bool xauto_access)
-{
-  // Preconditions:
-
-  require(path_is_auto_read_accessible<sec_rep_space>(xsrc_space_path, xauto_access));
-  require(!xsection_space_path.empty());
-  require(!contains_poset(xsection_space_path, xauto_access));
-  /// @todo: preconditions for xsection_space_Args
-  require(xsection_space_schema_path.empty() || 
-	  path_is_auto_read_accessible<section_space_schema_poset>(xsection_space_schema_path, xauto_access));
-    
-  // Body:
-
-  sec_rep_space& lsrc = member_poset<sec_rep_space>(xsrc_space_path, xauto_access);
-
-  poset_path lsection_space_schema_path(xsection_space_schema_path);
-  if(lsection_space_schema_path.empty())
-  {
-    lsection_space_schema_path = lsrc.schema().path();
-  }
-  
-  sec_rep_space& result = *(lsrc.clone());
-  result.new_state(*this, 
-		   xsection_space_path.poset_name(), 
-		   xsection_space_args, 
-		   lsection_space_schema_path, 
-		   xauto_access);
-
-  // Postconditions:
-
-  /// @todo Postconditions for clone_section_space.
-
-  // Exit:
-
-  return result;
-}
-
-// ===========================================================
-// PATH COMPLETION FACET
-// ===========================================================
-
-// PUBLIC MEMBER FUNCTIONS
-
-sheaf::poset_path
-fiber_bundle::fiber_bundles_namespace::
-completed_path(const poset_path& xprimary_path, 
-	       const poset_path& xsecondary_path, 
-	       const poset_path& xdefault_path) const
-{
-  // Preconditions:
-
-  require(!xdefault_path.empty());
-  
-  // Body:
-
-  poset_path result;
-
-  if(!xprimary_path.empty())
-  {
-    result = xprimary_path;
-  }
-  else if(!xsecondary_path.empty())
-  {
-    result = xsecondary_path;
-  }
-  else
-  {
-    result = xdefault_path;
-  }
-
-  // Postconditions:
-
-  ensure(!result.empty());
-  ensure(!xprimary_path.empty() ? result == xprimary_path : true);
-  ensure(xprimary_path.empty() && !xsecondary_path.empty() ? result == xsecondary_path : true);
-  ensure(xprimary_path.empty() && xsecondary_path.empty() ? result == xdefault_path : true);
-
-  // Exit:
-
-  return result;  
-
-}
-
-sheaf::poset_path
-fiber_bundle::fiber_bundles_namespace::
-completed_full_path(const poset_path& xprimary_path, 
-		    const poset_path& xsecondary_path, 
-		    const poset_path& xdefault_path) const
-{
-  // Preconditions:
-
-  // Body:
-
-  poset_path result;
-
-  if(xprimary_path.full())
-  {
-    result = xprimary_path;
-  }
-  else if(xsecondary_path.full())
-  {
-    result = xsecondary_path;
-  }
-  else
-  {
-    result = xdefault_path;
-  }
-
-  // Postconditions:
-
-  ensure(xprimary_path.full() ? result == xprimary_path : true);
-  ensure(!xprimary_path.full() && xsecondary_path.full() ? result == xsecondary_path : true);
-  ensure(!xprimary_path.full() && !xsecondary_path.full() ? result == xdefault_path : true);
-  ensure(result.full() == (xprimary_path.full() || xsecondary_path.full() || xdefault_path.full()));
-
-  // Exit:
-
-  return result;
-}
-
-// PROTECTED MEMBER FUNCTIONS
-
-sheaf::poset_path
-fiber_bundle::fiber_bundles_namespace::
-scalar_space_path(const poset_path& xvector_space_path, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-  require(is_abstract_vector_space(xvector_space_path, xauto_access));
-  require(path_is_auto_read_accessible(xvector_space_path, xauto_access));
-
-  // Body:
- 
-  vd_space& lvector_space = reinterpret_cast<vd_space&>(member_poset(xvector_space_path, xauto_access));
-  poset_path result = lvector_space.scalar_space_path(xauto_access);
-
-  // Postconditions:
-
-  ensure(!result.empty());
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::poset_path
-fiber_bundle::fiber_bundles_namespace::
-vector_space_path(const poset_path& xfiber_space_path, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-  require(is_tensor_space(xfiber_space_path, xauto_access));
-  require(path_is_auto_read_accessible(xfiber_space_path, xauto_access));
-  
-
-  // Body:
-
-  tp_space& lfiber_space = dynamic_cast<tp_space&>(member_poset(xfiber_space_path, xauto_access));
-  poset_path result = lfiber_space.vector_space_path(xauto_access);
-
-  // Postconditions:
-
-  ensure(!result.empty());
-
-  // Exit:
-
-  return result;
-}
-
-// PRIVATE MEMBER FUNCTIONS
-
-
-// ===========================================================
-// FIBER/SECTION FACTORY METHOD PATH COMPLETION FACET
-// ===========================================================
-
-// PUBLIC MEMBER FUNCTIONS
-
-// PROTECTED MEMBER FUNCTIONS
-
-// PRIVATE MEMBER FUNCTIONS
-
-
-// ===========================================================
-// SECTION SCHEMA FACTORY METHOD PATH COMPLETION FACET
-// ===========================================================
-
-// PUBLIC MEMBER FUNCTIONS
-
-sheaf::poset_path
-fiber_bundle::fiber_bundles_namespace::
-completed_base_space_path(const poset_path& xsection_space_schema_path, 
-			  const poset_path& xbase_space_path, 
-			  const arg_list& xsection_space_schema_args,
-			  bool xauto_access) const
-{
-  // Preconditions:
-
-  require(path_is_auto_read_available(xsection_space_schema_path, xauto_access));
-  require((xsection_space_schema_path.full() && 
-	   contains_path<section_space_schema_poset>(xsection_space_schema_path, xauto_access)) || 
-	  xbase_space_path.full() || 
-	  (xsection_space_schema_args.contains_arg("base_space_path") &&
-	   poset_path(xsection_space_schema_args.value("base_space_path")).full()));
-  
-
-  // Body:
-
-  typedef section_space_schema_poset schema_type;
-  
-  const poset_path& lsssp = xsection_space_schema_path;
-  
-  poset_path result;
-  if(lsssp.full() && contains_path<schema_type>(lsssp, xauto_access))
-  {
-    binary_section_space_schema_member lmbr(*this, lsssp, xauto_access);
-    result = lmbr.base_space().path(xauto_access);
-    lmbr.detach_from_state();
-  }
-  else
-  {
-    poset_path largs_base_space_path;
-    if(xsection_space_schema_args.contains_arg("base_space_path"))
-    {
-      largs_base_space_path = xsection_space_schema_args.value("base_space_path");
-    } 
-    result = completed_full_path(xbase_space_path, largs_base_space_path, "");
-  }
-  
-  // Postconditions:
-
-  ensure(result.full());
-
-  // Exit:
-
-  return result;
-}
-
-// PROTECTED MEMBER FUNCTIONS
-
-// PRIVATE MEMBER FUNCTIONS
-
-
-// ===========================================================
-// FIBER/SECTION FACTORY METHOD PATH AVAILABILITY QUERY FACET
-// ===========================================================
-
-// PUBLIC MEMBER FUNCTIONS
-
-// PROTECTED MEMBER FUNCTIONS
-
-// PRIVATE MEMBER FUNCTIONS
-
-
-// ===========================================================
-// SECTION SCHEMA FACTORY METHOD PATH AVAILABILITY QUERY FACET
-// ===========================================================
-
-// PUBLIC MEMBER FUNCTIONS
-
-// PROTECTED MEMBER FUNCTIONS
-
-// PRIVATE MEMBER FUNCTIONS
-
-
-// ===========================================================
-// MISCELLANEOUS FACTORY METHOD QUERY FACET
-// ===========================================================
- 
-// PUBLIC MEMBER FUNCTIONS
-
-bool
-fiber_bundle::fiber_bundles_namespace::
-is_scalar_space(const poset_path& xpath, bool xauto_access) const
-{
-  // Preconditions:
-
-  // Body:
-
-  bool result =
-    contains_path(xpath, xauto_access) &&
-    (dynamic_cast<at0_space*>(&member_poset(xpath, xauto_access)) != 0);
-
-  // Postconditions:
-
-
-  // Exit:
-
-  return result;
-}
-
-bool
-fiber_bundle::fiber_bundles_namespace::
-is_vector_space(const poset_path& xpath, bool xauto_access) const
-{
-  // Preconditions:
-
-  // Body:
-
-  bool result =
-    contains_path(xpath, xauto_access) &&
-    (dynamic_cast<at1_space*>(&member_poset(xpath, xauto_access)) != 0);
-
-  // Postconditions:
-
-
-  // Exit:
-
-  return result;
-}
-
-bool
-fiber_bundle::fiber_bundles_namespace::
-is_tensor_space(const poset_path& xpath, bool xauto_access) const
-{
-  // Preconditions:
-
-  // Body:
-
-
-  bool result =
-    contains_path(xpath, xauto_access) &&
-    (dynamic_cast<tp_space*>(&member_poset(xpath, xauto_access)) != 0);
-
-  // Postconditions:
-
-
-  // Exit:
-
-  return result;
-}
-
-bool
-fiber_bundle::fiber_bundles_namespace::
-is_strict_tensor_space(const poset_path& xpath, bool xauto_access) const
-{
-  // Preconditions:
-
-  // Body:
-
-  bool result = 
-    is_tensor_space(xpath, xauto_access) &&
-    !is_scalar_space(xpath, xauto_access) &&
-    !is_vector_space(xpath, xauto_access);
-
-  // Postconditions:
-
-
-  // Exit:
-
-  return result;
-}
-
-bool
-fiber_bundle::fiber_bundles_namespace::
-is_jcb_space(const poset_path& xpath, bool xauto_access) const
-{
-  // Preconditions:
-
-  // Body:
-
-
-  bool result =
-    contains_path(xpath, xauto_access) &&
-    (dynamic_cast<jcb_space*>(&member_poset(xpath, xauto_access)) != 0);
-
-  // Postconditions:
-
-
-  // Exit:
-
-  return result;
-}
-
-bool
-fiber_bundle::fiber_bundles_namespace::
-is_abstract_vector_space(const poset_path& xpath, bool xauto_access) const
-{
-  // Preconditions:
-
-  // Body:
-
-
-  bool result =
-    contains_path(xpath, xauto_access) &&
-    (dynamic_cast<vd_space*>(&member_poset(xpath, xauto_access)) != 0);
-
-  // Postconditions:
-
-
-  // Exit:
-
-  return result;
-}
-
-bool
-fiber_bundle::fiber_bundles_namespace::
-is_strict_abstract_vector_space(const poset_path& xpath, bool xauto_access) const
-{
-  // Preconditions:
-
-  // Body:
-
-  bool result = 
-    is_abstract_vector_space(xpath, xauto_access) &&
-    !is_tensor_space(xpath, xauto_access) &&
-    !is_jcb_space(xpath, xauto_access);
-
-  // Postconditions:
-
-
-  // Exit:
-
-  return result;
-}
-
-bool
-fiber_bundle::fiber_bundles_namespace::
-is_gln_space(const poset_path& xpath, bool xauto_access) const
-{
-  // Preconditions:
-
-  // Body:
-
-
-  bool result =
-    contains_path(xpath, xauto_access) &&
-    (dynamic_cast<gln_space*>(&member_poset(xpath, xauto_access)) != 0);
-
-  // Postconditions:
-
-
-  // Exit:
-
-  return result;
-}
-
-// PROTECTED MEMBER FUNCTIONS
-
 // PRIVATE MEMBER FUNCTIONS
 
 
@@ -1216,8 +525,9 @@ make_base_space_definitions()
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(!contains_poset(standard_base_space_schema_poset_name(), false));
-  require(!contains_poset(standard_base_space_member_prototypes_poset_name(), false));
+  //  require(!contains_poset(standard_base_space_schema_poset_name(), false));
+  require(!contains_poset(base_space_member::standard_schema_path(), false));
+  require(!contains_poset(base_space_member::prototypes_poset_name(), false));
 
   // Body:
 
@@ -1231,7 +541,7 @@ make_base_space_definitions()
 
   // Postconditions:
 
-  ensure(contains_poset(standard_base_space_schema_poset_name(), false));
+  ensure(contains_poset(base_space_member::standard_schema_path(), false));
 
   // Exit:
 
@@ -1247,18 +557,16 @@ make_base_space_schema_poset()
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(!contains_poset(standard_base_space_schema_poset_name(), false));
+  require(!contains_poset(base_space_member::standard_schema_path(), false));
 
   // Body:
 
   // Create the schema poset.
 
-  string lname = standard_base_space_schema_poset_name();
+  string lname = base_space_member::standard_schema_path().poset_name();
   poset_path lschema_path = primitives().schema().path(false);
-  arg_list largs = poset::make_args();
 
-  _base_space_schema_poset =
-    &new_member_poset<poset>(lname, lschema_path, largs, true);
+  _base_space_schema_poset = &poset::new_table(const_cast<fiber_bundles_namespace&>(*this), lname, lschema_path, false);
 
   _base_space_schema_poset->get_read_write_access();
 
@@ -1284,7 +592,7 @@ make_base_space_schema_poset()
 
   // Postconditions:
 
-  ensure(contains_poset(standard_base_space_schema_poset_name(), false));
+  ensure(contains_poset(base_space_member::standard_schema_path(), false));
 
   // Exit:
 
@@ -1300,28 +608,34 @@ make_base_space_schema_members()
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(contains_poset(standard_base_space_schema_poset_name(), false));
-  require(member_poset(standard_base_space_schema_poset_name(), false).state_is_read_write_accessible());
+  require(contains_poset(base_space_member::standard_schema_path(), false));
+  require(member_poset(base_space_member::standard_schema_path(), false).state_is_read_write_accessible());
 
   // Body:
 
   base_space_member::make_standard_schema(*this);
-  homogeneous_block::make_standard_schema(*this);
-  unstructured_block::make_standard_schema(*this);
-  structured_block::make_standard_schema(*this);
-  structured_block_3d::make_standard_schema(*this);
-  structured_block_2d::make_standard_schema(*this);
-  structured_block_1d::make_standard_schema(*this);
-  point_block_3d::make_standard_schema(*this);
-  point_block_2d::make_standard_schema(*this);
-  point_block_1d::make_standard_schema(*this);
+//   homogeneous_block::make_standard_schema(*this);
+//   unstructured_block::make_standard_schema(*this);
+//   structured_block::make_standard_schema(*this);
+//   structured_block_3d::make_standard_schema(*this);
+//   structured_block_2d::make_standard_schema(*this);
+//   structured_block_1d::make_standard_schema(*this);
+//   point_block_3d::make_standard_schema(*this);
+//   point_block_2d::make_standard_schema(*this);
+//   point_block_1d::make_standard_schema(*this);
 
-  // Construct the standard base space schema member
-  // (the join of the down set of the standard base space schema poset top).
+//   // Schema for prototypes is join of allother schema,
+//   // so it hase to be constructed last.
 
-  base_space_member lmember(_base_space_schema_poset->top(), true, false);
-  lmember.put_name(standard_base_space_schema_member_name(), true, false);
-  lmember.detach_from_state();
+//   base_space_member_prototype::make_standard_schema(*this);
+  
+
+//   // Construct the standard base space schema member
+//   // (the join of the down set of the standard base space schema poset top).
+
+//   base_space_member lmember(_base_space_schema_poset->top(), true, false);
+//   lmember.put_name(base_space_member::standard_schema_path().member_name(), true, false);
+//   lmember.detach_from_state();
 
   // Postconditions:
 
@@ -1337,36 +651,36 @@ make_base_space_member_prototypes_poset()
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(contains_poset_member(base_space_member_prototype::standard_schema_path(), true));
-  require(!contains_poset(standard_base_space_member_prototypes_poset_name()));
+  require(contains_poset_member(base_space_member::standard_schema_path(), true));
+  require(!contains_poset(base_space_member::prototypes_poset_name()));
 
   // Body:
 
   // Create the prototypes poset.
 
-  string lname = standard_base_space_member_prototypes_poset_name();
-  base_space_poset* lprototypes_poset =
-    &new_base_space<base_space_member_prototype>(lname, "", "", 3, true);
-  lprototypes_poset->begin_jim_edit_mode(true);
+  base_space_poset& lprototypes_poset = 
+    base_space_member::standard_host(*this, base_space_member::prototypes_poset_name(), 3, false);
+
+  lprototypes_poset.begin_jim_edit_mode(true);
 
   // Create the id space for cell types.
 
   arg_list largs = array_index_space_state::make_arg_list(0);
 
-  lprototypes_poset->member_id_spaces(false).
+  lprototypes_poset.member_id_spaces(false).
     new_secondary_state("cell_types",
 			"array_index_space_state",
 			largs, true);
 
   // Create the prototypes:
 
-  make_base_space_member_prototypes(lprototypes_poset);
+  make_base_space_member_prototypes(&lprototypes_poset);
 
   // Clean up.
 
-  lprototypes_poset->end_jim_edit_mode(true, true);
+  lprototypes_poset.end_jim_edit_mode(true, true);
 
-  _base_space_member_prototypes_poset = lprototypes_poset;
+  _base_space_member_prototypes_poset = &lprototypes_poset;
 
   // Postconditions:
 
@@ -1432,6 +746,7 @@ make_base_space_member_prototypes(base_space_poset* xspace)
 
   // Homogeneous blocks.
 
+  make_zone_nodes_block_prototype(xspace);
   make_unstructured_block_prototype(xspace);
   make_structured_block_1d_prototype(xspace);
   make_structured_block_2d_prototype(xspace);
@@ -1466,7 +781,7 @@ make_point_prototype(base_space_poset* xspace)
 
   // Body:
 
-  base_space_member_prototype lpt(xspace, "point", 0, "", false);
+  base_space_member lpt(xspace, "point", 0, "", false);
 
   lpt.detach_from_state();
 
@@ -1491,7 +806,7 @@ make_segment_prototype(base_space_poset* xspace)
 
   // Body:
 
-  base_space_member_prototype lseg(xspace, "segment", 1, "", false);
+  base_space_member lseg(xspace, "segment", 1, "", false);
 
   lseg.detach_from_state();
 
@@ -1517,17 +832,17 @@ make_segment_complex_prototype(base_space_poset* xspace)
 
   // Create the vertices.
 
-  base_space_member_prototype lpt(xspace, "point");
+  base_space_member lpt(xspace, "point");
 
-  base_space_member_prototype v0(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v0(xspace, "point", false, false);
   v0.put_name("segment_complex_vertex_0", true, false);
 
-  base_space_member_prototype v1(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v1(xspace, "point", false, false);
   v1.put_name("segment_complex_vertex_1", true, false);
 
   // Create the segment and link it to the vertices.
 
-  base_space_member_prototype lseg(xspace, "segment_complex", 1, "", false);
+  base_space_member lseg(xspace, "segment_complex", 1, "", false);
 
   lseg.create_cover_link(&v0);
   lseg.create_cover_link(&v1);
@@ -1560,7 +875,7 @@ make_triangle_prototype(base_space_poset* xspace)
 
   // Body:
 
-  base_space_member_prototype ltriangle(xspace, "triangle", 2, "", false);
+  base_space_member ltriangle(xspace, "triangle", 2, "", false);
   ltriangle.detach_from_state();
 
   // Postconditions:
@@ -1585,20 +900,20 @@ make_triangle_nodes_prototype(base_space_poset* xspace)
 
   // Create the vertices.
 
-  base_space_member_prototype lpt(xspace, "point");
+  base_space_member lpt(xspace, "point");
 
-  base_space_member_prototype v0(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v0(xspace, "point", false, false);
   v0.put_name("triangle_nodes_vertex_0", true, false);
 
-  base_space_member_prototype v1(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v1(xspace, "point", false, false);
   v1.put_name("triangle_nodes_vertex_1", true, false);
 
-  base_space_member_prototype v2(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v2(xspace, "point", false, false);
   v2.put_name("triangle_nodes_vertex_2", true, false);
 
   // Create the triangle and link it to the vertices.
 
-  base_space_member_prototype ltriangle(xspace, "triangle_nodes", 2, "", false);
+  base_space_member ltriangle(xspace, "triangle_nodes", 2, "", false);
 
   ltriangle.create_cover_link(&v0);
   ltriangle.create_cover_link(&v1);
@@ -1637,39 +952,39 @@ make_triangle_complex_prototype(base_space_poset* xspace)
 
   // Create the vertices.
 
-  base_space_member_prototype lpt(xspace, "point");
+  base_space_member lpt(xspace, "point");
 
-  base_space_member_prototype v0(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v0(xspace, "point", false, false);
   v0.put_name("triangle_complex_vertex_0", true, false);
 
-  base_space_member_prototype v1(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v1(xspace, "point", false, false);
   v1.put_name("triangle_complex_vertex_1", true, false);
 
-  base_space_member_prototype v2(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v2(xspace, "point", false, false);
   v2.put_name("triangle_complex_vertex_2", true, false);
 
   // Create the edges and link them to the vertices.
 
-  base_space_member_prototype lseg(xspace, "segment");
+  base_space_member lseg(xspace, "segment");
 
-  base_space_member_prototype e0(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e0(xspace, "segment", false, false);
   e0.put_name("triangle_complex_edge_0", true, false);
   e0.create_cover_link(&v0);
   e0.create_cover_link(&v1);
 
-  base_space_member_prototype e1(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e1(xspace, "segment", false, false);
   e1.put_name("triangle_complex_edge_1", true, false);
   e1.create_cover_link(&v1);
   e1.create_cover_link(&v2);
 
-  base_space_member_prototype e2(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e2(xspace, "segment", false, false);
   e2.put_name("triangle_complex_edge_2", true, false);
   e2.create_cover_link(&v2);
   e2.create_cover_link(&v0);
 
   // Create the triangle and link it to the edges.
 
-  base_space_member_prototype ltriangle(xspace, "triangle_complex", 2, "", false);
+  base_space_member ltriangle(xspace, "triangle_complex", 2, "", false);
 
   ltriangle.create_cover_link(&e0);
   ltriangle.create_cover_link(&e1);
@@ -1709,7 +1024,7 @@ make_quad_prototype(base_space_poset* xspace)
 
   // Body:
 
-  base_space_member_prototype lquad(xspace, "quad", 2, "", false);
+  base_space_member lquad(xspace, "quad", 2, "", false);
 
   lquad.detach_from_state();
 
@@ -1737,23 +1052,23 @@ make_quad_nodes_prototype(base_space_poset* xspace)
 
   // Create the vertices.
 
-  base_space_member_prototype lpt(xspace, "point");
+  base_space_member lpt(xspace, "point");
 
-  base_space_member_prototype v0(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v0(xspace, "point", false, false);
   v0.put_name("quad_nodes_vertex_0", true, false);
 
-  base_space_member_prototype v1(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v1(xspace, "point", false, false);
   v1.put_name("quad_nodes_vertex_1", true, false);
 
-  base_space_member_prototype v2(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v2(xspace, "point", false, false);
   v2.put_name("quad_nodes_vertex_2", true, false);
 
-  base_space_member_prototype v3(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v3(xspace, "point", false, false);
   v3.put_name("quad_nodes_vertex_3", true, false);
 
   // Create the quad and link it to the vertices.
 
-  base_space_member_prototype lquad(xspace, "quad_nodes", 2, "", false);
+  base_space_member lquad(xspace, "quad_nodes", 2, "", false);
 
   lquad.create_cover_link(&v0);
   lquad.create_cover_link(&v1);
@@ -1793,47 +1108,47 @@ make_quad_complex_prototype(base_space_poset* xspace)
 
   // Create the vertices.
 
-  base_space_member_prototype lpt(xspace, "point");
+  base_space_member lpt(xspace, "point");
 
-  base_space_member_prototype v0(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v0(xspace, "point", false, false);
   v0.put_name("quad_complex_vertex_0", true, false);
 
-  base_space_member_prototype v1(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v1(xspace, "point", false, false);
   v1.put_name("quad_complex_vertex_1", true, false);
 
-  base_space_member_prototype v2(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v2(xspace, "point", false, false);
   v2.put_name("quad_complex_vertex_2", true, false);
 
-  base_space_member_prototype v3(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v3(xspace, "point", false, false);
   v3.put_name("quad_complex_vertex_3", true, false);
 
   // Create the edges and link them to the vertices.
 
-  base_space_member_prototype lseg(xspace, "segment");
+  base_space_member lseg(xspace, "segment");
 
-  base_space_member_prototype e0(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e0(xspace, "segment", false, false);
   e0.put_name("quad_complex_edge_0", true, false);
   e0.create_cover_link(&v0);
   e0.create_cover_link(&v1);
 
-  base_space_member_prototype e1(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e1(xspace, "segment", false, false);
   e1.put_name("quad_complex_edge_1", true, false);
   e1.create_cover_link(&v1);
   e1.create_cover_link(&v2);
 
-  base_space_member_prototype e2(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e2(xspace, "segment", false, false);
   e2.put_name("quad_complex_edge_2", true, false);
   e2.create_cover_link(&v2);
   e2.create_cover_link(&v3);
 
-  base_space_member_prototype e3(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e3(xspace, "segment", false, false);
   e3.put_name("quad_complex_edge_3", true, false);
   e3.create_cover_link(&v3);
   e3.create_cover_link(&v0);
 
   // Create the quad and link it to the edges.
 
-  base_space_member_prototype lquad(xspace, "quad_complex", 2, "", false);
+  base_space_member lquad(xspace, "quad_complex", 2, "", false);
 
   lquad.create_cover_link(&e0);
   lquad.create_cover_link(&e1);
@@ -1878,7 +1193,7 @@ make_general_polygon_prototype(base_space_poset* xspace)
 
   // Body:
 
-  base_space_member_prototype lpoly(xspace, "general_polygon", 2, "", false);
+  base_space_member lpoly(xspace, "general_polygon", 2, "", false);
   lpoly.detach_from_state();
 
   // Postconditions:
@@ -1902,7 +1217,7 @@ make_tetra_prototype(base_space_poset* xspace)
 
   // Body:
 
-  base_space_member_prototype ltetra(xspace, "tetra", 3, "", false);
+  base_space_member ltetra(xspace, "tetra", 3, "", false);
   ltetra.detach_from_state();
 
   // Postconditions:
@@ -1927,23 +1242,23 @@ make_tetra_nodes_prototype(base_space_poset* xspace)
 
   // Create the vertices.
 
-  base_space_member_prototype lpt(xspace, "point");
+  base_space_member lpt(xspace, "point");
 
-  base_space_member_prototype v0(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v0(xspace, "point", false, false);
   v0.put_name("tetra_nodes_vertex_0", true, false);
 
-  base_space_member_prototype v1(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v1(xspace, "point", false, false);
   v1.put_name("tetra_nodes_vertex_1", true, false);
 
-  base_space_member_prototype v2(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v2(xspace, "point", false, false);
   v2.put_name("tetra_nodes_vertex_2", true, false);
 
-  base_space_member_prototype v3(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v3(xspace, "point", false, false);
   v3.put_name("tetra_nodes_vertex_3", true, false);
 
   // Create the tet and link it to the vertices.
 
-  base_space_member_prototype ltetra(xspace, "tetra_nodes", 3, "", false);
+  base_space_member ltetra(xspace, "tetra_nodes", 3, "", false);
 
   ltetra.create_cover_link(&v0);
   ltetra.create_cover_link(&v1);
@@ -1983,77 +1298,77 @@ make_tetra_complex_prototype(base_space_poset* xspace)
 
   // Create the vertices.
 
-  base_space_member_prototype lpt(xspace, "point");
+  base_space_member lpt(xspace, "point");
 
-  base_space_member_prototype v0(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v0(xspace, "point", false, false);
   v0.put_name("tetra_complex_vertex_0", true, false);
 
-  base_space_member_prototype v1(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v1(xspace, "point", false, false);
   v1.put_name("tetra_complex_vertex_1", true, false);
 
-  base_space_member_prototype v2(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v2(xspace, "point", false, false);
   v2.put_name("tetra_complex_vertex_2", true, false);
 
-  base_space_member_prototype v3(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v3(xspace, "point", false, false);
   v3.put_name("tetra_complex_vertex_3", true, false);
 
   // Create the edges and link thm to the vertices.
 
-  base_space_member_prototype lseg(xspace, "segment");
+  base_space_member lseg(xspace, "segment");
 
-  base_space_member_prototype e0(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e0(xspace, "segment", false, false);
   e0.put_name("tetra_complex_edge_0", true, false);
   e0.create_cover_link(&v0);
   e0.create_cover_link(&v1);
 
-  base_space_member_prototype e1(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e1(xspace, "segment", false, false);
   e1.put_name("tetra_complex_edge_1", true, false);
   e1.create_cover_link(&v1);
   e1.create_cover_link(&v2);
 
-  base_space_member_prototype e2(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e2(xspace, "segment", false, false);
   e2.put_name("tetra_complex_edge_2", true, false);
   e2.create_cover_link(&v2);
   e2.create_cover_link(&v0);
 
-  base_space_member_prototype e3(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e3(xspace, "segment", false, false);
   e3.put_name("tetra_complex_edge_3", true, false);
   e3.create_cover_link(&v2);
   e3.create_cover_link(&v3);
 
-  base_space_member_prototype e4(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e4(xspace, "segment", false, false);
   e4.put_name("tetra_complex_edge_4", true, false);
   e4.create_cover_link(&v3);
   e4.create_cover_link(&v1);
 
-  base_space_member_prototype e5(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e5(xspace, "segment", false, false);
   e5.put_name("tetra_complex_edge_5", true, false);
   e5.create_cover_link(&v3);
   e5.create_cover_link(&v0);
 
   // Create the faces and link them to the edges.
 
-  base_space_member_prototype lface(xspace, "triangle");
+  base_space_member lface(xspace, "triangle");
 
-  base_space_member_prototype f0(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f0(xspace, "triangle", false, false);
   f0.put_name("tetra_complex_face_0", true, false);
   f0.create_cover_link(&e0);
   f0.create_cover_link(&e1);
   f0.create_cover_link(&e2);
 
-  base_space_member_prototype f1(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f1(xspace, "triangle", false, false);
   f1.put_name("tetra_complex_face_1", true, false);
   f1.create_cover_link(&e2);
   f1.create_cover_link(&e3);
   f1.create_cover_link(&e5);
 
-  base_space_member_prototype f2(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f2(xspace, "triangle", false, false);
   f2.put_name("tetra_complex_face_2", true, false);
   f2.create_cover_link(&e5);
   f2.create_cover_link(&e4);
   f2.create_cover_link(&e0);
 
-  base_space_member_prototype f3(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f3(xspace, "triangle", false, false);
   f3.put_name("tetra_complex_face_3", true, false);
   f3.create_cover_link(&e1);
   f3.create_cover_link(&e3);
@@ -2061,7 +1376,7 @@ make_tetra_complex_prototype(base_space_poset* xspace)
 
   // Create the tet and link it to the faces.
 
-  base_space_member_prototype ltetra(xspace, "tetra_complex", 3, "", false);
+  base_space_member ltetra(xspace, "tetra_complex", 3, "", false);
 
   ltetra.create_cover_link(&f0);
   ltetra.create_cover_link(&f1);
@@ -2113,7 +1428,7 @@ make_hex_prototype(base_space_poset* xspace)
 
   // Body:
 
-  base_space_member_prototype lhex(xspace, "hex", 3, "", false);
+  base_space_member lhex(xspace, "hex", 3, "", false);
   lhex.detach_from_state();
 
   // Postconditions:
@@ -2138,35 +1453,35 @@ make_hex_nodes_prototype(base_space_poset* xspace)
 
   // Create the vertices.
 
-  base_space_member_prototype lpt(xspace, "point");
+  base_space_member lpt(xspace, "point");
 
-  base_space_member_prototype v0(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v0(xspace, "point", false, false);
   v0.put_name("hex_nodes_vertex_0", true, false);
 
-  base_space_member_prototype v1(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v1(xspace, "point", false, false);
   v1.put_name("hex_nodes_vertex_1", true, false);
 
-  base_space_member_prototype v2(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v2(xspace, "point", false, false);
   v2.put_name("hex_nodes_vertex_2", true, false);
 
-  base_space_member_prototype v3(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v3(xspace, "point", false, false);
   v3.put_name("hex_nodes_vertex_3", true, false);
 
-  base_space_member_prototype v4(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v4(xspace, "point", false, false);
   v4.put_name("hex_nodes_vertex_4", true, false);
 
-  base_space_member_prototype v5(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v5(xspace, "point", false, false);
   v5.put_name("hex_nodes_vertex_5", true, false);
 
-  base_space_member_prototype v6(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v6(xspace, "point", false, false);
   v6.put_name("hex_nodes_vertex_6", true, false);
 
-  base_space_member_prototype v7(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v7(xspace, "point", false, false);
   v7.put_name("hex_nodes_vertex_7", true, false);
 
   // Create the hex and link it to the vertices
 
-  base_space_member_prototype lhex(xspace, "hex_nodes", 3, "", false);
+  base_space_member lhex(xspace, "hex_nodes", 3, "", false);
 
   lhex.create_cover_link(&v0);
   lhex.create_cover_link(&v1);
@@ -2214,37 +1529,37 @@ make_hex_faces_nodes_prototype(base_space_poset* xspace)
 
   // Create the vertices.
 
-  base_space_member_prototype lpt(xspace, "point");
+  base_space_member lpt(xspace, "point");
 
-  base_space_member_prototype v0(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v0(xspace, "point", false, false);
   v0.put_name("hex_faces_nodes_vertex_0", true, false);
 
-  base_space_member_prototype v1(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v1(xspace, "point", false, false);
   v1.put_name("hex_faces_nodes_vertex_1", true, false);
 
-  base_space_member_prototype v2(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v2(xspace, "point", false, false);
   v2.put_name("hex_faces_nodes_vertex_2", true, false);
 
-  base_space_member_prototype v3(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v3(xspace, "point", false, false);
   v3.put_name("hex_faces_nodes_vertex_3", true, false);
 
-  base_space_member_prototype v4(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v4(xspace, "point", false, false);
   v4.put_name("hex_faces_nodes_vertex_4", true, false);
 
-  base_space_member_prototype v5(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v5(xspace, "point", false, false);
   v5.put_name("hex_faces_nodes_vertex_5", true, false);
 
-  base_space_member_prototype v6(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v6(xspace, "point", false, false);
   v6.put_name("hex_faces_nodes_vertex_6", true, false);
 
-  base_space_member_prototype v7(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v7(xspace, "point", false, false);
   v7.put_name("hex_faces_nodes_vertex_7", true, false);
 
   // Create the faces and link them to the vertices.
 
-  base_space_member_prototype lface(xspace, "quad");
+  base_space_member lface(xspace, "quad");
 
-  base_space_member_prototype f0(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f0(xspace, "quad", false, false);
   f0.put_name("hex_faces_nodes_face_0", true, false);
 
   f0.create_cover_link(&v0);
@@ -2253,7 +1568,7 @@ make_hex_faces_nodes_prototype(base_space_poset* xspace)
   f0.create_cover_link(&v3);
 
 
-  base_space_member_prototype f1(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f1(xspace, "quad", false, false);
   f1.put_name("hex_faces_nodes_face_1", true, false);
 
   f1.create_cover_link(&v4);
@@ -2261,7 +1576,7 @@ make_hex_faces_nodes_prototype(base_space_poset* xspace)
   f1.create_cover_link(&v6);
   f1.create_cover_link(&v7);
 
-  base_space_member_prototype f2(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f2(xspace, "quad", false, false);
   f2.put_name("hex_faces_nodes_face_2", true, false);
 
   f2.create_cover_link(&v1);
@@ -2269,7 +1584,7 @@ make_hex_faces_nodes_prototype(base_space_poset* xspace)
   f2.create_cover_link(&v6);
   f2.create_cover_link(&v2);
 
-  base_space_member_prototype f3(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f3(xspace, "quad", false, false);
   f3.put_name("hex_faces_nodes_face_3", true, false);
 
   f3.create_cover_link(&v0);
@@ -2277,7 +1592,7 @@ make_hex_faces_nodes_prototype(base_space_poset* xspace)
   f3.create_cover_link(&v7);
   f3.create_cover_link(&v3);
 
-  base_space_member_prototype f4(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f4(xspace, "quad", false, false);
   f4.put_name("hex_faces_nodes_face_4", true, false);
 
   f4.create_cover_link(&v0);
@@ -2285,7 +1600,7 @@ make_hex_faces_nodes_prototype(base_space_poset* xspace)
   f4.create_cover_link(&v5);
   f4.create_cover_link(&v4);
 
-  base_space_member_prototype f5(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f5(xspace, "quad", false, false);
   f5.put_name("hex_faces_nodes_face_5", true, false);
 
   f5.create_cover_link(&v3);
@@ -2295,7 +1610,7 @@ make_hex_faces_nodes_prototype(base_space_poset* xspace)
 
   // Create the hex and link it to the faces.
 
-  base_space_member_prototype lhex(xspace, "hex_faces_nodes", 3, "", false);
+  base_space_member lhex(xspace, "hex_faces_nodes", 3, "", false);
 
   lhex.create_cover_link(&f0);
   lhex.create_cover_link(&f1);
@@ -2350,136 +1665,136 @@ make_hex_complex_prototype(base_space_poset* xspace)
 
   // Create the vertices.
 
-  base_space_member_prototype lpt(xspace, "point");
+  base_space_member lpt(xspace, "point");
 
-  base_space_member_prototype v0(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v0(xspace, "point", false, false);
   v0.put_name("hex_complex_vertex_0", true, false);
 
-  base_space_member_prototype v1(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v1(xspace, "point", false, false);
   v1.put_name("hex_complex_vertex_1", true, false);
 
-  base_space_member_prototype v2(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v2(xspace, "point", false, false);
   v2.put_name("hex_complex_vertex_2", true, false);
 
-  base_space_member_prototype v3(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v3(xspace, "point", false, false);
   v3.put_name("hex_complex_vertex_3", true, false);
 
-  base_space_member_prototype v4(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v4(xspace, "point", false, false);
   v4.put_name("hex_complex_vertex_4", true, false);
 
-  base_space_member_prototype v5(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v5(xspace, "point", false, false);
   v5.put_name("hex_complex_vertex_5", true, false);
 
-  base_space_member_prototype v6(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v6(xspace, "point", false, false);
   v6.put_name("hex_complex_vertex_6", true, false);
 
-  base_space_member_prototype v7(xspace, lpt.dof_tuple_id(false), false);
+  base_space_member v7(xspace, "point", false, false);
   v7.put_name("hex_complex_vertex_7", true, false);
 
   // Create the edges and link them to the vertices.
 
-  base_space_member_prototype lseg(xspace, "segment");
+  base_space_member lseg(xspace, "segment");
 
-  base_space_member_prototype e0(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e0(xspace, "segment", false, false);
   e0.put_name("hex_complex_edge_0", true, false);
   e0.create_cover_link(&v0);
   e0.create_cover_link(&v1);
 
-  base_space_member_prototype e1(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e1(xspace, "segment", false, false);
   e1.put_name("hex_complex_edge_1", true, false);
   e1.create_cover_link(&v1);
   e1.create_cover_link(&v2);
 
-  base_space_member_prototype e2(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e2(xspace, "segment", false, false);
   e2.put_name("hex_complex_edge_2", true, false);
   e2.create_cover_link(&v2);
   e2.create_cover_link(&v3);
 
-  base_space_member_prototype e3(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e3(xspace, "segment", false, false);
   e3.put_name("hex_complex_edge_3", true, false);
   e3.create_cover_link(&v3);
   e3.create_cover_link(&v0);
 
-  base_space_member_prototype e4(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e4(xspace, "segment", false, false);
   e4.put_name("hex_complex_edge_4", true, false);
   e4.create_cover_link(&v4);
   e4.create_cover_link(&v5);
 
-  base_space_member_prototype e5(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e5(xspace, "segment", false, false);
   e5.put_name("hex_complex_edge_5", true, false);
   e5.create_cover_link(&v5);
   e5.create_cover_link(&v6);
 
-  base_space_member_prototype e6(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e6(xspace, "segment", false, false);
   e6.put_name("hex_complex_edge_6", true, false);
   e6.create_cover_link(&v6);
   e6.create_cover_link(&v7);
 
-  base_space_member_prototype e7(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e7(xspace, "segment", false, false);
   e7.put_name("hex_complex_edge_7", true, false);
   e7.create_cover_link(&v7);
   e7.create_cover_link(&v4);
 
-  base_space_member_prototype e8(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e8(xspace, "segment", false, false);
   e8.put_name("hex_complex_edge_8", true, false);
   e8.create_cover_link(&v3);
   e8.create_cover_link(&v7);
 
-  base_space_member_prototype e9(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e9(xspace, "segment", false, false);
   e9.put_name("hex_complex_edge_9", true, false);
   e9.create_cover_link(&v2);
   e9.create_cover_link(&v6);
 
-  base_space_member_prototype e10(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e10(xspace, "segment", false, false);
   e10.put_name("hex_complex_edge_10", true, false);
   e10.create_cover_link(&v1);
   e10.create_cover_link(&v5);
 
-  base_space_member_prototype e11(xspace, lseg.dof_tuple_id(false), false);
+  base_space_member e11(xspace, "segment", false, false);
   e11.put_name("hex_complex_edge_11", true, false);
   e11.create_cover_link(&v0);
   e11.create_cover_link(&v4);
 
   // Create the faces and link them to the edges.
 
-  base_space_member_prototype lface(xspace, "quad_complex");
+  base_space_member lface(xspace, "quad_complex");
 
-  base_space_member_prototype f0(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f0(xspace, "quad_complex", false, false);
   f0.put_name("hex_complex_face_0", true, false);
   f0.create_cover_link(&e0);
   f0.create_cover_link(&e1);
   f0.create_cover_link(&e2);
   f0.create_cover_link(&e3);
 
-  base_space_member_prototype f1(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f1(xspace, "quad_complex", false, false);
   f1.put_name("hex_complex_face_1", true, false);
   f1.create_cover_link(&e4);
   f1.create_cover_link(&e5);
   f1.create_cover_link(&e6);
   f1.create_cover_link(&e7);
 
-  base_space_member_prototype f2(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f2(xspace, "quad_complex", false, false);
   f2.put_name("hex_complex_face_2", true, false);
   f2.create_cover_link(&e10);
   f2.create_cover_link(&e5);
   f2.create_cover_link(&e9);
   f2.create_cover_link(&e1);
 
-  base_space_member_prototype f3(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f3(xspace, "quad_complex", false, false);
   f3.put_name("hex_complex_face_3", true, false);
   f3.create_cover_link(&e11);
   f3.create_cover_link(&e7);
   f3.create_cover_link(&e8);
   f3.create_cover_link(&e3);
 
-  base_space_member_prototype f4(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f4(xspace, "quad_complex", false, false);
   f4.put_name("hex_complex_face_4", true, false);
   f4.create_cover_link(&e0);
   f4.create_cover_link(&e10);
   f4.create_cover_link(&e4);
   f4.create_cover_link(&e11);
 
-  base_space_member_prototype f5(xspace, lface.dof_tuple_id(false), false);
+  base_space_member f5(xspace, "quad_complex", false, false);
   f5.put_name("hex_complex_face_5", true, false);
   f5.create_cover_link(&e2);
   f5.create_cover_link(&e9);
@@ -2488,7 +1803,7 @@ make_hex_complex_prototype(base_space_poset* xspace)
 
   // Create the hex and link it to the faces.
 
-  base_space_member_prototype lhex(xspace, "hex_complex", 3, "", false);
+  base_space_member lhex(xspace, "hex_complex", 3, "", false);
 
   lhex.create_cover_link(&f0);
   lhex.create_cover_link(&f1);
@@ -2555,12 +1870,37 @@ make_general_polyhedron_prototype(base_space_poset* xspace)
 
   // Body:
 
-  base_space_member_prototype lpoly(xspace, "general_polyhedron", 3, "", false);
+  base_space_member lpoly(xspace, "general_polyhedron", 3, "", false);
   lpoly.detach_from_state();
 
   // Postconditions:
 
   ensure(xspace->contains_member("general_polyhedron"));
+
+  // Exit:
+
+  return;
+}
+
+void
+fiber_bundle::fiber_bundles_namespace::
+make_zone_nodes_block_prototype(base_space_poset* xspace)
+{
+  // Preconditions:
+
+  require(xspace != 0);
+  require(xspace->in_jim_edit_mode());
+
+  // Body:
+
+  string lproto_name(zone_nodes_block::static_prototype_path().member_name());
+
+  base_space_member lblk(xspace, lproto_name, 0, "", false);
+  lblk.detach_from_state();
+
+  // Postconditions:
+
+  ensure(xspace->contains_member(zone_nodes_block::static_prototype_path().member_name()));
 
   // Exit:
 
@@ -2580,7 +1920,7 @@ make_unstructured_block_prototype(base_space_poset* xspace)
 
   string lproto_name(unstructured_block::static_prototype_path().member_name());
 
-  base_space_member_prototype lblk(xspace, lproto_name, 0, "", false);
+  base_space_member lblk(xspace, lproto_name, 0, "", false);
   lblk.detach_from_state();
 
   // Postconditions:
@@ -2607,7 +1947,7 @@ make_structured_block_1d_prototype(base_space_poset* xspace)
   string lproto_name(structured_block_1d::static_prototype_path().member_name());
   string lcell_name(structured_block_1d::static_local_cell_prototype_path().member_name());
 
-  base_space_member_prototype lblk(xspace, lproto_name, 1, lcell_name, false);
+  base_space_member lblk(xspace, lproto_name, 1, lcell_name, false);
   lblk.detach_from_state();
 
   // Postconditions:
@@ -2634,7 +1974,7 @@ make_structured_block_2d_prototype(base_space_poset* xspace)
   string lproto_name(structured_block_2d::static_prototype_path().member_name());
   string lcell_name(structured_block_2d::static_local_cell_prototype_path().member_name());
 
-  base_space_member_prototype lblk(xspace, lproto_name, 2, lcell_name, false);
+  base_space_member lblk(xspace, lproto_name, 2, lcell_name, false);
   lblk.detach_from_state();
 
   // Postconditions:
@@ -2660,7 +2000,7 @@ make_structured_block_3d_prototype(base_space_poset* xspace)
   string lproto_name(structured_block_3d::static_prototype_path().member_name());
   string lcell_name(structured_block_3d::static_local_cell_prototype_path().member_name());
 
-  base_space_member_prototype lblk(xspace, lproto_name, 3, lcell_name, false);
+  base_space_member lblk(xspace, lproto_name, 3, lcell_name, false);
   lblk.detach_from_state();
 
   // Postconditions:
@@ -2688,7 +2028,7 @@ make_point_block_1d_prototype(base_space_poset* xspace)
   string lproto_name(point_block_1d::static_prototype_path().member_name());
   string lcell_name(point_block_1d::static_local_cell_prototype_path().member_name());
 
-  base_space_member_prototype lblk(xspace, lproto_name, 0, lcell_name, false);
+  base_space_member lblk(xspace, lproto_name, 0, lcell_name, false);
   lblk.detach_from_state();
 
   // Postconditions:
@@ -2716,7 +2056,7 @@ make_point_block_2d_prototype(base_space_poset* xspace)
   string lproto_name(point_block_2d::static_prototype_path().member_name());
   string lcell_name(point_block_2d::static_local_cell_prototype_path().member_name());
 
-  base_space_member_prototype lblk(xspace, lproto_name, 0, lcell_name, false);
+  base_space_member lblk(xspace, lproto_name, 0, lcell_name, false);
   lblk.detach_from_state();
 
   // Postconditions:
@@ -2744,7 +2084,7 @@ make_point_block_3d_prototype(base_space_poset* xspace)
   string lproto_name(point_block_3d::static_prototype_path().member_name());
   string lcell_name(point_block_3d::static_local_cell_prototype_path().member_name());
 
-  base_space_member_prototype lblk(xspace, lproto_name, 0, lcell_name, false);
+  base_space_member lblk(xspace, lproto_name, 0, lcell_name, false);
   lblk.detach_from_state();
 
   // Postconditions:
@@ -2767,7 +2107,7 @@ make_part_prototype(base_space_poset* xspace)
 
   // Body:
 
-  base_space_member_prototype lblk(xspace, "part", 0, "", false);
+  base_space_member lblk(xspace, "part", 0, "", false);
   lblk.detach_from_state();
 
   // Postconditions:
@@ -2797,7 +2137,7 @@ make_fiber_space_definitions()
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(!contains_poset(standard_fiber_space_schema_poset_name(), false));
+  require(!contains_poset(tuple::standard_schema_path(), false));
 
   // Body:
 
@@ -2806,7 +2146,7 @@ make_fiber_space_definitions()
 
   // Postconditions:
 
-  ensure(contains_poset(standard_fiber_space_schema_poset_name(), false));
+  ensure(contains_poset(tuple::standard_schema_path(), false));
 
   // Exit:
 
@@ -2819,16 +2159,14 @@ make_fiber_space_schema_poset()
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(!contains_poset(standard_fiber_space_schema_poset_name(), false));
+  require(!contains_poset(tuple::standard_schema_path(), false));
 
   // Body:
 
-  string lname = standard_fiber_space_schema_poset_name();
+  string lname = tuple::standard_schema_path().poset_name();
   poset_path lschema_path = primitives().schema().path(false);
-  arg_list largs = poset::make_args();
 
-  poset* lfiber_space_schema_poset =
-    &new_member_poset<poset>(lname, lschema_path, largs, true);
+  poset* lfiber_space_schema_poset = &poset::new_table(const_cast<fiber_bundles_namespace&>(*this), lname, lschema_path, false);
   lfiber_space_schema_poset->get_read_write_access();
 
   subposet table_dofs(lfiber_space_schema_poset);
@@ -3196,7 +2534,7 @@ make_fiber_space_schema_poset()
 
   // Postconditions:
 
-  ensure(contains_poset(standard_fiber_space_schema_poset_name(), false));
+  ensure(contains_poset(tuple::standard_schema_path(), false));
 
   // Exit:
 
@@ -3209,7 +2547,7 @@ make_fiber_space_schema_members()
 {
   // Preconditions:
 
-  require(contains_poset(standard_fiber_space_schema_poset_name(), false));
+  require(contains_poset(tuple::standard_schema_path(), false));
   require(state_is_read_write_accessible());
 
   // Body:
@@ -3308,9 +2646,9 @@ make_section_space_definitions()
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(!contains_member(standard_sec_rep_descriptor_schema_poset_name(), false));
-  require(!contains_member(standard_sec_rep_descriptor_poset_name(), false));
-  require(!contains_member(standard_section_space_schema_schema_poset_name(), false));
+  require(!contains_poset(sec_rep_descriptor::standard_schema_path(), false));
+  require(!contains_poset(sec_rep_descriptor::standard_host_path(), false));
+  require(!contains_poset(section_space_schema_member::standard_schema_path(), false));
 
   // Body:
 
@@ -3321,9 +2659,9 @@ make_section_space_definitions()
 
   // Postconditions:
 
-  ensure(contains_member(standard_sec_rep_descriptor_schema_poset_name(), false));
-  ensure(contains_member(standard_sec_rep_descriptor_poset_name(), false));
-  ensure(contains_member(standard_section_space_schema_schema_poset_name(), false));
+  ensure(contains_poset(sec_rep_descriptor::standard_schema_path(), false));
+  ensure(contains_poset(sec_rep_descriptor::standard_host_path(), false));
+  ensure(contains_poset(section_space_schema_member::standard_schema_path(), false));
 
   // Exit
 
@@ -3337,15 +2675,14 @@ make_sec_rep_descriptor_schema_poset()
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(!contains_poset(standard_sec_rep_descriptor_schema_poset_name(), false));
+  require(!contains_poset(sec_rep_descriptor::standard_schema_path(), false));
 
   // Body:
 
-  string lname = standard_sec_rep_descriptor_schema_poset_name();
+  string lname = sec_rep_descriptor::standard_schema_path().poset_name();
   poset_path lschema_path = primitives().schema().path(false);
-  arg_list largs = poset::make_args();
   
-  poset* lschema_host = &new_member_poset<poset>(lname, lschema_path, largs, true);
+  poset* lschema_host = &poset::new_table(const_cast<fiber_bundles_namespace&>(*this), lname, lschema_path, false);
   lschema_host->get_read_write_access();
 
   subposet table_dofs(lschema_host);
@@ -3373,7 +2710,7 @@ make_sec_rep_descriptor_schema_poset()
 
   // Postconditions:
 
-  require(contains_poset(standard_sec_rep_descriptor_schema_poset_name(), false));
+  require(contains_poset(sec_rep_descriptor::standard_schema_path(), false));
 
   // Exit:
 
@@ -3387,12 +2724,12 @@ make_sec_rep_descriptor_schema_members()
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(contains_poset(standard_sec_rep_descriptor_schema_poset_name(), false));
-  require(member_poset(standard_sec_rep_descriptor_schema_poset_name(), false).state_is_read_write_accessible());
+  require(contains_poset(sec_rep_descriptor::standard_schema_path(), false));
+  require(member_poset(sec_rep_descriptor::standard_schema_path(), false).state_is_read_write_accessible());
 
   // Body:
 
-  sec_rep_descriptor_poset::make_standard_schema(*this);
+  sec_rep_descriptor::make_standard_schema(*this);
 
   // Postconditions:
 
@@ -3409,19 +2746,14 @@ make_sec_rep_descriptor_poset()
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(!contains_poset(standard_sec_rep_descriptor_poset_name(), false));
+  require(!contains_poset(sec_rep_descriptor::standard_host_path(), false));
 
 
   // Body:
 
   // Create the poset.
 
-  arg_list largs = sec_rep_descriptor_poset::make_arg_list(standard_base_space_member_prototypes_poset_name());
-
-  sec_rep_descriptor_poset& lhost =
-    new_member_poset<sec_rep_descriptor_poset>(standard_sec_rep_descriptor_poset_name(),
-					       sec_rep_descriptor_poset::standard_schema_path(),
-					       largs, true);
+  sec_rep_descriptor_poset& lhost = sec_rep_descriptor::standard_host(*this, true);
 
   // Create the members.
 
@@ -3435,7 +2767,7 @@ make_sec_rep_descriptor_poset()
 
   // Postconditions:
 
-  require(contains_poset(standard_sec_rep_descriptor_poset_name(), false));
+  ensure(contains_poset(sec_rep_descriptor::standard_host_path(), false));
 
   // Exit:
 
@@ -3626,18 +2958,17 @@ make_section_space_schema_schema_poset()
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(!contains_poset(standard_section_space_schema_schema_poset_name(), false));
+  require(!contains_poset(section_space_schema_member::standard_schema_path(), false));
 
 
   // Body:
 
   // Create the poset.
 
-  string lname = standard_section_space_schema_schema_poset_name();
+  string lname = section_space_schema_member::standard_schema_path().poset_name();
   poset_path lschema_path = primitives().schema().path(false);
-  arg_list largs = poset::make_args();
 
-  poset* lschema_host = &new_member_poset<poset>(lname, lschema_path, largs, true);
+  poset* lschema_host = &poset::new_table(const_cast<fiber_bundles_namespace&>(*this), lname, lschema_path, false);
   lschema_host->get_read_write_access();
 
   subposet table_dofs(lschema_host);
@@ -3665,7 +2996,7 @@ make_section_space_schema_schema_poset()
 
   // Postconditions:
 
-  require(contains_poset(standard_section_space_schema_schema_poset_name(), false));
+  require(contains_poset(section_space_schema_member::standard_schema_path(), false));
 
   // Exit:
 
@@ -3679,13 +3010,13 @@ make_section_space_schema_schema_members()
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  require(contains_poset(standard_section_space_schema_schema_poset_name(), false));
-  require(member_poset(standard_section_space_schema_schema_poset_name(), false).state_is_read_write_accessible());
+  require(contains_poset(section_space_schema_member::standard_schema_path(), false));
+  require(member_poset(section_space_schema_member::standard_schema_path(), false).state_is_read_write_accessible());
 
   // Body:
 
-  section_space_schema_poset::make_standard_schema(*this);
-  binary_section_space_schema_poset::make_standard_schema(*this);
+  section_space_schema_member::make_standard_schema(*this);
+  binary_section_space_schema_member::make_standard_schema(*this);
 
   // Postconditions:
 
@@ -3755,7 +3086,7 @@ link_poset(const namespace_poset_member& xmbr)
 
     new_link(xmbr.index().pod(), BOTTOM_INDEX);
   }
-  else if(lmbr_schema_id == member_id(standard_base_space_schema_poset_name(), false))
+  else if(lmbr_schema_id == member_id(base_space_member::standard_schema_path().poset_name(), false))
   {
     // This is a base space poset; link it under the base space group.
 
@@ -3774,7 +3105,7 @@ link_poset(const namespace_poset_member& xmbr)
 
     new_link(xmbr.index().pod(), BOTTOM_INDEX);
   }
-  else if(lmbr_schema_id == member_id(standard_fiber_space_schema_poset_name(), false))
+  else if(lmbr_schema_id == member_id(tuple::standard_schema_path().poset_name(), false))
   {
     pod_index_type lfiber_spaces_id = member_id("fiber_spaces", false);
 
@@ -3790,8 +3121,8 @@ link_poset(const namespace_poset_member& xmbr)
 
     // Test to see if this member comforms to tp.
 
-    poset_path lpath(standard_fiber_space_schema_poset_name(), "tp_schema");
-    bool lconforms = xmbr.poset_pointer()->schema().conforms_to(lpath);
+    //    poset_path lpath(tp::standard_schema_path());
+    bool lconforms = xmbr.poset_pointer()->schema().conforms_to(tp::standard_schema_path());
 
     // If it conforms, create the tensor space family if necessary
     // and link this member to that group.
@@ -3927,10 +3258,10 @@ attach_handle_data_members()
   sheaves_namespace::attach_handle_data_members();
 
   _base_space_schema_poset =
-    &member_poset<poset>(standard_base_space_schema_poset_name(), false);
+    &member_poset<poset>(base_space_member::standard_schema_path(), false);
 
   _base_space_member_prototypes_poset =
-    &member_poset<base_space_poset>(standard_base_space_member_prototypes_poset_name(), false);
+    &member_poset<base_space_poset>(base_space_member::prototypes_poset_name(), false);
 
   // Postconditions:
 

@@ -25,10 +25,6 @@
 #include "sheaf_dll_spec.h"
 #endif
 
-#ifndef ARG_LIST_H
-#include "arg_list.h"
-#endif
-
 #ifndef GROUP_H
 #include "group.h"
 #endif
@@ -293,6 +289,51 @@ private:
 class SHEAF_DLL_SPEC gln : public group
 {
 
+  // ===========================================================
+  /// @name HOST FACTORY FACET OF CLASS TP
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// The type of host poset.
+  ///
+  typedef gln_space host_type;
+
+  ///
+  /// The name of the standard schema poset for this class.
+  ///
+  static const string& standard_schema_poset_name();
+
+  ///
+  /// The path to the standard schema for this class.
+  ///
+  static const poset_path& standard_schema_path();
+
+  ///
+  /// Creates the standard schema for this class in namespace xns.
+  ///
+  static void make_standard_schema(namespace_poset& xns);
+
+  ///
+  /// Creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
+  /// and table attribute vector_space_path specified by xvector_space_path.
+  ///
+  static host_type& new_host(namespace_type& xns, 
+			     const poset_path& xhost_path, 
+			     const poset_path& xschema_path,
+			     const poset_path& xvector_space_path,
+			     bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+ 
+
   //============================================================================
   /// @name GLN FACET OF CLASS GLN
   //============================================================================
@@ -301,11 +342,6 @@ class SHEAF_DLL_SPEC gln : public group
 public:
 
   // Typedefs:
-
-  ///
-  /// The type of host poset.
-  ///
-  typedef gln_space host_type;
 
   ///
   /// The type of the underlying vector space.
@@ -343,21 +379,6 @@ public:
   /// in prinicple they are different roles and are not necessarily the same type.
   ///
   typedef vd_dof_type dof_type;
-
-  ///
-  /// The name of the standard schema poset for this class.
-  ///
-  static const string& standard_schema_poset_name();
-
-  ///
-  /// The path to the standard schema for this class.
-  ///
-  static const poset_path& standard_schema_path();
-
-  ///
-  /// Creates the standard schema for this class in namespace xns.
-  ///
-  static void make_standard_schema(namespace_poset& xns);
 
   ///
   /// Default constructor.

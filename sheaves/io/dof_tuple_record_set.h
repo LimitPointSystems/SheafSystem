@@ -100,6 +100,11 @@ public:
                        const poset_scaffold& xscaffold);
 
   ///
+  /// The name suffix for this data set.
+  ///
+  virtual const string& suffix() const;
+
+  ///
   /// Opens the record_set.
   ///
   virtual void open();

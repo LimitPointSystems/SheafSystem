@@ -491,36 +491,6 @@ function(add_doc_targets)
                     set_target_properties(doc PROPERTIES FOLDER "Documentation Targets")    
     endif() 
 endfunction(add_doc_targets)
-
-# 
-#  Append file types to CMake's default clean list.
-#
-function(add_clean_files)
-    
-    #Define the file types to be included in the clean operation.
-    
-    file(GLOB_RECURSE HDF_FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/*.hdf)
-    file(GLOB_RECURSE JAR_FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/*.jar)
-
-    # Append them to the list
-    list(APPEND CLEAN_FILES ${HDF_FILES})
-    list(APPEND CLEAN_FILES ${JAR_FILES})
-  
-    set_directory_properties(PROPERTIES ADDITIONAL_MAKE_CLEAN_FILES "${CLEAN_FILES}")
-
-endfunction(add_clean_files) 
-
-# 
-#  Clean up. Remove everything, not just the build products.
-#
-function(add_coverage_target)
-
-    if(LINUX64INTEL)
-        add_custom_target(coverage DEPENDS ${ALL_COVERAGE_TARGETS})
-    endif()
-
-endfunction()
-
     
 #
 # Add the list of clusters to this component.

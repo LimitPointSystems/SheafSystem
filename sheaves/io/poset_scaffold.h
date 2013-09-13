@@ -308,6 +308,17 @@ public:
   ///
   void extract_id_name_pair(pod_index_type& xid, string& xname, char*& xbuf);
 
+  ///
+  /// Transfers the enitre poset member name map to the scaffold name map.
+  ///
+  void get_member_names_from_poset();
+  
+  ///
+  /// Transfers all entries in scaffold name map that refer
+  /// members that exist in the poset.
+  ///
+  void put_member_names_to_poset();
+  
 protected:
 
 private:

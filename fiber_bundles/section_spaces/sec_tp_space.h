@@ -35,7 +35,6 @@
 
 namespace sheaf
 {
-class arg_list;
 class namespace_poset;
 }
 
@@ -43,6 +42,7 @@ namespace fiber_bundle
 {
 using namespace sheaf;
 
+class sec_at1;
 class sec_tp;
 class tensor_variance;
 class tp;
@@ -72,9 +72,9 @@ public:
   typedef tp fiber_type;
 
   ///
-  /// The scalar type definition.
+  /// The type of vector sections that form the domain of tensor sections of this type.
   ///
-  typedef sec_tp scalar_type;
+  typedef sec_at1 vector_space_type;
 
   ///
   /// The table dofs type defined by the standard schema.
@@ -82,9 +82,26 @@ public:
   typedef tp_table_dofs_type table_dofs_type;
 
   ///
-  /// Creates an arg list which conforms to the schema of this.
+  /// True if and only if vector space of fiber space == fiber space of vector space. 
+  /// More precisely, true if and only if the vector space of the fiber space of the 
+  /// tensor section schema specified by  xschema_path is the same as the fiber space 
+  /// of the schema of the vector section space specified by xvector_space_path.
   ///
-  static arg_list make_arg_list(int xp, const poset_path& xvector_space_path);
+  static bool same_vector_fiber_space(const namespace_poset& xns, 
+                                      const poset_path& xschema_path, 
+                                      const poset_path& xvector_space_path, 
+                                      bool xauto_access);
+
+  ///
+  /// Creates a new sec_tp_space in namespace xns with path xpath,
+  /// schema specified by xschema_path, and vector space specified
+  /// by xvector_space_path.
+  ///
+  static sec_tp_space& new_table(namespace_type& xhost, 
+                                 const poset_path& xpath, 
+                                 const poset_path& xschema_path,
+                                 const poset_path& xvector_space_path,
+                                 bool xauto_access);
   
   //============================================================================
   // TABLE DOFS
@@ -96,18 +113,6 @@ public:
   /// Dimension d() as a function of degree xp and domain dimension xdd.
   ///
   virtual int d(int xp, int xdd) const;
-  
-  ///
-  /// True if and only if the dimension d implied by the row dofs
-  /// specified in the schema with path xschema_path is equal to
-  /// the dimension implied by p and the underlying vector space 
-  /// specifed in xargs.
-  ///
-  bool d_is_valid(const namespace_poset& xns, 
-		  const poset_path& xschema_path, 
-		  const arg_list& xargs,
-		  bool xautuo_access) const;
-  
   
   ///
   /// The tensor degree of this space.
@@ -278,9 +283,9 @@ protected:
   sec_tp_space();
 
   ///
-  /// Copy constructor; attaches this to the same state as xother.
+  /// Copy constructor; disabled.
   ///
-  sec_tp_space(const sec_tp_space& xother);
+  sec_tp_space(const sec_tp_space& xother) { };
 
   ///
   /// Destructor.
@@ -291,49 +296,6 @@ protected:
   /// Covariant constructor
   ///
   sec_tp_space(sec_tp* xtop, sec_tp* xbottom);
-
-  //============================================================================
-  // NEW HANDLE, NEW STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new poset handle attached to a new state in namespace xhost,
-  /// with schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  sec_tp_space(namespace_poset& xhost,
-	       const string& xname,
-	       const arg_list& xargs,
-	       const poset_path& xschema_path,
-	       bool xauto_access);
-
-  //============================================================================
-  // NEW HANDLE, EXISTING STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new handle attached to the sec_tp_space with
-  /// index xindex in namespace xhost.
-  ///
-  sec_tp_space(const namespace_poset& xhost, pod_index_type xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the sec_tp_space with
-  /// index xindex in namespace xhost.
-  ///
-  sec_tp_space(const namespace_poset& xhost, const scoped_index& xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the sec_tp_space with
-  /// name xname in namespace xhost.
-  ///
-  sec_tp_space(const namespace_poset& xhost, const string& xname, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the sec_tp_space associated
-  /// with namespace member xmbr.
-  ///
-  sec_tp_space(const namespace_poset_member& xmbr, bool xauto_access);
 
 private:
 
@@ -382,15 +344,6 @@ public:
 
 protected:
 
-  ///
-  /// Initializes xarg to satisfy class invariants.
-  ///
-  virtual void initialize_arg_list(const namespace_poset& xns, 
-				   const string& xname,
-				   arg_list& xargs,
-				   const poset_path& xschema_path,
-				   bool xauto_access);
-
 private:
 
   ///
@@ -423,17 +376,15 @@ public:
   ///
   virtual pod_index_type prereq_id(int xi) const;
 
-  ///
-  /// Assignment operator; attaches this to the same state as xother.
-  /// @issue This is probably the wrong signature for operator=,
-  /// see thread Misc/Language/covariance in C++/covariance and operator=
-  /// in the discusion forum. But it is consistent with all the
-  /// other derivatives of poset_state_handle and it will soon be refactored
-  /// out of existence any way.
-  ///
-  sec_tp_space& operator=(const poset_state_handle& xother);
-
 protected:
+
+  ///
+  /// Assignment operator; disabled.
+  ///
+  sec_tp_space& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<sec_tp_space&>(*this);
+  };
 
 private:
 

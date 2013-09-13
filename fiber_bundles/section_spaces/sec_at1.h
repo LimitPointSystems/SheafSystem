@@ -48,9 +48,9 @@ class sec_at1_space;
 class SHEAF_DLL_SPEC sec_at1 : public sec_atp
 {
 
-  //============================================================================
-  /// @name AT1 FACET OF CLASS SEC_AT1
-  //============================================================================
+  // ===========================================================
+  /// @name HOST_FACTORY FACET OF CLASS SEC_AT1
+  // ===========================================================
   //@{
 
 public:
@@ -64,6 +64,31 @@ public:
   /// The fiber type.
   ///
   typedef at1 fiber_type;
+
+  ///
+  /// Creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
+  /// and table attribute scalar_space_path specified by xscalar_space_path.
+  ///
+  static host_type& new_host(namespace_type& xns, 
+                             const poset_path& xhost_path, 
+                             const poset_path& xschema_path,
+                             const poset_path& xscalar_space_path,
+                             bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+ 
+
+  //============================================================================
+  /// @name AT1 FACET OF CLASS SEC_AT1
+  //============================================================================
+  //@{
+
+public:
 
   ///
   /// Default constructor.

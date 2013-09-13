@@ -51,6 +51,8 @@ namespace fiber_bundle
 {
   using namespace sheaf;  
 
+  class fiber_bundles_namespace;
+
 //==============================================================================
 // CLASS GROUP_LITE
 //==============================================================================
@@ -153,8 +155,47 @@ private:
 /// The general, abstract mathematical group
 /// (persistent version)
 ///
-class SHEAF_DLL_SPEC group : public partial_poset_member
+class SHEAF_DLL_SPEC group : public total_poset_member
 {
+
+  //============================================================================
+  /// @name FACTORY FACET OF CLASS GROUP
+  //============================================================================
+  //@{
+
+public:
+
+  ///
+  /// The type of namespace for this type of member.
+  ///
+  typedef fiber_bundles_namespace namespace_type;
+
+  ///
+  /// The type of host poset.
+  ///
+  typedef poset host_type;
+
+  ///
+  /// The standard path with poset name suffix xsuffix for host spaces for type F.
+  ///
+  template <typename F>
+  SHEAF_DLL_SPEC
+  static poset_path standard_host_path(const string& xsuffix);
+
+  ///
+  /// True, if standard_host_path<F>(xsuffix) does not exist or is a path
+  /// to a poset of type F::host_type.
+  ///
+  template <typename F>
+  SHEAF_DLL_SPEC
+  static bool standard_host_is_available(namespace_type& xns, const string& xsuffix, bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+
 
   //============================================================================
   /// @name GROUP FACET OF CLASS GROUP
@@ -183,9 +224,10 @@ public:
   ///
   virtual ~group();
 
-  // The poset this is a member of.
-
-  poset* host() const;
+  ///
+  /// The poset this is a member of.
+  ///
+  host_type* host() const;
 
 protected:
 
@@ -231,8 +273,7 @@ public:
   ///
   inline group* clone(bool xnew_state, bool xauto_access = true) const
   {
-    return static_cast<group*>(partial_poset_member::clone(xnew_state,
-                               xauto_access));
+    return static_cast<group*>(total_poset_member::clone(xnew_state, xauto_access));
   }
 
 protected:

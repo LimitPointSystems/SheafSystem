@@ -52,23 +52,94 @@ namespace fiber_bundle
 class base_space_poset;
 
 using namespace sheaf;
+
+
+///
+/// The type of row dof tuple for base_space_member.
+///
+class SHEAF_DLL_SPEC base_space_member_row_dof_tuple_type
+{
+public:
+
+  ///
+  /// The base space dimension.
+  ///
+  int db;
+
+  ///
+  /// The cell type id.
+  ///
+  int type_id;
+
+  ///
+  /// The cell type name.
+  ///
+  const char* type_name;
+
+  ///
+  /// The refinement depth.
+  ///
+  int refinement_depth;
+
+  ///
+  /// The local cell type id.
+  ///
+  int local_cell_type_id;
+
+  ///
+  /// The local cell type name.
+  ///
+  const char* local_cell_type_name;
+
+  ///
+  /// The number of local cells.
+  ///
+  size_type size;
+
+  ///
+  /// The upper bound on the x direction index for structured blocks
+  ///
+  size_type i_size;
+
+  ///
+  /// The upper bound on the y direction index for structured blocks
+  ///
+  size_type j_size;
+
+  ///
+  /// The upper bound on the z direction index for structured blocks
+  ///
+  size_type k_size;
+
+protected:
+
+private:
+
+};
+
  
 ///
 /// A client handle for a member of a base space poset.
 ///
 class SHEAF_DLL_SPEC base_space_member : public total_poset_member
 {
+
   // ===========================================================
-  /// @name BASE_SPACE_MEMBER FACET
+  /// @name HOST FACTORY FACET
   // ===========================================================
   //@{
 
 public:
 
   ///
-  /// The name of the standard schema poset for this class.
+  /// The type of namespace for this type of member.
   ///
-  static const string& standard_schema_poset_name();
+  typedef fiber_bundles_namespace namespace_type;
+
+  ///
+  /// The type of host poset for this type of member.
+  ///
+  typedef base_space_poset host_type;
 
   ///
   /// The path of the schema required by this class.
@@ -90,6 +161,46 @@ public:
   ///
   static const string& prototypes_poset_name();
 
+  ///
+  /// Creates a new host poset for members of this type.
+  /// The poset is created in namespace xns with path xhost_path and schema specified by xschema_path.
+  ///
+  static host_type& new_host(namespace_type& xns, 
+			     const poset_path& xhost_path, 
+			     const poset_path& xschema_path, 
+			     int xmax_db,
+			     bool xauto_access);
+
+  ///
+  /// Finds or creates a host poset and any prerequisite posets
+  /// for members of this type. The poset is created in namespace xns with path xhost_path
+  /// and schema specified by standard_schema_path().
+  ///
+  static host_type& standard_host(namespace_type& xns,
+				  const poset_path& xhost_path,
+				  int xmax_db,
+				  bool xauto_access);
+  
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
+  /// @name BASE_SPACE_MEMBER FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// The type of rowe dof tuple for this.
+  ///
+  typedef base_space_member_row_dof_tuple_type row_dof_tuple_type;
+  
   ///
   /// Default constructor; creates a new, unattached base_space_member handle.
   ///
@@ -124,26 +235,30 @@ public:
 
   ///
   /// Creates a new handle attached to a new jim
-  /// state in xhost using the prototype with name xname.
-  /// Xis_prototype_name is present only to distinguish
-  /// the signature of this constructor from the existing state
-  /// constructor below and is ignored
+  /// state in xhost using the prototype with name xprototype_name.
+  /// If xcopy_dof_map or if xhost does not already contain a copy 
+  /// of the prototype dof map, create a copy of the dof map,
+  /// otherwise just refer to an existing copy.
+  ///.
   ///
-  base_space_member(poset* xhost,
+  base_space_member(base_space_poset* xhost,
                     const string& xprototype_name,
-                    bool xis_prototype_name,
+                    bool xcopy_dof_map,
                     bool xauto_access);
 
   ///
-  /// Creates a new handle attached to a new jim (join-irreducible member)
-  /// state in xhost using the existing dof tuple with index xdof_tuple_id.
+  /// Creates a new handle attached to a new jim state in xhost
+  /// and initializes it for use as a prototype with type_name xtype_name, 
+  /// dimension xdb, and local cell prototype xlocal_cell_name.
   ///
-  base_space_member(poset* xhost,
-                    const scoped_index& xdof_tuple_id,
+  base_space_member(base_space_poset* xhost,
+                    const string& xtype_name,
+                    int xdb,
+                    const string& xlocal_cell_name,
                     bool xauto_access);
 
   ///
-  /// creates a new jrm (join reducible member) attached to a new member state
+  /// Creates a new jrm (join reducible member) attached to a new member state
   /// in xhost The jrm created is the join of the members with the indices
   /// given in xexpansion.
   ///
@@ -177,7 +292,7 @@ public:
   /// Creates a new base_space_member handle attached to the member state
   /// with specified by xpath in namespace xnamespace.
   ///
-  base_space_member(const namespace_poset* xnamespace, const poset_path& xpath);
+  base_space_member(const namespace_poset* xnamespace, const poset_path& xpath, bool xauto_access);
 
   ///
   /// Creates a new base_space_member handle attached to the member state
@@ -218,49 +333,9 @@ public:
   static bool prototype_exists(const string& xname, bool xauto_access);
 
   ///
-  /// The type of row dof tuple for this.
-  ///
-  struct SHEAF_DLL_SPEC row_dof_tuple_type
-  {
-    ///
-    /// The base space dimension.
-    ///
-    int db;
-
-    ///
-    /// The cell type id.
-    ///
-    int type_id;
-
-    ///
-    /// The cell type name.
-    ///
-    const char * type_name;
-
-    ///
-    /// The refinement depth.
-    ///
-    int refinement_depth;
-  };
-
-  ///
   /// The row dof tuple for this.
   ///
   row_dof_tuple_type* row_dof_tuple(bool xrequire_write_access = false);
-
-  ///
-  /// The row dof tuple for the member with hub id xhub_id in poset xhost.
-  ///
-  static row_dof_tuple_type* row_dof_tuple(poset_state_handle* xhost,
-					   pod_index_type xhub_id,
-					   bool xrequire_write_access = false);
-
-  ///
-  /// The row dof tuple for the member with id xid in poset xhost.
-  ///
-  static row_dof_tuple_type* row_dof_tuple(poset_state_handle* xhost,
-					   const scoped_index& xid,
-					   bool xrequire_write_access = false);
 
   ///
   /// @deprecated Use scoped_index new_row_dof_map(poset_state_handle&...).
@@ -285,7 +360,7 @@ private:
 
 
   // ===========================================================
-  /// @name ROW DOFS
+  /// @name ROW DOFS FACET
   // ===========================================================
   //@{
 
@@ -317,6 +392,16 @@ public:
   /// Sets the refinement depth to xdepth.
   ///
   void put_refinement_depth(int xdepth);
+
+  ///
+  /// The local cell type id.
+  ///
+  pod_index_type local_cell_type_id() const;
+
+  ///
+  /// The local cell type name.
+  ///
+  const char* local_cell_type_name() const;
 
 protected:
 

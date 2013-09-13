@@ -48,6 +48,41 @@ class SHEAF_DLL_SPEC point_block_2d : public homogeneous_block
   friend class point_block_crg_interval;
 
   // ===========================================================
+  /// @name HOST FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// The path of the prototype required by this class.
+  ///
+  static const poset_path& static_prototype_path();
+
+  ///
+  /// Creates a new host poset for members of this type.
+  /// The poset is created in namespace xns with path xhost_path and schema specified by xschema_path.
+  ///
+  static host_type& new_host(namespace_type& xns, 
+			     const poset_path& xhost_path, 
+			     const poset_path& xschema_path, 
+			     bool xauto_access);
+
+  ///
+  /// Finds or creates a host poset and any prerequisite posets
+  /// for members of this type. The poset is created in namespace xns with path xhost_path
+  /// and schema specified by standard_schema_path().
+  ///
+  static host_type& standard_host(namespace_type& xns, const poset_path& xhost_path, bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
   /// @name POINT_BLOCK_2D FACET
   // ===========================================================
   //@{
@@ -181,65 +216,65 @@ public:
 
 protected:
 
-  ///
-  /// The type of row dof tuple for this.
-  ///
-  struct SHEAF_DLL_SPEC row_dof_tuple_type
-  {
-    ///
-    /// The base space dimension.
-    ///
-    int db;
+//   ///
+//   /// The type of row dof tuple for this.
+//   ///
+//   struct SHEAF_DLL_SPEC row_dof_tuple_type
+//   {
+//     ///
+//     /// The base space dimension.
+//     ///
+//     int db;
 
-    ///
-    /// The cell type id.
-    ///
-    int type_id;
+//     ///
+//     /// The cell type id.
+//     ///
+//     int type_id;
 
-    ///
-    /// The cell type name.
-    ///
-    const char* type_name;
+//     ///
+//     /// The cell type name.
+//     ///
+//     const char* type_name;
 
-    ///
-    /// The refinement depth.
-    ///
-    int refinement_depth;
+//     ///
+//     /// The refinement depth.
+//     ///
+//     int refinement_depth;
 
-    ///
-    /// The local cell type id.
-    ///
-    int local_cell_type_id;
+//     ///
+//     /// The local cell type id.
+//     ///
+//     int local_cell_type_id;
 
-    ///
-    /// The local cell type name.
-    ///
-    const char * local_cell_type_name;
+//     ///
+//     /// The local cell type name.
+//     ///
+//     const char * local_cell_type_name;
 
-    ///
-    /// The number of local cell instances in this block.
-    ///
-    size_type size;
+//     ///
+//     /// The number of local cell instances in this block.
+//     ///
+//     size_type size;
 
-    ///
-    /// The upper bound for index 0.
-    ///
-    size_type i_size;
+//     ///
+//     /// The upper bound for index 0.
+//     ///
+//     size_type i_size;
 
-    ///
-    /// The upper bound for index 1.
-    ///
-    size_type j_size;
-  };
+//     ///
+//     /// The upper bound for index 1.
+//     ///
+//     size_type j_size;
+//   };
 
 
-  ///
-  /// The row dof tuple for this.
-  ///
-  inline row_dof_tuple_type* row_dof_tuple()
-  {
-    return reinterpret_cast<row_dof_tuple_type*>(dof_map().dof_tuple());
-  }
+//   ///
+//   /// The row dof tuple for this.
+//   ///
+//   inline row_dof_tuple_type* row_dof_tuple()
+//   {
+//     return reinterpret_cast<row_dof_tuple_type*>(dof_map().dof_tuple());
+//   }
 
   using homogeneous_block::new_row_dof_map;
 
@@ -283,26 +318,6 @@ private:
   //@{
 
 public:
-
-  ///
-  /// The path of the schema required by this class.
-  ///
-  static const poset_path& standard_schema_path();
-
-  ///
-  /// The path of the schema required by this.
-  ///
-  virtual const poset_path& schema_path() const;
-
-  ///
-  /// Creates the standard schema for this class in namespace xns.
-  ///
-  static void make_standard_schema(namespace_poset& xns);
-
-  ///
-  /// The path of the prototype required by this class.
-  ///
-  static const poset_path& static_prototype_path();
 
 protected:
 

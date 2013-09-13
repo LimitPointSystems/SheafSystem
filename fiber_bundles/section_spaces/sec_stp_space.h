@@ -31,7 +31,6 @@
 
 namespace sheaf
 {
-class arg_list;
 class namespace_poset;
 }
 
@@ -72,9 +71,15 @@ public:
   typedef sec_stp scalar_type;
 
   ///
-  /// Creates an arg list which conforms to the schema of this.
+  /// Creates a new sec_atp_space in namespace xns with path xpath,
+  /// schema specified by xschema_path, and vector space specified
+  /// by xvector_space_path.
   ///
-  static arg_list make_arg_list(int xp, const poset_path& xvector_space_path);
+  static sec_stp_space& new_table(namespace_type& xhost, 
+                                 const poset_path& xpath, 
+                                 const poset_path& xschema_path,
+                                 const poset_path& xvector_space_path,
+                                 bool xauto_access);
   
 protected:
 
@@ -85,9 +90,9 @@ protected:
   sec_stp_space();
 
   ///
-  /// Copy constructor; attaches this to the same state as xother.
+  /// Copy constructor; disabled.
   ///
-  sec_stp_space(const sec_stp_space& xother);
+  sec_stp_space(const sec_stp_space& xother) { };
 
   ///
   /// Destructor.
@@ -98,49 +103,6 @@ protected:
   /// Covariant constructor
   ///
   sec_stp_space(sec_stp* xtop, sec_stp* xbottom);
-
-  //============================================================================
-  // NEW HANDLE, NEW STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new poset handle attached to a new state in namespace xhost,
-  /// with schema specified by xschema_path,  name xname, and
-  /// table dofs initialized by xargs.
-  ///
-  sec_stp_space(namespace_poset& xhost,
-		const string& xname,
-		const arg_list& xargs,
-		const poset_path& xschema_path,
-		bool xauto_access);
-
-  //============================================================================
-  // NEW HANDLE, EXISTING STATE CONSTRUCTORS
-  //============================================================================
-
-  ///
-  /// Creates a new handle attached to the sec_stp_space with
-  /// index xindex in namespace xhost.
-  ///
-  sec_stp_space(const namespace_poset& xhost, pod_index_type xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the sec_stp_space with
-  /// index xindex in namespace xhost.
-  ///
-  sec_stp_space(const namespace_poset& xhost, const scoped_index& xindex, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the sec_stp_space with
-  /// name xname in namespace xhost.
-  ///
-  sec_stp_space(const namespace_poset& xhost, const string& xname, bool xauto_access);
-
-  ///
-  /// Creates a new handle attached to the sec_stp_space associated
-  /// with namespace member xmbr.
-  ///
-  sec_stp_space(const namespace_poset_member& xmbr, bool xauto_access);
 
 private:
 
@@ -243,17 +205,15 @@ public:
   ///
   virtual const char* class_name() const;
 
-  ///
-  /// Assignment operator; attaches this to the same state as xother.
-  /// @issue This is probably the wrong signature for operator=,
-  /// see thread Misc/Language/covariance in C++/covariance and operator=
-  /// in the discusion forum. But it is consistent with all the
-  /// other derivatives of poset_state_handle and it will soon be refactored
-  /// out of existence any way.
-  ///
-  sec_stp_space& operator=(const poset_state_handle& xother);
-
 protected:
+
+  ///
+  /// Assignment operator; disabled.
+  ///
+  sec_stp_space& operator=(const poset_state_handle& xother)
+  {
+    return const_cast<sec_stp_space&>(*this);
+  };
 
 private:
 

@@ -128,6 +128,11 @@ public:
   attributes_record_set(const sheaf_file& xfile, const poset_scaffold& xscaffold);
 
   ///
+  /// The name suffix for this data set.
+  ///
+  virtual const string& suffix() const;
+
+  ///
   /// Internalize the record set from disk.
   ///
   void internalize();
@@ -136,7 +141,7 @@ public:
   /// Externalize the reccord set to disk.
   ///
   void externalize();
-
+  
 protected:
 
   // Default constructor;

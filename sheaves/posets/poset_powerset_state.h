@@ -62,8 +62,6 @@ namespace sheaf
 // Forward declaration to support friend declaration.
 SHEAF_DLL_SPEC ostream & operator << (ostream &os, const poset_powerset_state& p);
 
-class arg_list;
-
 ///
 /// The set of subsets of a poset.
 ///

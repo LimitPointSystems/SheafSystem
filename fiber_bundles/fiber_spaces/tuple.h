@@ -29,10 +29,6 @@
 #include "any_lite.h"
 #endif
 
-#ifndef ARG_LIST_H
-#include "arg_list.h"
-#endif
-
 #ifndef ARRAY_POSET_DOF_MAP_H
 #include "array_poset_dof_map.h"
 #endif
@@ -70,6 +66,8 @@ namespace fiber_bundle
 {
 
 using namespace sheaf;
+
+class fiber_bundles_namespace;
 class tuple_space;
 
 //==============================================================================
@@ -193,14 +191,17 @@ private:
 class SHEAF_DLL_SPEC tuple : public total_poset_member
 {
 
-  //============================================================================
-  /// @name  CARTESIAN ALGEBRA (TUPLE) FACET OF CLASS TUPLE
-  //============================================================================
+  // ===========================================================
+  /// @name HOST FACTORY FACET
+  // ===========================================================
   //@{
 
 public:
 
-  // Typedefs:
+  ///
+  /// The type of namespace for this type of member.
+  ///
+  typedef fiber_bundles_namespace namespace_type;
 
   ///
   /// The type of host poset.
@@ -223,7 +224,7 @@ public:
   static const string& standard_schema_poset_name();
 
   ///
-  /// The path to the standard schema for this class.
+  /// The path of the schema required by this class.
   ///
   static const poset_path& standard_schema_path();
 
@@ -232,6 +233,46 @@ public:
   ///
   static void make_standard_schema(namespace_poset& xns);
 
+  ///
+  /// The standard path with poset name suffix xsuffix for host spaces for type F.
+  ///
+  template <typename F>
+  SHEAF_DLL_SPEC
+  static poset_path standard_host_path(const string& xsuffix);
+
+  ///
+  /// True, if standard_host_path<F>(xsuffix) does not exist or is a path
+  /// to a poset of type F::host_type.
+  ///
+  template <typename F>
+  SHEAF_DLL_SPEC
+  static bool standard_host_is_available(namespace_type& xns, const string& xsuffix, bool xauto_access);
+
+  ///
+  /// Creates a new host table for members of this type.
+  /// The poset is created in namespace xns with path xhost_path, schema specified by xschema_path,
+  /// and table attribute factor_ct specified by xfactor_ct.
+  ///
+  static host_type& new_host(namespace_type& xns, 
+			     const poset_path& xhost_path, 
+			     const poset_path& xschema_path,
+			     int xfactor_ct,
+			     bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
+
+  //============================================================================
+  /// @name  CARTESIAN ALGEBRA (TUPLE) FACET OF CLASS TUPLE
+  //============================================================================
+  //@{
+
+public:
+
+  // Typedefs:
   ///
   /// Default constructor.
   ///

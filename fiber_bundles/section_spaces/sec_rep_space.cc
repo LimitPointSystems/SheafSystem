@@ -19,8 +19,8 @@
 /// Implementation for class sec_rep_space
 
 #include "sec_rep_space.h"
-#include "assert_contract.h"
 #include "arg_list.h"
+#include "assert_contract.h"
 #include "array_index_space_state.h"
 #include "array_section_dof_map.h"
 #include "binary_section_space_schema_member.h"
@@ -432,46 +432,6 @@ sec_rep_space()
 }
 
 fiber_bundle::sec_rep_space::
-sec_rep_space(const sec_rep_space& xother)
-  : poset_state_handle(new sec_rep_space_member, new sec_rep_space_member)
-{
-  // Preconditions:
-
-  // Body:
-
-  attach_to_state(&xother);
-
-  // Postconditions:
-
-}
-
-fiber_bundle::sec_rep_space&
-fiber_bundle::sec_rep_space::
-operator=(const sec_rep_space& xother)
-{
-  attach_to_state(&xother);
-
-  return *this;
-}
-
-fiber_bundle::sec_rep_space::
-~sec_rep_space()
-{
-
-  // Preconditions:
-
-  // Body:
-
-  // Nothing to do; base class does it all
-
-  // Postconditions:
-
-  // Exit:
-
-  return;
-}
-
-fiber_bundle::sec_rep_space::
 sec_rep_space(sec_rep_space_member* xtop, sec_rep_space_member* xbottom)
   : poset_state_handle(xtop, xbottom)
 {
@@ -493,192 +453,17 @@ sec_rep_space(sec_rep_space_member* xtop, sec_rep_space_member* xbottom)
   return;
 }
 
-void
 fiber_bundle::sec_rep_space::
-initialize_arg_list(const namespace_poset& xns, 
-		    const string& xname,
-		    arg_list& xargs, 
-		    const poset_path& xschema_path,
-		    bool xauto_access)
-{
-  // Preconditions:
-
-  require(xns.state_is_auto_read_accessible(xauto_access));
-
-  require(!xschema_path.empty());
-  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
-  
-  // Body:
-
-  // Nothing to do.  
-
-  // Done.
-  
-#ifdef DIAGNOSTIC_OUTPUT
-  cout << "sec_rep_space::initialize_arg_list:xargs: " << endl 
-       << xargs << endl;
-#endif
-
-  // Postconditions:
-  
-  // Exit:
-
-  return;
-}
-
-//==============================================================================
-// NEW HANDLE, NEW STATE CONSTRUCTORS
-//==============================================================================
-
-fiber_bundle::sec_rep_space::
-sec_rep_space(namespace_poset& xhost,
-	      const string& xname,
-	      const arg_list& xargs,
-	      const poset_path& xschema_path,
-	      bool xauto_access)
-  : poset_state_handle(new sec_rep_space_member, new sec_rep_space_member)
+~sec_rep_space()
 {
 
   // Preconditions:
 
-  require(xhost.state_is_auto_read_accessible(xauto_access));
-
-  require(!xhost.contains_poset(xname, xauto_access));
-
-  require(xhost.path_is_auto_read_accessible(xschema_path, xauto_access));
-  require(xargs.conforms_to(xhost, xschema_path, true, xauto_access));
-
   // Body:
 
-  new_state(xhost, xname, xargs, xschema_path, xauto_access);
+  // Nothing to do; base class does it all
 
   // Postconditions:
-
-  ensure(postcondition_of(sec_rep_space::new_state(same args)));
-
-  // Exit:
-
-  return;
-}
-
-//==============================================================================
-// NEW HANDLE, EXISTING STATE CONSTRUCTORS
-//==============================================================================
-
-fiber_bundle::sec_rep_space::
-sec_rep_space(const namespace_poset* xhost, pod_index_type xindex)
-    : poset_state_handle( new sec_rep_space_member, new sec_rep_space_member)
-{
-
-  // Preconditions:
-
-  require(xhost != 0);
-  require(xhost->state_is_read_accessible());
-  require(xhost->contains_member(xindex));
-
-  // Body:
-
-  attach_to_state(xhost, xindex);
-
-  get_read_access(); // just for postconditions
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(is_attached());
-  ensure(host() == xhost);
-  ensure(index() == xindex);
-
-  release_access();
-
-  // Exit:
-
-  return;
-}
-
-fiber_bundle::sec_rep_space::
-sec_rep_space(const namespace_poset* xhost, const scoped_index& xindex)
-    : poset_state_handle( new sec_rep_space_member, new sec_rep_space_member)
-{
-
-  // Preconditions:
-
-  require(xhost != 0);
-  require(xhost->state_is_read_accessible());
-  require(xhost->contains_member(xindex));
-
-  // Body:
-
-  attach_to_state(xhost, xindex.hub_pod());
-
-  get_read_access(); // just for postconditions
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(is_attached());
-  ensure(host() == xhost);
-  ensure(index() ==~ xindex);
-
-  release_access();
-
-  // Exit:
-
-  return;
-}
-
-fiber_bundle::sec_rep_space::
-sec_rep_space(const namespace_poset* xhost, const string& xname)
-    : poset_state_handle( new sec_rep_space_member, new sec_rep_space_member)
-{
-
-  // Preconditions:
-
-  require(xhost != 0);
-  require(xhost->state_is_read_accessible());
-  require(xhost->contains_member(xname));
-
-  // Body:
-
-  attach_to_state(xhost, xname);
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(is_attached());
-  /// @issue need read access to evaluate postconditions
-  ensure(state_is_read_accessible() ? host() == xhost : true);
-  ensure(state_is_read_accessible() ? name() == xname : true);
-
-  // Exit:
-
-  return;
-}
-
-fiber_bundle::sec_rep_space::
-sec_rep_space(const abstract_poset_member* xmbr)
-    : poset_state_handle( new sec_rep_space_member, new sec_rep_space_member)
-{
-
-  // Preconditions:
-
-  require(xmbr != 0);
-  require(dynamic_cast<namespace_poset*>(xmbr->host()) != 0);
-  require(xmbr->state_is_read_accessible());
-  require(xmbr->is_jim());
-  require(unexecutable(xmbr is sec_rep_space));
-  /// @issue how do we implement this last precondition
-
-  // Body:
-
-  attach_to_state(xmbr);
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(host() == xmbr->host());
-  ensure(index() ==~ xmbr->index());
-  ensure(!is_external() ? is_attached() : true);
 
   // Exit:
 
@@ -1211,168 +996,20 @@ end_jim_edit_mode(bool xensure_lattice_invariant, bool xauto_access)
 
 void
 fiber_bundle::sec_rep_space::
-new_state(namespace_poset& xns,
-          const string& xname,
-	  const arg_list& xargs,
-	  const poset_path& xschema_path,
-          bool xauto_access)
+new_state(const poset_path& xpath, const schema_poset_member& xschema, array_poset_dof_map& xdof_map)
 {
 
   // Preconditions:
 
-  require(xauto_access || xns.in_jim_edit_mode());
-
-  require(poset_path::is_valid_name(xname));
-  require(!xns.contains_poset(xname, xauto_access));
-
-  /// @hack the following is necessary because
-  /// the i/o subsystem can't handle poset with same name as namespace.
-  /// @todo fix the i/o subsystem and remove these preconditions.
-  /// @hack unexecutable because may not have access.
-
-  require(unexecutable(xname != xns.name()));
-
-  require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
-
-  /// @error arg_list attaches to a schema_poset_member however 
-  ///        binary_section_space_schema_member redefines the dof_map()
-  ///        functions which are used by schema_poset_member::invariant().
-  ///        See bug #0000401.
-
-  //require(xargs.conforms_to(xns, xschema_path, true, xauto_access));
-  
-  // Body:
-
-  if(xauto_access)
-  {
-    xns.get_read_write_access();
-  }
-
-  // Disable invariant checking in
-  // member functions until construction finished.
-
-  disable_invariant_check();
-
-  // Get a temporary handle to the schema.
-
-  binary_section_space_schema_member lschema(xns, xschema_path, xauto_access);
-
-  if(xauto_access)
-  {
-    lschema.get_read_access();
-  }
-
-  // Create the poset state object;
-  // allocates the data structures but does not (fully) initialize them.
-
-  _state = new poset_state(&lschema, type_id());
-
-  // Set any class specific args in arg list.
-
-  arg_list largs(xargs);
-  initialize_arg_list(xns, xname, largs, xschema_path, xauto_access);
-
-  // Get write access;
-  // handle data members aren't attached yet, 
-  // so use psh version.
-
-  poset_state_handle::get_read_write_access();
-
-  // Initialize the table dofs ("class variables").
-  // Do this before initializing the row structure so the subposet
-  // and member initialization routines can use the table dofs if needed.
-
-  array_poset_dof_map* lmap = new array_poset_dof_map(&lschema, true);
-  lmap->put_dof_tuple(largs);
-  initialize_table_dof_tuple(lmap);
-
-  // Initialize any additional handle data members
-  // that may depend on table dofs.
-
-  initialize_handle_data_members(xns);
-
-  // Release and regain access;
-  // will get access to handle data members.
-
-  poset_state_handle::release_access();
-  get_read_write_access();
-
-  // Initialize the row structure.
-
-  initialize_standard_subposets(xname);
-  initialize_standard_members();
-
-  // Initialize the namespace features.
-
-  initialize_namespace(xns, xname);
-
-  // Set the standard id spaces.
-
-  update_standard_member_id_spaces();
-
-  // Cleanup temporary schema handle.
-
-  if(xauto_access)
-  {
-    lschema.release_access();
-  }
-  lschema.detach_from_state();
-
-  // Now invariant should be satisfied
-
-  enable_invariant_check();
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(is_attached());
-  ensure(name_space()->is_same_state(&xns));
-  ensure(name() == xname);
-  ensure(!in_jim_edit_mode());
-  ensure(has_standard_member_ct());
-  ensure(has_standard_row_dof_tuple_ct());
-  ensure(has_standard_subposet_ct());
-  ensure(member_id_spaces(false).has_only_standard_id_spaces());
-  /// @issue Do we want to export name convension to the user for the post conditions?
-//   ensure(schema().path() == xschema_path);
-
-  // Now we're finished, release all access
-
-  release_access();
-
-  // One final postcondition
-
-  ensure(state_is_not_read_accessible());
-
-  if(xauto_access)
-  {
-    xns.release_access();
-  }
-
-  // Exit:
-
-  return;
-}
-
-void
-fiber_bundle::sec_rep_space::
-new_state(const schema_poset_member& xschema, array_poset_dof_map& xdof_map)
-{
-
-  // Preconditions:
-
-  require(xschema.state_is_read_accessible());
-  require(is_external());
   require(schema_is_ancestor_of(&xschema));
-  require(xschema.host()->name_space()->is_same_state(name_space()));
-  require(name_space()->member_poset_schema_id(index(), true) == xschema.host()->index().pod());
+  require(xschema.state_is_read_accessible());
 
   /// @issue the following is unexecutable because dof maps don't have
   /// a schema until attached to a host; requires covariant schema feature to implement.
 
   /// @todo fix dof maps schema feature and make this precondition executable.
 
-  require(unexecutable(xschema.is_same_state(xdof_map.schema())));
+  require(unexecutable("xschema.is_same_state(xdof_map.schema())"));
 
   // Body:
 
@@ -1384,9 +1021,7 @@ new_state(const schema_poset_member& xschema, array_poset_dof_map& xdof_map)
   // Create the state object;
   // Allocates the data structures but does not (fully) initialize them
 
-  const section_space_schema_member& lschema = reinterpret_cast<const section_space_schema_member&>(xschema);
-
-  _state = new poset_state(&lschema, type_id());
+  _state = new poset_state(&xschema, type_id(), xpath.poset_name());
 
   // Get write access
 
@@ -1398,7 +1033,7 @@ new_state(const schema_poset_member& xschema, array_poset_dof_map& xdof_map)
 
   // Initialize the row structure
 
-  initialize_standard_subposets(name_space()->member_name(index()));
+  initialize_standard_subposets(xpath.poset_name());
   initialize_standard_members();
 
   // Set the standard id spaces.
@@ -1414,11 +1049,11 @@ new_state(const schema_poset_member& xschema, array_poset_dof_map& xdof_map)
   ensure(invariant());
   ensure(is_attached());
   ensure(!in_jim_edit_mode());
+  ensure(schema().is_same_state(&xschema));
   ensure(has_standard_member_ct());
   ensure(has_standard_row_dof_tuple_ct());
   ensure(has_standard_subposet_ct());
   ensure(member_id_spaces(false).has_only_standard_id_spaces());
-  ensure(schema().is_same_state(&xschema));
   ensure(base().is_same_state(&(reinterpret_cast<const section_space_schema_member&>(xschema).base_space())));
   ensure(schema().fiber_space().is_same_state(&(reinterpret_cast<const section_space_schema_member&>(xschema).host()->fiber_space())));
   ensure(rep().is_same_state(&(reinterpret_cast<const section_space_schema_member&>(xschema).rep())));
