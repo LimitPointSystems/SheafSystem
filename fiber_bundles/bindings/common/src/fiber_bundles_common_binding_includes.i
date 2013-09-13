@@ -46,7 +46,6 @@
 #include                   "structured_block_3d.h"
 #include             "unstructured_block.h"
 #include       "local_base_space_member.h"
-#include "base_space_member_prototype.h"
 #include "base_space_poset.h"
 #include "binary_index.h"
 #include "binary_index_space.h"

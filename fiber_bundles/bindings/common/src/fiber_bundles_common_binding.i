@@ -39,7 +39,6 @@
 %ignore fiber_bundle::base_space_poset::member_dof_tuple;
 %ignore fiber_bundle::base_space_poset::table_dof_tuple;
 %ignore fiber_bundle::base_space_poset::row_dof_tuple;
-%ignore fiber_bundle::base_space_member_prototype::row_dof_tuple;
 
 %ignore fiber_bundle::block_connectivity::element_type;
 %ignore fiber_bundle::hex_connectivity::element_type;
@@ -304,7 +303,6 @@
 %include                   "structured_block_3d.h"
 %include             "unstructured_block.h"
 %include       "local_base_space_member.h"
-%include "base_space_member_prototype.h"
 %include "base_space_poset.h"
 %include "binary_index.h"
 %include "binary_index_space.h"
