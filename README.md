@@ -2,7 +2,8 @@
 	Building the SheafSystem 09/20/2013
 
 
-	Linux Prerequisites:
+Linux Prerequisites:
+-
 		For a Library-only build (no language bindings):
 		cmake 2.8.8 through 2.8.10.2. 
 		hdf5 1.8.9, libraries built with static linkage
@@ -17,7 +18,7 @@ Quick Start:
 	2. cd to the SheafSystem directory.
 
 	3. Run the cmboot script or chant the cmake mantra (mkdir build, cd build, ccmake ..), whichever you prefer. The cmboot script 
-   has been provided for purposes of convenience. It creates a build dir, goes there and runs cmake, dealing with any command line args. 
+	has been provided for purposes of convenience. It creates a build dir, goes there and runs cmake, dealing with any command line args. 
 
 	You may also run ccmake from the build directory and manually set the location of hdf5 and VTK.
 	
