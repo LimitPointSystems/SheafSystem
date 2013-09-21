@@ -4,7 +4,7 @@
 
 Linux Prerequisites:
 -
-		For a Library-only build (no language bindings):
+	For a Library-only build (no language bindings):
 		cmake 2.8.8 through 2.8.10.2. 
 		hdf5 1.8.9, libraries built with static linkage
 		VTK 5.10, libraries built shared (SheafSystem language bindings require shared VTK).
