@@ -1,5 +1,6 @@
 
-	For more Information on the SheafSystem, see http://www.sheafsystem.org
+	For more Information on the SheafSystem Community Edition, see http://www.sheafsystem.org
+-	
 
 	Building the SheafSystem 09/20/2013
 
