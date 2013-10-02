@@ -8291,7 +8291,6 @@ ostream &
 sheaf::
 operator<<(ostream &os, const poset_state_handle& p)
 {
-
   // Preconditions:
 
   // Library policy requires that access requirements be published

@@ -98,7 +98,6 @@
 #endif
 
 
-
 namespace sheaf
 {
 
@@ -121,6 +120,28 @@ class subposet_names_record;
 class storage_agent;
 class subposet_state;
 class zn_to_bool;
+
+// Following functions must be forward declared before friend statement.
+
+///
+/// Insert poset_state_handle& p into ostream& os.
+///
+SHEAF_DLL_SPEC
+ostream & operator << (ostream &os, const poset_state_handle& p);
+
+///
+/// The deep size of the referenced object of type poset_state_handle.
+/// if xinclude_shallow, add the sizeof xp to the result.
+/// if xresults is not null, the deep size of the poset_state parts returned;
+/// xresults[0] is the deep_size of poset_crg_state,
+/// xresults[1] is the deep_size of index_space_family,
+/// xresults[2] is the deep_size of poset_powerset_state,
+/// xresults[3] is the deep_size of poset_table_state.
+///
+SHEAF_DLL_SPEC
+size_t deep_size(const poset_state_handle& xp,
+		 bool xinclude_shallow = true,
+		 size_t xresults[4] = 0);
 
 ///
 /// A client handle for a general, abstract partially order set.
@@ -150,7 +171,6 @@ class SHEAF_DLL_SPEC poset_state_handle : public read_write_monitor_handle
   friend class table_dof_tuple_record; // needs new_state()
   friend SHEAF_DLL_SPEC ostream & sheaf::operator << (ostream &os, const poset_state_handle& p); // needs state_obj()
   friend SHEAF_DLL_SPEC size_t sheaf::deep_size(const poset_state_handle& xp, bool xinclude_shallow, size_t xresults[4]);
-
 
   // ===========================================================
   /// @name POSET_STATE_HANDLE FACET
@@ -2388,25 +2408,7 @@ private:
 // NON-MEMBER FUNCTIONS
 // ===========================================================
 
-///
-/// Insert poset_state_handle& p into ostream& os.
-///
-SHEAF_DLL_SPEC
-ostream & operator << (ostream &os, const poset_state_handle& p);
 
-///
-/// The deep size of the referenced object of type poset_state_handle.
-/// if xinclude_shallow, add the sizeof xp to the result.
-/// if xresults is not null, the deep size of the poset_state parts returned;
-/// xresults[0] is the deep_size of poset_crg_state,
-/// xresults[1] is the deep_size of index_space_family,
-/// xresults[2] is the deep_size of poset_powerset_state,
-/// xresults[3] is the deep_size of poset_table_state.
-///
-SHEAF_DLL_SPEC
-size_t deep_size(const poset_state_handle& xp,
-		 bool xinclude_shallow = true,
-		 size_t xresults[4] = 0);
 
 } // namespace sheaf
 

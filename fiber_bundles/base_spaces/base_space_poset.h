@@ -43,6 +43,22 @@ class base_space_crg_interval;
 class base_space_member_row_dof_tuple_type;
 class base_space_poset;
 
+// Following functions must be forward declared before friend statement.
+
+///
+/// The deep size of the referenced object of type poset_state_handle.
+/// if xinclude_shallow, add the sizeof xp to the result.
+/// if xresults is not null, the deep size of the poset_state parts returned;
+/// xresults[0] is the deep_size of poset_crg_state,
+/// xresults[1] is the deep_size of index_space_family,
+/// xresults[2] is the deep_size of poset_powerset_state,
+/// xresults[3] is the deep_size of poset_table_state.
+///
+SHEAF_DLL_SPEC
+size_t deep_size(const base_space_poset& xp,
+		 bool xinclude_shallow = true,
+		 size_t xresults[4] = 0);
+
 ///
 /// The type of table dof tuple for base_space_poset.
 ///
@@ -913,19 +929,7 @@ private:
 // NON-MEMBER FUNCTIONS
 // ===========================================================
 
-///
-/// The deep size of the referenced object of type poset_state_handle.
-/// if xinclude_shallow, add the sizeof xp to the result.
-/// if xresults is not null, the deep size of the poset_state parts returned;
-/// xresults[0] is the deep_size of poset_crg_state,
-/// xresults[1] is the deep_size of index_space_family,
-/// xresults[2] is the deep_size of poset_powerset_state,
-/// xresults[3] is the deep_size of poset_table_state.
-///
-SHEAF_DLL_SPEC
-size_t deep_size(const base_space_poset& xp,
-		 bool xinclude_shallow = true,
-		 size_t xresults[4] = 0);
+
 
 } // namespace fiber_bundle
 
