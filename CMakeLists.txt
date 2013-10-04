@@ -20,8 +20,15 @@
 # It does NOT stop cmake from setting all the cache variables associated with those same
 # configurations however.
 
-set(CMAKE_CONFIGURATION_TYPES Debug-contracts Debug-no-contracts Release-contracts Release-no-contracts 
-    RelWithDebInfo-contracts RelWithDebInfo-contracts CACHE STRING "Supported configuration types" FORCE)
+if(WIN32)
+    set(CMAKE_CONFIGURATION_TYPES Debug-contracts Debug-no-contracts Release-contracts Release-no-contracts 
+         RelWithDebInfo-contracts RelWithDebInfo-no-contracts CACHE STRING "Supported configuration types"
+        FORCE)
+else()
+    set(CMAKE_CONFIGURATION_TYPES Debug-contracts Debug-no-contracts Release-contracts Release-no-contracts 
+         CACHE STRING "Supported configuration types"
+        FORCE)
+endif()
 
 #
 # Establish the project name
@@ -77,8 +84,9 @@ endif()
 # You need only specify the sub-directory within ${CMAKE_INSTALL_PREFIX}, cmake will create the dir.
 # With no value specified for DESTINATION, all files are placed in ${CMAKE_INSTALL_PREFIX}.
 #
-install(DIRECTORY ${CMAKE_BINARY_DIR}/documentation/ DESTINATION documentation)
-
+if(INSTALL_DOCS)
+    install(DIRECTORY ${CMAKE_BINARY_DIR}/documentation/ DESTINATION documentation)
+endif()
 #
 # Generate some info about the release, and write it to the RELEASE file in install root folder.
 #

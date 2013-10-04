@@ -45,29 +45,6 @@ if(HDF5_FOUND)
 
 endif()
 
-#
-# Find VTK
-#
-find_package(VTK 5.10 REQUIRED MODULE)
-if(VTK_FOUND)
-    configure_file(${CMAKE_MODULE_PATH}/vtk_definitions.cmake.in 
-        ${CMAKE_BINARY_DIR}/vtk_definitions.cmake)
-    include(${CMAKE_BINARY_DIR}/vtk_definitions.cmake)
-endif()
-
-# Find the JDK
-find_package(Java 1.7 REQUIRED)
-find_package(JNI)
-if(JAVA_FOUND)
-    set(JAVA_BINDING_COMPILE_OPTIONS 
-        "-I${JNI_INCLUDE_DIRS}" "-I${JAVA_INCLUDE_PATH}" "-I${JAVA_INCLUDE_PATH2}""-I${JAVA_AWT_INCLUDE_PATH}" 
-        CACHE STRING "JDK compile includes") 
-endif()
-    
-#
-# Find Java, Python, VTK, JMF, Swig, and gnuplot
-#
-
 # Find gnuplot
 if(LINUX64GNU OR LINUX64INTEL)
     # Needed for some checks
@@ -77,30 +54,49 @@ if(LINUX64GNU OR LINUX64INTEL)
     endif()
 endif()
 
-if(BUILD_BINDINGS)
-    
-    # Find Swig
-    find_package(SWIG REQUIRED)
-    if(SWIG_FOUND)
-        include(${CMAKE_MODULE_PATH}/UseSWIG.cmake)
-    endif()
-    
-    # Find C#
-    find_package(CSharp)
-    if(CSHARP_FOUND)
-          include(${CMAKE_MODULE_PATH}/UseCSharp.cmake)
-    endif()
-        
-    # Find Python  
-    find_package(PythonLibs REQUIRED)
-      
-    # Find the JMF
-    find_package(JMF REQUIRED)
-        if(JMF_FOUND)
-           configure_file(${CMAKE_MODULE_PATH}/jmf_definitions.cmake.in 
-               ${CMAKE_BINARY_DIR}/jmf_definitions.cmake)
-           include(${CMAKE_BINARY_DIR}/jmf_definitions.cmake)
-        endif()   
-endif()
 
+if(BUILD_TOOLS OR BUILD_BINDINGS)
+    # Find the JDK
+    find_package(Java 1.7 REQUIRED)
+    find_package(JNI)
+    if(JAVA_FOUND)
+        set(JAVA_BINDING_COMPILE_OPTIONS 
+            "-I${JNI_INCLUDE_DIRS}" "-I${JAVA_INCLUDE_PATH}" "-I${JAVA_INCLUDE_PATH2}""-I${JAVA_AWT_INCLUDE_PATH}" 
+            CACHE STRING "JDK compile includes") 
+    endif()
+    
+    #
+    # Find VTK
+    #
+    find_package(VTK 5.10 REQUIRED MODULE)
+    if(VTK_FOUND)
+        configure_file(${CMAKE_MODULE_PATH}/vtk_definitions.cmake.in ${CMAKE_BINARY_DIR}/vtk_definitions.cmake)
+        include(${CMAKE_BINARY_DIR}/vtk_definitions.cmake)
+    endif()   
+    
+    if(BUILD_BINDINGS)
+         # Find Swig
+        find_package(SWIG REQUIRED)
+        if(SWIG_FOUND)
+            include(${CMAKE_MODULE_PATH}/UseSWIG.cmake)
+        endif()
+        
+        # Find C#
+        find_package(CSharp)
+        if(CSHARP_FOUND)
+              include(${CMAKE_MODULE_PATH}/UseCSharp.cmake)
+        endif()
+            
+        # Find Python  
+        find_package(PythonLibs REQUIRED)
+          
+        # Find the JMF
+        find_package(JMF REQUIRED)
+            if(JMF_FOUND)
+               configure_file(${CMAKE_MODULE_PATH}/jmf_definitions.cmake.in 
+                   ${CMAKE_BINARY_DIR}/jmf_definitions.cmake)
+               include(${CMAKE_BINARY_DIR}/jmf_definitions.cmake)
+            endif()   
+    endif()
+endif()
 

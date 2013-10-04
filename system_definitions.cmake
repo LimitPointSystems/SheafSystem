@@ -15,11 +15,15 @@
 #
 
 
+
 ##
 # This file is the system level counterpart to the component_definitions file
 # found in the top level of any component. Functions and variables
 # that need to have system scope should be declared and/or defined here.
 ##
+
+set(BUILD_TOOLS OFF CACHE BOOL "Toggle build of tools component. If no, then no need to look for JDK or VTK unless BUILD_BINDINGS is on.")
+set(INSTALL_DOCS OFF CACHE BOOL "Documentation is not installed by default.")
 
 #
 # Establish the version number for this build.
@@ -32,7 +36,12 @@ mark_as_advanced(LIB_VERSION)
 #
 # Establish the list of components in this system
 #
-set(COMPONENTS sheaves fiber_bundles geometry fields tools CACHE STRING "List of components in this system" FORCE)
+if(BUILD_TOOLS)
+    set(COMPONENTS sheaves fiber_bundles geometry fields tools CACHE STRING "List of components in this system" FORCE)
+else()
+    set(COMPONENTS sheaves fiber_bundles geometry fields CACHE STRING "List of components in this system" FORCE)
+endif()
+
 #
 # Set the default value for install location
 #
@@ -78,18 +87,6 @@ endif()
 set(EXPORTS_FILE ${PROJECT_NAME}-exports.cmake CACHE STRING "System exports file name")
 set(INSTALL_CONFIG_FILE ${PROJECT_NAME}-install.cmake CACHE STRING "Install config file name")
 
-#
-# Set the Configuartion types. Only relevant for Linux.
-#
-if(WIN64MSVC OR WIN64INTEL)
-    set(CMAKE_CONFIGURATION_TYPES Debug-contracts Debug-no-contracts Release-contracts Release-no-contracts 
-         RelWithDebInfo-contracts RelWithDebInfo-no-contracts CACHE STRING "Supported configuration types"
-        FORCE)
-else()
-    set(CMAKE_CONFIGURATION_TYPES Debug-contracts Debug-no-contracts Release-contracts Release-no-contracts 
-         CACHE STRING "Supported configuration types"
-        FORCE)
-endif()
 #
 # Delete the exports file at the start of each cmake run
 #
