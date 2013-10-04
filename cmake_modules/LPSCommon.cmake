@@ -470,7 +470,7 @@ endfunction()
 function(add_doc_targets)
     if(DOC_TARGETS)
             if(DOC_STATE MATCHES Dev OR DOC_STATE MATCHES dev OR DOC_STATE MATCHES DEV)
-                add_custom_target(doc ALL
+                add_custom_target(doc 
                         COMMAND ${CMAKE_COMMAND} -E echo 
                         "Generating Developer Documentation ... " 
                         COMMAND ${CMAKE_COMMAND} -E make_directory 
@@ -479,7 +479,7 @@ function(add_doc_targets)
                         ${CMAKE_BINARY_DIR}/dev_doxyfile
                                 )
             else()
-                add_custom_target(doc ALL
+                add_custom_target(doc 
                         COMMAND ${CMAKE_COMMAND} -E echo 
                         "Generating User Documentation ... "  
                         COMMAND ${CMAKE_COMMAND} -E make_directory 
