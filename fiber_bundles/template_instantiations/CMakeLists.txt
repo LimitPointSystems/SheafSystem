@@ -34,6 +34,7 @@ set(SRCS
     atp.inst.cc
     auto_block.inst.cc
     base_space_factory.inst.cc
+    binary_section_space_schema_member.inst.cc
     block.inst.cc
     e1.inst.cc
     e2.inst.cc
