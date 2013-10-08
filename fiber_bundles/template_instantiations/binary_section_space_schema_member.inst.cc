@@ -19,7 +19,58 @@
 
 #include "binary_section_space_schema_member.impl.h"
 
-#include "fiber_bundles_namespace.h"
+#include "at0.h"
+#include "at0_space.h"
+#include "at1.h"
+#include "at1_space.h"
+#include "at2.h"
+#include "at2_e2.h"
+#include "at2_e3.h"
+#include "at3.h"
+#include "at3_e3.h"
+#include "atp.h"
+#include "atp_space.h"
+#include "e1.h"
+#include "e2.h"
+#include "e3.h"
+#include "e4.h"
+#include "ed.h"
+#include "jcb.h"
+#include "jcb_e13.h"
+#include "jcb_e23.h"
+#include "jcb_e33.h"
+#include "jcb_ed.h"
+#include "jcb_space.h"
+#include "met.h"
+#include "met_e1.h"
+#include "met_e2.h"
+#include "met_e3.h"
+#include "met_ed.h"
+#include "st2.h"
+#include "st2_e2.h"
+#include "st2_e3.h"
+#include "st3.h"
+#include "st3_e3.h"
+#include "st4.h"
+#include "st4_e2.h"
+#include "st4_e3.h"
+#include "stp.h"
+#include "stp_space.h"
+#include "t2.h"
+#include "t2_e2.h"
+#include "t2_e3.h"
+#include "t3.h"
+#include "t3_e3.h"
+#include "t4.h"
+#include "t4_e2.h"
+#include "t4_e3.h"
+#include "tp.h"
+#include "tp_space.h"
+#include "tuple.h"
+#include "tuple_space.h"
+#include "vd.h"
+#include "vd_space.h"
+
 #include "sec_at0.h"
 #include "sec_at0_space.h"
 #include "sec_at1.h"
@@ -141,213 +192,213 @@ standard_member<fiber_bundle::sec_at0>(namespace_type& xns,
 // sec_at0_space
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_at0_space>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_at0_space>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_at0_space>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_at0_space>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_at0_space>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_at0_space>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_at0_space>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_at0_space>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_at0_space>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_at0_space>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
 //
-// sec_at1
+// nonleaf sec_at1
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_at1>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_at1>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_at1>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_at1>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_at1>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_at1>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_at1>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_at1>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_at1>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_at1>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
 //
 // sec_at1_space
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_at1_space>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_at1_space>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_at1_space>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_at1_space>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_at1_space>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_at1_space>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_at1_space>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_at1_space>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_at1_space>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_at1_space>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
 //
-// sec_at2
+// nonleaf sec_at2
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_at2>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_at2>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_at2>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_at2>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_at2>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_at2>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_at2>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_at2>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_at2>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_at2>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
 //
 // sec_at2_e2
@@ -456,57 +507,57 @@ standard_member<fiber_bundle::sec_at2_e3>(namespace_type& xns,
                                     bool xauto_access);
 
 //
-// sec_at3
+// nonleaf sec_at3
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_at3>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_at3>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_at3>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_at3>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_at3>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_at3>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_at3>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_at3>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_at3>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_at3>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
 //
 // sec_at3_e3
@@ -562,110 +613,110 @@ standard_member<fiber_bundle::sec_at3_e3>(namespace_type& xns,
                                     bool xauto_access);
 
 //
-// sec_atp
+// nonleaf sec_atp
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_atp>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_atp>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_atp>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_atp>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_atp>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_atp>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_atp>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_atp>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_atp>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_atp>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
 //
 // sec_atp_space
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_atp_space>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_atp_space>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_atp_space>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_atp_space>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_atp_space>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_atp_space>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_atp_space>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_atp_space>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_atp_space>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_atp_space>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
 //
 // sec_e1
@@ -1039,110 +1090,110 @@ standard_member<fiber_bundle::sec_e4>(namespace_type& xns,
                                     bool xauto_access);
 
 //
-// sec_ed
+// nonleaf sec_ed
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_ed>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_ed>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_ed>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_ed>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_ed>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_ed>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_ed>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_ed>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_ed>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_ed>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
 //
-// sec_jcb
+// nonleaf sec_jcb
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_jcb>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_jcb>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_jcb>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_jcb>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_jcb>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_jcb>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_jcb>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_jcb>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_jcb>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_jcb>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
 //
 // sec_jcb_e13
@@ -1304,163 +1355,163 @@ standard_member<fiber_bundle::sec_jcb_e33>(namespace_type& xns,
                                     bool xauto_access);
 
 //
-// sec_jcb_ed
+// nonleaf sec_jcb_ed
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_jcb_ed>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_jcb_ed>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_jcb_ed>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_jcb_ed>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_jcb_ed>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_jcb_ed>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_jcb_ed>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_jcb_ed>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_jcb_ed>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_jcb_ed>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
 //
 // sec_jcb_space
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_jcb_space>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_jcb_space>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_jcb_space>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_jcb_space>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_jcb_space>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_jcb_space>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_jcb_space>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_jcb_space>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_jcb_space>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_jcb_space>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
 //
-// sec_met
+// nonleaf sec_met
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_met>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_met>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_met>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_met>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_met>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_met>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_met>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_met>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_met>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_met>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
 //
 // sec_met_e1
@@ -1516,7 +1567,7 @@ standard_member<fiber_bundle::sec_met_e1>(namespace_type& xns,
                                     bool xauto_access);
 
 //
-// sec_met_e2
+//  sec_met_e2
 //
 
 template
@@ -1569,7 +1620,7 @@ standard_member<fiber_bundle::sec_met_e2>(namespace_type& xns,
                                     bool xauto_access);
 
 //
-// sec_met_e3
+//  sec_met_e3
 //
 
 template
@@ -1622,375 +1673,375 @@ standard_member<fiber_bundle::sec_met_e3>(namespace_type& xns,
                                     bool xauto_access);
 
 //
-// sec_met_ed
+// nonleaf sec_met_ed
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_met_ed>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_met_ed>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_met_ed>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_met_ed>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_met_ed>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_met_ed>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_met_ed>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_met_ed>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_met_ed>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_met_ed>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
+//
+////
+//// nonleaf sec_rep_descriptor
+////
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_rep_descriptor>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_rep_descriptor>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_rep_descriptor>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_rep_descriptor>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_rep_descriptor>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
+//
+////
+//// nonleaf sec_rep_descriptor_poset
+////
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_rep_descriptor_poset>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_rep_descriptor_poset>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_rep_descriptor_poset>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_rep_descriptor_poset>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_rep_descriptor_poset>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
+//
+////
+//// nonleaf sec_rep_descriptor_table_dofs_type
+////
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_rep_descriptor_table_dofs_type>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_rep_descriptor_table_dofs_type>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_rep_descriptor_table_dofs_type>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_rep_descriptor_table_dofs_type>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_rep_descriptor_table_dofs_type>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
 //
-// sec_rep_descriptor
+// nonleaf sec_rep_space
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_rep_descriptor>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_rep_descriptor>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_rep_descriptor>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_rep_descriptor>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_rep_descriptor>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
-
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_rep_space>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
 //
-// sec_rep_descriptor_poset
 //
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_rep_descriptor_poset>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_rep_descriptor_poset>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_rep_descriptor_poset>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_rep_descriptor_poset>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_rep_descriptor_poset>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
-
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_rep_space>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
 //
-// sec_rep_descriptor_table_dofs_type
 //
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_rep_descriptor_table_dofs_type>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_rep_descriptor_table_dofs_type>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_rep_descriptor_table_dofs_type>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_rep_descriptor_table_dofs_type>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_rep_descriptor_table_dofs_type>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
-
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_rep_space>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
 //
-// sec_rep_space
 //
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_rep_space>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_rep_space>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_rep_space>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_rep_space>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_rep_space>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
-
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_rep_space>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
 //
-// sec_rep_space_member
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_rep_space>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 //
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_rep_space_member>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_rep_space_member>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_rep_space_member>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_rep_space_member>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_rep_space_member>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
-
+////
+//// nonleaf sec_rep_space_member
+////
 //
-// sec_st2
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_rep_space_member>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
 //
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_st2>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_st2>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_st2>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_st2>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_st2>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_rep_space_member>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_rep_space_member>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_rep_space_member>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_rep_space_member>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
+//
+////
+//// nonleaf sec_st2
+////
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_st2>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_st2>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_st2>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_st2>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_st2>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
 //
 // sec_st2_e2
@@ -2099,57 +2150,57 @@ standard_member<fiber_bundle::sec_st2_e3>(namespace_type& xns,
                                     bool xauto_access);
 
 //
-// sec_st3
+// nonleaf sec_st3
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_st3>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_st3>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_st3>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_st3>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_st3>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_st3>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_st3>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_st3>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_st3>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_st3>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
 //
 // sec_st3_e3
@@ -2205,57 +2256,57 @@ standard_member<fiber_bundle::sec_st3_e3>(namespace_type& xns,
                                     bool xauto_access);
 
 //
-// sec_st4
+// nonleaf sec_st4
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_st4>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_st4>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_st4>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_st4>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_st4>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_st4>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_st4>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_st4>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_st4>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_st4>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
 //
 // sec_st4_e2
@@ -2364,163 +2415,163 @@ standard_member<fiber_bundle::sec_st4_e3>(namespace_type& xns,
                                     bool xauto_access);
 
 //
-// sec_stp
+// nonleaf sec_stp
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_stp>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_stp>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_stp>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_stp>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_stp>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_stp>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_stp>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_stp>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_stp>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_stp>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
 //
 // sec_stp_space
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_stp_space>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_stp_space>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_stp_space>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_stp_space>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_stp_space>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_stp_space>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_stp_space>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_stp_space>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_stp_space>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_stp_space>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
 //
-// sec_t2
+// nonleaf sec_t2
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_t2>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_t2>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_t2>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_t2>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_t2>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_t2>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_t2>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_t2>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_t2>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_t2>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
 //
 // sec_t2_e2
@@ -2629,57 +2680,57 @@ standard_member<fiber_bundle::sec_t2_e3>(namespace_type& xns,
                                     bool xauto_access);
 
 //
-// sec_t3
+// nonleaf sec_t3
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_t3>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_t3>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_t3>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_t3>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_t3>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_t3>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_t3>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_t3>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_t3>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_t3>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
 //
 // sec_t3_e3
@@ -2735,57 +2786,57 @@ standard_member<fiber_bundle::sec_t3_e3>(namespace_type& xns,
                                     bool xauto_access);
 
 //
-// sec_t4
+// nonleaf sec_t4
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_t4>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_t4>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_t4>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_t4>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_t4>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_t4>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_t4>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_t4>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_t4>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_t4>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
 //
 // sec_t4_e2
@@ -2841,7 +2892,7 @@ standard_member<fiber_bundle::sec_t4_e2>(namespace_type& xns,
                                     bool xauto_access);
 
 //
-// sec_t4_e3
+//  sec_t4_e3
 //
 
 template
@@ -2894,320 +2945,320 @@ standard_member<fiber_bundle::sec_t4_e3>(namespace_type& xns,
                                     bool xauto_access);
 
 //
-// sec_tp
+// nonleaf sec_tp
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_tp>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_tp>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_tp>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_tp>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_tp>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_tp>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_tp>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_tp>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_tp>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_tp>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
 //
 // sec_tp_space
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_tp_space>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_tp_space>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_tp_space>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_tp_space>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_tp_space>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_tp_space>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_tp_space>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_tp_space>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_tp_space>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_tp_space>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
 //
-// sec_tuple
+// nonleaf sec_tuple
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_tuple>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_tuple>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_tuple>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_tuple>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_tuple>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_tuple>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_tuple>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_tuple>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_tuple>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_tuple>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
 //
 // sec_tuple_space
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_tuple_space>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_tuple_space>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_tuple_space>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_tuple_space>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_tuple_space>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_tuple_space>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_tuple_space>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_tuple_space>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_tuple_space>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_tuple_space>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
 //
 // sec_vd
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_vd>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_vd>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_vd>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_vd>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_vd>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_vd>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_vd>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_vd>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_vd>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_vd>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
 //
 // sec_vd_space
 //
 
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_host_path<fiber_bundle::sec_vd_space>(const poset_path& xbase_path,
-                                       const poset_path& xrep_path,
-                                       const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member_path<fiber_bundle::sec_vd_space>(const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix);
-
-
-template
-SHEAF_DLL_SPEC
-bool
-fiber_bundle::binary_section_space_schema_member::
-standard_host_is_available<fiber_bundle::sec_vd_space>(namespace_poset& xns,
-                                         const poset_path& xbase_path,
-                                         const poset_path& xrep_path,
-                                         const string& xfiber_suffix,
-                                         bool xauto_access);
-
-
-template
-SHEAF_DLL_SPEC
-fiber_bundle::binary_section_space_schema_member::host_type&
-fiber_bundle::binary_section_space_schema_member::
-standard_host<fiber_bundle::sec_vd_space>(namespace_type& xns,
-                                  const poset_path& xbase_path,
-                                  const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
-                                  bool xauto_access);
-
-template
-SHEAF_DLL_SPEC
-sheaf::poset_path
-fiber_bundle::binary_section_space_schema_member::
-standard_member<fiber_bundle::sec_vd_space>(namespace_type& xns,
-                                    const poset_path& xbase_path,
-                                    const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
-                                    bool xauto_access);
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_path<fiber_bundle::sec_vd_space>(const poset_path& xbase_path,
+//                                       const poset_path& xrep_path,
+//                                       const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member_path<fiber_bundle::sec_vd_space>(const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//bool
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host_is_available<fiber_bundle::sec_vd_space>(namespace_poset& xns,
+//                                         const poset_path& xbase_path,
+//                                         const poset_path& xrep_path,
+//                                         const string& xfiber_suffix,
+//                                         bool xauto_access);
+//
+//
+//template
+//SHEAF_DLL_SPEC
+//fiber_bundle::binary_section_space_schema_member::host_type&
+//fiber_bundle::binary_section_space_schema_member::
+//standard_host<fiber_bundle::sec_vd_space>(namespace_type& xns,
+//                                  const poset_path& xbase_path,
+//                                  const poset_path& xrep_path,
+//                                  const string& xfiber_suffix,
+//                                  bool xauto_access);
+//
+//template
+//SHEAF_DLL_SPEC
+//sheaf::poset_path
+//fiber_bundle::binary_section_space_schema_member::
+//standard_member<fiber_bundle::sec_vd_space>(namespace_type& xns,
+//                                    const poset_path& xbase_path,
+//                                    const poset_path& xrep_path,
+//                                    const string& xfiber_suffix,
+//                                    bool xauto_access);
 
