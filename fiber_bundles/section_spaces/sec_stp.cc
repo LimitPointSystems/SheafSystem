@@ -21,7 +21,7 @@
 #include "sec_stp.h"
 
 #include "assert_contract.h"
-#include "binary_section_space_schema_member.h"
+#include "binary_section_space_schema_member.impl.h"
 #include "binary_section_space_schema_poset.h"
 #include "fiber_bundles_namespace.h"
 #include "section_space_schema_member.impl.h"

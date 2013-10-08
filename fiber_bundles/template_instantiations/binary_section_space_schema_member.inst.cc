@@ -20,86 +20,97 @@
 #include "binary_section_space_schema_member.impl.h"
 
 #include "fiber_bundles_namespace.h"
-#include "at0.h"
-#include "at0_space.h"
-#include "at1.h"
-#include "at1_space.h"
-#include "at2.h"
-#include "at2_e2.h"
-#include "at2_e3.h"
-#include "at3.h"
-#include "at3_e3.h"
-#include "atp.h"
-#include "dtypeh"
-#include "e3.h"
-#include "e4.h"
-#include "ed.h"
-#include "gl1.h"
-#include "gl2.h"
-#include "gl3.h"
-#include "gln.h"
-#include "gln_space.h"
-#include "jcb.h"
-#include "jcb_e13.h"
-#include "jcb_e23.h"
-#include "jcb_e33.h"
-#include "jcb_space.h"
-#include "met.h"
-#include "met_e1.h"
-#include "met_e2.h"
-#include "met_e3.h"
-#include "met_ed.h"
-#include "st2.h"
-#include "st2_e2.h"
-#include "st2_e3.h"
-#include "st3.h"
-#include "st3_e3.h"
-#include "st4_e2.h"
-#include "st4_e2.h"
-#include "st4_e3.h"
-#include "stp.h"
-#include "stp_space.h"
-#include "t2.h"
-#include "t2_e2.h"
-#include "t2_e3.h"
-#include "t3.h"
-#include "t3_e3.h"
-#include "t4.h"
-#include "t4_e2.h"
-#include "t4_e3.h"
-#include "tp.h"
-#include "tp_space.h"
-#include "vd.h"
+#include "sec_at0.h"
+#include "sec_at0_space.h"
+#include "sec_at1.h"
+#include "sec_at1_space.h"
+#include "sec_at2.h"
+#include "sec_at2_e2.h"
+#include "sec_at2_e3.h"
+#include "sec_at3.h"
+#include "sec_at3_e3.h"
+#include "sec_atp.h"
+#include "sec_atp_space.h"
+#include "sec_e1.h"
+#include "sec_e1_uniform.h"
+#include "sec_e2.h"
+#include "sec_e2_uniform.h"
+#include "sec_e3.h"
+#include "sec_e3_uniform.h"
+#include "sec_e4.h"
+#include "sec_ed.h"
+#include "sec_jcb.h"
+#include "sec_jcb_e13.h"
+#include "sec_jcb_e23.h"
+#include "sec_jcb_e33.h"
+#include "sec_jcb_ed.h"
+#include "sec_jcb_space.h"
+#include "sec_met.h"
+#include "sec_met_e1.h"
+#include "sec_met_e2.h"
+#include "sec_met_e3.h"
+#include "sec_met_ed.h"
+#include "sec_rep_descriptor.h"
+#include "sec_rep_descriptor_poset.h"
+#include "sec_rep_descriptor_table_dofs_type.h"
+#include "sec_rep_space.h"
+#include "sec_rep_space_member.h"
+#include "sec_st2.h"
+#include "sec_st2_e2.h"
+#include "sec_st2_e3.h"
+#include "sec_st3.h"
+#include "sec_st3_e3.h"
+#include "sec_st4.h"
+#include "sec_st4_e2.h"
+#include "sec_st4_e3.h"
+#include "sec_stp.h"
+#include "sec_stp_space.h"
+#include "sec_t2.h"
+#include "sec_t2_e2.h"
+#include "sec_t2_e3.h"
+#include "sec_t3.h"
+#include "sec_t3_e3.h"
+#include "sec_t4.h"
+#include "sec_t4_e2.h"
+#include "sec_t4_e3.h"
+#include "sec_tp.h"
+#include "sec_tp_space.h"
+#include "sec_tuple.h"
+#include "sec_tuple_space.h"
+#include "sec_vd.h"
+#include "sec_vd_space.h"
 
 //==============================================================================
 // EXPLICIT INSTANTIATIONS
 //==============================================================================
 
-
-  //
-  // at0
-  //
+//
+// sec_at0
+//
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at0>
-static poset_path standard_host_path(const poset_path& xbase_path,
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_at0>(const poset_path& xbase_path,
                                        const poset_path& xrep_path,
                                        const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at0>
-static poset_path standard_member_path(const poset_path& xbase_path,
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_at0>(const poset_path& xbase_path,
                                          const poset_path& xrep_path,
                                          const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at0>
-static bool standard_host_is_available(namespace_poset& xns,
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_at0>(namespace_poset& xns,
                                          const poset_path& xbase_path,
                                          const poset_path& xrep_path,
                                          const string& xfiber_suffix,
@@ -108,8 +119,9 @@ static bool standard_host_is_available(namespace_poset& xns,
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at0>
-static host_type& standard_host(namespace_type& xns,
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_at0>(namespace_type& xns,
                                   const poset_path& xbase_path,
                                   const poset_path& xrep_path,
                                   const string& xfiber_suffix,
@@ -117,2415 +129,3085 @@ static host_type& standard_host(namespace_type& xns,
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at0>
-static poset_path standard_member(namespace_type& xns,
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_at0>(namespace_type& xns,
                                     const poset_path& xbase_path,
                                     const poset_path& xrep_path,
                                     const string& xfiber_suffix,
                                     bool xauto_access);
 
+//
+// sec_at0_space
+//
 
-  //
-  // at0_space
-  //
+template
+SHEAF_DLL_SPEC
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_at0_space>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
- template
- SHEAF_DLL_SPEC
- <fiber_bundle::at0_space>
- static poset_path standard_host_path(const poset_path& xbase_path,
+
+template
+SHEAF_DLL_SPEC
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_at0_space>(const poset_path& xbase_path,
                                          const poset_path& xrep_path,
                                          const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at0_space>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                           const poset_path& xrep_path,
-                                           const string& xfiber_suffix);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_at0_space>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at0_space>
-static bool standard_host_is_available(namespace_poset& xns,
-                                           const poset_path& xbase_path,
-                                           const poset_path& xrep_path,
-                                           const string& xfiber_suffix,
-                                           bool xauto_access);
-
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_at0_space>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at0_space>
-static host_type& standard_host(namespace_type& xns,
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_at0_space>(namespace_type& xns,
                                     const poset_path& xbase_path,
                                     const poset_path& xrep_path,
                                     const string& xfiber_suffix,
                                     bool xauto_access);
 
+//
+// sec_at1
+//
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at0_space>
-static poset_path standard_member(namespace_type& xns,
-                                      const poset_path& xbase_path,
-                                      const poset_path& xrep_path,
-                                      const string& xfiber_suffix,
-                                      bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_at1>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
- //
- // at1
- //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at1>
- static poset_path standard_host_path(const poset_path& xbase_path,
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_at1>(const poset_path& xbase_path,
                                          const poset_path& xrep_path,
                                          const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at1>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                           const poset_path& xrep_path,
-                                           const string& xfiber_suffix);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_at1>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at1>
-static bool standard_host_is_available(namespace_poset& xns,
-                                           const poset_path& xbase_path,
-                                           const poset_path& xrep_path,
-                                           const string& xfiber_suffix,
-                                           bool xauto_access);
-
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_at1>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at1>
-static host_type& standard_host(namespace_type& xns,
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_at1>(namespace_type& xns,
                                     const poset_path& xbase_path,
                                     const poset_path& xrep_path,
                                     const string& xfiber_suffix,
                                     bool xauto_access);
 
+//
+// sec_at1_space
+//
+
+template
+SHEAF_DLL_SPEC
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_at1_space>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
+
+
+template
+SHEAF_DLL_SPEC
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_at1_space>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
+
+
+template
+SHEAF_DLL_SPEC
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_at1_space>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
+
+template
+SHEAF_DLL_SPEC
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_at1_space>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
+
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at1>
-static poset_path standard_member(namespace_type& xns,
-                                      const poset_path& xbase_path,
-                                      const poset_path& xrep_path,
-                                      const string& xfiber_suffix,
-                                      bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_at1_space>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// at1_space
+// sec_at2
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at1_space>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_at2>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at1_space>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_at2>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at1_space>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_at2>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at1_space>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_at2>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
-
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at1_space>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_at2>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// at2
+// sec_at2_e2
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at2>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_at2_e2>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at2>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_at2_e2>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at2>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_at2_e2>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at2>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
-
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_at2_e2>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at2>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_at2_e2>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// at2_e2
+// sec_at2_e3
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at2_e2>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_at2_e3>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at2_e2>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_at2_e3>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at2_e2>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_at2_e3>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at2_e2>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_at2_e3>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
-
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at2_e2>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_at2_e3>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// at2_e3
+// sec_at3
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at2_e3>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_at3>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at2_e3>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_at3>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at2_e3>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_at3>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at2_e3>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_at3>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
-
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at2_e3>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_at3>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// at3
+// sec_at3_e3
 //
+
+template
+SHEAF_DLL_SPEC
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_at3_e3>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
+
+
+template
+SHEAF_DLL_SPEC
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_at3_e3>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
+
+
+template
+SHEAF_DLL_SPEC
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_at3_e3>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
+
+template
+SHEAF_DLL_SPEC
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_at3_e3>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
+
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at3>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_at3_e3>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
+//
+// sec_atp
+//
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at3>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_atp>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at3>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_atp>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at3>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_atp>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at3>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_atp>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
+template
+SHEAF_DLL_SPEC
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_atp>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// at3_e3
+// sec_atp_space
 //
+
+template
+SHEAF_DLL_SPEC
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_atp_space>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
+
+
+template
+SHEAF_DLL_SPEC
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_atp_space>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
+
+
+template
+SHEAF_DLL_SPEC
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_atp_space>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
+
+
+template
+SHEAF_DLL_SPEC
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_atp_space>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at3_e3>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_atp_space>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
+//
+// sec_e1
+//
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at3_e3>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_e1>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at3_e3>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_e1>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at3_e3>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_e1>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::at3_e3>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_e1>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
+template
+SHEAF_DLL_SPEC
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_e1>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// atp
+// sec_e1_uniform
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::atp>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_e1_uniform>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::atp>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_e1_uniform>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::atp>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_e1_uniform>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::atp>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_e1_uniform>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
-
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::atp>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_e1_uniform>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// e1
+// sec_e2
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::e1>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_e2>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::e1>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_e2>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::e1>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_e2>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::e1>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_e2>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
-
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::e1>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_e2>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// e2
+// sec_e2_uniform
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::e2>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_e2_uniform>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::e2>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_e2_uniform>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::e2>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_e2_uniform>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::e2>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
-
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_e2_uniform>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::e2>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_e2_uniform>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// e3
+// sec_e3
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::e3>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_e3>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::e3>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_e3>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::e3>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_e3>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::e3>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_e3>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
-
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::e3>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_e3>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// e4
+// sec_e3_uniform
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::e4>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_e3_uniform>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::e4>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_e3_uniform>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::e4>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_e3_uniform>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::e4>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
-
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_e3_uniform>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::e4>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_e3_uniform>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// ed
+// sec_e4
 //
+
+template
+SHEAF_DLL_SPEC
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_e4>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
+
+
+template
+SHEAF_DLL_SPEC
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_e4>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
+
+
+template
+SHEAF_DLL_SPEC
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_e4>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
+
+
+template
+SHEAF_DLL_SPEC
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_e4>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::ed>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_e4>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
+//
+// sec_ed
+//
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::ed>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_ed>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::ed>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_ed>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::ed>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_ed>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::ed>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_ed>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
+template
+SHEAF_DLL_SPEC
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_ed>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// gl2
+// sec_jcb
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::gl2>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_jcb>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::gl2>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_jcb>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::gl2>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_jcb>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::gl2>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_jcb>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
-
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::gl2>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_jcb>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// gl3
+// sec_jcb_e13
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::gl3>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_jcb_e13>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::gl3>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_jcb_e13>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::gl3>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_jcb_e13>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::gl3>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
-
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_jcb_e13>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::gl3>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_jcb_e13>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// gln
+// sec_jcb_e23
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::gln>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_jcb_e23>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::gln>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_jcb_e23>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::gln>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_jcb_e23>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::gln>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_jcb_e23>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
-
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::gln>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_jcb_e23>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// gln_space
+// sec_jcb_e33
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::gln_space>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_jcb_e33>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::gln_space>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_jcb_e33>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::gln_space>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_jcb_e33>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::gln_space>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_jcb_e33>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
-
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::gln_space>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_jcb_e33>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// jcb
+// sec_jcb_ed
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::jcb>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_jcb_ed>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::jcb>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_jcb_ed>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::jcb>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_jcb_ed>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::jcb>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
-
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_jcb_ed>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::jcb>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_jcb_ed>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// jcb_e13
+// sec_jcb_space
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::jcb_e13>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_jcb_space>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::jcb_e13>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_jcb_space>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::jcb_e13>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_jcb_space>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::jcb_e13>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_jcb_space>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
-
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::jcb_e13>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_jcb_space>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// jcb_e23
+// sec_met
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::jcb_e23>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_met>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::jcb_e23>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_met>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::jcb_e23>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_met>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::jcb_e23>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
-
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_met>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::jcb_e23>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_met>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// jcb_e33
+// sec_met_e1
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::jcb_e33>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_met_e1>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::jcb_e33>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_met_e1>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::jcb_e33>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_met_e1>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::jcb_e33>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_met_e1>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
-
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::jcb_e33>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_met_e1>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// jcb_space
+// sec_met_e2
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::jcb_space>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_met_e2>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::jcb_space>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_met_e2>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::jcb_space>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_met_e2>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::jcb_space>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
-
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_met_e2>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::jcb_space>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_met_e2>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// met
+// sec_met_e3
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::met>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_met_e3>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::met>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_met_e3>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::met>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_met_e3>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::met>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_met_e3>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
-
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::met>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_met_e3>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// met_e1
+// sec_met_ed
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::met_e1>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_met_ed>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::met_e1>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_met_ed>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::met_e1>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_met_ed>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::met_e1>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_met_ed>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
-
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::met_e1>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_met_ed>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// met_e2
+// sec_rep_descriptor
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::met_e2>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_rep_descriptor>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::met_e2>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_rep_descriptor>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::met_e2>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_rep_descriptor>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::met_e2>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
-
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_rep_descriptor>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::met_e2>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_rep_descriptor>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// met_e3
+// sec_rep_descriptor_poset
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::met_e3>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_rep_descriptor_poset>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::met_e3>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_rep_descriptor_poset>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::met_e3>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_rep_descriptor_poset>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::met_e3>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_rep_descriptor_poset>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
-
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::met_e3>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_rep_descriptor_poset>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// met_ed
+// sec_rep_descriptor_table_dofs_type
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::met_ed>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_rep_descriptor_table_dofs_type>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::met_ed>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_rep_descriptor_table_dofs_type>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::met_ed>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_rep_descriptor_table_dofs_type>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::met_ed>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
-
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_rep_descriptor_table_dofs_type>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::met_ed>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_rep_descriptor_table_dofs_type>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// st2
+// sec_rep_space
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st2>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_rep_space>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st2>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_rep_space>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st2>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_rep_space>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st2>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_rep_space>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
-
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st2>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_rep_space>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// st2_e2
+// sec_rep_space_member
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st2_e2>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_rep_space_member>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st2_e2>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_rep_space_member>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st2_e2>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_rep_space_member>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st2_e2>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
-
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_rep_space_member>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st2_e2>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_rep_space_member>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// st2_e3
+// sec_st2
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st2_e3>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_st2>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st2_e3>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_st2>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st2_e3>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_st2>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st2_e3>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_st2>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
-
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st2_e3>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_st2>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// st3
+// sec_st2_e2
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st3>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_st2_e2>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st3>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_st2_e2>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st3>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_st2_e2>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st3>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_st2_e2>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
-
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st3>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_st2_e2>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// st3_e3
+// sec_st2_e3
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st3_e3>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_st2_e3>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st3_e3>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_st2_e3>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st3_e3>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_st2_e3>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st3_e3>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
-
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_st2_e3>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st3_e3>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_st2_e3>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// st4
+// sec_st3
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st4>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_st3>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st4>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_st3>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st4>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_st3>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st4>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_st3>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
-
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st4>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_st3>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// st4_e2
+// sec_st3_e3
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st4_e2>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_st3_e3>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st4_e2>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_st3_e3>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st4_e2>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_st3_e3>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st4_e2>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
-
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_st3_e3>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st4_e2>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_st3_e3>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// st4_e3
+// sec_st4
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st4_e3>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_st4>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st4_e3>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_st4>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st4_e3>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_st4>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st4_e3>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_st4>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
-
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::st4_e3>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_st4>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// stp
+// sec_st4_e2
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::stp>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_st4_e2>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::stp>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_st4_e2>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::stp>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_st4_e2>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::stp>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
-
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_st4_e2>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::stp>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_st4_e2>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// stp_space
+// sec_st4_e3
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::stp_space>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_st4_e3>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::stp_space>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_st4_e3>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::stp_space>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_st4_e3>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::stp_space>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_st4_e3>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
-
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::stp_space>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_st4_e3>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// t2
+// sec_stp
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t2>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_stp>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t2>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_stp>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t2>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_stp>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t2>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_stp>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
-
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t2>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_stp>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// t2_e2
+// sec_stp_space
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t2_e2>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_stp_space>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t2_e2>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_stp_space>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t2_e2>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_stp_space>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t2_e2>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
-
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_stp_space>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t2_e2>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_stp_space>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// t2_e3
+// sec_t2
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t2_e3>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_t2>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t2_e3>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_t2>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t2_e3>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_t2>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t2_e3>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_t2>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
-
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t2_e3>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_t2>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// t3
+// sec_t2_e2
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t3>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_t2_e2>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t3>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_t2_e2>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t3>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_t2_e2>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t3>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_t2_e2>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
-
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t3>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_t2_e2>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// t3_e3
+// sec_t2_e3
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t3_e3>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_t2_e3>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t3_e3>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_t2_e3>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t3_e3>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_t2_e3>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t3_e3>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
-
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_t2_e3>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t3_e3>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_t2_e3>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// t4
+// sec_t3
 //
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t4>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_t3>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t4>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_t3>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t4>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_t3>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t4>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_t3>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
-
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t4>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_t3>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// dtype
+// sec_t3_e3
 //
+
+template
+SHEAF_DLL_SPEC
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_t3_e3>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
+
+
+template
+SHEAF_DLL_SPEC
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_t3_e3>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
+
+
+template
+SHEAF_DLL_SPEC
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_t3_e3>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
+
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t4_e2>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_t3_e3>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
+template
+SHEAF_DLL_SPEC
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_t3_e3>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
+
+//
+// sec_t4
+//
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t4_e2>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_t4>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t4_e2>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_t4>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t4_e2>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_t4>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
+
+template
+SHEAF_DLL_SPEC
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_t4>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t4_e2>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_t4>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// t4_e3
+// sec_t4_e2
 //
+
+template
+SHEAF_DLL_SPEC
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_t4_e2>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
+
+
+template
+SHEAF_DLL_SPEC
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_t4_e2>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
+
+
+template
+SHEAF_DLL_SPEC
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_t4_e2>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
+
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t4_e3>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_t4_e2>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
+template
+SHEAF_DLL_SPEC
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_t4_e2>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
+
+//
+// sec_t4_e3
+//
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t4_e3>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_t4_e3>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t4_e3>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_t4_e3>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t4_e3>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_t4_e3>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
+
+template
+SHEAF_DLL_SPEC
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_t4_e3>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::t4_e3>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_t4_e3>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// tp
+// sec_tp
 //
+
+template
+SHEAF_DLL_SPEC
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_tp>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
+
+
+template
+SHEAF_DLL_SPEC
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_tp>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
+
+
+template
+SHEAF_DLL_SPEC
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_tp>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
+
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::tp>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_tp>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
+template
+SHEAF_DLL_SPEC
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_tp>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
+
+//
+// sec_tp_space
+//
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::tp>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_tp_space>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::tp>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_tp_space>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::tp>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_tp_space>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
+
+template
+SHEAF_DLL_SPEC
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_tp_space>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::tp>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_tp_space>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// tp_space
+// sec_tuple
 //
+
+template
+SHEAF_DLL_SPEC
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_tuple>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
+
+
+template
+SHEAF_DLL_SPEC
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_tuple>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
+
+
+template
+SHEAF_DLL_SPEC
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_tuple>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
+
+
+template
+SHEAF_DLL_SPEC
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_tuple>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::tp_space>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_tuple>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
+//
+// sec_tuple_space
+//
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::tp_space>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_tuple_space>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::tp_space>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_tuple_space>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::tp_space>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_tuple_space>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
 
+
+template
+SHEAF_DLL_SPEC
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_tuple_space>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::tp_space>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_tuple_space>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
 //
-// vd
+// sec_vd
 //
+
+template
+SHEAF_DLL_SPEC
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_vd>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
+
+
+template
+SHEAF_DLL_SPEC
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_vd>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
+
+
+template
+SHEAF_DLL_SPEC
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_vd>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
+
+
+template
+SHEAF_DLL_SPEC
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_vd>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::vd>
-static poset_path standard_host_path(const poset_path& xbase_path,
-                                        const poset_path& xrep_path,
-                                        const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_vd>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 
+//
+// sec_vd_space
+//
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::vd>
-static poset_path standard_member_path(const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_host_path<fiber_bundle::sec_vd_space>(const poset_path& xbase_path,
+                                       const poset_path& xrep_path,
+                                       const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::vd>
-static bool standard_host_is_available(namespace_poset& xns,
-                                          const poset_path& xbase_path,
-                                          const poset_path& xrep_path,
-                                          const string& xfiber_suffix,
-                                          bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member_path<fiber_bundle::sec_vd_space>(const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix);
 
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::vd>
-static host_type& standard_host(namespace_type& xns,
-                                   const poset_path& xbase_path,
-                                   const poset_path& xrep_path,
-                                   const string& xfiber_suffix,
-                                   bool xauto_access);
+bool
+fiber_bundle::binary_section_space_schema_member::
+standard_host_is_available<fiber_bundle::sec_vd_space>(namespace_poset& xns,
+                                         const poset_path& xbase_path,
+                                         const poset_path& xrep_path,
+                                         const string& xfiber_suffix,
+                                         bool xauto_access);
+
 
+template
+SHEAF_DLL_SPEC
+fiber_bundle::binary_section_space_schema_member::host_type&
+fiber_bundle::binary_section_space_schema_member::
+standard_host<fiber_bundle::sec_vd_space>(namespace_type& xns,
+                                  const poset_path& xbase_path,
+                                  const poset_path& xrep_path,
+                                  const string& xfiber_suffix,
+                                  bool xauto_access);
 
 template
 SHEAF_DLL_SPEC
-<fiber_bundle::vd>
-static poset_path standard_member(namespace_type& xns,
-                                     const poset_path& xbase_path,
-                                     const poset_path& xrep_path,
-                                     const string& xfiber_suffix,
-                                     bool xauto_access);
+sheaf::poset_path
+fiber_bundle::binary_section_space_schema_member::
+standard_member<fiber_bundle::sec_vd_space>(namespace_type& xns,
+                                    const poset_path& xbase_path,
+                                    const poset_path& xrep_path,
+                                    const string& xfiber_suffix,
+                                    bool xauto_access);
 

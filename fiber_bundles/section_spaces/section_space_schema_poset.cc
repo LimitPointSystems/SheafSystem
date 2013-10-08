@@ -48,7 +48,7 @@
 #include "primary_index_space_handle.h"
 #include "schema_descriptor.h"
 #include "schema_poset_member.h"
-#include "section_space_schema_member.h"
+#include "section_space_schema_member.impl.h"
 #include "section_space_schema_table_dofs_type.h"
 #include "std_limits.h"
 #include "std_sstream.h"

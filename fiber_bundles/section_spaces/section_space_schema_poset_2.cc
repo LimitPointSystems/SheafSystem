@@ -33,7 +33,7 @@
 #include "poset_member_iterator.h"
 #include "poset_state.h"
 #include "schema_descriptor.h"
-#include "section_space_schema_member.h"
+#include "section_space_schema_member.impl.h"
 #include "section_space_schema_table_dofs_type.h"
 #include "std_limits.h"
 #include "tern.h"

@@ -35,7 +35,7 @@
 #include "poset_member_iterator.h"
 #include "poset_state.h"
 #include "product_section_space_schema_crg_range.h"
-#include "product_section_space_schema_member.h"
+#include "product_section_space_schema_member.impl.h"
 #include "schema_descriptor.h"
 #include "section_space_schema_table_dofs_type.h"
 #include "section_space_schema_table_dof_crg_range.h"

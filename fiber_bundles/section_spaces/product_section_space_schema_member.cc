@@ -18,7 +18,7 @@
 /// @file
 /// Implementation for class product_section_space_schema_member.
 
-#include "product_section_space_schema_member.h"
+#include "product_section_space_schema_member.impl.h"
 
 #include "assert_contract.h"
 #include "array_index_space_state.h"

@@ -23,7 +23,7 @@
 #include "array_section_dof_map.h"
 #include "assert_contract.h"
 #include "at0.h"
-#include "binary_section_space_schema_member.h"
+#include "binary_section_space_schema_member.impl.h"
 #include "binary_section_space_schema_poset.h"
 #include "chart_point.h"
 #include "eval_family.h"

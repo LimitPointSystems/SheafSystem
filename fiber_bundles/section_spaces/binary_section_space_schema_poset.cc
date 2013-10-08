@@ -24,7 +24,7 @@
 #include "array_poset_dof_map.h"
 #include "base_space_member.h"
 #include "base_space_poset.h"
-#include "binary_section_space_schema_member.h"
+#include "binary_section_space_schema_member.impl.h"
 #include "index_iterator.h"
 #include "namespace_poset.impl.h"
 #include "namespace_poset_member.h"

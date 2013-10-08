@@ -18,13 +18,13 @@
 /// @file
 /// Implementation for class section_space_schema_member.
 
-#include "section_space_schema_member.h"
+#include "section_space_schema_member.impl.h"
 
 #include "arg_list.h"
 #include "assert_contract.h"
 #include "array_index_space_state.h"
 #include "base_space_member.h"
-#include "binary_section_space_schema_member.h"
+#include "binary_section_space_schema_member.impl.h"
 #include "binary_section_space_schema_poset.h"
 #include "discretization_iterator.h"
 #include "ij_product_structure.h"

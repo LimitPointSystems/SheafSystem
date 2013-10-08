@@ -18,7 +18,7 @@
 /// @file
 /// Implementation for class binary_section_space_schema_member.
 
-#include "binary_section_space_schema_member.h"
+#include "binary_section_space_schema_member.impl.h"
 
 #include "binary_section_space_schema_poset.h"
 #include "assert_contract.h"

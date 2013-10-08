@@ -23,7 +23,7 @@
 #include "assert_contract.h"
 #include "array_index_space_state.h"
 #include "array_section_dof_map.h"
-#include "binary_section_space_schema_member.h"
+#include "binary_section_space_schema_member.impl.h"
 #include "binary_section_space_schema_poset.h"
 #include "index_space_iterator.h"
 #include "namespace_poset.impl.h"
