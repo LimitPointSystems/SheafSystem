@@ -948,75 +948,72 @@ path_is_auto_read_write_available<fiber_bundle::sec_atp_space>(const poset_path&
 // CLASS SEC_JCB_SPACE
 //==============================================================================
 
-// $$SCRIBBLE: Jacobian not complete in fiber_bundles_namespace
-
-
-// template
-// SHEAF_DLL_SPEC
-// fiber_bundle::sec_jcb_space&
-// sheaf::namespace_poset::
-// member_poset<fiber_bundle::sec_jcb_space>(const scoped_index& xindex, bool xauto_access) const;
+ template
+ SHEAF_DLL_SPEC
+ fiber_bundle::sec_jcb_space&
+ sheaf::namespace_poset::
+ member_poset<fiber_bundle::sec_jcb_space>(const scoped_index& xindex, bool xauto_access) const;
  
 
-// template
-// SHEAF_DLL_SPEC
-// fiber_bundle::sec_jcb_space&
-// sheaf::namespace_poset::
-// member_poset<fiber_bundle::sec_jcb_space>(const poset_path& xpath, bool xauto_access) const;
+ template
+ SHEAF_DLL_SPEC
+ fiber_bundle::sec_jcb_space&
+ sheaf::namespace_poset::
+ member_poset<fiber_bundle::sec_jcb_space>(const poset_path& xpath, bool xauto_access) const;
  
 
-// template
-// SHEAF_DLL_SPEC
-// bool
-// sheaf::namespace_poset::
-// contains_poset<fiber_bundle::sec_jcb_space>(const scoped_index& index, bool xauto_access) const;
+ template
+ SHEAF_DLL_SPEC
+ bool
+ sheaf::namespace_poset::
+ contains_poset<fiber_bundle::sec_jcb_space>(const scoped_index& index, bool xauto_access) const;
  
 
-// template
-// SHEAF_DLL_SPEC
-// bool
-// sheaf::namespace_poset::
-// contains_poset<fiber_bundle::sec_jcb_space>(const poset_path& xpath, bool xauto_access) const;
+ template
+ SHEAF_DLL_SPEC
+ bool
+ sheaf::namespace_poset::
+ contains_poset<fiber_bundle::sec_jcb_space>(const poset_path& xpath, bool xauto_access) const;
  
 
-// template
-// SHEAF_DLL_SPEC
-// bool
-// sheaf::namespace_poset::
-// contains_path<fiber_bundle::sec_jcb_space>(const poset_path& xpath, bool xauto_access) const;
+ template
+ SHEAF_DLL_SPEC
+ bool
+ sheaf::namespace_poset::
+ contains_path<fiber_bundle::sec_jcb_space>(const poset_path& xpath, bool xauto_access) const;
 
 
-// template
-// SHEAF_DLL_SPEC
-// bool
-// sheaf::namespace_poset::
-// path_is_auto_read_accessible<fiber_bundle::sec_jcb_space>(const poset_path& xpath, bool xauto_access) const;
+ template
+ SHEAF_DLL_SPEC
+ bool
+ sheaf::namespace_poset::
+ path_is_auto_read_accessible<fiber_bundle::sec_jcb_space>(const poset_path& xpath, bool xauto_access) const;
  
 
-// template
-// SHEAF_DLL_SPEC
-// bool
-// sheaf::namespace_poset::
-// path_is_auto_read_write_accessible<fiber_bundle::sec_jcb_space>(const poset_path& xpath, bool xauto_access) const;
+ template
+ SHEAF_DLL_SPEC
+ bool
+ sheaf::namespace_poset::
+ path_is_auto_read_write_accessible<fiber_bundle::sec_jcb_space>(const poset_path& xpath, bool xauto_access) const;
 
-// template
-// SHEAF_DLL_SPEC
-// bool
-// sheaf::namespace_poset::
-// path_is_available<fiber_bundle::sec_jcb_space>(const poset_path& xpath, bool xauto_access) const;
+ template
+ SHEAF_DLL_SPEC
+ bool
+ sheaf::namespace_poset::
+ path_is_available<fiber_bundle::sec_jcb_space>(const poset_path& xpath, bool xauto_access) const;
 
-// template
-// SHEAF_DLL_SPEC
-// bool
-// sheaf::namespace_poset::
-// path_is_auto_read_available<fiber_bundle::sec_jcb_space>(const poset_path& xpath, bool xauto_access) const;
+ template
+ SHEAF_DLL_SPEC
+ bool
+ sheaf::namespace_poset::
+ path_is_auto_read_available<fiber_bundle::sec_jcb_space>(const poset_path& xpath, bool xauto_access) const;
 
 
-// template
-// SHEAF_DLL_SPEC
-// bool
-// sheaf::namespace_poset::
-// path_is_auto_read_write_available<fiber_bundle::sec_jcb_space>(const poset_path& xpath, bool xauto_access) const;
+ template
+ SHEAF_DLL_SPEC
+ bool
+ sheaf::namespace_poset::
+ path_is_auto_read_write_available<fiber_bundle::sec_jcb_space>(const poset_path& xpath, bool xauto_access) const;
 
 
 //==============================================================================
