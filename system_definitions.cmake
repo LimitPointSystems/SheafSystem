@@ -23,7 +23,7 @@
 ##
 
 set(BUILD_TOOLS OFF CACHE BOOL "Toggle build of tools component. If no, then no need to look for JDK or VTK unless BUILD_BINDINGS is on.")
-set(INSTALL_DOCS OFF CACHE BOOL "Documentation is not installed by default.")
+set(INSTALL_DOCS ON CACHE BOOL "Documentation is installed by default.")
 
 #
 # Establish the version number for this build.

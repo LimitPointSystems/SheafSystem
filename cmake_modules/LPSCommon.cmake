@@ -465,12 +465,12 @@ endfunction()
 
 #
 # Add the documentation targets.
-# Default Doc state is "User"
+# Default Doc state is "Dev"
 #
 function(add_doc_targets)
     if(DOC_TARGETS)
             if(DOC_STATE MATCHES Dev OR DOC_STATE MATCHES dev OR DOC_STATE MATCHES DEV)
-                add_custom_target(doc 
+                add_custom_target(doc ALL
                         COMMAND ${CMAKE_COMMAND} -E echo 
                         "Generating Developer Documentation ... " 
                         COMMAND ${CMAKE_COMMAND} -E make_directory 
@@ -479,7 +479,7 @@ function(add_doc_targets)
                         ${CMAKE_BINARY_DIR}/dev_doxyfile
                                 )
             else()
-                add_custom_target(doc 
+                add_custom_target(doc ALL
                         COMMAND ${CMAKE_COMMAND} -E echo 
                         "Generating User Documentation ... "  
                         COMMAND ${CMAKE_COMMAND} -E make_directory 
@@ -689,15 +689,15 @@ function(export_install_config_file_vars)
         file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
             "set(${COMPONENT}_IMPORT_LIBS ${${COMPONENT}_IMPORT_LIB} CACHE STRING \"${PROJECT_NAME} cumulative import library list\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-        if("${COMPONENT}" MATCHES "TOOLS")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
-                "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/vtk/lib CACHE PATH \"VTK library path\" FORCE)\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
-                "set(VTK_BIN_DIR @SHEAFSYSTEM_HOME@/vtk/bin CACHE PATH  \"Set to link against VTK libs\" FORCE)\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-        endif()            
+#        if("${COMPONENT}" MATCHES "TOOLS")
+#            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
+#            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+#                "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/vtk/lib CACHE PATH \"VTK library path\" FORCE)\n")
+#            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
+#            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+#                "set(VTK_BIN_DIR @SHEAFSYSTEM_HOME@/vtk/bin CACHE PATH  \"Set to link against VTK libs\" FORCE)\n")
+#            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
+#        endif()            
     else()
         export(TARGETS ${${COMPONENT}_SHARED_LIB} 
             ${${COMPONENT}_STATIC_LIB} 
@@ -724,11 +724,11 @@ function(export_install_config_file_vars)
 
         if("${COMPONENT}" MATCHES "TOOLS")        
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
-                "set(VTK_INC_DIR @SHEAFSYSTEM_HOME@/vtk/include CACHE PATH \"VTK library path\")\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")            
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
-                "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/vtk/lib CACHE PATH \"VTK library path\")\n")
+#            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+#                "set(VTK_INC_DIR @SHEAFSYSTEM_HOME@/vtk/include CACHE PATH \"VTK library path\")\n")
+#            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")            
+#            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+#                "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/vtk/lib CACHE PATH \"VTK library path\")\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
             file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
@@ -756,14 +756,14 @@ function(generate_install_config_file)
         MASSAGED_OUTPUT "${INSTALL_FILE_CONTENTS}")
     file(WRITE ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "${MASSAGED_OUTPUT}")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "\n")
-    if(WIN64MSVC OR WIN64INTEL)
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in 
-            "set(INSTALLED_VTK_LIB_DIR "\@SHEAFSYSTEM_HOME\@"/vtk/lib CACHE STRING \"VTK Base Dir\" FORCE)\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in 
-            "set(VTK_BIN_DIR "\@SHEAFSYSTEM_HOME\@"/vtk/bin CACHE STRING \"VTK Base Dir\" FORCE)\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in 
-            "set(VTK_INC_DIR "\@SHEAFSYSTEM_HOME\@"/vtk/include CACHE STRING \"VTK Base Dir\" FORCE)\n") 
-    endif()
+#    if(WIN64MSVC OR WIN64INTEL)
+#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in 
+#            "set(INSTALLED_VTK_LIB_DIR "\@SHEAFSYSTEM_HOME\@"/vtk/lib CACHE STRING \"VTK Base Dir\" FORCE)\n")
+#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in 
+#            "set(VTK_BIN_DIR "\@SHEAFSYSTEM_HOME\@"/vtk/bin CACHE STRING \"VTK Base Dir\" FORCE)\n")
+#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in 
+#            "set(VTK_INC_DIR "\@SHEAFSYSTEM_HOME\@"/vtk/include CACHE STRING \"VTK Base Dir\" FORCE)\n") 
+#    endif()
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in 
         "set(VTK_LIBS ${VTK_LIBS} CACHE STRING \"VTK Runtime Libraries\" FORCE)\n")      
 endfunction(generate_install_config_file)
