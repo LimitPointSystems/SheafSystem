@@ -26,21 +26,31 @@ if(LINUX64GNU OR LINUX64INTEL)
      # "shared-libs" builds solely shared libs
     add_custom_target(shared-libs)
 
-    # Because the library dependencies are correct, we only
-    # need to list the leaf nodes in the dependency list for shared libs.
-    add_dependencies(shared-libs tools-shared-lib solvers-shared-lib)
-
+    # "static-libs" builds solely static libs
+    add_custom_target(static-libs)
+    
+    if(BUILD_TOOLS)
+        # Because the library dependencies are correct, we only
+        # need to list the leaf nodes in the dependency list for shared libs.
+        add_dependencies(shared-libs tools-shared-lib)
+    
+        # Because the library dependencies are correct, we only
+        # need to list the leaf nodes in the dependency list for static libs.
+        add_dependencies(static-libs tools-static-lib)
+    else()
+        # Because the library dependencies are correct, we only
+        # need to list the leaf nodes in the dependency list for shared libs.
+        add_dependencies(shared-libs fields-shared-lib)
+    
+        # Because the library dependencies are correct, we only
+        # need to list the leaf nodes in the dependency list for static libs.
+        add_dependencies(static-libs fields-static-lib)
+    endif()   
+ 
     # Alias for shared lib; backward naming compatability with gnu system
     add_custom_target(lib)
     add_dependencies(lib shared-libs)
     
-    # "static-libs" builds solely static libs
-    add_custom_target(static-libs)
-    
-    # Because the library dependencies are correct, we only
-    # need to list the leaf nodes in the dependency list for static libs.
-    add_dependencies(static-libs tools-static-lib solvers-static-lib)
-
     # Add a shared and static library target for each component
     foreach(comp ${COMPONENTS})
         add_custom_target(${comp}-shared-lib)
