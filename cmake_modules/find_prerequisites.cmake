@@ -38,6 +38,8 @@ set(HDF5_USE_STATIC_LIBRARIES ON)
 
 find_package(HDF5 REQUIRED)
 if(HDF5_FOUND)
+    configure_file(${CMAKE_MODULE_PATH}/hdf_definitions.cmake.in ${CMAKE_BINARY_DIR}/hdf_definitions.cmake)
+    include(${CMAKE_BINARY_DIR}/hdf_definitions.cmake)
     include_directories(${HDF5_INCLUDE_DIRS})
     get_filename_component(__TMP_DIR "${HDF5_LIBRARIES}" PATH)
     set(HDF5_LIBRARY_DIR "${__TMP_DIR}" CACHE PATH "" FORCE)

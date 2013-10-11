@@ -101,6 +101,11 @@ install(FILES ${PROJECT_BINARY_DIR}/RELEASE DESTINATION ${CMAKE_INSTALL_PREFIX})
 generate_install_config_file()
 
 #
+# Install HDF5 headers to <include> dir
+#
+install_prereqs()
+
+#
 # Install the exports file
 #
 if(LINUX64INTEL OR LINUX64GNU)
