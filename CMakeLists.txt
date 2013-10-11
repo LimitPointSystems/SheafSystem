@@ -100,6 +100,7 @@ install(FILES ${PROJECT_BINARY_DIR}/RELEASE DESTINATION ${CMAKE_INSTALL_PREFIX})
 #
 generate_install_config_file()
 
+install_prereqs()
 #
 # Install the exports file
 #

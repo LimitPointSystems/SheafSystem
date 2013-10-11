@@ -895,57 +895,59 @@ endmacro(get_date)
 #
 function(install_prereqs)
     # Prerequisite components install
-    if(LINUX64INTEL OR LINUX64GNU)
-    install(DIRECTORY ${VTK_LIB_DIR}/ DESTINATION vtk/lib/ USE_SOURCE_PERMISSIONS
-        PATTERN "CMake" EXCLUDE 
-        PATTERN "doc" EXCLUDE 
-        PATTERN "doxygen" EXCLUDE
-        PATTERN "hints" EXCLUDE
-        PATTERN "testing" EXCLUDE 
-        PATTERN "*.cmake" EXCLUDE) 
+#    if(LINUX64INTEL OR LINUX64GNU)
+#    install(DIRECTORY ${VTK_LIB_DIR}/ DESTINATION vtk/lib/ USE_SOURCE_PERMISSIONS
+#        PATTERN "CMake" EXCLUDE 
+#        PATTERN "doc" EXCLUDE 
+#        PATTERN "doxygen" EXCLUDE
+#        PATTERN "hints" EXCLUDE
+#        PATTERN "testing" EXCLUDE 
+#        PATTERN "*.cmake" EXCLUDE) 
+#
+#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
+#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+#            "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/vtk/lib CACHE STRING \"Location of VTK libs\")\n")
+#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
+#
+#    elseif(WIN32) 
+#    
+#        foreach(name ${VTK_LIBS})
+#            file(GLOB files "${VTK_LIB_DIR}/${name}.lib")
+#            set(VTK_INST_LIBS ${VTK_INST_LIBS} ${files})
+#        endforeach()
+#        install(FILES ${VTK_INST_LIBS} DESTINATION vtk/lib
+#        PERMISSIONS
+#        OWNER_WRITE OWNER_READ OWNER_EXECUTE
+#        GROUP_READ GROUP_EXECUTE
+#        WORLD_READ WORLD_EXECUTE   
+#        )
+#            
+#        foreach(name ${VTK_LIBS})
+#            file(GLOB files "${VTK_BIN_DIR}/${name}.dll")
+#            set(VTK_RUNTIME_LIBS ${VTK_RUNTIME_LIBS} ${files})
+#        endforeach()
+#        
+#        install(FILES ${VTK_RUNTIME_LIBS} DESTINATION vtk/bin
+#        PERMISSIONS
+#        OWNER_WRITE OWNER_READ OWNER_EXECUTE
+#        GROUP_READ GROUP_EXECUTE
+#        WORLD_READ WORLD_EXECUTE   
+#        )
+#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
+#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+#            "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/vtk/lib CACHE STRING \"Location of VTK libs\")\n")
+#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")            
+#    endif()
+#
+#     file(GLOB vtk_includes "${VTK_INC_DIRS}/*.h")
+#     install(FILES ${vtk_includes} DESTINATION vtk/include
+#        PERMISSIONS
+#        OWNER_WRITE OWNER_READ
+#        GROUP_READ WORLD_READ
+#             )       
 
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
-            "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/vtk/lib CACHE STRING \"Location of VTK libs\")\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-
-    elseif(WIN32) 
-    
-        foreach(name ${VTK_LIBS})
-            file(GLOB files "${VTK_LIB_DIR}/${name}.lib")
-            set(VTK_INST_LIBS ${VTK_INST_LIBS} ${files})
-        endforeach()
-        install(FILES ${VTK_INST_LIBS} DESTINATION vtk/lib
-        PERMISSIONS
-        OWNER_WRITE OWNER_READ OWNER_EXECUTE
-        GROUP_READ GROUP_EXECUTE
-        WORLD_READ WORLD_EXECUTE   
-        )
-            
-        foreach(name ${VTK_LIBS})
-            file(GLOB files "${VTK_BIN_DIR}/${name}.dll")
-            set(VTK_RUNTIME_LIBS ${VTK_RUNTIME_LIBS} ${files})
-        endforeach()
-        
-        install(FILES ${VTK_RUNTIME_LIBS} DESTINATION vtk/bin
-        PERMISSIONS
-        OWNER_WRITE OWNER_READ OWNER_EXECUTE
-        GROUP_READ GROUP_EXECUTE
-        WORLD_READ WORLD_EXECUTE   
-        )
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
-            "set(VTK_LIB_DIR @SHEAFSYSTEM_HOME@/vtk/lib CACHE STRING \"Location of VTK libs\")\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")            
-    endif()
-
-     file(GLOB vtk_includes "${VTK_INC_DIRS}/*.h")
-     install(FILES ${vtk_includes} DESTINATION vtk/include
-        PERMISSIONS
-        OWNER_WRITE OWNER_READ
-        GROUP_READ WORLD_READ
-             )       
-
+message(STATUS "In install_prereqs()")
+message(STATUS "HDF files are ${HDF5_INCS}")
     # Install only the HDF includes we use 
     foreach(inc ${HDF5_INCS})
         install(FILES ${HDF5_INCLUDE_DIRS}/${inc} DESTINATION include
