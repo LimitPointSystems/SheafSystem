@@ -311,23 +311,23 @@ function(set_compiler_flags)
     if(WIN64MSVC OR WIN64INTEL)
         set(CMAKE_CXX_FLAGS_RELEASE_CONTRACTS 
             "${LPS_CXX_FLAGS} /MD /LD /O2 " 
-            CACHE STRING "Flags used by the C++ compiler for Release-contracts builds" )
+            CACHE STRING "Flags used by the C++ compiler for Release_contracts builds" )
         set(CMAKE_EXE_LINKER_FLAGS_RELEASE_CONTRACTS 
             "${LPS_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD  /NXCOMPAT"  
-            CACHE STRING "Flags used by the linker for executables for Release-contracts builds" )
+            CACHE STRING "Flags used by the linker for executables for Release_contracts builds" )
         set(CMAKE_SHARED_LINKER_FLAGS_RELEASE_CONTRACTS 
             "${LPS_SHARED_LINKER_FLAGS}" 
-            CACHE STRING "Flags used by the linker for shared libraries for Release-contracts builds" ) 
+            CACHE STRING "Flags used by the linker for shared libraries for Release_contracts builds" ) 
         set(CMAKE_MODULE_LINKER_FLAGS_RELEASE_CONTRACTS 
             "${LPS_SHARED_LINKER_FLAGS}" 
-            CACHE STRING "Release-contracts linker flags - binding libs" )
+            CACHE STRING "Release_contracts linker flags - binding libs" )
     else()
         set(CMAKE_CXX_FLAGS_RELEASE_CONTRACTS "${LPS_CXX_FLAGS} " 
-            CACHE STRING "Flags used by the C++ compiler for Release-contracts builds" )
+            CACHE STRING "Flags used by the C++ compiler for Release_contracts builds" )
         set(CMAKE_EXE_LINKER_FLAGS_RELEASE_CONTRACTS "${LPS_EXE_LINKER_FLAGS}"  
-            CACHE STRING "Flags used by the linker for executables for Release-contracts builds" )
+            CACHE STRING "Flags used by the linker for executables for Release_contracts builds" )
         set(CMAKE_SHARED_LINKER_FLAGS_RELEASE_CONTRACTS "${LPS_SHARED_LINKER_FLAGS}" 
-           CACHE STRING "Flags used by the linker for shared libraries for Release-contracts builds" )
+           CACHE STRING "Flags used by the linker for shared libraries for Release_contracts builds" )
     endif()
     
     # True for all currently supported platforms        
@@ -342,26 +342,26 @@ function(set_compiler_flags)
     if(WIN64MSVC OR WIN64INTEL)
         set(CMAKE_CXX_FLAGS_RELEASE_NO_CONTRACTS 
             "${LPS_CXX_FLAGS}  /MD /LD /O2 /DNDEBUG" 
-            CACHE STRING "Flags used by the C++ compiler for Release-no-contracts builds" )
+            CACHE STRING "Flags used by the C++ compiler for Release_no_contracts builds" )
         set(CMAKE_EXE_LINKER_FLAGS_RELEASE_NO_CONTRACTS 
             "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD  /NXCOMPAT" 
-            CACHE STRING "Flags used by the linker for executables for Release-no-contracts builds" )
+            CACHE STRING "Flags used by the linker for executables for Release_no_contracts builds" )
         set(CMAKE_SHARED_LINKER_FLAGS_RELEASE_NO_CONTRACTS 
             "${LPS_SHARED_LINKER_FLAGS}" 
-            CACHE STRING "Flags used by the linker for shared libraries for Release-no-contracts builds" )
+            CACHE STRING "Flags used by the linker for shared libraries for Release_no_contracts builds" )
         set(CMAKE_MODULE_LINKER_FLAGS_RELEASE_NO_CONTRACTS 
             "${LPS_SHARED_LINKER_FLAGS}" 
-            CACHE STRING "Release-no-contracts linker flags - binding libs" )
+            CACHE STRING "Release_no_contracts linker flags - binding libs" )
     else()
         set(CMAKE_CXX_FLAGS_RELEASE_NO_CONTRACTS 
             "${LPS_CXX_FLAGS}  -DNDEBUG" 
-            CACHE STRING "Flags used by the C++ compiler for Release-no-contracts builds" )
+            CACHE STRING "Flags used by the C++ compiler for Release_no_contracts builds" )
         set(CMAKE_EXE_LINKER_FLAGS_RELEASE_NO_CONTRACTS 
             "${CMAKE_EXE_LINKER_FLAGS}" 
-           CACHE STRING "Flags used by the linker for executables for Release-no-contracts builds" )
+           CACHE STRING "Flags used by the linker for executables for Release_no_contracts builds" )
         set(CMAKE_SHARED_LINKER_FLAGS_RELEASE_NO_CONTRACTS 
             "${LPS_SHARED_LINKER_FLAGS}" 
-            CACHE STRING "Flags used by the linker for shared libraries for Release-no-contracts builds" )
+            CACHE STRING "Flags used by the linker for shared libraries for Release_no_contracts builds" )
     endif()
     
     # True for all currently supported platforms        

@@ -21,11 +21,11 @@
 # configurations however.
 
 if(WIN32)
-    set(CMAKE_CONFIGURATION_TYPES Debug_contracts Debug_no_contracts Release-contracts Release-no-contracts 
+    set(CMAKE_CONFIGURATION_TYPES Debug_contracts Debug_no_contracts Release_contracts Release_no_contracts 
          RelWithDebInfo_contracts RelWithDebInfo_no_contracts CACHE STRING "Supported configuration types"
         FORCE)
 else()
-    set(CMAKE_CONFIGURATION_TYPES Debug_contracts Debug_no_contracts Release-contracts Release-no-contracts 
+    set(CMAKE_CONFIGURATION_TYPES Debug_contracts Debug_no_contracts Release_contracts Release_no_contracts 
          CACHE STRING "Supported configuration types"
         FORCE)
 endif()
