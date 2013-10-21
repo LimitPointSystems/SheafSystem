@@ -259,9 +259,9 @@ function(set_compiler_flags)
     # Configuration specific flags 
     if(WIN64MSVC OR WIN64INTEL)
         set(CMAKE_CXX_FLAGS_DEBUG_CONTRACTS 
-            "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od" 
+            "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od " 
             CACHE STRING "Flags used by the C++ compiler for Debug_contracts builds" )       
-        set(CMAKE_SHARED_LINKER_FLAGS_DEBUG_CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG" 
+        set(CMAKE_SHARED_LINKER_FLAGS_DEBUG_CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRT" 
             CACHE STRING "Flags used by the linker for shared libraries for Debug_contracts builds" )
         set(CMAKE_EXE_LINKER_FLAGS_DEBUG_CONTRACTS "${LPS_EXE_LINKER_FLAGS} /DEBUG" 
             CACHE STRING "Flags used by the linker for executables for Debug_contracts builds")            
@@ -284,10 +284,10 @@ function(set_compiler_flags)
 
     if(WIN64MSVC OR WIN64INTEL)
         set(CMAKE_CXX_FLAGS_DEBUG_NO_CONTRACTS 
-             "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od /DNDEBUG" 
+             "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od /DNDEBUG " 
              CACHE STRING "Flags used by the C++ compiler for Debug_no_contracts builds" )            
         set(CMAKE_SHARED_LINKER_FLAGS_DEBUG_NO_CONTRACTS 
-             "${LPS_SHARED_LINKER_FLAGS} /DEBUG" 
+             "${LPS_SHARED_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRT" 
              CACHE STRING "Flags used by the linker for shared libraries for Debug_contracts builds" )
         set(CMAKE_EXE_LINKER_FLAGS_DEBUG_NO_CONTRACTS 
              "${LPS_EXE_LINKER_FLAGS} /DEBUG" 
