@@ -50,7 +50,7 @@ add_custom_target(help-cmake-options
     COMMAND ${CMAKE_COMMAND} -E echo "    " 
     COMMAND ${CMAKE_COMMAND} -E echo "    Type: string"         
     COMMAND ${CMAKE_COMMAND} -E echo "    " 
-    COMMAND ${CMAKE_COMMAND} -E echo "    Default Value: Debug-contracts"
+    COMMAND ${CMAKE_COMMAND} -E echo "    Default Value: Debug_contracts"
     COMMAND ${CMAKE_COMMAND} -E echo "    " 
     COMMAND ${CMAKE_COMMAND} -E echo "        example: ./cmboot -DCMAKE_BUILD_TYPE=Release-contracts"
     COMMAND ${CMAKE_COMMAND} -E echo "        example -- from build directory: cmake -DCMAKE_BUILD_TYPE=Release-contracts .."        
