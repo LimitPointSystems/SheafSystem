@@ -29,6 +29,51 @@
 
 using namespace sheaf;  // Workaround for MSVC++ bug
 
+namespace
+{
+
+//
+// Output message xmsg of type xmsg_type to the VisualStudio Output Window.
+// Only implemented if _WIN32 is defined.
+//
+void
+print_output_message(const string& xmsg_type, const string& xmsg)
+{
+#ifdef _WIN32
+  
+  // Output Header.
+  
+  int ltype_len = xmsg_type.length();
+  int lmsg_len = xmsg.length();
+  int lline_len = lmsg_len - ltype_len - 4;
+
+  OutputDebugString("\n== ");
+  OutputDebugString(xmsg_type.c_str());
+  OutputDebugString(" ");
+  for(int i=0; i < lline_len; i++)
+  {
+    OutputDebugString("=");
+  }
+
+  // Output Message.
+  
+  OutputDebugString("\n\n");
+  OutputDebugString(xmsg.c_str());
+  OutputDebugString("\n\n");
+  
+  // Output Footer
+  
+  for(int i=0; i < lmsg_len; i++)
+  {
+    OutputDebugString("=");
+  }
+  
+  OutputDebugString("\n\n");
+#endif
+};
+
+} // end unnamed namespace.
+
 // ===========================================================
 // ASSERT_CONTRACT FACET
 // ===========================================================
@@ -46,17 +91,7 @@ check_contract(bool xcond, const char* xmsg, const char* xfile, int xline)
     stringstream lmsg;
     lmsg << "'" << xmsg << "'" << " in file " << lfilename << " at line " << xline;
 
-#ifdef _WIN32
-
-	// Compiling for MS C++;
-	// Dump message to the output window.
-
-	stringstream ldebug_msg;
-	ldebug_msg << lmsg.str() << endl;
-	
-    OutputDebugString(ldebug_msg.str().c_str());
-#endif
-
+	print_output_message("CONTRACT VIOLATION", lmsg.str());
     throw std::logic_error(lmsg.str());
   }
 };  
@@ -76,17 +111,7 @@ check_contract(bool xcond, const char* xcond_msg, int xi, const char* xi_msg, co
 	 << " failed at " << xi_msg << " = " << xi
 	 << " in file " << lfilename << " at line " << xline;
 
-#ifdef _WIN32
-
-	// Compiling for MS C++;
-	// Dump message to the output window.
-
-	stringstream ldebug_msg;
-	ldebug_msg << lmsg.str() << endl;
-	
-    OutputDebugString(ldebug_msg.str().c_str());
-#endif
-
+	print_output_message("CONTRACT VIOLATION", lmsg.str());
     throw std::logic_error(lmsg.str());
   }
 };  
@@ -105,17 +130,7 @@ post_there_exists_failed(const char* xcond_msg, int xi, const char* xi_msg, int 
        << " not true for any " << xi_msg << " in [" << xmin << ", " << xub << ")"
        << " in file " << lfilename << " at line " << xline;
 
-#ifdef _WIN32
-
-	// Compiling for MS C++;
-	// Dump message to the output window.
-
-	stringstream ldebug_msg;
-	ldebug_msg << lmsg.str() << endl;
-	
-    OutputDebugString(ldebug_msg.str().c_str());
-#endif
-
+  print_output_message("CONTRACT VIOLATION", lmsg.str());
   throw std::logic_error(lmsg.str());
 };  
 
@@ -130,16 +145,6 @@ post_unimplemented(const char* xcond_msg, const char* xfile, int xline)
   stringstream lmsg;
   lmsg << "Function in file " << lfilename << " at line " << xline << " " << xcond_msg;
 
-#ifdef _WIN32
-
-	// Compiling for MS C++;
-	// Dump message to the output window.
-
-	stringstream ldebug_msg;
-	ldebug_msg << lmsg.str() << endl;
-	
-    OutputDebugString(ldebug_msg.str().c_str());
-#endif
-
+  print_output_message("UNIMPLEMENTED", lmsg.str());
   throw std::logic_error(lmsg.str());
 };    

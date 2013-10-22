@@ -29,6 +29,7 @@
 
 namespace sheaf
 {
+
   ///
   /// Tests condition xcond and throws exception if false;
   /// exception message includes xmsg, file name xfile, and line number xline.
