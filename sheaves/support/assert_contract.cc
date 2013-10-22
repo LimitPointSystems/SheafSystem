@@ -48,10 +48,13 @@ check_contract(bool xcond, const char* xmsg, const char* xfile, int xline)
 
 #ifdef _WIN32
 
-// Compiling for MS C++;
-// Dump message to the output window.
+	// Compiling for MS C++;
+	// Dump message to the output window.
 
-    OutputDebugString(lmsg.str().c_str());
+	stringstream ldebug_msg;
+	ldebug_msg << lmsg.str() << endl;
+	
+    OutputDebugString(ldebug_msg.str().c_str());
 #endif
 
     throw std::logic_error(lmsg.str());
@@ -75,10 +78,13 @@ check_contract(bool xcond, const char* xcond_msg, int xi, const char* xi_msg, co
 
 #ifdef _WIN32
 
-// Compiling for MS C++;
-// Dump message to the output window.
+	// Compiling for MS C++;
+	// Dump message to the output window.
 
-    OutputDebugString(lmsg.str().c_str());
+	stringstream ldebug_msg;
+	ldebug_msg << lmsg.str() << endl;
+	
+    OutputDebugString(ldebug_msg.str().c_str());
 #endif
 
     throw std::logic_error(lmsg.str());
@@ -101,10 +107,13 @@ post_there_exists_failed(const char* xcond_msg, int xi, const char* xi_msg, int 
 
 #ifdef _WIN32
 
-// Compiling for MS C++;
-// Dump message to the output window.
+	// Compiling for MS C++;
+	// Dump message to the output window.
 
-    OutputDebugString(lmsg.str().c_str());
+	stringstream ldebug_msg;
+	ldebug_msg << lmsg.str() << endl;
+	
+    OutputDebugString(ldebug_msg.str().c_str());
 #endif
 
   throw std::logic_error(lmsg.str());
@@ -123,10 +132,13 @@ post_unimplemented(const char* xcond_msg, const char* xfile, int xline)
 
 #ifdef _WIN32
 
-// Compiling for MS C++;
-// Dump message to the output window.
+	// Compiling for MS C++;
+	// Dump message to the output window.
 
-    OutputDebugString(lmsg.str().c_str());
+	stringstream ldebug_msg;
+	ldebug_msg << lmsg.str() << endl;
+	
+    OutputDebugString(ldebug_msg.str().c_str());
 #endif
 
   throw std::logic_error(lmsg.str());
