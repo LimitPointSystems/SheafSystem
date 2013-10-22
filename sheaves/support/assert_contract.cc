@@ -23,6 +23,10 @@
 #include "std_sstream.h"
 #include "std_string.h"
 
+#ifdef _WIN32
+#include "windows.h" // Compiling with MS C++, needed for OutputDebugString.
+#endif
+
 using namespace sheaf;  // Workaround for MSVC++ bug
 
 // ===========================================================
@@ -41,6 +45,15 @@ check_contract(bool xcond, const char* xmsg, const char* xfile, int xline)
     
     stringstream lmsg;
     lmsg << "'" << xmsg << "'" << " in file " << lfilename << " at line " << xline;
+
+#ifdef _WIN32
+
+// Compiling for MS C++;
+// Dump message to the output window.
+
+    OutputDebugString(lmsg.str().c_str());
+#endif
+
     throw std::logic_error(lmsg.str());
   }
 };  
@@ -59,6 +72,15 @@ check_contract(bool xcond, const char* xcond_msg, int xi, const char* xi_msg, co
     lmsg << "'" << xcond_msg << "'" 
 	 << " failed at " << xi_msg << " = " << xi
 	 << " in file " << lfilename << " at line " << xline;
+
+#ifdef _WIN32
+
+// Compiling for MS C++;
+// Dump message to the output window.
+
+    OutputDebugString(lmsg.str().c_str());
+#endif
+
     throw std::logic_error(lmsg.str());
   }
 };  
@@ -76,6 +98,15 @@ post_there_exists_failed(const char* xcond_msg, int xi, const char* xi_msg, int 
   lmsg << "'" << xcond_msg << "'" 
        << " not true for any " << xi_msg << " in [" << xmin << ", " << xub << ")"
        << " in file " << lfilename << " at line " << xline;
+
+#ifdef _WIN32
+
+// Compiling for MS C++;
+// Dump message to the output window.
+
+    OutputDebugString(lmsg.str().c_str());
+#endif
+
   throw std::logic_error(lmsg.str());
 };  
 
@@ -89,5 +120,14 @@ post_unimplemented(const char* xcond_msg, const char* xfile, int xline)
     
   stringstream lmsg;
   lmsg << "Function in file " << lfilename << " at line " << xline << " " << xcond_msg;
+
+#ifdef _WIN32
+
+// Compiling for MS C++;
+// Dump message to the output window.
+
+    OutputDebugString(lmsg.str().c_str());
+#endif
+
   throw std::logic_error(lmsg.str());
 };    
