@@ -19,6 +19,7 @@
 /// Implementation for class assert_contract
 
 #include "assert_contract.h"
+#include "std_iostream.h"
 #include "std_stdexcept.h"
 #include "std_sstream.h"
 #include "std_string.h"
@@ -69,6 +70,11 @@ print_output_message(const string& xmsg_type, const string& xmsg)
   }
   
   OutputDebugString("\n\n");
+
+  // Output message to standard error so it appears in the
+  // Command Consile.
+
+  std::cerr << xmsg << std::endl;
 #endif
 };
 
