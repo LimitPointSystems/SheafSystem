@@ -57,8 +57,38 @@ class SHEAF_DLL_SPEC offset_index_space_state : public explicit_index_space_stat
 
 public:
 
+  ///////////////////////////////////////////////////////////////
+  // BEGIN NEW SPACE
+
+  ///
+  /// Create a new offset id space in the id space family xid_space
+  /// at the next available id space index with name xname,
+  /// and persistence xis_persistent, offset xoffset and count xct.
+  ///
+  static pod_type new_space(index_space_family& xid_spaces,
+			    const string& xname,
+			    bool xis_persistent,
+			    pod_type xoffset,
+			    size_type xct);
+
+  ///
+  /// Create a new offset id space in the id space family xid_space
+  /// at the id space index xid with name xname, and persistence
+  /// xis_persistent, offset xoffset and count xct.
+  ///
+  static pod_type new_space(index_space_family& xid_spaces,
+			    pod_type xid,
+			    const string& xname,
+			    bool xis_persistent,
+			    pod_type xoffset,
+			    size_type xct);
+
+  // END NEW SPACE
+  ///////////////////////////////////////////////////////////////
+
   ///
   /// Creates an arg list for constructing an instance of this.
+  /// @deprecated Use new_space() constructor.
   ///
   static arg_list make_arg_list(pod_type xoffset, size_type xct);
 
@@ -76,6 +106,7 @@ protected:
 
   ///
   /// Constructor: Creates an instance from arguments, xargs.
+  /// @deprecated Use new_space() constructor.
   ///
   offset_index_space_state(const arg_list& xargs);
 
@@ -275,12 +306,14 @@ public:
 
   ///
   /// The name of this class.
+  /// @deprecated Use new_space() constructor.
   ///
   virtual const string& class_name() const;
 
   ///
   /// Virtual constructor; create a new instance of the same type at this
   /// with arguments xargs.
+  /// @deprecated Use new_space() constructor.
   ///
   virtual offset_index_space_state* clone(const arg_list& xargs) const;
 
@@ -290,6 +323,7 @@ private:
 
   ///
   /// Creates prototype for this class and enters in factory.
+  /// @deprecated Use new_space() constructor.
   ///
   static bool make_prototype();
 

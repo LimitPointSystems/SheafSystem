@@ -77,6 +77,7 @@ class SHEAF_DLL_SPEC index_space_family : public any
 {
   friend class explicit_index_space_handle;
   friend class explicit_index_space_iterator;
+  friend class explicit_index_space_state;
   friend class forwarding_index_space_handle;
   friend class implicit_index_space_iterator;
   friend class index_space_family_iterator;
@@ -202,12 +203,14 @@ public:
   ///
   /// Creates a new primary id space state with xct number of ids.
   /// Returns the index of the id space state created.
+  /// @depreciated Use primary_index_space_state::new_space().
   ///
   pod_type new_primary_state(size_type xct);
 
   ///
   /// Creates a new primary id space state [xid, xid+xct).
   /// Returns the index of the id space state created.
+  /// @depreciated Use primary_index_space_state::new_space().
   ///
   pod_type new_primary_state(pod_type xid, size_type xct);
 
@@ -215,6 +218,7 @@ public:
   /// Creates a new secondary id space state with name xname, id space state
   /// of type xstate_class_name and initialization arguments, xstate_args.
   /// Returns the index of the id space state created.
+  /// @depreciated Use new_space constructors.
   ///
   pod_type new_secondary_state(const string& xname,
 			       const string& xstate_class_name,
@@ -226,6 +230,7 @@ public:
   /// with name xname, id space state of type xstate_class_name and
   /// initialization arguments, xstate_args.
   /// Returns the index of the id space state created.
+  /// @depreciated Use new_space constructors.
   ///
   pod_type new_secondary_state(pod_type xid,
 			       const string& xname,
@@ -274,6 +279,7 @@ protected:
   ///
   /// Create a new id space state with class type xstate_class_name, arguments
   /// xstate_args and name xname.
+  /// @depreciated Use new_space constructors.
   ///
   pod_type new_state(const string& xname,
 		     const string& xstate_class_name,
@@ -283,6 +289,7 @@ protected:
   ///
   /// Create a new id space state at id space index xid with class type
   /// xstate_class_name, arguments xstate_args and name xname.
+  /// @depreciated Use new_space constructors.
   ///
   pod_type new_state(pod_type xid,
 		     const string& xname,
@@ -315,6 +322,17 @@ protected:
   ///
   index_space_collection* collection(pod_type xid);
 
+  ///////////////////////////////////////////////////////////////
+  // BEGIN NEW SPACE
+
+  ///
+  /// Reserve the next available id for an explicit index space.
+  ///
+  pod_type reserve_next_explicit_id();
+
+  // END NEW SPACE
+  ///////////////////////////////////////////////////////////////
+
   ///
   /// Size of the explicit id space intervals.
   ///
@@ -346,7 +364,7 @@ protected:
   explicit_index_space_interval* _explicit_interval;
 
   ///
-  /// The id of the next explicit index interval.
+  /// The next available id for an explicit index space.
   ///
   pod_type _next_explicit_id;
 

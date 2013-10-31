@@ -951,6 +951,53 @@ collection(pod_type xid)
   return result;
 }
 
+///////////////////////////////////////////////////////////////
+// BEGIN NEW SPACE
+
+sheaf::index_space_family::pod_type
+sheaf::index_space_family::
+reserve_next_explicit_id()
+{
+  // Preconditions:
+
+  // Body:
+
+  define_old_variable(pod_type old_next_explicit_id = _next_explicit_id);
+
+  // Find the explicit id space interval.
+
+  if((_explicit_interval == 0) ||
+     (_next_explicit_id == _explicit_interval->end()))
+  {
+    // Construct a new explicit id space interval.
+
+    _next_explicit_id = new_interval("explicit_index_space_interval",
+				     explicit_index_space_interval::make_arg_list(),
+				     explicit_interval_size());
+
+    _explicit_interval =
+      reinterpret_cast<explicit_index_space_interval*>
+      (_intervals.upper_bound(_next_explicit_id)->second);
+  }
+
+  pod_type result = _next_explicit_id;
+
+  // Increment the next explicit id.
+
+  _next_explicit_id++;
+
+  // Postconditions:
+
+  ensure(is_explicit_interval(result));
+
+  // Exit:
+
+  return result;
+}  
+
+// END NEW SPACE
+///////////////////////////////////////////////////////////////
+
 sheaf::size_type
 sheaf::index_space_family::
 explicit_interval_size()

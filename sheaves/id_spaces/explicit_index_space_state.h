@@ -76,6 +76,7 @@ public:
 
   ///
   /// Creates an arg list for constructing an instance of this.
+  /// @deprecated Use new_space() constructor.
   ///
   static arg_list make_arg_list();
 
@@ -123,6 +124,7 @@ protected:
 
   ///
   /// Constructor: Creates an instance from arguments, xargs.
+  /// @deprecated Use new_space() constructor.
   ///
   explicit_index_space_state(const arg_list& xargs);
 
@@ -130,6 +132,31 @@ protected:
   /// Assignment operator
   ///
   virtual explicit_index_space_state& operator=(const explicit_index_space_state& xother);
+
+  ///////////////////////////////////////////////////////////////
+  // BEGIN NEW SPACE
+
+  ///
+  /// Create a new id space state in the id space family xid_space
+  /// at the next available id space index with name xname,
+  /// and persistence xis_persistent.
+  ///
+  void new_state(index_space_family& xid_spaces,
+		 const string& xname,
+		 bool xis_persistent);
+
+  ///
+  /// Create a new id space state in the id space family xid_spaces
+  /// at the id space index xid with name xname, and
+  /// persistence xis_persistent.
+  ///
+  void new_state(index_space_family& xid_spaces,
+		 pod_type xid,
+		 const string& xname,
+		 bool xis_persistent);
+
+  // END NEW SPACE
+  ///////////////////////////////////////////////////////////////
 
   ///
   /// The host collection.
@@ -426,17 +453,20 @@ public:
 
   ///
   /// The name of this class.
+  /// @deprecated Use new_space() constructor.
   ///
   virtual const string& class_name() const;
 
   ///
   /// A factory for making descendants of this class.
+  /// @deprecated Use new_space() constructor.
   ///
   static factory_2<explicit_index_space_state>& id_space_factory();
 
   ///
   /// Virtual constructor; create a new instance of the same type at this
   /// with arguments xargs.
+  /// @deprecated Use new_space() constructor.
   ///
   virtual explicit_index_space_state* clone(const arg_list& xargs) const = 0;
 

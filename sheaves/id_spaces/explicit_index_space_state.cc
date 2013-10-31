@@ -23,6 +23,7 @@
 #include "abstract_product_structure.h"
 #include "assert_contract.h"
 #include "arg_list.h"
+#include "explicit_index_space_interval.h"
 #include "explicit_index_space_iterator.h"
 #include "factory_2.h"
 #include "hub_index_space_handle.h"
@@ -249,6 +250,103 @@ operator=(const explicit_index_space_state& xother)
   
   return *this;
 }
+
+///////////////////////////////////////////////////////////////
+// BEGIN NEW SPACE
+
+void
+sheaf::explicit_index_space_state::
+new_state(index_space_family& xid_spaces,
+	  const string& xname,
+	  bool xis_persistent)
+{
+  // Preconditions:
+
+  require(!xname.empty());
+  require(!xid_spaces.contains(xname));
+
+  // Body:
+
+  // Reserve the next explicit index space id.
+
+  pod_type result = xid_spaces.reserve_next_explicit_id();
+
+  // Construct an explicit index space at id, result.
+
+  new_state(xid_spaces, result, xname, xis_persistent);
+
+  // Postconditions:
+
+  ensure(invariant());
+
+  ensure(&id_spaces() == &xid_spaces);
+  ensure(is_persistent() == xis_persistent);
+  ensure(xid_spaces.name(index()) == xname);
+
+  ensure(xid_spaces.contains(index()));
+  ensure(xid_spaces.contains(xname));
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::explicit_index_space_state::
+new_state(index_space_family& xid_spaces,
+	  pod_type xid,
+	  const string& xname,
+	  bool xis_persistent)
+{
+  // Preconditions:
+
+  require(!xid_spaces.contains(xid));
+  require(xid_spaces.is_explicit_interval(xid));
+  require(!xname.empty());
+  require(!xid_spaces.contains(xname));
+
+  // Body:
+
+  pod_type result = xid;
+
+  // Get the explicit interval.
+
+  explicit_index_space_interval* lexplicit_interval =
+    reinterpret_cast<explicit_index_space_interval*>(xid_spaces.collection(result));
+
+  // Set the data members.
+
+  _host = lexplicit_interval;
+  _is_persistent = xis_persistent;
+  _index = xid;
+  
+  // Insert state into the explicit interval.
+
+  lexplicit_interval->insert(*this);
+
+  // Insert the name.
+
+  xid_spaces.put_name(xid, xname);
+
+  // Postconditions:
+
+  ensure(invariant());
+
+  ensure(&id_spaces() == &xid_spaces);
+  ensure(index() == xid);
+  ensure(is_persistent() == xis_persistent);
+  ensure(xid_spaces.name(index()) == xname);
+
+  ensure(xid_spaces.contains(index()));
+  ensure(xid_spaces.contains(xname));
+
+  // Exit:
+
+  return;
+}  
+
+// END NEW SPACE
+///////////////////////////////////////////////////////////////
 
 sheaf::size_type
 sheaf::explicit_index_space_state::
