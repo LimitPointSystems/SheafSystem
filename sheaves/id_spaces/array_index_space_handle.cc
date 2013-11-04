@@ -201,9 +201,6 @@ sheaf::array_index_space_handle::
 
 // PROTECTED MEMBER FUNCTIONS
 
-///////////////////////////////////////////////////////////////
-// BEGIN NEW SPACE
-
 sheaf::array_index_space_handle::
 array_index_space_handle(array_index_space_state& xstate)
 {
@@ -223,9 +220,6 @@ array_index_space_handle(array_index_space_state& xstate)
 
   return;
 }
-
-// END NEW SPACE
-///////////////////////////////////////////////////////////////
 
 sheaf::array_index_space_state&
 sheaf::array_index_space_handle::

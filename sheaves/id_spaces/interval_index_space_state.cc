@@ -28,6 +28,95 @@
 #include "scoped_index.h"
 
 // ===========================================================
+// SPACE FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+sheaf::interval_index_space_handle
+sheaf::interval_index_space_state::
+new_space(index_space_family& xid_spaces,
+	  const string& xname,
+	  bool xis_persistent,
+	  bool xmerge_mode)
+{
+  // Preconditions:
+
+  require(!xname.empty());
+  require(!xid_spaces.contains(xname));
+
+  // Body:
+
+  interval_index_space_state* lstate = new interval_index_space_state();
+  lstate->new_state(xid_spaces, xname, xis_persistent);
+
+  lstate->_merge_mode = xmerge_mode;
+
+  interval_index_space_handle result(*lstate);;
+
+  // Postconditions:
+
+  ensure(&result.id_spaces() == &xid_spaces);
+  ensure(xid_spaces.contains(xname));
+  ensure(result.conforms_to_state(xname));
+
+  ensure(result.is_persistent() == xis_persistent);
+  ensure(result.name() == xname);
+
+  ensure(result.merge_mode() == xmerge_mode);
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::interval_index_space_handle
+sheaf::interval_index_space_state::
+new_space(index_space_family& xid_spaces,
+	  pod_index_type xid,
+	  const string& xname,
+	  bool xis_persistent,
+	  bool xmerge_mode)
+{
+  // Preconditions:
+
+  require(!xid_spaces.contains(xid));
+  require(xid_spaces.is_explicit_interval(xid));
+  require(!xname.empty());
+  require(!xid_spaces.contains(xname));
+
+  // Body:
+
+  interval_index_space_state* lstate = new interval_index_space_state();
+  lstate->new_state(xid_spaces, xid, xname, xis_persistent);
+
+  lstate->_merge_mode = xmerge_mode;
+
+  interval_index_space_handle result(*lstate);;
+
+  // Postconditions:
+
+  ensure(&result.id_spaces() == &xid_spaces);
+  ensure(xid_spaces.contains(xname));
+  ensure(result.conforms_to_state(xname));
+
+  ensure(result.index() == xid);
+  ensure(result.is_persistent() == xis_persistent);
+  ensure(result.name() == xname);
+
+  ensure(result.merge_mode() == xmerge_mode);
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// ===========================================================
 // INTERVAL_INDEX_SPACE_STATE FACET
 // ===========================================================
 

@@ -21,9 +21,101 @@
 #include "hash_index_space_state.h"
 #include "assert_contract.h"
 #include "arg_list.h"
+#include "hash_index_space_handle.h"
 #include "hash_index_space_iterator.h"
 #include "deep_size.h"
 #include "hub_index_space_handle.h"
+
+// ===========================================================
+// SPACE FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+sheaf::hash_index_space_handle
+sheaf::hash_index_space_state::
+new_space(index_space_family& xid_spaces,
+	  const string& xname,
+	  bool xis_persistent,
+	  size_type xcapacity)
+{
+  // Preconditions:
+
+  require(!xname.empty());
+  require(!xid_spaces.contains(xname));
+  require(xcapacity >= 0);
+
+  // Body:
+
+  hash_index_space_state* lstate = new hash_index_space_state();
+  lstate->new_state(xid_spaces, xname, xis_persistent);
+
+  lstate->reserve(xcapacity);
+
+  hash_index_space_handle result(*lstate);;
+
+  // Postconditions:
+
+  ensure(&result.id_spaces() == &xid_spaces);
+  ensure(xid_spaces.contains(xname));
+  ensure(result.conforms_to_state(xname));
+
+  ensure(result.is_persistent() == xis_persistent);
+  ensure(result.name() == xname);
+
+  ensure(result.capacity() >= xcapacity);
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::hash_index_space_handle
+sheaf::hash_index_space_state::
+new_space(index_space_family& xid_spaces,
+	  pod_index_type xid,
+	  const string& xname,
+	  bool xis_persistent,
+	  size_type xcapacity)
+{
+  // Preconditions:
+
+  require(!xid_spaces.contains(xid));
+  require(xid_spaces.is_explicit_interval(xid));
+  require(!xname.empty());
+  require(!xid_spaces.contains(xname));
+  require(xcapacity >= 0);
+
+  // Body:
+
+  hash_index_space_state* lstate = new hash_index_space_state();
+  lstate->new_state(xid_spaces, xid, xname, xis_persistent);
+
+  lstate->reserve(xcapacity);
+
+  hash_index_space_handle result(*lstate);;
+
+  // Postconditions:
+
+  ensure(&result.id_spaces() == &xid_spaces);
+  ensure(xid_spaces.contains(xname));
+  ensure(result.conforms_to_state(xname));
+
+  ensure(result.index() == xid);
+  ensure(result.is_persistent() == xis_persistent);
+  ensure(result.name() == xname);
+
+  ensure(result.capacity() >= xcapacity);
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
 
 // ===========================================================
 // HASH_INDEX_SPACE_STATE FACET
@@ -670,6 +762,143 @@ unglued_hub_pod(pod_type xid) const
 // PROTECTED MEMBER FUNCTIONS
 
 // PRIVATE MEMBER FUNCTIONS
+
+
+// ===========================================================
+// HANDLE POOL FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+sheaf::size_type
+sheaf::hash_index_space_state::
+handle_pool_ct()
+{
+  // Preconditions:
+
+  // Body:
+
+  size_type result = handles().ct();
+
+  // Postconditions:
+
+  ensure(result >= 0);
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::size_type
+sheaf::hash_index_space_state::
+handle_pool_deep_size()
+{
+  // Preconditions:
+
+  // Body:
+
+  size_type result = sheaf::deep_size(handles(), true);
+
+  // Postconditions:
+
+  ensure(result >= 0);
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::index_space_handle&
+sheaf::hash_index_space_state::
+get_id_space() const
+{
+  // Preconditions:
+
+  // Body:
+
+  hash_index_space_handle& result = handles().get();
+  attach(result);
+
+  // Postconditions:
+
+  ensure(result.is_attached());
+
+  // Exit:
+
+  return result;
+}
+
+void
+sheaf::hash_index_space_state::
+release_id_space(index_space_handle& xid_space) const
+{
+  // Preconditions:
+
+  require(allocated_id_space(xid_space));
+
+  // Body:
+
+  // Detach the handle.
+
+  xid_space.detach();
+
+  // Release the handle to the pool.
+
+  handles().release(reinterpret_cast<hash_index_space_handle&>(xid_space));
+
+  // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return;
+}
+
+bool
+sheaf::hash_index_space_state::
+allocated_id_space(const index_space_handle& xid_space) const
+{
+  // Preconditions:
+
+  // Body:
+
+  const hash_index_space_handle* lid_space =
+    dynamic_cast<const hash_index_space_handle*>(&xid_space);
+
+  bool result = (lid_space != 0) && handles().allocated(*lid_space);
+
+  // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+sheaf::list_pool<sheaf::hash_index_space_handle>&
+sheaf::hash_index_space_state::
+handles()
+{
+  // Preconditions:
+
+  // Body:
+
+  static list_pool<hash_index_space_handle> result;
+
+  // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return result;
+}
 
 
 // ===========================================================

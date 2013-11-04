@@ -25,6 +25,53 @@
 #include "scoped_index.h"
 
 // ===========================================================
+// SPACE FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+sheaf::interval_index_space_handle
+sheaf::interval_index_space_handle::
+new_space(index_space_family& xid_spaces,
+	  const string& xname,
+	  bool xis_persistent,
+	  bool xmerge_mode)
+{
+  // Preconditions:
+
+  require(!xname.empty());
+  require(!xid_spaces.contains(xname));
+
+  // Body:
+
+  interval_index_space_handle result =
+    interval_index_space_state::new_space(xid_spaces,
+					  xname,
+					  xis_persistent,
+					  xmerge_mode);
+
+  // Postconditions:
+
+  ensure(&result.id_spaces() == &xid_spaces);
+  ensure(xid_spaces.contains(xname));
+  ensure(result.conforms_to_state(xname));
+
+  ensure(result.is_persistent() == xis_persistent);
+  ensure(result.name() == xname);
+
+  ensure(result.merge_mode() >= xmerge_mode);
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// ===========================================================
 // INTERVAL_INDEX_SPACE_HANDLE FACET
 // ===========================================================
 
@@ -153,6 +200,26 @@ sheaf::interval_index_space_handle::
 }
 
 // PROTECTED MEMBER FUNCTIONS
+
+sheaf::interval_index_space_handle::
+interval_index_space_handle(interval_index_space_state& xstate)
+{
+  // Preconditions:
+
+  // Body:
+
+  attach_to(&xstate);
+
+  // Postconditions:
+
+  ensure(invariant());
+  ensure(is_attached());
+  ensure(&state() == &xstate);
+
+  // Exit:
+
+  return;
+}
 
 sheaf::interval_index_space_state&
 sheaf::interval_index_space_handle::

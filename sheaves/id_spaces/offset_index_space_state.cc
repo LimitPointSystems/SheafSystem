@@ -27,19 +27,15 @@
 #include "offset_index_space_iterator.h"
 
 // ===========================================================
-// OFFSET_INDEX_SPACE_STATE FACET
+// SPACE FACTORY FACET
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
 
-///////////////////////////////////////////////////////////////
-// BEGIN NEW SPACE
-
-sheaf::offset_index_space_state::pod_type
+sheaf::offset_index_space_handle
 sheaf::offset_index_space_state::
 new_space(index_space_family& xid_spaces,
 	  const string& xname,
-	  bool xis_persistent,
 	  pod_type xoffset,
 	  size_type xct)
 {
@@ -52,47 +48,39 @@ new_space(index_space_family& xid_spaces,
 
   // Body:
 
-  offset_index_space_state* lid_space = new offset_index_space_state();
-  lid_space->new_state(xid_spaces, xname, xis_persistent);
+  offset_index_space_state* lstate = new offset_index_space_state();
+  lstate->new_state(xid_spaces, xname, false);
 
-  lid_space->_offset = xoffset;
-  lid_space->_ct = xct;
-  lid_space->_begin = 0;
-  lid_space->_end = xct;
+  lstate->_offset = xoffset;
+  lstate->_ct = xct;
+  lstate->_begin = 0;
+  lstate->_end = xct;
 
-  pod_index_type result = lid_space->index();
+  offset_index_space_handle result(*lstate);;
 
   // Postconditions:
 
-  ensure(xid_spaces.is_persistent(result) == xis_persistent);
-  ensure(xid_spaces.name(result) == xname);
-
-  /// @todo Need to create a contract that can invoke methods on
-  ///       a id space handle and then release the handle.  The expression
-  ///       below or something simular should expand to:
-  ///
-  /// offset_index_space_handle& lhandle = xid_spaces.get_handle<offset_index_space_handle>(result);
-  /// assertion(lhandle.offset() == xoffset);
-  /// xid_spaces.release_handle(lhandle);
-
-  // ensure_for_handle("offset_index_space_handle", xid_spaces, result, "offset() == xoffset");
-  ensure(xid_spaces.ct(result) == xct);
-  ensure(xid_spaces.is_gathered(result));
-
-  ensure(xid_spaces.contains(result));
+  ensure(&result.id_spaces() == &xid_spaces);
   ensure(xid_spaces.contains(xname));
+  ensure(result.conforms_to_state(xname));
+
+  ensure(result.name() == xname);
+  ensure(!result.is_persistent());
+
+  ensure(result.offset() == xoffset);
+  ensure(result.ct() == xct);
+  ensure(result.is_gathered());
 
   // Exit:
 
   return result;
 }
 
-sheaf::offset_index_space_state::pod_type
+sheaf::offset_index_space_handle
 sheaf::offset_index_space_state::
 new_space(index_space_family& xid_spaces,
 	  pod_index_type xid,
 	  const string& xname,
-	  bool xis_persistent,
 	  pod_type xoffset,
 	  size_type xct)
 {
@@ -107,44 +95,45 @@ new_space(index_space_family& xid_spaces,
 
   // Body:
 
-  offset_index_space_state* lid_space = new offset_index_space_state();
-  lid_space->new_state(xid_spaces, xid, xname, xis_persistent);
+  offset_index_space_state* lstate = new offset_index_space_state();
+  lstate->new_state(xid_spaces, xid, xname, false);
 
-  lid_space->_offset = xoffset;
-  lid_space->_ct = xct;
-  lid_space->_begin = 0;
-  lid_space->_end = xct;
+  lstate->_offset = xoffset;
+  lstate->_ct = xct;
+  lstate->_begin = 0;
+  lstate->_end = xct;
 
-  pod_index_type result = lid_space->index();
+  offset_index_space_handle result(*lstate);;
 
   // Postconditions:
 
-  ensure(result == xid);
-  ensure(xid_spaces.is_persistent(result) == xis_persistent);
-  ensure(xid_spaces.name(result) == xname);
-
-  /// @todo Need to create a contract that can invoke methods on
-  ///       a id space handle and then release the handle.  The expression
-  ///       below or something simular should expand to:
-  ///
-  /// offset_index_space_handle& lhandle = xid_spaces.get_handle<offset_index_space_handle>(result);
-  /// assertion(lhandle.offset() == xoffset);
-  /// xid_spaces.release_handle(lhandle);
-
-  // ensure_for_handle("offset_index_space_handle", xid_spaces, result, "offset() == xoffset");
-  ensure(xid_spaces.ct(result) == xct);
-  ensure(xid_spaces.is_gathered(result));
-
-  ensure(xid_spaces.contains(result));
+  ensure(&result.id_spaces() == &xid_spaces);
   ensure(xid_spaces.contains(xname));
+  ensure(result.conforms_to_state(xname));
+
+  ensure(result.index() == xid);
+  ensure(result.name() == xname);
+  ensure(!result.is_persistent());
+
+  ensure(result.offset() == xoffset);
+  ensure(result.ct() == xct);
+  ensure(result.is_gathered());
 
   // Exit:
 
   return result;
 }
 
-// END NEW SPACE
-///////////////////////////////////////////////////////////////
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// ===========================================================
+// OFFSET_INDEX_SPACE_STATE FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
 
 sheaf::arg_list
 sheaf::offset_index_space_state::

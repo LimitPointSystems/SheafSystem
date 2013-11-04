@@ -41,7 +41,31 @@ class interval_index_space_state;
 class SHEAF_DLL_SPEC interval_index_space_handle : public mutable_index_space_handle
 {
 
-  friend class interval_sum_index_space_state;
+  friend class interval_index_space_state;
+
+  // ===========================================================
+  /// @name SPACE FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Create a new interval id space in the id space family xid_space
+  /// with name xname, persistence xis_persistent, and merge mode xmerge_mode.
+  /// Returns a handle to the id space created.
+  ///
+  static interval_index_space_handle new_space(index_space_family& xid_spaces,
+					       const string& xname,
+					       bool xis_persistent,
+					       bool xmerge_mode);
+
+protected:
+
+private:
+
+  //@}
+
 
   // ===========================================================
   /// @name INTERVAL_INDEX_SPACE_HANDLE FACET
@@ -83,6 +107,11 @@ public:
   virtual ~interval_index_space_handle();
 
 protected:
+
+  ///
+  /// Constructor: Attach to state xstate.
+  ///
+  interval_index_space_handle(interval_index_space_state& xstate);
 
   using mutable_index_space_handle::state;
 

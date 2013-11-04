@@ -41,7 +41,31 @@ class offset_index_space_state;
 class SHEAF_DLL_SPEC offset_index_space_handle : public explicit_index_space_handle
 {
 
-  friend class offset_sum_index_space_state;
+  friend class offset_index_space_state;
+
+  // ===========================================================
+  /// @name SPACE FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Create a new offset id space in the id space family xid_space
+  /// with name xname, offset xoffset and count xct.
+  /// Returns a handle to the id space created.
+  ///
+  static offset_index_space_handle new_space(index_space_family& xid_spaces,
+					     const string& xname,
+					     pod_type xoffset,
+					     size_type xct);
+
+protected:
+
+private:
+
+  //@}
+
 
   // ===========================================================
   /// @name OFFSET_INDEX_SPACE_HANDLE FACET
@@ -83,6 +107,17 @@ public:
   virtual ~offset_index_space_handle();
 
 protected:
+
+  ///////////////////////////////////////////////////////////////
+  // BEGIN NEW SPACE
+
+  ///
+  /// Constructor: Attach to state xstate.
+  ///
+  offset_index_space_handle(offset_index_space_state& xstate);
+
+  // END NEW SPACE
+  ///////////////////////////////////////////////////////////////
 
   using explicit_index_space_handle::state;
 

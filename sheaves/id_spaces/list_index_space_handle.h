@@ -57,7 +57,7 @@ public:
 
   ///
   /// Create a new list id space in the id space family xid_space
-  /// with name xname, handle persistence xis_persistent.
+  /// with name xname, and persistence xis_persistent.
   /// Returns a handle to the id space created.
   ///
   static list_index_space_handle new_space(index_space_family& xid_spaces,

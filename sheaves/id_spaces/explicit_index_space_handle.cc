@@ -565,25 +565,6 @@ is_persistent() const
   return result;
 }
 
-void
-sheaf::explicit_index_space_handle::
-put_is_persistent(bool xis_persistent)
-{
-  // Preconditions:
-
-  // Body:
-
-  _state->put_is_persistent(xis_persistent);
-
-  // Postconditions:
-
-  ensure(is_persistent() == xis_persistent);
-
-  // Exit:
-
-  return;
-}
-
 // PROTECTED MEMBER FUNCTIONS
 
 // PRIVATE MEMBER FUNCTIONS

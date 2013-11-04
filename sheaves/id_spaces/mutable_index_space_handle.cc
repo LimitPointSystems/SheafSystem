@@ -686,6 +686,36 @@ clone() const
 
 
 // ===========================================================
+// INDEX SPACE FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+void
+sheaf::mutable_index_space_handle::
+put_is_persistent(bool xis_persistent)
+{
+  // Preconditions:
+
+  // Body:
+
+  state().put_is_persistent(xis_persistent);
+
+  // Postconditions:
+
+  ensure(is_persistent() == xis_persistent);
+
+  // Exit:
+
+  return;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// ===========================================================
 // HANDLE FACET
 // ===========================================================
 

@@ -26,6 +26,7 @@ set(CLUSTER ${CMAKE_CURRENT_BINARY_DIR})
 set(SRCS
     abstract_product_structure.cc
     array_implicit_index_space_iterator.cc
+    array_index_space_handle.cc
     array_index_space_interval.cc
     array_index_space_iterator.cc
     array_index_space_state.cc
@@ -37,6 +38,7 @@ set(SRCS
     explicit_index_space_iterator.cc
     explicit_index_space_state.cc
     forwarding_index_space_handle.cc
+    hash_index_space_handle.cc
     hash_index_space_iterator.cc
     hash_index_space_state.cc
     hub_index_space_handle.cc
@@ -56,6 +58,7 @@ set(SRCS
     interval_index_space_handle.cc
     interval_index_space_iterator.cc
     interval_index_space_state.cc
+    list_index_space_handle.cc
     list_index_space_iterator.cc
     list_index_space_state.cc
     mutable_index_space_handle.cc

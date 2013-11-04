@@ -51,40 +51,47 @@ class SHEAF_DLL_SPEC offset_index_space_state : public explicit_index_space_stat
   friend class namespace_poset;
 
   // ===========================================================
-  /// @name OFFSET_INDEX_SPACE_STATE FACET
+  /// @name SPACE FACTORY FACET
   // ===========================================================
   //@{
 
 public:
 
-  ///////////////////////////////////////////////////////////////
-  // BEGIN NEW SPACE
-
   ///
   /// Create a new offset id space in the id space family xid_space
   /// at the next available id space index with name xname,
-  /// and persistence xis_persistent, offset xoffset and count xct.
+  /// offset xoffset and count xct.
+  /// Returns a handle to the id space created.
   ///
-  static pod_type new_space(index_space_family& xid_spaces,
-			    const string& xname,
-			    bool xis_persistent,
-			    pod_type xoffset,
-			    size_type xct);
+  static offset_index_space_handle new_space(index_space_family& xid_spaces,
+					     const string& xname,
+					     pod_type xoffset,
+					     size_type xct);
 
   ///
   /// Create a new offset id space in the id space family xid_space
-  /// at the id space index xid with name xname, and persistence
-  /// xis_persistent, offset xoffset and count xct.
+  /// at the id space index xid with name xname,  offset xoffset and count xct.
+  /// Returns a handle to the id space created.
   ///
-  static pod_type new_space(index_space_family& xid_spaces,
-			    pod_type xid,
-			    const string& xname,
-			    bool xis_persistent,
-			    pod_type xoffset,
-			    size_type xct);
+  static offset_index_space_handle new_space(index_space_family& xid_spaces,
+					     pod_type xid,
+					     const string& xname,
+					     pod_type xoffset,
+					     size_type xct);
 
-  // END NEW SPACE
-  ///////////////////////////////////////////////////////////////
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
+  /// @name OFFSET_INDEX_SPACE_STATE FACET
+  // ===========================================================
+  //@{
+
+public:
 
   ///
   /// Creates an arg list for constructing an instance of this.

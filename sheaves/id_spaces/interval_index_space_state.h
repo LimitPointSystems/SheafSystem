@@ -29,6 +29,10 @@
 #include "auto_block.h"
 #endif
 
+#ifndef LIST_POOL_H
+#include "list_pool.h"
+#endif
+
 #ifndef MUTABLE_INDEX_SPACE_STATE_H
 #include "mutable_index_space_state.h"
 #endif
@@ -68,6 +72,43 @@ class SHEAF_DLL_SPEC interval_index_space_state : public mutable_index_space_sta
   friend SHEAF_DLL_SPEC size_t deep_size(const interval_index_space_state& xn, bool xinclude_shallow);
 
   // ===========================================================
+  /// @name SPACE FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Create a new interval id space in the id space family xid_space
+  /// at the next available id space index with name xname,
+  /// persistence xis_persistent, and merge mode xmerge_mode.
+  /// Returns a handle to the id space created.
+  ///
+  static interval_index_space_handle new_space(index_space_family& xid_spaces,
+					       const string& xname,
+					       bool xis_persistent,
+					       bool xmerge_mode);
+
+  ///
+  /// Create a new interval id space in the id space family xid_space
+  /// at the id space index xid with name xname, persistence
+  /// xis_persistent, and merge mode xmerge_mode.
+  /// Returns a handle to the id space created.
+  ///
+  static interval_index_space_handle new_space(index_space_family& xid_spaces,
+					       pod_type xid,
+					       const string& xname,
+					       bool xis_persistent,
+					       bool xmerge_mode);
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
   /// @name INTERVAL_INDEX_SPACE_STATE FACET
   // ===========================================================
   //@{
@@ -78,6 +119,7 @@ public:
   /// Creates an arg list for constructing an instance of this.
   /// If xmerge_mode is true, compatible intervals will be merged.
   /// Otherwise, intervals will not be merged.
+  /// @deprecated Use new_space() constructor.
   ///
   static arg_list make_arg_list(bool xmerge_mode);
 
@@ -111,6 +153,7 @@ protected:
 
   ///
   /// Constructor: Creates an instance from arguments xargs.
+  /// @deprecated Use new_space() constructor.
   ///
   interval_index_space_state(const arg_list& xargs);
 
@@ -538,12 +581,14 @@ public:
 
   ///
   /// The name of this class.
+  /// @deprecated Use new_space() constructor.
   ///
   virtual const string& class_name() const;
 
   ///
   /// Virtual constructor; create a new instance of the same type at this
   /// with arguments xargs.
+  /// @deprecated Use new_space() constructor.
   ///
   virtual interval_index_space_state* clone(const arg_list& xargs) const;
 
@@ -553,6 +598,7 @@ private:
 
   ///
   /// Creates prototype for this class and enters in factory.
+  /// @deprecated Use new_space() constructor.
   ///
   static bool make_prototype();
 

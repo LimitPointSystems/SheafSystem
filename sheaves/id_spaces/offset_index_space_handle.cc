@@ -24,6 +24,57 @@
 #include "offset_index_space_state.h"
 
 // ===========================================================
+// SPACE FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+sheaf::offset_index_space_handle
+sheaf::offset_index_space_handle::
+new_space(index_space_family& xid_spaces,
+	  const string& xname,
+	  pod_type xoffset,
+	  size_type xct)
+{
+  // Preconditions:
+
+  require(!xname.empty());
+  require(!xid_spaces.contains(xname));
+  require(xoffset >= 0);
+  require(xct > 0);
+
+  // Body:
+
+  offset_index_space_handle result =
+    offset_index_space_state::new_space(xid_spaces,
+					xname,
+					xoffset,
+					xct);
+
+  // Postconditions:
+
+  ensure(&result.id_spaces() == &xid_spaces);
+  ensure(xid_spaces.contains(xname));
+  ensure(result.conforms_to_state(xname));
+
+  ensure(result.name() == xname);
+  ensure(!result.is_persistent());
+
+  ensure(result.offset() == xoffset);
+  ensure(result.ct() == xct);
+  ensure(result.is_gathered());
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// ===========================================================
 // OFFSET_INDEX_SPACE_HANDLE FACET
 // ===========================================================
 
@@ -152,6 +203,32 @@ sheaf::offset_index_space_handle::
 }
 
 // PROTECTED MEMBER FUNCTIONS
+
+///////////////////////////////////////////////////////////////
+// BEGIN NEW SPACE
+
+sheaf::offset_index_space_handle::
+offset_index_space_handle(offset_index_space_state& xstate)
+{
+  // Preconditions:
+
+  // Body:
+
+  attach_to(&xstate);
+
+  // Postconditions:
+
+  ensure(invariant());
+  ensure(is_attached());
+  ensure(&state() == &xstate);
+
+  // Exit:
+
+  return;
+}
+
+// END NEW SPACE
+///////////////////////////////////////////////////////////////
 
 sheaf::offset_index_space_state&
 sheaf::offset_index_space_handle::

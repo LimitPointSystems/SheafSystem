@@ -25,6 +25,10 @@
 #include "sheaf_dll_spec.h"
 #endif
 
+#ifndef LIST_POOL_H
+#include "list_pool.h"
+#endif
+
 #ifndef MUTABLE_INDEX_SPACE_STATE_H
 #include "mutable_index_space_state.h"
 #endif
@@ -36,6 +40,7 @@
 namespace sheaf
 {
   
+class hash_index_space_handle;
 class hash_index_space_state;
 class hash_index_space_iterator;
 
@@ -54,6 +59,43 @@ class SHEAF_DLL_SPEC hash_index_space_state : public mutable_index_space_state
   friend SHEAF_DLL_SPEC size_t deep_size(const hash_index_space_state& xn, bool xinclude_shallow);
 
   // ===========================================================
+  /// @name SPACE FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Create a new hash id space in the id space family xid_space
+  /// at the next available id space index with name xname,
+  /// persistence xis_persistent, and capacity xcapacity.
+  /// Returns a handle to the id space created.
+  ///
+  static hash_index_space_handle new_space(index_space_family& xid_spaces,
+					   const string& xname,
+					   bool xis_persistent,
+					   size_type xcapacity);
+
+  ///
+  /// Create a new hash id space in the id space family xid_space
+  /// at the id space index xid with name xname, persistence
+  /// xis_persistent, and capacity xcapacity
+  /// Returns a handle to the id space created.
+  ///
+  static hash_index_space_handle new_space(index_space_family& xid_spaces,
+					   pod_type xid,
+					   const string& xname,
+					   bool xis_persistent,
+					   size_type xcapacity);
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
   /// @name HASH_INDEX_SPACE_STATE FACET
   // ===========================================================
   //@{
@@ -62,6 +104,7 @@ public:
 
   ///
   /// Creates an arg list for constructing an instance of this.
+  /// @deprecated Use new_space() constructor.
   ///
   static arg_list make_arg_list(size_type xcapacity);
 
@@ -272,6 +315,51 @@ private:
 
 
   // ===========================================================
+  /// @name HANDLE POOL FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// The number of handles in the pool.
+  ///
+  static size_type handle_pool_ct();
+
+  ///
+  /// The deep size of the handle pool.
+  ///
+  static size_type handle_pool_deep_size();
+
+  ///
+  /// The id space handle with this state.
+  ///
+  virtual index_space_handle& get_id_space() const;
+
+  ///
+  /// Release the id space handle xid_space.
+  ///
+  virtual void release_id_space(index_space_handle& xid_space) const;
+
+  ///
+  /// True if and only if id space handle xid_space was allocated by
+  /// the handle pool.
+  ///
+  virtual bool allocated_id_space(const index_space_handle& xid_space) const;
+
+protected:
+
+private:
+
+  ///
+  /// The handle pool.
+  ///
+  static list_pool<hash_index_space_handle>& handles();
+
+  //@}
+
+
+  // ===========================================================
   /// @name ITERATOR POOL FACET
   // ===========================================================
   //@{
@@ -325,12 +413,14 @@ public:
 
   ///
   /// The name of this class.
+  /// @deprecated Use new_space() constructor.
   ///
   virtual const string& class_name() const;
 
   ///
   /// Virtual constructor; create a new instance of the same type at this
   /// with arguments xargs.
+  /// @deprecated Use new_space() constructor.
   ///
   virtual hash_index_space_state* clone(const arg_list& xargs) const;
 
@@ -340,6 +430,7 @@ private:
 
   ///
   /// Creates prototype for this class and enters in factory.
+  /// @deprecated Use new_space() constructor.
   ///
   static bool make_prototype();
 

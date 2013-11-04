@@ -213,11 +213,6 @@ public:
   ///
   virtual bool is_persistent() const;
 
-  ///
-  /// Set if this id space should be written to disk.
-  ///
-  void put_is_persistent(bool xis_persistent);
-
 protected:
 
 private:

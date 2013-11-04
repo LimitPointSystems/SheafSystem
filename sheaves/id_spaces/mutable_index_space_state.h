@@ -29,10 +29,6 @@
 #include "explicit_index_space_state.h"
 #endif
 
-#ifndef LIST_POOL_H
-#include "list_pool.h"
-#endif
-
 namespace sheaf
 {
 
@@ -269,46 +265,20 @@ private:
 
 
   // ===========================================================
-  /// @name HANDLE POOL FACET
+  /// @name INDEX SPACE FACET
   // ===========================================================
   //@{
 
 public:
 
   ///
-  /// The number of handles in the pool.
+  /// Set if this id space should be written to disk.
   ///
-  static size_type handle_pool_ct();
-
-  ///
-  /// The deep size of the handle pool.
-  ///
-  static size_type handle_pool_deep_size();
-
-  ///
-  /// The id space handle with this state.
-  ///
-  virtual index_space_handle& get_id_space() const;
-
-  ///
-  /// Release the id space handle xid_space.
-  ///
-  virtual void release_id_space(index_space_handle& xid_space) const;
-
-  ///
-  /// True if and only if id space handle xid_space was allocated by
-  /// the handle pool.
-  ///
-  virtual bool allocated_id_space(const index_space_handle& xid_space) const;
+  void put_is_persistent(bool xis_persistent);
 
 protected:
 
 private:
-
-  ///
-  /// The handle pool.
-  ///
-  static list_pool<mutable_index_space_handle>& handles();
 
   //@}
 

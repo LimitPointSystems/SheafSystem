@@ -889,140 +889,33 @@ operator=(const explicit_index_space_state& xother)
 
 
 // ===========================================================
-// HANDLE POOL FACET
+// INDEX SPACE FACET
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
 
-sheaf::size_type
-sheaf::mutable_index_space_state::
-handle_pool_ct()
-{
-  // Preconditions:
-
-  // Body:
-
-  size_type result = handles().ct();
-
-  // Postconditions:
-
-  ensure(result >= 0);
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::size_type
-sheaf::mutable_index_space_state::
-handle_pool_deep_size()
-{
-  // Preconditions:
-
-  // Body:
-
-  size_type result = sheaf::deep_size(handles(), true);
-
-  // Postconditions:
-
-  ensure(result >= 0);
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::index_space_handle&
-sheaf::mutable_index_space_state::
-get_id_space() const
-{
-  // Preconditions:
-
-  // Body:
-
-  mutable_index_space_handle& result = handles().get();
-  attach(result);
-
-  // Postconditions:
-
-  ensure(result.is_attached());
-
-  // Exit:
-
-  return result;
-}
-
 void
 sheaf::mutable_index_space_state::
-release_id_space(index_space_handle& xid_space) const
+put_is_persistent(bool xis_persistent)
 {
   // Preconditions:
 
-  require(allocated_id_space(xid_space));
-
   // Body:
 
-  // Detach the handle.
-
-  xid_space.detach();
-
-  // Release the handle to the pool.
-
-  handles().release(reinterpret_cast<mutable_index_space_handle&>(xid_space));
+  _is_persistent = xis_persistent;
 
   // Postconditions:
 
-  ensure(is_basic_query);
+  ensure(is_persistent() == xis_persistent);
 
   // Exit:
 
   return;
 }
 
-bool
-sheaf::mutable_index_space_state::
-allocated_id_space(const index_space_handle& xid_space) const
-{
-  // Preconditions:
-
-  // Body:
-
-  const mutable_index_space_handle* lid_space =
-    dynamic_cast<const mutable_index_space_handle*>(&xid_space);
-
-  bool result = (lid_space != 0) && handles().allocated(*lid_space);
-
-  // Postconditions:
-
-  ensure(is_basic_query);
-
-  // Exit:
-
-  return result;
-}
-
 // PROTECTED MEMBER FUNCTIONS
 
 // PRIVATE MEMBER FUNCTIONS
-
-sheaf::list_pool<sheaf::mutable_index_space_handle>&
-sheaf::mutable_index_space_state::
-handles()
-{
-  // Preconditions:
-
-  // Body:
-
-  static list_pool<mutable_index_space_handle> result;
-
-  // Postconditions:
-
-  ensure(is_basic_query);
-
-  // Exit:
-
-  return result;
-}
 
 
 // ===========================================================
