@@ -41,7 +41,30 @@ class singleton_index_space_state;
 class SHEAF_DLL_SPEC singleton_index_space_handle : public explicit_index_space_handle
 {
 
-  friend class singleton_sum_index_space_state;
+  friend class singleton_index_space_state;
+
+  // ===========================================================
+  /// @name SPACE FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Create a new singleton id space in the id space family xid_space
+  /// with name xname and hub id xhub_id.
+  /// Returns a handle to the id space created.
+  ///
+  static singleton_index_space_handle new_space(index_space_family& xid_spaces,
+						const string& xname,
+						pod_type xhub_id);
+
+protected:
+
+private:
+
+  //@}
+
 
   // ===========================================================
   /// @name SINGLETON_INDEX_SPACE_HANDLE FACET
@@ -83,6 +106,11 @@ public:
   virtual ~singleton_index_space_handle();
 
 protected:
+
+  ///
+  /// Constructor: Attach to state xstate.
+  ///
+  singleton_index_space_handle(singleton_index_space_state& xstate);
 
   using explicit_index_space_handle::state;
 

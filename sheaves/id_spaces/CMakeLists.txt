@@ -70,6 +70,7 @@ set(SRCS
     primary_index_space_iterator.cc
     primary_index_space_state.cc
     primary_sum_index_space_state.cc
+    primitives_index_space_handle.cc
     primitives_index_space_iterator.cc
     primitives_index_space_state.cc
     ragged_array_implicit_index_space_iterator.cc

@@ -27,6 +27,105 @@
 #include "singleton_index_space_iterator.h"
 
 // ===========================================================
+// SPACE FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+sheaf::singleton_index_space_handle
+sheaf::singleton_index_space_state::
+new_space(index_space_family& xid_spaces,
+	  const string& xname,
+	  pod_type xhub_id)
+{
+  // Preconditions:
+
+  require(!xname.empty());
+  require(!xid_spaces.contains(xname));
+  require(xid_spaces.hub_id_space().contains(xhub_id));
+
+  // Body:
+
+  singleton_index_space_state* lstate = new singleton_index_space_state();
+  lstate->new_state(xid_spaces, xname, false);
+
+  lstate->_hub_id = xhub_id;
+  lstate->_ct = 1;
+  lstate->_begin = 0;
+  lstate->_end = 1;
+
+  singleton_index_space_handle result(*lstate);;
+
+  // Postconditions:
+
+  ensure(&result.id_spaces() == &xid_spaces);
+  ensure(xid_spaces.contains(xname));
+  ensure(result.conforms_to_state(xname));
+
+  ensure(result.name() == xname);
+  ensure(!result.is_persistent());
+
+  ensure(result.hub_id() == xhub_id);
+  ensure(result.ct() == 1);
+  ensure(result.is_gathered());
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::singleton_index_space_handle
+sheaf::singleton_index_space_state::
+new_space(index_space_family& xid_spaces,
+	  pod_index_type xid,
+	  const string& xname,
+	  pod_type xhub_id)
+{
+  // Preconditions:
+
+  require(!xid_spaces.contains(xid));
+  require(xid_spaces.is_explicit_interval(xid));
+  require(!xname.empty());
+  require(!xid_spaces.contains(xname));
+  require(xid_spaces.hub_id_space().contains(xhub_id));
+
+  // Body:
+
+  singleton_index_space_state* lstate = new singleton_index_space_state();
+  lstate->new_state(xid_spaces, xid, xname, false);
+
+  lstate->_hub_id = xhub_id;
+  lstate->_ct = 1;
+  lstate->_begin = 0;
+  lstate->_end = 1;
+
+  singleton_index_space_handle result(*lstate);;
+
+  // Postconditions:
+
+  ensure(&result.id_spaces() == &xid_spaces);
+  ensure(xid_spaces.contains(xname));
+  ensure(result.conforms_to_state(xname));
+
+  ensure(result.index() == xid);
+  ensure(result.name() == xname);
+  ensure(!result.is_persistent());
+
+  ensure(result.hub_id() == xhub_id);
+  ensure(result.ct() == 1);
+  ensure(result.is_gathered());
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// ===========================================================
 // SINGLETON_INDEX_SPACE_STATE FACET
 // ===========================================================
 

@@ -24,6 +24,54 @@
 #include "singleton_index_space_state.h"
 
 // ===========================================================
+// SPACE FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+sheaf::singleton_index_space_handle
+sheaf::singleton_index_space_handle::
+new_space(index_space_family& xid_spaces,
+	  const string& xname,
+	  pod_type xhub_id)
+{
+  // Preconditions:
+
+  require(!xname.empty());
+  require(!xid_spaces.contains(xname));
+  require(xid_spaces.hub_id_space().contains(xhub_id));
+
+  // Body:
+
+  singleton_index_space_handle result =
+    singleton_index_space_state::new_space(xid_spaces,
+					   xname,
+					   xhub_id);
+
+  // Postconditions:
+
+  ensure(&result.id_spaces() == &xid_spaces);
+  ensure(xid_spaces.contains(xname));
+  ensure(result.conforms_to_state(xname));
+
+  ensure(result.name() == xname);
+  ensure(!result.is_persistent());
+
+  ensure(result.hub_id() == xhub_id);
+  ensure(result.ct() == 1);
+  ensure(result.is_gathered());
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// ===========================================================
 // SINGLETON_INDEX_SPACE_HANDLE FACET
 // ===========================================================
 
@@ -152,6 +200,26 @@ sheaf::singleton_index_space_handle::
 }
 
 // PROTECTED MEMBER FUNCTIONS
+
+sheaf::singleton_index_space_handle::
+singleton_index_space_handle(singleton_index_space_state& xstate)
+{
+  // Preconditions:
+
+  // Body:
+
+  attach_to(&xstate);
+
+  // Postconditions:
+
+  ensure(invariant());
+  ensure(is_attached());
+  ensure(&state() == &xstate);
+
+  // Exit:
+
+  return;
+}
 
 sheaf::singleton_index_space_state&
 sheaf::singleton_index_space_handle::

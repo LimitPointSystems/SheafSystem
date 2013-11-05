@@ -49,6 +49,40 @@ class SHEAF_DLL_SPEC singleton_index_space_state : public explicit_index_space_s
   friend class namespace_poset;
 
   // ===========================================================
+  /// @name SPACE FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Create a new singleton id space in the id space family xid_space
+  /// at the next available id space index with name xname,
+  /// and hub id xhub_id.
+  /// Returns a handle to the id space created.
+  ///
+  static singleton_index_space_handle new_space(index_space_family& xid_spaces,
+						const string& xname,
+						pod_type xhub_id);
+
+  ///
+  /// Create a new singleton id space in the id space family xid_space
+  /// at the id space index xid with name xname and hub id xhub_id.
+  /// Returns a handle to the id space created.
+  ///
+  static singleton_index_space_handle new_space(index_space_family& xid_spaces,
+						pod_type xid,
+						const string& xname,
+						pod_type xhub_id);
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
   /// @name SINGLETON_INDEX_SPACE_STATE FACET
   // ===========================================================
   //@{
@@ -57,6 +91,7 @@ public:
 
   ///
   /// Creates an arg list for constructing an instance of this.
+  /// @deprecated Use new_space() constructor.
   ///
   static arg_list make_arg_list(pod_type xhub_id);
 
@@ -74,6 +109,7 @@ protected:
 
   ///
   /// Constructor: Creates an instance from arguments, xargs.
+  /// @deprecated Use new_space() constructor.
   ///
   singleton_index_space_state(const arg_list& xargs);
 
@@ -279,6 +315,7 @@ public:
   ///
   /// Virtual constructor; create a new instance of the same type at this
   /// with arguments xargs.
+  /// @deprecated Use new_space() constructor.
   ///
   virtual singleton_index_space_state* clone(const arg_list& xargs) const;
 

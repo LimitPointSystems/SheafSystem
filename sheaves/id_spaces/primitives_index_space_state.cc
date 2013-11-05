@@ -24,6 +24,7 @@
 #include "deep_size.h"
 #include "hub_index_space_handle.h"
 #include "explicit_index_space_handle.h"
+#include "primitives_index_space_handle.h"
 #include "primitives_index_space_iterator.h"
 #include "primitives_schema_member_index.h"
 
@@ -40,6 +41,83 @@ namespace
   const pod_type HUB_BEGIN = sheaf::PRIMITIVES_SCHEMA_MEMBER_INDEX_BEGIN;
   const pod_type HUB_END   = sheaf::PRIMITIVES_SCHEMA_MEMBER_INDEX_END;
 }
+
+// ===========================================================
+// SPACE FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+sheaf::primitives_index_space_handle
+sheaf::primitives_index_space_state::
+new_space(index_space_family& xid_spaces,
+	  const string& xname)
+{
+  // Preconditions:
+
+  require(!xname.empty());
+  require(!xid_spaces.contains(xname));
+
+  // Body:
+
+  primitives_index_space_state* lstate = new primitives_index_space_state();
+  lstate->new_state(xid_spaces, xname, false);
+
+  primitives_index_space_handle result(*lstate);;
+
+  // Postconditions:
+
+  ensure(&result.id_spaces() == &xid_spaces);
+  ensure(xid_spaces.contains(xname));
+  ensure(result.conforms_to_state(xname));
+
+  ensure(result.name() == xname);
+  ensure(!result.is_persistent());
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::primitives_index_space_handle
+sheaf::primitives_index_space_state::
+new_space(index_space_family& xid_spaces,
+	  pod_index_type xid,
+	  const string& xname)
+{
+  // Preconditions:
+
+  require(!xid_spaces.contains(xid));
+  require(xid_spaces.is_explicit_interval(xid));
+  require(!xname.empty());
+  require(!xid_spaces.contains(xname));
+
+  // Body:
+
+  primitives_index_space_state* lstate = new primitives_index_space_state();
+  lstate->new_state(xid_spaces, xid, xname, false);
+
+  primitives_index_space_handle result(*lstate);;
+
+  // Postconditions:
+
+  ensure(&result.id_spaces() == &xid_spaces);
+  ensure(xid_spaces.contains(xname));
+  ensure(result.conforms_to_state(xname));
+
+  ensure(result.index() == xid);
+  ensure(result.name() == xname);
+  ensure(!result.is_persistent());
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
 
 // ===========================================================
 // PRIMITIVES_INDEX_SPACE_STATE FACET
@@ -324,7 +402,7 @@ get_id_space() const
 
   // Body:
 
-  explicit_index_space_handle& result = handles().get();
+  primitives_index_space_handle& result = handles().get();
   attach(result);
 
   // Postconditions:
@@ -352,7 +430,7 @@ release_id_space(index_space_handle& xid_space) const
 
   // Release the handle to the pool.
 
-  handles().release(reinterpret_cast<explicit_index_space_handle&>(xid_space));
+  handles().release(reinterpret_cast<primitives_index_space_handle&>(xid_space));
 
   // Postconditions:
 
@@ -371,8 +449,8 @@ allocated_id_space(const index_space_handle& xid_space) const
 
   // Body:
 
-  const explicit_index_space_handle* lid_space =
-    dynamic_cast<const explicit_index_space_handle*>(&xid_space);
+  const primitives_index_space_handle* lid_space =
+    dynamic_cast<const primitives_index_space_handle*>(&xid_space);
 
   bool result = (lid_space != 0) && handles().allocated(*lid_space);
 
@@ -389,7 +467,7 @@ allocated_id_space(const index_space_handle& xid_space) const
 
 // PRIVATE MEMBER FUNCTIONS
 
-sheaf::list_pool<sheaf::explicit_index_space_handle>&
+sheaf::list_pool<sheaf::primitives_index_space_handle>&
 sheaf::primitives_index_space_state::
 handles()
 {
@@ -397,7 +475,7 @@ handles()
 
   // Body:
 
-  static list_pool<explicit_index_space_handle> result;
+  static list_pool<primitives_index_space_handle> result;
 
   // Postconditions:
 

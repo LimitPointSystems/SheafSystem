@@ -448,13 +448,11 @@ public:
 
   ///
   /// The name of this class.
-  /// @deprecated Use new_space() constructor.
   ///
   virtual const string& class_name() const;
 
   ///
   /// A factory for making descendants of this class.
-  /// @deprecated Use new_space() constructor.
   ///
   static factory_2<explicit_index_space_state>& id_space_factory();
 

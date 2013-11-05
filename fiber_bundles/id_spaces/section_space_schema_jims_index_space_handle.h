@@ -91,6 +91,11 @@ public:
 
 protected:
 
+  ///
+  /// Constructor: Attach to state xstate.
+  ///
+  section_space_schema_jims_index_space_handle(section_space_schema_jims_index_space_state& xstate);
+
   using explicit_index_space_handle::state;
 
   ///
@@ -121,6 +126,21 @@ public:
   void put_factors(const index_space_handle& xbase_space_id_space,
 		   const index_space_handle& xfiber_schema_id_space,
 		   const ij_product_structure& xsection_space_schema_product);
+
+  ///
+  /// The base space jims id space.
+  ///
+  const index_space_handle& base_space() const;
+
+  ///
+  /// The fiber schema jims id space.
+  ///
+  const index_space_handle& fiber_schema() const;
+
+  ///
+  /// The product structure of the section space schema id space.
+  ///
+  const ij_product_structure& section_space_schema_product_structure() const;
 
   ///
   /// True, if this id space is consistent with the base space and the

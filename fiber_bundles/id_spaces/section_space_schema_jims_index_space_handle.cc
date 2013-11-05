@@ -157,6 +157,26 @@ fiber_bundle::section_space_schema_jims_index_space_handle::
 
 // PROTECTED MEMBER FUNCTIONS
 
+fiber_bundle::section_space_schema_jims_index_space_handle::
+section_space_schema_jims_index_space_handle(section_space_schema_jims_index_space_state& xstate)
+{
+  // Preconditions:
+
+  // Body:
+
+  attach_to(&xstate);
+
+  // Postconditions:
+
+  ensure(invariant());
+  ensure(is_attached());
+  ensure(&state() == &xstate);
+
+  // Exit:
+
+  return;
+}
+
 fiber_bundle::section_space_schema_jims_index_space_state&
 fiber_bundle::section_space_schema_jims_index_space_handle::
 state()
@@ -232,6 +252,57 @@ put_factors(const index_space_handle& xbase_space_id_space,
   // Exit:
 
   return;
+}
+
+const sheaf::index_space_handle&
+fiber_bundle::section_space_schema_jims_index_space_handle::
+base_space() const
+{
+  // Preconditions:
+
+  // Body:
+
+  // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return state().base_space();
+}
+
+const sheaf::index_space_handle&
+fiber_bundle::section_space_schema_jims_index_space_handle::
+fiber_schema() const
+{
+  // Preconditions:
+
+  // Body:
+
+  // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return state().fiber_schema();
+}
+
+const sheaf::ij_product_structure&
+fiber_bundle::section_space_schema_jims_index_space_handle::
+section_space_schema_product_structure() const
+{
+  // Preconditions:
+
+  // Body:
+
+  // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return state().section_space_schema_product_structure();
 }
 
 bool

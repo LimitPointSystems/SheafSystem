@@ -31,6 +31,139 @@
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // ===========================================================
+// SPACE FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+fiber_bundle::section_space_schema_jims_index_space_handle
+fiber_bundle::section_space_schema_jims_index_space_state::
+new_space(index_space_family& xid_spaces,
+	  const string& xname,
+	  const index_space_handle& xbase_space_id_space,
+	  const index_space_handle& xfiber_schema_id_space,
+	  const ij_product_structure& xsection_space_schema_product)
+{
+  // Preconditions:
+
+  require(!xname.empty());
+  require(!xid_spaces.contains(xname));
+
+  // Body:
+
+  section_space_schema_jims_index_space_state* lstate = new section_space_schema_jims_index_space_state();
+  lstate->new_state(xid_spaces, xname, false);
+
+  // Initialize data members from input arguments.
+
+  lstate->_base_space = &xbase_space_id_space.get_id_space();
+  lstate->_fiber_schema = &xfiber_schema_id_space.get_id_space();
+  lstate->_section_space_schema_product = xsection_space_schema_product.clone();
+
+  // Initialize the product structure.
+
+  lstate->_product =
+    new ij_product_structure(lstate->_base_space->end(), lstate->_fiber_schema->end());
+
+  // Initialize the count and extrema.
+
+  lstate->_begin = 0;
+  lstate->_end   = lstate->_base_space->end()*lstate->_fiber_schema->end();
+  lstate->_ct    = lstate->_base_space->ct()*lstate->_fiber_schema->ct();
+
+  section_space_schema_jims_index_space_handle result(*lstate);;
+
+  // Postconditions:
+
+  ensure(&result.id_spaces() == &xid_spaces);
+  ensure(xid_spaces.contains(xname));
+  ensure(result.conforms_to_state(xname));
+
+  ensure(result.name() == xname);
+  ensure(!result.is_persistent());
+
+  ensure(result.base_space() == xbase_space_id_space);
+  ensure(result.fiber_schema() == xfiber_schema_id_space);
+  ensure(unexecutable("result.section_space_schema_product_structure() == xsection_space_schema_product"));
+
+  ensure(result.begin() == 0);
+  ensure(result.end() == xbase_space_id_space.end()*xfiber_schema_id_space.end());
+  ensure(result.ct() == xbase_space_id_space.ct()*xfiber_schema_id_space.ct());
+
+  // Exit:
+
+  return result;
+}
+
+fiber_bundle::section_space_schema_jims_index_space_handle
+fiber_bundle::section_space_schema_jims_index_space_state::
+new_space(index_space_family& xid_spaces,
+	  pod_index_type xid,
+	  const string& xname,
+	  const index_space_handle& xbase_space_id_space,
+	  const index_space_handle& xfiber_schema_id_space,
+	  const ij_product_structure& xsection_space_schema_product)
+{
+  // Preconditions:
+
+  require(!xid_spaces.contains(xid));
+  require(xid_spaces.is_explicit_interval(xid));
+  require(!xname.empty());
+  require(!xid_spaces.contains(xname));
+
+  // Body:
+
+  section_space_schema_jims_index_space_state* lstate = new section_space_schema_jims_index_space_state();
+  lstate->new_state(xid_spaces, xid, xname, false);
+
+  // Initialize data members from input arguments.
+
+  lstate->_base_space = &xbase_space_id_space.get_id_space();
+  lstate->_fiber_schema = &xfiber_schema_id_space.get_id_space();
+  lstate->_section_space_schema_product = xsection_space_schema_product.clone();
+
+  // Initialize the product structure.
+
+  lstate->_product =
+    new ij_product_structure(lstate->_base_space->end(), lstate->_fiber_schema->end());
+
+  // Initialize the count and extrema.
+
+  lstate->_begin = 0;
+  lstate->_end   = lstate->_base_space->end()*lstate->_fiber_schema->end();
+  lstate->_ct    = lstate->_base_space->ct()*lstate->_fiber_schema->ct();
+
+  section_space_schema_jims_index_space_handle result(*lstate);;
+
+  // Postconditions:
+
+  ensure(&result.id_spaces() == &xid_spaces);
+  ensure(xid_spaces.contains(xname));
+  ensure(result.conforms_to_state(xname));
+
+  ensure(result.index() == xid);
+  ensure(result.name() == xname);
+  ensure(!result.is_persistent());
+
+  ensure(result.base_space() == xbase_space_id_space);
+  ensure(result.fiber_schema() == xfiber_schema_id_space);
+  ensure(unexecutable("result.section_space_schema_product_structure() == xsection_space_schema_product"));
+
+  ensure(result.begin() == 0);
+  ensure(result.end() == xbase_space_id_space.end()*xfiber_schema_id_space.end());
+  ensure(result.ct() == xbase_space_id_space.ct()*xfiber_schema_id_space.ct());
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// ===========================================================
 // SECTION_SPACE_SCHEMA_JIMS_INDEX_SPACE_STATE FACET
 // ===========================================================
 
@@ -63,57 +196,6 @@ make_arg_list(const index_space_handle& xbase_space_id_space,
   // Exit:
 
   return result;
-}
-
-const sheaf::index_space_handle&
-fiber_bundle::section_space_schema_jims_index_space_state::
-base_space() const
-{
-  // Preconditions:
-
-  // Body:
-
-  // Postconditions:
-
-  ensure(is_basic_query);
-
-  // Exit:
-
-  return *_base_space;
-}
-
-const sheaf::index_space_handle&
-fiber_bundle::section_space_schema_jims_index_space_state::
-fiber_schema() const
-{
-  // Preconditions:
-
-  // Body:
-
-  // Postconditions:
-
-  ensure(is_basic_query);
-
-  // Exit:
-
-  return *_fiber_schema;
-}
-
-const sheaf::ij_product_structure&
-fiber_bundle::section_space_schema_jims_index_space_state::
-section_space_schema_product_structure() const
-{
-  // Preconditions:
-
-  // Body:
-
-  // Postconditions:
-
-  ensure(is_basic_query);
-
-  // Exit:
-
-  return *_section_space_schema_product;
 }
 
 // PROTECTED MEMBER FUNCTIONS
@@ -258,6 +340,57 @@ put_factors(const index_space_handle& xbase_space_id_space,
   // Exit:
 
   return;
+}
+
+const sheaf::index_space_handle&
+fiber_bundle::section_space_schema_jims_index_space_state::
+base_space() const
+{
+  // Preconditions:
+
+  // Body:
+
+  // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return *_base_space;
+}
+
+const sheaf::index_space_handle&
+fiber_bundle::section_space_schema_jims_index_space_state::
+fiber_schema() const
+{
+  // Preconditions:
+
+  // Body:
+
+  // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return *_fiber_schema;
+}
+
+const sheaf::ij_product_structure&
+fiber_bundle::section_space_schema_jims_index_space_state::
+section_space_schema_product_structure() const
+{
+  // Preconditions:
+
+  // Body:
+
+  // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return *_section_space_schema_product;
 }
 
 bool

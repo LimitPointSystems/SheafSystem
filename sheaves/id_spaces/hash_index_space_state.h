@@ -122,6 +122,7 @@ protected:
 
   ///
   /// Constructor: Creates an instance from arguments xargs.
+  /// @deprecated Use new_space() constructor.
   ///
   hash_index_space_state(const arg_list& xargs);
 
@@ -413,7 +414,6 @@ public:
 
   ///
   /// The name of this class.
-  /// @deprecated Use new_space() constructor.
   ///
   virtual const string& class_name() const;
 
@@ -430,7 +430,6 @@ private:
 
   ///
   /// Creates prototype for this class and enters in factory.
-  /// @deprecated Use new_space() constructor.
   ///
   static bool make_prototype();
 

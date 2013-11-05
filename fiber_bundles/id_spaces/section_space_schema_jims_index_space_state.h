@@ -57,6 +57,53 @@ class SHEAF_DLL_SPEC section_space_schema_jims_index_space_state : public explic
   friend class fiber_bundles_namespace;
 
   // ===========================================================
+  /// @name SPACE FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Create a new section space schema jims id space in the id space
+  /// family xid_space at the next available id space index with name xname,
+  /// base space id space xbase_space_id_space, fiber schema id space,
+  /// xfiber_schema_id_space and section space schema product structure
+  /// xsection_space_schema_product.
+  /// Returns a handle to the id space created.
+  ///
+  static
+  section_space_schema_jims_index_space_handle
+  new_space(index_space_family& xid_spaces,
+	    const string& xname,
+	    const index_space_handle& xbase_space_id_space,
+	    const index_space_handle& xfiber_schema_id_space,
+	    const ij_product_structure& xsection_space_schema_product);
+
+  ///
+  /// Create a new section space schema jims id space in the id space
+  /// family xid_space at id space index xid with name xname,
+  /// base space id space xbase_space_id_space, fiber schema id space,
+  /// xfiber_schema_id_space and section space schema product structure
+  /// xsection_space_schema_product.
+  /// Returns a handle to the id space created.
+  ///
+  static
+  section_space_schema_jims_index_space_handle
+  new_space(index_space_family& xid_spaces,
+	    pod_type xid,
+	    const string& xname,
+	    const index_space_handle& xbase_space_id_space,
+	    const index_space_handle& xfiber_schema_id_space,
+	    const ij_product_structure& xsection_space_schema_product);
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
   /// @name SECTION_SPACE_SCHEMA_JIMS_INDEX_SPACE_STATE FACET
   // ===========================================================
   //@{
@@ -65,25 +112,11 @@ public:
 
   ///
   /// Creates an arg list for constructing an instance of this.
+  /// @deprecated Use new_space() constructor.
   ///
   static arg_list make_arg_list(const index_space_handle& xbase_space_id_space,
-				const index_space_handle& xfiber_schema_id,
+				const index_space_handle& xfiber_schema_id_space,
 				const ij_product_structure& xsection_space_schema_product);
-
-  ///
-  /// The base space jims id space.
-  ///
-  const index_space_handle& base_space() const;
-
-  ///
-  /// The fiber schema jims id space.
-  ///
-  const index_space_handle& fiber_schema() const;
-
-  ///
-  /// The product structure of the section space schema id space.
-  ///
-  const ij_product_structure& section_space_schema_product_structure() const;
 
 protected:
 
@@ -99,6 +132,7 @@ protected:
 
   ///
   /// Constructor: Creates an instance from arguments xargs.
+  /// @deprecated Use new_space() constructor.
   ///
   section_space_schema_jims_index_space_state(const arg_list& xargs);
 
@@ -106,21 +140,6 @@ protected:
   /// Destructor
   ///
   virtual ~section_space_schema_jims_index_space_state();
-
-  ///
-  /// The base space jims id space.
-  ///
-  index_space_handle* _base_space;
-
-  ///
-  /// The fiber schema jims id space.
-  ///
-  index_space_handle* _fiber_schema;
-
-  ///
-  /// The product structure of the section space schema id space.
-  ///
-  ij_product_structure* _section_space_schema_product;
 
 private:
 
@@ -142,6 +161,21 @@ public:
 		   const ij_product_structure& xsection_space_schema_product);
 
   ///
+  /// The base space jims id space.
+  ///
+  const index_space_handle& base_space() const;
+
+  ///
+  /// The fiber schema jims id space.
+  ///
+  const index_space_handle& fiber_schema() const;
+
+  ///
+  /// The product structure of the section space schema id space.
+  ///
+  const ij_product_structure& section_space_schema_product_structure() const;
+
+  ///
   /// True, if this id space is consistent with the base space and the
   /// fiber schema jims id spaces.
   ///
@@ -154,6 +188,21 @@ public:
   void update();
 
 protected:
+
+  ///
+  /// The base space jims id space.
+  ///
+  index_space_handle* _base_space;
+
+  ///
+  /// The fiber schema jims id space.
+  ///
+  index_space_handle* _fiber_schema;
+
+  ///
+  /// The product structure of the section space schema id space.
+  ///
+  ij_product_structure* _section_space_schema_product;
 
 private:
 
@@ -363,6 +412,7 @@ public:
   ///
   /// Virtual constructor; create a new instance of the same type at this
   /// with arguments xargs.
+  /// @deprecated Use new_space() constructor.
   ///
   virtual section_space_schema_jims_index_space_state* clone(const arg_list& xargs) const;
 

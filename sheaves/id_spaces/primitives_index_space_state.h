@@ -36,6 +36,7 @@
 namespace sheaf
 {
   
+class primitives_index_space_handle;
 class primitives_index_space_iterator;
 
 ///
@@ -46,6 +47,37 @@ class SHEAF_DLL_SPEC primitives_index_space_state : public explicit_index_space_
 {
 
   friend class namespace_poset;
+
+  // ===========================================================
+  /// @name SPACE FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Create a new primitives id space in the id space family xid_space
+  /// at the next available id space index with name xname.
+  /// Returns a handle to the id space created.
+  ///
+  static primitives_index_space_handle new_space(index_space_family& xid_spaces,
+						 const string& xname);
+
+  ///
+  /// Create a new primitives id space in the id space family xid_space
+  /// at the id space index xid with name xname.
+  /// Returns a handle to the id space created.
+  ///
+  static primitives_index_space_handle new_space(index_space_family& xid_spaces,
+						 pod_type xid,
+						 const string& xname);
+
+protected:
+
+private:
+
+  //@}
+
 
   // ===========================================================
   /// @name PRIMITIVES_INDEX_SPACE_STATE FACET
@@ -68,6 +100,7 @@ protected:
 
   ///
   /// Constructor: Creates an instance from arguments, xargs.
+  /// @deprecated Use new_space() constructor.
   ///
   primitives_index_space_state(const arg_list& xargs);
 
@@ -184,7 +217,7 @@ private:
   ///
   /// The handle pool.
   ///
-  static list_pool<explicit_index_space_handle>& handles();
+  static list_pool<primitives_index_space_handle>& handles();
 
   //@}
 
@@ -249,6 +282,7 @@ public:
   ///
   /// Virtual constructor; create a new instance of the same type at this
   /// with arguments xargs.
+  /// @deprecated Use new_space() constructor.
   ///
   virtual primitives_index_space_state* clone(const arg_list& xargs) const;
 
