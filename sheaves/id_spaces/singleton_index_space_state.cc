@@ -54,7 +54,7 @@ new_space(index_space_family& xid_spaces,
   lstate->_begin = 0;
   lstate->_end = 1;
 
-  singleton_index_space_handle result(*lstate);;
+  singleton_index_space_handle result(*lstate);
 
   // Postconditions:
 
@@ -99,7 +99,7 @@ new_space(index_space_family& xid_spaces,
   lstate->_begin = 0;
   lstate->_end = 1;
 
-  singleton_index_space_handle result(*lstate);;
+  singleton_index_space_handle result(*lstate);
 
   // Postconditions:
 

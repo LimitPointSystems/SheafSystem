@@ -63,7 +63,7 @@ new_space(index_space_family& xid_spaces,
   primitives_index_space_state* lstate = new primitives_index_space_state();
   lstate->new_state(xid_spaces, xname, false);
 
-  primitives_index_space_handle result(*lstate);;
+  primitives_index_space_handle result(*lstate);
 
   // Postconditions:
 
@@ -97,7 +97,7 @@ new_space(index_space_family& xid_spaces,
   primitives_index_space_state* lstate = new primitives_index_space_state();
   lstate->new_state(xid_spaces, xid, xname, false);
 
-  primitives_index_space_handle result(*lstate);;
+  primitives_index_space_handle result(*lstate);
 
   // Postconditions:
 

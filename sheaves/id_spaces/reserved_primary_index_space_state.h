@@ -49,6 +49,42 @@ class SHEAF_DLL_SPEC reserved_primary_index_space_state : public primary_index_s
   friend class namespace_poset;
 
   // ===========================================================
+  /// @name SPACE FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Create a new reserved primary id space in the id space family xid_space
+  /// at the next available id space index with name xname,
+  /// ooffset xoffset and count xct.
+  /// Returns a handle to the id space created.
+  ///
+  static reserved_primary_index_space_handle new_space(index_space_family& xid_spaces,
+						       const string& xname,
+						       pod_type xoffset,
+						       size_type xct);
+
+  ///
+  /// Create a new reserved primary id space in the id space family xid_space
+  /// at the id space index xid with name xname, offset xoffset and count xct.
+  /// Returns a handle to the id space created.
+  ///
+  static reserved_primary_index_space_handle new_space(index_space_family& xid_spaces,
+						       pod_type xid,
+						       const string& xname,
+						       pod_type xoffset,
+						       size_type xct);
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
   /// @name RESERVED_PRIMARY_INDEX_SPACE_STATE FACET
   // ===========================================================
   //@{
@@ -69,6 +105,7 @@ protected:
 
   ///
   /// Constructor: Creates an instance from arguments, xargs.
+  /// @deprecated Use new_space() constructor.
   ///
   reserved_primary_index_space_state(const arg_list& xargs);
 
@@ -289,6 +326,7 @@ public:
   ///
   /// Virtual constructor; create a new instance of the same type at this
   /// with arguments xargs.
+  /// @deprecated Use new_space() constructor.
   ///
   virtual reserved_primary_index_space_state* clone(const arg_list& xargs) const;
 

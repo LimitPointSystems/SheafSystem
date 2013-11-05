@@ -31,6 +31,83 @@
 #include "std_strstream.h"
 
 // ===========================================================
+// SPACE FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+sheaf::hub_index_space_handle
+sheaf::primary_sum_index_space_state::
+new_space(index_space_family& xid_spaces,
+	  const string& xname)
+{
+  // Preconditions:
+
+  require(!xname.empty());
+  require(!xid_spaces.contains(xname));
+
+  // Body:
+
+  primary_sum_index_space_state* lstate = new primary_sum_index_space_state();
+  lstate->new_state(xid_spaces, xname, false);
+
+  hub_index_space_handle result(*lstate);
+
+  // Postconditions:
+
+  ensure(&result.id_spaces() == &xid_spaces);
+  ensure(xid_spaces.contains(xname));
+  ensure(result.conforms_to_state(xname));
+
+  ensure(result.name() == xname);
+  ensure(!result.is_persistent());
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::hub_index_space_handle
+sheaf::primary_sum_index_space_state::
+new_space(index_space_family& xid_spaces,
+	  pod_index_type xid,
+	  const string& xname)
+{
+  // Preconditions:
+
+  require(!xid_spaces.contains(xid));
+  require(xid_spaces.is_explicit_interval(xid));
+  require(!xname.empty());
+  require(!xid_spaces.contains(xname));
+
+  // Body:
+
+  primary_sum_index_space_state* lstate = new primary_sum_index_space_state();
+  lstate->new_state(xid_spaces, xid, xname, false);
+
+  hub_index_space_handle result(*lstate);
+
+  // Postconditions:
+
+  ensure(&result.id_spaces() == &xid_spaces);
+  ensure(xid_spaces.contains(xname));
+  ensure(result.conforms_to_state(xname));
+
+  ensure(result.index() == xid);
+  ensure(result.name() == xname);
+  ensure(!result.is_persistent());
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// ===========================================================
 // PRIMARY_SUM_INDEX_SPACE_STATE FACET
 // ===========================================================
 

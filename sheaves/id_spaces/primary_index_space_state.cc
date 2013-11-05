@@ -27,6 +27,109 @@
 #include "primary_index_space_iterator.h"
 
 // ===========================================================
+// SPACE FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+sheaf::primary_index_space_handle
+sheaf::primary_index_space_state::
+new_space(index_space_family& xid_spaces,
+	  const string& xname,
+	  pod_type xoffset,
+	  size_type xct)
+{
+  // Preconditions:
+
+  require(!xname.empty());
+  require(!xid_spaces.contains(xname));
+  require(xoffset >= 0);
+  require(xct > 0);
+
+  // Body:
+
+  primary_index_space_state* lstate = new primary_index_space_state();
+  lstate->new_state(xid_spaces, xname, false);
+
+  lstate->_offset = xoffset;
+  lstate->_ct = xct;
+  lstate->_begin = 0;
+  lstate->_end = xct;
+
+  primary_index_space_handle result(*lstate);
+
+  // Postconditions:
+
+  ensure(&result.id_spaces() == &xid_spaces);
+  ensure(xid_spaces.contains(xname));
+  ensure(result.conforms_to_state(xname));
+
+  ensure(result.name() == xname);
+  ensure(!result.is_persistent());
+
+  ensure(result.offset() == xoffset);
+  ensure(result.ct() == xct);
+  ensure(result.is_gathered());
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::primary_index_space_handle
+sheaf::primary_index_space_state::
+new_space(index_space_family& xid_spaces,
+	  pod_index_type xid,
+	  const string& xname,
+	  pod_type xoffset,
+	  size_type xct)
+{
+  // Preconditions:
+
+  require(!xid_spaces.contains(xid));
+  require(xid_spaces.is_explicit_interval(xid));
+  require(!xname.empty());
+  require(!xid_spaces.contains(xname));
+  require(xoffset >= 0);
+  require(xct > 0);
+
+  // Body:
+
+  primary_index_space_state* lstate = new primary_index_space_state();
+  lstate->new_state(xid_spaces, xid, xname, false);
+
+  lstate->_offset = xoffset;
+  lstate->_ct = xct;
+  lstate->_begin = 0;
+  lstate->_end = xct;
+
+  primary_index_space_handle result(*lstate);
+
+  // Postconditions:
+
+  ensure(&result.id_spaces() == &xid_spaces);
+  ensure(xid_spaces.contains(xname));
+  ensure(result.conforms_to_state(xname));
+
+  ensure(result.index() == xid);
+  ensure(result.name() == xname);
+  ensure(!result.is_persistent());
+
+  ensure(result.offset() == xoffset);
+  ensure(result.ct() == xct);
+  ensure(result.is_gathered());
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// ===========================================================
 // PRIMARY_INDEX_SPACE_STATE FACET
 // ===========================================================
 

@@ -41,6 +41,7 @@ class primary_index_space_state;
 class SHEAF_DLL_SPEC primary_index_space_handle : public explicit_index_space_handle
 {
 
+  friend class primary_index_space_state;
   friend class primary_sum_index_space_state;
 
   // ===========================================================
@@ -83,6 +84,11 @@ public:
   virtual ~primary_index_space_handle();
 
 protected:
+
+  ///
+  /// Constructor: Attach to state xstate.
+  ///
+  primary_index_space_handle(primary_index_space_state& xstate);
 
   using explicit_index_space_handle::state;
 

@@ -52,7 +52,7 @@ new_space(index_space_family& xid_spaces,
 
   lstate->reserve(xcapacity);
 
-  hash_index_space_handle result(*lstate);;
+  hash_index_space_handle result(*lstate);
 
   // Postconditions:
 
@@ -93,7 +93,7 @@ new_space(index_space_family& xid_spaces,
 
   lstate->reserve(xcapacity);
 
-  hash_index_space_handle result(*lstate);;
+  hash_index_space_handle result(*lstate);
 
   // Postconditions:
 

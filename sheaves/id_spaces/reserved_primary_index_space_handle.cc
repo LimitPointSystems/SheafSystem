@@ -153,6 +153,26 @@ sheaf::reserved_primary_index_space_handle::
 
 // PROTECTED MEMBER FUNCTIONS
 
+sheaf::reserved_primary_index_space_handle::
+reserved_primary_index_space_handle(reserved_primary_index_space_state& xstate)
+{
+  // Preconditions:
+
+  // Body:
+
+  attach_to(&xstate);
+
+  // Postconditions:
+
+  ensure(invariant());
+  ensure(is_attached());
+  ensure(&state() == &xstate);
+
+  // Exit:
+
+  return;
+}
+
 sheaf::reserved_primary_index_space_state&
 sheaf::reserved_primary_index_space_handle::
 state()

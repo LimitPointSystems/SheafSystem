@@ -91,6 +91,37 @@ class SHEAF_DLL_SPEC primary_sum_index_space_state : public sum_index_space_stat
   friend SHEAF_DLL_SPEC size_t deep_size(const primary_sum_index_space_state& xn, bool xinclude_shallow);
 
   // ===========================================================
+  /// @name SPACE FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Create a new primary sum id space in the id space family xid_space
+  /// at the next available id space index with name xname.
+  /// Returns a handle to the id space created.
+  ///
+  static hub_index_space_handle new_space(index_space_family& xid_spaces,
+					  const string& xname);
+
+  ///
+  /// Create a new primary sum id space in the id space family xid_space
+  /// at the id space index xid with name xname.
+  /// Returns a handle to the id space created.
+  ///
+  static hub_index_space_handle new_space(index_space_family& xid_spaces,
+					  pod_type xid,
+					  const string& xname);
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
   /// @name PRIMARY_SUM_INDEX_SPACE_STATE FACET
   // ===========================================================
   //@{
@@ -111,6 +142,7 @@ protected:
 
   ///
   /// Constructor: Creates an instance from arguments, xargs.
+  /// @deprecated Use new_space() constructor.
   ///
   primary_sum_index_space_state(const arg_list& xargs);
 
@@ -633,6 +665,7 @@ public:
   ///
   /// Virtual constructor; create a new instance of the same type at this
   /// with arguments xargs.
+  /// @deprecated Use new_space() constructor.
   ///
   virtual primary_sum_index_space_state* clone(const arg_list& xargs) const;
 

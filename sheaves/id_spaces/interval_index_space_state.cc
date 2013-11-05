@@ -52,7 +52,7 @@ new_space(index_space_family& xid_spaces,
 
   lstate->_merge_mode = xmerge_mode;
 
-  interval_index_space_handle result(*lstate);;
+  interval_index_space_handle result(*lstate);
 
   // Postconditions:
 
@@ -92,7 +92,7 @@ new_space(index_space_family& xid_spaces,
 
   lstate->_merge_mode = xmerge_mode;
 
-  interval_index_space_handle result(*lstate);;
+  interval_index_space_handle result(*lstate);
 
   // Postconditions:
 

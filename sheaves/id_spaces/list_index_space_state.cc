@@ -48,7 +48,7 @@ new_space(index_space_family& xid_spaces,
   list_index_space_state* lstate = new list_index_space_state();
   lstate->new_state(xid_spaces, xname, xis_persistent);
 
-  list_index_space_handle result(*lstate);;
+  list_index_space_handle result(*lstate);
 
   // Postconditions:
 
@@ -85,7 +85,7 @@ new_space(index_space_family& xid_spaces,
   list_index_space_state* lstate = new list_index_space_state();
   lstate->new_state(xid_spaces, xid, xname, xis_persistent);
 
-  list_index_space_handle result(*lstate);;
+  list_index_space_handle result(*lstate);
 
   // Postconditions:
 

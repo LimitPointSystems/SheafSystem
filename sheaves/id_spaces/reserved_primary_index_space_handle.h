@@ -41,6 +41,8 @@ class reserved_primary_index_space_state;
 class SHEAF_DLL_SPEC reserved_primary_index_space_handle : public primary_index_space_handle
 {
 
+  friend class reserved_primary_index_space_state;
+
   // ===========================================================
   /// @name RESERVED_PRIMARY_INDEX_SPACE_HANDLE FACET
   // ===========================================================
@@ -81,6 +83,11 @@ public:
   virtual ~reserved_primary_index_space_handle();
 
 protected:
+
+  ///
+  /// Constructor: Attach to state xstate.
+  ///
+  reserved_primary_index_space_handle(reserved_primary_index_space_state& xstate);
 
   using primary_index_space_handle::state;
 

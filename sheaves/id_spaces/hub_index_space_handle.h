@@ -41,6 +41,8 @@ class primary_sum_index_space_state;
 class SHEAF_DLL_SPEC hub_index_space_handle : public sum_index_space_handle
 {
 
+  friend class primary_sum_index_space_state;
+
   // ===========================================================
   /// @name HUB_INDEX_SPACE_HANDLE FACET
   // ===========================================================
@@ -81,6 +83,11 @@ public:
   virtual ~hub_index_space_handle();
 
 protected:
+
+  ///
+  /// Constructor: Attach to state xstate.
+  ///
+  hub_index_space_handle(primary_sum_index_space_state& xstate);
 
   using explicit_index_space_handle::state;
 
