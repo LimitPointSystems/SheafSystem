@@ -21,6 +21,7 @@
 #include "sec_rep_space.h"
 #include "arg_list.h"
 #include "assert_contract.h"
+#include "array_index_space_handle.h"
 #include "array_index_space_state.h"
 #include "array_section_dof_map.h"
 #include "binary_section_space_schema_member.impl.h"
@@ -621,17 +622,14 @@ multisection_id_space(bool xauto_access) const
 
   if(!_multisection_id_space.is_attached())
   {
-    arg_list largs = array_index_space_state::make_arg_list(0);
-
     sec_rep_space* cthis = const_cast<sec_rep_space*>(this);
 
-    pod_index_type lspace_id =
-      cthis->member_id_spaces(false).
-      new_secondary_state(multisection_id_space_name,
-			  "array_index_space_state",
-			  largs, true);
+    array_index_space_handle lmultisection_id_space =
+      array_index_space_state::new_space(cthis->member_id_spaces(false),
+					 multisection_id_space_name,
+					 true, 0);
 
-    _multisection_id_space.attach_to(member_id_spaces(false), lspace_id);
+    _multisection_id_space.attach_to(lmultisection_id_space);
   }
 
   const mutable_index_space_handle& result = _multisection_id_space;
@@ -671,17 +669,14 @@ multisection_id_space(bool xauto_access)
 
   if(!_multisection_id_space.is_attached())
   {
-    arg_list largs = array_index_space_state::make_arg_list(0);
+    sec_rep_space* cthis = const_cast<sec_rep_space*>(this);
 
-    sec_rep_space* cthis = const_cast<sec_rep_space*>(this); 
+    array_index_space_handle lmultisection_id_space =
+      array_index_space_state::new_space(cthis->member_id_spaces(false),
+					 multisection_id_space_name,
+					 true, 0);
 
-    pod_index_type lspace_id =
-      cthis->member_id_spaces(false).
-      new_secondary_state(multisection_id_space_name,
-			  "array_index_space_state",
-			  largs, true);
-
-    _multisection_id_space.attach_to(member_id_spaces(false), lspace_id);
+    _multisection_id_space.attach_to(lmultisection_id_space);
   }
 
   mutable_index_space_handle& result = _multisection_id_space;

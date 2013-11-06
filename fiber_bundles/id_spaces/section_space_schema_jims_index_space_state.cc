@@ -20,7 +20,6 @@
 
 #include "section_space_schema_jims_index_space_state.h"
 #include "assert_contract.h"
-#include "arg_list.h"
 #include "ij_product_structure.h"
 #include "index_space_family.h"
 #include "section_space_schema_jims_index_space_handle.h"
@@ -169,35 +168,6 @@ new_space(index_space_family& xid_spaces,
 
 // PUBLIC MEMBER FUNCTIONS
 
-sheaf::arg_list
-fiber_bundle::section_space_schema_jims_index_space_state::
-make_arg_list(const index_space_handle& xbase_space_id_space,
-	      const index_space_handle& xfiber_schema_id_space,
-	      const ij_product_structure& xsection_space_schema_product_structure)
-{
-  // Preconditions:
-
-  // Body:
-
-  arg_list result = explicit_index_space_state::make_arg_list();
-  result << "base_space_id_space" << &xbase_space_id_space
-	 << "fiber_schema_id_space" << &xfiber_schema_id_space
-	 << "section_space_schema_product_structure" << &xsection_space_schema_product_structure;
-
-  // Postconditions:
-
-  ensure(result.contains_arg("base_space_id_space"));
-  ensure((void *) result.value("base_space_id_space") == &xbase_space_id_space);
-  ensure(result.contains_arg("fiber_schema_id_space"));
-  ensure((void *) result.value("fiber_schema_id_space") == &xfiber_schema_id_space);
-  ensure(result.contains_arg("section_space_schema_product_structure"));
-  ensure((void *) result.value("section_space_schema_product_structure") == &xsection_space_schema_product_structure);
-
-  // Exit:
-
-  return result;
-}
-
 // PROTECTED MEMBER FUNCTIONS
 
 fiber_bundle::section_space_schema_jims_index_space_state::
@@ -215,57 +185,6 @@ section_space_schema_jims_index_space_state()
 
   ensure(invariant());
   ensure(is_empty());
-
-  // Exit:
-
-  return; 
-}
-
-fiber_bundle::section_space_schema_jims_index_space_state::
-section_space_schema_jims_index_space_state(const arg_list& xargs)
-  : explicit_index_space_state(xargs)
-{
-  // Preconditions:
-    
-  require(precondition_of(explicit_index_space_state::explicit_index_space_state(xargs)));
-  require(xargs.contains_arg("base_space_id_space"));
-  require(xargs.contains_arg("fiber_schema_id_space"));
-  require(xargs.contains_arg("section_space_schema_product_structure"));
-
-  // Body:
-
-  // Initialize data members from input arguments.
-
-  _base_space =
-    &reinterpret_cast<const index_space_handle*>
-    ((void *) xargs.value("base_space_id_space"))->get_id_space();
-
-  _fiber_schema =
-    &reinterpret_cast<const index_space_handle*>
-    ((void *) xargs.value("fiber_schema_id_space"))->get_id_space();
-
-  _section_space_schema_product =
-    reinterpret_cast<const ij_product_structure*>
-    ((void *) xargs.value("section_space_schema_product_structure"))->clone();
-
-  // Initialize the product structure.
-
-  _product =
-    new ij_product_structure(_base_space->end(), _fiber_schema->end());
-
-  // Initialize the count and extrema.
-
-  _begin = 0;
-  _end   = _base_space->end()*_fiber_schema->end();
-  _ct    = _base_space->ct()*_fiber_schema->ct();
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(postcondition_of(explicit_index_space_state::explicit_index_space_state(xargs)));
-  ensure(base_space() == *reinterpret_cast<const index_space_handle*>((void *) xargs.value("base_space_id_space")));
-  ensure(fiber_schema() == *reinterpret_cast<const index_space_handle*>((void *) xargs.value("fiber_schema_id_space")));
-  //ensure(section_space_schema_product_structure() == *(reinterpret_cast<const ij_product_structure*>((void*) xargs.value("section_space_schema_product_structure"))));
 
   // Exit:
 
@@ -1062,13 +981,13 @@ class_name() const
 
 fiber_bundle::section_space_schema_jims_index_space_state*
 fiber_bundle::section_space_schema_jims_index_space_state::
-clone(const arg_list& xargs) const
+clone() const
 {
   // Preconditions:
 
   // Body:
 
-  section_space_schema_jims_index_space_state* result = new section_space_schema_jims_index_space_state(xargs);
+  section_space_schema_jims_index_space_state* result = new section_space_schema_jims_index_space_state();
 
   // Postconditions:
 

@@ -229,22 +229,10 @@ transfer_internal_buffer_to_poset()
     {
       // Create an id space with that name.
 
-      /// @hack This is a temporary fix until we review how to implement
-      ///       reading and writing persistent id spaces with the construction.
-      ///       Since persistent id spaces can only be mutable id spaces we
-      ///       construct space arguments that have defaulted values for
-      ///       capacity (to satisfy array_index_space_state and
-      ///       hash_index_space_state) and merge_mode (to satisfy
-      ///       interval_index_space_state).
-
-      arg_list largs;
-      largs << "capacity" << (size_type) 8 << "merge_mode" << true;
-
-      lposet.member_id_spaces(false).new_secondary_state(lid_space_name,
-							 lid_space_class_name,
-							 largs,
-							 true);
+      lposet.member_id_spaces(false).new_state(lid_space_name, lid_space_class_name);
     }
+
+    /// @hack Require that the id space is mutable.  See COM-475.
 
     mutable_index_space_handle* lid_space =
       &lposet.member_id_spaces(false).get_id_space<mutable_index_space_handle>(lid_space_name);
@@ -283,6 +271,8 @@ transfer_poset_to_internal_buffer()
   index_space_family_iterator litr(lposet.member_id_spaces(false), true);
   while(!litr.is_done())
   {
+    /// @hack Require that the id space is mutable.  See COM-475.
+
     assertion(lposet.member_id_spaces(false).handle_conforms_to_state<mutable_index_space_handle>(litr.index()));
 
     mutable_index_space_handle& lid_space =

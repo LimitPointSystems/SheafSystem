@@ -20,12 +20,12 @@
 
 #include "primary_sum_index_space_state.h"
 #include "assert_contract.h"
-#include "arg_list.h"
 #include "deep_size.h"
 #include "index_space_family.h"
 #include "interval_index_space_state.h"
 #include "poset_path.h"
 #include "primary_index_space_handle.h"
+#include "primitive_value.h"
 #include "hub_index_space_iterator.h"
 #include "reserved_primary_index_space_state.h"
 #include "std_strstream.h"
@@ -131,30 +131,6 @@ primary_sum_index_space_state()
 
   ensure(invariant());
   ensure(is_empty());
-
-  // Exit:
-
-  return; 
-}
-
-sheaf::primary_sum_index_space_state::
-primary_sum_index_space_state(const arg_list& xargs)
-  : sum_index_space_state(xargs),
-    _standard_id_end(0),
-    _term_id_begin(0),
-    _term_id_end(0),
-    _next_id(0)
-{
-  // Preconditions:
-    
-  require(precondition_of(sum_index_space_state::sum_index_space_state(xargs)));
-
-  // Body:
-  
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(postcondition_of(sum_index_space_state::sum_index_space_state(xargs)));
 
   // Exit:
 
@@ -406,12 +382,10 @@ new_primary_term(pod_type xid, size_type xct)
 
   // Create the term.
 
-  arg_list largs = primary_index_space_state::make_arg_list(xid, xct);
-
-  pod_type result = id_spaces().new_state(next_term_name(),
-					  "primary_index_space_state",
-					  largs,
-					  false);
+  pod_type result =
+    primary_index_space_state::new_space(id_spaces(),
+					 next_term_name(),
+					 xid, xct).index();
 
   // Add the term to this space.
 
@@ -745,13 +719,11 @@ new_reserved_term(pod_type xid)
 
   // Create the term.
 
-  arg_list largs =
-    reserved_primary_index_space_state::make_arg_list(lterm_begin, RESERVED_TERM_SIZE);
-
-  pod_type result = id_spaces().new_state(next_term_name(),
-					  "reserved_primary_index_space_state",
-					  largs,
-					  false);
+  pod_type result =
+    reserved_primary_index_space_state::new_space(id_spaces(),
+						  next_term_name(),
+						  lterm_begin,
+						  RESERVED_TERM_SIZE).index();
 
   // Add the term to this id space.
 
@@ -1040,13 +1012,10 @@ new_gathered_id_space(bool xexclude_bottom)
 
   // Body:
 
-  pod_type lid =
-    id_spaces().new_secondary_state(gathered_hub_id_space_name(),
-				    "interval_index_space_state",
-				    interval_index_space_state::make_arg_list(true),
-				    false);
-
-  _gathered_id_space.attach_to(id_spaces(), lid);
+  _gathered_id_space =
+    interval_index_space_state::new_space(id_spaces(),
+					  gathered_hub_id_space_name(),
+					  false, false);
 
   update_gathered_id_space(xexclude_bottom);
 
@@ -2054,14 +2023,14 @@ class_name() const
 
 sheaf::primary_sum_index_space_state*
 sheaf::primary_sum_index_space_state::
-clone(const arg_list& xargs) const
+clone() const
 {
   // Preconditions:
 
   // Body:
 
   primary_sum_index_space_state* result =
-    new primary_sum_index_space_state(xargs);
+    new primary_sum_index_space_state();
 
   // Postconditions:
 

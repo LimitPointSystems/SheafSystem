@@ -20,8 +20,8 @@
 
 #include "primary_index_space_state.h"
 #include "assert_contract.h"
-#include "arg_list.h"
 #include "deep_size.h"
+#include "index_space_family.h"
 #include "hub_index_space_handle.h"
 #include "primary_index_space_handle.h"
 #include "primary_index_space_iterator.h"
@@ -135,30 +135,6 @@ new_space(index_space_family& xid_spaces,
 
 // PUBLIC MEMBER FUNCTIONS
 
-sheaf::arg_list
-sheaf::primary_index_space_state::
-make_arg_list(pod_type xoffset, size_type xct)
-{
-  // Preconditions:
-
-  // Body:
-
-  arg_list result;
-  result << "offset" << xoffset;
-  result << "ct" << xct;
-
-  // Postconditions:
-
-  ensure(result.contains_arg("offset"));
-  ensure(result.value("offset") == xoffset);
-  ensure(result.contains_arg("ct"));
-  ensure(result.value("ct") == xct);
-
-  // Exit:
-
-  return result;
-} 
-
 // PROTECTED MEMBER FUNCTIONS
 
 sheaf::primary_index_space_state::
@@ -182,36 +158,6 @@ primary_index_space_state()
   ensure(offset() == 0);
   ensure(begin() == 0);
   ensure(end() == 0);
-
-  // Exit:
-
-  return; 
-}
-
-sheaf::primary_index_space_state::
-primary_index_space_state(const arg_list& xargs)
-  : explicit_index_space_state(xargs),
-    _hub_term_id(invalid_pod_index())
-{
-  // Preconditions:
-    
-  require(precondition_of(explicit_index_space_state::explicit_index_space_state(xargs)));
-  require(xargs.contains_arg("offset"));
-  require(xargs.contains_arg("ct"));
-
-  // Body:
-  
-  _offset = xargs.value("offset");
-  _ct     = xargs.value("ct");
-  _begin  = 0;
-  _end    = _ct;
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(postcondition_of(explicit_index_space_state::explicit_index_space_state(xargs)));
-  ensure(offset() == (pod_type) xargs.value("offset"));
-  ensure(ct() == (size_type) xargs.value("ct"));
 
   // Exit:
 
@@ -790,13 +736,13 @@ class_name() const
 
 sheaf::primary_index_space_state*
 sheaf::primary_index_space_state::
-clone(const arg_list& xargs) const
+clone() const
 {
   // Preconditions:
 
   // Body:
 
-  primary_index_space_state* result = new primary_index_space_state(xargs);
+  primary_index_space_state* result = new primary_index_space_state();
 
   // Postconditions:
 

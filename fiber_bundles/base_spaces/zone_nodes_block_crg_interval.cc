@@ -29,8 +29,11 @@
 #include "error_message.h"
 #include "explicit_index_space_interval.h"
 #include "factory.h"
+#include "offset_index_space_handle.h"
 #include "offset_index_space_state.h"
+#include "list_index_space_handle.h"
 #include "list_index_space_state.h"
+#include "hash_index_space_handle.h"
 #include "hash_index_space_state.h"
 #include "homogeneous_block.h"
 #include "index_space_iterator.h"
@@ -278,18 +281,13 @@ initialize_vertex_client_id_space(block_adjacency& xadjacency)
 
   // Create the id space.
 
-  arg_list largs = hash_index_space_state::make_arg_list(xadjacency.node_ct());
-
-  _vertex_client_space_id =
-    _id_spaces->new_secondary_state(lname,
-				    "hash_index_space_state",
-				    largs,
-				    false);
+  mutable_index_space_handle lclient_id_space =
+    hash_index_space_state::new_space(*_id_spaces,
+				      lname,
+				      false,
+				      xadjacency.node_ct());
 
   // Populate the id space.
-
-  mutable_index_space_handle& lclient_id_space =
-    _id_spaces->get_id_space<mutable_index_space_handle>(_vertex_client_space_id);
 
   pod_index_type lhub_vertex_id = lzone_begin + xadjacency.zone_ct();
   typedef block_adjacency::const_node_iterator_type node_itr_type;
@@ -301,8 +299,6 @@ initialize_vertex_client_id_space(block_adjacency& xadjacency)
   }
 
   assertion(lhub_vertex_id == lzone_begin + xadjacency.zone_ct() + xadjacency.node_ct());
-
-  _id_spaces->release_id_space(lclient_id_space);
 
   _vertex_client_id_space_initialized = true;
 
@@ -355,13 +351,11 @@ initialize_zones(base_space_poset& xhost)
   const string& lzone_id_space_name =
     section_space_schema_member::intersection_id_space_name(xhost.d_cells(_zone_db), interval_member());
 
-  arg_list largs = offset_index_space_state::make_arg_list(_zone_begin,
-							   _zone_size);
-
   _zones_space_id =
-    _id_spaces->new_secondary_state(lzone_id_space_name,
-				    "offset_index_space_state",
-				    largs, false);
+    offset_index_space_state::new_space(*_id_spaces,
+					lzone_id_space_name,
+					_zone_begin,
+					_zone_size).index();
 
   _zones_initialized = true;
 
@@ -403,13 +397,11 @@ initialize_vertices(base_space_poset& xhost)
     section_space_schema_member::intersection_id_space_name(xhost.d_cells(0),
 							    interval_member());
 
-  arg_list largs = offset_index_space_state::make_arg_list(_vertex_begin,
-							   _vertex_size);
-
   _vertices_space_id =
-    _id_spaces->new_secondary_state(lvertex_id_space_name,
-				    "offset_index_space_state",
-				    largs, false);
+    offset_index_space_state::new_space(*_id_spaces,
+					lvertex_id_space_name,
+					_vertex_begin,
+					_vertex_size).index();
 
   _vertices_initialized = true;
 
@@ -504,12 +496,10 @@ initialize_block_vertices()
 
   // Body:
 
-  arg_list largs = list_index_space_state::make_arg_list();
-
   _block_vertices_space_id =
-    _id_spaces->new_secondary_state(block_vertices_name(),
-				    "list_index_space_state",
-				    largs, false);
+     list_index_space_state::new_space(*_id_spaces,
+				       block_vertices_name(),
+				       false).index();
 
   // Block vertices id space is empty.
 
@@ -589,13 +579,10 @@ initialize_lower_covers()
 				       explicit_index_space_interval::make_arg_list(),
 				       1);
 
-  arg_list largs =
-    offset_index_space_state::make_arg_list(_zone_begin, _zone_size);
-
-  _id_spaces->new_secondary_state(_lower_covers_begin,
-				  implicit_cover_name(LOWER, interval_member()),
-				  "offset_index_space_state",
-				  largs, false);
+  offset_index_space_state::new_space(*_id_spaces,
+				      implicit_cover_name(LOWER, interval_member()),
+				      _zone_begin,
+				      _zone_size);
 
   // Construct the lower cover of the zones.
   //
@@ -605,9 +592,9 @@ initialize_lower_covers()
   // interval will remain in the id space family.  For that reason, we can
   // set use the interval created below as the connectivity id space interval.
 
-  largs = array_index_space_interval::make_arg_list(_connectivity,
-						    _nodes_per_zone,
-						    false);
+  arg_list largs = array_index_space_interval::make_arg_list(_connectivity,
+							     _nodes_per_zone,
+							     false);
 
   _connectivity_begin =
     _id_spaces->new_secondary_interval("array_index_space_interval",
@@ -657,11 +644,9 @@ initialize_upper_covers()
 				       explicit_index_space_interval::make_arg_list(),
 				       1);  
 
-  _id_spaces->new_secondary_state(_upper_covers_begin,
-				  explicit_cover_name(UPPER, interval_member()),
-				  "list_index_space_state",
-				  list_index_space_state::make_arg_list(),
-				  false);
+  list_index_space_state::new_space(*_id_spaces,
+				    explicit_cover_name(UPPER, interval_member()),
+				    false);
 
   // Construct the upper cover of the zones.
   //

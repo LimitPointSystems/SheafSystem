@@ -27,7 +27,9 @@
 #include "error_message.h"
 #include "explicit_index_space_interval.h"
 #include "factory.h"
+#include "offset_index_space_handle.h"
 #include "offset_index_space_state.h"
+#include "list_index_space_handle.h"
 #include "list_index_space_state.h"
 #include "ijk_adjacency_index_space_interval.h"
 #include "ijk_connectivity_index_space_interval.h"
@@ -206,13 +208,11 @@ initialize_zones(base_space_poset& xhost)
     section_space_schema_member::intersection_id_space_name(xhost.d_cells(3),
 							    interval_member());
 
-  arg_list largs = offset_index_space_state::make_arg_list(_zone_begin,
-							   _zone_size);
-
   _zones_space_id =
-    _id_spaces->new_secondary_state(lzone_id_space_name,
-				    "offset_index_space_state",
-				    largs, false);
+    offset_index_space_state::new_space(*_id_spaces,
+					lzone_id_space_name,
+					_zone_begin,
+					_zone_size).index();
 
   _zones_initialized = true;
 
@@ -261,13 +261,11 @@ initialize_vertices(base_space_poset& xhost)
     section_space_schema_member::intersection_id_space_name(xhost.d_cells(0),
 							    interval_member());
 
-  arg_list largs = offset_index_space_state::make_arg_list(_vertex_begin,
-							   _vertex_size);
-
   _vertices_space_id =
-    _id_spaces->new_secondary_state(lvertex_id_space_name,
-				    "offset_index_space_state",
-				    largs, false);
+    offset_index_space_state::new_space(*_id_spaces,
+					lvertex_id_space_name,
+					_vertex_begin,
+					_vertex_size).index();
 
   _vertices_initialized = true;
 
@@ -379,17 +377,14 @@ initialize_block_vertices()
 
  // Construct the block vertices id space.
 
-  arg_list largs = list_index_space_state::make_arg_list();
+  list_index_space_handle lblock_vertices_id_space =
+     list_index_space_state::new_space(*_id_spaces,
+				       block_vertices_name(),
+				       false);
 
-  _block_vertices_space_id =
-    _id_spaces->new_secondary_state(block_vertices_name(),
-				    "list_index_space_state",
-				    largs, false);
+  _block_vertices_space_id = lblock_vertices_id_space.index();
 
   // Insert the private data into the id space.
-
-  mutable_index_space_handle& lblock_vertices_id_space =
-    _id_spaces->get_id_space<mutable_index_space_handle>(_block_vertices_space_id);
 
   int I = i_size();
   int J = j_size();
@@ -426,10 +421,6 @@ initialize_block_vertices()
   // (0,J,K); client id 7;
 
   lblock_vertices_id_space.push_back(vertex_id(0, J, K));
-
-  // Release the id space handle.
-
-  _id_spaces->release_id_space(lblock_vertices_id_space);
 
   // The block vertices is initialized.
 
@@ -532,13 +523,10 @@ initialize_lower_covers()
 				       explicit_index_space_interval::make_arg_list(),
 				       1);
 
-  arg_list largs =
-    offset_index_space_state::make_arg_list(_zone_begin, _zone_size);
-
-  _id_spaces->new_secondary_state(_lower_covers_begin,
-				  implicit_cover_name(LOWER, interval_member()),
-				  "offset_index_space_state",
-				  largs, false);
+  offset_index_space_state::new_space(*_id_spaces,
+				      implicit_cover_name(LOWER, interval_member()),
+				      _zone_begin,
+				      _zone_size);
 
   // Construct the lower cover of the zones.
   //
@@ -549,9 +537,9 @@ initialize_lower_covers()
   // set the connectivity begin to beginning of the connectivity id space
   // interval created below.
 
-  largs = ijk_connectivity_index_space_interval::make_arg_list(_vertex_begin,
-							       _j_size,
-							       _k_size);
+  arg_list largs = ijk_connectivity_index_space_interval::make_arg_list(_vertex_begin,
+									_j_size,
+									_k_size);
 
   _connectivity_begin =
     _id_spaces->new_secondary_interval("ijk_connectivity_index_space_interval",
@@ -601,11 +589,9 @@ initialize_upper_covers()
 				       explicit_index_space_interval::make_arg_list(),
 				       1);  
 
-  _id_spaces->new_secondary_state(_upper_covers_begin,
-				  explicit_cover_name(UPPER, interval_member()),
-				  "list_index_space_state",
-				  list_index_space_state::make_arg_list(),
-				  false);
+  list_index_space_state::new_space(*_id_spaces,
+				    explicit_cover_name(UPPER, interval_member()),
+				    false);
 
   // Construct the upper cover of the zones.
   //

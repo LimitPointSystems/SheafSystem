@@ -204,9 +204,6 @@ sheaf::offset_index_space_handle::
 
 // PROTECTED MEMBER FUNCTIONS
 
-///////////////////////////////////////////////////////////////
-// BEGIN NEW SPACE
-
 sheaf::offset_index_space_handle::
 offset_index_space_handle(offset_index_space_state& xstate)
 {
@@ -226,9 +223,6 @@ offset_index_space_handle(offset_index_space_state& xstate)
 
   return;
 }
-
-// END NEW SPACE
-///////////////////////////////////////////////////////////////
 
 sheaf::offset_index_space_state&
 sheaf::offset_index_space_handle::

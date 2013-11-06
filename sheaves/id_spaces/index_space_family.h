@@ -67,6 +67,7 @@ class index_space_family_iterator;
 class index_space_interval;
 class index_space_iterator;
 class index_space_state;
+class mutable_index_space_handle;
 class primary_sum_index_space_state;
 class scoped_index;
 
@@ -79,10 +80,13 @@ class SHEAF_DLL_SPEC index_space_family : public any
   friend class explicit_index_space_iterator;
   friend class explicit_index_space_state;
   friend class forwarding_index_space_handle;
+  friend class id_space_names_record;
   friend class implicit_index_space_iterator;
   friend class index_space_family_iterator;
   friend class index_space_handle;
   friend class index_space_iterator;
+  friend class poset_state_handle; // Uses new_primary_state
+  friend class poset_crg_state; // Uses new_primary_state
   friend class primary_sum_index_space_state;
   friend SHEAF_DLL_SPEC size_t deep_size(const index_space_family& xfamily, bool xinclude_shallow);
 
@@ -200,43 +204,30 @@ private:
 
 public:
 
-  ///
-  /// Creates a new primary id space state with xct number of ids.
-  /// Returns the index of the id space state created.
-  /// @depreciated Use primary_index_space_state::new_space().
-  ///
-  pod_type new_primary_state(size_type xct);
+  /// @todo Remove.
+//   ///
+//   /// Creates a new secondary id space state with name xname, id space state
+//   /// of type xstate_class_name and initialization arguments, xstate_args.
+//   /// Returns the index of the id space state created.
+//   /// @depreciated Use new_space constructors.
+//   ///
+//   pod_type new_secondary_state(const string& xname,
+// 			       const string& xstate_class_name,
+// 			       const arg_list& xstate_args,
+// 			       bool xis_persistent);
 
-  ///
-  /// Creates a new primary id space state [xid, xid+xct).
-  /// Returns the index of the id space state created.
-  /// @depreciated Use primary_index_space_state::new_space().
-  ///
-  pod_type new_primary_state(pod_type xid, size_type xct);
-
-  ///
-  /// Creates a new secondary id space state with name xname, id space state
-  /// of type xstate_class_name and initialization arguments, xstate_args.
-  /// Returns the index of the id space state created.
-  /// @depreciated Use new_space constructors.
-  ///
-  pod_type new_secondary_state(const string& xname,
-			       const string& xstate_class_name,
-			       const arg_list& xstate_args,
-			       bool xis_persistent);
-
-  ///
-  /// Creates a new secondary id space state at id space index xid
-  /// with name xname, id space state of type xstate_class_name and
-  /// initialization arguments, xstate_args.
-  /// Returns the index of the id space state created.
-  /// @depreciated Use new_space constructors.
-  ///
-  pod_type new_secondary_state(pod_type xid,
-			       const string& xname,
-			       const string& xstate_class_name,
-			       const arg_list& xstate_args,
-			       bool xis_persistent);
+//   ///
+//   /// Creates a new secondary id space state at id space index xid
+//   /// with name xname, id space state of type xstate_class_name and
+//   /// initialization arguments, xstate_args.
+//   /// Returns the index of the id space state created.
+//   /// @depreciated Use new_space constructors.
+//   ///
+//   pod_type new_secondary_state(pod_type xid,
+// 			       const string& xname,
+// 			       const string& xstate_class_name,
+// 			       const arg_list& xstate_args,
+// 			       bool xis_persistent);
 
   ///
   /// Creates a new secondary id space interval with xub reserved id spaces,
@@ -277,25 +268,44 @@ public:
 protected:
 
   ///
-  /// Create a new id space state with class type xstate_class_name, arguments
-  /// xstate_args and name xname.
-  /// @depreciated Use new_space constructors.
+  /// Creates a new primary id space state with xct number of ids.
+  /// Returns the index of the id space state created.
   ///
-  pod_type new_state(const string& xname,
-		     const string& xstate_class_name,
-		     const arg_list& xstate_args,
-		     bool xis_persistent);
+  pod_type new_primary_state(size_type xct);
 
   ///
-  /// Create a new id space state at id space index xid with class type
-  /// xstate_class_name, arguments xstate_args and name xname.
-  /// @depreciated Use new_space constructors.
+  /// Creates a new primary id space state [xid, xid+xct).
+  /// Returns the index of the id space state created.
   ///
-  pod_type new_state(pod_type xid,
-		     const string& xname,
-		     const string& xstate_class_name,
-		     const arg_list& xstate_args,
-		     bool xis_persistent);
+  pod_type new_primary_state(pod_type xid, size_type xct);
+
+  ///
+  /// Create a new id space with class type xstate_class_name and
+  /// name xname.  Used by the I/O system to read secondary id spaces.
+  ///
+  void new_state(const string& xname, const string& xstate_class_name);
+
+  /// @todo Remove.
+//   ///
+//   /// Create a new id space state with class type xstate_class_name, arguments
+//   /// xstate_args and name xname.
+//   /// @depreciated Use new_space constructors.
+//   ///
+//   pod_type new_state(const string& xname,
+// 		     const string& xstate_class_name,
+// 		     const arg_list& xstate_args,
+// 		     bool xis_persistent);
+
+//   ///
+//   /// Create a new id space state at id space index xid with class type
+//   /// xstate_class_name, arguments xstate_args and name xname.
+//   /// @depreciated Use new_space constructors.
+//   ///
+//   pod_type new_state(pod_type xid,
+// 		     const string& xname,
+// 		     const string& xstate_class_name,
+// 		     const arg_list& xstate_args,
+// 		     bool xis_persistent);
 
   ///
   /// Creates a new sid space interval with xub reserved id spaces,
@@ -322,16 +332,10 @@ protected:
   ///
   index_space_collection* collection(pod_type xid);
 
-  ///////////////////////////////////////////////////////////////
-  // BEGIN NEW SPACE
-
   ///
   /// Reserve the next available id for an explicit index space.
   ///
   pod_type reserve_next_explicit_id();
-
-  // END NEW SPACE
-  ///////////////////////////////////////////////////////////////
 
   ///
   /// Size of the explicit id space intervals.

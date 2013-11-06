@@ -20,7 +20,6 @@
 
 #include "poset_state_handle.impl.h"
 
-#include "arg_list.h"
 #include "array_index_space_state.h"
 #include "array_poset_dof_map.h"
 #include "factory.h"
@@ -7324,9 +7323,7 @@ initialize_dof_id_space(subposet& xdof_subposet)
   }
   else
   {
-    xdof_subposet.new_id_space("array_index_space_state",
-			       array_index_space_state::
-			       make_arg_list(xdof_subposet.member_ct()));
+    xdof_subposet.new_id_space("array_index_space_state");
 
     mutable_index_space_handle& ldof_id_space = xdof_subposet.id_space();
 

@@ -20,7 +20,6 @@
 
 #include "base_space_poset.h"
 
-#include "arg_list.h"
 #include "array_index_space_state.h"
 #include "array_poset_dof_map.h"
 #include "base_space_member.h"
@@ -2309,14 +2308,12 @@ initialize_standard_subposets(const string& xname)
 
   string lsp_name;
 
-  arg_list largs = array_index_space_state::make_arg_list(0);
-
   // Make the blocks subposet.
 
   _blocks.new_state(this);
   lsp_name = blocks_name();
   _blocks.put_name(lsp_name, true, false);
-  _blocks.new_id_space("array_index_space_state", largs);
+  _blocks.new_id_space("array_index_space_state");
   _blocks.put_is_persistent(false);
 
   // Make the block vertices subposet.
@@ -2324,12 +2321,10 @@ initialize_standard_subposets(const string& xname)
   _block_vertices.new_state(this);
   lsp_name = block_vertices_name();
   _block_vertices.put_name(lsp_name, true, false);
-  _block_vertices.new_id_space("array_index_space_state", largs);
+  _block_vertices.new_id_space("array_index_space_state");
   _block_vertices.put_is_persistent(false);
 
   // Make the d-cells subposets.
-
-  arg_list li_args = interval_index_space_state::make_arg_list(true);
 
   int lmax_db = max_db();
   _d_cells.reserve(lmax_db + 1);
@@ -2340,7 +2335,7 @@ initialize_standard_subposets(const string& xname)
     _d_cells[i].new_state(this);
     lsp_name = d_cells_name(i, lmax_db);
     _d_cells[i].put_name(lsp_name, true, false);
-    _d_cells[i].new_id_space("interval_index_space_state", li_args);
+    _d_cells[i].new_id_space("interval_index_space_state");
     _d_cells_id_spaces[i] = &_d_cells[i].id_space();
     _d_cells[i].put_is_persistent(false);
   }
@@ -2350,7 +2345,7 @@ initialize_standard_subposets(const string& xname)
   _cells.new_state(this);
   lsp_name = cells_name();
   _cells.put_name(lsp_name, true, false);
-  _cells.new_id_space("interval_index_space_state", li_args);
+  _cells.new_id_space("interval_index_space_state");
   _cells.put_is_persistent(false);
 
   // Version subposets are not standard subposets;

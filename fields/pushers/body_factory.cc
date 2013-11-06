@@ -495,7 +495,7 @@ build_bodies(field_vd& xfield)
   lbase_space_host->get_read_write_access(false);
   subposet lbodies(lbase_space_host, 0, false);
   lbodies.put_name("bodies", true, false);
-  lbodies.new_id_space("array_index_space_state", array_index_space_state::make_arg_list(0));
+  lbodies.new_id_space("array_index_space_state");
 
   // Build the circular body and insert in bodies subposet.
 

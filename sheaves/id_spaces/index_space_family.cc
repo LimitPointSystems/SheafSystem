@@ -28,6 +28,7 @@
 #include "index_space_interval_iterator.h"
 #include "index_space_iterator.h"
 #include "interval_index_space_state.h"
+#include "mutable_index_space_handle.h"
 #include "poset_path.h"
 #include "primary_index_space_handle.h"
 #include "primary_sum_index_space_state.h"
@@ -54,14 +55,9 @@ index_space_family()
 
   // Create the primary sum id space state.
 
-  pod_type lid = new_state(hub_id_space_name(),
-			   "primary_sum_index_space_state",
-			   primary_sum_index_space_state::make_arg_list(),
-			   false);
-
-  // Attach hub id space handle.
-
-  _hub_id_space.attach_to(*this, lid);
+  _hub_id_space =
+    primary_sum_index_space_state::new_space(const_cast<index_space_family&>(*this),
+					     hub_id_space_name());
 
   // Postconditions:
 
@@ -380,111 +376,72 @@ max_rep_ids()
 
 // PUBLIC MEMBER FUNCTIONS
 
-sheaf::index_space_family::pod_type
-sheaf::index_space_family::
-new_primary_state(size_type xct)
-{
-  // Preconditions:
+/// @todo Remove.
+// sheaf::index_space_family::pod_type
+// sheaf::index_space_family::
+// new_secondary_state(const string& xname,
+// 		    const string& xstate_class_name,
+// 		    const arg_list& xstate_args,
+// 		    bool xis_persistent)
+// {
+//   // Preconditions:
 
-  // Body:
+//   require(!xname.empty());
+//   require(!contains(xname));
+//   require(!xstate_class_name.empty());
+//   require(explicit_index_space_state::id_space_factory().contains_prototype(xstate_class_name));
 
-  pod_type result = _hub_id_space.new_primary_term(xct);
+//   // Body:
 
-  // Postconditions:
+//   // Create the id space.
 
-  ensure(invariant());
-  ensure(contains(result));
+//   pod_type result =
+//     new_state(xname, xstate_class_name, xstate_args, xis_persistent);
 
-  // Exit:
+//   // Postconditions:
 
-  return result;
-}
+//   ensure(invariant());
+//   ensure(contains(result));
+//   ensure(contains(xname));
 
-sheaf::index_space_family::pod_type
-sheaf::index_space_family::
-new_primary_state(pod_type xid, size_type xct)
-{
-  // Preconditions:
+//   // Exit:
 
-  // Body:
+//   return result;
+// }
 
-  pod_type result = _hub_id_space.new_primary_term(xid, xct);
+// sheaf::index_space_family::pod_type
+// sheaf::index_space_family::
+// new_secondary_state(pod_type xid,
+// 		    const string& xname,
+// 		    const string& xstate_class_name,
+// 		    const arg_list& xstate_args,
+// 		    bool xis_persistent)
+// {
+//   // Preconditions:
 
-  // Postconditions:
+//   require(!xname.empty());
+//   require(is_explicit_interval(xid));
+//   require(!contains(xname));
+//   require(!xstate_class_name.empty());
+//   require(explicit_index_space_state::id_space_factory().contains_prototype(xstate_class_name));
 
-  ensure(invariant());
-  ensure(contains(result));
+//   // Body:
 
-  // Exit:
+//   // Create the id space.
 
-  return result;
-}
+//   pod_type result =
+//     new_state(xid, xname, xstate_class_name, xstate_args, xis_persistent);
 
-sheaf::index_space_family::pod_type
-sheaf::index_space_family::
-new_secondary_state(const string& xname,
-		    const string& xstate_class_name,
-		    const arg_list& xstate_args,
-		    bool xis_persistent)
-{
-  // Preconditions:
+//   // Postconditions:
 
-  require(!xname.empty());
-  require(!contains(xname));
-  require(!xstate_class_name.empty());
-  require(explicit_index_space_state::id_space_factory().contains_prototype(xstate_class_name));
+//   ensure(invariant());
+//   ensure(contains(result));
+//   ensure(contains(xname));
 
-  // Body:
+//   // Exit:
 
-  // Create the id space.
-
-  pod_type result =
-    new_state(xname, xstate_class_name, xstate_args, xis_persistent);
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(contains(result));
-  ensure(contains(xname));
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::index_space_family::pod_type
-sheaf::index_space_family::
-new_secondary_state(pod_type xid,
-		    const string& xname,
-		    const string& xstate_class_name,
-		    const arg_list& xstate_args,
-		    bool xis_persistent)
-{
-  // Preconditions:
-
-  require(!xname.empty());
-  require(is_explicit_interval(xid));
-  require(!contains(xname));
-  require(!xstate_class_name.empty());
-  require(explicit_index_space_state::id_space_factory().contains_prototype(xstate_class_name));
-
-  // Body:
-
-  // Create the id space.
-
-  pod_type result =
-    new_state(xid, xname, xstate_class_name, xstate_args, xis_persistent);
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(contains(result));
-  ensure(contains(xname));
-
-  // Exit:
-
-  return result;
-}
+//   return result;
+// }
 
 sheaf::index_space_family::pod_type
 sheaf::index_space_family::
@@ -709,51 +666,70 @@ is_explicit_interval(pod_type xid)
 
 // PROTECTED MEMBER FUNCTIONS
 
+/// @todo Remove
+// sheaf::mutable_index_space_handle
+// sheaf::index_space_family::
+// new_state(const string& xname,
+// 	  const string& xstate_class_name)
+// {
+//   // Preconditions:
+
+//   require(!xname.empty());
+//   require(!contains(xname));
+//   require(!xstate_class_name.empty());
+//   require(explicit_index_space_state::id_space_factory().contains_prototype(xstate_class_name));
+
+//   // Body:
+
+//   // Find the explicit id space interval.
+
+//   if((_explicit_interval == 0) ||
+//      (_next_explicit_id == _explicit_interval->end()))
+//   {
+//     // Construct a new explicit id space interval.
+
+//     _next_explicit_id = new_interval("explicit_index_space_interval",
+// 				     explicit_index_space_interval::make_arg_list(),
+// 				     explicit_interval_size());
+
+//     _explicit_interval =
+//       reinterpret_cast<explicit_index_space_interval*>
+//       (_intervals.upper_bound(_next_explicit_id)->second);
+//   }
+
+//   pod_type result = _next_explicit_id;
+
+//   new_state(result, xname, xstate_class_name, xstate_args, xis_persistent);
+
+//   // Set the next explicit id.
+
+//   _next_explicit_id = result + 1;
+
+//   // Postconditions:
+
+//   ensure(invariant());
+//   ensure(contains(result));
+//   ensure(contains(xname));
+
+//   // Exit:
+
+//   return result;
+// }
+
 sheaf::index_space_family::pod_type
 sheaf::index_space_family::
-new_state(const string& xname,
-	  const string& xstate_class_name,
-	  const arg_list& xstate_args,
-	  bool xis_persistent)
+new_primary_state(size_type xct)
 {
   // Preconditions:
 
-  require(!xname.empty());
-  require(!contains(xname));
-  require(!xstate_class_name.empty());
-  require(explicit_index_space_state::id_space_factory().contains_prototype(xstate_class_name));
-
   // Body:
 
-  // Find the explicit id space interval.
-
-  if((_explicit_interval == 0) ||
-     (_next_explicit_id == _explicit_interval->end()))
-  {
-    // Construct a new explicit id space interval.
-
-    _next_explicit_id = new_interval("explicit_index_space_interval",
-				     explicit_index_space_interval::make_arg_list(),
-				     explicit_interval_size());
-
-    _explicit_interval =
-      reinterpret_cast<explicit_index_space_interval*>
-      (_intervals.upper_bound(_next_explicit_id)->second);
-  }
-
-  pod_type result = _next_explicit_id;
-
-  new_state(result, xname, xstate_class_name, xstate_args, xis_persistent);
-
-  // Set the next explicit id.
-
-  _next_explicit_id = result + 1;
+  pod_type result = _hub_id_space.new_primary_term(xct);
 
   // Postconditions:
 
   ensure(invariant());
   ensure(contains(result));
-  ensure(contains(xname));
 
   // Exit:
 
@@ -762,59 +738,114 @@ new_state(const string& xname,
 
 sheaf::index_space_family::pod_type
 sheaf::index_space_family::
-new_state(pod_type xid,
-	  const string& xname,
-	  const string& xstate_class_name,
-	  const arg_list& xstate_args,
-	  bool xis_persistent)
+new_primary_state(pod_type xid, size_type xct)
 {
   // Preconditions:
 
-  require(!contains(xid));
-  require(is_explicit_interval(xid));
+  // Body:
+
+  pod_type result = _hub_id_space.new_primary_term(xid, xct);
+
+  // Postconditions:
+
+  ensure(invariant());
+  ensure(contains(result));
+
+  // Exit:
+
+  return result;
+}
+
+void
+sheaf::index_space_family::
+new_state(const string& xname,
+	  const string& xstate_class_name)
+{
+  // Preconditions:
+
   require(!xname.empty());
   require(!contains(xname));
   require(!xstate_class_name.empty());
   require(explicit_index_space_state::id_space_factory().contains_prototype(xstate_class_name));
 
+  /// @hack See COM-475.  Remove this precondition once COM-475 is fixed.
+  require(unexecutable("xstate_class_name is a mutable id space state"));
+
   // Body:
 
-  pod_type result = xid;
-
-  explicit_index_space_interval* lexplicit_interval =
-    reinterpret_cast<explicit_index_space_interval*>(collection(result));
-
-  // Add extra arguments required by the explicit_index_space_state constructor.
-
-  arg_list lstate_args(xstate_args);
-  lstate_args << "host" << lexplicit_interval;
-  lstate_args << "index" << result;
-  lstate_args << "is_persistent" << xis_persistent;
-
-  // Create the id space.
-
   explicit_index_space_state* lstate =
-    explicit_index_space_state::id_space_factory().new_instance(xstate_class_name,
-								lstate_args);
+    explicit_index_space_state::id_space_factory().new_instance(xstate_class_name);
 
-  // Insert state into the explicit interval.
+  lstate->new_state(const_cast<index_space_family&>(*this), xname, true);
 
-  lexplicit_interval->insert(*lstate);
-
-  // Insert the name.
-
-  _name_to_index.put_entry(result, xname, false);
-  
   // Postconditions:
 
   ensure(invariant());
-  ensure(contains(result));
   ensure(contains(xname));
+
+  /// @hack See COM-475.  Remove this postcondition once COM-475 is fixed.
+  ensure(handle_conforms_to_state<mutable_index_space_handle>(xname));
 
   // Exit:
 
-  return result;
-}  
+  return;
+}
+
+// sheaf::index_space_family::pod_type
+// sheaf::index_space_family::
+// new_state(pod_type xid,
+// 	  const string& xname,
+// 	  const string& xstate_class_name,
+// 	  const arg_list& xstate_args,
+// 	  bool xis_persistent)
+// {
+//   // Preconditions:
+
+//   require(!contains(xid));
+//   require(is_explicit_interval(xid));
+//   require(!xname.empty());
+//   require(!contains(xname));
+//   require(!xstate_class_name.empty());
+//   require(explicit_index_space_state::id_space_factory().contains_prototype(xstate_class_name));
+
+//   // Body:
+
+//   pod_type result = xid;
+
+//   explicit_index_space_interval* lexplicit_interval =
+//     reinterpret_cast<explicit_index_space_interval*>(collection(result));
+
+//   // Add extra arguments required by the explicit_index_space_state constructor.
+
+//   arg_list lstate_args(xstate_args);
+//   lstate_args << "host" << lexplicit_interval;
+//   lstate_args << "index" << result;
+//   lstate_args << "is_persistent" << xis_persistent;
+
+//   // Create the id space.
+
+//   explicit_index_space_state* lstate =
+//     explicit_index_space_state::id_space_factory().new_instance(xstate_class_name,
+// 								lstate_args);
+
+//   // Insert state into the explicit interval.
+
+//   lexplicit_interval->insert(*lstate);
+
+//   // Insert the name.
+
+//   _name_to_index.put_entry(result, xname, false);
+  
+//   // Postconditions:
+
+//   ensure(invariant());
+//   ensure(contains(result));
+//   ensure(contains(xname));
+
+//   // Exit:
+
+//   return result;
+// }  
 
 sheaf::index_space_family::pod_type
 sheaf::index_space_family::
@@ -951,9 +982,6 @@ collection(pod_type xid)
   return result;
 }
 
-///////////////////////////////////////////////////////////////
-// BEGIN NEW SPACE
-
 sheaf::index_space_family::pod_type
 sheaf::index_space_family::
 reserve_next_explicit_id()
@@ -994,9 +1022,6 @@ reserve_next_explicit_id()
 
   return result;
 }  
-
-// END NEW SPACE
-///////////////////////////////////////////////////////////////
 
 sheaf::size_type
 sheaf::index_space_family::

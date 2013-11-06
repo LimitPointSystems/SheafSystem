@@ -20,8 +20,8 @@
 
 #include "singleton_index_space_state.h"
 #include "assert_contract.h"
-#include "arg_list.h"
 #include "deep_size.h"
+#include "index_space_family.h"
 #include "hub_index_space_handle.h"
 #include "singleton_index_space_handle.h"
 #include "singleton_index_space_iterator.h"
@@ -131,27 +131,6 @@ new_space(index_space_family& xid_spaces,
 
 // PUBLIC MEMBER FUNCTIONS
 
-sheaf::arg_list
-sheaf::singleton_index_space_state::
-make_arg_list(pod_type xhub_id)
-{
-  // Preconditions:
-
-  // Body:
-
-  arg_list result;
-  result << "hub_id" << xhub_id;
-
-  // Postconditions:
-
-  ensure(result.contains_arg("hub_id"));
-  ensure(result.value("hub_id") == xhub_id);
-
-  // Exit:
-
-  return result;
-} 
-
 // PROTECTED MEMBER FUNCTIONS
 
 sheaf::singleton_index_space_state::
@@ -175,33 +154,6 @@ singleton_index_space_state()
   ensure(ct() == 0);
   ensure(begin() == 0);
   ensure(end() == 0);
-
-  // Exit:
-
-  return; 
-}
-
-sheaf::singleton_index_space_state::
-singleton_index_space_state(const arg_list& xargs)
-  : explicit_index_space_state(xargs)
-{
-  // Preconditions:
-    
-  require(precondition_of(explicit_index_space_state::explicit_index_space_state(xargs)));
-  require(xargs.contains_arg("hub_id"));
-
-  // Body:
-  
-  _hub_id = xargs.value("hub_id");
-  _ct     = 1;
-  _begin  = 0;
-  _end    = 1;
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(postcondition_of(explicit_index_space_state::explicit_index_space_state(xargs)));
-  ensure(hub_id() == (pod_type) xargs.value("hub_id"));
 
   // Exit:
 
@@ -715,13 +667,13 @@ class_name() const
 
 sheaf::singleton_index_space_state*
 sheaf::singleton_index_space_state::
-clone(const arg_list& xargs) const
+clone() const
 {
   // Preconditions:
 
   // Body:
 
-  singleton_index_space_state* result = new singleton_index_space_state(xargs);
+  singleton_index_space_state* result = new singleton_index_space_state();
 
   // Postconditions:
 

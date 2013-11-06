@@ -108,16 +108,10 @@ public:
 
 protected:
 
-  ///////////////////////////////////////////////////////////////
-  // BEGIN NEW SPACE
-
   ///
   /// Constructor: Attach to state xstate.
   ///
   offset_index_space_handle(offset_index_space_state& xstate);
-
-  // END NEW SPACE
-  ///////////////////////////////////////////////////////////////
 
   using explicit_index_space_handle::state;
 

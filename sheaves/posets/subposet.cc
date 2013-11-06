@@ -21,10 +21,16 @@
 #include "subposet.h"
 
 #include "assert_contract.h"
-#include "arg_list.h"
+#include "array_index_space_handle.h"
+#include "array_index_space_state.h"
 #include "block.h"
-#include "explicit_index_space_state.h"
 #include "factory_2.h"
+#include "hash_index_space_handle.h"
+#include "hash_index_space_state.h"
+#include "interval_index_space_handle.h"
+#include "interval_index_space_state.h"
+#include "list_index_space_handle.h"
+#include "list_index_space_state.h"
 #include "namespace_poset.h"
 #include "pool.h"
 #include "poset.h"
@@ -543,7 +549,7 @@ id_space()
 
 sheaf::mutable_index_space_handle&
 sheaf::subposet::
-new_id_space(const string& xstate_class_name, const arg_list& xstate_args)
+new_id_space(const string& xstate_class_name)
 {
   // Preconditions:
 
@@ -552,16 +558,46 @@ new_id_space(const string& xstate_class_name, const arg_list& xstate_args)
   require(!has_id_space());
   require(!host()->member_id_spaces(false).contains(id_space_name()));
   require(!xstate_class_name.empty());
-  require(explicit_index_space_state::id_space_factory().contains_prototype(xstate_class_name));
   require(unexecutable("xstate_class_name is a descendant of mutable_index_space_state"));
 
   // Body:
 
-  pod_index_type lid = host()->member_id_spaces(false).
-    new_secondary_state(id_space_name(),
-			xstate_class_name,
-			xstate_args,
-			is_persistent());
+  /// @hack Using the name of the id space state is a temporary fix
+  ///       until subposets become id spaces.  See COM-183.
+
+  pod_index_type lid;
+
+  if(xstate_class_name == "array_index_space_state")
+  {
+    lid = array_index_space_state::new_space(host()->member_id_spaces(false),
+					     id_space_name(),
+					     is_persistent(),
+					     member_ct()).index();
+  }
+  else if(xstate_class_name == "hash_index_space_state")
+  {
+    lid = hash_index_space_state::new_space(host()->member_id_spaces(false),
+					    id_space_name(),
+					    is_persistent(),
+					    member_ct()).index();
+  }
+  else if(xstate_class_name == "interval_index_space_state")
+  {
+    lid = interval_index_space_state::new_space(host()->member_id_spaces(false),
+						id_space_name(),
+						is_persistent(),
+						true).index();
+  }
+  else if(xstate_class_name == "list_index_space_state")
+  {
+    lid = list_index_space_state::new_space(host()->member_id_spaces(false),
+					    id_space_name(),
+					    is_persistent()).index();
+  }
+  else
+  {
+    post_fatal_error_message("The id space type '" + xstate_class_name + "' is not supported.");
+  }
 
   powerset_member(index())->put_id_space(host()->member_id_spaces(false), lid);
 

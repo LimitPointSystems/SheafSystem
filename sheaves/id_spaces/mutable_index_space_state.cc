@@ -51,26 +51,6 @@ mutable_index_space_state()
 }
 
 sheaf::mutable_index_space_state::
-mutable_index_space_state(const arg_list& xargs)
-  : explicit_index_space_state(xargs)
-{
-  // Preconditions:
-    
-  require(precondition_of(explicit_index_space_state::explicit_index_space_state(xargs)));
-
-  // Body:
-  
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(postcondition_of(explicit_index_space_state::explicit_index_space_state(xargs)));
-
-  // Exit:
-
-  return; 
-}
-
-sheaf::mutable_index_space_state::
 ~mutable_index_space_state()
 {  
   // Preconditions:

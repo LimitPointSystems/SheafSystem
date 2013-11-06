@@ -168,16 +168,10 @@ member_record_set(const sheaf_file& xfile,
   linterval_id_space_str << _record_id_space.name() << "_interval";
   linterval_id_space_str >> _interval_id_space_name;
 
-  arg_list largs = interval_index_space_state::make_arg_list(true);
-
-  pod_index_type lid =
-    lposet.member_id_spaces(false).new_secondary_state(_interval_id_space_name,
-						       "interval_index_space_state",
-						       largs,
-						       false);
-
-  _interval_id_space.attach_to(lposet.member_id_spaces(false), lid);
-  _interval_id_space.put_merge_mode(false);
+  _interval_id_space =
+    interval_index_space_handle::new_space(lposet.member_id_spaces(false),
+					   _interval_id_space_name,
+					   false, false);
 
   // _name has been initialized to poset name in record_set;
   // add members dataset suffix to it.

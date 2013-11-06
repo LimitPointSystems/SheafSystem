@@ -20,7 +20,6 @@
 
 #include "interval_index_space_state.h"
 #include "assert_contract.h"
-#include "arg_list.h"
 #include "interval_index_space_handle.h"
 #include "interval_index_space_iterator.h"
 #include "deep_size.h"
@@ -121,27 +120,6 @@ new_space(index_space_family& xid_spaces,
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
-
-sheaf::arg_list
-sheaf::interval_index_space_state::
-make_arg_list(bool xmerge_mode)
-{
-  // Preconditions:
-
-  // Body:
-
-  arg_list result = mutable_index_space_state::make_arg_list();
-  result << "merge_mode" << xmerge_mode;
-
-  // Postconditions:
-
-  ensure(result.contains_arg("merge_mode"));
-  ensure(result.value("merge_mode") == xmerge_mode);
-
-  // Exit:
-
-  return result;
-} 
 
 // PROTECTED MEMBER FUNCTIONS
 
@@ -376,32 +354,6 @@ interval_index_space_state()
   ensure(invariant());
   ensure(is_empty());
   ensure(merge_mode());
-  ensure(capacity() == 0);
-
-  // Exit:
-
-  return; 
-}
-
-sheaf::interval_index_space_state::
-interval_index_space_state(const arg_list& xargs)
-  : mutable_index_space_state(xargs)
-{
-  // Preconditions:
-    
-  require(precondition_of(mutable_index_space_state::mutable_index_space_state(xargs)));
-  require(xargs.contains_arg("merge_mode"));
-
-  // Body:
-  
-  _merge_mode = xargs.value("merge_mode");
-  _capacity = 0;
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(postcondition_of(mutable_index_space_state::mutable_index_space_state(xargs)));
-  ensure(merge_mode() == xargs.value("merge_mode"));
   ensure(capacity() == 0);
 
   // Exit:
@@ -1844,13 +1796,13 @@ class_name() const
 
 sheaf::interval_index_space_state*
 sheaf::interval_index_space_state::
-clone(const arg_list& xargs) const
+clone() const
 {
   // Preconditions:
 
   // Body:
 
-  interval_index_space_state* result = new interval_index_space_state(xargs);
+  interval_index_space_state* result = new interval_index_space_state();
 
   // Postconditions:
 

@@ -24,6 +24,7 @@
 #include "assert_contract.h"
 #include "index_space_family.h"
 #include "index_space_iterator.h"
+#include "list_index_space_handle.h"
 #include "list_index_space_state.h"
 #include "poset_state_handle.h"
 
@@ -511,24 +512,18 @@ put_private_data(const block<pod_index_type>& xdata)
     // Read cover.
 
     lcover_ct = xdata[++idx];
-    pod_index_type lcover_id =
-      _id_spaces->new_secondary_state(explicit_cover_name(UPPER, lmember_id),
-				      "list_index_space_state",
-				      list_index_space_state::make_arg_list(),
-				      false);
-    mutable_index_space_handle& lcover =
-      _id_spaces->get_id_space<mutable_index_space_handle>(lcover_id);
+
+    list_index_space_handle lcover =
+      list_index_space_state::new_space(*_id_spaces, explicit_cover_name(UPPER, lmember_id), false);
 
     for(pod_index_type j = 0; j < lcover_ct; ++j)
     {
       lcover.push_back(xdata[++idx]);
     }
 
-    _id_spaces->release_id_space(lcover);
-
     // Insert cover into the map.
 
-    _explicit_upper_cover_map[lmember_id] = lcover_id;
+    _explicit_upper_cover_map[lmember_id] = lcover.index();
   }
 
   // Read lower cover.
@@ -543,24 +538,18 @@ put_private_data(const block<pod_index_type>& xdata)
     // Read cover.
 
     lcover_ct = xdata[++idx];
-    pod_index_type lcover_id =
-      _id_spaces->new_secondary_state(explicit_cover_name(LOWER, lmember_id),
-				      "list_index_space_state",
-				      list_index_space_state::make_arg_list(),
-				      false);
-    mutable_index_space_handle& lcover =
-      _id_spaces->get_id_space<mutable_index_space_handle>(lcover_id);
+
+    list_index_space_handle lcover =
+      list_index_space_state::new_space(*_id_spaces, explicit_cover_name(UPPER, lmember_id), false);
 
     for(pod_index_type j = 0; j < lcover_ct; ++j)
     {
       lcover.push_back(xdata[++idx]);
     }
 
-    _id_spaces->release_id_space(lcover);
-
     // Insert cover into the map.
 
-    _explicit_lower_cover_map[lmember_id] = lcover_id;
+    _explicit_lower_cover_map[lmember_id] = lcover.index();
   }
 
   // Mark private data as initialized.

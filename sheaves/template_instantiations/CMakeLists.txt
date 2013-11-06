@@ -32,7 +32,6 @@ set(SRCS
     deep_size.inst.cc
     depth_first_itr.inst.cc
     factory.inst.cc
-    factory_2.inst.cc
     filtered_depth_first_itr.inst.cc
     index_space_family.inst.cc
     index_space_handle.inst.cc

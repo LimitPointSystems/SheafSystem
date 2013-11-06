@@ -115,14 +115,6 @@ private:
 
 public:
 
-  ///
-  /// Creates an arg list for constructing an instance of this.
-  /// If xmerge_mode is true, compatible intervals will be merged.
-  /// Otherwise, intervals will not be merged.
-  /// @deprecated Use new_space() constructor.
-  ///
-  static arg_list make_arg_list(bool xmerge_mode);
-
 protected:
 
   ///
@@ -150,12 +142,6 @@ protected:
   /// Copy constructor; disabled
   ///
   interval_index_space_state(const interval_index_space_state& xother) { };
-
-  ///
-  /// Constructor: Creates an instance from arguments xargs.
-  /// @deprecated Use new_space() constructor.
-  ///
-  interval_index_space_state(const arg_list& xargs);
 
   ///
   /// Destructor
@@ -585,11 +571,9 @@ public:
   virtual const string& class_name() const;
 
   ///
-  /// Virtual constructor; create a new instance of the same type at this
-  /// with arguments xargs.
-  /// @deprecated Use new_space() constructor.
+  /// Virtual constructor; create a new instance of the same type at this.
   ///
-  virtual interval_index_space_state* clone(const arg_list& xargs) const;
+  virtual interval_index_space_state* clone() const;
 
 protected:
 

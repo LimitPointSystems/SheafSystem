@@ -20,7 +20,6 @@
 
 #include "primitives_poset_schema.h"
 
-#include "arg_list.h"
 #include "assert_contract.h"
 #include "array_index_space_state.h"
 #include "array_poset_dof_map.h"
@@ -29,6 +28,7 @@
 #include "poset_handle_factory.h"
 #include "primitives_poset_dof_map.h"
 #include "poset_type.h"
+#include "primitives_index_space_handle.h"
 #include "primitives_index_space_state.h"
 #include "std_iomanip.h"
 #include "std_iostream.h"
@@ -390,8 +390,7 @@ schematize(subposet* xtable_dof_subposet,
 
   // Initialize the dof id space, empty
 
-  xtable_dof_subposet->new_id_space("array_index_space_state",
-				    array_index_space_state::make_arg_list(0));
+  xtable_dof_subposet->new_id_space("array_index_space_state");
 
   // Initialize is_dof_subposet
 
@@ -421,10 +420,7 @@ schematize(subposet* xtable_dof_subposet,
 
   string lname = xrow_dof_subposet->name();
 
-  arg_list largs = primitives_index_space_state::make_arg_list();
-  member_id_spaces(false).new_secondary_state(lname,
-					      "primitives_index_space_state",
-					      largs, false);
+  primitives_index_space_state::new_space(member_id_spaces(false), lname);
 
   // Initialize is_dof_subposet
 

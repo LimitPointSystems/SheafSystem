@@ -21,6 +21,7 @@
 #include "sec_rep_space_member.h"
 
 #include "arg_list.h"
+#include "array_index_space_handle.h"
 #include "array_index_space_state.h"
 #include "array_section_dof_map.h"
 #include "assert_contract.h"
@@ -642,16 +643,10 @@ new_jrm_state(sec_rep_space* xhost, const subposet& xbase_parts, bool xauto_acce
   const string& lbranch_space_name =
     host()->branch_id_space_name(index(), false);
 
-  arg_list largs = array_index_space_state::make_arg_list(0);
-
-  pod_index_type lspace_id =
-    host()->member_id_spaces(false).
-    new_secondary_state(lbranch_space_name,
-			"array_index_space_state",
-			largs, true);
-
-  mutable_index_space_handle lbranch_id_space(host()->member_id_spaces(false),
-					      lspace_id);
+  array_index_space_handle lbranch_id_space =
+    array_index_space_state::new_space(host()->member_id_spaces(false),
+				       lbranch_space_name,
+				       true, 0);
 
   int lbranch_ct = lbranches.ct();
   for(int i=0; i<lbranch_ct; ++i)

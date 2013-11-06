@@ -20,7 +20,7 @@
 
 #include "namespace_poset.h"
 
-#include "arg_list.h"
+#include "array_index_space_handle.h"
 #include "array_index_space_state.h" // for intialize_prototypes
 #include "array_index_space_interval.h" // for initialize_prototypes
 #include "array_poset_dof_map.h"
@@ -704,13 +704,7 @@ initialize_standard_id_spaces()
 
   // Body:
 
-  arg_list largs = array_index_space_state::make_arg_list(0);
-
-  pod_index_type result =
-    member_id_spaces(false).new_secondary_state("member_poset_id_space",
-					   "array_index_space_state",
-					   largs,
-                                           true);
+  array_index_space_state::new_space(member_id_spaces(false), "member_poset_id_space", false, 0);
 
   // Postconditions:
 

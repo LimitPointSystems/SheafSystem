@@ -30,7 +30,9 @@
 #include "explicit_index_space_interval.h"
 #include "factory.h"
 #include "index_space_iterator.h"
+#include "list_index_space_handle.h"
 #include "list_index_space_state.h"
+#include "offset_index_space_handle.h"
 #include "offset_index_space_state.h"
 #include "point_block_1d.h"
 #include "point_block_2d.h"
@@ -186,13 +188,11 @@ initialize_vertices(base_space_poset& xhost)
     section_space_schema_member::intersection_id_space_name(xhost.d_cells(0),
 							    interval_member());
 
-  arg_list largs = offset_index_space_state::make_arg_list(implicit_begin(),
-							   _vertex_size);
-
   _vertices_space_id =
-    _id_spaces->new_secondary_state(lvertex_id_space_name,
-				    "offset_index_space_state",
-				    largs, false);
+    offset_index_space_state::new_space(*_id_spaces,
+					lvertex_id_space_name,
+					implicit_begin(),
+					_vertex_size).index();
 
   _vertices_initialized = true;
   
@@ -295,17 +295,14 @@ initialize_block_vertices(pod_index_type* xdata)
 
   // Construct the block vertices id space.
 
-  arg_list largs = list_index_space_state::make_arg_list();
+  list_index_space_handle lblock_vertices_id_space =
+     list_index_space_state::new_space(*_id_spaces,
+				       block_vertices_name(),
+				       false);
 
-  _block_vertices_space_id =
-    _id_spaces->new_secondary_state(block_vertices_name(),
-				    "list_index_space_state",
-				    largs, false);
+  _block_vertices_space_id = lblock_vertices_id_space.index();
 
   // Insert the private data into the id space.
-
-  mutable_index_space_handle& lblock_vertices_id_space =
-    _id_spaces->get_id_space<mutable_index_space_handle>(_block_vertices_space_id);
 
   pod_index_type v = 0;
   size_type lbv_size = xdata[v++];
@@ -313,8 +310,6 @@ initialize_block_vertices(pod_index_type* xdata)
   {
     lblock_vertices_id_space.push_back(_local_id_space.hub_pod(xdata[v++]));
   }
-
-  _id_spaces->release_id_space(lblock_vertices_id_space);
 
   // The block vertices is initialized.
 
@@ -476,19 +471,16 @@ initialize_lower_covers()
 				       explicit_index_space_interval::make_arg_list(),
 				       1);
 
-  arg_list largs =
-    offset_index_space_state::make_arg_list(implicit_begin(), _vertex_size);
-
-  _id_spaces->new_secondary_state(_lower_covers_begin,
-				  implicit_cover_name(LOWER, interval_member()),
-				  "offset_index_space_state",
-				  largs, false);
+  offset_index_space_state::new_space(*_id_spaces,
+				      implicit_cover_name(LOWER, interval_member()),
+				      implicit_begin(),
+				      _vertex_size);
 
   // Construct the lower cover of the vertices.
   //
   // The lower cover of the vertices is initialized to bottom.
 
-  largs = constant_index_space_interval::make_arg_list(BOTTOM_INDEX);
+  arg_list largs = constant_index_space_interval::make_arg_list(BOTTOM_INDEX);
 
   _id_spaces->new_secondary_interval("constant_index_space_interval",
 				     largs, _vertex_size);
@@ -542,11 +534,9 @@ initialize_upper_covers()
 				       explicit_index_space_interval::make_arg_list(),
 				       1);  
 
-  _id_spaces->new_secondary_state(_upper_covers_begin,
-				  explicit_cover_name(UPPER, interval_member()),
-				  "list_index_space_state",
-				  list_index_space_state::make_arg_list(),
-				  false);
+  list_index_space_state::new_space(*_id_spaces,
+				    explicit_cover_name(UPPER, interval_member()),
+				    false);
 
   // Construct the upper cover of the points.
   //

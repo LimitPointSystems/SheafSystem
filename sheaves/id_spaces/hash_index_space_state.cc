@@ -20,10 +20,10 @@
 
 #include "hash_index_space_state.h"
 #include "assert_contract.h"
-#include "arg_list.h"
 #include "hash_index_space_handle.h"
 #include "hash_index_space_iterator.h"
 #include "deep_size.h"
+#include "index_space_family.h"
 #include "hub_index_space_handle.h"
 
 // ===========================================================
@@ -123,27 +123,6 @@ new_space(index_space_family& xid_spaces,
 
 // PUBLIC MEMBER FUNCTIONS
 
-sheaf::arg_list
-sheaf::hash_index_space_state::
-make_arg_list(size_type xcapacity)
-{
-  // Preconditions:
-
-  // Body:
-
-  arg_list result = mutable_index_space_state::make_arg_list();
-  result << "capacity" << xcapacity;
-
-  // Postconditions:
-
-  ensure(result.contains_arg("capacity"));
-  ensure(result.value("capacity") == xcapacity);
-
-  // Exit:
-
-  return result;
-} 
-
 // PROTECTED MEMBER FUNCTIONS
 
 sheaf::hash_index_space_state::
@@ -161,30 +140,6 @@ hash_index_space_state()
   ensure(invariant());
   ensure(is_empty());
   ensure(capacity() >= 0);
-
-  // Exit:
-
-  return; 
-}
-
-sheaf::hash_index_space_state::
-hash_index_space_state(const arg_list& xargs)
-  : mutable_index_space_state(xargs)
-{
-  // Preconditions:
-    
-  require(precondition_of(mutable_index_space_state::mutable_index_space_state(xargs)));
-  require(xargs.contains_arg("capacity"));
-
-  // Body:
-  
-  reserve(xargs.value("capacity"));
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(postcondition_of(mutable_index_space_state::mutable_index_space_state(xargs)));
-  ensure(capacity() >= (size_type) xargs.value("capacity"));
 
   // Exit:
 
@@ -1054,13 +1009,13 @@ class_name() const
 
 sheaf::hash_index_space_state*
 sheaf::hash_index_space_state::
-clone(const arg_list& xargs) const
+clone() const
 {
   // Preconditions:
 
   // Body:
 
-  hash_index_space_state* result = new hash_index_space_state(xargs);
+  hash_index_space_state* result = new hash_index_space_state();
 
   // Postconditions:
 

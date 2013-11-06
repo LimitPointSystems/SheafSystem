@@ -20,8 +20,8 @@
 
 #include "primitives_index_space_state.h"
 #include "assert_contract.h"
-#include "arg_list.h"
 #include "deep_size.h"
+#include "index_space_family.h"
 #include "hub_index_space_handle.h"
 #include "explicit_index_space_handle.h"
 #include "primitives_index_space_handle.h"
@@ -142,30 +142,6 @@ primitives_index_space_state()
   // Postconditions:
 
   ensure(invariant());
-
-  // Exit:
-
-  return; 
-}
-
-sheaf::primitives_index_space_state::
-primitives_index_space_state(const arg_list& xargs)
-  : explicit_index_space_state(xargs)
-{
-  // Preconditions:
-    
-  require(precondition_of(explicit_index_space_state::explicit_index_space_state(xargs)));
-
-  // Body:
-  
-  _ct     = CT;
-  _begin  = BEGIN;
-  _end    = END;
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(postcondition_of(explicit_index_space_state::explicit_index_space_state(xargs)));
 
   // Exit:
 
@@ -640,13 +616,13 @@ class_name() const
 
 sheaf::primitives_index_space_state*
 sheaf::primitives_index_space_state::
-clone(const arg_list& xargs) const
+clone() const
 {
   // Preconditions:
 
   // Body:
 
-  primitives_index_space_state* result = new primitives_index_space_state(xargs);
+  primitives_index_space_state* result = new primitives_index_space_state();
 
   // Postconditions:
 

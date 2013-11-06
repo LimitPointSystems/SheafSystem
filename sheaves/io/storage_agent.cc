@@ -2200,11 +2200,8 @@ initialize_poset_id_spaces_for_write(poset_state_handle& xposet)
   {
     // Doesn't exist; create it.
 
-    arg_list largs = interval_index_space_state::make_arg_list(true);
-
-    xposet.member_id_spaces(false).new_secondary_state(_file_id_space_name,
-						       "interval_index_space_state",
-						       largs, false);
+    interval_index_space_handle::new_space(xposet.member_id_spaces(false),
+					   _file_id_space_name, false, false);
   }
 
   // Get a subposet index id space for this poset; create it if needed or
@@ -2214,12 +2211,8 @@ initialize_poset_id_spaces_for_write(poset_state_handle& xposet)
   {
     // Doesn't exist; create it.
 
-    arg_list largs = interval_index_space_state::make_arg_list(true);
-
-    xposet.subposet_id_spaces(false).
-      new_secondary_state(_file_id_space_name,
-			  "interval_index_space_state",
-			  largs, false);
+    interval_index_space_handle::new_space(xposet.subposet_id_spaces(false),
+					   _file_id_space_name, false, false);
   }
   else
   {
@@ -2237,12 +2230,8 @@ initialize_poset_id_spaces_for_write(poset_state_handle& xposet)
   {
     // Doesn't exist; create it.
 
-    arg_list largs = interval_index_space_state::make_arg_list(true);
-
-    xposet.dof_tuple_id_spaces(false).
-      new_secondary_state(_file_id_space_name,
-			  "interval_index_space_state",
-			  largs, false);
+    interval_index_space_handle::new_space(xposet.dof_tuple_id_spaces(false),
+					   _file_id_space_name, false, false);
   }
 
   // Postconditions:
@@ -2359,36 +2348,23 @@ initialize_namespace_id_spaces_for_read(namespace_poset& xns)
 
   pod_index_type lfirst_member = member_record_set::first_member_record();
 
-  arg_list largs = interval_index_space_state::make_arg_list(true);
-  interval_index_space_handle lid_space;
+  interval_index_space_handle lid_space =
+    interval_index_space_handle::new_space(xns.primitives().member_id_spaces(false),
+					   _file_id_space_name, false, false);
 
-  // Initialize primitives space.
-
-  pod_index_type lid =
-    xns.primitives().member_id_spaces(false).
-    new_secondary_state(_file_id_space_name,
-			"interval_index_space_state",
-			largs, false);
-
-  // Reserve 0-th record for id space,
   // then assign record ids sequentially.
-
-  lid_space.attach_to(xns.primitives().member_id_spaces(false), lid);
 
   pod_index_type lprim_ct = xns.primitives().standard_member_ct();
   lid_space.insert_interval(lfirst_member, lfirst_member+lprim_ct, 0, lprim_ct);
 
   // Initialize primitives schema space.
 
-  lid = xns.primitives_schema().member_id_spaces(false).
-    new_secondary_state(_file_id_space_name,
-			"interval_index_space_state",
-			largs, false);
+  lid_space =
+    interval_index_space_handle::new_space(xns.primitives_schema().member_id_spaces(false),
+					   _file_id_space_name, false, false);
 
   // Reserve 0-th record for id space,
   // then assign record ids sequentially.
-
-  lid_space.attach_to(xns.primitives_schema().member_id_spaces(false), lid);
 
   pod_index_type lprim_schema_ct =
     xns.primitives_schema().standard_member_ct();
@@ -2397,15 +2373,12 @@ initialize_namespace_id_spaces_for_read(namespace_poset& xns)
 
   // Initialize namespaces schema space.
 
-  lid = xns.namespace_schema().member_id_spaces(false).
-    new_secondary_state(_file_id_space_name,
-			"interval_index_space_state",
-			largs, false);
+  lid_space =
+    interval_index_space_handle::new_space(xns.namespace_schema().member_id_spaces(false),
+					   _file_id_space_name, false, false);
 
   // Reserve 0-th record for id space,
   // then assign record ids sequentially.
-
-  lid_space.attach_to(xns.namespace_schema().member_id_spaces(false), lid);
 
   pod_index_type lnamespace_schema_ct =
     xns.namespace_schema().standard_member_ct();

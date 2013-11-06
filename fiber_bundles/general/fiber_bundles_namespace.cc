@@ -31,6 +31,7 @@
 #include "at3_e3.h"
 #include "atp.h"
 #include "atp_space.h"
+#include "array_index_space_handle.h"
 #include "array_index_space_state.h"
 #include "base_space_member.h"
 #include "base_space_poset.h"
@@ -665,12 +666,9 @@ make_base_space_member_prototypes_poset()
 
   // Create the id space for cell types.
 
-  arg_list largs = array_index_space_state::make_arg_list(0);
-
-  lprototypes_poset.member_id_spaces(false).
-    new_secondary_state("cell_types",
-			"array_index_space_state",
-			largs, true);
+  array_index_space_state::new_space(lprototypes_poset.member_id_spaces(false),
+				     "cell_types",
+				     true, 0);
 
   // Create the prototypes:
 

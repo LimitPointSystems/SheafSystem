@@ -110,14 +110,6 @@ private:
 
 public:
 
-  ///
-  /// Creates an arg list for constructing an instance of this.
-  /// @deprecated Use new_space() constructor.
-  ///
-  static arg_list make_arg_list(const index_space_handle& xbase_space_id_space,
-				const index_space_handle& xfiber_schema_id_space,
-				const ij_product_structure& xsection_space_schema_product);
-
 protected:
 
   ///
@@ -129,12 +121,6 @@ protected:
   /// Copy constructor; disabled.
   ///
   section_space_schema_jims_index_space_state(const section_space_schema_jims_index_space_state& xother) { };
-
-  ///
-  /// Constructor: Creates an instance from arguments xargs.
-  /// @deprecated Use new_space() constructor.
-  ///
-  section_space_schema_jims_index_space_state(const arg_list& xargs);
 
   ///
   /// Destructor
@@ -410,11 +396,9 @@ public:
   virtual const string& class_name() const;
 
   ///
-  /// Virtual constructor; create a new instance of the same type at this
-  /// with arguments xargs.
-  /// @deprecated Use new_space() constructor.
+  /// Virtual constructor; create a new instance of the same type at this.
   ///
-  virtual section_space_schema_jims_index_space_state* clone(const arg_list& xargs) const;
+  virtual section_space_schema_jims_index_space_state* clone() const;
 
 protected:
 

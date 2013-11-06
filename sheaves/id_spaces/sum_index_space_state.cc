@@ -20,7 +20,6 @@
 
 #include "sum_index_space_state.h"
 #include "assert_contract.h"
-#include "arg_list.h"
 #include "deep_size.h"
 #include "index_space_family.h"
 #include "scoped_index.h"
@@ -53,33 +52,6 @@ sum_index_space_state()
 
   ensure(invariant());
   ensure(is_empty());
-
-  // Exit:
-
-  return; 
-}
-
-sheaf::sum_index_space_state::
-sum_index_space_state(const arg_list& xargs)
-  : explicit_index_space_state(xargs)
-{
-  // Preconditions:
-    
-  require(precondition_of(explicit_index_space_state::explicit_index_space_state(xargs)));
-
-  // Body:
-  
-  // Initialize the sum to term map so that 
-  // anything before first term maps to invalid
-  // and anything above last term maps to invalid.
-
-  _sum_to_term_map[0] = invalid_pod_index();
-  _sum_to_term_map[numeric_limits<pod_type>::max()] = invalid_pod_index();
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(postcondition_of(explicit_index_space_state::explicit_index_space_state(xargs)));
 
   // Exit:
 

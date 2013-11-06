@@ -20,9 +20,9 @@
 
 #include "reserved_primary_index_space_state.h"
 #include "assert_contract.h"
-#include "arg_list.h"
 #include "deep_size.h"
 #include "hub_index_space_handle.h"
+#include "index_space_family.h"
 #include "reserved_primary_index_space_handle.h"
 #include "reserved_primary_index_space_iterator.h"
 
@@ -156,29 +156,6 @@ reserved_primary_index_space_state()
   ensure(invariant());
   ensure(is_empty());
   ensure(!is_valid(next_hub_id()));
-
-  // Exit:
-
-  return; 
-}
-
-sheaf::reserved_primary_index_space_state::
-reserved_primary_index_space_state(const arg_list& xargs)
-  : primary_index_space_state(xargs)
-{
-  // Preconditions:
-    
-  require(precondition_of(primary_index_space_state::primary_index_space_state(xargs)));
-
-  // Body:
-  
-  _next_hub_id = _offset;
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(postcondition_of(primary_index_space_state::primary_index_space_state(xargs)));
-  ensure(next_hub_id() == offset());
 
   // Exit:
 
@@ -720,13 +697,13 @@ class_name() const
 
 sheaf::reserved_primary_index_space_state*
 sheaf::reserved_primary_index_space_state::
-clone(const arg_list& xargs) const
+clone() const
 {
   // Preconditions:
 
   // Body:
 
-  reserved_primary_index_space_state* result = new reserved_primary_index_space_state(xargs);
+  reserved_primary_index_space_state* result = new reserved_primary_index_space_state();
 
   // Postconditions:
 

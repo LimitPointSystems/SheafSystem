@@ -20,7 +20,7 @@
 
 #include "schema_poset_member.h"
 
-#include "arg_list.h"
+#include "array_index_space_handle.h"
 #include "array_index_space_state.h"
 #include "assert_contract.h"
 #include "namespace_poset.h"
@@ -660,14 +660,12 @@ new_jim_state(const namespace_poset& xns,
 
   if(!ltable_dof_sp.has_id_space())
   {
-    ltable_dof_sp.new_id_space("array_index_space_state",
-			       array_index_space_state::make_arg_list(0));
+    ltable_dof_sp.new_id_space("array_index_space_state");
   }
 
   if(!lrow_dof_sp.has_id_space())
   {
-    lrow_dof_sp.new_id_space("array_index_space_state",
-			     array_index_space_state::make_arg_list(0));
+    lrow_dof_sp.new_id_space("array_index_space_state");
   }
 
   // Create the result.
@@ -2730,13 +2728,11 @@ initialize_dof_id_space(bool xis_table_dof) const
     string ldof_id_space_name(schema_poset_member::dof_subposet_name(name(), xis_table_dof));
     if(!host()->member_id_spaces(false).contains(ldof_id_space_name))
     {
-      // Id space does not exist create it.  Force the update.
+      // Id space does not exist, create it.  Force the update.
 
-      host()->member_id_spaces(false).
-	new_secondary_state(ldof_id_space_name,
-			    "array_index_space_state",
-			    array_index_space_state::make_arg_list(0),
-			    false);
+      array_index_space_state::new_space(host()->member_id_spaces(false),
+					 ldof_id_space_name,
+					 false, 0);
 
       result = true;
     }

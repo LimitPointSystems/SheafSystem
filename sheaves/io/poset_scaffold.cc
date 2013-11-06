@@ -881,11 +881,8 @@ initialize_member_id_space()
 
   if(!_structure.member_id_spaces(false).contains(_file_id_space_name))
   {
-    arg_list largs = interval_index_space_state::make_arg_list(true);
-
-    _structure.member_id_spaces(false).new_secondary_state(_file_id_space_name,
-							   "interval_index_space_state",
-							   largs, false);
+    interval_index_space_handle::new_space(_structure.member_id_spaces(false),
+					   _file_id_space_name, false, false);
   }
 
   _member_id_space.attach_to(_structure.member_id_spaces(false),
@@ -1155,12 +1152,8 @@ initialize_subposet_id_space()
 
   if(!_structure.subposet_id_spaces(false).contains(_file_id_space_name))
   {
-    arg_list largs = interval_index_space_state::make_arg_list(true);
- 
-    _structure.subposet_id_spaces(false).
-      new_secondary_state(_file_id_space_name,
-			  "interval_index_space_state",
-			  largs, false);
+    interval_index_space_handle::new_space(_structure.subposet_id_spaces(false),
+					   _file_id_space_name, false, false);
   }
 
   _subposet_id_space.attach_to(_structure.subposet_id_spaces(false),
@@ -1462,12 +1455,8 @@ initialize_dof_tuple_id_space()
 
   if(!_structure.dof_tuple_id_spaces(false).contains(_file_id_space_name))
   {
-    arg_list largs = interval_index_space_state::make_arg_list(true);
-
-    _structure.dof_tuple_id_spaces(false).
-      new_secondary_state(_file_id_space_name,
-			  "interval_index_space_state",
-			  largs, false);
+    interval_index_space_handle::new_space(_structure.dof_tuple_id_spaces(false),
+					   _file_id_space_name, false, false);
   }
 
   _dof_tuple_id_space.attach_to(_structure.dof_tuple_id_spaces(false),

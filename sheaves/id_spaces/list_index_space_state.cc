@@ -20,10 +20,10 @@
 
 #include "list_index_space_state.h"
 #include "assert_contract.h"
-#include "arg_list.h"
 #include "list_index_space_handle.h"
 #include "list_index_space_iterator.h"
 #include "deep_size.h"
+#include "index_space_family.h"
 #include "hub_index_space_handle.h"
 
 // ===========================================================
@@ -131,29 +131,6 @@ list_index_space_state()
 
   ensure(invariant());
   ensure(is_empty());
-  ensure(capacity() == 0);
-
-  // Exit:
-
-  return; 
-}
-
-sheaf::list_index_space_state::
-list_index_space_state(const arg_list& xargs)
-  : mutable_index_space_state(xargs)
-{
-  // Preconditions:
-    
-  require(precondition_of(mutable_index_space_state::mutable_index_space_state(xargs)));
-
-  // Body:
-  
-  _capacity = 0;
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(postcondition_of(mutable_index_space_state::mutable_index_space_state(xargs)));
   ensure(capacity() == 0);
 
   // Exit:
@@ -1155,13 +1132,13 @@ class_name() const
 
 sheaf::list_index_space_state*
 sheaf::list_index_space_state::
-clone(const arg_list& xargs) const
+clone() const
 {
   // Preconditions:
 
   // Body:
 
-  list_index_space_state* result = new list_index_space_state(xargs);
+  list_index_space_state* result = new list_index_space_state();
 
   // Postconditions:
 

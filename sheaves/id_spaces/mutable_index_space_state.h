@@ -61,11 +61,6 @@ protected:
   mutable_index_space_state(const mutable_index_space_state& xother) { };
 
   ///
-  /// Constructor: Creates an instance from arguments xargs.
-  ///
-  mutable_index_space_state(const arg_list& xargs);
-
-  ///
   /// Destructor
   ///
   virtual ~mutable_index_space_state();

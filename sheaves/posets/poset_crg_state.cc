@@ -21,13 +21,13 @@
 #include "poset_crg_state.impl.h"
 
 #include "assert_contract.h"
-#include "arg_list.h"
 #include "deep_size.h"
 #include "explicit_crg_interval.h"
 #include "factory.h"
 #include "implicit_crg_interval.h"
 #include "interval_index_space_handle.h"
 #include "interval_index_space_state.h"
+#include "list_index_space_handle.h"
 #include "list_index_space_state.h"
 #include "primary_index_space_handle.h"
 #include "poset_path.h"
@@ -692,20 +692,15 @@ initialize_member_covers(pod_index_type xid, bool xstandard_member_hack)
   // Create explicit lower cover id space.
 
   pod_index_type llower_cover_id = linterval->cover_id_space_id(LOWER, xid);
-  _id_spaces.new_secondary_state(llower_cover_id,
-				 crg_interval::explicit_cover_name(LOWER, xid),
-				 "list_index_space_state",
-				 list_index_space_state::make_arg_list(),
-				 false);
+  list_index_space_state::new_space(_id_spaces, llower_cover_id,
+				    crg_interval::explicit_cover_name(LOWER, xid), false);
+
 
   // Create explicit upper cover id space.
 
   pod_index_type lupper_cover_id = linterval->cover_id_space_id(UPPER, xid);
-  _id_spaces.new_secondary_state(lupper_cover_id,
-				 crg_interval::explicit_cover_name(UPPER, xid),
-				 "list_index_space_state",
-				 list_index_space_state::make_arg_list(),
-				 false);
+  list_index_space_state::new_space(_id_spaces, lupper_cover_id,
+				    crg_interval::explicit_cover_name(UPPER, xid), false);
 
   // Postconditions:
 
@@ -1568,13 +1563,9 @@ append_upper_cover_of_bottom(pod_index_type xmbr_begin,
 
     // Make a new interval id space state.
 
-    arg_list largs = interval_index_space_state::make_arg_list(true);
-
-    _id_spaces.new_secondary_state(lspace_id,
-				   crg_interval::explicit_cover_name(UPPER, BOTTOM_INDEX),
-				   "interval_index_space_state",
-				   largs,
-				   false);
+    interval_index_space_state::new_space(_id_spaces, lspace_id,
+					  crg_interval::explicit_cover_name(UPPER, BOTTOM_INDEX),
+					  false, true);
   }
 
   // Add the interval to the cover.  Since the interval id space takes a

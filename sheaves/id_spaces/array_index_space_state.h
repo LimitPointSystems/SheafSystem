@@ -108,12 +108,6 @@ private:
 
 public:
 
-  ///
-  /// Creates an arg list for constructing an instance of this.
-  /// @deprecated Use new_space() constructor.
-  ///
-  static arg_list make_arg_list(size_type xcapacity);
-
 protected:
 
   ///
@@ -125,12 +119,6 @@ protected:
   /// Copy constructor; disabled
   ///
   array_index_space_state(const array_index_space_state& xother) { };
-
-  ///
-  /// Constructor: Creates an instance from arguments xargs.
-  /// @deprecated Use new_space() constructor.
-  ///
-  array_index_space_state(const arg_list& xargs);
 
   ///
   /// Destructor
@@ -419,11 +407,9 @@ public:
   virtual const string& class_name() const;
 
   ///
-  /// Virtual constructor; create a new instance of the same type at this
-  /// with arguments xargs.
-  /// @deprecated Use new_space() constructor.
+  /// Virtual constructor; create a new instance of the same type at this.
   ///
-  virtual array_index_space_state* clone(const arg_list& xargs) const;
+  virtual array_index_space_state* clone() const;
 
 protected:
 

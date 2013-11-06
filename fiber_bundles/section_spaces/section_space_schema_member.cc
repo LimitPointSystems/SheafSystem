@@ -22,6 +22,7 @@
 
 #include "arg_list.h"
 #include "assert_contract.h"
+#include "array_index_space_handle.h"
 #include "array_index_space_state.h"
 #include "base_space_member.h"
 #include "binary_section_space_schema_member.impl.h"
@@ -1272,20 +1273,14 @@ update_row_dof_id_space() const
   {
     // Create the row dof id space.
 
-    arg_list largs =
-      section_space_schema_jims_index_space_state::
-      make_arg_list(*_discretization_id_space,
-		    lfiber_schema_id_space,
-		    host()->product_structure());
+    section_space_schema_jims_index_space_handle lrow_dof_id_space =
+      section_space_schema_jims_index_space_state::new_space(_host->member_id_spaces(false),
+							     row_dof_subposet_name(),
+							     *_discretization_id_space,
+							     lfiber_schema_id_space,
+							     host()->product_structure());
 
-    pod_index_type lspace_id =
-      _host->member_id_spaces(false).
-      new_secondary_state(row_dof_subposet_name(),
-			  "section_space_schema_jims_index_space_state",
-			  largs, false);
-
-    _row_dof_id_space =
-      &_host->member_id_spaces(false).get_id_space(lspace_id);
+    _row_dof_id_space = &lrow_dof_id_space.get_id_space();
   }
   
   // Postconditions:
@@ -1361,16 +1356,12 @@ update_table_cache() const
   {
     // Create the table dof id space.
 
-    arg_list largs = array_index_space_state::make_arg_list(0);
+    array_index_space_handle ltable_dof_id_space =
+      array_index_space_state::new_space(host()->member_id_spaces(false),
+					 table_dof_subposet_name(),
+					 false, 0);
 
-    pod_index_type lspace_id =
-      host()->member_id_spaces(false).
-      new_secondary_state(table_dof_subposet_name(),
-			  "array_index_space_state",
-			  largs, false);
-
-    _table_dof_id_space =
-      &host()->member_id_spaces(false).get_id_space(lspace_id);
+    _table_dof_id_space = &ltable_dof_id_space.get_id_space();
 
     // Populate the table dof id map.
 
@@ -1381,9 +1372,7 @@ update_table_cache() const
     /// @hack Cartesian product subspace hack. Should be using product id space.
     // Assume base space id is first index, fiber schema id is second. 
 
-    mutable_index_space_handle* ltable_dof_id_space =
-      reinterpret_cast<mutable_index_space_handle*>(_table_dof_id_space);
-    ltable_dof_id_space->reserve(fiber_schema().table_dof_id_space().ct());
+    ltable_dof_id_space.reserve(fiber_schema().table_dof_id_space().ct());
 
     index_space_iterator& litr =
       fiber_schema().table_dof_id_space().get_iterator();
@@ -1392,7 +1381,7 @@ update_table_cache() const
       // Iterating over the ids of the fiber schema table dof id space
       // in host (poset) order.
 
-      ltable_dof_id_space->insert(litr.pod(), litr.hub_pod());
+      ltable_dof_id_space.insert(litr.pod(), litr.hub_pod());
 
       litr.next();
     }
@@ -1475,18 +1464,13 @@ update_row_cache(bool xupdate_id_space) const
   {
     // Create the discretization id space.
 
-    bool is_persistent = discretization().is_persistent();
+    array_index_space_handle ldiscretization_id_space =
+      array_index_space_state::new_space(lbase_host.member_id_spaces(false),
+					 ldisc_id_space_name,
+					 discretization().is_persistent(),
+					 0);
 
-    arg_list largs = array_index_space_state::make_arg_list(0);
-
-    pod_index_type lspace_id =
-      lbase_host.member_id_spaces(false).
-      new_secondary_state(ldisc_id_space_name,
-			  "array_index_space_state",
-			  largs, is_persistent);
-
-    _discretization_id_space =
-      &lbase_host.member_id_spaces(false).get_id_space(lspace_id);
+    _discretization_id_space = &ldiscretization_id_space.get_id_space();
 
     if(lupdate == only_row_cache)
     {

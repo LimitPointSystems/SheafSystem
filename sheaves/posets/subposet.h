@@ -63,7 +63,6 @@ namespace sheaf
 template <typename T> class block;
 template <typename T> class depth_first_itr;
 class abstract_poset_member;
-class arg_list;
 class depth_first_iterator;
 class dof_descriptor_array;
 class index_iterator;
@@ -249,8 +248,7 @@ public:
   ///
   /// Creates an id space for the members of this.
   ///
-  virtual mutable_index_space_handle& new_id_space(const string& xstate_class_name,
-						   const arg_list& xstate_args);
+  virtual mutable_index_space_handle& new_id_space(const string& xstate_class_name);
 
   ///
   /// True if this already has an id space.

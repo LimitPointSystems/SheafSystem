@@ -68,8 +68,6 @@ set(ADDITIONAL_INCS
     deep_size.impl.h 
     factory.h 
     factory.impl.h 
-    factory_2.h 
-    factory_2.impl.h 
     hash_set_filter.h 
     index_traits.h 
     list_pool.impl.h

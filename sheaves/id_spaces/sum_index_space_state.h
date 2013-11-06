@@ -105,11 +105,6 @@ protected:
   sum_index_space_state(const sum_index_space_state& xother) { };
 
   ///
-  /// Constructor: Creates an instance from arguments, xargs.
-  ///
-  sum_index_space_state(const arg_list& xargs);
-
-  ///
   /// Destructor
   ///
   virtual ~sum_index_space_state();

@@ -29,8 +29,8 @@
 #include "any.h"
 #endif
 
-#ifndef FACTORY_2_H
-#include "factory_2.h"
+#ifndef FACTORY_H
+#include "factory.h"
 #endif
 
 #ifndef POD_TYPES_H
@@ -41,7 +41,6 @@ namespace sheaf
 {
 
 class abstract_product_structure;
-class arg_list;
 class explicit_index_space_handle;
 class explicit_index_space_iterator;
 class hub_index_space_handle;
@@ -73,12 +72,6 @@ public:
   /// The "plain old data" index type for this.
   ///
   typedef pod_index_type pod_type;
-
-  ///
-  /// Creates an arg list for constructing an instance of this.
-  /// @deprecated Use new_space() constructor.
-  ///
-  static arg_list make_arg_list();
 
   ///
   /// Destructor
@@ -123,18 +116,9 @@ protected:
   explicit_index_space_state(const explicit_index_space_state& xother) { };
 
   ///
-  /// Constructor: Creates an instance from arguments, xargs.
-  /// @deprecated Use new_space() constructor.
-  ///
-  explicit_index_space_state(const arg_list& xargs);
-
-  ///
   /// Assignment operator
   ///
   virtual explicit_index_space_state& operator=(const explicit_index_space_state& xother);
-
-  ///////////////////////////////////////////////////////////////
-  // BEGIN NEW SPACE
 
   ///
   /// Create a new id space state in the id space family xid_space
@@ -154,9 +138,6 @@ protected:
 		 pod_type xid,
 		 const string& xname,
 		 bool xis_persistent);
-
-  // END NEW SPACE
-  ///////////////////////////////////////////////////////////////
 
   ///
   /// The host collection.
@@ -454,14 +435,12 @@ public:
   ///
   /// A factory for making descendants of this class.
   ///
-  static factory_2<explicit_index_space_state>& id_space_factory();
+  static factory<explicit_index_space_state>& id_space_factory();
 
   ///
-  /// Virtual constructor; create a new instance of the same type at this
-  /// with arguments xargs.
-  /// @deprecated Use new_space() constructor.
+  /// Virtual constructor; create a new instance of the same type at this.
   ///
-  virtual explicit_index_space_state* clone(const arg_list& xargs) const = 0;
+  virtual explicit_index_space_state* clone() const = 0;
 
 protected:
 

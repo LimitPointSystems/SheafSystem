@@ -104,12 +104,6 @@ protected:
   reserved_primary_index_space_state(const reserved_primary_index_space_state& xother) { };
 
   ///
-  /// Constructor: Creates an instance from arguments, xargs.
-  /// @deprecated Use new_space() constructor.
-  ///
-  reserved_primary_index_space_state(const arg_list& xargs);
-
-  ///
   /// Destructor
   ///
   virtual ~reserved_primary_index_space_state();
@@ -324,11 +318,9 @@ public:
   virtual const string& class_name() const;
 
   ///
-  /// Virtual constructor; create a new instance of the same type at this
-  /// with arguments xargs.
-  /// @deprecated Use new_space() constructor.
+  /// Virtual constructor; create a new instance of the same type at this.
   ///
-  virtual reserved_primary_index_space_state* clone(const arg_list& xargs) const;
+  virtual reserved_primary_index_space_state* clone() const;
 
 protected:
 

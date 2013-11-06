@@ -25,6 +25,7 @@
 #include "factory.h"
 #include "index_space_family.h"
 #include "index_space_iterator.h"
+#include "list_index_space_handle.h"
 #include "list_index_space_state.h"
 #include "poset_crg_state.h"
 #include "poset_path.h"
@@ -521,11 +522,10 @@ force_explicit_cover(bool xlower, pod_index_type xmbr_index, bool xinitialize)
   {
     // Id space is not explicit.  Construct an interval id space in its place.
 
-    result =
-      _id_spaces->new_secondary_state(explicit_cover_name(xlower, xmbr_index),
-				      "list_index_space_state",
-				      list_index_space_state::make_arg_list(),
-				      false);
+    list_index_space_handle lid_space =
+      list_index_space_state::new_space(*_id_spaces, explicit_cover_name(xlower, xmbr_index), false);
+
+    result = lid_space.index();
 
     if(xinitialize)
     {
@@ -534,9 +534,6 @@ force_explicit_cover(bool xlower, pod_index_type xmbr_index, bool xinitialize)
       index_space_iterator& litr =
 	_id_spaces->get_id_space_iterator(cover_id_space_id(xlower, xmbr_index));
 
-      mutable_index_space_handle& lid_space =
-	_id_spaces->get_id_space<mutable_index_space_handle>(result);
-
       while(!litr.is_done())
       {
 	lid_space.push_back(litr.hub_pod());
@@ -544,7 +541,6 @@ force_explicit_cover(bool xlower, pod_index_type xmbr_index, bool xinitialize)
       }
 
       _id_spaces->release_id_space_iterator(litr);
-      _id_spaces->release_id_space(lid_space);
     }
 
     // Set the explicit override in the interval.

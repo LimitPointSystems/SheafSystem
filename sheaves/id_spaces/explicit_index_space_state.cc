@@ -22,10 +22,9 @@
 
 #include "abstract_product_structure.h"
 #include "assert_contract.h"
-#include "arg_list.h"
 #include "explicit_index_space_interval.h"
 #include "explicit_index_space_iterator.h"
-#include "factory_2.h"
+#include "factory.h"
 #include "hub_index_space_handle.h"
 #include "index_space_collection.h"
 #include "index_space_family.h"
@@ -37,25 +36,6 @@
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
-
-sheaf::arg_list
-sheaf::explicit_index_space_state::
-make_arg_list()
-{
-  // Preconditions:
-
-  // Body:
-
-  arg_list result;
-
-  // Postconditions:
-
-  ensure(result.empty());
-
-  // Exit:
-
-  return result;
-} 
 
 sheaf::explicit_index_space_state::
 ~explicit_index_space_state()
@@ -188,41 +168,6 @@ explicit_index_space_state()
   return; 
 }
 
-sheaf::explicit_index_space_state::
-explicit_index_space_state(const arg_list& xargs)
-  : _ct(0),
-    _begin(invalid_pod_index()),
-    _end(invalid_pod_index()),
-    _product(0)
-{
-  // Preconditions:
-
-  require(xargs.contains_arg("host"));
-  require(xargs.contains_arg("index"));
-  require(xargs.contains_arg("is_persistent"));
-
-  // Body:
-
-  _host          = reinterpret_cast<index_space_collection*>((void *) xargs.value("host"));
-  _index         = xargs.value("index");
-  _is_persistent = xargs.value("is_persistent");
-
-  /// @todo Add product structure to arguments?
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(&host() == (void*) xargs.value("host"));
-  ensure(index() == xargs.value("index"));
-  ensure(is_persistent() == xargs.value("is_persistent"));
-  ensure(is_empty());
-
-  // Exit:
-
-  return;
-}
-
-
 sheaf::explicit_index_space_state&
 sheaf::explicit_index_space_state::
 operator=(const explicit_index_space_state& xother)
@@ -250,9 +195,6 @@ operator=(const explicit_index_space_state& xother)
   
   return *this;
 }
-
-///////////////////////////////////////////////////////////////
-// BEGIN NEW SPACE
 
 void
 sheaf::explicit_index_space_state::
@@ -344,9 +286,6 @@ new_state(index_space_family& xid_spaces,
 
   return;
 }  
-
-// END NEW SPACE
-///////////////////////////////////////////////////////////////
 
 sheaf::size_type
 sheaf::explicit_index_space_state::
@@ -1137,7 +1076,7 @@ class_name() const
   return result;
 }
 
-sheaf::factory_2<sheaf::explicit_index_space_state>&
+sheaf::factory<sheaf::explicit_index_space_state>&
 sheaf::explicit_index_space_state::
 id_space_factory()
 {
@@ -1145,7 +1084,7 @@ id_space_factory()
 
   // Body:
 
-  static factory_2<explicit_index_space_state> result;
+  static factory<explicit_index_space_state> result;
 
   // Postconditions:
 
@@ -1156,7 +1095,7 @@ id_space_factory()
 
 sheaf::explicit_index_space_state*
 sheaf::explicit_index_space_state::
-clone(const arg_list& xargs) const
+clone() const
 {
   // Preconditions:
 
