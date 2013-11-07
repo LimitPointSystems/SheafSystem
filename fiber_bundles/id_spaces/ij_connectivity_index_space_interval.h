@@ -55,6 +55,32 @@ class SHEAF_DLL_SPEC ij_connectivity_index_space_interval : public index_space_i
   friend SHEAF_DLL_SPEC size_t deep_size(const ij_connectivity_index_space_interval& xn, bool xinclude_shallow);
 
   // ===========================================================
+  /// @name SPACE FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Create a new interval of id spaces for 2D structured block connectivity
+  /// in the id space family xid_spaces with upper bound xub,
+  /// vertex hub begin xvertex_hub_begin, and number of zones in the
+  /// j-direction xj_size.
+  /// Return a reference to the id space interval.
+  ///
+  static const ij_connectivity_index_space_interval& new_space(index_space_family& xid_spaces,
+							       size_type xub,
+							       pod_type xvertex_hub_begin,
+							       size_type xj_size);
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
   /// @name IJ_CONNECTIVITY_INDEX_SPACE_INTERVAL FACET
   // ===========================================================
   //@{

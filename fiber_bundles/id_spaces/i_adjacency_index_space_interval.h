@@ -55,6 +55,31 @@ class SHEAF_DLL_SPEC i_adjacency_index_space_interval : public index_space_inter
   friend SHEAF_DLL_SPEC size_t deep_size(const i_adjacency_index_space_interval& xn, bool xinclude_shallow);
 
   // ===========================================================
+  /// @name SPACE FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Create a new interval of id spaces for 1D structured block adjacency
+  /// in the id space family xid_spaces with upper bound xub,
+  /// zone hub begin and the number of zones in the i-direction, xi_size.
+  /// Return a reference to the id space interval.
+  ///
+  static const i_adjacency_index_space_interval& new_space(index_space_family& xid_spaces,
+							   size_type xub,
+							   pod_type xzone_hub_begin,
+							   size_type xi_size);
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
   /// @name I_ADJACENCY_INDEX_SPACE_INTERVAL FACET
   // ===========================================================
   //@{

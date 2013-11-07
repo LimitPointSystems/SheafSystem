@@ -24,7 +24,49 @@
 #include "assert_contract.h"
 #include "explicit_index_space_state.h"
 #include "hub_index_space_handle.h"
+#include "index_space_family.h"
 #include "index_space_iterator.h"
+
+// ===========================================================
+// SPACE FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+const sheaf::explicit_index_space_interval&
+sheaf::explicit_index_space_interval::
+new_space(index_space_family& xid_spaces,
+	  size_type xub)
+{
+  // Preconditions:
+
+  require(xub > 0);
+
+  // Body:
+
+  define_old_variable(size_type old_id_spaces_end = xid_spaces.end());
+
+  explicit_index_space_interval* result_ptr = new explicit_index_space_interval();
+  result_ptr->new_state(xid_spaces, xub);
+
+  const explicit_index_space_interval& result = *result_ptr;
+
+  // Postconditions:
+
+  ensure(&result.id_spaces() == &xid_spaces);
+  ensure(result.begin() == old_id_spaces_end);
+  ensure(result.end() == xid_spaces.end());
+  ensure(result.end() == result.begin() + xub);
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
 
 // ===========================================================
 // EXPLICIT_INDEX_SPACE_INTERVAL FACET

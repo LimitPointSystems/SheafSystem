@@ -59,6 +59,30 @@ class SHEAF_DLL_SPEC singleton_index_space_interval : public index_space_interva
   friend SHEAF_DLL_SPEC size_t deep_size(const singleton_index_space_interval& xn, bool xinclude_shallow);
 
   // ===========================================================
+  /// @name SPACE FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Create a new interval of id spaces with an singleton representation
+  /// in the id space family xid_spaces with upper bound xub,
+  /// and hub id offset xhub_offset.
+  /// Return a reference to the id space interval.
+  ///
+  static const singleton_index_space_interval& new_space(index_space_family& xid_spaces,
+							 size_type xub,
+							 pod_type xhub_offset);
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
   /// @name SINGLETON_INDEX_SPACE_INTERVAL FACET
   // ===========================================================
   //@{

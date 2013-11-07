@@ -84,6 +84,7 @@ class SHEAF_DLL_SPEC index_space_family : public any
   friend class implicit_index_space_iterator;
   friend class index_space_family_iterator;
   friend class index_space_handle;
+  friend class index_space_interval;
   friend class index_space_iterator;
   friend class poset_state_handle; // Uses new_primary_state
   friend class poset_crg_state; // Uses new_primary_state
@@ -316,6 +317,11 @@ protected:
   pod_type new_interval(const string& xinterval_class_name,
 			const arg_list& xinterval_args,
 			size_type xub);
+
+  ///
+  /// Inserts an id space interval into this family.
+  ///
+  void insert_interval(index_space_interval& xinterval);
 
   ///
   /// Delete the state with id xid.

@@ -62,6 +62,33 @@ class SHEAF_DLL_SPEC array_index_space_interval : public index_space_interval
   friend SHEAF_DLL_SPEC size_t deep_size(const array_index_space_interval& xn, bool xinclude_shallow);
 
   // ===========================================================
+  /// @name SPACE FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Create a new interval of id spaces with an array representation
+  /// in the id space family xid_spaces with upper bound xub,
+  /// hub id array xhub_ids, the number of ids per space xids_per_space
+  /// and ownership mode xowns_hub_ids.
+  /// Return a reference to the id space interval.
+  ///
+  static const array_index_space_interval& new_space(index_space_family& xid_spaces,
+						     size_type xub,
+						     block<pod_type>& xhub_ids,
+						     size_type xids_per_space,
+						     bool xowns_hub_ids);
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
   /// @name ARRAY_INDEX_SPACE_INTERVAL FACET
   // ===========================================================
   //@{

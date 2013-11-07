@@ -63,6 +63,31 @@ class SHEAF_DLL_SPEC ragged_array_index_space_interval : public index_space_inte
   friend SHEAF_DLL_SPEC size_t deep_size(const ragged_array_index_space_interval& xn, bool xinclude_shallow);
 
   // ===========================================================
+  /// @name SPACE FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Create a new interval of id spaces with an ragged array representation
+  /// in the id space family xid_spaces with upper bound xub, hub id ragged
+  /// array xhub_ids, and ownership mode xowns_hub_ids.
+  /// Return a reference to the id space interval.
+  ///
+  static const ragged_array_index_space_interval& new_space(index_space_family& xid_spaces,
+							    size_type xub,
+							    ragged_array<pod_type>& xhub_ids,
+							    bool xowns_hub_ids);
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
   /// @name RAGGED_ARRAY_INDEX_SPACE_INTERVAL FACET
   // ===========================================================
   //@{

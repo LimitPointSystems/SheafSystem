@@ -121,7 +121,7 @@ protected:
   virtual explicit_index_space_state& operator=(const explicit_index_space_state& xother);
 
   ///
-  /// Create a new id space state in the id space family xid_space
+  /// Create a new id space state in the id space family xid_spaces
   /// at the next available id space index with name xname,
   /// and persistence xis_persistent.
   ///

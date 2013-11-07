@@ -102,6 +102,12 @@ protected:
   index_space_interval(const index_space_interval& xother) { };
 
   ///
+  /// Create a new id space interval in the id space family xid_spaces
+  /// with upper bound xub.
+  ///
+  void new_state(index_space_family& xid_spaces, size_type xub);
+
+  ///
   /// True, if this interval supports persistent id spaces.
   ///
   virtual bool supports_persistent_id_spaces() const;

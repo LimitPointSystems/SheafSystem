@@ -72,7 +72,7 @@ class SHEAF_DLL_SPEC array_index_space_state : public mutable_index_space_state
 public:
 
   ///
-  /// Create a new array id space in the id space family xid_space
+  /// Create a new array id space in the id space family xid_spaces
   /// at the next available id space index with name xname,
   /// persistence xis_persistent, and capacity xcapacity.
   /// Returns a handle to the id space created.
@@ -83,7 +83,7 @@ public:
 					    size_type xcapacity);
 
   ///
-  /// Create a new array id space in the id space family xid_space
+  /// Create a new array id space in the id space family xid_spaces
   /// at the id space index xid with name xname, persistence
   /// xis_persistent, and capacity xcapacity
   /// Returns a handle to the id space created.

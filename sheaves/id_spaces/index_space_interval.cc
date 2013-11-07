@@ -171,6 +171,34 @@ index_space_interval(const arg_list& xargs)
   return; 
 }
 
+void
+sheaf::index_space_interval::
+new_state(index_space_family& xid_spaces, size_type xub)
+{
+  // Preconditions:
+
+  // Body:
+
+  define_old_variable(size_type old_id_spaces_end = xid_spaces.end());
+
+  _id_spaces = &xid_spaces;
+  _begin = _id_spaces->end();
+  _end = _begin + xub;
+
+  _id_spaces->insert_interval(*this);
+
+  // Postconditions:
+
+  ensure(&id_spaces() == &xid_spaces);
+  ensure(begin() == old_id_spaces_end);
+  ensure(end() == xid_spaces.end());
+  ensure(end() == begin() + xub);
+
+  // Exit:
+
+  return;
+}
+
 bool
 sheaf::index_space_interval::
 supports_persistent_id_spaces() const

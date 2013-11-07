@@ -32,6 +32,65 @@
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // ===========================================================
+// SPACE FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+const fiber_bundle::ijk_adjacency_index_space_interval&
+fiber_bundle::ijk_adjacency_index_space_interval::
+new_space(index_space_family& xid_spaces,
+	  size_type xub,
+	  pod_type xzone_hub_begin,
+	  size_type xi_size,
+	  size_type xj_size,
+	  size_type xk_size)
+{
+  // Preconditions:
+
+  require(xub > 0);
+  require(xid_spaces.contains(xzone_hub_begin));
+  require(xi_size > 0);
+  require(xj_size > 0);
+  require(xk_size > 0);
+
+  // Body:
+
+  define_old_variable(size_type old_id_spaces_end = xid_spaces.end());
+
+  ijk_adjacency_index_space_interval* result_ptr = new ijk_adjacency_index_space_interval();
+  result_ptr->new_state(xid_spaces, xub);
+
+  result_ptr->_zone_hub_begin = xzone_hub_begin;
+  result_ptr->_i_size = xi_size;
+  result_ptr->_j_size = xj_size;
+  result_ptr->_k_size = xk_size;
+
+  const ijk_adjacency_index_space_interval& result = *result_ptr;
+
+  // Postconditions:
+
+  ensure(&result.id_spaces() == &xid_spaces);
+  ensure(result.begin() == old_id_spaces_end);
+  ensure(result.end() == xid_spaces.end());
+  ensure(result.end() == result.begin() + xub);
+
+  ensure(result.zone_hub_begin() == xzone_hub_begin);
+  ensure(result.i_size() == xi_size);
+  ensure(result.j_size() == xj_size);
+  ensure(result.k_size() == xk_size);
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// ===========================================================
 // IJK_ADJACENCY_INDEX_SPACE_INTERVAL FACET
 // ===========================================================
 

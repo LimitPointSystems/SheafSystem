@@ -28,6 +28,72 @@
 #include "hub_index_space_handle.h"
 
 // ===========================================================
+// SPACE FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+const sheaf::ragged_array_index_space_interval&
+sheaf::ragged_array_index_space_interval::
+new_space(index_space_family& xid_spaces,
+	  size_type xub,
+	  ragged_array<pod_type>& xhub_ids,
+	  bool xowns_hub_ids)
+{
+  // Preconditions:
+
+  require(xub > 0);
+  require(xhub_ids.row_ct() >= xub);
+
+  // Body:
+
+  define_old_variable(size_type old_id_spaces_end = xid_spaces.end());
+
+  ragged_array_index_space_interval* result_ptr = new ragged_array_index_space_interval();
+  result_ptr->new_state(xid_spaces, xub);
+
+  result_ptr->_owns_hub_ids = xowns_hub_ids;
+
+  if(xowns_hub_ids)
+  {
+    // Use the assignment operator of block to copy the contents of the
+    // user input into the hub ids array.
+
+    result_ptr->_hub_ids = new ragged_array<pod_type>();
+
+    *(result_ptr->_hub_ids) = xhub_ids;
+  }
+  else
+  {
+    // The user is responsible for the memory management, copy the point
+    // to the user input.
+
+    result_ptr->_hub_ids = &xhub_ids;
+  }
+
+  const ragged_array_index_space_interval& result = *result_ptr;
+
+  // Postconditions:
+
+  ensure(&result.id_spaces() == &xid_spaces);
+  ensure(result.begin() == old_id_spaces_end);
+  ensure(result.end() == xid_spaces.end());
+  ensure(result.end() == result.begin() + xub);
+
+  ensure(result.hub_ids() == xhub_ids);
+  ensure(result.owns_hub_ids() == xowns_hub_ids);
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// ===========================================================
 // RAGGED_ARRAY_INDEX_SPACE_INTERVAL FACET
 // ===========================================================
 

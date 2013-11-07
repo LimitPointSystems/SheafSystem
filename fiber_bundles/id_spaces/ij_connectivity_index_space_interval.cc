@@ -32,6 +32,57 @@
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // ===========================================================
+// SPACE FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+const fiber_bundle::ij_connectivity_index_space_interval&
+fiber_bundle::ij_connectivity_index_space_interval::
+new_space(index_space_family& xid_spaces,
+	  size_type xub,
+	  pod_type xvertex_hub_begin,
+	  size_type xj_size)
+{
+  // Preconditions:
+
+  require(xub > 0);
+  require(xid_spaces.contains(xvertex_hub_begin));
+  require(xj_size > 0);
+
+  // Body:
+
+  define_old_variable(size_type old_id_spaces_end = xid_spaces.end());
+
+  ij_connectivity_index_space_interval* result_ptr = new ij_connectivity_index_space_interval();
+  result_ptr->new_state(xid_spaces, xub);
+
+  result_ptr->_vertex_hub_begin = xvertex_hub_begin;
+  result_ptr->_j_size = xj_size;
+
+  const ij_connectivity_index_space_interval& result = *result_ptr;
+
+  // Postconditions:
+
+  ensure(&result.id_spaces() == &xid_spaces);
+  ensure(result.begin() == old_id_spaces_end);
+  ensure(result.end() == xid_spaces.end());
+  ensure(result.end() == result.begin() + xub);
+
+  ensure(result.vertex_hub_begin() == xvertex_hub_begin);
+  ensure(result.j_size() == xj_size);
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// ===========================================================
 // IJ_CONNECTIVITY_INDEX_SPACE_INTERVAL FACET
 // ===========================================================
 

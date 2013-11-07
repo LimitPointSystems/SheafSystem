@@ -847,6 +847,41 @@ new_state(const string& xname,
 //   return result;
 // }  
 
+void
+sheaf::index_space_family::
+insert_interval(index_space_interval& xinterval)
+{
+  // Preconditions:
+
+  require(xinterval.begin() == end());
+
+  // Body:
+
+  // Insert interval into the map.
+
+  _intervals[_end] = &xinterval;
+
+  if(_intervals.find(xinterval.begin()) == _intervals.end())
+  {
+    // The beginning of the interval is not the end of some other
+    // interval.
+
+    _intervals[xinterval.begin()] = 0;
+  }
+
+  // Update the end of ths family.
+
+  _end = xinterval.end();
+  
+  // Postconditions:
+
+  ensure_for_all(i, xinterval.begin(), xinterval.end(), contains(i));
+
+  // Exit:
+
+  return;
+}
+
 sheaf::index_space_family::pod_type
 sheaf::index_space_family::
 new_interval(const string& xinterval_class_name,

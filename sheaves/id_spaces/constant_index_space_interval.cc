@@ -28,6 +28,52 @@
 #include "hub_index_space_handle.h"
 
 // ===========================================================
+// SPACE FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+const sheaf::constant_index_space_interval&
+sheaf::constant_index_space_interval::
+new_space(index_space_family& xid_spaces,
+	  size_type xub,
+	  pod_type xhub_id)
+{
+  // Preconditions:
+
+  require(xub > 0);
+
+  // Body:
+
+  define_old_variable(size_type old_id_spaces_end = xid_spaces.end());
+
+  constant_index_space_interval* result_ptr = new constant_index_space_interval();
+  result_ptr->new_state(xid_spaces, xub);
+
+  result_ptr->_hub_id = xhub_id;
+
+  const constant_index_space_interval& result = *result_ptr;
+
+  // Postconditions:
+
+  ensure(&result.id_spaces() == &xid_spaces);
+  ensure(result.begin() == old_id_spaces_end);
+  ensure(result.end() == xid_spaces.end());
+  ensure(result.end() == result.begin() + xub);
+
+  ensure(result.hub_id() == xhub_id);
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// ===========================================================
 // CONSTANT_INDEX_SPACE_INTERVAL FACET
 // ===========================================================
 
