@@ -22,11 +22,11 @@
 
 #include "abstract_product_structure.h"
 #include "assert_contract.h"
-#include "arg_list.h"
 #include "i_adjacency_implicit_index_space_iterator.h"
 #include "forwarding_index_space_handle.h"
 #include "explicit_index_space_state.h"
 #include "hub_index_space_handle.h"
+#include "index_space_family.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
@@ -86,33 +86,6 @@ new_space(index_space_family& xid_spaces,
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
-
-sheaf::arg_list
-fiber_bundle::i_adjacency_index_space_interval::
-make_arg_list(pod_type xzone_hub_begin, size_type xi_size)
-{
-  // Preconditions:
-
-  require(xzone_hub_begin >= 0);
-  require(xi_size > 0);
-
-  // Body:
-
-  arg_list result = index_space_interval::make_arg_list();
-  result << "zone_hub_begin" << xzone_hub_begin;
-  result << "i_size" << xi_size;
-
-  // Postconditions
-
-  ensure(result.contains_arg("zone_hub_begin"));
-  ensure(result.value("zone_hub_begin") == xzone_hub_begin);
-  ensure(result.contains_arg("i_size"));
-  ensure(result.value("i_size") == xi_size);
-
-  // Exit:
-
-  return result;
-}
 
 fiber_bundle::i_adjacency_index_space_interval::
 ~i_adjacency_index_space_interval()
@@ -248,31 +221,6 @@ i_adjacency_index_space_interval()
   return; 
 }
 
-fiber_bundle::i_adjacency_index_space_interval::
-i_adjacency_index_space_interval(const arg_list& xargs)
-  : index_space_interval(xargs)
-{
-  // Preconditions:
-
-  require(precondition_of(index_space_interval::index_space_interval(xargs)));
-
-  // Body:
-
-  _zone_hub_begin = xargs.value("zone_hub_begin");
-  _i_size = xargs.value("i_size");
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(postcondition_of(index_space_interval::index_space_interval(xargs)));
-  ensure(zone_hub_begin() == xargs.value("zone_hub_begin"));
-  ensure(i_size() == xargs.value("i_size"));
-
-  // Exit:
-
-  return; 
-}
-
 // PRIVATE MEMBER FUNCTIONS
 
 
@@ -303,14 +251,14 @@ class_name() const
 
 fiber_bundle::i_adjacency_index_space_interval*
 fiber_bundle::i_adjacency_index_space_interval::
-clone(const arg_list& xargs) const
+clone() const
 {
   // Preconditions:
 
   // Body:
 
   i_adjacency_index_space_interval* result =
-    new i_adjacency_index_space_interval(xargs);
+    new i_adjacency_index_space_interval();
 
   // Postconditions:
 

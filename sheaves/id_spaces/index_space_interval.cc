@@ -20,7 +20,6 @@
 
 #include "index_space_interval.h"
 #include "assert_contract.h"
-#include "arg_list.h"
 #include "index_space_family.h"
 
 // ===========================================================
@@ -28,25 +27,6 @@
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
-
-sheaf::arg_list
-sheaf::index_space_interval::
-make_arg_list()
-{
-  // Preconditions:
-
-  // Body:
-
-  arg_list result;
-
-  // Postconditions:
-
-  ensure(result.empty());
-
-  // Exit:
-
-  return result;
-}
 
 sheaf::index_space_interval::
 ~index_space_interval()
@@ -142,35 +122,6 @@ index_space_interval()
   return; 
 }
 
-sheaf::index_space_interval::
-index_space_interval(const arg_list& xargs)
-  : index_space_collection()
-{
-  // Preconditions:
-
-  require(xargs.contains_arg("id_spaces"));
-  require(xargs.contains_arg("begin"));
-  require(xargs.contains_arg("end"));
-  require((pod_type) xargs.value("begin") < (pod_type) xargs.value("end"));
-    
-  // Body:
-
-  _id_spaces = reinterpret_cast<index_space_family*>((void *) xargs.value("id_spaces"));
-  _begin     = xargs.value("begin");
-  _end       = xargs.value("end");
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(&id_spaces() == (void *) xargs.value("id_spaces"));
-  ensure(begin() == xargs.value("begin"));
-  ensure(end() == xargs.value("end"));
-
-  // Exit:
-
-  return; 
-}
-
 void
 sheaf::index_space_interval::
 new_state(index_space_family& xid_spaces, size_type xub)
@@ -233,7 +184,7 @@ class_name() const
   return result;
 }
 
-sheaf::factory_2<sheaf::index_space_interval>&
+sheaf::factory<sheaf::index_space_interval>&
 sheaf::index_space_interval::
 id_space_interval_factory()
 {
@@ -241,7 +192,7 @@ id_space_interval_factory()
 
   // Body:
 
-  static factory_2<index_space_interval> result;
+  static factory<index_space_interval> result;
 
   // Postconditions:
 
@@ -252,7 +203,7 @@ id_space_interval_factory()
 
 sheaf::index_space_interval*
 sheaf::index_space_interval::
-clone(const arg_list& xargs) const
+clone() const
 {
   // Preconditions:
 

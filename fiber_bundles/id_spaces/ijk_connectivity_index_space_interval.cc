@@ -22,12 +22,12 @@
 
 #include "abstract_product_structure.h"
 #include "assert_contract.h"
-#include "arg_list.h"
 #include "ijk_connectivity_implicit_index_space_iterator.h"
 #include "ijk_product_structure.h"
 #include "forwarding_index_space_handle.h"
 #include "explicit_index_space_state.h"
 #include "hub_index_space_handle.h"
+#include "index_space_family.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
@@ -91,39 +91,6 @@ new_space(index_space_family& xid_spaces,
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
-
-sheaf::arg_list
-fiber_bundle::ijk_connectivity_index_space_interval::
-make_arg_list(pod_type xvertex_hub_begin,
-	      size_type xj_size,
-	      size_type xk_size)
-{
-  // Preconditions:
-
-  require(xvertex_hub_begin >= 0);
-  require(xj_size > 0);
-  require(xk_size > 0);
-
-  // Body:
-
-  arg_list result = index_space_interval::make_arg_list();
-  result << "vertex_hub_begin" << xvertex_hub_begin;
-  result << "j_size" << xj_size;
-  result << "k_size" << xk_size;
-
-  // Postconditions
-
-  ensure(result.contains_arg("vertex_hub_begin"));
-  ensure(result.value("vertex_hub_begin") == xvertex_hub_begin);
-  ensure(result.contains_arg("j_size"));
-  ensure(result.value("j_size") == xj_size);
-  ensure(result.contains_arg("k_size"));
-  ensure(result.value("k_size") == xk_size);
-
-  // Exit:
-
-  return result;
-}
 
 fiber_bundle::ijk_connectivity_index_space_interval::
 ~ijk_connectivity_index_space_interval()
@@ -289,41 +256,6 @@ ijk_connectivity_index_space_interval()
   return; 
 }
 
-fiber_bundle::ijk_connectivity_index_space_interval::
-ijk_connectivity_index_space_interval(const arg_list& xargs)
-  : index_space_interval(xargs)
-{
-  // Preconditions:
-
-  require(precondition_of(index_space_interval::index_space_interval(xargs)));
-
-  // Body:
-
-  _vertex_hub_begin = xargs.value("vertex_hub_begin");
-  _j_size = xargs.value("j_size");
-  _k_size = xargs.value("k_size");
-
-  _j_vertex_size = _j_size+1;
-  _k_vertex_size = _k_size+1;
-
-  _jk_vertex_size = _j_vertex_size * _k_vertex_size;
-  
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(postcondition_of(index_space_interval::index_space_interval(xargs)));
-  ensure(vertex_hub_begin() == xargs.value("vertex_hub_begin"));
-  ensure(j_size() == xargs.value("j_size"));
-  ensure(k_size() == xargs.value("k_size"));
-  ensure(j_vertex_size() == j_size()+1);
-  ensure(k_vertex_size() == k_size()+1);
-  ensure(jk_vertex_size() == j_vertex_size()*k_vertex_size());
-
-  // Exit:
-
-  return; 
-}
-
 // PRIVATE MEMBER FUNCTIONS
 
 
@@ -354,14 +286,14 @@ class_name() const
 
 fiber_bundle::ijk_connectivity_index_space_interval*
 fiber_bundle::ijk_connectivity_index_space_interval::
-clone(const arg_list& xargs) const
+clone() const
 {
   // Preconditions:
 
   // Body:
 
   ijk_connectivity_index_space_interval* result =
-    new ijk_connectivity_index_space_interval(xargs);
+    new ijk_connectivity_index_space_interval();
 
   // Postconditions:
 

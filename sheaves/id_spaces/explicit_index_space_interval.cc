@@ -139,28 +139,6 @@ explicit_index_space_interval()
   return; 
 }
 
-sheaf::explicit_index_space_interval::
-explicit_index_space_interval(const arg_list& xargs)
-  : index_space_interval(xargs)
-{
-  // Preconditions:
-
-  require(precondition_of(index_space_interval::index_space_interval(xargs)));
-
-  // Body:
-
-  _states.reserve(_end - _begin);
-  
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(postcondition_of(index_space_interval::index_space_interval(xargs)));
-
-  // Exit:
-
-  return; 
-}
-
 // PRIVATE MEMBER FUNCTIONS
 
 
@@ -208,14 +186,14 @@ class_name() const
 
 sheaf::explicit_index_space_interval*
 sheaf::explicit_index_space_interval::
-clone(const arg_list& xargs) const
+clone() const
 {
   // Preconditions:
 
   // Body:
 
   explicit_index_space_interval* result =
-    new explicit_index_space_interval(xargs);
+    new explicit_index_space_interval();
 
   // Postconditions:
 

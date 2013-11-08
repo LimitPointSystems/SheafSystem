@@ -21,7 +21,6 @@
 #include "standard_member_hack_crg_interval.h"
 
 #include "assert_contract.h"
-#include "arg_list.h"
 #include "explicit_index_space_interval.h"
 #include "factory.h"
 #include "index_space_family.h"
@@ -110,9 +109,8 @@ initialize_lower_covers()
   // Only supports covers for top and bottom.
 
   _lower_covers_begin =
-    _id_spaces->new_secondary_interval("explicit_index_space_interval",
-				       explicit_index_space_interval::make_arg_list(),
-				       2);
+    explicit_index_space_interval::new_space(*_id_spaces, 2).begin();
+
   _lower_covers_initialized = true;
 
   // Posconditions:
@@ -139,9 +137,8 @@ initialize_upper_covers()
   // Only supports covers for top and bottom.
 
   _upper_covers_begin =
-    _id_spaces->new_secondary_interval("explicit_index_space_interval",
-				       explicit_index_space_interval::make_arg_list(),
-				       2);
+    explicit_index_space_interval::new_space(*_id_spaces, 2).begin();
+
   _upper_covers_initialized = true;
 
   // Posconditions:

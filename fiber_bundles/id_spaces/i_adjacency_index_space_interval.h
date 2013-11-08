@@ -87,12 +87,6 @@ private:
 public:
 
   ///
-  /// Creates an arg list for constructing an instance of this.
-  ///
-  static arg_list make_arg_list(pod_type xzone_hub_begin,
-				size_type xi_size);
-
-  ///
   /// Destructor
   ///
   virtual ~i_adjacency_index_space_interval();
@@ -126,11 +120,6 @@ protected:
   /// Default constructor
   ///
   i_adjacency_index_space_interval();
-
-  ///
-  /// Constructor: Creates an instance from arguments, xargs.
-  ///
-  i_adjacency_index_space_interval(const arg_list& xargs);
 
   ///
   /// Copy constructor; disabled.
@@ -179,10 +168,9 @@ public:
   virtual const string& class_name() const;
 
   ///
-  /// Virtual constructor; create a new instance of the same type at this
-  /// with arguments xargs.
+  /// Virtual constructor; create a new instance of the same type at this.
   ///
-  virtual i_adjacency_index_space_interval* clone(const arg_list& xargs) const;
+  virtual i_adjacency_index_space_interval* clone() const;
 
 protected:
 

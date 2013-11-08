@@ -101,11 +101,6 @@ protected:
   explicit_index_space_interval();
 
   ///
-  /// Constructor: Creates an instance from arguments, xargs.
-  ///
-  explicit_index_space_interval(const arg_list& xargs);
-
-  ///
   /// Copy constructor; disabled.
   ///
   explicit_index_space_interval(const explicit_index_space_interval& xother) { };
@@ -152,10 +147,9 @@ public:
   virtual const string& class_name() const;
 
   ///
-  /// Virtual constructor; create a new instance of the same type at this
-  /// with arguments xargs.
+  /// Virtual constructor; create a new instance of the same type at this.
   ///
-  virtual explicit_index_space_interval* clone(const arg_list& xargs) const;
+  virtual explicit_index_space_interval* clone() const;
 
 protected:
 

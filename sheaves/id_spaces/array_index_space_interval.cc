@@ -21,11 +21,11 @@
 #include "abstract_product_structure.h"
 #include "array_index_space_interval.h"
 #include "assert_contract.h"
-#include "arg_list.h"
 #include "array_implicit_index_space_iterator.h"
 #include "forwarding_index_space_handle.h"
 #include "explicit_index_space_state.h"
 #include "hub_index_space_handle.h"
+#include "index_space_family.h"
 
 // ===========================================================
 // SPACE FACTORY FACET
@@ -102,37 +102,6 @@ new_space(index_space_family& xid_spaces,
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
-
-sheaf::arg_list
-sheaf::array_index_space_interval::
-make_arg_list(block<pod_type>& xhub_ids,
-	      size_type xids_per_space,
-	      bool xowns_hub_ids)
-{
-  // Preconditions:
-
-  require(xids_per_space > 0);
-
-  // Body:
-
-  arg_list result = index_space_interval::make_arg_list();
-  result << "hub_ids" << &xhub_ids
-	 << "ids_per_space" << xids_per_space
-	 << "owns_hub_ids" << xowns_hub_ids;
-
-  // Postconditions
-
-  ensure(result.contains_arg("hub_ids"));
-  ensure((void *) result.value("hub_ids") == &xhub_ids);
-  ensure(result.contains_arg("ids_per_space"));
-  ensure(result.value("ids_per_space") == xids_per_space);
-  ensure(result.contains_arg("owns_hub_ids"));
-  ensure(result.value("owns_hub_ids") == xowns_hub_ids);
-
-  // Exit:
-
-  return result;
-}
 
 sheaf::array_index_space_interval::
 ~array_index_space_interval()
@@ -226,53 +195,6 @@ array_index_space_interval()
   return; 
 }
 
-sheaf::array_index_space_interval::
-array_index_space_interval(const arg_list& xargs)
-  : index_space_interval(xargs)
-{
-  // Preconditions:
-
-  require(precondition_of(index_space_interval::index_space_interval(xargs)));
-
-  // Body:
-
-  block<pod_type>* lhub_ids =
-    reinterpret_cast<block<pod_type>*>((void *) xargs.value("hub_ids"));
-
-  _ids_per_space = xargs.value("ids_per_space");
-
-  _owns_hub_ids = xargs.value("owns_hub_ids");
-
-  if(_owns_hub_ids)
-  {
-    // Use the assignment operator of block to copy the contents of the
-    // user input into the hub ids array.
-
-    _hub_ids = new block<pod_type>();
-
-    *_hub_ids = *lhub_ids;
-  }
-  else
-  {
-    // The user is responsible for the memory management, copy the point
-    // to the user input.
-
-    _hub_ids = lhub_ids;
-  }
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(postcondition_of(index_space_interval::index_space_interval(xargs)));
-  ensure(hub_ids() == *reinterpret_cast<const block<pod_type>*>((void *) xargs.value("hub_ids")));
-  ensure(ids_per_space() == xargs.value("ids_per_space"));
-  ensure(owns_hub_ids() == xargs.value("owns_hub_ids"));
-
-  // Exit:
-
-  return; 
-}
-
 // PRIVATE MEMBER FUNCTIONS
 
 
@@ -303,14 +225,14 @@ class_name() const
 
 sheaf::array_index_space_interval*
 sheaf::array_index_space_interval::
-clone(const arg_list& xargs) const
+clone() const
 {
   // Preconditions:
 
   // Body:
 
   array_index_space_interval* result =
-    new array_index_space_interval(xargs);
+    new array_index_space_interval();
 
   // Postconditions:
 

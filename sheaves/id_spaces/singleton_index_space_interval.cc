@@ -21,11 +21,11 @@
 #include "abstract_product_structure.h"
 #include "singleton_index_space_interval.h"
 #include "assert_contract.h"
-#include "arg_list.h"
 #include "singleton_implicit_index_space_iterator.h"
 #include "forwarding_index_space_handle.h"
 #include "explicit_index_space_state.h"
 #include "hub_index_space_handle.h"
+#include "index_space_family.h"
 
 // ===========================================================
 // SPACE FACTORY FACET
@@ -79,29 +79,6 @@ new_space(index_space_family& xid_spaces,
 
 // PUBLIC MEMBER FUNCTIONS
 
-sheaf::arg_list
-sheaf::singleton_index_space_interval::
-make_arg_list(pod_type xhub_offset)
-{
-  // Preconditions:
-
-  require(xhub_offset >= 0);
-
-  // Body:
-
-  arg_list result = index_space_interval::make_arg_list();
-  result << "hub_offset" << xhub_offset;
-
-  // Postconditions
-
-  ensure(result.contains_arg("hub_offset"));
-  ensure(result.value("hub_offset") == xhub_offset);
-
-  // Exit:
-
-  return result;
-}
-
 sheaf::singleton_index_space_interval::
 ~singleton_index_space_interval()
 {  
@@ -154,29 +131,6 @@ singleton_index_space_interval()
   return; 
 }
 
-sheaf::singleton_index_space_interval::
-singleton_index_space_interval(const arg_list& xargs)
-  : index_space_interval(xargs)
-{
-  // Preconditions:
-
-  require(precondition_of(index_space_interval::index_space_interval(xargs)));
-
-  // Body:
-
-  _hub_offset = xargs.value("hub_offset");
-  
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(postcondition_of(index_space_interval::index_space_interval(xargs)));
-  ensure(hub_offset() == xargs.value("hub_offset"));
-
-  // Exit:
-
-  return; 
-}
-
 // PRIVATE MEMBER FUNCTIONS
 
 
@@ -207,14 +161,14 @@ class_name() const
 
 sheaf::singleton_index_space_interval*
 sheaf::singleton_index_space_interval::
-clone(const arg_list& xargs) const
+clone() const
 {
   // Preconditions:
 
   // Body:
 
   singleton_index_space_interval* result =
-    new singleton_index_space_interval(xargs);
+    new singleton_index_space_interval();
 
   // Postconditions:
 

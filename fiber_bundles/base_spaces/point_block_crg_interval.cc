@@ -20,7 +20,6 @@
 
 #include "point_block_crg_interval.h"
 
-#include "arg_list.h"
 #include "assert_contract.h"
 #include "base_space_poset.h"
 #include "binary_index_space.h"
@@ -467,9 +466,7 @@ initialize_lower_covers()
   // all the points.
 
   _lower_covers_begin =
-    _id_spaces->new_secondary_interval("explicit_index_space_interval",
-				       explicit_index_space_interval::make_arg_list(),
-				       1);
+    explicit_index_space_interval::new_space(*_id_spaces, 1).begin();
 
   offset_index_space_state::new_space(*_id_spaces,
 				      implicit_cover_name(LOWER, interval_member()),
@@ -480,10 +477,7 @@ initialize_lower_covers()
   //
   // The lower cover of the vertices is initialized to bottom.
 
-  arg_list largs = constant_index_space_interval::make_arg_list(BOTTOM_INDEX);
-
-  _id_spaces->new_secondary_interval("constant_index_space_interval",
-				     largs, _vertex_size);
+  constant_index_space_interval::new_space(*_id_spaces, _vertex_size, BOTTOM_INDEX);
 
   // Construct the connectivity and adjacency id spaces.  The connectivity
   // and adjacency id spaces are identical.  Since a point is both a zone
@@ -492,11 +486,8 @@ initialize_lower_covers()
   // id space interval will be created for both the connectivity and
   // adjacency id spaces.
 
-  largs = singleton_index_space_interval::make_arg_list(implicit_begin());
-
   _connectivity_begin =
-    _id_spaces->new_secondary_interval("singleton_index_space_interval",
-				       largs, _vertex_size);
+    singleton_index_space_interval::new_space(*_id_spaces, _vertex_size, implicit_begin()).begin();
 
   _adjacency_begin = _connectivity_begin;
 
@@ -530,9 +521,7 @@ initialize_upper_covers()
   // The upper cover of block is initialized to an empty explicit id space.
 
   _upper_covers_begin =
-    _id_spaces->new_secondary_interval("explicit_index_space_interval",
-				       explicit_index_space_interval::make_arg_list(),
-				       1);  
+    explicit_index_space_interval::new_space(*_id_spaces, 1).begin();
 
   list_index_space_state::new_space(*_id_spaces,
 				    explicit_cover_name(UPPER, interval_member()),
@@ -542,10 +531,7 @@ initialize_upper_covers()
   //
   // The upper cover of the points is initialized to the block.
 
-  arg_list largs = constant_index_space_interval::make_arg_list(interval_member());
-
-  _id_spaces->new_secondary_interval("constant_index_space_interval",
-				     largs, _vertex_size);
+  constant_index_space_interval::new_space(*_id_spaces, _vertex_size, interval_member());
 
   // The adjacency id spaces are contructed in initialize_lower_covers.
 

@@ -230,15 +230,15 @@ public:
 // 			       const arg_list& xstate_args,
 // 			       bool xis_persistent);
 
-  ///
-  /// Creates a new secondary id space interval with xub reserved id spaces,
-  /// id space interval of type xinterval_class_name and initialization
-  /// arguments, xinterval_args.
-  /// Returns the index of the first id space state in the interval created.
-  ///
-  pod_type new_secondary_interval(const string& xinterval_class_name,
-				  const arg_list& xinterval_args,
-				  size_type xub);
+//   ///
+//   /// Creates a new secondary id space interval with xub reserved id spaces,
+//   /// id space interval of type xinterval_class_name and initialization
+//   /// arguments, xinterval_args.
+//   /// Returns the index of the first id space state in the interval created.
+//   ///
+//   pod_type new_secondary_interval(const string& xinterval_class_name,
+// 				  const arg_list& xinterval_args,
+// 				  size_type xub);
 
   ///
   /// Delete the primary id space state with index xid.
@@ -308,15 +308,15 @@ protected:
 // 		     const arg_list& xstate_args,
 // 		     bool xis_persistent);
 
-  ///
-  /// Creates a new sid space interval with xub reserved id spaces,
-  /// id space interval of type xinterval_class_name and initialization
-  /// arguments, xinterval_args.
-  /// Returns the index of the first id space state in the interval created.
-  ///
-  pod_type new_interval(const string& xinterval_class_name,
-			const arg_list& xinterval_args,
-			size_type xub);
+//   ///
+//   /// Creates a new sid space interval with xub reserved id spaces,
+//   /// id space interval of type xinterval_class_name and initialization
+//   /// arguments, xinterval_args.
+//   /// Returns the index of the first id space state in the interval created.
+//   ///
+//   pod_type new_interval(const string& xinterval_class_name,
+// 			const arg_list& xinterval_args,
+// 			size_type xub);
 
   ///
   /// Inserts an id space interval into this family.

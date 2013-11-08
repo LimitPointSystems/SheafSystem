@@ -20,7 +20,6 @@
 
 #include "structured_block_2d_crg_interval.h"
 
-#include "arg_list.h"
 #include "assert_contract.h"
 #include "base_space_poset.h"
 #include "constant_index_space_interval.h"
@@ -454,9 +453,7 @@ initialize_lower_covers()
   // all the zones.
 
   _lower_covers_begin =
-    _id_spaces->new_secondary_interval("explicit_index_space_interval",
-				       explicit_index_space_interval::make_arg_list(),
-				       1);
+    explicit_index_space_interval::new_space(*_id_spaces, 1).begin();
 
   offset_index_space_state::new_space(*_id_spaces,
 				      implicit_cover_name(LOWER, interval_member()),
@@ -472,22 +469,19 @@ initialize_lower_covers()
   // set the connectivity begin to beginning of the connectivity id space
   // interval created below.
 
-  arg_list largs = ij_connectivity_index_space_interval::make_arg_list(_vertex_begin,
-								       _j_size);
-
   _connectivity_begin =
-    _id_spaces->new_secondary_interval("ij_connectivity_index_space_interval",
-				       largs, _zone_size);
-				     
+    ij_connectivity_index_space_interval::new_space(*_id_spaces,
+						    _zone_size,
+						    _vertex_begin,
+						    _j_size).begin();
 
   // Construct the lower cover of the vertices.
   //
   // The lower cover of the vertices is initialized to bottom.
 
-  largs = constant_index_space_interval::make_arg_list(BOTTOM_INDEX);
-
-  _id_spaces->new_secondary_interval("constant_index_space_interval",
-				     largs, _vertex_size);
+  constant_index_space_interval::new_space(*_id_spaces,
+					   _vertex_size,
+					   BOTTOM_INDEX);
 
   // The lower cover is initialized.
 
@@ -519,9 +513,7 @@ initialize_upper_covers()
   // The upper cover of block is initialized to an empty explicit id space.
 
   _upper_covers_begin =
-    _id_spaces->new_secondary_interval("explicit_index_space_interval",
-				       explicit_index_space_interval::make_arg_list(),
-				       1);  
+    explicit_index_space_interval::new_space(*_id_spaces, 1).begin();
 
   list_index_space_state::new_space(*_id_spaces,
 				    explicit_cover_name(UPPER, interval_member()),
@@ -531,10 +523,9 @@ initialize_upper_covers()
   //
   // The upper cover of the zones is initialized to the block.
 
-  arg_list largs = constant_index_space_interval::make_arg_list(interval_member());
-
-  _id_spaces->new_secondary_interval("constant_index_space_interval",
-				     largs, _zone_size);
+  constant_index_space_interval::new_space(*_id_spaces,
+					   _zone_size,
+					   interval_member());
 
   // Construct the upper cover of the vertices.
   //
@@ -545,13 +536,12 @@ initialize_upper_covers()
   // set the adjacency begin to the beginning of the adjacency id space
   // interval created below.
 
-  largs = ij_adjacency_index_space_interval::make_arg_list(_zone_begin,
-							   _i_size,
-							   _j_size);
-
   _adjacency_begin =
-    _id_spaces->new_secondary_interval("ij_adjacency_index_space_interval",
-				       largs, _vertex_size);
+    ij_adjacency_index_space_interval::new_space(*_id_spaces,
+						 _vertex_size,
+						 _zone_begin,
+						 _i_size,
+						 _j_size).begin();
 
   // The upper cover is initialized.
 

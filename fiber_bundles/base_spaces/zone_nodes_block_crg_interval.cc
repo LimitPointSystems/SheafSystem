@@ -20,7 +20,6 @@
 
 #include "zone_nodes_block_crg_interval.h"
 
-#include "arg_list.h"
 #include "array_implicit_index_space_iterator.h"
 #include "array_index_space_interval.h"
 #include "assert_contract.h"
@@ -575,9 +574,7 @@ initialize_lower_covers()
   // all the zones.  The initial value is the same as the zone id.
 
   _lower_covers_begin =
-    _id_spaces->new_secondary_interval("explicit_index_space_interval",
-				       explicit_index_space_interval::make_arg_list(),
-				       1);
+    explicit_index_space_interval::new_space(*_id_spaces, 1).begin();
 
   offset_index_space_state::new_space(*_id_spaces,
 				      implicit_cover_name(LOWER, interval_member()),
@@ -592,23 +589,20 @@ initialize_lower_covers()
   // interval will remain in the id space family.  For that reason, we can
   // set use the interval created below as the connectivity id space interval.
 
-  arg_list largs = array_index_space_interval::make_arg_list(_connectivity,
-							     _nodes_per_zone,
-							     false);
-
   _connectivity_begin =
-    _id_spaces->new_secondary_interval("array_index_space_interval",
-				       largs, _zone_size);
-				     
+    array_index_space_interval::new_space(*_id_spaces,
+					  _zone_size,
+					  _connectivity,
+					  _nodes_per_zone,
+					  false).begin();
 
   // Construct the lower cover of the vertices.
   //
   // The lower cover of the vertices is initialized to bottom.
 
-  largs = constant_index_space_interval::make_arg_list(BOTTOM_INDEX);
-
-  _id_spaces->new_secondary_interval("constant_index_space_interval",
-				     largs, _vertex_size);
+  constant_index_space_interval::new_space(*_id_spaces,
+					   _vertex_size,
+					   BOTTOM_INDEX);
 
   // The lower cover is initialized.
 
@@ -640,9 +634,7 @@ initialize_upper_covers()
   // The upper cover of block is initialized to an empty explicit id space.
 
   _upper_covers_begin =
-    _id_spaces->new_secondary_interval("explicit_index_space_interval",
-				       explicit_index_space_interval::make_arg_list(),
-				       1);  
+    explicit_index_space_interval::new_space(*_id_spaces, 1).begin();
 
   list_index_space_state::new_space(*_id_spaces,
 				    explicit_cover_name(UPPER, interval_member()),
@@ -652,10 +644,9 @@ initialize_upper_covers()
   //
   // The upper cover of the zones is initialized to the block.
 
-  arg_list largs = constant_index_space_interval::make_arg_list(interval_member());
-
-  _id_spaces->new_secondary_interval("constant_index_space_interval",
-				     largs, _zone_size);
+  constant_index_space_interval::new_space(*_id_spaces,
+					   _zone_size,
+					   interval_member());
 
   // Construct the upper cover of the vertices.
   //
@@ -665,11 +656,11 @@ initialize_upper_covers()
   // interval will remain in the id space family.  For that reason, we can
   // the interval created below as the adjacency interval.
 
-  largs = ragged_array_index_space_interval::make_arg_list(_adjacency, false);
-
   _adjacency_begin =
-    _id_spaces->new_secondary_interval("ragged_array_index_space_interval",
-				       largs, _vertex_size);
+    ragged_array_index_space_interval::new_space(*_id_spaces,
+						 _vertex_size,
+						 _adjacency,
+						 false).begin();
 
   // The upper cover is initialized.
 

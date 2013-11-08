@@ -21,11 +21,11 @@
 #include "abstract_product_structure.h"
 #include "constant_index_space_interval.h"
 #include "assert_contract.h"
-#include "arg_list.h"
 #include "constant_implicit_index_space_iterator.h"
 #include "forwarding_index_space_handle.h"
 #include "explicit_index_space_state.h"
 #include "hub_index_space_handle.h"
+#include "index_space_family.h"
 
 // ===========================================================
 // SPACE FACTORY FACET
@@ -79,29 +79,6 @@ new_space(index_space_family& xid_spaces,
 
 // PUBLIC MEMBER FUNCTIONS
 
-sheaf::arg_list
-sheaf::constant_index_space_interval::
-make_arg_list(pod_type xhub_id)
-{
-  // Preconditions:
-
-  require(xhub_id >= 0);
-
-  // Body:
-
-  arg_list result = index_space_interval::make_arg_list();
-  result << "hub_id" << xhub_id;
-
-  // Postconditions
-
-  ensure(result.contains_arg("hub_id"));
-  ensure(result.value("hub_id") == xhub_id);
-
-  // Exit:
-
-  return result;
-}
-
 sheaf::constant_index_space_interval::
 ~constant_index_space_interval()
 {  
@@ -154,29 +131,6 @@ constant_index_space_interval()
   return; 
 }
 
-sheaf::constant_index_space_interval::
-constant_index_space_interval(const arg_list& xargs)
-  : index_space_interval(xargs)
-{
-  // Preconditions:
-
-  require(precondition_of(index_space_interval::index_space_interval(xargs)));
-
-  // Body:
-
-  _hub_id = xargs.value("hub_id");
-  
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(postcondition_of(index_space_interval::index_space_interval(xargs)));
-  ensure(hub_id() == xargs.value("hub_id"));
-
-  // Exit:
-
-  return; 
-}
-
 // PRIVATE MEMBER FUNCTIONS
 
 
@@ -207,14 +161,14 @@ class_name() const
 
 sheaf::constant_index_space_interval*
 sheaf::constant_index_space_interval::
-clone(const arg_list& xargs) const
+clone() const
 {
   // Preconditions:
 
   // Body:
 
   constant_index_space_interval* result =
-    new constant_index_space_interval(xargs);
+    new constant_index_space_interval();
 
   // Postconditions:
 

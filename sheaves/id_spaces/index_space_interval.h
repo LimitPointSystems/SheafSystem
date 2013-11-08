@@ -25,8 +25,8 @@
 #include "sheaf_dll_spec.h"
 #endif
 
-#ifndef FACTORY_2_H
-#include "factory_2.h"
+#ifndef FACTORY_H
+#include "factory.h"
 #endif
 
 #ifndef INDEX_SPACE_COLLECTION_H
@@ -36,8 +36,6 @@
 namespace sheaf
 {
   
-class arg_list;
-
 ///
 /// An implemenation of index_space_collection that adds an interface
 /// for the interval [begin(), end()) in the id space family.
@@ -54,11 +52,6 @@ class SHEAF_DLL_SPEC index_space_interval : public index_space_collection
   //@{
 
 public:
-
-  ///
-  /// Creates an arg list for constructing an instance of this.
-  ///
-  static arg_list make_arg_list();
 
   ///
   /// Destructor
@@ -90,11 +83,6 @@ protected:
   /// Default constructor
   ///
   index_space_interval();
-
-  ///
-  /// Constructor: Creates an instance from arguments, xargs.
-  ///
-  index_space_interval(const arg_list& xargs);
 
   ///
   /// Copy constructor; disabled.
@@ -217,13 +205,12 @@ public:
   ///
   /// A factory for making descendants of this class.
   ///
-  static factory_2<index_space_interval>& id_space_interval_factory();
+  static factory<index_space_interval>& id_space_interval_factory();
 
   ///
-  /// Virtual constructor; create a new instance of the same type at this
-  /// with arguments xargs.
+  /// Virtual constructor; create a new instance of the same type at thi.
   ///
-  virtual index_space_interval* clone(const arg_list& xargs) const = 0;
+  virtual index_space_interval* clone() const = 0;
 
 protected:
 

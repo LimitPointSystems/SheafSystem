@@ -21,11 +21,11 @@
 #include "abstract_product_structure.h"
 #include "ragged_array_index_space_interval.h"
 #include "assert_contract.h"
-#include "arg_list.h"
 #include "ragged_array_implicit_index_space_iterator.h"
 #include "forwarding_index_space_handle.h"
 #include "explicit_index_space_state.h"
 #include "hub_index_space_handle.h"
+#include "index_space_family.h"
 
 // ===========================================================
 // SPACE FACTORY FACET
@@ -98,31 +98,6 @@ new_space(index_space_family& xid_spaces,
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
-
-sheaf::arg_list
-sheaf::ragged_array_index_space_interval::
-make_arg_list(ragged_array<pod_type>& xhub_ids,
-	      bool xowns_hub_ids)
-{
-  // Preconditions:
-
-  // Body:
-
-  arg_list result = index_space_interval::make_arg_list();
-  result << "hub_ids" << &xhub_ids
-	 << "owns_hub_ids" << xowns_hub_ids;
-
-  // Postconditions
-
-  ensure(result.contains_arg("hub_ids"));
-  ensure((void *) result.value("hub_ids") == &xhub_ids);
-  ensure(result.contains_arg("owns_hub_ids"));
-  ensure(result.value("owns_hub_ids") == xowns_hub_ids);
-
-  // Exit:
-
-  return result;
-}
 
 sheaf::ragged_array_index_space_interval::
 ~ragged_array_index_space_interval()
@@ -199,50 +174,6 @@ ragged_array_index_space_interval()
   return; 
 }
 
-sheaf::ragged_array_index_space_interval::
-ragged_array_index_space_interval(const arg_list& xargs)
-  : index_space_interval(xargs)
-{
-  // Preconditions:
-
-  require(precondition_of(index_space_interval::index_space_interval(xargs)));
-
-  // Body:
-
-  ragged_array<pod_type>* lhub_ids =
-    reinterpret_cast<ragged_array<pod_type>*>((void *) xargs.value("hub_ids"));
-  
-  _owns_hub_ids = xargs.value("owns_hub_ids");
-
-  if(_owns_hub_ids)
-  {
-    // Use the assignment operator of block to copy the contents of the
-    // user input into the hub ids array.
-
-    _hub_ids = new ragged_array<pod_type>();
-
-    *_hub_ids = *lhub_ids;
-  }
-  else
-  {
-    // The user is responsible for the memory management, copy the point
-    // to the user input.
-
-    _hub_ids = lhub_ids;
-  }
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(postcondition_of(index_space_interval::index_space_interval(xargs)));
-  ensure(hub_ids() == *reinterpret_cast<ragged_array<pod_type>*>((void *) xargs.value("hub_ids")));
-  ensure(owns_hub_ids() == xargs.value("owns_hub_ids"));
-
-  // Exit:
-
-  return; 
-}
-
 // PRIVATE MEMBER FUNCTIONS
 
 
@@ -273,14 +204,14 @@ class_name() const
 
 sheaf::ragged_array_index_space_interval*
 sheaf::ragged_array_index_space_interval::
-clone(const arg_list& xargs) const
+clone() const
 {
   // Preconditions:
 
   // Body:
 
   ragged_array_index_space_interval* result =
-    new ragged_array_index_space_interval(xargs);
+    new ragged_array_index_space_interval();
 
   // Postconditions:
 

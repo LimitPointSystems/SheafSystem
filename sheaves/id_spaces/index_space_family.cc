@@ -20,7 +20,6 @@
 
 #include "index_space_family.h"
 #include "assert_contract.h"
-#include "arg_list.h"
 #include "explicit_index_space_interval.h"
 #include "hub_index_space_handle.h"
 #include "index_equivalence_iterator.h"
@@ -443,29 +442,29 @@ max_rep_ids()
 //   return result;
 // }
 
-sheaf::index_space_family::pod_type
-sheaf::index_space_family::
-new_secondary_interval(const string& xinterval_class_name,
-		       const arg_list& xinterval_args,
-		       size_type xub)
-{
-  // Preconditions:
+// sheaf::index_space_family::pod_type
+// sheaf::index_space_family::
+// new_secondary_interval(const string& xinterval_class_name,
+// 		       const arg_list& xinterval_args,
+// 		       size_type xub)
+// {
+//   // Preconditions:
 
-  require(!xinterval_class_name.empty());
-  require(index_space_interval::id_space_interval_factory().contains_prototype(xinterval_class_name));
+//   require(!xinterval_class_name.empty());
+//   require(index_space_interval::id_space_interval_factory().contains_prototype(xinterval_class_name));
 
-  // Body:
+//   // Body:
 
-  pod_type result = new_interval(xinterval_class_name, xinterval_args, xub);
+//   pod_type result = new_interval(xinterval_class_name, xinterval_args, xub);
 
-  // Postconditions:
+//   // Postconditions:
 
-  ensure(invariant());
+//   ensure(invariant());
 
-  // Exit:
+//   // Exit:
 
-  return result;
-}
+//   return result;
+// }
 
 void
 sheaf::index_space_family::
@@ -847,6 +846,50 @@ new_state(const string& xname,
 //   return result;
 // }  
 
+// sheaf::index_space_family::pod_type
+// sheaf::index_space_family::
+// new_interval(const string& xinterval_class_name,
+// 	     const arg_list& xinterval_args,
+// 	     size_type xub)
+// {
+//   // Preconditions:
+
+//   pod_type result = _end;
+//   _end += xub;
+
+//   // Add extra arguments required by the index_space_interval constructor.
+
+//   arg_list linterval_args(xinterval_args);
+//   linterval_args << "id_spaces" << this;
+//   linterval_args << "begin" << result;
+//   linterval_args << "end" << _end;
+
+//   // Construct the interval.
+
+//   index_space_interval* linterval =
+//     index_space_interval::
+//     id_space_interval_factory().new_instance(xinterval_class_name,
+// 					     linterval_args);
+
+//   // Insert interval into the map.
+
+//   _intervals[_end] = linterval;
+
+//   if(_intervals.find(result) == _intervals.end())
+//   {
+//     // The beginning of the interval is not the end of some other
+//     // interval.
+
+//     _intervals[result] = 0;
+//   }
+  
+//   // Postconditions:
+
+//   // Exit:
+
+//   return result;
+// }
+
 void
 sheaf::index_space_family::
 insert_interval(index_space_interval& xinterval)
@@ -880,50 +923,6 @@ insert_interval(index_space_interval& xinterval)
   // Exit:
 
   return;
-}
-
-sheaf::index_space_family::pod_type
-sheaf::index_space_family::
-new_interval(const string& xinterval_class_name,
-	     const arg_list& xinterval_args,
-	     size_type xub)
-{
-  // Preconditions:
-
-  pod_type result = _end;
-  _end += xub;
-
-  // Add extra arguments required by the index_space_interval constructor.
-
-  arg_list linterval_args(xinterval_args);
-  linterval_args << "id_spaces" << this;
-  linterval_args << "begin" << result;
-  linterval_args << "end" << _end;
-
-  // Construct the interval.
-
-  index_space_interval* linterval =
-    index_space_interval::
-    id_space_interval_factory().new_instance(xinterval_class_name,
-					     linterval_args);
-
-  // Insert interval into the map.
-
-  _intervals[_end] = linterval;
-
-  if(_intervals.find(result) == _intervals.end())
-  {
-    // The beginning of the interval is not the end of some other
-    // interval.
-
-    _intervals[result] = 0;
-  }
-  
-  // Postconditions:
-
-  // Exit:
-
-  return result;
 }
 
 void
@@ -1034,13 +1033,10 @@ reserve_next_explicit_id()
   {
     // Construct a new explicit id space interval.
 
-    _next_explicit_id = new_interval("explicit_index_space_interval",
-				     explicit_index_space_interval::make_arg_list(),
-				     explicit_interval_size());
-
     _explicit_interval =
-      reinterpret_cast<explicit_index_space_interval*>
-      (_intervals.upper_bound(_next_explicit_id)->second);
+      const_cast<explicit_index_space_interval*>(&explicit_index_space_interval::new_space(*this, explicit_interval_size()));
+
+    _next_explicit_id = _explicit_interval->begin();
   }
 
   pod_type result = _next_explicit_id;
