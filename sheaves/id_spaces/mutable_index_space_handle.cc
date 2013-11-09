@@ -513,8 +513,8 @@ remove(index_space_iterator& xitr, bool xupdate_extrema)
 
   // Postconditions:
 
-  ensure(!contains(old_itr_id));
-  ensure(!contains(old_itr_hub_id));
+  // ensure(!contains(old_itr_id)); not true for list_cover_id_space
+  ensure(!contains_hub(old_itr_hub_id));
   ensure(ct() == old_ct - 1);
   ensure(xupdate_extrema || begin() == old_begin);
   ensure(xupdate_extrema || end() == old_end);
@@ -522,7 +522,8 @@ remove(index_space_iterator& xitr, bool xupdate_extrema)
   ensure(xupdate_extrema && is_empty() ? !is_valid(end()) : true);
   ensure(xupdate_extrema && !is_empty() ? begin() >= old_begin : true);
   ensure(xupdate_extrema && !is_empty() ? end() <= old_end : true);
-  ensure(xitr.is_done() || xitr.pod() > old_itr_id);
+  // ensure(xitr.is_done() || xitr.pod() > old_itr_pod); Not true for list_index_space.
+  ensure(unexecutable("xitr.is_done() || xitr.hub_pod() == old_next_itr_hub_pod"));
 
   // Exit:
 
