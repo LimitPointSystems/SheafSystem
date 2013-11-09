@@ -21,11 +21,11 @@
 # configurations however.
 
 if(WIN32)
-    set(CMAKE_CONFIGURATION_TYPES Debug-contracts Debug-no-contracts Release-contracts Release-no-contracts 
-         RelWithDebInfo-contracts RelWithDebInfo-no-contracts CACHE STRING "Supported configuration types"
+    set(CMAKE_CONFIGURATION_TYPES Debug_contracts Debug_no_contracts Release_contracts Release_no_contracts 
+         RelWithDebInfo_contracts RelWithDebInfo_no_contracts CACHE STRING "Supported configuration types"
         FORCE)
 else()
-    set(CMAKE_CONFIGURATION_TYPES Debug-contracts Debug-no-contracts Release-contracts Release-no-contracts 
+    set(CMAKE_CONFIGURATION_TYPES Debug_contracts Debug_no_contracts Release_contracts Release_no_contracts 
          CACHE STRING "Supported configuration types"
         FORCE)
 endif()
@@ -99,6 +99,11 @@ install(FILES ${PROJECT_BINARY_DIR}/RELEASE DESTINATION ${CMAKE_INSTALL_PREFIX})
 # Generate the install configuration file.
 #
 generate_install_config_file()
+
+#
+# Install HDF5 headers to <include> dir
+#
+install_prereqs()
 
 #
 # Install the exports file

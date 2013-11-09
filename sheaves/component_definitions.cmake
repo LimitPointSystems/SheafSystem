@@ -138,7 +138,7 @@ function(add_library_targets)
         set_target_properties(${${COMPONENT}_STATIC_LIB} 
             PROPERTIES OUTPUT_NAME 
             ${PROJECT_NAME} LINKER_LANGUAGE CXX)
-        target_link_libraries(${${COMPONENT}_STATIC_LIB} hdf5_cpp )       
+        target_link_libraries(${${COMPONENT}_STATIC_LIB} LINK_PRIVATE hdf5 )       
 
         # Shared library
         add_library(${${COMPONENT}_SHARED_LIB} 
@@ -150,7 +150,7 @@ function(add_library_targets)
             PROPERTIES 
             LINK_INTERFACE_LIBRARIES "")          
         target_link_libraries(${${COMPONENT}_SHARED_LIB} 
-            -Wl,-Bstatic hdf5_cpp -Wl,-Bdynamic)  
+            LINK_PRIVATE -Wl,-Bstatic hdf5 -Wl,-Bdynamic)  
 
         # Override cmake's placing of "${COMPONENT_LIB}_EXPORTS into the preproc 
         # symbol table. CMake apparently detects the presence of cdecl_dllspec in 
