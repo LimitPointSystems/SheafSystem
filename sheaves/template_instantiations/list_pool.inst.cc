@@ -37,6 +37,7 @@
 #include "offset_index_space_iterator.h"
 #include "primary_index_space_handle.h"
 #include "primary_index_space_iterator.h"
+#include "primitives_index_space_handle.h"
 #include "primitives_index_space_iterator.h"
 #include "ragged_array_implicit_index_space_iterator.h"
 #include "reserved_primary_index_space_handle.h"
@@ -107,21 +108,6 @@ template
 SHEAF_DLL_SPEC
 size_t
 sheaf::deep_size<sheaf::constant_implicit_index_space_iterator>(const list_pool<constant_implicit_index_space_iterator>& xpool, bool xinclude_shallow);
-#endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
-
-//==============================================================================
-// explicit_index_space_handle
-//==============================================================================
-
-template class
-SHEAF_DLL_SPEC
-sheaf::list_pool<sheaf::explicit_index_space_handle>;
-
-#ifndef DOXYGEN_SKIP_INSTANTIATIONS
-template 
-SHEAF_DLL_SPEC
-size_t
-sheaf::deep_size<sheaf::explicit_index_space_handle>(const list_pool<explicit_index_space_handle>& xpool, bool xinclude_shallow);
 #endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
 
 //==============================================================================
@@ -317,6 +303,21 @@ template
 SHEAF_DLL_SPEC
 size_t
 sheaf::deep_size<sheaf::primary_index_space_iterator>(const list_pool<primary_index_space_iterator>& xpool, bool xinclude_shallow);
+#endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
+
+//==============================================================================
+// primitives_index_space_handle
+//==============================================================================
+
+template class
+SHEAF_DLL_SPEC
+sheaf::list_pool<sheaf::primitives_index_space_handle>;
+
+#ifndef DOXYGEN_SKIP_INSTANTIATIONS
+template 
+SHEAF_DLL_SPEC
+size_t
+sheaf::deep_size<sheaf::primitives_index_space_handle>(const list_pool<primitives_index_space_handle>& xpool, bool xinclude_shallow);
 #endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
 
 //==============================================================================

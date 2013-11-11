@@ -20,6 +20,8 @@
 #include "factory.impl.h"
 
 #include "crg_interval.h"
+#include "explicit_index_space_state.h"
+#include "index_space_interval.h"
 
 using namespace sheaf; // Workaround for MS C++ bug.
 
@@ -30,3 +32,11 @@ using namespace sheaf; // Workaround for MS C++ bug.
 template class 
 SHEAF_DLL_SPEC
 sheaf::factory<sheaf::crg_interval>;
+
+template class 
+SHEAF_DLL_SPEC
+sheaf::factory<sheaf::explicit_index_space_state>;
+
+template class 
+SHEAF_DLL_SPEC
+sheaf::factory<sheaf::index_space_interval>;
