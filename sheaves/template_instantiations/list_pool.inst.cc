@@ -20,17 +20,19 @@
 #include "list_pool.impl.h"
 
 #include "array_implicit_index_space_iterator.h"
+#include "array_index_space_handle.h"
 #include "array_index_space_iterator.h"
 #include "constant_implicit_index_space_iterator.h"
 #include "explicit_index_space_handle.h"
 #include "forwarding_index_space_handle.h"
+#include "hash_index_space_handle.h"
 #include "hash_index_space_iterator.h"
 #include "hub_index_space_handle.h"
 #include "hub_index_space_iterator.h"
 #include "interval_index_space_handle.h"
 #include "interval_index_space_iterator.h"
 #include "list_index_space_iterator.h"
-#include "mutable_index_space_handle.h"
+#include "list_index_space_handle.h"
 #include "offset_index_space_handle.h"
 #include "offset_index_space_iterator.h"
 #include "primary_index_space_handle.h"
@@ -60,6 +62,21 @@ template
 SHEAF_DLL_SPEC
 size_t
 sheaf::deep_size<sheaf::array_implicit_index_space_iterator>(const list_pool<array_implicit_index_space_iterator>& xpool, bool xinclude_shallow);
+#endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
+
+//==============================================================================
+// array_index_space_handle
+//==============================================================================
+
+template class
+SHEAF_DLL_SPEC
+sheaf::list_pool<sheaf::array_index_space_handle>;
+
+#ifndef DOXYGEN_SKIP_INSTANTIATIONS
+template 
+SHEAF_DLL_SPEC
+size_t
+sheaf::deep_size<sheaf::array_index_space_handle>(const list_pool<array_index_space_handle>& xpool, bool xinclude_shallow);
 #endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
 
 //==============================================================================
@@ -120,6 +137,21 @@ template
 SHEAF_DLL_SPEC
 size_t
 sheaf::deep_size<sheaf::forwarding_index_space_handle>(const list_pool<forwarding_index_space_handle>& xpool, bool xinclude_shallow);
+#endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
+
+//==============================================================================
+// hash_index_space_handle
+//==============================================================================
+
+template class
+SHEAF_DLL_SPEC
+sheaf::list_pool<sheaf::hash_index_space_handle>;
+
+#ifndef DOXYGEN_SKIP_INSTANTIATIONS
+template 
+SHEAF_DLL_SPEC
+size_t
+sheaf::deep_size<sheaf::hash_index_space_handle>(const list_pool<hash_index_space_handle>& xpool, bool xinclude_shallow);
 #endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
 
 //==============================================================================
@@ -198,6 +230,21 @@ sheaf::deep_size<sheaf::interval_index_space_iterator>(const list_pool<interval_
 #endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
 
 //==============================================================================
+// list_index_space_handle
+//==============================================================================
+
+template class
+SHEAF_DLL_SPEC
+sheaf::list_pool<sheaf::list_index_space_handle>;
+
+#ifndef DOXYGEN_SKIP_INSTANTIATIONS
+template 
+SHEAF_DLL_SPEC
+size_t
+sheaf::deep_size<sheaf::list_index_space_handle>(const list_pool<list_index_space_handle>& xpool, bool xinclude_shallow);
+#endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
+
+//==============================================================================
 // list_index_space_iterator
 //==============================================================================
 
@@ -210,21 +257,6 @@ template
 SHEAF_DLL_SPEC
 size_t
 sheaf::deep_size<sheaf::list_index_space_iterator>(const list_pool<list_index_space_iterator>& xpool, bool xinclude_shallow);
-#endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
-
-//==============================================================================
-// mutable_index_space_handle
-//==============================================================================
-
-template class
-SHEAF_DLL_SPEC
-sheaf::list_pool<sheaf::mutable_index_space_handle>;
-
-#ifndef DOXYGEN_SKIP_INSTANTIATIONS
-template 
-SHEAF_DLL_SPEC
-size_t
-sheaf::deep_size<sheaf::mutable_index_space_handle>(const list_pool<mutable_index_space_handle>& xpool, bool xinclude_shallow);
 #endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
 
 //==============================================================================
