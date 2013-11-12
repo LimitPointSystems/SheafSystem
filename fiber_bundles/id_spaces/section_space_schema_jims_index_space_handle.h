@@ -51,6 +51,35 @@ class SHEAF_DLL_SPEC section_space_schema_jims_index_space_handle : public expli
   friend class section_space_schema_jims_index_space_state;
 
   // ===========================================================
+  /// @name SPACE FACTORY FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Create a new section space schema jims id space in the id space
+  /// family xid_space with name xname, base space id space xbase_space_id_space,
+  /// fiber schema id space, xfiber_schema_id_space and section space schema
+  /// product structure xsection_space_schema_product.
+  /// Returns a handle to the id space created.
+  ///
+  static
+  section_space_schema_jims_index_space_handle
+  new_space(index_space_family& xid_spaces,
+	    const string& xname,
+	    const index_space_handle& xbase_space_id_space,
+	    const index_space_handle& xfiber_schema_id_space,
+	    const ij_product_structure& xsection_space_schema_product);
+
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
   /// @name SECTION_SPACE_SCHEMA_JIMS_INDEX_SPACE_HANDLE FACET
   // ===========================================================
   //@{

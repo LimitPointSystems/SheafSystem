@@ -28,6 +28,61 @@
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // ===========================================================
+// SPACE FACTORY FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+fiber_bundle::section_space_schema_jims_index_space_handle
+fiber_bundle::section_space_schema_jims_index_space_handle::
+new_space(index_space_family& xid_spaces,
+	  const string& xname,
+	  const index_space_handle& xbase_space_id_space,
+	  const index_space_handle& xfiber_schema_id_space,
+	  const ij_product_structure& xsection_space_schema_product)
+{
+  // Preconditions:
+
+  require(!xname.empty());
+  require(!xid_spaces.contains(xname));
+
+  // Body:
+
+  section_space_schema_jims_index_space_handle result =
+    section_space_schema_jims_index_space_state::new_space(xid_spaces,
+							   xname,
+							   xbase_space_id_space,
+							   xfiber_schema_id_space,
+							   xsection_space_schema_product);
+
+  // Postconditions:
+
+  ensure(&result.id_spaces() == &xid_spaces);
+  ensure(xid_spaces.contains(xname));
+  ensure(result.conforms_to_state(xname));
+
+  ensure(result.name() == xname);
+  ensure(!result.is_persistent());
+
+  ensure(result.base_space() == xbase_space_id_space);
+  ensure(result.fiber_schema() == xfiber_schema_id_space);
+  ensure(unexecutable("result.section_space_schema_product_structure() == xsection_space_schema_product"));
+
+  ensure(result.begin() == 0);
+  ensure(result.end() == xbase_space_id_space.end()*xfiber_schema_id_space.end());
+  ensure(result.ct() == xbase_space_id_space.ct()*xfiber_schema_id_space.ct());
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+// ===========================================================
 // SECTION_SPACE_SCHEMA_JIMS_INDEX_SPACE_HANDLE FACET
 // ===========================================================
 
