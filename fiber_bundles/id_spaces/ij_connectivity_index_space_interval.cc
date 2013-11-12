@@ -47,7 +47,7 @@ new_space(index_space_family& xid_spaces,
   // Preconditions:
 
   require(xub > 0);
-  require(xid_spaces.contains(xvertex_hub_begin));
+  require(xid_spaces.hub_id_space().contains(xvertex_hub_begin));
   require(xj_size > 0);
 
   // Body:
@@ -60,6 +60,8 @@ new_space(index_space_family& xid_spaces,
   result_ptr->_vertex_hub_begin = xvertex_hub_begin;
   result_ptr->_j_size = xj_size;
 
+  result_ptr->_j_vertex_size = result_ptr->_j_size+1;
+  
   const ij_connectivity_index_space_interval& result = *result_ptr;
 
   // Postconditions:

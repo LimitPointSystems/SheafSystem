@@ -49,6 +49,8 @@ new_space(index_space_family& xid_spaces,
   explicit_index_space_interval* result_ptr = new explicit_index_space_interval();
   result_ptr->new_state(xid_spaces, xub);
 
+  result_ptr->_states.reserve(xub);
+  
   const explicit_index_space_interval& result = *result_ptr;
 
   // Postconditions:

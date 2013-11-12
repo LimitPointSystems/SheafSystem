@@ -902,7 +902,7 @@ insert_interval(index_space_interval& xinterval)
 
   // Insert interval into the map.
 
-  _intervals[_end] = &xinterval;
+  _intervals[xinterval.end()] = &xinterval;
 
   if(_intervals.find(xinterval.begin()) == _intervals.end())
   {
@@ -917,8 +917,6 @@ insert_interval(index_space_interval& xinterval)
   _end = xinterval.end();
   
   // Postconditions:
-
-  ensure_for_all(i, xinterval.begin(), xinterval.end(), contains(i));
 
   // Exit:
 

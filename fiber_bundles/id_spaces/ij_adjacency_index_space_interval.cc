@@ -48,7 +48,7 @@ new_space(index_space_family& xid_spaces,
   // Preconditions:
 
   require(xub > 0);
-  require(xid_spaces.contains(xzone_hub_begin));
+  require(xid_spaces.hub_id_space().contains(xzone_hub_begin));
   require(xi_size > 0);
   require(xj_size > 0);
 
@@ -62,6 +62,9 @@ new_space(index_space_family& xid_spaces,
   result_ptr->_zone_hub_begin = xzone_hub_begin;
   result_ptr->_i_size = xi_size;
   result_ptr->_j_size = xj_size;
+
+  result_ptr->_i_vertex_size = result_ptr->_i_size+1;
+  result_ptr->_j_vertex_size = result_ptr->_j_size+1;
 
   const ij_adjacency_index_space_interval& result = *result_ptr;
 

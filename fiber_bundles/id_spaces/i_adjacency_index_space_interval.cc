@@ -46,7 +46,7 @@ new_space(index_space_family& xid_spaces,
   // Preconditions:
 
   require(xub > 0);
-  require(xid_spaces.contains(xzone_hub_begin));
+  require(xid_spaces.hub_id_space().contains(xzone_hub_begin));
   require(xi_size > 0);
 
   // Body:

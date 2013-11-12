@@ -299,6 +299,7 @@ initialize_vertex_client_id_space(block_adjacency& xadjacency)
 
   assertion(lhub_vertex_id == lzone_begin + xadjacency.zone_ct() + xadjacency.node_ct());
 
+  _vertex_client_space_id = lclient_id_space.index();
   _vertex_client_id_space_initialized = true;
 
   // Postconditions:
@@ -577,6 +578,7 @@ initialize_lower_covers()
     explicit_index_space_interval::new_space(*_id_spaces, 1).begin();
 
   offset_index_space_state::new_space(*_id_spaces,
+				      _lower_covers_begin,
 				      implicit_cover_name(LOWER, interval_member()),
 				      _zone_begin,
 				      _zone_size);
@@ -637,6 +639,7 @@ initialize_upper_covers()
     explicit_index_space_interval::new_space(*_id_spaces, 1).begin();
 
   list_index_space_state::new_space(*_id_spaces,
+				    _upper_covers_begin,
 				    explicit_cover_name(UPPER, interval_member()),
 				    false);
 
