@@ -38,7 +38,7 @@ project(SheafSystem)
 #
 # Specify the minimum cmake version.
 #
-cmake_minimum_required(VERSION 2.8.8)
+cmake_minimum_required(VERSION 2.8.12)
 
 #
 # Include variable definitions and functions
