@@ -51,6 +51,8 @@ forwarding_index_space_handle()
 
 sheaf::forwarding_index_space_handle::
 forwarding_index_space_handle(const forwarding_index_space_handle& xother)
+  : _host(0),
+    _local_id(invalid_pod_index())
 {
   // Preconditions:
 
@@ -121,19 +123,20 @@ sheaf::forwarding_index_space_handle::
 operator=(const forwarding_index_space_handle& xother)
 {
   // Preconditions:
-    
+
+  require(xother.is_attached() ? conforms_to_state(xother) : true);
+
   // Body:
-  
-  _host = xother._host;
-  _local_id = xother._local_id;
+
+  attach_to(xother);
 
   // Postconditions:
 
   ensure(invariant());
   ensure((*this) == xother);
 
-  // Exit
-  
+  // Exit:
+
   return *this;
 }
 
@@ -169,54 +172,21 @@ sheaf::forwarding_index_space_handle::
 operator=(const index_space_handle& xother)
 {
   // Preconditions:
-    
-  require(is_ancestor_of(&xother));
+
+  require(xother.is_attached() ? conforms_to_state(xother) : true);
 
   // Body:
-  
-  const forwarding_index_space_handle& lother =
-    dynamic_cast<const forwarding_index_space_handle&>(xother);
 
-  _host = lother._host;
-  _local_id = lother._local_id;
+  attach_to(xother);
 
   // Postconditions:
 
   ensure(invariant());
   ensure((*this) == xother);
 
-  // Exit
-  
+  // Exit:
+
   return *this;
-}
-
-bool
-sheaf::forwarding_index_space_handle::
-operator==(const index_space_handle& xother) const
-{
-  // Preconditions:
-
-  require(is_ancestor_of(&xother));
-
-  // Body:
-
-  bool result = (is_attached() == xother.is_attached());
-  if(result && is_attached())
-  {
-    const forwarding_index_space_handle& lother =
-      dynamic_cast<const forwarding_index_space_handle&>(xother);
-
-    result = result && (_host == lother._host);
-    result = result && (_local_id == lother._local_id);
-  }
-  
-  // Postconditions:
-
-  ensure(is_basic_query);
-
-  // Exit
-
-  return result;
 }
 
 sheaf::forwarding_index_space_handle*

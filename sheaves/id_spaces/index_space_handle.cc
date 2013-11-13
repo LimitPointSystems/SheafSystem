@@ -55,11 +55,11 @@ operator=(const index_space_handle& xother)
 {
   // Preconditions:
 
-  require(is_ancestor_of(&xother));
+  require(xother.is_attached() ? conforms_to_state(xother) : true);
 
   // Body:
 
-  is_abstract();
+  attach_to(xother);
 
   // Postconditions:
 
@@ -77,17 +77,20 @@ operator==(const index_space_handle& xother) const
 {
   // Preconditions:
 
-  require(is_ancestor_of(&xother));
-
   // Body:
 
-  bool result = false; // Just to silence compiler warnings.
-
-  is_abstract();
+  bool result = (is_attached() == xother.is_attached());
+  if(result && is_attached())
+  {
+    result = result && (&id_spaces() == &xother.id_spaces());
+    result = result && (index() == xother.index());
+  }
 
   // Postconditions:
 
-  // Exit
+  ensure(is_basic_query);
+
+  // Exit:
 
   return result;
 }
@@ -966,29 +969,39 @@ attach_to(const string& xname)
 
 void
 sheaf::index_space_handle::
-attach_to(const index_space_handle& xid_space)
+attach_to(const index_space_handle& xother)
 {
   // Preconditions:
 
-  require(xid_space.is_attached());
-  require(conforms_to_state(xid_space.id_spaces(), xid_space.index()));
+  require(xother.is_attached() ? conforms_to_state(xother) : true);
 
   // Body:
 
-  if(is_attached() && (host() == xid_space.host()))
+  if(xother.is_attached())
   {
-    attach_to(xid_space.index());
+    // xother is attached; attach this to the state of xother.
+
+    if(is_attached() && (host() == xother.host()))
+    {
+      attach_to(xother.index());
+    }
+    else
+    {
+      attach_to(xother.id_spaces(), xother.index());
+    }
   }
   else
   {
-    attach_to(xid_space.id_spaces(), xid_space.index());
+    // xother is not attached; detach this.
+
+    detach();
   }
 
   // Postconditions:
 
-  ensure(is_attached());
-  ensure(&host() == &xid_space.host());
-  ensure(index() == xid_space.index());
+  ensure(is_attached() == xother.is_attached());
+  ensure(is_attached() ? &host() == &xother.host() : true);
+  ensure(is_attached() ? index() == xother.index() : true);
 
   // Exit:
 
@@ -1115,6 +1128,42 @@ conforms_to_state(const string& xname) const
   // Body:
 
   bool result = conforms_to_state(id_spaces(), xname);
+
+  // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return result;
+}
+
+bool
+sheaf::index_space_handle::
+conforms_to_state(const index_space_handle& xother) const
+{
+  // Preconditions:
+
+  // Body:
+
+  // Any handle can conform to an unattached state.
+
+  bool result = !xother.is_attached();
+
+  if(!result)
+  {
+    // xother is attached to a state; check to see if this handle
+    // conforms to the state of xother.
+
+    if(is_attached() && (host() == xother.host()))
+    {
+      result = conforms_to_state(xother.index());
+    }
+    else
+    {
+      result = conforms_to_state(xother.id_spaces(), xother.index());
+    }
+  }
 
   // Postconditions:
 

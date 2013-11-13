@@ -168,18 +168,20 @@ sheaf::interval_index_space_handle::
 operator=(const interval_index_space_handle& xother)
 {
   // Preconditions:
-    
+
+  require(xother.is_attached() ? conforms_to_state(xother) : true);
+
   // Body:
-  
-  (void) explicit_index_space_handle::operator=(xother);
+
+  attach_to(xother);
 
   // Postconditions:
 
   ensure(invariant());
   ensure((*this) == xother);
 
-  // Exit
-  
+  // Exit:
+
   return *this;
 }
 
@@ -643,6 +645,28 @@ print_map_rep(ostream& xos) const
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
+
+sheaf::interval_index_space_handle&
+sheaf::interval_index_space_handle::
+operator=(const index_space_handle& xother)
+{
+  // Preconditions:
+
+  require(xother.is_attached() ? conforms_to_state(xother) : true);
+
+  // Body:
+
+  attach_to(xother);
+
+  // Postconditions:
+
+  ensure(invariant());
+  ensure((*this) == xother);
+
+  // Exit:
+
+  return *this;
+}
 
 sheaf::interval_index_space_handle*
 sheaf::interval_index_space_handle::

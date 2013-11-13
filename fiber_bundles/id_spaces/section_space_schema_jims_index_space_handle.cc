@@ -179,18 +179,20 @@ fiber_bundle::section_space_schema_jims_index_space_handle::
 operator=(const section_space_schema_jims_index_space_handle& xother)
 {
   // Preconditions:
-    
+
+  require(xother.is_attached() ? conforms_to_state(xother) : true);
+
   // Body:
-  
-  (void) explicit_index_space_handle::operator=(xother);
+
+  attach_to(xother);
 
   // Postconditions:
 
   ensure(invariant());
   ensure((*this) == xother);
 
-  // Exit
-  
+  // Exit:
+
   return *this;
 }
 
@@ -419,6 +421,28 @@ update()
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
+
+fiber_bundle::section_space_schema_jims_index_space_handle&
+fiber_bundle::section_space_schema_jims_index_space_handle::
+operator=(const index_space_handle& xother)
+{
+  // Preconditions:
+
+  require(xother.is_attached() ? conforms_to_state(xother) : true);
+
+  // Body:
+
+  attach_to(xother);
+
+  // Postconditions:
+
+  ensure(invariant());
+  ensure((*this) == xother);
+
+  // Exit:
+
+  return *this;
+}
 
 fiber_bundle::section_space_schema_jims_index_space_handle*
 fiber_bundle::section_space_schema_jims_index_space_handle::

@@ -51,6 +51,7 @@ explicit_index_space_handle()
 
 sheaf::explicit_index_space_handle::
 explicit_index_space_handle(const explicit_index_space_handle& xother)
+  : _state(0)
 {
   // Preconditions:
     
@@ -137,18 +138,20 @@ sheaf::explicit_index_space_handle::
 operator=(const explicit_index_space_handle& xother)
 {
   // Preconditions:
-    
+
+  require(xother.is_attached() ? conforms_to_state(xother) : true);
+
   // Body:
-  
-  _state = xother._state;
+
+  attach_to(xother);
 
   // Postconditions:
 
   ensure(invariant());
   ensure((*this) == xother);
 
-  // Exit
-  
+  // Exit:
+
   return *this;
 }
 
@@ -210,52 +213,21 @@ sheaf::explicit_index_space_handle::
 operator=(const index_space_handle& xother)
 {
   // Preconditions:
-    
-  require(is_ancestor_of(&xother));
+
+  require(xother.is_attached() ? conforms_to_state(xother) : true);
 
   // Body:
-  
-  const explicit_index_space_handle& lother =
-    dynamic_cast<const explicit_index_space_handle&>(xother);
 
-  _state = lother._state;
+  attach_to(xother);
 
   // Postconditions:
 
   ensure(invariant());
   ensure((*this) == xother);
 
-  // Exit
-  
+  // Exit:
+
   return *this;
-}
-
-bool
-sheaf::explicit_index_space_handle::
-operator==(const index_space_handle& xother) const
-{
-  // Preconditions:
-
-  require(is_ancestor_of(&xother));
-
-  // Body:
-
-  bool result = (is_attached() == xother.is_attached());
-  if(result && is_attached())
-  {
-    const explicit_index_space_handle& lother =
-      dynamic_cast<const explicit_index_space_handle&>(xother);
-
-    result = result && (_state == lother._state);
-  }
-  
-  // Postconditions:
-
-  ensure(is_basic_query);
-
-  // Exit
-
-  return result;
 }
 
 sheaf::explicit_index_space_handle*

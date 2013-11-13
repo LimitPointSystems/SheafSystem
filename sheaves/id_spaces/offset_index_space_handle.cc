@@ -171,18 +171,20 @@ sheaf::offset_index_space_handle::
 operator=(const offset_index_space_handle& xother)
 {
   // Preconditions:
-    
+
+  require(xother.is_attached() ? conforms_to_state(xother) : true);
+
   // Body:
-  
-  (void) explicit_index_space_handle::operator=(xother);
+
+  attach_to(xother);
 
   // Postconditions:
 
   ensure(invariant());
   ensure((*this) == xother);
 
-  // Exit
-  
+  // Exit:
+
   return *this;
 }
 
@@ -308,6 +310,28 @@ offset() const
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
+
+sheaf::offset_index_space_handle&
+sheaf::offset_index_space_handle::
+operator=(const index_space_handle& xother)
+{
+  // Preconditions:
+
+  require(xother.is_attached() ? conforms_to_state(xother) : true);
+
+  // Body:
+
+  attach_to(xother);
+
+  // Postconditions:
+
+  ensure(invariant());
+  ensure((*this) == xother);
+
+  // Exit:
+
+  return *this;
+}
 
 sheaf::offset_index_space_handle*
 sheaf::offset_index_space_handle::

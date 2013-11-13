@@ -68,14 +68,15 @@ public:
   virtual ~index_space_handle();
 
   ///
-  /// Assignment operator.
+  /// Assignment operator; attach this handle to the state of xother.
+  /// synonym for attach_to(xother).
   ///
-  virtual index_space_handle& operator=(const index_space_handle& xother) = 0;
+  virtual index_space_handle& operator=(const index_space_handle& xother);
 
   ///
-  /// True if this is equivalent to xother.
+  /// True if this is a handle has the same state as xother.
   ///
-  virtual bool operator==(const index_space_handle& xother) const = 0;
+  bool operator==(const index_space_handle& xother) const;
 
   ///
   /// Virtual constructor, makes a new instance of the same type as this.
@@ -338,9 +339,9 @@ public:
   void attach_to(const string& xname);
 
   ///
-  /// Attach to the state of the id space xid_space.
+  /// Attach to the state of the id space xother.
   ///
-  void attach_to(const index_space_handle& xid_space);
+  void attach_to(const index_space_handle& xother);
 
   ///
   /// True if this conforms to the handle type required by the state
@@ -367,6 +368,12 @@ public:
   /// with name xname.
   ///
   bool conforms_to_state(const string& xname) const;
+
+  ///
+  /// True if this conforms to the handle type required by the state
+  /// of xother.
+  ///
+  bool conforms_to_state(const index_space_handle& xother) const;
 
   ///
   /// Attach to the state with local scope id, xlocal_id in the host id space

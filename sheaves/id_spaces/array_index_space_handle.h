@@ -102,7 +102,8 @@ public:
 			   const string& xname);
 
   ///
-  /// Assignment operator.
+  /// Assignment operator; attach this handle to the state of xother.
+  /// synonym for attach_to(xother).
   ///
   array_index_space_handle& operator=(const array_index_space_handle& xother);
 
@@ -169,6 +170,12 @@ private:
   //@{
 
 public:
+
+  ///
+  /// Assignment operator; attach this handle to the state of xother.
+  /// synonym for attach_to(xother).
+  ///
+  virtual array_index_space_handle& operator=(const index_space_handle& xother);
 
   ///
   /// Virtual constructor, makes a new instance of the same type as this.

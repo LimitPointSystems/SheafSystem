@@ -120,18 +120,20 @@ sheaf::reserved_primary_index_space_handle::
 operator=(const reserved_primary_index_space_handle& xother)
 {
   // Preconditions:
-    
+
+  require(xother.is_attached() ? conforms_to_state(xother) : true);
+
   // Body:
-  
-  (void) explicit_index_space_handle::operator=(xother);
+
+  attach_to(xother);
 
   // Postconditions:
 
   ensure(invariant());
   ensure((*this) == xother);
 
-  // Exit
-  
+  // Exit:
+
   return *this;
 }
 
@@ -354,6 +356,28 @@ is_hub_id_available(pod_type xhub_id) const
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
+
+sheaf::reserved_primary_index_space_handle&
+sheaf::reserved_primary_index_space_handle::
+operator=(const index_space_handle& xother)
+{
+  // Preconditions:
+
+  require(xother.is_attached() ? conforms_to_state(xother) : true);
+
+  // Body:
+
+  attach_to(xother);
+
+  // Postconditions:
+
+  ensure(invariant());
+  ensure((*this) == xother);
+
+  // Exit:
+
+  return *this;
+}
 
 sheaf::reserved_primary_index_space_handle*
 sheaf::reserved_primary_index_space_handle::

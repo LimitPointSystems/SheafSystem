@@ -73,7 +73,8 @@ public:
 				const string& xname);
 
   ///
-  /// Assignment operator.
+  /// Assignment operator; attach this handle to the state of xother.
+  /// synonym for attach_to(xother).
   ///
   forwarding_index_space_handle& operator=(const forwarding_index_space_handle& xother);
 
@@ -107,14 +108,10 @@ private:
 public:
 
   ///
-  /// Assignment operator.
+  /// Assignment operator; attach this handle to the state of xother.
+  /// synonym for attach_to(xother).
   ///
   virtual forwarding_index_space_handle& operator=(const index_space_handle& xother);
-
-  ///
-  /// True if this is equivalent to xother.
-  ///
-  virtual bool operator==(const index_space_handle& xother) const;
 
   ///
   /// Virtual constructor, makes a new instance of the same type as this.

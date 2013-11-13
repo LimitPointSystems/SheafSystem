@@ -162,18 +162,20 @@ sheaf::list_index_space_handle::
 operator=(const list_index_space_handle& xother)
 {
   // Preconditions:
-    
+
+  require(xother.is_attached() ? conforms_to_state(xother) : true);
+
   // Body:
-  
-  (void) mutable_index_space_handle::operator=(xother);
+
+  attach_to(xother);
 
   // Postconditions:
 
   ensure(invariant());
   ensure((*this) == xother);
 
-  // Exit
-  
+  // Exit:
+
   return *this;
 }
 
@@ -278,6 +280,28 @@ state() const
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
+
+sheaf::list_index_space_handle&
+sheaf::list_index_space_handle::
+operator=(const index_space_handle& xother)
+{
+  // Preconditions:
+
+  require(xother.is_attached() ? conforms_to_state(xother) : true);
+
+  // Body:
+
+  attach_to(xother);
+
+  // Postconditions:
+
+  ensure(invariant());
+  ensure((*this) == xother);
+
+  // Exit:
+
+  return *this;
+}
 
 sheaf::list_index_space_handle*
 sheaf::list_index_space_handle::
