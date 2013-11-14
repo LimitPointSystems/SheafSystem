@@ -56,12 +56,6 @@
 %ignore *::operator=;
 %ignore *::operator[];
 
-%ignore scoped_index(primitive_type, index_map*);
-%ignore scoped_index(standard_dof_tuple_index, index_map*);
-%ignore scoped_index(standard_member_index, index_map*);
-%ignore scoped_index(standard_subposet_index, index_map*);
-%ignore scoped_index(standard_version_index, index_map*);
-
 // The following cause unresolved symbol errors during the Windows link phase:
 
 %ignore sheaf::poset_state_handle::default_name;
@@ -203,22 +197,31 @@ typedef sheaf::arg_list::arg_type arg_type;
 %include       "index_space_handle.h"
 %include             "forwarding_index_space_handle.h"
 %include             "explicit_index_space_handle.h"
+%include                   "offset_index_space_handle.h"
 %include                   "sum_index_space_handle.h"
 %include                         "hub_index_space_handle.h"
 %include                   "mutable_index_space_handle.h"
+%include                         "array_index_space_handle.h"
+%include                         "hash_index_space_handle.h"
 %include                         "interval_index_space_handle.h"
+%include                         "list_index_space_handle.h"
 %include                   "primary_index_space_handle.h"
-%include                         "offset_index_space_handle.h"
+%include                         "reserved_primary_index_space_handle.h"
+%include                   "primitives_index_space_handle.h"
+%include                   "singleton_index_space_handle.h"
 %include       "explicit_index_space_state.h"
+%include             "offset_index_space_state.h"
 %include             "mutable_index_space_state.h"
 %include                   "array_index_space_state.h"
 %include                   "hash_index_space_state.h"
 %include                   "interval_index_space_state.h"
+%include                   "list_index_space_state.h"
 %include             "primary_index_space_state.h"
-%include                   "offset_index_space_state.h"
+%include                   "reserved_primary_index_space_state.h"
 %include             "sum_index_space_state.h"
 %include                   "primary_sum_index_space_state.h"
 %include             "primitives_index_space_state.h"
+%include             "singleton_index_space_state.h"
 %include       "index_space_interval_iterator.h"
 %include       "index_space_iterator.h"
 %include             "explicit_index_space_iterator.h"
@@ -226,10 +229,15 @@ typedef sheaf::arg_list::arg_type arg_type;
 %include                   "hash_index_space_iterator.h"
 %include                   "hub_index_space_iterator.h"
 %include                   "interval_index_space_iterator.h"
+%include                   "list_index_space_iterator.h"
 %include                   "offset_index_space_iterator.h"
+%include                   "primary_index_space_iterator.h"
 %include                   "primitives_index_space_iterator.h"
+%include                   "reserved_primary_index_space_iterator.h"
+%include                   "singleton_index_space_iterator.h"
 %include             "implicit_index_space_iterator.h"
 %include                   "array_implicit_index_space_iterator.h"
+%include                   "constant_implicit_index_space_iterator.h"
 %include                   "ragged_array_implicit_index_space_iterator.h"
 %include                   "singleton_implicit_index_space_iterator.h"
 %include       "name_multimap.h"
