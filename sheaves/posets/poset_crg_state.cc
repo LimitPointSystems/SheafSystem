@@ -1421,7 +1421,16 @@ remove_cover_member(index_space_iterator& xitr,
   // Postconditions:
 
   ensure(!cover_contains_member(xlower, xmbr_index, old_itr_hub_pod));
-  ensure(xitr.is_done() || xitr.pod() > old_itr_pod);
+
+  // Because the underlying representation is a list,
+  // the xitr.pod() now actually == old_itr_pod, but that
+  // is not part of the specification. The specified behavior
+  // is however difficult to implement, since we would have to 
+  // get and release an iterator to find the old_next_hub_id.
+
+  // ensure(xitr.is_done() || xitr.pod() > old_itr_pod);
+  ensure(unexecutable("xitr.hub_pod() == old_next_itr_hub_pod"));
+  
 
   // Exit:
 

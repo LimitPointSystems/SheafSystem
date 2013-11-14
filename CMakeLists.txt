@@ -21,11 +21,11 @@
 # configurations however.
 
 if(WIN32)
-    set(CMAKE_CONFIGURATION_TYPES Debug-contracts Debug-no-contracts Release-contracts Release-no-contracts 
-         RelWithDebInfo-contracts RelWithDebInfo-no-contracts CACHE STRING "Supported configuration types"
+    set(CMAKE_CONFIGURATION_TYPES Debug_contracts Debug_no_contracts Release_contracts Release_no_contracts 
+         RelWithDebInfo_contracts RelWithDebInfo_no_contracts CACHE STRING "Supported configuration types"
         FORCE)
 else()
-    set(CMAKE_CONFIGURATION_TYPES Debug-contracts Debug-no-contracts Release-contracts Release-no-contracts 
+    set(CMAKE_CONFIGURATION_TYPES Debug_contracts Debug_no_contracts Release_contracts Release_no_contracts 
          CACHE STRING "Supported configuration types"
         FORCE)
 endif()
@@ -38,7 +38,7 @@ project(SheafSystem)
 #
 # Specify the minimum cmake version.
 #
-cmake_minimum_required(VERSION 2.8.8)
+cmake_minimum_required(VERSION 2.8.12)
 
 #
 # Include variable definitions and functions

@@ -152,8 +152,6 @@ function(add_library_targets)
             ${FIBER_BUNDLES_SHARED_LIBS})
         set_target_properties(${${COMPONENT}_SHARED_LIB} 
             PROPERTIES OUTPUT_NAME ${PROJECT_NAME} LINKER_LANGUAGE CXX)
-        set_target_properties(${${COMPONENT}_SHARED_LIB} 
-            PROPERTIES LINK_INTERFACE_LIBRARIES "") 
         
         # Override cmake's placing of "${COMPONENT_LIB}_EXPORTS into the preproc 
         # symbol table. CMake apparently detects the presence of cdecl_dllspec in 

@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-
+#cmake_policy(SET CMP0022 OLD)
 
 ##
 # This file is the system level counterpart to the component_definitions file
@@ -97,7 +97,7 @@ execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/${INSTALL
 # Set the default build type.
 #
 if(NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE "Debug-contracts" CACHE STRING
+  set(CMAKE_BUILD_TYPE "Debug_contracts" CACHE STRING
       "Choose the type of build, options are: ${CMAKE_CONFIGURATION_TYPES}."      
       FORCE)
 endif(NOT CMAKE_BUILD_TYPE)
@@ -105,17 +105,17 @@ endif(NOT CMAKE_BUILD_TYPE)
 #
 # Tell CMake which configurations are "debug"
 #
-set_property(GLOBAL PROPERTY DEBUG_CONFIGURATIONS "Debug-contracts" "Debug-no-contracts") 
+set_property(GLOBAL PROPERTY DEBUG_CONFIGURATIONS "Debug_contracts" "Debug_no_contracts") 
 
 #
 # Establish the file name suffix for debug type compuiler output
 #
 if(WIN64MSVC OR WIN64INTEL)
-    set(CMAKE_DEBUG-CONTRACTS_POSTFIX "_d" CACHE STRING "Debug libs suffix")
-    set(CMAKE_DEBUG-NO-CONTRACTS_POSTFIX "_d" CACHE STRING "Debug libs suffix")
+    set(CMAKE_DEBUG_CONTRACTS_POSTFIX "_d" CACHE STRING "Debug libs suffix")
+    set(CMAKE_DEBUG_NO_CONTRACTS_POSTFIX "_d" CACHE STRING "Debug libs suffix")
 else()
-    set(CMAKE_DEBUG-CONTRACTS_POSTFIX "_debug" CACHE STRING "Debug libs suffix")
-    set(CMAKE_DEBUG-NO-CONTRACTS_POSTFIX "_debug" CACHE STRING "Debug libs suffix")
+    set(CMAKE_DEBUG_CONTRACTS_POSTFIX "_debug" CACHE STRING "Debug libs suffix")
+    set(CMAKE_DEBUG_NO_CONTRACTS_POSTFIX "_debug" CACHE STRING "Debug libs suffix")
 endif()
 
 #   

@@ -63,7 +63,7 @@ if(BUILD_TOOLS OR BUILD_BINDINGS)
     find_package(JNI)
     if(JAVA_FOUND)
         set(JAVA_BINDING_COMPILE_OPTIONS 
-            "-I${JNI_INCLUDE_DIRS}" "-I${JAVA_INCLUDE_PATH}" "-I${JAVA_INCLUDE_PATH2}""-I${JAVA_AWT_INCLUDE_PATH}" 
+            "-I${JNI_INCLUDE_DIRS}" "-I${JAVA_INCLUDE_PATH}" "-I${JAVA_INCLUDE_PATH2}" "-I${JAVA_AWT_INCLUDE_PATH}" 
             CACHE STRING "JDK compile includes") 
     endif()
     

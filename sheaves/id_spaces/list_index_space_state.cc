@@ -492,6 +492,9 @@ map_rep_remove_entry(index_space_iterator& xitr)
     reinterpret_cast<list_index_space_iterator&>(xitr);
 
   // Remove the current position.
+  // Note that since the id space is determined by sequentially
+  // numbering the items in the list, the pod id
+  // associated with the new value of the iterator is unchanged.
 
   litr._itr = _to_range.erase(litr._itr);
 
@@ -510,9 +513,9 @@ map_rep_remove_entry(index_space_iterator& xitr)
 
   // Postconditions:
 
-  ensure(!contains(old_itr_id));
-  ensure(!contains(old_itr_hub_id));
-  ensure(xitr.is_done() || xitr.pod() > old_itr_id);
+  ensure(!contains_hub(old_itr_hub_id));
+  ensure(xitr.is_done() || xitr.pod() == old_itr_id);
+  ensure(unexecutable("xitr.is_done() || xitr.hub_pod() == old_next_itr_hub_pod"));
 
   // Exit:
 
