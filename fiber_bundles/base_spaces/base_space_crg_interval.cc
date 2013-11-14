@@ -59,7 +59,7 @@ fiber_bundle::base_space_crg_interval::
 
   if(is_valid(_block_vertices_space_id))
   {
-    _id_spaces->delete_secondary_state(_block_vertices_space_id);
+    _id_spaces->delete_space(_block_vertices_space_id);
   }
 
   // Postconditions:

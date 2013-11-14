@@ -54,12 +54,12 @@ sheaf::explicit_crg_interval::
 
   if(is_valid(_lower_covers_begin))
   {
-    _id_spaces->delete_secondary_interval(_lower_covers_begin);
+    _id_spaces->delete_space(_lower_covers_begin);
   }
   
   if(is_valid(_upper_covers_begin))
   {
-    _id_spaces->delete_secondary_interval(_upper_covers_begin);
+    _id_spaces->delete_space(_upper_covers_begin);
   }
 
   // Postconditions:

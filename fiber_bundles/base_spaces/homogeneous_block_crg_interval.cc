@@ -75,13 +75,13 @@ fiber_bundle::homogeneous_block_crg_interval::
   if(is_valid(_zones_space_id) &&
      _id_spaces->contains(_zones_space_id))
   {
-    _id_spaces->delete_secondary_state(_zones_space_id);
+    _id_spaces->delete_space(_zones_space_id);
   }
 
   if(is_valid(_vertices_space_id) &&
      _id_spaces->contains(_vertices_space_id))
   {
-    _id_spaces->delete_secondary_state(_vertices_space_id);
+    _id_spaces->delete_space(_vertices_space_id);
   }
 
   // Postconditions:

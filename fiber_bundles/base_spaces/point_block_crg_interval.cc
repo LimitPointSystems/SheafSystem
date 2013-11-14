@@ -86,29 +86,29 @@ fiber_bundle::point_block_crg_interval::
   {
     // Delete the block interval.
 
-    _id_spaces->delete_secondary_interval(_lower_covers_begin);
+    _id_spaces->delete_space(_lower_covers_begin);
 
     // Delete the vertices interval.
 
-    _id_spaces->delete_secondary_interval(_lower_covers_begin + 1);
+    _id_spaces->delete_space(_lower_covers_begin + 1);
   }
 
   if(is_valid(_upper_covers_begin))
   {
     // Delete the block interval.
 
-    _id_spaces->delete_secondary_interval(_upper_covers_begin);
+    _id_spaces->delete_space(_upper_covers_begin);
 
     // Delete the vertices interval.
 
-    _id_spaces->delete_secondary_interval(_upper_covers_begin + 1);
+    _id_spaces->delete_space(_upper_covers_begin + 1);
   }
 
   if(is_valid(_connectivity_begin))
   {
     // Delete the connectivity interval.
 
-    _id_spaces->delete_secondary_interval(_connectivity_begin);
+    _id_spaces->delete_space(_connectivity_begin);
   }
 
   // For efficiency, the connectivity and adjacency id space interval

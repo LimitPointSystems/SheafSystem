@@ -205,60 +205,15 @@ private:
 
 public:
 
-  /// @todo Remove.
-//   ///
-//   /// Creates a new secondary id space state with name xname, id space state
-//   /// of type xstate_class_name and initialization arguments, xstate_args.
-//   /// Returns the index of the id space state created.
-//   /// @depreciated Use new_space constructors.
-//   ///
-//   pod_type new_secondary_state(const string& xname,
-// 			       const string& xstate_class_name,
-// 			       const arg_list& xstate_args,
-// 			       bool xis_persistent);
-
-//   ///
-//   /// Creates a new secondary id space state at id space index xid
-//   /// with name xname, id space state of type xstate_class_name and
-//   /// initialization arguments, xstate_args.
-//   /// Returns the index of the id space state created.
-//   /// @depreciated Use new_space constructors.
-//   ///
-//   pod_type new_secondary_state(pod_type xid,
-// 			       const string& xname,
-// 			       const string& xstate_class_name,
-// 			       const arg_list& xstate_args,
-// 			       bool xis_persistent);
-
-//   ///
-//   /// Creates a new secondary id space interval with xub reserved id spaces,
-//   /// id space interval of type xinterval_class_name and initialization
-//   /// arguments, xinterval_args.
-//   /// Returns the index of the first id space state in the interval created.
-//   ///
-//   pod_type new_secondary_interval(const string& xinterval_class_name,
-// 				  const arg_list& xinterval_args,
-// 				  size_type xub);
+  ///
+  /// Delete the id space with index xid.
+  ///
+  void delete_space(pod_type xid);
 
   ///
-  /// Delete the primary id space state with index xid.
+  /// Delete the id space with name xname.
   ///
-  void delete_primary_state(pod_type xid);
-
-  ///
-  /// Delete the secondary id space state with name xname.
-  ///
-  void delete_secondary_state(const string& xname);
-
-  ///
-  /// Delete the secondary id space state with index xid.
-  ///
-  void delete_secondary_state(pod_type xid);
-
-  ///
-  /// Delete the secondary id space interval contains index xid.
-  ///
-  void delete_secondary_interval(pod_type xid);
+  void delete_space(const string& xname);
 
   ///
   /// True, if and only if the id space interval that contains index xid
@@ -281,42 +236,20 @@ protected:
   pod_type new_primary_state(pod_type xid, size_type xct);
 
   ///
+  /// Delete the primary space state with id xid.
+  ///
+  void delete_primary_state(pod_type xid);
+
+  ///
   /// Create a new id space with class type xstate_class_name and
   /// name xname.  Used by the I/O system to read secondary id spaces.
   ///
   void new_state(const string& xname, const string& xstate_class_name);
 
-  /// @todo Remove.
-//   ///
-//   /// Create a new id space state with class type xstate_class_name, arguments
-//   /// xstate_args and name xname.
-//   /// @depreciated Use new_space constructors.
-//   ///
-//   pod_type new_state(const string& xname,
-// 		     const string& xstate_class_name,
-// 		     const arg_list& xstate_args,
-// 		     bool xis_persistent);
-
-//   ///
-//   /// Create a new id space state at id space index xid with class type
-//   /// xstate_class_name, arguments xstate_args and name xname.
-//   /// @depreciated Use new_space constructors.
-//   ///
-//   pod_type new_state(pod_type xid,
-// 		     const string& xname,
-// 		     const string& xstate_class_name,
-// 		     const arg_list& xstate_args,
-// 		     bool xis_persistent);
-
-//   ///
-//   /// Creates a new sid space interval with xub reserved id spaces,
-//   /// id space interval of type xinterval_class_name and initialization
-//   /// arguments, xinterval_args.
-//   /// Returns the index of the first id space state in the interval created.
-//   ///
-//   pod_type new_interval(const string& xinterval_class_name,
-// 			const arg_list& xinterval_args,
-// 			size_type xub);
+  ///
+  /// Delete the state with id xid.
+  ///
+  void delete_state(pod_type xid);
 
   ///
   /// Inserts an id space interval into this family.
@@ -324,9 +257,9 @@ protected:
   void insert_interval(index_space_interval& xinterval);
 
   ///
-  /// Delete the state with id xid.
+  /// Delete the interval that contains the id space with id xid.
   ///
-  void delete_state(pod_type xid);
+  void delete_interval(pod_type xid);
 
   ///
   /// Id space collection for id xid (const version).

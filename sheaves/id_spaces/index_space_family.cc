@@ -304,26 +304,26 @@ clear_id_spaces()
 
       if(linterval->begin() >= _standard_end)
       {
-	     // Interval is completely outside the standard id spaces, delete it.
+	// Interval is completely outside the standard id spaces, delete it.
 
-	     _intervals.erase(old_itr);
-	     delete linterval;
+	_intervals.erase(old_itr);
+	delete linterval;
       }
       else if((linterval->begin() < _standard_end) &&
 	      (linterval->end() > _standard_end))
       {
-	     // Interval is partly outside the standard id spaces.
+	// Interval is partly outside the standard id spaces.
 
-	     assertion(dynamic_cast<explicit_index_space_interval*>(linterval) != 0);
+	assertion(dynamic_cast<explicit_index_space_interval*>(linterval) != 0);
 
-	     for(pod_type i=_standard_end; i<linterval->end(); ++i)
-	    {
-	       linterval->remove(linterval->local_scope(i));
-	    }
+	for(pod_type i=_standard_end; i<linterval->end(); ++i)
+	{
+	  linterval->remove(linterval->local_scope(i));
+	}
       }
       else
       {
-	    // Interval complete inside the standard id spaces, do nothing.
+	// Interval complete inside the standard id spaces, do nothing.
       }
     }
   }
@@ -375,120 +375,31 @@ max_rep_ids()
 
 // PUBLIC MEMBER FUNCTIONS
 
-/// @todo Remove.
-// sheaf::index_space_family::pod_type
-// sheaf::index_space_family::
-// new_secondary_state(const string& xname,
-// 		    const string& xstate_class_name,
-// 		    const arg_list& xstate_args,
-// 		    bool xis_persistent)
-// {
-//   // Preconditions:
-
-//   require(!xname.empty());
-//   require(!contains(xname));
-//   require(!xstate_class_name.empty());
-//   require(explicit_index_space_state::id_space_factory().contains_prototype(xstate_class_name));
-
-//   // Body:
-
-//   // Create the id space.
-
-//   pod_type result =
-//     new_state(xname, xstate_class_name, xstate_args, xis_persistent);
-
-//   // Postconditions:
-
-//   ensure(invariant());
-//   ensure(contains(result));
-//   ensure(contains(xname));
-
-//   // Exit:
-
-//   return result;
-// }
-
-// sheaf::index_space_family::pod_type
-// sheaf::index_space_family::
-// new_secondary_state(pod_type xid,
-// 		    const string& xname,
-// 		    const string& xstate_class_name,
-// 		    const arg_list& xstate_args,
-// 		    bool xis_persistent)
-// {
-//   // Preconditions:
-
-//   require(!xname.empty());
-//   require(is_explicit_interval(xid));
-//   require(!contains(xname));
-//   require(!xstate_class_name.empty());
-//   require(explicit_index_space_state::id_space_factory().contains_prototype(xstate_class_name));
-
-//   // Body:
-
-//   // Create the id space.
-
-//   pod_type result =
-//     new_state(xid, xname, xstate_class_name, xstate_args, xis_persistent);
-
-//   // Postconditions:
-
-//   ensure(invariant());
-//   ensure(contains(result));
-//   ensure(contains(xname));
-
-//   // Exit:
-
-//   return result;
-// }
-
-// sheaf::index_space_family::pod_type
-// sheaf::index_space_family::
-// new_secondary_interval(const string& xinterval_class_name,
-// 		       const arg_list& xinterval_args,
-// 		       size_type xub)
-// {
-//   // Preconditions:
-
-//   require(!xinterval_class_name.empty());
-//   require(index_space_interval::id_space_interval_factory().contains_prototype(xinterval_class_name));
-
-//   // Body:
-
-//   pod_type result = new_interval(xinterval_class_name, xinterval_args, xub);
-
-//   // Postconditions:
-
-//   ensure(invariant());
-
-//   // Exit:
-
-//   return result;
-// }
-
 void
 sheaf::index_space_family::
-delete_primary_state(pod_type xid)
+delete_space(pod_type xid)
 {
   // Preconditions:
 
   require(xid != hub_id_space().index());
-  require(!contains(xid) || handle_conforms_to_state<primary_index_space_handle>(xid));
+  require(contains(xid) ? !handle_conforms_to_state<primary_index_space_handle>(xid) : true);
 
   // Body:
 
   if(contains(xid))
   {
-    // Remove from from the id space.
+    if(is_explicit_interval(xid))
+    {
+      // The id space is explicit; delete the state object.
 
-    primary_index_space_handle& lterm =
-      get_id_space<primary_index_space_handle>(xid);
+      delete_state(xid);
+    }
+    else
+    {
+      // The id space is implicit; delete the interval.
 
-    _hub_id_space.remove_term(lterm.hub_term_id());
-
-    // Delete the state object.
-
-    delete_state(xid);
+      delete_interval(xid);
+    }
   }
   
   // Postconditions:
@@ -503,18 +414,18 @@ delete_primary_state(pod_type xid)
 
 void
 sheaf::index_space_family::
-delete_secondary_state(const string& xname)
+delete_space(const string& xname)
 {
   // Preconditions:
 
   require(xname != hub_id_space_name());
-  require(!contains(xname) || !handle_conforms_to_state<primary_index_space_handle>(xname));
+  require(contains(xname) ? !handle_conforms_to_state<primary_index_space_handle>(xname) : true);
 
   // Body:
 
   if(_name_to_index.contains_name(xname))
   {
-    delete_secondary_state(_name_to_index.index(xname));
+    delete_space(_name_to_index.index(xname));
   }
 
   // Postconditions:
@@ -527,24 +438,91 @@ delete_secondary_state(const string& xname)
   return;
 }
 
+bool
+sheaf::index_space_family::
+is_explicit_interval(pod_type xid)
+{
+  // Preconditions:
+
+  // Body:
+
+  bool result =
+    (dynamic_cast<explicit_index_space_interval*>(collection(xid)) != 0);
+
+  // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+sheaf::index_space_family::pod_type
+sheaf::index_space_family::
+new_primary_state(size_type xct)
+{
+  // Preconditions:
+
+  // Body:
+
+  pod_type result = _hub_id_space.new_primary_term(xct);
+
+  // Postconditions:
+
+  ensure(invariant());
+  ensure(contains(result));
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::index_space_family::pod_type
+sheaf::index_space_family::
+new_primary_state(pod_type xid, size_type xct)
+{
+  // Preconditions:
+
+  // Body:
+
+  pod_type result = _hub_id_space.new_primary_term(xid, xct);
+
+  // Postconditions:
+
+  ensure(invariant());
+  ensure(contains(result));
+
+  // Exit:
+
+  return result;
+}
+
 void
 sheaf::index_space_family::
-delete_secondary_state(pod_type xid)
+delete_primary_state(pod_type xid)
 {
   // Preconditions:
 
   require(xid != hub_id_space().index());
-  require(!contains(xid) || !handle_conforms_to_state<primary_index_space_handle>(xid));
+  require(contains(xid));
+  require(handle_conforms_to_state<primary_index_space_handle>(xid));
 
   // Body:
 
-  if(contains(xid))
-  {
-    // Delete the state object.
+  // Remove the term from the hub id space..
 
-    delete_state(xid);
-  }
-     
+  primary_index_space_handle& lterm =
+    get_id_space<primary_index_space_handle>(xid);
+
+  _hub_id_space.remove_term(lterm.hub_term_id());
+
+  // Delete the state.
+
+  delete_state(xid);
+  
   // Postconditions:
 
   ensure(invariant());
@@ -557,7 +535,122 @@ delete_secondary_state(pod_type xid)
 
 void
 sheaf::index_space_family::
-delete_secondary_interval(pod_type xid)
+new_state(const string& xname,
+	  const string& xstate_class_name)
+{
+  // Preconditions:
+
+  require(!xname.empty());
+  require(!contains(xname));
+  require(!xstate_class_name.empty());
+  require(explicit_index_space_state::id_space_factory().contains_prototype(xstate_class_name));
+
+  /// @hack See COM-475.  Remove this precondition once COM-475 is fixed.
+  require(unexecutable("xstate_class_name is a mutable id space state"));
+
+  // Body:
+
+  explicit_index_space_state* lstate =
+    explicit_index_space_state::id_space_factory().new_instance(xstate_class_name);
+
+  lstate->new_state(const_cast<index_space_family&>(*this), xname, true);
+
+  // Postconditions:
+
+  ensure(invariant());
+  ensure(contains(xname));
+
+  /// @hack See COM-475.  Remove this postcondition once COM-475 is fixed.
+  ensure(handle_conforms_to_state<mutable_index_space_handle>(xname));
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::index_space_family::
+delete_state(pod_type xid)
+{
+  // Preconditions:
+
+  // Body:
+
+  index_space_collection* lcollection = collection(xid);
+
+  if(lcollection != 0)
+  {
+    pod_type local_id = lcollection->local_scope(xid);
+
+    // Get the explicit state.
+
+    explicit_index_space_state* lstate = lcollection->explicit_state(local_id);
+
+    // Remove the state from the collection.
+
+    lcollection->remove(local_id);
+
+    // Delete the explicit state, if there is one.
+
+    if(lstate != 0)
+    {
+      delete lstate;
+    }
+  }
+
+  // Delete the names.
+
+  if(_name_to_index.contains_index(xid))
+  {
+    _name_to_index.delete_index(xid);
+  }
+
+  // Postconditions:
+
+  ensure(invariant());
+  ensure(!contains(xid));
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::index_space_family::
+insert_interval(index_space_interval& xinterval)
+{
+  // Preconditions:
+
+  require(xinterval.begin() == end());
+
+  // Body:
+
+  // Insert interval into the map.
+
+  _intervals[xinterval.end()] = &xinterval;
+
+  if(_intervals.find(xinterval.begin()) == _intervals.end())
+  {
+    // The beginning of the interval is not the end of some other
+    // interval.
+
+    _intervals[xinterval.begin()] = 0;
+  }
+
+  // Update the end of ths family.
+
+  _end = xinterval.end();
+  
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::index_space_family::
+delete_interval(pod_type xid)
 {
   // Preconditions:
 
@@ -633,333 +726,6 @@ delete_secondary_interval(pod_type xid)
     }
   }
      
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(!contains(xid));
-
-  // Exit:
-
-  return;
-}
-
-bool
-sheaf::index_space_family::
-is_explicit_interval(pod_type xid)
-{
-  // Preconditions:
-
-  // Body:
-
-  bool result =
-    (dynamic_cast<explicit_index_space_interval*>(collection(xid)) != 0);
-
-  // Postconditions:
-
-  ensure(is_basic_query);
-
-  // Exit:
-
-  return result;
-}
-
-// PROTECTED MEMBER FUNCTIONS
-
-/// @todo Remove
-// sheaf::mutable_index_space_handle
-// sheaf::index_space_family::
-// new_state(const string& xname,
-// 	  const string& xstate_class_name)
-// {
-//   // Preconditions:
-
-//   require(!xname.empty());
-//   require(!contains(xname));
-//   require(!xstate_class_name.empty());
-//   require(explicit_index_space_state::id_space_factory().contains_prototype(xstate_class_name));
-
-//   // Body:
-
-//   // Find the explicit id space interval.
-
-//   if((_explicit_interval == 0) ||
-//      (_next_explicit_id == _explicit_interval->end()))
-//   {
-//     // Construct a new explicit id space interval.
-
-//     _next_explicit_id = new_interval("explicit_index_space_interval",
-// 				     explicit_index_space_interval::make_arg_list(),
-// 				     explicit_interval_size());
-
-//     _explicit_interval =
-//       reinterpret_cast<explicit_index_space_interval*>
-//       (_intervals.upper_bound(_next_explicit_id)->second);
-//   }
-
-//   pod_type result = _next_explicit_id;
-
-//   new_state(result, xname, xstate_class_name, xstate_args, xis_persistent);
-
-//   // Set the next explicit id.
-
-//   _next_explicit_id = result + 1;
-
-//   // Postconditions:
-
-//   ensure(invariant());
-//   ensure(contains(result));
-//   ensure(contains(xname));
-
-//   // Exit:
-
-//   return result;
-// }
-
-sheaf::index_space_family::pod_type
-sheaf::index_space_family::
-new_primary_state(size_type xct)
-{
-  // Preconditions:
-
-  // Body:
-
-  pod_type result = _hub_id_space.new_primary_term(xct);
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(contains(result));
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::index_space_family::pod_type
-sheaf::index_space_family::
-new_primary_state(pod_type xid, size_type xct)
-{
-  // Preconditions:
-
-  // Body:
-
-  pod_type result = _hub_id_space.new_primary_term(xid, xct);
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(contains(result));
-
-  // Exit:
-
-  return result;
-}
-
-void
-sheaf::index_space_family::
-new_state(const string& xname,
-	  const string& xstate_class_name)
-{
-  // Preconditions:
-
-  require(!xname.empty());
-  require(!contains(xname));
-  require(!xstate_class_name.empty());
-  require(explicit_index_space_state::id_space_factory().contains_prototype(xstate_class_name));
-
-  /// @hack See COM-475.  Remove this precondition once COM-475 is fixed.
-  require(unexecutable("xstate_class_name is a mutable id space state"));
-
-  // Body:
-
-  explicit_index_space_state* lstate =
-    explicit_index_space_state::id_space_factory().new_instance(xstate_class_name);
-
-  lstate->new_state(const_cast<index_space_family&>(*this), xname, true);
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(contains(xname));
-
-  /// @hack See COM-475.  Remove this postcondition once COM-475 is fixed.
-  ensure(handle_conforms_to_state<mutable_index_space_handle>(xname));
-
-  // Exit:
-
-  return;
-}
-
-// sheaf::index_space_family::pod_type
-// sheaf::index_space_family::
-// new_state(pod_type xid,
-// 	  const string& xname,
-// 	  const string& xstate_class_name,
-// 	  const arg_list& xstate_args,
-// 	  bool xis_persistent)
-// {
-//   // Preconditions:
-
-//   require(!contains(xid));
-//   require(is_explicit_interval(xid));
-//   require(!xname.empty());
-//   require(!contains(xname));
-//   require(!xstate_class_name.empty());
-//   require(explicit_index_space_state::id_space_factory().contains_prototype(xstate_class_name));
-
-//   // Body:
-
-//   pod_type result = xid;
-
-//   explicit_index_space_interval* lexplicit_interval =
-//     reinterpret_cast<explicit_index_space_interval*>(collection(result));
-
-//   // Add extra arguments required by the explicit_index_space_state constructor.
-
-//   arg_list lstate_args(xstate_args);
-//   lstate_args << "host" << lexplicit_interval;
-//   lstate_args << "index" << result;
-//   lstate_args << "is_persistent" << xis_persistent;
-
-//   // Create the id space.
-
-//   explicit_index_space_state* lstate =
-//     explicit_index_space_state::id_space_factory().new_instance(xstate_class_name,
-// 								lstate_args);
-
-//   // Insert state into the explicit interval.
-
-//   lexplicit_interval->insert(*lstate);
-
-//   // Insert the name.
-
-//   _name_to_index.put_entry(result, xname, false);
-  
-//   // Postconditions:
-
-//   ensure(invariant());
-//   ensure(contains(result));
-//   ensure(contains(xname));
-
-//   // Exit:
-
-//   return result;
-// }  
-
-// sheaf::index_space_family::pod_type
-// sheaf::index_space_family::
-// new_interval(const string& xinterval_class_name,
-// 	     const arg_list& xinterval_args,
-// 	     size_type xub)
-// {
-//   // Preconditions:
-
-//   pod_type result = _end;
-//   _end += xub;
-
-//   // Add extra arguments required by the index_space_interval constructor.
-
-//   arg_list linterval_args(xinterval_args);
-//   linterval_args << "id_spaces" << this;
-//   linterval_args << "begin" << result;
-//   linterval_args << "end" << _end;
-
-//   // Construct the interval.
-
-//   index_space_interval* linterval =
-//     index_space_interval::
-//     id_space_interval_factory().new_instance(xinterval_class_name,
-// 					     linterval_args);
-
-//   // Insert interval into the map.
-
-//   _intervals[_end] = linterval;
-
-//   if(_intervals.find(result) == _intervals.end())
-//   {
-//     // The beginning of the interval is not the end of some other
-//     // interval.
-
-//     _intervals[result] = 0;
-//   }
-  
-//   // Postconditions:
-
-//   // Exit:
-
-//   return result;
-// }
-
-void
-sheaf::index_space_family::
-insert_interval(index_space_interval& xinterval)
-{
-  // Preconditions:
-
-  require(xinterval.begin() == end());
-
-  // Body:
-
-  // Insert interval into the map.
-
-  _intervals[xinterval.end()] = &xinterval;
-
-  if(_intervals.find(xinterval.begin()) == _intervals.end())
-  {
-    // The beginning of the interval is not the end of some other
-    // interval.
-
-    _intervals[xinterval.begin()] = 0;
-  }
-
-  // Update the end of ths family.
-
-  _end = xinterval.end();
-  
-  // Postconditions:
-
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::index_space_family::
-delete_state(pod_type xid)
-{
-  // Preconditions:
-
-  // Body:
-
-  index_space_collection* lcollection = collection(xid);
-
-  if(lcollection != 0)
-  {
-    pod_type local_id = lcollection->local_scope(xid);
-
-    // Get the explicit state.
-
-    explicit_index_space_state* lstate = lcollection->explicit_state(local_id);
-
-    // Remove the state from the collection.
-
-    lcollection->remove(local_id);
-
-    // Delete the explicit state, if there is one.
-
-    if(lstate != 0)
-    {
-      delete lstate;
-    }
-  }
-
-  // Delete the names.
-
-  if(_name_to_index.contains_index(xid))
-  {
-    _name_to_index.delete_index(xid);
-  }
-
   // Postconditions:
 
   ensure(invariant());

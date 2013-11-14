@@ -388,12 +388,12 @@ delete_member(pod_index_type xid)
 
   if(linterval.cover_is_explicit(LOWER, xid))
   {
-    _id_spaces.delete_secondary_state(linterval.cover_id_space_id(LOWER, xid));
+    _id_spaces.delete_space(linterval.cover_id_space_id(LOWER, xid));
   }
   
   if(linterval.cover_is_explicit(UPPER, xid))
   {
-    _id_spaces.delete_secondary_state(linterval.cover_id_space_id(UPPER, xid));
+    _id_spaces.delete_space(linterval.cover_id_space_id(UPPER, xid));
   }
   
   // Remove from dof tuple map.
@@ -1559,7 +1559,7 @@ append_upper_cover_of_bottom(pod_index_type xmbr_begin,
 
     // Delete the current id space state.
 
-    _id_spaces.delete_secondary_state(lspace_id);
+    _id_spaces.delete_space(lspace_id);
 
     // Make a new interval id space state.
 

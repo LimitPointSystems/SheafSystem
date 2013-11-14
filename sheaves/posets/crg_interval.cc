@@ -71,7 +71,7 @@ sheaf::crg_interval::
       itr != llower_cover_map.end();
       ++itr)
   {
-    _id_spaces->delete_secondary_state(itr->second);
+    _id_spaces->delete_space(itr->second);
   }
   
   const explicit_cover_map_type& lupper_cover_map = explicit_cover_map(UPPER);
@@ -79,7 +79,7 @@ sheaf::crg_interval::
       itr != lupper_cover_map.end();
       ++itr)
   {
-    _id_spaces->delete_secondary_state(itr->second);
+    _id_spaces->delete_space(itr->second);
   }
 
   // Postconditions:

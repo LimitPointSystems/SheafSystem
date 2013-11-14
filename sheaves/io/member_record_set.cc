@@ -250,7 +250,7 @@ sheaf::member_record_set::
   /// when it should require read-write access.
 
   _scaffold.structure().get_read_access();
-  _scaffold.structure().member_id_spaces(false).delete_secondary_state(_interval_id_space_name);
+  _scaffold.structure().member_id_spaces(false).delete_space(_interval_id_space_name);
   _scaffold.structure().release_access();
 
   // Postconditions:
