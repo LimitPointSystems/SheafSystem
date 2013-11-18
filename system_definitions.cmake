@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-#cmake_policy(SET CMP0022 OLD)
+cmake_policy(SET CMP0022 NEW)
 
 ##
 # This file is the system level counterpart to the component_definitions file
