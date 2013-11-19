@@ -650,6 +650,12 @@ function(export_targets)
             "set(HDF_INCLUDE_DIR ${HDF5_INCLUDE_DIRS} CACHE STRING \"HDF5 Include Path \")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     endif()
+    
+    if("${COMPONENT}" MATCHES "GEOMETRY")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+            "set(TETGEN_INCLUDE_DIR ${TETGEN_INC_DIR} CACHE STRING \"Tetgen Include Path \")\n")
+    endif()
+                
     if("${COMPONENT}" MATCHES "TOOLS")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
@@ -666,6 +672,7 @@ function(export_targets)
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
             "set(VTK_LIBS ${VTK_LIBS} CACHE STRING \"VTK Libraries\")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")                  
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")        
         file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
