@@ -126,16 +126,23 @@ operator=(const section_space_schema_jims_index_space_iterator& xother)
 
   // Body:
 
-  _base_space_itr = &xother.state().base_space().get_iterator();
-  *_base_space_itr = *xother._base_space_itr;
+  if(xother.is_attached())
+  {
+    _base_space_itr = &xother.state().base_space().get_iterator();
+    *_base_space_itr = *xother._base_space_itr;
   
-  _fiber_schema_itr = &xother.state().fiber_schema().get_iterator();
-  *_fiber_schema_itr = *xother._fiber_schema_itr;
+    _fiber_schema_itr = &xother.state().fiber_schema().get_iterator();
+    *_fiber_schema_itr = *xother._fiber_schema_itr;
   
-  _section_space_schema_jims_product = new ij_product_structure(*xother._section_space_schema_jims_product);
-  _section_space_schema_product = new ij_product_structure(*xother._section_space_schema_product);
+    _section_space_schema_jims_product = new ij_product_structure(*xother._section_space_schema_jims_product);
+    _section_space_schema_product = new ij_product_structure(*xother._section_space_schema_product);
 
-  (void) explicit_index_space_iterator::operator=(xother);
+    (void) explicit_index_space_iterator::operator=(xother);
+  }
+  else
+  {
+    detach();
+  }
 
   // Postconditions:
 

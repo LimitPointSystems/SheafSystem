@@ -122,9 +122,16 @@ operator=(const constant_implicit_index_space_iterator& xother)
 
   // Body:
 
-  _hub_begin = xother._hub_begin;
+  if(xother.is_attached())
+  {
+    _hub_begin = xother._hub_begin;
 
-  (void) implicit_index_space_iterator::operator=(xother);
+    (void) implicit_index_space_iterator::operator=(xother);
+  }
+  else
+  {
+    detach();
+  }
 
   // Postconditions:
 

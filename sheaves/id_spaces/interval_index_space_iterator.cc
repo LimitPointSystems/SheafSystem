@@ -139,12 +139,19 @@ operator=(const interval_index_space_iterator& xother)
 
   // Body:
 
-  _to_hub         = xother._to_hub;
-  _itr            = xother._itr;
-  _interval_begin = xother._interval_begin;
-  _interval_end   = xother._interval_end;
+  if(xother.is_attached())
+  {
+    _to_hub         = xother._to_hub;
+    _itr            = xother._itr;
+    _interval_begin = xother._interval_begin;
+    _interval_end   = xother._interval_end;
 
-  (void) explicit_index_space_iterator::operator=(xother);
+    (void) explicit_index_space_iterator::operator=(xother);
+  }
+  else
+  {
+    detach();
+  }
 
   // Postconditions:
 

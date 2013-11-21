@@ -124,17 +124,24 @@ operator=(const ijk_adjacency_implicit_index_space_iterator& xother)
 
   // Body:
 
-  _hub_begin = xother._hub_begin;
-  _j_size = xother._j_size;
-  _k_size = xother._k_size;
-  _i_ct = xother._i_ct;
-  _j_ct = xother._j_ct;
-  _k_ct = xother._k_ct;
-  _i = xother._i;
-  _j = xother._j;
-  _k = xother._k;
+  if(xother.is_attached())
+  {
+    _hub_begin = xother._hub_begin;
+    _j_size = xother._j_size;
+    _k_size = xother._k_size;
+    _i_ct = xother._i_ct;
+    _j_ct = xother._j_ct;
+    _k_ct = xother._k_ct;
+    _i = xother._i;
+    _j = xother._j;
+    _k = xother._k;
 
-  (void) implicit_index_space_iterator::operator=(xother);
+    (void) implicit_index_space_iterator::operator=(xother);
+  }
+  else
+  {
+    detach();
+  }
 
   // Postconditions:
 
