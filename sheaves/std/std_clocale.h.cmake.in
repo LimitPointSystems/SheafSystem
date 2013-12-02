@@ -23,8 +23,6 @@
 #if HAVE_CLOCALE
 
 #include <clocale>
-using namespace std;
-
 #else
 
 #include <locale.h>

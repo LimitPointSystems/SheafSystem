@@ -32,7 +32,7 @@
 sheaf::list_index_space_handle
 sheaf::list_index_space_handle::
 new_space(index_space_family& xid_spaces,
-	  const string& xname,
+	  const std::string& xname,
 	  bool xis_persistent)
 {
   // Preconditions:
@@ -134,7 +134,7 @@ list_index_space_handle(const index_space_family& xid_spaces,
 
 sheaf::list_index_space_handle::
 list_index_space_handle(const index_space_family& xid_spaces,
-			const string& xname)
+			const std::string& xname)
 {
   // Preconditions:
 

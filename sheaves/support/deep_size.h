@@ -137,7 +137,7 @@ size_t deep_size(const hash_map<K, V, H, E, A>& xp, bool xinclude_shallow);
 ///
 template <typename K, typename V, typename S>
 size_t
-deep_size(const map<K, V>& xp, bool xinclude_shallow);
+deep_size(const std::map<K, V>& xp, bool xinclude_shallow);
 
 ///
 /// The deep size of the referenced object of type list;
@@ -145,7 +145,7 @@ deep_size(const map<K, V>& xp, bool xinclude_shallow);
 ///
 template <typename T>
 size_t
-deep_size(const list<T>& xp, bool xinclude_shallow);
+deep_size(const std::list<T>& xp, bool xinclude_shallow);
 
 ///
 /// The deep size of the referenced primitive of type T.
@@ -160,7 +160,7 @@ deep_size(const T& xvalue, bool xinclude_shallow);
 /// 
 SHEAF_DLL_SPEC
 size_t
-deep_size(const string& xp, bool xinclude_shallow);
+deep_size(const std::string& xp, bool xinclude_shallow);
 
 } // namespace sheaf
 

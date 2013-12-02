@@ -20,6 +20,4 @@
 
 #include <new>
 
-using namespace std;
-
 #endif // STD_NEW_H

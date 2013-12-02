@@ -105,7 +105,7 @@ public:
   /// Conversion from string;
   /// creates a new primitive value of type C_STRING with value x.
   ///
-  primitive_value(const string& x);
+  primitive_value(const std::string& x);
 
   ///
   /// Conversion from scoped_index;
@@ -494,14 +494,14 @@ operator==(const char* xval, const primitive_value& xpv);
 ///
 SHEAF_DLL_SPEC
 bool
-operator==(const primitive_value& xpv, const string& xval);
+operator==(const primitive_value& xpv, const std::string& xval);
 
 ///
 /// Comparison of xval to xpv.
 ///
 SHEAF_DLL_SPEC
 bool
-operator==(const string& xval, const primitive_value& xpv);
+operator==(const std::string& xval, const primitive_value& xpv);
 
 ///
 /// Comparison of xpv to xval.
@@ -787,8 +787,8 @@ operator==(const namespace_relative_subposet_index_pod_type& xval, const primiti
 /// Inserts primitive_value xpv into ostream xos.
 ///
 SHEAF_DLL_SPEC
-ostream&
-operator<<(ostream& xos, const primitive_value& xpv);
+std::ostream&
+operator<<(std::ostream& xos, const primitive_value& xpv);
 
 ///
 /// The deep size of the referenced object of type primitive_value.

@@ -165,7 +165,7 @@ initialize_upper_covers()
 
 // PUBLIC DATA MEMBERS
 
-const string&
+const std::string&
 sheaf::explicit_crg_interval::
 class_name() const
 {

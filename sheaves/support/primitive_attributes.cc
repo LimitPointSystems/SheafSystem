@@ -116,7 +116,7 @@ prototype(pod_index_type xid)
 ///
 sheaf::primitive_type
 sheaf::primitive_attributes::
-id(const string& xtype_name)
+id(const std::string& xtype_name)
 {
   // Preconditions:
 
@@ -271,7 +271,7 @@ namespace sheaf
 ///
 template <>
 sheaf::primitive_attributes::
-primitive_attributes(const string& x)
+primitive_attributes(const std::string& x)
 {
   // Preconditions:
 

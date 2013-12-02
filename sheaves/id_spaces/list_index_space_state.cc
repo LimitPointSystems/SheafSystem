@@ -35,7 +35,7 @@
 sheaf::list_index_space_handle
 sheaf::list_index_space_state::
 new_space(index_space_family& xid_spaces,
-	  const string& xname,
+	  const std::string& xname,
 	  bool xis_persistent)
 {
   // Preconditions:
@@ -70,7 +70,7 @@ sheaf::list_index_space_handle
 sheaf::list_index_space_state::
 new_space(index_space_family& xid_spaces,
 	  pod_index_type xid,
-	  const string& xname,
+	  const std::string& xname,
 	  bool xis_persistent)
 {
   // Preconditions:
@@ -1125,11 +1125,11 @@ iterators()
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 sheaf::list_index_space_state::
 class_name() const
 {
-  static const string result("list_index_space_state");
+  static const std::string result("list_index_space_state");
   return result;
 }
 

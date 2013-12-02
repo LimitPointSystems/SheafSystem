@@ -53,8 +53,7 @@ class SHEAF_DLL_SPEC zn_to_bool
 {
 
 
-  friend SHEAF_DLL_SPEC ostream & operator << (ostream &os, zn_to_bool* zn);
-  friend SHEAF_DLL_SPEC ostream & operator << (ostream &os, zn_to_bool& zn);
+  friend SHEAF_DLL_SPEC std::ostream & operator << (std::ostream &os, zn_to_bool& zn);
   friend SHEAF_DLL_SPEC size_t deep_size(const zn_to_bool& zn, bool xinclude_shallow);
   friend class index_iterator;
   friend class subposet;
@@ -165,7 +164,7 @@ public:
   /// @hack Inline initialization of static const integral data 
   /// members causes link error in MSC++; use enum instead.
   ///
-  enum static_const_int {BITS_PER_WORD = numeric_limits<word_t>::digits};
+  enum static_const_int {BITS_PER_WORD = std::numeric_limits<word_t>::digits};
 
 protected:
 private:
@@ -451,7 +450,7 @@ private:
 /// Insert zn_to_bool& zn into ostream& os.
 ///
 SHEAF_DLL_SPEC 
-ostream & operator << (ostream &os, zn_to_bool& zn);
+std::ostream & operator << (std::ostream &os, zn_to_bool& zn);
 
 ///
 /// The deep size of the referenced object of type zn_to_bool.

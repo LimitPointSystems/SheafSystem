@@ -20,6 +20,4 @@
 
 #include <stack>
 
-using namespace std;
-
 #endif // STD_STACK_H

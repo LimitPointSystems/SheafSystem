@@ -240,7 +240,7 @@ sheaf::namespace_poset::
 }
 
 sheaf::namespace_poset::
-namespace_poset(const string& xname)
+namespace_poset(const std::string& xname)
     : poset_state_handle(new namespace_poset_member, new namespace_poset_member)
 {
   // Preconditions:
@@ -717,7 +717,7 @@ initialize_standard_id_spaces()
 
 sheaf::scoped_index
 sheaf::namespace_poset::
-insert_poset(const poset_state_handle& xposet, const string& xposet_name, bool xauto_link)
+insert_poset(const poset_state_handle& xposet, const std::string& xposet_name, bool xauto_link)
 {
   // Preconditions:
 
@@ -796,7 +796,7 @@ insert_poset(const poset_state_handle& xposet, const string& xposet_name, bool x
 
 sheaf::scoped_index
 sheaf::namespace_poset::
-insert_poset(const poset_state_handle& xposet, const string& xposet_name, bool xauto_link, bool xauto_access)
+insert_poset(const poset_state_handle& xposet, const std::string& xposet_name, bool xauto_link, bool xauto_access)
 {
   // Preconditions:
 
@@ -1007,7 +1007,7 @@ delete_poset(scoped_index xid, bool xauto_access)
 
 void
 sheaf::namespace_poset::
-delete_poset(string xname, bool xauto_access)
+delete_poset(std::string xname, bool xauto_access)
 {
   // Argument xname passed by value as opposed to ref
   // to avoid any possibility of it being a reference
@@ -1494,8 +1494,8 @@ contains_poset_member(const poset_path& xpath, bool xauto_access) const
 
 bool
 sheaf::namespace_poset::
-contains_poset_members(const string& xposet_name,
-                       const string xmember_names[],
+contains_poset_members(const std::string& xposet_name,
+                       const std::string xmember_names[],
                        int xmember_names_ct,
                        bool xauto_access) const
 {
@@ -1918,7 +1918,7 @@ detach_from_state()
 
 void
 sheaf::namespace_poset::
-new_state(const string& xname)
+new_state(const std::string& xname)
 {
   // Preconditions:
 
@@ -2097,7 +2097,7 @@ attach_handle_data_members()
 
 // PUBLIC FUNCTIONS
 
-string
+std::string
 sheaf::namespace_poset::
 name() const
 {
@@ -2122,7 +2122,7 @@ name() const
   return poset_state_handle::name();
 }
 
-string
+std::string
 sheaf::namespace_poset::
 name(bool xauto_access) const
 {
@@ -2611,7 +2611,7 @@ prereq_id(int xi) const
 
 void
 sheaf::namespace_poset::
-put_name(const string& xname)
+put_name(const std::string& xname)
 {
   // cout << endl << "Entering namespace_poset::put_name." << endl;
 
@@ -2646,13 +2646,12 @@ put_name(const string& xname)
 
 void
 sheaf::namespace_poset::
-to_stream(ostream& xos)
+to_stream(std::ostream& xos)
 {
   xos << *this;
 }
 
-//
-string
+std::string
 sheaf::namespace_poset::
 to_string()
 {
@@ -2768,8 +2767,8 @@ invariant() const
 // NON-MEMBER FUNCTIONS
 // =============================================================================
 
-ostream & sheaf::
-operator << (ostream &os, const namespace_poset& ns)
+std::ostream & sheaf::
+operator << (std::ostream &os, const namespace_poset& ns)
 {
 
   // Preconditions:

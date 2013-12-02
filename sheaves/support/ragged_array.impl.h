@@ -739,8 +739,8 @@ is_ancestor_of(const any* xother) const
 // ===========================================================
 
 template <typename T>
-ostream&
-operator << (ostream& xos, const ragged_array<T>& xra)
+std::ostream&
+operator << (std::ostream& xos, const ragged_array<T>& xra)
 {
   for(size_type i=0; i<xra.row_ct(); ++i)
   {

@@ -36,7 +36,7 @@ namespace
 /// Converts x to a string for stream insertion.
 ///
 template <typename T>
-string to_string(const sheaf::primitive_buffer_type& x)
+std::string to_string(const sheaf::primitive_buffer_type& x)
 {
   stringstream lstr;
   lstr << reinterpret_cast<const T&>(x);
@@ -46,7 +46,7 @@ string to_string(const sheaf::primitive_buffer_type& x)
 // Specialization for void.
 
 template <>
-string to_string<void>(const sheaf::primitive_buffer_type& x)
+std::string to_string<void>(const sheaf::primitive_buffer_type& x)
 {
   return "<undefined>";
 };
@@ -54,7 +54,7 @@ string to_string<void>(const sheaf::primitive_buffer_type& x)
 ///
 /// Type of function to_string.
 ///
-typedef string (*to_string_type)(const sheaf::primitive_buffer_type& x);
+typedef std::string (*to_string_type)(const sheaf::primitive_buffer_type& x);
 
 to_string_type to_string_function(sheaf::primitive_type xid)
 {
@@ -140,7 +140,7 @@ bool from_string<void>(const std::string& x, sheaf::primitive_buffer_type& b)
 ///
 /// Type of function from_string.
 ///
-typedef bool (*from_string_type)(const string& x, sheaf::primitive_buffer_type& b);
+typedef bool (*from_string_type)(const std::string& x, sheaf::primitive_buffer_type& b);
 
 from_string_type from_string_function(sheaf::primitive_type xid)
 {
@@ -348,7 +348,7 @@ primitive_value(const char* x)
 
 ///
 sheaf::primitive_value::
-primitive_value(const string& x)
+primitive_value(const std::string& x)
 {
 
   // Id:
@@ -833,7 +833,7 @@ template <>
 SHEAF_DLL_SPEC
 sheaf::primitive_value& 
 sheaf::primitive_value::
-operator=(const string& x)
+operator=(const std::string& x)
 {
   _id = primitive_traits<c_string>::id();
   string s(x);
@@ -1102,7 +1102,7 @@ sheaf::primitive_value::
 // ===========================================================
 
 ///
-std::string
+std::std::string
 sheaf::primitive_value::
 to_string() const
 {
@@ -1114,7 +1114,7 @@ to_string() const
 ///
 bool
 sheaf::primitive_value::
-from_string(const string& x)
+from_string(const std::string& x)
 {
   return (*from_string_function(_id))(x, _value);
 }
@@ -1294,14 +1294,14 @@ operator==(const char* xval, const primitive_value& xpv)
 
 bool
 sheaf::
-operator==(const primitive_value& xpv, const string& xval)
+operator==(const primitive_value& xpv, const std::string& xval)
 {
   return xpv.value().c_string_primitive == xval;
 }
 
 bool
 sheaf::
-operator==(const string& xval, const primitive_value& xpv)
+operator==(const std::string& xval, const primitive_value& xpv)
 {
   return xval == xpv.value().c_string_primitive;
 }
@@ -1587,9 +1587,9 @@ operator==(const namespace_relative_subposet_index_pod_type& xval, const primiti
 }
 
 
-ostream&
+std::ostream&
 sheaf::
-operator << (ostream& xos, const primitive_value& xpv)
+operator << (std::ostream& xos, const primitive_value& xpv)
 {
   xos << xpv.to_string();
   return xos;

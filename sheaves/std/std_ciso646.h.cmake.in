@@ -23,8 +23,6 @@
 #if HAVE_CISO646
 
 #include <ciso646>
-using namespace std;
-
 #else
 
 #include <iso646.h>

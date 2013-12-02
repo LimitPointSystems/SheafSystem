@@ -116,19 +116,19 @@ public:
   ///
   /// The name for id xid.
   ///
-  string name(pod_type xid) const;
+  std::string name(pod_type xid) const;
 
   /// @todo Add an interface for accessing all possible names.
 
   ///
   /// The index for name xname.
   ///
-  pod_type index(const string& xname) const;
+  pod_type index(const std::string& xname) const;
 
   ///
   /// Associate name xname with id space index xid.
   ///
-  void put_name(pod_type xid, const string& xname);
+  void put_name(pod_type xid, const std::string& xname);
 
   ///
   /// True, if this contains an id space with id xid.
@@ -138,7 +138,7 @@ public:
   ///
   /// True, if this contains an id space with name xname.
   ///
-  bool contains(const string& xname) const;
+  bool contains(const std::string& xname) const;
 
   ///
   /// The beginning index of the id spaces.
@@ -213,7 +213,7 @@ public:
   ///
   /// Delete the id space with name xname.
   ///
-  void delete_space(const string& xname);
+  void delete_space(const std::string& xname);
 
   ///
   /// True, if and only if the id space interval that contains index xid
@@ -244,7 +244,7 @@ protected:
   /// Create a new id space with class type xstate_class_name and
   /// name xname.  Used by the I/O system to read secondary id spaces.
   ///
-  void new_state(const string& xname, const string& xstate_class_name);
+  void new_state(const std::string& xname, const std::string& xstate_class_name);
 
   ///
   /// Delete the state with id xid.
@@ -284,7 +284,7 @@ protected:
   ///
   /// Type of interval map.
   ///
-  typedef map<pod_type, index_space_interval*> interval_map_type;
+  typedef std::map<pod_type, index_space_interval*> interval_map_type;
 
   ///
   /// Type of interval map iterator.
@@ -372,7 +372,7 @@ public:
   ///
   /// Name of the hub id space.
   ///
-  static const string& hub_id_space_name();
+  static const std::string& hub_id_space_name();
 
   ///
   /// True if and only if the reserved term containing xid is
@@ -430,7 +430,7 @@ public:
   ///
   /// The number of members for the id space with name xname.
   ///
-  size_type ct(const string& xname) const;
+  size_type ct(const std::string& xname) const;
 
   ///
   /// The number of members for the id space with id xspace_id.
@@ -440,7 +440,7 @@ public:
   ///
   /// True if there are no ids in the space with name xname.
   ///
-  bool is_empty(const string& xname) const;
+  bool is_empty(const std::string& xname) const;
 
   ///
   /// True if there are no ids in the space with id xspace_id.
@@ -450,7 +450,7 @@ public:
   ///
   /// Beginning id of the space with name xname.
   ///
-  pod_type begin(const string& xname) const;
+  pod_type begin(const std::string& xname) const;
 
   ///
   /// Beginning id of the space with id xspace_id.
@@ -460,7 +460,7 @@ public:
   ///
   /// Ending id of the space with name xname.
   ///
-  pod_type end(const string& xname) const;
+  pod_type end(const std::string& xname) const;
 
   ///
   /// Ending id of this the with id xspace_id.
@@ -470,7 +470,7 @@ public:
   ///
   /// Beginning id of the space in the hub id space with name xname.
   ///
-  pod_type hub_begin(const string& xname) const;
+  pod_type hub_begin(const std::string& xname) const;
 
   ///
   /// Beginning id of the space in the hub id space with id xspace_id.
@@ -480,7 +480,7 @@ public:
   ///
   /// True if begin(xspace_id) == 0 and end(xspace_id) == ct(xspace_id).
   ///
-  bool is_gathered(const string& xname) const;
+  bool is_gathered(const std::string& xname) const;
     
   ///
   /// True if begin(xspace_id) == 0 and end(xspace_id) == ct(xspace_id).
@@ -490,7 +490,7 @@ public:
   ///
   /// True if the space with name xname contains id xid.
   ///
-  bool contains(const string& xname, pod_type xid) const;
+  bool contains(const std::string& xname, pod_type xid) const;
 
   ///
   /// True if the space with id xspace_id contains id xid.
@@ -501,7 +501,7 @@ public:
   /// True if the space with name xname contains an id equivalent to xid.
   /// synonym for contains_hub(xspace_id, xid.hub_pod()).
   ///
-  bool contains(const string& xname, const scoped_index& xid) const;
+  bool contains(const std::string& xname, const scoped_index& xid) const;
 
   ///
   /// True if the space with id xspace_id contains an id equivalent to xid.
@@ -514,7 +514,7 @@ public:
   /// to xid in the unglued hub id space.
   /// synonym for contains_unglued_hub(xname, xid).
   ///
-  bool contains_hub(const string& xname, pod_type xid) const;
+  bool contains_hub(const std::string& xname, pod_type xid) const;
 
   ///
   /// True if the space with id xspace_id contains an id equivalent
@@ -527,7 +527,7 @@ public:
   /// True if the space with name xname contains an id equivalent
   /// to xid in the unglued hub id space.
   ///
-  bool contains_unglued_hub(const string& xname, pod_type xid) const;
+  bool contains_unglued_hub(const std::string& xname, pod_type xid) const;
 
   ///
   /// True if the space with id xspace_id contains an id equivalent
@@ -539,7 +539,7 @@ public:
   /// True if the space with name xname contains an id equivalent
   /// to xid in the glued hub id space.
   ///
-  bool contains_glued_hub(const string& xname, pod_type xid) const;
+  bool contains_glued_hub(const std::string& xname, pod_type xid) const;
 
   ///
   /// True if the space with id xspace_id contains an id equivalent
@@ -552,7 +552,7 @@ public:
   /// to xhub_id in the hub id space.
   /// synonym for contains(xspace_id, xid, xhub_id.hub_pod()).
   ///
-  bool contains(const string& xname, pod_type xid, const scoped_index& xhub_id) const;
+  bool contains(const std::string& xname, pod_type xid, const scoped_index& xhub_id) const;
 
   ///
   /// True if the space with id xspace_id contains an id xid equivalent
@@ -565,7 +565,7 @@ public:
   /// True if the space with name xname contains an id xid equivalent
   /// to xhub_id in the hub id space.
   ///
-  bool contains(const string& xname, pod_type xid, pod_type xhub_id) const;
+  bool contains(const std::string& xname, pod_type xid, pod_type xhub_id) const;
 
   ///
   /// True if the space with id xspace_id contains an id xid equivalent
@@ -577,7 +577,7 @@ public:
   /// The pod index in the space with name xname equivalent to
   /// xid in the hub id space.
   ///
-  pod_type pod(const string& xname, pod_type xid) const;
+  pod_type pod(const std::string& xname, pod_type xid) const;
 
   ///
   /// The pod index in the space with id xspace_id equivalent to
@@ -589,7 +589,7 @@ public:
   /// The pod index in the space with name xname equivalent to xid.
   /// synonym for pod(xxspace_id, id.hub_pod()).
   ///
-  pod_type pod(const string& xname, const scoped_index& xid) const;
+  pod_type pod(const std::string& xname, const scoped_index& xid) const;
 
   ///
   /// The pod index in the space with id xspace_id equivalent to xid.
@@ -602,7 +602,7 @@ public:
   /// with name xname.
   /// synonym for unglued_hub_pod(xname, xid).
   ///
-  pod_type hub_pod(const string& xname, pod_type xid) const;
+  pod_type hub_pod(const std::string& xname, pod_type xid) const;
 
   ///
   /// The pod index in the unglued hub id space equivalent to xid in the id space
@@ -615,7 +615,7 @@ public:
   /// The pod index in the unglued hub id space equivalent to xid in the id space
   /// with name xname.
   ///
-  pod_type unglued_hub_pod(const string& xname, pod_type xid) const;
+  pod_type unglued_hub_pod(const std::string& xname, pod_type xid) const;
 
   ///
   /// The pod index in the unglued hub id space equivalent to xid in the id space
@@ -627,7 +627,7 @@ public:
   /// The pod index in the glued hub id space equivalent to xid in the id space
   /// with name xname.
   ///
-  pod_type glued_hub_pod(const string& xname, pod_type xid) const;
+  pod_type glued_hub_pod(const std::string& xname, pod_type xid) const;
 
   ///
   /// The pod index in the glued hub id space equivalent to xid in the id space
@@ -638,7 +638,7 @@ public:
   ///
   /// True if the id space with name xname should be written to disk.
   ///
-  bool is_persistent(const string& xname) const;
+  bool is_persistent(const std::string& xname) const;
 
   ///
   /// True if the id space with id xspace_id should be written to disk.
@@ -700,7 +700,7 @@ public:
   /// Creates a new product structure for the id space with name xname
   /// by cloning the product structure, xproduct.
   ///
-  void new_product_structure(const string& xname,
+  void new_product_structure(const std::string& xname,
 			     const abstract_product_structure& xproduct);
 
   ///
@@ -713,7 +713,7 @@ public:
   ///
   /// Deletes the product structure for the id space with name xname.
   ///
-  void delete_product_structure(const string& xname);
+  void delete_product_structure(const std::string& xname);
 
   ///
   /// Deletes the product structure for the id space with id xspace_id.
@@ -723,7 +723,7 @@ public:
   ///
   /// The product structure for the id space with name xname (const version).
   ///
-  const abstract_product_structure& product_structure(const string& xname) const;
+  const abstract_product_structure& product_structure(const std::string& xname) const;
 
   ///
   /// The product structure for the id space with id xspace_id (const version).
@@ -733,7 +733,7 @@ public:
   ///
   /// The product structure for the id space with name xname (mutable version).
   ///
-  abstract_product_structure& product_structure(const string& xname);
+  abstract_product_structure& product_structure(const std::string& xname);
 
   ///
   /// The product structure for the id space with id xspace_id (mutable version).
@@ -744,7 +744,7 @@ public:
   /// The product structure of type T for the id space with name xname (const version).
   ///
   template<typename T>
-  const T& product_structure(const string& xname) const;
+  const T& product_structure(const std::string& xname) const;
 
   ///
   /// The product structure of type T for the id space with id xspace_id (const version).
@@ -756,7 +756,7 @@ public:
   /// The product structure of type T for the id space with name xname (mutable version).
   ///
   template<typename T>
-  T& product_structure(const string& xname);
+  T& product_structure(const std::string& xname);
 
   ///
   /// The product structure of type T for the id space with id xspace_id (mutable version).
@@ -767,7 +767,7 @@ public:
   ///
   /// True if the id space with name xname has a product structure.
   ///
-  bool has_product_structure(const string& xname) const;
+  bool has_product_structure(const std::string& xname) const;
 
   ///
   /// True if the id space with id xspace_id has a product structure.
@@ -779,7 +779,7 @@ public:
   /// conforms to type T.
   ///
   template<typename T>
-  bool product_structure_conforms_to(const string& xname) const;
+  bool product_structure_conforms_to(const std::string& xname) const;
 
   ///
   /// True if the product structure for the id space with id xspace_id
@@ -806,7 +806,7 @@ public:
   /// Allocates an id space handle from the handle pool attached to state
   /// with name xname.
   ///
-  index_space_handle& get_id_space(const string& xname) const;
+  index_space_handle& get_id_space(const std::string& xname) const;
 
   ///
   /// Allocates an id space handle from the handle pool attached to state
@@ -819,7 +819,7 @@ public:
   /// to state with name xname.
   ///
   template<typename T>
-  T& get_id_space(const string& xname) const;
+  T& get_id_space(const std::string& xname) const;
 
   ///
   /// Allocates an id space handle of type T from the handle pool attached
@@ -832,7 +832,7 @@ public:
   /// True if handle of type T conforms to the state with name xname.
   ///
   template<typename T>
-  bool handle_conforms_to_state(const string& xname) const;
+  bool handle_conforms_to_state(const std::string& xname) const;
 
   ///
   /// True if handle of type T conforms to the state with id xspace_id.
@@ -869,7 +869,7 @@ public:
   /// Allocates an id space iterator from the iterator pool attached
   /// to state with name xname.
   ///
-  index_space_iterator& get_id_space_iterator(const string& xname) const;
+  index_space_iterator& get_id_space_iterator(const std::string& xname) const;
 
   ///
   /// Allocates an id space iterator from the iterator pool attached
@@ -928,7 +928,8 @@ private:
 /// Insert index_space_family& xn into ostream& xos.
 ///
 SHEAF_DLL_SPEC 
-ostream & operator << (ostream &xos, const index_space_family& xfamily);
+std::ostream&
+operator << (std::ostream &xos, const index_space_family& xfamily);
 
 ///
 /// The deep size of index_space_family& xn.

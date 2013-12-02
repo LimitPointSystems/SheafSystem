@@ -20,6 +20,4 @@
  
 #include <limits>
 
-using namespace std;
-
 #endif // STD_LIMITS_H

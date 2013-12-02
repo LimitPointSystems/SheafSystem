@@ -51,7 +51,7 @@ namespace
 sheaf::primitives_index_space_handle
 sheaf::primitives_index_space_state::
 new_space(index_space_family& xid_spaces,
-	  const string& xname)
+	  const std::string& xname)
 {
   // Preconditions:
 
@@ -83,7 +83,7 @@ sheaf::primitives_index_space_handle
 sheaf::primitives_index_space_state::
 new_space(index_space_family& xid_spaces,
 	  pod_index_type xid,
-	  const string& xname)
+	  const std::string& xname)
 {
   // Preconditions:
 
@@ -606,11 +606,11 @@ iterators()
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 sheaf::primitives_index_space_state::
 class_name() const
 {
-  static const string result("primitives_index_space_state");
+  static const std::string result("primitives_index_space_state");
   return result;
 }
 

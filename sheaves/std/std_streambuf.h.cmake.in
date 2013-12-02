@@ -20,6 +20,4 @@
 
 #include <streambuf>
 
-using namespace std;
-
 #endif // STD_STREAMBUF_H

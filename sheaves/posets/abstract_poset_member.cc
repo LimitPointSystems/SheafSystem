@@ -1153,7 +1153,7 @@ unrestricted_schema() const
 
 bool
 sheaf::abstract_poset_member::
-schema_is(const string& xschema_name) const
+schema_is(const std::string& xschema_name) const
 {
   bool result;
 
@@ -4363,7 +4363,7 @@ hub_id(pod_index_type xid) const
 
 sheaf::pod_index_type
 sheaf::abstract_poset_member::
-get_index_from_name(const poset_state_handle* xhost, const string& xname) const
+get_index_from_name(const poset_state_handle* xhost, const std::string& xname) const
 {
   // Preconditions:
 
@@ -4387,7 +4387,7 @@ get_index_from_name(const poset_state_handle* xhost, const string& xname) const
 
 void
 sheaf::abstract_poset_member::
-get_index_from_name(const poset_state_handle* xhost, const string& xname,
+get_index_from_name(const poset_state_handle* xhost, const std::string& xname,
 		    scoped_index& result) const
 {
   // Preconditions:
@@ -4421,7 +4421,7 @@ get_index_from_name(const poset_state_handle* xhost, const string& xname,
 
 // PUBLIC MEMBER FUNCTIONS
 
-string
+std::string
 sheaf::abstract_poset_member::
 name(bool xauto_access) const
 {
@@ -4446,7 +4446,7 @@ name(bool xauto_access) const
 
 void
 sheaf::abstract_poset_member::
-all_names(block<string>& xresult, bool xauto_access) const
+all_names(block<std::string>& xresult, bool xauto_access) const
 {
   // Preconditions:
 
@@ -4489,7 +4489,7 @@ name_ct(bool xauto_access) const
 
 bool
 sheaf::abstract_poset_member::
-has_name(const string& xname, bool xauto_access) const
+has_name(const std::string& xname, bool xauto_access) const
 {
   // Preconditions:
 
@@ -4509,7 +4509,7 @@ has_name(const string& xname, bool xauto_access) const
 
 void
 sheaf::abstract_poset_member::
-put_name(const string& xname, bool xunique, bool xauto_access)
+put_name(const std::string& xname, bool xunique, bool xauto_access)
 {
   // Preconditions:
 
@@ -4533,7 +4533,7 @@ put_name(const string& xname, bool xunique, bool xauto_access)
 
 void
 sheaf::abstract_poset_member::
-delete_name(const string& xname, bool xauto_access)
+delete_name(const std::string& xname, bool xauto_access)
 {
   // Preconditions:
 
@@ -4942,7 +4942,7 @@ invariant() const
 
 void
 sheaf::abstract_poset_member::
-to_stream(ostream& xos) const
+to_stream(std::ostream& xos) const
 {
   // Preconditions:
 
@@ -4966,9 +4966,9 @@ to_stream(ostream& xos) const
 // NON-MEMBER FUNCTIONS FACET
 // ===========================================================
  
-ostream & 
+std::ostream & 
 sheaf::
-operator<<(ostream &os, const abstract_poset_member& p)
+operator<<(std::ostream &os, const abstract_poset_member& p)
 {
 
   // Preconditions:
@@ -5001,9 +5001,9 @@ operator<<(ostream &os, const abstract_poset_member& p)
   return os;
 }
 
-ostream & 
+std::ostream & 
 sheaf::
-operator<<(ostream &os, const abstract_poset_member* p)
+operator<<(std::ostream &os, const abstract_poset_member* p)
 {
   // Preconditions:
 

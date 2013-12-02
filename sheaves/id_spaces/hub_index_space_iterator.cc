@@ -96,7 +96,7 @@ hub_index_space_iterator(const index_space_family& xid_spaces,
 
 sheaf::hub_index_space_iterator::
 hub_index_space_iterator(const index_space_family& xid_spaces,
-			 const string& xname)
+			 const std::string& xname)
   : _mbr_itr(0)
 {
   // Preconditions:

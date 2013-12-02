@@ -74,12 +74,12 @@ SHEAF_DLL_SPEC namespace_schema_member_index& operator++(namespace_schema_member
 ///
 /// The name of the enumerator xpt.
 ///
-SHEAF_DLL_SPEC const string& namespace_schema_member_index_to_name(namespace_schema_member_index xpt);
+SHEAF_DLL_SPEC const std::string& namespace_schema_member_index_to_name(namespace_schema_member_index xpt);
 
 ///
 /// The enumerator with name xname.
 ///
-SHEAF_DLL_SPEC namespace_schema_member_index namespace_schema_member_index_from_name(const string& xname);
+SHEAF_DLL_SPEC namespace_schema_member_index namespace_schema_member_index_from_name(const std::string& xname);
 
 ///
 /// The enumerator corresponding to primitive index xindex.

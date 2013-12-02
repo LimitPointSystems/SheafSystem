@@ -163,7 +163,7 @@ empty() const
 ///
 int
 sheaf::arg_list::
-index(const string& xname) const
+index(const std::string& xname) const
 {
   int result;
 
@@ -193,7 +193,7 @@ index(const string& xname) const
 }
 
 ///
-const string&
+const std::string&
 sheaf::arg_list::
 name(int xi) const
 {
@@ -239,7 +239,7 @@ type(int xi) const
 ///
 int
 sheaf::arg_list::
-type(const string& xname) const
+type(const std::string& xname) const
 {
 
   // Preconditions:
@@ -306,7 +306,7 @@ value(int xi) const
 ///
 sheaf::primitive_value&
 sheaf::arg_list::
-value(const string& xname)
+value(const std::string& xname)
 {
 
   // Preconditions:
@@ -329,7 +329,7 @@ value(const string& xname)
 ///
 const sheaf::primitive_value&
 sheaf::arg_list::
-value(const string& xname) const
+value(const std::string& xname) const
 {
 
   // Preconditions:
@@ -770,9 +770,9 @@ put_type(int xid)
 // ===========================================================
 
 ///
-ostream&
+std::ostream&
 sheaf::
-operator<<(ostream &os, const arg_list& p)
+operator<<(std::ostream &os, const arg_list& p)
 {
   // Preconditions:
 
@@ -797,9 +797,9 @@ operator<<(ostream &os, const arg_list& p)
 
 
 ///
-istream&
+std::istream&
 sheaf::
-operator>>(istream &is, arg_list& p)
+operator>>(std::istream &is, arg_list& p)
 {
   // Preconditions:
 
@@ -824,9 +824,9 @@ operator>>(istream &is, arg_list& p)
 }
 
 ///
-ostream&
+std::ostream&
 sheaf::
-operator<<(ostream &os, const arg_list::arg_type& p)
+operator<<(std::ostream &os, const arg_list::arg_type& p)
 {
   // Preconditions:
 
@@ -845,9 +845,9 @@ operator<<(ostream &os, const arg_list::arg_type& p)
 }
 
 ///
-istream&
+std::istream&
 sheaf::
-operator>>(istream &is, arg_list::arg_type& p)
+operator>>(std::istream &is, arg_list::arg_type& p)
 {
   // Preconditions:
 
@@ -1028,7 +1028,7 @@ arg(int xi) const
 ///
 bool
 sheaf::arg_list::
-contains_arg(const string& xname) const
+contains_arg(const std::string& xname) const
 {
   // Preconditions:
 
@@ -1079,7 +1079,7 @@ contains_args(const arg_list& xother) const
 ///
 sheaf::arg_list::arg_type&
 sheaf::arg_list::
-arg(const string& xname)
+arg(const std::string& xname)
 {
 
   // Preconditions:
@@ -1103,7 +1103,7 @@ arg(const string& xname)
 ///
 const sheaf::arg_list::arg_type&
 sheaf::arg_list::
-arg(const string& xname) const
+arg(const std::string& xname) const
 {
 
   // Preconditions:

@@ -69,20 +69,8 @@
 #include "sheaf.h"
 #endif
 
-#ifndef STD_HASH_SET_H
-#include "std_hash_set.h"
-#endif
-
 #ifndef STD_IOSTREAM_H
 #include "std_iostream.h"
-#endif
-
-#ifndef STD_LIST_H
-#include "std_list.h"
-#endif
-
-#ifndef STD_SET_H
-#include "std_set.h"
 #endif
 
 #ifndef STD_STRING_H
@@ -110,7 +98,6 @@ class index_equivalence_iterator;
 class index_map;
 class implict_crg_interval;
 class index_iterator;
-class list_cover_link;
 class namespace_poset_member;
 class poset_bounds;
 class poset_component;
@@ -127,7 +114,7 @@ class zn_to_bool;
 /// Insert poset_state_handle& p into ostream& os.
 ///
 SHEAF_DLL_SPEC
-ostream & operator << (ostream &os, const poset_state_handle& p);
+std::ostream & operator << (std::ostream &os, const poset_state_handle& p);
 
 ///
 /// The deep size of the referenced object of type poset_state_handle.
@@ -169,7 +156,7 @@ class SHEAF_DLL_SPEC poset_state_handle : public read_write_monitor_handle
   friend class subposet_joiner; // needs cross_link()
   friend class subposet_names_record; // needs version_to_name()
   friend class table_dof_tuple_record; // needs new_state()
-  friend SHEAF_DLL_SPEC ostream & sheaf::operator << (ostream &os, const poset_state_handle& p); // needs state_obj()
+  friend SHEAF_DLL_SPEC std::ostream & sheaf::operator << (std::ostream &os, const poset_state_handle& p); // needs state_obj()
   friend SHEAF_DLL_SPEC size_t sheaf::deep_size(const poset_state_handle& xp, bool xinclude_shallow, size_t xresults[4]);
 
   // ===========================================================
@@ -188,7 +175,7 @@ protected:
   /// @todo Move this functionality to namespace_poset.
   ///
   static poset_state_handle*
-  new_poset_handle(const string& xclass_name, poset_type xsheaf_base_class_id);
+  new_poset_handle(const std::string& xclass_name, poset_type xsheaf_base_class_id);
 
   ///
   /// The poset handle factory.
@@ -349,7 +336,7 @@ protected:
   /// Attach this handle to the state associated with the member
   /// with name xname in name space xhost.
   ///
-  virtual void attach_to_state(const namespace_poset* xhost, const string& xname);
+  virtual void attach_to_state(const namespace_poset* xhost, const std::string& xname);
 
   ///
   /// Attach this handle to the state with associated with namespace member xmbr
@@ -442,12 +429,12 @@ public:
   ///
   /// The name of this poset
   ///
-  virtual string name() const;
+  virtual std::string name() const;
 
   ///
   /// The name of this poset
   ///
-  virtual string name(bool xauto_access) const;
+  virtual std::string name(bool xauto_access) const;
 
   ///
   /// The path of this poset.
@@ -471,7 +458,7 @@ protected:
   /// links the member into an appropriate group.
   ///
   virtual void initialize_namespace(namespace_poset& xns,
-                                    const string& xposet_name,
+                                    const std::string& xposet_name,
                                     bool xauto_link = true);
 
 private:
@@ -561,7 +548,7 @@ public:
   /// member created by this routine using new_link in order to return
   /// the poset to a valid state.
   ///
-  virtual pod_index_type new_member_interval(const string& xinterval_type,
+  virtual pod_index_type new_member_interval(const std::string& xinterval_type,
 					     size_type xsize,
 					     const block<pod_index_type>& xtuple_hub_ids,
 					     const block<pod_index_type>& xdata);
@@ -574,7 +561,7 @@ public:
   /// member created by this routine using new_link in order to return
   /// the poset to a valid state.
   ///
-  void new_member_interval(const string& xinterval_type, size_type xsize,
+  void new_member_interval(const std::string& xinterval_type, size_type xsize,
 			   const block<pod_index_type>& xtuple_hub_ids,
 			   const block<pod_index_type>& xdata,
 			   scoped_index& result);
@@ -652,7 +639,7 @@ public:
   ///
   /// True if this poset contains a member with name xname
   ///
-  virtual bool contains_member(const string& xname, bool xauto_access = true) const;
+  virtual bool contains_member(const std::string& xname, bool xauto_access = true) const;
 
   ///
   /// True if this poset contains xmbr
@@ -672,7 +659,7 @@ public:
   ///
   /// True if this poset contains poset member(s) with names in xnames
   ///
-  bool contains_members(const string* xnames, int xnames_ct, bool xauto_access = true) const;
+  bool contains_members(const std::string* xnames, int xnames_ct, bool xauto_access = true) const;
 
   ///
   /// True if this poset contains poset members with indices in p
@@ -687,7 +674,7 @@ public:
   ///
   /// True if this poset contains poset members with names in p
   ///
-  bool contains_members(const block<string>& p, bool xauto_access = true) const;
+  bool contains_members(const block<std::string>& p, bool xauto_access = true) const;
 
   ///
   /// True if this poset is empty
@@ -713,7 +700,7 @@ public:
   /// current version (xin_current_version == true) or in
   /// some version (xin_current_version == false).
   ///
-  bool is_jim(const string& xname, bool xin_current_version = true) const;
+  bool is_jim(const std::string& xname, bool xin_current_version = true) const;
 
   ///
   /// True if the member with hub id xmbr_hub_id covers the bottom.
@@ -748,35 +735,35 @@ public:
   ///
   /// The hub id of the member with name xname
   ///
-  virtual pod_index_type member_id(const string& xname, bool xauto_access) const;
+  virtual pod_index_type member_id(const std::string& xname, bool xauto_access) const;
 
   ///
   /// The index of the member with name xname
   ///
-  void member_id(const string& xname, scoped_index& result, bool xauto_access) const;
+  void member_id(const std::string& xname, scoped_index& result, bool xauto_access) const;
 
   ///
   /// A name for the member with hub id xmbr_hub_id
   ///
-  virtual string member_name(pod_index_type xmbr_hub_id, bool xauto_access = false) const;
+  virtual std::string member_name(pod_index_type xmbr_hub_id, bool xauto_access = false) const;
 
   ///
   /// A name for the member with id xmbr_id
   ///
-  string member_name(const scoped_index& xmbr_id, bool xauto_access = false) const;
+  std::string member_name(const scoped_index& xmbr_id, bool xauto_access = false) const;
 
   ///
   /// All the names for the member with hub id xmbr_hub_id.
   ///
   void all_member_names(pod_index_type xmbr_hub_id,
-                        block<string>& xresult,
+                        block<std::string>& xresult,
                         bool xauto_access = false) const;
 
   ///
   /// All the names for the member with id xmbr_id.
   ///
   void all_member_names(const scoped_index& xmbr_id,
-                        block<string>& xresult,
+                        block<std::string>& xresult,
                         bool xauto_access = false) const;
 
   ///
@@ -793,14 +780,14 @@ public:
   /// True if xname is a name for the member with hub id xmbr_hub_id.
   ///
   bool member_has_name(pod_index_type xmbr_hub_id,
-                       const string& xname,
+                       const std::string& xname,
                        bool xauto_access = false) const;
 
   ///
   /// True if xname is a name for the member with id xmbr_id.
   ///
   bool member_has_name(const scoped_index& xmbr_hub_id,
-                       const string& xname,
+                       const std::string& xname,
                        bool xauto_access = false) const;
 
   ///
@@ -808,7 +795,7 @@ public:
   /// if xunique, make xname the only name.
   ///
   virtual void put_member_name(pod_index_type xmbr_hub_id,
-                               const string& xname,
+                               const std::string& xname,
                                bool xunique,
                                bool xauto_access = false);
 
@@ -817,14 +804,14 @@ public:
   /// if xunique, make xname the only name.
   ///
   void put_member_name(const scoped_index& xmbr_id,
-		       const string& xname,
+		       const std::string& xname,
 		       bool xunique,
 		       bool xauto_access = false);
 
   ///
   /// Make xname not a name for any member.
   ///
-  void delete_member_name(const string& xname, bool xauto_access = false);
+  void delete_member_name(const std::string& xname, bool xauto_access = false);
 
   ///
   /// Delete all names for the member with hub id xmbr_hub_id.
@@ -937,7 +924,7 @@ protected:
   /// member created by this routine using new_link in order to return
   /// the poset to a valid state.
   ///
-  virtual pod_index_type new_member_interval(const string& xinterval_type, size_type xsize);
+  virtual pod_index_type new_member_interval(const std::string& xinterval_type, size_type xsize);
 
   ///
   /// Create a disconnected member interval beginning at hub id xmbr_hub_id,
@@ -953,7 +940,7 @@ protected:
   /// the poset to a valid state.
   ///
   virtual void new_member_interval(pod_index_type xmbr_hub_id,
-				   const string& xinterval_type, 
+				   const std::string& xinterval_type, 
 				   size_type xsize);
 
 private:
@@ -1524,27 +1511,27 @@ public:
   ///
   /// A name for the subposet with hub id xsubposet_hub_id
   ///
-  virtual string subposet_name(pod_index_type xsubposet_hub_id,
-                               bool xauto_access = false) const;
+  virtual std::string subposet_name(pod_index_type xsubposet_hub_id,
+				    bool xauto_access = false) const;
 
   ///
   /// A name for the subposet with id xsubposet_id
   ///
-  string subposet_name(const scoped_index& xsubposet_id,
-		       bool xauto_access = false) const;
+  std::string subposet_name(const scoped_index& xsubposet_id,
+			    bool xauto_access = false) const;
 
   ///
   /// All the names for the subposet with hub id xsubposet_hub_id
   ///
   void all_subposet_names(pod_index_type xsubposet_hub_id,
-                          block<string>& xresult,
+                          block<std::string>& xresult,
                           bool xauto_access = false) const;
 
   ///
   /// All the names for the subposet with id xsubposet_id.
   ///
   void all_subposet_names(const scoped_index& xsubposet_id,
-                          block<string>& xresult,
+                          block<std::string>& xresult,
                           bool xauto_access = false) const;
 
   ///
@@ -1560,19 +1547,19 @@ public:
   ///
   /// True if xname is a name for the subposet with hub id xsubposet_hub_id.
   ///
-  bool subposet_has_name(pod_index_type xsubposet_hub_id, const string& xname, bool xauto_access = false) const;
+  bool subposet_has_name(pod_index_type xsubposet_hub_id, const std::string& xname, bool xauto_access = false) const;
 
   ///
   /// True if xname is a name for the subposet with id xsubposet_id.
   ///
-  bool subposet_has_name(const scoped_index& xsubposet_id, const string& xname, bool xauto_access = false) const;
+  bool subposet_has_name(const scoped_index& xsubposet_id, const std::string& xname, bool xauto_access = false) const;
 
   ///
   /// Make xname a name for the subposet with hub id xsubposet_hub_id;
   /// if xunique, make xname the only name.
   ///
   virtual void put_subposet_name(pod_index_type xsubposet_hub_id,
-                                 const string& xname,
+                                 const std::string& xname,
                                  bool xunique,
                                  bool xauto_access);
 
@@ -1581,14 +1568,14 @@ public:
   /// if xunique, make xname the only name.
   ///
   void put_subposet_name(const scoped_index& xsubposet_id,
-			 const string& xname,
+			 const std::string& xname,
 			 bool xunique,
 			 bool xauto_access);
 
   ///
   /// Make xname not a name for any subposet.
   ///
-  void delete_subposet_name(const string& xname, bool xauto_access = false);
+  void delete_subposet_name(const std::string& xname, bool xauto_access = false);
 
   ///
   /// Delete all names for the subposet with hub id xsubposet_hub_id;
@@ -1622,12 +1609,12 @@ public:
   ///
   /// The hub id of the subposet with name xname
   ///
-  virtual pod_index_type subposet_id(const string& xname) const;
+  virtual pod_index_type subposet_id(const std::string& xname) const;
 
   ///
   /// The id of the subposet with name xname
   ///
-  virtual void subposet_id(const string& xname, scoped_index& result) const;
+  virtual void subposet_id(const std::string& xname, scoped_index& result) const;
 
   ///
   /// Allocates an id space iterator over the subposet ids from the
@@ -1655,7 +1642,7 @@ public:
   ///
   /// True if this poset includes subposet with name xname
   ///
-  bool includes_subposet(const string& xname, bool xauto_access = true) const;
+  bool includes_subposet(const std::string& xname, bool xauto_access = true) const;
 
   ///
   /// True if this poset includes xs
@@ -1742,7 +1729,7 @@ public:
   ///
   /// The name of the coarsest common refinement subposet.
   ///
-  static const string& coarsest_common_refinement_name();
+  static const std::string& coarsest_common_refinement_name();
 
 protected:
 
@@ -1769,7 +1756,7 @@ protected:
   ///
   /// Creates the subposets common to every poset (e.g. whole() and jims()).
   ///
-  virtual void initialize_standard_subposets(const string& xname);
+  virtual void initialize_standard_subposets(const std::string& xname);
 
   ///
   /// Sets the number of standard subposets automatically allocated by the constructor.
@@ -1863,7 +1850,7 @@ public:
   ///
   /// True if the schema of this has name xname
   ///
-  bool schema_is(const string& xschema_name) const;
+  bool schema_is(const std::string& xschema_name) const;
 
   ///
   /// True if other has the same schema as this.
@@ -2200,7 +2187,7 @@ protected:
   ///
   /// The prefix which begins the name of every version subposet.
   ///
-  static const string& VERSION_PREFIX();
+  static const std::string& VERSION_PREFIX();
 
   ///
   /// The length of _version_prefix.
@@ -2210,17 +2197,17 @@ protected:
   ///
   /// True if xname has the proper form for a version name.
   ///
-  bool is_version_name(const string& xname) const;
+  bool is_version_name(const std::string& xname) const;
 
   ///
   /// Creates the standard name for the level xversion whole subposet.
   ///
-  string version_to_name(int xversion) const;
+  std::string version_to_name(int xversion) const;
 
   ///
   /// Extracts the version from the standard name
   ///
-  int version_from_name(const string& xname) const;
+  int version_from_name(const std::string& xname) const;
 
   ///
   /// Set the current level to xversion
@@ -2264,7 +2251,7 @@ public:
   //// This member exists only to encapsulate the hack.
   ////
   virtual schema_poset_member*
-  new_schema_handle(const string& xid_space_name,
+  new_schema_handle(const std::string& xid_space_name,
                     pod_index_type xschema_member_ext_id,
                     pod_index_type xbase_space_ext_id,
                     pod_index_type xfiber_schema_ext_id,
@@ -2302,7 +2289,7 @@ public:
   /// the equivalence map with name xid_space_name.
   ///
   pod_index_type get_int_id(pod_index_type xext_id,
-			    const string& xid_space_name,
+			    const std::string& xid_space_name,
 			    bool xauto_access) const;
 
   ///
@@ -2310,7 +2297,7 @@ public:
   /// the equivalence map with name xid_space_name.
   ///
   virtual bool is_valid_int_id(pod_index_type xint_id,
-			       const string& xid_space_name,
+			       const std::string& xid_space_name,
 			       bool xauto_access) const;
 
   ///
@@ -2318,7 +2305,7 @@ public:
   /// the equivalence map with name xid_space_name.
   ///
   bool is_valid_int_id(const scoped_index& xint_id,
-		       const string& xid_space_name,
+		       const std::string& xid_space_name,
 		       bool xauto_access) const;
 
   ///
@@ -2326,7 +2313,7 @@ public:
   /// the equivalence map with name xid_space_name.
   ///
   virtual pod_index_type get_ext_id(pod_index_type xint_id,
-				    const string& xid_space_name,
+				    const std::string& xid_space_name,
 				    bool xauto_access) const;
 
   ///
@@ -2334,7 +2321,7 @@ public:
   /// the equivalence map with name xid_space_name.
   ///
   pod_index_type get_ext_id(const scoped_index& xint_id,
-			    const string& xid_space_name,
+			    const std::string& xid_space_name,
 			    bool xauto_access) const;
 
   ///
@@ -2359,12 +2346,12 @@ public:
   ///
   ///  Write instance information to an ostream (default = stdout).
   ///
-  void to_stream(ostream& xos = cout);
+  void to_stream(std::ostream& xos = std::cout);
 
   ///
   /// Get instance information as a string.
   ///
-  string to_string();
+  std::string to_string();
 
 protected:
 

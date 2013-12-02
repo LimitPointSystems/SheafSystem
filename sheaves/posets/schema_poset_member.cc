@@ -32,6 +32,8 @@
 #include "tern.h"
 #include "wsv_block.h"
 
+using namespace std;
+
 //#define DIAGNOSTIC_OUTPUT
 
 // ===========================================================
@@ -379,7 +381,7 @@ schema_poset_member(poset_state_handle* xhost,
 
 sheaf::schema_poset_member::
 schema_poset_member(const namespace_poset& xns,
-                    const string& xname,
+                    const std::string& xname,
                     const poset_path& xparent_path,
                     const wsv_block<schema_descriptor>& xdof_specs,
                     bool xauto_access)
@@ -462,7 +464,7 @@ schema_poset_member(poset_state_handle* xhost, const scoped_index& xid)
 }
 
 sheaf::schema_poset_member::
-schema_poset_member(const poset_state_handle* xhost, const string& xname)
+schema_poset_member(const poset_state_handle* xhost, const std::string& xname)
   : _table_dof_descriptors(0),
     _row_dof_descriptors(0),
     _table_cache_version(NOT_A_STANDARD_VERSION_INDEX),
@@ -617,7 +619,7 @@ new_jim_state(poset_state_handle* xhost,
 void
 sheaf::schema_poset_member::
 new_jim_state(const namespace_poset& xns,
-              const string& xname,
+              const std::string& xname,
               const poset_path& xparent_path,
               const wsv_block<schema_descriptor>& xdof_specs,
               bool xauto_access)
@@ -1082,9 +1084,9 @@ dof_tuple_is_homogeneous(bool xis_table_dof) const
   return result;
 }
 
-string
+std::string
 sheaf::schema_poset_member::
-dof_subposet_name(const string& xname, bool xis_table_dofs)
+dof_subposet_name(const std::string& xname, bool xis_table_dofs)
 {
   string result;
 
@@ -1108,7 +1110,7 @@ dof_subposet_name(const string& xname, bool xis_table_dofs)
   return result;
 }
 
-string
+std::string
 sheaf::schema_poset_member::
 dof_subposet_name(bool xis_table_dofs) const
 {
@@ -1251,7 +1253,7 @@ contains_dof(const scoped_index& xother_id, bool xin_table_dofs) const
 
 bool
 sheaf::schema_poset_member::
-contains_dof(const string& xname, bool xin_table_dofs) const
+contains_dof(const std::string& xname, bool xin_table_dofs) const
 {
   bool result;
 
@@ -1935,7 +1937,7 @@ sheaf::poset_path
 sheaf::schema_poset_member::
 make_schema(const namespace_poset& xns,
             const poset_path& xparent_path,
-            const string& xname)
+            const std::string& xname)
 {
   // Preconditions:
 
@@ -1983,9 +1985,9 @@ make_schema(const namespace_poset& xns,
 void
 sheaf::schema_poset_member::
 make_schema_no_jims(namespace_poset* xns,
-                    const string& xposet_name,
-                    const string& xmember_name,
-                    const string& xparent_name)
+                    const std::string& xposet_name,
+                    const std::string& xmember_name,
+                    const std::string& xparent_name)
 {
   // Preconditions:
 
@@ -2006,8 +2008,8 @@ sheaf::poset_path
 sheaf::schema_poset_member::
 make_schema(const namespace_poset& xns,
             const poset_path& xparent_path,
-            const string& xname,
-            const string xdof_names[],
+            const std::string& xname,
+            const std::string xdof_names[],
             const primitive_type xdof_types[],
             const bool xis_table_dof[],
             const size_type xdof_ct,
@@ -2132,8 +2134,8 @@ sheaf::poset_path
 sheaf::schema_poset_member::
 make_row_schema(const namespace_poset& xns,
                 const poset_path& xparent_path,
-                const string& xname,
-                const string xdof_names[],
+                const std::string& xname,
+                const std::string xdof_names[],
                 const primitive_type xdof_types[],
                 const size_type xdof_ct,
                 bool xauto_access)
@@ -2176,8 +2178,8 @@ sheaf::poset_path
 sheaf::schema_poset_member::
 make_homogeneous_row_schema(const namespace_poset& xns,
                             const poset_path& xparent_path,
-                            const string& xname,
-                            const string xdof_names[],
+                            const std::string& xname,
+                            const std::string xdof_names[],
                             const primitive_type xdof_type,
                             const size_type xdof_ct,
                             bool xauto_access)
@@ -2218,12 +2220,12 @@ make_homogeneous_row_schema(const namespace_poset& xns,
 void
 sheaf::schema_poset_member::
 make_row_dofs_schema(namespace_poset*  xns,
-                     const string      member_names[],
-                     const int         num_members,
-                     const int         member_dof_type,
-                     const string&     schema_poset_name,
-                     const string&     schema_member_name,
-                     const string&     schema_inherits_name)
+                     const std::string member_names[],
+                     const int num_members,
+                     const int member_dof_type,
+                     const std::string& schema_poset_name,
+                     const std::string& schema_member_name,
+                     const std::string& schema_inherits_name)
 {
   // Preconditions:
 
@@ -2267,12 +2269,12 @@ make_row_dofs_schema(namespace_poset*  xns,
 void
 sheaf::schema_poset_member::
 make_table_dofs_schema(namespace_poset*  xns,
-                       const string      member_names[],
-                       const int         num_members,
-                       const int         member_dof_type,
-                       const string&     schema_poset_name,
-                       const string&     schema_member_name,
-                       const string&     schema_inherits_name)
+                       const std::string member_names[],
+                       const int num_members,
+                       const int member_dof_type,
+                       const std::string& schema_poset_name,
+                       const std::string& schema_member_name,
+                       const std::string& schema_inherits_name)
 {
   // Preconditions:
 
@@ -3165,7 +3167,7 @@ size(const scoped_index& xdof_id, bool xis_table_dof, bool xauto_access) const
 
 sheaf::size_type
 sheaf::schema_poset_member::
-size(const string& xname, bool xis_table_dof, bool xauto_access) const
+size(const std::string& xname, bool xis_table_dof, bool xauto_access) const
 {
   // Preconditions:
 
@@ -3251,7 +3253,7 @@ alignment(const scoped_index& xdof_id, bool xis_table_dof, bool xauto_access) co
 
 sheaf::size_type
 sheaf::schema_poset_member::
-alignment(const string& xname, bool xis_table_dof, bool xauto_access) const
+alignment(const std::string& xname, bool xis_table_dof, bool xauto_access) const
 {
   // Preconditions:
 
@@ -3337,7 +3339,7 @@ type(const scoped_index& xdof_id, bool xis_table_dof, bool xauto_access) const
 
 sheaf::primitive_type
 sheaf::schema_poset_member::
-type(const string& xname, bool xis_table_dof, bool xauto_access) const
+type(const std::string& xname, bool xis_table_dof, bool xauto_access) const
 {
   // Preconditions:
 
@@ -3422,7 +3424,7 @@ offset(const scoped_index& xdof_id, bool xis_table_dof, bool xauto_access) const
 
 sheaf::size_type
 sheaf::schema_poset_member::
-offset(const string& xname, bool xis_table_dof, bool xauto_access) const
+offset(const std::string& xname, bool xis_table_dof, bool xauto_access) const
 {
   // Preconditions:
 
@@ -3536,7 +3538,7 @@ bound_iterator(const poset_bounds& xbounds, bool xis_ub) const
 
 sheaf::pod_index_type
 sheaf::schema_poset_member::
-get_int_id(pod_index_type xext_id, const string& xid_space_name) const
+get_int_id(pod_index_type xext_id, const std::string& xid_space_name) const
 {
   // Preconditions:
 
@@ -3563,7 +3565,7 @@ get_int_id(pod_index_type xext_id, const string& xid_space_name) const
 
 sheaf::pod_index_type
 sheaf::schema_poset_member::
-get_ext_id(const string& xid_space_name) const
+get_ext_id(const std::string& xid_space_name) const
 {
   // Preconditions:
 
@@ -3584,7 +3586,7 @@ get_ext_id(const string& xid_space_name) const
 
 void
 sheaf::schema_poset_member::
-get_ext_ids(const string& xid_space_name,
+get_ext_ids(const std::string& xid_space_name,
             pod_index_type& xschema_poset_ext_id,
             pod_index_type& xschema_member_ext_id,
             pod_index_type& xbase_space_ext_id,

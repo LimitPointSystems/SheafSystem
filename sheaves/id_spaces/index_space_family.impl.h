@@ -40,7 +40,7 @@
 template<typename T>
 const T&
 sheaf::index_space_family::
-product_structure(const string& xname) const
+product_structure(const std::string& xname) const
 {
   // Preconditions:
 
@@ -88,7 +88,7 @@ product_structure(pod_type xspace_id) const
 template<typename T>
 T&
 sheaf::index_space_family::
-product_structure(const string& xname)
+product_structure(const std::string& xname)
 {
   // Preconditions:
 
@@ -136,7 +136,7 @@ product_structure(pod_type xspace_id)
 template<typename T>
 bool
 sheaf::index_space_family::
-product_structure_conforms_to(const string& xname) const
+product_structure_conforms_to(const std::string& xname) const
 {
   // Preconditions:
 
@@ -186,7 +186,7 @@ product_structure_conforms_to(pod_type xspace_id) const
 template<typename T>
 T&
 sheaf::index_space_family::
-get_id_space(const string& xname) const
+get_id_space(const std::string& xname) const
 {
   // Preconditions:
 
@@ -232,7 +232,7 @@ get_id_space(pod_type xid) const
 template<typename T>
 bool
 sheaf::index_space_family::
-handle_conforms_to_state(const string& xname) const
+handle_conforms_to_state(const std::string& xname) const
 {
   // Preconditions:
 

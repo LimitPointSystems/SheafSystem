@@ -199,7 +199,7 @@ public:
   /// and has additional dofs with names, types, and roles specified by xdof_specs.
   ///
   schema_poset_member(const namespace_poset& xns,
-                      const string& xname,
+                      const std::string& xname,
                       const poset_path& xparent_path,
                       const wsv_block<schema_descriptor>& xdof_specs,
                       bool xauto_access);
@@ -222,7 +222,7 @@ public:
   /// Creates a new schema_poset_member handle attached to the member state
   /// with name xname in xhost
   ///
-  schema_poset_member(const poset_state_handle* xhost, const string& xname);
+  schema_poset_member(const poset_state_handle* xhost, const std::string& xname);
 
   ///
   /// Creates a new schema_poset_member handle attached to the member state
@@ -267,7 +267,7 @@ public:
   /// in xdof_specs instead.
   ///
   void new_jim_state(const namespace_poset& xns,
-                     const string& xname,
+                     const std::string& xname,
                      const poset_path& xparent_path,
                      const wsv_block<schema_descriptor>& xdof_specs,
                      bool xauto_access);
@@ -404,14 +404,14 @@ public:
   /// row (xis_table_dof false) dof subposet
   /// associated with the schema member with name xname.
   ///
-  static string dof_subposet_name(const string& xname, bool xis_table_dof);
+  static std::string dof_subposet_name(const std::string& xname, bool xis_table_dof);
 
   ///
   /// The standard name for the table dof subposet
   /// associated with the schema member with name xname.
   /// Synonym for dof_subposet_name(xname, true).
   ///
-  static inline string table_dof_subposet_name(const string& xname)
+  static inline std::string table_dof_subposet_name(const std::string& xname)
   {
     return dof_subposet_name(xname, true);
   };
@@ -421,7 +421,7 @@ public:
   /// associated with the schema member with name xname.
   /// Synonym for dof_subposet_name(xname, false).
   ///
-  static inline string row_dof_subposet_name(const string& xname)
+  static inline std::string row_dof_subposet_name(const std::string& xname)
   {
     return dof_subposet_name(xname, false);
   };
@@ -431,14 +431,14 @@ public:
   /// row (xis_table_dof false) dof subposet
   /// associated with this schema member.
   ///
-  string dof_subposet_name(bool xis_table_dof) const;
+  std::string dof_subposet_name(bool xis_table_dof) const;
 
   ///
   /// The standard name for the table dof subposet
   /// associated with this schema member.
   /// Synonym for dof_subposet_name(true).
   ///
-  inline string table_dof_subposet_name() const
+  inline std::string table_dof_subposet_name() const
   {
     return dof_subposet_name(true);
   };
@@ -448,7 +448,7 @@ public:
   /// associated with this schema member.
   /// Synonym for dof_subposet_name(false).
   ///
-  inline string row_dof_subposet_name() const
+  inline std::string row_dof_subposet_name() const
   {
     return dof_subposet_name(false);
   };
@@ -526,7 +526,7 @@ public:
   /// in the row dofs part (xin_table_dofs == false)
   /// of the schema defined by this.
   ///
-  bool contains_dof(const string& xname, bool xin_table_dofs) const;
+  bool contains_dof(const std::string& xname, bool xin_table_dofs) const;
 
   ///
   /// True if xother_id is the index of a dof in the table dofs part
@@ -780,16 +780,16 @@ public:
   ///
   static poset_path make_schema(const namespace_poset& xns,
                                 const poset_path& xparent_path,
-                                const string& xname);
+                                const std::string& xname);
 
 
   ///
   /// @deprecated Use schema_poset_member(namespace, name, parent_path, dof_specs ...).
   ///
   static void make_schema_no_jims(namespace_poset* xns,
-                                  const string& xposet_name,
-                                  const string& xmember_name,
-                                  const string& xparent_name);
+                                  const std::string& xposet_name,
+                                  const std::string& xmember_name,
+                                  const std::string& xparent_name);
 
   ///
   /// @deprecated Use schema_poset_member(namespace, name, parent_path, dof_specs ...).
@@ -800,8 +800,8 @@ public:
   ///
   static poset_path make_schema(const namespace_poset& xns,
                                 const poset_path& xparent_path,
-                                const string& xname,
-                                const string xdof_names[],
+                                const std::string& xname,
+                                const std::string xdof_names[],
                                 const primitive_type xdof_types[],
                                 const bool xis_table_dof[],
                                 size_type xdof_ct,
@@ -815,8 +815,8 @@ public:
   ///
   static poset_path make_row_schema(const namespace_poset& xns,
                                     const poset_path& xparent_path,
-                                    const string& xname,
-                                    const string xdof_names[],
+                                    const std::string& xname,
+                                    const std::string xdof_names[],
                                     const primitive_type xdof_types[],
                                     size_type xdof_ct,
                                     bool xauto_access);
@@ -830,8 +830,8 @@ public:
   static poset_path
   make_homogeneous_row_schema(const namespace_poset& xns,
                               const poset_path& xparent_path,
-                              const string& xname,
-                              const string xdof_names[],
+                              const std::string& xname,
+                              const std::string xdof_names[],
                               const primitive_type xdof_type,
                               size_type xdof_ct,
                               bool xauto_access);
@@ -842,12 +842,12 @@ public:
   /// (Version with inheritance).
   ///
   static void make_row_dofs_schema(namespace_poset*  xns,
-                                   const string      member_names[],
-                                   const int         num_members,
-                                   const int         member_dof_type,
-                                   const string&     schema_poset_name,
-                                   const string&     schema_member_name,
-                                   const string&     schema_inherits_name);
+                                   const std::string      member_names[],
+                                   const int              num_members,
+                                   const int              member_dof_type,
+                                   const std::string&     schema_poset_name,
+                                   const std::string&     schema_member_name,
+                                   const std::string&     schema_inherits_name);
 
   ///
   /// @deprecated Use schema_poset_member(namespace, name, parent_path, dof_specs ...).
@@ -855,12 +855,12 @@ public:
   /// (Version with inheritance).
   ///
   static void make_table_dofs_schema(namespace_poset*  xns,
-                                     const string      member_names[],
-                                     const int         num_members,
-                                     const int         member_dof_type,
-                                     const string&     schema_poset_name,
-                                     const string&     schema_member_name,
-                                     const string&     schema_inherits_name);
+                                     const std::string      member_names[],
+                                     const int              num_members,
+                                     const int              member_dof_type,
+                                     const std::string&     schema_poset_name,
+                                     const std::string&     schema_member_name,
+                                     const std::string&     schema_inherits_name);
 
   ///
   /// Forces update of the attribute cache.
@@ -1098,13 +1098,13 @@ public:
   /// The name of the table dof (xis_table_dof true) or row
   /// dof referred to by xdof_id in the schema defined by this.
   ///
-  string name(pod_index_type xdof_id, bool xis_table_dof) const;
+  std::string name(pod_index_type xdof_id, bool xis_table_dof) const;
  
   ///
   /// The name of the table dof (xis_table_dof true) or row
   /// dof referred to by xdof_id in the schema defined by this.
   ///
-  string name(const scoped_index& xdof_id, bool xis_table_dof, bool xauto_access) const;
+  std::string name(const scoped_index& xdof_id, bool xis_table_dof, bool xauto_access) const;
   
   ///
   /// The number of bytes in the table dof (xis_table_dof true) or row
@@ -1122,7 +1122,7 @@ public:
   /// The number of bytes in the table dof (xis_table_dof true) or row
   /// dof with name xname in the schema defined by this.
   ///
-  size_type size(const string& xname, bool xis_table_dof, bool xauto_access) const;
+  size_type size(const std::string& xname, bool xis_table_dof, bool xauto_access) const;
 
   ///
   /// The alignment for the table dof (xis_table_dof true) or row
@@ -1140,7 +1140,7 @@ public:
   /// The alignment for the table dof (xis_table_dof true) or row
   /// dof with name xname in the schema defined by this.
   ///
-  size_type alignment(const string& xname, bool xis_table_dof, bool xauto_access) const;
+  size_type alignment(const std::string& xname, bool xis_table_dof, bool xauto_access) const;
 
   ///
   /// The primitive type for the table dof (xis_table_dof true) or row
@@ -1160,7 +1160,7 @@ public:
   /// The primitive type for the table dof (xis_table_dof true) or row
   /// dof with name xname in the schema defined by this.
   ///
-  primitive_type type(const string& xname, bool xis_table_dof, bool xauto_access) const;
+  primitive_type type(const std::string& xname, bool xis_table_dof, bool xauto_access) const;
 
   ///
   /// The offset for the table dof (xis_table_dof true) or row
@@ -1179,7 +1179,7 @@ public:
   /// The offset for the table dof (xis_table_dof true) or row
   /// dof with name xname in the schema defined by this.
   ///
-  size_type offset(const string& xname, bool xis_table_dof, bool xauto_access) const;
+  size_type offset(const std::string& xname, bool xis_table_dof, bool xauto_access) const;
 
 protected:
   
@@ -1246,7 +1246,7 @@ public:
   /// This member exists only to encapsulate the hack.
   ///
   virtual pod_index_type get_int_id(pod_index_type xext_id,
-				    const string& xid_space_name) const;
+				    const std::string& xid_space_name) const;
 
   ///
   /// Gets an external id corresponding to index() in the id space
@@ -1254,7 +1254,7 @@ public:
   /// @hack the product subposet hack, version 2.
   /// This member exists only to encapsulate the hack.
   ///
-  virtual pod_index_type get_ext_id(const string& xid_space_name) const;
+  virtual pod_index_type get_ext_id(const std::string& xid_space_name) const;
 
   ///
   /// Gets the external ids of this in
@@ -1262,7 +1262,7 @@ public:
   /// @hack the product subposet hack, version 2.
   /// This member exists only to encapsulate the hack.
   ///
-  virtual void get_ext_ids(const string& xid_space_name,
+  virtual void get_ext_ids(const std::string& xid_space_name,
                            pod_index_type& xschema_poset_ext_id,
                            pod_index_type& xschema_member_ext_id,
                            pod_index_type& xbase_space_ext_id,

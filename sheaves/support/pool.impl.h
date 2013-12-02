@@ -414,7 +414,7 @@ print() const
 template <typename T, int EXTENSION_FACTOR>
 void
 pool<T, EXTENSION_FACTOR>::
-print(ostream &os) const
+print(std::ostream &os) const
 {
 
   os << endl;

@@ -20,6 +20,4 @@
 
 #include <utility>
 
-using namespace std;
-
 #endif // STD_UTILTITY_H

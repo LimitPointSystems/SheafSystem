@@ -195,7 +195,7 @@ public:
   ///
   /// The type of the interval map.
   ///
-  typedef map<pod_type, bool> map_type;
+  typedef std::map<pod_type, bool> map_type;
 
   ///
   /// The type of the interval map iterator.
@@ -272,7 +272,7 @@ private:
 /// Insert interval_set& xset into ostream& xos.
 ///
 SHEAF_DLL_SPEC 
-ostream& operator << (ostream& xos, const interval_set& xset);
+std::ostream& operator << (std::ostream& xos, const interval_set& xset);
 
 ///
 /// The deep size of the referenced object of type interval_set.

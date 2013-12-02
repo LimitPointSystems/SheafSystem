@@ -23,8 +23,6 @@
 #if HAVE_CERRNO
 
 #include <cerrno>
-using namespace std;
-
 #else
 
 #include <errno.h>

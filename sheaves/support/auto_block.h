@@ -331,7 +331,7 @@ bool operator==(const auto_block<T, S>& xblk1, const auto_block<T, S>& xblk2);
 /// Inserts auto_block xblk into ostream xos.
 ///
 template <typename T, typename S>
-ostream& operator << (ostream& xos, const auto_block<T, S>& xblk);
+std::ostream& operator << (std::ostream& xos, const auto_block<T, S>& xblk);
 
 ///
 /// The deep size of the referenced object of type auto_block@<T, S@>;

@@ -151,11 +151,11 @@ singleton_index_space_interval()
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 sheaf::singleton_index_space_interval::
 class_name() const
 {
-  static const string result("singleton_index_space_interval");
+  static const std::string result("singleton_index_space_interval");
   return result;
 }
 

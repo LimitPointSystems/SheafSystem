@@ -32,7 +32,7 @@
 sheaf::offset_index_space_handle
 sheaf::offset_index_space_handle::
 new_space(index_space_family& xid_spaces,
-	  const string& xname,
+	  const std::string& xname,
 	  pod_type xoffset,
 	  size_type xct)
 {
@@ -143,7 +143,7 @@ offset_index_space_handle(const index_space_family& xid_spaces,
 
 sheaf::offset_index_space_handle::
 offset_index_space_handle(const index_space_family& xid_spaces,
-			   const string& xname)
+			   const std::string& xname)
 {
   // Preconditions:
 

@@ -23,8 +23,6 @@
 #if HAVE_CCTYPE
 
 #include <cctype>
-using namespace std;
-
 #else
 
 #include <ctype.h>

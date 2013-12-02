@@ -500,7 +500,7 @@ put_id_space(const index_space_family& xid_spaces, pod_index_type xid)
 
 void
 sheaf::subposet_state::
-put_id_space(const index_space_family& xid_spaces, const string& xname)
+put_id_space(const index_space_family& xid_spaces, const std::string& xname)
 {
   // Preconditions:
 
@@ -565,9 +565,9 @@ put_is_persistent(bool xvalue)
 // NON-MEMBER FUNCTIONS
 // ===========================================================
 
-ostream &
+std::ostream &
 sheaf::
-operator << (ostream &os, subposet_state& s)
+operator << (std::ostream &os, subposet_state& s)
 {
   if(s.members() != 0)
   {

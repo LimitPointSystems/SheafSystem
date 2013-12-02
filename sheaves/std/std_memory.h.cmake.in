@@ -20,6 +20,4 @@
 
 #include <memory>
 
-using namespace std;
-
 #endif // STD_MEMORY_H

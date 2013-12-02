@@ -20,6 +20,4 @@
 
 #include <set>
 
-using namespace std;
-
 #endif // STD_SET_H

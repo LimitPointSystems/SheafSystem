@@ -20,6 +20,4 @@
 
 #include <iomanip>
 
-using namespace std;
-
 #endif // STD_IOMANIP_H

@@ -475,7 +475,7 @@ index() const
   return result;
 }
 
-string
+std::string
 sheaf::index_space_iterator::
 name() const
 {
@@ -485,7 +485,7 @@ name() const
 
   // Body:
 
-  string result = id_spaces().name(index());
+  std::string result = id_spaces().name(index());
 
   // Postconditions:
 
@@ -547,7 +547,7 @@ attach_to(const index_space_family& xid_spaces, pod_type xindex)
 
 void
 sheaf::index_space_iterator::
-attach_to(const index_space_family& xid_spaces, const string& xname)
+attach_to(const index_space_family& xid_spaces, const std::string& xname)
 {
   // Preconditions:
 
@@ -601,7 +601,7 @@ attach_to(pod_type xindex)
 
 void
 sheaf::index_space_iterator::
-attach_to(const string& xname)
+attach_to(const std::string& xname)
 {
   // Preconditions:
 
@@ -728,7 +728,7 @@ conforms_to_state(const index_space_family& xid_spaces,
 bool
 sheaf::index_space_iterator::
 conforms_to_state(const index_space_family& xid_spaces,
-		  const string& xname) const
+		  const std::string& xname) const
 {
   // Preconditions:
 
@@ -770,7 +770,7 @@ conforms_to_state(pod_type xindex) const
 
 bool
 sheaf::index_space_iterator::
-conforms_to_state(const string& xname) const
+conforms_to_state(const std::string& xname) const
 {
   // Preconditions:
 

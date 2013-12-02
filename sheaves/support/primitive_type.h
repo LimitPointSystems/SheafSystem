@@ -101,14 +101,13 @@ bool is_primitive_index(pod_index_type xindex);
 /// Insert primitive_type xpt into ostream& os.
 ///
 SHEAF_DLL_SPEC
-ostream & operator << (ostream& os, const primitive_type& xpt);
-
+std::ostream & operator << (std::ostream& os, const primitive_type& xpt);
 
 ///
 /// Extract primitive_type xpt from istream& is.
 ///
 SHEAF_DLL_SPEC
-istream & operator >> (istream& is, primitive_type& xpt);
+std::istream & operator >> (std::istream& is, primitive_type& xpt);
 
 
 // =============================================================================
@@ -126,7 +125,7 @@ struct SHEAF_DLL_SPEC primitive_descriptor
 /// Insert primitive_descriptor into ostream& os.
 ///
 SHEAF_DLL_SPEC
-ostream & operator << (ostream& os, const primitive_descriptor& xpd);
+std::ostream & operator << (std::ostream& os, const primitive_descriptor& xpd);
 
 
 ///

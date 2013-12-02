@@ -346,7 +346,7 @@ hub_id(pod_index_type xid) const
 
 sheaf::pod_index_type
 sheaf::poset_component::
-get_index_from_name(const poset_state_handle* xhost, const string& xname) const
+get_index_from_name(const poset_state_handle* xhost, const std::string& xname) const
 {
   // Preconditions:
 
@@ -370,7 +370,7 @@ get_index_from_name(const poset_state_handle* xhost, const string& xname) const
 
 void
 sheaf::poset_component::
-get_index_from_name(const poset_state_handle* xhost, const string& xname,
+get_index_from_name(const poset_state_handle* xhost, const std::string& xname,
 		    scoped_index& result) const
 {
   // Preconditions:
@@ -520,7 +520,7 @@ version_index(scoped_index& result) const
   return;
 }
 
-string
+std::string
 sheaf::poset_component::
 version_name() const
 {
@@ -579,7 +579,7 @@ has_version(int xversion) const
 
 // PUBLIC MEMBER FUNCTIONS
 
-string
+std::string
 sheaf::poset_component::
 name() const
 {
@@ -600,7 +600,7 @@ name() const
   return name(false);
 }
 
-string
+std::string
 sheaf::poset_component::
 name(bool xauto_access) const
 {
@@ -625,7 +625,7 @@ name(bool xauto_access) const
 
 void
 sheaf::poset_component::
-all_names(block<string>& xresult, bool xauto_access) const
+all_names(block<std::string>& xresult, bool xauto_access) const
 {
   // Preconditions:
 
@@ -668,7 +668,7 @@ name_ct(bool xauto_access) const
 
 bool
 sheaf::poset_component::
-has_name(const string& xname, bool xauto_access) const
+has_name(const std::string& xname, bool xauto_access) const
 {
   // Preconditions:
 
@@ -690,7 +690,7 @@ has_name(const string& xname, bool xauto_access) const
 
 void
 sheaf::poset_component::
-put_name(const string& xname, bool xunique, bool xauto_access)
+put_name(const std::string& xname, bool xunique, bool xauto_access)
 {
   // Preconditions:
 
@@ -714,7 +714,7 @@ put_name(const string& xname, bool xunique, bool xauto_access)
 
 void
 sheaf::poset_component::
-delete_name(const string& xname, bool xauto_access)
+delete_name(const std::string& xname, bool xauto_access)
 {
   // Preconditions:
 
@@ -757,7 +757,7 @@ delete_all_names(bool xauto_access)
 
 bool
 sheaf::poset_component::
-is_valid_name(const poset_state_handle* xhost, const string& xname) const
+is_valid_name(const poset_state_handle* xhost, const std::string& xname) const
 {
   bool result;
 
@@ -1153,7 +1153,7 @@ attach_to_state(const poset_state_handle* xhost, const scoped_index& xid)
 
 void
 sheaf::poset_component::
-attach_to_state(const poset_state_handle* xhost, const string& xname)
+attach_to_state(const poset_state_handle* xhost, const std::string& xname)
 {
   // Preconditions:
 
@@ -1178,7 +1178,7 @@ attach_to_state(const poset_state_handle* xhost, const string& xname)
 
 void
 sheaf::poset_component::
-attach_to_state(const string& xname)
+attach_to_state(const std::string& xname)
 {
   // Preconditions:
 

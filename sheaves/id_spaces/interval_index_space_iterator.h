@@ -77,7 +77,7 @@ public:
   /// Constructor: Attach to state with name xname in the family xid_spaces.
   ///
   interval_index_space_iterator(const index_space_family& xid_spaces,
-				const string& xname);
+				const std::string& xname);
 
   ///
   /// Assignment operator.
@@ -109,7 +109,7 @@ protected:
   ///
   /// The type of the id maps.
   ///
-  typedef map<pod_type, pod_type> to_hub_type;
+  typedef std::map<pod_type, pod_type> to_hub_type;
 
   ///
   /// Update the interval ids with the beginning interval id, xinterval_begin.

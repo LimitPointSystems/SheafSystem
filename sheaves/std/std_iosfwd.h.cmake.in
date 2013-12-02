@@ -20,6 +20,4 @@
 
 #include <iosfwd>
 
-using namespace std;
-
 #endif // STD_IOSFWD_H

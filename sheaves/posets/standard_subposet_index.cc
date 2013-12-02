@@ -41,7 +41,7 @@ operator++(standard_subposet_index& x)
 };
 
 ///
-const string&
+const std::string&
 sheaf::
 standard_subposet_index_to_name(standard_subposet_index xindex)
 {
@@ -81,7 +81,7 @@ standard_subposet_index_to_name(standard_subposet_index xindex)
 ///
 sheaf::standard_subposet_index
 sheaf::
-standard_subposet_index_from_name(const string& xname)
+standard_subposet_index_from_name(const std::string& xname)
 {
   standard_subposet_index result = NOT_A_STANDARD_SUBPOSET_INDEX;
   for(standard_subposet_index i=STANDARD_SUBPOSET_INDEX_BEGIN;

@@ -200,7 +200,7 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// A factory for making descendants of this class.
@@ -252,7 +252,7 @@ private:
 /// Insert index_space_interval& xn into ostream& xos.
 ///
 SHEAF_DLL_SPEC 
-ostream & operator << (ostream &xos, const index_space_interval& xn);
+std::ostream & operator << (std::ostream &xos, const index_space_interval& xn);
 
 } // end namespace sheaf
 

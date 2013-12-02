@@ -62,7 +62,7 @@ class crg_interval;
 ///
 /// Insert crg_interval& m into ostream& os.
 ///
-ostream& operator <<(ostream& os, const crg_interval& m);
+std::ostream& operator <<(std::ostream& os, const crg_interval& m);
 
 ///
 /// Abstract emulator for an interval of cover relation graph members.
@@ -70,7 +70,7 @@ ostream& operator <<(ostream& os, const crg_interval& m);
 class SHEAF_DLL_SPEC crg_interval : public any
 {
 
-  friend ostream& operator <<(ostream& os, const crg_interval& m);
+  friend std::ostream& operator <<(std::ostream& os, const crg_interval& m);
   friend SHEAF_DLL_SPEC size_t deep_size(const crg_interval& xp, bool xinclude_shallow);
   friend class poset_crg_state;   // uses cover_name
   
@@ -390,7 +390,7 @@ public:
   /// Creates a default constructed instance of the
   /// the class with name xname.
   ///
-  static crg_interval* new_interval(const string& xname);
+  static crg_interval* new_interval(const std::string& xname);
 
   ///
   /// Sets is_initialized() == true;
@@ -407,7 +407,7 @@ public:
   /// The name of this class;
   /// provided to satisfy factory template.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
 protected:
 

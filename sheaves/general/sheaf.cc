@@ -24,6 +24,8 @@
 #include "std_cmath.h"
 #include "std_iostream.h"
 
+using namespace std;
+
 // =============================================================================
 // MISC FACET
 // =============================================================================
@@ -44,9 +46,9 @@ check_lps_script_has_run()
 }
 
 ///
-string
+std::string
 sheaf::
-filename_from_cmdline(string xargv)
+filename_from_cmdline(std::string xargv)
 {
   string result;
   // Look for backslashes no matter the OS
@@ -75,7 +77,7 @@ filename_from_cmdline(string xargv)
 
 ///
 string
-sheaf::
+std::sheaf::
 get_release_tag()
 {
   // Expansion of the CVS keyword "<dollars>Name<dollars>" looks like this:

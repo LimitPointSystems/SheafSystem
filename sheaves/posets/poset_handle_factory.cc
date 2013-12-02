@@ -98,7 +98,7 @@ sheaf::poset_handle_factory::
 ///
 sheaf::poset_state_handle*
 sheaf::poset_handle_factory::
-new_poset_handle(const string& xclient_class_name,
+new_poset_handle(const std::string& xclient_class_name,
                  poset_type xsheaf_base_class_id)
 {
   poset_state_handle* result = 0;
@@ -183,7 +183,7 @@ insert_prototype(const poset_state_handle* xprototype)
 ///
 void
 sheaf::poset_handle_factory::
-delete_prototype(const string& xclass_name)
+delete_prototype(const std::string& xclass_name)
 {
   // Preconditions:
 
@@ -217,7 +217,7 @@ delete_prototype(const string& xclass_name)
 ///
 bool
 sheaf::poset_handle_factory::
-contains_prototype(const string& xclass_name) const
+contains_prototype(const std::string& xclass_name) const
 {
   bool result;
 

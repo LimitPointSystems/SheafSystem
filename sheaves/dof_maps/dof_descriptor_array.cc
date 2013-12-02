@@ -129,10 +129,11 @@ size() const
 //  NON-MEMBER FUNCTIONS
 // ===========================================================
 
-ostream& sheaf::
-operator << (ostream &os, const dof_descriptor_array& p)
+std::ostream&
+sheaf::
+operator << (std::ostream &os, const dof_descriptor_array& p)
 {
-  os << "p.ub() = " << p.ub() << endl;
+  os << "p.ub() = " << p.ub() << std::endl;
   
   for(int i=0; i<p.ub(); ++i)
   {
@@ -142,8 +143,9 @@ operator << (ostream &os, const dof_descriptor_array& p)
   return os;
 }
 
-ostream& sheaf::
-operator << (ostream &os, const dof_descriptor_array::dof_descriptor& p)
+std::ostream&
+sheaf::
+operator << (std::ostream &os, const dof_descriptor_array::dof_descriptor& p)
 {
   os << "{"  << primitive_attributes::name(p.type)
   << ", " << p.size

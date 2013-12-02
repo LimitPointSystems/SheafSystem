@@ -85,7 +85,7 @@ public:
   /// Returns a handle to the id space created.
   ///
   static interval_index_space_handle new_space(index_space_family& xid_spaces,
-					       const string& xname,
+					       const std::string& xname,
 					       bool xis_persistent,
 					       bool xmerge_mode);
 
@@ -97,7 +97,7 @@ public:
   ///
   static interval_index_space_handle new_space(index_space_family& xid_spaces,
 					       pod_type xid,
-					       const string& xname,
+					       const std::string& xname,
 					       bool xis_persistent,
 					       bool xmerge_mode);
 
@@ -125,13 +125,13 @@ protected:
 				  pod_type xdomain_end, 
 				  pod_type xrange_begin, 
 				  pod_type xrange_end,
-				  map<pod_type, pod_type>& xmap,
+				  std::map<pod_type, pod_type>& xmap,
 				  bool xmerge_mode);
 
   ///
   /// The value of map xmap at id xid.
   ///
-  static pod_type map_value(pod_type xid, const map<pod_type, pod_type>& xmap);
+  static pod_type map_value(pod_type xid, const std::map<pod_type, pod_type>& xmap);
 
   ///
   /// Default constructor
@@ -301,7 +301,7 @@ public:
   ///
   /// Inserts the map representation into ostream xos.
   ///
-  void print_map_rep(ostream& xos) const;
+  void print_map_rep(std::ostream& xos) const;
   
 protected:
 
@@ -366,7 +366,7 @@ protected:
   ///
   /// The type of the id maps.
   ///
-  typedef map<pod_type, pod_type> map_type;
+  typedef std::map<pod_type, pod_type> map_type;
 
   ///
   /// The type of the range id to domain id map.
@@ -568,7 +568,7 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// Virtual constructor; create a new instance of the same type at this.

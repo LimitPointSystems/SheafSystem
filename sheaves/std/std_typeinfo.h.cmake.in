@@ -20,6 +20,4 @@
 
 #include <typeinfo>
 
-using namespace std;
-
 #endif // STD_TYPEINFO_H

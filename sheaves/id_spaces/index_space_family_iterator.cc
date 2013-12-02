@@ -330,7 +330,7 @@ index() const
   return result;
 }
 
-string
+std::string
 sheaf::index_space_family_iterator::
 name() const
 {
@@ -340,7 +340,7 @@ name() const
 
   // Body:
 
-  string result = _id_spaces->name(index());
+  std::string result = _id_spaces->name(index());
 
   // Postconditions:
 

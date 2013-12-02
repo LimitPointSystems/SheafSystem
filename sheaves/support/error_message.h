@@ -79,26 +79,26 @@ public:
   ///
   /// Creates an instance with level xlevel, source xsource, and text xtext.
   ///
-  error_message(level_type xlevel, const string& xsource, const string& xtext);
+  error_message(level_type xlevel, const std::string& xsource, const std::string& xtext);
 
   ///
   /// Creates an instance with level xlevel, source file xfile,
   /// source line number xline, and text xtext.
   ///
   error_message(level_type xlevel,
-                const string& xfile,
+                const std::string& xfile,
                 int xline,
-                const string& xtext);
+                const std::string& xtext);
 
   ///
   /// The source of this message.
   ///
-  string source() const;
+  std::string source() const;
 
   ///
   /// The text of this message.
   ///
-  string text() const;
+  std::string text() const;
 
   ///
   /// The level of this message.
@@ -113,18 +113,18 @@ public:
   ///
   /// The name of level xlevel.
   ///
-  static const string& level_name(level_type xlevel);
+  static const std::string& level_name(level_type xlevel);
 
 private:
   ///
   /// The source of this message.
   ///
-  string _source;
+  std::string _source;
 
   ///
   /// The text of this message.
   ///
-  string _text;
+  std::string _text;
 
   ///
   /// The level of this message.
@@ -141,7 +141,7 @@ private:
 /// Inserts error message xmsg into ostream xos.
 ///
 SHEAF_DLL_SPEC
-ostream & operator << (ostream &xos, const error_message& xmsg);
+std::ostream & operator << (std::ostream &xos, const error_message& xmsg);
 
 #define SOURCE_CODE_LOCATION \
 error_message(error_message::UNSPECIFIED, __FILE__, __LINE__, "")

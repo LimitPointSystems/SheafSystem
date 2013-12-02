@@ -35,7 +35,7 @@
 sheaf::array_index_space_handle
 sheaf::array_index_space_state::
 new_space(index_space_family& xid_spaces,
-	  const string& xname,
+	  const std::string& xname,
 	  bool xis_persistent,
 	  size_type xcapacity)
 {
@@ -74,7 +74,7 @@ sheaf::array_index_space_handle
 sheaf::array_index_space_state::
 new_space(index_space_family& xid_spaces,
 	  pod_index_type xid,
-	  const string& xname,
+	  const std::string& xname,
 	  bool xis_persistent,
 	  size_type xcapacity)
 {
@@ -1015,11 +1015,11 @@ iterators()
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 sheaf::array_index_space_state::
 class_name() const
 {
-  static const string result("array_index_space_state");
+  static const std::string result("array_index_space_state");
   return result;
 }
 

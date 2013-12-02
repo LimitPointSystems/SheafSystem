@@ -389,7 +389,7 @@ filtered_depth_first_iterator(const abstract_poset_member& xanchor,
 
 sheaf::filtered_depth_first_iterator::
 filtered_depth_first_iterator(const abstract_poset_member& xanchor,
-                              const string& xfilter_name,
+                              const std::string& xfilter_name,
                               bool xdown,
                               bool xstrict,
                               order_type xorder)
@@ -637,7 +637,7 @@ put_filter(const subposet& xfilter)
 
 void
 sheaf::filtered_depth_first_iterator::
-put_filter(const string& xfilter_name)
+put_filter(const std::string& xfilter_name)
 {
 
   // Preconditions:

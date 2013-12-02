@@ -35,7 +35,7 @@
 sheaf::singleton_index_space_handle
 sheaf::singleton_index_space_state::
 new_space(index_space_family& xid_spaces,
-	  const string& xname,
+	  const std::string& xname,
 	  pod_type xhub_id)
 {
   // Preconditions:
@@ -78,7 +78,7 @@ sheaf::singleton_index_space_handle
 sheaf::singleton_index_space_state::
 new_space(index_space_family& xid_spaces,
 	  pod_index_type xid,
-	  const string& xname,
+	  const std::string& xname,
 	  pod_type xhub_id)
 {
   // Preconditions:
@@ -657,11 +657,11 @@ iterators()
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 sheaf::singleton_index_space_state::
 class_name() const
 {
-  static const string result("singleton_index_space_state");
+  static const std::string result("singleton_index_space_state");
   return result;
 }
 

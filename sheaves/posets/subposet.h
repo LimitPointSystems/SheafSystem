@@ -37,10 +37,6 @@
 #include "poset_component.h"
 #endif
 
-#ifndef STD_SET_H
-#include "std_set.h"
-#endif
-
 #ifndef STD_STRING_H
 #include "std_string.h"
 #endif
@@ -102,7 +98,7 @@ class SHEAF_DLL_SPEC subposet : public poset_component
   friend class section_space_schema_subposet;
   friend class storage_agent;
   friend class subposet_member_iterator;
-  friend SHEAF_DLL_SPEC ostream & operator << (ostream &os, const subposet& s);
+  friend SHEAF_DLL_SPEC std::ostream & operator << (std::ostream &os, const subposet& s);
 
   // ===========================================================
   /// @name SUBPOSET FACET
@@ -163,7 +159,7 @@ public:
   /// Creates a new subposet handle attached to the subposet state
   /// with name xname in xhost
   ///
-  subposet(const poset_state_handle* xhost, const string& xname);
+  subposet(const poset_state_handle* xhost, const std::string& xname);
 
   ///
   /// Deletes this subposet and the state it is attached to, if any
@@ -248,7 +244,7 @@ public:
   ///
   /// Creates an id space for the members of this.
   ///
-  virtual mutable_index_space_handle& new_id_space(const string& xstate_class_name);
+  virtual mutable_index_space_handle& new_id_space(const std::string& xstate_class_name);
 
   ///
   /// True if this already has an id space.
@@ -270,7 +266,7 @@ protected:
   ///
   /// The name of the id space associated with this.
   ///
-  virtual string id_space_name() const;
+  virtual std::string id_space_name() const;
 
   ///
   /// Attach the id space to the id_space_name().
@@ -363,7 +359,7 @@ public:
   ///
   /// True if this poset contains poset member with name xname.
   ///
-  bool contains_member(const string& xname) const;
+  bool contains_member(const std::string& xname) const;
 
   ///
   /// True if this poset contains poset members with hub ids in xmbr_hub_ids.
@@ -768,13 +764,13 @@ public:
   /// Gets the index of the component in xhost with name xname.
   ///
   virtual pod_index_type get_index_from_name(const poset_state_handle* xhost,
-					     const string& xname) const;
+					     const std::string& xname) const;
 
   ///
   /// Gets the index of the component in xhost with name xname.
   ///
   virtual void get_index_from_name(const poset_state_handle* xhost,
-				   const string& xname,
+				   const std::string& xname,
 				   scoped_index& result) const;
 
 protected:
@@ -795,7 +791,7 @@ public:
 
   //   using poset_component::name;
 
-  string name() const
+  std::string name() const
   {
     return poset_component::name();
   };
@@ -803,12 +799,12 @@ public:
   ///
   /// A name for this.
   ///
-  virtual string name(bool xauto_access) const;
+  virtual std::string name(bool xauto_access) const;
 
   ///
   /// All the names for this.
   ///
-  virtual void all_names(block<string>& xresult, bool xauto_access = false) const;
+  virtual void all_names(block<std::string>& xresult, bool xauto_access = false) const;
 
   ///
   /// The number of names for this.
@@ -818,17 +814,17 @@ public:
   ///
   /// True if xname is a name for this.
   ///
-  virtual bool has_name(const string& xname, bool xauto_access = false) const;
+  virtual bool has_name(const std::string& xname, bool xauto_access = false) const;
 
   ///
   /// Make xname a name for this; if xunique, make xname the only name.
   ///
-  virtual void put_name(const string& xname, bool xunique, bool xauto_access);
+  virtual void put_name(const std::string& xname, bool xunique, bool xauto_access);
 
   ///
   /// Delete all names for this.
   ///
-  virtual void delete_name(const string& xname, bool xauto_access = false);
+  virtual void delete_name(const std::string& xname, bool xauto_access = false);
 
   ///
   /// Delete all the names for this.
@@ -901,12 +897,12 @@ public:
   ///
   /// Prints out useful information for debugging
   ///
-  void to_stream(ostream& os = cout);
+  void to_stream(std::ostream& os = std::cout);
 
   ///
   /// Get useful information for debugging as a string.
   ///
-  string to_string();
+  std::string to_string();
 
 protected:
 
@@ -924,7 +920,7 @@ private:
 /// Insert subposet& s into ostream& os
 ///
 SHEAF_DLL_SPEC
-ostream & operator << (ostream &os, const subposet& s);
+std::ostream & operator << (std::ostream &os, const subposet& s);
 
 ///
 /// The deep size of the referenced object of type subposet.

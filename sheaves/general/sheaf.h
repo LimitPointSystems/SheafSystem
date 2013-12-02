@@ -128,18 +128,18 @@ SHEAF_DLL_SPEC void check_lps_script_has_run();
 /// Method to strip any command line down to it's rightmost delimited element                .
 /// Used in unit test routines.
 ///
-SHEAF_DLL_SPEC string filename_from_cmdline(string xargv);
+SHEAF_DLL_SPEC std::string filename_from_cmdline(std::string xargv);
 
 ///
 /// The CVS branch tag this file is part of.
 ///
-const string RELEASE_TAG = "$Name: HEAD $";
+const std::string RELEASE_TAG = "$Name: HEAD $";
 
 ///
 /// Returns the CVS branch tag for this codebase.                .
 /// 
 ///
-SHEAF_DLL_SPEC string get_release_tag();
+SHEAF_DLL_SPEC std::string get_release_tag();
 
 ///
 /// True if isunordered(x1, x2) or x1 == x2.

@@ -49,10 +49,6 @@
 #include "primitives_poset_schema.h"
 #endif
 
-#ifndef STD_MAP_H
-#include "std_map.h"
-#endif
-
 #ifndef STD_IOSTREAM_H
 #include "std_iostream.h"
 #endif
@@ -100,7 +96,7 @@ public:
   ///
   /// Creates a new namespace with name xname.
   ///
-  namespace_poset(const string& xname);
+  namespace_poset(const std::string& xname);
 
   ///
   /// The primitives poset within this namespace (mutable version)
@@ -238,14 +234,14 @@ protected:
   /// Inserts xposet into this namespace with member name xposet_name.
   ///
   scoped_index insert_poset(const poset_state_handle& xposet,
-			    const string& xposet_name,
+			    const std::string& xposet_name,
 			    bool xauto_link);
 
   ///
   /// Inserts xposet into this namespace with member name xposet_name.
   ///
   scoped_index insert_poset(const poset_state_handle& xposet,
-			    const string& xposet_name,
+			    const std::string& xposet_name,
 			    bool xauto_link,
                             bool xauto_access);
 
@@ -304,7 +300,7 @@ public:
   ///
   /// Delete the poset with name xname.
   ///
-  void delete_poset(string xname, bool xauto_access);
+  void delete_poset(std::string xname, bool xauto_access);
 
   ///
   /// Delete the poset with name xpath.poset_name().
@@ -458,8 +454,8 @@ public:
   /// True if this contains a poset with name xposet_name which
   /// contains all members with names in array xmember_name.
   ///
-  bool contains_poset_members(const string& xposet_name,
-                              const string  xmember_names[],
+  bool contains_poset_members(const std::string& xposet_name,
+                              const std::string  xmember_names[],
                               int xmember_names_ct,
                               bool xauto_access = true) const;
 
@@ -598,7 +594,7 @@ protected:
   ///
   /// Creates a new namespace state with name xname and attaches this to it.
   ///
-  void new_state(const string& xname);
+  void new_state(const std::string& xname);
 
   ///
   /// Detaches this from its state
@@ -626,12 +622,12 @@ public:
   ///
   /// The name of this poset
   ///
-  virtual string name() const;
+  virtual std::string name() const;
 
   ///
   /// The name of this poset
   ///
-  virtual string name(bool xauto_access) const;
+  virtual std::string name(bool xauto_access) const;
 
   ///
   /// The path of this poset.
@@ -783,7 +779,7 @@ protected:
   /// Sets name() to xname.
   /// Intended for use only by storage_agent::begin_read_transaction(namespace_poset&).
   ///
-  void put_name(const string& xname);
+  void put_name(const std::string& xname);
 
 private:
 
@@ -800,13 +796,13 @@ public:
   ///
   ///  Write instance information to an ostream (default = stdout).
   ///
-  void to_stream(ostream& xos = cout);
+  void to_stream(std::ostream& xos = std::cout);
 
 
   ///
   /// Get instance information as a string.
   ///
-  string to_string();
+  std::string to_string();
 
 protected:
 
@@ -854,7 +850,7 @@ private:
 /// Insert namespace_poset& p into ostream& os.
 ///
 SHEAF_DLL_SPEC 
-ostream & operator << (ostream &os, const namespace_poset& p);
+std::ostream & operator << (std::ostream &os, const namespace_poset& p);
 
 ///
 ///The deep size of the referenced object of type namespace_poset.

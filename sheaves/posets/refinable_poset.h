@@ -257,7 +257,7 @@ public:
   /// member created by this routine using new_link in order to return
   /// the poset to a valid state.
   ///
-  virtual pod_index_type new_member_interval(const string& xinterval_type,
+  virtual pod_index_type new_member_interval(const std::string& xinterval_type,
 					     size_type xsize,
 					     const block<pod_index_type>& xdof_tuple_ids,
 					     const block<pod_index_type>& xdata)
@@ -273,7 +273,7 @@ public:
   /// member created by this routine using new_link in order to return
   /// the poset to a valid state.
   ///
-  void new_member_interval(const string& xinterval_type, size_type xsize,
+  void new_member_interval(const std::string& xinterval_type, size_type xsize,
 			   const block<pod_index_type>& xdof_tuple_ids,
 			   const block<pod_index_type>& xdata,
 			   scoped_index& result)
@@ -328,7 +328,7 @@ protected:
   /// member created by this routine using new_link in order to return
   /// the poset to a valid state.
   ///
-  virtual pod_index_type new_member_interval(const string& xinterval_type, size_type xsize);
+  virtual pod_index_type new_member_interval(const std::string& xinterval_type, size_type xsize);
 
   ///
   /// Create a disconnected member interval beginning at index xindex,
@@ -344,7 +344,7 @@ protected:
   /// the poset to a valid state.
   ///
   virtual void new_member_interval(const scoped_index& xindex,
-				   const string& xinterval_type, 
+				   const std::string& xinterval_type, 
 				   size_type xsize);
 
 private:

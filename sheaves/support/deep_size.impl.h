@@ -265,7 +265,7 @@ deep_size(const hash_map<K, V, H, E, A>& xp, bool xinclude_shallow)
 
 template <typename K, typename V, typename S>
 size_t
-deep_size(const map<K, V>& xp, bool xinclude_shallow)
+deep_size(const std::map<K, V>& xp, bool xinclude_shallow)
 {
   size_t result;
   
@@ -300,7 +300,7 @@ deep_size(const map<K, V>& xp, bool xinclude_shallow)
 
 template <typename T>
 size_t
-deep_size(const list<T>& xp, bool xinclude_shallow)
+deep_size(const std::list<T>& xp, bool xinclude_shallow)
 {
   size_t result;
   

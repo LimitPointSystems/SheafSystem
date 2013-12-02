@@ -241,7 +241,7 @@ subposet(const poset_state_handle* xhost, const scoped_index& xid)
 }
 
 sheaf::subposet::
-subposet(const poset_state_handle* xhost, const string& xname)
+subposet(const poset_state_handle* xhost, const std::string& xname)
 {
 
   // Preconditions
@@ -549,7 +549,7 @@ id_space()
 
 sheaf::mutable_index_space_handle&
 sheaf::subposet::
-new_id_space(const string& xstate_class_name)
+new_id_space(const std::string& xstate_class_name)
 {
   // Preconditions:
 
@@ -683,7 +683,7 @@ put_is_persistent(bool xis_persistent)
 
 // PROTECTED MEMBER FUNCTIONS
 
-string
+std::string
 sheaf::subposet::
 id_space_name() const
 {
@@ -988,7 +988,7 @@ contains_member(const scoped_index& xmbr_id) const
 
 bool
 sheaf::subposet::
-contains_member(const string& xname) const
+contains_member(const std::string& xname) const
 {
   bool result;
 
@@ -2631,7 +2631,7 @@ hub_id(pod_index_type xid) const
 
 sheaf::pod_index_type
 sheaf::subposet::
-get_index_from_name(const poset_state_handle* xhost, const string& xname) const
+get_index_from_name(const poset_state_handle* xhost, const std::string& xname) const
 {
   // Preconditions:
 
@@ -2655,7 +2655,7 @@ get_index_from_name(const poset_state_handle* xhost, const string& xname) const
 
 void
 sheaf::subposet::
-get_index_from_name(const poset_state_handle* xhost, const string& xname,
+get_index_from_name(const poset_state_handle* xhost, const std::string& xname,
 		    scoped_index& result) const
 {
   // Preconditions:
@@ -2689,7 +2689,7 @@ get_index_from_name(const poset_state_handle* xhost, const string& xname,
 
 // PUBLIC MEMBER FUNCTIONS
 
-string
+std::string
 sheaf::subposet::
 name(bool xauto_access) const
 {
@@ -2714,7 +2714,7 @@ name(bool xauto_access) const
 
 void
 sheaf::subposet::
-all_names(block<string>& xresult, bool xauto_access) const
+all_names(block<std::string>& xresult, bool xauto_access) const
 {
   // Preconditions:
 
@@ -2757,7 +2757,7 @@ name_ct(bool xauto_access) const
 
 bool
 sheaf::subposet::
-has_name(const string& xname, bool xauto_access) const
+has_name(const std::string& xname, bool xauto_access) const
 {
   // Preconditions:
 
@@ -2777,7 +2777,7 @@ has_name(const string& xname, bool xauto_access) const
 
 void
 sheaf::subposet::
-put_name(const string& xname, bool xunique, bool xauto_access)
+put_name(const std::string& xname, bool xunique, bool xauto_access)
 {
   // Preconditions:
 
@@ -2800,7 +2800,7 @@ put_name(const string& xname, bool xunique, bool xauto_access)
 
 void
 sheaf::subposet::
-delete_name(const string& xname, bool xauto_access)
+delete_name(const std::string& xname, bool xauto_access)
 {
   // Preconditions:
 
@@ -2997,12 +2997,12 @@ invariant() const
 
 void
 sheaf::subposet::
-to_stream(ostream& os)
+to_stream(std::ostream& os)
 {
   cout  << *this;
 }
 
-string
+std::string
 sheaf::subposet::
 to_string()
 {
@@ -3021,9 +3021,9 @@ to_string()
 // ===========================================================
 
 
-ostream&
+std::ostream&
 sheaf::
-operator<<(ostream& xos, const subposet& xs)
+operator<<(std::ostream& xos, const subposet& xs)
 {
   // Preconditions:
 

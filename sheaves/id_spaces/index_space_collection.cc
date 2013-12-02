@@ -22,7 +22,6 @@
 #include "index_space_collection.h"
 #include "assert_contract.h"
 #include "explicit_index_space_state.h"
-#include "factory_2.h"
 #include "hub_index_space_handle.h"
 #include "index_space_family.h"
 #include "index_space_iterator.h"

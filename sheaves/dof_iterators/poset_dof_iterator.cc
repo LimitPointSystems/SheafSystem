@@ -25,6 +25,7 @@
 #include "poset_state_handle.h"
 #include "schema_poset_member.h"
 
+using namespace std;
 
 sheaf::poset_dof_iterator::
 poset_dof_iterator()

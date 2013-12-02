@@ -37,8 +37,8 @@ sheaf::operator<<(ostream& xos, const namespace_relative_member_index& xindex)
   return xos;
 }
 
-istream&
-sheaf::operator>>(istream& xis, namespace_relative_member_index& xindex)
+std::istream&
+sheaf::operator>>(std::istream& xis, namespace_relative_member_index& xindex)
 {
   // Preconditions:
 

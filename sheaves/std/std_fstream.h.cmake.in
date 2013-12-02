@@ -22,6 +22,4 @@
 
 #include <fstream>
 
-using namespace std;
-
 #endif // STD_FSTREAM_H

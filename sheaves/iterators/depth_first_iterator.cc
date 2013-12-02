@@ -1862,7 +1862,7 @@ initialize_filter(const scoped_index& xfilter_id)
 
 void
 sheaf::depth_first_iterator::
-initialize_filter(const string& xfilter_name)
+initialize_filter(const std::string& xfilter_name)
 {
   // Preconditions:
 

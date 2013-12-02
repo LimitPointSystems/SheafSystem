@@ -72,7 +72,7 @@ public:
   /// Constructor: Attach to state with name xname in the family xid_spaces.
   ///
   sum_index_space_handle(const index_space_family& xid_spaces,
-			 const string& xname);
+			 const std::string& xname);
 
   ///
   /// Assignment operator; attach this handle to the state of xother.
@@ -114,7 +114,7 @@ public:
   ///
   /// The type used to represent an equivalence class.
   ///
-  typedef list<pod_type> equivalence_class_type;
+  typedef std::list<pod_type> equivalence_class_type;
 
   ///
   /// The equivalence class associated with the hub id xhub_id.

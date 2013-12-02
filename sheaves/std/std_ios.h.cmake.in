@@ -20,6 +20,4 @@
 
 #include <ios>
 
-using namespace std;
-
 #endif // STD_IOS_H

@@ -184,7 +184,7 @@ schema_descriptor(const schema_descriptor& xother)
 
 ///
 sheaf::schema_descriptor::
-schema_descriptor(const string& xname, primitive_type xtype, bool xis_table_dof)
+schema_descriptor(const std::string& xname, primitive_type xtype, bool xis_table_dof)
 {
   // Preconditions:
 
@@ -230,8 +230,8 @@ sheaf::schema_descriptor::
 // ===========================================================
 
 ///
-ostream&
-sheaf::operator<<(ostream& os, const schema_descriptor& xsd)
+std::ostream&
+sheaf::operator<<(std::ostream& os, const schema_descriptor& xsd)
 {
   // Preconditions:
 
@@ -252,8 +252,8 @@ sheaf::operator<<(ostream& os, const schema_descriptor& xsd)
 
 
 ///
-istream&
-sheaf::operator>>(istream& is, schema_descriptor& xsd)
+std::istream&
+sheaf::operator>>(std::istream& is, schema_descriptor& xsd)
 {
   // Preconditions:
 

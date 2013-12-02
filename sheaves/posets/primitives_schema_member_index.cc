@@ -41,7 +41,7 @@ operator++(primitives_schema_member_index& x)
 };
 
 ///
-const string&
+const std::string&
 sheaf::
 primitives_schema_member_index_to_name(primitives_schema_member_index xpt)
 {
@@ -79,7 +79,7 @@ primitives_schema_member_index_to_name(primitives_schema_member_index xpt)
 ///
 sheaf::primitives_schema_member_index
 sheaf::
-primitives_schema_member_index_from_name(const string& xname)
+primitives_schema_member_index_from_name(const std::string& xname)
 {
   primitives_schema_member_index result = NOT_A_PRIMITIVES_SCHEMA_MEMBER_INDEX;
   for(primitives_schema_member_index i=PRIMITIVES_SCHEMA_MEMBER_INDEX_BEGIN;

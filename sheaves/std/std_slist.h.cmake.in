@@ -34,8 +34,6 @@
 
 #include <slist>
 
-using namespace std;
-
 #elif HAVE_EXT_SLIST
 
 // This environment has <ext/slist>.
@@ -52,8 +50,6 @@ using namespace __gnu_cxx;
 
 // Assume class slist is in namespace std
 
-using namespace std;
-
 #endif // ifdef __GNUG__
 
 
@@ -64,8 +60,6 @@ using namespace std;
 // simulate with list.
 
 #include <list>
-
-using namespace std;
 
 template <class T, class A = allocator<T> > class slist : public list<T, A> 
 { 

@@ -23,8 +23,6 @@
 #if HAVE_CFLOAT
 
 #include <cfloat>
-using namespace std;
-
 #else
 
 #include <float.h>

@@ -616,7 +616,7 @@ interval_factory()
 
 sheaf::crg_interval*
 sheaf::crg_interval::
-new_interval(const string& xname)
+new_interval(const std::string& xname)
 {
   // Preconditions:
 
@@ -671,7 +671,7 @@ is_initialized() const
   return result;
 }
 
-const string&
+const std::string&
 sheaf::crg_interval::
 class_name() const
 {

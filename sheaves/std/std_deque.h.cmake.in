@@ -20,6 +20,4 @@
 
 #include <deque>
 
-using namespace std;
-
 #endif // STD_DEQUE_H

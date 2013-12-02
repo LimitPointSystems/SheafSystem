@@ -82,12 +82,12 @@ public:
   /// the pair is the index of the id space, the second value in the
   /// pair is the pod.
   ///
-  typedef pair<pod_type, pod_type> member_type;
+  typedef std::pair<pod_type, pod_type> member_type;
 
   ///
   /// The equivalence id list type for this.
   ///
-  typedef list<member_type> list_type;
+  typedef std::list<member_type> list_type;
 
   ///
   /// Creates the id equivalence class for the id space family xid_spaces.

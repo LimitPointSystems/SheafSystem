@@ -33,10 +33,6 @@
 #include "poset_state_handle.h"
 #endif
 
-#ifndef STD_STACK_H
-#include "std_stack.h"
-#endif
-
 #ifndef SUBPOSET_H
 #include "subposet.h"
 #endif
@@ -171,7 +167,7 @@ public:
   /// If xstrict, iterate over strict up/down set only.
   ///
   filtered_depth_first_iterator(const abstract_poset_member& xanchor,
-                                const string& xfilter_name,
+                                const std::string& xfilter_name,
                                 bool xdown,
                                 bool xstrict,
                                 order_type xorder);
@@ -211,7 +207,7 @@ public:
   ///
   /// Sets the subposet which is the filter.
   ///
-  void put_filter(const string& xfilter_name);
+  void put_filter(const std::string& xfilter_name);
 
   ///
   /// Sets the subposet which is the filter.

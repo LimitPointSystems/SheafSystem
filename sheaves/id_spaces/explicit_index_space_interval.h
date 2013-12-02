@@ -144,7 +144,7 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// Virtual constructor; create a new instance of the same type at this.

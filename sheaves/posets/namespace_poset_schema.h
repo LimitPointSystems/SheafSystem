@@ -62,7 +62,7 @@ public:
   ///
   /// The standard name for an instance of this class.
   ///
-  static const string& standard_name();
+  static const std::string& standard_name();
 
 protected:
 
@@ -131,7 +131,7 @@ protected:
   /// Creates the subposets common to every poset (i.e._whole and _jims) plus
   /// those required of a schema poset (table_dofs and row_dofs)
   ///
-  virtual void initialize_standard_subposets(const string& xname);
+  virtual void initialize_standard_subposets(const std::string& xname);
 
   ///
   /// Initializes the predefined members of the poset.

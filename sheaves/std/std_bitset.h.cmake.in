@@ -20,6 +20,4 @@
 
 #include <bitset>
 
-using namespace std;
-
 #endif // STD_BITSET_H

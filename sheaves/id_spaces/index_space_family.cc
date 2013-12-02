@@ -35,6 +35,8 @@
 #include "std_iomanip.h"
 #include "std_set.h"
 
+using namespace std;
+
 // ===========================================================
 // INDEX_SPACE_FAMILY FACET
 // ===========================================================
@@ -96,7 +98,7 @@ sheaf::index_space_family::
   return;
 }
 
-string
+std::string
 sheaf::index_space_family::
 name(pod_type xid) const
 {
@@ -117,7 +119,7 @@ name(pod_type xid) const
 
 sheaf::index_space_family::pod_type
 sheaf::index_space_family::
-index(const string& xname) const
+index(const std::string& xname) const
 {
   // Preconditions:
 
@@ -138,7 +140,7 @@ index(const string& xname) const
 
 void
 sheaf::index_space_family::
-put_name(pod_type xid, const string& xname)
+put_name(pod_type xid, const std::string& xname)
 {
   // Preconditions:
 
@@ -181,7 +183,7 @@ contains(pod_type xid) const
 
 bool
 sheaf::index_space_family::
-contains(const string& xname) const
+contains(const std::string& xname) const
 {
   // Preconditions:
 
@@ -414,7 +416,7 @@ delete_space(pod_type xid)
 
 void
 sheaf::index_space_family::
-delete_space(const string& xname)
+delete_space(const std::string& xname)
 {
   // Preconditions:
 
@@ -535,8 +537,8 @@ delete_primary_state(pod_type xid)
 
 void
 sheaf::index_space_family::
-new_state(const string& xname,
-	  const string& xstate_class_name)
+new_state(const std::string& xname,
+	  const std::string& xstate_class_name)
 {
   // Preconditions:
 
@@ -1017,7 +1019,7 @@ gathered_hub_id_space_excludes_bottom() const
   return result;
 }
 
-const string&
+const std::string&
 sheaf::index_space_family::
 hub_id_space_name()
 {
@@ -1025,7 +1027,7 @@ hub_id_space_name()
 
   // Body:
 
-  static const string result(poset_path::reserved_prefix() + "hub");
+  static const std::string result(poset_path::reserved_prefix() + "hub");
 
   // Postconditions:
 
@@ -1152,7 +1154,7 @@ extend_last_term(size_type xct)
 
 sheaf::size_type
 sheaf::index_space_family::
-ct(const string& xname) const
+ct(const std::string& xname) const
 {
   // Preconditions:
 
@@ -1197,7 +1199,7 @@ ct(pod_type xspace_id) const
 
 bool
 sheaf::index_space_family::
-is_empty(const string& xname) const
+is_empty(const std::string& xname) const
 {
   // Preconditions:
 
@@ -1239,7 +1241,7 @@ is_empty(pod_type xspace_id) const
 
 sheaf::index_space_family::pod_type
 sheaf::index_space_family::
-begin(const string& xname) const
+begin(const std::string& xname) const
 {
   // Preconditions:
 
@@ -1284,7 +1286,7 @@ begin(pod_type xspace_id) const
 
 sheaf::index_space_family::pod_type
 sheaf::index_space_family::
-end(const string& xname) const
+end(const std::string& xname) const
 {
   // Preconditions:
 
@@ -1329,7 +1331,7 @@ end(pod_type xspace_id) const
 
 sheaf::index_space_family::pod_type
 sheaf::index_space_family::
-hub_begin(const string& xname) const
+hub_begin(const std::string& xname) const
 {
   // Preconditions:
 
@@ -1374,7 +1376,7 @@ hub_begin(pod_type xspace_id) const
 
 bool
 sheaf::index_space_family::
-is_gathered(const string& xname) const
+is_gathered(const std::string& xname) const
 {
   // Preconditions:
 
@@ -1416,7 +1418,7 @@ is_gathered(pod_type xspace_id) const
 
 bool
 sheaf::index_space_family::
-contains(const string& xname, pod_type xid) const
+contains(const std::string& xname, pod_type xid) const
 {
   // Preconditions:
 
@@ -1461,7 +1463,7 @@ contains(pod_type xspace_id, pod_type xid) const
 
 bool
 sheaf::index_space_family::
-contains(const string& xname, const scoped_index& xid) const
+contains(const std::string& xname, const scoped_index& xid) const
 {
   // Preconditions:
 
@@ -1503,7 +1505,7 @@ contains(pod_type xspace_id, const scoped_index& xid) const
 
 bool
 sheaf::index_space_family::
-contains_hub(const string& xname, pod_type xid) const
+contains_hub(const std::string& xname, pod_type xid) const
 {
   // Preconditions:
 
@@ -1545,7 +1547,7 @@ contains_hub(pod_type xspace_id, pod_type xid) const
 
 bool
 sheaf::index_space_family::
-contains_unglued_hub(const string& xname, pod_type xid) const
+contains_unglued_hub(const std::string& xname, pod_type xid) const
 {
   // Preconditions:
 
@@ -1590,7 +1592,7 @@ contains_unglued_hub(pod_type xspace_id, pod_type xid) const
 
 bool
 sheaf::index_space_family::
-contains_glued_hub(const string& xname, pod_type xid) const
+contains_glued_hub(const std::string& xname, pod_type xid) const
 {
   // Preconditions:
 
@@ -1633,7 +1635,7 @@ contains_glued_hub(pod_type xspace_id, pod_type xid) const
 
 bool
 sheaf::index_space_family::
-contains(const string& xname, pod_type xid, const scoped_index& xhub_id) const
+contains(const std::string& xname, pod_type xid, const scoped_index& xhub_id) const
 {
   // Preconditions:
 
@@ -1675,7 +1677,7 @@ contains(pod_type xspace_id, pod_type xid, const scoped_index& xhub_id) const
 
 bool
 sheaf::index_space_family::
-contains(const string& xname, pod_type xid, pod_type xhub_id) const
+contains(const std::string& xname, pod_type xid, pod_type xhub_id) const
 {
   // Preconditions:
 
@@ -1720,7 +1722,7 @@ contains(pod_type xspace_id, pod_type xid, pod_type xhub_id) const
 
 sheaf::index_space_family::pod_type
 sheaf::index_space_family::
-pod(const string& xname, pod_type xid) const
+pod(const std::string& xname, pod_type xid) const
 {
   // Preconditions:
 
@@ -1765,7 +1767,7 @@ pod(pod_type xspace_id, pod_type xid) const
 
 sheaf::index_space_family::pod_type
 sheaf::index_space_family::
-pod(const string& xname, const scoped_index& xid) const
+pod(const std::string& xname, const scoped_index& xid) const
 {
   // Preconditions:
 
@@ -1807,7 +1809,7 @@ pod(pod_type xspace_id, const scoped_index& xid) const
 
 sheaf::index_space_family::pod_type
 sheaf::index_space_family::
-hub_pod(const string& xname, pod_type xid) const
+hub_pod(const std::string& xname, pod_type xid) const
 {
   // Preconditions:
 
@@ -1849,7 +1851,7 @@ hub_pod(pod_type xspace_id, pod_type xid) const
 
 sheaf::index_space_family::pod_type
 sheaf::index_space_family::
-unglued_hub_pod(const string& xname, pod_type xid) const
+unglued_hub_pod(const std::string& xname, pod_type xid) const
 {
   // Preconditions:
 
@@ -1894,7 +1896,7 @@ unglued_hub_pod(pod_type xspace_id, pod_type xid) const
 
 sheaf::index_space_family::pod_type
 sheaf::index_space_family::
-glued_hub_pod(const string& xname, pod_type xid) const
+glued_hub_pod(const std::string& xname, pod_type xid) const
 {
   // Preconditions:
 
@@ -1937,7 +1939,7 @@ glued_hub_pod(pod_type xspace_id, pod_type xid) const
 
 bool
 sheaf::index_space_family::
-is_persistent(const string& xname) const
+is_persistent(const std::string& xname) const
 {
   // Preconditions:
 
@@ -2093,7 +2095,7 @@ has_gluing() const
 
 void
 sheaf::index_space_family::
-new_product_structure(const string& xname,
+new_product_structure(const std::string& xname,
 		      const abstract_product_structure& xproduct)
 {
   // Preconditions:
@@ -2140,7 +2142,7 @@ new_product_structure(pod_type xspace_id,
 
 void
 sheaf::index_space_family::
-delete_product_structure(const string& xname)
+delete_product_structure(const std::string& xname)
 {
   // Preconditions:
 
@@ -2185,7 +2187,7 @@ delete_product_structure(pod_type xspace_id)
 
 const sheaf::abstract_product_structure&
 sheaf::index_space_family::
-product_structure(const string& xname) const
+product_structure(const std::string& xname) const
 {
   // Preconditions:
 
@@ -2234,7 +2236,7 @@ product_structure(pod_type xspace_id) const
 
 sheaf::abstract_product_structure&
 sheaf::index_space_family::
-product_structure(const string& xname)
+product_structure(const std::string& xname)
 {
   // Preconditions:
 
@@ -2283,7 +2285,7 @@ product_structure(pod_type xspace_id)
 
 bool
 sheaf::index_space_family::
-has_product_structure(const string& xname) const
+has_product_structure(const std::string& xname) const
 {
   // Preconditions:
 
@@ -2339,7 +2341,7 @@ has_product_structure(pod_type xspace_id) const
 
 sheaf::index_space_handle&
 sheaf::index_space_family::
-get_id_space(const string& xname) const
+get_id_space(const std::string& xname) const
 {
   // Preconditions:
 
@@ -2435,7 +2437,7 @@ allocated_id_space(const index_space_handle& xid_space) const
 
 sheaf::index_space_iterator&
 sheaf::index_space_family::
-get_id_space_iterator(const string& xname) const
+get_id_space_iterator(const std::string& xname) const
 {
   // Preconditions:
 
@@ -2590,9 +2592,9 @@ invariant() const
 //  NON-MEMBER FUNCTIONS
 // ===========================================================
  
-ostream& 
+std::ostream& 
 sheaf::
-operator<<(ostream& xos, const index_space_family& xfamily)
+operator<<(std::ostream& xos, const index_space_family& xfamily)
 {
   // Preconditions:
 

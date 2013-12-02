@@ -33,7 +33,7 @@
 // PUBLIC MEMBER FUNCTIONS
 
 sheaf::poset_state::
-poset_state(const abstract_poset_member* xschema, poset_type xtype_id, const string& xname)
+poset_state(const abstract_poset_member* xschema, poset_type xtype_id, const std::string& xname)
 {
   // Preconditions:
   
@@ -163,7 +163,7 @@ sheaf::poset_state::
   return;
 }
 
-const string&
+const std::string&
 sheaf::poset_state::
 name() const
 {
@@ -172,7 +172,7 @@ name() const
 
 void
 sheaf::poset_state::
-put_name(const string& xname)
+put_name(const std::string& xname)
 {
   // cout << endl << "Entering poset_state::put_name." << endl;
 

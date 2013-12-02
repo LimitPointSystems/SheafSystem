@@ -41,7 +41,7 @@ operator++(standard_member_index& x)
 };
 
 ///
-const string&
+const std::string&
 sheaf::
 standard_member_index_to_name(standard_member_index xpt)
 {
@@ -78,7 +78,7 @@ standard_member_index_to_name(standard_member_index xpt)
 ///
 sheaf::standard_member_index
 sheaf::
-standard_member_index_from_name(const string& xname)
+standard_member_index_from_name(const std::string& xname)
 {
   standard_member_index result = NOT_A_STANDARD_MEMBER_INDEX;
   for(standard_member_index i=STANDARD_MEMBER_INDEX_BEGIN;

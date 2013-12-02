@@ -23,8 +23,6 @@
 #if HAVE_CSTDARG
 
 #include <cstdarg>
-using namespace std;
-
 #else
 
 #include <stdarg.h>

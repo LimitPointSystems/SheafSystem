@@ -236,7 +236,7 @@ new_standard_member_hack(standard_member_index xid)
 
 sheaf::pod_index_type
 sheaf::poset_crg_state::
-new_member_interval(const string& xinterval_type, size_type xsize)
+new_member_interval(const std::string& xinterval_type, size_type xsize)
 {
   // Preconditions:
 
@@ -308,7 +308,7 @@ new_member_interval(const string& xinterval_type, size_type xsize)
 
 void
 sheaf::poset_crg_state::
-new_member_interval(pod_index_type xid, const string& xinterval_type, size_type xsize)
+new_member_interval(pod_index_type xid, const std::string& xinterval_type, size_type xsize)
 {
   // Preconditions:
 

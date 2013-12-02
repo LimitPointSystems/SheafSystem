@@ -780,8 +780,8 @@ operator==(const auto_block<T, S>& xblk1, const auto_block<T, S>& xblk2)
 }
 
 template <typename T, typename S>
-ostream&
-operator << (ostream& xos, const auto_block<T, S>& xblk)
+std::ostream&
+operator << (std::ostream& xos, const auto_block<T, S>& xblk)
 {
   //for(auto_block::index_type i=0; i<xblk.ct(); ++i)
   for(long int i=0; i<xblk.ct(); ++i)

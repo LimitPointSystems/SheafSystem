@@ -41,7 +41,7 @@ operator++(standard_dof_tuple_index& x)
 };
 
 ///
-const string&
+const std::string&
 sheaf::
 standard_dof_tuple_index_to_name(standard_dof_tuple_index xpt)
 {
@@ -77,7 +77,7 @@ standard_dof_tuple_index_to_name(standard_dof_tuple_index xpt)
 ///
 sheaf::standard_dof_tuple_index
 sheaf::
-standard_dof_tuple_index_from_name(const string& xname)
+standard_dof_tuple_index_from_name(const std::string& xname)
 {
   standard_dof_tuple_index result = NOT_A_STANDARD_DOF_TUPLE_INDEX;
   for(standard_dof_tuple_index i=STANDARD_DOF_TUPLE_INDEX_BEGIN;

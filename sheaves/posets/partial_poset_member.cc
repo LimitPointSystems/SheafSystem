@@ -237,7 +237,7 @@ partial_poset_member(const poset_state_handle* xhost, const scoped_index& xid)
 }
 
 sheaf::partial_poset_member::
-partial_poset_member(const poset_state_handle* xhost, const string& xname)
+partial_poset_member(const poset_state_handle* xhost, const std::string& xname)
     : _schema(0)
 {
 

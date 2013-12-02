@@ -56,7 +56,7 @@ public:
   /// Returns a handle to the id space created.
   ///
   static interval_index_space_handle new_space(index_space_family& xid_spaces,
-					       const string& xname,
+					       const std::string& xname,
 					       bool xis_persistent,
 					       bool xmerge_mode);
 
@@ -94,7 +94,7 @@ public:
   /// Constructor: Attach to state with name xname in the family xid_spaces.
   ///
   interval_index_space_handle(const index_space_family& xid_spaces,
-			     const string& xname);
+			     const std::string& xname);
 
   ///
   /// Assignment operator; attach this handle to the state of xother.
@@ -256,7 +256,7 @@ public:
   ///
   /// Inserts the map representation into ostream xos.
   ///
-  void print_map_rep(ostream& xos) const;
+  void print_map_rep(std::ostream& xos) const;
   
 protected:
 

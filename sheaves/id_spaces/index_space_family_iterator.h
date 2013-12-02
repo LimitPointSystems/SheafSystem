@@ -123,7 +123,7 @@ public:
   ///
   /// The name of the current id space in the iteration.
   ///
-  string name() const;
+  std::string name() const;
 
 protected:
 

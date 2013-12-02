@@ -20,7 +20,7 @@
 #include "deep_size.impl.h"
 
 size_t
-sheaf::deep_size(const string& xp, bool xinclude_shallow)
+sheaf::deep_size(const std::string& xp, bool xinclude_shallow)
 {
   size_t result;
   

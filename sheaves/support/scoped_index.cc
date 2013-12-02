@@ -30,7 +30,7 @@
 // PUBLIC MEMBER FUNCTIONS
  
 sheaf::scoped_index::
-scoped_index(const poset_state_handle& xhost, const string& xname)
+scoped_index(const poset_state_handle& xhost, const std::string& xname)
   : _id_spaces(&xhost.member_id_spaces(false)),
     _scope_id(xhost.member_id_spaces(false).index(xname)),
     _pod(invalid_pod())
@@ -56,7 +56,7 @@ scoped_index(const poset_state_handle& xhost, const string& xname)
 }
 
 sheaf::scoped_index::
-scoped_index(pod_type xpod, const poset_state_handle& xhost, const string& xname)
+scoped_index(pod_type xpod, const poset_state_handle& xhost, const std::string& xname)
   : _id_spaces(&xhost.member_id_spaces(false)),
     _scope_id(xhost.member_id_spaces(false).index(xname)),
     _pod(xpod)
@@ -82,7 +82,7 @@ scoped_index(pod_type xpod, const poset_state_handle& xhost, const string& xname
 }
 
 sheaf::scoped_index::
-scoped_index(const scoped_index& xother, const poset_state_handle& xhost, const string& xname)
+scoped_index(const scoped_index& xother, const poset_state_handle& xhost, const std::string& xname)
   : _id_spaces(&xhost.member_id_spaces(false)),
     _scope_id(xhost.member_id_spaces(false).index(xname))
 {
@@ -117,8 +117,8 @@ scoped_index(const scoped_index& xother, const poset_state_handle& xhost, const 
 // NON-MEMBER FUNCTIONS
 // ===========================================================
 
-ostream&
-sheaf::operator<<(ostream& xos, const scoped_index& xid)
+std::ostream&
+sheaf::operator<<(std::ostream& xos, const scoped_index& xid)
 {
   if(xid.is_scoped())
   {
@@ -132,8 +132,8 @@ sheaf::operator<<(ostream& xos, const scoped_index& xid)
   return xos;
 }
 
-istream&
-sheaf::operator>>(istream& xis, scoped_index& xid)
+std::istream&
+sheaf::operator>>(std::istream& xis, scoped_index& xid)
 {
   scoped_index::pod_type lpod;
   xis >> lpod;

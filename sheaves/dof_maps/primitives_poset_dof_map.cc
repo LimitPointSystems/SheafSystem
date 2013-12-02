@@ -26,12 +26,11 @@
 #include "primitives_poset_schema.h"
 #include "std_string.h"
 
+using namespace std;
+
 // PUBLIC MEMBER FUNCTIONS
 
- 
-
-///
-const string&
+const std::string&
 sheaf::primitives_poset_dof_map::
 class_name() const
 {
@@ -50,8 +49,7 @@ class_name() const
   return result;
 }
 
-///
-const string&
+const std::string&
 sheaf::primitives_poset_dof_map::
 static_class_name()
 {
@@ -73,7 +71,6 @@ static_class_name()
 
 // CANONICAL MEMBERS
 
-///
 sheaf::primitives_poset_dof_map::
 primitives_poset_dof_map()
 {
@@ -104,7 +101,6 @@ primitives_poset_dof_map()
 
 }
 
-///
 sheaf::primitives_poset_dof_map*
 sheaf::primitives_poset_dof_map::
 clone() const
@@ -131,7 +127,6 @@ clone() const
 
 
 
-///
 sheaf::primitives_poset_dof_map::
 primitives_poset_dof_map(const primitives_poset_dof_map& xother)
     :poset_dof_map()
@@ -158,7 +153,6 @@ primitives_poset_dof_map(const primitives_poset_dof_map& xother)
 
 }
 
-///
 sheaf::primitives_poset_dof_map*
 sheaf::primitives_poset_dof_map::
 copy() const
@@ -184,7 +178,6 @@ copy() const
 }
 
 
-///
 sheaf::primitives_poset_dof_map&
 sheaf::primitives_poset_dof_map::
 operator=(const primitives_poset_dof_map& xother)
@@ -231,7 +224,6 @@ operator=(const primitives_poset_dof_map& xother)
 }
 
 
-///
 sheaf::primitives_poset_dof_map::
 ~primitives_poset_dof_map()
 {
@@ -287,7 +279,6 @@ invariant() const
 
 // OTHER CONSTRUCTORS
 
-///
 sheaf::primitives_poset_dof_map::
 primitives_poset_dof_map(const poset_state_handle* xhost, int xprimitive_index)
     : poset_dof_map()
@@ -355,7 +346,6 @@ primitives_poset_dof_map(const poset_state_handle* xhost, int xprimitive_index)
 }
 
 
-///
 void
 sheaf::primitives_poset_dof_map::
 init_row_dof_map(const poset_state_handle* xhost,
@@ -505,7 +495,6 @@ put_dof(pod_index_type xdof_id, const void* xdof, size_type xdof_size)
 //  END NEW DOF ACCESS FACET
 // ===========================================================
 
-///
 void*
 sheaf::primitives_poset_dof_map::
 dof_tuple()
@@ -527,7 +516,6 @@ dof_tuple()
   return result;
 }
 
-///
 const void*
 sheaf::primitives_poset_dof_map::
 dof_tuple() const
@@ -549,7 +537,6 @@ dof_tuple() const
   return result;
 }
 
-///
 void
 sheaf::primitives_poset_dof_map::
 get_dof_tuple(void* xbuf, size_t xbuflen) const
@@ -575,7 +562,6 @@ get_dof_tuple(void* xbuf, size_t xbuflen) const
 }
 
 
-///
 void
 sheaf::primitives_poset_dof_map::
 put_dof_tuple(const void* xbuf, size_t xbuflen)
@@ -600,7 +586,6 @@ put_dof_tuple(const void* xbuf, size_t xbuflen)
   return;
 }
 
-///
 size_t
 sheaf::primitives_poset_dof_map::
 size() const
@@ -608,7 +593,6 @@ size() const
   return _dofs.size;
 }
 
-///
 void
 sheaf::primitives_poset_dof_map::
 put_size(size_t xsize)
@@ -628,7 +612,6 @@ put_size(size_t xsize)
   return;
 }
 
-///
 size_t
 sheaf::primitives_poset_dof_map::
 alignment() const
@@ -636,7 +619,6 @@ alignment() const
   return _dofs.alignment;
 }
 
-///
 void
 sheaf::primitives_poset_dof_map::
 put_alignment(size_t xalignment)
@@ -656,7 +638,6 @@ put_alignment(size_t xalignment)
   return;
 }
 
-///
 sheaf::primitive_type
 sheaf::primitives_poset_dof_map::
 type() const
@@ -664,7 +645,6 @@ type() const
   return primitive_attributes::id(_dofs.index);
 }
 
-///
 void
 sheaf::primitives_poset_dof_map::
 put_type(int xtype)
@@ -686,7 +666,6 @@ put_type(int xtype)
 
 // PRIVATE STATIC MEMBERS
 
-///
 void
 sheaf::primitives_poset_dof_map::
 put_host(const poset_state_handle* xhost)

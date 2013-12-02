@@ -41,7 +41,7 @@ operator++(namespace_schema_member_index& x)
 };
 
 ///
-const string&
+const std::string&
 sheaf::
 namespace_schema_member_index_to_name(namespace_schema_member_index xpt)
 {
@@ -85,7 +85,7 @@ namespace_schema_member_index_to_name(namespace_schema_member_index xpt)
 ///
 sheaf::namespace_schema_member_index
 sheaf::
-namespace_schema_member_index_from_name(const string& xname)
+namespace_schema_member_index_from_name(const std::string& xname)
 {
   namespace_schema_member_index result = NOT_A_NAMESPACE_SCHEMA_MEMBER_INDEX;
   for(namespace_schema_member_index i=NAMESPACE_SCHEMA_MEMBER_INDEX_BEGIN;

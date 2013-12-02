@@ -64,7 +64,7 @@ public:
   /// Creates an instance with poset_name() == xposet_name and
   /// member_name() == xmember_name.
   ///
-  poset_path(const string& xposet_name, const string& xmember_name);
+  poset_path(const std::string& xposet_name, const std::string& xmember_name);
 
   ///
   /// Destructor
@@ -74,7 +74,7 @@ public:
   ///
   /// Conversion from string.
   ///
-  poset_path(const string& xpath);
+  poset_path(const std::string& xpath);
 
   ///
   /// Conversion from C string.
@@ -99,7 +99,7 @@ public:
   ///
   /// Assignment from string.
   ///
-  poset_path& operator=(const string& xpath);
+  poset_path& operator=(const std::string& xpath);
 
   ///
   /// Assignment from C string.
@@ -125,7 +125,7 @@ public:
   /// True if xname is not empty and contains
   /// only name legal characters.
   ///
-  static bool is_valid_name(const string& xname);
+  static bool is_valid_name(const std::string& xname);
 
   ///
   /// True if xpath is empty, or if not empty, contains
@@ -133,7 +133,7 @@ public:
   /// contains a poset name and delimiter(), or contains
   /// contains a poset name, a delimiter(), and a member name.
   ///
-  static bool is_valid_path(const string& xpath);
+  static bool is_valid_path(const std::string& xpath);
 
   ///
   /// True if this specifies the same poset and member as xother
@@ -143,7 +143,7 @@ public:
   ///
   /// True if this specifies the same poset and member as xother
   ///
-  bool operator==(const string& xother) const;
+  bool operator==(const std::string& xother) const;
 
   ///
   /// True if this specifies the same poset and member as xother
@@ -153,32 +153,32 @@ public:
   ///
   /// The full path as a string.
   ///
-  string path() const;
+  std::string path() const;
 
   ///
   /// The poset name part of the path.
   ///
-  string poset_name() const;
+  std::string poset_name() const;
 
   ///
   /// Sets poset_name() to xname.
   ///
-  void put_poset_name(const string& xname);
+  void put_poset_name(const std::string& xname);
 
   ///
   ///  The member name part of the path.
   ///
-  string member_name() const;
+  std::string member_name() const;
 
   ///
   /// Sets member_name() to xname.
   ///
-  void put_member_name(const string& xname);
+  void put_member_name(const std::string& xname);
 
   ///
   /// The characters a name is allowed to contain.
   ///
-  static const string& name_legal_characters();
+  static const std::string& name_legal_characters();
 
   ///
   /// The path delimiter; used to separate poset name from member name.
@@ -188,90 +188,90 @@ public:
   ///
   /// The characters a path is allowed to contain.
   ///
-  static const string& path_legal_characters();
+  static const std::string& path_legal_characters();
 
   ///
   /// Extracts poset name from xpath.
   ///
-  static string poset_name(const string& xpath);
+  static std::string poset_name(const std::string& xpath);
 
   ///
   /// Extracts delimiter from xpath.
   ///
-  static string delimiter(const string& xpath);
+  static std::string delimiter(const std::string& xpath);
 
   ///
   /// Extracts member name from xpath.
   ///
-  static string member_name(const string& xpath);
+  static std::string member_name(const std::string& xpath);
 
   ///
   ///  Write instance information to an ostream (default = stdout).
   ///
-  void to_stream(ostream& xos = cout) const;
+  void to_stream(std::ostream& xos = std::cout) const;
 
   ///
   /// Creates a string xprefix_xindex_xsuffix.
   ///
-  static string make_name(const string& xprefix, int xindex, const string& xsuffix);
+  static std::string make_name(const std::string& xprefix, int xindex, const std::string& xsuffix);
 
   ///
   /// Creates a string reserved_prefix()_xprefix_xindex_xsuffix.
   ///
-  static string make_reserved_name(const string& xprefix, const size_t& xindex, const string& xsuffix);
+  static std::string make_reserved_name(const std::string& xprefix, const size_t& xindex, const std::string& xsuffix);
 
   ///
   /// Creates the standard name for the block with index xindex.
   ///
-  static string block_name(const size_t& xindex);
+  static std::string block_name(const size_t& xindex);
 
   ///
   /// Creates the standard block name associated with
   /// the neighborhood with name xneighborhood_name.
   ///
-  static string block_name(const string& xneighborhood_name);
+  static std::string block_name(const std::string& xneighborhood_name);
 
   ///
   /// Creates the standard name for the neighborhood of the block with index xindex.
   ///
-  static string block_neighborhood_name(const size_t& xindex);
+  static std::string block_neighborhood_name(const size_t& xindex);
 
   ///
   /// Creates the standard neighborhood name associated with
   /// the block with name xblock_name.
   ///
-  static string block_neighborhood_name(const string& xblock_name);
+  static std::string block_neighborhood_name(const std::string& xblock_name);
 
   ///
   /// Extracts the index from a block name or block neighborhood name.
   ///
-  static size_t block_id(const string& xname);
+  static size_t block_id(const std::string& xname);
 
   ///
   /// Prefix for identifying member names reserved by the sheaf system.
   ///
-  static string reserved_prefix();
+  static std::string reserved_prefix();
 
   ///
   /// Prefix for identifying boundary members.
   ///
-  static string boundary_prefix();
+  static std::string boundary_prefix();
 
   ///
   /// Creates the standard boundary name associated with
   /// the member with name xmbr_name.
   ///
-  static string boundary_name(const string& xmbr_name);
+  static std::string boundary_name(const std::string& xmbr_name);
 
   ///
   /// Prefix for identifying blocks.
   ///
-  static string block_prefix();
+  static std::string block_prefix();
 
   ///
   /// Prefix for identifying neighborhoods.
   ///
-  static string neighborhood_prefix();
+  static std::string neighborhood_prefix();
 
   ///
   /// @deprecated Use namespace_poset::current_namespace() instead.
@@ -331,25 +331,25 @@ private:
   ///
   /// The poset name.
   ///
-  string _poset_name;
+  std::string _poset_name;
 
   ///
   /// The member name.
   ///
-  string _member_name;
+  std::string _member_name;
 
 //   ///
 //   /// True if xname contains only path legal characters.
 //   ///
-//   static bool contains_legal_characters(const string& xname, const string& xlegal_chars);
+//   static bool contains_legal_characters(const std::string& xname, const std::string& xlegal_chars);
 
   ///
   /// Extracts poset name, delimiter, and member names from xpath.
   ///
-  static void parse_path(const string& xpath, 
-                         string& xposet_name, 
-                         string& xdelimiter, 
-                         string& xmember_name);
+  static void parse_path(const std::string& xpath, 
+                         std::string& xposet_name, 
+                         std::string& xdelimiter, 
+                         std::string& xmember_name);
 
 
 };
@@ -362,7 +362,7 @@ private:
 /// Insert poset_path& pp into ostream& os.
 ///
 SHEAF_DLL_SPEC
-ostream & operator << (ostream& os, const poset_path& pp);
+std::ostream & operator << (std::ostream& os, const poset_path& pp);
 
 ///
 /// True if and only if xpath.path() == xprim.value().c_string_primitive.

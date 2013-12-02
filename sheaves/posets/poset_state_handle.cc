@@ -67,7 +67,7 @@ class index_iterator;
 
 sheaf::poset_state_handle*
 sheaf::poset_state_handle::
-new_poset_handle(const string& xclass_name,
+new_poset_handle(const std::string& xclass_name,
                  poset_type xsheaf_base_class_id)
 {
   poset_state_handle* result;
@@ -607,7 +607,7 @@ attach_to_state(const namespace_poset* xhost, const scoped_index& xindex)
 
 void
 sheaf::poset_state_handle::
-attach_to_state(const namespace_poset* xhost, const string& xname)
+attach_to_state(const namespace_poset* xhost, const std::string& xname)
 {
   // Preconditions:
 
@@ -1165,7 +1165,7 @@ primitives() const
   return result;
 }
 
-string
+std::string
 sheaf::poset_state_handle::
 name() const
 {
@@ -1199,7 +1199,7 @@ name() const
   return result;
 }
 
-string
+std::string
 sheaf::poset_state_handle::
 name(bool xauto_access) const
 {
@@ -1261,7 +1261,7 @@ path(bool xauto_access) const
 
 void
 sheaf::poset_state_handle::
-initialize_namespace(namespace_poset& xns, const string& xposet_name, bool xauto_link)
+initialize_namespace(namespace_poset& xns, const std::string& xposet_name, bool xauto_link)
 {
   // Preconditions:
 
@@ -1529,7 +1529,7 @@ new_member(bool xis_jim, poset_dof_map* xdof_map, bool xcopy_dof_map, scoped_ind
 
 sheaf::pod_index_type
 sheaf::poset_state_handle::
-new_member_interval(const string& xinterval_type,
+new_member_interval(const std::string& xinterval_type,
                  size_type xsize,
                  const block<pod_index_type>& xtuple_hub_ids,
                  const block<pod_index_type>& xdata)
@@ -1567,7 +1567,7 @@ new_member_interval(const string& xinterval_type,
 
 void
 sheaf::poset_state_handle::
-new_member_interval(const string& xinterval_type,
+new_member_interval(const std::string& xinterval_type,
 		    size_type xsize,
 		    const block<pod_index_type>& xtuple_hub_ids,
 		    const block<pod_index_type>& xdata,
@@ -1860,7 +1860,7 @@ contains_member(const scoped_index& xmbr_id, int xversion, bool xauto_access) co
 
 bool
 sheaf::poset_state_handle::
-contains_member(const string& xname, bool xauto_access) const
+contains_member(const std::string& xname, bool xauto_access) const
 {
   bool result;
 
@@ -2072,7 +2072,7 @@ contains_members(const block<scoped_index>& xmbrs, bool xauto_access) const
 
 bool
 sheaf::poset_state_handle::
-contains_members(const string* xnames, int xnames_ct, bool xauto_access) const
+contains_members(const std::string* xnames, int xnames_ct, bool xauto_access) const
 {
 
   // Preconditions:
@@ -2113,7 +2113,7 @@ contains_members(const string* xnames, int xnames_ct, bool xauto_access) const
 
 bool
 sheaf::poset_state_handle::
-contains_members(const block<string>& xmbrs, bool xauto_access) const
+contains_members(const block<std::string>& xmbrs, bool xauto_access) const
 {
 
   // Preconditions:
@@ -2224,7 +2224,7 @@ is_jim(const scoped_index& xmbr_id, bool xin_current_version ) const
 
 bool
 sheaf::poset_state_handle::
-is_jim(const string& xname, bool xin_current_version) const
+is_jim(const std::string& xname, bool xin_current_version) const
 {
   bool result;
 
@@ -2345,7 +2345,7 @@ bottom() const
 
 sheaf::pod_index_type
 sheaf::poset_state_handle::
-member_id(const string& xname, bool xauto_access) const
+member_id(const std::string& xname, bool xauto_access) const
 {
   // Preconditions:
 
@@ -2379,7 +2379,7 @@ member_id(const string& xname, bool xauto_access) const
 
 void
 sheaf::poset_state_handle::
-member_id(const string& xname, scoped_index& result, bool xauto_access) const
+member_id(const std::string& xname, scoped_index& result, bool xauto_access) const
 {
   // Preconditions:
 
@@ -2399,7 +2399,7 @@ member_id(const string& xname, scoped_index& result, bool xauto_access) const
   return;
 }
 
-string
+std::string
 sheaf::poset_state_handle::
 member_name(pod_index_type xmbr_hub_id, bool xauto_access) const
 {
@@ -2426,7 +2426,7 @@ member_name(pod_index_type xmbr_hub_id, bool xauto_access) const
   return result;
 }
 
-string
+std::string
 sheaf::poset_state_handle::
 member_name(const scoped_index& xmbr_id, bool xauto_access) const
 {
@@ -2442,7 +2442,7 @@ member_name(const scoped_index& xmbr_id, bool xauto_access) const
 void
 sheaf::poset_state_handle::
 all_member_names(pod_index_type xmbr_hub_id,
-                 block<string>& xresult,
+                 block<std::string>& xresult,
                  bool xauto_access) const
 {
   // Preconditions:
@@ -2477,7 +2477,7 @@ all_member_names(pod_index_type xmbr_hub_id,
 void
 sheaf::poset_state_handle::
 all_member_names(const scoped_index& xmbr_id,
-                 block<string>& xresult,
+                 block<std::string>& xresult,
                  bool xauto_access) const
 {
   // Preconditions:
@@ -2549,7 +2549,7 @@ member_name_ct(const scoped_index& xmbr_id, bool xauto_access) const
 
 bool
 sheaf::poset_state_handle::
-member_has_name(pod_index_type xmbr_hub_id, const string& xname, bool xauto_access) const
+member_has_name(pod_index_type xmbr_hub_id, const std::string& xname, bool xauto_access) const
 {
   // Preconditions:
 
@@ -2580,7 +2580,7 @@ member_has_name(pod_index_type xmbr_hub_id, const string& xname, bool xauto_acce
 
 bool
 sheaf::poset_state_handle::
-member_has_name(const scoped_index& xmbr_id, const string& xname, bool xauto_access) const
+member_has_name(const scoped_index& xmbr_id, const std::string& xname, bool xauto_access) const
 {
   // Preconditions:
 
@@ -2596,7 +2596,7 @@ member_has_name(const scoped_index& xmbr_id, const string& xname, bool xauto_acc
 void
 sheaf::poset_state_handle::
 put_member_name(pod_index_type xmbr_hub_id,
-                const string& xname,
+                const std::string& xname,
                 bool xunique,
                 bool xauto_access)
 {
@@ -2632,7 +2632,7 @@ put_member_name(pod_index_type xmbr_hub_id,
 void
 sheaf::poset_state_handle::
 put_member_name(const scoped_index& xmbr_id,
-                const string& xname,
+                const std::string& xname,
                 bool xunique,
                 bool xauto_access)
 {
@@ -2657,7 +2657,7 @@ put_member_name(const scoped_index& xmbr_id,
 
 void
 sheaf::poset_state_handle::
-delete_member_name(const string& xname, bool xauto_access)
+delete_member_name(const std::string& xname, bool xauto_access)
 {
   // Preconditions:
 
@@ -3024,7 +3024,7 @@ new_member(pod_index_type xmbr_hub_id, bool xis_jim, poset_dof_map* xdof_map, bo
 
 sheaf::pod_index_type
 sheaf::poset_state_handle::
-new_member_interval(const string& xinterval_type, size_type xsize)
+new_member_interval(const std::string& xinterval_type, size_type xsize)
 {
   // Preconditions:
 
@@ -3073,7 +3073,7 @@ new_member_interval(const string& xinterval_type, size_type xsize)
 
 void
 sheaf::poset_state_handle::
-new_member_interval(pod_index_type xmbr_hub_id, const string& xinterval_type, size_type xsize)
+new_member_interval(pod_index_type xmbr_hub_id, const std::string& xinterval_type, size_type xsize)
 {
   // Preconditions:
 
@@ -4980,7 +4980,7 @@ subposet_ct() const
   return result;
 }
 
-string
+std::string
 sheaf::poset_state_handle::
 subposet_name(pod_index_type xsubposet_hub_id, bool xauto_access) const
 {
@@ -5012,7 +5012,7 @@ subposet_name(pod_index_type xsubposet_hub_id, bool xauto_access) const
   return result;
 }
 
-string
+std::string
 sheaf::poset_state_handle::
 subposet_name(const scoped_index& xsubposet_id, bool xauto_access) const
 {
@@ -5028,7 +5028,7 @@ subposet_name(const scoped_index& xsubposet_id, bool xauto_access) const
 void
 sheaf::poset_state_handle::
 all_subposet_names(pod_index_type xsubposet_hub_id,
-                   block<string>& xresult,
+                   block<std::string>& xresult,
                    bool xauto_access) const
 {
   // Preconditions:
@@ -5063,7 +5063,7 @@ all_subposet_names(pod_index_type xsubposet_hub_id,
 void
 sheaf::poset_state_handle::
 all_subposet_names(const scoped_index& xsubposet_id,
-                   block<string>& xresult,
+                   block<std::string>& xresult,
                    bool xauto_access) const
 {
   // Preconditions:
@@ -5136,7 +5136,7 @@ subposet_name_ct(const scoped_index& xsubposet_id, bool xauto_access) const
 bool
 sheaf::poset_state_handle::
 subposet_has_name(pod_index_type xsubposet_hub_id,
-                  const string& xname,
+                  const std::string& xname,
                   bool xauto_access) const
 {
   // Preconditions:
@@ -5170,7 +5170,7 @@ subposet_has_name(pod_index_type xsubposet_hub_id,
 bool
 sheaf::poset_state_handle::
 subposet_has_name(const scoped_index& xsubposet_id,
-                  const string& xname,
+                  const std::string& xname,
                   bool xauto_access) const
 {
   // Preconditions:
@@ -5187,7 +5187,7 @@ subposet_has_name(const scoped_index& xsubposet_id,
 void
 sheaf::poset_state_handle::
 put_subposet_name(pod_index_type xsubposet_hub_id,
-                  const string& xname,
+                  const std::string& xname,
                   bool xunique,
                   bool xauto_access)
 {
@@ -5225,7 +5225,7 @@ put_subposet_name(pod_index_type xsubposet_hub_id,
 void
 sheaf::poset_state_handle::
 put_subposet_name(const scoped_index& xsubposet_id,
-                  const string& xname,
+                  const std::string& xname,
                   bool xunique,
                   bool xauto_access)
 {
@@ -5252,7 +5252,7 @@ put_subposet_name(const scoped_index& xsubposet_id,
 
 void
 sheaf::poset_state_handle::
-delete_subposet_name(const string& xname, bool xauto_access)
+delete_subposet_name(const std::string& xname, bool xauto_access)
 {
   // Preconditions:
 
@@ -5398,7 +5398,7 @@ subposet_index_ub() const
 
 sheaf::pod_index_type
 sheaf::poset_state_handle::
-subposet_id(const string& xname) const
+subposet_id(const std::string& xname) const
 {
   // Preconditions:
 
@@ -5421,7 +5421,7 @@ subposet_id(const string& xname) const
 
 void
 sheaf::poset_state_handle::
-subposet_id(const string& xname, scoped_index& result) const
+subposet_id(const std::string& xname, scoped_index& result) const
 {
   // Preconditions:
 
@@ -5522,7 +5522,7 @@ includes_subposet(const scoped_index& xsubposet_id, bool xauto_access) const
 
 bool
 sheaf::poset_state_handle::
-includes_subposet(const string& xname, bool xauto_access) const
+includes_subposet(const std::string& xname, bool xauto_access) const
 {
   bool result;
 
@@ -5859,7 +5859,7 @@ row_dof_subposet() const
   return powerset().row_dof_subposet();
 }
 
-const string&
+const std::string&
 sheaf::poset_state_handle::
 coarsest_common_refinement_name()
 {
@@ -5907,7 +5907,7 @@ powerset() const
 
 void
 sheaf::poset_state_handle::
-initialize_standard_subposets(const string& xname)
+initialize_standard_subposets(const std::string& xname)
 {
   // Preconditions:
 
@@ -6278,7 +6278,7 @@ schema_is_ancestor_of(const schema_poset_member* xother_schema) const
 
 bool
 sheaf::poset_state_handle::
-schema_is(const string& xschema_name) const
+schema_is(const std::string& xschema_name) const
 {
   bool result;
 
@@ -7587,7 +7587,7 @@ is_version() const
 
 // PROTECTED FUNCTIONS
 
-const string&
+const std::string&
 sheaf::poset_state_handle::
 VERSION_PREFIX()
 {
@@ -7605,7 +7605,7 @@ VERSION_PREFIX_LENGTH()
 
 bool
 sheaf::poset_state_handle::
-is_version_name(const string& xname) const
+is_version_name(const std::string& xname) const
 {
   bool result;
 
@@ -7626,7 +7626,7 @@ is_version_name(const string& xname) const
   return result;
 }
 
-string
+std::string
 sheaf::poset_state_handle::
 version_to_name(int xversion) const
 {
@@ -7659,7 +7659,7 @@ version_to_name(int xversion) const
 
 int
 sheaf::poset_state_handle::
-version_from_name(const string& xname) const
+version_from_name(const std::string& xname) const
 {
   int result;
 
@@ -7762,7 +7762,7 @@ put_version(int xversion)
 
 sheaf::schema_poset_member*
 sheaf::poset_state_handle::
-new_schema_handle(const string& xid_space_name,
+new_schema_handle(const std::string& xid_space_name,
                   pod_index_type xschema_member_ext_id,
                   pod_index_type xbase_space_ext_id,
                   pod_index_type xfiber_schema_ext_id,
@@ -7925,7 +7925,7 @@ bound_contains_member(const poset_bounds& xbounds,
 sheaf::pod_index_type
 sheaf::poset_state_handle::
 get_int_id(pod_index_type xext_id,
-           const string& xid_space_name,
+           const std::string& xid_space_name,
            bool xauto_access) const
 {
   // Preconditions:
@@ -7978,7 +7978,7 @@ get_int_id(pod_index_type xext_id,
 bool
 sheaf::poset_state_handle::
 is_valid_int_id(pod_index_type xint_id,
-		const string& xid_space_name,
+		const std::string& xid_space_name,
 		bool xauto_access) const
 {
   // Preconditions:
@@ -8018,7 +8018,7 @@ is_valid_int_id(pod_index_type xint_id,
 bool
 sheaf::poset_state_handle::
 is_valid_int_id(const scoped_index& xint_id,
-		const string& xid_space_name,
+		const std::string& xid_space_name,
 		bool xauto_access) const
 {
   // Preconditions:
@@ -8038,7 +8038,7 @@ is_valid_int_id(const scoped_index& xint_id,
 sheaf::pod_index_type
 sheaf::poset_state_handle::
 get_ext_id(pod_index_type xint_id,
-           const string& xid_space_name,
+           const std::string& xid_space_name,
            bool xauto_access) const
 {
   pod_index_type result;
@@ -8086,7 +8086,7 @@ get_ext_id(pod_index_type xint_id,
 sheaf::pod_index_type
 sheaf::poset_state_handle::
 get_ext_id(const scoped_index& xint_id,
-           const string& xid_space_name,
+           const std::string& xid_space_name,
            bool xauto_access) const
 {
   pod_index_type result;
@@ -8151,16 +8151,16 @@ prereq_id(int xi) const
 
 void
 sheaf::poset_state_handle::
-to_stream(ostream& xos)
+to_stream(std::ostream& xos)
 {
   xos << *this;
 }
 
-string
+std::string
 sheaf::poset_state_handle::
 to_string()
 {
-  ostringstream oss;
+  std::ostringstream oss;
   oss << *this;
   return oss.str();
 }

@@ -71,9 +71,9 @@ is_primitive_index(pod_index_type xindex)
 }
 
 ///
-ostream&
+std::ostream&
 sheaf::
-operator<<(ostream& os, const primitive_type& xpt)
+operator<<(std::ostream& os, const primitive_type& xpt)
 {
   // Preconditions:
 
@@ -91,9 +91,9 @@ operator<<(ostream& os, const primitive_type& xpt)
 }
 
 ///
-istream&
+std::istream&
 sheaf::
-operator>>(istream& is, primitive_type& xpt)
+operator>>(std::istream& is, primitive_type& xpt)
 {
   // Preconditions:
 
@@ -118,9 +118,9 @@ operator>>(istream& is, primitive_type& xpt)
 // =============================================================================
 
 ///
-ostream&
+std::ostream&
 sheaf::
-operator<<(ostream& os, const primitive_descriptor& xpd)
+operator<<(std::ostream& os, const primitive_descriptor& xpd)
 {
   // Preconditions:
 

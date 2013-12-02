@@ -33,14 +33,6 @@
 #include "schema_poset_member.h"
 #endif
 
-#ifndef STD_HASH_MAP_H
-#include "std_hash_map.h"
-#endif
-
-#ifndef STD_LIST_H
-#include "std_list.h"
-#endif
-
 #ifndef STD_IOSTREAM_H
 #include "std_iostream.h"
 #endif
@@ -57,7 +49,6 @@ class poset_member_dof_iterator;
 class poset_member_iterator;
 class storage_agent;
 class subposet;
-class list_cover_set;
 
 ///
 /// A client handle for a restrictable member of a poset. <br>
@@ -156,7 +147,7 @@ public:
   /// Creates a new poset_member handle attached to the member state with name
   /// xname in xhost
   ///
-  poset_member(const poset_state_handle* xhost, const string& xname);
+  poset_member(const poset_state_handle* xhost, const std::string& xname);
 
   ///
   /// Creates a new poset_member handle attached to the member state with

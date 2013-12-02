@@ -94,7 +94,7 @@ mutable_index_space_handle(const index_space_family& xid_spaces,
 
 sheaf::mutable_index_space_handle::
 mutable_index_space_handle(const index_space_family& xid_spaces,
-			   const string& xname)
+			   const std::string& xname)
 {
   // Preconditions:
 

@@ -24,8 +24,6 @@
 #if HAVE_CASSERT
 
 #include <cassert>
-using namespace std;
-
 #else
 
 #include <assert.h>

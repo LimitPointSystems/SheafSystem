@@ -33,18 +33,6 @@
 #include "poset_path.h"
 #endif
 
-#ifndef STD_HASH_MAP_H
-#include "std_hash_map.h"
-#endif
-
-#ifndef STD_LIST_H
-#include "std_list.h"
-#endif
-
-#ifndef STD_IOSTREAM_H
-#include "std_iostream.h"
-#endif
-
 #ifndef STD_STRING_H
 #include "std_string.h"
 #endif
@@ -52,7 +40,6 @@
 namespace sheaf 
 {
 
-class list_cover_set;
 class subposet;
 class poset_dof_map;
 class poset_member_dof_iterator;
@@ -153,7 +140,7 @@ public:
   /// Creates a new total_poset_member handle attached to the member state
   /// with name xname in xhost
   ///
-  total_poset_member(const poset_state_handle* xhost, const string& xname);
+  total_poset_member(const poset_state_handle* xhost, const std::string& xname);
 
   ///
   /// Creates a new total_poset_member handle attached to the member state

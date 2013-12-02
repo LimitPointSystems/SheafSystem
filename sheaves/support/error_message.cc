@@ -130,7 +130,7 @@ sheaf::error_message::
 
 ///
 sheaf::error_message::
-error_message(level_type xlevel, const string& xsource, const string& xtext)
+error_message(level_type xlevel, const std::string& xsource, const std::string& xtext)
 {
 
   // Preconditions:
@@ -159,7 +159,7 @@ error_message(level_type xlevel, const string& xsource, const string& xtext)
 
 ///
 sheaf::error_message::
-error_message(level_type xlevel, const string& xfile, int xline, const string& xtext)
+error_message(level_type xlevel, const std::string& xfile, int xline, const std::string& xtext)
 {
 
   // Preconditions:
@@ -193,7 +193,7 @@ error_message(level_type xlevel, const string& xfile, int xline, const string& x
 
 
 ///
-string
+std::string
 sheaf::error_message::
 source() const
 {
@@ -201,7 +201,7 @@ source() const
 }
 
 ///
-string
+std::string
 sheaf::error_message::
 text() const
 {
@@ -249,7 +249,7 @@ post(bool xforce_exit) const
 }
 
 ///
-const string&
+const std::string&
 sheaf::error_message::
 level_name(level_type xlevel )
 {
@@ -284,8 +284,8 @@ level_name(level_type xlevel )
 // ===========================================================
 
 ///
-ostream&
-sheaf::operator<<(ostream& xos, const error_message& xmsg)
+std::ostream&
+sheaf::operator<<(std::ostream& xos, const error_message& xmsg)
 {
   // Preconditions:
 

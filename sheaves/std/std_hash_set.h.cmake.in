@@ -44,8 +44,6 @@
 
 #include <hash_set>
 
-using namespace std;
-
 // Alias for namespace hash_set is
 // needed when specializing hash<T>.
 

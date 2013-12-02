@@ -1346,7 +1346,7 @@ b_and_not_sa(const zn_to_bool* other)
 // NON-MEMBER FUNCTIONS
 // ===========================================================
  
-ostream& sheaf::operator << (ostream& xos, zn_to_bool& xzn)
+std::ostream& sheaf::operator << (std::ostream& xos, zn_to_bool& xzn)
 {
 
   // Preconditions:

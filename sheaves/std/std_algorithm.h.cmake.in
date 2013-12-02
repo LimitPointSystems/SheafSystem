@@ -20,6 +20,4 @@
 
 #include <algorithm>
 
-using namespace std;
-
 #endif // STD_ALGORITHM_H

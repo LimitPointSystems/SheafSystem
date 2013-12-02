@@ -181,7 +181,7 @@ public:
   /// Prints the data members of this on cout.
   /// Intended for use debugging.
   ///
-  void  print(ostream &out) const;
+  void  print(std::ostream &out) const;
 
   ///
   /// Creates an instance with xub upper bound.

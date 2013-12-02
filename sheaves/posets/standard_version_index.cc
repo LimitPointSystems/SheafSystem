@@ -41,7 +41,7 @@ operator++(standard_version_index& x)
 };
 
 ///
-const string&
+const std::string&
 sheaf::
 standard_version_index_to_name(standard_version_index xpt)
 {
@@ -79,7 +79,7 @@ standard_version_index_to_name(standard_version_index xpt)
 ///
 sheaf::standard_version_index
 sheaf::
-standard_version_index_from_name(const string& xname)
+standard_version_index_from_name(const std::string& xname)
 {
   standard_version_index result = NOT_A_STANDARD_VERSION_INDEX;
   for(standard_version_index i=STANDARD_VERSION_INDEX_BEGIN;

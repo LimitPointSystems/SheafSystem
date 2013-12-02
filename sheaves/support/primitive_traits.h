@@ -61,17 +61,17 @@ struct SHEAF_DLL_SPEC primitive_traits
   ///
   /// The name of T.
   ///
-  static string name();
+  static std::string name();
 
   ///
   /// Other names for T.
   ///
-  static string aliases();
+  static std::string aliases();
 
   ///
   /// The name of T in the hdf file.
   ///
-  static string hdf_type_name();
+  static std::string hdf_type_name();
 
   ///
   /// The hdf type used to represent T in the hdf file.
@@ -113,19 +113,19 @@ struct SHEAF_DLL_SPEC primitive_traits<bool>
     };
     return offsetof(alignment_type, prim);
   };
-  static const string& name()
+  static const std::string& name()
   {
-    static const string result("BOOL");
+    static const std::string result("BOOL");
     return result;
   };
-  static const string& aliases()
+  static const std::string& aliases()
   {
-    static const string result;
+    static const std::string result;
     return result;
   };
-  static const string& hdf_type_name()
+  static const std::string& hdf_type_name()
   {
-    static const string result("SHF_PRIMITIVE_BOOL");
+    static const std::string result("SHF_PRIMITIVE_BOOL");
     return result;
   };
   static int hdf_type();
@@ -157,19 +157,19 @@ struct SHEAF_DLL_SPEC primitive_traits<char>
     };
     return offsetof(alignment_type, prim);
   };
-  static const string& name()
+  static const std::string& name()
   {
-    static const string result("CHAR");
+    static const std::string result("CHAR");
     return result;
   };
-  static const string& aliases()
+  static const std::string& aliases()
   {
-    static const string result;
+    static const std::string result;
     return result;
   };
-  static const string& hdf_type_name()
+  static const std::string& hdf_type_name()
   {
-    static const string result("SHF_PRIMITIVE_CHAR");
+    static const std::string result("SHF_PRIMITIVE_CHAR");
     return result;
   };
   static int hdf_type();
@@ -200,19 +200,19 @@ struct SHEAF_DLL_SPEC primitive_traits<signed char>
     };
     return offsetof(alignment_type, prim);
   };
-  static const string& name()
+  static const std::string& name()
   {
-    static const string result("SIGNED_CHAR");
+    static const std::string result("SIGNED_CHAR");
     return result;
   };
-  static const string& aliases()
+  static const std::string& aliases()
   {
-    static const string result;
+    static const std::string result;
     return result;
   };
-  static const string& hdf_type_name()
+  static const std::string& hdf_type_name()
   {
-    static const string result("SHF_PRIMITIVE_SIGNED_CHAR");
+    static const std::string result("SHF_PRIMITIVE_SIGNED_CHAR");
     return result;
   };
   static int hdf_type();
@@ -243,19 +243,19 @@ struct SHEAF_DLL_SPEC primitive_traits<short int>
     };
     return offsetof(alignment_type, prim);
   };
-  static const string& name()
+  static const std::string& name()
   {
-    static const string result("SHORT_INT");
+    static const std::string result("SHORT_INT");
     return result;
   };
-  static const string& aliases()
+  static const std::string& aliases()
   {
-    static const string result;
+    static const std::string result;
     return result;
   };
-  static const string& hdf_type_name()
+  static const std::string& hdf_type_name()
   {
-    static const string result("SHF_PRIMITIVE_SHORT_INT");
+    static const std::string result("SHF_PRIMITIVE_SHORT_INT");
     return result;
   };
   static int hdf_type();
@@ -286,19 +286,19 @@ struct SHEAF_DLL_SPEC primitive_traits<int>
     };
     return offsetof(alignment_type, prim);
   };
-  static const string& name()
+  static const std::string& name()
   {
-    static const string result("INT");
+    static const std::string result("INT");
     return result;
   };
-  static const string& aliases()
+  static const std::string& aliases()
   {
-    static const string result("INT_TYPE POD_INDEX_TYPE");
+    static const std::string result("INT_TYPE POD_INDEX_TYPE");
     return result;
   };
-  static const string& hdf_type_name()
+  static const std::string& hdf_type_name()
   {
-    static const string result("SHF_PRIMITIVE_INT");
+    static const std::string result("SHF_PRIMITIVE_INT");
     return result;
   };
   static int hdf_type();
@@ -329,19 +329,19 @@ struct SHEAF_DLL_SPEC primitive_traits<long int>
     };
     return offsetof(alignment_type, prim);
   };
-  static const string& name()
+  static const std::string& name()
   {
-    static const string result("LONG_INT");
+    static const std::string result("LONG_INT");
     return result;
   };
-  static const string& aliases()
+  static const std::string& aliases()
   {
-    static const string result;
+    static const std::string result;
     return result;
   };
-  static const string& hdf_type_name()
+  static const std::string& hdf_type_name()
   {
-    static const string result("SHF_PRIMITIVE_LONG_INT");
+    static const std::string result("SHF_PRIMITIVE_LONG_INT");
     return result;
   };
   static int hdf_type();
@@ -372,19 +372,19 @@ struct SHEAF_DLL_SPEC primitive_traits<long long int>
     };
     return offsetof(alignment_type, prim);
   };
-  static const string& name()
+  static const std::string& name()
   {
-    static const string result("LONG_LONG_INT");
+    static const std::string result("LONG_LONG_INT");
     return result;
   };
-  static const string& aliases()
+  static const std::string& aliases()
   {
-    static const string result;
+    static const std::string result;
     return result;
   };
-  static const string& hdf_type_name()
+  static const std::string& hdf_type_name()
   {
-    static const string result("SHF_PRIMITIVE_LONG_LONG_INT");
+    static const std::string result("SHF_PRIMITIVE_LONG_LONG_INT");
     return result;
   };
   static int hdf_type();
@@ -415,19 +415,19 @@ struct SHEAF_DLL_SPEC primitive_traits<unsigned char>
     };
     return offsetof(alignment_type, prim);
   };
-  static const string& name()
+  static const std::string& name()
   {
-    static const string result("UNSIGNED_CHAR");
+    static const std::string result("UNSIGNED_CHAR");
     return result;
   };
-  static const string& aliases()
+  static const std::string& aliases()
   {
-    static const string result;
+    static const std::string result;
     return result;
   };
-  static const string& hdf_type_name()
+  static const std::string& hdf_type_name()
   {
-    static const string result("SHF_PRIMITIVE_UNSIGNED_CHAR");
+    static const std::string result("SHF_PRIMITIVE_UNSIGNED_CHAR");
     return result;
   };
   static int hdf_type();
@@ -458,19 +458,19 @@ struct SHEAF_DLL_SPEC primitive_traits<unsigned short int>
     };
     return offsetof(alignment_type, prim);
   };
-  static const string& name()
+  static const std::string& name()
   {
-    static const string result("UNSIGNED_SHORT_INT");
+    static const std::string result("UNSIGNED_SHORT_INT");
     return result;
   };
-  static const string& aliases()
+  static const std::string& aliases()
   {
-    static const string result;
+    static const std::string result;
     return result;
   };
-  static const string& hdf_type_name()
+  static const std::string& hdf_type_name()
   {
-    static const string result("SHF_PRIMITIVE_UNSIGNED_SHORT_INT");
+    static const std::string result("SHF_PRIMITIVE_UNSIGNED_SHORT_INT");
     return result;
   };
   static int hdf_type();
@@ -501,19 +501,19 @@ struct SHEAF_DLL_SPEC primitive_traits<unsigned int>
     };
     return offsetof(alignment_type, prim);
   };
-  static const string& name()
+  static const std::string& name()
   {
-    static const string result("UNSIGNED_INT");
+    static const std::string result("UNSIGNED_INT");
     return result;
   };
-  static const string& aliases()
+  static const std::string& aliases()
   {
-    static const string result;
+    static const std::string result;
     return result;
   };
-  static const string& hdf_type_name()
+  static const std::string& hdf_type_name()
   {
-    static const string result("SHF_PRIMITIVE_UNSIGNED_INT");
+    static const std::string result("SHF_PRIMITIVE_UNSIGNED_INT");
     return result;
   };
   static int hdf_type();
@@ -544,19 +544,19 @@ struct SHEAF_DLL_SPEC primitive_traits<unsigned long int>
     };
     return offsetof(alignment_type, prim);
   };
-  static const string& name()
+  static const std::string& name()
   {
-    static const string result("UNSIGNED_LONG_INT");
+    static const std::string result("UNSIGNED_LONG_INT");
     return result;
   };
-  static const string& aliases()
+  static const std::string& aliases()
   {
-    static const string result("SIZE_TYPE");
+    static const std::string result("SIZE_TYPE");
     return result;
   };
-  static const string& hdf_type_name()
+  static const std::string& hdf_type_name()
   {
-    static const string result("SHF_PRIMITIVE_UNSIGNED_LONG_INT");
+    static const std::string result("SHF_PRIMITIVE_UNSIGNED_LONG_INT");
     return result;
   };
   static int hdf_type();
@@ -587,19 +587,19 @@ struct SHEAF_DLL_SPEC primitive_traits<unsigned long long int>
     };
     return offsetof(alignment_type, prim);
   };
-  static const string& name()
+  static const std::string& name()
   {
-    static const string result("UNSIGNED_LONG_LONG_INT");
+    static const std::string result("UNSIGNED_LONG_LONG_INT");
     return result;
   };
-  static const string& aliases()
+  static const std::string& aliases()
   {
-    static const string result;
+    static const std::string result;
     return result;
   };
-  static const string& hdf_type_name()
+  static const std::string& hdf_type_name()
   {
-    static const string result("SHF_PRIMITIVE_UNSIGNED_LONG_LONG_INT");
+    static const std::string result("SHF_PRIMITIVE_UNSIGNED_LONG_LONG_INT");
     return result;
   };
   static int hdf_type();
@@ -630,19 +630,19 @@ struct SHEAF_DLL_SPEC primitive_traits<float>
     };
     return offsetof(alignment_type, prim);
   };
-  static const string& name()
+  static const std::string& name()
   {
-    static const string result("FLOAT");
+    static const std::string result("FLOAT");
     return result;
   };
-  static const string& aliases()
+  static const std::string& aliases()
   {
-    static const string result;
+    static const std::string result;
     return result;
   };
-  static const string& hdf_type_name()
+  static const std::string& hdf_type_name()
   {
-    static const string result("SHF_PRIMITIVE_FLOAT");
+    static const std::string result("SHF_PRIMITIVE_FLOAT");
     return result;
   };
   static int hdf_type();
@@ -673,19 +673,19 @@ struct SHEAF_DLL_SPEC primitive_traits<double>
     };
     return offsetof(alignment_type, prim);
   };
-  static const string& name()
+  static const std::string& name()
   {
-    static const string result("DOUBLE");
+    static const std::string result("DOUBLE");
     return result;
   };
-  static const string& aliases()
+  static const std::string& aliases()
   {
-    static const string result;
+    static const std::string result;
     return result;
   };
-  static const string& hdf_type_name()
+  static const std::string& hdf_type_name()
   {
-    static const string result("SHF_PRIMITIVE_DOUBLE");
+    static const std::string result("SHF_PRIMITIVE_DOUBLE");
     return result;
   };
   static int hdf_type();
@@ -716,19 +716,19 @@ struct SHEAF_DLL_SPEC primitive_traits<long double>
     };
     return offsetof(alignment_type, prim);
   };
-  static const string& name()
+  static const std::string& name()
   {
-    static const string result("LONG_DOUBLE");
+    static const std::string result("LONG_DOUBLE");
     return result;
   };
-  static const string& aliases()
+  static const std::string& aliases()
   {
-    static const string result;
+    static const std::string result;
     return result;
   };
-  static const string& hdf_type_name()
+  static const std::string& hdf_type_name()
   {
-    static const string result("SHF_PRIMITIVE_LONG_DOUBLE");
+    static const std::string result("SHF_PRIMITIVE_LONG_DOUBLE");
     return result;
   };
   static int hdf_type();
@@ -759,19 +759,19 @@ struct SHEAF_DLL_SPEC primitive_traits<void_star>
     };
     return offsetof(alignment_type, prim);
   };
-  static const string& name()
+  static const std::string& name()
   {
-    static const string result("VOID_STAR");
+    static const std::string result("VOID_STAR");
     return result;
   };
-  static const string& aliases()
+  static const std::string& aliases()
   {
-    static const string result;
+    static const std::string result;
     return result;
   };
-  static const string& hdf_type_name()
+  static const std::string& hdf_type_name()
   {
-    static const string result("SHF_PRIMITIVE_VOID_STAR");
+    static const std::string result("SHF_PRIMITIVE_VOID_STAR");
     return result;
   };
   static int hdf_type();
@@ -802,19 +802,19 @@ struct SHEAF_DLL_SPEC primitive_traits<c_string>
     };
     return offsetof(alignment_type, prim);
   };
-  static const string& name()
+  static const std::string& name()
   {
-    static const string result("C_STRING");
+    static const std::string result("C_STRING");
     return result;
   };
-  static const string& aliases()
+  static const std::string& aliases()
   {
-    static const string result;
+    static const std::string result;
     return result;
   };
-  static const string& hdf_type_name()
+  static const std::string& hdf_type_name()
   {
-    static const string result("SHF_PRIMITIVE_C_STRING");
+    static const std::string result("SHF_PRIMITIVE_C_STRING");
     return result;
   };
   static int hdf_type();
@@ -845,19 +845,19 @@ struct SHEAF_DLL_SPEC primitive_traits<char const*>
     };
     return offsetof(alignment_type, prim);
   };
-  static const string& name()
+  static const std::string& name()
   {
-    static const string result("C_STRING");
+    static const std::string result("C_STRING");
     return result;
   };
-  static const string& aliases()
+  static const std::string& aliases()
   {
-    static const string result;
+    static const std::string result;
     return result;
   };
-  static const string& hdf_type_name()
+  static const std::string& hdf_type_name()
   {
-    static const string result("SHF_PRIMITIVE_C_STRING");
+    static const std::string result("SHF_PRIMITIVE_C_STRING");
     return result;
   };
   static int hdf_type();
@@ -888,19 +888,19 @@ struct SHEAF_DLL_SPEC primitive_traits<namespace_relative_member_index_pod_type>
     };
     return offsetof(alignment_type, prim);
   };
-  static const string& name()
+  static const std::string& name()
   {
-    static const string result("NAMESPACE_RELATIVE_MEMBER_INDEX");
+    static const std::string result("NAMESPACE_RELATIVE_MEMBER_INDEX");
     return result;
   };
-  static const string& aliases()
+  static const std::string& aliases()
   {
-    static const string result;
+    static const std::string result;
     return result;
   };
-  static const string& hdf_type_name()
+  static const std::string& hdf_type_name()
   {
-    static const string result("SHF_PRIMITIVE_NAMESPACE_RELATIVE_MEMBER_INDEX");
+    static const std::string result("SHF_PRIMITIVE_NAMESPACE_RELATIVE_MEMBER_INDEX");
     return result;
   };
   static int hdf_type();
@@ -931,19 +931,19 @@ struct SHEAF_DLL_SPEC primitive_traits<namespace_relative_subposet_index_pod_typ
     };
     return offsetof(alignment_type, prim);
   };
-  static const string& name()
+  static const std::string& name()
   {
-    static const string result("NAMESPACE_RELATIVE_SUBPOSET_INDEX");
+    static const std::string result("NAMESPACE_RELATIVE_SUBPOSET_INDEX");
     return result;
   };
-  static const string& aliases()
+  static const std::string& aliases()
   {
-    static const string result;
+    static const std::string result;
     return result;
   };
-  static const string& hdf_type_name()
+  static const std::string& hdf_type_name()
   {
-    static const string result("SHF_PRIMITIVE_NAMESPACE_RELATIVE_SUBPOSET_INDEX");
+    static const std::string result("SHF_PRIMITIVE_NAMESPACE_RELATIVE_SUBPOSET_INDEX");
     return result;
   };
   static int hdf_type();
@@ -969,19 +969,19 @@ struct SHEAF_DLL_SPEC primitive_traits<void>
   {
     return 0;
   };
-  static const string& name()
+  static const std::string& name()
   {
-    static const string result("NOT_A_PRIMITIVE_TYPE");
+    static const std::string result("NOT_A_PRIMITIVE_TYPE");
     return result;
   };
-  static const string& aliases()
+  static const std::string& aliases()
   {
-    static const string result;
+    static const std::string result;
     return result;
   };
-  static const string& hdf_type_name()
+  static const std::string& hdf_type_name()
   {
-    static const string result;
+    static const std::string result;
     return result;
   };
   static int hdf_type();

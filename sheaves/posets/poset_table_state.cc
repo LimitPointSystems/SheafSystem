@@ -632,7 +632,7 @@ namespace
 ///
 /// Prints schema for poset_state_handle stream insertion operator.
 ///
-void print_schema(ostream &os, const sheaf::poset_table_state& p)
+void print_schema(std::ostream &os, const sheaf::poset_table_state& p)
 {
   // Preconditions:
 
@@ -654,7 +654,7 @@ void print_schema(ostream &os, const sheaf::poset_table_state& p)
 ///
 /// Prints table dofs for poset_state_handle stream insertion operator.
 ///
-void print_table_dofs(ostream &os, const sheaf::poset_table_state& p)
+void print_table_dofs(std::ostream &os, const sheaf::poset_table_state& p)
 {
   // Preconditions:
 
@@ -720,7 +720,7 @@ void print_table_dofs(ostream &os, const sheaf::poset_table_state& p)
 ///
 /// Prints row dofs for poset_state_handle stream insertion operator.
 ///
-void print_row_dofs(ostream &os, const sheaf::poset_table_state& p)
+void print_row_dofs(std::ostream &os, const sheaf::poset_table_state& p)
 {
   // Preconditions:
 
@@ -900,9 +900,9 @@ void print_row_dofs(ostream &os, const sheaf::poset_table_state& p)
 // NON-MEBER FUNCTIONS
 // ===========================================================
 
-ostream&
+std::ostream&
 sheaf::
-operator<<(ostream &os, const poset_table_state& p)
+operator<<(std::ostream &os, const poset_table_state& p)
 {
 
   // Preconditions:

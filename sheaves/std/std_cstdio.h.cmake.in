@@ -23,8 +23,6 @@
 #if HAVE_CSTDIO
 
 #include <cstdio>
-using namespace std;
-
 #else
 
 #include <stdio.h>

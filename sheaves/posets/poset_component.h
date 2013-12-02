@@ -201,13 +201,13 @@ public:
   /// Gets the index of the component in xhost with name xname.
   ///
   virtual pod_index_type get_index_from_name(const poset_state_handle* xhost,
-					     const string& xname) const = 0;
+					     const std::string& xname) const = 0;
 
   ///
   /// Gets the index of the component in xhost with name xname.
   ///
   virtual void get_index_from_name(const poset_state_handle* xhost,
-				   const string& xname,
+				   const std::string& xname,
 				   scoped_index& result) const = 0;
 
   ///
@@ -242,7 +242,7 @@ public:
   ///
   /// The subposet name for the filter associated with version().
   ///
-  string version_name() const;
+  std::string version_name() const;
 
   ///
   /// True if xversion is a valid version for this.
@@ -267,17 +267,17 @@ public:
   /// OBSOLETE: use name(bool xauto_access).
   /// A name for this.
   ///
-  string name() const;
+  std::string name() const;
 
   ///
   /// A name for this.
   ///
-  virtual string name(bool xauto_access) const = 0;
+  virtual std::string name(bool xauto_access) const = 0;
 
   ///
   /// All the names for this.
   ///
-  virtual void all_names(block<string>& xresult, bool xauto_access = false) const = 0;
+  virtual void all_names(block<std::string>& xresult, bool xauto_access = false) const = 0;
 
   ///
   /// The number of names for this.
@@ -287,17 +287,17 @@ public:
   ///
   /// True if xname is a name for this.
   ///
-  virtual bool has_name(const string& xname, bool xauto_access = false) const = 0;
+  virtual bool has_name(const std::string& xname, bool xauto_access = false) const = 0;
 
   ///
   /// Make xname a name for this; if xunique, make xname the only name.
   ///
-  virtual void put_name(const string& xname, bool xunique, bool xauto_access) = 0;
+  virtual void put_name(const std::string& xname, bool xunique, bool xauto_access) = 0;
 
   ///
   /// Delete all names for this.
   ///
-  virtual void delete_name(const string& xname, bool xauto_access = false) = 0;
+  virtual void delete_name(const std::string& xname, bool xauto_access = false) = 0;
 
   ///
   /// Delete all the names for this.
@@ -308,7 +308,7 @@ public:
   /// True if there exists a component as the same type as this in xhost with
   /// name xname
   ///
-  bool is_valid_name(const poset_state_handle* xhost, const string& xname) const;
+  bool is_valid_name(const poset_state_handle* xhost, const std::string& xname) const;
 
   ///
   /// A path to this component.
@@ -424,16 +424,16 @@ public:
   /// Attach to the member state with name xname in
   /// the current version of host xhost.
   ///
-  void attach_to_state(const poset_state_handle* xhost, const string& xname);
+  void attach_to_state(const poset_state_handle* xhost, const std::string& xname);
 
   // Not included in generated documentation; would just be confusing.
-  inline void attach_to_state(const namespace_poset* xhost, const string& xname)
+  inline void attach_to_state(const namespace_poset* xhost, const std::string& xname)
   {
     // This routine needed to resolve ambiguity between the preceeding
     // routine and attach_to_state(namespace_poset*, const poset_path&),
-    // when called with signature (namespace_poset*, const string&).
+    // when called with signature (namespace_poset*, const std::string&).
     // Compiler can't choose between conversion of namespace_poset* to
-    // poset_state_handle* versus conversion of const string& to const poset_path&.
+    // poset_state_handle* versus conversion of const std::string& to const poset_path&.
 
     attach_to_state(reinterpret_cast<const poset_state_handle*>(xhost), xname);
   };
@@ -442,7 +442,7 @@ public:
   /// Attach to the state with name xname in version version() of
   /// host host().
   ///
-  void attach_to_state(const string&);
+  void attach_to_state(const std::string&);
 
   ///
   /// Attach to the state with hub id xhub_id in version version() of

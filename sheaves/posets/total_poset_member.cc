@@ -223,7 +223,7 @@ total_poset_member(const poset_state_handle* xhost, const scoped_index& xid)
 }
 
 sheaf::total_poset_member::
-total_poset_member(const poset_state_handle* xhost, const string& xname)
+total_poset_member(const poset_state_handle* xhost, const std::string& xname)
 {
 
   // Preconditions:

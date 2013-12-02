@@ -299,7 +299,7 @@ private:
 /// Insert poset_table_state& p into ostream& os.
 ///
 SHEAF_DLL_SPEC 
-ostream& operator << (ostream &os, const poset_table_state& p);
+std::ostream& operator << (std::ostream &os, const poset_table_state& p);
 
 ///
 /// The deep size of the referenced object of type poset_table_state.

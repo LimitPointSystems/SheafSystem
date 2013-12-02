@@ -228,7 +228,7 @@ poset_member(const poset_state_handle* xhost, const scoped_index& xid)
 }
 
 sheaf::poset_member::
-poset_member(const poset_state_handle* xhost, const string& xname)
+poset_member(const poset_state_handle* xhost, const std::string& xname)
 {
 
   // Preconditions:

@@ -20,6 +20,4 @@
 
 #include <multimap>
 
-using namespace std;
-
 #endif // STD_MULTIMAP_H

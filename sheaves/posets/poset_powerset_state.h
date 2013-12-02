@@ -36,10 +36,6 @@
 #include "index_space_family.h"
 #endif
 
-#ifndef STD_HASH_MAP_H
-#include "std_hash_map.h"
-#endif
-
 #ifndef SCOPED_INDEX_H
 #include "scoped_index.h"
 #endif
@@ -60,7 +56,7 @@ namespace sheaf
 {
 
 // Forward declaration to support friend declaration.
-SHEAF_DLL_SPEC ostream & operator << (ostream &os, const poset_powerset_state& p);
+SHEAF_DLL_SPEC std::ostream & operator << (std::ostream &os, const poset_powerset_state& p);
 
 ///
 /// The set of subsets of a poset.
@@ -71,7 +67,7 @@ class SHEAF_DLL_SPEC poset_powerset_state : public any
   friend class subposet;
   friend class storage_agent; // needs to create an id space.
   friend class poset_scaffold; // needs to create an id space.
-  friend SHEAF_DLL_SPEC ostream & operator << (ostream &os, const poset_powerset_state& p);
+  friend SHEAF_DLL_SPEC std::ostream & operator << (std::ostream &os, const poset_powerset_state& p);
   friend SHEAF_DLL_SPEC size_t deep_size(const poset_powerset_state& xp, bool xinclude_shallow);
 
   // ===========================================================
@@ -501,7 +497,7 @@ private:
 ///
 /// Insert poset_powerset_state& p into ostream& os.
 ///
-SHEAF_DLL_SPEC ostream & operator << (ostream &os, const poset_powerset_state& p);
+SHEAF_DLL_SPEC std::ostream & operator << (std::ostream &os, const poset_powerset_state& p);
 
 ///
 /// The deep size of the referenced object of type poset_powerset_state.

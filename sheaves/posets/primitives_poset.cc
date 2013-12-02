@@ -38,7 +38,7 @@
 
 // PUBLIC FUNCTIONS
 
-const string&
+const std::string&
 sheaf::primitives_poset::
 standard_name()
 {
@@ -560,7 +560,7 @@ initialize_standard_members()
 
 void
 sheaf::primitives_poset::
-initialize_standard_subposets(const string& xname)
+initialize_standard_subposets(const std::string& xname)
 {
 
   // Preconditions:

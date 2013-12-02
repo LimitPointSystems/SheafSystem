@@ -37,10 +37,6 @@
 #include "poset_type.h"
 #endif
 
-#ifndef STD_HASH_MAP_H
-#include "std_hash_map.h"
-#endif
-
 #ifndef STD_STRING_H
 #include "std_string.h"
 #endif
@@ -138,7 +134,7 @@ public:
   /// Creates a new namespace_poset_member handle attached to the member state
   /// with name xname in xhost
   ///
-  namespace_poset_member(const namespace_poset* xhost, const string& xname);
+  namespace_poset_member(const namespace_poset* xhost, const std::string& xname);
 
   ///
   /// Creates a new namespace_poset_member handle attached to the member state

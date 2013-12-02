@@ -56,7 +56,7 @@ public:
   /// Returns a handle to the id space created.
   ///
   static offset_index_space_handle new_space(index_space_family& xid_spaces,
-					     const string& xname,
+					     const std::string& xname,
 					     pod_type xoffset,
 					     size_type xct);
 
@@ -94,7 +94,7 @@ public:
   /// Constructor: Attach to state with name xname in the family xid_spaces.
   ///
   offset_index_space_handle(const index_space_family& xid_spaces,
-			     const string& xname);
+			     const std::string& xname);
 
   ///
   /// Assignment operator; attach this handle to the state of xother.

@@ -29,12 +29,13 @@
 #include "primitive_type.h"
 #include "std_string.h"
 
+using namespace std;
+
 // PUBLIC MEMBER FUNCTIONS
 
  
 
-///
-const string&
+const std::string&
 sheaf::namespace_poset_dof_map::
 class_name() const
 {
@@ -53,8 +54,7 @@ class_name() const
   return result;
 }
 
-///
-const string&
+const std::string&
 sheaf::namespace_poset_dof_map::
 static_class_name()
 {
@@ -76,7 +76,6 @@ static_class_name()
 
 // CANONICAL MEMBERS
 
-///
 sheaf::namespace_poset_dof_map::
 namespace_poset_dof_map()
     : poset_dof_map()
@@ -123,7 +122,6 @@ namespace_poset_dof_map()
 }
 
 
-///
 sheaf::namespace_poset_dof_map*
 sheaf::namespace_poset_dof_map::
 clone() const
@@ -150,7 +148,6 @@ clone() const
 
 
 
-///
 sheaf::namespace_poset_dof_map::
 namespace_poset_dof_map(const namespace_poset_dof_map& xother)
     :poset_dof_map(xother)
@@ -168,7 +165,6 @@ namespace_poset_dof_map(const namespace_poset_dof_map& xother)
 
 }
 
-///
 sheaf::namespace_poset_dof_map*
 sheaf::namespace_poset_dof_map::
 copy() const
@@ -194,7 +190,6 @@ copy() const
 }
 
 
-///
 sheaf::namespace_poset_dof_map&
 sheaf::namespace_poset_dof_map::
 operator=(const namespace_poset_dof_map& xother)
@@ -217,7 +212,6 @@ operator=(const namespace_poset_dof_map& xother)
 }
 
 
-///
 sheaf::namespace_poset_dof_map::
 ~namespace_poset_dof_map()
 {
@@ -230,7 +224,6 @@ sheaf::namespace_poset_dof_map::
 }
 
 
-///
 bool
 sheaf::namespace_poset_dof_map::
 invariant() const
@@ -263,7 +256,6 @@ invariant() const
 
 // OTHER CONSTRUCTORS
 
-///
 sheaf::namespace_poset_dof_map::
 namespace_poset_dof_map(const namespace_poset* xhost)
     : poset_dof_map(xhost, false)
@@ -316,7 +308,6 @@ namespace_poset_dof_map(const namespace_poset* xhost)
 //  NEW DOF ACCESS FACET
 // ===========================================================
 
-///
 void
 sheaf::namespace_poset_dof_map::
 get_dof(pod_index_type xdof_id, void* xdof, size_type xdof_size) const
@@ -372,7 +363,6 @@ get_dof(pod_index_type xdof_id, void* xdof, size_type xdof_size) const
   return;
 }
 
-///
 void
 sheaf::namespace_poset_dof_map::
 put_dof(pod_index_type xdof_id, const void* xdof, size_type xdof_size)
@@ -435,7 +425,6 @@ put_dof(pod_index_type xdof_id, const void* xdof, size_type xdof_size)
 //  END NEW DOF ACCESS FACET
 // ===========================================================
 
-///
 void*
 sheaf::namespace_poset_dof_map::
 dof_tuple()
@@ -457,7 +446,6 @@ dof_tuple()
   return result;
 }
 
-///
 const void*
 sheaf::namespace_poset_dof_map::
 dof_tuple() const
@@ -479,7 +467,6 @@ dof_tuple() const
   return result;
 }
 
-///
 void
 sheaf::namespace_poset_dof_map::
 get_dof_tuple(void* xbuf, size_t xbuflen) const
@@ -504,7 +491,6 @@ get_dof_tuple(void* xbuf, size_t xbuflen) const
 }
 
 
-///
 void
 sheaf::namespace_poset_dof_map::
 put_dof_tuple(const void* xbuf, size_t xbuflen)
@@ -529,7 +515,6 @@ put_dof_tuple(const void* xbuf, size_t xbuflen)
 }
 
 
-///
 sheaf::poset_state_handle*
 sheaf::namespace_poset_dof_map::
 poset_pointer() const
@@ -550,7 +535,6 @@ poset_pointer() const
 }
 
 
-///
 sheaf::poset_type
 sheaf::namespace_poset_dof_map::
 poset_type_id() const
@@ -571,7 +555,6 @@ poset_type_id() const
 }
 
 
-///
 const char*
 sheaf::namespace_poset_dof_map::
 poset_class() const
@@ -591,7 +574,6 @@ poset_class() const
   return result;
 }
 
-///
 int
 sheaf::namespace_poset_dof_map::
 poset_prereq_id(int xi) const
@@ -625,7 +607,6 @@ poset_prereq_id(int xi) const
 // PROTECTED MEMBER FUNCTIONS
 
  
-///
 void
 sheaf::namespace_poset_dof_map::
 extend_to_top()
@@ -654,7 +635,6 @@ extend_to_top()
   return;
 }
 
-///
 void
 sheaf::namespace_poset_dof_map::
 put_poset_pointer(const poset_state_handle* xposet)
@@ -675,7 +655,6 @@ put_poset_pointer(const poset_state_handle* xposet)
 }
 
 
-///
 void
 sheaf::namespace_poset_dof_map::
 put_poset_type_id(poset_type xtype_id)
@@ -695,7 +674,6 @@ put_poset_type_id(poset_type xtype_id)
   return;
 }
 
-///
 void
 sheaf::namespace_poset_dof_map::
 put_poset_class(const char* xclass)
@@ -715,7 +693,6 @@ put_poset_class(const char* xclass)
   return;
 }
 
-///
 void
 sheaf::namespace_poset_dof_map::
 put_poset_prereq_id(int xi, int xid)
@@ -745,7 +722,6 @@ put_poset_prereq_id(int xi, int xid)
   return;
 }
 
-///
 void
 sheaf::namespace_poset_dof_map::
 allocate_dofs()
@@ -791,7 +767,6 @@ allocate_dofs()
 
 // PRIVATE MEMBERS
 
-///
 bool
 sheaf::namespace_poset_dof_map::
 make_prototype()

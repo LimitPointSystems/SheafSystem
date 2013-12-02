@@ -199,7 +199,7 @@ operator=(const explicit_index_space_state& xother)
 void
 sheaf::explicit_index_space_state::
 new_state(index_space_family& xid_spaces,
-	  const string& xname,
+	  const std::string& xname,
 	  bool xis_persistent)
 {
   // Preconditions:
@@ -237,7 +237,7 @@ void
 sheaf::explicit_index_space_state::
 new_state(index_space_family& xid_spaces,
 	  pod_type xid,
-	  const string& xname,
+	  const std::string& xname,
 	  bool xis_persistent)
 {
   // Preconditions:
@@ -1068,11 +1068,11 @@ attach(explicit_index_space_iterator& xitr) const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 sheaf::explicit_index_space_state::
 class_name() const
 {
-  static const string result("explicit_index_space_state");
+  static const std::string result("explicit_index_space_state");
   return result;
 }
 
@@ -1218,13 +1218,15 @@ deep_size(const explicit_index_space_state& xn, bool xinclude_shallow)
   return result;
 }
 
-ostream& 
+std::ostream& 
 sheaf::
-operator << (ostream& xos, const explicit_index_space_state& xe)
+operator << (std::ostream& xos, const explicit_index_space_state& xe)
 {
   // Preconditions:
 
   // Body:
+
+  using namespace std;
 
   xos << "class name: " << xe.class_name() << endl;
   xos << "index:      " << xe.index() << endl;

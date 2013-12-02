@@ -90,7 +90,7 @@ bool operator==(const block<T>& xblk1, const block<T>& xblk2);
 /// Inserts block xblk into ostream xos.
 ///
 template <typename T>
-ostream& operator << (ostream& xos, const block<T>& xblk);
+std::ostream& operator << (std::ostream& xos, const block<T>& xblk);
 
 ///
 /// The deep size of the referenced object of type block@<T@>;

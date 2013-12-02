@@ -20,6 +20,4 @@
 
 #include <functional>
 
-using namespace std;
-
 #endif // STD_FUNCTIONAL_H

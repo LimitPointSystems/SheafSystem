@@ -47,7 +47,7 @@ template <typename T>
 class factory;
 
 template <typename T>
-ostream& operator << (ostream &os, const factory<T>& xf);
+std::ostream& operator << (std::ostream &os, const factory<T>& xf);
 
 
 ///
@@ -64,7 +64,7 @@ ostream& operator << (ostream &os, const factory<T>& xf);
 template <typename T>
 class factory
 {
-  friend ostream& operator << <T> (ostream& xos, const factory<T>& xf);
+  friend std::ostream& operator << <T> (std::ostream& xos, const factory<T>& xf);
 
 public:
 
@@ -86,13 +86,13 @@ public:
   ///
   /// Creates an instance of type xclient_class_name.
   ///
-  T* new_instance(const string& xclient_class_name);
+  T* new_instance(const std::string& xclient_class_name);
 
   ///
   /// Creates an instance of type xclient_class_name and initializes it with xname_space.
   ///
   template<typename S>
-  T* new_instance(const string& xclient_class_name, S& xarg);
+  T* new_instance(const std::string& xclient_class_name, S& xarg);
 
   ///
   /// Sets xprototype as the prototype for its client class.
@@ -102,13 +102,13 @@ public:
   ///
   /// Removes the prototype for handles of type xclass_name.
   ///
-  void delete_prototype(const string& xclass_name);
+  void delete_prototype(const std::string& xclass_name);
 
   ///
   /// True if the set of prototypes contains a
   /// prototype for handles of type xclass_name.
   ///
-  bool contains_prototype(const string& xclass_name) const;
+  bool contains_prototype(const std::string& xclass_name) const;
 
 private:
 
@@ -121,7 +121,7 @@ private:
   ///
   /// The type of the prototypes map.
   ///
-  typedef map<string, T*> prototypes_map_type;
+  typedef std::map<std::string, T*> prototypes_map_type;
 
   ///
   /// The client prototypes map.
@@ -137,7 +137,7 @@ private:
 /// Inserts factory& xf in stream xos.
 ///
 template <typename T>
-ostream& operator << (ostream& xos, const factory<T>& xf);
+std::ostream& operator << (std::ostream& xos, const factory<T>& xf);
  
 } // namespace sheaf
 

@@ -20,6 +20,4 @@
 
 #include <stdexcept>
 
-using namespace std;
-
 #endif // STD_STDEXCEPT_H

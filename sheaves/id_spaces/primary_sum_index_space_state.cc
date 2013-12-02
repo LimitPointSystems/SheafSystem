@@ -39,7 +39,7 @@
 sheaf::hub_index_space_handle
 sheaf::primary_sum_index_space_state::
 new_space(index_space_family& xid_spaces,
-	  const string& xname)
+	  const std::string& xname)
 {
   // Preconditions:
 
@@ -71,7 +71,7 @@ sheaf::hub_index_space_handle
 sheaf::primary_sum_index_space_state::
 new_space(index_space_family& xid_spaces,
 	  pod_index_type xid,
-	  const string& xname)
+	  const std::string& xname)
 {
   // Preconditions:
 
@@ -636,7 +636,7 @@ interval_is_available(pod_type xbegin, pod_type xend) const
 
 // PROTECTED MEMBER FUNCTIONS
 
-const string&
+const std::string&
 sheaf::primary_sum_index_space_state::
 term_prefix()
 {
@@ -644,7 +644,7 @@ term_prefix()
 
   // Body:
 
-  static const string result("__hub_term_");
+  static const std::string result("__hub_term_");
 
   // Postconditions:
 
@@ -655,17 +655,17 @@ term_prefix()
   return result;
 }
 
-string
+std::string
 sheaf::primary_sum_index_space_state::
 next_term_name()
 {
-  string result;
+  std::string result;
   
   // Preconditions:
 
   // Body:
 
-  strstream lstr;
+  std::strstream lstr;
   lstr << term_prefix() << term_id_end();
   lstr >> result;
 
@@ -1108,7 +1108,7 @@ gathered_id_space_excludes_bottom() const
   return result;
 }
 
-const string&
+const std::string&
 sheaf::primary_sum_index_space_state::
 gathered_hub_id_space_name()
 {
@@ -1116,7 +1116,7 @@ gathered_hub_id_space_name()
 
   // Body:
 
-  static const string result(poset_path::reserved_prefix() + "gathered_hub");
+  static const std::string result(poset_path::reserved_prefix() + "gathered_hub");
 
   // Postconditions:
 
@@ -2013,11 +2013,11 @@ iterators()
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 sheaf::primary_sum_index_space_state::
 class_name() const
 {
-  static const string result("primary_sum_index_space_state");
+  static const std::string result("primary_sum_index_space_state");
   return result;
 }
 

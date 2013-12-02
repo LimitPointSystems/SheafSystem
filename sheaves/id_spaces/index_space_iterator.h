@@ -234,7 +234,7 @@ public:
   ///
   /// Name of this space.
   ///
-  string name() const;
+  std::string name() const;
 
   ///
   /// True if this iterator is attached to a state.
@@ -249,7 +249,7 @@ public:
   ///
   /// Attach to the state with name xname in the id space family xid_spaces.
   ///
-  void attach_to(const index_space_family& xid_spaces, const string& xname);
+  void attach_to(const index_space_family& xid_spaces, const std::string& xname);
 
   ///
   /// Attach to the state with index xindex in the id space family id_spaces().
@@ -259,7 +259,7 @@ public:
   ///
   /// Attach to the state with name xname in the id space family id_spaces().
   ///
-  void attach_to(const string& xname);
+  void attach_to(const std::string& xname);
 
   ///
   /// Attach to the state of the id space xid_space.
@@ -290,7 +290,7 @@ public:
   /// with name xname in the id space family, xid_spaces.
   ///
   bool conforms_to_state(const index_space_family& xid_spaces,
-			 const string& xname) const;
+			 const std::string& xname) const;
 
   ///
   /// True if this conforms to the handle type required by the state
@@ -302,7 +302,7 @@ public:
   /// True if this conforms to the handle type required by the state
   /// with name xname.
   ///
-  bool conforms_to_state(const string& xname) const;
+  bool conforms_to_state(const std::string& xname) const;
 
   ///
   /// True if this conforms to the handle type required by the state

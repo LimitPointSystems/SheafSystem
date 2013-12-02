@@ -78,7 +78,7 @@ public:
   /// Returns a handle to the id space created.
   ///
   static array_index_space_handle new_space(index_space_family& xid_spaces,
-					    const string& xname,
+					    const std::string& xname,
 					    bool xis_persistent,
 					    size_type xcapacity);
 
@@ -90,7 +90,7 @@ public:
   ///
   static array_index_space_handle new_space(index_space_family& xid_spaces,
 					    pod_type xid,
-					    const string& xname,
+					    const std::string& xname,
 					    bool xis_persistent,
 					    size_type xcapacity);
 
@@ -404,7 +404,7 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// Virtual constructor; create a new instance of the same type at this.

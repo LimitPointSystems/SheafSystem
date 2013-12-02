@@ -516,7 +516,7 @@ new_member(const scoped_index& xindex, bool xis_jim, const scoped_index& xdof_tu
 
 sheaf::pod_index_type
 sheaf::refinable_poset::
-new_member_interval(const string& xinterval_type, size_type xsize)
+new_member_interval(const std::string& xinterval_type, size_type xsize)
 {
   // Preconditions:
 
@@ -557,7 +557,7 @@ new_member_interval(const string& xinterval_type, size_type xsize)
 
 void
 sheaf::refinable_poset::
-new_member_interval(const scoped_index& xindex, const string& xinterval_type, size_type xsize)
+new_member_interval(const scoped_index& xindex, const std::string& xinterval_type, size_type xsize)
 {
   // Preconditions:
 

@@ -20,6 +20,4 @@
 
 #include <list>
 
-using namespace std;
-
 #endif // STD_LIST_H

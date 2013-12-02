@@ -35,7 +35,7 @@
 sheaf::interval_index_space_handle
 sheaf::interval_index_space_state::
 new_space(index_space_family& xid_spaces,
-	  const string& xname,
+	  const std::string& xname,
 	  bool xis_persistent,
 	  bool xmerge_mode)
 {
@@ -73,7 +73,7 @@ sheaf::interval_index_space_handle
 sheaf::interval_index_space_state::
 new_space(index_space_family& xid_spaces,
 	  pod_index_type xid,
-	  const string& xname,
+	  const std::string& xname,
 	  bool xis_persistent,
 	  bool xmerge_mode)
 {
@@ -129,7 +129,7 @@ insert_map_interval(pod_type xdomain_begin,
 		    pod_type xdomain_end, 
 		    pod_type xrange_begin, 
 		    pod_type xrange_end,
-		    map<pod_type, pod_type>& xmap,
+		    std::map<pod_type, pod_type>& xmap,
 		    bool xmerge_mode)
 {
   // Preconditions:
@@ -306,7 +306,7 @@ insert_map_interval(pod_type xdomain_begin,
 
 sheaf::interval_index_space_state::pod_type
 sheaf::interval_index_space_state::
-map_value(pod_type xid, const map<pod_type, pod_type>& xmap)
+map_value(pod_type xid, const std::map<pod_type, pod_type>& xmap)
 {
   // Preconditions:
 
@@ -947,11 +947,13 @@ capacity() const
 
 void
 sheaf::interval_index_space_state::
-print_map_rep(ostream& xos) const
+print_map_rep(std::ostream& xos) const
 {
   // Preconditions:
 
   // Body:
+
+  using namespace std;
 
   xos << "_to_range: " << endl;
   
@@ -1786,11 +1788,11 @@ iterators()
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 sheaf::interval_index_space_state::
 class_name() const
 {
-  static const string result("interval_index_space_state");
+  static const std::string result("interval_index_space_state");
   return result;
 }
 

@@ -69,7 +69,7 @@ struct SHEAF_DLL_SPEC index_traits
   ///
   static inline T invalid()
   {
-    return numeric_limits<T>::max();
+    return std::numeric_limits<T>::max();
   };
 
   ///
@@ -117,7 +117,7 @@ struct SHEAF_DLL_SPEC index_traits
   ///
   static inline T max()
   {
-    return numeric_limits<T>::max() - 1;
+    return std::numeric_limits<T>::max() - 1;
   };
 
   ///
@@ -125,7 +125,7 @@ struct SHEAF_DLL_SPEC index_traits
   ///
   static inline T min()
   {
-    return numeric_limits<T>::min();
+    return std::numeric_limits<T>::min();
   };
 };
  

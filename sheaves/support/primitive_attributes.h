@@ -50,7 +50,7 @@ public:
   ///
   /// Type id of the primitive type with name or alias xname.
   ///
-  static primitive_type id(const string& xname);
+  static primitive_type id(const std::string& xname);
 
   ///
   /// Converts pod_index_type xid to primitive_type.
@@ -79,7 +79,7 @@ public:
   ///
   /// The name of primitive type with id xid.
   ///
-  static const string& name(pod_index_type xid)
+  static const std::string& name(pod_index_type xid)
   {
     return prototype(xid).name();
   };
@@ -87,7 +87,7 @@ public:
   ///
   /// Other names for the primitive type with id xid
   ///
-  static const string& aliases(pod_index_type xid)
+  static const std::string& aliases(pod_index_type xid)
   {
     return prototype(xid).aliases();
   };
@@ -95,7 +95,7 @@ public:
   ///
   /// The name in the hdf file of primitive type with id xid.
   ///
-  static const string& hdf_type_name(pod_index_type xid)
+  static const std::string& hdf_type_name(pod_index_type xid)
   {
     return prototype(xid).hdf_type_name();
   };
@@ -205,7 +205,7 @@ public:
   ///
   /// The name of the primitive type associated with this.
   ///
-  const string& name() const
+  const std::string& name() const
   {
     return *_name;
   };
@@ -213,7 +213,7 @@ public:
   ///
   /// Other names for the primitive type associated with this.
   ///
-  const string& aliases() const
+  const std::string& aliases() const
   {
     return *_aliases;
   };
@@ -221,7 +221,7 @@ public:
   ///
   /// The name in the hdf file of the primitive type associated with this.
   ///
-  const string& hdf_type_name() const
+  const std::string& hdf_type_name() const
   {
     return *_hdf_type_name;
   };
@@ -267,17 +267,17 @@ private:
   ///
   /// The name of the primitive type associated with this.
   ///
-  const string* _name;
+  const std::string* _name;
 
   ///
   /// Other names for the primitive type associated with this.
   ///
-  const string* _aliases;
+  const std::string* _aliases;
 
   ///
   /// The name in the hdf file of the primitive type associated with this.
   ///
-  const string* _hdf_type_name;
+  const std::string* _hdf_type_name;
 
   ///
   /// The hdf type used to represent the primitive type associated with this.

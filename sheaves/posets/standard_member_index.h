@@ -55,12 +55,12 @@ SHEAF_DLL_SPEC standard_member_index& operator++(standard_member_index& x);
 ///
 /// The name of the enumerator xpt.
 ///
-SHEAF_DLL_SPEC const string& standard_member_index_to_name(standard_member_index xpt);
+SHEAF_DLL_SPEC const std::string& standard_member_index_to_name(standard_member_index xpt);
 
 ///
 /// The enumerator with name xname.
 ///
-SHEAF_DLL_SPEC standard_member_index standard_member_index_from_name(const string& xname);
+SHEAF_DLL_SPEC standard_member_index standard_member_index_from_name(const std::string& xname);
 
 ///
 /// The enumerator corresponding to primitive index xindex.

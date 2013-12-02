@@ -20,6 +20,4 @@
 
 #include <exception>
 
-using namespace std;
-
 #endif // STD_EXCEPTION_H

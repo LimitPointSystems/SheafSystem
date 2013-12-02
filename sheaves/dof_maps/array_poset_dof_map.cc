@@ -27,6 +27,8 @@
 #include "poset_state_handle.h"
 #include "std_string.h"
 
+using namespace std;
+
 //#define DIAGNOSTIC_OUTPUT
 //#undef DIAGNOSTIC_OUTPUT
 
@@ -35,7 +37,7 @@
 // PUBLIC MEMBER FUNCTIONS
 
 ///
-const string&
+const std::string&
 sheaf::array_poset_dof_map::
 class_name() const
 {
@@ -55,7 +57,7 @@ class_name() const
 }
 
 ///
-const string&
+const std::string&
 sheaf::array_poset_dof_map::
 static_class_name()
 {

@@ -22,8 +22,6 @@
 #if HAVE_CTIME
 
 #include <ctime>
-using namespace std;
-
 #else
 
 #include <time.h>

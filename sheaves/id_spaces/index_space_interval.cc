@@ -176,11 +176,11 @@ supports_persistent_id_spaces() const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 sheaf::index_space_interval::
 class_name() const
 {
-  static const string result("index_space_interval");
+  static const std::string result("index_space_interval");
   return result;
 }
 
@@ -485,16 +485,16 @@ invariant() const
 //  NON-MEMBER FUNCTIONS
 // ===========================================================
  
-ostream& 
+std::ostream& 
 sheaf::
-operator << (ostream& xos, const index_space_interval& xn)
+operator << (std::ostream& xos, const index_space_interval& xn)
 {
   // Preconditions:
 
   // Body:
 
   xos << "[" << xn.begin() << ", " << xn.end() << "] "
-      << xn.class_name() << endl;
+      << xn.class_name() << std::endl;
 
   // Postconditions:
 

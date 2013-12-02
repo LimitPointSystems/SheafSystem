@@ -22,6 +22,8 @@
 #include "assert_contract.h"
 #include "poset_dof_map.h"
 
+using namespace std;
+
 //#define DIAGNOSTIC_OUTPUT
 //#undef DIAGNOSTIC_OUTPUT
 
@@ -64,7 +66,7 @@ sheaf::dof_map_factory::
 ///
 sheaf::poset_dof_map*
 sheaf::dof_map_factory::
-new_dof_map(const string& xclient_class_name, dof_tuple_type xsheaf_base_class_id)
+new_dof_map(const std::string& xclient_class_name, dof_tuple_type xsheaf_base_class_id)
 {
   poset_dof_map* result = 0;
 
@@ -174,7 +176,7 @@ insert_prototype(dof_tuple_type xtype_id, const poset_dof_map* xprototype)
 ///
 void
 sheaf::dof_map_factory::
-delete_prototype(const string& xclass_name)
+delete_prototype(const std::string& xclass_name)
 {
   // Preconditions:
 
@@ -206,7 +208,7 @@ delete_prototype(const string& xclass_name)
 ///
 bool
 sheaf::dof_map_factory::
-contains_prototype(const string& xclass_name) const
+contains_prototype(const std::string& xclass_name) const
 {
   bool result;
 

@@ -68,7 +68,7 @@ public:
   /// Creates an uninitialized dof map of type xclient_class_name
   /// or type xsheaf_base_class_id if no prototype for xclient_class_name.
   ///
-  poset_dof_map* new_dof_map(const string& xclient_class_name,
+  poset_dof_map* new_dof_map(const std::string& xclient_class_name,
                              dof_tuple_type xsheaf_base_class_id);
 
   ///
@@ -84,13 +84,13 @@ public:
   ///
   /// Removes the prototype for handles of type xclass_name.
   ///
-  void delete_prototype(const string& xclass_name);
+  void delete_prototype(const std::string& xclass_name);
 
   ///
   /// True if the set of prototypes contains a
   /// prototype for handles of type xclass_name.
   ///
-  bool contains_prototype(const string& xclass_name) const;
+  bool contains_prototype(const std::string& xclass_name) const;
 
   ///
   /// True if the set of prototypes contains a
@@ -117,7 +117,7 @@ private:
   ///
   /// The type of the prototypes map.
   ///
-  typedef map<string, poset_dof_map*> prototypes_map_type;
+  typedef std::map<std::string, poset_dof_map*> prototypes_map_type;
 
   ///
   /// The client prototypes map.

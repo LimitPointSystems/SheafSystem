@@ -28,11 +28,13 @@
 #include "primitive_value.h"
 #include "std_strstream.h"
 
+using namespace std;
+
 //#define DIAGNOSTIC_OUTPUT
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 sheaf::poset_dof_map::
 class_name() const
 {
@@ -51,7 +53,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 sheaf::poset_dof_map::
 static_class_name()
 {
@@ -73,7 +75,7 @@ static_class_name()
 
 sheaf::poset_dof_map*
 sheaf::poset_dof_map::
-new_dof_map(const string& xclass_name, dof_tuple_type xsheaf_base_class_id)
+new_dof_map(const std::string& xclass_name, dof_tuple_type xsheaf_base_class_id)
 {
   poset_dof_map* result;
 
@@ -563,7 +565,7 @@ dof(const scoped_index& xdof_id) const
 
 sheaf::primitive_value
 sheaf::poset_dof_map::
-dof(const string& xname) const
+dof(const std::string& xname) const
 {
   // Preconditions:
 
@@ -634,7 +636,7 @@ put_dof(const scoped_index& xdof_id, const primitive_value& xdof)
 
 void
 sheaf::poset_dof_map::
-put_dof(const string& xname, const primitive_value& xdof)
+put_dof(const std::string& xname, const primitive_value& xdof)
 {
   // Preconditions:
 
@@ -1369,7 +1371,7 @@ put_ref_ct(int xref_ct)
   return;
 }
 
-string
+std::string
 sheaf::poset_dof_map::
 to_string(const schema_poset_member& xschema) const
 {
@@ -1390,7 +1392,7 @@ to_string(const schema_poset_member& xschema) const
   return result;
 }
 
-string
+std::string
 sheaf::poset_dof_map::
 to_string() const
 {
@@ -1437,8 +1439,8 @@ to_string() const
 // NONMEMBER FUNCTIONS
 // ===========================================================
 SHEAF_DLL_SPEC
-ostream& sheaf::
-operator<<(ostream& os, const poset_dof_map& xmap )
+std::ostream& sheaf::
+operator<<(std::ostream& os, const poset_dof_map& xmap )
 {
   // Preconditions:
 

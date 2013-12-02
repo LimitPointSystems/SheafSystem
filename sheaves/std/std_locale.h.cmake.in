@@ -20,6 +20,4 @@
 
 #include <locale>
 
-using namespace std;
-
 #endif // STD_LOCALE_H

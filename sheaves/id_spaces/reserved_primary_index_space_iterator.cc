@@ -95,7 +95,7 @@ reserved_primary_index_space_iterator(const index_space_family& xid_spaces,
 
 sheaf::reserved_primary_index_space_iterator::
 reserved_primary_index_space_iterator(const index_space_family& xid_spaces,
-				      const string& xname)
+				      const std::string& xname)
   : _is_active_only(true)
 {
   // Preconditions:

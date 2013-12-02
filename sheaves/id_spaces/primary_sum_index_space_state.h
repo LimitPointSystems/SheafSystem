@@ -103,7 +103,7 @@ public:
   /// Returns a handle to the id space created.
   ///
   static hub_index_space_handle new_space(index_space_family& xid_spaces,
-					  const string& xname);
+					  const std::string& xname);
 
   ///
   /// Create a new primary sum id space in the id space family xid_space
@@ -112,7 +112,7 @@ public:
   ///
   static hub_index_space_handle new_space(index_space_family& xid_spaces,
 					  pod_type xid,
-					  const string& xname);
+					  const std::string& xname);
 
 protected:
 
@@ -224,12 +224,12 @@ protected:
 
   /// Prefix of the term id spaces.
   ///
-  static const string& term_prefix();
+  static const std::string& term_prefix();
 
   ///
   /// Name of the next term id space.
   ///
-  string next_term_name();
+  std::string next_term_name();
 
   ///
   /// Creates a new reserved term starting above next_hub_id().
@@ -356,7 +356,7 @@ public:
   ///
   /// Name of the gathered id space.
   ///
-  static const string& gathered_hub_id_space_name();
+  static const std::string& gathered_hub_id_space_name();
 
 protected:
 
@@ -654,7 +654,7 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// Virtual constructor; create a new instance of the same type at this.

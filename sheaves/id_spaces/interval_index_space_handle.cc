@@ -33,7 +33,7 @@
 sheaf::interval_index_space_handle
 sheaf::interval_index_space_handle::
 new_space(index_space_family& xid_spaces,
-	  const string& xname,
+	  const std::string& xname,
 	  bool xis_persistent,
 	  bool xmerge_mode)
 {
@@ -140,7 +140,7 @@ interval_index_space_handle(const index_space_family& xid_spaces,
 
 sheaf::interval_index_space_handle::
 interval_index_space_handle(const index_space_family& xid_spaces,
-			   const string& xname)
+			   const std::string& xname)
 {
   // Preconditions:
 
@@ -618,7 +618,7 @@ put_merge_mode(bool xvalue)
 
 void
 sheaf::interval_index_space_handle::
-print_map_rep(ostream& xos) const
+print_map_rep(std::ostream& xos) const
 {
   // Preconditions:
 

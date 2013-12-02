@@ -72,7 +72,7 @@ public:
   /// Constructor: Attach to state with name xname in the family xid_spaces.
   ///
   list_index_space_iterator(const index_space_family& xid_spaces,
-			    const string& xname);
+			    const std::string& xname);
 
   ///
   /// Assignment operator.
@@ -89,7 +89,7 @@ protected:
   ///
   /// The type of hub id map.
   ///
-  typedef list<pod_type> to_hub_type;
+  typedef std::list<pod_type> to_hub_type;
 
   ///
   /// The map to hub ids.

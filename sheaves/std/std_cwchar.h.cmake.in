@@ -23,8 +23,6 @@
 #if HAVE_CWCHAR
 
 #include <cwchar>
-using namespace std;
-
 #else
 
 #include <wchar.h>

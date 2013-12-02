@@ -20,6 +20,4 @@
 
 #include <numeric>
 
-using namespace std;
-
 #endif // STD_NUMERIC_H

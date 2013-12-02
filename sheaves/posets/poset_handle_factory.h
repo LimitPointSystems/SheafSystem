@@ -72,7 +72,7 @@ public:
   /// Creates an unattached handle of type xclient_class_name
   /// or type xsheaf_base_class_id if no prototype for xclient_class_name.
   ///
-  poset_state_handle* new_poset_handle(const string& xclient_class_name,
+  poset_state_handle* new_poset_handle(const std::string& xclient_class_name,
                                        poset_type xsheaf_base_class_id);
 
   ///
@@ -89,13 +89,13 @@ public:
   ///
   /// Removes the prototype for handles of type xclass_name.
   ///
-  void delete_prototype(const string& xclass_name);
+  void delete_prototype(const std::string& xclass_name);
 
   ///
   /// True if the set of prototypes contains a
   /// prototype for handles of type xclass_name.
   ///
-  bool contains_prototype(const string& xclass_name) const;
+  bool contains_prototype(const std::string& xclass_name) const;
 
   ///
   /// True if the set of prototypes contains a
@@ -116,7 +116,7 @@ private:
   ///
   /// The type of the poset handle prototypes map.
   ///
-  typedef map<string, poset_state_handle*> prototypes_map_type;
+  typedef std::map<string, poset_state_handle*> prototypes_map_type;
 
   ///
   /// The client poset handle prototypes map.

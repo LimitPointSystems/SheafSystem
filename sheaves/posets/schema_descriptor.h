@@ -94,7 +94,7 @@ public:
   /// Creates an instance with name == xname,
   /// type == xtype, and is_table_dof == xis_table_dof.
   ///
-  schema_descriptor(const string& xname,
+  schema_descriptor(const std::string& xname,
                     primitive_type xtype = NOT_A_PRIMITIVE_TYPE,
                     bool xis_table_dof = true);
 
@@ -130,14 +130,14 @@ public:
 /// Insert schema_descriptor xsd into ostream& os.
 ///
 SHEAF_DLL_SPEC
-ostream & operator << (ostream& os, const schema_descriptor& xsd);
+std::ostream & operator << (std::ostream& os, const schema_descriptor& xsd);
 
 
 ///
 /// Extract schema_descriptor xsd from istream& is.
 ///
 SHEAF_DLL_SPEC
-istream & operator >> (istream& is, schema_descriptor& xsd);
+std::istream & operator >> (std::istream& is, schema_descriptor& xsd);
 
 ///
 /// The deep size of the referenced object of type schema_descriptor.

@@ -68,7 +68,7 @@ public:
   /// Constructor: Attach to state with name xname in the family xid_spaces.
   ///
   offset_index_space_iterator(const index_space_family& xid_spaces,
-			      const string& xname);
+			      const std::string& xname);
 
   ///
   /// Assignment operator.

@@ -188,7 +188,7 @@ namespace_poset_member(const namespace_poset* xhost, const scoped_index& xid)
 }
 
 sheaf::namespace_poset_member::
-namespace_poset_member(const namespace_poset* xhost, const string& xname)
+namespace_poset_member(const namespace_poset* xhost, const std::string& xname)
 {
   // Preconditions:
 

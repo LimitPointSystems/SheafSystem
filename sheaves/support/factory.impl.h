@@ -88,7 +88,7 @@ factory<T>::
 template <typename T>
 T*
 factory<T>::
-new_instance(const string& xclient_class_name)
+new_instance(const std::string& xclient_class_name)
 {
   T* result = 0;
 
@@ -114,7 +114,7 @@ template <typename T>
 template <typename S>
 T*
 factory<T>::
-new_instance(const string& xclient_class_name, S& xarg)
+new_instance(const std::string& xclient_class_name, S& xarg)
 {
   T* result = 0;
 
@@ -179,7 +179,7 @@ insert_prototype(T* xprototype)
 template <typename T>
 void
 factory<T>::
-delete_prototype(const string& xclass_name)
+delete_prototype(const std::string& xclass_name)
 {
   // Preconditions:
 
@@ -209,7 +209,7 @@ delete_prototype(const string& xclass_name)
 template <typename T>
 bool
 factory<T>::
-contains_prototype(const string& xclass_name) const
+contains_prototype(const std::string& xclass_name) const
 {
   bool result;
 
@@ -244,7 +244,7 @@ factory(const factory& xother)
 // ===========================================================
 
 template <typename T>
-ostream& operator << (ostream& xos, const factory<T>& xf)
+std::ostream& operator << (std::ostream& xos, const factory<T>& xf)
 {
   // Preconditions:
 

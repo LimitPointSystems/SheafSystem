@@ -23,8 +23,6 @@
 #if HAVE_CWCTYPE
 
 #include <cwctype>
-using namespace std;
-
 #else
 
 #include <wctype.h>

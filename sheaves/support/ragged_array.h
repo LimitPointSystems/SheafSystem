@@ -259,7 +259,7 @@ private:
 /// Inserts ragged_array xra into ostream xos.
 ///
 template <typename T>
-ostream& operator << (ostream& xos, const ragged_array<T>& xra);
+std::ostream& operator << (std::ostream& xos, const ragged_array<T>& xra);
  
 } // namespace sheaf
 

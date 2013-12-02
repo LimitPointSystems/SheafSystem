@@ -24,10 +24,6 @@
 #include "sheaf_dll_spec.h"
 #endif
 
-#ifndef STD_CLIMITS_H
-#include "std_climits.h"
-#endif
-
 #ifndef POD_TYPES_H
 #include "pod_types.h"
 #endif
@@ -63,12 +59,12 @@ SHEAF_DLL_SPEC primitives_schema_member_index& operator++(primitives_schema_memb
 ///
 /// The name of the enumerator xpt.
 ///
-SHEAF_DLL_SPEC const string& primitives_schema_member_index_to_name(primitives_schema_member_index xpt);
+SHEAF_DLL_SPEC const std::string& primitives_schema_member_index_to_name(primitives_schema_member_index xpt);
 
 ///
 /// The enumerator with name xname.
 ///
-SHEAF_DLL_SPEC primitives_schema_member_index primitives_schema_member_index_from_name(const string& xname);
+SHEAF_DLL_SPEC primitives_schema_member_index primitives_schema_member_index_from_name(const std::string& xname);
 
 ///
 /// The enumerator corresponding to primitive index xindex.

@@ -56,12 +56,12 @@ SHEAF_DLL_SPEC standard_version_index& operator++(standard_version_index& x);
 ///
 /// The name of the enumerator xpt.
 ///
-SHEAF_DLL_SPEC const string& standard_version_index_to_name(standard_version_index xpt);
+SHEAF_DLL_SPEC const std::string& standard_version_index_to_name(standard_version_index xpt);
 
 ///
 /// The enumerator with name xname.
 ///
-SHEAF_DLL_SPEC standard_version_index standard_version_index_from_name(const string& xname);
+SHEAF_DLL_SPEC standard_version_index standard_version_index_from_name(const std::string& xname);
 
 ///
 /// The enumerator corresponding to primitive index xindex.

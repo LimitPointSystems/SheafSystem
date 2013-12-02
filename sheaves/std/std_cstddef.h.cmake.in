@@ -23,8 +23,6 @@
 #if HAVE_CSTDDEF
 
 #include <cstddef>
-using namespace std;
-
 #else
 
 #include <stddef.h>

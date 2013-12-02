@@ -64,7 +64,7 @@ public:
   ///
   /// The standard name for an instance of this class.
   ///
-  static const string& standard_name();
+  static const std::string& standard_name();
 
   ///
   /// True if the primitive members are all attached.
@@ -594,7 +594,7 @@ private:
   ///
   /// Creates the subposets common to every primitives poset.
   ///
-  virtual void initialize_standard_subposets(const string& xname);
+  virtual void initialize_standard_subposets(const std::string& xname);
 
   //@}
 

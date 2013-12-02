@@ -49,6 +49,10 @@
 #include "std_hash_map.h"
 #endif
 
+#ifndef STD_SET_H
+#include "std_set.h"
+#endif
+
 #ifndef STD_STRING_H
 #include "std_string.h"
 #endif
@@ -133,14 +137,14 @@ public:
   ///
   /// Create an implicit interval of type xinterval_type with size xsize.
   ///
-  pod_index_type new_member_interval(const string& xinterval_type, size_type xsize);
+  pod_index_type new_member_interval(const std::string& xinterval_type, size_type xsize);
 
   ///
   /// Create an implicit interval beginning at xid,
   /// of type xinterval_type, and with size xsize.
   ///
   void new_member_interval(pod_index_type xid,
-			   const string& xinterval_type, 
+			   const std::string& xinterval_type, 
 			   size_type xsize);
 
   ///
@@ -653,7 +657,7 @@ private:
   ///
   /// The type of the interval member map.
   ///
-  typedef map<pod_index_type, crg_interval*> interval_map_type;
+  typedef std::map<pod_index_type, crg_interval*> interval_map_type;
 
   ///
   /// The map from ids to intervals.
@@ -706,7 +710,7 @@ public:
   /// The explicit members in the downset of the interval xinterval.
   ///
   void explicit_down_set_members(const implicit_crg_interval& xinterval,
-				 set<pod_index_type>& result) const;
+				 std::set<pod_index_type>& result) const;
 
 protected:
 
@@ -714,7 +718,7 @@ protected:
   /// The explicit members in the downset of member with index xmbr_index.
   ///
   void explicit_down_set_members(pod_index_type xmbr_index,
-				 set<pod_index_type>& result) const;
+				 std::set<pod_index_type>& result) const;
 
 private:
 
@@ -758,7 +762,7 @@ private:
 ///
 /// Insert poset_crg_state& p into ostream& os.
 ///
-SHEAF_DLL_SPEC ostream & operator << (ostream &os, const poset_crg_state& p);
+SHEAF_DLL_SPEC std::ostream & operator << (std::ostream &os, const poset_crg_state& p);
 
 ///
 /// The deep size of the referenced object of type poset_crg_state;

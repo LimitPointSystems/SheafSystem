@@ -71,7 +71,7 @@ poset_path(const poset_path& xposet_path)
 
 ///
 sheaf::poset_path::
-poset_path(const string& xposet_name, const string& xmember_name)
+poset_path(const std::string& xposet_name, const std::string& xmember_name)
 {
   // Preconditions:
 
@@ -113,7 +113,7 @@ sheaf::poset_path::
 
 ///
 sheaf::poset_path::
-poset_path(const string& xpath)
+poset_path(const std::string& xpath)
 {
   // Preconditions:
 
@@ -220,7 +220,7 @@ operator=(const poset_path& xposet_path)
 ///
 sheaf::poset_path&
 sheaf::poset_path::
-operator=(const string& xpath)
+operator=(const std::string& xpath)
 {
   // Preconditions:
 
@@ -327,7 +327,7 @@ full() const
 ///
 bool
 sheaf::poset_path::
-is_valid_name(const string& xname)
+is_valid_name(const std::string& xname)
 {
   bool result;
 
@@ -351,7 +351,7 @@ is_valid_name(const string& xname)
 ///
 bool
 sheaf::poset_path::
-is_valid_path(const string& xpath)
+is_valid_path(const std::string& xpath)
 {
 
   // Preconditions:
@@ -401,7 +401,7 @@ operator==(const poset_path& xother) const
 ///
 bool
 sheaf::poset_path::
-operator==(const string& xother) const
+operator==(const std::string& xother) const
 {
   bool result;
 
@@ -444,7 +444,7 @@ operator==(const char* xother) const
 
 
 ///
-string
+std::string
 sheaf::poset_path::
 path() const
 {
@@ -467,7 +467,7 @@ path() const
 
 
 ///
-string
+std::string
 sheaf::poset_path::
 poset_name() const
 {
@@ -485,7 +485,7 @@ poset_name() const
 ///
 void
 sheaf::poset_path::
-put_poset_name(const string& xname)
+put_poset_name(const std::string& xname)
 {
   // Preconditions:
 
@@ -505,7 +505,7 @@ put_poset_name(const string& xname)
 }
 
 ///
-string
+std::string
 sheaf::poset_path::
 member_name() const
 {
@@ -522,7 +522,7 @@ member_name() const
 ///
 void
 sheaf::poset_path::
-put_member_name(const string& xname)
+put_member_name(const std::string& xname)
 {
   // Preconditions:
 
@@ -541,7 +541,7 @@ put_member_name(const string& xname)
   return;
 }
 
-const string&
+const std::string&
 sheaf::poset_path::
 name_legal_characters()
 {
@@ -592,7 +592,7 @@ delimiter()
   return result;
 }
 
-const string&
+const std::string&
 sheaf::poset_path::
 path_legal_characters()
 {
@@ -617,7 +617,7 @@ path_legal_characters()
 
 std::string
 sheaf::poset_path::
-poset_name(const string& xpath)
+poset_name(const std::string& xpath)
 {
   // cout << endl << "Entering poset_path::poset_name." << endl;
 
@@ -639,9 +639,9 @@ poset_name(const string& xpath)
   return result;
 }
 
-string
+std::string
 sheaf::poset_path::
-delimiter(const string& xpath)
+delimiter(const std::string& xpath)
 {
   // cout << endl << "Entering poset_path::delimiter." << endl;
 
@@ -664,9 +664,9 @@ delimiter(const string& xpath)
 }
 
 
-string
+std::string
 sheaf::poset_path::
-member_name(const string& xpath)
+member_name(const std::string& xpath)
 {
   // cout << endl << "Entering poset_path::member_name." << endl;
 
@@ -699,9 +699,9 @@ to_stream(ostream& xos) const
 }
 
 ///
-string
+std::string
 sheaf::poset_path::
-make_name(const string& xprefix, int xindex, const string& xsuffix)
+make_name(const std::string& xprefix, int xindex, const std::string& xsuffix)
 {
   string result;
 
@@ -727,9 +727,9 @@ make_name(const string& xprefix, int xindex, const string& xsuffix)
 }
 
 ///
-string
+std::string
 sheaf::poset_path::
-make_reserved_name(const string& xprefix, const size_t& xindex, const string& xsuffix)
+make_reserved_name(const std::string& xprefix, const size_t& xindex, const std::string& xsuffix)
 {
   // Preconditions:
 
@@ -745,7 +745,7 @@ make_reserved_name(const string& xprefix, const size_t& xindex, const string& xs
 }
 
 ///
-string
+std::string
 sheaf::poset_path::
 block_name(const size_t& xindex)
 {
@@ -772,9 +772,9 @@ block_name(const size_t& xindex)
 
 
 ///
-string
+std::string
 sheaf::poset_path::
-block_name(const string& xneighborhood_name)
+block_name(const std::string& xneighborhood_name)
 {
   string result;
 
@@ -799,7 +799,7 @@ block_name(const string& xneighborhood_name)
 
 
 ///
-string
+std::string
 sheaf::poset_path::
 block_neighborhood_name(const size_t& xindex)
 {
@@ -826,9 +826,9 @@ block_neighborhood_name(const size_t& xindex)
 
 
 ///
-string
+std::string
 sheaf::poset_path::
-block_neighborhood_name(const string& xblock_name)
+block_neighborhood_name(const std::string& xblock_name)
 {
   string result;
 
@@ -853,7 +853,7 @@ block_neighborhood_name(const string& xblock_name)
 ///
 size_t
 sheaf::poset_path::
-block_id(const string& xname)
+block_id(const std::string& xname)
 {
   size_t result;
 
@@ -877,7 +877,7 @@ block_id(const string& xname)
 
 
 ///
-string
+std::string
 sheaf::poset_path::
 reserved_prefix()
 {
@@ -900,7 +900,7 @@ reserved_prefix()
 
 
 ///
-string
+std::string
 sheaf::poset_path::
 boundary_prefix()
 {
@@ -921,9 +921,9 @@ boundary_prefix()
 }
 
 ///
-string
+std::string
 sheaf::poset_path::
-boundary_name(const string& xmbr_name)
+boundary_name(const std::string& xmbr_name)
 {
   string result;
 
@@ -944,7 +944,7 @@ boundary_name(const string& xmbr_name)
 }
 
 ///
-string
+std::string
 sheaf::poset_path::
 block_prefix()
 {
@@ -967,7 +967,7 @@ block_prefix()
 
 
 ///
-string
+std::string
 sheaf::poset_path::
 neighborhood_prefix()
 {
@@ -1232,7 +1232,7 @@ conforms_to(const namespace_poset& xns, const poset_path& xother, bool xauto_acc
 
 // bool
 // sheaf::poset_path::
-// contains_legal_characters(const string& xname, const string& xlegal_chars)
+// contains_legal_characters(const std::string& xname, const std::string& xlegal_chars)
 // {
 //   bool result;
 
@@ -1266,10 +1266,10 @@ conforms_to(const namespace_poset& xns, const poset_path& xother, bool xauto_acc
 ///
 void
 sheaf::poset_path::
-parse_path(const string& xpath,
-           string& xposet_name,
-           string& xdelimiter,
-           string& xmember_name)
+parse_path(const std::string& xpath,
+           std::string& xposet_name,
+           std::string& xdelimiter,
+           std::string& xmember_name)
 {
 
   // Preconditions:

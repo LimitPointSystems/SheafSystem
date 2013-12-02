@@ -23,8 +23,6 @@
 #if HAVE_CSTRING
 
 #include <cstring>
-using namespace std;
-
 #else
 
 #include <string.h>

@@ -126,7 +126,7 @@ protected:
   /// and persistence xis_persistent.
   ///
   void new_state(index_space_family& xid_spaces,
-		 const string& xname,
+		 const std::string& xname,
 		 bool xis_persistent);
 
   ///
@@ -136,7 +136,7 @@ protected:
   ///
   void new_state(index_space_family& xid_spaces,
 		 pod_type xid,
-		 const string& xname,
+		 const std::string& xname,
 		 bool xis_persistent);
 
   ///
@@ -430,7 +430,7 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// A factory for making descendants of this class.
@@ -488,7 +488,7 @@ size_t deep_size(const explicit_index_space_state& xn, bool xinclude_shallow = t
 /// Insert explicit_index_space_state& xn into ostream& xos.
 ///
 SHEAF_DLL_SPEC 
-ostream & operator << (ostream &xos, const explicit_index_space_state& xn);
+std::ostream & operator << (std::ostream &xos, const explicit_index_space_state& xn);
 
 } // end namespace sheaf
 

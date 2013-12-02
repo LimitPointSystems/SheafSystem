@@ -22,12 +22,14 @@
 #include "assert_contract.h"
 #include "error_message.h"
 
+using namespace std;
+
 // =============================================================================
 // DOF TUPLE TYPES FACET
 // =============================================================================
 
 ///
-const string&
+const std::string&
 sheaf::
 dof_tuple_type_to_name(dof_tuple_type xdt)
 {
@@ -58,7 +60,7 @@ dof_tuple_type_to_name(dof_tuple_type xdt)
 
 ///
 sheaf::dof_tuple_type
-sheaf::dof_tuple_type_from_name(const string& xname)
+sheaf::dof_tuple_type_from_name(const std::string& xname)
 {
   dof_tuple_type result;
 
@@ -147,9 +149,9 @@ dof_tuple_type_id(int xi)
 
 
 ///
-ostream&
+std::ostream&
 sheaf::
-operator<<(ostream& os, dof_tuple_type xdt)
+operator<<(std::ostream& os, dof_tuple_type xdt)
 {
   // Preconditions:
 
@@ -167,9 +169,9 @@ operator<<(ostream& os, dof_tuple_type xdt)
 }
 
 ///
-istream&
+std::istream&
 sheaf::
-operator>>(istream& is, dof_tuple_type& xdt)
+operator>>(std::istream& is, dof_tuple_type& xdt)
 {
   // Preconditions:
 

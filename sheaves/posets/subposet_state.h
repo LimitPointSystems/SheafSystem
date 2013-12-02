@@ -207,7 +207,7 @@ public:
   /// Put the id space for this subposet state.
   ///
   void put_id_space(const index_space_family& xid_spaces,
-		    const string& xname);
+		    const std::string& xname);
 
   ///
   /// True if this id space should be written to disk.
@@ -274,7 +274,7 @@ private:
 /// Insert subposet_state& s into ostream& os.
 ///
 SHEAF_DLL_SPEC
-ostream & operator << (ostream &os, subposet_state& s);
+std::ostream & operator << (std::ostream &os, subposet_state& s);
 
 ///
 /// The deep size of the referenced object of type subposet_state.

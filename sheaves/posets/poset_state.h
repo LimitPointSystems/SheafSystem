@@ -61,7 +61,7 @@ public:
   ///
   /// Constructor
   ///
-  poset_state(const abstract_poset_member* xschema, poset_type xtype_id, const string& xname);
+  poset_state(const abstract_poset_member* xschema, poset_type xtype_id, const std::string& xname);
 
 //   ///
 //   /// Constructor
@@ -80,12 +80,12 @@ public:
   ///
   /// The name of this poset.
   ///
-  const string& name() const;
+  const std::string& name() const;
 
   ///
   /// Sets name() to xname.
   ///
-  void put_name(const string& xname);
+  void put_name(const std::string& xname);
 
   ///
   /// Identifier for the type of this poset.
@@ -123,7 +123,7 @@ protected:
   ///
   /// The name of this poset.
   ///
-  string _name;
+  std::string _name;
 
   ///
   /// Identifier for the type of poset.

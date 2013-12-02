@@ -20,6 +20,4 @@
 
 #include <map>
 
-using namespace std;
-
 #endif // STD_MAP_H

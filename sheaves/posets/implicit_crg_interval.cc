@@ -717,7 +717,7 @@ is_initialized() const
   return result;
 }
 
-const string&
+const std::string&
 sheaf::implicit_crg_interval::
 class_name() const
 {

@@ -170,7 +170,8 @@ ref_ct() const
 // NON-MEMBER FUNCTIONS
 // ===========================================================
 
-ostream & sheaf::operator << (ostream& xos, const rc_any& xrc)
+std::ostream&
+sheaf::operator << (std::ostream& xos, const rc_any& xrc)
 {
   // Preconditions:
 

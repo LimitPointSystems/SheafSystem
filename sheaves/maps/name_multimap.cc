@@ -68,7 +68,7 @@ name_multimap(const name_multimap& xother)
 }
 
 sheaf::name_multimap::
-name_multimap(const string xnames[], size_type xnames_ub)
+name_multimap(const std::string xnames[], size_type xnames_ub)
 {
   // Preconditions:
 
@@ -109,7 +109,7 @@ sheaf::name_multimap::
   return;
 }
 
-string
+std::string
 sheaf::name_multimap::
 name(index_type xindex) const
 {
@@ -145,7 +145,7 @@ name(index_type xindex) const
 
 }
 
-string
+std::string
 sheaf::name_multimap::
 name(index_type xindex, int xi) const
 {
@@ -202,7 +202,7 @@ all_names(index_type xindex) const
 
 void
 sheaf::name_multimap::
-all_names(index_type xindex, block<string>& xresult) const
+all_names(index_type xindex, block<std::string>& xresult) const
 {
   // Preconditions:
 
@@ -229,7 +229,7 @@ all_names(index_type xindex, block<string>& xresult) const
 
 sheaf::name_multimap::index_type
 sheaf::name_multimap::
-index(const string& xname) const
+index(const std::string& xname) const
 {
   index_type result;
 
@@ -300,7 +300,7 @@ put_entry(const entry_type& xentry, bool xunique)
 
 void
 sheaf::name_multimap::
-put_entry(index_type xindex, const string& xname, bool xunique)
+put_entry(index_type xindex, const std::string& xname, bool xunique)
 {
   // Preconditions:
 
@@ -323,7 +323,7 @@ put_entry(index_type xindex, const string& xname, bool xunique)
 
 bool
 sheaf::name_multimap::
-contains_name(const string& xname) const
+contains_name(const std::string& xname) const
 {
   bool result;
 
@@ -359,7 +359,7 @@ contains_index(index_type xindex) const
 
 bool
 sheaf::name_multimap::
-contains_entry(index_type xindex, const string& xname) const
+contains_entry(index_type xindex, const std::string& xname) const
 {
   // Preconditions:
 
@@ -433,7 +433,7 @@ delete_index(index_type xindex)
 
 void
 sheaf::name_multimap::
-delete_name(const string& xname)
+delete_name(const std::string& xname)
 {
   // Preconditions:
 
@@ -562,7 +562,7 @@ print() const
 
 void
 sheaf::name_multimap::
-print(ostream& xos, const name_multimap& xm) const
+print(std::ostream& xos, const name_multimap& xm) const
 {
   // Preconditions:
 

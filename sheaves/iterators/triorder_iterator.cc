@@ -225,7 +225,7 @@ triorder_iterator(const abstract_poset_member& xanchor,
 
 sheaf::triorder_iterator::
 triorder_iterator(const abstract_poset_member& xanchor,
-                  const string& xfilter_name,
+                  const std::string& xfilter_name,
                   bool xdown,
                   bool xstrict)
     : filtered_depth_first_iterator(xanchor, xfilter_name, xdown, xstrict, TRIORDER)

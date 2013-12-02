@@ -93,7 +93,7 @@ array_index_space_iterator(const index_space_family& xid_spaces,
 
 sheaf::array_index_space_iterator::
 array_index_space_iterator(const index_space_family& xid_spaces,
-			   const string& xname)
+			   const std::string& xname)
 {
   // Preconditions:
 

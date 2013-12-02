@@ -45,12 +45,12 @@ class schema_poset_member;
 ///
 /// Insert arg_list p into ostream os.
 ///
-SHEAF_DLL_SPEC ostream& operator << (ostream &os, const arg_list& p);
+SHEAF_DLL_SPEC std::ostream& operator << (std::ostream &os, const arg_list& p);
 
 ///
 /// Extract arg_list p from istream is.
 ///
-SHEAF_DLL_SPEC istream& operator >> (istream &is, arg_list& p);
+SHEAF_DLL_SPEC std::istream& operator >> (std::istream &is, arg_list& p);
 
 ///
 /// A whitespace separated list of arguments.  Insertion operaters are used to
@@ -63,8 +63,8 @@ SHEAF_DLL_SPEC istream& operator >> (istream &is, arg_list& p);
 class SHEAF_DLL_SPEC arg_list
 {
 
-  friend SHEAF_DLL_SPEC ostream& operator << (ostream &os, const arg_list& xf);
-  friend SHEAF_DLL_SPEC istream& operator >> (istream &is, arg_list& xf);
+  friend SHEAF_DLL_SPEC std::ostream& operator << (std::ostream &os, const arg_list& xf);
+  friend SHEAF_DLL_SPEC std::istream& operator >> (std::istream &is, arg_list& xf);
 
 public:
 
@@ -78,7 +78,7 @@ public:
     ///
     /// The name of the argument.
     ///
-    string name;
+    std::string name;
 
     ///
     /// The type of the argument.
@@ -114,7 +114,7 @@ public:
     ///
     /// Create an instance with name == xname and default value.
     ///
-    arg_type(const string& xname)
+    arg_type(const std::string& xname)
         : name(xname)
     {} ;
 
@@ -181,12 +181,12 @@ public:
   ///
   /// The index of the argument with name xname.
   ///
-  int index(const string& xname) const;
+  int index(const std::string& xname) const;
 
   ///
   /// The name of the xi-th argument.
   ///
-  const string& name(int xi) const;
+  const std::string& name(int xi) const;
 
   ///
   /// The type of the xi-th argument.
@@ -197,7 +197,7 @@ public:
   ///
   /// The type of the argument with name xname.
   ///
-  int type(const string& xname) const;
+  int type(const std::string& xname) const;
   //  const int& type(const string& xname) const;
 
   ///
@@ -213,12 +213,12 @@ public:
   ///
   /// The value of argument with name xname.
   ///
-  primitive_value& value(const string& xname);
+  primitive_value& value(const std::string& xname);
 
   ///
   /// The value of argument with name xname, const version.
   ///
-  const primitive_value& value(const string& xname) const;
+  const primitive_value& value(const std::string& xname) const;
 
 //   ///
 //   /// Insert another arg_list.
@@ -314,7 +314,7 @@ public:
   ///
   /// True if and only if this contains an arg with name xname.
   ///
-  bool contains_arg(const string& xname) const;
+  bool contains_arg(const std::string& xname) const;
 
   ///
   /// True if and only if this contains all the args of xother.
@@ -324,12 +324,12 @@ public:
   ///
   /// The arg with name xname.
   ///
-  arg_type& arg(const string& xname);
+  arg_type& arg(const std::string& xname);
 
   ///
   /// The arg with name xname.
   ///
-  const arg_type& arg(const string& xname) const;
+  const arg_type& arg(const std::string& xname) const;
 
   ///
   /// The last arg.
@@ -380,13 +380,13 @@ private:
 /// Insert arg_list::arg_type& p into ostream& os.
 ///
 SHEAF_DLL_SPEC
-ostream& operator << (ostream &os, const arg_list::arg_type& p);
+std::ostream& operator << (std::ostream &os, const arg_list::arg_type& p);
 
 ///
-/// Extract arg_list::arg_type& p from ostream& os.
+/// Extract arg_list::arg_type& p from istream& os.
 ///
 SHEAF_DLL_SPEC
-istream& operator >> (istream &os, arg_list::arg_type& p);
+std::istream& operator >> (std::istream &os, arg_list::arg_type& p);
 
 ///
 /// The deep size of the referenced object of type arg_list::arg_type.

@@ -23,8 +23,6 @@
 #if HAVE_CLIMITS
 
 #include <climits>
-using namespace std;
-
 #else
 
 #include <limits.h>

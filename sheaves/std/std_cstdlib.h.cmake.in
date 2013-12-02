@@ -22,8 +22,6 @@
 #if HAVE_CSTDLIB
 
 #include <cstdlib>
-using namespace std;
-
 #else
 
 #include <stdlib.h>

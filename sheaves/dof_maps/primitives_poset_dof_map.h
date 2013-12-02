@@ -33,10 +33,6 @@
 #include "primitive_type.h"
 #endif
 
-#ifndef STD_IOSTREAM_H
-#include "std_iostream.h"
-#endif
-
 namespace sheaf
 {
 
@@ -56,12 +52,12 @@ public:
   ///
   /// The name of the actual (possibly derived) class of this instance.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
 
   // CANONICAL MEMBERS
 

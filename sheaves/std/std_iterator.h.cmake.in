@@ -20,6 +20,4 @@
 
 #include <iterator>
 
-using namespace std;
-
 #endif // STD_ITERATOR_H

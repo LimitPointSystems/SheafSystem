@@ -68,19 +68,19 @@ public:
   ///
   /// The name of the actual (possibly derived) class of this instance.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
 
   ///
   /// Creates an uninitialized dof map of type xclass_name, if a prototype
   /// of that name exists, otherwise of type xsheaf_base_class_id.
   ///
   static poset_dof_map*
-  new_dof_map(const string& xclass_name, dof_tuple_type xsheaf_base_class_id);
+  new_dof_map(const std::string& xclass_name, dof_tuple_type xsheaf_base_class_id);
 
   // CANONICAL MEMBERS
 
@@ -194,7 +194,7 @@ public:
   ///
   /// The dof with name xname.
   ///
-  primitive_value dof(const string& xname) const;
+  primitive_value dof(const std::string& xname) const;
 
   ///
   /// Sets the dof referred to by xdof_id to xdof.
@@ -209,7 +209,7 @@ public:
   ///
   /// Sets the dof with name xname to xdof.
   ///
-  void put_dof(const string& xname, const primitive_value& xdof);
+  void put_dof(const std::string& xname, const primitive_value& xdof);
 
   ///
   /// Copies the dof referred to by xdof_id into xdof.
@@ -314,12 +314,12 @@ public:
   ///
   /// Return schema member dof value as a string
   ///
-  string to_string(const schema_poset_member& xschema) const;
+  std::string to_string(const schema_poset_member& xschema) const;
 
   ///
   /// Return dof values as a formated string
   ///
-  string to_string() const;
+  std::string to_string() const;
 
   // ===========================================================
   // I/O SUPPORT FACET
@@ -442,7 +442,7 @@ protected:
 /// Insert poset_dof_map& p into ostream& os.
 ///
 SHEAF_DLL_SPEC
-ostream& operator << (ostream &os, const poset_dof_map& p);
+std::ostream& operator << (std::ostream &os, const poset_dof_map& p);
 
 ///
 /// The deep size of the referenced object of type poset_dof_map.

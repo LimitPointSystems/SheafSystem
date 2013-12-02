@@ -35,7 +35,7 @@
 sheaf::reserved_primary_index_space_handle
 sheaf::reserved_primary_index_space_state::
 new_space(index_space_family& xid_spaces,
-	  const string& xname,
+	  const std::string& xname,
 	  pod_type xoffset,
 	  size_type xct)
 {
@@ -82,7 +82,7 @@ sheaf::reserved_primary_index_space_handle
 sheaf::reserved_primary_index_space_state::
 new_space(index_space_family& xid_spaces,
 	  pod_index_type xid,
-	  const string& xname,
+	  const std::string& xname,
 	  pod_type xoffset,
 	  size_type xct)
 {
@@ -687,11 +687,11 @@ iterators()
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 sheaf::reserved_primary_index_space_state::
 class_name() const
 {
-  static const string result("reserved_primary_index_space_state");
+  static const std::string result("reserved_primary_index_space_state");
   return result;
 }
 

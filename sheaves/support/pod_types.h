@@ -95,15 +95,15 @@ SHEAF_DLL_SPEC namespace_relative_member_index_pod_type invalid_namespace_relati
 /// Inserts namespace_relative_member_index_pod_type xpod into ostream xos
 ///
 SHEAF_DLL_SPEC 
-ostream&
-operator<<(ostream& xos, const namespace_relative_member_index_pod_type& xpod);
+std::ostream&
+operator<<(std::ostream& xos, const namespace_relative_member_index_pod_type& xpod);
 
 ///
 /// Extracts namespace_relative_member_index_pod_type xpod from istream xis
 ///
 SHEAF_DLL_SPEC 
-istream&
-operator>>(istream& xis, namespace_relative_member_index_pod_type& xindex);
+std::istream&
+operator>>(std::istream& xis, namespace_relative_member_index_pod_type& xindex);
 
 ///
 /// POD type associated with namespace_relative_subposet_index.
@@ -127,15 +127,15 @@ SHEAF_DLL_SPEC namespace_relative_subposet_index_pod_type invalid_namespace_rela
 /// Inserts namespace_relative_subposet_index_pod_type xpod into ostream xos
 ///
 SHEAF_DLL_SPEC 
-ostream&
-operator<<(ostream& xos, const namespace_relative_subposet_index_pod_type& xpod);
+std::ostream&
+operator<<(std::ostream& xos, const namespace_relative_subposet_index_pod_type& xpod);
 
 ///
 /// Extracts namespace_relative_subposet_index_pod_type xpod from istream xis
 ///
 SHEAF_DLL_SPEC 
-istream&
-operator>>(istream& xis, namespace_relative_subposet_index_pod_type& xindex);
+std::istream&
+operator>>(std::istream& xis, namespace_relative_subposet_index_pod_type& xindex);
 
 } // namespace sheaf
 

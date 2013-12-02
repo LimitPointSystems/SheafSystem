@@ -79,12 +79,12 @@ public:
   ///
   /// The type of an entry in the map.
   ///
-  typedef pair<index_type, string> entry_type;
+  typedef std::pair<index_type, std::string> entry_type;
 
   ///
   /// The type of name list for this map.
   ///
-  typedef list<string> name_list_type;
+  typedef std::list<std::string> name_list_type;
 
   ///
   /// The iterator type for names.
@@ -99,12 +99,12 @@ public:
   ///
   /// The iterator type for this map.
   ///
-  typedef map<index_type, name_list_type >::iterator iterator;
+  typedef std::map<index_type, name_list_type >::iterator iterator;
 
   ///
   /// The const iterator type for this map.
   ///
-  typedef map<index_type, name_list_type >::const_iterator const_iterator;
+  typedef std::map<index_type, name_list_type >::const_iterator const_iterator;
 
   ///
   /// Default constructor.
@@ -119,7 +119,7 @@ public:
   ///
   /// Copy constructor.
   ///
-  name_multimap(const string xnames[], size_type xnames_ub);
+  name_multimap(const std::string xnames[], size_type xnames_ub);
 
   ///
   /// Destructor.
@@ -129,12 +129,12 @@ public:
   ///
   /// The primary (0-th) name associated with index xindex.
   ///
-  string name(index_type xindex) const;
+  std::string name(index_type xindex) const;
 
   ///
   /// The xi-th name associated with index xindex.
   ///
-  string name(index_type xindex, int xi) const;
+  std::string name(index_type xindex, int xi) const;
 
   ///
   /// All names associated with index xindex.
@@ -144,12 +144,12 @@ public:
   ///
   /// All the names associated with xindex.
   ///
-  void all_names(index_type xindex, block<string>& xresult) const;
+  void all_names(index_type xindex, block<std::string>& xresult) const;
 
   ///
   /// The index associated with name xname.
   ///
-  index_type index(const string& xname) const;
+  index_type index(const std::string& xname) const;
 
   ///
   /// Sets (xindex, xname) as an entry in the map.
@@ -161,12 +161,12 @@ public:
   /// Sets (xindex, xname) as an entry in the map.
   /// If xunique, deletes all other entries for xindex.
   ///
-  void put_entry(index_type xindex, const string& xname, bool xunique);
+  void put_entry(index_type xindex, const std::string& xname, bool xunique);
 
   ///
   /// True if this already contains an entry with name xname.
   ///
-  bool contains_name(const string& xname) const;
+  bool contains_name(const std::string& xname) const;
 
   ///
   /// True if this already contains an entry with index xindex.
@@ -181,7 +181,7 @@ public:
   ///
   /// True if this already contains an entry equal to @<xindex, xname@>.
   ///
-  bool contains_entry(index_type xindex, const string& xname) const;
+  bool contains_entry(index_type xindex, const std::string& xname) const;
 
   ///
   /// Removes all entires for index xindex.
@@ -191,7 +191,7 @@ public:
   ///
   /// Removes the entry for name xname.
   ///
-  void delete_name(const string& xname);
+  void delete_name(const std::string& xname);
 
   ///
   /// Removes all entries.
@@ -228,7 +228,7 @@ public:
   /// Prints the data members of xm on stream xos.
   /// Intended for use debugging.
   ///
-  void print(ostream& xos, const name_multimap& xm) const;
+  void print(std::ostream& xos, const name_multimap& xm) const;
   
   ///
   /// The number of names associated with key xindex.
@@ -240,7 +240,7 @@ private:
   ///
   /// The type of the name to index map.
   ///
-  typedef map<string, index_type> name_to_index_map_type;
+  typedef std::map<std::string, index_type> name_to_index_map_type;
 
   ///
   /// Name to index map.
@@ -250,7 +250,7 @@ private:
   ///
   /// The type of the index to name map.
   ///
-  typedef map< index_type, list<string> > index_to_name_map_type;
+  typedef std::map< index_type, std::list<std::string> > index_to_name_map_type;
 
   ///
   /// Index to name map.
@@ -310,8 +310,8 @@ private:
 /// Insert name_multimap xm into ostream xos. 
 ///
 SHEAF_DLL_SPEC
-ostream&
-operator<<(ostream& xos, const name_multimap& xm);
+std::ostream&
+operator<<(std::ostream& xos, const name_multimap& xm);
 
 ///
 /// The deep size of the referenced object of type name_multimap;

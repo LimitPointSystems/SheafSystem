@@ -20,6 +20,4 @@
 
 #include <ostream>
 
-using namespace std;
-
 #endif // STD_OSTREAM_H

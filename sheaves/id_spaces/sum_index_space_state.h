@@ -124,7 +124,7 @@ public:
   ///
   /// The type used to represent an equivalence class.
   ///
-  typedef list<pod_type> equivalence_class_type;
+  typedef std::list<pod_type> equivalence_class_type;
 
   ///
   /// The equivalence class associated with the hub id xhub_id.
@@ -274,7 +274,7 @@ protected:
   ///
   /// The type of sum_to_term_map.
   ///
-  typedef map<pod_type, pod_type> sum_to_term_type;
+  typedef std::map<pod_type, pod_type> sum_to_term_type;
   
   ///
   /// The term id corresponding to each sum id.
@@ -339,7 +339,7 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
 protected:
 

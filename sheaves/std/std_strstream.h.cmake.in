@@ -64,6 +64,4 @@ class istrstream : public istringstream
 
 #endif
 
-using namespace std;
-
 #endif // STD_STRSTREAM_H

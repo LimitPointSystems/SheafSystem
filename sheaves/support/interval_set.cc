@@ -744,8 +744,8 @@ invariant() const
 // ===========================================================
 // NON-MEMBER FUNCTIONS
 // ===========================================================
-ostream&
-sheaf::operator << (ostream& xos, const interval_set& xset)
+std::ostream&
+sheaf::operator << (std::ostream& xos, const interval_set& xset)
 {
   // Preconditions:
 

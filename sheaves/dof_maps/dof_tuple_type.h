@@ -59,13 +59,13 @@ enum dof_tuple_type
 /// The name of the enumerator xdt.
 ///
 SHEAF_DLL_SPEC
-const string& dof_tuple_type_to_name(dof_tuple_type xdt);
+const std::string& dof_tuple_type_to_name(dof_tuple_type xdt);
 
 ///
 /// The enumerator with name xname.
 ///
 SHEAF_DLL_SPEC
-dof_tuple_type dof_tuple_type_from_name(const string& xname);
+dof_tuple_type dof_tuple_type_from_name(const std::string& xname);
 
 ///
 /// The dof tuple type associated with int xi;
@@ -78,15 +78,13 @@ dof_tuple_type dof_tuple_type_id(int xi);
 /// Insert dof_tuple_type xdt into ostream& os.
 ///
 SHEAF_DLL_SPEC
-ostream & operator << (ostream& os, dof_tuple_type xdt);
-
+std::ostream & operator << (std::ostream& os, dof_tuple_type xdt);
 
 ///
 /// Extract dof_tuple_type xdt from istream& is.
 ///
 SHEAF_DLL_SPEC
-istream & operator >> (istream& is, dof_tuple_type& xdt);
-//};
+std::istream & operator >> (std::istream& is, dof_tuple_type& xdt);
 
 } //namespace sheaf
 

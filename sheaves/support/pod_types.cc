@@ -100,15 +100,15 @@ is_valid()
   return (sheaf::is_valid(poset_id) && sheaf::is_valid(subposet_id));
 }
 
-ostream&
-sheaf::operator<<(ostream& xos, const namespace_relative_member_index_pod_type& xpod)
+std::ostream&
+sheaf::operator<<(std::ostream& xos, const namespace_relative_member_index_pod_type& xpod)
 {
   xos << xpod.poset_id << " " << xpod.member_id ;
   return xos;
 }
 
-istream&
-sheaf::operator>>(istream& xis, namespace_relative_member_index_pod_type& xpod)
+std::istream&
+sheaf::operator>>(std::istream& xis, namespace_relative_member_index_pod_type& xpod)
 {
   // Preconditions:
 
@@ -148,15 +148,15 @@ sheaf::operator>>(istream& xis, namespace_relative_member_index_pod_type& xpod)
   return xis;
 }
 
-ostream&
-sheaf::operator<<(ostream& xos, const namespace_relative_subposet_index_pod_type& xpod)
+std::ostream&
+sheaf::operator<<(std::ostream& xos, const namespace_relative_subposet_index_pod_type& xpod)
 {
   xos << xpod.poset_id << " " << xpod.subposet_id ;
   return xos;
 }
 
-istream&
-sheaf::operator>>(istream& xis, namespace_relative_subposet_index_pod_type& xpod)
+std::istream&
+sheaf::operator>>(std::istream& xis, namespace_relative_subposet_index_pod_type& xpod)
 {
   // Preconditions:
 

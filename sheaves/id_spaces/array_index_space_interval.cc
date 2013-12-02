@@ -215,11 +215,11 @@ array_index_space_interval()
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 sheaf::array_index_space_interval::
 class_name() const
 {
-  static const string result("array_index_space_interval");
+  static const std::string result("array_index_space_interval");
   return result;
 }
 

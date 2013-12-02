@@ -39,8 +39,8 @@ sheaf::operator<<(ostream& xos, const namespace_relative_subposet_index& xindex)
 }
 
 ///
-istream&
-sheaf::operator>>(istream& xis, namespace_relative_subposet_index& xindex)
+std::istream&
+sheaf::operator>>(std::istream& xis, namespace_relative_subposet_index& xindex)
 {
   // Preconditions:
 

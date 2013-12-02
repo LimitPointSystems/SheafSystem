@@ -218,16 +218,16 @@ struct SHEAF_DLL_SPEC namespace_relative_subposet_index
 /// Inserts namespace_relative_subposet_index xindex into ostream xos
 ///
 SHEAF_DLL_SPEC 
-ostream&
-operator<<(ostream& xos, const namespace_relative_subposet_index& xindex);
+std::ostream&
+operator<<(std::ostream& xos, const namespace_relative_subposet_index& xindex);
 
 
 ///
 /// Extracts namespace_relative_subposet_index xindex from istream xis
 ///
 SHEAF_DLL_SPEC 
-istream&
-operator>>(istream& xis, namespace_relative_subposet_index& xindex);
+std::istream&
+operator>>(std::istream& xis, namespace_relative_subposet_index& xindex);
  
 } // namespace sheaf
 

@@ -23,8 +23,6 @@
 #if HAVE_CSETJMP
 
 #include <csetjmp>
-using namespace std;
-
 #else
 
 #include <setjmp.h>

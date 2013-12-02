@@ -68,12 +68,12 @@ SHEAF_DLL_SPEC standard_dof_tuple_index& operator++(standard_dof_tuple_index& x)
 ///
 /// The name of the enumerator xpt.
 ///
-SHEAF_DLL_SPEC const string& standard_dof_tuple_index_to_name(standard_dof_tuple_index xpt);
+SHEAF_DLL_SPEC const std::string& standard_dof_tuple_index_to_name(standard_dof_tuple_index xpt);
 
 ///
 /// The enumerator with name xname.
 ///
-SHEAF_DLL_SPEC standard_dof_tuple_index standard_dof_tuple_index_from_name(const string& xname);
+SHEAF_DLL_SPEC standard_dof_tuple_index standard_dof_tuple_index_from_name(const std::string& xname);
 
 ///
 /// The enumerator corresponding to primitive index xindex.

@@ -46,7 +46,7 @@ sum_index_space_state()
   // and anything above last term maps to invalid.
 
   _sum_to_term_map[0] = invalid_pod_index();
-  _sum_to_term_map[numeric_limits<pod_type>::max()] = invalid_pod_index();
+  _sum_to_term_map[std::numeric_limits<pod_type>::max()] = invalid_pod_index();
 
   // Postconditions:
 
@@ -699,11 +699,11 @@ operator=(const explicit_index_space_state& xother)
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 sheaf::sum_index_space_state::
 class_name() const
 {
-  static const string result("sum_index_space_state");
+  static const std::string result("sum_index_space_state");
   return result;
 }
 

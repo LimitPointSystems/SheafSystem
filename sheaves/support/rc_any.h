@@ -109,7 +109,9 @@ private:
 ///
 /// Insert rc_any rc into ostream os.
 ///
-SHEAF_DLL_SPEC ostream & operator << (ostream &os, const rc_any& rc);
+SHEAF_DLL_SPEC
+std::ostream&
+operator << (std::ostream &os, const rc_any& rc);
  
 } // namespace sheaf
 

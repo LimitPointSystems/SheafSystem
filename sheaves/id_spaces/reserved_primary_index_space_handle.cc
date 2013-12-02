@@ -92,7 +92,7 @@ reserved_primary_index_space_handle(const index_space_family& xid_spaces,
 
 sheaf::reserved_primary_index_space_handle::
 reserved_primary_index_space_handle(const index_space_family& xid_spaces,
-				    const string& xname)
+				    const std::string& xname)
 {
   // Preconditions:
 

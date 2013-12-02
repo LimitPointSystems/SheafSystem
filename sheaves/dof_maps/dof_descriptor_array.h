@@ -40,10 +40,6 @@
 #include "std_iostream.h"
 #endif
 
-#ifndef STD_IOMANIP_H
-#include "std_iomanip.h"
-#endif
-
 namespace sheaf
 {
   
@@ -156,13 +152,13 @@ private:
 /// Insert dof_descriptor_array& p into ostream& os.
 ///
 SHEAF_DLL_SPEC
-ostream& operator << (ostream &os, const dof_descriptor_array& p);
+std::ostream& operator << (std::ostream &os, const dof_descriptor_array& p);
 
 ///
 /// Insert dof_descriptor_array::dof_descriptor& p into ostream& os.
 ///
 SHEAF_DLL_SPEC
-ostream& operator << (ostream &os, const dof_descriptor_array::dof_descriptor& p);
+std::ostream& operator << (std::ostream &os, const dof_descriptor_array::dof_descriptor& p);
 
 ///
 /// The deep size of the referenced object of type dof_descriptor_array.

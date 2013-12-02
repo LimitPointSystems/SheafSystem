@@ -92,7 +92,7 @@ constant_implicit_index_space_iterator(const index_space_family& xid_spaces,
 
 sheaf::constant_implicit_index_space_iterator::
 constant_implicit_index_space_iterator(const index_space_family& xid_spaces,
-					const string& xname)
+					const std::string& xname)
 {
   // Preconditions:
 

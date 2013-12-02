@@ -256,19 +256,19 @@ public:
   /// Creates an invalid instance in the id space 
   /// with name xname in poset xhost.
   ///
-  scoped_index(const poset_state_handle& xhost, const string& xname);
+  scoped_index(const poset_state_handle& xhost, const std::string& xname);
 
   ///
   /// Creates an instance with pod xpod
   /// in the id space with name xname in poset xhost.
   ///
-  scoped_index(pod_type xpod, const poset_state_handle& xhost, const string& xname);
+  scoped_index(pod_type xpod, const poset_state_handle& xhost, const std::string& xname);
 
   ///
   /// Creates an instance equivalent to xother
   /// in the id space with name xname in poset xhost.
   ///
-  scoped_index(const scoped_index& xother, const poset_state_handle& xhost, const string& xname);
+  scoped_index(const scoped_index& xother, const poset_state_handle& xhost, const std::string& xname);
 
   ///
   /// Destructor.
@@ -3726,13 +3726,13 @@ private:
 /// Inserts xid into ostream xos.
 ///
 SHEAF_DLL_SPEC
-ostream& operator<<(ostream& xos, const scoped_index& xid);
+std::ostream& operator<<(std::ostream& xos, const scoped_index& xid);
 
 ///
 /// Extracts xid from istream xis.
 ///
 SHEAF_DLL_SPEC
-istream& operator>>(istream& xis, scoped_index& xid);
+std::istream& operator>>(std::istream& xis, scoped_index& xid);
 
 ///
 /// The deep size of the referenced object of type scoped_index.

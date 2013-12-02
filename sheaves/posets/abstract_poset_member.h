@@ -33,16 +33,8 @@
 #include "primitive_value.h"
 #endif
  
-#ifndef STD_HASH_MAP_H
-#include "std_hash_map.h"
-#endif
-
 #ifndef STD_IOSTREAM_H
 #include "std_iostream.h"
-#endif
-
-#ifndef STD_LIST_H
-#include "std_list.h"
 #endif
 
 #ifndef STD_STRING_H
@@ -181,7 +173,7 @@ class SHEAF_DLL_SPEC abstract_poset_member : public poset_component
   friend class postorder_iterator;
   friend class subposet_joiner;
   friend class storage_agent;
-  // friend ostream & operator << (ostream &os, abstract_poset_member& p);
+  // friend std::ostream & operator << (std::ostream &os, abstract_poset_member& p);
 
 
   // ===========================================================
@@ -464,7 +456,7 @@ public:
   ///
   /// True if the schema of this has name xname
   ///
-  bool schema_is(const string& xschema_name) const;
+  bool schema_is(const std::string& xschema_name) const;
 
   ///
   /// True if xother has the same schema (column poset) as this
@@ -1282,13 +1274,13 @@ public:
   /// Gets the index of the component in xhost with name xname.
   ///
   virtual pod_index_type get_index_from_name(const poset_state_handle* xhost,
-					     const string& xname) const;
+					     const std::string& xname) const;
 
   ///
   /// Gets the index of the component in xhost with name xname.
   ///
   virtual void get_index_from_name(const poset_state_handle* xhost,
-				   const string& xname,
+				   const std::string& xname,
 				   scoped_index& result) const;
 
 protected:
@@ -1312,7 +1304,7 @@ public:
   ///
   /// A name for this.
   ///
-  string name() const
+  std::string name() const
   {
     return poset_component::name();
   };
@@ -1320,12 +1312,12 @@ public:
   ///
   /// A name for this.
   ///
-  virtual string name(bool xauto_access) const;
+  virtual std::string name(bool xauto_access) const;
 
   ///
   /// All the names for this.
   ///
-  virtual void all_names(block<string>& xresult, bool xauto_access = false) const;
+  virtual void all_names(block<std::string>& xresult, bool xauto_access = false) const;
 
   ///
   /// The number of names for this.
@@ -1335,17 +1327,17 @@ public:
   ///
   /// True if xname is a name for this.
   ///
-  virtual bool has_name(const string& xname, bool xauto_access = false) const;
+  virtual bool has_name(const std::string& xname, bool xauto_access = false) const;
 
   ///
   /// Make xname a name for this; if xunique, make xname the only name.
   ///
-  virtual void put_name(const string& xname, bool xunique, bool xauto_access);
+  virtual void put_name(const std::string& xname, bool xunique, bool xauto_access);
 
   ///
   /// Delete all names for this.
   ///
-  virtual void delete_name(const string& xname, bool xauto_access = false);
+  virtual void delete_name(const std::string& xname, bool xauto_access = false);
 
   ///
   /// Delete all the names for this.
@@ -1444,7 +1436,7 @@ public:
   ///
   /// Virtual stream insertion.
   ///
-  virtual void to_stream(ostream& xos = cout) const;
+  virtual void to_stream(std::ostream& xos = std::cout) const;
 
 protected:
 
@@ -1510,10 +1502,10 @@ const typename T::row_dofs_type& row_dofs(const T& x0, bool xauto_access);
 /// Insert abstract_poset_member& p into ostream& os.
 ///
 SHEAF_DLL_SPEC 
-ostream& operator << (ostream &os, const abstract_poset_member& p);
+std::ostream& operator << (std::ostream &os, const abstract_poset_member& p);
 
 SHEAF_DLL_SPEC 
-ostream& operator << (ostream &os, const abstract_poset_member* p); 
+std::ostream& operator << (std::ostream &os, const abstract_poset_member* p); 
 
 } // namespace sheaf
 

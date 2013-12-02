@@ -905,11 +905,11 @@ put_is_persistent(bool xis_persistent)
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 sheaf::mutable_index_space_state::
 class_name() const
 {
-  static const string result("mutable_index_space_state");
+  static const std::string result("mutable_index_space_state");
   return result;
 }
 
