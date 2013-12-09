@@ -34,6 +34,8 @@
 #include "std_iostream.h"
 #include "total_poset_member.h"
 
+using namespace std;
+
 // ===========================================================
 // PRIMITIVES_POSET_SCHEMA FACET
 // ===========================================================

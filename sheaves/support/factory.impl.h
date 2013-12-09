@@ -155,7 +155,7 @@ insert_prototype(T* xprototype)
   // the prototype == xprototype.
 
   // string lclass_name = typeid(*xprototype).name();
-  string lclass_name = xprototype->class_name();
+  std::string lclass_name = xprototype->class_name();
 
 #ifdef DIAGNOSTIC_OUTPUT
 
@@ -255,7 +255,7 @@ std::ostream& operator << (std::ostream& xos, const factory<T>& xf)
 
   for(litr = xf._prototypes_map.begin(); litr != xf._prototypes_map.end(); ++litr)
   {
-    xos << " class: " << litr->first << endl;
+    xos << " class: " << litr->first << std::endl;
   }
 
   // Postconditions:

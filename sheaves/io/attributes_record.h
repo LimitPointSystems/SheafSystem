@@ -134,7 +134,7 @@ protected:
   ///
   /// The internal/external buffer
   ///
-  string _str_buf;
+  std::string _str_buf;
 
 };
   

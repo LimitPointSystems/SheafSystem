@@ -116,7 +116,7 @@ private:
   ///
   /// The type of the poset handle prototypes map.
   ///
-  typedef std::map<string, poset_state_handle*> prototypes_map_type;
+  typedef std::map<std::string, poset_state_handle*> prototypes_map_type;
 
   ///
   /// The client poset handle prototypes map.

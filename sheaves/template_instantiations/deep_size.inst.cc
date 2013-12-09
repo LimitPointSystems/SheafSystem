@@ -22,6 +22,7 @@
 #include "crg_interval.h"
 #include "scoped_index.h"
 
+using namespace std;
 using namespace sheaf; // workaround for MS C++ bug.
 
 #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS

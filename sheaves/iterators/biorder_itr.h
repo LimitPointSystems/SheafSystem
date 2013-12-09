@@ -109,7 +109,7 @@ public:
   /// If xstrict, iterate over strict up/down set only.
   ///
   biorder_itr(const abstract_poset_member& xanchor,
-              const string& xfilter_name,
+              const std::string& xfilter_name,
               bool xdown,
               bool xstrict);
 
@@ -157,7 +157,7 @@ typedef biorder_itr<zn_to_bool> zn_to_bool_biorder_itr;
 ///
 /// Biorder_itr<T> using set for _has_visited markers.
 ///
-typedef biorder_itr< set<pod_index_type> > set_biorder_itr;
+typedef biorder_itr< std::set<pod_index_type> > set_biorder_itr;
 
 ///
 /// Biorder_itr<T> using hash_set for _has_visited markers.

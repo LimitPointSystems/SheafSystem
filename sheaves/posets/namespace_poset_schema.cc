@@ -45,7 +45,7 @@ standard_name()
 
   // Body:
 
-  static const string result("namespace_poset_schema");
+  static const std::string result("namespace_poset_schema");
 
   // Postconditions:
 

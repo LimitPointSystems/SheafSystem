@@ -43,14 +43,14 @@ namespace sheaf
   ///
   /// Tolerance for float comparisons.
   ///
-  const float float_tolerance = sqrt(numeric_limits<float>::epsilon());
+  const float float_tolerance = sqrt(std::numeric_limits<float>::epsilon());
   
   ///
   /// Absolute equality comparison of float xf0 to 0.0f using tolerance float_tolerance.
   ///
   SHEAF_DLL_SPEC inline bool a_eql_0(float xf0)
   {
-    return abs(xf0) <= float_tolerance;
+    return std::abs(xf0) <= float_tolerance;
   };
   
   ///
@@ -58,7 +58,7 @@ namespace sheaf
   ///
   SHEAF_DLL_SPEC inline bool a_eql_0(float xf0, float xtolerance)
   {
-    return abs(xf0) <= xtolerance;
+    return std::abs(xf0) <= xtolerance;
   };
   
   ///
@@ -66,7 +66,7 @@ namespace sheaf
   ///
   SHEAF_DLL_SPEC inline bool a_eql_1(float xf0)
   {
-    return abs(xf0 - 1.0f) <= float_tolerance;
+    return std::abs(xf0 - 1.0f) <= float_tolerance;
   };
   
   ///
@@ -74,7 +74,7 @@ namespace sheaf
   ///
   SHEAF_DLL_SPEC inline bool a_eql_1(float xf0, float xtolerance)
   {
-    return abs(xf0 - 1.0f) <= xtolerance;
+    return std::abs(xf0 - 1.0f) <= xtolerance;
   };
   
   ///
@@ -82,7 +82,7 @@ namespace sheaf
   ///
   SHEAF_DLL_SPEC inline bool a_eql(float xf0, float xf1)
   {
-    return abs(xf0 - xf1) <= float_tolerance;
+    return std::abs(xf0 - xf1) <= float_tolerance;
   };
   
   ///
@@ -90,7 +90,7 @@ namespace sheaf
   ///
   SHEAF_DLL_SPEC inline bool a_eql(float xf0, float xf1, float xtolerance)
   {
-    return abs(xf0 - xf1) <= xtolerance;
+    return std::abs(xf0 - xf1) <= xtolerance;
   };
 
   ///
@@ -98,7 +98,7 @@ namespace sheaf
   ///
   SHEAF_DLL_SPEC inline bool r_eql(float xf0, float xf1)
   {
-    return abs(xf0 - xf1) <= float_tolerance*(abs(xf0) + abs(xf1));
+    return std::abs(xf0 - xf1) <= float_tolerance*(std::abs(xf0) + std::abs(xf1));
   };
   
   ///
@@ -106,7 +106,7 @@ namespace sheaf
   ///
   SHEAF_DLL_SPEC inline bool r_eql(float xf0, float xf1, float xtolerance)
   {
-    return abs(xf0 - xf1) <= xtolerance*(abs(xf0) + abs(xf1));
+    return std::abs(xf0 - xf1) <= xtolerance*(std::abs(xf0) + std::abs(xf1));
   };
   
   ///
@@ -114,7 +114,7 @@ namespace sheaf
   ///
   SHEAF_DLL_SPEC inline bool c_eql(float xf0, float xf1)
   {
-    return abs(xf0 - xf1) <= float_tolerance*(abs(xf0) + abs(xf1) + 1.0f);
+    return std::abs(xf0 - xf1) <= float_tolerance*(std::abs(xf0) + std::abs(xf1) + 1.0f);
   };
   
   ///
@@ -122,7 +122,7 @@ namespace sheaf
   ///
   SHEAF_DLL_SPEC inline bool c_eql(float xf0, float xf1, float xtolerance)
   {
-    return abs(xf0 - xf1) <= xtolerance*(abs(xf0) + abs(xf1) + 1.0f);
+    return std::abs(xf0 - xf1) <= xtolerance*(std::abs(xf0) + std::abs(xf1) + 1.0f);
   };
   
 
@@ -133,14 +133,14 @@ namespace sheaf
   ///
   /// Tolerance for double comparisons.
   ///
-  const double double_tolerance = sqrt(numeric_limits<double>::epsilon());
+  const double double_tolerance = sqrt(std::numeric_limits<double>::epsilon());
   
   ///
   /// Absolute equality comparison of double xd0 to 0.0 using tolerance double_tolerance.
   ///
   SHEAF_DLL_SPEC inline bool a_eql_0(double xd0)
   {
-    return abs(xd0) <= double_tolerance;
+    return std::abs(xd0) <= double_tolerance;
   };
   
   ///
@@ -148,7 +148,7 @@ namespace sheaf
   ///
   SHEAF_DLL_SPEC inline bool a_eql_0(double xd0, double xtolerance)
   {
-    return abs(xd0) <= xtolerance;
+    return std::abs(xd0) <= xtolerance;
   };
   
   ///
@@ -156,7 +156,7 @@ namespace sheaf
   ///
   SHEAF_DLL_SPEC inline bool a_eql_1(double xd0)
   {
-    return abs(xd0 - 1.0) <= double_tolerance;
+    return std::abs(xd0 - 1.0) <= double_tolerance;
   };
   
   ///
@@ -164,7 +164,7 @@ namespace sheaf
   ///
   SHEAF_DLL_SPEC inline bool a_eql_1(double xd0, double xtolerance)
   {
-    return abs(xd0 - 1.0) <= xtolerance;
+    return std::abs(xd0 - 1.0) <= xtolerance;
   };
   
   ///
@@ -172,7 +172,7 @@ namespace sheaf
   ///
   SHEAF_DLL_SPEC inline bool a_eql(double xd0, double xd1)
   {
-    return abs(xd0 - xd1) <= double_tolerance;
+    return std::abs(xd0 - xd1) <= double_tolerance;
   };
   
   ///
@@ -180,7 +180,7 @@ namespace sheaf
   ///
   SHEAF_DLL_SPEC inline bool a_eql(double xd0, double xd1, double xtolerance)
   {
-    return abs(xd0 - xd1) <= xtolerance;
+    return std::abs(xd0 - xd1) <= xtolerance;
   };
 
   ///
@@ -188,7 +188,7 @@ namespace sheaf
   ///
   SHEAF_DLL_SPEC inline bool r_eql(double xd0, double xd1)
   {
-    return abs(xd0 - xd1) <= double_tolerance*(abs(xd0) + abs(xd1));
+    return std::abs(xd0 - xd1) <= double_tolerance*(std::abs(xd0) + std::abs(xd1));
   };
   
   ///
@@ -196,7 +196,7 @@ namespace sheaf
   ///
   SHEAF_DLL_SPEC inline bool r_eql(double xd0, double xd1, double xtolerance)
   {
-    return abs(xd0 - xd1) <= xtolerance*(abs(xd0) + abs(xd1));
+    return std::abs(xd0 - xd1) <= xtolerance*(std::abs(xd0) + std::abs(xd1));
   };
   
   ///
@@ -204,7 +204,7 @@ namespace sheaf
   ///
   SHEAF_DLL_SPEC inline bool c_eql(double xd0, double xd1)
   {
-    return abs(xd0 - xd1) <= double_tolerance*(abs(xd0) + abs(xd1) + 1.0);
+    return std::abs(xd0 - xd1) <= double_tolerance*(std::abs(xd0) + std::abs(xd1) + 1.0);
   };
   
   ///
@@ -212,7 +212,7 @@ namespace sheaf
   ///
   SHEAF_DLL_SPEC inline bool c_eql(double xd0, double xd1, double xtolerance)
   {
-    return abs(xd0 - xd1) <= xtolerance*(abs(xd0) + abs(xd1) + 1.0);
+    return std::abs(xd0 - xd1) <= xtolerance*(std::abs(xd0) + std::abs(xd1) + 1.0);
   };
   
 
@@ -225,7 +225,7 @@ namespace sheaf
   ///
   SHEAF_DLL_SPEC inline bool c_lte(double xd0, double xd1)
   {
-    return xd0 <= (xd1 + double_tolerance*(abs(xd0) + abs(xd1) + 1.0));
+    return xd0 <= (xd1 + double_tolerance*(std::abs(xd0) + std::abs(xd1) + 1.0));
   };
   
   ///
@@ -233,7 +233,7 @@ namespace sheaf
   ///
   SHEAF_DLL_SPEC inline bool c_lte(double xd0, double xd1, double xtolerance)
   {
-    return xd0 <= (xd1 + xtolerance*(abs(xd0) + abs(xd1) + 1.0));
+    return xd0 <= (xd1 + xtolerance*(std::abs(xd0) + std::abs(xd1) + 1.0));
   };
   
 
@@ -246,7 +246,7 @@ namespace sheaf
   ///
   SHEAF_DLL_SPEC inline bool c_lt(double xd0, double xd1)
   {
-    return xd0 < (xd1 - double_tolerance*(abs(xd0) + abs(xd1) + 1.0));
+    return xd0 < (xd1 - double_tolerance*(std::abs(xd0) + std::abs(xd1) + 1.0));
   };
   
   ///
@@ -254,7 +254,7 @@ namespace sheaf
   ///
   SHEAF_DLL_SPEC inline bool c_lt(double xd0, double xd1, double xtolerance)
   {
-    return xd0 < (xd1 - xtolerance*(abs(xd0) + abs(xd1) + 1.0));
+    return xd0 < (xd1 - xtolerance*(std::abs(xd0) + std::abs(xd1) + 1.0));
   };
   
 
@@ -267,7 +267,7 @@ namespace sheaf
   ///
   SHEAF_DLL_SPEC inline bool c_gte(double xd0, double xd1)
   {
-    return xd0 >= (xd1 - double_tolerance*(abs(xd0) + abs(xd1) + 1.0));
+    return xd0 >= (xd1 - double_tolerance*(std::abs(xd0) + std::abs(xd1) + 1.0));
   };
   
   ///
@@ -275,7 +275,7 @@ namespace sheaf
   ///
   SHEAF_DLL_SPEC inline bool c_gte(double xd0, double xd1, double xtolerance)
   {
-    return xd0 >= (xd1 - xtolerance*(abs(xd0) + abs(xd1) + 1.0));
+    return xd0 >= (xd1 - xtolerance*(std::abs(xd0) + std::abs(xd1) + 1.0));
   };
   
 
@@ -288,7 +288,7 @@ namespace sheaf
   ///
   SHEAF_DLL_SPEC inline bool c_gt(double xd0, double xd1)
   {
-    return xd0 > (xd1 + double_tolerance*(abs(xd0) + abs(xd1) + 1.0));
+    return xd0 > (xd1 + double_tolerance*(std::abs(xd0) + std::abs(xd1) + 1.0));
   };
   
   ///
@@ -296,7 +296,7 @@ namespace sheaf
   ///
   SHEAF_DLL_SPEC inline bool c_gt(double xd0, double xd1, double xtolerance)
   {
-    return xd0 > (xd1 + xtolerance*(abs(xd0) + abs(xd1) + 1.0));
+    return xd0 > (xd1 + xtolerance*(std::abs(xd0) + std::abs(xd1) + 1.0));
   };
   
 

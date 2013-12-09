@@ -28,6 +28,8 @@
 #include "list_index_space_state.h"
 #include "poset_state_handle.h"
 
+using namespace std;
+
 // ===========================================================
 // IMPLICIT_CRG_INTERVAL FACET
 // ===========================================================
@@ -188,7 +190,7 @@ is_interval_member(const scoped_index& xindex) const
 
 // PROTECTED MEMBER FUNCTIONS
 
-string
+std::string
 sheaf::implicit_crg_interval::
 implicit_cover_name(bool xlower, pod_index_type xmbr_index)
 {
@@ -209,7 +211,7 @@ implicit_cover_name(bool xlower, pod_index_type xmbr_index)
   return result;
 }
 
-string
+std::string
 sheaf::implicit_crg_interval::
 implicit_cover_name(bool xlower, const scoped_index& xmbr_index)
 {

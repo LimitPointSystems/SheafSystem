@@ -130,7 +130,7 @@ public:
   ///
   /// The name suffix for this data set.
   ///
-  virtual const string& suffix() const;
+  virtual const std::string& suffix() const;
 
   ///
   /// Internalize the record set from disk.

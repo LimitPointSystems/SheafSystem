@@ -20,7 +20,7 @@
 #include "auto_block.impl.h"
 
 
-
+using namespace std;
 using namespace sheaf; // workaround for MS C++ bug.
 
 //==============================================================================

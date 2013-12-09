@@ -28,10 +28,6 @@
 #include "namespace_poset.h"
 #endif
 
-#ifndef STD_IOSTREAM_H
-#include "std_iostream.h"
-#endif
-
 namespace sheaf
 {
   
@@ -66,7 +62,7 @@ public:
   ///
   /// Creates a sheaves namespace with name xname.
   ///
-  sheaves_namespace(const string& xname);
+  sheaves_namespace(const std::string& xname);
 
   ///
   /// Creates a triangle schema using the primatives poset.  This

@@ -748,7 +748,7 @@ operator << (std::ostream& xos, const ragged_array<T>& xra)
     {
       xos << "  " << xra[i][j];
     }
-    xos << endl;
+    xos << std::endl;
   }
 
   return xos;

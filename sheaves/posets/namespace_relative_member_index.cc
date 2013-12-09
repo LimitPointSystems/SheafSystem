@@ -21,8 +21,10 @@
 
 #include "namespace_relative_member_index.h"
 
-ostream&
-sheaf::operator<<(ostream& xos, const namespace_relative_member_index& xindex)
+using namespace std;
+
+std::ostream&
+sheaf::operator<<(std::ostream& xos, const namespace_relative_member_index& xindex)
 {
   // Preconditions:
 

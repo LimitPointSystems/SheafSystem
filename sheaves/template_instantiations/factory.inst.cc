@@ -23,6 +23,7 @@
 #include "explicit_index_space_state.h"
 #include "index_space_interval.h"
 
+using namespace std;
 using namespace sheaf; // Workaround for MS C++ bug.
 
 //============================================================

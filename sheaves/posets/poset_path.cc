@@ -27,6 +27,7 @@
 #include "std_strstream.h"
 
 using namespace sheaf;
+using namespace std;
 
 //#define DIAGNOSTIC_OUTPUT
 
@@ -1315,9 +1316,9 @@ parse_path(const std::string& xpath,
 // NON-MEMBER FUNCTIONS
 // ===========================================================
 
-ostream & 
+std::ostream& 
 sheaf::
-operator << (ostream& xos, const poset_path& xpp)
+operator << (std::ostream& xos, const poset_path& xpp)
 {
   xos << xpp.path();
 

@@ -265,8 +265,8 @@ reset()
 //  NON-MEMBER FUNCTIONS
 // ===========================================================
 
-///
-ostream & sheaf::operator << (ostream &xos, stop_watch& xsw)
+std::ostream&
+sheaf::operator << (std::ostream &xos, stop_watch& xsw)
 {
   xos << " lap times: ";
 
@@ -275,7 +275,7 @@ ostream & sheaf::operator << (ostream &xos, stop_watch& xsw)
     xos << " " << xsw.lap_time(i);
     if((i % 10 == 9) || (i == (xsw.lap_ct() - 1)))
     {
-      xos << endl;
+      xos << std::endl;
     }
   }
 

@@ -37,6 +37,8 @@
 #include "std_string.h"
 #include "std_strstream.h"
 
+using namespace std;
+
 // ===========================================================
 // POSET_CRG_STATE FACET
 // ===========================================================
@@ -1890,9 +1892,9 @@ invariant() const
 // NON MEMBER FUNCTIONS
 // ===========================================================
 
-ostream & 
+std::ostream & 
 sheaf::
-operator<<(ostream &os, const poset_crg_state& p)
+operator<<(std::ostream &os, const poset_crg_state& p)
 {
 
   // Preconditions:

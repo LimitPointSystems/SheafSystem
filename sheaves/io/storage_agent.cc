@@ -45,6 +45,8 @@
 
 #include "index_equivalence_iterator.h"
 
+using namespace std;
+
 //#define DIAGNOSTIC_OUTPUT
 //#undef DIAGNOSTIC_OUTPUT
 
@@ -244,7 +246,7 @@ is_ancestor_of(const any* other) const
 
 ///
 sheaf::storage_agent::
-storage_agent(const string& xfile_name,
+storage_agent(const std::string& xfile_name,
               sheaf_file::access_mode xmode,
               bool xclobber,
               bool xenable_error_report)
@@ -389,7 +391,7 @@ file_is_read_write_accessible() const
   return result;
 }
 
-const string&
+const std::string&
 sheaf::storage_agent::
 file_id_space_name() const
 {

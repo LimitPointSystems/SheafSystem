@@ -44,7 +44,7 @@ class subposet;
 ///
 /// An STL set representation for a set of integers.
 ///
-class SHEAF_DLL_SPEC int_set : public set<int>
+class SHEAF_DLL_SPEC int_set : public std::set<int>
   {
 
 public:
@@ -200,7 +200,7 @@ public:
 /// Insert int_set& c into ostream& os.
 ///
 SHEAF_DLL_SPEC
-ostream& operator << (ostream& os, const int_set& c);
+std::ostream& operator << (std::ostream& os, const int_set& c);
 
 } // namespace sheaf
 

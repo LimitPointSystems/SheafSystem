@@ -24,6 +24,8 @@
 #include "error_message.h"
 #include "std_iomanip.h"
 
+using namespace std;
+
 // ===========================================================
 // ZN_TO_BOOL FACET
 // ===========================================================

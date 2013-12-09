@@ -24,6 +24,7 @@
 #include "std_strstream.h"
 #include "std_stdexcept.h"
 
+using namespace std;
 
 // ===========================================================
 // ERROR_MESSAGE FACET

@@ -198,7 +198,7 @@ is_ancestor_of(const any* other) const
 ///
 void
 sheaf::sheaf_file::
-open(const string &xname, access_mode xmode, bool xclobber)
+open(const std::string &xname, access_mode xmode, bool xclobber)
 {
   // Preconditions:
 

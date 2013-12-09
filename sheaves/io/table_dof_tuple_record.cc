@@ -28,6 +28,8 @@
 #include "std_limits.h"
 #include "std_sstream.h"
 
+using namespace std;
+
 //#define DIAGNOSTIC_OUTPUT
 //#undef DIAGNOSTIC_OUTPUT
 

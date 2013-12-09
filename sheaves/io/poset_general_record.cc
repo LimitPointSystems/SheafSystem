@@ -25,6 +25,8 @@
 #include "poset_bounds.h"
 #include "std_sstream.h"
 
+using namespace std;
+
 // PUBLIC MEMBER FUNCTIONS
 
 // CANONICAL MEMBERS

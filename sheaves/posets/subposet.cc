@@ -24,7 +24,6 @@
 #include "array_index_space_handle.h"
 #include "array_index_space_state.h"
 #include "block.h"
-#include "factory_2.h"
 #include "hash_index_space_handle.h"
 #include "hash_index_space_state.h"
 #include "interval_index_space_handle.h"
@@ -39,10 +38,13 @@
 #include "poset_slicer.h"
 #include "preorder_iterator.h"
 #include "std_sstream.h"
+#include "std_iomanip.h"
 #include "poset_joiner.h"
 #include "subposet_member_iterator.h"
 #include "subposet_state.h"
 #include "tern.h"
+
+using namespace std;
 
 // ===========================================================
 // SUBPOSET FACET

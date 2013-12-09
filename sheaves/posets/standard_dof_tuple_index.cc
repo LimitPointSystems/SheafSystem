@@ -23,6 +23,8 @@
 #include "assert_contract.h"
 #include "std_string.h"
 
+using namespace std;
+
 namespace
 {
 const int STANDARD_DOF_TUPLE_INDEX_CT =

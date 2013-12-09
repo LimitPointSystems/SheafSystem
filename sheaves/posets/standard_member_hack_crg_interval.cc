@@ -26,6 +26,8 @@
 #include "index_space_family.h"
 #include "index_space_iterator.h"
 
+using namespace std;
+
 // ===========================================================
 // STANDARD_MEMBER_HACK_CRG_INTERVAL FACET
 // ===========================================================

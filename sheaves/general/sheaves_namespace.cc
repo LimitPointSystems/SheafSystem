@@ -76,7 +76,7 @@ sheaves_namespace()
 }
 
 sheaf::sheaves_namespace::
-sheaves_namespace(const string& xname)
+sheaves_namespace(const std::string& xname)
     : namespace_poset(xname)
 {
   // Preconditions:

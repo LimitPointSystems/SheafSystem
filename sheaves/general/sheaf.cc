@@ -76,8 +76,8 @@ filename_from_cmdline(std::string xargv)
 }
 
 ///
-string
-std::sheaf::
+std::string
+sheaf::
 get_release_tag()
 {
   // Expansion of the CVS keyword "<dollars>Name<dollars>" looks like this:

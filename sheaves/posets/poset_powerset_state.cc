@@ -20,11 +20,12 @@
 
 #include "poset_powerset_state.h"
 #include "assert_contract.h"
-#include "arg_list.h"
-#include "factory_2.h"
 #include "index_space_iterator.h"
 #include "hub_index_space_handle.h"
 #include "std_sstream.h"
+#include "std_iomanip.h"
+
+using namespace std;
 
 // ===========================================================
 // CANONICAL FACET
@@ -928,9 +929,9 @@ invariant() const
 // NONMEBER FUNCTIONS
 // ===========================================================
 
-ostream & 
+std::ostream& 
 sheaf::
-operator<<(ostream &os, const poset_powerset_state& p)
+operator<<(std::ostream &os, const poset_powerset_state& p)
 {
 
   // Preconditions:

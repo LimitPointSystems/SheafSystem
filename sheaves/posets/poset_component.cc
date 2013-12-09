@@ -28,6 +28,8 @@
 #include "pool.h"
 #include "std_typeinfo.h"
 
+using namespace std;
+
 // ===========================================================
 // POSET_COMPONENT FACET
 // ===========================================================

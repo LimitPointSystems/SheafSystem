@@ -321,7 +321,7 @@ deep_size(const std::list<T>& xp, bool xinclude_shallow)
 
   // Add the deep size of the members.
 
-  typename list<T>::const_iterator litr = xp.begin();
+  typename std::list<T>::const_iterator litr = xp.begin();
   for(; litr != xp.end(); ++litr)
   {
     deep_size(*litr, true);

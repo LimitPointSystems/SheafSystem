@@ -23,6 +23,9 @@
 #include "namespace_poset.h"
 #include "std_fstream.h"
 #include "std_iostream.h"
+#include "std_iomanip.h"
+
+using namespace std;
 
 // ===========================================================
 // ANY FACET
@@ -109,7 +112,7 @@ sheaf::report::
 
 void
 sheaf::report::
-start(const string& xtitle)
+start(const std::string& xtitle)
 {
   // Preconditions:
 
@@ -152,7 +155,7 @@ reset()
 
 void
 sheaf::report::
-point(const string& xname)
+point(const std::string& xname)
 {
   // Preconditions:
 
@@ -180,7 +183,7 @@ point(const string& xname)
 
 void
 sheaf::report::
-write(const string& xfile_name) const
+write(const std::string& xfile_name) const
 {
   // Preconditions:
 
@@ -236,7 +239,9 @@ write(const string& xfile_name) const
 //  NON-MEMBER FUNCTIONS
 // ===========================================================
 
-ostream & sheaf::operator << (ostream &xos, report& xreport)
+std::ostream &
+sheaf::
+operator << (std::ostream &xos, report& xreport)
 {
   size_t lcol1 = 30;
   size_t lcol2 = 20;

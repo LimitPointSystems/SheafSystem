@@ -30,6 +30,8 @@
 #include "poset_crg_state.h"
 #include "poset_path.h"
 
+using namespace std;
+
 // ===========================================================
 // CRG_INTERVAL FACET
 // ===========================================================
@@ -284,7 +286,7 @@ id_spaces_initialized() const
 
 // PUBLIC DATA MEMBERS
 
-string
+std::string
 sheaf::crg_interval::
 local_id_space_name(pod_index_type xindex)
 {
@@ -562,7 +564,7 @@ force_explicit_cover(bool xlower, pod_index_type xmbr_index, bool xinitialize)
   return result;
 }
 
-string
+std::string
 sheaf::crg_interval::
 explicit_cover_name(bool xlower, pod_index_type xmbr_index)
 {
@@ -583,7 +585,7 @@ explicit_cover_name(bool xlower, pod_index_type xmbr_index)
   return result;
 }
 
-string
+std::string
 sheaf::crg_interval::
 explicit_cover_name(bool xlower, const scoped_index& xmbr_index)
 {
@@ -772,7 +774,8 @@ invariant() const
 // NON-MEMBER FUNCTIONS
 // ===========================================================
 
-ostream& sheaf::operator << (ostream& os, const crg_interval& m)
+std::ostream&
+sheaf::operator << (std::ostream& os, const crg_interval& m)
 {
 
   os << "interval begin: " << m.begin()

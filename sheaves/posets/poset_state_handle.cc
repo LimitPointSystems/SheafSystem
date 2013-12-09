@@ -23,7 +23,6 @@
 #include "array_index_space_state.h"
 #include "array_poset_dof_map.h"
 #include "factory.h"
-#include "factory_2.h"
 #include "index_equivalence_iterator.h"
 #include "index_space_interval.h"
 #include "explicit_index_space_state.h"
@@ -56,7 +55,8 @@ class index_iterator;
 #include "subposet_state.h"
 #include "subposet_member_iterator.h"
 #include "zn_to_bool.h"
-#include "std_iomanip.h"
+
+using namespace std;
 
 // ===========================================================
 // POSET_STATE_HANDLE FACET
@@ -8284,9 +8284,9 @@ invariant() const
 // NON-MEMBER FUNCTIONS
 // ===========================================================
 
-ostream & 
+std::ostream & 
 sheaf::
-operator<<(ostream &os, const poset_state_handle& p)
+operator<<(std::ostream &os, const poset_state_handle& p)
 {
   // Preconditions:
 

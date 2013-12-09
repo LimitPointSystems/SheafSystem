@@ -847,7 +847,7 @@ initialize_filter(const scoped_index& xfilter_id)
 template <typename T>
 void
 depth_first_itr<T>::
-initialize_filter(const string& xfilter_name)
+initialize_filter(const std::string& xfilter_name)
 {
   // Preconditions:
 

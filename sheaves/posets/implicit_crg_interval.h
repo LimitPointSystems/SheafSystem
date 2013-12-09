@@ -131,12 +131,12 @@ protected:
   ///
   /// Creates a name for the implicit cover id space for member with index, xmbr_index.
   ///
-  static string implicit_cover_name(bool xlower, const scoped_index& xmbr_index);
+  static std::string implicit_cover_name(bool xlower, const scoped_index& xmbr_index);
 
   ///
   /// Creates a name for the implicit cover id space for member with index, xmbr_index.
   ///
-  static string implicit_cover_name(bool xlower, pod_index_type xmbr_index);
+  static std::string implicit_cover_name(bool xlower, pod_index_type xmbr_index);
 
 private:
 

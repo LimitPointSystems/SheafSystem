@@ -19,6 +19,7 @@
 
 #include "ragged_array.impl.h"
 
+using namespace std;
 using namespace sheaf; // workaround for MS C++ bug.
 
 // Instantiate with primitive types for general purpose use.

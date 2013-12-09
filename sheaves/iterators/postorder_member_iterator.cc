@@ -363,7 +363,7 @@ postorder_member_iterator(const abstract_poset_member& xanchor,
 
 sheaf::postorder_member_iterator::
 postorder_member_iterator(const abstract_poset_member& xanchor,
-                          const string& xfilter_name,
+                          const std::string& xfilter_name,
                           bool xdown,
                           bool xstrict)
     :filtered_depth_first_member_iterator(new postorder_iterator(xanchor,

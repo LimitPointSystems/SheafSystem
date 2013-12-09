@@ -34,6 +34,8 @@
 #include "std_sstream.h"
 #include "storage_agent.h"
 
+using namespace std;
+
 //#define DIAGNOSTIC_OUTPUT
 //#undef DIAGNOSTIC_OUTPUT
 
@@ -131,7 +133,7 @@ sheaf::poset_scaffold::
 poset_scaffold(const poset_state_handle& xposet,
 	       const storage_agent::transaction& xtrans,
 	       data_type_map& xtype_map,
-	       const string& xfile_id_space_name,
+	       const std::string& xfile_id_space_name,
 	       bool xis_write_transaction)
   : _structure(const_cast<poset_state_handle&>(xposet)),
     _type_map(xtype_map),
@@ -390,7 +392,7 @@ index() const
   return _structure.index();
 }
 
-string
+std::string
 sheaf::poset_scaffold::
 name() const
 {
@@ -453,7 +455,7 @@ type_map() const
   return _type_map;
 }
 
-const string&
+const std::string&
 sheaf::poset_scaffold::
 file_id_space_name() const
 {
@@ -583,7 +585,7 @@ initialize_transfer_schema_for_read(const scoped_index& xindex)
 
 void
 sheaf::poset_scaffold::
-insert_id_name_pair(pod_index_type xid, const string& xname, block<char>& xbuf)
+insert_id_name_pair(pod_index_type xid, const std::string& xname, block<char>& xbuf)
 {
   // Preconditions:
 
@@ -636,7 +638,7 @@ insert_id_name_pair(pod_index_type xid, const string& xname, block<char>& xbuf)
 
 void
 sheaf::poset_scaffold::
-extract_id_name_pair(pod_index_type& xid, string& xname, char*& xbuf)
+extract_id_name_pair(pod_index_type& xid, std::string& xname, char*& xbuf)
 {
   // Preconditions:
 
@@ -1269,14 +1271,14 @@ subposet_id_space() const
   return result;
 }
 
-vector<sheaf::subposet*>&
+std::vector<sheaf::subposet*>&
 sheaf::poset_scaffold::
 subposets()
 {
   return _subposets;
 }
 
-const vector<sheaf::subposet*>&
+const std::vector<sheaf::subposet*>&
 sheaf::poset_scaffold::
 subposets() const
 {

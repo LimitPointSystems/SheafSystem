@@ -20,7 +20,10 @@
 
 #include "subposet_state.h"
 #include "assert_contract.h"
+#include "std_iomanip.h"
 #include "zn_to_bool.h"
+
+using namespace std;
 
 // ===========================================================
 // SUBPOSET_STATE FACET

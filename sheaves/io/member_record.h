@@ -97,7 +97,7 @@ private:
   ///
   /// Type for table of contents
   ///
-  typedef bitset<numeric_limits<pod_index_type>::digits> toc_type;
+  typedef std::bitset<std::numeric_limits<pod_index_type>::digits> toc_type;
 
   ///
   /// Names for the toc bit fields.
@@ -124,7 +124,7 @@ private:
     // Use the remaining bits to store subposet membership.
 
     SUBPOSET_BITS_BEGIN,
-    SUBPOSET_BITS_END = numeric_limits<pod_index_type>::digits - 1,
+    SUBPOSET_BITS_END = std::numeric_limits<pod_index_type>::digits - 1,
     LAST_BIT = SUBPOSET_BITS_END // Not used.
   };
 
@@ -137,7 +137,7 @@ private:
   block<pod_index_type> _upper_cover;
   block<pod_index_type> _subposet_ids;
   block<pod_index_type> _eqv_ids;
-  block<string> _names;
+  block<std::string> _names;
 
 
   // External buffer layout:

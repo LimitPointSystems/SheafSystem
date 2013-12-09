@@ -19,6 +19,8 @@
 
 #include "wsv_block.impl.h"
 
+using namespace std;
+
 using namespace sheaf; // workaround for MS C++ bug.
 
 
@@ -37,7 +39,7 @@ using namespace sheaf; // workaround for MS C++ bug.
 template <>
 wsv_block<bool>&
 wsv_block<bool>::
-operator=(const string& xlist)
+operator=(const std::string& xlist)
 {
   // Preconditions:
 

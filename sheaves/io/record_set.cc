@@ -27,6 +27,8 @@
 #include "sheaf_file.h"
 #include "record.h"
 
+using namespace std;
+
 //#define DIAGNOSTIC_OUTPUT
 //#undef DIAGNOSTIC_OUTPUT
 
@@ -217,7 +219,7 @@ file() const
 
 
 ///
-string
+std::string
 sheaf::record_set::
 name() const
 {
@@ -240,7 +242,7 @@ name() const
 
 
 ///
-string
+std::string
 sheaf::record_set::
 alias() const
 {
@@ -261,7 +263,7 @@ alias() const
 }
 
 
-const string&
+const std::string&
 sheaf::record_set::
 name_space_alias()
 {
@@ -269,7 +271,7 @@ name_space_alias()
   return result;
 }
 
-const string&
+const std::string&
 sheaf::record_set::
 name_space_prefix()
 {
@@ -277,7 +279,7 @@ name_space_prefix()
   return result;
 }
 
-const string&
+const std::string&
 sheaf::record_set::
 suffix() const
 {
@@ -301,9 +303,9 @@ suffix() const
   return result;
 }
 
-string
+std::string
 sheaf::record_set::
-data_set_name(const string& xname) const
+data_set_name(const std::string& xname) const
 {
   // cout << endl << "Entering record_set::data_set_name." << endl;
 
@@ -333,9 +335,9 @@ data_set_name(const string& xname) const
   return result;
 }
 
-string
+std::string
 sheaf::record_set::
-data_set_alias(const string& xname) const
+data_set_alias(const std::string& xname) const
 {
   // cout << endl << "Entering record_set::data_set_alias." << endl;
 
@@ -366,7 +368,7 @@ data_set_alias(const string& xname) const
 }
 
 
-string
+std::string
 sheaf::record_set::
 poset_name() const
 {
@@ -1043,7 +1045,7 @@ sheaf::record_set::
 read_attribute(const char*& xatt_values,
                size_type& xatt_ct,
                const data_converter* xatt_conv,
-               const string& xatt_name)
+               const std::string& xatt_name)
 {
   // Preconditions:
 
@@ -1133,7 +1135,7 @@ sheaf::record_set::
 write_attribute(const void* xatt_values,
                 size_type xatt_ct,
                 const data_converter* xatt_conv,
-                const string& xatt_name)
+                const std::string& xatt_name)
 {
   // Preconditions:
 

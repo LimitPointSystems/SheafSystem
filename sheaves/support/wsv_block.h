@@ -70,7 +70,7 @@ public:
   ///
   /// Creates an instance initialized from whitespace-separated list xlist.
   ///
-  wsv_block(const string& xlist);
+  wsv_block(const std::string& xlist);
 
   using block<T>::operator=;
 
@@ -84,7 +84,7 @@ public:
   /// Sets the contents of this to the contents of
   /// whitespace-separated list xlist.
   ///
-  wsv_block& operator=(const string& xlist);
+  wsv_block& operator=(const std::string& xlist);
 
   ///
   /// Sets the contents of this to the contents of
@@ -123,7 +123,7 @@ template <>
 SHEAF_DLL_SPEC
 wsv_block<bool>&
 wsv_block<bool>::
-operator=(const string& xlist);
+operator=(const std::string& xlist);
 
 // ===========================================================
 // NON-MEMBER FUNCTIONS

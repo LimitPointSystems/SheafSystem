@@ -96,7 +96,7 @@ private:
   ///
   /// The data file stream
   ///
-  ofstream* _data_file;
+  std::ofstream* _data_file;
 
   ///
   /// The number of curves

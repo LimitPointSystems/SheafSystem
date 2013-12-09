@@ -32,6 +32,8 @@
 #include "std_strstream.h"
 #include "std_string.h"
 
+using namespace std;
+
 //#define DIAGNOSTIC_OUTPUT
 //#undef DIAGNOSTIC_OUTPUT
 
@@ -271,7 +273,7 @@ dof_tuple_record_set(const sheaf_file& xfile,
 }
 
 
-const string&
+const std::string&
 sheaf::dof_tuple_record_set::
 suffix() const
 {

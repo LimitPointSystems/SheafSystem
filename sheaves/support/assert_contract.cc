@@ -19,7 +19,6 @@
 /// Implementation for class assert_contract
 
 #include "assert_contract.h"
-#include "std_iostream.h"
 #include "std_stdexcept.h"
 #include "std_sstream.h"
 #include "std_string.h"
@@ -28,6 +27,7 @@
 #include "windows.h" // Compiling with MS C++, needed for OutputDebugString.
 #endif
 
+using namespace std;
 using namespace sheaf;  // Workaround for MSVC++ bug
 
 namespace

@@ -37,6 +37,7 @@
 #include "triorder_itr.h"
 
 using namespace sheaf;
+using namespace std;
 
 //#define DIAGNOSTIC_OUTPUT
 

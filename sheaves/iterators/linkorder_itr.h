@@ -109,7 +109,7 @@ public:
   /// If xstrict, iterate over strict up/down set only.
   ///
   linkorder_itr(const abstract_poset_member& xanchor,
-		const string& xfilter_name,
+		const std::string& xfilter_name,
 		bool xdown,
 		bool xstrict);
 
@@ -157,7 +157,7 @@ typedef linkorder_itr<zn_to_bool> zn_to_bool_linkorder_itr;
 ///
 /// Linkorder_itr<T> using set for _has_visited markers.
 ///
-typedef linkorder_itr< set<pod_index_type> > set_linkorder_itr;
+typedef linkorder_itr< std::set<pod_index_type> > set_linkorder_itr;
 
 ///
 /// Linkorder_itr<T> using hash_set for _has_visited markers.

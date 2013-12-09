@@ -24,6 +24,8 @@
 #include "primitive_attributes.h"
 #include "std_iomanip.h"
 
+using namespace std;
+
 namespace
 {
 const int PRIMITIVE_TYPE_CT = sheaf::PRIMITIVE_TYPE_END - sheaf::PRIMITIVE_TYPE_BEGIN;

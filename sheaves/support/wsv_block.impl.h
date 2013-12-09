@@ -120,7 +120,7 @@ wsv_block(const char* xlist)
 
 template <typename T>
 wsv_block<T>::
-wsv_block(const string& xlist)
+wsv_block(const std::string& xlist)
 {
   // Preconditions:
 
@@ -161,13 +161,13 @@ operator=(const wsv_block& xother)
 template <typename T>
 wsv_block<T>&
 wsv_block<T>::
-operator=(const string& xlist)
+operator=(const std::string& xlist)
 {
   // Preconditions:
 
   // Body:
 
-  stringstream lval_stream;
+  std::stringstream lval_stream;
   lval_stream.str(xlist);
 
   T lval;
@@ -196,7 +196,7 @@ operator=(const char* xlist)
 
   // Body:
 
-  this->operator=(string(xlist));
+  this->operator=(std::string(xlist));
 
   // Postconditions:
 

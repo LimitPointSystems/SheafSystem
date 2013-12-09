@@ -206,7 +206,7 @@ public:
   /// The reserved name for the local id space of
   /// the ramge member with index xindex.
   ///
-  static string local_id_space_name(pod_index_type xindex);
+  static std::string local_id_space_name(pod_index_type xindex);
 
   ///
   /// The local id space of this interval.
@@ -331,12 +331,12 @@ protected:
   ///
   /// Creates a name for the explicit cover id space for member with index, xmbr_index.
   ///
-  static string explicit_cover_name(bool xlower, const scoped_index& xmbr_index);
+  static std::string explicit_cover_name(bool xlower, const scoped_index& xmbr_index);
 
   ///
   /// Creates a name for the explicit cover id space for member with index, xmbr_index.
   ///
-  static string explicit_cover_name(bool xlower, pod_index_type xmbr_index);
+  static std::string explicit_cover_name(bool xlower, pod_index_type xmbr_index);
 
   ///
   /// The type of the explicit cover maps..

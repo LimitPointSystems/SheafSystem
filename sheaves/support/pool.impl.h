@@ -408,7 +408,7 @@ void
 pool<T, EXTENSION_FACTOR>::
 print() const
 {   
-  print(cout);
+  print(std::cout);
 }
 
 template <typename T, int EXTENSION_FACTOR>
@@ -417,26 +417,26 @@ pool<T, EXTENSION_FACTOR>::
 print(std::ostream &os) const
 {
 
-  os << endl;
+  os << std::endl;
 
   os << "pool "
-  << hex
-  << (void *)this
-  << dec
-  << " free_ct = "
-  << _free_ct
-  << " allocated_ct = "
-  << _allocated_ct
-  << " free_list = "
-  << _free_list
-  << endl
-  << endl;
+     << std::hex
+     << (void *)this
+     << std::dec
+     << " free_ct = "
+     << _free_ct
+     << " allocated_ct = "
+     << _allocated_ct
+     << " free_list = "
+     << _free_list
+     << std::endl
+     << std::endl;
 
   for (pod_index_type i = 0; i < _pool.ub(); ++i)
   {
-    os << "member: " << setw(5) << i << "   ";
+    os << "member: " << std::setw(5) << i << "   ";
     os << *(_pool[i]);
-    os << endl;
+    os << std::endl;
   }
 
 

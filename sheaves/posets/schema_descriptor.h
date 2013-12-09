@@ -106,7 +106,7 @@ public:
   ///
   /// The name of the dof described by this.
   ///
-  string name;
+  std::string name;
 
   ///
   /// The type of the dof described by this.

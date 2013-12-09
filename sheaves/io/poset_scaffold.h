@@ -69,10 +69,6 @@
 #include "std_hash_map.h"
 #endif
 
-#ifndef STD_SET_H
-#include "std_set.h"
-#endif
-
 #ifndef STD_VECTOR_H
 #include "std_vector.h"
 #endif
@@ -121,7 +117,7 @@ public:
   poset_scaffold(const poset_state_handle& xposet,
 		 const storage_agent::transaction& xtrans,
 		 data_type_map& xtype_map,
-		 const string& xfile_id_space_name,
+		 const std::string& xfile_id_space_name,
 		 bool xis_write_transaction);
 
   ///
@@ -228,7 +224,7 @@ public:
   ///
   /// The name of this poset.
   ///
-  string name() const;
+  std::string name() const;
 
   ///
   /// The schema of the poset in internal namespace (mutable version).
@@ -273,7 +269,7 @@ public:
   ///
   /// The name of the id space used for the member index map.
   ///
-  const string& file_id_space_name() const;
+  const std::string& file_id_space_name() const;
 
   ///
   /// True if poset has more than one version (mutable version).
@@ -301,12 +297,12 @@ public:
   ///
   /// Inserts xid, xname pair into char buffer xbuf.
   ///
-  void insert_id_name_pair(pod_index_type xid, const string& xname, block<char>& xbuf);
+  void insert_id_name_pair(pod_index_type xid, const std::string& xname, block<char>& xbuf);
 
   ///
   /// Extracts xid, xname pair from char buffer xbuf.
   ///
-  void extract_id_name_pair(pod_index_type& xid, string& xname, char*& xbuf);
+  void extract_id_name_pair(pod_index_type& xid, std::string& xname, char*& xbuf);
 
   ///
   /// Transfers the enitre poset member name map to the scaffold name map.
@@ -385,7 +381,7 @@ private:
   ///
   /// The name of the id space used for the external index maps.
   ///
-  string _file_id_space_name;
+  std::string _file_id_space_name;
 
   ///
   /// True if poset has more than one version.
@@ -467,7 +463,7 @@ public:
   ///
   /// Type of member class names map.
   ///
-  typedef hash_map<pod_index_type, pair<string, size_type> > member_class_names_type;
+  typedef hash_map<pod_index_type, pair<std::string, size_type> > member_class_names_type;
 
   ///
   /// Member class names (mutable version).
@@ -558,12 +554,12 @@ public:
   ///
   /// Buffer for subposet handles (mutable version).
   ///
-  vector<subposet*>& subposets();
+  std::vector<subposet*>& subposets();
 
   ///
   /// Buffer for subposet handles (const version).
   ///
-  const vector<subposet*>& subposets() const;
+  const std::vector<subposet*>& subposets() const;
 
   ///
   /// Converts namespace relative subposet id at location xbuf
@@ -589,7 +585,7 @@ private:
   ///
   /// Buffer for subposet handles
   ///
-  vector<subposet*> _subposets;
+  std::vector<subposet*> _subposets;
 
   ///
   /// Initializes subposet index space and handle buffer.
@@ -669,7 +665,7 @@ public:
   ///
   /// Type of dof tuple class names map.
   ///
-  typedef hash_map<pod_index_type, string> dof_tuple_class_names_type;
+  typedef hash_map<pod_index_type, std::string> dof_tuple_class_names_type;
 
   ///
   /// Dof tuple class names (mutable version).
@@ -787,7 +783,7 @@ public:
   ///
   /// Type of dof tuple domain offsets map.
   ///
-  typedef map<pair<pod_index_type, pod_index_type>, pod_index_type>
+  typedef std::map<pair<pod_index_type, pod_index_type>, pod_index_type>
     dof_tuple_domain_offsets_type;
 
   ///

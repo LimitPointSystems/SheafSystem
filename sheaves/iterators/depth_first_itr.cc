@@ -125,7 +125,7 @@ put_has_visited(pod_index_type xindex, bool xvalue)
 
 template <>
 void
-sheaf::depth_first_itr< set<sheaf::pod_index_type> >::
+sheaf::depth_first_itr< std::set<sheaf::pod_index_type> >::
 clear_has_visited()
 {
   _has_visited->clear();
@@ -133,7 +133,7 @@ clear_has_visited()
 
 template <>
 void
-sheaf::depth_first_itr< set<sheaf::pod_index_type> >::
+sheaf::depth_first_itr< std::set<sheaf::pod_index_type> >::
 reserve_has_visited(sheaf::pod_index_type xub)
 {
   // No action required.
@@ -141,7 +141,7 @@ reserve_has_visited(sheaf::pod_index_type xub)
 
 template <>
 bool
-sheaf::depth_first_itr< set<sheaf::pod_index_type> >::
+sheaf::depth_first_itr< std::set<sheaf::pod_index_type> >::
 has_visited(pod_index_type xindex) const
 {
 
@@ -161,7 +161,7 @@ has_visited(pod_index_type xindex) const
 
 template <>
 void
-sheaf::depth_first_itr< set<sheaf::pod_index_type> >::
+sheaf::depth_first_itr< std::set<sheaf::pod_index_type> >::
 initialize_has_visited(const abstract_poset_member& xanchor)
 {
   // Preconditions:
@@ -176,7 +176,7 @@ initialize_has_visited(const abstract_poset_member& xanchor)
     delete _has_visited;
   }
 
-  _has_visited = new set<pod_index_type>;
+  _has_visited = new std::set<pod_index_type>;
 
   // Postconditions:
 
@@ -190,7 +190,7 @@ initialize_has_visited(const abstract_poset_member& xanchor)
 
 template <>
 void
-sheaf::depth_first_itr< set<sheaf::pod_index_type> >::
+sheaf::depth_first_itr< std::set<sheaf::pod_index_type> >::
 put_has_visited(pod_index_type xindex, bool xvalue)
 {
 

@@ -28,6 +28,7 @@
 #include "std_sstream.h"
 
 using namespace sheaf;
+using namespace std;
 
 namespace
 {
@@ -1102,7 +1103,7 @@ sheaf::primitive_value::
 // ===========================================================
 
 ///
-std::std::string
+std::string
 sheaf::primitive_value::
 to_string() const
 {

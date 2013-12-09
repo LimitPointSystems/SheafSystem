@@ -108,7 +108,7 @@ private:
   /// @todo replace this representation with something
   /// more sophisticated that supports hyperslices
   ///
-  queue<pod_index_type> _record_queue;
+  std::queue<pod_index_type> _record_queue;
 
 
   //@}

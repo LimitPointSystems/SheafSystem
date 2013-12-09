@@ -29,6 +29,7 @@
 #include "std_sstream.h"
 
 using namespace sheaf;
+using namespace std;
 
 namespace
 {

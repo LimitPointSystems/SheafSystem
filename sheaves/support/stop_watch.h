@@ -145,7 +145,7 @@ private:
   ///
   /// The lap times.
   ///
-  vector<double> _lap_times;
+  std::vector<double> _lap_times;
 
 };
 
@@ -157,7 +157,8 @@ private:
 /// Inserts lap times for stop_watch xsw into ostream xos.
 ///
 SHEAF_DLL_SPEC
-ostream & operator << (ostream &os, stop_watch& xsw);
+std::ostream&
+operator << (std::ostream &os, stop_watch& xsw);
  
 } // namespace sheaf
 

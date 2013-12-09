@@ -32,6 +32,8 @@
 #include "std_iomanip.h"
 #include "total_poset_member.h"
 
+using namespace std;
+
 // ===========================================================
 // PRIMITIVES_POSET FACET
 // ===========================================================

@@ -23,6 +23,8 @@
 #include "deep_size.h"
 #include "interval_set_iterator.h"
 
+using namespace std;
+
 // =============================================================
 // INTERVAL_SET FACET
 // =============================================================
@@ -744,6 +746,7 @@ invariant() const
 // ===========================================================
 // NON-MEMBER FUNCTIONS
 // ===========================================================
+
 std::ostream&
 sheaf::operator << (std::ostream& xos, const interval_set& xset)
 {

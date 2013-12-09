@@ -158,7 +158,8 @@ private:
 /// Inserts block xblk into ostream xos.
 ///
 SHEAF_DLL_SPEC
-ostream& operator << (ostream& xos, const id_block& xblk);
+std::ostream&
+operator << (std::ostream& xos, const id_block& xblk);
 
 } // namespace sheaf
 

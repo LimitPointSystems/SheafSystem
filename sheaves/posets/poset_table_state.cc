@@ -23,12 +23,14 @@
 
 #include "array_poset_dof_map.h"
 #include "assert_contract.h"
-#include "factory_2.h"
 #include "index_space_iterator.h"
 #include "poset_dof_iterator.h"
 #include "poset_state_handle.h"
 #include "schema_poset_member.h"
+#include "std_iomanip.h"
 #include "primitive_value.h"
+
+using namespace std;
 
 // ===========================================================
 // POSET_TABLE_STATE FACET

@@ -31,6 +31,7 @@
 #include "singleton_index_space_handle.h"
 #include "sum_index_space_handle.h"
 
+using namespace std;
 using namespace sheaf; // Workaround for MS C++ bug.
 
 //============================================================

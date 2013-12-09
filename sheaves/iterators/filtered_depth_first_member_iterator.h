@@ -170,7 +170,7 @@ public:
   ///
   /// Sets the subposet which is the filter.
   ///
-  void put_filter(const string& xfilter_name);
+  void put_filter(const std::string& xfilter_name);
 
   ///
   /// Sets the subposet which is the filter.

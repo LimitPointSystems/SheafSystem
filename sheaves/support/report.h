@@ -80,7 +80,7 @@ public:
   ///
   /// Starts a new report with title, xtitle.
   ///
-  void start(const string& xname);
+  void start(const std::string& xname);
 
   ///
   /// Reset the report.
@@ -90,12 +90,12 @@ public:
   ///
   /// Mark a point named, xname, in the report.
   ///
-  void point(const string& xname);
+  void point(const std::string& xname);
 
   ///
   /// Write the report to a comma separated value file.
   ///
-  void write(const string& xfile_name) const;  
+  void write(const std::string& xfile_name) const;  
 
   ///
   /// Namespace for the report.
@@ -108,7 +108,7 @@ public:
   ///
   /// Title of the report.
   ///
-  inline string title() const
+  inline std::string title() const
   {
     return _title;
   };
@@ -124,7 +124,7 @@ public:
   ///
   /// Names of the report points.
   ///
-  inline block<string> names() const
+  inline block<std::string> names() const
   {
     return _names;
   };
@@ -155,7 +155,7 @@ private:
   ///
   /// Title of the report.
   ///
-  string _title;
+  std::string _title;
 
   ///
   /// Stop watch used to time the report points.
@@ -165,7 +165,7 @@ private:
   ///
   /// Names of the report points.
   ///
-  block<string> _names;
+  block<std::string> _names;
 
   ///
   /// Deep size of the namespace for each point.
@@ -187,7 +187,7 @@ private:
 /// Inserts the report xreport into ostream xos.
 ///
 SHEAF_DLL_SPEC
-ostream & operator << (ostream &os, report& xreport);
+std::ostream & operator << (std::ostream &os, report& xreport);
  
 } // namespace sheaf
 

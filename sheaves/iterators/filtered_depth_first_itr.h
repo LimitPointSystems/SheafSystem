@@ -161,7 +161,7 @@ public:
   /// If xstrict, iterate over strict up/down set only.
   ///
   filtered_depth_first_itr(const abstract_poset_member& xanchor,
-                           const string& xfilter_name,
+                           const std::string& xfilter_name,
                            bool xdown,
                            bool xstrict,
                            typename depth_first_itr<T>::order_type xorder = depth_first_itr<T>::TRIORDER);
@@ -213,7 +213,7 @@ public:
   ///
   /// Sets the subposet which is the filter.
   ///
-  void put_filter(const string& xfilter_name);
+  void put_filter(const std::string& xfilter_name);
 
   ///
   /// Sets the subposet which is the filter.

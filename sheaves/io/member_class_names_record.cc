@@ -22,6 +22,8 @@
 #include "assert_contract.h"
 #include "std_sstream.h"
 
+using namespace std;
+
 //#define DIAGNOSTIC_OUTPUT
 
 // =============================================================================

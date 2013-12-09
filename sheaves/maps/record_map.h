@@ -243,9 +243,8 @@ public:
   /// Prints the data members of this on stream xos.
   /// Intended for use debugging.
   ///
-  void print(ostream& xos,
-             const record_map<internal_index_type,
-                              external_index_type>& xp) const;
+  void print(std::ostream& xos,
+	     const record_map<internal_index_type, external_index_type>& xp) const;
 
 protected:
 
@@ -325,9 +324,8 @@ private:
 // ===========================================================
 
 template<typename internal_index_type, typename external_index_type>
-ostream& operator<<(ostream& xos,
-                    const record_map<internal_index_type,
-                                     external_index_type>& xp);
+std::ostream&
+operator<<(std::ostream& xos, const record_map<internal_index_type, external_index_type>& xp);
 
  
 } // namespace sheaf

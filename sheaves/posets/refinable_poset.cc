@@ -33,6 +33,7 @@ class index_iterator;
 #include "std_strstream.h"
 #include "subposet.h"
 
+using namespace std;
 
 // ===========================================================
 // REFINABLE_POSET FACET

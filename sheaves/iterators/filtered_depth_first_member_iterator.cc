@@ -403,7 +403,7 @@ put_filter(const subposet& xfilter)
 
 void
 sheaf::filtered_depth_first_member_iterator::
-put_filter(const string& xfilter_name)
+put_filter(const std::string& xfilter_name)
 {
 
   // Preconditions:

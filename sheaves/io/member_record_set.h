@@ -105,7 +105,7 @@ public:
   ///
   /// The name suffix for this data set.
   ///
-  virtual const string& suffix() const;
+  virtual const std::string& suffix() const;
 
   ///
   /// Internalize the members of scafold().structure() from disk.
@@ -261,7 +261,7 @@ private:
   ///
   /// Name of the interval member space.
   ///
-  string _interval_id_space_name;
+  std::string _interval_id_space_name;
 
   ///
   /// Id space from internal member id to interval member.

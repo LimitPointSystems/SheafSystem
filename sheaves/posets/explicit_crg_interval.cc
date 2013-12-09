@@ -169,7 +169,7 @@ const std::string&
 sheaf::explicit_crg_interval::
 class_name() const
 {
-  static const string result("explicit_crg_interval");
+  static const std::string result("explicit_crg_interval");
   return result;
 }
 

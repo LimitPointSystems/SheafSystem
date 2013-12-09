@@ -73,7 +73,7 @@ protected:
   /// Storage for abstract_poset_member objects, so we can reuse them,
   /// rather than creating one for each member in the graph.
   ///
-  stack<abstract_poset_member*> _free_mbrs;
+  std::stack<abstract_poset_member*> _free_mbrs;
 
   // actions:
 

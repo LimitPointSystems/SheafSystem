@@ -379,8 +379,9 @@ id_block()
 // NON-MEMBER FUNCTIONS
 // =============================================================================
 
-ostream&
-sheaf::operator << (ostream& xos, const id_block& xblk)
+std::ostream&
+sheaf::
+operator << (std::ostream& xos, const id_block& xblk)
 {
 
   // Preconditions:

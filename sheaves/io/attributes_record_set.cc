@@ -26,7 +26,8 @@
 #include "poset_bounds.h"
 #include "poset_bounds_descriptor.h"
 #include "sheaf_file.h"
-#include "std_iostream.h"
+
+using namespace std;
 
 //#define DIAGNOSTIC_OUTPUT
 //#undef DIAGNOSTIC_OUTPUT
@@ -250,7 +251,7 @@ attributes_record_set(const sheaf_file& xfile, const poset_scaffold& xscaffold)
   ensure(record_buffer_ct() == 0);
 }
 
-const string&
+const std::string&
 sheaf::attributes_record_set::
 suffix() const
 {

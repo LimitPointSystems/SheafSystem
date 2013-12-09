@@ -24,6 +24,8 @@
 #include "std_iostream.h"
 #include "std_algorithm.h"
 
+using namespace std;
+
 ///
 sheaf::int_set::
 int_set()
@@ -569,7 +571,9 @@ print() const
 
  
 
-ostream & sheaf::operator << (ostream &os, const int_set& c)
+std::ostream &
+sheaf::
+operator << (std::ostream &os, const int_set& c)
 {
   copy(c.begin(), c.end(), ostream_iterator<int>(os, " "));
   return os;

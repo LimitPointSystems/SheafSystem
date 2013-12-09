@@ -34,6 +34,8 @@
 #include "std_iostream.h"
 #include "std_strstream.h"
 
+using namespace std;
+
 //#define DIAGNOSTIC_OUTPUT
 // #undef DIAGNOSTIC_OUTPUT
 
@@ -261,7 +263,7 @@ sheaf::member_record_set::
 }
 
 
-const string&
+const std::string&
 sheaf::member_record_set::
 suffix() const
 {

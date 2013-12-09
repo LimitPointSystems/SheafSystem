@@ -735,7 +735,7 @@ print() const
 
   // Body:
    
-  print(cout, *this);
+  print(std::cout, *this);
 
  // Postconditions:
 
@@ -745,13 +745,14 @@ print() const
 template <typename internal_index_type, typename external_index_type>
 void
 record_map<internal_index_type, external_index_type>::
-print(ostream& xos,
+print(std::ostream& xos,
       const record_map<internal_index_type, external_index_type>& xp) const
 {
   // Preconditions:
 
   // Body:
 
+  using namespace std;
 
   record_map<internal_index_type, external_index_type>& lp =
     const_cast<record_map<internal_index_type, external_index_type>&>(xp);
@@ -812,9 +813,9 @@ print(ostream& xos,
 //==============================================================================
 
 template<typename internal_index_type, typename external_index_type>
-ostream& operator<<(ostream& xos,
-                    const record_map<internal_index_type,
-                                     external_index_type>& xp)
+std::ostream&
+operator<<(std::ostream& xos,
+	   const record_map<internal_index_type, external_index_type>& xp)
 {
   // Preconditions:
 

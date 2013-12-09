@@ -100,7 +100,7 @@ public:
   ///
   /// The name of this file.
   ///
-  inline string name() const
+  inline std::string name() const
   {
     return _name;
   } ;
@@ -114,7 +114,7 @@ public:
   /// Opens a file with name xname, with access mode xmode.
   /// If xclobber and the file already exists, delete it first.
   ///
-  void open(const string &xname, access_mode xmode = READ_WRITE, bool xclobber = true);
+  void open(const std::string &xname, access_mode xmode = READ_WRITE, bool xclobber = true);
 
   ///
   /// True if this file is open.
@@ -152,7 +152,7 @@ private:
   ///
   /// The name of this file.
   ///
-  string _name;
+  std::string _name;
 
   ///
   /// A handle for the underlying HDF file

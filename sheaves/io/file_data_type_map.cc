@@ -26,6 +26,8 @@
 #include "primitive_attributes.h"
 #include "sheaf_file.h"
 
+using namespace std;
+
 // ===========================================================
 // ANY FACET
 // ===========================================================

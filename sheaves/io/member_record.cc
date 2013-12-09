@@ -36,6 +36,8 @@
 #include "record_queue.h"
 #include "standard_dof_tuple_index.h"
 
+using namespace std;
+
 //#define DIAGNOSTIC_OUTPUT
 // #undef DIAGNOSTIC_OUTPUT
 

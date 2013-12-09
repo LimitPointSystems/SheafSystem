@@ -32,6 +32,8 @@
 
 #include "block.impl.h"
 
+using namespace std;
+
 // #define DIAGNOSTIC_OUTPUT
 
 ///

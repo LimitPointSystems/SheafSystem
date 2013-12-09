@@ -41,6 +41,8 @@
 #include "index_space_iterator.h"
 #endif
    
+using namespace std;
+
 
 // ===========================================================
 // POSET_CRG_STATE FACET

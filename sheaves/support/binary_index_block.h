@@ -202,7 +202,8 @@ protected:
 /// Inserts block xblk into ostream xos.
 ///
 template <class T>
-ostream& operator << (ostream& xos, const binary_index_block<T>& xblk);
+std::ostream&
+operator << (std::ostream& xos, const binary_index_block<T>& xblk);
  
 } // namespace sheaf
 

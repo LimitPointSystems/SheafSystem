@@ -120,7 +120,7 @@ public:
   /// If xstrict, iterate over strict up/down set only.
   ///
   biorder_iterator(const abstract_poset_member& xanchor,
-                   const string& xfilter_name,
+                   const std::string& xfilter_name,
                    bool xdown,
                    bool xstrict);
 };

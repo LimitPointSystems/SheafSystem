@@ -21,6 +21,7 @@
 
 #include "std_limits.h"
 
+using namespace std;
 
 // =============================================================================
 // POD TYPES FACET

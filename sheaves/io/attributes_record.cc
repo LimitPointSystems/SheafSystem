@@ -23,6 +23,7 @@
 #include "namespace_poset.h"
 #include "poset.h"
 
+using namespace std;
 
 // PUBLIC MEMBER FUNCTIONS
 

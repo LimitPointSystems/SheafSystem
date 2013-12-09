@@ -56,6 +56,8 @@
 #include "triorder_itr.h"
 #include "zn_to_bool.h"
 
+using namespace std;
+
 //#define DIAGNOSTIC_OUTPUT
 
 // ============================================================================

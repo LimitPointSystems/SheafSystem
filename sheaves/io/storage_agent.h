@@ -40,24 +40,12 @@
 #include "sheaf_file.h"
 #endif
 
-#ifndef STD_CTIME_H
-#include "std_ctime.h"
-#endif
-
-#ifndef STD_MAP_H
-#include "std_map.h"
-#endif
-
 #ifndef STD_SET_H
 #include "std_set.h"
 #endif
 
 #ifndef STD_STRING_H
 #include "std_string.h"
-#endif
-
-#ifndef STD_VECTOR_H
-#include "std_vector.h"
 #endif
 
 namespace sheaf
@@ -132,7 +120,7 @@ public:
   /// Locks the file against deletion, but does not prevent access to the
   /// file by other processes.
   ///
-  storage_agent(const string& xfile_name,
+  storage_agent(const std::string& xfile_name,
                 sheaf_file::access_mode xmode = sheaf_file::READ_WRITE,
                 bool xclobber = true,
                 bool xenable_error_report = false);
@@ -167,7 +155,7 @@ public:
   ///
   /// The name of the id spaces associated with this file in each poset.
   ///
-  const string& file_id_space_name() const;
+  const std::string& file_id_space_name() const;
 
   ///
   /// Reset the start time.  Set the start time to the CPU time when this
@@ -613,14 +601,14 @@ private:
   ///
   /// The name of the id spaces associated with this file in each poset.
   ///
-  string _file_id_space_name;
+  std::string _file_id_space_name;
 
   ///
   /// The set of active transactions.
   /// @hack until this set is shared between processes,
   /// we do not actually have any real transaction control.
   ///
-  set<transaction> _active_transactions;
+  std::set<transaction> _active_transactions;
 
   ///
   /// The start time.  Set to the value of clock() when the constructor is

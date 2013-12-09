@@ -561,8 +561,8 @@ assign(const T& xitem)
 
 ///
 template <typename T>
-ostream&
-operator << (ostream& xos, const binary_index_block<T>& xblk)
+std::ostream&
+operator << (std::ostream& xos, const binary_index_block<T>& xblk)
 {
   for(int i=0; i<xblk.i_ct(); ++i)
   {

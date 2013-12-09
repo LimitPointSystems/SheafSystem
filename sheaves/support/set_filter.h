@@ -42,14 +42,14 @@ public:
   ///
   /// Creates an instance for hash_set xfilter.
   ///
-  set_filter(const set<pod_index_type>& xfilter)
+  set_filter(const std::set<pod_index_type>& xfilter)
     : _filter(xfilter)
   {};
   
   ///
   /// The filter.
   ///
-  const set<pod_index_type>& filter() const
+  const std::set<pod_index_type>& filter() const
   {
     return _filter;
   };
@@ -64,7 +64,7 @@ public:
   
 private:
 
-  const set<pod_index_type>& _filter;
+  const std::set<pod_index_type>& _filter;
 };
 
 } // end namespace sheaf

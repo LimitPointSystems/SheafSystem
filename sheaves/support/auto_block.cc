@@ -20,6 +20,8 @@
 
 #include "auto_block.impl.h"
 
+using namespace std;
+
 // ===========================================================
 // INVALID_BLOCK_INITIALIZATION_POLICY SPECIALIZATIONS
 // ===========================================================

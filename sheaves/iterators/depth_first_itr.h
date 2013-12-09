@@ -258,7 +258,7 @@ protected:
   /// Initializes the client filter to the subposet with name
   /// xfilter_name then initializes the filter from the client filter.
   ///
-  void initialize_filter(const string& xfilter_name);
+  void initialize_filter(const std::string& xfilter_name);
 
   ///
   /// Release the cover iterators back to the pool of iterators.
@@ -413,14 +413,14 @@ protected:
   /// The tail of the path to the current member of the iteration
   /// greater_index() == **(_path_tail.top()) == greater member of current link.
   ///
-  stack<index_space_iterator*> _path_tail;
+  std::stack<index_space_iterator*> _path_tail;
 
   ///
   /// The tail of the filtered path to the current member of the iteration.
   /// Contains only members which pass the filter; equivalent to the path
   /// in the subposet selected by the filter.
   ///
-  stack<pod_index_type> _filtered_path_tail;
+  std::stack<pod_index_type> _filtered_path_tail;
 
   ///
   /// True if traversal should only visit a member once;
@@ -731,33 +731,33 @@ put_has_visited(pod_index_type xhub_id, bool xvalue);
 template <>
 SHEAF_DLL_SPEC
 void
-depth_first_itr< set<pod_index_type> >::
+depth_first_itr< std::set<pod_index_type> >::
 clear_has_visited();
 
 
 template <>
 SHEAF_DLL_SPEC
 void
-depth_first_itr< set<pod_index_type> >::
+depth_first_itr< std::set<pod_index_type> >::
 reserve_has_visited(pod_index_type xub);
 
 template <>
 SHEAF_DLL_SPEC
 bool
-depth_first_itr< set<pod_index_type> >::
+depth_first_itr< std::set<pod_index_type> >::
 has_visited(pod_index_type xhub_id) const;
 
 
 template <>
 SHEAF_DLL_SPEC
 void
-depth_first_itr< set<pod_index_type> >::
+depth_first_itr< std::set<pod_index_type> >::
 initialize_has_visited(const abstract_poset_member& xanchor);
 
 template <>
 SHEAF_DLL_SPEC
 void
-depth_first_itr< set<pod_index_type> >::
+depth_first_itr< std::set<pod_index_type> >::
 put_has_visited(pod_index_type xhub_id, bool xvalue);
 
 template <>

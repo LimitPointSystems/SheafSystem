@@ -24,6 +24,7 @@
 #include "std_set.h"
 #include "std_hash_set.h"
 
+using namespace std;
 using namespace sheaf; // workaround for MS C++ bug.
 
 //==============================================================================

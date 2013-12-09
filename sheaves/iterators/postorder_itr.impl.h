@@ -179,7 +179,7 @@ postorder_itr(const abstract_poset_member& xanchor,
 template <typename T>
 postorder_itr<T>::
 postorder_itr(const abstract_poset_member& xanchor,
-              const string& xfilter_name,
+              const std::string& xfilter_name,
               bool xdown,
               bool xstrict)
     : filtered_depth_first_itr<T>::filtered_depth_first_itr(xanchor, xfilter_name, xdown, xstrict, depth_first_itr<T>::POSTORDER)

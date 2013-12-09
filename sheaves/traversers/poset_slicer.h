@@ -192,7 +192,7 @@ private:
   bool _select_only_deepest;
   // True if minimal and going down or maxinal and going up
 
-  stack<bool> _select_enabled;
+  std::stack<bool> _select_enabled;
   // True if selection enabled
 
   int _depth_below_shallowest;

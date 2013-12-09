@@ -21,9 +21,11 @@
 
 #include "namespace_relative_subposet_index.h"
 
+using namespace std;
+
 ///
-ostream&
-sheaf::operator<<(ostream& xos, const namespace_relative_subposet_index& xindex)
+std::ostream&
+sheaf::operator<<(std::ostream& xos, const namespace_relative_subposet_index& xindex)
 {
   // Preconditions:
 

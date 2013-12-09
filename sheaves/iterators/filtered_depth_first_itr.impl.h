@@ -348,7 +348,7 @@ filtered_depth_first_itr(const abstract_poset_member& xanchor,
 template <typename T>
 filtered_depth_first_itr<T>::
 filtered_depth_first_itr(const abstract_poset_member& xanchor,
-                         const string& xfilter_name,
+                         const std::string& xfilter_name,
                          bool xdown,
                          bool xstrict,
                          typename depth_first_itr<T>::order_type xorder)
@@ -605,7 +605,7 @@ put_filter(const subposet& xfilter)
 template <typename T>
 void
 filtered_depth_first_itr<T>::
-put_filter(const string& xfilter_name)
+put_filter(const std::string& xfilter_name)
 {
 
   // Preconditions:

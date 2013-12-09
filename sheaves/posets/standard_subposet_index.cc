@@ -22,6 +22,8 @@
 #include "assert_contract.h"
 #include "std_string.h"
 
+using namespace std;
+
 namespace
 {
 const int STANDARD_SUBPOSET_INDEX_CT =

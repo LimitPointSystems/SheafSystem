@@ -205,43 +205,43 @@ public:
   ///
   /// The name of this data set.
   ///
-  string name() const;
+  std::string name() const;
 
   ///
   /// The standard alias for this data set.
   ///
-  string alias() const;
+  std::string alias() const;
 
   ///
   /// The reserved, standard alias for the namespace in the file
   ///
-  static const string& name_space_alias();
+  static const std::string& name_space_alias();
 
   ///
   /// The reserved, standard prefix for namespace dataser names.
   ///
-  static const string& name_space_prefix();
+  static const std::string& name_space_prefix();
 
   ///
   /// The name suffix for this data set.
   ///
-  virtual const string& suffix() const;
+  virtual const std::string& suffix() const;
 
   ///
   /// The data set name for a poset with name xname.
   ///
-  string data_set_name(const string& xname) const;
+  std::string data_set_name(const std::string& xname) const;
 
   ///
   /// The data set alias for a poset with name xname.
   ///
-  string data_set_alias(const string& xname) const;
+  std::string data_set_alias(const std::string& xname) const;
 
   ///
   /// The name of the poset this represents, 
   /// extracted from the name of the dataset.
   ///
-  string poset_name() const;
+  std::string poset_name() const;
 
   ///
   /// Scaffold for constructing poset associated with this record set (mutable version).
@@ -387,12 +387,12 @@ protected:
   ///
   /// The name of this record_set
   ///
-  string _name;
+  std::string _name;
 
   ///
   /// The standard alias for this record_set
   ///
-  string _alias;
+  std::string _alias;
 
   ///
   /// The poset scaffold associated with this.
@@ -469,14 +469,14 @@ protected:
   void read_attribute(const char*& xatt_values,
                       size_type& xatt_ct,
                       const data_converter* xatt_conv,
-                      const string& xatt_name);
+                      const std::string& xatt_name);
   ///
   /// Writes the attribute with name xatt_name into the file.
   ///
   void write_attribute(const void* xatt_values,
                        size_type xatt_ct,
                        const data_converter* xatt_conv,
-                       const string& xatt_name);
+                       const std::string& xatt_name);
 
 
 };

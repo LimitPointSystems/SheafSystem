@@ -58,6 +58,8 @@
 #include "tern.h"
 #include "total_poset_member.h"
 
+using namespace std;
+
 //#define DIAGNOSTIC_OUTPUT
 
 namespace
