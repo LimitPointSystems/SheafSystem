@@ -21,6 +21,7 @@
 
 #include "d_bin_point_locator.impl.h"
 
+using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.
 
 //=============================================================================

@@ -29,6 +29,7 @@
 #include "std_string.h"
 #include "std_strstream.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // ===========================================================
@@ -212,7 +213,7 @@ block_vertices_space_id() const
 
 // PROTECTED MEMBER FUNCTIONS
 
-string
+std::string
 fiber_bundle::base_space_crg_interval::
 block_vertices_name() const
 {
@@ -284,7 +285,7 @@ is_initialized() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::base_space_crg_interval::
 class_name() const
 {

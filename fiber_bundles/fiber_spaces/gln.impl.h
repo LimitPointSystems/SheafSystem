@@ -42,7 +42,7 @@ namespace fiber_bundle
 //==============================================================================
 
 template <typename T>
-const string&
+const std::string&
 gln_row_dofs_type<T>::
 static_class_name()
 {
@@ -50,7 +50,7 @@ static_class_name()
 
   // Body:
 
-  static const string result("gln_row_dofs_type");
+  static const std::string result("gln_row_dofs_type");
 
   // Postconditions:
 

@@ -99,7 +99,7 @@ public:
   /// Prints the data members of this on output stream xos.
   /// Intended for use debugging.
   ///
-  void print(ostream& xos) const;
+  void print(std::ostream& xos) const;
         
   ///
   /// Creates an instance with capacity xcapacity.
@@ -145,7 +145,7 @@ private:
 /// Insert ptr_linked_pool<T>& xp into ostream& xos.
 ///
 template <typename T>
-ostream& operator<< (ostream& xos, const ptr_linked_pool<T>& xp);
+std::ostream& operator<< (std::ostream& xos, const ptr_linked_pool<T>& xp);
 
 
 } // namespace sheaf

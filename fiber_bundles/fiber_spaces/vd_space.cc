@@ -30,6 +30,7 @@
 #include "tp_space.h"
 #include "vd.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //#define DIAGNOSTIC_OUTPUT
@@ -39,7 +40,7 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 //==============================================================================
 
 ///
-const string&
+const std::string&
 fiber_bundle::vd_space::
 standard_schema_poset_name()
 {
@@ -672,7 +673,7 @@ vd_space(vd* xtop, vd* xbottom)
   return;
 }
 
-string
+std::string
 fiber_bundle::vd_space::
 covariant_subposet_name(int xi)
 {
@@ -863,7 +864,7 @@ prereq_id(int xi) const
 
 void
 fiber_bundle::vd_space::
-initialize_standard_subposets(const string& xname)
+initialize_standard_subposets(const std::string& xname)
 {
   // Preconditions:
 
@@ -958,10 +959,10 @@ invariant() const
 // ===========================================================
 
 void
-fiber_bundle::print_prereq_paths(ostream &xos, 
+fiber_bundle::print_prereq_paths(std::ostream &xos, 
 				 const vd_space& xspace, 
-				 const string& xheading,
-				 const string& xindent,
+				 const std::string& xheading,
+				 const std::string& xindent,
 				 bool xauto_access)
 {
   // Preconditions:

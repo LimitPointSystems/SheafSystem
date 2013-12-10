@@ -133,12 +133,12 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
   
   ///
   /// Virtual constructor, makes a new instance of the same type as this.
@@ -221,7 +221,7 @@ public:
   ///
   /// The name of the standard schema poset for this class.
   ///
-  static const string& standard_schema_poset_name();
+  static const std::string& standard_schema_poset_name();
 
   ///
   /// The path of the schema required by this class.
@@ -238,7 +238,7 @@ public:
   ///
   template <typename F>
   SHEAF_DLL_SPEC
-  static poset_path standard_host_path(const string& xsuffix);
+  static poset_path standard_host_path(const std::string& xsuffix);
 
   ///
   /// True, if standard_host_path<F>(xsuffix) does not exist or is a path
@@ -246,7 +246,7 @@ public:
   ///
   template <typename F>
   SHEAF_DLL_SPEC
-  static bool standard_host_is_available(namespace_type& xns, const string& xsuffix, bool xauto_access);
+  static bool standard_host_is_available(namespace_type& xns, const std::string& xsuffix, bool xauto_access);
 
   ///
   /// Creates a new host table for members of this type.
@@ -296,7 +296,7 @@ public:
   /// Creates a new tuple handle attached to the member state with name xname
   /// in xhost.
   ///
-  tuple(const poset_state_handle* xhost, const string& xname);
+  tuple(const poset_state_handle* xhost, const std::string& xname);
 
   ///
   /// Creates a new tuple handle attached to the same state as xother.
@@ -372,12 +372,12 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
 
   ///
   /// Make a new handle instance of current.  Attach the new instance to

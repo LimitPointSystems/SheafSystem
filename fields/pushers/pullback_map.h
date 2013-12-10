@@ -137,7 +137,7 @@ hash_multiset<pullback_map_entry, discretization_hash> {};
 ///
 /// Insert pullback_map_entry& xentry into ostream& os.
 ///
-ostream& operator<<(ostream& xos, const pullback_map_entry& xentry);
+std::ostream& operator<<(std::ostream& xos, const pullback_map_entry& xentry);
  
 } // namespace fields
 

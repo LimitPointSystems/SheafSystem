@@ -182,7 +182,7 @@ public:
 ///
 /// Insert ternary_index& xbi into ostream& os.
 ///
-SHEAF_DLL_SPEC ostream & operator << (ostream& os, const ternary_index& xbi);
+SHEAF_DLL_SPEC std::ostream & operator << (std::ostream& os, const ternary_index& xbi);
 
 #endif // ifndef DOXYGEN_1_5_4_SKIP_UNKNOWN
 

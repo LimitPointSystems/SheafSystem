@@ -26,6 +26,7 @@
 #include "field_refinement_buffer.h"
 #include "wsv_block.h"
 
+using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
 
 // #define DIAGNOSTIC_OUTPUT 1
@@ -280,7 +281,7 @@ first_vertex_index() const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fields::edge_centered_triangle_refiner::
 zone_type_name() const
 {

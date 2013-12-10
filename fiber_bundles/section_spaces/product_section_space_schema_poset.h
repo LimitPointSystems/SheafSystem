@@ -81,7 +81,7 @@ public:
   /// table dofs initialized by xargs.
   ///
   product_section_space_schema_poset(namespace_poset& xhost,
-				     const string& xname,
+				     const std::string& xname,
 				     const arg_list& xargs,
 				     const poset_path& xschema_path,
 				     bool xauto_access);
@@ -107,7 +107,7 @@ protected:
   /// Initializes xarg to satisfy class invariants.
   ///
   virtual void initialize_arg_list(const namespace_poset& xns,
-				   const string& xname,
+				   const std::string& xname,
 				   arg_list& xargs,
 				   const poset_path& xschema_path,
 				   bool xauto_access);
@@ -252,7 +252,7 @@ protected:
   /// table dofs initialized by xargs.
   ///
   void new_state(namespace_poset& xhost,
-                 const string& xname,
+                 const std::string& xname,
                  const arg_list& xargs,
                  const poset_path& xschema_path,
                  bool xauto_access);
@@ -388,7 +388,7 @@ public:
 //   /// the equivalence map with name xid_space_name.
 //   ///
 //   virtual bool is_valid_int_id(pod_index_type xint_id,
-// 			       const string& xid_space_name,
+// 			       const std::string& xid_space_name,
 // 			       bool xauto_access) const;
 
 //   using poset_state_handle::get_ext_id;
@@ -398,7 +398,7 @@ public:
 //   /// the equivalence map with name xid_space_name.
 //   ///
 //   virtual pod_index_type get_ext_id(pod_index_type xint_id,
-// 				    const string& xid_space_name,
+// 				    const std::string& xid_space_name,
 // 				    bool xauto_access) const;
 
   ///
@@ -408,7 +408,7 @@ public:
   //// This member exists only to encapsulate the hack.
   ////
   virtual schema_poset_member*
-  new_schema_handle(const string& xid_space_name,
+  new_schema_handle(const std::string& xid_space_name,
                     pod_index_type xschema_member_ext_id,
                     pod_index_type xbase_space_ext_id,
                     pod_index_type xfiber_schema_ext_id,

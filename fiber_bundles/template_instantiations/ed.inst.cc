@@ -24,6 +24,7 @@
 #include "e3.h"
 #include "e4.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS

@@ -31,6 +31,7 @@
 #include "std_sstream.h"
 #include "homogeneous_block.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 
@@ -471,7 +472,7 @@ is_initialized() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::homogeneous_block_crg_interval::
 class_name() const
 {

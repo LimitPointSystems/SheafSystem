@@ -74,8 +74,8 @@ public:
   /// the policy with name xrefinement_policy_name.
   ///
   field_refiner(const poset& xbase_space,
-                const string& xrefiner_family_name,
-                const string& xrefinement_policy_name,
+                const std::string& xrefiner_family_name,
+                const std::string& xrefinement_policy_name,
                 bool xauto_access);
 
   ///

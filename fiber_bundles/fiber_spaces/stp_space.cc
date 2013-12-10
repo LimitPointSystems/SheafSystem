@@ -28,6 +28,7 @@
 #include "namespace_poset_member.h"
 #include "poset_handle_factory.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 using namespace fiber_bundle::vd_algebra;
 
@@ -38,7 +39,7 @@ using namespace fiber_bundle::vd_algebra;
 //==============================================================================
 
 ///
-const string&
+const std::string&
 fiber_bundle::stp_space::
 standard_schema_poset_name()
 {

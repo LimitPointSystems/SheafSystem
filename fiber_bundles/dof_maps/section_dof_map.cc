@@ -25,12 +25,13 @@
 #include "binary_section_space_schema_member.h"
 #include "poset_type.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // PUBLIC MEMBER FUNCTIONS
 
 ///
-const string&
+const std::string&
 fiber_bundle::section_dof_map::
 class_name() const
 {
@@ -50,7 +51,7 @@ class_name() const
 }
 
 ///
-const string&
+const std::string&
 fiber_bundle::section_dof_map::
 static_class_name()
 {

@@ -27,12 +27,13 @@
 #include "sec_rep_space.h"
 #include "sec_vd.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // PUBLIC MEMBER FUNCTIONS
 
 ///
-const string&
+const std::string&
 fiber_bundle::sparse_section_dof_map::
 class_name() const
 {
@@ -52,7 +53,7 @@ class_name() const
 }
 
 ///
-const string&
+const std::string&
 fiber_bundle::sparse_section_dof_map::
 static_class_name()
 {

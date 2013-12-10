@@ -32,6 +32,7 @@
 #include "tp.h"
 #include "tp_space.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //==============================================================================
@@ -163,7 +164,7 @@ sec_t3(const sec_rep_space* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::sec_t3::
-sec_t3(const sec_rep_space* xhost, const string& xname)
+sec_t3(const sec_rep_space* xhost, const std::string& xname)
 {
 
   // Preconditions:
@@ -443,7 +444,7 @@ fiber_prototype() const
 // ABSTRACT POSET MEMBER FACET OF CLASS SEC_T3
 //==============================================================================
 
-const string&
+const std::string&
 fiber_bundle::sec_t3::
 class_name() const
 {
@@ -462,7 +463,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::sec_t3::
 static_class_name()
 {

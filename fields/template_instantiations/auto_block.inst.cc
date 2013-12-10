@@ -29,6 +29,8 @@
 #include "zone_centered_tet_refiner.h"
 #include "zone_centered_triangle_refiner.h"
 
+using namespace std;
+
 //==============================================================================
 // EXPLICIT INSTANTIATIONS
 //==============================================================================

@@ -33,6 +33,7 @@
 #include "st3_e3.h"
 
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 
@@ -402,7 +403,7 @@ stp_prototype(int xp) const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::t3_e3_lite::
 class_name() const
 {
@@ -421,7 +422,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::t3_e3_lite::
 static_class_name()
 {
@@ -680,7 +681,7 @@ new_host(namespace_type& xns,
 
 fiber_bundle::t3_e3::host_type&
 fiber_bundle::t3_e3::
-standard_host(namespace_type& xns, const string& xsuffix, bool xauto_access)
+standard_host(namespace_type& xns, const std::string& xsuffix, bool xauto_access)
 {
   // cout << endl << "Entering t3_e3::new_host." << endl;
 
@@ -1001,7 +1002,7 @@ t3_e3(const poset* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::t3_e3::
-t3_e3(const poset* xhost, const string& xname)
+t3_e3(const poset* xhost, const std::string& xname)
 {
 
   // Preconditions:
@@ -1178,7 +1179,7 @@ new_stp(int xp, bool xauto_access) const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::t3_e3::
 class_name() const
 {
@@ -1197,7 +1198,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::t3_e3::
 static_class_name()
 {

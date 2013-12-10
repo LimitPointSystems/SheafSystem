@@ -35,6 +35,7 @@
 #include "section_evaluator.h"
 #include "tern.h"
 
+using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
 
 //#define DIAGNOSTIC_OUTPUT 1
@@ -573,14 +574,14 @@ push_name() const
   return _push_name;
 }
 
-string&
+std::string&
 fields::body_pusher::
 name_prefix()
 {
   return _name_prefix;
 }
 
-string&
+std::string&
 fields::body_pusher::
 name_suffix()
 {

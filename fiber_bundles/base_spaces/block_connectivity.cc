@@ -22,6 +22,7 @@
 #include "std_limits.h"
 #include "std_set.h"
 
+using namespace std;
 using namespace fiber_bundle;
 
 // ===========================================================
@@ -103,7 +104,7 @@ start_id() const
 
 void
 fiber_bundle::block_connectivity::
-to_stream(ostream& os) const
+to_stream(std::ostream& os) const
 {
   size_type npe = nodes_per_element();
   size_type nid_ct = node_id_ct();
@@ -399,9 +400,9 @@ is_ancestor_of(const any* other) const
 // ===========================================================
 
 
-ostream&
+std::ostream&
 fiber_bundle::
-operator << (ostream& xos, const fiber_bundle::block_connectivity& xconn)
+operator << (std::ostream& xos, const fiber_bundle::block_connectivity& xconn)
 {
 
   xconn.to_stream(xos);

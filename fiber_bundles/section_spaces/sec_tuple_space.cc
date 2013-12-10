@@ -34,6 +34,7 @@
 #include "tuple.h"
 #include "tuple_space.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //#define DIAGNOSTIC_OUTPUT

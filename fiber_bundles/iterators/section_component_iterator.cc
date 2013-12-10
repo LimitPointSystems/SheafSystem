@@ -24,6 +24,7 @@
 #include "section_space_schema_member.h"
 #include "section_space_schema_poset.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 fiber_bundle::section_component_iterator::

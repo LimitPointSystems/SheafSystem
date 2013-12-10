@@ -29,6 +29,7 @@
 #include "std_iomanip.h"
 #include "std_sstream.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for bug in MS C++.
 
 // ===========================================================
@@ -524,12 +525,12 @@ operator==(const chart_point& xother) const
 
 void
 fiber_bundle::chart_point::
-to_stream(ostream& xos) const
+to_stream(std::ostream& xos) const
 {
   xos << *this;
 }
 
-string
+std::string
 fiber_bundle::chart_point::
 to_string() const
 {
@@ -543,9 +544,9 @@ to_string() const
 // NON-MEMBER FUNCTIONS
 // ===========================================================
 
-ostream&
+std::ostream&
 fiber_bundle::
-operator<<(ostream& os, const fiber_bundle::chart_point& xpt)
+operator<<(std::ostream& os, const fiber_bundle::chart_point& xpt)
 {
 
   // Preconditions:

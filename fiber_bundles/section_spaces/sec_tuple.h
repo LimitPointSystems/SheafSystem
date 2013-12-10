@@ -95,8 +95,8 @@ public:
   template <typename S>
   static poset_path standard_host_path(const poset_path& xbase_path,
                                        const poset_path& xrep_path,
-                                       const string& xsection_suffix,
-                                       const string& xfiber_suffix);
+                                       const std::string& xsection_suffix,
+                                       const std::string& xfiber_suffix);
 
   ///
   /// True if and only if the host with path standard_host_path<S>(xbase_path, xrep_path, xsection_suffix, xfiber_suffix)
@@ -106,8 +106,8 @@ public:
   static bool standard_host_is_available(const namespace_poset& xns,
                                          const poset_path& xbase_path,
                                          const poset_path& xrep_path,
-                                         const string& xsection_suffix,
-                                         const string& xfiber_suffix,
+                                         const std::string& xsection_suffix,
+                                         const std::string& xfiber_suffix,
                                          bool xauto_access);
 
 //   ///
@@ -115,7 +115,7 @@ public:
 //   /// does not exist in namespace xns, or if it exists, conforms to S:fiber_type:host_type and is auto-read-accessible.
 //   ///
 //   template <typename S>
-//   static bool standard_fiber_host_is_auto_read_accessible(const namespace_poset& xns, const string& xfiber_suffix, bool xauto_access);
+//   static bool standard_fiber_host_is_auto_read_accessible(const namespace_poset& xns, const std::string& xfiber_suffix, bool xauto_access);
 
 //   ///
 //   /// The standard schema path for section type S with base path xbase_path,
@@ -124,7 +124,7 @@ public:
 //   template <typename S>
 //   static poset_path standard_schema_path(const poset_path& xbase_path,
 //                                          const poset_path& xrep_path,
-//                                          const string& xfiber_suffix);
+//                                          const std::string& xfiber_suffix);
 
 //   ///
 //   /// True if and only if the schema host with path standard_schema_path(xbase_path, xrep_path, xfiber_suffix)
@@ -134,7 +134,7 @@ public:
 //   static bool standard_schema_host_is_auto_read_write_accessible(const namespace_poset& xns,
 //                                                                  const poset_path& xbase_path,
 //                                                                  const poset_path& xrep_path,
-//                                                                  const string& xfiber_suffix,
+//                                                                  const std::string& xfiber_suffix,
 //                                                                  bool xauto_access);
 
   ///
@@ -182,7 +182,7 @@ public:
   /// Creates a new sec_tuple handle attached to the member state with name
   /// xname in* xhost.
   ///
-  sec_tuple(const sec_rep_space* xhost, const string& xname);
+  sec_tuple(const sec_rep_space* xhost, const std::string& xname);
 
   ///
   /// Creates a new handle attached to the member state
@@ -256,12 +256,12 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
 
   ///
   /// Make a new handle, no state instance of current.
@@ -394,7 +394,7 @@ protected:
   /// Creates a fiber space name for sec class with name xname.
   /// Convenience method used by derived class "new_host" methods.
   ///
-  inline static string create_fiber_name(const string& xname)
+  inline static std::string create_fiber_name(const std::string& xname)
   {
     return xname + "_fiber";
   }

@@ -60,7 +60,7 @@ public:
   ///
   /// The type of box set.
   ///
-  typedef set<const d_bounding_box<DC, DB>*> box_set_type;
+  typedef std::set<const d_bounding_box<DC, DB>*> box_set_type;
   
   ///
   /// Insert xbox into this.
@@ -147,7 +147,7 @@ public:
   ///
   /// Inserts this in ostream xos.
   ///
-  void to_stream(ostream& xos) const;
+  void to_stream(std::ostream& xos) const;
 
 protected:
 
@@ -231,16 +231,16 @@ public:
 ///
 template <int DC, int DB>
 SHEAF_DLL_SPEC 
-ostream&
-operator << (ostream& xos, const d_array_point_locator<DC, DB>& xpl);
+std::ostream&
+operator << (std::ostream& xos, const d_array_point_locator<DC, DB>& xpl);
 
 ///
 /// Insert d_array_point_locator<DC, DB>::box_list_type xbl into ostream xos.
 ///
 template <int DC, int DB>
 SHEAF_DLL_SPEC 
-ostream&
-operator << (ostream& xos, const slist<const d_bounding_box<DC, DB>*>& xbl);
+std::ostream&
+operator << (std::ostream& xos, const slist<const d_bounding_box<DC, DB>*>& xbl);
 
 
 // ============================================================================

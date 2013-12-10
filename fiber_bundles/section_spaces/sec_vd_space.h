@@ -200,7 +200,7 @@ protected:
   ///
   /// The name of the covariant subposet for the xi-th index.
   ///
-  static string covariant_subposet_name(int xi);
+  static std::string covariant_subposet_name(int xi);
 
   ///
   /// Default constructor;
@@ -306,7 +306,7 @@ protected:
   ///
   /// Creates the standard subposets.
   ///
-  virtual void initialize_standard_subposets(const string& xname);
+  virtual void initialize_standard_subposets(const std::string& xname);
 
 private:
 
@@ -368,10 +368,10 @@ private:
   /// schema, rep, base, fiber, scalar space, etc.
   ///
   SHEAF_DLL_SPEC
-		void print_prereq_paths(ostream &xos, 
+		void print_prereq_paths(std::ostream &xos, 
 			  const sec_vd_space& xspace, 
-			  const string& xheading,
-			  const string& xindex,
+			  const std::string& xheading,
+			  const std::string& xindex,
 			  bool xauto_access);
 
 

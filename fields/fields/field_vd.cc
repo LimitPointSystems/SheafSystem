@@ -49,6 +49,7 @@
 #include "structured_block_3d.h"
 #include "subposet.h"
 
+using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
 
 // ===========================================================
@@ -719,9 +720,9 @@ put_property_dofs(const sec_vd& xcoordinates,
 ///
 void
 fields::field_vd::
-print_property_dofs(ostream& xos,
+print_property_dofs(std::ostream& xos,
                     property_dof_function_type xdof_fcn,
-                    const string& xtitle_text,
+                    const std::string& xtitle_text,
                     bool xzero_specified,
                     bool xauto_access) const
 {
@@ -943,7 +944,7 @@ property_at_coordinates(sec_vd_value_type xcoord_base[], int xcoord_ct,
 ///
 sheaf::subposet*
 fields::field_vd::
-embed_property(const string& xresult_name,
+embed_property(const std::string& xresult_name,
                name_multimap& xresult_member_names,
                bool xauto_access)
 {
@@ -1648,7 +1649,7 @@ clear_state_is_modified()
 // ===========================================================
 
 ///
-const string&
+const std::string&
 fields::field_vd::
 class_name() const
 {
@@ -1668,7 +1669,7 @@ class_name() const
 }
 
 ///
-const string&
+const std::string&
 fields::field_vd::
 static_class_name()
 {
@@ -1933,8 +1934,8 @@ operator>>(const field_vd& xsrc, field_vd& xdst)
 }
 
 ///
-ostream&
-fields::operator<<(ostream& xos, const field_vd& xfield)
+std::ostream&
+fields::operator<<(std::ostream& xos, const field_vd& xfield)
 {
   // Preconditions:
 

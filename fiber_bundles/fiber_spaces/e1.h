@@ -58,7 +58,7 @@ public:
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
   
   ///
   /// The dimension of the row dof components.
@@ -325,12 +325,12 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
   
   ///
   /// Virtual constructor, makes a new instance of the same type as this.
@@ -433,7 +433,7 @@ public:
   /// with schema specified by standard_schema_path() and standard paths for prerequisites,
   /// which are also created if needed.
   ///
-  static host_type& standard_host(namespace_type& xns, const string& xsuffix, bool xauto_access);
+  static host_type& standard_host(namespace_type& xns, const std::string& xsuffix, bool xauto_access);
 
 protected:
 
@@ -487,7 +487,7 @@ public:
   /// Creates a new e1 handle attached to the member state with name xname
   /// in xhost.
   ///
-  e1(const poset_state_handle* xhost, const string& xname);
+  e1(const poset_state_handle* xhost, const std::string& xname);
 
   ///
   /// Creates a new e1 handle attached to the same state as xother.
@@ -689,12 +689,12 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
   
   ///
   /// Make a new handle, no state instance of current.
@@ -749,7 +749,7 @@ private:
 /// Insert e1_row_dofs_type@<T@>& xrdt into ostream& xos.
 ///
 template <typename T>
-ostream& operator<<(ostream& xos, const e1_row_dofs_type<T>& xrdt);
+std::ostream& operator<<(std::ostream& xos, const e1_row_dofs_type<T>& xrdt);
 
 
 } // namespace fiber_bundle

@@ -41,6 +41,7 @@
 #include "wsv_block.h"
 
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 
@@ -358,7 +359,7 @@ operator[] (int xindex) const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::gln_lite::
 class_name() const
 {
@@ -377,7 +378,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::gln_lite::
 static_class_name()
 {
@@ -525,7 +526,7 @@ invariant() const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::gln::
 standard_schema_poset_name()
 {
@@ -846,7 +847,7 @@ gln(const poset* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::gln::
-gln(const poset* xhost, const string& xname)
+gln(const poset* xhost, const std::string& xname)
 {
 
   // Preconditions:
@@ -1325,7 +1326,7 @@ lite_type() const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::gln::
 class_name() const
 {
@@ -1344,7 +1345,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::gln::
 static_class_name()
 {
@@ -1496,9 +1497,9 @@ rad(double degrees)
   return degrees*RAD_PER_DEG;
 };
 
-ostream& 
+std::ostream& 
 fiber_bundle::
-operator<<(ostream& xos, gln_lite::table_dofs_type& xt)
+operator<<(std::ostream& xos, gln_lite::table_dofs_type& xt)
 {
   xos << " " << xt.n
       << " " << xt.scalar_space_path
@@ -1507,9 +1508,9 @@ operator<<(ostream& xos, gln_lite::table_dofs_type& xt)
   return xos;
 }
 
-ostream& 
+std::ostream& 
 fiber_bundle::
-operator<<(ostream& xos, gln_lite& xv)
+operator<<(std::ostream& xos, gln_lite& xv)
 {
   int ld = xv.d();
   for(int i=0; i<ld; ++i)

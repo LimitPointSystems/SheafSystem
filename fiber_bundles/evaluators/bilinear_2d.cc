@@ -23,6 +23,7 @@
 #include "std_cmath.h"
 #include "std_limits.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // ===========================================================

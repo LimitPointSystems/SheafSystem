@@ -43,11 +43,6 @@ using namespace sheaf;
 
 // Forward declarations to support friend declaration.
 
-///
-/// Insert base_space_crg_interval& m into ostream& os.
-///
-SHEAF_DLL_SPEC ostream& operator <<(ostream& os, const fiber_bundle::base_space_crg_interval& m);
-
 SHEAF_DLL_SPEC size_t deep_size(const base_space_crg_interval& m);
 
 ///
@@ -57,7 +52,6 @@ SHEAF_DLL_SPEC size_t deep_size(const base_space_crg_interval& m);
 class SHEAF_DLL_SPEC base_space_crg_interval : public implicit_crg_interval
 {
 
-  friend SHEAF_DLL_SPEC ostream& operator <<(ostream& os, const base_space_crg_interval& m);
   friend SHEAF_DLL_SPEC size_t deep_size(const base_space_crg_interval& m);
 
   // ===========================================================
@@ -144,7 +138,7 @@ protected:
   ///
   /// The name of the block vertices id space.
   ///
-  string block_vertices_name() const;
+  std::string block_vertices_name() const;
 
   ///
   /// True if the block vertices id space has been initialized.
@@ -216,7 +210,7 @@ public:
   /// The name of this class;
   /// provided to satisfy factory template.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
 protected:
 

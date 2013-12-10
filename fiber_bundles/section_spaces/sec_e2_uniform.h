@@ -76,8 +76,8 @@ public:
   static host_type& standard_host(namespace_type& xns, 
                                   const poset_path& xbase_path,
                                   const poset_path& xrep_path,
-                                  const string& xsection_suffix, 
-                                  const string& xfiber_suffix, 
+                                  const std::string& xsection_suffix, 
+                                  const std::string& xfiber_suffix, 
                                   bool xauto_access);
 
 protected:
@@ -156,7 +156,7 @@ public:
   /// Creates a new sec_e2_uniform handle attached to
   /// the member state with name xname in xhost.
   ///
-  sec_e2_uniform(const sec_rep_space* xhost, const string& xname);
+  sec_e2_uniform(const sec_rep_space* xhost, const std::string& xname);
 
   ///
   /// Creates a new handle attached to the member state
@@ -336,12 +336,12 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
  
   ///
   /// Virtual constructor; makes a new instance of the same type as this.

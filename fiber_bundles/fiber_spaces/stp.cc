@@ -30,6 +30,7 @@
 #include "wsv_block.h"
 
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 using namespace fiber_bundle::vd_algebra;
 
@@ -214,7 +215,7 @@ d() const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::stp_lite::
 class_name() const
 {
@@ -233,7 +234,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::stp_lite::
 static_class_name()
 {
@@ -516,7 +517,7 @@ stp(const poset_state_handle* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::stp::
-stp(const poset_state_handle* xhost, const string& xname)
+stp(const poset_state_handle* xhost, const std::string& xname)
 {
 
   // Preconditions:
@@ -718,7 +719,7 @@ lite_type() const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::stp::
 class_name() const
 {
@@ -737,7 +738,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::stp::
 static_class_name()
 {

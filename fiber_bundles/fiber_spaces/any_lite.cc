@@ -21,7 +21,7 @@
 #include "any_lite.h"
 #include "assert_contract.h"
 
-
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //==============================================================================
@@ -51,7 +51,7 @@ fiber_bundle::any_lite::
   return;
 }
 
-const string&
+const std::string&
 fiber_bundle::any_lite::
 class_name() const
 {
@@ -70,7 +70,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::any_lite::
 static_class_name()
 {

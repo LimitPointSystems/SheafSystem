@@ -145,18 +145,20 @@ void
 ptr_linked_pool<T>::
 print() const
 {   
-  print(cout);
+  print(std::cout);
 }
 
 
 template <typename T>
 void
 ptr_linked_pool<T>::
-print(ostream& xos) const
+print(std::ostream& xos) const
 {
   // Preconditions:
 
   // Body:
+
+  using namespace std;
 
   xos << " capacity: " << capacity()
       << " free_size: " << free_size()
@@ -340,8 +342,8 @@ clear()
 //==============================================================================
 
 template <typename T>
-ostream&
-operator<< (ostream& xos, const ptr_linked_pool<T>& xp)
+std::ostream&
+operator<< (std::ostream& xos, const ptr_linked_pool<T>& xp)
 {
   // Preconditions:
 

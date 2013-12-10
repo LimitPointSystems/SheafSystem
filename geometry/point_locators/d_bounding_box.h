@@ -121,7 +121,7 @@ public:
   ///
   /// Insert this into stream xos.
   ///
-  void to_stream(ostream& xos) const;
+  void to_stream(std::ostream& xos) const;
 
   ///
   /// The lower bound; the lower, left, front corner.
@@ -255,8 +255,8 @@ private:
 ///
 template <int DC, int DB>
 SHEAF_DLL_SPEC 
-ostream&
-operator<<(ostream& xos, const d_bounding_box<DC, DB>& xbox);
+std::ostream&
+operator<<(std::ostream& xos, const d_bounding_box<DC, DB>& xbox);
  
 } // namespace geometry
 

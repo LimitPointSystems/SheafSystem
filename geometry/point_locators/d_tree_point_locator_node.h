@@ -162,7 +162,7 @@ public:
   ///
   /// Get instance information as a string.
   ///
-  string* to_string() const;
+  std::string* to_string() const;
 
   ///
   /// The maximum number of branches a node may have.
@@ -221,8 +221,8 @@ protected:
 ///
 template <int DC, int DB>
 SHEAF_DLL_SPEC 
-ostream&
-operator<<(ostream& xos, const d_tree_point_locator_node<DC, DB>& xnode);
+std::ostream&
+operator<<(std::ostream& xos, const d_tree_point_locator_node<DC, DB>& xnode);
  
 } // namespace geometry
 

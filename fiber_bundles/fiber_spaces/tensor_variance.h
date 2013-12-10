@@ -175,7 +175,7 @@ private:
   ///
   /// The type used to specify the "variance" of each index.
   ///
-  typedef bitset<numeric_limits<unsigned long int>::digits> variance_type;
+  typedef std::bitset<std::numeric_limits<unsigned long int>::digits> variance_type;
 
   ///
   /// The variance of the xi-th index; 

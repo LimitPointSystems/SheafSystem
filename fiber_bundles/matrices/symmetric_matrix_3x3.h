@@ -303,7 +303,7 @@ private:
 /// Insert symmetric_matrix_3x3@<T@> xm into output stream xos.
 ///
 template <typename T>
-ostream& operator<<(ostream& xos, const symmetric_matrix_3x3<T>& xm);
+std::ostream& operator<<(std::ostream& xos, const symmetric_matrix_3x3<T>& xm);
 
 ///
 /// Determine the eigenvectors and eigenvalues of a real symmetric matrix xm

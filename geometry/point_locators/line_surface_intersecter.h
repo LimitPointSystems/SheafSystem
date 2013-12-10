@@ -79,7 +79,7 @@ namespace geometry
 class SHEAF_DLL_SPEC line_surface_intersecter : public any
 {
 
-  friend SHEAF_DLL_SPEC ostream & operator << (ostream &os, const line_surface_intersecter& xp);
+  friend SHEAF_DLL_SPEC std::ostream & operator << (std::ostream &os, const line_surface_intersecter& xp);
 
   // ===========================================================
   /// @name LINE_SURFACE_INTERSECTER FACET
@@ -117,7 +117,7 @@ public:
   {
     bool operator()(sec_vd_value_type x1, sec_vd_value_type x2) const
     {
-      return (x2 - x1) > (abs(x1) + abs(x2))*1.0e-6;
+      return (x2 - x1) > (std::abs(x1) + std::abs(x2))*1.0e-6;
     }
   };
 
@@ -126,7 +126,7 @@ public:
   /// map from z coordinate to surface id;
   /// sorted by z coordinate.
   ///
-  typedef map<sec_vd_value_type, pod_index_type, really_less_than> intersection_set_type;
+  typedef std::map<sec_vd_value_type, pod_index_type, really_less_than> intersection_set_type;
 
   ///
   /// The type of search structure box
@@ -240,8 +240,8 @@ public:
 /// Insert line_surface_intersecter xp in ostream xos.
 ///
 SHEAF_DLL_SPEC
-ostream&
-operator<< (ostream &os, const line_surface_intersecter& xp);
+std::ostream&
+operator<< (std::ostream &os, const line_surface_intersecter& xp);
   
 } // end namespace geometry
 

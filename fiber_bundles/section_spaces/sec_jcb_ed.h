@@ -105,7 +105,7 @@ public:
   /// Creates a new sec_jcb_ed handle attached to the member state with name
   /// xname in xhost.
   ///
-  sec_jcb_ed(const sec_rep_space* xhost, const string& xname);
+  sec_jcb_ed(const sec_rep_space* xhost, const std::string& xname);
 
   ///
   /// Creates a new handle attached to the member state
@@ -216,12 +216,12 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
 
   ///
   /// Make a new handle, no state instance of current.

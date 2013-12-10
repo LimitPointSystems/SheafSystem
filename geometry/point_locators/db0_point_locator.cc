@@ -23,6 +23,7 @@
 #include "block.impl.h"
 #include "section_space_schema_poset.h"
 
+using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.
 
 // ============================================================================
@@ -57,7 +58,7 @@ bin_id(const bin_coord_type xcoord[]) const
 template<>
 void
 geometry::db0_point_locator<3>::
-print_bins(ostream& xos, const string& xmsg) const
+print_bins(std::ostream& xos, const std::string& xmsg) const
 {
   // Preconditions:
 

@@ -22,6 +22,7 @@
 #include "assert_contract.h"
 #include "std_iostream.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //==============================================================================

@@ -53,7 +53,7 @@ public:
   ///
   /// Creates a geometry namespace with name xname.
   ///
-  geometry_namespace(const string& xname);
+  geometry_namespace(const std::string& xname);
 
   ///
   /// Destructor.

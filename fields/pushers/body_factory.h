@@ -69,37 +69,37 @@ public:
   /// Uses body_builder to create bodies in a 1D unstructured mesh.
   ///
   static field_vd* new_1d_unstructured_bodies(fiber_bundles_namespace& xns,
-      const string& xname_prefix);
+      const std::string& xname_prefix);
 
   ///
   /// Uses body_builder to create bodies in a 1D uniform mesh.
   ///
   static field_vd* new_1d_uniform_bodies(fiber_bundles_namespace& xns,
-                                         const string& xname_prefix);
+                                         const std::string& xname_prefix);
 
   ///
   /// Uses body_builder to create bodies in a 2D unstructured mesh.
   ///
   static field_vd* new_2d_unstructured_bodies(fiber_bundles_namespace& xns,
-      const string& xname_prefix);
+      const std::string& xname_prefix);
 
   ///
   /// Uses body_builder to create bodies in a 2D uniform mesh.
   ///
   static field_vd* new_2d_uniform_bodies(fiber_bundles_namespace& xns,
-                                         const string& xname_prefix);
+                                         const std::string& xname_prefix);
 
   ///
   /// Uses body_builder to create bodies in a 3D unstructured mesh.
   ///
   static field_vd* new_3d_unstructured_bodies(fiber_bundles_namespace& xns,
-      const string& xname_prefix);
+      const std::string& xname_prefix);
 
   ///
   /// Uses body_builder to create bodies in a 3D uniform mesh.
   ///
   static field_vd* new_3d_uniform_bodies(fiber_bundles_namespace& xns,
-                                         const string& xname_prefix);
+                                         const std::string& xname_prefix);
 
 private:
 

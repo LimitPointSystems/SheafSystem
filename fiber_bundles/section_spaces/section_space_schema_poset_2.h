@@ -94,7 +94,7 @@ public:
   ///
   /// The name of the standard schema poset for this class.
   ///
-  static const string& standard_schema_poset_name();
+  static const std::string& standard_schema_poset_name();
 
   ///
   /// The path to the standard schema for this class.
@@ -448,7 +448,7 @@ public:
   /// member created by this routine using new_link in order to return
   /// the poset to a valid state.
   ///
-  virtual pod_index_type new_member_range(const string& xrange_type,
+  virtual pod_index_type new_member_range(const std::string& xrange_type,
 					  size_type xsize,
 					  const block<scoped_index>& xdof_tuple_ids,
 					  const block<pod_index_type>& xdata);
@@ -479,15 +479,15 @@ public:
   /// The member id for base space member with name xbase_space_namd,
   /// and fiber schema member with name xfiber_schema_name.
   ///
-  pod_index_type member_id(const string& xbase_space_name,
-			   const string& xfiber_schema_name) const;
+  pod_index_type member_id(const std::string& xbase_space_name,
+			   const std::string& xfiber_schema_name) const;
 
   ///
   /// The member id for base space member with name xbase_space_namd,
   /// and fiber schema member with name xfiber_schema_name.
   ///
-  void member_id(const string& xbase_space_name,
-		 const string& xfiber_schema_name,
+  void member_id(const std::string& xbase_space_name,
+		 const std::string& xfiber_schema_name,
 		 scoped_index& result) const;
 
   ///

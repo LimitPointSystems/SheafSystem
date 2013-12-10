@@ -255,7 +255,7 @@ structured_block_1d(const poset* xhost, const scoped_index& xid)
 
 
 fiber_bundle::structured_block_1d::
-structured_block_1d(const poset* xhost, const string& xname)
+structured_block_1d(const poset* xhost, const std::string& xname)
 {
   // Preconditions:
 

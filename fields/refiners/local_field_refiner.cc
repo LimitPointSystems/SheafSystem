@@ -30,6 +30,7 @@
 #include "sec_vd.h"
 #include "field_vd.h"
 
+using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
 
 // ===========================================================
@@ -74,7 +75,7 @@ db() const
   return result;
 }
 
-const string&
+const std::string&
 fields::local_field_refiner::
 zone_type_name() const
 {
@@ -97,7 +98,7 @@ zone_type_name() const
 }
 
 
-const string&
+const std::string&
 fields::local_field_refiner::
 vertex_type_name() const
 {

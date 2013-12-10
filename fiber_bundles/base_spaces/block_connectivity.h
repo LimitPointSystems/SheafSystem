@@ -103,7 +103,7 @@ public:
   ///
   ///  Print to stream xos.
   ///
-  virtual void to_stream(ostream& xos) const;
+  virtual void to_stream(std::ostream& xos) const;
 
   ///
   /// Assignment operator
@@ -240,7 +240,7 @@ private:
 ///  Print block_connectivity instance xconn to stream xos.
 ///
 SHEAF_DLL_SPEC 
-ostream& operator << (ostream& xos, const block_connectivity& xconn);
+std::ostream& operator << (std::ostream& xos, const block_connectivity& xconn);
 
 #endif // ifndef DOXYGEN_1_5_4_SKIP_UNKNOWN
 

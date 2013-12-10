@@ -70,7 +70,7 @@ public:
   ///
   /// The name of the standard schema poset for this class.
   ///
-  static const string& standard_schema_poset_name();
+  static const std::string& standard_schema_poset_name();
 
   ///
   /// The path to the standard schema for this class.
@@ -212,7 +212,7 @@ protected:
   ///
   /// The name of the covariant subposet for the xi-th index.
   ///
-  static string covariant_subposet_name(int xi);
+  static std::string covariant_subposet_name(int xi);
 
   ///
   /// Create covariant subposets.
@@ -281,7 +281,7 @@ protected:
   ///
   /// Creates the standard subposets.
   ///
-  virtual void initialize_standard_subposets(const string& xname);
+  virtual void initialize_standard_subposets(const std::string& xname);
 
 private:
 
@@ -326,10 +326,10 @@ private:
   /// Print the paths for xspace and its prerequisites:
   /// schema, scalar space, etc.
   ///
-  SHEAF_DLL_SPEC void print_prereq_paths(ostream &xos, 
+  SHEAF_DLL_SPEC void print_prereq_paths(std::ostream &xos, 
 			  const vd_space& xspace, 
-			  const string& xheading,
-			  const string& xindent,
+			  const std::string& xheading,
+			  const std::string& xindent,
 			  bool xauto_access = true);
 
 } // namespace fiber_bundle

@@ -36,6 +36,7 @@
 #include "jcb.h"
 #include "jcb_space.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //#define DIAGNOSTIC_OUTPUT

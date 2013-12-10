@@ -25,6 +25,7 @@
 #include "std_iostream.h"
 #include "std_slist.h"
 
+using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.
 
 // ============================================================================

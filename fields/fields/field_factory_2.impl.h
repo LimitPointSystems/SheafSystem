@@ -252,6 +252,8 @@ put_bounds(sec_e1* xsec,
 
   // Body:
 
+  using namespace std;
+
   xsec->get_read_write_access(true);
 
   // Set the coordinate dofs from the bounds if we know how.
@@ -336,6 +338,8 @@ put_bounds(sec_e2* xsec,
 
   // Body:
 
+  using namespace std;
+
   xsec->get_read_write_access(true);
 
   // Set the coordinate dofs from the bounds if we know how.
@@ -419,6 +423,8 @@ put_bounds(sec_e3* xsec,
   // Preconditions:
 
   // Body:
+
+  using namespace std;
 
   xsec->get_read_write_access(true);
 
@@ -860,7 +866,7 @@ make_base_space(fiber_bundles_namespace& xns,
 
   // Body:
 
-
+  using namespace std;
 
   if(xns.contains_poset_member(xbase_path))
   {
@@ -1018,6 +1024,8 @@ new_field(fiber_bundles_namespace& xns,
 
   // Body:
 
+  using namespace std;
+
   if(xauto_access)
   {
     xns.get_read_write_access();
@@ -1123,8 +1131,8 @@ typename field_traits<prop_type>::field_type*
 field_factory_2<coord_type, prop_type, base_type>::
 standard_field(fiber_bundles_namespace& xns,
 	       const poset_path& xbase_path,
-	       const string& xcoord_name,
-	       const string& xprop_name,
+	       const std::string& xcoord_name,
+	       const std::string& xprop_name,
 	       bool xauto_access)
 {
   field_type* result;
@@ -1318,7 +1326,7 @@ coord_rep_path()
 }
 
 template <typename coord_type, typename prop_type, typename base_type>
-string&
+std::string&
 field_factory_2<coord_type, prop_type, base_type>::
 coord_fiber_suffix()
 {
@@ -1326,7 +1334,7 @@ coord_fiber_suffix()
 }
 
 template <typename coord_type, typename prop_type, typename base_type>
-string&
+std::string&
 field_factory_2<coord_type, prop_type, base_type>::
 coord_section_suffix()
 {
@@ -1365,7 +1373,7 @@ prop_rep_path()
 }
 
 template <typename coord_type, typename prop_type, typename base_type>
-string&
+std::string&
 field_factory_2<coord_type, prop_type, base_type>::
 prop_fiber_suffix()
 {
@@ -1373,7 +1381,7 @@ prop_fiber_suffix()
 }
 
 template <typename coord_type, typename prop_type, typename base_type>
-string&
+std::string&
 field_factory_2<coord_type, prop_type, base_type>::
 prop_section_suffix()
 {

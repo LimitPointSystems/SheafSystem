@@ -72,12 +72,12 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
   
   ///
   /// Assignment operator; attaches this to the same state as xother
@@ -770,7 +770,7 @@ public:
   //// @hack the product subposet hack, version 2.
   //// This member exists only to encapsulate the hack.
   ////
-  virtual pod_index_type get_ext_id(const string& xid_space_name) const;
+  virtual pod_index_type get_ext_id(const std::string& xid_space_name) const;
 
 protected:
 
@@ -958,7 +958,7 @@ public:
   ///
   /// Virtual stream insertion.
   ///
-  virtual void to_stream(ostream& xos = cout) const;
+  virtual void to_stream(std::ostream& xos = std::cout) const;
 
 protected:
 
@@ -976,7 +976,7 @@ private:
 ///
 /// Insert section_space_schema_member& p into ostream& os.
 ///
-SHEAF_DLL_SPEC ostream& operator << (ostream &os, section_space_schema_member& p);
+SHEAF_DLL_SPEC std::ostream& operator << (std::ostream &os, section_space_schema_member& p);
 
 #endif // ifndef DOXYGEN_1_5_4_SKIP_UNKNOWN
 

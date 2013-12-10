@@ -174,12 +174,12 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
   
   ///
   /// Virtual constructor, makes a new instance of the same type as this.
@@ -336,7 +336,7 @@ public:
   /// Creates a new handle attached to
   /// the member state with name xname in xhost.
   ///
-  t2(const poset* xhost, const string& xname);
+  t2(const poset* xhost, const std::string& xname);
 
   ///
   /// The index into linear storage of the component
@@ -425,12 +425,12 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
   
   ///
   /// Make a new handle, no state instance of current.

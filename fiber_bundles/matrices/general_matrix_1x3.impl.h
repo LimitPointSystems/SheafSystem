@@ -175,7 +175,7 @@ operator T* ()
 
   // Body:
 
-  cout << "general_matrix_1x3<T>::operator T* () " << endl;
+  //cout << "general_matrix_1x3<T>::operator T* () " << std::endl;
 
   T* result = components;
 
@@ -197,7 +197,7 @@ operator const T* () const
 
   // Body:
 
-  cout << "general_matrix_1x3<T>::operator const T* () const " << endl;
+  //cout << "general_matrix_1x3<T>::operator const T* () const " << std::endl;
 
   const T* result = components;
 
@@ -525,7 +525,7 @@ transpose() const
 
 ///
 template <typename T>
-ostream& operator<<(ostream& xos, const general_matrix_1x3<T>& xm)
+std::ostream& operator<<(std::ostream& xos, const general_matrix_1x3<T>& xm)
 {
   // Preconditions:
 
@@ -540,7 +540,7 @@ ostream& operator<<(ostream& xos, const general_matrix_1x3<T>& xm)
     {
       xos << "  " << xm[i][j];
     }
-    xos << endl;
+    xos << std::endl;
   }
 
   // Postconditions:

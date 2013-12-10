@@ -28,6 +28,7 @@
 #include "schema_poset_member.h"
 #include "wsv_block.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 
@@ -329,7 +330,7 @@ p() const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::at2_lite::
 class_name() const
 {
@@ -348,7 +349,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::at2_lite::
 static_class_name()
 {
@@ -625,7 +626,7 @@ at2(const poset_state_handle* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::at2::
-at2(const poset_state_handle* xhost, const string& xname)
+at2(const poset_state_handle* xhost, const std::string& xname)
 {
 
   // Preconditions:
@@ -996,7 +997,7 @@ index_for_row_column(int xrow, int xcolumn) const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::at2::
 class_name() const
 {
@@ -1015,7 +1016,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::at2::
 static_class_name()
 {

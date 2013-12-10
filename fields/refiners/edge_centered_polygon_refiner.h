@@ -101,7 +101,7 @@ protected:
   ///
   /// The type of buffer used for processing vertices.
   ///
-  typedef list<scoped_index> vertex_list_type;
+  typedef std::list<scoped_index> vertex_list_type;
 
   ///
   /// The position in _vertex_list of ids of the vertices

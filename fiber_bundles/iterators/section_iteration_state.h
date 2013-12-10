@@ -186,7 +186,7 @@ public:
   /// The set of evaluation member prototypes for which
   /// connectivity order correction is applied.
   ///
-  set<pod_index_type> correction_set;
+  std::set<pod_index_type> correction_set;
 
   ///
   /// True if discretization member order

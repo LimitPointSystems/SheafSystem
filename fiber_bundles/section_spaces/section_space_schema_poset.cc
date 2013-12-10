@@ -53,6 +53,7 @@
 #include "std_limits.h"
 #include "std_sstream.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 namespace
@@ -594,7 +595,7 @@ evaluation() const
   return _evaluation;
 }
 
-string
+std::string
 fiber_bundle::section_space_schema_poset::
 evaluator_family_name() const
 {
@@ -1974,7 +1975,7 @@ get_decomposition(pod_index_type xindex) const
 bool
 fiber_bundle::section_space_schema_poset::
 is_valid_int_id(pod_index_type xint_id,
-		const string& xid_space_name,
+		const std::string& xid_space_name,
 		bool xauto_access) const
 {
   // Preconditions:
@@ -2015,7 +2016,7 @@ is_valid_int_id(pod_index_type xint_id,
 sheaf::pod_index_type
 fiber_bundle::section_space_schema_poset::
 get_ext_id(pod_index_type xint_id,
-           const string& xid_space_name,
+           const std::string& xid_space_name,
            bool xauto_access) const
 {
   // Preconditions:

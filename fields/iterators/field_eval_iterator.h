@@ -124,7 +124,7 @@ public:
   ///
   /// The type name of the current member.
   ///
-  string type_name() const;
+  std::string type_name() const;
 
   ///
   /// The coordinate field evaluator associated
@@ -314,8 +314,7 @@ private:
   /// The set of evaluation member prototypes for which
   /// connectivity order correction is applied.
   ///
-  set
-    <pod_index_type> _correction_set;
+  std::set<pod_index_type> _correction_set;
 
   ///
   /// The initial size of the downset collection buffers.

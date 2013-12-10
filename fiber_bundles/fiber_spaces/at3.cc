@@ -28,6 +28,7 @@
 #include "schema_poset_member.h"
 #include "wsv_block.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 
@@ -311,7 +312,7 @@ index_for_ijk(int xi, int xj, int xk) const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::at3_lite::
 class_name() const
 {
@@ -330,7 +331,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::at3_lite::
 static_class_name()
 {
@@ -608,7 +609,7 @@ at3(const poset_state_handle* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::at3::
-at3(const poset_state_handle* xhost, const string& xname)
+at3(const poset_state_handle* xhost, const std::string& xname)
 {
 
   // Preconditions:
@@ -1001,7 +1002,7 @@ index_for_ijk(int xi, int xj, int xk) const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::at3::
 class_name() const
 {
@@ -1020,7 +1021,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::at3::
 static_class_name()
 {

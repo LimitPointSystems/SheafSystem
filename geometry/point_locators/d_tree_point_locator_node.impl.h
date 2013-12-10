@@ -589,10 +589,12 @@ box_list() const
 }
 
 template <int DC, int DB>
-string*
+std::string*
 d_tree_point_locator_node<DC, DB>::
 to_string() const
 {
+  using namespace std;
+
   ostringstream ostr;
 
   ostr << "d_tree_point_locator_node:" << endl;
@@ -744,10 +746,10 @@ put_next(d_tree_point_locator_node<DC, DB>* xnode)
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 
 template <int DC, int DB>
-ostream&
-geometry::operator<<(ostream& xos, const geometry::d_tree_point_locator_node<DC, DB>& xnode)
+std::ostream&
+geometry::operator<<(std::ostream& xos, const geometry::d_tree_point_locator_node<DC, DB>& xnode)
 {
-  string* s = xnode.to_string();
+  std::string* s = xnode.to_string();
   xos << *s;
   delete s;
 

@@ -32,6 +32,7 @@
 #include "zone_centered_tet_refiner.h"
 #include "zone_centered_triangle_refiner.h"
 
+using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
 
 // ===========================================================
@@ -100,7 +101,7 @@ fields::zone_centered_refiner_family::
   return;
 }
 
-const string&
+const std::string&
 fields::zone_centered_refiner_family::
 class_name() const
 {
@@ -119,7 +120,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fields::zone_centered_refiner_family::
 static_class_name()
 {

@@ -27,6 +27,7 @@
 #include "std_cmath.h"
 #include "std_iostream.h"
 
+using namespace std;
 
 // SVD-decomposition A = U*S*V', where U,V orthogonal and S diagonal.
 // On completion A is replaced by U. Also, V and not V' (the transpose)

@@ -113,7 +113,7 @@ public:
   ///
   /// The type name of the current member.
   ///
-  string type_name() const;
+  std::string type_name() const;
 
   ///
   /// The coordinate field evaluator associated

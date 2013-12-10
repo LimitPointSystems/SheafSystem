@@ -34,8 +34,8 @@ sheaf::poset_path
 fiber_bundle::sec_tuple::
 standard_host_path(const poset_path& xbase_path,
                    const poset_path& xrep_path, 
-                   const string& xsection_suffix, 
-                   const string& xfiber_suffix)
+                   const std::string& xsection_suffix, 
+                   const std::string& xfiber_suffix)
 {
   // Preconditions:
 
@@ -51,7 +51,7 @@ standard_host_path(const poset_path& xbase_path,
   poset_path lstd_fiber_path(fiber_type::template standard_host_path<fiber_type>(xfiber_suffix));
   poset_path lrep_path = !xrep_path.empty() ? xrep_path : S::standard_rep_path();
   
-  string lposet_name(lstd_fiber_path.poset_name());
+  std::string lposet_name(lstd_fiber_path.poset_name());
   lposet_name += "_on_";
   lposet_name += xbase_path.poset_name();
   lposet_name += "_";
@@ -78,8 +78,8 @@ fiber_bundle::sec_tuple::
 standard_host_is_available(const namespace_poset& xns,
                            const poset_path& xbase_path,
                            const poset_path& xrep_path, 
-                           const string& xsection_suffix, 
-                           const string& xfiber_suffix,
+                           const std::string& xsection_suffix, 
+                           const std::string& xfiber_suffix,
                            bool xauto_access)
 {
   // Preconditions:
@@ -108,7 +108,7 @@ standard_host_is_available(const namespace_poset& xns,
 // template <typename S>
 // bool
 // fiber_bundle::sec_tuple::
-// standard_fiber_host_is_auto_read_accessible(xns, const string& xfiber_suffix, bool xauto_access)
+// standard_fiber_host_is_auto_read_accessible(xns, const std::string& xfiber_suffix, bool xauto_access)
 // {
 //   // Preconditions:
 
@@ -133,7 +133,7 @@ standard_host_is_available(const namespace_poset& xns,
 // template <typename S>
 // sheaf::poset_path
 // fiber_bundle::sec_tuple::
-// standard_schema_path(const poset_path& xbase_path, const poset_path& xrep_path, const string& xfiber_suffix)
+// standard_schema_path(const poset_path& xbase_path, const poset_path& xrep_path, const std::string& xfiber_suffix)
 // {
 //   // Preconditions:
 
@@ -179,7 +179,7 @@ standard_host_is_available(const namespace_poset& xns,
 // standard_schema_host_is_available(xns,
 //                                   const poset_path& xbase_path,
 //                                   const poset_path& xrep_path, 
-//                                   const string& xfiber_suffix,
+//                                   const std::string& xfiber_suffix,
 //                                   bool xauto_access)
 // {
 //   // Preconditions:

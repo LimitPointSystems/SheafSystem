@@ -29,6 +29,7 @@
 #include "tp_space.h"
 #include "wsv_block.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //==============================================================================
@@ -296,7 +297,7 @@ d() const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::tp_lite::
 class_name() const
 {
@@ -315,7 +316,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::tp_lite::
 static_class_name()
 {
@@ -606,7 +607,7 @@ tp(const poset_state_handle* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::tp::
-tp(const poset_state_handle* xhost, const string& xname)
+tp(const poset_state_handle* xhost, const std::string& xname)
 {
 
   // Preconditions:
@@ -944,9 +945,9 @@ vector_space(bool xauto_access) const
   return result;
 }
 
-const string
+const std::string
 fiber_bundle::tp::
-create_tensor_space_name(const string& xvector_space_name, const string& xname)
+create_tensor_space_name(const std::string& xvector_space_name, const std::string& xname)
 {
  // Preconditions:
 
@@ -1259,7 +1260,7 @@ put_is_contravariant(int xi, bool xauto_access)
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::tp::
 class_name() const
 {
@@ -1278,7 +1279,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::tp::
 static_class_name()
 {
@@ -1430,9 +1431,9 @@ invariant() const
 // NON-MEMBER FUNCTIONS
 //==============================================================================
 
-ostream&
+std::ostream&
 fiber_bundle::
-operator<<(ostream& xos, tp_lite::table_dofs_type& xt)
+operator<<(std::ostream& xos, tp_lite::table_dofs_type& xt)
 {
   xos << " " << xt.factor_ct
       << " " << xt.d

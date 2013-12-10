@@ -19,6 +19,7 @@
 
 #include "general_matrix_1x3.impl.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //==============================================================================

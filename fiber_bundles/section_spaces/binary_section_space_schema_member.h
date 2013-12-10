@@ -105,7 +105,7 @@ public:
   template <typename S>
   static poset_path standard_host_path(const poset_path& xbase_path, 
                                        const poset_path& xrep_path, 
-                                       const string& xfiber_suffix);
+                                       const std::string& xfiber_suffix);
  
   ///
   /// The standard path for a schema member for sections of type S with
@@ -115,7 +115,7 @@ public:
   template <typename S>
   static poset_path standard_member_path(const poset_path& xbase_path, 
                                          const poset_path& xrep_path, 
-                                         const string& xfiber_suffix);
+                                         const std::string& xfiber_suffix);
 
   ///
   /// True if and only if the host specified by standard_host_path<S>(xbase_path, xrep_path, xfiber_suffix)
@@ -125,7 +125,7 @@ public:
   static bool standard_host_is_available(namespace_poset& xns,
                                          const poset_path& xbase_path, 
                                          const poset_path& xrep_path, 
-                                         const string& xfiber_suffix,
+                                         const std::string& xfiber_suffix,
                                          bool xauto_access);
   
   ///
@@ -137,7 +137,7 @@ public:
   static host_type& standard_host(namespace_type& xns, 
                                   const poset_path& xbase_path,
                                   const poset_path& xrep_path,
-                                  const string& xfiber_suffix,
+                                  const std::string& xfiber_suffix,
                                   bool xauto_access);
 
   
@@ -151,7 +151,7 @@ public:
   static poset_path standard_member(namespace_type& xns, 
                                     const poset_path& xbase_path,
                                     const poset_path& xrep_path,
-                                    const string& xfiber_suffix,
+                                    const std::string& xfiber_suffix,
                                     bool xauto_access);
 
 protected:
@@ -231,7 +231,7 @@ public:
   /// attached to the member state with name xname in xhost
   ///
   binary_section_space_schema_member(const binary_section_space_schema_poset* xhost,
-                                     const string& xname);
+                                     const std::string& xname);
 
   ///
   /// Create a new handle attached to the state in xhost with
@@ -409,7 +409,7 @@ public:
   /// This member exists only to encapsulate the hack.
   ///
   virtual pod_index_type get_int_id(pod_index_type xext_id,
-				    const string& xid_space_name) const;
+				    const std::string& xid_space_name) const;
 
   ///
   /// Gets the external ids of this in
@@ -417,7 +417,7 @@ public:
   /// @hack the product subposet hack, version 2.
   /// This member exists only to encapsulate the hack.
   ///
-  virtual void get_ext_ids(const string& xid_space_name,
+  virtual void get_ext_ids(const std::string& xid_space_name,
                            pod_index_type& xschema_poset_ext_id,
                            pod_index_type& xschema_member_ext_id,
                            pod_index_type& xbase_space_ext_id,

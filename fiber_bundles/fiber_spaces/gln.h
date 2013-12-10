@@ -68,7 +68,7 @@ public:
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
 
   ///
   /// Value of xindex-th component (row dof)
@@ -231,12 +231,12 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
   
   ///
   /// Virtual constructor, makes a new instance of the same type as this.
@@ -304,7 +304,7 @@ public:
   ///
   /// The name of the standard schema poset for this class.
   ///
-  static const string& standard_schema_poset_name();
+  static const std::string& standard_schema_poset_name();
 
   ///
   /// The path to the standard schema for this class.
@@ -426,7 +426,7 @@ public:
   /// Creates a new handle attached to
   /// the member state with name xname in xhost.
   ///
-  gln(const poset* xhost, const string& xname);
+  gln(const poset* xhost, const std::string& xname);
 
   ///
   /// Creates a new handle attached to the same state as xother.
@@ -549,12 +549,12 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
 
   ///
   /// Make a new handle instance of current.  Attach the new instance to
@@ -639,12 +639,12 @@ SHEAF_DLL_SPEC double rad(double degrees);
 ///
 /// Insert gln_lite& xv into ostream& xos.
 ///
-SHEAF_DLL_SPEC ostream& operator<<(ostream& xos, gln_lite& xv);
+SHEAF_DLL_SPEC std::ostream& operator<<(std::ostream& xos, gln_lite& xv);
 
 ///
 /// Insert gln_lite::table_dofs_type& xt into ostream& xos.
 ///
-SHEAF_DLL_SPEC ostream& operator<<(ostream& xos, gln_lite::table_dofs_type& xt);
+SHEAF_DLL_SPEC std::ostream& operator<<(std::ostream& xos, gln_lite::table_dofs_type& xt);
 
 #endif // ifndef DOXYGEN_1_5_4_SKIP_UNKNOWN
 

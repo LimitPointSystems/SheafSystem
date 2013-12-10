@@ -168,12 +168,12 @@ public:
   ///
   /// Prefix for destination name.
   ///
-  string& name_prefix();
+  std::string& name_prefix();
 
   ///
   /// Suffix for destination name.
   ///
-  string& name_suffix();
+  std::string& name_suffix();
 
   ///
   /// True if and only if xcoord1 and xcoord2 have the same fiber type and dimension.
@@ -250,12 +250,12 @@ private:
   ///
   /// Prefix for destination name.
   ///
-  string _name_prefix;
+  std::string _name_prefix;
 
   ///
   /// Suffix for destination name.
   ///
-  string _name_suffix;
+  std::string _name_suffix;
 
   ///
   /// Pulls the range disc back into the domain.

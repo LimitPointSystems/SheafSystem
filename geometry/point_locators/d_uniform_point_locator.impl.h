@@ -139,7 +139,7 @@ clip_component(sec_vd_value_type xcomp, sec_vd_value_type xupper_bound)
     // The coordinate to be inverted matches the domain upper bound;
     // make sure it is strictly less than the bound.
 
-    result = xcomp*(1.0 - numeric_limits<sec_vd_value_type>::epsilon());
+    result = xcomp*(1.0 - std::numeric_limits<sec_vd_value_type>::epsilon());
   }
 
   return result;

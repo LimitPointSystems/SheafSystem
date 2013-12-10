@@ -43,7 +43,7 @@ namespace fiber_bundle
 // PUBLIC MEMBER FUNCTIONS
 
 template <typename T>
-const string&
+const std::string&
 vd_row_dofs_type<T>::
 static_class_name()
 {
@@ -51,7 +51,7 @@ static_class_name()
 
   // Body:
 
-  static const string result("vd_row_dofs_type");
+  static const std::string result("vd_row_dofs_type");
 
   // Postconditions:
 

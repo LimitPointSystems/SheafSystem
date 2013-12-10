@@ -29,6 +29,7 @@
 #include "schema_poset_member.h"
 #include "wsv_block.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 
@@ -417,7 +418,7 @@ dr() const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::jcb_e33_lite::
 class_name() const
 {
@@ -436,7 +437,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::jcb_e33_lite::
 static_class_name()
 {
@@ -691,7 +692,7 @@ new_host(namespace_type& xns,
 
 fiber_bundle::jcb_e33::host_type&
 fiber_bundle::jcb_e33::
-standard_host(namespace_type& xns, const string& xsuffix, bool xauto_access)
+standard_host(namespace_type& xns, const std::string& xsuffix, bool xauto_access)
 {
   // cout << endl << "Entering jcb_e33::new_host." << endl;
 
@@ -821,7 +822,7 @@ jcb_e33(const poset_state_handle* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::jcb_e33::
-jcb_e33(const poset_state_handle* xhost, const string& xname)
+jcb_e33(const poset_state_handle* xhost, const std::string& xname)
 {
 
   // Preconditions:
@@ -1130,7 +1131,7 @@ operator const jcb_e33::row_dofs_type& () const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::jcb_e33::
 class_name() const
 {
@@ -1149,7 +1150,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::jcb_e33::
 static_class_name()
 {

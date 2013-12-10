@@ -249,7 +249,7 @@ point_block_1d(poset* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::point_block_1d::
-point_block_1d(const poset* xhost, const string& xname)
+point_block_1d(const poset* xhost, const std::string& xname)
 {
   // Preconditions:
 

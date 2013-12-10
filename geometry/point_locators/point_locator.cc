@@ -29,6 +29,7 @@
 #include "sec_ed.h"
 #include "std_iostream.h"
 
+using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.
 using namespace fiber_bundle::sec_vd_algebra;
 

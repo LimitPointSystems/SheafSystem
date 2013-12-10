@@ -34,6 +34,7 @@
 #include "sec_rep_space.h"
 #include "wsv_block.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // ===========================================================
@@ -231,7 +232,6 @@ standard_host(namespace_type& xns, bool xauto_access)
 
 
 
-///
 fiber_bundle::sec_rep_descriptor&
 fiber_bundle::sec_rep_descriptor::
 operator=(const abstract_poset_member& xother)
@@ -253,7 +253,6 @@ operator=(const abstract_poset_member& xother)
   return *this;
 }
 
-///
 fiber_bundle::sec_rep_descriptor&
 fiber_bundle::sec_rep_descriptor::
 operator=(const sec_rep_descriptor& xother)
@@ -280,7 +279,6 @@ operator=(const sec_rep_descriptor& xother)
 // CANONICAL MEMBERS
 
 // Default constructor
-///
 fiber_bundle::sec_rep_descriptor::
 sec_rep_descriptor()
     : _evaluators(0)
@@ -303,7 +301,6 @@ sec_rep_descriptor()
 
 
 // Copy constructor
-///
 fiber_bundle::sec_rep_descriptor::
 sec_rep_descriptor(const sec_rep_descriptor& xother, bool xnew_jem)
     : _evaluators(0)
@@ -336,7 +333,6 @@ sec_rep_descriptor(const sec_rep_descriptor& xother, bool xnew_jem)
   ensure(is_attached() == xother.is_attached() );
 }
 
-///
 fiber_bundle::sec_rep_descriptor*
 fiber_bundle::sec_rep_descriptor::
 clone() const
@@ -362,7 +358,6 @@ clone() const
 }
 
 // Destructor
-///
 fiber_bundle::sec_rep_descriptor::
 ~sec_rep_descriptor()
 {
@@ -385,7 +380,6 @@ fiber_bundle::sec_rep_descriptor::
 
 
 // Class invariant
-///
 bool
 fiber_bundle::sec_rep_descriptor::
 invariant() const
@@ -421,7 +415,6 @@ invariant() const
   return result;
 }
 
-///
 bool
 fiber_bundle::sec_rep_descriptor::
 is_ancestor_of(const any* other) const
@@ -447,14 +440,13 @@ is_ancestor_of(const any* other) const
 
 // NEW HANDLE, NEW STATE CONSTRUCTORS
 
-///
 fiber_bundle::sec_rep_descriptor::
 sec_rep_descriptor(poset* xhost,
-                   const string& xdiscretization_subposet_name,
-                   const string& xmultivalued_subposet_name,
-                   const string& xevaluation_subposet_name,
-                   const string& xevaluator_family_name,
-                   const string& xurl,
+                   const std::string& xdiscretization_subposet_name,
+                   const std::string& xmultivalued_subposet_name,
+                   const std::string& xevaluation_subposet_name,
+                   const std::string& xevaluator_family_name,
+                   const std::string& xurl,
                    int xmultiplicity,
                    bool xeval_is_above_disc,
                    bool xauto_access)
@@ -538,9 +530,8 @@ sec_rep_descriptor(const poset* xhost, const scoped_index& xindex)
 
 // Creates a new handle attached to
 // the member state with name xname in xhost.
-///
 fiber_bundle::sec_rep_descriptor::
-sec_rep_descriptor(const poset* xhost, const string &xname)
+sec_rep_descriptor(const poset* xhost, const std::string& xname)
     : _evaluators(0)
 {
 
@@ -565,7 +556,6 @@ sec_rep_descriptor(const poset* xhost, const string &xname)
 }
 
 
-///
 fiber_bundle::sec_rep_descriptor::
 sec_rep_descriptor(const namespace_poset* xnamespace,
                    const poset_path& xpath,
@@ -643,7 +633,6 @@ sec_rep_descriptor(const namespace_poset* xnamespace,
   return;
 }
 
-///
 void
 fiber_bundle::sec_rep_descriptor::
 new_jim_state(poset_dof_map* xdof_map, bool xcopy_dof_map, bool xauto_access)
@@ -665,7 +654,6 @@ new_jim_state(poset_dof_map* xdof_map, bool xcopy_dof_map, bool xauto_access)
   return;
 }
 
-///
 void
 fiber_bundle::sec_rep_descriptor::
 new_jim_state(poset_state_handle* xhost,
@@ -743,15 +731,14 @@ new_jim_state(poset_state_handle* xhost,
   return;
 }
 
-///
 void
 fiber_bundle::sec_rep_descriptor::
 new_jim_state(poset* xhost,
-              const string& xdiscretization_subposet_name,
-              const string& xmultivalued_subposet_name,
-              const string& xevaluation_subposet_name,
-              const string& xevaluator_family_name,
-              const string& xurl,
+              const std::string& xdiscretization_subposet_name,
+              const std::string& xmultivalued_subposet_name,
+              const std::string& xevaluation_subposet_name,
+              const std::string& xevaluator_family_name,
+              const std::string& xurl,
               int xmultiplicity,
               bool xeval_is_above_disc,
               bool xauto_access)
@@ -814,7 +801,6 @@ new_jim_state(poset* xhost,
 
  
 
-///
 sheaf::array_poset_dof_map&
 fiber_bundle::sec_rep_descriptor::
 dof_map(bool xrequire_write_access)
@@ -840,7 +826,6 @@ dof_map(bool xrequire_write_access)
   return result;
 }
 
-///
 const sheaf::array_poset_dof_map&
 fiber_bundle::sec_rep_descriptor::
 dof_map(bool xrequire_write_access) const
@@ -868,7 +853,6 @@ dof_map(bool xrequire_write_access) const
 
  
 
-///
 bool
 fiber_bundle::sec_rep_descriptor::
 dof_map_is_ancestor_of(const poset_dof_map* xdof_map) const
@@ -892,8 +876,7 @@ dof_map_is_ancestor_of(const poset_dof_map* xdof_map) const
   return result;
 }
 
-///
-string
+std::string
 fiber_bundle::sec_rep_descriptor::
 discretization_subposet_name() const
 {
@@ -914,10 +897,9 @@ discretization_subposet_name() const
   return result;
 }
 
-///
 void
 fiber_bundle::sec_rep_descriptor::
-put_discretization_subposet_name(const string& xname)
+put_discretization_subposet_name(const std::string& xname)
 {
   // Preconditions:
 
@@ -938,8 +920,7 @@ put_discretization_subposet_name(const string& xname)
 }
 
 
-///
-string
+std::string
 fiber_bundle::sec_rep_descriptor::
 multivalued_subposet_name() const
 {
@@ -960,10 +941,9 @@ multivalued_subposet_name() const
   return result;
 }
 
-///
 void
 fiber_bundle::sec_rep_descriptor::
-put_multivalued_subposet_name(const string& xname)
+put_multivalued_subposet_name(const std::string& xname)
 {
   // Preconditions:
 
@@ -984,8 +964,7 @@ put_multivalued_subposet_name(const string& xname)
 }
 
 
-///
-string
+std::string
 fiber_bundle::sec_rep_descriptor::
 evaluation_subposet_name() const
 {
@@ -1006,10 +985,9 @@ evaluation_subposet_name() const
   return result;
 }
 
-///
 void
 fiber_bundle::sec_rep_descriptor::
-put_evaluation_subposet_name(const string& xname)
+put_evaluation_subposet_name(const std::string& xname)
 {
   // Preconditions:
 
@@ -1029,8 +1007,7 @@ put_evaluation_subposet_name(const string& xname)
   return;
 }
 
-///
-string
+std::string
 fiber_bundle::sec_rep_descriptor::
 evaluator_family_name() const
 {
@@ -1051,10 +1028,9 @@ evaluator_family_name() const
   return result;
 }
 
-///
 void
 fiber_bundle::sec_rep_descriptor::
-put_evaluator_family_name(const string& xname)
+put_evaluator_family_name(const std::string& xname)
 {
   // Preconditions:
 
@@ -1074,8 +1050,7 @@ put_evaluator_family_name(const string& xname)
   return;
 }
 
-///
-string
+std::string
 fiber_bundle::sec_rep_descriptor::
 url() const
 {
@@ -1096,10 +1071,9 @@ url() const
   return result;
 }
 
-///
 void
 fiber_bundle::sec_rep_descriptor::
-put_url(const string& xurl)
+put_url(const std::string& xurl)
 {
   // Preconditions:
 
@@ -1119,7 +1093,6 @@ put_url(const string& xurl)
   return;
 }
 
-///
 int
 fiber_bundle::sec_rep_descriptor::
 multiplicity() const
@@ -1141,7 +1114,6 @@ multiplicity() const
   return result;
 }
 
-///
 void
 fiber_bundle::sec_rep_descriptor::
 put_multiplicity(int xmultiplicity)
@@ -1163,7 +1135,6 @@ put_multiplicity(int xmultiplicity)
   return;
 }
 
-///
 bool
 fiber_bundle::sec_rep_descriptor::
 eval_is_above_disc() const
@@ -1186,7 +1157,6 @@ eval_is_above_disc() const
   return result;
 }
 
-///
 void
 fiber_bundle::sec_rep_descriptor::
 put_eval_is_above_disc(bool xvalue)
@@ -1208,7 +1178,6 @@ put_eval_is_above_disc(bool xvalue)
   return;
 }
 
-///
 fiber_bundle::eval_family*
 fiber_bundle::sec_rep_descriptor::
 evaluators() const
@@ -1258,13 +1227,12 @@ attach_handle_data_members()
 }
 
 
-///
 fiber_bundle::sec_rep_descriptor::row_dof_tuple::
-row_dof_tuple(const string& xdiscretization_subposet_name,
-	      const string& xmultivalued_subposet_name,
-	      const string& xevaluation_subposet_name,
-	      const string& xevaluator_family_name,
-	      const string& xurl,
+row_dof_tuple(const std::string& xdiscretization_subposet_name,
+	      const std::string& xmultivalued_subposet_name,
+	      const std::string& xevaluation_subposet_name,
+	      const std::string& xevaluator_family_name,
+	      const std::string& xurl,
 	      int xmultiplicity,
 	      size_type xeval_is_above_disc)
 {
@@ -1295,10 +1263,9 @@ row_dof_tuple(const string& xdiscretization_subposet_name,
   return;
 }
 
-///
 void
 fiber_bundle::sec_rep_descriptor::row_dof_tuple::
-copy_string_dof(char*& xdof, const string& xdof_value)
+copy_string_dof(char*& xdof, const std::string& xdof_value)
 {
   // Preconditions:
 

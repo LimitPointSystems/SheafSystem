@@ -38,6 +38,7 @@
 #include "structured_block_2d.h"
 #include "structured_block_3d.h"
 
+using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
 
 //#define DIAGNOSTIC_OUTPUT 1

@@ -75,7 +75,7 @@ public:
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
   
   ///
   /// Value of xindex-th component (row dof)
@@ -292,12 +292,12 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
   
   ///
   /// Virtual constructor, makes a new instance of the same type as this.
@@ -478,7 +478,7 @@ public:
   /// Creates a new vd handle attached to the member state with name xname
   /// in xhost.
   ///
-  vd(const poset_state_handle* xhost, const string& xname);
+  vd(const poset_state_handle* xhost, const std::string& xname);
 
   ///
   /// Creates a new vd handle attached to the same state as xother.
@@ -592,12 +592,12 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
 
   ///
   /// Make a new handle instance of current.  Attach the new instance to
@@ -676,12 +676,12 @@ private:
 ///
 /// Insert vd_lite& x0 into ostream& xos.
 ///
-SHEAF_DLL_SPEC ostream& operator<<(ostream& xos, const vd_lite& x0);
+SHEAF_DLL_SPEC std::ostream& operator<<(std::ostream& xos, const vd_lite& x0);
 
 ///
 /// Insert vd& x0 into ostream& xos.
 ///
-SHEAF_DLL_SPEC ostream& operator<<(ostream& xos, const vd& x0);
+SHEAF_DLL_SPEC std::ostream& operator<<(std::ostream& xos, const vd& x0);
 
 #endif // ifndef DOXYGEN_1_5_4_SKIP_UNKNOWN
 

@@ -39,6 +39,7 @@
 #include "sec_rep_space_member.h"
 #include "tern.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // =============================================================================
@@ -47,7 +48,7 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::sec_rep_space::
 static_class_name()
 {
@@ -380,7 +381,7 @@ evaluation() const
   return schema().evaluation();
 }
 
-string
+std::string
 fiber_bundle::sec_rep_space::
 evaluator_family() const
 {
@@ -397,7 +398,7 @@ evaluator_family() const
   return schema().rep().evaluator_family_name();
 }
 
-string
+std::string
 fiber_bundle::sec_rep_space::
 url() const
 {
@@ -553,7 +554,7 @@ is_multisection(const scoped_index& xid, bool xauto_access) const
   return is_multisection(xid.hub_pod(), xauto_access);
 }
 
-string
+std::string
 fiber_bundle::sec_rep_space::
 branch_id_space_name(pod_index_type xhub_id, bool xauto_access) const
 {
@@ -578,7 +579,7 @@ branch_id_space_name(pod_index_type xhub_id, bool xauto_access) const
   return result;
 }
 
-string
+std::string
 fiber_bundle::sec_rep_space::
 branch_id_space_name(const scoped_index& xid, bool xauto_access) const
 {

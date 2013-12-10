@@ -32,6 +32,7 @@
 #include "st4_e2.h"
 #include "std_sstream.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 
@@ -368,7 +369,7 @@ stp_prototype(int xp) const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::t4_e2_lite::
 class_name() const
 {
@@ -387,7 +388,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::t4_e2_lite::
 static_class_name()
 {
@@ -630,7 +631,7 @@ new_host(namespace_type& xns,
 
 fiber_bundle::t4_e2::host_type&
 fiber_bundle::t4_e2::
-standard_host(namespace_type& xns, const string& xsuffix, bool xauto_access)
+standard_host(namespace_type& xns, const std::string& xsuffix, bool xauto_access)
 {
   // cout << endl << "Entering t4_e2::new_host." << endl;
 
@@ -948,7 +949,7 @@ t4_e2(const poset* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::t4_e2::
-t4_e2(const poset* xhost, const string& xname)
+t4_e2(const poset* xhost, const std::string& xname)
 {
 
   // Preconditions:
@@ -1125,7 +1126,7 @@ new_stp(int xp, bool xauto_access) const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::t4_e2::
 class_name() const
 {
@@ -1144,7 +1145,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::t4_e2::
 static_class_name()
 {

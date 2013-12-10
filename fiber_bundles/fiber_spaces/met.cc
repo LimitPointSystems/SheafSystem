@@ -31,6 +31,7 @@
 #include "wsv_block.h"
 
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 
@@ -205,7 +206,7 @@ operator=(const row_dofs_type& xrow_dofs)
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::met_lite::
 class_name() const
 {
@@ -224,7 +225,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::met_lite::
 static_class_name()
 {
@@ -501,7 +502,7 @@ met(const poset_state_handle* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::met::
-met(const poset_state_handle* xhost, const string& xname)
+met(const poset_state_handle* xhost, const std::string& xname)
 {
 
   // Preconditions:
@@ -724,7 +725,7 @@ lite_type() const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::met::
 class_name() const
 {
@@ -743,7 +744,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::met::
 static_class_name()
 {

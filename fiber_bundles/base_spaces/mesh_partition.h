@@ -79,12 +79,12 @@ public:
   ///
   /// Creates an instance for mesh xmesh.
   ///
-  mesh_partition(const base_space_poset& xmesh, const string& xname);
+  mesh_partition(const base_space_poset& xmesh, const std::string& xname);
 
   ///
   /// The name of this mesh_partition.
   ///
-  const string& name() const;
+  const std::string& name() const;
 
   ///
   /// The mesh poset containing this mesh_partition.
@@ -119,12 +119,12 @@ public:
   ///
   /// Extracts the part id from part name xname.
   ///
-  pod_index_type part_id(const string& xname) const;
+  pod_index_type part_id(const std::string& xname) const;
 
   ///
   /// True if xname is a valid decomposition name.
   ///
-  static bool is_valid_name(const string& xname);
+  static bool is_valid_name(const std::string& xname);
 
   ///
   /// The prefix for valid mesh_partition names.

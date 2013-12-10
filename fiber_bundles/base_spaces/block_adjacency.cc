@@ -23,6 +23,7 @@
 #include "block_connectivity.h"
 #include "std_iomanip.h"
 
+using namespace std;
 using namespace fiber_bundle;
 
 // ===========================================================
@@ -414,9 +415,9 @@ invariant() const
 // ===========================================================
 
 ///
-ostream&
+std::ostream&
 fiber_bundle::
-operator<<(ostream& xos, const fiber_bundle::block_adjacency& xadj)
+operator<<(std::ostream& xos, const fiber_bundle::block_adjacency& xadj)
 {
   // Preconditions:
 

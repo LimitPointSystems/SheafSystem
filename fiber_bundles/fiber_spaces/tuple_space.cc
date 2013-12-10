@@ -27,6 +27,7 @@
 #include "poset_handle_factory.h"
 #include "tuple.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //#define DIAGNOSTIC_OUTPUT
@@ -36,7 +37,7 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 //==============================================================================
 
 ///
-const string&
+const std::string&
 fiber_bundle::tuple_space::
 standard_schema_poset_name()
 {

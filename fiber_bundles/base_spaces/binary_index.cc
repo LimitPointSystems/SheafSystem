@@ -30,9 +30,9 @@
 //  NON-MEMBER FUNCTIONS
 // ===========================================================
 
-ostream&
+std::ostream&
 fiber_bundle::
-operator<<(ostream& xos, const fiber_bundle::binary_index& xbi)
+operator<<(std::ostream& xos, const fiber_bundle::binary_index& xbi)
 {
   xos << xbi.i << "," << xbi.j;
   return xos;

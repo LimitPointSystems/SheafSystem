@@ -96,7 +96,7 @@ section_space_schema_jims_index_space_iterator(const index_space_family& xid_spa
 
 fiber_bundle::section_space_schema_jims_index_space_iterator::
 section_space_schema_jims_index_space_iterator(const index_space_family& xid_spaces,
-					       const string& xname)
+					       const std::string& xname)
 {
   // Preconditions:
 

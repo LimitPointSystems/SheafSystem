@@ -24,6 +24,7 @@
 #include "block.h"
 #include "error_message.h"
 #include "sec_vd.h"
+#include "std_iomanip.h"
 
 using namespace fields; // Workaround for MS C++ bug.
 
@@ -97,6 +98,8 @@ operator()(const scoped_index& xdisc_id, block<sec_vd_value_type>& xcoords)
   require(xdisc_id.in_scope());
 
   // Body:
+
+  using namespace std;
 
   // Print the discretization poset and seq id.
 

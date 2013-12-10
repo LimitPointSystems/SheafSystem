@@ -21,4 +21,5 @@
 #include "geometry.h"
 
 
+using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.

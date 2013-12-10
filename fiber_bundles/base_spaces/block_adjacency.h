@@ -57,7 +57,7 @@ public:
   ///
   /// The type of the adjacency relation.
   ///
-  typedef map< pod_index_type, slist<pod_index_type> > adj_type;
+  typedef std::map< pod_index_type, slist<pod_index_type> > adj_type;
 
   ///
   /// Type of iterator for nodes.
@@ -246,7 +246,7 @@ private:
 ///  Print block_adjacency& xconn to stream xos.
 ///
 SHEAF_DLL_SPEC 
-ostream& operator<<(ostream& xos, const block_adjacency& xconn);
+std::ostream& operator<<(std::ostream& xos, const block_adjacency& xconn);
 
 #endif // ifndef DOXYGEN_1_5_4_SKIP_UNKNOWN
 

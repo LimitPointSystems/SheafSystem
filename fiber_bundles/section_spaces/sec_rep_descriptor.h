@@ -184,11 +184,11 @@ public:
   /// Creates a new handle attached to a new jim state in xhost.
   ///
   sec_rep_descriptor(poset *xhost,
-                     const string& xdiscretization_subposet_name,
-                     const string& xmultivalued_subposet_name,
-                     const string& xevaluation_subposet_name,
-                     const string& xevaluation_method_name,
-                     const string& xurl,
+                     const std::string& xdiscretization_subposet_name,
+                     const std::string& xmultivalued_subposet_name,
+                     const std::string& xevaluation_subposet_name,
+                     const std::string& xevaluation_method_name,
+                     const std::string& xurl,
                      int xmultiplicity,
                      bool xeval_is_above_disc,
                      bool xauto_access);
@@ -211,7 +211,7 @@ public:
   /// Creates a new handle attached to
   /// the member state with name xname in xhost.
   ///
-  sec_rep_descriptor(const poset *xhost, const string &xname);
+  sec_rep_descriptor(const poset *xhost, const std::string& xname);
 
   ///
   /// Creates a new sec_rep_descriptor handle attached to the member state
@@ -270,11 +270,11 @@ public:
   /// Creates a new jim state in xhost and attaches this to it.
   ///
   void new_jim_state(poset *xhost,
-                     const string& xdiscretization_subposet_name,
-                     const string& xmultivalued_subposet_name,
-                     const string& xevaluation_subposet_name,
-                     const string& xevaluation_method_name,
-                     const string& xurl,
+                     const std::string& xdiscretization_subposet_name,
+                     const std::string& xmultivalued_subposet_name,
+                     const std::string& xevaluation_subposet_name,
+                     const std::string& xevaluation_method_name,
+                     const std::string& xurl,
                      int xmultiplicity,
                      bool xeval_is_above_disc,
                      bool xauto_access);
@@ -302,52 +302,52 @@ public:
   ///
   /// The name of the discretization subposet.
   ///
-  string discretization_subposet_name() const;
+  std::string discretization_subposet_name() const;
 
   ///
   /// Sets the name of the discretization subposet to xname.
   ///
-  void put_discretization_subposet_name(const string& xname);
+  void put_discretization_subposet_name(const std::string& xname);
 
   ///
   /// The name of the multivalued subposet.
   ///
-  string multivalued_subposet_name() const;
+  std::string multivalued_subposet_name() const;
 
   ///
   /// Sets the name of the multivalued subposet to xname.
   ///
-  void put_multivalued_subposet_name(const string& xname);
+  void put_multivalued_subposet_name(const std::string& xname);
 
   ///
   /// The name of the evaluation subposet.
   ///
-  string evaluation_subposet_name() const;
+  std::string evaluation_subposet_name() const;
 
   ///
   /// Sets the name of the evaluation subposet to xname.
   ///
-  void put_evaluation_subposet_name(const string& xname);
+  void put_evaluation_subposet_name(const std::string& xname);
 
   ///
   /// The name of the evaluator family.
   ///
-  string evaluator_family_name() const;
+  std::string evaluator_family_name() const;
 
   ///
   /// Sets the name of the evaluator family to xname.
   ///
-  void put_evaluator_family_name(const string& xname);
+  void put_evaluator_family_name(const std::string& xname);
 
   ///
   /// The url for a description of this representation
   ///
-  string url() const;
+  std::string url() const;
 
   ///
   /// Sets the url for a description of this representation to xurl.
   ///
-  void put_url(const string& xurl);
+  void put_url(const std::string& xurl);
 
   ///
   /// The number of degrees of freedom associated with each
@@ -435,18 +435,18 @@ private:
     ///
     /// Constructor
     ///
-    row_dof_tuple(const string& xdiscretization_subposet_name,
-                  const string& xmultivalued_subposet_name,
-                  const string& xevaluation_subposet_name,
-                  const string& xevaluator_family_name,
-                  const string& xurl,
+    row_dof_tuple(const std::string& xdiscretization_subposet_name,
+                  const std::string& xmultivalued_subposet_name,
+                  const std::string& xevaluation_subposet_name,
+                  const std::string& xevaluator_family_name,
+                  const std::string& xurl,
                   int xmultiplicity,
                   size_type xeval_is_above_disc);
 
     ///
     /// Duplicates xodf_value.str() and makes xdof point to the copy.
     ///
-    static void copy_string_dof(char*& xdof, const string& xdof_value);
+    static void copy_string_dof(char*& xdof, const std::string& xdof_value);
 
   };
 

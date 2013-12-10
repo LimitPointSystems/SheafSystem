@@ -23,6 +23,7 @@
 #include "assert_contract.h"
 #include "poset.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //==============================================================================
@@ -107,7 +108,7 @@ fiber_bundle::group_lite::
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::group_lite::
 class_name() const
 {
@@ -126,7 +127,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::group_lite::
 static_class_name()
 {
@@ -349,7 +350,7 @@ group()
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::group::
 class_name() const
 {
@@ -368,7 +369,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::group::
 static_class_name()
 {

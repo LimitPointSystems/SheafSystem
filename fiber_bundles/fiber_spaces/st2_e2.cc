@@ -30,6 +30,7 @@
 #include "stp_space.h"
 #include "wsv_block.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 
@@ -433,7 +434,7 @@ stp_prototype(int xp) const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::st2_e2_lite::
 class_name() const
 {
@@ -452,7 +453,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::st2_e2_lite::
 static_class_name()
 {
@@ -685,7 +686,7 @@ new_host(namespace_type& xns,
 
 fiber_bundle::st2_e2::host_type&
 fiber_bundle::st2_e2::
-standard_host(namespace_type& xns, const string& xsuffix, bool xauto_access)
+standard_host(namespace_type& xns, const std::string& xsuffix, bool xauto_access)
 {
   // cout << endl << "Entering st2_e2::new_host." << endl;
 
@@ -870,7 +871,7 @@ st2_e2(const poset_state_handle* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::st2_e2::
-st2_e2(const poset_state_handle* xhost, const string &xname)
+st2_e2(const poset_state_handle* xhost, const std::string& xname)
 {
 
   // Preconditions:
@@ -1211,7 +1212,7 @@ operator const st2_e2::row_dofs_type& () const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::st2_e2::
 class_name() const
 {
@@ -1230,7 +1231,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::st2_e2::
 static_class_name()
 {

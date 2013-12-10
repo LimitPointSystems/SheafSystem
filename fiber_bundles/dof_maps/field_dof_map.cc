@@ -26,7 +26,7 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 // PUBLIC MEMBER FUNCTIONS
 
 ///
-const string&
+const std::string&
 fiber_bundle::field_dof_map::
 class_name() const
 {
@@ -46,7 +46,7 @@ class_name() const
 }
 
 ///
-const string&
+const std::string&
 fiber_bundle::field_dof_map::
 static_class_name()
 {

@@ -32,6 +32,7 @@
 #include "sheaves_namespace.h"
 #include "std_set.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // ===========================================================
@@ -40,7 +41,7 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::section_space_schema_member::
 class_name() const
 {
@@ -59,7 +60,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::section_space_schema_member::
 static_class_name()
 {
@@ -1704,7 +1705,7 @@ component_size(const scoped_index& xfiber_dof_id, bool xauto_access) const
 
 sheaf::pod_index_type
 fiber_bundle::section_space_schema_member::
-get_ext_id(const string& xid_space_name) const
+get_ext_id(const std::string& xid_space_name) const
 {
   // Preconditions:
 
@@ -2176,7 +2177,7 @@ invariant() const
 
 void
 fiber_bundle::section_space_schema_member::
-to_stream(ostream& xos) const
+to_stream(std::ostream& xos) const
 {
   // Preconditions:
 
@@ -2202,7 +2203,7 @@ to_stream(ostream& xos) const
 // NONMEMBER FUNCTIONS
 // ===========================================================
 
-ostream& fiber_bundle::operator << (ostream &os, section_space_schema_member& p)
+std::ostream& fiber_bundle::operator << (std::ostream &os, section_space_schema_member& p)
 {
 
   // Preconditions:

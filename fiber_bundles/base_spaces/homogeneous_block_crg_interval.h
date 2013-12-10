@@ -345,7 +345,7 @@ public:
   /// The name of this class;
   /// provided to satisfy factory template.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
 protected:
 

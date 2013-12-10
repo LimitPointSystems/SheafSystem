@@ -34,6 +34,8 @@
 #include "differentiable_section_evaluator.h"
 #include "integrable_section_evaluator.h"
 
+using namespace std;
+
 //==============================================================================
 // EXPLICIT INSTANTIATIONS
 //==============================================================================

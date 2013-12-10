@@ -39,6 +39,7 @@
 #include "vd.h"
 #include "vd_space.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //#define DIAGNOSTIC_OUTPUT
@@ -632,7 +633,7 @@ put_is_covector(const scoped_index& xmbr_id, bool xauto_access)
 
 // PROTECTED MEMBER FUNCTIONS
 
-string
+std::string
 fiber_bundle::sec_vd_space::
 covariant_subposet_name(int xi)
 {
@@ -890,7 +891,7 @@ prereq_id(int xi) const
 
 void
 fiber_bundle::sec_vd_space::
-initialize_standard_subposets(const string& xname)
+initialize_standard_subposets(const std::string& xname)
 {
   // Preconditions:
 
@@ -1009,10 +1010,10 @@ invariant() const
 
 void
 fiber_bundle::
-print_prereq_paths(ostream &xos,
+print_prereq_paths(std::ostream &xos,
 		   const sec_vd_space& xspace, 
-		   const string& xheading, 
-		   const string& xindent, 
+		   const std::string& xheading, 
+		   const std::string& xindent, 
 		   bool xauto_access)
 {
   // Preconditions:

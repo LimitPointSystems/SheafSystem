@@ -198,11 +198,13 @@ contains_point(const d_bin_coordinates<DC, DB>& xpt) const
 template <int DC, int DB>
 void
 d_bounding_box<DC, DB>::
-to_stream(ostream& xos) const
+to_stream(std::ostream& xos) const
 {
   // Preconditions:
 
   // Body:
+
+  using namespace std;
 
   xos << "d_bounding_box: " << endl
   << "  lower_bounds: " << lb() << endl
@@ -487,8 +489,8 @@ dc()
 // ===========================================================
 
 template <int DC, int DB>
-ostream&
-operator<<(ostream& xos, const d_bounding_box<DC, DB>& xbox)
+std::ostream&
+operator<<(std::ostream& xos, const d_bounding_box<DC, DB>& xbox)
 {
   xbox.to_stream(xos);
   return xos;

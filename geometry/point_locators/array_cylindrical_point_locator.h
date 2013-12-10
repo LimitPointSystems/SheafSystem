@@ -208,8 +208,8 @@ public:
 /// Insert array_cylindrical_point_locator xpl into ostream xos.
 ///
 SHEAF_DLL_SPEC 
-ostream&
-operator << (ostream& xos, const array_cylindrical_point_locator& xpl);
+std::ostream&
+operator << (std::ostream& xos, const array_cylindrical_point_locator& xpl);
  
 } // namespace geometry
 

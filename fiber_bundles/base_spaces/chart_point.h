@@ -207,13 +207,13 @@ public:
   ///
   ///  Write instance information to an ostream (default = stdout).
   ///
-  void to_stream(ostream& xos = cout) const;
+  void to_stream(std::ostream& xos = std::cout) const;
 
 
   ///
   /// Get instance information as a string.
   ///
-  string to_string() const;
+  std::string to_string() const;
 
 protected:
 
@@ -231,7 +231,7 @@ private:
 ///
 /// Insert chart_point_1d& xpt into ostream& os.
 ///
-SHEAF_DLL_SPEC ostream& operator<<(ostream &os, const chart_point& xpt);
+SHEAF_DLL_SPEC std::ostream& operator<<(std::ostream &os, const chart_point& xpt);
 
 #endif // ifndef DOXYGEN_1_5_4_SKIP_UNKNOWN
 

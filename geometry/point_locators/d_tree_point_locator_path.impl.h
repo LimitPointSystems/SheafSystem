@@ -392,14 +392,14 @@ d_tree_point_locator_path()
 // ===========================================================
 
 template <int DC, int DB>
-ostream&
-operator<<(ostream &os, const d_tree_point_locator_path<DC, DB>& xpath)
+std::ostream&
+operator<<(std::ostream &os, const d_tree_point_locator_path<DC, DB>& xpath)
 {
   os << "height = " << xpath.height()
-  << ", max_height = " << xpath.max_height()
-  << ", head = " << xpath.head()
-  << ", path = " << xpath.path()
-  << endl;
+     << ", max_height = " << xpath.max_height()
+     << ", head = " << xpath.head()
+     << ", path = " << xpath.path()
+     << std::endl;
 
   return os;
 }

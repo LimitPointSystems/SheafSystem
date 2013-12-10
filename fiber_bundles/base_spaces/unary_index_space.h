@@ -211,7 +211,7 @@ public:
 ///
 /// Insert unary_index_space& xbis into ostream& os.
 ///
-SHEAF_DLL_SPEC ostream& operator<<(ostream& os, const unary_index_space& xbis);
+SHEAF_DLL_SPEC std::ostream& operator<<(std::ostream& os, const unary_index_space& xbis);
 
 #endif // ifndef DOXYGEN_1_5_4_SKIP_UNKNOWN
 

@@ -27,6 +27,7 @@
 #include "namespace_poset_member.h"
 #include "poset_handle_factory.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //#define DIAGNOSTIC_OUTPUT
@@ -36,7 +37,7 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 //==============================================================================
 
 ///
-const string&
+const std::string&
 fiber_bundle::at0_space::
 standard_schema_poset_name()
 {

@@ -106,12 +106,12 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
   
   ///
   /// Virtual constructor, makes a new instance of the same type as this.
@@ -180,7 +180,7 @@ public:
   ///
   template <typename F>
   SHEAF_DLL_SPEC
-  static poset_path standard_host_path(const string& xsuffix);
+  static poset_path standard_host_path(const std::string& xsuffix);
 
   ///
   /// True, if standard_host_path<F>(xsuffix) does not exist or is a path
@@ -188,7 +188,7 @@ public:
   ///
   template <typename F>
   SHEAF_DLL_SPEC
-  static bool standard_host_is_available(namespace_type& xns, const string& xsuffix, bool xauto_access);
+  static bool standard_host_is_available(namespace_type& xns, const std::string& xsuffix, bool xauto_access);
 
 protected:
 
@@ -252,12 +252,12 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const = 0;
+  virtual const std::string& class_name() const = 0;
 
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
   
   ///
   /// Make a new handle, no state instance of current

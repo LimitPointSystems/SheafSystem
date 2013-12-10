@@ -104,13 +104,13 @@ public:
   ///
   /// Creates an instance of the evaluator family associated with name xname.
   ///
-  static eval_family* new_family(const string& xname);
+  static eval_family* new_family(const std::string& xname);
 
   ///
   /// Creates an instance of the evaluator family associated with name xname
   /// and initialized with name space, xname_space.
   ///
-  static eval_family* new_family(const string& xname, const namespace_poset& xname_space);
+  static eval_family* new_family(const std::string& xname, const namespace_poset& xname_space);
 
   ///
   /// Inserts xprototype in family_factory().
@@ -125,7 +125,7 @@ public:
   ///
   /// The name of this family.
   ///
-  virtual const string& class_name() const = 0;
+  virtual const std::string& class_name() const = 0;
 
   ///
   /// The evaluator associated with cell type xtype_id.

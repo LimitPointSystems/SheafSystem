@@ -32,6 +32,7 @@
 #include "sec_ed.h"
 #include "std_bitset.h"
 
+using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.
 
 //#undef DIAGNOSTIC_OUTPUT

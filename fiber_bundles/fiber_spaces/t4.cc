@@ -30,6 +30,7 @@
 #include "wsv_block.h"
 
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 
@@ -300,7 +301,7 @@ index_for_ijkl(int xi, int xj, int xk, int xl) const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::t4_lite::
 class_name() const
 {
@@ -319,7 +320,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::t4_lite::
 static_class_name()
 {
@@ -736,7 +737,7 @@ t4(const poset* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::t4::
-t4(const poset* xhost, const string& xname)
+t4(const poset* xhost, const std::string& xname)
 {
 
   // Preconditions:
@@ -954,7 +955,7 @@ index_for_ijkl(int xi, int xj, int xk, int xl) const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::t4::
 class_name() const
 {
@@ -973,7 +974,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::t4::
 static_class_name()
 {

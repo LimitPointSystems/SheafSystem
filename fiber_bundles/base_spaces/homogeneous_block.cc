@@ -252,8 +252,8 @@ size() const
 sheaf::array_poset_dof_map*
 fiber_bundle::homogeneous_block::
 new_row_dof_map(const poset* xhost,
-                const string& xprototype_name,
-                const string& xlocal_cell_name,
+                const std::string& xprototype_name,
+                const std::string& xlocal_cell_name,
                 size_type xsize)
 {
   // Preconditions:
@@ -304,8 +304,8 @@ new_row_dof_map(const poset* xhost,
 const sheaf::scoped_index&
 fiber_bundle::homogeneous_block::
 new_row_dof_map(poset_state_handle& xhost,
-                const string& xprototype_name,
-                const string& xlocal_cell_name,
+                const std::string& xprototype_name,
+                const std::string& xlocal_cell_name,
                 size_type xsize,
                 bool xauto_access)
 {

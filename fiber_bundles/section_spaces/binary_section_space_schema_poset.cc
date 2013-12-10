@@ -38,6 +38,7 @@
 #include "sheaves_namespace.h"
 #include "subposet.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // ===========================================================
@@ -612,7 +613,7 @@ merge_jems(pod_index_type xjem1, pod_index_type xjem2)
 
 sheaf::schema_poset_member*
 fiber_bundle::binary_section_space_schema_poset::
-new_schema_handle(const string& xid_space_name,
+new_schema_handle(const std::string& xid_space_name,
                   pod_index_type xschema_member_ext_id,
                   pod_index_type xbase_space_ext_id,
                   pod_index_type xfiber_schema_ext_id,

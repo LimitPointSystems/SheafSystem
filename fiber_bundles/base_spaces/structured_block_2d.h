@@ -141,7 +141,7 @@ public:
   /// Creates a new structured_block_2d handle attached to the member state
   /// with name xname in xhost
   ///
-  structured_block_2d(const poset* xhost, const string& xname);
+  structured_block_2d(const poset* xhost, const std::string& xname);
 
   ///
   /// Creates a new structured_block_2d handle attached to the member state

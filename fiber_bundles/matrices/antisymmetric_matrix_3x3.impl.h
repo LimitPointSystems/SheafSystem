@@ -196,7 +196,7 @@ operator T* ()
 
   // Body:
 
-  cout << "antisymmetric_matrix_3x3<T>::operator T* () " << endl;
+  //cout << "antisymmetric_matrix_3x3<T>::operator T* () " << std::endl;
 
   T* result = components;
 
@@ -218,7 +218,7 @@ operator const T* () const
 
   // Body:
 
-  cout << "antisymmetric_matrix_3x3<T>::operator const T* () const " << endl;
+  //cout << "antisymmetric_matrix_3x3<T>::operator const T* () const " << std::endl;
 
   const T* result = components;
 
@@ -1038,7 +1038,7 @@ transpose() const
 
 ///
 template <typename T>
-ostream& operator<<(ostream& xos, const antisymmetric_matrix_3x3<T>& xm)
+std::ostream& operator<<(std::ostream& xos, const antisymmetric_matrix_3x3<T>& xm)
 {
   // Preconditions:
 
@@ -1064,7 +1064,7 @@ ostream& operator<<(ostream& xos, const antisymmetric_matrix_3x3<T>& xm)
    
       xos << "  " << v;
     }
-    xos << endl;
+    xos << std::endl;
   }
 
   // Postconditions:

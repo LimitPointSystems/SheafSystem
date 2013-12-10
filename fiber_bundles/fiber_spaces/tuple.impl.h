@@ -46,7 +46,7 @@ namespace fiber_bundle
 template <typename F>
 sheaf::poset_path
 fiber_bundle::tuple::
-standard_host_path(const string& xsuffix)
+standard_host_path(const std::string& xsuffix)
 {
   // Preconditions:
 
@@ -70,7 +70,7 @@ standard_host_path(const string& xsuffix)
 template <typename F>
 bool
 fiber_bundle::tuple::
-standard_host_is_available(namespace_type& xns, const string& xsuffix, bool xauto_access)
+standard_host_is_available(namespace_type& xns, const std::string& xsuffix, bool xauto_access)
 {
   // Preconditions:
 

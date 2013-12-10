@@ -86,7 +86,7 @@ public:
   /// Creates a new sec_ed_invertible handle attached to
   /// the member state with name xname in xhost.
   ///
-  sec_ed_invertible(sec_rep_space* xhost, const string& xname);
+  sec_ed_invertible(sec_rep_space* xhost, const std::string& xname);
 
   ///
   /// Creates a new sec_ed_invertible handle attached to the member state

@@ -29,6 +29,7 @@
 #include "sec_ed_invertible.h"
 #include "sec_jcb.h"
 
+using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
 
 //=============================================================================
@@ -381,7 +382,7 @@ same_property_fiber_schema(const field_jcb& xother, bool xauto_access) const
 //=============================================================================
 
 ///
-const string&
+const std::string&
 fields::field_jcb::
 class_name() const
 {
@@ -401,7 +402,7 @@ class_name() const
 }
 
 ///
-const string&
+const std::string&
 fields::field_jcb::
 static_class_name()
 {
@@ -529,9 +530,9 @@ operator>>(const field_jcb& xsrc, field_jcb& xdst)
 }
 
 ///
-ostream&
+std::ostream&
 fields::
-operator<<(ostream& xos, const field_jcb& xfield)
+operator<<(std::ostream& xos, const field_jcb& xfield)
 {
   // Preconditions:
 

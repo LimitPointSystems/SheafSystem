@@ -32,6 +32,7 @@
 #include "atp.h"
 #include "atp_space.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 ///=============================================================================
@@ -164,7 +165,7 @@ sec_at3(const sec_rep_space* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::sec_at3::
-sec_at3(const sec_rep_space* xhost, const string& xname)
+sec_at3(const sec_rep_space* xhost, const std::string& xname)
 {
 
   // Preconditions:
@@ -448,7 +449,7 @@ fiber_prototype() const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::sec_at3::
 class_name() const
 {
@@ -467,7 +468,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::sec_at3::
 static_class_name()
 {

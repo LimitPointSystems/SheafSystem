@@ -27,6 +27,7 @@
 #include "std_utility.h"
 
 
+using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.
 
 //==============================================================================

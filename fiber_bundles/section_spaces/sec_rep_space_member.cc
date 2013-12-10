@@ -39,6 +39,7 @@
 #include "std_typeinfo.h"
 #include "tern.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // ===========================================================
@@ -47,7 +48,7 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::sec_rep_space_member::
 class_name() const
 {
@@ -66,7 +67,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::sec_rep_space_member::
 static_class_name()
 {
@@ -85,9 +86,9 @@ static_class_name()
   return result;
 }
 
-string
+std::string
 fiber_bundle::sec_rep_space_member::
-standard_schema_poset_name(const string& xschema_member_name)
+standard_schema_poset_name(const std::string& xschema_member_name)
 {
   // Preconditions:
 
@@ -105,7 +106,7 @@ standard_schema_poset_name(const string& xschema_member_name)
   return result;
 }
 
-string
+std::string
 fiber_bundle::sec_rep_space_member::
 standard_fiber_space_name(const poset_path& xschema_path)
 {
@@ -143,10 +144,10 @@ standard_fiber_space_name(const poset_path& xschema_path)
   return result;
 }
 
-string
+std::string
 fiber_bundle::sec_rep_space_member::
-standard_section_space_name(const string& xfiber_space_name,
-                            const string& xbase_space_name)
+standard_section_space_name(const std::string& xfiber_space_name,
+                            const std::string& xbase_space_name)
 {
   string result;
 
@@ -403,7 +404,7 @@ sec_rep_space_member(const sec_rep_space* xhost, const scoped_index& xindex)
 }
 
 fiber_bundle::sec_rep_space_member::
-sec_rep_space_member(const sec_rep_space* xhost, const string& xname)
+sec_rep_space_member(const sec_rep_space* xhost, const std::string& xname)
 {
   // Preconditions:
 

@@ -290,8 +290,8 @@ public:
   ///
   field_type* standard_field(fiber_bundles_namespace& xns,
 			     const poset_path& xbase_path,
-			     const string& xcoord_name,
-			     const string& xprop_name,
+			     const std::string& xcoord_name,
+			     const std::string& xprop_name,
 			     bool xauto_access);
 
   //@}
@@ -355,12 +355,12 @@ public:
   ///
   /// The fiber suffix for the coordinates section space.
   ///
-  string& coord_fiber_suffix();
+  std::string& coord_fiber_suffix();
 
   ///
   /// The section suffix for the coordinates section space.
   ///
-  string& coord_section_suffix();
+  std::string& coord_section_suffix();
 
   ///
   /// The coordinates lower bound.
@@ -383,12 +383,12 @@ private:
   ///
   /// The fiber suffix for the coordinates section space.
   ///
-  string _coord_fiber_suffix;
+  std::string _coord_fiber_suffix;
 
   ///
   /// The section suffix for the coordinates section space.
   ///
-  string _coord_section_suffix;
+  std::string _coord_section_suffix;
 
   ///
   /// The coordinates lower bound.
@@ -418,12 +418,12 @@ public:
   ///
   /// The fiber suffix for the property section space.
   ///
-  string& prop_fiber_suffix();
+  std::string& prop_fiber_suffix();
 
   ///
   /// The section suffix for the property section space.
   ///
-  string& prop_section_suffix();
+  std::string& prop_section_suffix();
 
   ///
   /// The property lower bound.
@@ -446,12 +446,12 @@ private:
   ///
   /// The fiber suffix for the property section space.
   ///
-  string _prop_fiber_suffix;
+  std::string _prop_fiber_suffix;
 
   ///
   /// The section suffix for the property section space.
   ///
-  string _prop_section_suffix;
+  std::string _prop_section_suffix;
 
   ///
   /// The property lower bound.

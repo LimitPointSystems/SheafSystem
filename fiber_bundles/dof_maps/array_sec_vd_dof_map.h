@@ -44,12 +44,12 @@ public:
   ///
   /// The name of the actual (possibly derived) class of this instance.
   ///
-  virtual const string& class_name();
+  virtual const std::string& class_name();
 
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
 
   // ===========================================================
   // CANONICAL FACET

@@ -113,7 +113,7 @@ public:
   ///
   /// The name of the type of zone this creates during refinement.
   ///
-  virtual const string& zone_type_name() const;
+  virtual const std::string& zone_type_name() const;
 
   ///
   /// The map from the local coordinates of refined zone xi

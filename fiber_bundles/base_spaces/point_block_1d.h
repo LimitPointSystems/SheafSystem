@@ -142,7 +142,7 @@ public:
   /// Creates a new point_block_1d handle attached to the member state
   /// with name xname in xhost
   ///
-  point_block_1d(const poset* xhost, const string& xname);
+  point_block_1d(const poset* xhost, const std::string& xname);
 
   ///
   /// Creates a new point_block_1d handle attached to the member state

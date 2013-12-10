@@ -155,12 +155,12 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
 
   ///
   /// Conformance test; true if xother conforms to this.
@@ -190,14 +190,12 @@ private:
 ///
 /// Pushes xsrc.property() to xdst.property().
 ///
-SHEAF_DLL_SPEC
 field_st2_e2& operator>>(const field_st2_e2& xsrc, field_st2_e2& xdst);
 
 ///
 /// Inserts field_st2_e2 xfield into ostream xos.
 ///
-SHEAF_DLL_SPEC
-ostream& operator<<(ostream& xos, const field_st2_e2& xfield);
+std::ostream& operator<<(std::ostream& xos, const field_st2_e2& xfield);
 
 } // namespace fields
 

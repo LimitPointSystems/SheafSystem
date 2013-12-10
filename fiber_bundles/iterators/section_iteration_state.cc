@@ -25,7 +25,6 @@
 #include "block.impl.h"
 #include "error_message.h"
 #include "eval_family.h"
-#include "factory_2.h"
 #include "section_evaluator.h"
 #include "section_space_schema_member.h"
 #include "section_space_schema_poset.h"
@@ -34,6 +33,7 @@
 #include "structured_block_2d.h"
 #include "structured_block_3d.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 ///

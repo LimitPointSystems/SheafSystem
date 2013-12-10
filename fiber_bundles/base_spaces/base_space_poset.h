@@ -480,19 +480,19 @@ public:
   /// The name of the prototypes poset;
   /// a synonym for bsae_space_member::prototypes_poset_name().
   ///
-  static const string& prototypes_poset_name();
+  static const std::string& prototypes_poset_name();
 
   ///
   /// The type id of the base space member prototype with name xname.
   ///
-  pod_index_type prototype_type_id(const string& xname, bool xauto_access = true) const;
+  pod_index_type prototype_type_id(const std::string& xname, bool xauto_access = true) const;
 
   ///
   /// The dof tuple id in this of the base space member prototype
   /// with name xname and refinememnt_depth xdepth. If xcreate,
   /// create the dof tuple if it doesn't already exist.
   ///
-  scoped_index prototype_dof_tuple_id(const string& xname,
+  scoped_index prototype_dof_tuple_id(const std::string& xname,
 				      int xdepth,
 				      bool xcreate,
 				      bool xauto_access) const;
@@ -562,10 +562,10 @@ public:
   /// of the prototype dof map, create a copy of the dof map,
   /// otherwise just refer to an existing copy.
   ///
-  pod_index_type new_member(const string& xprototype_name, bool xcopy_dof_map);
+  pod_index_type new_member(const std::string& xprototype_name, bool xcopy_dof_map);
   
   ///
-  /// Synonym for new_member(const string& xprototype_name, bool xcopy_dof_map),
+  /// Synonym for new_member(const std::string& xprototype_name, bool xcopy_dof_map),
   /// provided only to eliminate ambiguity with refinable_poset::new_member(bool, pod_index_type)
   /// when xprototype_name is provided as a string literal.
   ///
@@ -575,7 +575,7 @@ public:
   /// Creates a new jim and initializes it for use as a prototype with 
   /// type name xtype_name, dimension xdb, and local cell prototype xlocal_cell_name.
   ///
-  pod_index_type new_member(const string& xtype_name, int xdb, const string& xlocal_cell_name);
+  pod_index_type new_member(const std::string& xtype_name, int xdb, const std::string& xlocal_cell_name);
   
 protected:
 
@@ -603,7 +603,7 @@ public:
   ///
   /// The name of the blocks subposet.
   ///
-  static string blocks_name();
+  static std::string blocks_name();
 
   ///
   /// The subposet containing the vertices associated with blocks (mutable version).
@@ -618,7 +618,7 @@ public:
   ///
   /// The name of the block vertices subposet.
   ///
-  static string block_vertices_name();
+  static std::string block_vertices_name();
 
   ///
   /// The subposet containing all the vertices, that is, the cells of dimension 0 (mutable version).
@@ -663,7 +663,7 @@ public:
   ///
   /// The name of the xdb-cell subposet.
   ///
-  static string d_cells_name(int xdb, int xmax_db);
+  static std::string d_cells_name(int xdb, int xmax_db);
 
   ///
   /// The subposet containing all the cells, of any dimension.
@@ -678,7 +678,7 @@ public:
   ///
   /// The name of the cells subposet.
   ///
-  static string cells_name();
+  static std::string cells_name();
 
   ///
   /// Inserts interval xinterval into the standard subposets.
@@ -715,7 +715,7 @@ protected:
   ///
   /// Creates the subposets common to every poset (i.e._whole and _jims).
   ///
-  virtual void initialize_standard_subposets(const string& xname);
+  virtual void initialize_standard_subposets(const std::string& xname);
 
 private:
 
@@ -790,12 +790,12 @@ public:
   ///
   /// The type id of the member with hub id xmbr_hub_id.
   ///
-  string type_name(pod_index_type xmbr_hub_id) const;
+  std::string type_name(pod_index_type xmbr_hub_id) const;
 
   ///
   /// The type id of the member with id xmbr_id.
   ///
-  string type_name(const scoped_index& xmbr_id) const;
+  std::string type_name(const scoped_index& xmbr_id) const;
 
   ///
   /// The refinement depth of the member with hub id xmbr_hub_id.
@@ -847,7 +847,7 @@ public:
   /// Creates a new dof map with dofs equal to those of
   /// the prototype with name xprototype_name.
   ///
-  const scoped_index& new_row_dof_map(const string& xprototype_name);
+  const scoped_index& new_row_dof_map(const std::string& xprototype_name);
 
 protected:
 

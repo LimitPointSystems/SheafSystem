@@ -14,6 +14,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
+
 /// @file
 /// Implementation for class field_t3.
 ///
@@ -28,6 +29,7 @@
 #include "sec_ed_invertible.h"
 #include "sec_t3.h"
 
+using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
 
 //=============================================================================
@@ -380,7 +382,7 @@ same_property_fiber_schema(const field_t3& xother, bool xauto_access) const
 //=============================================================================
 
 ///
-const string&
+const std::string&
 fields::field_t3::
 class_name() const
 {
@@ -400,7 +402,7 @@ class_name() const
 }
 
 ///
-const string&
+const std::string&
 fields::field_t3::
 static_class_name()
 {
@@ -528,9 +530,9 @@ operator>>(const field_t3& xsrc, field_t3& xdst)
 }
 
 ///
-ostream&
+std::ostream&
 fields::
-operator<<(ostream& xos, const field_t3& xfield)
+operator<<(std::ostream& xos, const field_t3& xfield)
 {
   // Preconditions:
 

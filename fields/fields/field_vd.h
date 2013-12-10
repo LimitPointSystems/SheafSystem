@@ -205,9 +205,9 @@ public:
   /// If xzero_specified, assume the result of xproperty_dofs_fcn
   /// is zero wherever property is zero. Intended to be useful for debugging.
   ///
-  void print_property_dofs(ostream& xos,
+  void print_property_dofs(std::ostream& xos,
                            property_dof_function_type xproperty_dofs_fcn,
-                           const string& xtitle_text,
+                           const std::string& xtitle_text,
                            bool xzero_specified,
                            bool xauto_access) const;
 
@@ -249,7 +249,7 @@ public:
   /// @hack This function belongs in sec_at0, but is put here
   /// temporarily to avoid problems merging with branch refactor-8.
   ///
-  subposet* embed_property(const string& xresult_name,
+  subposet* embed_property(const std::string& xresult_name,
                            name_multimap& xresult_member_names,
                            bool xauto_access);
 
@@ -436,12 +436,12 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
 
   ///
   /// Conformance test; true if other conforms to this.
@@ -503,7 +503,7 @@ field_vd& operator>>(const field_vd& xsrc, field_vd& xdst);
 /// Inserts field_vd xfield into ostream xos.
 ///
 SHEAF_DLL_SPEC
-ostream& operator<<(ostream& xos, const field_vd& xfield);
+std::ostream& operator<<(std::ostream& xos, const field_vd& xfield);
 
 } // namespace fields
 

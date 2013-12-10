@@ -37,7 +37,7 @@ namespace fiber_bundle
 //==============================================================================
 
 template <typename T>
-const string&
+const std::string&
 e1_row_dofs_type<T>::
 static_class_name()
 {
@@ -45,7 +45,7 @@ static_class_name()
 
   // Body:
 
-  static const string result("e1_row_dofs_type");
+  static const std::string result("e1_row_dofs_type");
 
   // Postconditions:
 
@@ -146,7 +146,7 @@ e1_row_dofs_type<T>::clone() const
 
 #ifndef DOXYGEN_SKIP_IMPLEMENTATIONS
 template <typename T>
-ostream& operator<<(ostream& xos, const e1_row_dofs_type<T>& xrdt)
+std::ostream& operator<<(std::ostream& xos, const e1_row_dofs_type<T>& xrdt)
 {
   int ld = xrdt.d();
   for(int i=0; i<ld; ++i)

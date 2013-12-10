@@ -37,6 +37,7 @@
 #include "st2_e3.h"
 #include "stp_space.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //==============================================================================
@@ -105,8 +106,8 @@ fiber_bundle::sec_st2_e3::
 standard_host(namespace_type& xns, 
               const poset_path& xbase_path, 
               const poset_path& xrep_path, 
-              const string& xsection_suffix, 
-              const string& xfiber_suffix, 
+              const std::string& xsection_suffix, 
+              const std::string& xfiber_suffix, 
               bool xauto_access)
 {
   // cout << endl << "Entering sec_st2_e3::new_host." << endl;
@@ -258,7 +259,7 @@ sec_st2_e3(const sec_rep_space* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::sec_st2_e3::
-sec_st2_e3(const sec_rep_space* xhost, const string& xname)
+sec_st2_e3(const sec_rep_space* xhost, const std::string& xname)
 {
 
   // Preconditions:
@@ -551,7 +552,7 @@ fiber_prototype() const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::sec_st2_e3::
 class_name() const
 {
@@ -570,7 +571,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::sec_st2_e3::
 static_class_name()
 {

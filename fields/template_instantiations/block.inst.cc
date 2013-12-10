@@ -31,6 +31,8 @@
 #include "zone_centered_triangle_refiner.h"
 #include "local_field_refiner.h"
 
+using namespace std;
+
 //==============================================================================
 // EXPLICIT INSTANTIATIONS
 //==============================================================================

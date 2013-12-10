@@ -159,7 +159,7 @@ public:
   ///
   /// The name of the prototypes poset.
   ///
-  static const string& prototypes_poset_name();
+  static const std::string& prototypes_poset_name();
 
   ///
   /// Creates a new host poset for members of this type.
@@ -242,7 +242,7 @@ public:
   ///.
   ///
   base_space_member(base_space_poset* xhost,
-                    const string& xprototype_name,
+                    const std::string& xprototype_name,
                     bool xcopy_dof_map,
                     bool xauto_access);
 
@@ -252,9 +252,9 @@ public:
   /// dimension xdb, and local cell prototype xlocal_cell_name.
   ///
   base_space_member(base_space_poset* xhost,
-                    const string& xtype_name,
+                    const std::string& xtype_name,
                     int xdb,
-                    const string& xlocal_cell_name,
+                    const std::string& xlocal_cell_name,
                     bool xauto_access);
 
   ///
@@ -286,7 +286,7 @@ public:
   /// Creates a new base_space_member handle attached to the member state
   /// with name xname in xhost
   ///
-  base_space_member(const poset* xhost, const string& xname);
+  base_space_member(const poset* xhost, const std::string& xname);
 
   ///
   /// Creates a new base_space_member handle attached to the member state
@@ -330,7 +330,7 @@ public:
   /// True if base space member prototypes poset in
   /// the current name space contains a member with name xname.
   ///
-  static bool prototype_exists(const string& xname, bool xauto_access);
+  static bool prototype_exists(const std::string& xname, bool xauto_access);
 
   ///
   /// The row dof tuple for this.
@@ -342,14 +342,14 @@ public:
   /// Creates a new row dof map and initializes it
   /// from the prototype with name xprototype_name.
   ///
-  static array_poset_dof_map* new_row_dof_map(const poset* xhost, const string& xprototype_name);
+  static array_poset_dof_map* new_row_dof_map(const poset* xhost, const std::string& xprototype_name);
 
   ///
   /// Creates a new row dof map and initializes it
   /// from the prototype with name xprototype_name.
   ///
   static const scoped_index& new_row_dof_map(poset_state_handle& xhost,
-					     const string& xprototype_name,
+					     const std::string& xprototype_name,
 					     bool xauto_access = true);
 
 protected:

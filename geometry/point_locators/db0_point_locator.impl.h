@@ -781,12 +781,14 @@ find_closest_vertex_in_bin(int xbin_id,
 template<int DC>
 void
 db0_point_locator<DC>::
-print_bins(ostream& xos, const string& xmsg) const
+print_bins(std::ostream& xos, const std::string& xmsg) const
 {
   // Preconditions:
 
 
   // Body:
+
+  using namespace std;
 
   xos << endl << xmsg << endl;
 
@@ -827,12 +829,14 @@ print_bins(ostream& xos, const string& xmsg) const
 template<int DC>
 void
 db0_point_locator<DC>::
-print_queue(ostream& xos, const string& xmsg) const
+print_queue(std::ostream& xos, const std::string& xmsg) const
 {
   // Preconditions:
 
 
   // Body:
+
+  using namespace std;
 
   xos << endl << xmsg << endl;
 
@@ -859,14 +863,16 @@ print_queue(ostream& xos, const string& xmsg) const
 template<int DC>
 void
 db0_point_locator<DC>::
-print_value(ostream& xos,
+print_value(std::ostream& xos,
             const sec_vd_value_type xvalue[],
-            const string& xmsg) const
+            const std::string& xmsg) const
 {
   // Preconditions:
 
 
   // Body:
+
+  using namespace std;
 
   xos << xmsg;
 
@@ -887,14 +893,16 @@ print_value(ostream& xos,
 template<int DC>
 void
 db0_point_locator<DC>::
-print_coords(ostream& xos,
+print_coords(std::ostream& xos,
              const bin_coord_type xcoords[],
-             const string& xmsg) const
+             const std::string& xmsg) const
 {
   // Preconditions:
 
 
   // Body:
+
+  using namespace std;
 
   xos << xmsg;
 
@@ -1052,7 +1060,7 @@ point_at_value(const sec_vd_value_type* xvalue,
 
   // Initialize distance (squared) to "infinity".
 
-  sec_vd_value_type lclosest_dist_sq = numeric_limits<sec_vd_value_type>::max();
+  sec_vd_value_type lclosest_dist_sq = std::numeric_limits<sec_vd_value_type>::max();
 
   // Keep expanding the search region until we find the closest point
   // or we've searched the entire structure. We should always find a

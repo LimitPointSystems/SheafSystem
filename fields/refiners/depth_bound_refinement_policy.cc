@@ -25,6 +25,7 @@
 #include "field_refinement_buffer.h"
 #include "field_vd.h"
 
+using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
 
 // ===========================================================
@@ -156,7 +157,7 @@ should_refine(field_refinement_buffer& xbuffer, size_type xrefinement_depth) con
   return result;
 }
 
-const string&
+const std::string&
 fields::depth_bound_refinement_policy::
 class_name() const
 {
@@ -176,7 +177,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fields::depth_bound_refinement_policy::
 static_class_name()
 {

@@ -28,6 +28,7 @@
 #include "poset_handle_factory.h"
 #include "tp.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //#define DIAGNOSTIC_OUTPUT
@@ -36,7 +37,7 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 // TP_SPACE FACET public member functions
 //==============================================================================
 
-const string&
+const std::string&
 fiber_bundle::tp_space::
 standard_schema_poset_name()
 {

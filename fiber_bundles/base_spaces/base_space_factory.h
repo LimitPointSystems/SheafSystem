@@ -83,7 +83,7 @@ public:
   /// Finds or creates the base space member with name xbase_name
   /// in the host with path path in namespace xns.
   ///
-  base_type* new_base(fiber_bundles_namespace& xns, const string& xbase_name);
+  base_type* new_base(fiber_bundles_namespace& xns, const std::string& xbase_name);
 
   ///
   /// The base space host path.
@@ -118,42 +118,42 @@ template <>
 SHEAF_DLL_SPEC 
 structured_block_1d*
 base_space_factory<structured_block_1d>::
-new_base(fiber_bundles_namespace& xns, const string& xbase_name);
+new_base(fiber_bundles_namespace& xns, const std::string& xbase_name);
 
 class structured_block_2d;
 template <>
 SHEAF_DLL_SPEC
 structured_block_2d*
 base_space_factory<structured_block_2d>::
-new_base(fiber_bundles_namespace& xns, const string& xbase_name);
+new_base(fiber_bundles_namespace& xns, const std::string& xbase_name);
 
 class structured_block_3d;
 template <>
 SHEAF_DLL_SPEC
 structured_block_3d*
 base_space_factory<structured_block_3d>::
-new_base(fiber_bundles_namespace& xns, const string& xbase_name);
+new_base(fiber_bundles_namespace& xns, const std::string& xbase_name);
 
 class point_block_1d;
 template <>
 SHEAF_DLL_SPEC
 point_block_1d*
 base_space_factory<point_block_1d>::
-new_base(fiber_bundles_namespace& xns, const string& xbase_name);
+new_base(fiber_bundles_namespace& xns, const std::string& xbase_name);
 
 class point_block_2d;
 template <>
 SHEAF_DLL_SPEC
 point_block_2d*
 base_space_factory<point_block_2d>::
-new_base(fiber_bundles_namespace& xns, const string& xbase_name);
+new_base(fiber_bundles_namespace& xns, const std::string& xbase_name);
 
 class point_block_3d;
 template <>
 SHEAF_DLL_SPEC
 point_block_3d*
 base_space_factory<point_block_3d>::
-new_base(fiber_bundles_namespace& xns, const string& xbase_name);
+new_base(fiber_bundles_namespace& xns, const std::string& xbase_name);
 
 class zone_nodes_block;
 template <>
@@ -166,7 +166,7 @@ template <>
 SHEAF_DLL_SPEC
 zone_nodes_block*
 base_space_factory<zone_nodes_block>::
-new_base(fiber_bundles_namespace& xns, const string& xbase_name);
+new_base(fiber_bundles_namespace& xns, const std::string& xbase_name);
 
 class unstructured_block;
 template <>
@@ -179,7 +179,7 @@ template <>
 SHEAF_DLL_SPEC
 unstructured_block*
 base_space_factory<unstructured_block>::
-new_base(fiber_bundles_namespace& xns, const string& xbase_name);
+new_base(fiber_bundles_namespace& xns, const std::string& xbase_name);
 
 
 // =============================================================================

@@ -266,7 +266,7 @@ public:
   ///
   /// The name of the evaluator family for section spaces on this schema.
   ///
-  string evaluator_family_name() const;
+  std::string evaluator_family_name() const;
 
   ///
   /// The product structure of this schema.
@@ -724,7 +724,7 @@ public:
   /// the equivalence map with name xid_space_name.
   ///
   virtual bool is_valid_int_id(pod_index_type xint_id,
-			       const string& xid_space_name,
+			       const std::string& xid_space_name,
 			       bool xauto_access) const;
 
   using poset_state_handle::get_ext_id;
@@ -734,7 +734,7 @@ public:
   /// the equivalence map with name xid_space_name.
   ///
   virtual pod_index_type get_ext_id(pod_index_type xint_id,
-				    const string& xid_space_name,
+				    const std::string& xid_space_name,
 				    bool xauto_access) const;
 
   ///

@@ -25,6 +25,7 @@
 #include "structured_block_2d.h"
 #include "unstructured_block.h"
 
+using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.
 
 // ===========================================================
@@ -546,8 +547,8 @@ invariant() const
 // NON-MEMBER FUNCTIONS
 // ===========================================================
 
-ostream&
-geometry::operator<<(ostream& xos, const array_cylindrical_point_locator& xpl)
+std::ostream&
+geometry::operator<<(std::ostream& xos, const array_cylindrical_point_locator& xpl)
 {
   // Preconditions:
 

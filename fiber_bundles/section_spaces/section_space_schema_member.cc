@@ -46,6 +46,7 @@
 #include "wsv_block.h"
 
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // ===========================================================
@@ -132,7 +133,7 @@ make_standard_schema(namespace_poset& xns)
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::section_space_schema_member::
 class_name() const
 {
@@ -151,7 +152,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::section_space_schema_member::
 static_class_name()
 {
@@ -170,10 +171,10 @@ static_class_name()
   return result;
 }
 
-string
+std::string
 fiber_bundle::section_space_schema_member::
-standard_member_name(const string& xfiber_schema_member_name,
-		     const string& xbase_member_name)
+standard_member_name(const std::string& xfiber_schema_member_name,
+		     const std::string& xbase_member_name)
 {
   // Preconditions:
 
@@ -812,7 +813,7 @@ component_iterator() const
   return result;
 }
 
-string
+std::string
 fiber_bundle::section_space_schema_member::
 evaluator_family_name() const
 {
@@ -832,7 +833,7 @@ evaluator_family_name() const
   return result;
 }
 
-string
+std::string
 fiber_bundle::section_space_schema_member::
 intersection_id_space_name(const subposet& xsp, pod_index_type xhub_id)
 {
@@ -864,7 +865,7 @@ intersection_id_space_name(const subposet& xsp, pod_index_type xhub_id)
   return result;
 }
 
-string
+std::string
 fiber_bundle::section_space_schema_member::
 intersection_id_space_name(const subposet& xsp, const scoped_index& xid)
 {
@@ -2141,7 +2142,7 @@ component_size(const scoped_index& xfiber_dof_id, bool xauto_access) const
 
 sheaf::pod_index_type
 fiber_bundle::section_space_schema_member::
-get_ext_id(const string& xid_space_name) const
+get_ext_id(const std::string& xid_space_name) const
 {
   // Preconditions:
 
@@ -2944,7 +2945,7 @@ invariant() const
 
 void
 fiber_bundle::section_space_schema_member::
-to_stream(ostream& xos) const
+to_stream(std::ostream& xos) const
 {
   // Preconditions:
 
@@ -2970,7 +2971,7 @@ to_stream(ostream& xos) const
 // NONMEMBER FUNCTIONS
 // ===========================================================
 
-ostream& fiber_bundle::operator << (ostream &os, section_space_schema_member& p)
+std::ostream& fiber_bundle::operator << (std::ostream &os, section_space_schema_member& p)
 {
 
   // Preconditions:

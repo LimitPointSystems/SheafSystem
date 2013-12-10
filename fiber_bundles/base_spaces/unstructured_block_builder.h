@@ -103,7 +103,7 @@ public:
    ///
   /// The type of the temporary cover set lists.
   ///
-  typedef list<pod_index_type> list_type;
+  typedef std::list<pod_index_type> list_type;
 
  //$$TYPE_SAFE_IDS_TODO: Change glue_map_type to use scoped_index..
 
@@ -296,12 +296,12 @@ private:
   ///
   /// Cover sets currently under construction.
   ///
-  stack<list_type*> _used_covers;
+  std::stack<list_type*> _used_covers;
 
   ///
   /// Cover sets not currently being used.
   ///
-  stack<list_type*> _free_covers;
+  std::stack<list_type*> _free_covers;
 
   ///
   /// Action at previsit position of traversal.

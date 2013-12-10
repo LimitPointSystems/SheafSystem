@@ -44,8 +44,10 @@
 #include "section_pusher.h"
 #include "section_pusher_push_action.h"
 #include "stl_scoped_index.h"
+#include "std_iomanip.h"
 #include "field_vd.h"
 
+using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
 
 // #define DIAGNOSTIC_OUTPUT 1

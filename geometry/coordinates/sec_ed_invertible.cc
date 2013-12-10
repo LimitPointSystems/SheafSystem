@@ -40,6 +40,7 @@
 #include "section_evaluator.h"
 #include "sheaf.h"
 
+using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.
 
 // ===========================================================
@@ -110,7 +111,7 @@ sec_ed_invertible(sec_rep_space* xhost, const scoped_index& xindex)
 }
 
 geometry::sec_ed_invertible::
-sec_ed_invertible(sec_rep_space* xhost, const string& xname)
+sec_ed_invertible(sec_rep_space* xhost, const std::string& xname)
     : _inverter(0)
 {
 

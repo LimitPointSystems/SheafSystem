@@ -26,6 +26,7 @@
 #include "section_evaluator.h"
 #include "uniform_eval_family.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 
@@ -177,7 +178,7 @@ is_ancestor_of(const any* xother) const
 ///
 fiber_bundle::eval_family*
 fiber_bundle::eval_family::
-new_family(const string& xname)
+new_family(const std::string& xname)
 {
   eval_family* result;
 
@@ -203,7 +204,7 @@ new_family(const string& xname)
 ///
 fiber_bundle::eval_family*
 fiber_bundle::eval_family::
-new_family(const string& xname, const namespace_poset& xname_space)
+new_family(const std::string& xname, const namespace_poset& xname_space)
 {
   eval_family* result;
 
@@ -271,7 +272,7 @@ family_factory()
 }
 
 ///
-const string&
+const std::string&
 fiber_bundle::eval_family::
 class_name() const
 {

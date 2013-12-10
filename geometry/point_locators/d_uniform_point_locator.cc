@@ -23,6 +23,7 @@
 
 #include "sec_rep_descriptor.h"
 
+using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.
 
 // ============================================================================

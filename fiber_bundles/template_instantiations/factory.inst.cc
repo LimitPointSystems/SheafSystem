@@ -21,6 +21,7 @@
 
 #include "eval_family.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //============================================================

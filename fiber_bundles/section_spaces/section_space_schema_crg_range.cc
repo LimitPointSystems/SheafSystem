@@ -367,7 +367,7 @@ implicit_cover_is_singleton(bool xlower, pod_index_type xmbr_index) const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::section_space_schema_crg_range::
 class_name() const
 {

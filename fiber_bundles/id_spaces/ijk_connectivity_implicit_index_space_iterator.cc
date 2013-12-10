@@ -94,7 +94,7 @@ ijk_connectivity_implicit_index_space_iterator(const index_space_family& xid_spa
 
 fiber_bundle::ijk_connectivity_implicit_index_space_iterator::
 ijk_connectivity_implicit_index_space_iterator(const index_space_family& xid_spaces,
-					       const string& xname)
+					       const std::string& xname)
 {
   // Preconditions:
 

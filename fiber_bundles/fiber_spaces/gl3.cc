@@ -31,6 +31,7 @@
 #include "std_cmath.h"
 #include "wsv_block.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 
@@ -707,7 +708,7 @@ n() const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::gl3_lite::
 class_name() const
 {
@@ -726,7 +727,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::gl3_lite::
 static_class_name()
 {
@@ -962,7 +963,7 @@ new_host(namespace_type& xns,
 
 fiber_bundle::gl3::host_type&
 fiber_bundle::gl3::
-standard_host(namespace_type& xns, const string& xsuffix, bool xauto_access)
+standard_host(namespace_type& xns, const std::string& xsuffix, bool xauto_access)
 {
   // cout << endl << "Entering gl3::new_host." << endl;
 
@@ -1260,7 +1261,7 @@ gl3(const poset* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::gl3::
-gl3(const poset* xhost, const string& xname)
+gl3(const poset* xhost, const std::string& xname)
 {
 
   // Preconditions:
@@ -1436,7 +1437,7 @@ lite_type() const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::gl3::
 class_name() const
 {
@@ -1455,7 +1456,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::gl3::
 static_class_name()
 {
@@ -1579,9 +1580,9 @@ is_ancestor_of(const any* xother) const
 // NON-MEMBER FUNCTIONS
 //==============================================================================
 
-ostream& 
+std::ostream& 
 fiber_bundle::
-operator<<(ostream& xos, const gl3_lite& xlite)
+operator<<(std::ostream& xos, const gl3_lite& xlite)
 {
   xos << "basis:" << endl;
   xos << " " << xlite[0] << " " << xlite[1] << " " << xlite[2] << endl;
@@ -1598,9 +1599,9 @@ operator<<(ostream& xos, const gl3_lite& xlite)
   return xos;
 }
 
-ostream& 
+std::ostream& 
 fiber_bundle::
-operator<< (ostream& xos, const gl3& xpersistent)
+operator<< (std::ostream& xos, const gl3& xpersistent)
 {
   const gl3::row_dofs_type& lm = xpersistent;
 

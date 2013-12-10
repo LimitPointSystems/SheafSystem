@@ -25,6 +25,7 @@
 #include "error_message.h"
 #include "sec_ed_invertible.h"
 
+using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
 
 // #define DIAGNOSTIC_OUTPUT 1

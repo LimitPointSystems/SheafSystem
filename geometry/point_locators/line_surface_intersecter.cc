@@ -27,6 +27,7 @@
 #include "sec_e3.h"
 #include "section_space_schema_poset.h"
 
+using namespace std;
 using namespace geometry;  // Workaround for MSVC++ bug
 using namespace fiber_bundle::vd_algebra;
 using namespace fiber_bundle::ed_algebra;
@@ -464,9 +465,9 @@ invariant() const
 //  NON-MEMBER FUNCTIONS
 // ===========================================================
  
-ostream&
+std::ostream&
 geometry::
-operator<<(ostream& xos, const line_surface_intersecter& xp)
+operator<<(std::ostream& xos, const line_surface_intersecter& xp)
 {
   // Preconditions:
 

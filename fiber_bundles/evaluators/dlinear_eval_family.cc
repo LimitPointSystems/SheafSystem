@@ -33,6 +33,7 @@
 #include "sheaf.h"
 #include "trilinear_3d.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // PUBLIC MEMBER FUNCTIONS
@@ -179,7 +180,7 @@ dlinear_eval_family(const namespace_poset& xname_space)
 }
 
 ///
-const string&
+const std::string&
 fiber_bundle::dlinear_eval_family::
 class_name() const
 {
@@ -199,7 +200,7 @@ class_name() const
 }
 
 ///
-const string&
+const std::string&
 fiber_bundle::dlinear_eval_family::
 static_class_name()
 {

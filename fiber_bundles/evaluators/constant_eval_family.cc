@@ -34,6 +34,7 @@
 #include "namespace_poset.h"
 #include "sheaf.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // PUBLIC MEMBER FUNCTIONS
@@ -180,7 +181,7 @@ constant_eval_family(const namespace_poset& xname_space)
 }
 
 ///
-const string&
+const std::string&
 fiber_bundle::constant_eval_family::
 class_name() const
 {
@@ -200,7 +201,7 @@ class_name() const
 }
 
 ///
-const string&
+const std::string&
 fiber_bundle::constant_eval_family::
 static_class_name()
 {

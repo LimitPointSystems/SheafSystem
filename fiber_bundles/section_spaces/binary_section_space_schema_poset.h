@@ -257,7 +257,7 @@ public:
   //// This member exists only to encapsulate the hack.
   ////
   virtual schema_poset_member*
-  new_schema_handle(const string& xid_space_name,
+  new_schema_handle(const std::string& xid_space_name,
                     pod_index_type xschema_member_ext_id,
                     pod_index_type xbase_space_ext_id,
                     pod_index_type xfiber_schema_ext_id,

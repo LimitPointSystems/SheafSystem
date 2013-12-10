@@ -216,7 +216,7 @@ operator T* ()
 
   // Body:
 
-  //cout << "### symmetric_matrix_2x2<T>::operator T* () " << endl;
+  //cout << "### symmetric_matrix_2x2<T>::operator T* () " << std::endl;
 
   T* result = components;
 
@@ -238,7 +238,7 @@ operator const T* () const
 
   // Body:
 
-  //cout << "### symmetric_matrix_2x2<T>::operator const T* () const " << endl;
+  //cout << "### symmetric_matrix_2x2<T>::operator const T* () const " << std::endl;
 
   const T* result = components;
 
@@ -1128,7 +1128,7 @@ transpose() const
 
 ///
 template <typename T>
-ostream& operator<<(ostream& xos, const symmetric_matrix_2x2<T>& xm)
+std::ostream& operator<<(std::ostream& xos, const symmetric_matrix_2x2<T>& xm)
 {
   // Preconditions:
 
@@ -1137,8 +1137,8 @@ ostream& operator<<(ostream& xos, const symmetric_matrix_2x2<T>& xm)
   // Here we will actually print the elements below the diagonal
   // even though we don't store them.
 
-  xos << "  " << xm[0][0] << "  " << xm[0][1] << endl;
-  xos << "  " << xm[0][1] << "  " << xm[1][1] << endl;
+  xos << "  " << xm[0][0] << "  " << xm[0][1] << std::endl;
+  xos << "  " << xm[0][1] << "  " << xm[1][1] << std::endl;
 
   // Postconditions:
 

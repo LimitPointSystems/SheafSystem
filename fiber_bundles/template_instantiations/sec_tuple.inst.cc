@@ -131,6 +131,8 @@
 #include "sec_vd.h"
 #include "sec_vd_space.h"
 
+using namespace std;
+
 
 //==============================================================================
 // EXPLICIT INSTANTIATIONS

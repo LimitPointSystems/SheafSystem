@@ -27,6 +27,7 @@
 #include "deep_size.h"
 #include "hub_index_space_handle.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // ===========================================================
@@ -38,7 +39,7 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 fiber_bundle::section_space_schema_jims_index_space_handle
 fiber_bundle::section_space_schema_jims_index_space_state::
 new_space(index_space_family& xid_spaces,
-	  const string& xname,
+	  const std::string& xname,
 	  const index_space_handle& xbase_space_id_space,
 	  const index_space_handle& xfiber_schema_id_space,
 	  const ij_product_structure& xsection_space_schema_product)
@@ -98,7 +99,7 @@ fiber_bundle::section_space_schema_jims_index_space_handle
 fiber_bundle::section_space_schema_jims_index_space_state::
 new_space(index_space_family& xid_spaces,
 	  pod_index_type xid,
-	  const string& xname,
+	  const std::string& xname,
 	  const index_space_handle& xbase_space_id_space,
 	  const index_space_handle& xfiber_schema_id_space,
 	  const ij_product_structure& xsection_space_schema_product)
@@ -971,7 +972,7 @@ iterators()
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::section_space_schema_jims_index_space_state::
 class_name() const
 {

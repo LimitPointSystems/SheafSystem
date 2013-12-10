@@ -42,6 +42,7 @@
 #include "std_utility.h"
 #include "field_vd.h"
 
+using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
 
 //#define DIAGNOSTIC_OUTPUT 1
@@ -732,7 +733,7 @@ void
 fields::base_space_map::
 pull_back_output_disc_mono_multi(const discretization_context& xcontext,
                                  pb_type& xpb,
-                                 set< stl_scoped_index<> >& xbranches)
+                                 std::set< stl_scoped_index<> >& xbranches)
 {
 #ifdef DIAGNOSTIC_OUTPUT
   post_information_message("Entering pull_back_output_disc_mono_multi:");

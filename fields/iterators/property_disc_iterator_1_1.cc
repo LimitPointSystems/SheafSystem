@@ -38,6 +38,7 @@
 #include "uniform_eval_family.h"
 #include "field_vd.h"
 
+using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
 
 //#define DIAGNOSTIC_OUTPUT 1

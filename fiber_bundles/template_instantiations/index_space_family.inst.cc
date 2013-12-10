@@ -21,6 +21,8 @@
 
 #include "section_space_schema_jims_index_space_handle.h"
 
+using namespace std;
+
 //============================================================
 // EXPLICIT INSTANTIATIONS
 //============================================================

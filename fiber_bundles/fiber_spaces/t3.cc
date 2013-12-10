@@ -44,6 +44,7 @@
 // #include "wsv_block.h"
 
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 
@@ -311,7 +312,7 @@ index_for_ijk(int xi, int xj, int xk) const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::t3_lite::
 class_name() const
 {
@@ -330,7 +331,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::t3_lite::
 static_class_name()
 {
@@ -754,7 +755,7 @@ t3(const poset* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::t3::
-t3(const poset* xhost, const string& xname)
+t3(const poset* xhost, const std::string& xname)
 {
 
   // Preconditions:
@@ -965,7 +966,7 @@ index_for_ijk(int xi, int xj, int xk) const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::t3::
 class_name() const
 {
@@ -984,7 +985,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::t3::
 static_class_name()
 {

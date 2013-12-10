@@ -29,6 +29,7 @@
 #include "${coords_invertible}.h"
 #include "${property}.h"
 
+using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
 
 //=============================================================================
@@ -381,7 +382,7 @@ same_property_fiber_schema(const ${derived}& xother, bool xauto_access) const
 //=============================================================================
 
 ///
-const string&
+const std::string&
 fields::${derived}::
 class_name() const
 {
@@ -401,7 +402,7 @@ class_name() const
 }
 
 ///
-const string&
+const std::string&
 fields::${derived}::
 static_class_name()
 {
@@ -529,9 +530,9 @@ operator>>(const ${derived}& xsrc, ${derived}& xdst)
 }
 
 ///
-ostream&
+std::ostream&
 fields::
-operator<<(ostream& xos, const ${derived}& xfield)
+operator<<(std::ostream& xos, const ${derived}& xfield)
 {
   // Preconditions:
 

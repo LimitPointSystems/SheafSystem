@@ -34,6 +34,7 @@
 #include "jcb.h"
 #include "jcb_space.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //==============================================================================
@@ -170,7 +171,7 @@ sec_jcb(const sec_rep_space* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::sec_jcb::
-sec_jcb(const sec_rep_space* xhost, const string& xname)
+sec_jcb(const sec_rep_space* xhost, const std::string& xname)
 {
 
   // Preconditions:
@@ -577,7 +578,7 @@ range_path(bool xauto_access) const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::sec_jcb::
 class_name() const
 {
@@ -596,7 +597,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::sec_jcb::
 static_class_name()
 {

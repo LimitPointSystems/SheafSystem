@@ -25,6 +25,7 @@
 #include "std_limits.h"
 #include "std_cmath.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //#define DIAGNOSTIC_OUTPUT

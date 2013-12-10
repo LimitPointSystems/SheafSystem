@@ -169,7 +169,7 @@ public:
 /// Insert binary_index& xbi into ostream& os.
 ///
 SHEAF_DLL_SPEC 
-ostream& operator<<(ostream& os, const binary_index& xbi);
+std::ostream& operator<<(std::ostream& os, const binary_index& xbi);
 
 #endif // ifndef DOXYGEN_1_5_4_SKIP_UNKNOWN
 

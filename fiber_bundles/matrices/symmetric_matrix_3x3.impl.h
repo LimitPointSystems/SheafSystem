@@ -217,7 +217,7 @@ operator T* ()
 
   // Body:
 
-  cout << "symmetric_matrix_3x3<T>::operator T* () " << endl;
+  //cout << "symmetric_matrix_3x3<T>::operator T* () " << std::endl;
 
   T* result = components;
 
@@ -239,7 +239,7 @@ operator const T* () const
 
   // Body:
 
-  cout << "symmetric_matrix_3x3<T>::operator const T* () const " << endl;
+  //cout << "symmetric_matrix_3x3<T>::operator const T* () const " << std::endl;
 
   const T* result = components;
 
@@ -1330,7 +1330,7 @@ transpose() const
 
 ///
 template <typename T>
-ostream& operator<<(ostream& xos, const symmetric_matrix_3x3<T>& xm)
+std::ostream& operator<<(std::ostream& xos, const symmetric_matrix_3x3<T>& xm)
 {
   // Preconditions:
 
@@ -1354,7 +1354,7 @@ ostream& operator<<(ostream& xos, const symmetric_matrix_3x3<T>& xm)
    
       xos << "  " << v;
     }
-    xos << endl;
+    xos << std::endl;
   }
 
   // Postconditions:
@@ -1423,7 +1423,7 @@ jacobi_transformation(const symmetric_matrix_3x3<T>& xm,
 
   symmetric_matrix_3x3<T> lm = xm;
 
-  cout << "lm:" << endl << lm << endl;
+  //cout << "lm:" << std::endl << lm << std::endl;
 
   //int number_of_rotations = 0;
 
@@ -1431,7 +1431,7 @@ jacobi_transformation(const symmetric_matrix_3x3<T>& xm,
 
   xeigenvectors = xeigenvectors.identity();
 
-  cout << "xeigenvectors:" << endl << xeigenvectors << endl;
+  //cout << "xeigenvectors:" << std::endl << xeigenvectors << std::endl;
 
   // Initialize b and xeigenvalues to the diagonal of lm;
 
@@ -1453,7 +1453,7 @@ jacobi_transformation(const symmetric_matrix_3x3<T>& xm,
     T sum = fabs(lm[0][1]) + fabs(lm[0][2]) + fabs(lm[1][2]);
 
     //cout << "number_of_rotations = " << number_of_rotations;
-    //cout << "  sum = " << sum << endl;
+    //cout << "  sum = " << sum << std::endl;
 
     // Test for convergence.
 

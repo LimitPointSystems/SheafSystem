@@ -661,7 +661,7 @@ is_initialized() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::section_space_schema_table_dof_crg_range::
 class_name() const
 {

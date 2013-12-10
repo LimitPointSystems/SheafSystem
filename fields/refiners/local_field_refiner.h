@@ -79,12 +79,12 @@ public:
   ///
   /// The name of the type of zone this creates during refinement.
   ///
-  virtual const string& zone_type_name() const = 0;
+  virtual const std::string& zone_type_name() const = 0;
 
   ///
   /// The name of the type of vertex this creates during refinement.
   ///
-  virtual const string& vertex_type_name() const;
+  virtual const std::string& vertex_type_name() const;
 
   ///
   /// The refinement policy for this refiner.

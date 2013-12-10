@@ -63,7 +63,7 @@ public:
   ///
   /// Creates a fiber bundles namespace with name xname.
   ///
-  fiber_bundles_namespace(const string& xname);
+  fiber_bundles_namespace(const std::string& xname);
 
   ///
   /// Destructor

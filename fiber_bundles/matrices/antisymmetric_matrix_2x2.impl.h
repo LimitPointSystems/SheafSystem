@@ -196,7 +196,7 @@ operator T* ()
 
   // Body:
 
-  //cout << "antisymmetric_matrix_2x2<T>::operator T* () " << endl;
+  //cout << "antisymmetric_matrix_2x2<T>::operator T* () " << std::endl;
 
   T* result = components;
 
@@ -218,7 +218,7 @@ operator const T* () const
 
   // Body:
 
-  //cout << "antisymmetric_matrix_2x2<T>::operator const T* () const " << endl;
+  //cout << "antisymmetric_matrix_2x2<T>::operator const T* () const " << std::endl;
 
   const T* result = components;
 
@@ -953,7 +953,7 @@ transpose() const
 
 ///
 template <typename T>
-ostream& operator<<(ostream& xos, const antisymmetric_matrix_2x2<T>& xm)
+std::ostream& operator<<(std::ostream& xos, const antisymmetric_matrix_2x2<T>& xm)
 {
   // Preconditions:
 
@@ -962,8 +962,8 @@ ostream& operator<<(ostream& xos, const antisymmetric_matrix_2x2<T>& xm)
   // Here we will actually print the elements on and below the diagonal
   // even though we don't store them.
 
-  xos << "  " <<       0.0 << "  " << xm[0][1] << endl;
-  xos << "  " << -xm[0][1] << "  " <<      0.0 << endl;
+  xos << "  " <<       0.0 << "  " << xm[0][1] << std::endl;
+  xos << "  " << -xm[0][1] << "  " <<      0.0 << std::endl;
 
   // Postconditions:
 

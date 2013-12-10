@@ -36,6 +36,7 @@
 #include "section_space_schema_poset.h"
 #include "stp_space.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 using namespace fiber_bundle::vd_algebra;
 

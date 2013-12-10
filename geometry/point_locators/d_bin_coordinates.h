@@ -227,8 +227,8 @@ private:
 ///
 template <int DC, int DB>
 SHEAF_DLL_SPEC 
-ostream&
-operator<<(ostream& xos, const d_bin_coordinates<DC, DB>& xcoords);
+std::ostream&
+operator<<(std::ostream& xos, const d_bin_coordinates<DC, DB>& xcoords);
 
 
 // ===========================================================

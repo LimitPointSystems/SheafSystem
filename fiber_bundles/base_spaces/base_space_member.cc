@@ -29,6 +29,7 @@
 #include "tern.h"
 #include "wsv_block.h"
 
+using namespace std;
 using namespace fiber_bundle;
 
 // ===========================================================
@@ -116,7 +117,7 @@ make_standard_schema(namespace_poset& xns)
   return;
 }
 
-const string&
+const std::string&
 fiber_bundle::base_space_member::
 prototypes_poset_name()
 {
@@ -306,7 +307,7 @@ base_space_member(poset* xhost,
 
 fiber_bundle::base_space_member::
 base_space_member(base_space_poset* xhost,
-                  const string& xprototype_name,
+                  const std::string& xprototype_name,
                   bool xcopy_dof_map,
                   bool xauto_access)
 {
@@ -346,9 +347,9 @@ base_space_member(base_space_poset* xhost,
 
 fiber_bundle::base_space_member::
 base_space_member(base_space_poset* xhost,
-                  const string& xtype_name,
+                  const std::string& xtype_name,
                   int xdb,
-                  const string& xlocal_cell_name,
+                  const std::string& xlocal_cell_name,
                   bool xauto_access)
 {
   // Preconditions:
@@ -468,7 +469,7 @@ base_space_member(const poset* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::base_space_member::
-base_space_member(const poset* xhost, const string& xname)
+base_space_member(const poset* xhost, const std::string& xname)
 {
 
   // Preconditions:
@@ -616,7 +617,7 @@ prototype_path(const namespace_poset* xnamespace,
 
 bool
 fiber_bundle::base_space_member::
-prototype_exists(const string& xname, bool xauto_access)
+prototype_exists(const std::string& xname, bool xauto_access)
 {
   bool result;
 
@@ -666,7 +667,7 @@ row_dof_tuple(bool xrequire_write_access)
 
 sheaf::array_poset_dof_map*
 fiber_bundle::base_space_member::
-new_row_dof_map(const poset* xhost, const string& xprototype_name)
+new_row_dof_map(const poset* xhost, const std::string& xprototype_name)
 {
   // Preconditions:
 
@@ -714,7 +715,7 @@ new_row_dof_map(const poset* xhost, const string& xprototype_name)
 
 const sheaf::scoped_index&
 fiber_bundle::base_space_member::
-new_row_dof_map(poset_state_handle& xhost, const string& xprototype_name, bool xauto_access)
+new_row_dof_map(poset_state_handle& xhost, const std::string& xprototype_name, bool xauto_access)
 {
   // Preconditions:
 

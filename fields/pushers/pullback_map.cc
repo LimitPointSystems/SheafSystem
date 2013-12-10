@@ -23,14 +23,15 @@
 #include "std_iomanip.h"
 #include "std_iostream.h"
 
+using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
 
 // ===========================================================
 // NON-MEMBER FUNCTIONS
 // ===========================================================
 
-ostream&
-fields::operator<<(ostream& xos, const pullback_map_entry& xentry)
+std::ostream&
+fields::operator<<(std::ostream& xos, const pullback_map_entry& xentry)
 {
 
   // Preconditions:

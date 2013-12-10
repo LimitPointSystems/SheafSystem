@@ -28,6 +28,7 @@
 #include "hub_index_space_handle.h"
 #include "index_space_family.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // ===========================================================
@@ -241,7 +242,7 @@ i_adjacency_index_space_interval()
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::i_adjacency_index_space_interval::
 class_name() const
 {

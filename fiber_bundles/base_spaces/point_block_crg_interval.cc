@@ -23,7 +23,6 @@
 #include "assert_contract.h"
 #include "base_space_poset.h"
 #include "binary_index_space.h"
-#include "cover_set_iterator.h"
 #include "constant_index_space_interval.h"
 #include "error_message.h"
 #include "explicit_index_space_interval.h"
@@ -43,6 +42,7 @@
 #include "std_sstream.h"
 #include "ternary_index_space.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 namespace
@@ -967,7 +967,7 @@ finalize(poset_state_handle& xhost)
 
 // PUBLIC DATA MEMBERS
 
-const string&
+const std::string&
 fiber_bundle::point_block_crg_interval::
 class_name() const
 {

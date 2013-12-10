@@ -42,6 +42,7 @@
 #include "std_limits.h"
 #include "wsv_block.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // ===========================================================
@@ -86,7 +87,7 @@ make_arg_list(const poset_path& xrep_path,
 
 fiber_bundle::product_section_space_schema_poset::
 product_section_space_schema_poset(namespace_poset& xns,
-				   const string& xname,
+				   const std::string& xname,
 				   const arg_list& xargs,
 				   const poset_path& xschema_path,
 				   bool xauto_access)
@@ -169,7 +170,7 @@ fiber_bundle::product_section_space_schema_poset::
 void
 fiber_bundle::product_section_space_schema_poset::
 initialize_arg_list(const namespace_poset& xns, 
-		    const string& xname,
+		    const std::string& xname,
 		    arg_list& xargs, 
 		    const poset_path& xschema_path,
 		    bool xauto_access)
@@ -612,7 +613,7 @@ class_name() const
 void
 fiber_bundle::product_section_space_schema_poset::
 new_state(namespace_poset& xns,
-          const string& xname,
+          const std::string& xname,
 	  const arg_list& xargs,
 	  const poset_path& xschema_path,
           bool xauto_access)
@@ -1323,7 +1324,7 @@ initialize_standard_members()
 // bool
 // fiber_bundle::product_section_space_schema_poset::
 // is_valid_int_id(pod_index_type xint_id,
-// 		const string& xid_space_name,
+// 		const std::string& xid_space_name,
 // 		bool xauto_access) const
 // {
 //   // Preconditions:
@@ -1367,7 +1368,7 @@ initialize_standard_members()
 // sheaf::pod_index_type
 // fiber_bundle::product_section_space_schema_poset::
 // get_ext_id(pod_index_type xint_id,
-//            const string& xid_space_name,
+//            const std::string& xid_space_name,
 //            bool xauto_access) const
 // {
 //   // Preconditions:
@@ -1398,7 +1399,7 @@ initialize_standard_members()
 
 sheaf::schema_poset_member*
 fiber_bundle::product_section_space_schema_poset::
-new_schema_handle(const string& xid_space_name,
+new_schema_handle(const std::string& xid_space_name,
                   pod_index_type xschema_member_ext_id,
                   pod_index_type xbase_space_ext_id,
                   pod_index_type xfiber_schema_ext_id,

@@ -32,6 +32,7 @@
 #include "t4_e2.h"
 #include "t4_e3.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS

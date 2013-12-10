@@ -268,11 +268,13 @@ capacity() const
 template <int DC, int DB>
 void
 d_array_point_locator<DC, DB>::
-to_stream(ostream& xos) const
+to_stream(std::ostream& xos) const
 {
   // Preconditions:
 
   // Body:
+
+  using namespace std;
 
   xos << "lb =";
   for(int i=0; i<this->dc(); i++)
@@ -400,8 +402,8 @@ invariant() const
 // ===========================================================
 
 template <int DC, int DB>
-ostream&
-operator<<(ostream& xos, const d_array_point_locator<DC, DB>& xpl)
+std::ostream&
+operator<<(std::ostream& xos, const d_array_point_locator<DC, DB>& xpl)
 {
   // Preconditions:
 
@@ -417,12 +419,14 @@ operator<<(ostream& xos, const d_array_point_locator<DC, DB>& xpl)
 }
 
 template <int DC, int DB>
-ostream&
-operator<<(ostream& xos, const slist<const d_bounding_box<DC, DB>*>& xbl)
+std::ostream&
+operator<<(std::ostream& xos, const slist<const d_bounding_box<DC, DB>*>& xbl)
 {
   // Preconditions:
 
   // Body:
+
+  using namespace std;
 
   typedef slist<const d_bounding_box<DC, DB>*> list_type;
 

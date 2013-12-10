@@ -29,6 +29,7 @@
 #include "schema_poset_member.h"
 #include "wsv_block.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //==============================================================================
@@ -347,7 +348,7 @@ d() const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::jcb_lite::
 class_name() const
 {
@@ -366,7 +367,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::jcb_lite::
 static_class_name()
 {
@@ -669,7 +670,7 @@ jcb(const poset_state_handle* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::jcb::
-jcb(const poset_state_handle* xhost, const string& xname)
+jcb(const poset_state_handle* xhost, const std::string& xname)
 {
 
   // Preconditions:
@@ -1169,7 +1170,7 @@ put_component(int xrow, int xcolumn, value_type xvalue, bool xauto_access)
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::jcb::
 class_name() const
 {
@@ -1188,7 +1189,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::jcb::
 static_class_name()
 {
@@ -1340,9 +1341,9 @@ invariant() const
 //==============================================================================
 
 ///
-ostream&
+std::ostream&
 fiber_bundle::
-operator<<(ostream& xos, jcb_lite::table_dofs_type& xt)
+operator<<(std::ostream& xos, jcb_lite::table_dofs_type& xt)
 {
   xos << " " << xt.factor_ct
       << " " << xt.d

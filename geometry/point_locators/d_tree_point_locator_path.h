@@ -205,8 +205,8 @@ private:
 ///
 template <int DC, int DB>
 SHEAF_DLL_SPEC 
-ostream&
-operator<<(ostream &os, const d_tree_point_locator_path<DC, DB>& xpath);
+std::ostream&
+operator<<(std::ostream &os, const d_tree_point_locator_path<DC, DB>& xpath);
  
 } // namespace geometry
 

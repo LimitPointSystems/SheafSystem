@@ -112,19 +112,19 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
 
   ///
   /// The standard member name for a schema with fiber schema member with name
   /// xfiber_schema_member_name and base space member with name xbase_member_name.
   ///
-  static string standard_member_name(const string& xfiber_schema_member_name,
-				     const string& xbase_member_name);
+  static std::string standard_member_name(const std::string& xfiber_schema_member_name,
+					  const std::string& xbase_member_name);
   
   ///
   /// Assignment operator; attaches this to the same state as xother
@@ -449,19 +449,19 @@ public:
   ///
   /// The name of the evaluator family for section spaces on schemae hosted by this.
   ///
-  string evaluator_family_name() const;
+  std::string evaluator_family_name() const;
 
   ///
   /// The name of the id space for intersection of xsp
   /// with the down set of the member with hub id xhub_id.
   ///
-  static string intersection_id_space_name(const subposet& xsp, const pod_index_type xhub_id);
+  static std::string intersection_id_space_name(const subposet& xsp, const pod_index_type xhub_id);
 
   ///
   /// The name of the id space for intersection of xsp
   /// with the down set of the member with id xid.
   ///
-  static string intersection_id_space_name(const subposet& xsp, const scoped_index& xid);
+  static std::string intersection_id_space_name(const subposet& xsp, const scoped_index& xid);
 
   ///
   /// The number of bytes in this dof
@@ -997,7 +997,7 @@ public:
   //// @hack the product subposet hack, version 2.
   //// This member exists only to encapsulate the hack.
   ////
-  virtual pod_index_type get_ext_id(const string& xid_space_name) const;
+  virtual pod_index_type get_ext_id(const std::string& xid_space_name) const;
 
 protected:
 
@@ -1440,7 +1440,7 @@ public:
   ///
   /// Virtual stream insertion.
   ///
-  virtual void to_stream(ostream& xos = cout) const;
+  virtual void to_stream(std::ostream& xos = std::cout) const;
 
 protected:
 
@@ -1458,7 +1458,7 @@ private:
 ///
 /// Insert section_space_schema_member& p into ostream& os.
 ///
-SHEAF_DLL_SPEC ostream& operator << (ostream &os, section_space_schema_member& p);
+SHEAF_DLL_SPEC std::ostream& operator << (std::ostream &os, section_space_schema_member& p);
 
 #endif // ifndef DOXYGEN_1_5_4_SKIP_UNKNOWN
 

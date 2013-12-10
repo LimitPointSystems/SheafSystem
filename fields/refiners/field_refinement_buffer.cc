@@ -31,6 +31,7 @@
 #include "sec_ed_invertible.h"
 #include "sec_vd.h"
 
+using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
 
 // ===========================================================

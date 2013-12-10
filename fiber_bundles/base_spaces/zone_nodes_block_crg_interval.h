@@ -91,7 +91,7 @@ private:
   /// The name of the prototype for
   /// the zone type of connectivity xconn.
   ///
-  static const string& zone_prototype_name(const block_connectivity& xconn);
+  static const std::string& zone_prototype_name(const block_connectivity& xconn);
 
   ///
   /// The dimension of the zone type of connectivity xconn.
@@ -158,7 +158,7 @@ protected:
   ///
   /// The reserved name for the vertex client id space of this interval.
   ///
-  string vertex_client_id_space_name();
+  std::string vertex_client_id_space_name();
 
   ///
   /// Initializes the vertex client id space.
@@ -444,7 +444,7 @@ public:
   /// The name of this class;
   /// provided to satisfy factory template.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// True if fully initialized.

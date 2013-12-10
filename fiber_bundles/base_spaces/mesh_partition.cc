@@ -109,7 +109,7 @@ fiber_bundle::mesh_partition::
 
 ///
 fiber_bundle::mesh_partition::
-mesh_partition(const base_space_poset& xmesh, const string& xname)
+mesh_partition(const base_space_poset& xmesh, const std::string& xname)
 {
   // Preconditions:
 
@@ -143,7 +143,7 @@ mesh_partition(const base_space_poset& xmesh, const string& xname)
 
 
 ///
-const string&
+const std::string&
 fiber_bundle::mesh_partition::
 name() const
 {
@@ -274,7 +274,7 @@ put_part(const scoped_index& xp_id, id_block& xzones)
 ///
 sheaf::pod_index_type
 fiber_bundle::mesh_partition::
-part_id(const string& xname) const
+part_id(const std::string& xname) const
 {
   // Preconditions:
 
@@ -304,7 +304,7 @@ part_id(const string& xname) const
 ///
 bool
 fiber_bundle::mesh_partition::
-is_valid_name(const string& xname)
+is_valid_name(const std::string& xname)
 {
   bool result;
 

@@ -491,11 +491,13 @@ invariant() const
 //==============================================================================
 
 template <int DC, int DB>
-ostream& operator<<(ostream& xos, const d_tree_point_locator<DC, DB>& xtree)
+std::ostream& operator<<(std::ostream& xos, const d_tree_point_locator<DC, DB>& xtree)
 {
   // Preconditions:
 
   // Body:
+
+  using namespace std;
 
   cout << "lb =";
   for(int i=0; i< xtree.dc(); i++)

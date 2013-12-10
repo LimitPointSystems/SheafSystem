@@ -88,12 +88,12 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
   
   ///
   /// The standard name for the section_space_schema_poset constructed
@@ -103,20 +103,20 @@ public:
   //// schema poset owns the fiber space. See additional comments in
   //// section_space_schema_poset.
   ////
-  static string standard_schema_poset_name(const string& xschema_member_name);
+  static std::string standard_schema_poset_name(const std::string& xschema_member_name);
 
   ///
   /// The standard name for the fiber space constructed for the schema member
   /// with path xschema_path.
   ///
-  static string standard_fiber_space_name(const poset_path& xschema_path);
+  static std::string standard_fiber_space_name(const poset_path& xschema_path);
 
   ///
   /// The standard name for the section space with fiber space poset name
   /// xfiber_space_name and base space poset name xbase_space_name.
   ///
-  static string standard_section_space_name(const string& xfiber_space_name,
-      const string& xbase_space_name);
+  static std::string standard_section_space_name(const std::string& xfiber_space_name,
+						 const std::string& xbase_space_name);
 
   ///
   /// Default constructor; creates an unattached handle.
@@ -217,7 +217,7 @@ public:
   /// Creates a new sec_rep_space_member handle attached to the member state
   /// with name xname in xhost
   ///
-  sec_rep_space_member(const sec_rep_space* xhost, const string& xname);
+  sec_rep_space_member(const sec_rep_space* xhost, const std::string& xname);
 
   ///
   /// Creates a new sec_rep_space_member handle attached to the member state

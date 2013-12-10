@@ -26,6 +26,7 @@
 #include "discretization_iterator.h"
 #include "postorder_iterator.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 fiber_bundle::section_dof_iterator&

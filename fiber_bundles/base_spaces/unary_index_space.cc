@@ -78,9 +78,9 @@ neighbor_list() const
 //  NON-MEMBER FUNCTIONS
 // ===========================================================
 
-ostream&
+std::ostream&
 fiber_bundle::
-operator<<(ostream& os, const fiber_bundle::unary_index_space& xbis)
+operator<<(std::ostream& os, const fiber_bundle::unary_index_space& xbis)
 {
   os << "i_size: " << xbis.i_size
   << " size: " << xbis.size;

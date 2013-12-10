@@ -68,12 +68,12 @@ public:
   ///
   /// The name of this family.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// The name of this class of families.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
 
 private:
 

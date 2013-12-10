@@ -22,13 +22,15 @@
 #include "assert_contract.h"
 #include "error_message.h"
 
+using namespace std;
+
 // =============================================================================
 // NON-MEMBER FUNCTIONS
 // =============================================================================
 
-ostream&
+std::ostream&
 fiber_bundle::
-operator<<(ostream& xos, const fiber_bundle::discretization_context& xc)
+operator<<(std::ostream& xos, const fiber_bundle::discretization_context& xc)
 {
   // Preconditions:
 

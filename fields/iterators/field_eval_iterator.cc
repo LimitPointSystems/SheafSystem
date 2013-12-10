@@ -36,6 +36,7 @@
 #include "subposet_member_iterator.h"
 #include "field_vd.h"
 
+using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
 
 //#define DIAGNOSTIC_OUTPUT 1
@@ -319,7 +320,7 @@ type_id() const
   return result;
 }
 
-string
+std::string
 fields::field_eval_iterator::
 type_name() const
 {

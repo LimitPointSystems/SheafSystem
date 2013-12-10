@@ -32,7 +32,7 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 // PUBLIC MEMBER FUNCTIONS
 
 ///
-const string&
+const std::string&
 fiber_bundle::array_sec_vd_dof_map::
 class_name()
 {
@@ -52,7 +52,7 @@ class_name()
 }
 
 ///
-const string&
+const std::string&
 fiber_bundle::array_sec_vd_dof_map::
 static_class_name()
 {

@@ -45,6 +45,7 @@
 #include "sec_tuple.impl.h"
 #include "sec_tuple_space.impl.h"
 
+using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
 
 

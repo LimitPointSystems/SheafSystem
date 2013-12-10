@@ -22,6 +22,7 @@
 
 #include "std_iostream.h"
 
+using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.
 
 //==============================================================================

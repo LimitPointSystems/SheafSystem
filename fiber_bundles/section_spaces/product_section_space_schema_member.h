@@ -142,7 +142,7 @@ public:
   /// attached to the member state with name xname in xhost
   ///
   product_section_space_schema_member(const product_section_space_schema_poset* xhost,
-                                     const string& xname);
+                                     const std::string& xname);
 
   ///
   /// Create a new handle attached to the state in xhost with
@@ -435,7 +435,7 @@ public:
 //   /// This member exists only to encapsulate the hack.
 //   ///
 //   virtual pod_index_type get_int_id(pod_index_type xext_id,
-// 				    const string& xid_space_name) const;
+// 				    const std::string& xid_space_name) const;
 
   ///
   /// Gets the external ids of this in
@@ -443,7 +443,7 @@ public:
   /// @hack the product subposet hack, version 2.
   /// This member exists only to encapsulate the hack.
   ///
-  virtual void get_ext_ids(const string& xid_space_name,
+  virtual void get_ext_ids(const std::string& xid_space_name,
                            pod_index_type& xschema_poset_ext_id,
                            pod_index_type& xschema_member_ext_id,
                            pod_index_type& xbase_space_ext_id,

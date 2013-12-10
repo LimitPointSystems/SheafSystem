@@ -268,7 +268,7 @@ private:
 /// Insert antisymmetric_matrix_2x2@<T@> xm into output stream xos.
 ///
 template <typename T>
-ostream& operator<<(ostream& xos, const antisymmetric_matrix_2x2<T>& xm);
+std::ostream& operator<<(std::ostream& xos, const antisymmetric_matrix_2x2<T>& xm);
 
 } // namespace fiber_bundle
 

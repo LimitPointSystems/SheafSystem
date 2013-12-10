@@ -30,6 +30,7 @@
 #include "wsv_block.h"
 
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 
@@ -289,7 +290,7 @@ d() const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::t2_lite::
 class_name() const
 {
@@ -308,7 +309,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::t2_lite::
 static_class_name()
 {
@@ -730,7 +731,7 @@ t2(const poset* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::t2::
-t2(const poset* xhost, const string& xname)
+t2(const poset* xhost, const std::string& xname)
 {
 
   // Preconditions:
@@ -940,7 +941,7 @@ put_component(int xrow, int xcolumn, value_type xvalue, bool xauto_access)
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::t2::
 class_name() const
 {
@@ -959,7 +960,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::t2::
 static_class_name()
 {

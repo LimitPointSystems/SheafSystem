@@ -248,7 +248,7 @@ public:
   ///
   //*/
   unstructured_block(poset* xhost,
-                     const string& xlocal_cell_prototype_name,
+                     const std::string& xlocal_cell_prototype_name,
                      bool xis_prototype_name,
                      bool xauto_access);
 
@@ -395,7 +395,7 @@ public:
   /// Creates a new unstructured_block handle attached to the member state
   /// with name xname in xhost
   ///
-  unstructured_block(const poset* xhost, const string& xname);
+  unstructured_block(const poset* xhost, const std::string& xname);
 
   ///
   /// Creates a new unstructured_block handle attached to the member state
@@ -422,7 +422,7 @@ public:
   /// in xhost and attaches this to it.
   ///
   virtual void new_state(poset* xhost,
-                         const string& xlocal_cell_prototype_name,
+                         const std::string& xlocal_cell_prototype_name,
                          bool xauto_access);
 
   ///

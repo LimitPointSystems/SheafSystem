@@ -303,7 +303,7 @@ private:
 /// Insert symmetric_matrix_2x2@<T@> xm into output stream xos.
 ///
 template <typename T>
-ostream& operator<<(ostream& xos, const symmetric_matrix_2x2<T>& xm);
+std::ostream& operator<<(std::ostream& xos, const symmetric_matrix_2x2<T>& xm);
 
 
 } // namespace fiber_bundle

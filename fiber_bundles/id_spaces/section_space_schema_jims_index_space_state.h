@@ -74,7 +74,7 @@ public:
   static
   section_space_schema_jims_index_space_handle
   new_space(index_space_family& xid_spaces,
-	    const string& xname,
+	    const std::string& xname,
 	    const index_space_handle& xbase_space_id_space,
 	    const index_space_handle& xfiber_schema_id_space,
 	    const ij_product_structure& xsection_space_schema_product);
@@ -91,7 +91,7 @@ public:
   section_space_schema_jims_index_space_handle
   new_space(index_space_family& xid_spaces,
 	    pod_type xid,
-	    const string& xname,
+	    const std::string& xname,
 	    const index_space_handle& xbase_space_id_space,
 	    const index_space_handle& xfiber_schema_id_space,
 	    const ij_product_structure& xsection_space_schema_product);
@@ -393,7 +393,7 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// Virtual constructor; create a new instance of the same type at this.

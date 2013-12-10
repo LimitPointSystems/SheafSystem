@@ -155,12 +155,12 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
 
   ///
   /// Conformance test; true if xother conforms to this.
@@ -195,7 +195,7 @@ ${derived}& operator>>(const ${derived}& xsrc, ${derived}& xdst);
 ///
 /// Inserts ${derived} xfield into ostream xos.
 ///
-ostream& operator<<(ostream& xos, const ${derived}& xfield);
+std::ostream& operator<<(std::ostream& xos, const ${derived}& xfield);
 
 } // namespace fields
 

@@ -24,6 +24,7 @@
 #include "assert_contract.h"
 #include "fiber_bundles_namespace.h"
 #include "schema_poset_member.h"
+#include "std_iomanip.h"
 #include "wsv_block.h"
 
 #include "at0.h"
@@ -33,7 +34,7 @@
 #include "tp.h"
 #include "vd_space.h"
 
-
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //==============================================================================
@@ -558,7 +559,7 @@ factor_ct() const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::vd_lite::
 class_name() const
 {
@@ -577,7 +578,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::vd_lite::
 static_class_name()
 {
@@ -965,7 +966,7 @@ vd(const poset_state_handle* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::vd::
-vd(const poset_state_handle* xhost, const string& xname)
+vd(const poset_state_handle* xhost, const std::string& xname)
 {
 
   // Preconditions:
@@ -1441,7 +1442,7 @@ put_is_covector(bool xauto_access)
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::vd::
 class_name() const
 {
@@ -1460,7 +1461,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 vd::
 static_class_name()
 {
@@ -1605,9 +1606,9 @@ invariant() const
 // NON-MEMBER FUNCTIONS
 //==============================================================================
 
-ostream& 
+std::ostream& 
 fiber_bundle::
-operator<<(ostream& xos, const vd_lite& x0)
+operator<<(std::ostream& xos, const vd_lite& x0)
 {
   size_type lprec = xos.precision(18);
   
@@ -1622,9 +1623,9 @@ operator<<(ostream& xos, const vd_lite& x0)
   return xos;
 }
 
-ostream& 
+std::ostream& 
 fiber_bundle::
-operator<<(ostream& xos, const vd& x0)
+operator<<(std::ostream& xos, const vd& x0)
 {
   int ld = x0.d();
   for(int i=0; i<ld; ++i)

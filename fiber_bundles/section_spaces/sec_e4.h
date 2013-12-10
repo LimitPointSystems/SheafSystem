@@ -86,8 +86,8 @@ public:
   static host_type& standard_host(namespace_type& xns, 
                                   const poset_path& xbase_path,
                                   const poset_path& xrep_path,
-                                  const string& xsection_suffix, 
-                                  const string& xfiber_suffix, 
+                                  const std::string& xsection_suffix, 
+                                  const std::string& xfiber_suffix, 
                                   bool xauto_access);
 
 protected:
@@ -119,7 +119,7 @@ public:
   /// Creates a new sec_e4 handle attached to the member state with name xname
   /// in host xhost.
   ///
-  sec_e4(const sec_rep_space* xhost, const string& xname);
+  sec_e4(const sec_rep_space* xhost, const std::string& xname);
 
   ///
   /// Creates a new handle attached to the member state
@@ -284,12 +284,12 @@ public:
   ///
   /// The name of this class.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
   
   ///
   /// Make a new handle, no state instance of current
@@ -352,7 +352,7 @@ private:
 ///
 /// Insert sec_e4& xv into ostream& xos
 ///
-ostream& operator << (ostream& xos, sec_e4& xv);
+std::ostream& operator << (std::ostream& xos, sec_e4& xv);
 
 #endif // ifndef DOXYGEN_1_5_4_SKIP_UNKNOWN
 

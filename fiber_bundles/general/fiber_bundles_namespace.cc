@@ -135,6 +135,7 @@
 #include "array_section_dof_map.h"
 #include "sparse_section_dof_map.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // ===========================================================
@@ -144,7 +145,7 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 // PUBLIC MEMBER FUNCTIONS
 
 fiber_bundle::fiber_bundles_namespace::
-fiber_bundles_namespace(const string& xname)
+fiber_bundles_namespace(const std::string& xname)
 {
   // Preconditions:
 

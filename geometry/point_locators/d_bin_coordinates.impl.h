@@ -311,7 +311,7 @@ ub()
   // requires positions to have leftmost bit = 0.
 
   static const int_type result =
-    static_cast<int_type>(1) << (numeric_limits<int_type>::digits - 1);
+    static_cast<int_type>(1) << (std::numeric_limits<int_type>::digits - 1);
 
   return result;
 }
@@ -321,7 +321,7 @@ typename d_bin_coordinates<DC, DB>::size_type
 d_bin_coordinates<DC, DB>::
 bits()
 {
-  static const size_type result = numeric_limits<int_type>::digits;
+  static const size_type result = std::numeric_limits<int_type>::digits;
   return result;
 }
 
@@ -422,13 +422,13 @@ d_bin_coordinates(int_type xint_value)
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 template <int DC, int DB>
-ostream& geometry::operator<<(ostream& xos, const geometry::d_bin_coordinates<DC, DB>& xcoords)
+std::ostream& geometry::operator<<(std::ostream& xos, const geometry::d_bin_coordinates<DC, DB>& xcoords)
 {
   for(int i=0; i<xcoords.dc(); ++i)
   {
     xos << " "
-    << bitset<numeric_limits<typename d_bin_coordinates<DC, DB>::int_type>
-    ::digits>(xcoords.int_value()[i]);
+	<< std::bitset<std::numeric_limits<typename d_bin_coordinates<DC, DB>::int_type>
+      ::digits>(xcoords.int_value()[i]);
   }
   return xos;
 }

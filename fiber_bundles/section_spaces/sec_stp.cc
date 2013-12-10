@@ -33,6 +33,7 @@
 #include "stp.h"
 #include "stp_space.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //==============================================================================
@@ -164,7 +165,7 @@ sec_stp(const sec_rep_space* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::sec_stp::
-sec_stp(const sec_rep_space* xhost, const string& xname)
+sec_stp(const sec_rep_space* xhost, const std::string& xname)
 {
 
   // Preconditions:
@@ -438,7 +439,7 @@ fiber_prototype() const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::sec_stp::
 class_name() const
 {
@@ -457,7 +458,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::sec_stp::
 static_class_name()
 {

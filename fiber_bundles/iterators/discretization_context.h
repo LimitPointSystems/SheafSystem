@@ -80,7 +80,7 @@ public:
 ///
 
 SHEAF_DLL_SPEC
-ostream& operator<<(ostream& xos, const discretization_context& xc);
+std::ostream& operator<<(std::ostream& xos, const discretization_context& xc);
 
 ///
 /// The deep size of the referenced object of type discretization_context.

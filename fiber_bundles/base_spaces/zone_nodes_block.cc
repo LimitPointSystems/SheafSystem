@@ -255,7 +255,7 @@ zone_nodes_block(const base_space_poset& xhost, const scoped_index& xid)
 }
 
 fiber_bundle::zone_nodes_block::
-zone_nodes_block(const base_space_poset& xhost, const string& xname)
+zone_nodes_block(const base_space_poset& xhost, const std::string& xname)
 {
   // Preconditions:
 

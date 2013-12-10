@@ -40,6 +40,7 @@
 #include "std_sstream.h"
 #include "structured_block_2d.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // ===========================================================
@@ -759,7 +760,7 @@ finalize(poset_state_handle& xhost)
 
 // PUBLIC DATA MEMBERS
 
-const string&
+const std::string&
 fiber_bundle::structured_block_2d_crg_interval::
 class_name() const
 {

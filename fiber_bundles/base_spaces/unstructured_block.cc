@@ -336,7 +336,7 @@ fiber_bundle::unstructured_block::
 
 fiber_bundle::unstructured_block::
 unstructured_block(poset* xhost,
-                   const string& xlocal_cell_prototype_name,
+                   const std::string& xlocal_cell_prototype_name,
                    bool xis_prototype_name,
                    bool xauto_access)
 {
@@ -622,7 +622,7 @@ unstructured_block(const poset* xhost, scoped_index xindex)
 
 
 fiber_bundle::unstructured_block::
-unstructured_block(const poset* xhost, const string& xname)
+unstructured_block(const poset* xhost, const std::string& xname)
 {
 
   // Preconditions:
@@ -698,7 +698,7 @@ unstructured_block(const namespace_poset* xnamespace,
 void
 fiber_bundle::unstructured_block::
 new_state(poset* xhost,
-          const string& xlocal_cell_prototype_name,
+          const std::string& xlocal_cell_prototype_name,
           bool xauto_access)
 {
   // Preconditions:

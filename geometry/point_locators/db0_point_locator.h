@@ -189,7 +189,7 @@ protected:
   ///
   /// The bins scheduled to be searched for the current query point.
   ///
-  queue<int> _search_q;
+  std::queue<int> _search_q;
 
   ///
   /// Set xbin_pos the bin closest to xpt_pos.
@@ -277,27 +277,27 @@ protected:
   ///
   /// Prints the contents of the bins on xos; intended for debugging.
   ///
-  void print_bins(ostream& xos, const string& xmsg) const;
+  void print_bins(std::ostream& xos, const std::string& xmsg) const;
 
   ///
   /// Prints the contents of the search queue on xos; intended for debugging.
   ///
-  void print_queue(ostream& xos, const string& xmsg) const;
+  void print_queue(std::ostream& xos, const std::string& xmsg) const;
 
   ///
   /// Prints xvlaue on xos; intended for debugging.
   ///
-  void print_value(ostream& xos,
+  void print_value(std::ostream& xos,
                    const sec_vd_value_type xvalue[],
-                   const string& xmsg) const;
+                   const std::string& xmsg) const;
 
 
   ///
   /// Prints xcoords on xos; intended for debugging.
   ///
-  void print_coords(ostream& xos,
+  void print_coords(std::ostream& xos,
                     const bin_coord_type xcoords[],
-                    const string& xmsg) const;
+                    const std::string& xmsg) const;
 
 
   ///
@@ -490,7 +490,7 @@ template<>
 SHEAF_DLL_SPEC
 void
 db0_point_locator<3>::
-print_bins(ostream& xos, const string& xmsg) const;
+print_bins(std::ostream& xos, const std::string& xmsg) const;
 
 ///
 /// Puts all the bins from the search region onto the search queue

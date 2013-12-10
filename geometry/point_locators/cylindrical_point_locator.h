@@ -243,7 +243,7 @@ protected:
   /// for the current evaluation member. Used in all_points_at_value,
   /// allocated her to avoid reallocation for each query.
   ///
-  set< stl_scoped_index<> > _branches;
+  std::set< stl_scoped_index<> > _branches;
 
   ///
   /// Creates the bounding box or boxes for the quad defined by

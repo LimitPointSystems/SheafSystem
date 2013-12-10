@@ -32,6 +32,7 @@
 
 
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //==============================================================================
@@ -170,7 +171,7 @@ sec_tuple(const sec_rep_space* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::sec_tuple::
-sec_tuple(const sec_rep_space* xhost, const string& xname)
+sec_tuple(const sec_rep_space* xhost, const std::string& xname)
 {
   // Preconditions:
 
@@ -385,7 +386,7 @@ factor_ct(bool xauto_access) const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::sec_tuple::
 class_name() const
 {
@@ -404,7 +405,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::sec_tuple::
 static_class_name()
 {

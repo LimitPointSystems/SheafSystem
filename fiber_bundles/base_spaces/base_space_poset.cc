@@ -34,6 +34,7 @@
 #include "std_strstream.h"
 #include "zone_nodes_block_crg_interval.h"
 
+using namespace std;
 using namespace fiber_bundle;
 
 // ===========================================================
@@ -1472,7 +1473,7 @@ release_adjacency_id_space_iterator(index_space_iterator& xitr, bool xauto_acces
 
 // PUBLIC FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::base_space_poset::
 prototypes_poset_name()
 {
@@ -1494,7 +1495,7 @@ prototypes_poset_name()
 
 sheaf::pod_index_type
 fiber_bundle::base_space_poset::
-prototype_type_id(const string& xname, bool xauto_access) const
+prototype_type_id(const std::string& xname, bool xauto_access) const
 {
 
   // Preconditions:
@@ -1542,7 +1543,7 @@ prototype_type_id(const string& xname, bool xauto_access) const
 
 sheaf::scoped_index
 fiber_bundle::base_space_poset::
-prototype_dof_tuple_id(const string& xname,
+prototype_dof_tuple_id(const std::string& xname,
                        int xdepth,
                        bool xcreate,
                        bool xauto_access) const
@@ -1693,7 +1694,7 @@ attach_handle_data_members()
 
 sheaf::pod_index_type
 fiber_bundle::base_space_poset::
-new_member(const string& xprototype_name, bool xcopy_dof_map)
+new_member(const std::string& xprototype_name, bool xcopy_dof_map)
 {
   // cout << endl << "Entering base_space_poset::new_member." << endl;
 
@@ -1762,7 +1763,7 @@ new_member(const char* xprototype_name, bool xcopy_dof_map)
 
 sheaf::pod_index_type
 fiber_bundle::base_space_poset::
-new_member(const string& xtype_name, int xdb, const string& xlocal_cell_name)
+new_member(const std::string& xtype_name, int xdb, const std::string& xlocal_cell_name)
 {
   // cout << endl << "Entering base_space_poset::new_member." << endl;
 
@@ -1904,7 +1905,7 @@ blocks() const
   return result;
 }
 
-string
+std::string
 fiber_bundle::base_space_poset::
 blocks_name()
 {
@@ -1956,7 +1957,7 @@ block_vertices() const
   return result;
 }
 
-string
+std::string
 fiber_bundle::base_space_poset::
 block_vertices_name()
 {
@@ -2126,7 +2127,7 @@ d_cells_id_space(int xd) const
   return result;
 }
 
-string
+std::string
 fiber_bundle::base_space_poset::
 d_cells_name(int xdb, int xmax_db)
 {
@@ -2194,7 +2195,7 @@ cells() const
   return result;
 }
 
-string
+std::string
 fiber_bundle::base_space_poset::
 cells_name()
 {
@@ -2293,7 +2294,7 @@ insert_interval_in_standard_subposets(base_space_crg_interval& xinterval)
 
 void
 fiber_bundle::base_space_poset::
-initialize_standard_subposets(const string& xname)
+initialize_standard_subposets(const std::string& xname)
 {
   // Preconditions:
 
@@ -2605,7 +2606,7 @@ type_id(const scoped_index& xid) const
   return type_id(xid.hub_pod());
 }
 
-string
+std::string
 fiber_bundle::base_space_poset::
 type_name(pod_index_type xhub_id) const
 {
@@ -2627,7 +2628,7 @@ type_name(pod_index_type xhub_id) const
   return result;
 }
 
-string
+std::string
 fiber_bundle::base_space_poset::
 type_name(const scoped_index& xid) const
 {
@@ -2837,7 +2838,7 @@ row_dof_tuple(const scoped_index& xtuple_id, bool xrequire_write_access) const
 
 const sheaf::scoped_index&
 fiber_bundle::base_space_poset::
-new_row_dof_map(const string& xprototype_name)
+new_row_dof_map(const std::string& xprototype_name)
 {
   // Preconditions:
 

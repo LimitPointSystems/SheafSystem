@@ -243,7 +243,7 @@ operator T* ()
 
   // Body:
 
-  cout << "general_matrix_2x2<T>::operator T* () " << endl;
+  //cout << "general_matrix_2x2<T>::operator T* () " << std::endl;
 
   T* result = components;
 
@@ -265,7 +265,7 @@ operator const T* () const
 
   // Body:
 
-  cout << "general_matrix_2x2<T>::operator const T* () const " << endl;
+  //cout << "general_matrix_2x2<T>::operator const T* () const " << std::endl;
 
   const T* result = components;
 
@@ -1178,14 +1178,14 @@ symmetric_part() const
 
 ///
 template <typename T>
-ostream& operator<<(ostream& xos, const general_matrix_2x2<T>& xm)
+std::ostream& operator<<(std::ostream& xos, const general_matrix_2x2<T>& xm)
 {
   // Preconditions:
 
   // Body:
 
-  xos << "  " << xm[0][0] << "  " << xm[0][1] << endl;
-  xos << "  " << xm[1][0] << "  " << xm[1][1] << endl;
+  xos << "  " << xm[0][0] << "  " << xm[0][1] << std::endl;
+  xos << "  " << xm[1][0] << "  " << xm[1][1] << std::endl;
 
   // Postconditions:
 

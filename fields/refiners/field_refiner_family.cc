@@ -28,6 +28,7 @@
 #include "local_field_refiner.h"
 #include "namespace_poset.h"
 
+using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
 
 // ===========================================================
@@ -36,7 +37,7 @@ using namespace fields; // Workaround for MS C++ bug.
 
 fields::field_refiner_family*
 fields::field_refiner_family::
-new_family(const string& xname)
+new_family(const std::string& xname)
 {
   field_refiner_family* result;
 
@@ -131,7 +132,7 @@ fields::field_refiner_family::
   return;
 }
 
-const string&
+const std::string&
 fields::field_refiner_family::
 class_name() const
 {

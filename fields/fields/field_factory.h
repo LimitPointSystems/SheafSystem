@@ -100,7 +100,7 @@ public:
   ///
   static field_vd*
   new_scalar_field_1d_points(fiber_bundles_namespace& xns,
-                             const string& xname,
+                             const std::string& xname,
                              size_type xi_size,
                              block<sec_vd_value_type>& xlower,
                              block<sec_vd_value_type>& xupper,
@@ -116,7 +116,7 @@ public:
   ///
   static field_vd*
   new_scalar_field_1d_unstructured(fiber_bundles_namespace& xns,
-                                   const string& xname,
+                                   const std::string& xname,
                                    size_type xi_size,
                                    block<sec_vd_value_type>& xlower,
                                    block<sec_vd_value_type>& xupper,
@@ -133,7 +133,7 @@ public:
   ///
   static field_vd*
   new_scalar_field_1d_uniform(fiber_bundles_namespace& xns,
-                              const string& xname,
+                              const std::string& xname,
                               size_type xi_size,
                               block<sec_vd_value_type>& xlower,
                               block<sec_vd_value_type>& xupper,
@@ -150,7 +150,7 @@ public:
   ///
   static field_vd*
   new_scalar_field_2d_points(fiber_bundles_namespace& xns,
-                             const string& xname,
+                             const std::string& xname,
                              size_type xi_size,
                              size_type xj_size,
                              block<sec_vd_value_type>& xlower,
@@ -169,7 +169,7 @@ public:
   ///
   static field_vd*
   new_scalar_field_2d_unstructured(fiber_bundles_namespace& xns,
-                                   const string& xname,
+                                   const std::string& xname,
                                    size_type xi_size,
                                    size_type xj_size,
                                    bool xuse_quads,
@@ -191,7 +191,7 @@ public:
   ///
   static field_vd*
   new_scalar_field_2d_unstructured(fiber_bundles_namespace& xns,
-                                   const string& xname,
+                                   const std::string& xname,
                                    size_type xpt_ct,
                                    block<sec_vd_value_type>& xlower,
                                    block<sec_vd_value_type>& xupper,
@@ -209,7 +209,7 @@ public:
   ///
   static field_vd*
   new_scalar_field_2d_uniform(fiber_bundles_namespace& xns,
-                              const string& xname,
+                              const std::string& xname,
                               size_type xi_size,
                               size_type xj_size,
                               block<sec_vd_value_type>& xlower,
@@ -228,7 +228,7 @@ public:
   ///
   static field_vd*
   new_scalar_field_3d_points(fiber_bundles_namespace& xns,
-                             const string& xname,
+                             const std::string& xname,
                              size_type xi_size,
                              size_type xj_size,
                              size_type xk_size,
@@ -248,7 +248,7 @@ public:
   ///
   static field_vd*
   new_scalar_field_3d_unstructured(fiber_bundles_namespace& xns,
-                                   const string& xname,
+                                   const std::string& xname,
                                    size_type xi_size,
                                    size_type xj_size,
                                    size_type xk_size,
@@ -271,7 +271,7 @@ public:
   ///
   static field_vd*
   new_scalar_field_3d_unstructured(fiber_bundles_namespace& xns,
-                                   const string& xname,
+                                   const std::string& xname,
                                    size_type xpt_ct,
                                    block<sec_vd_value_type>& xlower,
                                    block<sec_vd_value_type>& xupper,
@@ -289,7 +289,7 @@ public:
   ///
   static field_vd*
   new_scalar_field_3d_uniform(fiber_bundles_namespace& xns,
-                              const string& xname,
+                              const std::string& xname,
                               size_type xi_size,
                               size_type xj_size,
                               size_type xk_size,
@@ -316,11 +316,11 @@ public:
   ///
   static field_vd*
   new_scalar_field_1d_uniform(fiber_bundles_namespace& xns,
-                              const string& xname,
+                              const std::string& xname,
                               size_type xi_size,
                               block<sec_vd_value_type>& xlower,
                               block<sec_vd_value_type>& xupper,
-                              const string& xfcn);
+                              const std::string& xfcn);
 
   ///
   /// Creates a scalar field with name xname+"_scalar_property" on a 1D mesh
@@ -330,11 +330,11 @@ public:
   ///
   static field_vd*
   new_scalar_field_1d_unstructured(fiber_bundles_namespace& xns,
-                                   const string& xname,
+                                   const std::string& xname,
                                    size_type xi_size,
                                    block<sec_vd_value_type>& xlower,
                                    block<sec_vd_value_type>& xupper,
-                                   const string& xfcn);
+                                   const std::string& xfcn);
 
   ///
   /// Creates a scalar field with name xname+"_scalar_property" on a 2D mesh with
@@ -346,13 +346,13 @@ public:
   ///
   static field_vd*
   new_scalar_field_2d_unstructured(fiber_bundles_namespace& xns,
-                                   const string& xname,
+                                   const std::string& xname,
                                    size_type xi_size,
                                    size_type xj_size,
                                    bool xuse_quads,
                                    block<sec_vd_value_type>& xlower,
                                    block<sec_vd_value_type>& xupper,
-                                   const string& xfcn);
+                                   const std::string& xfcn);
 
 #ifdef HAVE_VTK
 
@@ -365,11 +365,11 @@ public:
   ///
   static field_vd*
   new_scalar_field_2d_unstructured(fiber_bundles_namespace& xns,
-                                   const string& xname,
+                                   const std::string& xname,
                                    size_type xpt_ct,
                                    block<sec_vd_value_type>& xlower,
                                    block<sec_vd_value_type>& xupper,
-                                   const string& xfcn);
+                                   const std::string& xfcn);
 
 #endif
 
@@ -381,12 +381,12 @@ public:
   ///
   static field_vd*
   new_scalar_field_2d_uniform(fiber_bundles_namespace& xns,
-                              const string& xname,
+                              const std::string& xname,
                               size_type xi_size,
                               size_type xj_size,
                               block<sec_vd_value_type>& xlower,
                               block<sec_vd_value_type>& xupper,
-                              const string& xfcn);
+                              const std::string& xfcn);
 
   ///
   /// Creates a scalar field with name xname+"_scalar_property" on a 3D mesh with
@@ -398,14 +398,14 @@ public:
   ///
   static field_vd*
   new_scalar_field_3d_unstructured(fiber_bundles_namespace& xns,
-                                   const string& xname,
+                                   const std::string& xname,
                                    size_type xi_size,
                                    size_type xj_size,
                                    size_type xk_size,
                                    bool xuse_hexs,
                                    block<sec_vd_value_type>& xlower,
                                    block<sec_vd_value_type>& xupper,
-                                   const string& xfcn);
+                                   const std::string& xfcn);
 
 
 #ifdef HAVE_VTK
@@ -419,11 +419,11 @@ public:
   ///
   static field_vd*
   new_scalar_field_3d_unstructured(fiber_bundles_namespace& xns,
-                                   const string& xname,
+                                   const std::string& xname,
                                    size_type xpt_ct,
                                    block<sec_vd_value_type>& xlower,
                                    block<sec_vd_value_type>& xupper,
-                                   const string& xfcn);
+                                   const std::string& xfcn);
 
 #endif
 
@@ -435,13 +435,13 @@ public:
   ///
   static field_vd*
   new_scalar_field_3d_uniform(fiber_bundles_namespace& xns,
-                              const string& xname,
+                              const std::string& xname,
                               size_type xi_size,
                               size_type xj_size,
                               size_type xk_size,
                               block<sec_vd_value_type>& xlower,
                               block<sec_vd_value_type>& xupper,
-                              const string& xfcn);
+                              const std::string& xfcn);
 
 
 
@@ -474,7 +474,7 @@ public:
   /// The property dof function with name xname. Intended to enable
   /// passing property_dof_function pointers from Java.
   ///
-  static property_dof_function_type property_dof_function(const string& xname);
+  static property_dof_function_type property_dof_function(const std::string& xname);
 
   ///
   /// Deletes field xfield and all associated section spaces, section schema spaces,
@@ -496,7 +496,7 @@ protected:
   ///
   static unstructured_block*
   new_0d_point_base_space(namespace_poset& xns,
-                          const string& xname,
+                          const std::string& xname,
                           size_type xi_size);
 
   ///
@@ -506,7 +506,7 @@ protected:
   ///
   static unstructured_block*
   new_0d_point_base_space(namespace_poset& xns,
-                          const string& xname,
+                          const std::string& xname,
                           size_type xi_size,
                           size_type xj_size);
 
@@ -517,7 +517,7 @@ protected:
   ///
   static unstructured_block*
   new_0d_point_base_space(namespace_poset& xns,
-                          const string& xname,
+                          const std::string& xname,
                           size_type xi_size,
                           size_type xj_size,
                           size_type xk_size);
@@ -527,7 +527,7 @@ protected:
   ///
   static unstructured_block*
   new_1d_unstructured_base_space(namespace_poset& xns,
-                                 const string& xname,
+                                 const std::string& xname,
                                  size_type xi_size);
 
   ///
@@ -535,7 +535,7 @@ protected:
   ///
   static sec_e1*
   new_1d_unstructured_coordinates(fiber_bundles_namespace& xns,
-                                  const string& xname,
+                                  const std::string& xname,
                                   size_type xi_size,
                                   block<sec_vd_value_type>& xlower,
                                   block<sec_vd_value_type>& xupper,
@@ -548,7 +548,7 @@ protected:
   ///
   static structured_block_1d*
   new_1d_structured_base_space(namespace_poset& xns,
-                               const string& xname,
+                               const std::string& xname,
                                size_type xi_size);
 
   ///
@@ -556,7 +556,7 @@ protected:
   ///
   static sec_e1*
   new_1d_uniform_coordinates(fiber_bundles_namespace& xns,
-                             const string& xname,
+                             const std::string& xname,
                              size_type xi_size,
                              block<sec_vd_value_type>& xlower,
                              block<sec_vd_value_type>& xupper,
@@ -569,7 +569,7 @@ protected:
   ///
   static unstructured_block*
   new_2d_unstructured_base_space(namespace_poset& xns,
-                                 const string& xname,
+                                 const std::string& xname,
                                  size_type xi_size,
                                  size_type xj_size,
                                  bool xuse_quads);
@@ -579,7 +579,7 @@ protected:
   ///
   static sec_e2*
   new_2d_unstructured_coordinates(fiber_bundles_namespace& xns,
-                                  const string& xname,
+                                  const std::string& xname,
                                   size_type xi_size,
                                   size_type xj_size,
                                   block<sec_vd_value_type>& xlower,
@@ -595,7 +595,7 @@ protected:
   ///
   static unstructured_block*
   new_2d_unstructured_base_space(namespace_poset& xns,
-                                 const string& xname,
+                                 const std::string& xname,
                                  size_type xpt_ct,
                                  block<sec_vd_value_type>& xpt_coords);
 
@@ -608,7 +608,7 @@ protected:
   ///
   static sec_e2*
   new_2d_unstructured_coordinates(fiber_bundles_namespace& xns,
-                                  const string& xname,
+                                  const std::string& xname,
                                   size_type xpt_ct,
                                   block<sec_vd_value_type>& xlower,
                                   block<sec_vd_value_type>& xupper,
@@ -620,7 +620,7 @@ protected:
   ///
   static structured_block_2d*
   new_2d_structured_base_space(namespace_poset& xns,
-                               const string& xname,
+                               const std::string& xname,
                                size_type xi_size,
                                size_type xj_size);
 
@@ -629,7 +629,7 @@ protected:
   ///
   static sec_e2*
   new_2d_uniform_coordinates(fiber_bundles_namespace& xns,
-                             const string& xname,
+                             const std::string& xname,
                              size_type xi_size,
                              size_type xj_size,
                              block<sec_vd_value_type>& xlower,
@@ -643,7 +643,7 @@ protected:
   ///
   static unstructured_block*
   new_3d_unstructured_base_space(namespace_poset& xns,
-                                 const string& xname,
+                                 const std::string& xname,
                                  size_type xi_size,
                                  size_type xj_size,
                                  size_type xk_size,
@@ -655,7 +655,7 @@ protected:
   ///
   static sec_e3*
   new_3d_unstructured_coordinates(fiber_bundles_namespace& xns,
-                                  const string& xname,
+                                  const std::string& xname,
                                   size_type xi_size,
                                   size_type xj_size,
                                   size_type xk_size,
@@ -673,7 +673,7 @@ protected:
   ///
   static unstructured_block*
   new_3d_unstructured_base_space(namespace_poset& xns,
-                                 const string& xname,
+                                 const std::string& xname,
                                  size_type xpt_ct,
                                  block<sec_vd_value_type>& xpt_coords);
 
@@ -686,7 +686,7 @@ protected:
   ///
   static sec_e3*
   new_3d_unstructured_coordinates(fiber_bundles_namespace& xns,
-                                  const string& xname,
+                                  const std::string& xname,
                                   size_type xpt_ct,
                                   block<sec_vd_value_type>& xlower,
                                   block<sec_vd_value_type>& xupper,
@@ -698,7 +698,7 @@ protected:
   ///
   static structured_block_3d*
   new_3d_structured_base_space(namespace_poset& xns,
-                               const string& xname,
+                               const std::string& xname,
                                size_type xi_size,
                                size_type xj_size,
                                size_type xk_size);
@@ -708,7 +708,7 @@ protected:
   ///
   static sec_e3*
   new_3d_uniform_coordinates(fiber_bundles_namespace& xns,
-                             const string& xname,
+                             const std::string& xname,
                              size_type xi_size,
                              size_type xj_size,
                              size_type xk_size,
@@ -722,7 +722,7 @@ protected:
   ///
   static base_space_member*
   new_structured_base_space(namespace_poset& xns,
-                            const string& xbase_space_name,
+                            const std::string& xbase_space_name,
                             const block<int>& xindex_ubs);
 
 
@@ -776,7 +776,7 @@ protected:
   ///
   static sec_at0*
   new_property(fiber_bundles_namespace& xns,
-               const string& xname,
+               const std::string& xname,
                base_space_member& xbase_space,
                const poset_path& xrep_path);
 

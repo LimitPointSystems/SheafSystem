@@ -251,7 +251,7 @@ private:
   ///
   void pull_back_output_disc_mono_multi(const discretization_context& xcontext,
                                         pb_type& xpb,
-                                        set< stl_scoped_index<> >& xbranches);
+                                        std::set< stl_scoped_index<> >& xbranches);
 
   ///
   /// Pulls the output disc back into the domain

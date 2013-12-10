@@ -28,6 +28,7 @@
 #include "sec_vd.h"
 #include "section_space_schema_poset.h"
 
+using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
 
 

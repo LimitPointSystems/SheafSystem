@@ -41,6 +41,7 @@
 #include "field_vd.h"
 #include "zone_centered_error_bound_refinement_policy.h"
 
+using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
 
 // #define DIAGNOSTIC_OUTPUT 1
@@ -134,8 +135,8 @@ invariant() const
 
 fields::field_refiner::
 field_refiner(const poset& xbase_space,
-              const string& xrefiner_family_name,
-              const string& xrefinement_policy_name,
+              const std::string& xrefiner_family_name,
+              const std::string& xrefinement_policy_name,
               bool xauto_access)
 {
   // Preconditions:

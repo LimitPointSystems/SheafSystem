@@ -124,7 +124,7 @@ protected:
 
   static inline double TOLERANCE()
   {
-    static const double result = 10.0*numeric_limits<double>::epsilon();
+    static const double result = 10.0*std::numeric_limits<double>::epsilon();
     return result;
   };
 

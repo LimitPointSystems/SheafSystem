@@ -150,7 +150,7 @@ public:
   /// Creates a new zone_nodes_block handle attached to the member state
   /// with name xname in xhost
   ///
-  zone_nodes_block(const base_space_poset& xhost, const string& xname);
+  zone_nodes_block(const base_space_poset& xhost, const std::string& xname);
 
   ///
   /// Creates a new zone_nodes_block handle attached to the member state

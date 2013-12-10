@@ -29,6 +29,7 @@
 #include "schema_poset_member.h"
 #include "wsv_block.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 using namespace fiber_bundle::vd_algebra;
 
@@ -315,7 +316,7 @@ new_host(namespace_type& xns,
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::atp_lite::
 class_name() const
 {
@@ -334,7 +335,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::atp_lite::
 static_class_name()
 {
@@ -515,7 +516,7 @@ atp(const poset_state_handle* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::atp::
-atp(const poset_state_handle* xhost, const string& xname)
+atp(const poset_state_handle* xhost, const std::string& xname)
 {
 
   // Preconditions:
@@ -792,7 +793,7 @@ put_is_p_vector(bool xauto_access)
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::atp::
 class_name() const
 {
@@ -811,7 +812,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::atp::
 static_class_name()
 {

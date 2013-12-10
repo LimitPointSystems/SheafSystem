@@ -80,7 +80,7 @@ public:
   /// Creates an instance of the refiner family associated with
   /// name xname.
   ///
-  static field_refiner_family* new_family(const string& xname);
+  static field_refiner_family* new_family(const std::string& xname);
 
   ///
   /// Copy constructor
@@ -96,7 +96,7 @@ public:
   ///
   /// The name of this family.
   ///
-  virtual const string& class_name() const = 0;
+  virtual const std::string& class_name() const = 0;
 
   ///
   /// The evaluator associated with cell type xtype_id.

@@ -28,6 +28,7 @@
 #include "sec_rep_descriptor_poset.h"
 #include "wsv_block.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // ===========================================================
@@ -295,7 +296,7 @@ binary_section_space_schema_member(const binary_section_space_schema_poset* xhos
 
 fiber_bundle::binary_section_space_schema_member::
 binary_section_space_schema_member(const binary_section_space_schema_poset* xhost,
-                                   const string& xname)
+                                   const std::string& xname)
 {
   // Preconditions:
 
@@ -708,7 +709,7 @@ get_decomposition(pod_index_type xindex) const
 }
 sheaf::pod_index_type
 fiber_bundle::binary_section_space_schema_member::
-get_int_id(pod_index_type xext_id, const string& xid_space_name) const
+get_int_id(pod_index_type xext_id, const std::string& xid_space_name) const
 {
   // Preconditions:
 
@@ -737,7 +738,7 @@ get_int_id(pod_index_type xext_id, const string& xid_space_name) const
 
 void
 fiber_bundle::binary_section_space_schema_member::
-get_ext_ids(const string& xid_space_name,
+get_ext_ids(const std::string& xid_space_name,
             pod_index_type& xschema_poset_ext_id,
             pod_index_type& xschema_member_ext_id,
             pod_index_type& xbase_space_ext_id,

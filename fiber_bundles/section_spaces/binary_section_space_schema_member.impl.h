@@ -46,7 +46,7 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 template <typename S>
 sheaf::poset_path
 fiber_bundle::binary_section_space_schema_member::
-standard_host_path(const poset_path& xbase_path, const poset_path& xrep_path, const string& xfiber_suffix)
+standard_host_path(const poset_path& xbase_path, const poset_path& xrep_path, const std::string& xfiber_suffix)
 {
   // cout << endl << "Entering binary_section_space_schema_member::standard_host_path." << endl;
 
@@ -63,7 +63,7 @@ standard_host_path(const poset_path& xbase_path, const poset_path& xrep_path, co
   poset_path lstd_fiber_path(fiber_type::template standard_host_path<fiber_type>(xfiber_suffix));
   poset_path lrep_path = !xrep_path.empty() ? xrep_path : S::standard_rep_path();
   
-  string lposet_name(lstd_fiber_path.poset_name());
+  std::string lposet_name(lstd_fiber_path.poset_name());
   lposet_name += "_on_";
   lposet_name += xbase_path.poset_name();
   lposet_name += "_";
@@ -86,7 +86,7 @@ standard_host_path(const poset_path& xbase_path, const poset_path& xrep_path, co
 template <typename S>
 sheaf::poset_path
 fiber_bundle::binary_section_space_schema_member::
-standard_member_path(const poset_path& xbase_path, const poset_path& xrep_path, const string& xfiber_suffix)
+standard_member_path(const poset_path& xbase_path, const poset_path& xrep_path, const std::string& xfiber_suffix)
 {
   // cout << endl << "Entering binary_section_space_schema_member::standard_path." << endl;
 
@@ -102,7 +102,7 @@ standard_member_path(const poset_path& xbase_path, const poset_path& xrep_path, 
 
   poset_path result(standard_host_path<S>(xbase_path, xrep_path, xfiber_suffix));
 
-  string lmember_name =
+  std::string lmember_name =
     standard_member_name(fiber_type::standard_schema_path().member_name(),
 			 xbase_path.member_name());
 
@@ -126,7 +126,7 @@ fiber_bundle::binary_section_space_schema_member::
 standard_host_is_available(namespace_poset& xns, 
                            const poset_path& xbase_path,
                            const poset_path& xrep_path,
-                           const string& xfiber_suffix,
+                           const std::string& xfiber_suffix,
                            bool xauto_access)
 {
   // cout << endl << "Entering binary_section_space_schema_member::standard_host." << endl;
@@ -165,7 +165,7 @@ fiber_bundle::binary_section_space_schema_member::
 standard_host(namespace_type& xns, 
               const poset_path& xbase_path,
               const poset_path& xrep_path,
-              const string& xfiber_suffix,
+              const std::string& xfiber_suffix,
               bool xauto_access)
 {
   // cout << endl << "Entering binary_section_space_schema_member::standard_host." << endl;
@@ -241,7 +241,7 @@ fiber_bundle::binary_section_space_schema_member::
 standard_member(namespace_type& xns, 
                 const poset_path& xbase_path,
                 const poset_path& xrep_path,
-                const string& xfiber_suffix,
+                const std::string& xfiber_suffix,
                 bool xauto_access)
 {
   // cout << endl << "Entering binary_section_space_schema_member::standard_host." << endl;

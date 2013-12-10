@@ -42,6 +42,7 @@
 #include "std_string.h"
 #include "std_sstream.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // #define DIAGNOSTIC_OUTPUT
@@ -138,7 +139,7 @@ fiber_bundle::zone_nodes_block_crg_interval::
 
 // PROTECTED DATA MEMBERS
 
-const string&
+const std::string&
 fiber_bundle::zone_nodes_block_crg_interval::
 zone_prototype_name(const block_connectivity& xconn)
 {
@@ -244,7 +245,7 @@ vertex_client_space_id() const
 
 // PROTECTED DATA MEMBERS
 
-string
+std::string
 fiber_bundle::zone_nodes_block_crg_interval::
 vertex_client_id_space_name()
 {
@@ -979,7 +980,7 @@ finalize(poset_state_handle& xhost)
 
 // PUBLIC DATA MEMBERS
 
-const string&
+const std::string&
 fiber_bundle::zone_nodes_block_crg_interval::
 class_name() const
 {

@@ -39,6 +39,7 @@
 #include "tern.h"
 #include "wsv_block.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // ===========================================================
@@ -47,7 +48,7 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // PUBLIC FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::section_space_schema_poset::
 standard_schema_poset_name()
 {
@@ -1089,7 +1090,7 @@ new_member(bool xis_jim, poset_dof_map* xdof_map, bool xcopy_dof_map)
 
 sheaf::pod_index_type
 fiber_bundle::section_space_schema_poset::
-new_member_range(const string& xrange_type,
+new_member_range(const std::string& xrange_type,
                  size_type xsize,
                  const block<scoped_index>& xdof_tuple_ids,
                  const block<pod_index_type>& xdata)
@@ -1161,7 +1162,7 @@ bottom() const
 
 sheaf::pod_index_type
 fiber_bundle::section_space_schema_poset::
-member_id(const string& xbase_space_name, const string& xfiber_schema_name) const
+member_id(const std::string& xbase_space_name, const std::string& xfiber_schema_name) const
 {
   // Preconditions:
 
@@ -1190,8 +1191,8 @@ member_id(const string& xbase_space_name, const string& xfiber_schema_name) cons
 
 void
 fiber_bundle::section_space_schema_poset::
-member_id(const string& xbase_space_name,
-	  const string& xfiber_schema_name,
+member_id(const std::string& xbase_space_name,
+	  const std::string& xfiber_schema_name,
 	  scoped_index& result) const
 {
   // Postconditions:

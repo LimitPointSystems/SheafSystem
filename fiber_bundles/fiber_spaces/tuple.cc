@@ -29,6 +29,7 @@
 #include "fiber_bundles_namespace.h"
 #include "tuple_space.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 //==============================================================================
@@ -102,7 +103,7 @@ fiber_bundle::tuple_lite::
 // ABSTRACT POSET MEMBER FACET
 //==============================================================================
 
-const string&
+const std::string&
 fiber_bundle::tuple_lite::
 class_name() const
 {
@@ -121,7 +122,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::tuple_lite::
 static_class_name()
 {
@@ -244,7 +245,7 @@ invariant() const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::tuple::
 standard_schema_poset_name()
 {
@@ -423,7 +424,7 @@ tuple(const poset_state_handle* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::tuple::
-tuple(const poset_state_handle* xhost, const string& xname)
+tuple(const poset_state_handle* xhost, const std::string& xname)
 {
 
   // Preconditions:
@@ -664,7 +665,7 @@ dof_map_is_ancestor_of(const poset_dof_map* xdof_map) const
 // ABSTRACT POSET MEMBER FACET
 //==============================================================================
 
-const string&
+const std::string&
 fiber_bundle::tuple::
 class_name() const
 {
@@ -683,7 +684,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::tuple::
 static_class_name()
 {

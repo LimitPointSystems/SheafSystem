@@ -22,6 +22,7 @@
 #include "geometry.h"
 #include "d_tree_point_locator_node.impl.h"
 
+using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.
 
 //=============================================================================

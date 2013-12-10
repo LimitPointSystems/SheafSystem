@@ -28,6 +28,7 @@
 #include "stp.h"
 #include "wsv_block.h"
 
+using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 
@@ -527,7 +528,7 @@ dd() const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::at0_lite::
 class_name() const
 {
@@ -546,7 +547,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::at0_lite::
 static_class_name()
 {
@@ -769,7 +770,7 @@ new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xs
 
 fiber_bundle::at0::host_type&
 fiber_bundle::at0::
-standard_host(namespace_type& xns, const string& xsuffix, bool xauto_access)
+standard_host(namespace_type& xns, const std::string& xsuffix, bool xauto_access)
 {
   // cout << endl << "Entering at0::new_host." << endl;
 
@@ -890,7 +891,7 @@ at0(const poset_state_handle* xhost, const scoped_index& xid)
 }
 
 fiber_bundle::at0::
-at0(const poset_state_handle* xhost, const string& xname)
+at0(const poset_state_handle* xhost, const std::string& xname)
 {
 
   // Preconditions:
@@ -1249,7 +1250,7 @@ factor_ct() const
 
 // PUBLIC MEMBER FUNCTIONS
 
-const string&
+const std::string&
 fiber_bundle::at0::
 class_name() const
 {
@@ -1268,7 +1269,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fiber_bundle::at0::
 static_class_name()
 {

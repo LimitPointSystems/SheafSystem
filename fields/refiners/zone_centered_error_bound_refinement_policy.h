@@ -116,12 +116,12 @@ public:
   ///
   /// The class name of this.
   ///
-  virtual const string& class_name() const;
+  virtual const std::string& class_name() const;
 
   ///
   /// The class name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
 
   //@}
 

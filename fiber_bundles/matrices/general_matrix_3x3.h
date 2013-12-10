@@ -320,7 +320,7 @@ private:
 /// Insert general_matrix_3x3@<T@> xm into output stream xos.
 ///
 template <typename T>
-ostream& operator<<(ostream& xos, const general_matrix_3x3<T>& xm);
+std::ostream& operator<<(std::ostream& xos, const general_matrix_3x3<T>& xm);
 
 
 } // namespace fiber_bundle

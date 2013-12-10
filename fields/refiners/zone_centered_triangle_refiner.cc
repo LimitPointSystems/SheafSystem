@@ -29,6 +29,7 @@
 #include "sec_ed_invertible.h"
 #include "field_vd.h"
 
+using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
 
 // ===========================================================
@@ -358,7 +359,7 @@ db() const
   return result;
 }
 
-const string&
+const std::string&
 fields::zone_centered_triangle_refiner::
 zone_type_name() const
 {

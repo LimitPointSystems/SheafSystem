@@ -73,7 +73,7 @@ public:
   ///
   /// The name of this class.
   ///
-  static const string& static_class_name();
+  static const std::string& static_class_name();
 
   ///
   /// The base space for this section space (mutable version)
@@ -150,12 +150,12 @@ public:
   ///
   /// The name of the evaluator family used by this section space.
   ///
-  string evaluator_family() const;
+  std::string evaluator_family() const;
 
   ///
   /// The url for a description of the representation
   ///
-  string url() const;
+  std::string url() const;
 
   ///
   /// A representation descriptor for this sec rep space (mutable version).
@@ -233,13 +233,13 @@ public:
   /// The name of the sequence id space for the branches of the
   /// multisection with hub id xhub_id.
   ///
-  string branch_id_space_name(pod_index_type xhub_id, bool xauto_access) const;
+  std::string branch_id_space_name(pod_index_type xhub_id, bool xauto_access) const;
 
   ///
   /// The name of the sequence id space for the branches of the
   /// multisection with id xid.
   ///
-  string branch_id_space_name(const scoped_index& xid, bool xauto_access) const;
+  std::string branch_id_space_name(const scoped_index& xid, bool xauto_access) const;
 
   ///
   /// The sequence id space for multisections (const version).

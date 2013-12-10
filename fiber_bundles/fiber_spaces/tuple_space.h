@@ -73,7 +73,7 @@ public:
   ///
   /// The name of the standard schema poset for this class.
   ///
-  static const string& standard_schema_poset_name();
+  static const std::string& standard_schema_poset_name();
 
   ///
   /// The path to the standard schema for this class.

@@ -25,6 +25,7 @@
 #include "field_refinement_buffer.h"
 #include "field_vd.h"
 
+using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
 
 // ===========================================================
@@ -137,7 +138,7 @@ put_refinement_depth_ub(size_type xub )
   return;
 }
 
-const string&
+const std::string&
 fields::field_refinement_policy::
 class_name() const
 {
@@ -155,7 +156,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fields::field_refinement_policy::
 static_class_name()
 {
@@ -177,7 +178,7 @@ static_class_name()
 
 fields::field_refinement_policy*
 fields::field_refinement_policy::
-new_policy(const string& xname)
+new_policy(const std::string& xname)
 {
   field_refinement_policy* result;
 

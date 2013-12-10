@@ -33,6 +33,7 @@
 #include "poset.h"
 #include "zone_centered_segment_refiner.h"
 
+using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
 
 // ===========================================================
@@ -100,7 +101,7 @@ fields::barycentric_refiner_family::
   return;
 }
 
-const string&
+const std::string&
 fields::barycentric_refiner_family::
 class_name() const
 {
@@ -119,7 +120,7 @@ class_name() const
   return result;
 }
 
-const string&
+const std::string&
 fields::barycentric_refiner_family::
 static_class_name()
 {

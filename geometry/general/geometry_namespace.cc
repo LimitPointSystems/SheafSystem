@@ -34,6 +34,7 @@
 
 //#define DIAGNOSTIC_OUTPUT
 
+using namespace std;
 using namespace geometry; // Workaround for MSVC++ bug.
 
 // =============================================================================
@@ -44,7 +45,7 @@ using namespace geometry; // Workaround for MSVC++ bug.
 
 
 geometry::geometry_namespace::
-geometry_namespace(const string& xname)
+geometry_namespace(const std::string& xname)
 {
   // Preconditions:
 
