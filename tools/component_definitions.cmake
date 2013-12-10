@@ -174,8 +174,6 @@ function(add_library_targets)
         add_library(${${COMPONENT}_SHARED_LIB} SHARED ${${COMPONENT}_SRCS})
         set_target_properties(${${COMPONENT}_SHARED_LIB} PROPERTIES 
             OUTPUT_NAME ${PROJECT_NAME} LINKER_LANGUAGE CXX)
-        set_target_properties(${${COMPONENT}_SHARED_LIB} 
-            PROPERTIES LINK_INTERFACE_LIBRARIES "") 
         add_dependencies(${${COMPONENT}_SHARED_LIB} ${FIELDS_SHARED_LIBS})
         
         # Override cmake's placing of "${COMPONENT_LIB}_EXPORTS into the preproc symbol table.
