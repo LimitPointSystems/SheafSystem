@@ -39,6 +39,7 @@
 
 // Workaround for MS Visual C++
 using namespace tool;
+using namespace std;
 
 // ============================================================================
 // ANY FACET

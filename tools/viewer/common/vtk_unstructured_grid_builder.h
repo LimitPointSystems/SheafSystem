@@ -131,7 +131,7 @@ public:
   /// membership in the partition with name xpartition_name, auto-allocated.
   ///
   vtkUnstructuredGrid* build(const sec_vd& xcoords,
-                             const string& xpartition_name);
+                             const std::string& xpartition_name);
 
   ///
   /// Builds a vtkUnstructuredGrid from xcoords and the property
@@ -166,7 +166,7 @@ public:
   /// membership in the partition with name xpartition_name, pre-allocated.
   ///
   void build_pa(const sec_vd& xcoords,
-                const string& xpartition_name,
+                const std::string& xpartition_name,
                 vtkUnstructuredGrid& xresult);
 
   ///
@@ -185,7 +185,7 @@ public:
   /// binary file.
   ///
   void build_file(const sec_vd& xcoords, const sec_vd& xproperty,
-                  const string& xvtk_file_name, bool xis_ascii = true);
+                  const std::string& xvtk_file_name, bool xis_ascii = true);
 
   ///
   /// True if the fiber of xsec is a scalar type.
@@ -221,7 +221,7 @@ private:
   /// in base space xbase.
   ///
   void set_cell_data(abstract_poset_member& xbase,
-                     const string& xpartition_name,
+                     const std::string& xpartition_name,
                      vtkUnstructuredGrid& xresult);
 
   ///
@@ -282,7 +282,7 @@ private:
   ///
   /// Initializes vtk mesh and coordinate data structures before iteration.
   ///
-  void initialize_vtk_mesh_data(const sec_vd& xsec, string xcoords_name);
+  void initialize_vtk_mesh_data(const sec_vd& xsec, std::string xcoords_name);
 
   ///
   /// Finalizes vtk mesh and coordinate data structures after iteration.

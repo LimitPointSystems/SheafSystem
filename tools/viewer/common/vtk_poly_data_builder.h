@@ -153,7 +153,7 @@ public:
   /// binary file.
   ///
   void build_file(const sec_vd& xcoords, const sec_vd& xproperty,
-                  const string& xvtk_file_name, bool xis_ascii = true);
+                  const std::string& xvtk_file_name, bool xis_ascii = true);
 
   ///
   /// Builds a vtk file representation of a vtkPolyData from xcoords only
@@ -162,7 +162,7 @@ public:
   /// binary file.
   ///
   void build_file(const sec_vd& xcoords,
-                  const string& xvtk_file_name, bool xis_ascii = true);
+                  const std::string& xvtk_file_name, bool xis_ascii = true);
 
   ///
   ///  Construct the VTK "mesh" (vtkPolyData) object

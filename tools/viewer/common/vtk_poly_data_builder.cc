@@ -39,6 +39,7 @@
 
 // Workaround for MS Visual C++
 using namespace tool;
+using namespace std;
 
 // ============================================================================
 // ANY FACET
@@ -223,7 +224,7 @@ vtk_poly_data_builder(namespace_poset& xns)
 void
 tool::vtk_poly_data_builder::
 build_file(const sec_vd& xcoords, const sec_vd& xproperty,
-           const string& xvtk_file_name, bool xis_ascii)
+           const std::string& xvtk_file_name, bool xis_ascii)
 {
   // Preconditions:
 
@@ -277,7 +278,7 @@ build_file(const sec_vd& xcoords, const sec_vd& xproperty,
 void
 tool::vtk_poly_data_builder::
 build_file(const sec_vd& xcoords,
-           const string& xvtk_file_name, bool xis_ascii)
+           const std::string& xvtk_file_name, bool xis_ascii)
 {
   // Preconditions:
 

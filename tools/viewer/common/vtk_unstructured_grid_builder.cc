@@ -49,6 +49,7 @@
 
 // Workaround for MS Visual C++
 using namespace tool;
+using namespace std;
 
 // ============================================================================
 // ANY FACET
@@ -352,7 +353,7 @@ build(const sec_vd& xcoords)
 
 vtkUnstructuredGrid*
 tool::vtk_unstructured_grid_builder::
-build(const sec_vd& xcoords, const string& xpartition_name)
+build(const sec_vd& xcoords, const std::string& xpartition_name)
 {
   vtkUnstructuredGrid* result;
 
@@ -721,7 +722,7 @@ build_pa(const sec_vd& xcoords, vtkUnstructuredGrid& xresult)
 void
 tool::vtk_unstructured_grid_builder::
 build_pa(const sec_vd& xcoords,
-         const string& xpartition_name,
+         const std::string& xpartition_name,
          vtkUnstructuredGrid& xresult)
 {
 
@@ -1032,7 +1033,7 @@ init_cell_type_map()
 void
 tool::vtk_unstructured_grid_builder::
 set_cell_data(abstract_poset_member& xbase,
-              const string& xpartition_name,
+              const std::string& xpartition_name,
               vtkUnstructuredGrid& xresult)
 {
   // Preconditions:
@@ -1157,7 +1158,7 @@ set_cell_data(abstract_poset_member& xbase,
 ///
 void
 tool::vtk_unstructured_grid_builder::
-build_file(const sec_vd& xcoords, const sec_vd& xproperty, const string& xvtk_file_name, bool xis_ascii)
+build_file(const sec_vd& xcoords, const sec_vd& xproperty, const std::string& xvtk_file_name, bool xis_ascii)
 {
   // Preconditions:
 
@@ -1325,7 +1326,7 @@ is_tensor(const sec_vd* xsec) const
 
 void
 tool::vtk_unstructured_grid_builder::
-initialize_vtk_mesh_data(const sec_vd& xsec, string xcoords_name)
+initialize_vtk_mesh_data(const sec_vd& xsec, std::string xcoords_name)
 {
   // Preconditions:
 
