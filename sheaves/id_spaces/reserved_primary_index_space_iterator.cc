@@ -126,11 +126,18 @@ operator=(const reserved_primary_index_space_iterator& xother)
 
   // Body:
 
-  _offset = xother._offset;
-  _end = xother._end;
-  _is_active_only = xother._is_active_only;
+  if(xother.is_attached())
+  {
+    _offset = xother._offset;
+    _end = xother._end;
+    _is_active_only = xother._is_active_only;
 
-  (void) explicit_index_space_iterator::operator=(xother);
+    (void) explicit_index_space_iterator::operator=(xother);
+  }
+  else
+  {
+    detach();
+  }
 
   // Postconditions:
 

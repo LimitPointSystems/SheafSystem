@@ -124,11 +124,18 @@ operator=(const ijk_connectivity_implicit_index_space_iterator& xother)
 
   // Body:
 
-  _hub_begin = xother._hub_begin;
-  _k_vertex_size = xother._k_vertex_size;
-  _jk_vertex_size = xother._jk_vertex_size;
+  if(xother.is_attached())
+  {
+    _hub_begin = xother._hub_begin;
+    _k_vertex_size = xother._k_vertex_size;
+    _jk_vertex_size = xother._jk_vertex_size;
 
-  (void) implicit_index_space_iterator::operator=(xother);
+    (void) implicit_index_space_iterator::operator=(xother);
+  }
+  else
+  {
+    detach();
+  }
 
   // Postconditions:
 

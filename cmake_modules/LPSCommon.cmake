@@ -650,6 +650,7 @@ function(export_targets)
             "set(HDF_INCLUDE_DIR ${HDF5_INCLUDE_DIRS} CACHE STRING \"HDF5 Include Path \")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     endif()
+                
     if("${COMPONENT}" MATCHES "TOOLS")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
@@ -666,6 +667,7 @@ function(export_targets)
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
             "set(VTK_LIBS ${VTK_LIBS} CACHE STRING \"VTK Libraries\")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")                  
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")        
         file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
@@ -687,7 +689,7 @@ function(export_install_config_file_vars)
         export(TARGETS ${${COMPONENT}_DYNAMIC_LIB} 
             APPEND FILE ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE})
         file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
-            "set(${COMPONENT}_IMPORT_LIBS ${${COMPONENT}_IMPORT_LIB} CACHE STRING \"${PROJECT_NAME} cumulative import library list\")\n")
+            "set(${COMPONENT}_IMPORT_LIBS ${${COMPONENT}_IMPORT_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative import library list\")\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
     else()
         export(TARGETS ${${COMPONENT}_SHARED_LIB} 
@@ -733,13 +735,15 @@ function(export_install_config_file_vars)
 endfunction(export_install_config_file_vars)
 
 #
-# Generate the install config file. Replace hardcoded vars with cmake substitution vars.
+# Generate the installed <project>-exports file. Replace hardcoded vars with cmake substitution vars.
 #
 function(generate_install_config_file)
 
     file(READ ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} INSTALL_FILE_CONTENTS)
+
     string(REPLACE ${CMAKE_BINARY_DIR} "\@SHEAFSYSTEM_HOME\@" 
         MASSAGED_OUTPUT "${INSTALL_FILE_CONTENTS}")
+
     file(WRITE ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "${MASSAGED_OUTPUT}")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in 

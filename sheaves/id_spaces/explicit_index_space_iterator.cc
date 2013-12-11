@@ -92,10 +92,13 @@ operator=(const explicit_index_space_iterator& xother)
 
   // Body:
 
-  _state = xother._state;
+  if(xother.is_attached())
+  {
+    _state = xother._state;
 
-  (void) index_space_iterator::operator=(xother);
-
+    (void) index_space_iterator::operator=(xother);
+  }
+  
   // Postconditions:
 
   ensure(invariant());

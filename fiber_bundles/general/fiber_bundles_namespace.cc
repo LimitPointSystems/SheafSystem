@@ -2941,6 +2941,17 @@ make_sec_rep_descriptors(sec_rep_descriptor_poset* xhost)
                      false);
   lsrd.put_name("vertex_vertex_constant", true, false);
 
+  lsrd.new_jim_state(xhost,
+                     "__cells",
+                     "",
+                     "__cells",
+                     "constant",
+                     "www.lpsweb.com/fiber_bundles/fiber_bundles_namespace.html",
+                     1,
+                     false,
+                     false);
+  lsrd.put_name("cells_cells_constant", true, false);
+
   lsrd.detach_from_state();
 
   // Postconditions:

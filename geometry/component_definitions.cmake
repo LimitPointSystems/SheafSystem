@@ -103,9 +103,6 @@ set(${COMPONENT}_IPATHS ${FIBER_BUNDLES_IPATHS}
 #
 include_directories(${FIBER_BUNDLES_IPATHS})
 
-include_directories(${TETGEN_INC_DIR})
-
-
 #------------------------------------------------------------------------------
 # FUNCTION DEFINITION SECTION
 #------------------------------------------------------------------------------

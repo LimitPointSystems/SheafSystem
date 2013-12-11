@@ -124,11 +124,18 @@ operator=(const i_adjacency_implicit_index_space_iterator& xother)
 
   // Body:
 
-  _hub_begin = xother._hub_begin;
-  _i_ct = xother._i_ct;
-  _i = xother._i;
+  if(xother.is_attached())
+  {
+    _hub_begin = xother._hub_begin;
+    _i_ct = xother._i_ct;
+    _i = xother._i;
 
-  (void) implicit_index_space_iterator::operator=(xother);
+    (void) implicit_index_space_iterator::operator=(xother);
+  }
+  else
+  {
+    detach();
+  }
 
   // Postconditions:
 

@@ -137,7 +137,14 @@ operator=(const primitives_index_space_iterator& xother)
 
   // Body:
 
-  (void) explicit_index_space_iterator::operator=(xother);
+  if(xother.is_attached())
+  {
+    (void) explicit_index_space_iterator::operator=(xother);
+  }
+  else
+  {
+    detach();
+  }
 
   // Postconditions:
 

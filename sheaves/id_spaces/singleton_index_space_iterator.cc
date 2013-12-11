@@ -123,9 +123,16 @@ operator=(const singleton_index_space_iterator& xother)
 
   // Body:
 
-  _hub_begin = xother._hub_begin;
+  if(xother.is_attached())
+  {
+    _hub_begin = xother._hub_begin;
 
-  (void) explicit_index_space_iterator::operator=(xother);
+    (void) explicit_index_space_iterator::operator=(xother);
+  }
+  else
+  {
+    detach();
+  }
 
   // Postconditions:
 

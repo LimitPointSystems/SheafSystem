@@ -92,11 +92,14 @@ operator=(const implicit_index_space_iterator& xother)
 
   // Body:
 
-  _host = xother._host;
-  _local_id = xother._local_id;
+  if(xother.is_attached())
+  {
+    _host = xother._host;
+    _local_id = xother._local_id;
 
-  (void) index_space_iterator::operator=(xother);
-
+    (void) index_space_iterator::operator=(xother);
+  }
+  
   // Postconditions:
 
   ensure(invariant());

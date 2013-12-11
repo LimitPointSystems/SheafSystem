@@ -124,10 +124,17 @@ operator=(const hash_index_space_iterator& xother)
 
   // Body:
 
-  _to_hub = xother._to_hub;
-  _itr    = xother._itr;
+  if(xother.is_attached())
+  {
+    _to_hub = xother._to_hub;
+    _itr    = xother._itr;
 
-  (void) explicit_index_space_iterator::operator=(xother);
+    (void) explicit_index_space_iterator::operator=(xother);
+  }
+  else
+  {
+    detach();
+  }
 
   // Postconditions:
 

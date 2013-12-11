@@ -54,10 +54,13 @@ operator=(const index_space_iterator& xother)
 
   // Body:
 
-  _is_done = xother._is_done;
-  _pod = xother._pod;
-  _hub_pod = xother._hub_pod;
-
+  if(xother.is_attached())
+  {
+    _is_done = xother._is_done;
+    _pod = xother._pod;
+    _hub_pod = xother._hub_pod;
+  }
+  
   // Postconditions:
 
   ensure(invariant());
