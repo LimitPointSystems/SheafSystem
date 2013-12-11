@@ -51,6 +51,7 @@
 
 #include "sec_ed_invertible.h"
 
+using namespace std;
 using namespace geometry;
 
 %}

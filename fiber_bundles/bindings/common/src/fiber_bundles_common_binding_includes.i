@@ -236,6 +236,7 @@
 #include "unary_index_space.h"
 #include "unstructured_block_builder.h"
 
+using namespace std;
 using namespace fiber_bundle;
 
 %}

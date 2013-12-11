@@ -26,6 +26,7 @@
 //#include "edge_centered_refiner_family.h"
 //#include "zone_centered_refiner_family.h"
 
+using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
 
 //============================================================

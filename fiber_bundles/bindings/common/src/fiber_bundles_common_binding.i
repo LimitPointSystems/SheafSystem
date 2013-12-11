@@ -56,7 +56,7 @@
 
 // Overcome the naming conflict in homogenous_block, lines 218 and 229 respectively.
 // Comments say that the version on line 218 is obsoleted. Perhaps we should do away with it to avoid this swig hack.
-%rename (new_row_DOF_map) new_row_dof_map(poset_state_handle& xhost,const string& xprototype_name,const string& xlocal_cell_name,size_type xsize,bool xauto_access);
+%rename (new_row_DOF_map) new_row_dof_map(poset_state_handle& xhost,const std::string& xprototype_name,const std::string& xlocal_cell_name,size_type xsize,bool xauto_access);
 
 
 %ignore fiber_bundle::state::comp(int);

@@ -134,6 +134,7 @@
 #include                   "field_t4_e2.h"
 #include                   "field_t4_e3.h"
 
+using namespace std;
 using namespace fields;
 using namespace geometry;
 %}

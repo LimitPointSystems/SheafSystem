@@ -226,6 +226,7 @@
 
 #include "deep_size.h"
 
+using namespace std;
 using namespace sheaf;
 
 %}
