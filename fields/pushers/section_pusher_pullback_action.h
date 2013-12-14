@@ -73,7 +73,7 @@ public:
   ///
   /// The type of iterator range for the pullback map.
   ///
-  typedef pair<pb_map_itr_type, pb_map_itr_type> pb_map_range_type;
+  typedef std::pair<pb_map_itr_type, pb_map_itr_type> pb_map_range_type;
 
   // No default constructor.
 

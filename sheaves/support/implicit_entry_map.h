@@ -33,8 +33,8 @@
 #include "pod_types.h"
 #endif
 
-#ifndef STD_HASH_MAP_H
-#include "std_hash_map.h"
+#ifndef STD_UNORDERED_MAP_H
+#include "std_unordered_map.h"
 #endif
 
 #ifndef STD_MAP_H
@@ -226,7 +226,7 @@ private:
   ///
   /// The type of the explicit value map.
   ///
-  typedef hash_map<pod_type, explicit_value_type*> explicit_value_map_type;
+  typedef std::unordered_map<pod_type, explicit_value_type*> explicit_value_map_type;
 
   ///
   /// The map from domain ids to explicit values.

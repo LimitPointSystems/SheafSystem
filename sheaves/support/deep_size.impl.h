@@ -181,7 +181,7 @@ items_deep_size(const M& xp)
 
 template <typename K, typename V, typename S, typename H, typename E, typename A>
 size_t
-deep_size(const hash_multimap<K, V, H, E, A>& xp, bool xinclude_shallow)
+deep_size(const std::unordered_multimap<K, V, H, E, A>& xp, bool xinclude_shallow)
 {
   size_t result;
   
@@ -189,11 +189,13 @@ deep_size(const hash_multimap<K, V, H, E, A>& xp, bool xinclude_shallow)
 
   // Body:
 
+  using namespace std;
+
   result = xinclude_shallow ? sizeof(xp) : 0;
 
   // @hack Using the same calculation ashash map.  Should review.
 
-  // Since we have no easy access to the memory allocation in STL class hash_map
+  // Since we have no easy access to the memory allocation in STL class unordered_map
   // (or map) we use the following as a best guess:
   //    deep_size = load_factor * (bucket_count) * sizeof(value_type);
 
@@ -224,17 +226,19 @@ deep_size(const hash_multimap<K, V, H, E, A>& xp, bool xinclude_shallow)
 
 template <typename K, typename V, typename S, typename H, typename E, typename A>
 size_t
-deep_size(const hash_map<K, V, H, E, A>& xp, bool xinclude_shallow)
+deep_size(const std::unordered_map<K, V, H, E, A>& xp, bool xinclude_shallow)
 {
   size_t result;
   
   // Preconditions:
 
+  using namespace std;
+
   // Body:
 
   result = xinclude_shallow ? sizeof(xp) : 0;
 
-  // Since we have no easy access to the memory allocation in STL class hash_map
+  // Since we have no easy access to the memory allocation in STL class unordered_map
   // (or map) we use the following as a best guess:
   //    deep_size = load_factor * (bucket_count) * sizeof(value_type);
 
@@ -270,6 +274,8 @@ deep_size(const std::map<K, V>& xp, bool xinclude_shallow)
   size_t result;
   
   // Preconditions:
+
+  using namespace std;
 
   // Body:
 

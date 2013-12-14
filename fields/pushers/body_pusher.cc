@@ -297,12 +297,12 @@ push_pa(const base_space_member& xinput,
   // Allocate a set to contain the range vertices which have
   // a pullback in xinput.
 
-  hash_set<scoped_index> lvertices;
+  unordered_set<scoped_index> lvertices;
 
   // Iterate over the down set of the input;
   // process all the pullbacks contained in each element.
 
-  hash_set_postorder_itr litr(xinput, _domain->elements(), DOWN, NOT_STRICT);
+  unordered_set_postorder_itr litr(xinput, _domain->elements(), DOWN, NOT_STRICT);
   while(!litr.is_done())
   {
     // Insert all the range vertex pullbacks contained in this element
@@ -326,17 +326,17 @@ push_pa(const base_space_member& xinput,
 
   // Allocate a set to contain upper bound of zones in the result.
 
-  hash_set<scoped_index> lelements;
+  unordered_set<scoped_index> lelements;
 
   // Create the element iterator using the top of the range.  The
   // iterator must be initialized so that the anchor can be set within
   // the loop.
 
-  hash_set_postorder_itr lelem_itr(_range->top(),
+  unordered_set_postorder_itr lelem_itr(_range->top(),
 				   &_range->elements(),
 				   sheaf::UP);
 
-  for(hash_set<scoped_index>::const_iterator lvertex_itr = lvertices.begin();
+  for(unordered_set<scoped_index>::const_iterator lvertex_itr = lvertices.begin();
       lvertex_itr != lvertices.end();
       ++lvertex_itr)
   {
@@ -371,7 +371,7 @@ push_pa(const base_space_member& xinput,
   // Loop over the elements of the upper bound and insert them into
   // the result subposet.
 
-  for(hash_set<scoped_index>::const_iterator lub_elem_itr = lelements.begin();
+  for(unordered_set<scoped_index>::const_iterator lub_elem_itr = lelements.begin();
       lub_elem_itr != lelements.end();
       ++lub_elem_itr)
   {

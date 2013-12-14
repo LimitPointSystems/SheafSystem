@@ -19,7 +19,7 @@
 
 #include "poset_crg_state.impl.h"
 
-#include "hash_set_filter.h"
+#include "unordered_set_filter.h"
 #include "set_filter.h"
 #include "zn_to_bool_filter.h"
 
@@ -32,7 +32,7 @@ using namespace sheaf; // Workaround for MS C++ bug.
 template 
 void 
 sheaf::poset_crg_state::
-remove_cover_members<sheaf::hash_set_filter>(const hash_set_filter& xfilter,
+remove_cover_members<sheaf::unordered_set_filter>(const unordered_set_filter& xfilter,
 					     bool xlower,
 					     pod_index_type xmbr_index);
 

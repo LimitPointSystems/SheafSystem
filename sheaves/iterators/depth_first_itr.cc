@@ -21,6 +21,8 @@
 
 #include "depth_first_itr.impl.h"
 
+using namespace std;
+
 // =============================================================================
 // MEMBER FUNCTION SPECIALIZATIONS
 // =============================================================================
@@ -219,14 +221,14 @@ put_has_visited(pod_index_type xindex, bool xvalue)
 }
 
 // =============================================================================
-// HASH_SET
+// UNORDERED_SET
 // =============================================================================
 
-#include "std_hash_set.h"
+#include "std_unordered_set.h"
 
 template <>
 void
-sheaf::depth_first_itr< hash_set<sheaf::pod_index_type> >::
+sheaf::depth_first_itr< std::unordered_set<sheaf::pod_index_type> >::
 clear_has_visited()
 {
   _has_visited->clear();
@@ -234,17 +236,17 @@ clear_has_visited()
 
 template <>
 void
-sheaf::depth_first_itr< hash_set<sheaf::pod_index_type> >::
+sheaf::depth_first_itr< std::unordered_set<sheaf::pod_index_type> >::
 reserve_has_visited(pod_index_type xub)
 {
   // Assume bucket load factor of 2.
 
-  _has_visited->resize(xub/2);
+  _has_visited->rehash(xub/2);
 }
 
 template <>
 bool
-sheaf::depth_first_itr< hash_set<sheaf::pod_index_type> >::
+sheaf::depth_first_itr< std::unordered_set<sheaf::pod_index_type> >::
 has_visited(pod_index_type xindex) const
 {
 
@@ -265,7 +267,7 @@ has_visited(pod_index_type xindex) const
 
 template <>
 void
-sheaf::depth_first_itr< hash_set<sheaf::pod_index_type> >::
+sheaf::depth_first_itr< std::unordered_set<sheaf::pod_index_type> >::
 initialize_has_visited(const abstract_poset_member& xanchor)
 {
   // Preconditions:
@@ -280,7 +282,7 @@ initialize_has_visited(const abstract_poset_member& xanchor)
     delete _has_visited;
   }
 
-  _has_visited = new hash_set<pod_index_type>;
+  _has_visited = new unordered_set<pod_index_type>;
 
   // Postconditions:
 
@@ -294,7 +296,7 @@ initialize_has_visited(const abstract_poset_member& xanchor)
 
 template <>
 void
-sheaf::depth_first_itr< hash_set<sheaf::pod_index_type> >::
+sheaf::depth_first_itr< std::unordered_set<sheaf::pod_index_type> >::
 put_has_visited(pod_index_type xindex, bool xvalue)
 {
 

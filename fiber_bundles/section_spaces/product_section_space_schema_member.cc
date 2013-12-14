@@ -399,7 +399,7 @@ update_row_cache_without_disc_id_space() const
   {
     _evaluation_ct = 0;
 
-    hash_set_postorder_itr itr(_base_space, DOWN, NOT_STRICT);
+    unordered_set_postorder_itr itr(_base_space, DOWN, NOT_STRICT);
     while(!itr.is_done())
     {
       pod_index_type lindex = itr.index().pod();
@@ -461,7 +461,7 @@ update_row_cache_with_disc_id_space() const
   set<scoped_index::pod_type> ltop_seq_ids;
   const index_space_handle& ltop_space = ldisc_sp.id_space();
 
-  hash_set_postorder_itr itr(_base_space, DOWN, NOT_STRICT);
+  unordered_set_postorder_itr itr(_base_space, DOWN, NOT_STRICT);
   while(!itr.is_done())
   {
     const scoped_index& lindex = itr.index();

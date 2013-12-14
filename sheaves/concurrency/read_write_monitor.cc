@@ -714,7 +714,7 @@ initialize_thread_state()
 
   // Insert the new state in the map for this thread..
 
-  hash_map<pthread_t, thread_state_t>::value_type lval(pthread_self(), new_thread_state);
+  unordered_map<pthread_t, thread_state_t>::value_type lval(pthread_self(), new_thread_state);
   _thread_state.insert(lval);
 
   // Postconditions:
@@ -1068,7 +1068,7 @@ release_read_write_access() const
 
     // Set the modified flag on all threads, including this thread.
 
-    hash_map<pthread_t, thread_state_t>::iterator itr = _thread_state.begin();
+    unordered_map<pthread_t, thread_state_t>::iterator itr = _thread_state.begin();
 
     while(itr != _thread_state.end())
     {

@@ -25,13 +25,13 @@
 
 #include "abstract_poset_member.h"
 #include "error_message.h"
-#include "hash_set_filter.h"
+#include "unordered_set_filter.h"
 #include "total_poset_member.h"
 #include "poset_state_handle.h"
 #include "scoped_index.h"
 #include "set_filter.h"
 #include "std_algorithm.h"
-#include "std_hash_set.h"
+#include "std_unordered_set.h"
 #include "std_set.h"
 #include "tern.h"
 #include "triorder_itr.h"
@@ -61,7 +61,7 @@ namespace
 ///
 /// The type of unordered sets.
 ///
-typedef hash_set<pod_index_type> uset_type;
+typedef unordered_set<pod_index_type> uset_type;
 
 ///
 /// The type of ordered sets.
@@ -71,7 +71,7 @@ typedef set<pod_index_type> oset_type;
 ///
 /// The type of cover relation graph iterator.
 ///
-typedef hash_set_triorder_itr crg_itr_type;
+typedef unordered_set_triorder_itr crg_itr_type;
 
 ///
 /// True if and only if xset contains exactly one member.
@@ -1013,7 +1013,7 @@ link_result(const uset_type& xresult_lc, const oset_type& xresult_uc, abstract_p
     // Remove all members of result_lc from 
     // the lower cover of the current upper cover member
 
-    lhost->remove_cover_members(hash_set_filter(xresult_lc), LOWER, litem);
+    lhost->remove_cover_members(unordered_set_filter(xresult_lc), LOWER, litem);
 
     // Insert result in the lower cover
     // of the current upper cover member.

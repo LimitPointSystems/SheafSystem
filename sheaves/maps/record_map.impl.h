@@ -191,7 +191,7 @@ external_id(internal_index_type xinternal_id) const
 
   // Body:
   
-  typename hash_map<internal_index_type, external_index_type>::const_iterator itr = _to_external.find(xinternal_id);
+  typename std::unordered_map<internal_index_type, external_index_type>::const_iterator itr = _to_external.find(xinternal_id);
   external_index_type result =
     itr != _to_external.end() ? itr->second : index_traits<external_index_type>::invalid();
 
@@ -214,7 +214,7 @@ internal_id(external_index_type xexternal_id) const
 
   // Body:
   
-  typename hash_map<external_index_type, internal_index_type>::const_iterator itr = _to_internal.find(xexternal_id);
+  typename std::unordered_map<external_index_type, internal_index_type>::const_iterator itr = _to_internal.find(xexternal_id);
   internal_index_type result =
     itr != _to_internal.end() ? itr->second : index_traits<internal_index_type>::invalid();
 
@@ -422,9 +422,9 @@ operator==(const record_map& xother) const
   record_map& lother = const_cast<record_map&>(xother);
 
   /// @hack On AIX, xlC uses unordered_map rather
-  /// than hash_map. unordered_map contains no operator==.
+  /// than unordered_map. unordered_map contains no operator==.
   /// Rather than define operator== for unordered_map, we comment
-  /// out the following two lines which test hash_maps for equality.
+  /// out the following two lines which test unordered_maps for equality.
   /// These are only used in the post condition of record_map's copy contructor,
   /// which has now been rendered "unexecutable."
 
@@ -760,7 +760,7 @@ print(std::ostream& xos,
   xos << endl << "internal to external map:" << endl;
 
   xos << "int:";
-  typename hash_map<internal_index_type, external_index_type>::iterator itr0;
+  typename unordered_map<internal_index_type, external_index_type>::iterator itr0;
   itr0 = lp._to_external.begin();
   while(itr0 != lp._to_external.end())
   {
@@ -780,7 +780,7 @@ print(std::ostream& xos,
   xos << "external to internal map:" << endl;
 
   xos << "ext:";
-  typename hash_map<external_index_type, internal_index_type>::iterator itr1;
+  typename unordered_map<external_index_type, internal_index_type>::iterator itr1;
   itr1 = lp._to_internal.begin();
   while(itr1 != lp._to_internal.end())
   {

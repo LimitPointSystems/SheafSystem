@@ -169,7 +169,7 @@ initialize(const section_space_schema_member& xschema)
       vertex_discretization = (disc_sp.name() == "__vertices");
     }
 
-    disc_to_seq_map = new hash_map<pod_index_type, pod_index_type>();
+    disc_to_seq_map = new unordered_map<pod_index_type, pod_index_type>();
   }
   else
   {
@@ -262,7 +262,7 @@ initialize(const base_space_poset& xbase_space_host)
   {
     is_uniform = false;
     disc_sp.attach_to_state(&base_space_host->vertices());
-    disc_to_seq_map = new hash_map<pod_index_type, pod_index_type>();
+    disc_to_seq_map = new unordered_map<pod_index_type, pod_index_type>();
     vertex_discretization = true;
   }
   else

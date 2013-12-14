@@ -31,49 +31,49 @@ using namespace sheaf; // workaround for MS C++ bug.
 // EXPLICIT INSTANTIATIONS FOR DEEP_SIZE FACET
 // =============================================================================
 
-// hash_multimap
+// unordered_multimap
 
 template class 
 SHEAF_DLL_SPEC 
-sheaf::no_deep_size_policy<hash_multimap<sheaf::pod_index_type, sheaf::pod_index_type> >;
+sheaf::no_deep_size_policy<unordered_multimap<sheaf::pod_index_type, sheaf::pod_index_type> >;
 
 template 
 SHEAF_DLL_SPEC 
-size_t sheaf::deep_size<sheaf::pod_index_type, sheaf::pod_index_type, sheaf::no_deep_size_policy<hash_multimap<sheaf::pod_index_type, sheaf::pod_index_type> > >(const hash_multimap<sheaf::pod_index_type, sheaf::pod_index_type>& xp, bool xinclude_shallow);
+size_t sheaf::deep_size<sheaf::pod_index_type, sheaf::pod_index_type, sheaf::no_deep_size_policy<unordered_multimap<sheaf::pod_index_type, sheaf::pod_index_type> > >(const unordered_multimap<sheaf::pod_index_type, sheaf::pod_index_type>& xp, bool xinclude_shallow);
 
-// hash_map
+// unordered_map
 
 template class 
 SHEAF_DLL_SPEC 
-sheaf::no_deep_size_policy<hash_map<sheaf::pod_index_type, sheaf::scoped_index> >;
+sheaf::no_deep_size_policy<unordered_map<sheaf::pod_index_type, sheaf::scoped_index> >;
 
 template 
 SHEAF_DLL_SPEC 
-size_t sheaf::deep_size<sheaf::pod_index_type, sheaf::scoped_index, sheaf::no_deep_size_policy<hash_map<sheaf::pod_index_type, sheaf::scoped_index> > >(const hash_map<sheaf::pod_index_type, sheaf::scoped_index>& xp, bool xinclude_shallow);
+size_t sheaf::deep_size<sheaf::pod_index_type, sheaf::scoped_index, sheaf::no_deep_size_policy<unordered_map<sheaf::pod_index_type, sheaf::scoped_index> > >(const unordered_map<sheaf::pod_index_type, sheaf::scoped_index>& xp, bool xinclude_shallow);
 
 template class 
 SHEAF_DLL_SPEC 
-sheaf::no_deep_size_policy<hash_map<const char*, sheaf::pod_index_type, hash_cstr, key_test> >;
+sheaf::no_deep_size_policy<unordered_map<const char*, sheaf::pod_index_type, hash_cstr, key_test> >;
 
 template 
 SHEAF_DLL_SPEC 
-size_t sheaf::deep_size<const char*, sheaf::pod_index_type, sheaf::no_deep_size_policy<hash_map<const char*, sheaf::pod_index_type, hash_cstr, key_test> >, hash_cstr, key_test>(const hash_map<const char*, sheaf::pod_index_type, hash_cstr, key_test>& xp, bool xinclude_shallow);
+size_t sheaf::deep_size<const char*, sheaf::pod_index_type, sheaf::no_deep_size_policy<unordered_map<const char*, sheaf::pod_index_type, hash_cstr, key_test> >, hash_cstr, key_test>(const unordered_map<const char*, sheaf::pod_index_type, hash_cstr, key_test>& xp, bool xinclude_shallow);
 
 template class 
 SHEAF_DLL_SPEC 
-sheaf::value_ptr_deep_size_policy<hash_map<sheaf::pod_index_type, string*> >;
+sheaf::value_ptr_deep_size_policy<unordered_map<sheaf::pod_index_type, string*> >;
 
 template 
 SHEAF_DLL_SPEC 
-size_t sheaf::deep_size<sheaf::pod_index_type, string*, sheaf::value_ptr_deep_size_policy<hash_map<sheaf::pod_index_type, string*> > >(const hash_map<sheaf::pod_index_type, string*>& xp, bool xinclude_shallow);
+size_t sheaf::deep_size<sheaf::pod_index_type, string*, sheaf::value_ptr_deep_size_policy<unordered_map<sheaf::pod_index_type, string*> > >(const unordered_map<sheaf::pod_index_type, string*>& xp, bool xinclude_shallow);
 
 template class 
 SHEAF_DLL_SPEC 
-sheaf::no_deep_size_policy<hash_map<sheaf::pod_index_type, sheaf::pod_index_type> >;
+sheaf::no_deep_size_policy<unordered_map<sheaf::pod_index_type, sheaf::pod_index_type> >;
 
 template 
 SHEAF_DLL_SPEC 
-size_t sheaf::deep_size<sheaf::pod_index_type, sheaf::pod_index_type, sheaf::no_deep_size_policy<hash_map<sheaf::pod_index_type, sheaf::pod_index_type> > >(const hash_map<sheaf::pod_index_type, sheaf::pod_index_type>& xp, bool xinclude_shallow);
+size_t sheaf::deep_size<sheaf::pod_index_type, sheaf::pod_index_type, sheaf::no_deep_size_policy<unordered_map<sheaf::pod_index_type, sheaf::pod_index_type> > >(const unordered_map<sheaf::pod_index_type, sheaf::pod_index_type>& xp, bool xinclude_shallow);
 
 // map
 

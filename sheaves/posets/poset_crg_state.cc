@@ -2039,7 +2039,7 @@ deep_size(const poset_crg_state& xp, bool xinclude_shallow, size_t xresults[2])
 
   result = xinclude_shallow ? sizeof(xp) : 0;
 
-  typedef hash_map<pod_index_type, pod_index_type> implicit_member_map_type;
+  typedef unordered_map<pod_index_type, pod_index_type> implicit_member_map_type;
   typedef no_deep_size_policy<implicit_member_map_type> implicit_member_map_policy_type;
 
   typedef map<pod_index_type, crg_interval*> crg_interval_map_type;

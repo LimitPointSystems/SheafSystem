@@ -45,8 +45,8 @@
 #include "scoped_index.h"
 #endif
 
-#ifndef STD_HASH_MAP_H
-#include "std_hash_map.h"
+#ifndef STD_UNORDERED_MAP_H
+#include "std_unordered_map.h"
 #endif
 
 #ifndef STD_SET_H
@@ -647,7 +647,7 @@ private:
   ///
   /// The type of map from id to explicit dof_tuple_id.
   ///
-  typedef hash_map<pod_index_type, pod_index_type> explicit_dof_tuple_map_type;
+  typedef std::unordered_map<pod_index_type, pod_index_type> explicit_dof_tuple_map_type;
 
   ///
   /// The map from id to explicit dof_tuple_id.

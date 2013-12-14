@@ -65,8 +65,8 @@
 #include "schema_poset_member.h"
 #endif
 
-#ifndef STD_HASH_MAP_H
-#include "std_hash_map.h"
+#ifndef STD_UNORDERED_MAP_H
+#include "std_unordered_map.h"
 #endif
 
 #ifndef STD_VECTOR_H
@@ -463,7 +463,7 @@ public:
   ///
   /// Type of member class names map.
   ///
-  typedef hash_map<pod_index_type, pair<std::string, size_type> > member_class_names_type;
+  typedef std::unordered_map<pod_index_type, std::pair<std::string, size_type> > member_class_names_type;
 
   ///
   /// Member class names (mutable version).
@@ -650,7 +650,7 @@ public:
   ///
   /// Type of dof tuple types map.
   ///
-  typedef hash_map<pod_index_type, dof_tuple_type> dof_tuple_types_type;
+  typedef std::unordered_map<pod_index_type, dof_tuple_type> dof_tuple_types_type;
 
   ///
   /// Dof tuple type ids (mutable version).
@@ -665,7 +665,7 @@ public:
   ///
   /// Type of dof tuple class names map.
   ///
-  typedef hash_map<pod_index_type, std::string> dof_tuple_class_names_type;
+  typedef std::unordered_map<pod_index_type, std::string> dof_tuple_class_names_type;
 
   ///
   /// Dof tuple class names (mutable version).
@@ -680,7 +680,7 @@ public:
   ///
   /// Type of dof tuple versions map.
   ///
-  typedef hash_map<pod_index_type, int> dof_tuple_schema_versions_type;
+  typedef std::unordered_map<pod_index_type, int> dof_tuple_schema_versions_type;
 
   ///
   /// Dof tuple schema versions (mutable version).
@@ -707,7 +707,7 @@ public:
   ///
   /// Type of dof tuple schema ids map.
   ///
-  typedef hash_map<pod_index_type, pod_index_type> dof_tuple_schema_ids_type;
+  typedef std::unordered_map<pod_index_type, pod_index_type> dof_tuple_schema_ids_type;
 
   ///
   /// Dof tuple schema ids (mutable version).
@@ -738,7 +738,7 @@ public:
   ///
   /// Type of dof tuple col bounds map.
   ///
-  typedef hash_map<pod_index_type, poset_bounds_descriptor>
+  typedef std::unordered_map<pod_index_type, poset_bounds_descriptor>
     dof_tuple_col_bounds_type;
 
   ///
@@ -775,15 +775,15 @@ public:
   ///
   void translate_dof_tuple_col_bounds();
 
-  // Note: dof_tuple_domain_offsets uses map rather than hash_map
+  // Note: dof_tuple_domain_offsets uses map rather than unordered_map
   // because there is no default hash function for pairs.
-  // Best case performance is not as good as hash_map, but
+  // Best case performance is not as good as unordered_map, but
   // should be adequate.
 
   ///
   /// Type of dof tuple domain offsets map.
   ///
-  typedef std::map<pair<pod_index_type, pod_index_type>, pod_index_type>
+  typedef std::map<std::pair<pod_index_type, pod_index_type>, pod_index_type>
     dof_tuple_domain_offsets_type;
 
   ///

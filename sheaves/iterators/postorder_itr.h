@@ -160,9 +160,9 @@ typedef postorder_itr<zn_to_bool> zn_to_bool_postorder_itr;
 typedef postorder_itr< std::set<pod_index_type> > set_postorder_itr;
 
 ///
-/// Postorder_itr<T> using hash_set for _has_visited markers.
+/// Postorder_itr<T> using unordered_set for _has_visited markers.
 ///
-typedef postorder_itr< hash_set<pod_index_type> > hash_set_postorder_itr;
+typedef postorder_itr< std::unordered_set<pod_index_type> > unordered_set_postorder_itr;
  
 } // namespace sheaf
 

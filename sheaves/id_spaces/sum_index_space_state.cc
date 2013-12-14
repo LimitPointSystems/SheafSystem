@@ -25,6 +25,8 @@
 #include "scoped_index.h"
 #include "std_limits.h"
 
+using namespace std;
+
 // ===========================================================
 // SUM_INDEX_SPACE_STATE FACET
 // ===========================================================
@@ -614,7 +616,9 @@ operator==(const explicit_index_space_state& xother) const
     dynamic_cast<const sum_index_space_state&>(xother);
 
   bool result = explicit_index_space_state::operator==(xother);
-  result = result && (_rem_inv == lother._rem_inv);
+  /// @error Since we still support tr1 unordered_maps the comparison
+  ///        operator may not be supported.  See COM-374.
+//   result = result && (_rem_inv == lother._rem_inv);
   result = result && (_terms == lother._terms);
   result = result && (_term_begin == lother._term_begin);
   result = result && (_term_end == lother._term_end);

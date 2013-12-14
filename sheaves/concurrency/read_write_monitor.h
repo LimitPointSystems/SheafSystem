@@ -29,11 +29,11 @@
 #ifdef _PTHREADS
 
 // hash map only used with threads
-// hash_map.h includes hashtable.h includes stl_alloc.h includes time.h
+// unordered_map.h includes hashtable.h includes stl_alloc.h includes time.h
 // causes conflict in declaration of timespec in thread_condition_variable.h
-// if hash_map.h included when not _PTHREADS
-#ifndef STD_HASH_MAP_H
-#include "std_hash_map.h"
+// if unordered_map.h included when not _PTHREADS
+#ifndef STD_UNORDERED_MAP_H
+#include "std_unordered_map.h"
 #endif
 
 #include "pthread.h"
@@ -310,7 +310,7 @@ private:
   ///
   /// Access state for each thread
   ///
-  mutable hash_map<pthread_t, thread_state_t> _thread_state;
+  mutable std::unordered_map<pthread_t, thread_state_t> _thread_state;
 
   ///
   /// Thread lock.

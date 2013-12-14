@@ -29,8 +29,8 @@
 #include "explicit_index_space_iterator.h"
 #endif
 
-#ifndef STD_HASH_MAP_H
-#include "std_hash_map.h"
+#ifndef STD_UNORDERED_MAP_H
+#include "std_unordered_map.h"
 #endif
 
 namespace sheaf
@@ -90,7 +90,7 @@ protected:
   ///
   /// The type of rem map.
   ///
-  typedef hash_map<pod_type, pod_type> rem_type;
+  typedef std::unordered_map<pod_type, pod_type> rem_type;
 
   ///
   /// Iterator over the members.

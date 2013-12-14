@@ -16,17 +16,17 @@
 //
 
 /// @file
-/// Interface and implementation for class hash_set_filter
+/// Interface and implementation for class unordered_set_filter
 
-#ifndef HASH_SET_FILTER_H
-#define HASH_SET_FILTER_H
+#ifndef UNORDERED_SET_FILTER_H
+#define UNORDERED_SET_FILTER_H
 
 #ifndef SHEAF_DLL_SPEC_H
 #include "sheaf_dll_spec.h"
 #endif
 
-#ifndef STD_HASH_SET_H
-#include "std_hash_set.h"
+#ifndef STD_UNORDERED_SET_H
+#include "std_unordered_set.h"
 #endif
 
 #ifndef STD_IOSTREAM_H
@@ -39,21 +39,21 @@ namespace sheaf
 ///
 /// Hash set implementation of filter concept.
 ///
-class SHEAF_DLL_SPEC hash_set_filter
+class SHEAF_DLL_SPEC unordered_set_filter
 {
 public:
 
   ///
-  /// Creates an instance for hash_set xfilter.
+  /// Creates an instance for unordered_set xfilter.
   ///
-  hash_set_filter(const hash_set<pod_index_type>& xfilter)
+  unordered_set_filter(const std::unordered_set<pod_index_type>& xfilter)
     : _filter(xfilter)
   {};
   
   ///
   /// The filter.
   ///
-  const hash_set<pod_index_type>& filter() const
+  const std::unordered_set<pod_index_type>& filter() const
   {
     return _filter;
   };
@@ -68,9 +68,9 @@ public:
 
 private:
 
-  const hash_set<pod_index_type>& _filter;
+  const std::unordered_set<pod_index_type>& _filter;
 };
 
 } // end namespace sheaf
 
-#endif // ifndef HASH_SET_FILTER_H
+#endif // ifndef UNORDERED_SET_FILTER_H

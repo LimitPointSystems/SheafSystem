@@ -29,8 +29,8 @@
 #include "index_space_collection.h"
 #endif
 
-#ifndef STD_HASH_MAP_H
-#include "std_hash_map.h"
+#ifndef STD_UNORDERED_MAP_H
+#include "std_unordered_map.h"
 #endif
 
 namespace sheaf
@@ -81,11 +81,6 @@ protected:
   explicit_index_space_collection();
 
   ///
-  /// Constructor: Creates an instance from arguments, xargs.
-  ///
-  //explicit_index_space_collection(const arg_list& xargs);
-
-  ///
   /// Copy constructor; disabled.
   ///
   explicit_index_space_collection(const explicit_index_space_collection& xother) { };
@@ -93,7 +88,7 @@ protected:
   ///
   /// The type of explicit id space map.
   ///
-  typedef hash_map<pod_type, explicit_index_space_state*> map_type;
+  typedef std::unordered_map<pod_type, explicit_index_space_state*> map_type;
 
   ///
   /// The map from space id to explicit id space.

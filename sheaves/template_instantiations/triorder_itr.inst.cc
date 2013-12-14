@@ -22,7 +22,7 @@
 
 #include "zn_to_bool.h"
 #include "std_set.h"
-#include "std_hash_set.h"
+#include "std_unordered_set.h"
 
 using namespace std;
 using namespace sheaf; // workaround for MS C++ bug.
@@ -46,10 +46,10 @@ sheaf::
 triorder_itr< set<sheaf::pod_index_type> >;
 
 //==============================================================================
-// hash_set<pod_index_type>
+// unordered_set<pod_index_type>
 //==============================================================================
 
 template class 
 SHEAF_DLL_SPEC
 sheaf::
-triorder_itr< hash_set<sheaf::pod_index_type> >;
+triorder_itr< unordered_set<sheaf::pod_index_type> >;

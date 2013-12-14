@@ -28,8 +28,8 @@
 #include "std_cstddef.h"
 #endif
 
-#ifndef STD_HASH_MAP_H
-#include "std_hash_map.h"
+#ifndef STD_UNORDERED_MAP_H
+#include "std_unordered_map.h"
 #endif
 
 #ifndef STD_MAP_H
@@ -122,14 +122,14 @@ class key_value_deep_size_policy
 /// if xinclude_shallow, add the sizeof xp to the result.
 ///
 template <typename K, typename V, typename S, typename H, typename E, typename A>
-size_t deep_size(const hash_multimap<K, V, H, E, A>& xp, bool xinclude_shallow);
+size_t deep_size(const std::unordered_multimap<K, V, H, E, A>& xp, bool xinclude_shallow);
 
 ///
-/// The deep size of the referenced object of type hash_map;
+/// The deep size of the referenced object of type unordered_map;
 /// if xinclude_shallow, add the sizeof xp to the result.
 ///
 template <typename K, typename V, typename S, typename H, typename E, typename A>
-size_t deep_size(const hash_map<K, V, H, E, A>& xp, bool xinclude_shallow);
+size_t deep_size(const std::unordered_map<K, V, H, E, A>& xp, bool xinclude_shallow);
 
 ///
 /// The deep size of the referenced object of type map;

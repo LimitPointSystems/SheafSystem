@@ -32,8 +32,8 @@
 #include "block.h"
 #endif
 
-#ifndef STD_HASH_MAP_H
-#include "std_hash_map.h"
+#ifndef STD_UNORDERED_MAP_H
+#include "std_unordered_map.h"
 #endif
 
 #ifndef STD_STACK_H
@@ -110,7 +110,7 @@ public:
   ///
   /// The type of the glue map.
   ///
-  typedef hash_map<int, int> glue_map_type;
+  typedef std::unordered_map<int, int> glue_map_type;
 
   //$$TYPE_SAFE_IDS_ISSUE: Remove when no longer used?
 
@@ -195,7 +195,7 @@ private:
   /// A map from template member index to
   /// result member index for the current copy of the template.
   ///
-  hash_map<int, int> _template_map;
+  std::unordered_map<int, int> _template_map;
 
   ///
   /// Max cell dimension of template.

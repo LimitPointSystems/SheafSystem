@@ -40,7 +40,7 @@ class SHEAF_DLL_SPEC set_filter
 public:
 
   ///
-  /// Creates an instance for hash_set xfilter.
+  /// Creates an instance for unordered_set xfilter.
   ///
   set_filter(const std::set<pod_index_type>& xfilter)
     : _filter(xfilter)

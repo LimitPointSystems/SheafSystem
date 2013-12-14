@@ -341,7 +341,7 @@ protected:
   ///
   /// The type of the explicit cover maps..
   ///
-  typedef hash_map<pod_index_type, pod_index_type> explicit_cover_map_type;
+  typedef std::unordered_map<pod_index_type, pod_index_type> explicit_cover_map_type;
 
   ///
   /// The map from ids to explicit upper cover id spaces.

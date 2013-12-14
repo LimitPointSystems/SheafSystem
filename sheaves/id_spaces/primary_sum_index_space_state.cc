@@ -30,6 +30,8 @@
 #include "reserved_primary_index_space_state.h"
 #include "std_strstream.h"
 
+using namespace std;
+
 // ===========================================================
 // SPACE FACTORY FACET
 // ===========================================================
@@ -1496,7 +1498,9 @@ operator==(const explicit_index_space_state& xother) const
   result = result && (_next_id == lother._next_id);
   result = result && (_reserved_term == lother._reserved_term);
   result = result && (_standard_id_end == lother._standard_id_end);
-  result = result && (_rem == lother._rem);
+  /// @error Since we still support tr1 unordered_maps the comparison
+  ///        operator may not be supported.  See COM-374.
+//   result = result && (_rem == lother._rem);
   result = result && (_term_id_begin == lother._term_id_begin);
   result = result && (_term_id_end == lother._term_id_end);
 

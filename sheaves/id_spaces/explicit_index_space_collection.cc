@@ -137,8 +137,12 @@ operator==(const index_space_collection& xother) const
   const explicit_index_space_collection& lother =
     dynamic_cast<const explicit_index_space_collection&>(xother);
 
-  bool result = (_states == lother._states);
-  result = result && (_id_spaces == lother._id_spaces);
+  /// @error Since we still support tr1 unordered_maps the comparison
+  ///        operator may not be supported.  See COM-374.
+//   bool result = (_states == lother._states);
+//   result = result && (_id_spaces == lother._id_spaces);
+
+  bool result = (_id_spaces == lother._id_spaces);
 
   // Postconditions:
 

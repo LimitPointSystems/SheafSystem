@@ -29,8 +29,8 @@
 #include "pod_types.h"
 #endif
 
-#ifndef STD_HASH_MAP_H
-#include "std_hash_map.h"
+#ifndef STD_UNORDERED_MAP_H
+#include "std_unordered_map.h"
 #endif
 
 #ifndef STD_STRING_H
@@ -221,7 +221,7 @@ public:
   /// The type of const iterator for this.
   ///
   typedef typename
-  hash_map<internal_index_type, external_index_type>::const_iterator const_iterator;
+  std::unordered_map<internal_index_type, external_index_type>::const_iterator const_iterator;
 
   ///
   /// The beginning of the range of internal ids contained in this.
@@ -253,7 +253,7 @@ private:
   ///
   /// The type of the internal to external map.
   ///
-  typedef hash_map<internal_index_type, external_index_type> external_map_type;
+  typedef std::unordered_map<internal_index_type, external_index_type> external_map_type;
 
   ///
   /// The representation of the internal to external map.
@@ -263,7 +263,7 @@ private:
   ///
   /// The type of the external to internal map.
   ///
-  typedef hash_map<external_index_type, internal_index_type> internal_map_type;
+  typedef std::unordered_map<external_index_type, internal_index_type> internal_map_type;
 
   ///
   /// The representation of the external to internal map.

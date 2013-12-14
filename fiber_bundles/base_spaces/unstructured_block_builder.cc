@@ -1060,7 +1060,7 @@ link_action(const triorder_iterator& xtmplt_itr)
 
   // Body:
 
-  hash_map<int,int>::iterator itr = _template_map.find(xtmplt_itr.lesser_index().pod());
+  unordered_map<int,int>::iterator itr = _template_map.find(xtmplt_itr.lesser_index().pod());
 
   // Find must succeed.
 
@@ -1164,7 +1164,7 @@ postvisit_action(const triorder_iterator& xtmplt_itr)
     // Now we have the member associated with the glue id;
     // put it in the template map.
 
-    _template_map.insert(hash_map<int, int>::value_type(ltmplt_mbr_id.pod(), lblk_mbr_id.pod()));
+    _template_map.insert(unordered_map<int, int>::value_type(ltmplt_mbr_id.pod(), lblk_mbr_id.pod()));
 
   } // end xmbr is an atom
   else
@@ -1295,7 +1295,7 @@ postvisit_action(const triorder_iterator& xtmplt_itr)
     // Put the block member index into the template map
     // so we can retrieve it in link_action.
 
-    _template_map.insert(hash_map<int, int>::value_type(ltmplt_mbr_id.pod(), lblk_mbr_id.pod()));
+    _template_map.insert(unordered_map<int, int>::value_type(ltmplt_mbr_id.pod(), lblk_mbr_id.pod()));
 
     // Finished with the cover on top of the stack;
     // empty it and push it on to the free stack for reuse.

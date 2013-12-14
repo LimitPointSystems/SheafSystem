@@ -29,8 +29,8 @@
 #include "std_slist.h"
 #endif
 
-#ifndef STD_HASH_SET_H
-#include "std_hash_set.h"
+#ifndef STD_UNORDERED_SET_H
+#include "std_unordered_set.h"
 #endif
 
 namespace sheaf
@@ -135,7 +135,7 @@ private:
   ///
   /// The type of allocation set.
   ///
-  typedef hash_set<T*, ptr_hash<T*>, ptr_key_test<T*> > allocated_type;
+  typedef std::unordered_set<T*, ptr_hash<T*>, ptr_key_test<T*> > allocated_type;
 
   ///
   /// Copy constructor; disabled.

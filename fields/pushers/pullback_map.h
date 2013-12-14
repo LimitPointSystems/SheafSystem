@@ -29,8 +29,8 @@
 #include "chart_point_3d.h"
 #endif
 
-#ifndef STD_HASH_SET_H
-#include "std_hash_set.h"
+#ifndef STD_UNORDERED_SET_H
+#include "std_unordered_set.h"
 #endif
 
 namespace fields
@@ -128,7 +128,7 @@ struct SHEAF_DLL_SPEC discretization_hash
 /// A map from members of a discretization subposet to points in a base space.
 ///
 class SHEAF_DLL_SPEC pullback_map : public
-hash_multiset<pullback_map_entry, discretization_hash> {};
+std::unordered_multiset<pullback_map_entry, discretization_hash> {};
 
 // ===========================================================
 // NON-MEMBER FUNCTIONS

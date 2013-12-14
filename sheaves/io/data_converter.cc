@@ -25,6 +25,7 @@
 #include "error_message.h"
 #include "primitive_attributes.h"
 #include "sheaf_file.h"
+#include "std_cstring.h"
 #include "std_iostream.h"
 
 // PUBLIC MEMBER FUNCTIONS

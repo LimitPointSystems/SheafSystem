@@ -45,12 +45,12 @@
 #include "reserved_primary_index_space_handle.h"
 #endif
 
-#ifndef STD_HASH_MAP_H
-#include "std_hash_map.h"
+#ifndef STD_UNORDERED_MAP_H
+#include "std_unordered_map.h"
 #endif
 
-#ifndef STD_HASH_SET_H
-#include "std_hash_set.h"
+#ifndef STD_UNORDERED_SET_H
+#include "std_unordered_set.h"
 #endif
 
 namespace sheaf
@@ -276,7 +276,7 @@ protected:
   ///
   /// The set of reserved term ids.
   ///
-  hash_set<pod_type> _reserved_term_ids;
+  std::unordered_set<pod_type> _reserved_term_ids;
   
 private:
 
@@ -459,7 +459,7 @@ protected:
   ///
   /// The type of rem map.
   ///
-  typedef hash_map<pod_type, pod_type> rem_type;
+  typedef std::unordered_map<pod_type, pod_type> rem_type;
 
   ///
   /// The reflexive reduction of the rem map.

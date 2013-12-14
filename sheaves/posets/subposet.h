@@ -29,8 +29,8 @@
 #include "mutable_index_space_handle.h"
 #endif
 
-#ifndef STD_HASH_SET_H
-#include "std_hash_set.h"
+#ifndef STD_UNORDERED_SET_H
+#include "std_unordered_set.h"
 #endif
 
 #ifndef POSET_COMPONENT_H

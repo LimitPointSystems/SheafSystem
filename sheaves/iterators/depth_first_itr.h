@@ -29,8 +29,8 @@
 #include "any.h"
 #endif
 
-#ifndef STD_HASH_SET_H
-#include "std_hash_set.h"
+#ifndef STD_UNORDERED_SET_H
+#include "std_unordered_set.h"
 #endif
 
 #ifndef POSET_STATE_HANDLE_H
@@ -83,7 +83,7 @@ class zn_to_bool;
 /// the link between the front of _path and _index, with _index being the
 /// lesser member of the link.
 ///
-/// @hack Included set and hash_set as a workaround
+/// @hack Included set and unordered_set as a workaround
 ///       until we know how to get forward declarations for same.
 ///
 template <typename T>
@@ -763,31 +763,31 @@ put_has_visited(pod_index_type xhub_id, bool xvalue);
 template <>
 SHEAF_DLL_SPEC
 void
-depth_first_itr< hash_set<pod_index_type> >::
+depth_first_itr< std::unordered_set<pod_index_type> >::
 clear_has_visited();
 
 template <>
 SHEAF_DLL_SPEC
 void
-depth_first_itr< hash_set<pod_index_type> >::
+depth_first_itr< std::unordered_set<pod_index_type> >::
 reserve_has_visited(pod_index_type xub);
 
 template <>
 SHEAF_DLL_SPEC
 bool
-depth_first_itr< hash_set<pod_index_type> >::
+depth_first_itr< std::unordered_set<pod_index_type> >::
 has_visited(pod_index_type xhub_id) const;
 
 template <>
 SHEAF_DLL_SPEC
 void
-depth_first_itr< hash_set<pod_index_type> >::
+depth_first_itr< std::unordered_set<pod_index_type> >::
 initialize_has_visited(const abstract_poset_member& xanchor);
 
 template <>
 SHEAF_DLL_SPEC
 void
-depth_first_itr< hash_set<pod_index_type> >::
+depth_first_itr< std::unordered_set<pod_index_type> >::
 put_has_visited(pod_index_type xhub_id, bool xvalue);
  
 } // namespace sheaf

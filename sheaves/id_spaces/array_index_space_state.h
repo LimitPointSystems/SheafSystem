@@ -37,8 +37,8 @@
 #include "mutable_index_space_state.h"
 #endif
 
-#ifndef STD_HASH_MAP_H
-#include "std_hash_map.h"
+#ifndef STD_UNORDERED_MAP_H
+#include "std_unordered_map.h"
 #endif
 
 namespace sheaf
@@ -213,7 +213,7 @@ protected:
   ///
   /// The type of the range id to domain id map.
   ///
-  typedef hash_map<pod_type, pod_type> to_domain_type;
+  typedef std::unordered_map<pod_type, pod_type> to_domain_type;
 
   ///
   /// The representation of the range id to domain id map.

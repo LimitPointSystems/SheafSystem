@@ -28,7 +28,7 @@
 #include "interval_index_space_state.h"
 #include "preorder_itr.h"
 #include "sheaf_file.h"
-#include "std_hash_set.h"
+#include "std_unordered_set.h"
 #include "std_string.h"
 #include "std_strstream.h"
 #include "std_iostream.h"

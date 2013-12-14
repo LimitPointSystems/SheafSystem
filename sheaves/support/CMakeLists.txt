@@ -68,7 +68,6 @@ set(ADDITIONAL_INCS
     deep_size.impl.h 
     factory.h 
     factory.impl.h 
-    hash_set_filter.h 
     index_traits.h 
     list_pool.impl.h
     pool.h 
@@ -80,6 +79,7 @@ set(ADDITIONAL_INCS
     set_filter.h 
     sheaf_dll_spec.h
     stl_scoped_index.impl.h 
+    unordered_set_filter.h 
     wsv_block.impl.h 
     zn_to_bool_filter.h
    )

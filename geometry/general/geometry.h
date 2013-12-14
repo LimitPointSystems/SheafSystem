@@ -37,8 +37,8 @@
 #include "stl_scoped_index.h"
 #endif
 
-#ifndef STD_HASH_SET_H
-#include "std_hash_set.h"
+#ifndef STD_UNORDERED_SET_H
+#include "std_unordered_set.h"
 #endif
 
 #ifndef STD_LIST_H
@@ -76,7 +76,7 @@ namespace geometry
   ///
   /// A point in base space paired with a branch in section space.
   ///
-  typedef pair<scoped_index, chart_point_3d> branch_point_pair;
+  typedef std::pair<scoped_index, chart_point_3d> branch_point_pair;
 
 
   // ===========================================================

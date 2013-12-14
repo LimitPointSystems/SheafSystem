@@ -162,9 +162,9 @@ typedef preorder_itr<zn_to_bool> zn_to_bool_preorder_itr;
 typedef preorder_itr< std::set<pod_index_type> > set_preorder_itr;
 
 ///
-/// Preorder_itr<T> using hash_set for _has_visited markers.
+/// Preorder_itr<T> using unordered_set for _has_visited markers.
 ///
-typedef preorder_itr< hash_set<pod_index_type> > hash_set_preorder_itr;
+typedef preorder_itr< std::unordered_set<pod_index_type> > unordered_set_preorder_itr;
  
 } // namespace sheaf
 

@@ -36,8 +36,8 @@
 #include "discretization_context.h"
 #endif
 
-#ifndef STD_HASH_MAP_H
-#include "std_hash_map.h"
+#ifndef STD_UNORDERED_MAP_H
+#include "std_unordered_map.h"
 #endif
 
 #ifndef STD_SET_H
@@ -153,7 +153,7 @@ public:
   ///
   /// The map from discretization to sequence ids.
   ///
-  hash_map<pod_index_type, pod_index_type>* disc_to_seq_map;
+  std::unordered_map<pod_index_type, pod_index_type>* disc_to_seq_map;
 
   ///
   /// The next sequence id.

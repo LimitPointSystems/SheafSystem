@@ -42,7 +42,7 @@ class SHEAF_DLL_SPEC zn_to_bool_filter
 public:
 
   ///
-  /// Creates an instance for hash_set xfilter.
+  /// Creates an instance for unordered_set xfilter.
   ///
   zn_to_bool_filter(const zn_to_bool& xfilter)
     : _filter(xfilter)

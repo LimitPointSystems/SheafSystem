@@ -28,6 +28,10 @@
 #include "std_ctime.h"
 #endif
 
+#ifndef STD_IOSTREAM_H
+#include "std_iostream.h"
+#endif
+
 #ifndef STD_VECTOR_H
 #include "std_vector.h"
 #endif

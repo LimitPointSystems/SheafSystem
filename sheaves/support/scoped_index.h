@@ -85,8 +85,8 @@
 #include "std_set.h"
 #endif
 
-#ifndef STD_HASH_MAP_H
-#include "std_hash_map.h"
+#ifndef STD_UNORDERED_MAP_H
+#include "std_unordered_map.h"
 #endif
 
 #ifndef STD_LIMITS_H
@@ -3832,7 +3832,7 @@ template<> struct SHEAF_DLL_SPEC hash<sheaf::scoped_index>
 {
   size_t operator()(sheaf::scoped_index xindex) const;
 };
-
+  
 SHEAF_END_HASH_NAMESPACE
 
 #endif // SWIG

@@ -160,9 +160,9 @@ typedef linkorder_itr<zn_to_bool> zn_to_bool_linkorder_itr;
 typedef linkorder_itr< std::set<pod_index_type> > set_linkorder_itr;
 
 ///
-/// Linkorder_itr<T> using hash_set for _has_visited markers.
+/// Linkorder_itr<T> using unordered_set for _has_visited markers.
 ///
-typedef linkorder_itr< hash_set<pod_index_type> > hash_set_linkorder_itr;
+typedef linkorder_itr< std::unordered_set<pod_index_type> > unordered_set_linkorder_itr;
  
 } // namespace sheaf
 

@@ -160,9 +160,9 @@ typedef biorder_itr<zn_to_bool> zn_to_bool_biorder_itr;
 typedef biorder_itr< std::set<pod_index_type> > set_biorder_itr;
 
 ///
-/// Biorder_itr<T> using hash_set for _has_visited markers.
+/// Biorder_itr<T> using unordered_set for _has_visited markers.
 ///
-typedef biorder_itr< hash_set<pod_index_type> > hash_set_biorder_itr;
+typedef biorder_itr< std::unordered_set<pod_index_type> > unordered_set_biorder_itr;
  
 } // namespace sheaf
 

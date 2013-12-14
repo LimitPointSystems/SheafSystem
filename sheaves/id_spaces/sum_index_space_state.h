@@ -33,8 +33,8 @@
 #include "block.h"
 #endif
  
-#ifndef STD_HASH_MAP_H
-#include "std_hash_map.h"
+#ifndef STD_UNORDERED_MAP_H
+#include "std_unordered_map.h"
 #endif
 
 #ifndef STD_MAP_H
@@ -239,7 +239,7 @@ protected:
   ///
   /// The type of the inverse of the rem map.
   ///
-  typedef hash_multimap<pod_type, pod_type> rem_inv_type;
+  typedef std::unordered_multimap<pod_type, pod_type> rem_inv_type;
 
   ///
   /// The inverse rem map.

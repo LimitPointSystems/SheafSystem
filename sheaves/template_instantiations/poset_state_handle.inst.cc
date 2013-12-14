@@ -19,7 +19,7 @@
 
 #include "poset_state_handle.impl.h"
 
-#include "hash_set_filter.h"
+#include "unordered_set_filter.h"
 #include "set_filter.h"
 #include "zn_to_bool_filter.h"
 
@@ -33,7 +33,7 @@ template
 SHEAF_DLL_SPEC
 void 
 sheaf::poset_state_handle::
-remove_cover_members<sheaf::hash_set_filter>(const sheaf::hash_set_filter& xfilter,
+remove_cover_members<sheaf::unordered_set_filter>(const sheaf::unordered_set_filter& xfilter,
 					     bool xlower,
 					     const sheaf::scoped_index& xmbr_index);
 
@@ -41,7 +41,7 @@ template
 SHEAF_DLL_SPEC
 void 
 sheaf::poset_state_handle::
-remove_cover_members<sheaf::hash_set_filter>(const sheaf::hash_set_filter& xfilter,
+remove_cover_members<sheaf::unordered_set_filter>(const sheaf::unordered_set_filter& xfilter,
 					     bool xlower,
 					     pod_index_type xmbr_hub_id);
 

@@ -26,6 +26,8 @@
 #include "index_space_family.h"
 #include "hub_index_space_handle.h"
 
+using namespace std;
+
 // ===========================================================
 // SPACE FACTORY FACET
 // ===========================================================
@@ -208,8 +210,8 @@ reserve(size_type xcapacity)
   {  
     size_type lbucket_ct = (xcapacity / 2) + (xcapacity % 2);
 
-    _to_domain.resize(lbucket_ct);
-    _to_range.resize(lbucket_ct);
+    _to_domain.rehash(lbucket_ct);
+    _to_range.rehash(lbucket_ct);
   }
 
   // Postconditions:
@@ -543,8 +545,10 @@ operator==(const explicit_index_space_state& xother) const
     dynamic_cast<const hash_index_space_state&>(xother);
 
   bool result = mutable_index_space_state::operator==(xother);
-  result = result && (_to_range == lother._to_range);
-  result = result && (_to_domain == lother._to_domain);
+  /// @error Since we still support tr1 unordered_maps the comparison
+  ///        operator may not be supported.  See COM-374.
+//   result = result && (_to_range == lother._to_range);
+//   result = result && (_to_domain == lother._to_domain);
 
   // Postconditions:
 
@@ -1130,15 +1134,15 @@ deep_size(const hash_index_space_state& xn, bool xinclude_shallow)
   const mutable_index_space_state& ixn = static_cast<const mutable_index_space_state&>(xn);
   result += deep_size(ixn, false);
 
-  // Add contribution from hash_map<pod_type, pod_type> to_domain.
+  // Add contribution from unordered_map<pod_type, pod_type> to_domain.
 
   typedef hash_index_space_state::pod_type pod_type;
-  typedef no_deep_size_policy<hash_map<pod_type, pod_type> > to_domain_policy_type;
+  typedef no_deep_size_policy<unordered_map<pod_type, pod_type> > to_domain_policy_type;
   result += deep_size<pod_type, pod_type, to_domain_policy_type>(xn._to_domain, false);
 
-  // Add contribution from hash_map<pod_type, pod_type> _to_range.
+  // Add contribution from unordered_map<pod_type, pod_type> _to_range.
 
-  typedef no_deep_size_policy<hash_map<pod_type, pod_type> > to_range_policy_type;
+  typedef no_deep_size_policy<unordered_map<pod_type, pod_type> > to_range_policy_type;
   result += deep_size<pod_type, pod_type, to_range_policy_type>(xn._to_range, false);
 
   // Postconditions:

@@ -24,6 +24,10 @@
 #include "sheaf_dll_spec.h"
 #endif
 
+#ifndef STD_CLIMITS_H
+#include "std_climits.h"
+#endif
+
 #ifndef POD_TYPES_H
 #include "pod_types.h"
 #endif
