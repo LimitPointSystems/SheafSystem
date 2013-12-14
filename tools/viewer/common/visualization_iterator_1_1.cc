@@ -282,7 +282,7 @@ set_vtk_data(const sec_vd& xcoords,
   << endl;
 #endif
 
-  typedef hash_map<pod_index_type, pod_index_type> map_type;
+  typedef unordered_map<pod_index_type, pod_index_type> map_type;
   typedef map_type::const_iterator iterator_type;
 
   int lprop_df = xprop.schema().df();
@@ -426,7 +426,7 @@ set_vtk_data(const sec_vd& xcoords,
   << endl;
 #endif
 
-  typedef hash_map<pod_index_type, pod_index_type> map_type;
+  typedef unordered_map<pod_index_type, pod_index_type> map_type;
   typedef map_type::const_iterator iterator_type;
 
   block<discretization_context>& ldisc_mbrs = _vis_state.discretization_members;
