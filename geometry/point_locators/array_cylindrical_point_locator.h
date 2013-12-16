@@ -154,7 +154,7 @@ public:
   ///
   /// The type of box list.
   ///
-  typedef slist<const d_bounding_box<2, 2>*> box_list_type;
+  typedef std::forward_list<const d_bounding_box<2, 2>*> box_list_type;
 
   ///
   /// Insert xbox into this.

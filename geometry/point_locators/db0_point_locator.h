@@ -29,8 +29,8 @@
 #include "point_locator.h"
 #endif
 
-#ifndef STD_SLIST_H
-#include "std_slist.h"
+#ifndef STD_FORWARD_LIST_H
+#include "std_forward_list.h"
 #endif
 
 #ifndef STD_QUEUE_H
@@ -179,7 +179,7 @@ protected:
   ///
   /// The type of vertex list.
   ///
-  typedef slist<vertex_type> vertex_list_type;
+  typedef std::forward_list<vertex_type> vertex_list_type;
 
   ///
   /// The search structure; a d-dimensional array of bins.

@@ -32,8 +32,8 @@
 #include "std_map.h"
 #endif
 
-#ifndef STD_SLIST_H
-#include "std_slist.h"
+#ifndef STD_FORWARD_LIST_H
+#include "std_forward_list.h"
 #endif
 
 namespace fiber_bundle
@@ -57,7 +57,7 @@ public:
   ///
   /// The type of the adjacency relation.
   ///
-  typedef std::map< pod_index_type, slist<pod_index_type> > adj_type;
+  typedef std::map< pod_index_type, std::forward_list<pod_index_type> > adj_type;
 
   ///
   /// Type of iterator for nodes.

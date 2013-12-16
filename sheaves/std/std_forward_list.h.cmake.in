@@ -15,62 +15,48 @@
 // limitations under the License.
 //
 
-#ifndef STD_SLIST_H
-#define STD_SLIST_H
+#ifndef STD_FORWARD_LIST_H
+#define STD_FORWARD_LIST_H
 
 #ifndef STD_STRING_H
 #include "std_string.h"
 #endif
 
-// Autoconf hooks; will be replaced with #define if have <slist>
-// or <ext/slist>, respectively, or commented out if not.
+// Autoconf hooks; will be replaced with #define if have <forward_list>
+// or commented out if not.
 
-#cmakedefine HAVE_SLIST 1
-#cmakedefine HAVE_EXT_SLIST 1
+#cmakedefine HAVE_FORWARD_LIST 1
 
-#ifdef HAVE_SLIST
+#ifdef HAVE_FORWARD_LIST
 
-// This environment has <slist>.
+// This environment has <forward_list>.
 
-#include <slist>
-
-#elif HAVE_EXT_SLIST
-
-// This environment has <ext/slist>.
-
-#include <ext/slist>
-
-#ifdef __GNUG__
-
-// g++ - class slist is in namespace __gnu_cxx
-
-using namespace __gnu_cxx;
+#include <forward_list>
 
 #else
 
-// Assume class slist is in namespace std
-
-#endif // ifdef __GNUG__
-
-
-
-#else
-
-// This environment does not have an slist class;
+// This environment does not have an forward_list class;
 // simulate with list.
 
 #include <list>
 
-template <class T, class A = allocator<T> > class slist : public list<T, A> 
+namespace std
+{
+
+template <class T, class A = allocator<T> > class forward_list : public list<T, A> 
 { 
   public:
 
-  iterator erase_after(iterator pos)
+  typedef typename list<T>::iterator forward_iterator;
+
+  forward_iterator erase_after(forward_iterator pos)
   {
     return erase(++pos);
   }
 };
 
-#endif // HAVE_SLIST
+}
 
-#endif // STD_SLIST_H
+#endif // HAVE_FORWARD_LIST
+
+#endif // STD_FORWARD_LIST_H

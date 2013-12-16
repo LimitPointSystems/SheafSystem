@@ -46,8 +46,8 @@
 #include "std_map.h"
 #endif
 
-#ifndef STD_SLIST_H
-#include "std_slist.h"
+#ifndef STD_FORWARD_LIST_H
+#include "std_forward_list.h"
 #endif
 
 namespace fiber_bundle

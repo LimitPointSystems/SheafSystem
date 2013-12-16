@@ -29,8 +29,8 @@
 #include "depth_first_iterator.h"
 #endif
 
-#ifndef STD_SLIST_H
-#include "std_slist.h"
+#ifndef STD_FORWARD_LIST_H
+#include "std_forward_list.h"
 #endif
 
 namespace fiber_bundle
@@ -200,7 +200,7 @@ private:
   ///
   /// List to store the upset to empty the _ascending_has_visited reset markers.
   ///
-  slist<int> _up_set;
+  std::forward_list<int> _up_set;
 
   ///
   /// The current discretization member index.

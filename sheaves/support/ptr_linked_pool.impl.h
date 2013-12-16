@@ -167,7 +167,7 @@ print(std::ostream& xos) const
 
   int lcol_pos = 0;
   xos << "pool contents: " << endl;
-  typename slist<block<T>*>::const_iterator citr;
+  typename std::forward_list<block<T>*>::const_iterator citr;
   for(citr = _chunk_list.begin(); citr != _chunk_list.end(); ++citr)
   {
     for(size_t i=0; i<(*citr)->ct(); ++i)

@@ -122,6 +122,7 @@ function(check_cxx_includes)
     check_include_file_cxx(deque HAVE_DEQUE)
     check_include_file_cxx(exception HAVE_EXCEPTION)    
     check_include_file_cxx(fstream HAVE_FSTREAM)
+    check_include_file_cxx(forward_list HAVE_FORWARD_LIST)
     check_include_file_cxx(functional HAVE_FUNCTIONAL)
     check_include_file_cxx(iomanip HAVE_IOMANIP)
     check_include_file_cxx(ios HAVE_IOS)
@@ -149,19 +150,6 @@ function(check_cxx_includes)
     check_include_file_cxx(valarray HAVE_VALARRAY)
     check_include_file_cxx(vector HAVE_VECTOR)
 
-    # STL
-
-    if(NOT (HAVE_HASH_MAP OR HAVE_EXT_HASH_MAP))
-        status_message("Looking for C++ STL Headers")
-    endif()
-
-    check_include_file_cxx(hash_map HAVE_HASH_MAP)
-    check_include_file_cxx(ext/hash_map HAVE_EXT_HASH_MAP)
-    check_include_file_cxx(hash_set HAVE_HASH_SET)
-    check_include_file_cxx(ext/hash_set HAVE_EXT_HASH_SET)    
-    check_include_file_cxx(slist HAVE_SLIST)
-    check_include_file_cxx(ext/slist HAVE_EXT_SLIST)
-    
     # C++ TR1 Extensions
 
     if(NOT (HAVE_UNORDERED_MAP OR HAVE_TR1_UNORDERED_MAP))

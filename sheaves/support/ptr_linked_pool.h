@@ -32,8 +32,8 @@
 #include "std_iostream.h"
 #endif
 
-#ifndef STD_SLIST_H
-#include "std_slist.h"
+#ifndef STD_FORWARD_LIST_H
+#include "std_forward_list.h"
 #endif
 
 namespace sheaf
@@ -132,7 +132,7 @@ private:
   ///
   /// List of contiguously allocated chunks of members.
   ///
-  slist<block<T>*> _chunk_list;
+  std::forward_list<block<T>*> _chunk_list;
 
 };
  

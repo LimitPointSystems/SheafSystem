@@ -29,9 +29,9 @@
 #include "runnable.h"
 #endif
 
-#include "std_slist.h"
+#include "std_forward_list.h"
 
-slist<thread *> *
+forward_list<thread *> *
 sheaf::thread::
 _thread_list = 0;
 
@@ -46,7 +46,7 @@ thread()
   _runnable = 0;
 
   if (_thread_list == 0)
-    _thread_list = new slist<thread *>;
+    _thread_list = new forward_list<thread *>;
 
   int old_list_size = _thread_list->size();
 
@@ -75,7 +75,7 @@ thread(runnable* xrunnable)
   _runnable = xrunnable;
 
   if (_thread_list == 0)
-    _thread_list = new slist<thread *>;
+    _thread_list = new forward_list<thread *>;
 
   int old_list_size = _thread_list->size();
 
@@ -238,8 +238,8 @@ is_alive(thread* other)
   if(_thread_list != 0)
   {
 
-    slist<thread *>::iterator it  = _thread_list->begin();
-    slist<thread *>::iterator end = _thread_list->end();
+    forward_list<thread *>::iterator it  = _thread_list->begin();
+    forward_list<thread *>::iterator end = _thread_list->end();
 
     for (; it != end && *it != other; ++it)
       ;
@@ -268,13 +268,13 @@ current_thread()
 
   thread *result;
 
-  slist<thread *> *list = sheaf::thread::_thread_list;
+  forward_list<thread *> *list = sheaf::thread::_thread_list;
 
   if (list != 0)
   {
 
-    slist<thread *>::iterator it  = list->begin();
-    slist<thread *>::iterator end = list->end();
+    forward_list<thread *>::iterator it  = list->begin();
+    forward_list<thread *>::iterator end = list->end();
 
     for (; it != end && (pthread_equal(self,(*it)->pthread) == 0); ++it)
       ;
@@ -304,8 +304,8 @@ cleanup(thread* This)
 
   // body:
 
-  slist<thread *>::iterator it  = _thread_list->begin();
-  slist<thread *>::iterator end = _thread_list->end();
+  forward_list<thread *>::iterator it  = _thread_list->begin();
+  forward_list<thread *>::iterator end = _thread_list->end();
 
   for (; it != end && *it != This; ++it)
     ;
@@ -329,7 +329,7 @@ active_count()
 
   int result;
 
-  slist<thread *> *list = sheaf::thread::_thread_list;
+  forward_list<thread *> *list = sheaf::thread::_thread_list;
 
   result = list->size();
 

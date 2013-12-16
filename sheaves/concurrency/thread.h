@@ -31,8 +31,8 @@
 #include "std_unistd.h"
 #endif
 
-#ifndef STD_SLIST_H
-#include "std_slist.h"
+#ifndef STD_FORWARD_LIST_H
+#include "std_forward_list.h"
 #endif
 
 namespace sheaf
@@ -54,7 +54,7 @@ private:
   bool                     _is_alive;
   pthread_t                 pthread;
   runnable                *_runnable;
-  static slist<thread *>  *_thread_list; // $$ISSUE. destroying a thread or querying for is_alive requires
+  static std::forward_list<thread *>  *_thread_list; // $$ISSUE. destroying a thread or querying for is_alive requires
   // a linear search through the list.  For small numbers of threads
   // this is probably ok, but for large numbers a hash table would be
   // better.
@@ -72,7 +72,7 @@ public:
   static int       active_count();
 
   ///
-  slist<thread *> *thread_list();
+  std::forward_list<thread *> *thread_list();
 
   ///
   /// Class Invarient

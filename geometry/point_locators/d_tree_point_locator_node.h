@@ -29,8 +29,8 @@
 #include "sheaf.h"
 #endif
 
-#ifndef STD_SLIST_H
-#include "std_slist.h"
+#ifndef STD_FORWARD_LIST_H
+#include "std_forward_list.h"
 #endif
 
 //#undef DIAGNOSTIC_OUTPUT
@@ -147,7 +147,7 @@ public:
   ///
   /// The type of box list.
   ///
-  typedef slist<const d_bounding_box<DC, DB>*> box_list_type;
+  typedef std::forward_list<const d_bounding_box<DC, DB>*> box_list_type;
 
   ///
   /// The bounding boxes which intersect xpath.

@@ -31,6 +31,7 @@
 #include "poset.h"
 #include "poset_bounds.h"
 #include "primitive_type.h"
+#include "std_cstdlib.h"
 #include "std_sstream.h"
 #include "storage_agent.h"
 

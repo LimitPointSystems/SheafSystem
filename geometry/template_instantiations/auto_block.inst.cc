@@ -23,7 +23,7 @@
 #include "d_bounding_box.impl.h"
 #include "d_tree_point_locator_node.impl.h"
 #include "geometry.h"
-#include "std_slist.h"
+#include "std_forward_list.h"
 #include "std_utility.h"
 
 
@@ -833,178 +833,178 @@ ostream& sheaf::operator << <sheaf::block<geometry::d_bounding_box<4, 4> >, shea
 #endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
 
 //==============================================================================
-// auto_block<slist<d_bounding_box<M, N>* >,
-//            un_block_initialization_policy<slist<d_bounding_box<M, N>*> > >;
+// auto_block<forward_list<d_bounding_box<M, N>* >,
+//            un_block_initialization_policy<forward_list<d_bounding_box<M, N>*> > >;
 //==============================================================================
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<1, 0>* > >;
+sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<1, 0>* > >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::auto_block<slist< geometry::d_bounding_box<1, 0>* > ,
-                         sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<1, 0>* > > >;
+sheaf::auto_block<forward_list< geometry::d_bounding_box<1, 0>* > ,
+                         sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<1, 0>* > > >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<1, 1>* > >;
+sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<1, 1>* > >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::auto_block<slist< geometry::d_bounding_box<1, 1>* > ,
-                         sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<1, 1>* > > >;
+sheaf::auto_block<forward_list< geometry::d_bounding_box<1, 1>* > ,
+                         sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<1, 1>* > > >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<2, 0>* > >;
+sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<2, 0>* > >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::auto_block<slist< geometry::d_bounding_box<2, 0>* > ,
-                         sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<2, 0>* > > >;
+sheaf::auto_block<forward_list< geometry::d_bounding_box<2, 0>* > ,
+                         sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<2, 0>* > > >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<2, 2>* > >;
+sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<2, 2>* > >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::auto_block<slist< geometry::d_bounding_box<2, 2>* > ,
-                         sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<2, 2>* > > >;
+sheaf::auto_block<forward_list< geometry::d_bounding_box<2, 2>* > ,
+                         sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<2, 2>* > > >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<3, 0>* > >;
+sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<3, 0>* > >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::auto_block<slist< geometry::d_bounding_box<3, 0>* > ,
-                         sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<3, 0>* > > >;
+sheaf::auto_block<forward_list< geometry::d_bounding_box<3, 0>* > ,
+                         sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<3, 0>* > > >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<3, 1>* > >;
+sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<3, 1>* > >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::auto_block<slist< geometry::d_bounding_box<3, 1>* > ,
-                         sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<3, 1>* > > >;
+sheaf::auto_block<forward_list< geometry::d_bounding_box<3, 1>* > ,
+                         sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<3, 1>* > > >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<3, 2>* > >;
+sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<3, 2>* > >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::auto_block<slist< geometry::d_bounding_box<3, 2>* > ,
-                         sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<3, 2>* > > >;
+sheaf::auto_block<forward_list< geometry::d_bounding_box<3, 2>* > ,
+                         sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<3, 2>* > > >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<3, 3>* > >;
+sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<3, 3>* > >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::auto_block<slist< geometry::d_bounding_box<3, 3>* > ,
-                         sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<3, 3>* > > >;
+sheaf::auto_block<forward_list< geometry::d_bounding_box<3, 3>* > ,
+                         sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<3, 3>* > > >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<4, 4>* > >;
+sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<4, 4>* > >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::auto_block<slist< geometry::d_bounding_box<4, 4>* > ,
-                         sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<4, 4>* > > >;
+sheaf::auto_block<forward_list< geometry::d_bounding_box<4, 4>* > ,
+                         sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<4, 4>* > > >;
 
 
 
 //==============================================================================
-// auto_block<slist<d_bounding_box<M, N> const* >,
-//            un_block_initialization_policy<slist<d_bounding_box<M, N> const*> > >;
+// auto_block<forward_list<d_bounding_box<M, N> const* >,
+//            un_block_initialization_policy<forward_list<d_bounding_box<M, N> const*> > >;
 //==============================================================================
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<1, 0> const*> >;
+sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<1, 0> const*> >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::auto_block<slist< geometry::d_bounding_box<1, 0> const*> ,
-                         sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<1, 0> const*> > >;
+sheaf::auto_block<forward_list< geometry::d_bounding_box<1, 0> const*> ,
+                         sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<1, 0> const*> > >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<1, 1> const*> >;
+sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<1, 1> const*> >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::auto_block<slist< geometry::d_bounding_box<1, 1> const*> ,
-                         sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<1, 1> const*> > >;
+sheaf::auto_block<forward_list< geometry::d_bounding_box<1, 1> const*> ,
+                         sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<1, 1> const*> > >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<2, 0> const*> >;
+sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<2, 0> const*> >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::auto_block<slist< geometry::d_bounding_box<2, 0> const*> ,
-                         sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<2, 0> const*> > >;
+sheaf::auto_block<forward_list< geometry::d_bounding_box<2, 0> const*> ,
+                         sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<2, 0> const*> > >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<2, 2> const*> >;
+sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<2, 2> const*> >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::auto_block<slist< geometry::d_bounding_box<2, 2> const*> ,
-                         sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<2, 2> const*> > >;
+sheaf::auto_block<forward_list< geometry::d_bounding_box<2, 2> const*> ,
+                         sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<2, 2> const*> > >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<3, 0> const*> >;
+sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<3, 0> const*> >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::auto_block<slist< geometry::d_bounding_box<3, 0> const*> ,
-                         sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<3, 0> const*> > >;
+sheaf::auto_block<forward_list< geometry::d_bounding_box<3, 0> const*> ,
+                         sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<3, 0> const*> > >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<3, 1> const*> >;
+sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<3, 1> const*> >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::auto_block<slist< geometry::d_bounding_box<3, 1> const*> ,
-                         sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<3, 1> const*> > >;
+sheaf::auto_block<forward_list< geometry::d_bounding_box<3, 1> const*> ,
+                         sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<3, 1> const*> > >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<3, 2> const*> >;
+sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<3, 2> const*> >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::auto_block<slist< geometry::d_bounding_box<3, 2> const*> ,
-                         sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<3, 2> const*> > >;
+sheaf::auto_block<forward_list< geometry::d_bounding_box<3, 2> const*> ,
+                         sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<3, 2> const*> > >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<3, 3> const*> >;
+sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<3, 3> const*> >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::auto_block<slist< geometry::d_bounding_box<3, 3> const*> ,
-                         sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<3, 3> const*> > >;
+sheaf::auto_block<forward_list< geometry::d_bounding_box<3, 3> const*> ,
+                         sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<3, 3> const*> > >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<4, 4> const*> >;
+sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<4, 4> const*> >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::auto_block<slist< geometry::d_bounding_box<4, 4> const*> ,
-                         sheaf::un_block_initialization_policy<slist< geometry::d_bounding_box<4, 4> const*> > >;
+sheaf::auto_block<forward_list< geometry::d_bounding_box<4, 4> const*> ,
+                         sheaf::un_block_initialization_policy<forward_list< geometry::d_bounding_box<4, 4> const*> > >;
 
 
 //==============================================================================
