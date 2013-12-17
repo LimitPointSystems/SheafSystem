@@ -20,6 +20,7 @@
 
 #include "assert_contract.h"
 #include "std_stdexcept.h"
+#include "std_iostream.h"
 #include "std_sstream.h"
 #include "std_string.h"
 

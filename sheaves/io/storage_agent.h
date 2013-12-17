@@ -40,6 +40,10 @@
 #include "sheaf_file.h"
 #endif
 
+#ifndef STD_CTIME_H
+#include "std_ctime.h"
+#endif
+
 #ifndef STD_SET_H
 #include "std_set.h"
 #endif
