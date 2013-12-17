@@ -184,14 +184,6 @@ include(${CMAKE_MODULE_PATH}/target_declarations.cmake)
 #
 include(${CMAKE_MODULE_PATH}/find_prerequisites.cmake)
 
-#
-# Detect C++11 features
-#
-message(STATUS " ")
-message(STATUS "Checking for C++11 Compliance - ")
-message(STATUS " ")
-
-include(${CMAKE_MODULE_PATH}/CheckCXX11Features.cmake)
 
 #
 # Utility function to add components to a system.
