@@ -37,11 +37,6 @@ add_subdirectory(examples)
 set_scope_sources()
 
 #
-# Set compiler flags for all build configurations
-#
-set_compiler_flags()
-
-#
 # Set up output directories
 #
 create_output_dirs()
