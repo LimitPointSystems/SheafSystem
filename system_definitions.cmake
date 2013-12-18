@@ -74,7 +74,7 @@ elseif(CMAKE_HOST_SYSTEM_NAME MATCHES "Windows" AND CMAKE_CXX_COMPILER_ID MATCHE
 # OS is 64 bit linux, compiler is g++
 elseif(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux" AND CMAKE_COMPILER_IS_GNUCXX AND CMAKE_SIZEOF_VOID_P MATCHES "8")
     set(LINUX64GNU ON CACHE BOOL "GNU compiler in use.")
-    set(CMAKE_CXX_FLAGS "-std=gnu++0x")
+    set(CMAKE_CXX_FLAGS "-std=c++0x")
 # OS is 64 bit linux, compiler is icpc
 elseif(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux" AND CMAKE_CXX_COMPILER_ID MATCHES "Intel" AND CMAKE_SIZEOF_VOID_P MATCHES "8")
     set(LINUX64INTEL ON CACHE BOOL "Intel compiler in use.")
@@ -295,7 +295,8 @@ function(set_compiler_flags)
             endif()
        endif() # ENABLE_COVERAGE        
     elseif(LINUX64GNU)
-        set(LPS_CXX_FLAGS "-ansi -m64 -Wno-deprecated")       
+        #set(LPS_CXX_FLAGS "-ansi -m64 -Wno-deprecated")
+        set(LPS_CXX_FLAGS "-m64 -Wno-deprecated") 
     #$$TODO: A 32 bit option is not needed. Do away with this case.
     else() # Assume 32-bit i686 linux for the present
        set(LPS_CXX_FLAGS "-ansi -m32 -Wno-deprecated ")

@@ -27,6 +27,10 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/component_definitions.cmake)
 status_message("Processing ${PROJECT_NAME}")
 
 #
+# Set compiler flags for all build configurations
+#
+set_compiler_flags() 
+#
 # Set up output directories
 #
 create_output_dirs()
