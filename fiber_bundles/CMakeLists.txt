@@ -29,7 +29,7 @@ status_message("Processing ${PROJECT_NAME}")
 #
 # Set compiler flags for all build configurations
 #
-set_compiler_flags()
+#set_compiler_flags()
 
 #
 # Set up output directories

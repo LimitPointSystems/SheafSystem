@@ -47,6 +47,11 @@ cmake_minimum_required(VERSION 2.8.12)
 include(system_definitions.cmake)
 
 #
+# Set compiler flags for all build configurations
+#
+set_compiler_flags()
+
+#
 # Add components to the system
 #
 add_components()
