@@ -273,7 +273,7 @@ box_list(const section_evaluator& xeval,
   for(size_type i=ilb; i<=iub; ++i)
   {
     const box_list_type& lbox_list = _bins[i];
-    xresult.insert(xresult.begin(), lbox_list.begin(), lbox_list.end());
+    xresult.insert_after(xresult.before_begin(), lbox_list.begin(), lbox_list.end());
   }
 
   // Postconditions:
@@ -326,7 +326,7 @@ box_list(const section_evaluator& xeval,
     for(size_type j=jlb; j<=jub; ++j)
     {
       const box_list_type& lbox_list = _bins[bin_id(i, j)];
-      xresult.insert(xresult.begin(), lbox_list.begin(), lbox_list.end());
+      xresult.insert_after(xresult.before_begin(), lbox_list.begin(), lbox_list.end());
     }
   }
 
@@ -384,7 +384,7 @@ box_list(const section_evaluator& xeval,
       for(size_type k=klb; k<=kub; ++k)
       {
 	const box_list_type& lbox_list = _bins[bin_id(i, j, k)];
-	xresult.insert(xresult.begin(), lbox_list.begin(), lbox_list.end());
+	xresult.insert_after(xresult.before_begin(), lbox_list.begin(), lbox_list.end());
       }
     }
   }
@@ -443,7 +443,7 @@ box_list(const section_evaluator& xeval,
       for(size_type k=klb; k<=kub; ++k)
       {
 	const box_list_type& lbox_list = _bins[bin_id(i, j, k)];
-	xresult.insert(xresult.begin(), lbox_list.begin(), lbox_list.end());
+	xresult.insert_after(xresult.before_begin(), lbox_list.begin(), lbox_list.end());
       }
     }
   }
@@ -503,7 +503,7 @@ box_list(const section_evaluator& xeval,
       for(size_type k=klb; k<=kub; ++k)
       {
 	const box_list_type& lbox_list = _bins[bin_id(i, j, k)];
-	xresult.insert(xresult.begin(), lbox_list.begin(), lbox_list.end());
+	xresult.insert_after(xresult.before_begin(), lbox_list.begin(), lbox_list.end());
       }
     }
   }

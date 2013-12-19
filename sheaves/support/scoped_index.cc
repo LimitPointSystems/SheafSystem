@@ -167,14 +167,10 @@ sheaf::deep_size(const scoped_index& xp, bool xinclude_shallow)
 // TEMPLATE SPECIALIZATIONS
 // ===========================================================
 
-SHEAF_BEGIN_HASH_NAMESPACE
-
 size_t
-hash<sheaf::scoped_index>::
+std::hash<sheaf::scoped_index>::
 operator()(sheaf::scoped_index xindex) const
 {
   return xindex.hub_pod();
 }
-
-SHEAF_END_HASH_NAMESPACE
 

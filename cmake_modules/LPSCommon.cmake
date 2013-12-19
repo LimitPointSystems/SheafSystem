@@ -153,14 +153,6 @@ function(check_cxx_includes)
     check_include_file_cxx(valarray HAVE_VALARRAY)
     check_include_file_cxx(vector HAVE_VECTOR)
 
-    # C++ TR1 Extensions
-
-    if(NOT (HAVE_UNORDERED_MAP OR HAVE_TR1_UNORDERED_MAP))
-        status_message("Looking for C++ TR1 Headers") 
-        check_include_file_cxx(tr1/unordered_map HAVE_TR1_UNORDERED_MAP) 
-        check_include_file_cxx(tr1/unordered_set HAVE_TR1_UNORDERED_SET)
-    endif()
-
 endfunction(check_cxx_includes)
 
 #

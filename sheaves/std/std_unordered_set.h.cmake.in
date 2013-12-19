@@ -18,31 +18,7 @@
 #ifndef STD_UNORDERED_SET_H
 #define STD_UNORDERED_SET_H
 
-#cmakedefine HAVE_TR1_UNORDERED_SET 1
-
-#ifdef HAVE_TR1_UNORDERED_SET
-
-#include <tr1/unordered_set>
-
-namespace std
-{
-  // Move unordered_set to the std namespace.
-
-  using std::tr1::unordered_set;
-  using std::tr1::unordered_multiset;
-}
-
-#define SHEAF_BEGIN_HASH_NAMESPACE namespace std { namespace tr1 {
-#define SHEAF_END_HASH_NAMESPACE }}
-
-#else
-
 #include <unordered_set>
-
-#define SHEAF_BEGIN_HASH_NAMESPACE namespace std {
-#define SHEAF_END_HASH_NAMESPACE }
-
-#endif
 
 // If hash_cstr has not been defined by std_unordered_set,
 // define it.

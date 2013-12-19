@@ -18,45 +18,6 @@
 #ifndef STD_FORWARD_LIST_H
 #define STD_FORWARD_LIST_H
 
-#ifndef STD_STRING_H
-#include "std_string.h"
-#endif
-
-// Autoconf hooks; will be replaced with #define if have <forward_list>
-// or commented out if not.
-
-#cmakedefine HAVE_FORWARD_LIST 1
-
-#ifdef HAVE_FORWARD_LIST
-
-// This environment has <forward_list>.
-
 #include <forward_list>
-
-#else
-
-// This environment does not have an forward_list class;
-// simulate with list.
-
-#include <list>
-
-namespace std
-{
-
-template <class T, class A = allocator<T> > class forward_list : public list<T, A> 
-{ 
-  public:
-
-  typedef typename list<T>::iterator forward_iterator;
-
-  forward_iterator erase_after(forward_iterator pos)
-  {
-    return erase(++pos);
-  }
-};
-
-}
-
-#endif // HAVE_FORWARD_LIST
 
 #endif // STD_FORWARD_LIST_H
