@@ -296,7 +296,7 @@ function(set_compiler_flags)
        endif() # ENABLE_COVERAGE        
     elseif(LINUX64GNU)
         #set(LPS_CXX_FLAGS "-ansi -m64 -Wno-deprecated")
-        set(LPS_CXX_FLAGS "-m64 -Wno-deprecated") 
+        set(LPS_CXX_FLAGS "-m64 -Wno-deprecated -Wno-union-with-long-double") 
     #$$TODO: A 32 bit option is not needed. Do away with this case.
     else() # Assume 32-bit i686 linux for the present
        set(LPS_CXX_FLAGS "-ansi -m32 -Wno-deprecated ")
