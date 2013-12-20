@@ -190,12 +190,12 @@ private:
 ///
 /// Pushes xsrc.property() to xdst.property().
 ///
-${derived}& operator>>(const ${derived}& xsrc, ${derived}& xdst);
+SHEAF_DLL_SPEC ${derived}& operator>>(const ${derived}& xsrc, ${derived}& xdst);
 
 ///
 /// Inserts ${derived} xfield into ostream xos.
 ///
-std::ostream& operator<<(std::ostream& xos, const ${derived}& xfield);
+SHEAF_DLL_SPEC std::ostream& operator<<(std::ostream& xos, const ${derived}& xfield);
 
 } // namespace fields
 

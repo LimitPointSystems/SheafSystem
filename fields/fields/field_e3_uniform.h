@@ -190,12 +190,12 @@ private:
 ///
 /// Pushes xsrc.property() to xdst.property().
 ///
-field_e3_uniform& operator>>(const field_e3_uniform& xsrc, field_e3_uniform& xdst);
+SHEAF_DLL_SPEC field_e3_uniform& operator>>(const field_e3_uniform& xsrc, field_e3_uniform& xdst);
 
 ///
 /// Inserts field_e3_uniform xfield into ostream xos.
 ///
-std::ostream& operator<<(std::ostream& xos, const field_e3_uniform& xfield);
+SHEAF_DLL_SPEC std::ostream& operator<<(std::ostream& xos, const field_e3_uniform& xfield);
 
 } // namespace fields
 

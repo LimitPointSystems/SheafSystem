@@ -190,12 +190,12 @@ private:
 ///
 /// Pushes xsrc.property() to xdst.property().
 ///
-field_at2& operator>>(const field_at2& xsrc, field_at2& xdst);
+SHEAF_DLL_SPEC field_at2& operator>>(const field_at2& xsrc, field_at2& xdst);
 
 ///
 /// Inserts field_at2 xfield into ostream xos.
 ///
-std::ostream& operator<<(std::ostream& xos, const field_at2& xfield);
+SHEAF_DLL_SPEC std::ostream& operator<<(std::ostream& xos, const field_at2& xfield);
 
 } // namespace fields
 
