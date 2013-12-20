@@ -295,8 +295,11 @@ function(set_compiler_flags)
             endif()
        endif() # ENABLE_COVERAGE        
     elseif(LINUX64GNU)
-        #set(LPS_CXX_FLAGS "-ansi -m64 -Wno-deprecated")
-        set(LPS_CXX_FLAGS "-m64 -Wno-deprecated -Wno-union-with-long-double") 
+        # 12/20/13 -- added "-Wno-abi to suppress the following:
+        #"SheafSystem/sheaves/support/primitive_attributes.h:115: 
+        #note: The ABI of passing union with long double has changed in GCC 4.4"
+        # The probrem is still there; we have only suppressed the warning.
+        set(LPS_CXX_FLAGS "-m64 -Wno-deprecated -Wno-abi") 
     #$$TODO: A 32 bit option is not needed. Do away with this case.
     else() # Assume 32-bit i686 linux for the present
        set(LPS_CXX_FLAGS "-ansi -m32 -Wno-deprecated ")
