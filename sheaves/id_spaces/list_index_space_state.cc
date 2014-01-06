@@ -238,7 +238,7 @@ map_rep_insert_entry(pod_type xdomain_id, pod_type xrange_id)
     // The domain id is not in the map.  Construct entries needed to insert
     // the id into the map.
 
-    if(xdomain_id > _end)
+    if((!is_valid(_end) && xdomain_id > 0) || (xdomain_id > _end))
     {
       // Add invalid entries into the map so that the next entry inserted
       // will be the xdomain_id.
