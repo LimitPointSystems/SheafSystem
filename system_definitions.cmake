@@ -73,8 +73,14 @@ elseif(CMAKE_HOST_SYSTEM_NAME MATCHES "Windows" AND CMAKE_CXX_COMPILER_ID MATCHE
     set(WIN64INTEL ON CACHE BOOL "Intel compiler in use.")
 # OS is 64 bit linux, compiler is g++
 elseif(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux" AND CMAKE_COMPILER_IS_GNUCXX AND CMAKE_SIZEOF_VOID_P MATCHES "8")
-    set(LINUX64GNU ON CACHE BOOL "GNU compiler in use.")
-    set(CMAKE_CXX_FLAGS "-std=c++0x")
+    execute_process(COMMAND ${CMAKE_CXX_COMPILER} -dumpversion
+                OUTPUT_VARIABLE GCC_VERSION)
+        if(GCC_VERSION VERSION_EQUAL 4.4 OR GCC_VERSION VERSION_GREATER 4.4 )            
+            set(CMAKE_CXX_FLAGS "-std=c++0x")
+        elseif(GCC_VERSION VERSION_LESS 4.2.2)
+            message(FATAL "g++ ${GCC_VERSION} is unsupported. Version must be >= 4.2.2")                
+        endif()
+   set(LINUX64GNU ON CACHE BOOL "GNU CXX compiler ${GCC_VERSION} in use.")
 # OS is 64 bit linux, compiler is icpc
 elseif(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux" AND CMAKE_CXX_COMPILER_ID MATCHES "Intel" AND CMAKE_SIZEOF_VOID_P MATCHES "8")
     set(LINUX64INTEL ON CACHE BOOL "Intel compiler in use.")
@@ -319,7 +325,7 @@ function(set_compiler_flags)
         set(CMAKE_EXE_LINKER_FLAGS_DEBUG_CONTRACTS "${LPS_EXE_LINKER_FLAGS} /DEBUG" 
             CACHE STRING "Flags used by the linker for executables for Debug_contracts builds")            
         set(CMAKE_MODULE_LINKER_FLAGS_DEBUG_CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG" 
-            CACHE STRING "Debugno-contracts linker flags - binding libs" )
+            CACHE STRING "Debug_contracts linker flags - binding libs" )
     else() # Linux
         set(CMAKE_CXX_FLAGS_DEBUG_CONTRACTS "${LPS_CXX_FLAGS} -g " 
             CACHE STRING "Flags used by the C++ compiler for Debug_contracts builds" )
@@ -347,7 +353,7 @@ function(set_compiler_flags)
              CACHE STRING "Flags used by the linker for executables for Debug_contracts builds")                  
         set(CMAKE_MODULE_LINKER_FLAGS_DEBUG_NO_CONTRACTS 
             "${LPS_SHARED_LINKER_FLAGS} /DEBUG" 
-            CACHE STRING "Debugno-no-contracts linker flags - binding libs" )
+            CACHE STRING "Debug_no_contracts linker flags - binding libs" )
     else()
         set(CMAKE_CXX_FLAGS_DEBUG_NO_CONTRACTS "${LPS_CXX_FLAGS} -g -DNDEBUG" CACHE
             STRING "Flags used by the C++ compiler for Debug_no_contracts builds" )
