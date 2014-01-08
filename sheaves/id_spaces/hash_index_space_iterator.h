@@ -89,7 +89,7 @@ protected:
   ///
   /// The type of hub id map.
   ///
-  typedef std::unordered_map<pod_type, pod_type> to_hub_type;
+  typedef SHEAF_UNORDERED_NAMESPACE::unordered_map<pod_type, pod_type> to_hub_type;
 
   ///
   /// The hash to hub ids.

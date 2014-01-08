@@ -27,6 +27,7 @@
 #include "hub_index_space_handle.h"
 
 using namespace std;
+using namespace SHEAF_UNORDERED_NAMESPACE;
 
 // ===========================================================
 // SPACE FACTORY FACET

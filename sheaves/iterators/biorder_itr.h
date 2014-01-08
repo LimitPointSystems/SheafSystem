@@ -162,7 +162,7 @@ typedef biorder_itr< std::set<pod_index_type> > set_biorder_itr;
 ///
 /// Biorder_itr<T> using unordered_set for _has_visited markers.
 ///
-typedef biorder_itr< std::unordered_set<pod_index_type> > unordered_set_biorder_itr;
+typedef biorder_itr< SHEAF_UNORDERED_NAMESPACE::unordered_set<pod_index_type> > unordered_set_biorder_itr;
  
 } // namespace sheaf
 

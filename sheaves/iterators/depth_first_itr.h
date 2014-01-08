@@ -763,31 +763,31 @@ put_has_visited(pod_index_type xhub_id, bool xvalue);
 template <>
 SHEAF_DLL_SPEC
 void
-depth_first_itr< std::unordered_set<pod_index_type> >::
+depth_first_itr< SHEAF_UNORDERED_NAMESPACE::unordered_set<pod_index_type> >::
 clear_has_visited();
 
 template <>
 SHEAF_DLL_SPEC
 void
-depth_first_itr< std::unordered_set<pod_index_type> >::
+depth_first_itr< SHEAF_UNORDERED_NAMESPACE::unordered_set<pod_index_type> >::
 reserve_has_visited(pod_index_type xub);
 
 template <>
 SHEAF_DLL_SPEC
 bool
-depth_first_itr< std::unordered_set<pod_index_type> >::
+depth_first_itr< SHEAF_UNORDERED_NAMESPACE::unordered_set<pod_index_type> >::
 has_visited(pod_index_type xhub_id) const;
 
 template <>
 SHEAF_DLL_SPEC
 void
-depth_first_itr< std::unordered_set<pod_index_type> >::
+depth_first_itr< SHEAF_UNORDERED_NAMESPACE::unordered_set<pod_index_type> >::
 initialize_has_visited(const abstract_poset_member& xanchor);
 
 template <>
 SHEAF_DLL_SPEC
 void
-depth_first_itr< std::unordered_set<pod_index_type> >::
+depth_first_itr< SHEAF_UNORDERED_NAMESPACE::unordered_set<pod_index_type> >::
 put_has_visited(pod_index_type xhub_id, bool xvalue);
  
 } // namespace sheaf

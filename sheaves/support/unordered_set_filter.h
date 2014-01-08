@@ -46,14 +46,14 @@ public:
   ///
   /// Creates an instance for unordered_set xfilter.
   ///
-  unordered_set_filter(const std::unordered_set<pod_index_type>& xfilter)
+  unordered_set_filter(const SHEAF_UNORDERED_NAMESPACE::unordered_set<pod_index_type>& xfilter)
     : _filter(xfilter)
   {};
   
   ///
   /// The filter.
   ///
-  const std::unordered_set<pod_index_type>& filter() const
+  const SHEAF_UNORDERED_NAMESPACE::unordered_set<pod_index_type>& filter() const
   {
     return _filter;
   };
@@ -68,7 +68,7 @@ public:
 
 private:
 
-  const std::unordered_set<pod_index_type>& _filter;
+  const SHEAF_UNORDERED_NAMESPACE::unordered_set<pod_index_type>& _filter;
 };
 
 } // end namespace sheaf

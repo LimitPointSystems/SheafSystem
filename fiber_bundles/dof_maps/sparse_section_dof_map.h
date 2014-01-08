@@ -198,7 +198,7 @@ private:
   ///
   /// Type of value map.
   ///
-  typedef std::unordered_map<pod_index_type, double> val_map_type;
+  typedef SHEAF_UNORDERED_NAMESPACE::unordered_map<pod_index_type, double> val_map_type;
 
   ///
   /// Map from id to value.

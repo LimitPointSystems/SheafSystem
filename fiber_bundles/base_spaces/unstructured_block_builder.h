@@ -110,7 +110,7 @@ public:
   ///
   /// The type of the glue map.
   ///
-  typedef std::unordered_map<int, int> glue_map_type;
+  typedef SHEAF_UNORDERED_NAMESPACE::unordered_map<int, int> glue_map_type;
 
   //$$TYPE_SAFE_IDS_ISSUE: Remove when no longer used?
 
@@ -195,7 +195,7 @@ private:
   /// A map from template member index to
   /// result member index for the current copy of the template.
   ///
-  std::unordered_map<int, int> _template_map;
+  SHEAF_UNORDERED_NAMESPACE::unordered_map<int, int> _template_map;
 
   ///
   /// Max cell dimension of template.

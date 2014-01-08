@@ -18,9 +18,39 @@
 #ifndef STD_UNORDERED_SET_H
 #define STD_UNORDERED_SET_H
 
+#cmakedefine HAVE_UNORDERED_SET 1
+
+#ifdef HAVE_UNORDERED_SET
+
+// Using unordered_set
+
 #include <unordered_set>
 
-// If hash_cstr has not been defined by std_unordered_set,
+#ifndef SHEAF_UNORDERED_NAMESPACE
+#define SHEAF_UNORDERED_NAMESPACE std
+#define SHEAF_BEGIN_UNORDERED_NAMESPACE namespace std {
+#define SHEAF_END_UNORDERED_NAMESPACE }
+#endif
+
+#else
+
+// Using tr1/unordered_set
+
+#include <tr1/unordered_set>
+
+#ifndef SHEAF_UNORDERED_NAMESPACE
+#define SHEAF_UNORDERED_NAMESPACE std::tr1
+#define SHEAF_BEGIN_UNORDERED_NAMESPACE namespace std { namespace tr1 {
+#define SHEAF_END_UNORDERED_NAMESPACE }}
+#endif
+
+#endif // HAVE_UNORDERED_SET
+
+
+
+//////////////////////////////////////////////////////////
+
+// If hash_cstr has not been defined by std_unordered_map,
 // define it.
 
 #ifndef HAVE_HASH_CSTR
@@ -30,8 +60,8 @@
 #include "std_cstring.h"
 #endif
 
-namespace std
-{
+SHEAF_BEGIN_UNORDERED_NAMESPACE
+
   struct key_test
   {
     public:
@@ -51,8 +81,9 @@ namespace std
         return size_t(__h);
       }
   };
-}
 
-#endif
+SHEAF_END_UNORDERED_NAMESPACE
+
+#endif // HAVE_HASH_CSTR
 
 #endif // STD_UNORDERED_SET_H

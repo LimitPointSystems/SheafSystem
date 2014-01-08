@@ -3823,8 +3823,7 @@ struct SHEAF_DLL_SPEC index_traits<scoped_index>
 // But swig would ignore the namespace and template declaration
 // any way, so just don't process it.
 
-namespace std
-{
+SHEAF_BEGIN_UNORDERED_NAMESPACE
 
 ///
 /// Specialization of hash function to scoped_index.
@@ -3834,7 +3833,7 @@ template<> struct SHEAF_DLL_SPEC hash<sheaf::scoped_index>
   size_t operator()(sheaf::scoped_index xindex) const;
 };
  
-} // namespace std
+SHEAF_END_UNORDERED_NAMESPACE
 
 #endif // SWIG
 

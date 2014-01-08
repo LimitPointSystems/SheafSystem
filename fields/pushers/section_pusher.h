@@ -264,7 +264,7 @@ private:
   ///
   /// The typeof map from evaluation subposet member ids to branch base space ids.
   ///
-  typedef std::unordered_multimap<pod_index_type, scoped_index> chart_to_branch_map_type;
+  typedef SHEAF_UNORDERED_NAMESPACE::unordered_multimap<pod_index_type, scoped_index> chart_to_branch_map_type;
 
   ///
   /// Creates a map from evaluation subposet member ids to branch base space ids.

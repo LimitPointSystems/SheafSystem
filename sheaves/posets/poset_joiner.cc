@@ -38,6 +38,7 @@
 
 using namespace sheaf;
 using namespace std;
+using namespace SHEAF_UNORDERED_NAMESPACE;
 
 //#define DIAGNOSTIC_OUTPUT
 

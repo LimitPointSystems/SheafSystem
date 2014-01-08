@@ -168,7 +168,7 @@ sheaf::deep_size(const scoped_index& xp, bool xinclude_shallow)
 // ===========================================================
 
 size_t
-std::hash<sheaf::scoped_index>::
+SHEAF_UNORDERED_NAMESPACE::hash<sheaf::scoped_index>::
 operator()(sheaf::scoped_index xindex) const
 {
   return xindex.hub_pod();

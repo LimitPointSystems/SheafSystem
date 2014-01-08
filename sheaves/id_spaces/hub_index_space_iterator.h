@@ -90,7 +90,7 @@ protected:
   ///
   /// The type of rem map.
   ///
-  typedef std::unordered_map<pod_type, pod_type> rem_type;
+  typedef SHEAF_UNORDERED_NAMESPACE::unordered_map<pod_type, pod_type> rem_type;
 
   ///
   /// Iterator over the members.

@@ -38,6 +38,7 @@
 #include "std_strstream.h"
 
 using namespace std;
+using namespace SHEAF_UNORDERED_NAMESPACE;
 
 // ===========================================================
 // POSET_CRG_STATE FACET

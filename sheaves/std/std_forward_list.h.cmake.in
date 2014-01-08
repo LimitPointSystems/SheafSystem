@@ -18,6 +18,28 @@
 #ifndef STD_FORWARD_LIST_H
 #define STD_FORWARD_LIST_H
 
+#cmakedefine HAVE_FORWARD_LIST 1
+
+#ifdef HAVE_FORWARD_LIST
+
 #include <forward_list>
+
+#else
+
+// This environment does not have an forward_list class;
+// simulate with list.
+
+#include <list>
+
+namespace std
+{
+
+  template <class T, class A = allocator<T> > class forward_list : public list<T, A> 
+  { 
+  };
+
+}
+
+#endif // HAVE_FORWARD_LIST
 
 #endif // STD_FORWARD_LIST_H

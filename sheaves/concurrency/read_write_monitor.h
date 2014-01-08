@@ -310,7 +310,7 @@ private:
   ///
   /// Access state for each thread
   ///
-  mutable std::unordered_map<pthread_t, thread_state_t> _thread_state;
+  mutable SHEAF_UNORDERED_NAMESPACE::unordered_map<pthread_t, thread_state_t> _thread_state;
 
   ///
   /// Thread lock.

@@ -135,7 +135,7 @@ private:
   ///
   /// The type of allocation set.
   ///
-  typedef std::unordered_set<T*, ptr_hash<T*>, ptr_key_test<T*> > allocated_type;
+  typedef SHEAF_UNORDERED_NAMESPACE::unordered_set<T*, ptr_hash<T*>, ptr_key_test<T*> > allocated_type;
 
   ///
   /// Copy constructor; disabled.
