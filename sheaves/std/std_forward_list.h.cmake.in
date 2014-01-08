@@ -36,10 +36,36 @@ namespace std
 
   template <class T, class A = allocator<T> > class forward_list : public list<T, A> 
   { 
+    public:
+
+    typename forward_list<T>::iterator erase_after(typename forward_list<T>::iterator pos)
+    {
+      return erase(++pos);
+    }
   };
 
 }
 
 #endif // HAVE_FORWARD_LIST
+
+// Add a function to the std namespace that allows us to push
+// a range of ids to the beginning of a list.
+
+namespace std
+{
+  // Push range (xbegin, xrange] to the beginning of list xlist.
+
+  template<typename T>
+  void
+  push_front(forward_list<T> xlist, typename forward_list<T>::const_iterator xbegin, typename forward_list<T>::const_iterator xend)
+  {
+
+#ifdef HAVE_FORWARD_LIST
+    xlist.insert_after(xlist.before_begin(), xbegin, xend);
+#else
+    xlist.insert(xlist.begin(), xbegin, xend);
+#endif
+  }
+}
 
 #endif // STD_FORWARD_LIST_H
