@@ -179,12 +179,12 @@ function(configure_std_headers)
 
     # Glob all the .h.cmake.in files in std
     file(GLOB STD_INC_INS RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}/std 
-        ${CMAKE_CURRENT_SOURCE_DIR}/std/*.h.cmake.in)
+        ${CMAKE_CURRENT_SOURCE_DIR}/std/*.h.in)
 
     # Configure the .h file from each .h.cmake.in
     foreach(input_file ${STD_INC_INS})
-        # Strip .cmake.in from globbed filenames for output filenames
-        string(REGEX REPLACE ".cmake.in$" ""  std_h ${input_file})
+        # Strip .in from globbed filenames for output filenames
+        string(REGEX REPLACE ".in$" ""  std_h ${input_file})
         message(STATUS "Creating ${CMAKE_BINARY_DIR}/include/${std_h} from std/${input_file}")
         list(APPEND std_incs ${CMAKE_BINARY_DIR}/include/${std_h})
         set(STD_HEADERS ${std_incs} CACHE STRING "STD Includes" FORCE)          

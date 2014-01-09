@@ -20,6 +20,8 @@
 
 set(CLUSTER ${CMAKE_CURRENT_BINARY_DIR})
 
+configure_file(singly_linked_list.h.in ${CMAKE_BINARY_DIR}/include/singly_linked_list.h)
+
 #
 # Library sources.
 #
