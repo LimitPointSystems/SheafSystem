@@ -36,7 +36,7 @@
 #include "tern.h"
 
 using namespace std;
-using namespace SHEAF_UNORDERED_NAMESPACE;
+using namespace unordered;
 using namespace fields; // Workaround for MS C++ bug.
 
 //#define DIAGNOSTIC_OUTPUT 1

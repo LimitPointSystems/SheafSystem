@@ -34,7 +34,6 @@
 #include "postorder_iterator.h"
 #include "primitives_poset.h"
 #include "primitives_poset_schema.h"
-#include "std_strstream.h"
 #include "subposet.h"
 #include "subposet_member_iterator.h"
 #include "subposet_state.h"

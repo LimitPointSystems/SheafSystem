@@ -21,7 +21,7 @@
 
 #include "assert_contract.h"
 #include "std_iostream.h"
-#include "std_strstream.h"
+#include "std_sstream.h"
 #include "std_stdexcept.h"
 
 using namespace std;
@@ -173,7 +173,7 @@ error_message(level_type xlevel, const std::string& xfile, int xline, const std:
 
   _level = xlevel;
   _source = xfile;
-  strstream lstrm;
+  stringstream lstrm;
   lstrm << xline;
   string lline;
   lstrm >> lline;

@@ -34,7 +34,7 @@
 #include "structured_block_3d.h"
 
 using namespace std;
-using namespace SHEAF_UNORDERED_NAMESPACE;
+using namespace unordered;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 ///

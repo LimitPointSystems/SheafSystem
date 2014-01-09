@@ -226,7 +226,7 @@ private:
   ///
   /// The type of the explicit value map.
   ///
-  typedef SHEAF_UNORDERED_NAMESPACE::unordered_map<pod_type, explicit_value_type*> explicit_value_map_type;
+  typedef unordered::unordered_map<pod_type, explicit_value_type*> explicit_value_map_type;
 
   ///
   /// The map from domain ids to explicit values.

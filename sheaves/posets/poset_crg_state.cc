@@ -35,10 +35,9 @@
 #include "std_iostream.h"
 #include "std_set.h"
 #include "std_string.h"
-#include "std_strstream.h"
 
 using namespace std;
-using namespace SHEAF_UNORDERED_NAMESPACE;
+using namespace unordered;
 
 // ===========================================================
 // POSET_CRG_STATE FACET

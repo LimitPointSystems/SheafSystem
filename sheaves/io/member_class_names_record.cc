@@ -269,7 +269,6 @@ transfer_poset_to_internal_buffer()
 
   // Have to copy stringstream to string
   // because can't get C string from stringstream.
-  // Could use strstream, but that's error-prone and not portable.
 
   _str_buf = lstream.str();
 

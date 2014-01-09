@@ -276,7 +276,7 @@ protected:
   ///
   /// The set of reserved term ids.
   ///
-  SHEAF_UNORDERED_NAMESPACE::unordered_set<pod_type> _reserved_term_ids;
+  unordered::unordered_set<pod_type> _reserved_term_ids;
   
 private:
 
@@ -459,7 +459,7 @@ protected:
   ///
   /// The type of rem map.
   ///
-  typedef SHEAF_UNORDERED_NAMESPACE::unordered_map<pod_type, pod_type> rem_type;
+  typedef unordered::unordered_map<pod_type, pod_type> rem_type;
 
   ///
   /// The reflexive reduction of the rem map.

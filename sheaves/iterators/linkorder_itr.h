@@ -162,7 +162,7 @@ typedef linkorder_itr< std::set<pod_index_type> > set_linkorder_itr;
 ///
 /// Linkorder_itr<T> using unordered_set for _has_visited markers.
 ///
-typedef linkorder_itr< SHEAF_UNORDERED_NAMESPACE::unordered_set<pod_index_type> > unordered_set_linkorder_itr;
+typedef linkorder_itr< unordered::unordered_set<pod_index_type> > unordered_set_linkorder_itr;
  
 } // namespace sheaf
 

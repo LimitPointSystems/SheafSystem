@@ -647,7 +647,7 @@ private:
   ///
   /// The type of map from id to explicit dof_tuple_id.
   ///
-  typedef SHEAF_UNORDERED_NAMESPACE::unordered_map<pod_index_type, pod_index_type> explicit_dof_tuple_map_type;
+  typedef unordered::unordered_map<pod_index_type, pod_index_type> explicit_dof_tuple_map_type;
 
   ///
   /// The map from id to explicit dof_tuple_id.

@@ -25,7 +25,7 @@
 #include "std_unordered_set.h"
 
 using namespace std;
-using namespace SHEAF_UNORDERED_NAMESPACE;
+using namespace unordered;
 using namespace sheaf; // workaround for MS C++ bug.
 
 //==============================================================================

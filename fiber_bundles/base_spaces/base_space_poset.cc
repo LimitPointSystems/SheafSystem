@@ -31,7 +31,7 @@
 #include "poset_handle_factory.h"
 #include "poset_type.h"
 #include "preorder_iterator.h"
-#include "std_strstream.h"
+#include "std_sstream.h"
 #include "zone_nodes_block_crg_interval.h"
 
 using namespace std;
@@ -2147,7 +2147,7 @@ d_cells_name(int xdb, int xmax_db)
   }
   else
   {
-    strstream lsp_name_stream;
+    stringstream lsp_name_stream;
     lsp_name_stream << poset_path::reserved_prefix() << xdb << "_cells";
     lsp_name_stream >> result;
   }

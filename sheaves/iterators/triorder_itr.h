@@ -165,7 +165,7 @@ typedef triorder_itr< std::set<pod_index_type> > set_triorder_itr;
 ///
 /// Triorder_itr<T> using unordered_set for _has_visited markers.
 ///
-typedef triorder_itr< SHEAF_UNORDERED_NAMESPACE::unordered_set<pod_index_type> > unordered_set_triorder_itr;
+typedef triorder_itr< unordered::unordered_set<pod_index_type> > unordered_set_triorder_itr;
 
 
 #endif // ifndef TRIORDER_ITR_H

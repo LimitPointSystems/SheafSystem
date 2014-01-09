@@ -50,7 +50,7 @@ class index_iterator;
 #include "std_cstdlib.h"
 #include "std_iomanip.h"
 #include "std_sstream.h"
-#include "std_strstream.h"
+#include "std_sstream.h"
 #include "subposet.h"
 #include "subposet_state.h"
 #include "subposet_member_iterator.h"
@@ -7642,7 +7642,7 @@ version_to_name(int xversion) const
   }
   else
   {
-    strstream str;
+    stringstream str;
     str << VERSION_PREFIX() << xversion;
     str >> result;
   }

@@ -28,7 +28,7 @@
 #include "primitive_value.h"
 #include "hub_index_space_iterator.h"
 #include "reserved_primary_index_space_state.h"
-#include "std_strstream.h"
+#include "std_sstream.h"
 
 using namespace std;
 
@@ -667,7 +667,7 @@ next_term_name()
 
   // Body:
 
-  std::strstream lstr;
+  std::stringstream lstr;
   lstr << term_prefix() << term_id_end();
   lstr >> result;
 

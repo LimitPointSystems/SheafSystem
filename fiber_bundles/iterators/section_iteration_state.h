@@ -153,7 +153,7 @@ public:
   ///
   /// The map from discretization to sequence ids.
   ///
-  SHEAF_UNORDERED_NAMESPACE::unordered_map<pod_index_type, pod_index_type>* disc_to_seq_map;
+  unordered::unordered_map<pod_index_type, pod_index_type>* disc_to_seq_map;
 
   ///
   /// The next sequence id.

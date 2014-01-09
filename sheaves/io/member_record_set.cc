@@ -30,9 +30,9 @@
 #include "sheaf_file.h"
 #include "std_unordered_set.h"
 #include "std_string.h"
-#include "std_strstream.h"
+#include "std_sstream.h"
 #include "std_iostream.h"
-#include "std_strstream.h"
+#include "std_sstream.h"
 
 using namespace std;
 
@@ -166,7 +166,7 @@ member_record_set(const sheaf_file& xfile,
 
   poset_state_handle& lposet = _scaffold.structure();
 
-  strstream linterval_id_space_str;
+  stringstream linterval_id_space_str;
   linterval_id_space_str << _record_id_space.name() << "_interval";
   linterval_id_space_str >> _interval_id_space_name;
 

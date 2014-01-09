@@ -46,7 +46,6 @@
 #include "sheaves_namespace.h"
 #include "hub_index_space_handle.h"
 #include "std_set.h"
-#include "std_strstream.h"
 #include "std_vector.h"
 #include "stop_watch.h"
 #include "subposet.h"

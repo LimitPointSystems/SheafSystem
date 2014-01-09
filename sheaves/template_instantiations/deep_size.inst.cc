@@ -23,7 +23,7 @@
 #include "scoped_index.h"
 
 using namespace std;
-using namespace SHEAF_UNORDERED_NAMESPACE;
+using namespace unordered;
 using namespace sheaf; // workaround for MS C++ bug.
 
 #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS

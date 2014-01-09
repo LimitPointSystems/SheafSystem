@@ -239,7 +239,7 @@ protected:
   ///
   /// The type of the inverse of the rem map.
   ///
-  typedef SHEAF_UNORDERED_NAMESPACE::unordered_multimap<pod_type, pod_type> rem_inv_type;
+  typedef unordered::unordered_multimap<pod_type, pod_type> rem_inv_type;
 
   ///
   /// The inverse rem map.

@@ -191,7 +191,7 @@ external_id(internal_index_type xinternal_id) const
 
   // Body:
   
-  typename SHEAF_UNORDERED_NAMESPACE::unordered_map<internal_index_type, external_index_type>::const_iterator itr = _to_external.find(xinternal_id);
+  typename unordered::unordered_map<internal_index_type, external_index_type>::const_iterator itr = _to_external.find(xinternal_id);
   external_index_type result =
     itr != _to_external.end() ? itr->second : index_traits<external_index_type>::invalid();
 
@@ -214,7 +214,7 @@ internal_id(external_index_type xexternal_id) const
 
   // Body:
   
-  typename SHEAF_UNORDERED_NAMESPACE::unordered_map<external_index_type, internal_index_type>::const_iterator itr = _to_internal.find(xexternal_id);
+  typename unordered::unordered_map<external_index_type, internal_index_type>::const_iterator itr = _to_internal.find(xexternal_id);
   internal_index_type result =
     itr != _to_internal.end() ? itr->second : index_traits<internal_index_type>::invalid();
 
@@ -753,7 +753,7 @@ print(std::ostream& xos,
   // Body:
 
   using namespace std;
-  using namespace SHEAF_UNORDERED_NAMESPACE;
+  using namespace unordered;
 
   record_map<internal_index_type, external_index_type>& lp =
     const_cast<record_map<internal_index_type, external_index_type>&>(xp);

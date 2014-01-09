@@ -128,7 +128,7 @@ struct SHEAF_DLL_SPEC discretization_hash
 /// A map from members of a discretization subposet to points in a base space.
 ///
 class SHEAF_DLL_SPEC pullback_map : public
-SHEAF_UNORDERED_NAMESPACE::unordered_multiset<pullback_map_entry, discretization_hash> {};
+unordered::unordered_multiset<pullback_map_entry, discretization_hash> {};
 
 // ===========================================================
 // NON-MEMBER FUNCTIONS

@@ -26,8 +26,8 @@
 
 #include <unordered_set>
 
-#ifndef SHEAF_UNORDERED_NAMESPACE
-#define SHEAF_UNORDERED_NAMESPACE std
+#ifndef SHEAF_BEGIN_UNORDERED_NAMESPACE
+namespace unordered = std;
 #define SHEAF_BEGIN_UNORDERED_NAMESPACE namespace std {
 #define SHEAF_END_UNORDERED_NAMESPACE }
 #endif
@@ -38,8 +38,8 @@
 
 #include <tr1/unordered_set>
 
-#ifndef SHEAF_UNORDERED_NAMESPACE
-#define SHEAF_UNORDERED_NAMESPACE std::tr1
+#ifndef SHEAF_BEGIN_UNORDERED_NAMESPACE
+namespace unordered = std::tr1;
 #define SHEAF_BEGIN_UNORDERED_NAMESPACE namespace std { namespace tr1 {
 #define SHEAF_END_UNORDERED_NAMESPACE }}
 #endif

@@ -213,7 +213,7 @@ protected:
   ///
   /// The type of the range id to domain id map.
   ///
-  typedef SHEAF_UNORDERED_NAMESPACE::unordered_map<pod_type, pod_type> to_domain_type;
+  typedef unordered::unordered_map<pod_type, pod_type> to_domain_type;
 
   ///
   /// The representation of the range id to domain id map.

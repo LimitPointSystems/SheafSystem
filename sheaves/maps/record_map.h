@@ -221,7 +221,7 @@ public:
   /// The type of const iterator for this.
   ///
   typedef typename
-  SHEAF_UNORDERED_NAMESPACE::unordered_map<internal_index_type, external_index_type>::const_iterator const_iterator;
+  unordered::unordered_map<internal_index_type, external_index_type>::const_iterator const_iterator;
 
   ///
   /// The beginning of the range of internal ids contained in this.
@@ -253,7 +253,7 @@ private:
   ///
   /// The type of the internal to external map.
   ///
-  typedef SHEAF_UNORDERED_NAMESPACE::unordered_map<internal_index_type, external_index_type> external_map_type;
+  typedef unordered::unordered_map<internal_index_type, external_index_type> external_map_type;
 
   ///
   /// The representation of the internal to external map.
@@ -263,7 +263,7 @@ private:
   ///
   /// The type of the external to internal map.
   ///
-  typedef SHEAF_UNORDERED_NAMESPACE::unordered_map<external_index_type, internal_index_type> internal_map_type;
+  typedef unordered::unordered_map<external_index_type, internal_index_type> internal_map_type;
 
   ///
   /// The representation of the external to internal map.

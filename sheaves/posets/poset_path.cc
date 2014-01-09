@@ -24,7 +24,7 @@
 #include "primitive_value.h"
 #include "schema_poset_member.h"
 #include "std_iostream.h"
-#include "std_strstream.h"
+#include "std_sstream.h"
 
 using namespace sheaf;
 using namespace std;
@@ -711,7 +711,7 @@ make_name(const std::string& xprefix, int xindex, const std::string& xsuffix)
 
   // Body:
 
-  strstream lname_stream;
+  stringstream lname_stream;
   lname_stream << xprefix << xindex << xsuffix;
   lname_stream >> result;
 
@@ -864,7 +864,7 @@ block_id(const std::string& xname)
 
   // Body:
 
-  strstream lname_stream;
+  stringstream lname_stream;
   string lblock_prefix = block_prefix();
   lname_stream << xname.substr(xname.find(lblock_prefix) + lblock_prefix.size());
   lname_stream >> result;

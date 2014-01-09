@@ -21,7 +21,7 @@
 
 #include "assert_contract.h"
 #include "std_iostream.h"
-#include "std_strstream.h"
+#include "std_sstream.h"
 #include "std_string.h"
 
 using namespace std;
@@ -94,7 +94,7 @@ plot(const char* xdriver,
 
   // Write file.
 
-  strstream ldata_file_name_stream;
+  stringstream ldata_file_name_stream;
   ldata_file_name_stream << xdriver << ".dat";
 
   string ldata_file_name;
@@ -104,7 +104,7 @@ plot(const char* xdriver,
 
   // Create the gnuplot file
 
-  strstream lplot_file_name_stream;
+  stringstream lplot_file_name_stream;
   lplot_file_name_stream << xdriver << ".gnu";
 
   string lplot_file_name;

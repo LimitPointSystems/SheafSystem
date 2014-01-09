@@ -26,7 +26,6 @@
 #include "poset_dof_iterator.h"
 #include "poset_state_handle.h"
 #include "primitive_value.h"
-#include "std_strstream.h"
 
 using namespace std;
 

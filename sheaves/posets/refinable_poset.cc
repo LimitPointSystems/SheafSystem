@@ -30,7 +30,6 @@ class index_iterator;
 #include "poset_state.h"
 #include "poset_type.h"
 #include "schema_poset_member.h"
-#include "std_strstream.h"
 #include "subposet.h"
 
 using namespace std;

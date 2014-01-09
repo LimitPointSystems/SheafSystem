@@ -29,7 +29,7 @@
 #include "primitive_value.h"
 #include "sheaf_file.h"
 #include "std_iostream.h"
-#include "std_strstream.h"
+#include "std_sstream.h"
 #include "std_string.h"
 
 using namespace std;

@@ -181,7 +181,7 @@ items_deep_size(const M& xp)
 
 template <typename K, typename V, typename S, typename H, typename E, typename A>
 size_t
-deep_size(const SHEAF_UNORDERED_NAMESPACE::unordered_multimap<K, V, H, E, A>& xp, bool xinclude_shallow)
+deep_size(const unordered::unordered_multimap<K, V, H, E, A>& xp, bool xinclude_shallow)
 {
   size_t result;
   
@@ -226,7 +226,7 @@ deep_size(const SHEAF_UNORDERED_NAMESPACE::unordered_multimap<K, V, H, E, A>& xp
 
 template <typename K, typename V, typename S, typename H, typename E, typename A>
 size_t
-deep_size(const SHEAF_UNORDERED_NAMESPACE::unordered_map<K, V, H, E, A>& xp, bool xinclude_shallow)
+deep_size(const unordered::unordered_map<K, V, H, E, A>& xp, bool xinclude_shallow)
 {
   size_t result;
   

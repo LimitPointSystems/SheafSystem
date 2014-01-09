@@ -27,7 +27,6 @@
 #include "scoped_index.h"
 #include "std_iomanip.h"
 #include "std_string.h"
-#include "std_strstream.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

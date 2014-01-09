@@ -88,7 +88,7 @@ protected:
   ///
   /// The type of explicit id space map.
   ///
-  typedef SHEAF_UNORDERED_NAMESPACE::unordered_map<pod_type, explicit_index_space_state*> map_type;
+  typedef unordered::unordered_map<pod_type, explicit_index_space_state*> map_type;
 
   ///
   /// The map from space id to explicit id space.
