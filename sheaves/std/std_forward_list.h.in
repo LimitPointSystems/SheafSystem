@@ -1,0 +1,71 @@
+
+//
+// Copyright (c) 2013 Limit Point Systems, Inc. 
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//   http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+#ifndef STD_FORWARD_LIST_H
+#define STD_FORWARD_LIST_H
+
+#cmakedefine HAVE_FORWARD_LIST 1
+
+#ifdef HAVE_FORWARD_LIST
+
+#include <forward_list>
+
+#else
+
+// This environment does not have an forward_list class;
+// simulate with list.
+
+#include <list>
+
+namespace std
+{
+
+  template <class T, class A = allocator<T> > class forward_list : public list<T, A> 
+  { 
+    public:
+
+    typename forward_list<T>::iterator erase_after(typename forward_list<T>::iterator pos)
+    {
+      return erase(++pos);
+    }
+  };
+
+}
+
+#endif // HAVE_FORWARD_LIST
+
+// Add a function to the std namespace that allows us to push
+// a range of ids to the beginning of a list.
+
+namespace std
+{
+  // Push range (xbegin, xrange] to the beginning of list xlist.
+
+  template<typename T>
+  void
+  push_front(forward_list<T> xlist, typename forward_list<T>::const_iterator xbegin, typename forward_list<T>::const_iterator xend)
+  {
+
+#ifdef HAVE_FORWARD_LIST
+    xlist.insert_after(xlist.before_begin(), xbegin, xend);
+#else
+    xlist.insert(xlist.begin(), xbegin, xend);
+#endif
+  }
+}
+
+#endif // STD_FORWARD_LIST_H
