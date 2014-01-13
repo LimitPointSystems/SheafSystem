@@ -23,7 +23,7 @@
 //#include "block.impl.h"
 #include "geometry.h"
 #include "std_iostream.h"
-#include "std_forward_list.h"
+#include "singly_linked_list.h"
 
 using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.
@@ -113,87 +113,87 @@ ostream& geometry::operator<< <4, 4>(ostream& xos, const geometry::d_bounding_bo
 #endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
 
 
-// Forward_lists of bounding boxes.
+// Singly_linked_lists of bounding boxes.
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 
 template class 
 SHEAF_DLL_SPEC
-forward_list< geometry::d_bounding_box<1, 0>* >;
+singly_linked_list< geometry::d_bounding_box<1, 0>* >;
 
 template class 
 SHEAF_DLL_SPEC
-forward_list< geometry::d_bounding_box<1, 1>* >;
+singly_linked_list< geometry::d_bounding_box<1, 1>* >;
 
 template class 
 SHEAF_DLL_SPEC
-forward_list< geometry::d_bounding_box<2, 0>* >;
+singly_linked_list< geometry::d_bounding_box<2, 0>* >;
 
 template class 
 SHEAF_DLL_SPEC
-forward_list< geometry::d_bounding_box<2, 2>* >;
+singly_linked_list< geometry::d_bounding_box<2, 2>* >;
 
 template class 
 SHEAF_DLL_SPEC
-forward_list< geometry::d_bounding_box<3, 0>* >;
+singly_linked_list< geometry::d_bounding_box<3, 0>* >;
 
 template class 
 SHEAF_DLL_SPEC
-forward_list< geometry::d_bounding_box<3, 1>* >;
+singly_linked_list< geometry::d_bounding_box<3, 1>* >;
 
 template class 
 SHEAF_DLL_SPEC
-forward_list< geometry::d_bounding_box<3, 2>* >;
+singly_linked_list< geometry::d_bounding_box<3, 2>* >;
 
 template class 
 SHEAF_DLL_SPEC
-forward_list< geometry::d_bounding_box<3, 3>* >;
+singly_linked_list< geometry::d_bounding_box<3, 3>* >;
 
 template class 
 SHEAF_DLL_SPEC
-forward_list< geometry::d_bounding_box<4, 4>* >;
+singly_linked_list< geometry::d_bounding_box<4, 4>* >;
 
 #endif // ifndef DOXYGEN_SHOULD_SKIP_THIS
 
 
-// Forward_lists of bounding boxes const.
+// Singly_linked_lists of bounding boxes const.
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 
 template class 
 SHEAF_DLL_SPEC
-forward_list< geometry::d_bounding_box<1, 0> const*>;
+singly_linked_list< geometry::d_bounding_box<1, 0> const*>;
 
 template class 
 SHEAF_DLL_SPEC
-forward_list< geometry::d_bounding_box<1, 1> const*>;
+singly_linked_list< geometry::d_bounding_box<1, 1> const*>;
 
 template class 
 SHEAF_DLL_SPEC
-forward_list< geometry::d_bounding_box<2, 0> const*>;
+singly_linked_list< geometry::d_bounding_box<2, 0> const*>;
 
 template class 
 SHEAF_DLL_SPEC
-forward_list< geometry::d_bounding_box<2, 2> const*>;
+singly_linked_list< geometry::d_bounding_box<2, 2> const*>;
 
 template class 
 SHEAF_DLL_SPEC
-forward_list< geometry::d_bounding_box<3, 0> const*>;
+singly_linked_list< geometry::d_bounding_box<3, 0> const*>;
 
 template class 
 SHEAF_DLL_SPEC
-forward_list< geometry::d_bounding_box<3, 1> const*>;
+singly_linked_list< geometry::d_bounding_box<3, 1> const*>;
 
 template class 
 SHEAF_DLL_SPEC
-forward_list< geometry::d_bounding_box<3, 2> const*>;
+singly_linked_list< geometry::d_bounding_box<3, 2> const*>;
 
 template class 
 SHEAF_DLL_SPEC
-forward_list< geometry::d_bounding_box<3, 3> const*>;
+singly_linked_list< geometry::d_bounding_box<3, 3> const*>;
 
 template class 
 SHEAF_DLL_SPEC
-forward_list< geometry::d_bounding_box<4, 4> const*>;
+singly_linked_list< geometry::d_bounding_box<4, 4> const*>;
 
 #endif // ifndef DOXYGEN_SHOULD_SKIP_THIS

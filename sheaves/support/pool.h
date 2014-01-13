@@ -36,8 +36,12 @@
 #include "std_iostream.h"
 #endif
 
-#ifndef STD_FORWARD_LIST_H
-#include "std_forward_list.h"
+#ifndef SINGLY_LINKED_LIST_H
+#include "singly_linked_list.h"
+#endif
+
+#ifndef SINGLY_LINKED_LIST_H
+#include "singly_linked_list.h"
 #endif
 
 namespace sheaf
@@ -224,7 +228,7 @@ private:
   ///
   /// List of contiguously allocated chunks of members.
   ///
-  std::forward_list<T*> _chunk_list;
+  singly_linked_list<T*> _chunk_list;
 
   ///
   /// Bit vector to tag allocated members.

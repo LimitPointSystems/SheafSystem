@@ -47,8 +47,8 @@
 #include "std_set.h"
 #endif
 
-#ifndef STD_FORWARD_LIST_H
-#include "std_forward_list.h"
+#ifndef SINGLY_LINKED_LIST_H
+#include "singly_linked_list.h"
 #endif
 
 #ifndef STL_SCOPED_INDEX_H
@@ -98,7 +98,7 @@ public:
   ///
   /// The type of box list.
   ///
-  typedef std::forward_list<const d_bounding_box<2, 2>*> box_list_type;
+  typedef singly_linked_list<const d_bounding_box<2, 2>*> box_list_type;
 
   ///
   /// Destructor.

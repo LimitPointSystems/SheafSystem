@@ -420,7 +420,7 @@ operator<<(std::ostream& xos, const d_array_point_locator<DC, DB>& xpl)
 
 template <int DC, int DB>
 std::ostream&
-operator<<(std::ostream& xos, const std::forward_list<const d_bounding_box<DC, DB>*>& xbl)
+operator<<(std::ostream& xos, const singly_linked_list<const d_bounding_box<DC, DB>*>& xbl)
 {
   // Preconditions:
 
@@ -428,7 +428,7 @@ operator<<(std::ostream& xos, const std::forward_list<const d_bounding_box<DC, D
 
   using namespace std;
 
-  typedef std::forward_list<const d_bounding_box<DC, DB>*> list_type;
+  typedef singly_linked_list<const d_bounding_box<DC, DB>*> list_type;
 
   for(typename list_type::const_iterator i = xbl.begin(); i != xbl.end(); ++i)
   {

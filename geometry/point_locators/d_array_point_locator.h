@@ -55,7 +55,7 @@ public:
   ///
   /// The type of box list.
   ///
-  typedef std::forward_list<const d_bounding_box<DC, DB>*> box_list_type;
+  typedef singly_linked_list<const d_bounding_box<DC, DB>*> box_list_type;
 
   ///
   /// The type of box set.
@@ -240,7 +240,7 @@ operator << (std::ostream& xos, const d_array_point_locator<DC, DB>& xpl);
 template <int DC, int DB>
 SHEAF_DLL_SPEC 
 std::ostream&
-operator << (std::ostream& xos, const std::forward_list<const d_bounding_box<DC, DB>*>& xbl);
+operator << (std::ostream& xos, const singly_linked_list<const d_bounding_box<DC, DB>*>& xbl);
 
 
 // ============================================================================

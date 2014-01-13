@@ -481,11 +481,11 @@ deep_size(const pool<T, EXTENSION_FACTOR>& xpool, bool xinclude_shallow)
     }
   }
 
-  // Class pool has no public access to the forward_list and zn_to_bool type data
+  // Class pool has no public access to the singly_linked_list and zn_to_bool type data
   // members, so we are unable to add any additional contributions from them.
 
   // Calculate the total memory used by data member _chunk_list
-  // of type std::forward_list<T*> not including that already counted above.
+  // of type singly_linked_list<T*> not including that already counted above.
 
   // Best guess for singly linked list deep size.
 

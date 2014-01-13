@@ -25,8 +25,8 @@
 #include "sheaf_dll_spec.h"
 #endif
 
-#ifndef STD_FORWARD_LIST_H
-#include "std_forward_list.h"
+#ifndef SINGLY_LINKED_LIST_H
+#include "singly_linked_list.h"
 #endif
 
 #ifndef STD_UNORDERED_SET_H
@@ -130,7 +130,7 @@ private:
   ///
   /// The free list type.
   ///
-  typedef std::forward_list<T*> free_list_type;
+  typedef singly_linked_list<T*> free_list_type;
 
   ///
   /// The type of allocation set.

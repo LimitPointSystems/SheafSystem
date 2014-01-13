@@ -273,9 +273,7 @@ box_list(const section_evaluator& xeval,
   for(size_type i=ilb; i<=iub; ++i)
   {
     const box_list_type& lbox_list = _bins[i];
-    /// @todo Remove.
-    //xresult.insert_after(xresult.before_begin(), lbox_list.begin(), lbox_list.end());
-    push_front(xresult, lbox_list.begin(), lbox_list.end());
+    xresult.push_front(lbox_list.begin(), lbox_list.end());
   }
 
   // Postconditions:
@@ -328,9 +326,7 @@ box_list(const section_evaluator& xeval,
     for(size_type j=jlb; j<=jub; ++j)
     {
       const box_list_type& lbox_list = _bins[bin_id(i, j)];
-      /// @todo Remove.
-      //xresult.insert_after(xresult.before_begin(), lbox_list.begin(), lbox_list.end());
-      push_front(xresult, lbox_list.begin(), lbox_list.end());
+      xresult.push_front(lbox_list.begin(), lbox_list.end());
     }
   }
 
@@ -388,9 +384,7 @@ box_list(const section_evaluator& xeval,
       for(size_type k=klb; k<=kub; ++k)
       {
 	const box_list_type& lbox_list = _bins[bin_id(i, j, k)];
-	/// @todo Remove.
-        //xresult.insert_after(xresult.before_begin(), lbox_list.begin(), lbox_list.end());
-	push_front(xresult, lbox_list.begin(), lbox_list.end());
+	xresult.push_front(lbox_list.begin(), lbox_list.end());
       }
     }
   }
@@ -449,9 +443,7 @@ box_list(const section_evaluator& xeval,
       for(size_type k=klb; k<=kub; ++k)
       {
 	const box_list_type& lbox_list = _bins[bin_id(i, j, k)];
-	/// @todo Remove.
-        //xresult.insert_after(xresult.before_begin(), lbox_list.begin(), lbox_list.end());
-	push_front(xresult, lbox_list.begin(), lbox_list.end());
+	xresult.push_front(lbox_list.begin(), lbox_list.end());
       }
     }
   }
@@ -511,9 +503,7 @@ box_list(const section_evaluator& xeval,
       for(size_type k=klb; k<=kub; ++k)
       {
 	const box_list_type& lbox_list = _bins[bin_id(i, j, k)];
-	/// @todo Remove.
-        //xresult.insert_after(xresult.before_begin(), lbox_list.begin(), lbox_list.end());
-	push_front(xresult, lbox_list.begin(), lbox_list.end());
+	xresult.push_front(lbox_list.begin(), lbox_list.end());
       }
     }
   }

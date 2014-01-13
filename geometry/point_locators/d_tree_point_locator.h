@@ -174,7 +174,7 @@ public:
   ///
   /// The type of box list.
   ///
-  typedef std::forward_list<const d_bounding_box<DC, DB>*> box_list_type;
+  typedef singly_linked_list<const d_bounding_box<DC, DB>*> box_list_type;
 
   ///
   /// Insert xbox into the tree.

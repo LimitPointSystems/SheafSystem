@@ -29,7 +29,7 @@
 //#include "kd_plane.h"
 //#include "kd_bounding_box.h"
 
-#include "std_forward_list.h"
+#include "singly_linked_list.h"
 #include "std_utility.h"
 
 using namespace std;
@@ -453,248 +453,248 @@ ostream& sheaf::operator << < geometry::d_bounding_box<4, 4> const* >(ostream& x
 
 
 //==============================================================================
-// Blocks of forward_lists of bounding boxes.
+// Blocks of singly_linked_lists of bounding boxes.
 //==============================================================================
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::block< forward_list<geometry::d_bounding_box<1, 0> const *> >;
+sheaf::block< singly_linked_list<geometry::d_bounding_box<1, 0> const *> >;
 
 // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
 // template 
 // SHEAF_DLL_SPEC 
-// bool sheaf::operator == < forward_list<geometry::d_bounding_box<1, 0> const *> >(const sheaf::block< forward_list<geometry::d_bounding_box<1, 0> const *> >& xblk1, const sheaf::block< forward_list<geometry::d_bounding_box<1, 0> const *> >& xblk2);
+// bool sheaf::operator == < singly_linked_list<geometry::d_bounding_box<1, 0> const *> >(const sheaf::block< singly_linked_list<geometry::d_bounding_box<1, 0> const *> >& xblk1, const sheaf::block< singly_linked_list<geometry::d_bounding_box<1, 0> const *> >& xblk2);
 
 // template 
 // SHEAF_DLL_SPEC 
-// ostream& sheaf::operator << < forward_list<geometry::d_bounding_box<1, 0> const *> >(ostream& xos, const sheaf::block< forward_list<geometry::d_bounding_box<1, 0> const *> >& xblk);
+// ostream& sheaf::operator << < singly_linked_list<geometry::d_bounding_box<1, 0> const *> >(ostream& xos, const sheaf::block< singly_linked_list<geometry::d_bounding_box<1, 0> const *> >& xblk);
 
 // template 
 // SHEAF_DLL_SPEC 
-// size_t sheaf::deep_size< forward_list<geometry::d_bounding_box<1, 0> const *> >(const sheaf::block< forward_list<geometry::d_bounding_box<1, 0> const *> >& xblk, bool xinclude_shallow);
+// size_t sheaf::deep_size< singly_linked_list<geometry::d_bounding_box<1, 0> const *> >(const sheaf::block< singly_linked_list<geometry::d_bounding_box<1, 0> const *> >& xblk, bool xinclude_shallow);
 // #endif // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::block< forward_list<geometry::d_bounding_box<1, 1> const *> >;
+sheaf::block< singly_linked_list<geometry::d_bounding_box<1, 1> const *> >;
 
 // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
 // template 
 // SHEAF_DLL_SPEC 
-// bool sheaf::operator == < forward_list<geometry::d_bounding_box<1, 1> const *> >(const sheaf::block< forward_list<geometry::d_bounding_box<1, 1> const *> >& xblk1, const sheaf::block< forward_list<geometry::d_bounding_box<1, 1> const *> >& xblk2);
+// bool sheaf::operator == < singly_linked_list<geometry::d_bounding_box<1, 1> const *> >(const sheaf::block< singly_linked_list<geometry::d_bounding_box<1, 1> const *> >& xblk1, const sheaf::block< singly_linked_list<geometry::d_bounding_box<1, 1> const *> >& xblk2);
 
 // template 
 // SHEAF_DLL_SPEC 
-// ostream& sheaf::operator << < forward_list<geometry::d_bounding_box<1, 1> const *> >(ostream& xos, const sheaf::block< forward_list<geometry::d_bounding_box<1, 1> const *> >& xblk);
+// ostream& sheaf::operator << < singly_linked_list<geometry::d_bounding_box<1, 1> const *> >(ostream& xos, const sheaf::block< singly_linked_list<geometry::d_bounding_box<1, 1> const *> >& xblk);
 
 // template 
 // SHEAF_DLL_SPEC 
-// size_t sheaf::deep_size< forward_list<geometry::d_bounding_box<1, 1> const *> >(const sheaf::block< forward_list<geometry::d_bounding_box<1, 1> const *> >& xblk, bool xinclude_shallow);
+// size_t sheaf::deep_size< singly_linked_list<geometry::d_bounding_box<1, 1> const *> >(const sheaf::block< singly_linked_list<geometry::d_bounding_box<1, 1> const *> >& xblk, bool xinclude_shallow);
 // #endif // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::block< forward_list<geometry::d_bounding_box<2, 0> const *> >;
+sheaf::block< singly_linked_list<geometry::d_bounding_box<2, 0> const *> >;
 
 // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
 // template 
 // SHEAF_DLL_SPEC 
-// bool sheaf::operator == < forward_list<geometry::d_bounding_box<2, 0> const *> >(const sheaf::block< forward_list<geometry::d_bounding_box<2, 0> const *> >& xblk1, const sheaf::block< forward_list<geometry::d_bounding_box<2, 0> const *> >& xblk2);
+// bool sheaf::operator == < singly_linked_list<geometry::d_bounding_box<2, 0> const *> >(const sheaf::block< singly_linked_list<geometry::d_bounding_box<2, 0> const *> >& xblk1, const sheaf::block< singly_linked_list<geometry::d_bounding_box<2, 0> const *> >& xblk2);
 
 // template 
 // SHEAF_DLL_SPEC 
-// ostream& sheaf::operator << < forward_list<geometry::d_bounding_box<2, 0> const *> >(ostream& xos, const sheaf::block< forward_list<geometry::d_bounding_box<2, 0> const *> >& xblk);
+// ostream& sheaf::operator << < singly_linked_list<geometry::d_bounding_box<2, 0> const *> >(ostream& xos, const sheaf::block< singly_linked_list<geometry::d_bounding_box<2, 0> const *> >& xblk);
 
 // template 
 // SHEAF_DLL_SPEC 
-// size_t sheaf::deep_size< forward_list<geometry::d_bounding_box<2, 0> const *> >(const sheaf::block< forward_list<geometry::d_bounding_box<2, 0> const *> >& xblk, bool xinclude_shallow);
+// size_t sheaf::deep_size< singly_linked_list<geometry::d_bounding_box<2, 0> const *> >(const sheaf::block< singly_linked_list<geometry::d_bounding_box<2, 0> const *> >& xblk, bool xinclude_shallow);
 // #endif // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::block< forward_list<geometry::d_bounding_box<2, 2> const *> >;
+sheaf::block< singly_linked_list<geometry::d_bounding_box<2, 2> const *> >;
 
 // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
 // template 
 // SHEAF_DLL_SPEC 
-// bool sheaf::operator == < forward_list<geometry::d_bounding_box<2, 2> const *> >(const sheaf::block< forward_list<geometry::d_bounding_box<2, 2> const *> >& xblk1, const sheaf::block< forward_list<geometry::d_bounding_box<2, 2> const *> >& xblk2);
+// bool sheaf::operator == < singly_linked_list<geometry::d_bounding_box<2, 2> const *> >(const sheaf::block< singly_linked_list<geometry::d_bounding_box<2, 2> const *> >& xblk1, const sheaf::block< singly_linked_list<geometry::d_bounding_box<2, 2> const *> >& xblk2);
 
 // template 
 // SHEAF_DLL_SPEC 
-// ostream& sheaf::operator << < forward_list<geometry::d_bounding_box<2, 2> const *> >(ostream& xos, const sheaf::block< forward_list<geometry::d_bounding_box<2, 2> const *> >& xblk);
+// ostream& sheaf::operator << < singly_linked_list<geometry::d_bounding_box<2, 2> const *> >(ostream& xos, const sheaf::block< singly_linked_list<geometry::d_bounding_box<2, 2> const *> >& xblk);
 
 // template 
 // SHEAF_DLL_SPEC 
-// size_t sheaf::deep_size< forward_list<geometry::d_bounding_box<2, 2> const *> >(const sheaf::block< forward_list<geometry::d_bounding_box<2, 2> const *> >& xblk, bool xinclude_shallow);
+// size_t sheaf::deep_size< singly_linked_list<geometry::d_bounding_box<2, 2> const *> >(const sheaf::block< singly_linked_list<geometry::d_bounding_box<2, 2> const *> >& xblk, bool xinclude_shallow);
 // #endif // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::block< forward_list<geometry::d_bounding_box<3, 0> const *> >;
+sheaf::block< singly_linked_list<geometry::d_bounding_box<3, 0> const *> >;
 
 // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
 // template 
 // SHEAF_DLL_SPEC 
-// bool sheaf::operator == < forward_list<geometry::d_bounding_box<3, 0> const *> >(const sheaf::block< forward_list<geometry::d_bounding_box<3, 0> const *> >& xblk1, const sheaf::block< forward_list<geometry::d_bounding_box<3, 0> const *> >& xblk2);
+// bool sheaf::operator == < singly_linked_list<geometry::d_bounding_box<3, 0> const *> >(const sheaf::block< singly_linked_list<geometry::d_bounding_box<3, 0> const *> >& xblk1, const sheaf::block< singly_linked_list<geometry::d_bounding_box<3, 0> const *> >& xblk2);
 
 // template 
 // SHEAF_DLL_SPEC 
-// ostream& sheaf::operator << < forward_list<geometry::d_bounding_box<3, 0> const *> >(ostream& xos, const sheaf::block< forward_list<geometry::d_bounding_box<3, 0> const *> >& xblk);
+// ostream& sheaf::operator << < singly_linked_list<geometry::d_bounding_box<3, 0> const *> >(ostream& xos, const sheaf::block< singly_linked_list<geometry::d_bounding_box<3, 0> const *> >& xblk);
 
 // template 
 // SHEAF_DLL_SPEC 
-// size_t sheaf::deep_size< forward_list<geometry::d_bounding_box<3, 0> const *> >(const sheaf::block< forward_list<geometry::d_bounding_box<3, 0> const *> >& xblk, bool xinclude_shallow);
+// size_t sheaf::deep_size< singly_linked_list<geometry::d_bounding_box<3, 0> const *> >(const sheaf::block< singly_linked_list<geometry::d_bounding_box<3, 0> const *> >& xblk, bool xinclude_shallow);
 // #endif // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::block< forward_list<geometry::d_bounding_box<3, 1> const *> >;
+sheaf::block< singly_linked_list<geometry::d_bounding_box<3, 1> const *> >;
 
 // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
 // template 
 // SHEAF_DLL_SPEC 
-// bool sheaf::operator == < forward_list<geometry::d_bounding_box<3, 1> const *> >(const sheaf::block< forward_list<geometry::d_bounding_box<3, 1> const *> >& xblk1, const sheaf::block< forward_list<geometry::d_bounding_box<3, 1> const *> >& xblk2);
+// bool sheaf::operator == < singly_linked_list<geometry::d_bounding_box<3, 1> const *> >(const sheaf::block< singly_linked_list<geometry::d_bounding_box<3, 1> const *> >& xblk1, const sheaf::block< singly_linked_list<geometry::d_bounding_box<3, 1> const *> >& xblk2);
 
 // template 
 // SHEAF_DLL_SPEC 
-// ostream& sheaf::operator << < forward_list<geometry::d_bounding_box<3, 1> const *> >(ostream& xos, const sheaf::block< forward_list<geometry::d_bounding_box<3, 1> const *> >& xblk);
+// ostream& sheaf::operator << < singly_linked_list<geometry::d_bounding_box<3, 1> const *> >(ostream& xos, const sheaf::block< singly_linked_list<geometry::d_bounding_box<3, 1> const *> >& xblk);
 
 // template 
 // SHEAF_DLL_SPEC 
-// size_t sheaf::deep_size< forward_list<geometry::d_bounding_box<3, 1> const *> >(const sheaf::block< forward_list<geometry::d_bounding_box<3, 1> const *> >& xblk, bool xinclude_shallow);
+// size_t sheaf::deep_size< singly_linked_list<geometry::d_bounding_box<3, 1> const *> >(const sheaf::block< singly_linked_list<geometry::d_bounding_box<3, 1> const *> >& xblk, bool xinclude_shallow);
 // #endif // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::block< forward_list<geometry::d_bounding_box<3, 2> const *> >;
+sheaf::block< singly_linked_list<geometry::d_bounding_box<3, 2> const *> >;
 
 // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
 // template 
 // SHEAF_DLL_SPEC 
-// bool sheaf::operator == < forward_list<geometry::d_bounding_box<3, 2> const *> >(const sheaf::block< forward_list<geometry::d_bounding_box<3, 2> const *> >& xblk1, const sheaf::block< forward_list<geometry::d_bounding_box<3, 2> const *> >& xblk2);
+// bool sheaf::operator == < singly_linked_list<geometry::d_bounding_box<3, 2> const *> >(const sheaf::block< singly_linked_list<geometry::d_bounding_box<3, 2> const *> >& xblk1, const sheaf::block< singly_linked_list<geometry::d_bounding_box<3, 2> const *> >& xblk2);
 
 // template 
 // SHEAF_DLL_SPEC 
-// ostream& sheaf::operator << < forward_list<geometry::d_bounding_box<3, 2> const *> >(ostream& xos, const sheaf::block< forward_list<geometry::d_bounding_box<3, 2> const *> >& xblk);
+// ostream& sheaf::operator << < singly_linked_list<geometry::d_bounding_box<3, 2> const *> >(ostream& xos, const sheaf::block< singly_linked_list<geometry::d_bounding_box<3, 2> const *> >& xblk);
 
 // template 
 // SHEAF_DLL_SPEC 
-// size_t sheaf::deep_size< forward_list<geometry::d_bounding_box<3, 2> const *> >(const sheaf::block< forward_list<geometry::d_bounding_box<3, 2> const *> >& xblk, bool xinclude_shallow);
+// size_t sheaf::deep_size< singly_linked_list<geometry::d_bounding_box<3, 2> const *> >(const sheaf::block< singly_linked_list<geometry::d_bounding_box<3, 2> const *> >& xblk, bool xinclude_shallow);
 // #endif // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::block< forward_list<geometry::d_bounding_box<3, 3> const *> >;
+sheaf::block< singly_linked_list<geometry::d_bounding_box<3, 3> const *> >;
 
 // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
 // template 
 // SHEAF_DLL_SPEC 
-// bool sheaf::operator == < forward_list<geometry::d_bounding_box<3, 3> const *> >(const sheaf::block< forward_list<geometry::d_bounding_box<3, 3> const *> >& xblk1, const sheaf::block< forward_list<geometry::d_bounding_box<3, 3> const *> >& xblk2);
+// bool sheaf::operator == < singly_linked_list<geometry::d_bounding_box<3, 3> const *> >(const sheaf::block< singly_linked_list<geometry::d_bounding_box<3, 3> const *> >& xblk1, const sheaf::block< singly_linked_list<geometry::d_bounding_box<3, 3> const *> >& xblk2);
 
 // template 
 // SHEAF_DLL_SPEC 
-// ostream& sheaf::operator << < forward_list<geometry::d_bounding_box<3, 3> const *> >(ostream& xos, const sheaf::block< forward_list<geometry::d_bounding_box<3, 3> const *> >& xblk);
+// ostream& sheaf::operator << < singly_linked_list<geometry::d_bounding_box<3, 3> const *> >(ostream& xos, const sheaf::block< singly_linked_list<geometry::d_bounding_box<3, 3> const *> >& xblk);
 
 // template 
 // SHEAF_DLL_SPEC 
-// size_t sheaf::deep_size< forward_list<geometry::d_bounding_box<3, 3> const *> >(const sheaf::block< forward_list<geometry::d_bounding_box<3, 3> const *> >& xblk, bool xinclude_shallow);
+// size_t sheaf::deep_size< singly_linked_list<geometry::d_bounding_box<3, 3> const *> >(const sheaf::block< singly_linked_list<geometry::d_bounding_box<3, 3> const *> >& xblk, bool xinclude_shallow);
 // #endif // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::block< forward_list<geometry::d_bounding_box<4, 4> const *> >;
+sheaf::block< singly_linked_list<geometry::d_bounding_box<4, 4> const *> >;
 
 // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
 // template 
 // SHEAF_DLL_SPEC 
-// bool sheaf::operator == < forward_list<geometry::d_bounding_box<4, 4> const *> >(const sheaf::block< forward_list<geometry::d_bounding_box<4, 4> const *> >& xblk1, const sheaf::block< forward_list<geometry::d_bounding_box<4, 4> const *> >& xblk2);
+// bool sheaf::operator == < singly_linked_list<geometry::d_bounding_box<4, 4> const *> >(const sheaf::block< singly_linked_list<geometry::d_bounding_box<4, 4> const *> >& xblk1, const sheaf::block< singly_linked_list<geometry::d_bounding_box<4, 4> const *> >& xblk2);
 
 // template 
 // SHEAF_DLL_SPEC 
-// ostream& sheaf::operator << < forward_list<geometry::d_bounding_box<4, 4> const *> >(ostream& xos, const sheaf::block< forward_list<geometry::d_bounding_box<4, 4> const *> >& xblk);
+// ostream& sheaf::operator << < singly_linked_list<geometry::d_bounding_box<4, 4> const *> >(ostream& xos, const sheaf::block< singly_linked_list<geometry::d_bounding_box<4, 4> const *> >& xblk);
 
 // template 
 // SHEAF_DLL_SPEC 
-// size_t sheaf::deep_size< forward_list<geometry::d_bounding_box<4, 4> const *> >(const sheaf::block< forward_list<geometry::d_bounding_box<4, 4> const *> >& xblk, bool xinclude_shallow);
+// size_t sheaf::deep_size< singly_linked_list<geometry::d_bounding_box<4, 4> const *> >(const sheaf::block< singly_linked_list<geometry::d_bounding_box<4, 4> const *> >& xblk, bool xinclude_shallow);
 // #endif // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
 
 
 //==============================================================================
-// block<forward_list<db0_point_locator<M>::vertex_type
+// block<singly_linked_list<db0_point_locator<M>::vertex_type
 //==============================================================================
 
 //$$SCRIBBLE: db0_point_locator<DC>::vertex_type is protected.
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::block<forward_list<geometry::db0_point_locator<1>::vertex_type,
+sheaf::block<singly_linked_list<geometry::db0_point_locator<1>::vertex_type,
                    std::allocator<geometry::db0_point_locator<1>::vertex_type> > >;
 
 // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
 // template 
 // SHEAF_DLL_SPEC 
-// forward_list<geometry::db0_point_locator<1>::vertex_type, std::allocator<geometry::db0_point_locator<1>::vertex_type> >
-// sheaf::operator == < forward_list<geometry::db0_point_locator<1>::vertex_type, std::allocator<geometry::db0_point_locator<1>::vertex_type> > >
-// (const sheaf::block< forward_list<geometry::db0_point_locator<1>::vertex_type, std::allocator<geometry::db0_point_locator<1>::vertex_type> > >& xblk1,
-//  const sheaf::block< forward_list<geometry::db0_point_locator<1>::vertex_type, std::allocator<geometry::db0_point_locator<1>::vertex_type> > >& xblk2);
+// singly_linked_list<geometry::db0_point_locator<1>::vertex_type, std::allocator<geometry::db0_point_locator<1>::vertex_type> >
+// sheaf::operator == < singly_linked_list<geometry::db0_point_locator<1>::vertex_type, std::allocator<geometry::db0_point_locator<1>::vertex_type> > >
+// (const sheaf::block< singly_linked_list<geometry::db0_point_locator<1>::vertex_type, std::allocator<geometry::db0_point_locator<1>::vertex_type> > >& xblk1,
+//  const sheaf::block< singly_linked_list<geometry::db0_point_locator<1>::vertex_type, std::allocator<geometry::db0_point_locator<1>::vertex_type> > >& xblk2);
 
 // template 
 // SHEAF_DLL_SPEC 
-// ostream& sheaf::operator << < forward_list<geometry::db0_point_locator<1>::vertex_type, std::allocator<geometry::db0_point_locator<1>::vertex_type> > >
-// (ostream& xos, const sheaf::block< forward_list<geometry::db0_point_locator<1>::vertex_type, std::allocator<geometry::db0_point_locator<1>::vertex_type> > >& xblk);
+// ostream& sheaf::operator << < singly_linked_list<geometry::db0_point_locator<1>::vertex_type, std::allocator<geometry::db0_point_locator<1>::vertex_type> > >
+// (ostream& xos, const sheaf::block< singly_linked_list<geometry::db0_point_locator<1>::vertex_type, std::allocator<geometry::db0_point_locator<1>::vertex_type> > >& xblk);
 
 // template 
 // SHEAF_DLL_SPEC 
-// size_t sheaf::deep_size< forward_list<geometry::db0_point_locator<1>::vertex_type, std::allocator<geometry::db0_point_locator<1>::vertex_type> > >
-// (const sheaf::block< forward_list<geometry::db0_point_locator<1>::vertex_type, std::allocator<geometry::db0_point_locator<1>::vertex_type> > >& xblk, bool xinclude_shallow);
+// size_t sheaf::deep_size< singly_linked_list<geometry::db0_point_locator<1>::vertex_type, std::allocator<geometry::db0_point_locator<1>::vertex_type> > >
+// (const sheaf::block< singly_linked_list<geometry::db0_point_locator<1>::vertex_type, std::allocator<geometry::db0_point_locator<1>::vertex_type> > >& xblk, bool xinclude_shallow);
 // #endif // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::block<forward_list<geometry::db0_point_locator<2>::vertex_type,
+sheaf::block<singly_linked_list<geometry::db0_point_locator<2>::vertex_type,
                    std::allocator<geometry::db0_point_locator<2>::vertex_type> > >;
 
 // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
 // template 
 // SHEAF_DLL_SPEC 
-// forward_list<geometry::db0_point_locator<2>::vertex_type, std::allocator<geometry::db0_point_locator<2>::vertex_type> >
-// sheaf::operator == < forward_list<geometry::db0_point_locator<2>::vertex_type, std::allocator<geometry::db0_point_locator<2>::vertex_type> > >
-// (const sheaf::block< forward_list<geometry::db0_point_locator<2>::vertex_type, std::allocator<geometry::db0_point_locator<2>::vertex_type> > >& xblk1,
- // const sheaf::block< forward_list<geometry::db0_point_locator<2>::vertex_type, std::allocator<geometry::db0_point_locator<2>::vertex_type> > >& xblk2);
+// singly_linked_list<geometry::db0_point_locator<2>::vertex_type, std::allocator<geometry::db0_point_locator<2>::vertex_type> >
+// sheaf::operator == < singly_linked_list<geometry::db0_point_locator<2>::vertex_type, std::allocator<geometry::db0_point_locator<2>::vertex_type> > >
+// (const sheaf::block< singly_linked_list<geometry::db0_point_locator<2>::vertex_type, std::allocator<geometry::db0_point_locator<2>::vertex_type> > >& xblk1,
+ // const sheaf::block< singly_linked_list<geometry::db0_point_locator<2>::vertex_type, std::allocator<geometry::db0_point_locator<2>::vertex_type> > >& xblk2);
 
 // template 
 // SHEAF_DLL_SPEC 
-// ostream& sheaf::operator << < forward_list<geometry::db0_point_locator<2>::vertex_type, std::allocator<geometry::db0_point_locator<2>::vertex_type> > >
-// (ostream& xos, const sheaf::block< forward_list<geometry::db0_point_locator<2>::vertex_type, std::allocator<geometry::db0_point_locator<2>::vertex_type> > >& xblk);
+// ostream& sheaf::operator << < singly_linked_list<geometry::db0_point_locator<2>::vertex_type, std::allocator<geometry::db0_point_locator<2>::vertex_type> > >
+// (ostream& xos, const sheaf::block< singly_linked_list<geometry::db0_point_locator<2>::vertex_type, std::allocator<geometry::db0_point_locator<2>::vertex_type> > >& xblk);
 
 // template 
 // SHEAF_DLL_SPEC 
-// size_t sheaf::deep_size< forward_list<geometry::db0_point_locator<2>::vertex_type, std::allocator<geometry::db0_point_locator<2>::vertex_type> > >
-// (const sheaf::block< forward_list<geometry::db0_point_locator<2>::vertex_type, std::allocator<geometry::db0_point_locator<2>::vertex_type> > >& xblk, bool xinclude_shallow);
+// size_t sheaf::deep_size< singly_linked_list<geometry::db0_point_locator<2>::vertex_type, std::allocator<geometry::db0_point_locator<2>::vertex_type> > >
+// (const sheaf::block< singly_linked_list<geometry::db0_point_locator<2>::vertex_type, std::allocator<geometry::db0_point_locator<2>::vertex_type> > >& xblk, bool xinclude_shallow);
 // #endif // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::block<forward_list<geometry::db0_point_locator<3>::vertex_type,
+sheaf::block<singly_linked_list<geometry::db0_point_locator<3>::vertex_type,
                    std::allocator<geometry::db0_point_locator<3>::vertex_type> > >;
 
 // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
 // template 
 // SHEAF_DLL_SPEC 
-// forward_list<geometry::db0_point_locator<3>::vertex_type, std::allocator<geometry::db0_point_locator<3>::vertex_type> >
-// sheaf::operator == < forward_list<geometry::db0_point_locator<3>::vertex_type, std::allocator<geometry::db0_point_locator<3>::vertex_type> > >
-// (const sheaf::block< forward_list<geometry::db0_point_locator<3>::vertex_type, std::allocator<geometry::db0_point_locator<3>::vertex_type> > >& xblk1,
- // const sheaf::block< forward_list<geometry::db0_point_locator<3>::vertex_type, std::allocator<geometry::db0_point_locator<3>::vertex_type> > >& xblk2);
+// singly_linked_list<geometry::db0_point_locator<3>::vertex_type, std::allocator<geometry::db0_point_locator<3>::vertex_type> >
+// sheaf::operator == < singly_linked_list<geometry::db0_point_locator<3>::vertex_type, std::allocator<geometry::db0_point_locator<3>::vertex_type> > >
+// (const sheaf::block< singly_linked_list<geometry::db0_point_locator<3>::vertex_type, std::allocator<geometry::db0_point_locator<3>::vertex_type> > >& xblk1,
+ // const sheaf::block< singly_linked_list<geometry::db0_point_locator<3>::vertex_type, std::allocator<geometry::db0_point_locator<3>::vertex_type> > >& xblk2);
 
 // template 
 // SHEAF_DLL_SPEC 
-// ostream& sheaf::operator << < forward_list<geometry::db0_point_locator<3>::vertex_type, std::allocator<geometry::db0_point_locator<3>::vertex_type> > >
-// (ostream& xos, const sheaf::block< forward_list<geometry::db0_point_locator<3>::vertex_type, std::allocator<geometry::db0_point_locator<3>::vertex_type> > >& xblk);
+// ostream& sheaf::operator << < singly_linked_list<geometry::db0_point_locator<3>::vertex_type, std::allocator<geometry::db0_point_locator<3>::vertex_type> > >
+// (ostream& xos, const sheaf::block< singly_linked_list<geometry::db0_point_locator<3>::vertex_type, std::allocator<geometry::db0_point_locator<3>::vertex_type> > >& xblk);
 
 // template 
 // SHEAF_DLL_SPEC 
-// size_t sheaf::deep_size< forward_list<geometry::db0_point_locator<3>::vertex_type, std::allocator<geometry::db0_point_locator<3>::vertex_type> > >
-// (const sheaf::block< forward_list<geometry::db0_point_locator<3>::vertex_type, std::allocator<geometry::db0_point_locator<3>::vertex_type> > >& xblk, bool xinclude_shallow);
+// size_t sheaf::deep_size< singly_linked_list<geometry::db0_point_locator<3>::vertex_type, std::allocator<geometry::db0_point_locator<3>::vertex_type> > >
+// (const sheaf::block< singly_linked_list<geometry::db0_point_locator<3>::vertex_type, std::allocator<geometry::db0_point_locator<3>::vertex_type> > >& xblk, bool xinclude_shallow);
 // #endif // #ifndef DOXYGEN_SKIP_PRIMITIVE_INSTANTIATIONS
 
 //==============================================================================
