@@ -366,9 +366,9 @@ public:
   ///
   /// Inserts count copies of the value after the element pointed to by pos.
   ///
-  iterator insert_after(iterator pos, size_type count, const T& value)
+  void insert_after(iterator pos, size_type count, const T& value)
   {
-    return _list.insert_after(pos, count, value);
+    _list.insert_after(pos, count, value);
   };
 
   ///
@@ -376,9 +376,9 @@ public:
   /// to by pos.
   ///
   template<class InputIt>
-  iterator insert_after(iterator pos, InputIt first, InputIt last)
+  void insert_after(iterator pos, InputIt first, InputIt last)
   {
-    return _list.insert_after(pos, first, last);
+    _list.insert_after(pos, first, last);
   };
 
   ///
