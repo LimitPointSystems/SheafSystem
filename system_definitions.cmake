@@ -77,6 +77,8 @@ elseif(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux" AND CMAKE_COMPILER_IS_GNUCXX AND C
                 OUTPUT_VARIABLE GCC_VERSION)
         if(GCC_VERSION VERSION_EQUAL 4.4 OR GCC_VERSION VERSION_GREATER 4.4 )            
             set(CMAKE_CXX_FLAGS "-std=c++0x")
+        elseif(GCC_VERSION VERSION_GREATER 4.2.1 AND GCC_VERSION VERSION_LESS 4.4 )            
+            set(CMAKE_CXX_FLAGS "-ansi")
         elseif(GCC_VERSION VERSION_LESS 4.2.2)
             message(FATAL "g++ ${GCC_VERSION} is unsupported. Version must be >= 4.2.2")                
         endif()
