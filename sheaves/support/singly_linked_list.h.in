@@ -239,10 +239,11 @@ public:
 
 #ifdef HAVE_FORWARD_LIST
 
-#ifdef _WIN32
-
   //
-  // Forward_list signatures for forward_list on Windows.
+  // Forward_list signatures for insert_after on Windows.  Use the Windows
+  // signature because two of the insert_after after signatures have a
+  // void return time.  The standard states that all insert_after signatures
+  // should return an iterator but we need this code to compile on Windows.
   //
 
   ///
@@ -278,48 +279,6 @@ public:
   {
     _list.insert_after(pos, first, last);
   };
-
-#else // _WIN32
-
-  //
-  // Forward_list standard signatures for insert_after.
-  //
-
-  ///
-  /// Inserts value after the element pointed to by pos.
-  ///
-  iterator insert_after(const_iterator pos, const T& value)
-  {
-    return _list.insert_after(pos, value);
-  };
-
-  ///
-  /// Inserts value after the element pointed to by pos.
-  ///
-  iterator insert_after(const_iterator pos, T& value)
-  {
-    return _list.insert_after(pos, value);
-  };
-
-  ///
-  /// Inserts count copies of the value after the element pointed to by pos.
-  ///
-  iterator insert_after(const_iterator pos, size_type count, const T& value)
-  {
-    return _list.insert_after(pos, count, value);
-  };
-
-  ///
-  /// inserts elements from range [first, last) after the element pointed
-  /// to by pos.
-  ///
-  template<class InputIt>
-  iterator insert_after(const_iterator pos, InputIt first, InputIt last)
-  {
-    return _list.insert_after(pos, first, last);
-  };
-
-#endif // _WIN32
 
   //
   // Forward_list standard and Windows signatures for erase_after.
