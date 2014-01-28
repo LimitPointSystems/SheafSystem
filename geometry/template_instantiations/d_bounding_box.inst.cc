@@ -119,39 +119,39 @@ ostream& geometry::operator<< <4, 4>(ostream& xos, const geometry::d_bounding_bo
 
 template class 
 SHEAF_DLL_SPEC
-singly_linked_list< geometry::d_bounding_box<1, 0>* >;
+sheaf::singly_linked_list< geometry::d_bounding_box<1, 0>* >;
 
 template class 
 SHEAF_DLL_SPEC
-singly_linked_list< geometry::d_bounding_box<1, 1>* >;
+sheaf::singly_linked_list< geometry::d_bounding_box<1, 1>* >;
 
 template class 
 SHEAF_DLL_SPEC
-singly_linked_list< geometry::d_bounding_box<2, 0>* >;
+sheaf::singly_linked_list< geometry::d_bounding_box<2, 0>* >;
 
 template class 
 SHEAF_DLL_SPEC
-singly_linked_list< geometry::d_bounding_box<2, 2>* >;
+sheaf::singly_linked_list< geometry::d_bounding_box<2, 2>* >;
 
 template class 
 SHEAF_DLL_SPEC
-singly_linked_list< geometry::d_bounding_box<3, 0>* >;
+sheaf::singly_linked_list< geometry::d_bounding_box<3, 0>* >;
 
 template class 
 SHEAF_DLL_SPEC
-singly_linked_list< geometry::d_bounding_box<3, 1>* >;
+sheaf::singly_linked_list< geometry::d_bounding_box<3, 1>* >;
 
 template class 
 SHEAF_DLL_SPEC
-singly_linked_list< geometry::d_bounding_box<3, 2>* >;
+sheaf::singly_linked_list< geometry::d_bounding_box<3, 2>* >;
 
 template class 
 SHEAF_DLL_SPEC
-singly_linked_list< geometry::d_bounding_box<3, 3>* >;
+sheaf::singly_linked_list< geometry::d_bounding_box<3, 3>* >;
 
 template class 
 SHEAF_DLL_SPEC
-singly_linked_list< geometry::d_bounding_box<4, 4>* >;
+sheaf::singly_linked_list< geometry::d_bounding_box<4, 4>* >;
 
 #endif // ifndef DOXYGEN_SHOULD_SKIP_THIS
 
@@ -162,38 +162,38 @@ singly_linked_list< geometry::d_bounding_box<4, 4>* >;
 
 template class 
 SHEAF_DLL_SPEC
-singly_linked_list< geometry::d_bounding_box<1, 0> const*>;
+sheaf::singly_linked_list< geometry::d_bounding_box<1, 0> const*>;
 
 template class 
 SHEAF_DLL_SPEC
-singly_linked_list< geometry::d_bounding_box<1, 1> const*>;
+sheaf::singly_linked_list< geometry::d_bounding_box<1, 1> const*>;
 
 template class 
 SHEAF_DLL_SPEC
-singly_linked_list< geometry::d_bounding_box<2, 0> const*>;
+sheaf::singly_linked_list< geometry::d_bounding_box<2, 0> const*>;
 
 template class 
 SHEAF_DLL_SPEC
-singly_linked_list< geometry::d_bounding_box<2, 2> const*>;
+sheaf::singly_linked_list< geometry::d_bounding_box<2, 2> const*>;
 
 template class 
 SHEAF_DLL_SPEC
-singly_linked_list< geometry::d_bounding_box<3, 0> const*>;
+sheaf::singly_linked_list< geometry::d_bounding_box<3, 0> const*>;
 
 template class 
 SHEAF_DLL_SPEC
-singly_linked_list< geometry::d_bounding_box<3, 1> const*>;
+sheaf::singly_linked_list< geometry::d_bounding_box<3, 1> const*>;
 
 template class 
 SHEAF_DLL_SPEC
-singly_linked_list< geometry::d_bounding_box<3, 2> const*>;
+sheaf::singly_linked_list< geometry::d_bounding_box<3, 2> const*>;
 
 template class 
 SHEAF_DLL_SPEC
-singly_linked_list< geometry::d_bounding_box<3, 3> const*>;
+sheaf::singly_linked_list< geometry::d_bounding_box<3, 3> const*>;
 
 template class 
 SHEAF_DLL_SPEC
-singly_linked_list< geometry::d_bounding_box<4, 4> const*>;
+sheaf::singly_linked_list< geometry::d_bounding_box<4, 4> const*>;
 
 #endif // ifndef DOXYGEN_SHOULD_SKIP_THIS

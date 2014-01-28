@@ -292,14 +292,6 @@ public:
     return _list.erase_after(position);
   };
 
-  ///
-  /// Removes the elements in the range (first; last).
-  ///
-  iterator erase_after(const_iterator first, const_iterator last)
-  {
-    return _list.erase_after(first, last);
-  };
-
 #else // HAVE_FORWARD_LIST
 
   //
@@ -346,14 +338,6 @@ public:
   iterator erase_after(iterator position)
   {
     return _list.erase_after(position);
-  };
-
-  ///
-  /// Removes the elements in the range (first; last).
-  ///
-  iterator erase_after(iterator first, iterator last)
-  {
-    return _list.erase_after(first, last);
   };
 
 #endif // HAVE_FORWARD_LIST
