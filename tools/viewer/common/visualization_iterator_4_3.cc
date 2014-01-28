@@ -42,6 +42,7 @@
 // Workaround for MS Visual C++
 using namespace tool;
 using namespace std;
+using namespace unordered;
 
 // ===========================================================
 // ANY FACET
