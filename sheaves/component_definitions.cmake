@@ -24,6 +24,11 @@
 include(${CMAKE_MODULE_PATH}/LPSCommon.cmake)
 
 #
+# Check for the presence of system cxx includes.
+#
+check_cxx_includes()
+
+#
 # Define the clusters for this component.
 #
 set(clusters concurrency dof_iterators dof_maps examples id_spaces io general
@@ -94,11 +99,7 @@ set(${COMPONENT}_IPATHS ${${COMPONENT}_IPATH}
 
 include_directories(${${COMPONENT}_IPATHS})
 
-#
-# Check for the presence of system cxx includes.
-#
-check_cxx_includes()
-    
+   
 #
 # Configure the STD header files
 #

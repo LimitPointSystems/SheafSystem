@@ -124,7 +124,6 @@ function(check_cxx_includes)
     check_include_file_cxx(forward_list HAVE_FORWARD_LIST)
      if(NOT HAVE_FORWARD_LIST)
         check_include_file_cxx(ext/slist HAVE_EXT_SLIST) 
-
         if(NOT HAVE_EXT_SLIST)
             message(FATAL_ERROR "ERROR: ${CMAKE_CXX_COMPILER} does not appear to support forward_list or slist. Configure phase aborted")
         endif()
