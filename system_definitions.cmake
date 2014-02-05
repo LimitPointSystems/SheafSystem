@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2013 Limit Point Systems, Inc. 
+# Copyright (c) 2014 Limit Point Systems, Inc. 
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-cmake_policy(SET CMP0022 NEW)
+#cmake_policy(SET CMP0022 NEW)
 
 ##
 # This file is the system level counterpart to the component_definitions file
@@ -68,9 +68,11 @@ file(TO_CMAKE_PATH ${CMAKE_INSTALL_PREFIX} CMAKE_INSTALL_PREFIX)
 # OS is 64 bit Windows, compiler is cl 
 if(CMAKE_HOST_SYSTEM_NAME MATCHES "Windows" AND MSVC AND CMAKE_SIZEOF_VOID_P MATCHES "8")
     set(WIN64MSVC ON CACHE BOOL "MS compiler in use.")
+
 # OS is 64 bit Windows, compiler is icl
 elseif(CMAKE_HOST_SYSTEM_NAME MATCHES "Windows" AND CMAKE_CXX_COMPILER_ID MATCHES "Intel" AND CMAKE_SIZEOF_VOID_P MATCHES "8")
     set(WIN64INTEL ON CACHE BOOL "Intel compiler in use.")
+
 # OS is 64 bit linux, compiler is g++
 elseif(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux" AND CMAKE_COMPILER_IS_GNUCXX AND CMAKE_SIZEOF_VOID_P MATCHES "8")
     execute_process(COMMAND ${CMAKE_CXX_COMPILER} -dumpversion
@@ -83,6 +85,7 @@ elseif(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux" AND CMAKE_COMPILER_IS_GNUCXX AND C
             message(FATAL "g++ ${GCC_VERSION} is unsupported. Version must be >= 4.2.2")                
         endif()
    set(LINUX64GNU ON CACHE BOOL "GNU CXX compiler ${GCC_VERSION} in use.")
+
 # OS is 64 bit linux, compiler is icpc
 elseif(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux" AND CMAKE_CXX_COMPILER_ID MATCHES "Intel" AND CMAKE_SIZEOF_VOID_P MATCHES "8")
     set(LINUX64INTEL ON CACHE BOOL "Intel compiler in use.")
@@ -117,7 +120,7 @@ endif(NOT CMAKE_BUILD_TYPE)
 set_property(GLOBAL PROPERTY DEBUG_CONFIGURATIONS "Debug_contracts" "Debug_no_contracts") 
 
 #
-# Establish the file name suffix for debug type compuiler output
+# Establish the file name suffix for debug type compiler output
 #
 if(WIN64MSVC OR WIN64INTEL)
     set(CMAKE_DEBUG_CONTRACTS_POSTFIX "_d" CACHE STRING "Debug libs suffix")
@@ -128,7 +131,7 @@ else()
 endif()
 
 #   
-#  Type of system documentation to build: Dev or User
+#  Toggle language bindings build
 #
 set(BUILD_BINDINGS NO CACHE BOOL "Toggle build of language bindings.")
 
@@ -157,7 +160,7 @@ if(LINUX64GNU OR LINUX64INTEL)
 endif()
 
 #
-# Set the location of the coverage foilder and create it.
+# Set the location of the coverage folder and then create it.
 #
 if(ENABLE_COVERAGE)
     set(COVERAGE_DIR ${CMAKE_BINARY_DIR}/coverage CACHE STRING "Directory for coverage files")
@@ -263,7 +266,6 @@ endfunction(add_tags_target)
 function(set_compiler_flags)
        
        # Toggle multi-process compilation in Windows
-       # Set in system_definitions.cmake
        if(ENABLE_WIN32_MP)
            set(MP "/MP")
        else()
@@ -308,9 +310,6 @@ function(set_compiler_flags)
         #note: The ABI of passing union with long double has changed in GCC 4.4"
         # The probrem is still there; we have only suppressed the warning.
         set(LPS_CXX_FLAGS "-m64 -Wno-deprecated -Wno-abi") 
-    #$$TODO: A 32 bit option is not needed. Do away with this case.
-    else() # Assume 32-bit i686 linux for the present
-       set(LPS_CXX_FLAGS "-ansi -m32 -Wno-deprecated ")
     endif()
 
     #                 
@@ -391,7 +390,6 @@ function(set_compiler_flags)
            CACHE STRING "Flags used by the linker for shared libraries for Release_contracts builds" )
     endif()
     
-    # True for all currently supported platforms        
     mark_as_advanced(CMAKE_CXX_FLAGS_RELEASE_CONTRACTS
          CMAKE_EXE_LINKER_FLAGS_RELEASE_CONTRACTS 
          CMAKE_SHARED_LINKER_FLAGS_RELEASE_CONTRACTS)
@@ -425,7 +423,6 @@ function(set_compiler_flags)
             CACHE STRING "Flags used by the linker for shared libraries for Release_no_contracts builds" )
     endif()
     
-    # True for all currently supported platforms        
     mark_as_advanced(CMAKE_CXX_FLAGS_RELEASE_NO_CONTRACTS
          CMAKE_EXE_LINKER_FLAGS_RELEASE_NO_CONTRACTS 
          CMAKE_SHARED_LINKER_FLAGS_RELEASE_NO_CONTRACTS)
@@ -449,7 +446,6 @@ function(set_compiler_flags)
             STRING "RelWithDebInfo_contracts linker flags - binding libs" )
     endif()
     
-    # True for all currently supported platforms        
     mark_as_advanced(CMAKE_CXX_FLAGS_RELWITHDEBINFO_CONTRACTS
          CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO_CONTRACTS 
          CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO_CONTRACTS)
@@ -474,7 +470,6 @@ function(set_compiler_flags)
             STRING "RelWithDebInfo_no_contracts linker flags - binding libs" )
     endif()
     
-    # True for all currently supported platforms        
     mark_as_advanced(CMAKE_CXX_FLAGS_RELWITHDEBINFO_NO_CONTRACTS
          CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO_NO_CONTRACTS 
          CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO_NO_CONTRACTS)
