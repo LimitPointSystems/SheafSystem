@@ -29,23 +29,13 @@ if(LINUX64GNU OR LINUX64INTEL)
     # "static-libs" builds solely static libs
     add_custom_target(static-libs)
     
-#    if(BUILD_TOOLS)
-        # Because the library dependencies are correct, we only
-        # need to list the leaf nodes in the dependency list for shared libs.
-        add_dependencies(shared-libs tools-shared-lib)
-    
-        # Because the library dependencies are correct, we only
-        # need to list the leaf nodes in the dependency list for static libs.
-        add_dependencies(static-libs tools-static-lib)
-#    else()
-        # Because the library dependencies are correct, we only
-        # need to list the leaf nodes in the dependency list for shared libs.
-#        add_dependencies(shared-libs fields-shared-lib)
-    
-        # Because the library dependencies are correct, we only
-        # need to list the leaf nodes in the dependency list for static libs.
-#        add_dependencies(static-libs fields-static-lib)
-#    endif()   
+    # Because the library dependencies are correct, we only
+    # need to list the leaf nodes in the dependency list for shared libs.
+    add_dependencies(shared-libs fields-shared-lib tools-shared-lib)
+
+    # Because the library dependencies are correct, we only
+    # need to list the leaf nodes in the dependency list for static libs.
+    add_dependencies(static-libs fields-static-lib tools-static-lib)
  
     # Alias for shared lib; backward naming compatability with gnu system
     add_custom_target(lib)

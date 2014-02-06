@@ -421,13 +421,12 @@ endfunction(add_bindings_targets)
 function(add_install_target)
 
     if(LINUX64INTEL OR LINUX64GNU)
-        install(TARGETS ${${COMPONENT}_SHARED_LIB} EXPORT ${${COMPONENT}_SHARED_LIB} 
-            LIBRARY DESTINATION ${CMAKE_BUILD_TYPE}/lib)
-        install(TARGETS ${${COMPONENT}_STATIC_LIB} ARCHIVE 
-            DESTINATION ${CMAKE_BUILD_TYPE}/lib)
-        install(PROGRAMS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/dumpsheaf 
-            DESTINATION ${CMAKE_BUILD_TYPE}/bin)
-                    
+        if(BUILD_SHEAFSCOPE)
+            install(TARGETS ${${COMPONENT}_SHARED_LIB} EXPORT ${${COMPONENT}_SHARED_LIB} 
+                LIBRARY DESTINATION ${CMAKE_BUILD_TYPE}/lib)
+            install(TARGETS ${${COMPONENT}_STATIC_LIB} ARCHIVE 
+                DESTINATION ${CMAKE_BUILD_TYPE}/lib)
+        endif()                     
         if(SWIG_FOUND AND BUILD_BINDINGS)
             install(TARGETS ${${COMPONENT}_JAVA_BINDING_LIB} LIBRARY 
                 DESTINATION ${CMAKE_BUILD_TYPE}/lib)
@@ -443,6 +442,8 @@ function(add_install_target)
                 install(TARGETS ${${COMPONENT}_PYTHON_BINDING_LIB} LIBRARY DESTINATION ${CMAKE_BUILD_TYPE}/lib)
             endif()
         endif()
+            install(PROGRAMS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/dumpsheaf 
+                DESTINATION ${CMAKE_BUILD_TYPE}/bin)
         
     elseif(WIN64INTEL OR WIN64MSVC)
 

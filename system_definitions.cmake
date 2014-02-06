@@ -20,7 +20,6 @@
 # that need to have system scope should be declared and/or defined here.
 ##
 
-#set(BUILD_TOOLS OFF CACHE BOOL "Toggle build of tools component. If OFF, then no need to look for JDK or VTK unless BUILD_BINDINGS is on.")
 set(BUILD_SHEAFSCOPE OFF CACHE BOOL "Toggle build of the SheafScope. If OFF, then no need to look for JDK or VTK unless BUILD_BINDINGS is on.")
 set(INSTALL_DOCS ON CACHE BOOL "Documentation is installed by default.")
 
@@ -35,11 +34,7 @@ mark_as_advanced(LIB_VERSION)
 #
 # Establish the list of components in this system
 #
-#if(BUILD_TOOLS)
-    set(COMPONENTS sheaves fiber_bundles geometry fields tools CACHE STRING "List of components in this system" FORCE)
-#else()
-#    set(COMPONENTS sheaves fiber_bundles geometry fields CACHE STRING "List of components in this system" FORCE)
-#endif()
+set(COMPONENTS sheaves fiber_bundles geometry fields tools CACHE STRING "List of components in this system" FORCE)
 
 #
 # Set the default value for install location
