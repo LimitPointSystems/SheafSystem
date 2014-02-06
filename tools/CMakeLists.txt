@@ -57,11 +57,6 @@ add_bindings_targets()
 add_install_target()
 
 #
-# Explicit target for the dumpsheaf tool.
-#
-add_dumpsheaf_target()
-
-#
 # Write this component's lib targets and include paths to an export file.
 #
 export_targets()
@@ -71,3 +66,7 @@ export_targets()
 #
 export_install_config_file_vars()
 
+#
+# Add a target for the dumpsheaf utility
+#
+add_dumpsheaf_target()

@@ -60,7 +60,7 @@ MACRO(SWIG_MODULE_INITIALIZE name language)
     # This script prepended an underscore to the library name. This forces us to
     # refer to "_${PYTHON-LIB-NAME}" in subsequent references to the library.
     # Fixed so that it's the programmers job to name the lib. In other words, we 
-    # prepend the underscore when we set the python lib name. See LPSCommon.cmake.
+    # prepend the underscore when we set the python lib name. See component_functions.cmake.
     # JEB -- 070511.
     
     #  SET(SWIG_MODULE_${name}_REAL_NAME "_${name}")

@@ -14,15 +14,13 @@
 # limitations under the License.
 #
 
-#cmake_policy(SET CMP0022 NEW)
-
 ##
 # This file is the system level counterpart to the component_definitions file
 # found in the top level of any component. Functions and variables
 # that need to have system scope should be declared and/or defined here.
 ##
 
-set(BUILD_TOOLS OFF CACHE BOOL "Toggle build of tools component. If no, then no need to look for JDK or VTK unless BUILD_BINDINGS is on.")
+set(BUILD_TOOLS OFF CACHE BOOL "Toggle build of tools component. If OFF, then no need to look for JDK or VTK unless BUILD_BINDINGS is on.")
 set(INSTALL_DOCS ON CACHE BOOL "Documentation is installed by default.")
 
 #
@@ -172,7 +170,7 @@ endif()
 # Set a default where the user has write permission ; in this
 # case, the top of the components source tree.
 # "lib", "include", and "bin" will be appended to this location.
-# See "add_install_target" in cmake_modules/LPSCommon.cmake for source.
+# See "add_install_target" in cmake_modules/component_functions.cmake for source.
 #
 if(LINUX64GNU OR LINUX64INTEL)
     set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR} CACHE STRING "System install location")

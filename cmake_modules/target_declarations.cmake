@@ -66,24 +66,20 @@ if(LINUX64GNU OR LINUX64INTEL)
 endif()
 
 #
-# Documentation targets
+# Bindings Documentation targets
 #
 if(DOC_TARGETS)
-    add_custom_target(java-docs)
-    # $$TODO: this list, and the one for bindings above, should be populated programmatically,
-    # NOT by hand. Fix it.
-    add_dependencies(java-docs sheaves-java-docs fiber_bundles-java-docs geometry-java-docs
-                     fields-java-docs solvers-java-docs tools-java-docs)
-    set_target_properties(java-docs PROPERTIES FOLDER "Documentation Targets")
-                         
-    add_custom_target(alldocs DEPENDS doc java-docs)
-    set_target_properties(alldocs PROPERTIES FOLDER "Documentation Targets")
-    #
-    # clean targets
-    #
-    add_custom_target(docclean 
-            COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/documentation)
-    set_target_properties(docclean PROPERTIES FOLDER "Documentation Targets")
+    if(BUILD_BINDINGS)
+        add_custom_target(java-docs)
+        # $$TODO: this list, and the one for bindings above, should be populated programmatically,
+        # NOT by hand. Fix it.
+        add_dependencies(java-docs sheaves-java-docs fiber_bundles-java-docs geometry-java-docs
+                         fields-java-docs solvers-java-docs tools-java-docs)
+        set_target_properties(java-docs PROPERTIES FOLDER "Documentation Targets")
+                             
+        add_custom_target(alldocs DEPENDS doc java-docs)
+        set_target_properties(alldocs PROPERTIES FOLDER "Documentation Targets")
+    endif()
 endif()  
   
 #

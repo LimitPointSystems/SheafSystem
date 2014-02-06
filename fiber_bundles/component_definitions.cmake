@@ -21,7 +21,7 @@
 #
 # Include functions and definitions common to all components.
 # 
-include(${CMAKE_MODULE_PATH}/LPSCommon.cmake)
+include(${CMAKE_MODULE_PATH}/component_functions.cmake)
 
 #
 # Define the clusters for this component.
@@ -469,3 +469,4 @@ function(add_install_target)
     install(FILES ${${COMPONENT}_INCS} DESTINATION include) 
                          
 endfunction(add_install_target)
+

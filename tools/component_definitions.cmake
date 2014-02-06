@@ -22,7 +22,7 @@
 #
 # Include functions and definitions common to all components.
 # 
-include(${CMAKE_MODULE_PATH}/LPSCommon.cmake)
+include(${CMAKE_MODULE_PATH}/component_functions.cmake)
 
 #
 # Define the clusters for this component.
@@ -480,20 +480,20 @@ endfunction(add_install_target)
 
 function(add_dumpsheaf_target)
 
-    message(STATUS "Creating dumpsheaf from dumpsheaf.cc")
     add_executable(dumpsheaf ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/util/dumpsheaf.cc)
+    
     # Make sure the library is up to date
     if(WIN64MSVC OR WIN64INTEL)
         add_dependencies(dumpsheaf ${FIBER_BUNDLES_IMPORT_LIB})
-        link_directories(${FIBER_BUNDLES_OUTPUT_DIR}/$(OutDir))
         target_link_libraries(dumpsheaf ${FIBER_BUNDLES_IMPORT_LIBS})
     else()
         add_dependencies(dumpsheaf ${FIBER_BUNDLES_SHARED_LIB})
-        link_directories(${FIBER_BUNDLES_OUTPUT_DIR})
         target_link_libraries(dumpsheaf ${FIBER_BUNDLES_SHARED_LIB})
     endif()
 
     # Supply the *_DLL_IMPORTS directive to preprocessor
     set_target_properties(dumpsheaf PROPERTIES COMPILE_DEFINITIONS "SHEAF_DLL_IMPORTS")
-        
+    # Put the target in the Utilities VS folder.
+    set_target_properties(dumpsheaf PROPERTIES FOLDER "Utilities")
+                
 endfunction(add_dumpsheaf_target)
