@@ -95,26 +95,6 @@ public:
   ///
   static void initialize_id_space_prototypes();
 
-  ///
-  /// The poset defining the schema for  base_space_poset, base_space_member and descendants.
-  ///
-  poset& base_space_schema_poset();
-
-  ///
-  /// The poset defining the schema for base_space_poset, base_space_member and descendants, const ver.
-  ///
-  const poset& base_space_schema_poset() const;
-
-  ///
-  /// The poset defining the prototype instances for base_space_member.
-  ///
-  base_space_poset& base_space_member_prototypes_poset();
-
-  ///
-  /// The poset defining the prototype instances for base_space_member, const ver.
-  ///
-  const base_space_poset& base_space_member_prototypes_poset() const;
-
 protected:
 
   ///
@@ -139,16 +119,6 @@ protected:
   fiber_bundles_namespace(const fiber_bundles_namespace& xother) { };
 
 private:
-
-  ///
-  /// The poset defining the schemas for base_space_member and descendaants.
-  ///
-  poset* _base_space_schema_poset;
-
-  ///
-  /// The poset defining the prototype instances for base_space_member.
-  ///
-  base_space_poset* _base_space_member_prototypes_poset;
 
   //@}
 
@@ -459,13 +429,6 @@ public:
   virtual const char* class_name() const;
 
 protected:
-
-  ///
-  /// Attaches the handle data members when this handle
-  /// is attached to a state. Intended to be redefined in
-  /// descendants to handle additional data members defined there.
-  ///
-  virtual void attach_handle_data_members();
 
 private:
 

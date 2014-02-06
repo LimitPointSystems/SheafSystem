@@ -375,74 +375,6 @@ initialize_id_space_prototypes()
   return;
 }
 
-sheaf::poset&
-fiber_bundle::fiber_bundles_namespace::
-base_space_schema_poset()
-{
-  // Preconditions:
-
-  // Body:
-
-  poset& result = *_base_space_schema_poset;
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-const sheaf::poset&
-fiber_bundle::fiber_bundles_namespace::
-base_space_schema_poset() const
-{
-  // Preconditions:
-
-  // Body:
-
-  const poset& result = *_base_space_schema_poset;
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-fiber_bundle::base_space_poset&
-fiber_bundle::fiber_bundles_namespace::
-base_space_member_prototypes_poset()
-{
-  // Preconditions:
-
-  // Body:
-
-  base_space_poset& result = *_base_space_member_prototypes_poset;
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-const fiber_bundle::base_space_poset&
-fiber_bundle::fiber_bundles_namespace::
-base_space_member_prototypes_poset() const
-{
-  // Preconditions:
-
-  // Body:
-
-  const base_space_poset& result = *_base_space_member_prototypes_poset;
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
 // PROTECTED MEMBER FUNCTIONS
 
 void
@@ -475,9 +407,6 @@ fiber_bundles_namespace()
   // Preconditions:
 
   // Body:
-
-  _base_space_schema_poset = 0;
-  _base_space_member_prototypes_poset = 0;
 
   // Postconditions:
 
@@ -527,7 +456,6 @@ make_base_space_definitions()
   // Preconditions:
 
   require(state_is_read_write_accessible());
-  //  require(!contains_poset(standard_base_space_schema_poset_name(), false));
   require(!contains_poset(base_space_member::standard_schema_path(), false));
   require(!contains_poset(base_space_member::prototypes_poset_name(), false));
 
@@ -568,14 +496,14 @@ make_base_space_schema_poset()
   string lname = base_space_member::standard_schema_path().poset_name();
   poset_path lschema_path = primitives().schema().path(false);
 
-  _base_space_schema_poset = &poset::new_table(const_cast<fiber_bundles_namespace&>(*this), lname, lschema_path, false);
+  poset& lbase_space_schema_poset = poset::new_table(const_cast<fiber_bundles_namespace&>(*this), lname, lschema_path, false);
 
-  _base_space_schema_poset->get_read_write_access();
+  lbase_space_schema_poset.get_read_write_access();
 
-  subposet table_dofs(_base_space_schema_poset, 0, false);
+  subposet table_dofs(&lbase_space_schema_poset, 0, false);
   table_dofs.put_name(schema_poset_member::table_dof_subposet_name("top"), true, false);
 
-  subposet row_dofs(_base_space_schema_poset, 0, false);
+  subposet row_dofs(&lbase_space_schema_poset, 0, false);
   row_dofs.put_name(schema_poset_member::row_dof_subposet_name("top"), true, false);
 
   // Make the various schema members
@@ -584,13 +512,13 @@ make_base_space_schema_poset()
 
   // Schematize the poset and all its members
 
-  _base_space_schema_poset->schematize(&table_dofs, &row_dofs, true);
+  lbase_space_schema_poset.schematize(&table_dofs, &row_dofs, true);
 
   // Clean up.
 
   table_dofs.detach_from_state();
   row_dofs.detach_from_state();
-  _base_space_schema_poset->release_access();
+  lbase_space_schema_poset.release_access();
 
   // Postconditions:
 
@@ -679,11 +607,9 @@ make_base_space_member_prototypes_poset()
 
   lprototypes_poset.end_jim_edit_mode(true, true);
 
-  _base_space_member_prototypes_poset = &lprototypes_poset;
-
   // Postconditions:
 
-  ensure(base_space_member_prototypes_poset().is_attached());
+  ensure(contains_poset(base_space_member::prototypes_poset_name()));
 
   // Exit:
 
@@ -3254,34 +3180,5 @@ class_name() const
 }
 
 // PROTECTED MEMBER FUNCTIONS
-
-void
-fiber_bundle::fiber_bundles_namespace::
-attach_handle_data_members()
-{
-  // Preconditions:
-
-  require(state_is_read_accessible());
-
-  // Body:
-
-  sheaves_namespace::attach_handle_data_members();
-
-  _base_space_schema_poset =
-    &member_poset<poset>(base_space_member::standard_schema_path(), false);
-
-  _base_space_member_prototypes_poset =
-    &member_poset<base_space_poset>(base_space_member::prototypes_poset_name(), false);
-
-  // Postconditions:
-
-  ensure(postcondition_of(sheaves_names::attach_handle_data_members()));
-  ensure(base_space_schema_poset().is_attached());
-  ensure(base_space_member_prototypes_poset().is_attached());
-
-  // Exit
-
-  return;
-}
 
 // PRIVATE MEMBER FUNCTIONS
