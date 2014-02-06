@@ -57,7 +57,7 @@ if(LINUX64GNU OR LINUX64INTEL)
 endif()
 
 
-if(BUILD_TOOLS OR BUILD_BINDINGS)
+if(BUILD_SHEAFSCOPE OR BUILD_BINDINGS)
     # Find the JDK
     find_package(Java 1.7 REQUIRED)
     find_package(JNI)

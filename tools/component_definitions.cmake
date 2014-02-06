@@ -27,10 +27,13 @@ include(${CMAKE_MODULE_PATH}/component_functions.cmake)
 #
 # Define the clusters for this component.
 #
-set(clusters SheafScope common/client_server common/event common/gui common/util 
-    util viewer/animation viewer/common viewer/event viewer/render viewer/table 
-    viewer/user viewer/application)
-
+if(BUILD_SHEAFSCOPE)
+    set(clusters SheafScope common/client_server common/event common/gui common/util 
+        util viewer/animation viewer/common viewer/event viewer/render viewer/table 
+        viewer/user viewer/application)
+else()
+    set(clusters util)
+endif()    
 #
 # Initialize all variables for this component.
 #
@@ -319,7 +322,7 @@ function(add_bindings_targets)
      
          # Establish the SheafScope jar dir
          set(LIB_JAR_DIR ${CMAKE_BINARY_DIR}/SheafScope)
-   
+    if(BUILD_SHEAFSCOPE)   
          # Build the SheafScope jar
         if(WIN64INTEL OR WIN64MSVC)
              add_custom_target(SheafScope.jar ALL 
@@ -400,7 +403,7 @@ function(add_bindings_targets)
  
         add_dependencies(${PROJECT_NAME}-bindings ${PROJECT_NAME}_java_binding.jar SheafScope 
             ${PROJECT_NAME}-python-binding)
-        
+    endif()  # BUILD_SHEAFSCOPE      
         # Guard these until we can get the VS solution explorer aesthetic issues sorted
         if(LINUX64GNU OR LINUX64INTEL) 
             add_dependencies(${PROJECT_NAME}-java-binding ${PROJECT_NAME}_java_binding.jar)    
@@ -445,14 +448,18 @@ function(add_install_target)
 
         # The BUILD_TYPE variable will be set while CMake is processing the install files. It is not set at configure time
         # for this project. We pass it literally here. 
-        install(TARGETS ${${COMPONENT}_IMPORT_LIB} EXPORT 
-            ${${COMPONENT}_IMPORT_LIB} ARCHIVE 
-            DESTINATION lib/\${BUILD_TYPE})
-        install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_DYNAMIC_LIB}_d.pdb 
-            DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
-        install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_DYNAMIC_LIB}.pdb 
-            DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
-            
+        if(BUILD_SHEAFSCOPE)
+            install(TARGETS ${${COMPONENT}_IMPORT_LIB} EXPORT 
+                ${${COMPONENT}_IMPORT_LIB} ARCHIVE 
+                DESTINATION lib/\${BUILD_TYPE})
+            install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_DYNAMIC_LIB}_d.pdb 
+                DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
+            install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_DYNAMIC_LIB}.pdb 
+                DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
+            install(PROGRAMS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/SheafScope.jar 
+                DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
+        endif()    
+                
         if(SWIG_FOUND AND BUILD_BINDINGS)
             install(TARGETS ${${COMPONENT}_JAVA_BINDING_LIB} 
                 RUNTIME DESTINATION bin/\${BUILD_TYPE})
@@ -461,19 +468,16 @@ function(add_install_target)
                 DESTINATION bin/\${BUILD_TYPE} OPTIONAL)                
             install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_LIB}.pdb 
                 DESTINATION bin/\${BUILD_TYPE} OPTIONAL)              
-
             install(PROGRAMS ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_JAR} 
                 DESTINATION lib/\${BUILD_TYPE} OPTIONAL)  
-            install(PROGRAMS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/SheafScope.jar 
-                DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
-            install(PROGRAMS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/dumpsheaf.exe 
-                DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
             install(PROGRAMS ${JMF_JAR} DESTINATION lib/\${BUILD_TYPE} OPTIONAL)
             install(PROGRAMS ${VTK_JAR} DESTINATION lib/\${BUILD_TYPE} OPTIONAL)
             install(PROGRAMS ${JDK_LIBS} DESTINATION lib/\${BUILD_TYPE} OPTIONAL)
         endif()
     endif()
-
+    
+    install(PROGRAMS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/dumpsheaf.exe 
+        DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
     install(FILES ${${COMPONENT}_INCS} DESTINATION include) 
                          
 endfunction(add_install_target)

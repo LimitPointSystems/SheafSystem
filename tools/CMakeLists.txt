@@ -44,7 +44,9 @@ create_output_dirs()
 #
 # Add the library targets
 #
-add_library_targets()
+if(BUILD_SHEAFSCOPE)
+    add_library_targets()
+endif()
 
 #
 # Add Bindings targets
@@ -56,15 +58,18 @@ add_bindings_targets()
 #
 add_install_target()
 
-#
-# Write this component's lib targets and include paths to an export file.
-#
-export_targets()
 
-#
-# Prepare this component's lib targets and include paths for export to an install config file.
-#
-export_install_config_file_vars()
+if(BUILD_SHEAFSCOPE OR BUILD_BINDINGS)
+    #
+    # Write this component's lib targets and include paths to an export file.
+    #
+    export_targets()
+    #
+    # Prepare this component's lib targets and include paths for export to an install config file.
+    #
+    export_install_config_file_vars()
+endif()
+
 
 #
 # Add a target for the dumpsheaf utility

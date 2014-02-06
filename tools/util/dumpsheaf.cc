@@ -31,6 +31,7 @@
 
 #include "fiber_bundles_namespace.h"
 
+using namespace std;
 using namespace fiber_bundle;
 
 string filename;
