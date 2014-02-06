@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2013 Limit Point Systems, Inc. 
+# Copyright (c) 2014 Limit Point Systems, Inc. 
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -87,12 +87,13 @@ endif()
 if(INSTALL_DOCS)
     install(DIRECTORY ${CMAKE_BINARY_DIR}/documentation/ DESTINATION documentation)
 endif()
+
 #
 # Generate some info about the release, and write it to the RELEASE file in install root folder.
 #
 set(RELEASE_DATE)
 get_date(RELEASE_DATE)
-file(WRITE ${CMAKE_BINARY_DIR}/RELEASE "${PROJECT_NAME} version ${LIB_VERSION} ${RELEASE_DATE}  \n")
+file(WRITE ${CMAKE_BINARY_DIR}/RELEASE "${PROJECT_NAME} snapshot-${LIB_VERSION} ${RELEASE_DATE}  \n")
 install(FILES ${PROJECT_BINARY_DIR}/RELEASE DESTINATION ${CMAKE_INSTALL_PREFIX})
 
 #

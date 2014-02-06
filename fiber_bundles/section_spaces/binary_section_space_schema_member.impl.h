@@ -1,7 +1,7 @@
 
 
 //
-// Copyright (c) 2013 Limit Point Systems, Inc.
+// Copyright (c) 2014 Limit Point Systems, Inc.
 //
 
 // Implementation for section_space_schema_member facet function templates.

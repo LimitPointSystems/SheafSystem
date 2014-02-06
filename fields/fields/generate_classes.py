@@ -3,7 +3,7 @@
 ## $RCSfile: generate_classes.py,v $ $Revision: 1.7 $ $Date: 2013/01/12 17:17:22 $
 ##
 ##
-## Copyright (c) 2013 Limit Point Systems, Inc.
+## Copyright (c) 2014 Limit Point Systems, Inc.
 ##
 
 ################################################################################

@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 ##
 ##
-## Copyright (c) 2013 Limit Point Systems, Inc.
+## Copyright (c) 2014 Limit Point Systems, Inc.
 ##
 
 from sheaves_python_binding import *
