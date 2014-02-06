@@ -238,7 +238,7 @@ private:
 
   ///
   /// Pointer to dof referred to be xdof_id.
-  //
+  ///
   void* dof_ptr(pod_index_type xdof_id, bool xis_table_dofs) const
   {
     return _dofs + schema().offset(xdof_id, xis_table_dofs);
@@ -246,7 +246,7 @@ private:
 
   ///
   /// Pointer to dof referred to be xdisc_id, xfiber_dof_id.
-  //
+  ///
   void* dof_ptr(pod_index_type xdisc_id, pod_index_type xfiber_dof_id, bool xis_table_dofs) const
   {
     return _dofs + schema().offset(xdisc_id, xfiber_dof_id, xis_table_dofs);
