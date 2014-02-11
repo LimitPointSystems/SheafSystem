@@ -679,7 +679,7 @@ initialize_member_covers(pod_index_type xid, bool xstandard_member_hack)
 
     if(_interval_map.find(linterval->begin()) == _interval_map.end())
     {
-      _interval_map[xid] = 0;
+      _interval_map[linterval->begin()] = 0;
     }
   }
   else
