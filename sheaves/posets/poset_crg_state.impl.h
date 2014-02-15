@@ -56,12 +56,13 @@ get_cover_id_space(bool xlower, pod_index_type xmbr_index) const
   // Preconditions:
 
   require(contains_member(xmbr_index));
+  require(unexecutable("handle type conforms to state or is mutable"));
   /// @todo Need a precondition that enforces that handle_type conforms the
   ///       the state or is a mutable handle type.
 
   // Body:
 
-  crg_interval& linterval = interval(xmbr_index);
+  const crg_interval& linterval = interval(xmbr_index);
   pod_index_type lid = linterval.cover_id_space_id(xlower, xmbr_index);
 
   handle_type* result = 0;

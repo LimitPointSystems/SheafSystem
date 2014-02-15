@@ -29,6 +29,10 @@
 #include "mutable_index_space_handle.h"
 #endif
 
+#ifndef STD_LIST_H
+#include "std_list.h"
+#endif
+
 namespace sheaf
 {
 
@@ -91,14 +95,12 @@ public:
   ///
   /// Constructor: Attach to state with index xindex in the family xid_spaces.
   ///
-  list_index_space_handle(const index_space_family& xid_spaces,
-			  pod_type xindex);
+  list_index_space_handle(const index_space_family& xid_spaces, pod_type xindex);
 
   ///
   /// Constructor: Attach to state with name xname in the family xid_spaces.
   ///
-  list_index_space_handle(const index_space_family& xid_spaces,
-			  const std::string& xname);
+  list_index_space_handle(const index_space_family& xid_spaces, const std::string& xname);
 
   ///
   /// Assignment operator; attach this handle to the state of xother.
@@ -110,6 +112,39 @@ public:
   /// Destructor
   ///
   virtual ~list_index_space_handle();
+
+  ///
+  /// Reverse the order, for instance hub_pod(new 0) = hub_pod(old last);
+  /// WARNING: invalidates extrema, update_extrema must be called after this function.
+  ///
+  void reverse();
+
+  ///
+  /// The front of the list used to represent this id space;
+  /// equivalent to hub_pod(begin()).
+  ///
+  pod_type front() const;
+
+  ///
+  /// The back of the list used to represent this id space;
+  /// equivalent to hub_pod(last id).
+  ///
+  pod_type back() const;
+
+  ///
+  /// Pushes xrange_id onto the front of the list used to represent this id space;
+  /// increments the domain ids of all existing members.
+  /// WARNING: invalidates extrema, update_extrema must be called after this function.
+  ///
+  void push_front(pod_type xrange_id);
+
+  ///
+  /// Pushes xrange_id onto the back of the list used to represent this id space;
+  /// does not change the domain ids of any existing members.
+  /// Equivalent to map_rep_push_back.
+  /// WARNING: invalidates extrema, update_extrema must be called after this function.
+  ///
+  void push_back(pod_type xrange_id);
 
 protected:
 
@@ -148,6 +183,40 @@ private:
 
   //@}
 
+  // ===========================================================
+  /// @name MAP REPRESENTATION FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// The type of the domain id to range id map.
+  ///
+  typedef std::list<pod_type> to_range_type;
+
+  ///
+  /// The representation of the domain id to range id map.
+  /// Warning: direct manipulation of the to_range map can invalid
+  /// the state of the index space, make sure to invoke
+  /// update_extrema() before using the rest of the index space interface.
+  ///
+  to_range_type& to_range();
+
+  ///
+  /// The representation of the domain id to range id map, const version.
+  /// Warning: direct manipulation of the to_range map can invalid
+  /// the state of the index space, make sure to invoke
+  /// update_extrema() before using the rest of the index space interface.
+  ///
+  const to_range_type& to_range() const;
+
+protected:
+
+private:
+
+  //@}
+ 
 
   // ===========================================================
   /// @name EXPLICIT_INDEX_SPACE_HANDLE FACET

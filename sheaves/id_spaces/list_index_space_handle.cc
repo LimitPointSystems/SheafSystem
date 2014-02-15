@@ -195,6 +195,78 @@ sheaf::list_index_space_handle::
   return; 
 }
 
+void
+sheaf::list_index_space_handle::
+reverse()
+{
+  state().reverse();
+  return;
+}
+
+sheaf::list_index_space_handle::pod_type
+sheaf::list_index_space_handle::
+front() const
+{
+  return state().front();
+}
+
+sheaf::list_index_space_handle::pod_type
+sheaf::list_index_space_handle::
+back() const
+{
+  return state().back();
+}
+
+void
+sheaf::list_index_space_handle::
+push_front(pod_type xrange_id)
+{
+  // cout << endl << "Entering list_index_space_handle::push_front." << endl;
+
+  // Preconditions:
+
+  require(!contains_unglued_hub(xrange_id));
+  
+  // Body:
+
+  state().push_front(xrange_id);
+  
+
+  // Postconditions:
+
+  ensure(unglued_hub_pod(0) == xrange_id);
+  
+  // Exit:
+
+  // cout << "Leaving list_index_space_handle::push_front." << endl;
+  return;
+}
+
+void
+sheaf::list_index_space_handle::
+push_back(pod_type xrange_id)
+{
+  // cout << endl << "Entering list_index_space_handle::push_front." << endl;
+
+  // Preconditions:
+
+  require(!contains_unglued_hub(xrange_id));
+
+  // Body:
+
+  state().push_back(xrange_id);
+  
+
+  // Postconditions:
+
+  ensure(contains_unglued_hub(xrange_id));
+
+  // Exit:
+
+  // cout << "Leaving list_index_space_handle::push_front." << endl;
+  return;
+}
+
 // PROTECTED MEMBER FUNCTIONS
 
 sheaf::list_index_space_handle::
@@ -274,7 +346,30 @@ state() const
 
 // PRIVATE MEMBER FUNCTIONS
 
+// ===========================================================
+// MAP REPRESENTATION FACET
+// ===========================================================
 
+// PUBLIC MEMBER FUNCTIONS
+
+sheaf::list_index_space_handle::to_range_type&
+sheaf::list_index_space_handle::
+to_range()
+{
+  return state().to_range();
+}
+
+const sheaf::list_index_space_handle::to_range_type&
+sheaf::list_index_space_handle::
+to_range() const
+{
+  return state().to_range();
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+ 
 // ===========================================================
 // INDEX_SPACE_HANDLE FACET
 // ===========================================================

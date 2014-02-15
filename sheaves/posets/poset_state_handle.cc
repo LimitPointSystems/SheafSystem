@@ -18,7 +18,7 @@
 /// @file
 /// Implementation for class poset_state_handle.
 
-#include "poset_state_handle.impl.h"
+#include "poset_state_handle.h"
 
 #include "array_index_space_state.h"
 #include "array_poset_dof_map.h"
@@ -28,6 +28,7 @@
 #include "explicit_index_space_state.h"
 #include "implicit_crg_interval.h"
 class index_iterator;
+#include "index_space_iterator.h"
 #include "namespace_poset.impl.h"
 #include "namespace_poset_member.h"
 #include "poset_bounds.h"

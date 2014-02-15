@@ -115,6 +115,79 @@ new_space(index_space_family& xid_spaces,
 
 // PUBLIC MEMBER FUNCTIONS
 
+void
+sheaf::list_index_space_state::
+reverse()
+{
+  _to_range.reverse();
+  return;
+}
+
+sheaf::list_index_space_state::pod_type
+sheaf::list_index_space_state::
+front() const
+{
+  return _to_range.front();
+}
+
+sheaf::list_index_space_state::pod_type
+sheaf::list_index_space_state::
+back() const
+{
+  return _to_range.back();
+}
+
+void
+sheaf::list_index_space_state::
+push_front(pod_type xrange_id)
+{
+  // cout << endl << "Entering list_index_space_state::push_front." << endl;
+
+  // Preconditions:
+
+  require(!contains_unglued_hub(xrange_id));
+  
+  // Body:
+
+  _to_range.push_front(xrange_id);
+  
+
+  // Postconditions:
+
+  ensure(unglued_hub_pod(0) == xrange_id);
+  
+  // Exit:
+
+  // cout << "Leaving list_index_space_state::push_front." << endl;
+  return;
+}
+
+void
+sheaf::list_index_space_state::
+push_back(pod_type xrange_id)
+{
+  // cout << endl << "Entering list_index_space_state::push_front." << endl;
+
+  // Preconditions:
+
+  require(!contains_unglued_hub(xrange_id));
+
+  // Body:
+
+  _to_range.push_back(xrange_id);
+  
+
+  // Postconditions:
+
+  ensure(contains_unglued_hub(xrange_id));
+
+  // Exit:
+
+  // cout << "Leaving list_index_space_state::push_front." << endl;
+  return;
+}
+
+
 // PROTECTED MEMBER FUNCTIONS
 
 sheaf::list_index_space_state::
@@ -153,6 +226,7 @@ sheaf::list_index_space_state::
 
   return; 
 }
+
 
 // PRIVATE MEMBER FUNCTIONS
 
@@ -260,6 +334,21 @@ capacity() const
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
+
+sheaf::list_index_space_state::to_range_type&
+sheaf::list_index_space_state::
+to_range()
+{
+  return _to_range;
+}
+
+const sheaf::list_index_space_state::to_range_type&
+sheaf::list_index_space_state::
+to_range() const
+{
+  return _to_range;
+}
+
 
 // PROTECTED MEMBER FUNCTIONS
 

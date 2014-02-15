@@ -19,8 +19,15 @@
 
 #include "poset_state_handle.impl.h"
 
-#include "unordered_set_filter.h"
+#include "array_index_space_handle.h"
+#include "hash_index_space_handle.h"
+#include "hub_index_space_handle.h"
+#include "list_index_space_handle.h"
+#include "mutable_index_space_handle.h"
+#include "offset_index_space_handle.h"
+#include "singleton_index_space_handle.h"
 #include "set_filter.h"
+#include "unordered_set_filter.h"
 #include "zn_to_bool_filter.h"
 
 using namespace sheaf; // Workaround for MS C++ bug.
@@ -28,6 +35,49 @@ using namespace sheaf; // Workaround for MS C++ bug.
 //============================================================
 // EXPLICIT INSTANTIATIONS
 //============================================================
+
+
+template 
+SHEAF_DLL_SPEC
+sheaf::array_index_space_handle& 
+sheaf::poset_state_handle::
+get_cover_id_space<sheaf::array_index_space_handle>(bool xlower, pod_index_type xmbr_index) const;
+
+template 
+SHEAF_DLL_SPEC
+sheaf::hash_index_space_handle& 
+sheaf::poset_state_handle::
+get_cover_id_space<sheaf::hash_index_space_handle>(bool xlower, pod_index_type xmbr_index) const;
+
+template 
+SHEAF_DLL_SPEC
+sheaf::hub_index_space_handle& 
+sheaf::poset_state_handle::
+get_cover_id_space<sheaf::hub_index_space_handle>(bool xlower, pod_index_type xmbr_index) const;
+
+template 
+SHEAF_DLL_SPEC
+sheaf::list_index_space_handle& 
+sheaf::poset_state_handle::
+get_cover_id_space<sheaf::list_index_space_handle>(bool xlower, pod_index_type xmbr_index) const;
+
+template 
+SHEAF_DLL_SPEC
+sheaf::mutable_index_space_handle& 
+sheaf::poset_state_handle::
+get_cover_id_space<sheaf::mutable_index_space_handle>(bool xlower, pod_index_type xmbr_index) const;
+
+template 
+SHEAF_DLL_SPEC
+sheaf::offset_index_space_handle& 
+sheaf::poset_state_handle::
+get_cover_id_space<sheaf::offset_index_space_handle>(bool xlower, pod_index_type xmbr_index) const;
+
+template 
+SHEAF_DLL_SPEC
+sheaf::singleton_index_space_handle& 
+sheaf::poset_state_handle::
+get_cover_id_space<sheaf::singleton_index_space_handle>(bool xlower, pod_index_type xmbr_index) const;
 
 template 
 SHEAF_DLL_SPEC
