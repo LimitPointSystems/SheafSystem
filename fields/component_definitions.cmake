@@ -47,6 +47,13 @@ if(WIN64INTEL OR WIN64MSVC)
         ${${COMPONENT}_IMPORT_LIB} 
         CACHE STRING " Cumulative import libraries (win32) for ${PROJECT_NAME}" FORCE)
 
+    # Add a Win32 "lib" target
+    # Doing it here makes it a synonym for "Fields", but abstracts away
+    # the component hierarchy.
+    add_custom_target(lib)
+    add_dependencies(lib ${${COMPONENT}_IMPORT_LIBS})
+    set_target_properties(lib PROPERTIES FOLDER "Library Targets")    
+
 else()
 
     #
