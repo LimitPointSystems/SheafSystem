@@ -1183,6 +1183,12 @@ public:
   index_space_handle& get_cover_id_space(bool xlower, pod_index_type xmbr_hub_id) const;
 
   ///
+  /// Allocates a handle for the lower (xlower true) or upper (xlower false) 
+  /// cover id space of the member with id xmbr_id from the pool of id spaces.
+  ///
+  index_space_handle& get_cover_id_space(bool xlower, const scoped_index& xmbr_id) const;
+
+  ///
   /// Allocates an handle of type handle_type for the lower (xlower true) or
   /// upper (xlower false) cover of member with index xmbr_index from
   /// the pool of id spaces.
@@ -1191,10 +1197,11 @@ public:
   handle_type& get_cover_id_space(bool xlower, pod_index_type xmbr_index) const;
 
   ///
-  /// Allocates a handle for the lower (xlower true) or upper (xlower false) 
-  /// cover id space of the member with id xmbr_id from the pool of id spaces.
+  /// True if a handle for the lower (xlower true) or upper (xlower false) cover id space
+  /// of the member with hub id xmbr_index conforms to a handle of type handle_type.
   ///
-  index_space_handle& get_cover_id_space(bool xlower, const scoped_index& xmbr_id) const;
+  template<typename handle_type>
+  bool cover_id_space_handle_conforms_to(bool xlower, pod_index_type xmbr_index) const;
 
   ///
   /// Returns xcover_id_space to the pool of id spaces.

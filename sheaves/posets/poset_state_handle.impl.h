@@ -64,6 +64,30 @@ get_cover_id_space(bool xlower, pod_index_type xmbr_index) const
   return result;
 }
 
+template<typename handle_type>
+bool
+sheaf::poset_state_handle::
+cover_id_space_handle_conforms_to(bool xlower, pod_index_type xmbr_index) const
+{
+  // cout << endl << "Entering poset_state_handle::cover_id_space_handle_conforms_to." << endl;
+
+  // Preconditions:
+
+  require(contains_member(xmbr_index));
+
+  // Body:
+
+  bool result = crg().cover_id_space_handle_conforms_to<handle_type>(xlower, xmbr_index);
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving poset_state_handle::cover_id_space_handle_conforms_to." << endl;
+  return result;
+}
+
 template<typename filter_type>
 void
 sheaf::poset_state_handle::
