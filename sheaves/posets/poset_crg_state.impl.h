@@ -56,36 +56,48 @@ get_cover_id_space(bool xlower, pod_index_type xmbr_index) const
   // Preconditions:
 
   require(contains_member(xmbr_index));
-  /// @todo Need a precondition that enforces that handle_type conforms the
-  ///       the state or is a mutable handle type.
-
+  require(cover_id_space_handle_conforms_to<handle_type>(xlower, xmbr_index));
+  
   // Body:
 
-  crg_interval& linterval = interval(xmbr_index);
-  pod_index_type lid = linterval.cover_id_space_id(xlower, xmbr_index);
-
-  handle_type* result = 0;
-
-  if(_id_spaces.handle_conforms_to_state<handle_type>(lid))
-  {
-    result = &_id_spaces.get_id_space<handle_type>(lid);
-  }
-  else
-  {
-    /// @todo Implement conversion from implicit id space the mutable handle
-    ///       type.
-
-    not_implemented();
-  }
+  pod_index_type lid_space_id = cover_id_space_id(xlower, xmbr_index);
+  handle_type& result = _id_spaces.get_id_space<handle_type>(lid_space_id);
 
   // Postconditions:
 
-  ensure(result->is_attached());
+  ensure(result.is_attached());
 
   // Exit:
 
-  return *result;
+  return result;
 }
+
+template<typename handle_type>
+bool
+sheaf::poset_crg_state::
+cover_id_space_handle_conforms_to(bool xlower, pod_index_type xmbr_index) const
+{
+  // cout << endl << "Entering poset_crg_state::cover_id_space_handle_conforms_to." << endl;
+
+  // Preconditions:
+
+  require(contains_member(xmbr_index));
+
+  // Body:
+
+  pod_index_type lid_space_id = cover_id_space_id(xlower, xmbr_index);
+  bool result = _id_spaces.handle_conforms_to_state<handle_type>(lid_space_id);
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving poset_crg_state::cover_id_space_handle_conforms_to." << endl;
+  return result;
+}
+
+ 
 
 template<typename filter_type>
 void

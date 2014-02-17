@@ -449,6 +449,13 @@ public:
   handle_type& get_cover_id_space(bool xlower, pod_index_type xmbr_index) const;
 
   ///
+  /// True if a handle for the lower (xlower true) or upper (xlower false) cover id space
+  /// of the member with hub id xmbr_index conforms to a handle of type handle_type.
+  ///
+  template<typename handle_type>
+  bool cover_id_space_handle_conforms_to(bool xlower, pod_index_type xmbr_index) const;
+
+  ///
   /// Returns cover handle xcover_id_space to the pool of id spaces.
   ///
   void release_cover_id_space(index_space_handle& xcover_id_space) const;

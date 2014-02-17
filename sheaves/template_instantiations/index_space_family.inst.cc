@@ -19,11 +19,15 @@
 
 #include "index_space_family.impl.h"
 
-#include "forwarding_index_space_handle.h"
+#include "array_index_space_handle.h"
 #include "explicit_index_space_handle.h"
+#include "forwarding_index_space_handle.h"
+#include "hash_index_space_handle.h"
+#include "hub_index_space_handle.h"
 #include "ij_product_structure.h"
 #include "ijk_product_structure.h"
 #include "interval_index_space_handle.h"
+#include "list_index_space_handle.h"
 #include "mutable_index_space_handle.h"
 #include "offset_index_space_handle.h"
 #include "primary_index_space_handle.h"
@@ -37,6 +41,62 @@ using namespace sheaf; // Workaround for MS C++ bug.
 //============================================================
 // EXPLICIT INSTANTIATIONS
 //============================================================
+
+//==============================================================================
+// array_index_space_handle
+//==============================================================================
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::index_space_family::
+handle_conforms_to_state<sheaf::array_index_space_handle>(const string& xname) const;
+
+template
+SHEAF_DLL_SPEC
+sheaf::array_index_space_handle&
+sheaf::index_space_family::
+get_id_space<sheaf::array_index_space_handle>(const string& xname) const;
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::index_space_family::
+handle_conforms_to_state<sheaf::array_index_space_handle>(pod_type xid) const;
+
+template
+SHEAF_DLL_SPEC
+sheaf::array_index_space_handle&
+sheaf::index_space_family::
+get_id_space<sheaf::array_index_space_handle>(pod_type xid) const;
+
+//==============================================================================
+// explicit_index_space_handle
+//==============================================================================
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::index_space_family::
+handle_conforms_to_state<sheaf::explicit_index_space_handle>(const string& xname) const;
+
+template
+SHEAF_DLL_SPEC
+sheaf::explicit_index_space_handle&
+sheaf::index_space_family::
+get_id_space<sheaf::explicit_index_space_handle>(const string& xname) const;
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::index_space_family::
+handle_conforms_to_state<sheaf::explicit_index_space_handle>(pod_type xid) const;
+
+template
+SHEAF_DLL_SPEC
+sheaf::explicit_index_space_handle&
+sheaf::index_space_family::
+get_id_space<sheaf::explicit_index_space_handle>(pod_type xid) const;
 
 //==============================================================================
 // forwarding_index_space_handle
@@ -67,32 +127,60 @@ sheaf::index_space_family::
 get_id_space<sheaf::forwarding_index_space_handle>(pod_type xid) const;
 
 //==============================================================================
-// explicit_index_space_handle
+// hash_index_space_handle
 //==============================================================================
 
 template
 SHEAF_DLL_SPEC
 bool
 sheaf::index_space_family::
-handle_conforms_to_state<sheaf::explicit_index_space_handle>(const string& xname) const;
+handle_conforms_to_state<sheaf::hash_index_space_handle>(const string& xname) const;
 
 template
 SHEAF_DLL_SPEC
-sheaf::explicit_index_space_handle&
+sheaf::hash_index_space_handle&
 sheaf::index_space_family::
-get_id_space<sheaf::explicit_index_space_handle>(const string& xname) const;
+get_id_space<sheaf::hash_index_space_handle>(const string& xname) const;
 
 template
 SHEAF_DLL_SPEC
 bool
 sheaf::index_space_family::
-handle_conforms_to_state<sheaf::explicit_index_space_handle>(pod_type xid) const;
+handle_conforms_to_state<sheaf::hash_index_space_handle>(pod_type xid) const;
 
 template
 SHEAF_DLL_SPEC
-sheaf::explicit_index_space_handle&
+sheaf::hash_index_space_handle&
 sheaf::index_space_family::
-get_id_space<sheaf::explicit_index_space_handle>(pod_type xid) const;
+get_id_space<sheaf::hash_index_space_handle>(pod_type xid) const;
+
+//==============================================================================
+// hub_index_space_handle
+//==============================================================================
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::index_space_family::
+handle_conforms_to_state<sheaf::hub_index_space_handle>(const string& xname) const;
+
+template
+SHEAF_DLL_SPEC
+sheaf::hub_index_space_handle&
+sheaf::index_space_family::
+get_id_space<sheaf::hub_index_space_handle>(const string& xname) const;
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::index_space_family::
+handle_conforms_to_state<sheaf::hub_index_space_handle>(pod_type xid) const;
+
+template
+SHEAF_DLL_SPEC
+sheaf::hub_index_space_handle&
+sheaf::index_space_family::
+get_id_space<sheaf::hub_index_space_handle>(pod_type xid) const;
 
 //==============================================================================
 // ij_product_structure
@@ -201,6 +289,34 @@ SHEAF_DLL_SPEC
 sheaf::interval_index_space_handle&
 sheaf::index_space_family::
 get_id_space<sheaf::interval_index_space_handle>(pod_type xid) const;
+
+//==============================================================================
+// list_index_space_handle
+//==============================================================================
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::index_space_family::
+handle_conforms_to_state<sheaf::list_index_space_handle>(const string& xname) const;
+
+template
+SHEAF_DLL_SPEC
+sheaf::list_index_space_handle&
+sheaf::index_space_family::
+get_id_space<sheaf::list_index_space_handle>(const string& xname) const;
+
+template
+SHEAF_DLL_SPEC
+bool
+sheaf::index_space_family::
+handle_conforms_to_state<sheaf::list_index_space_handle>(pod_type xid) const;
+
+template
+SHEAF_DLL_SPEC
+sheaf::list_index_space_handle&
+sheaf::index_space_family::
+get_id_space<sheaf::list_index_space_handle>(pod_type xid) const;
 
 //==============================================================================
 // mutable_index_space_handle

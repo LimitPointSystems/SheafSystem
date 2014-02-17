@@ -41,6 +41,53 @@
 // POSET_STATE_HANDLE FACET
 // ===========================================================
 
+template<typename handle_type>
+handle_type&
+sheaf::poset_state_handle::
+get_cover_id_space(bool xlower, pod_index_type xmbr_index) const
+{
+  // Preconditions:
+
+  require(contains_member(xmbr_index));
+  require(unexecutable("handle type conforms to state or is mutable"));
+
+  // Body:
+
+  handle_type& result = crg().get_cover_id_space<handle_type>(xlower, xmbr_index);
+
+  // Postconditions:
+
+  ensure(result.is_attached());
+
+  // Exit:
+
+  return result;
+}
+
+template<typename handle_type>
+bool
+sheaf::poset_state_handle::
+cover_id_space_handle_conforms_to(bool xlower, pod_index_type xmbr_index) const
+{
+  // cout << endl << "Entering poset_state_handle::cover_id_space_handle_conforms_to." << endl;
+
+  // Preconditions:
+
+  require(contains_member(xmbr_index));
+
+  // Body:
+
+  bool result = crg().cover_id_space_handle_conforms_to<handle_type>(xlower, xmbr_index);
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving poset_state_handle::cover_id_space_handle_conforms_to." << endl;
+  return result;
+}
+
 template<typename filter_type>
 void
 sheaf::poset_state_handle::
