@@ -232,6 +232,11 @@ public:
   ///
   /// The value of the property at the given global coordinates.
   ///
+  void property_at_coordinates(const vd_lite& xcoord, vd_lite& xprop) const;
+
+  ///
+  /// The value of the property at the given global coordinates.
+  ///
   void property_at_coordinates(const block<sec_vd_value_type>& xcoord,
                                block<sec_vd_value_type>& xprop) const;
 

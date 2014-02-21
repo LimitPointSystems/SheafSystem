@@ -868,6 +868,31 @@ same_discretization() const
   return result;
 }
 
+void
+fields::field_vd::
+property_at_coordinates(const vd_lite& xcoord, vd_lite& xprop) const
+{
+  // Preconditions:
+
+  require(state_is_read_accessible());
+
+  // Body:
+
+  vd_lite& lcoord = const_cast<vd_lite&>(xcoord);
+
+  vd_lite::dof_type* lcoord_dofs = reinterpret_cast<vd_lite::dof_type*>(&sheaf::row_dofs(lcoord));
+  vd_lite::dof_type* lprop_dofs = reinterpret_cast<vd_lite::dof_type*>(&sheaf::row_dofs(xprop));
+
+  property_at_coordinates(lcoord_dofs, xcoord.d(), lprop_dofs, xprop.d());
+
+  // Postconditions:
+
+
+  // Exit:
+
+  return;
+}
+
 ///
 void
 fields::field_vd::
