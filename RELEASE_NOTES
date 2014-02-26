@@ -1,5 +1,7 @@
 SheafSystem Release Notes Version 3.5.2.0 02/26/2014
 
+  1. Implemented New Feature COM-483 field_vd::property_at_coordinates should have vd_lite arguments.
+
 SheafSystem Release Notes Version  3.4.0.1 01/31/2014
 
 	1.	The id space construction mechanism has been replace with a static new_space() constructor on the id space handles and a static new_interval() constructor on the id space intervals.  Handle classes have been implemented for all explicit id space states.
