@@ -1,6 +1,6 @@
-SheafSystem Release Notes Version 
+SheafSystem Release Notes Version 3.5.2.0 02/26/2014
 
-3.4.0.1 01/31/2014
+SheafSystem Release Notes Version  3.4.0.1 01/31/2014
 
 	1.	The id space construction mechanism has been replace with a static new_space() constructor on the id space handles and a static new_interval() constructor on the id space intervals.  Handle classes have been implemented for all explicit id space states.
 	2.	The “using namespace std” statements have been removed from all header files.  All c++ standard classes are fully qualified with “std::” in the header files.  All source files that use standard classes have a “using namespace std” after the #include statements.  Function definitions in the the source files were made consistent with the function declarations in the header files (i.e., the function signatures have namespace qualifiers for c++ standard classes).
