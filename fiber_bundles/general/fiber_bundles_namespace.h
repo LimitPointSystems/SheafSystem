@@ -70,38 +70,7 @@ public:
   ///
   virtual ~fiber_bundles_namespace();
 
-  ///
-  /// Initialize all the prototypes needed by various factory methods,
-  ///
-  static void initialize_prototypes();
-
-  ///
-  /// Initialize the prototypes needed by poset factory method,
-  ///
-  static void initialize_poset_prototypes();
-
-  ///
-  /// Initialize the prototypes needed by crg interval factory method,
-  ///
-  static void initialize_crg_interval_prototypes();
-
-  ///
-  /// Initialize the prototypes needed by dof map factory method,
-  ///
-  static void initialize_dof_map_prototypes();
-
-  ///
-  /// Initialize the  prototypes needed by id space factory method,
-  ///
-  static void initialize_id_space_prototypes();
-
 protected:
-
-  ///
-  /// Initialize all the prototypes needed by various factory methods;
-  /// virtual version.
-  ///
-  virtual void virtual_initialize_prototypes();
 
   ///
   /// Default constructor; creates an unattached handle.
@@ -386,20 +355,14 @@ private:
 
   //@}
 
-
   // ===========================================================
-  /// @name NAMESPACE_POSET FACET
+  /// @name MEMBER POSET FACET
   // ===========================================================
   //@{
 
 public:
 
 protected:
- 
-  ///
-  /// Creates additional  members for this namespace.
-  ///
-  virtual void initialize_additional_members();
 
   ///
   /// Links xmbr into the appropriate group.
@@ -408,11 +371,56 @@ protected:
 
 private:
 
-  //@}
- 
+  //@} 
 
   // ===========================================================
-  /// @name POSET_STATE_HANDLE FACET
+  /// @name FACTORY INITIALIZATION FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Initialize all the prototypes needed by various factory methods,
+  ///
+  static void initialize_prototypes();
+
+  ///
+  /// Initialize the prototypes needed by poset factory method,
+  ///
+  static void initialize_poset_prototypes();
+
+  ///
+  /// Initialize the prototypes needed by crg interval factory method,
+  ///
+  static void initialize_crg_interval_prototypes();
+
+  ///
+  /// Initialize the prototypes needed by dof map factory method,
+  ///
+  static void initialize_dof_map_prototypes();
+
+  ///
+  /// Initialize the  prototypes needed by id space factory method,
+  ///
+  static void initialize_id_space_prototypes();
+
+protected:
+
+  ///
+  /// Initialize all the prototypes needed by various factory methods;
+  /// virtual version.
+  ///
+  virtual void virtual_initialize_prototypes();
+
+private:
+
+  //@}
+  
+
+
+  // ===========================================================
+  /// @name STATE FACET
   // ===========================================================
   //@{
 
@@ -434,6 +442,25 @@ private:
 
   //@}
 
+
+  // ===========================================================
+  /// @name MEMBERSHIP FACET
+  // ===========================================================
+  //@{
+
+public:
+
+protected:
+ 
+  ///
+  /// Creates additional  members for this namespace.
+  ///
+  virtual void initialize_additional_members();
+
+private:
+
+  //@}
+ 
 };
 
 } // namespace fiber_bundle

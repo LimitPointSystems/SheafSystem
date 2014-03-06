@@ -37,27 +37,12 @@ namespace sheaf
 class SHEAF_DLL_SPEC sheaves_namespace : public namespace_poset
 {
 
+  // ===========================================================
+  /// @name SHEAVES_NAMESPACE FACET
+  // ===========================================================
+  //@{
 
 public:
-
-  ///
-  /// Identifier for the type of this poset.
-  ///
-  virtual poset_type type_id() const;
-
-  ///
-  /// The name of this class.
-  ///
-  virtual const char* class_name() const;
-
-  // CANONICAL MEMBERS
-
-  ///
-  /// Destructor
-  ///
-  virtual ~sheaves_namespace();
-
-  // NEW HANDLE, NEW STATE CONSTRUCTORS
 
   ///
   /// Creates a sheaves namespace with name xname.
@@ -65,8 +50,13 @@ public:
   sheaves_namespace(const std::string& xname);
 
   ///
-  /// Creates a triangle schema using the primatives poset.  This
-  /// static function is used for test drivers.
+  /// Destructor
+  ///
+  virtual ~sheaves_namespace();
+
+  ///
+  /// Creates a triangle schema using the primatives poset;
+  /// used for test drivers.
   ///
   static void make_triangle(sheaves_namespace* xns);
 
@@ -87,6 +77,32 @@ protected:
   ///
   sheaves_namespace(const sheaves_namespace& xother) { };
 
+private:
+
+  //@}
+
+  // ===========================================================
+  /// @name STATE FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// Identifier for the type of this poset.
+  ///
+  virtual poset_type type_id() const;
+
+  ///
+  /// The name of this class.
+  ///
+  virtual const char* class_name() const;
+
+protected:
+
+private:
+
+  //@}    
 
 };
   

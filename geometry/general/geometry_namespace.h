@@ -75,50 +75,6 @@ protected:
 private:
 
   //@}
-
-  // ===========================================================
-  /// @name FIBER_BUNDLES_NAMESPACE FACET
-  // ===========================================================
-  //@{
-
-public:
-
-protected:
-
-  ///
-  /// Create standard base space member prototypes.
-  ///
-  virtual void make_base_space_member_prototypes(base_space_poset* xspace);
-
-  ///
-  /// Create prototype for a polyline in poset xspace.
-  ///
-  void make_line_prototype(base_space_poset* xspace);
-
-  ///
-  /// Create prototype for an interpretation plane in poset xspace.
-  ///
-  void make_plane_prototype(base_space_poset* xspace);
-
-  ///
-  /// Create prototype for an interpreted surface in poset xspace.
-  ///
-  void make_surface_prototype(base_space_poset* xspace);
-
-  ///
-  /// Create prototype for a line web in poset xspace.
-  ///
-  void make_line_web_prototype(base_space_poset* xspace);
-
-  ///
-  /// Create prototype for a line web in poset xspace.
-  ///
-  void make_polygon_prototype(base_space_poset* xspace);
-
-
-private:
-
-  //@}
  
   // =============================================================================
   /// @name ANY FACET

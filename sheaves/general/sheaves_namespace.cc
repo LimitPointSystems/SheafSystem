@@ -30,50 +30,11 @@
 #include "sheaves_namespace.h"
 #include "refinable_poset.h"
 
-///
-sheaf::poset_type
-sheaf::sheaves_namespace::
-type_id() const
-{
-  return SHEAVES_NAMESPACE_ID;
-}
+// ===========================================================
+// SHEAVES_NAMESPACE FACET
+// ===========================================================
 
-///
-const char*
-sheaf::sheaves_namespace::
-class_name() const
-{
-  // Preconditions:
-
-
-  // Body:
-
-  static const char* result = "sheaves_namespace";
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-///
-sheaf::sheaves_namespace::
-sheaves_namespace()
-{
-  // Preconditions:
-
-
-  // Body:
-
-  // Nothing to do.
-
-  // Postconditions:
-
-  // Exit:
-
-  return;
-}
+// PUBLIC MEMBER FUNCTIONS
 
 sheaf::sheaves_namespace::
 sheaves_namespace(const std::string& xname)
@@ -237,9 +198,25 @@ make_triangle(sheaves_namespace* xns)
   return;
 }
 
-// =============================================================================
 // PROTECTED MEMBER FUNCTIONS
-// =============================================================================
+
+///
+sheaf::sheaves_namespace::
+sheaves_namespace()
+{
+  // Preconditions:
+
+
+  // Body:
+
+  // Nothing to do.
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
 
 ///
 sheaf::sheaves_namespace::
@@ -262,4 +239,45 @@ sheaves_namespace(namespace_poset_member* xtop, namespace_poset_member* xbottom)
 
   return;
 }
+
+// PRIVATE MEMBER FUNCTIONS
+ 
+
+// ===========================================================
+// STATE FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+ 
+
+///
+sheaf::poset_type
+sheaf::sheaves_namespace::
+type_id() const
+{
+  return SHEAVES_NAMESPACE_ID;
+}
+
+///
+const char*
+sheaf::sheaves_namespace::
+class_name() const
+{
+  // Preconditions:
+
+
+  // Body:
+
+  static const char* result = "sheaves_namespace";
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
 

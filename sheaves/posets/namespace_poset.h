@@ -79,110 +79,16 @@ class SHEAF_DLL_SPEC namespace_poset : public poset_state_handle
 public:
 
   ///
-  /// The current working namespace.
+  /// Creates a new namespace with name xname.
   ///
-  static namespace_poset* current_namespace();
-
-  ///
-  /// The schema path used for constructing schema posets.
-  ///
-  static poset_path primitives_schema_path();
+  namespace_poset(const std::string& xname);
 
   ///
   /// Destructor
   ///
   virtual ~namespace_poset();
 
-  ///
-  /// Creates a new namespace with name xname.
-  ///
-  namespace_poset(const std::string& xname);
-
-  ///
-  /// The primitives poset within this namespace (mutable version)
-  ///
-  inline primitives_poset& primitives()
-  {
-    return _primitives;
-  };
-
-  ///
-  /// The primitives poset within this namespace (const version)
-  ///
-  inline const primitives_poset& primitives() const
-  {
-    return _primitives;
-  };
-
-  ///
-  /// The primitives poset schema within this namespace (mutable version)
-  ///
-  inline primitives_poset_schema& primitives_schema()
-  {
-    return _primitives_schema;
-  };
-
-  ///
-  /// The primitives poset schema within this namespace (const version)
-  ///
-  inline const primitives_poset_schema& primitives_schema() const
-  {
-    return _primitives_schema;
-  };
-
-  ///
-  /// The namespace poset schema within this namespace (mutable version)
-  ///
-  inline namespace_poset_schema& namespace_schema()
-  {
-    return _namespace_schema;
-  };
-
-  ///
-  /// The namespace poset schema within this namespace (const version)
-  ///
-  inline const namespace_poset_schema& namespace_schema() const
-  {
-    return _namespace_schema;
-  };
-
-  ///
-  /// Removes all members except the standard members.
-  ///
-  void clear();
-
-  ///
-  /// Initialize all the prototypes needed by various factory methods,
-  ///
-  static void initialize_prototypes();
-
-  ///
-  /// Initialize the prototypes needed by poset factory method,
-  ///
-  static void initialize_poset_prototypes();
-
-  ///
-  /// Initialize the prototypes needed by crg interval factory method,
-  ///
-  static void initialize_crg_interval_prototypes();
-
-  ///
-  /// Initialize the prototypes needed by dof map factory method,
-  ///
-  static void initialize_dof_map_prototypes();
-
-  ///
-  /// Initialize the  prototypes needed by id space factory method,
-  ///
-  static void initialize_id_space_prototypes();
-
 protected:
-
-  ///
-  /// Initialize all the prototypes needed by various factory methods;
-  /// virtual version.
-  ///
-  virtual void virtual_initialize_prototypes();
 
   ///
   /// Default constructor; creates an unattached namespace handle.
@@ -215,40 +121,60 @@ protected:
     return const_cast<namespace_poset&>(*this);
   };
 
-  ///
-  /// Sets the current working namespace to xns.
-  ///
-  void put_current_namespace(namespace_poset* xns);
+private:
 
   ///
-  /// Creates additional  members for this namespace.
+  /// Creates prototype for this class and enters in factory.
   ///
-  virtual void initialize_additional_members();
+  static bool make_prototype();
+
+  //@}
+
+  // ===========================================================
+  /// @name PRIMITIVES FACET
+  // ===========================================================
+  //@{
+
+public:
 
   ///
-  /// Creates the standard id spaces for this namespace.
+  /// The poset of primitives for this namespace (mutable version)
   ///
-  void initialize_standard_id_spaces();
+  inline primitives_poset& primitives()
+  {
+    return _primitives;
+  };
 
   ///
-  /// Inserts xposet into this namespace with member name xposet_name.
+  /// The poset of primitives this namespace (const version)
   ///
-  scoped_index insert_poset(const poset_state_handle& xposet,
-			    const std::string& xposet_name,
-			    bool xauto_link);
+  inline const primitives_poset& primitives() const
+  {
+    return _primitives;
+  };
 
   ///
-  /// Inserts xposet into this namespace with member name xposet_name.
+  /// The path for the primitives schema.
   ///
-  scoped_index insert_poset(const poset_state_handle& xposet,
-			    const std::string& xposet_name,
-			    bool xauto_link,
-                            bool xauto_access);
+  static poset_path primitives_schema_path();
 
   ///
-  /// Links xmbr into the appropriate group.
+  /// The schema poset for the primitives poset (mutable version)
   ///
-  virtual void link_poset(const namespace_poset_member& xmbr);
+  inline primitives_poset_schema& primitives_schema()
+  {
+    return _primitives_schema;
+  };
+
+  ///
+  /// The schema poset for the primitives poset (const version)
+  ///
+  inline const primitives_poset_schema& primitives_schema() const
+  {
+    return _primitives_schema;
+  };
+
+protected:
 
 private:
 
@@ -258,119 +184,19 @@ private:
   primitives_poset _primitives;
 
   ///
-  /// The schema poset for primitives in this namespace.
+  /// The schema poset for the primitives poset in this namespace.
   ///
   primitives_poset_schema _primitives_schema;
 
-  ///
-  /// The schema poset for this namespace.
-  ///
-  namespace_poset_schema _namespace_schema;
-
-  ///
-  /// The current working namespace.
-  ///
-  static namespace_poset* _current_namespace;
-
-  ///
-  /// Creates prototype for this class and enters in factory.
-  ///
-  static bool make_prototype();
-
   //@}
 
 
   // ===========================================================
-  /// @name POSET FACTORY METHOD FACET
+  /// @name MEMBER POSET FACET
   // ===========================================================
   //@{
 
 public:
-
-  ///
-  /// Delete the poset with hub id xhub_id.
-  ///
-  void delete_poset(pod_index_type xhub_id, bool xauto_access);
-
-  ///
-  /// Delete the poset with id xid.
-  ///
-  void delete_poset(scoped_index xid, bool xauto_access);
-
-  ///
-  /// Delete the poset with name xname.
-  ///
-  void delete_poset(std::string xname, bool xauto_access);
-
-  ///
-  /// Delete the poset with name xpath.poset_name().
-  ///
-  void delete_poset(poset_path xpath, bool xauto_access);
-
-  ///
-  /// Delete the poset associated with xmbr.
-  ///
-  void delete_poset(namespace_poset_member& xmbr);
-
-  ///
-  /// The poset_state_handle object referred to by  hub id xhub_id.
-  ///
-  poset_state_handle& member_poset(pod_index_type xhub_id, bool xauto_access = true) const;
-
-  ///
-  /// The poset_state_handle object referred to by id xid.
-  ///
-  poset_state_handle& member_poset(const scoped_index& xid, bool xauto_access = true) const;
-
-  ///
-  /// The poset_state_handle object referred to by
-  /// hub id xhub_id, dynamically cast to type P*.
-  ///
-  template <typename P>
-  SHEAF_DLL_SPEC
-  P& member_poset(pod_index_type xhub_id, bool xauto_access = true) const;
-
-  ///
-  /// The poset_state_handle object referred to by
-  /// id xid, dynamically cast to type P*.
-  ///
-  template <typename P>
-  SHEAF_DLL_SPEC
-  P& member_poset(const scoped_index& xid, bool xauto_access = true) const;
-
-  ///
-  /// The poset_state_handle object referred to by
-  /// name xpath.poset_name().
-  ///
-  poset_state_handle& member_poset(const poset_path& xpath, bool xauto_access = true) const;
-
-  ///
-  /// The poset_state_handle object referred to by
-  /// name xpath.poset_name(), dynamically cast to type P*.
-  ///
-  template <typename P>
-  SHEAF_DLL_SPEC
-  P& member_poset(const poset_path& xpath, bool xauto_access = true) const;
-
-protected:
-
-private:
-
-  //@}
-
-
-  // ===========================================================
-  /// @name POSET FACTORY METHOD QUERY FACET
-  // ===========================================================
-  //@{
-
-public:
-
-  ///
-  /// The index of the schema of the member poset with index xindex.
-  ///
-  pod_index_type member_poset_schema_id(const scoped_index& xindex,
-					bool xauto_access) const;
 
   ///
   /// True if this contains a poset with hub id xhub_id..
@@ -418,18 +244,6 @@ public:
   bool owns(const poset_state_handle& xposet, bool xauto_access) const;
 
   ///
-  /// True if the poset referred to by xpath is read accessible.
-  ///
-  bool poset_state_is_read_accessible(const poset_path& xpath,
-                                      bool xauto_access = true) const;
-
-  ///
-  /// True if the poset referred to by xpath is read-write accessible.
-  ///
-  bool poset_state_is_read_write_accessible(const poset_path& xpath,
-					    bool xauto_access = true) const;
-
-  ///
   /// True if this contains a poset with hub id xposet_hub_id which
   /// contains a member with hub id xmember_hub_id.
   ///
@@ -463,6 +277,109 @@ public:
   /// True if this contains the poset and subposet specified by xpath.
   ///
   bool contains_poset_subposet(const poset_path& xpath, bool xauto_access = true) const;
+
+  ///
+  /// The poset_state_handle object referred to by  hub id xhub_id.
+  ///
+  poset_state_handle& member_poset(pod_index_type xhub_id, bool xauto_access = true) const;
+
+  ///
+  /// The poset_state_handle object referred to by id xid.
+  ///
+  poset_state_handle& member_poset(const scoped_index& xid, bool xauto_access = true) const;
+
+  ///
+  /// The poset_state_handle object referred to by
+  /// hub id xhub_id, dynamically cast to type P*.
+  ///
+  template <typename P>
+  SHEAF_DLL_SPEC
+  P& member_poset(pod_index_type xhub_id, bool xauto_access = true) const;
+
+  ///
+  /// The poset_state_handle object referred to by
+  /// id xid, dynamically cast to type P*.
+  ///
+  template <typename P>
+  SHEAF_DLL_SPEC
+  P& member_poset(const scoped_index& xid, bool xauto_access = true) const;
+
+  ///
+  /// The poset_state_handle object referred to by
+  /// name xpath.poset_name().
+  ///
+  poset_state_handle& member_poset(const poset_path& xpath, bool xauto_access = true) const;
+
+  ///
+  /// The poset_state_handle object referred to by
+  /// name xpath.poset_name(), dynamically cast to type P*.
+  ///
+  template <typename P>
+  SHEAF_DLL_SPEC
+  P& member_poset(const poset_path& xpath, bool xauto_access = true) const;
+
+  ///
+  /// The index of the schema of the member poset with index xindex.
+  ///
+  pod_index_type member_poset_schema_id(const scoped_index& xindex, bool xauto_access) const;
+
+  ///
+  /// Delete the poset with hub id xhub_id.
+  ///
+  void delete_poset(pod_index_type xhub_id, bool xauto_access);
+
+  ///
+  /// Delete the poset with id xid.
+  ///
+  void delete_poset(scoped_index xid, bool xauto_access);
+
+  ///
+  /// Delete the poset with name xname.
+  ///
+  void delete_poset(std::string xname, bool xauto_access);
+
+  ///
+  /// Delete the poset with name xpath.poset_name().
+  ///
+  void delete_poset(poset_path xpath, bool xauto_access);
+
+  ///
+  /// Delete the poset associated with xmbr.
+  ///
+  void delete_poset(namespace_poset_member& xmbr);
+
+protected:
+
+  ///
+  /// Inserts xposet into this namespace with member name xposet_name.
+  ///
+  scoped_index insert_poset(const poset_state_handle& xposet,
+			    const std::string& xposet_name,
+			    bool xauto_link);
+
+  ///
+  /// Inserts xposet into this namespace with member name xposet_name.
+  ///
+  scoped_index insert_poset(const poset_state_handle& xposet,
+			    const std::string& xposet_name,
+			    bool xauto_link,
+                            bool xauto_access);
+
+  ///
+  /// Links xmbr into the appropriate group.
+  ///
+  virtual void link_poset(const namespace_poset_member& xmbr);
+
+private:
+
+  //@}
+
+  // ===========================================================
+  /// @name PATH QUERY FACET
+  // ===========================================================
+  //@{
+
+public:
 
   ///
   /// True if this contains the poset or poset member specified by xpath.
@@ -533,7 +450,91 @@ public:
   template <typename P>
   bool path_is_auto_read_write_available(const poset_path& xpath, bool xauto_access) const;
 
+  ///
+  /// True if the poset referred to by xpath is read accessible.
+  ///
+  bool poset_state_is_read_accessible(const poset_path& xpath, bool xauto_access = true) const;
+
+  ///
+  /// True if the poset referred to by xpath is read-write accessible.
+  ///
+  bool poset_state_is_read_write_accessible(const poset_path& xpath, bool xauto_access = true) const;
+
 protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
+  /// @name CURRENT NAMESPACE FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// The current default namespace.
+  ///
+  static namespace_poset* current_namespace();
+
+  ///
+  /// Sets the current default namespace to xns.
+  ///
+  void put_current_namespace(namespace_poset* xns);
+
+protected:
+
+private:
+
+  ///
+  /// The current working namespace.
+  ///
+  static namespace_poset* _current_namespace;
+
+  //@}
+  
+
+  // ===========================================================
+  /// @name FACTORY INITIALIZATION FACET
+  // ===========================================================
+  //@{
+
+public: 
+
+  ///
+  /// Initialize all the prototypes needed by various factory methods,
+  ///
+  static void initialize_prototypes();
+
+  ///
+  /// Initialize the prototypes needed by poset factory method,
+  ///
+  static void initialize_poset_prototypes();
+
+  ///
+  /// Initialize the prototypes needed by crg interval factory method,
+  ///
+  static void initialize_crg_interval_prototypes();
+
+  ///
+  /// Initialize the prototypes needed by dof map factory method,
+  ///
+  static void initialize_dof_map_prototypes();
+
+  ///
+  /// Initialize the  prototypes needed by id space factory method,
+  ///
+  static void initialize_id_space_prototypes();
+
+protected:
+
+  ///
+  /// Initialize all the prototypes needed by various factory methods;
+  /// virtual version.
+  ///
+  virtual void virtual_initialize_prototypes();
 
 private:
 
@@ -661,6 +662,22 @@ public:
   typedef namespace_poset_schema schema_type;
 
   ///
+  /// The namespace poset schema within this namespace (mutable version)
+  ///
+  inline namespace_poset_schema& namespace_schema()
+  {
+    return _namespace_schema;
+  };
+
+  ///
+  /// The namespace poset schema within this namespace (const version)
+  ///
+  inline const namespace_poset_schema& namespace_schema() const
+  {
+    return _namespace_schema;
+  };
+
+  ///
   /// True if xdof_map conforms to (is derived from) the type of
   /// row dof map required by this poset
   ///
@@ -679,6 +696,11 @@ public:
   virtual const scoped_index& new_row_dof_map();
 
 protected:
+
+  ///
+  /// The schema poset for this namespace.
+  ///
+  namespace_poset_schema _namespace_schema;
 
 private:
 
@@ -712,12 +734,22 @@ public:
   ///
   const namespace_poset_member& bottom() const;
 
+  ///
+  /// Removes all members except the standard members.
+  ///
+  void clear();
+
 protected:
 
   ///
   /// Creates the standard members for this namespace.
   ///
   virtual void initialize_standard_members();
+
+  ///
+  /// Creates additional  members for this namespace.
+  ///
+  virtual void initialize_additional_members();
 
 private:
 
@@ -755,6 +787,11 @@ public:
   void release_member_poset_id_space_iterator(index_space_iterator& xid_space, bool xauto_access) const;
 
 protected:
+
+  ///
+  /// Creates the member poset id space.
+  ///
+  void initialize_member_poset_id_space();
 
 private:
 

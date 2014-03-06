@@ -114,47 +114,30 @@ traverse_prereqs(const sheaf::namespace_poset* xns,
 // NAMESPACE_POSET FACET
 // ===========================================================
 
-// PUBLIC FUNCTIONS
+// PUBLIC MEMBER FUNCTIONS
 
-sheaf::namespace_poset*
 sheaf::namespace_poset::
-current_namespace()
+namespace_poset(const std::string& xname)
+    : poset_state_handle(new namespace_poset_member, new namespace_poset_member)
 {
   // Preconditions:
 
-  // Body:
-
-  // Postconditions:
-
-
-  // Exit:
-
-  return _current_namespace;
-}
-
-sheaf::poset_path
-sheaf::namespace_poset::
-primitives_schema_path()
-{
-  // cout << endl << "Entering namespace_poset::primitives_schema_path." << endl;
-
-  // Preconditions:
-
+  require(precondition_of(new_state(xname)));
 
   // Body:
 
-  poset_path result(primitives_poset_schema::standard_name(), "top");
+  // Create the state.
+
+  new_state(xname);
 
   // Postconditions:
 
-  ensure(result.full());
-  
+  ensure(postcondition_of(new_state(xname)));
+
   // Exit:
 
-  // cout << "Leaving namespace_poset::primitives_schema_path." << endl;
-  return result;
+  return;
 }
-
 
 sheaf::namespace_poset::
 ~namespace_poset()
@@ -241,387 +224,7 @@ sheaf::namespace_poset::
   return;
 }
 
-sheaf::namespace_poset::
-namespace_poset(const std::string& xname)
-    : poset_state_handle(new namespace_poset_member, new namespace_poset_member)
-{
-  // Preconditions:
-
-  require(precondition_of(new_state(xname)));
-
-  // Body:
-
-  // Create the state.
-
-  new_state(xname);
-
-  // Postconditions:
-
-  ensure(postcondition_of(new_state(xname)));
-
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::namespace_poset::
-clear()
-{
-  // Preconditions:
-
-  require(state_is_read_write_accessible());
-
-  // Body:
-
-  // We have to delete the members in reverse dependency order, that is,
-  // we can not delete a prerequisite before the posets that depend on it.
-  // We'll do that by traversing the dependency graph in post order,
-  // pushing the prerequisites onto a stack, then traverse the stack.
-  // To start the dependency graph traversal, we need the maximal members.
-
-  // Find the "maximal" members of the dependency graph,
-  // that is, the members which are not a prerequisite for
-  // some other member
-
-  // First create a set containing all members, except the standard ones.
-
-  typedef set<pod_index_type> lmax_mbrs_type;
-
-  lmax_mbrs_type lmax_mbrs;
-  index_iterator litr = whole().indexed_member_iterator();
-  while(!litr.is_done())
-  {
-    if(litr.index().hub_pod() >= standard_member_ct())
-    {
-      lmax_mbrs.insert(litr.index().hub_pod());
-    }
-    litr.next();
-  }
-
-  // Now the maximal members set contains all non-standard members.
-  // Next, traverse the dependency graph, removing prerequisites from the set.
-
-  litr.reset();
-  namespace_poset_member lns_mbr(top());
-  while(!litr.is_done())
-  {
-    if(is_jim(litr.index(), false))
-    {
-      // This member is a jim and has an associated poset
-
-      lns_mbr.attach_to_state(litr.index());
-
-      for(int i=0; i<PREREQ_IDS_UB; ++i)
-      {
-        pod_index_type lprereq_id = lns_mbr.poset_prereq_id(i);
-
-        if(is_valid(lprereq_id))
-        {
-          lmax_mbrs.erase(lprereq_id);
-        }
-      }
-    }
-    litr.next();
-  }
-  lns_mbr.detach_from_state();
-
-  // Now lmax members contains the maximal members and any non-standard jrms.
-
-  // Traverse the dependency graph in post order,
-  // pushing the members onto a stack.
-
-  zn_to_bool lvisited(member_index_ub().pod());
-  list<pod_index_type> lrev_post;
-  lmax_mbrs_type::iterator lmax_mbrs_itr = lmax_mbrs.begin();
-
-  pod_index_type lmbr_id;
-
-  while(lmax_mbrs_itr != lmax_mbrs.end())
-  {
-    lmbr_id = *lmax_mbrs_itr;
-    if(lmbr_id >= standard_member_ct())
-    {
-      if(is_jim(lmbr_id, false))
-      {
-        // This mbr has an associated poset; traverse its prerequisites
-
-        ::traverse_prereqs(this, lmbr_id, lrev_post, lvisited);
-      }
-      else
-      {
-        // This is a jrm; just push it onto the stack.
-
-        lvisited.put(lmbr_id, true);
-        lrev_post.push_front(lmbr_id);
-      }
-    }
-    ++lmax_mbrs_itr;
-  }
-
-#ifdef DIAGNOSTIC_OUTPUT
-  list<pod_index_type>::iterator lrev_post_itr = lrev_post.begin();
-  while(lrev_post_itr != lrev_post.end())
-  {
-    cout << "  " << *lrev_post_itr;
-    ++lrev_post_itr;
-  }
-  cout << endl << endl;
-#endif
-
-  // Now popping the stack will traverse the members in reverse dependency order,
-  // any prerequisite will appear after all posets that require it.
-  // So now we can just run the stack, deleting as we go.
-
-  begin_jim_edit_mode();
-
-  while(!lrev_post.empty())
-  {
-    lns_mbr.attach_to_state(this, lrev_post.front());
-
-#ifdef DIAGNOSTIC_OUTPUT
-    cout << endl << "deleting ns mbr: " << lns_mbr.index()
-    << " " << lns_mbr.name()
-    << endl;
-#endif
-
-    if(lns_mbr.is_jim(false))
-    {
-      // Delete the handle and state of the associated poset; 
-      // also deletes member state.
-
-      delete_poset(lns_mbr);
-    }
-    else
-    {
-      // This is a jrm, doesn't have an associated poset.
-      // Just delete the member state.
-
-      lns_mbr.delete_state();
-    }
-
-    lrev_post.pop_front();
-  }
-
-  end_jim_edit_mode();
-
-  // Remove all non-standard id spaces in this and the remaining members.
-
-  clear_member_id_spaces(false);
-  primitives().clear_member_id_spaces(true);
-  primitives_schema().clear_member_id_spaces(true);
-  namespace_schema().clear_member_id_spaces(true);
-
-  // Postconditions:
-
-  ensure(has_standard_member_ct());
-  ensure(member_id_spaces(false).has_only_standard_id_spaces());
-  ensure(primitives().member_id_spaces(false).has_only_standard_id_spaces());
-  ensure(primitives_schema().member_id_spaces(false).has_only_standard_id_spaces());
-  ensure(namespace_schema().member_id_spaces(false).has_only_standard_id_spaces());
-
-  // Exit
-
-  return;
-}
-
-void
-sheaf::namespace_poset::
-initialize_prototypes()
-{
-  // Preconditions:
-
-  // Body:
-
-  initialize_poset_prototypes();
-  initialize_crg_interval_prototypes();
-  initialize_dof_map_prototypes();
-  initialize_id_space_prototypes();
-
-  // Postconditions:
-
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::namespace_poset::
-initialize_poset_prototypes()
-{
-  // Preconditions:
-
-  // Body:
-
-  static bool lposet_prototypes_initialized = false;
-
-  if(!lposet_prototypes_initialized)
-  {
-    // Initialize the prototypes
-
-    namespace_poset::make_prototype();
-    namespace_poset_schema::make_prototype();
-    poset::make_prototype();
-    primitives_poset::make_prototype();
-    primitives_poset_schema::make_prototype();
-    refinable_poset::make_prototype();
-
-    // Done with prototype initializations.
-
-    lposet_prototypes_initialized = true;
-
-#ifdef DIAGNOSTIC_OUTPUT
-    cout << "Initialized sheaves poset prototypes" << endl;
-#endif
-
-  }
-
-  // Postconditions:
-
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::namespace_poset::
-initialize_crg_interval_prototypes()
-{
-  // Preconditions:
-
-  // Body:
-
-  static bool lcrg_interval_prototypes_initialized = false;
-
-  if(!lcrg_interval_prototypes_initialized)
-  {
-    // Initialize the prototypes
-
-    explicit_crg_interval::make_prototype();
-    standard_member_hack_crg_interval::make_prototype();
-
-    // Done with prototype initializations.
-
-    lcrg_interval_prototypes_initialized = true;
-
-#ifdef DIAGNOSTIC_OUTPUT
-    cout << "Initialized sheaves crg interval prototypes" << endl;
-#endif
-  }
-
-  // Postconditions:
-
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::namespace_poset::
-initialize_dof_map_prototypes()
-{
-  // Preconditions:
-
-  // Body:
-
-  static bool ldof_map_prototypes_initialized = false;
-
-  if(!ldof_map_prototypes_initialized)
-  {
-    // Initialize the prototypes
-
-    array_poset_dof_map::make_prototype();
-    namespace_poset_dof_map::make_prototype();
-    primitives_poset_dof_map::make_prototype();
-
-    // Done with prototype initializations.
-
-    ldof_map_prototypes_initialized = true;
-
-#ifdef DIAGNOSTIC_OUTPUT
-    cout << "Initialized sheaves dof map prototypes" << endl;
-#endif
-  }
-
-  // Postconditions:
-
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::namespace_poset::
-initialize_id_space_prototypes()
-{
-  // Preconditions:
-
-  // Body:
-
-  static bool lid_space_prototypes_initialized = false;
-
-  if(!lid_space_prototypes_initialized)
-  {
-    // Initialize the prototypes
-
-    array_index_space_state::make_prototype();
-    hash_index_space_state::make_prototype();
-    interval_index_space_state::make_prototype();
-    list_index_space_state::make_prototype();
-    offset_index_space_state::make_prototype();
-    primary_index_space_state::make_prototype();
-    primary_sum_index_space_state::make_prototype();
-    primitives_index_space_state::make_prototype();
-    reserved_primary_index_space_state::make_prototype();
-    singleton_index_space_state::make_prototype();
-
-    array_index_space_interval::make_prototype();
-    constant_index_space_interval::make_prototype();
-    explicit_index_space_interval::make_prototype();
-    ragged_array_index_space_interval::make_prototype();
-    singleton_index_space_interval::make_prototype();
-
-    // Done with prototype initializations.
-
-    lid_space_prototypes_initialized = true;
-
-#ifdef DIAGNOSTIC_OUTPUT
-    cout << "Initialized sheaves id space prototypes" << endl;
-#endif
-  }
-
-  // Postconditions:
-
-  // Exit:
-
-  return;
-}
-
-// PROTECTED FUNCTIONS
-
-void
-sheaf::namespace_poset::
-virtual_initialize_prototypes()
-{
-  // cout << endl << "Entering namespace_poset::virutal_initialize_prototypes." << endl;
-
-  // Preconditions:
-
-
-  // Body:
-
-  // Call static version defined in this class.
-
-  namespace_poset::initialize_prototypes();
-
-  // Postconditions:
-
-
-  // Exit:
-
-  // cout << "Leaving namespace_poset::virutal_initialize_prototypes." << endl;
-  return;
-}
+// PROTECTED MEMBER FUNCTIONS
 
 
 sheaf::namespace_poset::
@@ -652,19 +255,500 @@ namespace_poset(namespace_poset_member* xtop, namespace_poset_member* xbottom)
   return;
 }
 
-void
+// PRIVATE MEMBER FUNCTIONS
+
+
+bool
 sheaf::namespace_poset::
-put_current_namespace(namespace_poset* xns)
+make_prototype()
 {
   // Preconditions:
 
   // Body:
 
-  _current_namespace = xns;
+  poset_type ltype = NAMESPACE_POSET_ID;
+
+  namespace_poset* lproto = new namespace_poset;
+
+  factory().insert_prototype(lproto);
+  factory().insert_prototype(ltype, lproto);
 
   // Postconditions:
 
-  ensure(current_namespace() == xns);
+  // Exit:
+
+  return true;
+}
+
+// ===========================================================
+// PRIMTIVES FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+
+sheaf::poset_path
+sheaf::namespace_poset::
+primitives_schema_path()
+{
+  // cout << endl << "Entering namespace_poset::primitives_schema_path." << endl;
+
+  // Preconditions:
+
+
+  // Body:
+
+  poset_path result(primitives_poset_schema::standard_name(), "top");
+
+  // Postconditions:
+
+  ensure(result.full());
+  
+  // Exit:
+
+  // cout << "Leaving namespace_poset::primitives_schema_path." << endl;
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+// ===========================================================
+// MEMBER POSET FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+
+bool
+sheaf::namespace_poset::
+contains_poset(pod_index_type xhub_id, bool xauto_access) const
+{
+  bool result;
+
+  // Preconditions:
+
+  require(xauto_access || state_is_read_accessible());
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  // Body:
+
+  result = contains_member(xhub_id, false) && is_jim(xhub_id);
+
+  // Postconditions:
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Exit
+
+  return result;
+}
+
+bool
+sheaf::namespace_poset::
+contains_poset(const scoped_index& xid, bool xauto_access) const
+{
+  bool result;
+
+  // Preconditions:
+
+  require(xauto_access || state_is_read_accessible());
+
+  // Body:
+
+  return contains_poset(xid.hub_pod(), xauto_access);
+}
+
+bool
+sheaf::namespace_poset::
+contains_poset(const poset_path& xpath, bool xauto_access) const
+{
+  bool result;
+
+  // Preconditions:
+
+  require(xauto_access || state_is_read_accessible());
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  result =
+    !xpath.poset_name().empty() && contains_member(xpath.poset_name(), false) && is_jim(xpath.poset_name());
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+bool
+sheaf::namespace_poset::
+owns(const poset_state_handle& xposet, bool xauto_access) const
+{
+  bool result;
+
+  // Preconditions:
+
+  require(xauto_access || state_is_read_accessible());
+
+  // Body:
+
+  result = contains_poset(xposet.path(true), xauto_access);
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+bool
+sheaf::namespace_poset::
+contains_poset_member(pod_index_type xposet_hub_id,
+                      pod_index_type xmember_hub_id,
+                      bool xauto_access) const
+{
+  bool result;
+
+  // Preconditions:
+
+  require(xauto_access || state_is_read_accessible());
+  require(xauto_access ||
+          (contains_poset(xposet_hub_id) ?
+           member_poset(xposet_hub_id).state_is_read_accessible() :
+           true));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  result =
+    contains_poset(xposet_hub_id, false) &&
+    member_poset(xposet_hub_id, false).contains_member(xmember_hub_id, xauto_access);
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+bool
+sheaf::namespace_poset::
+contains_poset_member(const scoped_index& xposet_id,
+                      const scoped_index& xmember_id,
+                      bool xauto_access) const
+{
+  bool result;
+
+  // Preconditions:
+
+  require(xauto_access || state_is_read_accessible());
+  require(xauto_access ||
+          (contains_poset(xposet_id) ?
+           member_poset(xposet_id).state_is_read_accessible() :
+           true));
+
+  // Body:
+
+  return contains_poset_member(xposet_id.hub_pod(),
+			       xmember_id.hub_pod(),
+			       xauto_access);
+}
+
+bool
+sheaf::namespace_poset::
+contains_poset_member(const poset_path& xpath, bool xauto_access) const
+{
+  bool result;
+
+  // Preconditions:
+
+  require(xpath.full());
+  require(xauto_access || state_is_read_accessible());
+  require(xauto_access ||
+          (contains_poset(xpath, false) ?
+           poset_state_is_read_accessible(xpath, false) :
+           true));
+
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  result =
+    xpath.full() &&
+    contains_poset(xpath, false) &&
+    member_poset(xpath, false).contains_member(xpath.member_name(), xauto_access);
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+bool
+sheaf::namespace_poset::
+contains_poset_members(const std::string& xposet_name,
+                       const std::string xmember_names[],
+                       int xmember_names_ct,
+                       bool xauto_access) const
+{
+  bool result = true;
+
+  // Preconditions:
+
+  require(!xposet_name.empty());
+  require(xmember_names != 0);
+  require_for_all(i, 0, xmember_names_ct, !xmember_names[i].empty());
+  require(xauto_access || state_is_read_accessible());
+  require(xauto_access ||
+          (contains_poset(xposet_name) ?
+           member_poset(xposet_name).state_is_read_accessible() :
+           true));
+
+  // Body:
+
+  result =
+    contains_member(xposet_name) &&
+    member_poset(xposet_name, false).contains_members(xmember_names,
+        xmember_names_ct,
+        xauto_access);
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+bool
+sheaf::namespace_poset::
+contains_poset_subposet(const poset_path& xpath, bool xauto_access) const
+{
+  bool result;
+
+  // Preconditions:
+
+  require(xpath.full());
+  require(xauto_access || state_is_read_accessible());
+  require(xauto_access ||
+          ( contains_poset(xpath) ?
+            member_poset(xpath).state_is_read_accessible() :
+            true));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  result =
+    contains_member(xpath.poset_name(), false) &&
+    member_poset(xpath.poset_name(), false).includes_subposet(xpath.member_name(),
+        xauto_access);
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+sheaf::poset_state_handle&
+sheaf::namespace_poset::
+member_poset(pod_index_type xhub_id, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(xauto_access || state_is_read_accessible());
+  require(contains_member(xhub_id, xauto_access));
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  require(is_jim(xhub_id));
+
+  // Body:
+
+  namespace_poset_dof_map& ldof_map =
+    row_dof_map(member_dof_tuple_id(xhub_id, false));
+
+  poset_state_handle& result = *ldof_map.poset_pointer();
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  return result;
+}
+
+sheaf::poset_state_handle&
+sheaf::namespace_poset::
+member_poset(const scoped_index& xid, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(xauto_access || state_is_read_accessible());
+  require(contains_member(xid, xauto_access));
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  require(is_jim(xid));
+
+  // Body:
+
+  poset_state_handle& result = member_poset(xid.hub_pod(), false);
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  return result;
+}
+
+sheaf::poset_state_handle&
+sheaf::namespace_poset::
+member_poset(const poset_path& xpath, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(xauto_access || state_is_read_accessible());
+  require(contains_member(xpath.poset_name(), xauto_access));
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  require(is_jim(xpath.poset_name()));
+
+  // Body:
+
+  poset_state_handle& result = member_poset(member_id(xpath.poset_name(), false), false);
+
+  // Postconditions:
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::pod_index_type
+sheaf::namespace_poset::
+member_poset_schema_id(const scoped_index& xindex, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(is_attached());
+  require(state_is_auto_read_accessible(xauto_access));
+  require(contains_poset(xindex));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  namespace_poset_member lmbr(this, xindex);
+  pod_index_type result = lmbr.poset_prereq_id(0);
+  lmbr.detach_from_state();
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+void
+sheaf::namespace_poset::
+delete_poset(pod_index_type xhub_id, bool xauto_access)
+{
+  // Preconditions:
+
+  require(contains_poset(xhub_id, xauto_access));
+  require(member_poset(xhub_id, xauto_access).state_is_auto_read_write_accessible(true));
+  require(xauto_access || in_jim_edit_mode());
+
+  // Body:
+
+  if(xauto_access)
+  {
+    begin_jim_edit_mode(true);
+  }
+
+  namespace_poset_member lmbr(this, xhub_id);
+
+  delete_poset(lmbr);
+  
+  if(xauto_access)
+  {
+    end_jim_edit_mode(true, true);
+  }
+
+  // Postconditions:
+
+  ensure(!contains_poset(xhub_id, xauto_access));
 
   // Exit:
 
@@ -673,22 +757,29 @@ put_current_namespace(namespace_poset* xns)
 
 void
 sheaf::namespace_poset::
-initialize_additional_members()
+delete_poset(scoped_index xid, bool xauto_access)
 {
+  // Argument xid must be passed by value, otherwise
+  // since poset_state_handle::index returns a reference,
+  // it is possible to pass a reference to the index
+  // member of the poset handle itself, which has just
+  // been deleted, causing the usage of xid in postcondition
+  // to fail.
+
+
   // Preconditions:
 
-  require(state_is_read_write_accessible());
-
-  define_old_variable(int old_access_request_depth = access_request_depth());
+  require(contains_poset(xid, xauto_access));
+  require(member_poset(xid, xauto_access).state_is_auto_read_write_accessible(true));
+  require(xauto_access || in_jim_edit_mode());
 
   // Body:
 
-  // Nothing to do in this class;
-  // intended to be redefined in descendants.
+  delete_poset(xid.hub_pod(), xauto_access);
 
   // Postconditions:
 
-  ensure(access_request_depth() == old_access_request_depth);
+  ensure(!contains_poset(xid, xauto_access));
 
   // Exit:
 
@@ -697,25 +788,109 @@ initialize_additional_members()
 
 void
 sheaf::namespace_poset::
-initialize_standard_id_spaces()
+delete_poset(std::string xname, bool xauto_access)
 {
+  // Argument xname passed by value as opposed to ref
+  // to avoid any possibility of it being a reference
+  // to something in the poset being deleted, which
+  // would cause usage in postcondition to fail.
+
   // Preconditions:
 
-  require(state_is_read_write_accessible());
-  require(!member_id_spaces(false).contains("member_poset_id_space"));
-
+  require(contains_poset(xname, xauto_access));
+  require(member_poset(xname, xauto_access).state_is_auto_read_write_accessible(true));
+  require(xauto_access || in_jim_edit_mode())
+;
   // Body:
 
-  array_index_space_state::new_space(member_id_spaces(false), "member_poset_id_space", false, 0);
+  delete_poset(member_id(xname, xauto_access), xauto_access);
 
   // Postconditions:
 
-  ensure(member_id_spaces(false).contains("member_poset_id_space"));
+  ensure(!contains_poset(xname, xauto_access));
 
   // Exit:
 
   return;
 }
+
+void
+sheaf::namespace_poset::
+delete_poset(poset_path xpath, bool xauto_access)
+{
+  // Argument xpath passed by value as opposed to ref
+  // to avoid any possibility of it being a reference
+  // to something in the poset being deleted, which
+  // would cause usage in postcondition to fail.
+
+  // Preconditions:
+
+  require(contains_poset(xpath, xauto_access));
+  require(member_poset(xpath, xauto_access).state_is_auto_read_write_accessible(true));
+  require(xauto_access || in_jim_edit_mode());
+
+  // Body:
+
+  delete_poset(member_id(xpath.poset_name(), xauto_access), xauto_access);  
+
+  // Postconditions:
+
+  ensure(!contains_poset(xpath, xauto_access));
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::namespace_poset::
+delete_poset(namespace_poset_member& xmbr)
+{
+  // Preconditions:
+
+  require(in_jim_edit_mode());
+  require(xmbr.is_jim());
+  require(xmbr.poset_pointer()->state_is_auto_read_write_accessible(true));
+
+  // Body:
+
+  define_old_variable(scoped_index old_xmbr_index = xmbr.index());
+
+  // Get the poset handle.
+
+  poset_state_handle* lposet = xmbr.poset_pointer();
+
+  // Detach the handle from its state and delete the state;
+  // requires write access. One of the few places there's no matching release!
+
+  lposet->get_read_write_access(true);
+  lposet->terminate_access();
+
+  // Delete the handle.
+
+  delete lposet;
+
+  // Clean up the member dof tuple.
+
+  xmbr.put_poset_pointer(0);
+  xmbr.put_poset_type_id(NOT_A_POSET_TYPE);
+  xmbr.put_poset_class("");
+
+  // Delete the member.
+
+  xmbr.delete_state(false);
+
+  // Postconditions:
+
+  ensure(!contains_poset(old_xmbr_index, false));
+  ensure(!xmbr.is_attached());
+
+  // Exit:
+
+  return;
+}
+
+// PROTECTED MEMBER FUNCTIONS
 
 sheaf::scoped_index
 sheaf::namespace_poset::
@@ -906,667 +1081,14 @@ link_poset(const namespace_poset_member& xmbr)
   return;
 }
 
-// PRIVATE FUNCTIONS
-
-sheaf::namespace_poset*
-sheaf::namespace_poset::
-_current_namespace  = 0;
-
-bool
-sheaf::namespace_poset::
-make_prototype()
-{
-  // Preconditions:
-
-  // Body:
-
-  poset_type ltype = NAMESPACE_POSET_ID;
-
-  namespace_poset* lproto = new namespace_poset;
-
-  factory().insert_prototype(lproto);
-  factory().insert_prototype(ltype, lproto);
-
-  // Postconditions:
-
-  // Exit:
-
-  return true;
-}
-
-
+// PRIVATE MEMBER FUNCTIONS
+ 
+ 
 // ===========================================================
-// POSET FACTORY METHOD FACET
+// PATH QUERY FACET
 // ===========================================================
 
-// PUBLIC FUNCTIONS
-
-void
-sheaf::namespace_poset::
-delete_poset(pod_index_type xhub_id, bool xauto_access)
-{
-  // Preconditions:
-
-  require(contains_poset(xhub_id, xauto_access));
-  require(member_poset(xhub_id, xauto_access).state_is_auto_read_write_accessible(true));
-  require(xauto_access || in_jim_edit_mode());
-
-  // Body:
-
-  if(xauto_access)
-  {
-    begin_jim_edit_mode(true);
-  }
-
-  namespace_poset_member lmbr(this, xhub_id);
-
-  delete_poset(lmbr);
-  
-  if(xauto_access)
-  {
-    end_jim_edit_mode(true, true);
-  }
-
-  // Postconditions:
-
-  ensure(!contains_poset(xhub_id, xauto_access));
-
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::namespace_poset::
-delete_poset(scoped_index xid, bool xauto_access)
-{
-  // Argument xid must be passed by value, otherwise
-  // since poset_state_handle::index returns a reference,
-  // it is possible to pass a reference to the index
-  // member of the poset handle itself, which has just
-  // been deleted, causing the usage of xid in postcondition
-  // to fail.
-
-
-  // Preconditions:
-
-  require(contains_poset(xid, xauto_access));
-  require(member_poset(xid, xauto_access).state_is_auto_read_write_accessible(true));
-  require(xauto_access || in_jim_edit_mode());
-
-  // Body:
-
-  delete_poset(xid.hub_pod(), xauto_access);
-
-  // Postconditions:
-
-  ensure(!contains_poset(xid, xauto_access));
-
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::namespace_poset::
-delete_poset(std::string xname, bool xauto_access)
-{
-  // Argument xname passed by value as opposed to ref
-  // to avoid any possibility of it being a reference
-  // to something in the poset being deleted, which
-  // would cause usage in postcondition to fail.
-
-  // Preconditions:
-
-  require(contains_poset(xname, xauto_access));
-  require(member_poset(xname, xauto_access).state_is_auto_read_write_accessible(true));
-  require(xauto_access || in_jim_edit_mode())
-;
-  // Body:
-
-  delete_poset(member_id(xname, xauto_access), xauto_access);
-
-  // Postconditions:
-
-  ensure(!contains_poset(xname, xauto_access));
-
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::namespace_poset::
-delete_poset(poset_path xpath, bool xauto_access)
-{
-  // Argument xpath passed by value as opposed to ref
-  // to avoid any possibility of it being a reference
-  // to something in the poset being deleted, which
-  // would cause usage in postcondition to fail.
-
-  // Preconditions:
-
-  require(contains_poset(xpath, xauto_access));
-  require(member_poset(xpath, xauto_access).state_is_auto_read_write_accessible(true));
-  require(xauto_access || in_jim_edit_mode());
-
-  // Body:
-
-  delete_poset(member_id(xpath.poset_name(), xauto_access), xauto_access);  
-
-  // Postconditions:
-
-  ensure(!contains_poset(xpath, xauto_access));
-
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::namespace_poset::
-delete_poset(namespace_poset_member& xmbr)
-{
-  // Preconditions:
-
-  require(in_jim_edit_mode());
-  require(xmbr.is_jim());
-  require(xmbr.poset_pointer()->state_is_auto_read_write_accessible(true));
-
-  // Body:
-
-  define_old_variable(scoped_index old_xmbr_index = xmbr.index());
-
-  // Get the poset handle.
-
-  poset_state_handle* lposet = xmbr.poset_pointer();
-
-  // Detach the handle from its state and delete the state;
-  // requires write access. One of the few places there's no matching release!
-
-  lposet->get_read_write_access(true);
-  lposet->terminate_access();
-
-  // Delete the handle.
-
-  delete lposet;
-
-  // Clean up the member dof tuple.
-
-  xmbr.put_poset_pointer(0);
-  xmbr.put_poset_type_id(NOT_A_POSET_TYPE);
-  xmbr.put_poset_class("");
-
-  // Delete the member.
-
-  xmbr.delete_state(false);
-
-  // Postconditions:
-
-  ensure(!contains_poset(old_xmbr_index, false));
-  ensure(!xmbr.is_attached());
-
-  // Exit:
-
-  return;
-}
-
-sheaf::poset_state_handle&
-sheaf::namespace_poset::
-member_poset(pod_index_type xhub_id, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-  require(contains_member(xhub_id, xauto_access));
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  require(is_jim(xhub_id));
-
-  // Body:
-
-  namespace_poset_dof_map& ldof_map =
-    row_dof_map(member_dof_tuple_id(xhub_id, false));
-
-  poset_state_handle& result = *ldof_map.poset_pointer();
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  return result;
-}
-
-sheaf::poset_state_handle&
-sheaf::namespace_poset::
-member_poset(const scoped_index& xid, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-  require(contains_member(xid, xauto_access));
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  require(is_jim(xid));
-
-  // Body:
-
-  poset_state_handle& result = member_poset(xid.hub_pod(), false);
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  return result;
-}
-
-sheaf::poset_state_handle&
-sheaf::namespace_poset::
-member_poset(const poset_path& xpath, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-  require(contains_member(xpath.poset_name(), xauto_access));
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  require(is_jim(xpath.poset_name()));
-
-  // Body:
-
-  poset_state_handle& result = member_poset(member_id(xpath.poset_name(), false), false);
-
-  // Postconditions:
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Exit:
-
-  return result;
-}
-
-// PROTECTED FUNCTIONS
-
-// PRIVATE FUNCTIONS
-
-
-// ===========================================================
-// POSET FACTORY METHOD QUERY FACET
-// ===========================================================
-
-// PUBLIC FUNCTIONS
-
-sheaf::pod_index_type
-sheaf::namespace_poset::
-member_poset_schema_id(const scoped_index& xindex, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(is_attached());
-  require(state_is_auto_read_accessible(xauto_access));
-  require(contains_poset(xindex));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  namespace_poset_member lmbr(this, xindex);
-  pod_index_type result = lmbr.poset_prereq_id(0);
-  lmbr.detach_from_state();
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-
-bool
-sheaf::namespace_poset::
-contains_poset(pod_index_type xhub_id, bool xauto_access) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  // Body:
-
-  result = contains_member(xhub_id, false) && is_jim(xhub_id);
-
-  // Postconditions:
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Exit
-
-  return result;
-}
-
-bool
-sheaf::namespace_poset::
-contains_poset(const scoped_index& xid, bool xauto_access) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-
-  // Body:
-
-  return contains_poset(xid.hub_pod(), xauto_access);
-}
-
-bool
-sheaf::namespace_poset::
-contains_poset(const poset_path& xpath, bool xauto_access) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  result =
-    !xpath.poset_name().empty() && contains_member(xpath.poset_name(), false) && is_jim(xpath.poset_name());
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-bool
-sheaf::namespace_poset::
-owns(const poset_state_handle& xposet, bool xauto_access) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-
-  // Body:
-
-  result = contains_poset(xposet.path(true), xauto_access);
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-bool
-sheaf::namespace_poset::
-poset_state_is_read_accessible(const poset_path& xpath, bool xauto_access) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-
-  // Body:
-
-  result =
-    contains_poset(xpath, xauto_access) &&
-    member_poset(xpath, xauto_access).state_is_read_accessible();
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-bool
-sheaf::namespace_poset::
-poset_state_is_read_write_accessible(const poset_path& xpath, bool xauto_access) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-
-  // Body:
-
-  result =
-    contains_poset(xpath, xauto_access) &&
-    member_poset(xpath, xauto_access).state_is_read_write_accessible();
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-bool
-sheaf::namespace_poset::
-contains_poset_member(pod_index_type xposet_hub_id,
-                      pod_index_type xmember_hub_id,
-                      bool xauto_access) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-  require(xauto_access ||
-          (contains_poset(xposet_hub_id) ?
-           member_poset(xposet_hub_id).state_is_read_accessible() :
-           true));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  result =
-    contains_poset(xposet_hub_id, false) &&
-    member_poset(xposet_hub_id, false).contains_member(xmember_hub_id, xauto_access);
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-bool
-sheaf::namespace_poset::
-contains_poset_member(const scoped_index& xposet_id,
-                      const scoped_index& xmember_id,
-                      bool xauto_access) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-  require(xauto_access ||
-          (contains_poset(xposet_id) ?
-           member_poset(xposet_id).state_is_read_accessible() :
-           true));
-
-  // Body:
-
-  return contains_poset_member(xposet_id.hub_pod(),
-			       xmember_id.hub_pod(),
-			       xauto_access);
-}
-
-bool
-sheaf::namespace_poset::
-contains_poset_member(const poset_path& xpath, bool xauto_access) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(xpath.full());
-  require(xauto_access || state_is_read_accessible());
-  require(xauto_access ||
-          (contains_poset(xpath, false) ?
-           poset_state_is_read_accessible(xpath, false) :
-           true));
-
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  result =
-    xpath.full() &&
-    contains_poset(xpath, false) &&
-    member_poset(xpath, false).contains_member(xpath.member_name(), xauto_access);
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-bool
-sheaf::namespace_poset::
-contains_poset_members(const std::string& xposet_name,
-                       const std::string xmember_names[],
-                       int xmember_names_ct,
-                       bool xauto_access) const
-{
-  bool result = true;
-
-  // Preconditions:
-
-  require(!xposet_name.empty());
-  require(xmember_names != 0);
-  require_for_all(i, 0, xmember_names_ct, !xmember_names[i].empty());
-  require(xauto_access || state_is_read_accessible());
-  require(xauto_access ||
-          (contains_poset(xposet_name) ?
-           member_poset(xposet_name).state_is_read_accessible() :
-           true));
-
-  // Body:
-
-  result =
-    contains_member(xposet_name) &&
-    member_poset(xposet_name, false).contains_members(xmember_names,
-        xmember_names_ct,
-        xauto_access);
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
-bool
-sheaf::namespace_poset::
-contains_poset_subposet(const poset_path& xpath, bool xauto_access) const
-{
-  bool result;
-
-  // Preconditions:
-
-  require(xpath.full());
-  require(xauto_access || state_is_read_accessible());
-  require(xauto_access ||
-          ( contains_poset(xpath) ?
-            member_poset(xpath).state_is_read_accessible() :
-            true));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  result =
-    contains_member(xpath.poset_name(), false) &&
-    member_poset(xpath.poset_name(), false).includes_subposet(xpath.member_name(),
-        xauto_access);
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
+// PUBLIC MEMBER FUNCTIONS
 
 bool
 sheaf::namespace_poset::
@@ -1693,16 +1215,317 @@ path_is_auto_read_write_available(const poset_path& xpath, bool xauto_access) co
   return result;
 }
 
-// PROTECTED FUNCTIONS
+bool
+sheaf::namespace_poset::
+poset_state_is_read_accessible(const poset_path& xpath, bool xauto_access) const
+{
+  bool result;
 
-// PRIVATE FUNCTIONS
+  // Preconditions:
 
+  require(xauto_access || state_is_read_accessible());
+
+  // Body:
+
+  result =
+    contains_poset(xpath, xauto_access) &&
+    member_poset(xpath, xauto_access).state_is_read_accessible();
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+bool
+sheaf::namespace_poset::
+poset_state_is_read_write_accessible(const poset_path& xpath, bool xauto_access) const
+{
+  bool result;
+
+  // Preconditions:
+
+  require(xauto_access || state_is_read_accessible());
+
+  // Body:
+
+  result =
+    contains_poset(xpath, xauto_access) &&
+    member_poset(xpath, xauto_access).state_is_read_write_accessible();
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+ 
+// ===========================================================
+// CURRENT NAMESPACE FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+ 
+sheaf::namespace_poset*
+sheaf::namespace_poset::
+current_namespace()
+{
+  // Preconditions:
+
+  // Body:
+
+  // Postconditions:
+
+
+  // Exit:
+
+  return _current_namespace;
+}
+
+void
+sheaf::namespace_poset::
+put_current_namespace(namespace_poset* xns)
+{
+  // Preconditions:
+
+  // Body:
+
+  _current_namespace = xns;
+
+  // Postconditions:
+
+  ensure(current_namespace() == xns);
+
+  // Exit:
+
+  return;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+sheaf::namespace_poset*
+sheaf::namespace_poset::
+_current_namespace  = 0;
+
+
+// ===========================================================
+// FACTORY INITIALIZATION FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+void
+sheaf::namespace_poset::
+initialize_prototypes()
+{
+  // Preconditions:
+
+  // Body:
+
+  initialize_poset_prototypes();
+  initialize_crg_interval_prototypes();
+  initialize_dof_map_prototypes();
+  initialize_id_space_prototypes();
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::namespace_poset::
+initialize_poset_prototypes()
+{
+  // Preconditions:
+
+  // Body:
+
+  static bool lposet_prototypes_initialized = false;
+
+  if(!lposet_prototypes_initialized)
+  {
+    // Initialize the prototypes
+
+    namespace_poset::make_prototype();
+    namespace_poset_schema::make_prototype();
+    poset::make_prototype();
+    primitives_poset::make_prototype();
+    primitives_poset_schema::make_prototype();
+    refinable_poset::make_prototype();
+
+    // Done with prototype initializations.
+
+    lposet_prototypes_initialized = true;
+
+#ifdef DIAGNOSTIC_OUTPUT
+    cout << "Initialized sheaves poset prototypes" << endl;
+#endif
+
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::namespace_poset::
+initialize_crg_interval_prototypes()
+{
+  // Preconditions:
+
+  // Body:
+
+  static bool lcrg_interval_prototypes_initialized = false;
+
+  if(!lcrg_interval_prototypes_initialized)
+  {
+    // Initialize the prototypes
+
+    explicit_crg_interval::make_prototype();
+    standard_member_hack_crg_interval::make_prototype();
+
+    // Done with prototype initializations.
+
+    lcrg_interval_prototypes_initialized = true;
+
+#ifdef DIAGNOSTIC_OUTPUT
+    cout << "Initialized sheaves crg interval prototypes" << endl;
+#endif
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::namespace_poset::
+initialize_dof_map_prototypes()
+{
+  // Preconditions:
+
+  // Body:
+
+  static bool ldof_map_prototypes_initialized = false;
+
+  if(!ldof_map_prototypes_initialized)
+  {
+    // Initialize the prototypes
+
+    array_poset_dof_map::make_prototype();
+    namespace_poset_dof_map::make_prototype();
+    primitives_poset_dof_map::make_prototype();
+
+    // Done with prototype initializations.
+
+    ldof_map_prototypes_initialized = true;
+
+#ifdef DIAGNOSTIC_OUTPUT
+    cout << "Initialized sheaves dof map prototypes" << endl;
+#endif
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::namespace_poset::
+initialize_id_space_prototypes()
+{
+  // Preconditions:
+
+  // Body:
+
+  static bool lid_space_prototypes_initialized = false;
+
+  if(!lid_space_prototypes_initialized)
+  {
+    // Initialize the prototypes
+
+    array_index_space_state::make_prototype();
+    hash_index_space_state::make_prototype();
+    interval_index_space_state::make_prototype();
+    list_index_space_state::make_prototype();
+    offset_index_space_state::make_prototype();
+    primary_index_space_state::make_prototype();
+    primary_sum_index_space_state::make_prototype();
+    primitives_index_space_state::make_prototype();
+    reserved_primary_index_space_state::make_prototype();
+    singleton_index_space_state::make_prototype();
+
+    array_index_space_interval::make_prototype();
+    constant_index_space_interval::make_prototype();
+    explicit_index_space_interval::make_prototype();
+    ragged_array_index_space_interval::make_prototype();
+    singleton_index_space_interval::make_prototype();
+
+    // Done with prototype initializations.
+
+    lid_space_prototypes_initialized = true;
+
+#ifdef DIAGNOSTIC_OUTPUT
+    cout << "Initialized sheaves id space prototypes" << endl;
+#endif
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+void
+sheaf::namespace_poset::
+virtual_initialize_prototypes()
+{
+  // cout << endl << "Entering namespace_poset::virutal_initialize_prototypes." << endl;
+
+  // Preconditions:
+
+
+  // Body:
+
+  // Call static version defined in this class.
+
+  namespace_poset::initialize_prototypes();
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving namespace_poset::virutal_initialize_prototypes." << endl;
+  return;
+}
+
+// PRIVATE MEMBER FUNCTIONS
 
 // ===========================================================
 // STATE FACET
 // ===========================================================
 
-// PUBLIC FUNCTIONS
+// PUBLIC MEMBER FUNCTIONS
 
 sheaf::poset_type
 sheaf::namespace_poset::
@@ -1916,7 +1739,7 @@ detach_from_state()
   return;
 }
 
-// PROTECTED FUNCTIONS
+// PROTECTED MEMBER FUNCTIONS
 
 void
 sheaf::namespace_poset::
@@ -2008,11 +1831,9 @@ new_state(const std::string& xname)
   // Want the primary term for bottom and top in the top id space
   // allocated before the member poset id space which
   // must be allocated before the other standard namespace members
-  // are intiailaized. So do it like this:
+  // are initialized. So do it like this:
 
   initialize_standard_subposets(xname);
-
-  //   initialize_standard_id_spaces();
 
   initialize_standard_members();
 
@@ -2090,14 +1911,14 @@ attach_handle_data_members()
   return;
 }
 
-// PRIVATE FUNCTIONS
-
+// PRIVATE MEMBER FUNCTIONS
+ 
 
 // ===========================================================
 // GLOBAL ATTRIBUTES FACET
 // ===========================================================
 
-// PUBLIC FUNCTIONS
+// PUBLIC MEMBER FUNCTIONS
 
 std::string
 sheaf::namespace_poset::
@@ -2178,7 +1999,7 @@ path(bool xauto_access) const
   return result;
 }
 
-// PROTECTED FUNCTIONS
+// PROTECTED MEMBER FUNCTIONS
 
 void
 sheaf::namespace_poset::
@@ -2204,14 +2025,14 @@ initialize_namespace(namespace_poset& xns, bool xauto_link)
   return;
 }
 
-// PRIVATE FUNCTIONS
+// PRIVATE MEMBER FUNCTIONS
 
 
 // ===========================================================
 // SCHEMA FACET
 // ===========================================================
 
-// PUBLIC FUNCTIONS
+// PUBLIC MEMBER FUNCTIONS
 
 bool
 sheaf::namespace_poset::
@@ -2292,16 +2113,16 @@ new_row_dof_map()
   return result;
 }
 
-// PROTECTED FUNCTIONS
+// PROTECTED MEMBER FUNCTIONS
 
-// PRIVATE FUNCTIONS
-
+// PRIVATE MEMBER FUNCTIONS
+  
 
 // ===========================================================
 // MEMBERSHIP FACET
 // ===========================================================
 
-// PUBLIC FUNCTIONS
+// PUBLIC MEMBER FUNCTIONS
 
 sheaf::namespace_poset_member&
 sheaf::namespace_poset::
@@ -2371,7 +2192,168 @@ bottom() const
   return result;
 }
 
-// PROTECTED FUNCTIONS
+void
+sheaf::namespace_poset::
+clear()
+{
+  // Preconditions:
+
+  require(state_is_read_write_accessible());
+
+  // Body:
+
+  // We have to delete the members in reverse dependency order, that is,
+  // we can not delete a prerequisite before the posets that depend on it.
+  // We'll do that by traversing the dependency graph in post order,
+  // pushing the prerequisites onto a stack, then traverse the stack.
+  // To start the dependency graph traversal, we need the maximal members.
+
+  // Find the "maximal" members of the dependency graph,
+  // that is, the members which are not a prerequisite for
+  // some other member
+
+  // First create a set containing all members, except the standard ones.
+
+  typedef set<pod_index_type> lmax_mbrs_type;
+
+  lmax_mbrs_type lmax_mbrs;
+  index_iterator litr = whole().indexed_member_iterator();
+  while(!litr.is_done())
+  {
+    if(litr.index().hub_pod() >= standard_member_ct())
+    {
+      lmax_mbrs.insert(litr.index().hub_pod());
+    }
+    litr.next();
+  }
+
+  // Now the maximal members set contains all non-standard members.
+  // Next, traverse the dependency graph, removing prerequisites from the set.
+
+  litr.reset();
+  namespace_poset_member lns_mbr(top());
+  while(!litr.is_done())
+  {
+    if(is_jim(litr.index(), false))
+    {
+      // This member is a jim and has an associated poset
+
+      lns_mbr.attach_to_state(litr.index());
+
+      for(int i=0; i<PREREQ_IDS_UB; ++i)
+      {
+        pod_index_type lprereq_id = lns_mbr.poset_prereq_id(i);
+
+        if(is_valid(lprereq_id))
+        {
+          lmax_mbrs.erase(lprereq_id);
+        }
+      }
+    }
+    litr.next();
+  }
+  lns_mbr.detach_from_state();
+
+  // Now lmax members contains the maximal members and any non-standard jrms.
+
+  // Traverse the dependency graph in post order,
+  // pushing the members onto a stack.
+
+  zn_to_bool lvisited(member_index_ub().pod());
+  list<pod_index_type> lrev_post;
+  lmax_mbrs_type::iterator lmax_mbrs_itr = lmax_mbrs.begin();
+
+  pod_index_type lmbr_id;
+
+  while(lmax_mbrs_itr != lmax_mbrs.end())
+  {
+    lmbr_id = *lmax_mbrs_itr;
+    if(lmbr_id >= standard_member_ct())
+    {
+      if(is_jim(lmbr_id, false))
+      {
+        // This mbr has an associated poset; traverse its prerequisites
+
+        ::traverse_prereqs(this, lmbr_id, lrev_post, lvisited);
+      }
+      else
+      {
+        // This is a jrm; just push it onto the stack.
+
+        lvisited.put(lmbr_id, true);
+        lrev_post.push_front(lmbr_id);
+      }
+    }
+    ++lmax_mbrs_itr;
+  }
+
+#ifdef DIAGNOSTIC_OUTPUT
+  list<pod_index_type>::iterator lrev_post_itr = lrev_post.begin();
+  while(lrev_post_itr != lrev_post.end())
+  {
+    cout << "  " << *lrev_post_itr;
+    ++lrev_post_itr;
+  }
+  cout << endl << endl;
+#endif
+
+  // Now popping the stack will traverse the members in reverse dependency order,
+  // any prerequisite will appear after all posets that require it.
+  // So now we can just run the stack, deleting as we go.
+
+  begin_jim_edit_mode();
+
+  while(!lrev_post.empty())
+  {
+    lns_mbr.attach_to_state(this, lrev_post.front());
+
+#ifdef DIAGNOSTIC_OUTPUT
+    cout << endl << "deleting ns mbr: " << lns_mbr.index()
+    << " " << lns_mbr.name()
+    << endl;
+#endif
+
+    if(lns_mbr.is_jim(false))
+    {
+      // Delete the handle and state of the associated poset; 
+      // also deletes member state.
+
+      delete_poset(lns_mbr);
+    }
+    else
+    {
+      // This is a jrm, doesn't have an associated poset.
+      // Just delete the member state.
+
+      lns_mbr.delete_state();
+    }
+
+    lrev_post.pop_front();
+  }
+
+  end_jim_edit_mode();
+
+  // Remove all non-standard id spaces in this and the remaining members.
+
+  clear_member_id_spaces(false);
+  primitives().clear_member_id_spaces(true);
+  primitives_schema().clear_member_id_spaces(true);
+  namespace_schema().clear_member_id_spaces(true);
+
+  // Postconditions:
+
+  ensure(has_standard_member_ct());
+  ensure(member_id_spaces(false).has_only_standard_id_spaces());
+  ensure(primitives().member_id_spaces(false).has_only_standard_id_spaces());
+  ensure(primitives_schema().member_id_spaces(false).has_only_standard_id_spaces());
+  ensure(namespace_schema().member_id_spaces(false).has_only_standard_id_spaces());
+
+  // Exit
+
+  return;
+}
+
+// PROTECTED MEMBER FUNCTIONS
 
 void
 sheaf::namespace_poset::
@@ -2383,13 +2365,13 @@ initialize_standard_members()
 
   // First create the standard members of the base class,
   // creates the primary terrm in the top id space before
-  // the secondary term allocated in initialize_standard_id_spaces.
+  // the secondary term allocated in initialize_member_poset_id_space.
 
   poset_state_handle::initialize_standard_members();
 
   // Now create the standard id space; secondary terms it top id space.
 
-  initialize_standard_id_spaces();
+  initialize_member_poset_id_space();
 
   // Insert primitives schema poset into the namespace.
   // Creates primitives schema member at index 2.
@@ -2453,7 +2435,32 @@ initialize_standard_members()
   return;
 }
 
-// PRIVATE FUNCTIONS
+void
+sheaf::namespace_poset::
+initialize_additional_members()
+{
+  // Preconditions:
+
+  require(state_is_read_write_accessible());
+
+  define_old_variable(int old_access_request_depth = access_request_depth());
+
+  // Body:
+
+  // Nothing to do in this class;
+  // intended to be redefined in descendants.
+
+  // Postconditions:
+
+  ensure(access_request_depth() == old_access_request_depth);
+
+  // Exit:
+
+  return;
+}
+
+// PRIVATE MEMBER FUNCTIONS
+
 
 // ===========================================================
 // MEMBER ID SPACE FAMILY FACET
@@ -2586,9 +2593,30 @@ release_member_poset_id_space_iterator(index_space_iterator& xitr, bool xauto_ac
   return;
 }
 
-
 // PROTECTED MEMBER FUNCTIONS
 
+
+void
+sheaf::namespace_poset::
+initialize_member_poset_id_space()
+{
+  // Preconditions:
+
+  require(state_is_read_write_accessible());
+  require(!member_id_spaces(false).contains("member_poset_id_space"));
+
+  // Body:
+
+  array_index_space_state::new_space(member_id_spaces(false), "member_poset_id_space", false, 0);
+
+  // Postconditions:
+
+  ensure(member_id_spaces(false).contains("member_poset_id_space"));
+
+  // Exit:
+
+  return;
+}
 
 // PRIVATE MEMBER FUNCTIONS
  
@@ -2597,7 +2625,7 @@ release_member_poset_id_space_iterator(index_space_iterator& xitr, bool xauto_ac
 // I/O SUPPORT FACET
 // ===========================================================
 
-// PUBLIC FUNCTIONS
+// PUBLIC MEMBER FUNCTIONS
 
 sheaf::pod_index_type
 sheaf::namespace_poset::
@@ -2609,7 +2637,7 @@ prereq_id(int xi) const
   return invalid_pod_index();
 }
 
-// PROTECTED FUNCTIONS
+// PROTECTED MEMBER FUNCTIONS
 
 void
 sheaf::namespace_poset::
@@ -2637,14 +2665,14 @@ put_name(const std::string& xname)
 }
 
 
-// PRIVATE FUNCTIONS
+// PRIVATE MEMBER FUNCTIONS
 
 
 // ===========================================================
 // DEBUGGING FACET
 // ===========================================================
 
-// PUBLIC FUNCTIONS
+// PUBLIC MEMBER FUNCTIONS
 
 void
 sheaf::namespace_poset::
@@ -2662,16 +2690,16 @@ to_string()
   return oss.str();
 }
 
-// PROTECTED FUNCTIONS
+// PROTECTED MEMBER FUNCTIONS
 
-// PRIVATE FUNCTIONS
+// PRIVATE MEMBER FUNCTIONS
 
 
 // ===========================================================
 // ANY FACET
 // ===========================================================
 
-// PUBLIC FUNCTIONS
+// PUBLIC MEMBER FUNCTIONS
 
 bool
 sheaf::namespace_poset::
@@ -2760,16 +2788,17 @@ invariant() const
   return result;
 }
 
-// PROTECTED FUNCTIONS
+// PROTECTED MEMBER FUNCTIONS
 
-// PRIVATE FUNCTIONS
+// PRIVATE MEMBER FUNCTIONS
 
 
 // =============================================================================
 // NON-MEMBER FUNCTIONS
 // =============================================================================
 
-std::ostream & sheaf::
+std::ostream & 
+sheaf::
 operator << (std::ostream &os, const namespace_poset& ns)
 {
 
@@ -2821,7 +2850,8 @@ operator << (std::ostream &os, const namespace_poset& ns)
 }
 
 size_t
-sheaf::deep_size(const namespace_poset& xp, bool xinclude_shallow, size_t xresults[4])
+sheaf::
+deep_size(const namespace_poset& xp, bool xinclude_shallow, size_t xresults[4])
 {
   size_t result;
   size_t lmemory_parts[4];

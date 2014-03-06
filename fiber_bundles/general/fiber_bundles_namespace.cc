@@ -184,222 +184,8 @@ fiber_bundle::fiber_bundles_namespace::
   return;
 }
 
-void
-fiber_bundle::fiber_bundles_namespace::
-initialize_prototypes()
-{
-  // Preconditions:
-
-  // Body:
-
-  initialize_poset_prototypes();
-  initialize_crg_interval_prototypes();
-  initialize_dof_map_prototypes();
-  initialize_id_space_prototypes();
-
-  // Postconditions:
-
-  // Exit:
-
-  return;
-}
-
-void
-fiber_bundle::fiber_bundles_namespace::
-initialize_poset_prototypes()
-{
-  // Preconditions:
-
-  // Body:
-
-  static bool lposet_prototypes_initialized = false;
-
-  if(!lposet_prototypes_initialized)
-  {
-    namespace_poset::initialize_poset_prototypes();
-
-    // Initialize the prototypes
-
-    base_space_poset::make_prototype();
-
-    binary_section_space_schema_poset::make_prototype();
-    sec_at0_space::make_prototype();
-    sec_at1_space::make_prototype();
-    sec_atp_space::make_prototype();
-    sec_jcb_space::make_prototype();
-    sec_rep_space::make_prototype();
-    sec_rep_descriptor_poset::make_prototype();
-    sec_stp_space::make_prototype();
-    sec_tp_space::make_prototype();
-    sec_tuple_space::make_prototype();
-    sec_vd_space::make_prototype();
-
-    at0_space::make_prototype();
-    at1_space::make_prototype();
-    atp_space::make_prototype();
-    gln_space::make_prototype();
-    jcb_space::make_prototype();
-    stp_space::make_prototype();
-    tp_space::make_prototype();
-    tuple_space::make_prototype();
-    vd_space::make_prototype();
-
-    // Done with prototype initializations.
-
-    lposet_prototypes_initialized = true;
-
-#ifdef DIAGNOSTIC_OUTPUT
-    cout << "Initialized fiber bundles poset prototypes" << endl;
-#endif
-
-  }
-
-  // Postconditions:
-
-  // Exit:
-
-  return;
-}
-
-void
-fiber_bundle::fiber_bundles_namespace::
-initialize_crg_interval_prototypes()
-{
-  // Preconditions:
-
-  // Body:
-
-  static bool lcrg_interval_prototypes_initialized = false;
-
-  if(!lcrg_interval_prototypes_initialized)
-  {
-    namespace_poset::initialize_crg_interval_prototypes();
-
-    // Initialize the prototypes
-
-    point_block_crg_interval::make_prototype();
-    structured_block_1d_crg_interval::make_prototype();
-    structured_block_2d_crg_interval::make_prototype();
-    structured_block_3d_crg_interval::make_prototype();
-    zone_nodes_block_crg_interval::make_prototype();
-
-    // Done with prototype initializations.
-
-    lcrg_interval_prototypes_initialized = true;
-
-#ifdef DIAGNOSTIC_OUTPUT
-    cout << "Initialized fiber bundles crg interval prototypes" << endl;
-#endif
-  }
-
-  // Postconditions:
-
-  // Exit:
-
-  return;
-}
-
-void
-fiber_bundle::fiber_bundles_namespace::
-initialize_dof_map_prototypes()
-{
-  // Preconditions:
-
-  // Body:
-
-  static bool ldof_map_prototypes_initialized = false;
-
-  if(!ldof_map_prototypes_initialized)
-  {
-    namespace_poset::initialize_dof_map_prototypes();
-
-    // Initialize the prototypes
-
-    array_section_dof_map::make_prototype();
-    sparse_section_dof_map::make_prototype();
-
-    // Done with prototype initializations.
-
-    ldof_map_prototypes_initialized = true;
-
-#ifdef DIAGNOSTIC_OUTPUT
-    cout << "Initialized fiber bundles dof map prototypes" << endl;
-#endif
-  }
-
-  // Postconditions:
-
-  // Exit:
-
-  return;
-}
-
-void
-fiber_bundle::fiber_bundles_namespace::
-initialize_id_space_prototypes()
-{
-  // Preconditions:
-
-  // Body:
-
-  static bool lid_space_prototypes_initialized = false;
-
-  if(!lid_space_prototypes_initialized)
-  {
-    namespace_poset::initialize_id_space_prototypes();
-
-    // Initialize the prototypes
-
-    section_space_schema_jims_index_space_state::make_prototype();
-
-    i_adjacency_index_space_interval::make_prototype();
-    i_connectivity_index_space_interval::make_prototype();
-    ij_adjacency_index_space_interval::make_prototype();
-    ij_connectivity_index_space_interval::make_prototype();
-    ijk_adjacency_index_space_interval::make_prototype();
-    ijk_connectivity_index_space_interval::make_prototype();
-
-    // Done with prototype initializations.
-
-    lid_space_prototypes_initialized = true;
-
-#ifdef DIAGNOSTIC_OUTPUT
-    cout << "Initialized fiber bundles id space prototypes" << endl;
-#endif
-  }
-
-  // Postconditions:
-
-  // Exit:
-
-  return;
-}
-
 // PROTECTED MEMBER FUNCTIONS
 
-void
-fiber_bundle::fiber_bundles_namespace::
-virtual_initialize_prototypes()
-{
-  // cout << endl << "Entering namespace_poset::virutal_initialize_prototypes." << endl;
-
-  // Preconditions:
-
-
-  // Body:
-
-  // Call static version defined in this class.
-
-  fiber_bundles_namespace::initialize_prototypes();
-
-  // Postconditions:
-
-
-  // Exit:
-
-  // cout << "Leaving namespace_poset::virutal_initialize_prototypes." << endl;
-  return;
-}
 
 fiber_bundle::fiber_bundles_namespace::
 fiber_bundles_namespace()
@@ -2964,41 +2750,13 @@ make_section_space_schema_schema_members()
 
 // PRIVATE MEMBER FUNCTIONS
 
-
 // ===========================================================
-// NAMESPACE_POSET FACET
+// MEMBER POSET FACET
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
 
 // PROTECTED MEMBER FUNCTIONS
-
-void
-fiber_bundle::fiber_bundles_namespace::
-initialize_additional_members()
-{
-  // Preconditions:
-
-  require(state_is_read_write_accessible());
-
-  define_old_variable(int old_access_request_depth = access_request_depth());
-
-
-  // Body:
-
-  make_base_space_definitions();
-  make_fiber_space_definitions();
-  make_section_space_definitions();
-
-  // Postconditions:
-
-  ensure(access_request_depth() == old_access_request_depth);
-
-
-  // Exit:
-
-  return;
-}
 
 void
 fiber_bundle::fiber_bundles_namespace::
@@ -3146,10 +2904,234 @@ link_poset(const namespace_poset_member& xmbr)
 }
 
 // PRIVATE MEMBER FUNCTIONS
-
-
+ 
 // ===========================================================
-// POSET_STATE_HANDLE FACET
+// FACTORY INITIALIZATION FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+void
+fiber_bundle::fiber_bundles_namespace::
+initialize_prototypes()
+{
+  // Preconditions:
+
+  // Body:
+
+  initialize_poset_prototypes();
+  initialize_crg_interval_prototypes();
+  initialize_dof_map_prototypes();
+  initialize_id_space_prototypes();
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+fiber_bundle::fiber_bundles_namespace::
+initialize_poset_prototypes()
+{
+  // Preconditions:
+
+  // Body:
+
+  static bool lposet_prototypes_initialized = false;
+
+  if(!lposet_prototypes_initialized)
+  {
+    namespace_poset::initialize_poset_prototypes();
+
+    // Initialize the prototypes
+
+    base_space_poset::make_prototype();
+
+    binary_section_space_schema_poset::make_prototype();
+    sec_at0_space::make_prototype();
+    sec_at1_space::make_prototype();
+    sec_atp_space::make_prototype();
+    sec_jcb_space::make_prototype();
+    sec_rep_space::make_prototype();
+    sec_rep_descriptor_poset::make_prototype();
+    sec_stp_space::make_prototype();
+    sec_tp_space::make_prototype();
+    sec_tuple_space::make_prototype();
+    sec_vd_space::make_prototype();
+
+    at0_space::make_prototype();
+    at1_space::make_prototype();
+    atp_space::make_prototype();
+    gln_space::make_prototype();
+    jcb_space::make_prototype();
+    stp_space::make_prototype();
+    tp_space::make_prototype();
+    tuple_space::make_prototype();
+    vd_space::make_prototype();
+
+    // Done with prototype initializations.
+
+    lposet_prototypes_initialized = true;
+
+#ifdef DIAGNOSTIC_OUTPUT
+    cout << "Initialized fiber bundles poset prototypes" << endl;
+#endif
+
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+fiber_bundle::fiber_bundles_namespace::
+initialize_crg_interval_prototypes()
+{
+  // Preconditions:
+
+  // Body:
+
+  static bool lcrg_interval_prototypes_initialized = false;
+
+  if(!lcrg_interval_prototypes_initialized)
+  {
+    namespace_poset::initialize_crg_interval_prototypes();
+
+    // Initialize the prototypes
+
+    point_block_crg_interval::make_prototype();
+    structured_block_1d_crg_interval::make_prototype();
+    structured_block_2d_crg_interval::make_prototype();
+    structured_block_3d_crg_interval::make_prototype();
+    zone_nodes_block_crg_interval::make_prototype();
+
+    // Done with prototype initializations.
+
+    lcrg_interval_prototypes_initialized = true;
+
+#ifdef DIAGNOSTIC_OUTPUT
+    cout << "Initialized fiber bundles crg interval prototypes" << endl;
+#endif
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+fiber_bundle::fiber_bundles_namespace::
+initialize_dof_map_prototypes()
+{
+  // Preconditions:
+
+  // Body:
+
+  static bool ldof_map_prototypes_initialized = false;
+
+  if(!ldof_map_prototypes_initialized)
+  {
+    namespace_poset::initialize_dof_map_prototypes();
+
+    // Initialize the prototypes
+
+    array_section_dof_map::make_prototype();
+    sparse_section_dof_map::make_prototype();
+
+    // Done with prototype initializations.
+
+    ldof_map_prototypes_initialized = true;
+
+#ifdef DIAGNOSTIC_OUTPUT
+    cout << "Initialized fiber bundles dof map prototypes" << endl;
+#endif
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+void
+fiber_bundle::fiber_bundles_namespace::
+initialize_id_space_prototypes()
+{
+  // Preconditions:
+
+  // Body:
+
+  static bool lid_space_prototypes_initialized = false;
+
+  if(!lid_space_prototypes_initialized)
+  {
+    namespace_poset::initialize_id_space_prototypes();
+
+    // Initialize the prototypes
+
+    section_space_schema_jims_index_space_state::make_prototype();
+
+    i_adjacency_index_space_interval::make_prototype();
+    i_connectivity_index_space_interval::make_prototype();
+    ij_adjacency_index_space_interval::make_prototype();
+    ij_connectivity_index_space_interval::make_prototype();
+    ijk_adjacency_index_space_interval::make_prototype();
+    ijk_connectivity_index_space_interval::make_prototype();
+
+    // Done with prototype initializations.
+
+    lid_space_prototypes_initialized = true;
+
+#ifdef DIAGNOSTIC_OUTPUT
+    cout << "Initialized fiber bundles id space prototypes" << endl;
+#endif
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+void
+fiber_bundle::fiber_bundles_namespace::
+virtual_initialize_prototypes()
+{
+  // cout << endl << "Entering namespace_poset::virutal_initialize_prototypes." << endl;
+
+  // Preconditions:
+
+
+  // Body:
+
+  // Call static version defined in this class.
+
+  fiber_bundles_namespace::initialize_prototypes();
+
+  // Postconditions:
+
+
+  // Exit:
+
+  // cout << "Leaving namespace_poset::virutal_initialize_prototypes." << endl;
+  return;
+}
+
+// PRIVATE MEMBER FUNCTIONS
+ 
+// ===========================================================
+// STATE FACET
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -3180,5 +3162,42 @@ class_name() const
 }
 
 // PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+// ===========================================================
+// MEMBERSHIP FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+// PROTECTED MEMBER FUNCTIONS
+
+void
+fiber_bundle::fiber_bundles_namespace::
+initialize_additional_members()
+{
+  // Preconditions:
+
+  require(state_is_read_write_accessible());
+
+  define_old_variable(int old_access_request_depth = access_request_depth());
+
+
+  // Body:
+
+  make_base_space_definitions();
+  make_fiber_space_definitions();
+  make_section_space_definitions();
+
+  // Postconditions:
+
+  ensure(access_request_depth() == old_access_request_depth);
+
+
+  // Exit:
+
+  return;
+}
 
 // PRIVATE MEMBER FUNCTIONS
