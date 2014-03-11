@@ -117,9 +117,23 @@ new_space(index_space_family& xid_spaces,
 
 void
 sheaf::list_index_space_state::
-reverse()
+reverse(bool xupdate_extrema)
 {
+  // Preconditions:
+
+  // Body:
+
   _to_range.reverse();
+
+  if(xupdate_extrema)
+  {
+    update_extrema();
+  }
+
+  // Postconditions:
+
+  // Exit:
+
   return;
 }
 
@@ -139,54 +153,45 @@ back() const
 
 void
 sheaf::list_index_space_state::
-push_front(pod_type xrange_id)
+push_front(pod_type xhub_id)
 {
   // cout << endl << "Entering list_index_space_state::push_front." << endl;
 
   // Preconditions:
 
-  require(!contains_unglued_hub(xrange_id));
+  require(!contains_unglued_hub(xhub_id));
   
   // Body:
 
-  _to_range.push_front(xrange_id);
+  define_old_variable(size_type old_ct = _ct);
+  define_old_variable(pod_type old_begin = _begin);
+  define_old_variable(pod_type old_end = _end);
+
+  // Insert the entry in the list.
+
+  _to_range.push_front(xhub_id);
   
+  // Update the count.
+
+  ++_ct;
+
+  // Update the extrema.
+
+  update_extrema(0);
 
   // Postconditions:
 
-  ensure(unglued_hub_pod(0) == xrange_id);
+  ensure(invariant());
+  ensure(unglued_hub_pod(0) == xhub_id);
+  ensure(ct() == old_ct + 1);
+  ensure(begin() == 0);
+  ensure(ct() > 1 ? end() == old_end : end() == 1);
   
   // Exit:
 
   // cout << "Leaving list_index_space_state::push_front." << endl;
   return;
 }
-
-void
-sheaf::list_index_space_state::
-push_back(pod_type xrange_id)
-{
-  // cout << endl << "Entering list_index_space_state::push_front." << endl;
-
-  // Preconditions:
-
-  require(!contains_unglued_hub(xrange_id));
-
-  // Body:
-
-  _to_range.push_back(xrange_id);
-  
-
-  // Postconditions:
-
-  ensure(contains_unglued_hub(xrange_id));
-
-  // Exit:
-
-  // cout << "Leaving list_index_space_state::push_front." << endl;
-  return;
-}
-
 
 // PROTECTED MEMBER FUNCTIONS
 

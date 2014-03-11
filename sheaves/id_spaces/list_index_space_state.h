@@ -104,9 +104,8 @@ public:
 
   ///
   /// Reverse the order, for instance hub_pod(new 0) = hub_pod(old last);
-  /// WARNING: invalidates extrema, update_extrema must be called after this function.
   ///
-  void reverse();
+  void reverse(bool xupdate_extrema);
 
   ///
   /// The front of the list used to represent this id space;
@@ -121,20 +120,10 @@ public:
   pod_type back() const;
 
   ///
-  /// Pushes xrange_id onto the front of the list used to represent this id space;
+  /// Pushes hub id xhub_id onto the front of the list used to represent this id space;
   /// increments the domain ids of all existing members.
-  /// WARNING: invalidates extrema, update_extrema must be called after this function.
   ///
-  void push_front(pod_type xrange_id);
-
-  ///
-  /// Pushes xrange_id onto the back of the list used to represent this id space;
-  /// does not change the domain ids of any existing members.
-  /// Equivalent to map_rep_push_back.
-  /// WARNING: invalidates extrema, update_extrema must be called after this function.
-  ///
-  void push_back(pod_type xrange_id);
-
+  void push_front(pod_type xhub_id);
 
 protected:
 
