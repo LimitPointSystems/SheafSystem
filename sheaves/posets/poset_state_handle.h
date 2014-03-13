@@ -732,99 +732,6 @@ public:
   ///
   const abstract_poset_member& bottom() const;
 
-  ///
-  /// The hub id of the member with name xname
-  ///
-  virtual pod_index_type member_id(const std::string& xname, bool xauto_access) const;
-
-  ///
-  /// The index of the member with name xname
-  ///
-  void member_id(const std::string& xname, scoped_index& result, bool xauto_access) const;
-
-  ///
-  /// A name for the member with hub id xmbr_hub_id
-  ///
-  virtual std::string member_name(pod_index_type xmbr_hub_id, bool xauto_access = false) const;
-
-  ///
-  /// A name for the member with id xmbr_id
-  ///
-  std::string member_name(const scoped_index& xmbr_id, bool xauto_access = false) const;
-
-  ///
-  /// All the names for the member with hub id xmbr_hub_id.
-  ///
-  void all_member_names(pod_index_type xmbr_hub_id,
-                        block<std::string>& xresult,
-                        bool xauto_access = false) const;
-
-  ///
-  /// All the names for the member with id xmbr_id.
-  ///
-  void all_member_names(const scoped_index& xmbr_id,
-                        block<std::string>& xresult,
-                        bool xauto_access = false) const;
-
-  ///
-  /// The number of names for the member with hub id xmbr_hub_id.
-  ///
-  size_type member_name_ct(pod_index_type xmbr_hub_id, bool xauto_access) const;
-
-  ///
-  /// The number of names for the member with id xmbr_id.
-  ///
-  size_type member_name_ct(const scoped_index& xmbr_id, bool xauto_access) const;
-
-  ///
-  /// True if xname is a name for the member with hub id xmbr_hub_id.
-  ///
-  bool member_has_name(pod_index_type xmbr_hub_id,
-                       const std::string& xname,
-                       bool xauto_access = false) const;
-
-  ///
-  /// True if xname is a name for the member with id xmbr_id.
-  ///
-  bool member_has_name(const scoped_index& xmbr_hub_id,
-                       const std::string& xname,
-                       bool xauto_access = false) const;
-
-  ///
-  /// Make xname a name for the member with hub id xmbr_hub_id.
-  /// if xunique, make xname the only name.
-  ///
-  virtual void put_member_name(pod_index_type xmbr_hub_id,
-                               const std::string& xname,
-                               bool xunique,
-                               bool xauto_access = false);
-
-  ///
-  /// Make xname a name for the member with id xmbr_id.
-  /// if xunique, make xname the only name.
-  ///
-  void put_member_name(const scoped_index& xmbr_id,
-		       const std::string& xname,
-		       bool xunique,
-		       bool xauto_access = false);
-
-  ///
-  /// Make xname not a name for any member.
-  ///
-  void delete_member_name(const std::string& xname, bool xauto_access = false);
-
-  ///
-  /// Delete all names for the member with hub id xmbr_hub_id.
-  ///
-  void delete_all_member_names(pod_index_type xmbr_hub_id,
-                               bool xauto_access = false);
-
-  ///
-  /// Delete all names for the member with id xmbr_id.
-  ///
-  void delete_all_member_names(const scoped_index& xmbr_id,
-                               bool xauto_access = false);
-
 protected:
 
   ///
@@ -844,16 +751,6 @@ protected:
   {
     return *(state_obj()->crg());
   };
-
-  ///
-  /// The type of the member name map.
-  ///
-  typedef poset_crg_state::member_name_map_type member_name_map_type;
-
-  ///
-  /// The bidirectional map between member indices and names
-  ///
-  member_name_map_type& member_name_map(bool xrequire_write_access = false);
 
   ///
   /// Creates the members common to every poset, for instance, top() and bottom().
@@ -947,7 +844,117 @@ private:
 
   //@}
 
+  // ===========================================================
+  /// @name MEMBER NAME FACET
+  // ===========================================================
+  //@{
 
+public:
+
+  ///
+  /// A path for the member with hub id xmbr_hub_id.
+  ///
+  poset_path member_path(pod_index_type xmbr_hub_id, bool xauto_access) const;
+
+  ///
+  /// A name for the member with hub id xmbr_hub_id
+  ///
+  virtual std::string member_name(pod_index_type xmbr_hub_id, bool xauto_access = false) const;
+
+  ///
+  /// A name for the member with id xmbr_id
+  ///
+  std::string member_name(const scoped_index& xmbr_id, bool xauto_access = false) const;
+
+  ///
+  /// All the names for the member with hub id xmbr_hub_id.
+  ///
+  void all_member_names(pod_index_type xmbr_hub_id,
+                        block<std::string>& xresult,
+                        bool xauto_access = false) const;
+
+  ///
+  /// All the names for the member with id xmbr_id.
+  ///
+  void all_member_names(const scoped_index& xmbr_id,
+                        block<std::string>& xresult,
+                        bool xauto_access = false) const;
+
+  ///
+  /// The number of names for the member with hub id xmbr_hub_id.
+  ///
+  size_type member_name_ct(pod_index_type xmbr_hub_id, bool xauto_access) const;
+
+  ///
+  /// The number of names for the member with id xmbr_id.
+  ///
+  size_type member_name_ct(const scoped_index& xmbr_id, bool xauto_access) const;
+
+  ///
+  /// True if xname is a name for the member with hub id xmbr_hub_id.
+  ///
+  bool member_has_name(pod_index_type xmbr_hub_id,
+                       const std::string& xname,
+                       bool xauto_access = false) const;
+
+  ///
+  /// True if xname is a name for the member with id xmbr_id.
+  ///
+  bool member_has_name(const scoped_index& xmbr_hub_id,
+                       const std::string& xname,
+                       bool xauto_access = false) const;
+
+  ///
+  /// Make xname a name for the member with hub id xmbr_hub_id.
+  /// if xunique, make xname the only name.
+  ///
+  virtual void put_member_name(pod_index_type xmbr_hub_id,
+                               const std::string& xname,
+                               bool xunique,
+                               bool xauto_access = false);
+
+  ///
+  /// Make xname a name for the member with id xmbr_id.
+  /// if xunique, make xname the only name.
+  ///
+  void put_member_name(const scoped_index& xmbr_id,
+		       const std::string& xname,
+		       bool xunique,
+		       bool xauto_access = false);
+
+  ///
+  /// Make xname not a name for any member.
+  ///
+  void delete_member_name(const std::string& xname, bool xauto_access = false);
+
+  ///
+  /// Delete all names for the member with hub id xmbr_hub_id.
+  ///
+  void delete_all_member_names(pod_index_type xmbr_hub_id,
+                               bool xauto_access = false);
+
+  ///
+  /// Delete all names for the member with id xmbr_id.
+  ///
+  void delete_all_member_names(const scoped_index& xmbr_id,
+                               bool xauto_access = false);
+
+protected:
+
+  ///
+  /// The type of the member name map.
+  ///
+  typedef poset_crg_state::member_name_map_type member_name_map_type;
+
+  ///
+  /// The bidirectional map between member indices and names
+  ///
+  member_name_map_type& member_name_map(bool xrequire_write_access = false);
+
+private:
+
+  //@}
+ 
 
   // ===========================================================
   /// @name MEMBER ID SPACE FAMILY FACET
@@ -972,9 +979,8 @@ public:
   const hub_index_space_handle& member_hub_id_space(bool xauto_access) const;  
 
   ///
-  /// An id in the member hub id space;
-  /// intended for copying to initialize ids
-  /// to the member id space.
+  /// An id in the member hub id space; intended for 
+  /// copying to initialize ids to the member id space.
   ///
   virtual const scoped_index& member_id(bool xauto_access) const;
 
@@ -982,6 +988,16 @@ public:
   /// An id in the member hub id space with pod xid.
   ///
   scoped_index member_id(pod_index_type xid, bool xauto_access) const;
+
+  ///
+  /// The hub id of the member with name xname.
+  ///
+  virtual pod_index_type member_id(const std::string& xname, bool xauto_access) const;
+
+  ///
+  /// The index of the member with name xname.
+  ///
+  void member_id(const std::string& xname, scoped_index& result, bool xauto_access) const;
 
 protected:
 
@@ -1524,87 +1540,6 @@ public:
   virtual size_type subposet_ct() const; 
 
   ///
-  /// A name for the subposet with hub id xsubposet_hub_id
-  ///
-  virtual std::string subposet_name(pod_index_type xsubposet_hub_id,
-				    bool xauto_access = false) const;
-
-  ///
-  /// A name for the subposet with id xsubposet_id
-  ///
-  std::string subposet_name(const scoped_index& xsubposet_id,
-			    bool xauto_access = false) const;
-
-  ///
-  /// All the names for the subposet with hub id xsubposet_hub_id
-  ///
-  void all_subposet_names(pod_index_type xsubposet_hub_id,
-                          block<std::string>& xresult,
-                          bool xauto_access = false) const;
-
-  ///
-  /// All the names for the subposet with id xsubposet_id.
-  ///
-  void all_subposet_names(const scoped_index& xsubposet_id,
-                          block<std::string>& xresult,
-                          bool xauto_access = false) const;
-
-  ///
-  /// The number of names for the subposet with hub id xsubposet_hub_id.
-  ///
-  size_type subposet_name_ct(pod_index_type xsubposet_hub_id, bool xauto_access) const;
-
-  ///
-  /// The number of names for the subposet with id xsubposet_id.
-  ///
-  size_type subposet_name_ct(const scoped_index& xsubposet_id, bool xauto_access) const;
-
-  ///
-  /// True if xname is a name for the subposet with hub id xsubposet_hub_id.
-  ///
-  bool subposet_has_name(pod_index_type xsubposet_hub_id, const std::string& xname, bool xauto_access = false) const;
-
-  ///
-  /// True if xname is a name for the subposet with id xsubposet_id.
-  ///
-  bool subposet_has_name(const scoped_index& xsubposet_id, const std::string& xname, bool xauto_access = false) const;
-
-  ///
-  /// Make xname a name for the subposet with hub id xsubposet_hub_id;
-  /// if xunique, make xname the only name.
-  ///
-  virtual void put_subposet_name(pod_index_type xsubposet_hub_id,
-                                 const std::string& xname,
-                                 bool xunique,
-                                 bool xauto_access);
-
-  ///
-  /// Make xname a name for the subposet with id xsubposet_id;
-  /// if xunique, make xname the only name.
-  ///
-  void put_subposet_name(const scoped_index& xsubposet_id,
-			 const std::string& xname,
-			 bool xunique,
-			 bool xauto_access);
-
-  ///
-  /// Make xname not a name for any subposet.
-  ///
-  void delete_subposet_name(const std::string& xname, bool xauto_access = false);
-
-  ///
-  /// Delete all names for the subposet with hub id xsubposet_hub_id;
-  ///
-  void delete_all_subposet_names(pod_index_type xsubposet_hub_id,
-                                 bool xauto_access = false);
-
-  ///
-  /// Delete all names for the subposet with id xsubposet_id;
-  ///
-  void delete_all_subposet_names(const scoped_index& xsubposet_id,
-                                 bool xauto_access = false);
-
-  ///
   /// The number of standard subposets automatically
   /// allocated by the constructor.
   ///
@@ -1782,6 +1717,98 @@ private:
 
   //@}
 
+  // ===========================================================
+  /// @name SUBPOSET NAME FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  ///
+  /// A name for the subposet with hub id xsubposet_hub_id
+  ///
+  virtual std::string subposet_name(pod_index_type xsubposet_hub_id, bool xauto_access = false) const;
+
+  ///
+  /// A name for the subposet with id xsubposet_id
+  ///
+  std::string subposet_name(const scoped_index& xsubposet_id, bool xauto_access = false) const;
+
+  ///
+  /// All the names for the subposet with hub id xsubposet_hub_id
+  ///
+  void all_subposet_names(pod_index_type xsubposet_hub_id,
+                          block<std::string>& xresult,
+                          bool xauto_access = false) const;
+
+  ///
+  /// All the names for the subposet with id xsubposet_id.
+  ///
+  void all_subposet_names(const scoped_index& xsubposet_id,
+                          block<std::string>& xresult,
+                          bool xauto_access = false) const;
+
+  ///
+  /// The number of names for the subposet with hub id xsubposet_hub_id.
+  ///
+  size_type subposet_name_ct(pod_index_type xsubposet_hub_id, bool xauto_access) const;
+
+  ///
+  /// The number of names for the subposet with id xsubposet_id.
+  ///
+  size_type subposet_name_ct(const scoped_index& xsubposet_id, bool xauto_access) const;
+
+  ///
+  /// True if xname is a name for the subposet with hub id xsubposet_hub_id.
+  ///
+  bool subposet_has_name(pod_index_type xsubposet_hub_id, const std::string& xname, bool xauto_access = false) const;
+
+  ///
+  /// True if xname is a name for the subposet with id xsubposet_id.
+  ///
+  bool subposet_has_name(const scoped_index& xsubposet_id, const std::string& xname, bool xauto_access = false) const;
+
+  ///
+  /// Make xname a name for the subposet with hub id xsubposet_hub_id;
+  /// if xunique, make xname the only name.
+  ///
+  virtual void put_subposet_name(pod_index_type xsubposet_hub_id,
+                                 const std::string& xname,
+                                 bool xunique,
+                                 bool xauto_access);
+
+  ///
+  /// Make xname a name for the subposet with id xsubposet_id;
+  /// if xunique, make xname the only name.
+  ///
+  void put_subposet_name(const scoped_index& xsubposet_id,
+			 const std::string& xname,
+			 bool xunique,
+			 bool xauto_access);
+
+  ///
+  /// Make xname not a name for any subposet.
+  ///
+  void delete_subposet_name(const std::string& xname, bool xauto_access = false);
+
+  ///
+  /// Delete all names for the subposet with hub id xsubposet_hub_id;
+  ///
+  void delete_all_subposet_names(pod_index_type xsubposet_hub_id,
+                                 bool xauto_access = false);
+
+  ///
+  /// Delete all names for the subposet with id xsubposet_id;
+  ///
+  void delete_all_subposet_names(const scoped_index& xsubposet_id,
+                                 bool xauto_access = false);
+
+protected:
+
+private:
+
+  //@}
+ 
 
   // ===========================================================
   /// @name SUBPOSET ID SPACE FAMILY FACET
@@ -1995,27 +2022,35 @@ public:
   /// The dof map associated with the member identified by
   /// hub id xmbr_hub_id (mutable version).
   ///
-  poset_dof_map& member_dof_map(pod_index_type xmbr_hub_id,
-                                bool xrequire_write_access = false);
+  poset_dof_map& member_dof_map(pod_index_type xmbr_hub_id, bool xrequire_write_access = false);
 
   ///
   /// The dof map associated with the member identified by xmbr_index (mutable version).
   ///
-  poset_dof_map& member_dof_map(const scoped_index& xmbr_id,
-                                bool xrequire_write_access = false);
+  poset_dof_map& member_dof_map(const scoped_index& xmbr_id, bool xrequire_write_access = false);
 
   ///
   /// The dof map associated with the member identified by
   /// hub id xmbr_hub_id (const version).
   ///
-  const poset_dof_map& member_dof_map(pod_index_type xmbr_hub_id,
-				      bool xrequire_write_access = false) const;
+  const poset_dof_map& member_dof_map(pod_index_type xmbr_hub_id, bool xrequire_write_access = false) const;
 
   ///
   /// The dof map associated with the member identified by xmbr_index (const version).
   ///
-  const poset_dof_map& member_dof_map(const scoped_index& xmbr_id,
-				      bool xrequire_write_access = false) const;
+  const poset_dof_map& member_dof_map(const scoped_index& xmbr_id, bool xrequire_write_access = false) const;
+
+  ///
+  /// Copies the dof tuple of the member with hub id xmbr_hub_id 
+  /// into the buffer xbuf of length xbuf_len bytes.
+  ///
+  void member_dof_tuple(pod_index_type xmbr_hub_id, void* xbuf, size_t xbuf_len, bool xauto_access) const;
+
+  ///
+  /// Copies the contents of the buffer xbuf of len xbuf_len 
+  /// into the dof tuple of the member with hub id xmbr_hub_id.
+  ///
+  void put_member_dof_tuple(pod_index_type xmbr_hub_id, void* xbuf, size_t xbuf_len, bool xauto_access);
 
   ///
   /// The dof tuple hub id of the member with hub id xmbr_hub_id

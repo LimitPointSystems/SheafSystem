@@ -251,10 +251,6 @@ public:
   ///
   virtual const void* dof_tuple() const = 0;
 
-  /// @hack This routine is inconsistent with the rest of the interface,
-  /// which attempts to hide the dof storage. Consistency awaits the
-  /// planned redesign of the dof map cluster.
-
   ///
   /// Copies the entire dof tuple from internal storage into xbuf.
   ///

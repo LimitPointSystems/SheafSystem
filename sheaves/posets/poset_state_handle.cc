@@ -2344,423 +2344,6 @@ bottom() const
   return *_bottom;
 }
 
-sheaf::pod_index_type
-sheaf::poset_state_handle::
-member_id(const std::string& xname, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-  require(!xname.empty());
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  // Lookup the name in the name-to-index map.
-
-  pod_index_type result = crg().member_name_map().index(xname);
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postcondition:
-
-  ensure(is_valid(result) ? member_has_name(result, xname, xauto_access) : true);
-
-  // Exit
-
-  return result;
-}
-
-void
-sheaf::poset_state_handle::
-member_id(const std::string& xname, scoped_index& result, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-  require(!xname.empty());
-
-  // Body:
-
-  result.put(member_hub_id_space(xauto_access), member_id(xname, xauto_access));
-
-  // Postcondition:
-
-  ensure(result.is_valid() ? member_has_name(result, xname, xauto_access) : true);
-
-  // Exit
-
-  return;
-}
-
-std::string
-sheaf::poset_state_handle::
-member_name(pod_index_type xmbr_hub_id, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  string result(crg().member_name_map().name(xmbr_hub_id));
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Exit:
-
-  return result;
-}
-
-std::string
-sheaf::poset_state_handle::
-member_name(const scoped_index& xmbr_id, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-
-  // Body:
-
-  return member_name(xmbr_id.hub_pod(), xauto_access);
-}
-
-void
-sheaf::poset_state_handle::
-all_member_names(pod_index_type xmbr_hub_id,
-                 block<std::string>& xresult,
-                 bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-  require(contains_member(xmbr_hub_id, xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  crg().member_name_map().all_names(xmbr_hub_id, xresult);
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(xresult.ct() == member_name_ct(xmbr_hub_id, xauto_access));
-  ensure_for_all(i, 0, xresult.ct(), member_has_name(xmbr_hub_id, xresult[i], xauto_access));
-
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::poset_state_handle::
-all_member_names(const scoped_index& xmbr_id,
-                 block<std::string>& xresult,
-                 bool xauto_access) const
-{
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-  require(contains_member(xmbr_id, xauto_access));
-
-  // Body:
-
-  all_member_names(xmbr_id.hub_pod(), xresult, xauto_access);
-
-  // Postconditions:
-
-  ensure(xresult.ct() == member_name_ct(xmbr_id, xauto_access));
-  ensure_for_all(i, 0, xresult.ct(), member_has_name(xmbr_id, xresult[i], xauto_access));
-
-  // Exit:
-
-  return;
-}
-
-sheaf::size_type
-sheaf::poset_state_handle::
-member_name_ct(pod_index_type xmbr_hub_id, bool xauto_access) const
-{
-  size_type result;
-
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-  require(contains_member(xmbr_hub_id, xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  result = crg().member_name_map().name_ct(xmbr_hub_id);
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::size_type
-sheaf::poset_state_handle::
-member_name_ct(const scoped_index& xmbr_id, bool xauto_access) const
-{
-  size_type result;
-
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-  require(contains_member(xmbr_id, xauto_access));
-
-  // Body:
-
-  return member_name_ct(xmbr_id.hub_pod(), xauto_access);
-}
-
-bool
-sheaf::poset_state_handle::
-member_has_name(pod_index_type xmbr_hub_id, const std::string& xname, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-  require(!xname.empty());
-  require(contains_member(xmbr_hub_id, xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  bool result = crg().member_name_map().contains_entry(xmbr_hub_id, xname);
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-bool
-sheaf::poset_state_handle::
-member_has_name(const scoped_index& xmbr_id, const std::string& xname, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-  require(!xname.empty());
-  require(contains_member(xmbr_id, xauto_access));
-
-  // Body:
-
-  return member_has_name(xmbr_id.hub_pod(), xname, xauto_access);
-}
-
-void
-sheaf::poset_state_handle::
-put_member_name(pod_index_type xmbr_hub_id,
-                const std::string& xname,
-                bool xunique,
-                bool xauto_access)
-{
-  // Preconditions:
-
-  require(state_is_auto_read_write_accessible(xauto_access));
-  require(contains_member(xmbr_hub_id, xauto_access));
-  require(poset_path::is_valid_name(xname));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_write_access(true);
-  }
-
-  crg().member_name_map().put_entry(xmbr_hub_id, xname, xunique);
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postcondition:
-
-  ensure(member_has_name(xmbr_hub_id, xname, xauto_access));
-
-  // Exit
-
-  return;
-}
-
-void
-sheaf::poset_state_handle::
-put_member_name(const scoped_index& xmbr_id,
-                const std::string& xname,
-                bool xunique,
-                bool xauto_access)
-{
-  // Preconditions:
-
-  require(xauto_access || state_is_read_write_accessible());
-  require(contains_member(xmbr_id, xauto_access));
-  require(poset_path::is_valid_name(xname));
-
-  // Body:
-
-  put_member_name(xmbr_id.hub_pod(), xname, xunique, xauto_access);
-
-  // Postcondition:
-
-  ensure(member_has_name(xmbr_id, xname, xauto_access));
-
-  // Exit
-
-  return;
-}
-
-void
-sheaf::poset_state_handle::
-delete_member_name(const std::string& xname, bool xauto_access)
-{
-  // Preconditions:
-
-  require(!xname.empty());
-  require(state_is_auto_read_write_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_write_access(true);
-  }
-
-  crg().member_name_map().delete_name(xname);
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postcondition
-
-  ensure(!contains_member(xname, xauto_access));
-
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::poset_state_handle::
-delete_all_member_names(pod_index_type xmbr_hub_id, bool xauto_access)
-{
-  // Preconditions:
-
-  require(state_is_auto_read_write_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_write_access(true);
-  }
-
-  crg().member_name_map().delete_index(xmbr_hub_id);
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postcondition
-
-  ensure(member_name_ct(xmbr_hub_id, xauto_access) == 0);
-
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::poset_state_handle::
-delete_all_member_names(const scoped_index& xmbr_id, bool xauto_access)
-{
-  // Preconditions:
-
-  require(xauto_access || state_is_read_write_accessible());
-
-  // Body:
-
-  delete_all_member_names(xmbr_id.hub_pod(), xauto_access);
-
-  // Postcondition
-
-  ensure(member_name_ct(xmbr_id, xauto_access) == 0);
-
-  // Exit:
-
-  return;
-}
-
-// PROTECTED FUNCTIONS
-
-sheaf::poset_state_handle::member_name_map_type&
-sheaf::poset_state_handle::
-member_name_map(bool xrequire_write_access)
-{
-  // Preconditions:
-
-  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
-
-  // Body:
-
-  member_name_map_type& result = crg().member_name_map();
-
-  // Postconditions:
-
-  // Exit
-
-  return result;
-}
-
 void
 sheaf::poset_state_handle::
 initialize_standard_members()
@@ -3125,6 +2708,404 @@ new_member_interval(pod_index_type xmbr_hub_id, const std::string& xinterval_typ
 
 // PRIVATE FUNCTIONS
 
+
+// ===========================================================
+// MEMBER NAME FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+sheaf::poset_path
+sheaf::poset_state_handle::
+member_path(pod_index_type xmbr_hub_id, bool xauto_access) const
+{
+  // cout << endl << "Entering poset_state_handle::member_path." << endl;
+
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  require(contains_member(xmbr_hub_id, xauto_access));
+  
+  // Body:
+
+  poset_path result(name(xauto_access), member_name(xmbr_hub_id, xauto_access));
+
+  // Postconditions:
+
+  ensure(result.poset_name() == name(xauto_access));
+  ensure(member_id(result.member_name(), xauto_access) == xmbr_hub_id);
+  
+  // Exit:
+
+  // cout << "Leaving poset_state_handle::member_path." << endl;
+  return result;
+}
+
+
+std::string
+sheaf::poset_state_handle::
+member_name(pod_index_type xmbr_hub_id, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  string result(crg().member_name_map().name(xmbr_hub_id));
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Exit:
+
+  return result;
+}
+
+std::string
+sheaf::poset_state_handle::
+member_name(const scoped_index& xmbr_id, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(xauto_access || state_is_read_accessible());
+
+  // Body:
+
+  return member_name(xmbr_id.hub_pod(), xauto_access);
+}
+
+void
+sheaf::poset_state_handle::
+all_member_names(pod_index_type xmbr_hub_id,
+                 block<std::string>& xresult,
+                 bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  require(contains_member(xmbr_hub_id, xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  crg().member_name_map().all_names(xmbr_hub_id, xresult);
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(xresult.ct() == member_name_ct(xmbr_hub_id, xauto_access));
+  ensure_for_all(i, 0, xresult.ct(), member_has_name(xmbr_hub_id, xresult[i], xauto_access));
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::poset_state_handle::
+all_member_names(const scoped_index& xmbr_id,
+                 block<std::string>& xresult,
+                 bool xauto_access) const
+{
+  // Preconditions:
+
+  require(xauto_access || state_is_read_accessible());
+  require(contains_member(xmbr_id, xauto_access));
+
+  // Body:
+
+  all_member_names(xmbr_id.hub_pod(), xresult, xauto_access);
+
+  // Postconditions:
+
+  ensure(xresult.ct() == member_name_ct(xmbr_id, xauto_access));
+  ensure_for_all(i, 0, xresult.ct(), member_has_name(xmbr_id, xresult[i], xauto_access));
+
+  // Exit:
+
+  return;
+}
+
+sheaf::size_type
+sheaf::poset_state_handle::
+member_name_ct(pod_index_type xmbr_hub_id, bool xauto_access) const
+{
+  size_type result;
+
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  require(contains_member(xmbr_hub_id, xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  result = crg().member_name_map().name_ct(xmbr_hub_id);
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::size_type
+sheaf::poset_state_handle::
+member_name_ct(const scoped_index& xmbr_id, bool xauto_access) const
+{
+  size_type result;
+
+  // Preconditions:
+
+  require(xauto_access || state_is_read_accessible());
+  require(contains_member(xmbr_id, xauto_access));
+
+  // Body:
+
+  return member_name_ct(xmbr_id.hub_pod(), xauto_access);
+}
+
+bool
+sheaf::poset_state_handle::
+member_has_name(pod_index_type xmbr_hub_id, const std::string& xname, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  require(!xname.empty());
+  require(contains_member(xmbr_hub_id, xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  bool result = crg().member_name_map().contains_entry(xmbr_hub_id, xname);
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+bool
+sheaf::poset_state_handle::
+member_has_name(const scoped_index& xmbr_id, const std::string& xname, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(xauto_access || state_is_read_accessible());
+  require(!xname.empty());
+  require(contains_member(xmbr_id, xauto_access));
+
+  // Body:
+
+  return member_has_name(xmbr_id.hub_pod(), xname, xauto_access);
+}
+
+void
+sheaf::poset_state_handle::
+put_member_name(pod_index_type xmbr_hub_id,
+                const std::string& xname,
+                bool xunique,
+                bool xauto_access)
+{
+  // Preconditions:
+
+  require(state_is_auto_read_write_accessible(xauto_access));
+  require(contains_member(xmbr_hub_id, xauto_access));
+  require(poset_path::is_valid_name(xname));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_write_access(true);
+  }
+
+  crg().member_name_map().put_entry(xmbr_hub_id, xname, xunique);
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postcondition:
+
+  ensure(member_has_name(xmbr_hub_id, xname, xauto_access));
+
+  // Exit
+
+  return;
+}
+
+void
+sheaf::poset_state_handle::
+put_member_name(const scoped_index& xmbr_id,
+                const std::string& xname,
+                bool xunique,
+                bool xauto_access)
+{
+  // Preconditions:
+
+  require(xauto_access || state_is_read_write_accessible());
+  require(contains_member(xmbr_id, xauto_access));
+  require(poset_path::is_valid_name(xname));
+
+  // Body:
+
+  put_member_name(xmbr_id.hub_pod(), xname, xunique, xauto_access);
+
+  // Postcondition:
+
+  ensure(member_has_name(xmbr_id, xname, xauto_access));
+
+  // Exit
+
+  return;
+}
+
+void
+sheaf::poset_state_handle::
+delete_member_name(const std::string& xname, bool xauto_access)
+{
+  // Preconditions:
+
+  require(!xname.empty());
+  require(state_is_auto_read_write_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_write_access(true);
+  }
+
+  crg().member_name_map().delete_name(xname);
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postcondition
+
+  ensure(!contains_member(xname, xauto_access));
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::poset_state_handle::
+delete_all_member_names(pod_index_type xmbr_hub_id, bool xauto_access)
+{
+  // Preconditions:
+
+  require(state_is_auto_read_write_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_write_access(true);
+  }
+
+  crg().member_name_map().delete_index(xmbr_hub_id);
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postcondition
+
+  ensure(member_name_ct(xmbr_hub_id, xauto_access) == 0);
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::poset_state_handle::
+delete_all_member_names(const scoped_index& xmbr_id, bool xauto_access)
+{
+  // Preconditions:
+
+  require(xauto_access || state_is_read_write_accessible());
+
+  // Body:
+
+  delete_all_member_names(xmbr_id.hub_pod(), xauto_access);
+
+  // Postcondition
+
+  ensure(member_name_ct(xmbr_id, xauto_access) == 0);
+
+  // Exit:
+
+  return;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+sheaf::poset_state_handle::member_name_map_type&
+sheaf::poset_state_handle::
+member_name_map(bool xrequire_write_access)
+{
+  // Preconditions:
+
+  require(xrequire_write_access ? state_is_read_write_accessible() : state_is_read_accessible());
+
+  // Body:
+
+  member_name_map_type& result = crg().member_name_map();
+
+  // Postconditions:
+
+  // Exit
+
+  return result;
+}
+
+// PRIVATE MEMBER FUNCTIONS
+ 
+
 // ===========================================================
 // MEMBER ID SPACE FAMILY FACET
 // ===========================================================
@@ -3286,6 +3267,62 @@ member_id(pod_index_type xid, bool xauto_access) const
   // Exit:
 
   return result;
+}
+
+sheaf::pod_index_type
+sheaf::poset_state_handle::
+member_id(const std::string& xname, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  require(!xname.empty());
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  // Lookup the name in the name-to-index map.
+
+  pod_index_type result = crg().member_name_map().index(xname);
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postcondition:
+
+  ensure(is_valid(result) ? member_has_name(result, xname, xauto_access) : true);
+
+  // Exit
+
+  return result;
+}
+
+void
+sheaf::poset_state_handle::
+member_id(const std::string& xname, scoped_index& result, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  require(!xname.empty());
+
+  // Body:
+
+  result.put(member_hub_id_space(xauto_access), member_id(xname, xauto_access));
+
+  // Postcondition:
+
+  ensure(result.is_valid() ? member_has_name(result, xname, xauto_access) : true);
+
+  // Exit
+
+  return;
 }
 
 // PROTECTED FUNCTIONS
@@ -4981,360 +5018,6 @@ subposet_ct() const
   return result;
 }
 
-std::string
-sheaf::poset_state_handle::
-subposet_name(pod_index_type xsubposet_hub_id, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-//   cout << "poset_state_handle::subposet_name: poset " << name() << endl;
-//   cout << powerset() << endl;
-//   cout << "  subposet namemap:" << endl;
-//   cout << powerset().subposet_name_map() << endl;
-  
-  string result(powerset().subposet_name_map().name(xsubposet_hub_id));
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Exit:
-
-  return result;
-}
-
-std::string
-sheaf::poset_state_handle::
-subposet_name(const scoped_index& xsubposet_id, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-
-  // Body:
-
-  return subposet_name(xsubposet_id.hub_pod(), xauto_access);
-}
-
-void
-sheaf::poset_state_handle::
-all_subposet_names(pod_index_type xsubposet_hub_id,
-                   block<std::string>& xresult,
-                   bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-  require(includes_subposet(xsubposet_hub_id, xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  powerset().subposet_name_map().all_names(xsubposet_hub_id, xresult);
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(xresult.ct() == subposet_name_ct(xsubposet_hub_id, xauto_access));
-  ensure_for_all(i, 0, xresult.ct(), subposet_has_name(xsubposet_hub_id, xresult[i], xauto_access));
-
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::poset_state_handle::
-all_subposet_names(const scoped_index& xsubposet_id,
-                   block<std::string>& xresult,
-                   bool xauto_access) const
-{
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-  require(includes_subposet(xsubposet_id, xauto_access));
-
-  // Body:
-
-  all_subposet_names(xsubposet_id.hub_pod(), xresult, xauto_access);
-
-  // Postconditions:
-
-  ensure(xresult.ct() == subposet_name_ct(xsubposet_id, xauto_access));
-  ensure_for_all(i, 0, xresult.ct(), subposet_has_name(xsubposet_id, xresult[i], xauto_access));
-
-  // Exit:
-
-  return;
-}
-
-sheaf::size_type
-sheaf::poset_state_handle::
-subposet_name_ct(pod_index_type xsubposet_hub_id, bool xauto_access) const
-{
-  size_type result;
-
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-  require(includes_subposet(xsubposet_hub_id, xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  result = powerset().subposet_name_map().name_ct(xsubposet_hub_id);
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-sheaf::size_type
-sheaf::poset_state_handle::
-subposet_name_ct(const scoped_index& xsubposet_id, bool xauto_access) const
-{
-  size_type result;
-
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-  require(includes_subposet(xsubposet_id, xauto_access));
-
-  // Body:
-
-  return subposet_name_ct(xsubposet_id.hub_pod(), xauto_access);
-}
-
-bool
-sheaf::poset_state_handle::
-subposet_has_name(pod_index_type xsubposet_hub_id,
-                  const std::string& xname,
-                  bool xauto_access) const
-{
-  // Preconditions:
-
-  require(state_is_auto_read_accessible(xauto_access));
-  require(!xname.empty());
-  require(includes_subposet(xsubposet_hub_id, xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  bool result =
-    powerset().subposet_name_map().contains_entry(xsubposet_hub_id, xname);
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
-bool
-sheaf::poset_state_handle::
-subposet_has_name(const scoped_index& xsubposet_id,
-                  const std::string& xname,
-                  bool xauto_access) const
-{
-  // Preconditions:
-
-  require(xauto_access || state_is_read_accessible());
-  require(!xname.empty());
-  require(includes_subposet(xsubposet_id, xauto_access));
-
-  // Body:
-
-  return subposet_has_name(xsubposet_id.hub_pod(), xname, xauto_access);
-}
-
-void
-sheaf::poset_state_handle::
-put_subposet_name(pod_index_type xsubposet_hub_id,
-                  const std::string& xname,
-                  bool xunique,
-                  bool xauto_access)
-{
-  // Preconditions:
-
-  require(state_is_auto_read_write_accessible(xauto_access));
-  require(includes_subposet(xsubposet_hub_id, xauto_access));
-  require(poset_path::is_valid_name(xname));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_write_access(true);
-  }
-
-  powerset().subposet_name_map().put_entry(xsubposet_hub_id, xname, xunique);
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postcondition:
-
-  ensure(xunique ?
-         (subposet_name(xsubposet_hub_id, xauto_access) == xname) :
-         subposet_has_name(xsubposet_hub_id, xname, xauto_access));
-
-  // Exit
-
-  return;
-}
-
-void
-sheaf::poset_state_handle::
-put_subposet_name(const scoped_index& xsubposet_id,
-                  const std::string& xname,
-                  bool xunique,
-                  bool xauto_access)
-{
-  // Preconditions:
-
-  require(xauto_access || state_is_read_write_accessible());
-  require(includes_subposet(xsubposet_id, xauto_access));
-  require(poset_path::is_valid_name(xname));
-
-  // Body:
-
-  put_subposet_name(xsubposet_id.hub_pod(), xname, xunique, xauto_access);
-
-  // Postcondition:
-
-  ensure(xunique ?
-         (subposet_name(xsubposet_id, xauto_access) == xname) :
-         subposet_has_name(xsubposet_id, xname, xauto_access));
-
-  // Exit
-
-  return;
-}
-
-void
-sheaf::poset_state_handle::
-delete_subposet_name(const std::string& xname, bool xauto_access)
-{
-  // Preconditions:
-
-  require(!xname.empty());
-  require(state_is_auto_read_write_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_write_access(true);
-  }
-
-  powerset().subposet_name_map().delete_name(xname);
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postcondition
-
-  ensure(!includes_subposet(xname, xauto_access));
-
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::poset_state_handle::
-delete_all_subposet_names(pod_index_type xsubposet_hub_id, bool xauto_access)
-{
-  // Preconditions:
-
-  require(state_is_auto_read_write_accessible(xauto_access));
-
-  // Body:
-
-  if(xauto_access)
-  {
-    get_read_write_access(true);
-  }
-
-  powerset().subposet_name_map().delete_index(xsubposet_hub_id);
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postcondition
-
-  ensure(subposet_name_ct(xsubposet_hub_id, xauto_access) == 0);
-
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::poset_state_handle::
-delete_all_subposet_names(const scoped_index& xsubposet_id, bool xauto_access)
-{
-  // Preconditions:
-
-  require(xauto_access || state_is_read_write_accessible());
-
-  // Body:
-
-  delete_all_subposet_names(xsubposet_id.hub_pod(), xauto_access);
-
-  // Postcondition
-
-  ensure(subposet_name_ct(xsubposet_id, xauto_access) == 0);
-
-  // Exit:
-
-  return;
-}
-
 int
 sheaf::poset_state_handle::
 standard_subposet_ct() const
@@ -5981,6 +5664,371 @@ put_standard_subposet_ct(int xct)
 
 // PRIVATE FUNCTIONS
 
+
+// ===========================================================
+// SUBPOSET NAME FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+std::string
+sheaf::poset_state_handle::
+subposet_name(pod_index_type xsubposet_hub_id, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+//   cout << "poset_state_handle::subposet_name: poset " << name() << endl;
+//   cout << powerset() << endl;
+//   cout << "  subposet namemap:" << endl;
+//   cout << powerset().subposet_name_map() << endl;
+  
+  string result(powerset().subposet_name_map().name(xsubposet_hub_id));
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Exit:
+
+  return result;
+}
+
+std::string
+sheaf::poset_state_handle::
+subposet_name(const scoped_index& xsubposet_id, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(xauto_access || state_is_read_accessible());
+
+  // Body:
+
+  return subposet_name(xsubposet_id.hub_pod(), xauto_access);
+}
+
+void
+sheaf::poset_state_handle::
+all_subposet_names(pod_index_type xsubposet_hub_id,
+                   block<std::string>& xresult,
+                   bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  require(includes_subposet(xsubposet_hub_id, xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  powerset().subposet_name_map().all_names(xsubposet_hub_id, xresult);
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(xresult.ct() == subposet_name_ct(xsubposet_hub_id, xauto_access));
+  ensure_for_all(i, 0, xresult.ct(), subposet_has_name(xsubposet_hub_id, xresult[i], xauto_access));
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::poset_state_handle::
+all_subposet_names(const scoped_index& xsubposet_id,
+                   block<std::string>& xresult,
+                   bool xauto_access) const
+{
+  // Preconditions:
+
+  require(xauto_access || state_is_read_accessible());
+  require(includes_subposet(xsubposet_id, xauto_access));
+
+  // Body:
+
+  all_subposet_names(xsubposet_id.hub_pod(), xresult, xauto_access);
+
+  // Postconditions:
+
+  ensure(xresult.ct() == subposet_name_ct(xsubposet_id, xauto_access));
+  ensure_for_all(i, 0, xresult.ct(), subposet_has_name(xsubposet_id, xresult[i], xauto_access));
+
+  // Exit:
+
+  return;
+}
+
+sheaf::size_type
+sheaf::poset_state_handle::
+subposet_name_ct(pod_index_type xsubposet_hub_id, bool xauto_access) const
+{
+  size_type result;
+
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  require(includes_subposet(xsubposet_hub_id, xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  result = powerset().subposet_name_map().name_ct(xsubposet_hub_id);
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+sheaf::size_type
+sheaf::poset_state_handle::
+subposet_name_ct(const scoped_index& xsubposet_id, bool xauto_access) const
+{
+  size_type result;
+
+  // Preconditions:
+
+  require(xauto_access || state_is_read_accessible());
+  require(includes_subposet(xsubposet_id, xauto_access));
+
+  // Body:
+
+  return subposet_name_ct(xsubposet_id.hub_pod(), xauto_access);
+}
+
+bool
+sheaf::poset_state_handle::
+subposet_has_name(pod_index_type xsubposet_hub_id,
+                  const std::string& xname,
+                  bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  require(!xname.empty());
+  require(includes_subposet(xsubposet_hub_id, xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  bool result =
+    powerset().subposet_name_map().contains_entry(xsubposet_hub_id, xname);
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
+
+bool
+sheaf::poset_state_handle::
+subposet_has_name(const scoped_index& xsubposet_id,
+                  const std::string& xname,
+                  bool xauto_access) const
+{
+  // Preconditions:
+
+  require(xauto_access || state_is_read_accessible());
+  require(!xname.empty());
+  require(includes_subposet(xsubposet_id, xauto_access));
+
+  // Body:
+
+  return subposet_has_name(xsubposet_id.hub_pod(), xname, xauto_access);
+}
+
+void
+sheaf::poset_state_handle::
+put_subposet_name(pod_index_type xsubposet_hub_id,
+                  const std::string& xname,
+                  bool xunique,
+                  bool xauto_access)
+{
+  // Preconditions:
+
+  require(state_is_auto_read_write_accessible(xauto_access));
+  require(includes_subposet(xsubposet_hub_id, xauto_access));
+  require(poset_path::is_valid_name(xname));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_write_access(true);
+  }
+
+  powerset().subposet_name_map().put_entry(xsubposet_hub_id, xname, xunique);
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postcondition:
+
+  ensure(xunique ?
+         (subposet_name(xsubposet_hub_id, xauto_access) == xname) :
+         subposet_has_name(xsubposet_hub_id, xname, xauto_access));
+
+  // Exit
+
+  return;
+}
+
+void
+sheaf::poset_state_handle::
+put_subposet_name(const scoped_index& xsubposet_id,
+                  const std::string& xname,
+                  bool xunique,
+                  bool xauto_access)
+{
+  // Preconditions:
+
+  require(xauto_access || state_is_read_write_accessible());
+  require(includes_subposet(xsubposet_id, xauto_access));
+  require(poset_path::is_valid_name(xname));
+
+  // Body:
+
+  put_subposet_name(xsubposet_id.hub_pod(), xname, xunique, xauto_access);
+
+  // Postcondition:
+
+  ensure(xunique ?
+         (subposet_name(xsubposet_id, xauto_access) == xname) :
+         subposet_has_name(xsubposet_id, xname, xauto_access));
+
+  // Exit
+
+  return;
+}
+
+void
+sheaf::poset_state_handle::
+delete_subposet_name(const std::string& xname, bool xauto_access)
+{
+  // Preconditions:
+
+  require(!xname.empty());
+  require(state_is_auto_read_write_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_write_access(true);
+  }
+
+  powerset().subposet_name_map().delete_name(xname);
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postcondition
+
+  ensure(!includes_subposet(xname, xauto_access));
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::poset_state_handle::
+delete_all_subposet_names(pod_index_type xsubposet_hub_id, bool xauto_access)
+{
+  // Preconditions:
+
+  require(state_is_auto_read_write_accessible(xauto_access));
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_write_access(true);
+  }
+
+  powerset().subposet_name_map().delete_index(xsubposet_hub_id);
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postcondition
+
+  ensure(subposet_name_ct(xsubposet_hub_id, xauto_access) == 0);
+
+  // Exit:
+
+  return;
+}
+
+void
+sheaf::poset_state_handle::
+delete_all_subposet_names(const scoped_index& xsubposet_id, bool xauto_access)
+{
+  // Preconditions:
+
+  require(xauto_access || state_is_read_write_accessible());
+
+  // Body:
+
+  delete_all_subposet_names(xsubposet_id.hub_pod(), xauto_access);
+
+  // Postcondition
+
+  ensure(subposet_name_ct(xsubposet_id, xauto_access) == 0);
+
+  // Exit:
+
+  return;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+ 
 
 // ===========================================================
 // SUBPOSET ID SPACE FAMILY FACET
@@ -6808,6 +6856,70 @@ member_dof_map(const scoped_index& xmbr_id, bool xrequire_write_access) const
   // Body:
 
   return member_dof_map(xmbr_id.hub_pod(), xrequire_write_access);
+}
+
+void
+sheaf::poset_state_handle::
+member_dof_tuple(pod_index_type xmbr_hub_id, void* xbuf, size_t xbuflen, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(state_is_auto_read_accessible(xauto_access));
+  require(contains_member(xmbr_hub_id, xauto_access));
+  require(unexecutable("xbuf points to a buffer of length xbuflen"));
+  require(xbuflen >= member_dof_map(xmbr_hub_id, false).dof_tuple_ub());
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  member_dof_map(xmbr_hub_id, false).get_dof_tuple(xbuf, xbuflen);
+  
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  // Exit
+
+  return;
+}
+
+void
+sheaf::poset_state_handle::
+put_member_dof_tuple(pod_index_type xmbr_hub_id, void* xbuf, size_t xbuflen, bool xauto_access)
+{
+  // Preconditions:
+
+  require(state_is_auto_read_write_accessible(xauto_access));
+  require(contains_member(xmbr_hub_id, xauto_access));
+  require(unexecutable("xbuf points to a buffer of length xbuflen"));
+  require(xbuflen >= member_dof_map(xmbr_hub_id, true).dof_tuple_ub());
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_write_access();
+  }
+
+  member_dof_map(xmbr_hub_id, true).put_dof_tuple(xbuf, xbuflen);
+  
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  // Exit
+
+  return;
 }
 
 sheaf::pod_index_type
