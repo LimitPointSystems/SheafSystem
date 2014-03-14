@@ -199,17 +199,22 @@ public:
   ~sec_vd();
 
   ///
+  /// True if xother conforms to an instance of the fiber of current.
+  ///
+  bool fiber_is_ancestor_of(const any* xother) const;
+
+  ///
   /// Virtual constructor for the associated fiber type.
   ///
   virtual const fiber_type& fiber_prototype() const;
 
   ///
-  /// Dimension of this as a vector space.
+  /// The fiber dimension.
   ///
   virtual int d() const;
 
   ///
-  /// Dimension of this as a vector space; auto-access version.
+  /// The fiber dimension; auto-access version.
   ///
   virtual int d(bool xauto_access) const;
 
@@ -243,12 +248,107 @@ public:
   ///
   virtual void put_is_covector(bool xauto_access);
 
+  ///
+  /// Ith component of section
+  ///
+  scalar_type* comp(int i) const;
+
+  ///
+  /// Sets ith component of section
+  ///
+  void set_comp(int i, scalar_type* xcomponent);
+
+  ///
+  /// Value of the field at xpt, auto-allocated version.
+  ///
+  vd* value_at_point(const chart_point& xpt, bool xauto_access = true) const;
+
+  ///
+  /// Value of the field at xpt, pre-allocated version.
+  ///
+  virtual void value_at_point_pa(const chart_point& xpt,
+                                 vd& xresult,
+                                 bool xauto_access = true) const;
+
+  ///
+  /// Value of the field at xpt, unattached version.
+  ///
+  virtual void value_at_point_ua(const chart_point& xpt,
+                                 value_type* xresult,
+                                 size_type xresult_ub,
+                                 bool xauto_access = true) const;
+
+  ///
+  /// @deprecated no longer supported.
+  ///
+  virtual int dof_packet_ub();
+
+  ///
+  /// Copies the entire dof tuple into xbuf
+  ///
+  void dof_tuple(dof_type* xbuf, int xbuflen) const;
+
+  ///
+  /// Virtual constructor; makes a new handle of the same type as this,
+  /// attached to a copy of the state of this.
+  ///
+  sec_vd* deep_copy(bool xauto_access);
+
+  ///
+  /// Copies the dofs of this to xother.
+  ///
+  void deep_copy(sec_vd& xother, bool xauto_access);
+
+protected:
+
+  ///
+  /// Creates a new component for attach_handle_data_members.
+  /// A "virtual constructor" for components.
+  ///
+  virtual sec_tuple::scalar_type* new_comp();
+
+private:
+
+  //@}
+
+  //============================================================================
+  /// @name TUPLE FACET OF CLASS SEC_VD
+  //============================================================================
+  //@{
+
+public:
+
 protected:
 
 private:
 
   //@}
  
+
+  //============================================================================
+  /// @name MULTISECTION FACET
+  //============================================================================
+  //@{
+
+  ///
+  /// Unifies this multisection into result using the painters algorithm
+  /// (result at disccretization point is value of last branch
+  /// overlapping that point); auto-allocated version.
+  ///
+  sec_vd* unify(bool xauto_access);
+
+  ///
+  /// Unifies this multisection into xresult using the painters algorithm
+  /// (result at disccretization point is value of last branch
+  /// overlapping that point); pre-allocated version.
+  ///
+  void unify(sec_vd& xresult, bool xauto_access);
+
+protected:
+
+private:
+
+  //@}
 
   //============================================================================
   /// @name NEW DOF ACCESS FACET
@@ -297,22 +397,7 @@ protected:
 
 private:
 
-  //@}
- 
-
-  //============================================================================
-  /// @name TUPLE FACET OF CLASS SEC_VD
-  //============================================================================
-  //@{
-
-public:
-
-protected:
-
-private:
-
-  //@}
- 
+  //@} 
 
   //============================================================================
   /// @name ABSTRACT POSET MEMBER FACET OF CLASS SEC_VD
@@ -354,7 +439,7 @@ private:
  
 
   // ===========================================================
-  /// @name POSET_COMPONENT FACET
+  /// @name HOST POSET FACET
   // ===========================================================
   //@{
 
@@ -385,11 +470,6 @@ private:
 public:
 
   ///
-  /// True if xother conforms to an instance of the fiber of current.
-  ///
-  bool fiber_is_ancestor_of(const any* xother) const;
-
-  ///
   /// True if xother conforms to current.
   ///
   bool is_ancestor_of(const any* xother) const;
@@ -403,103 +483,14 @@ protected:
 
 private:
 
-  //@}
- 
+  //@} 
 
-  //############################################################################
-
-public:
-
-  ///
-  /// ith component of section
-  ///
-  scalar_type* comp(int i) const;
+}; // end of class sec_vd
 
 
-  ///
-  /// Value of the field at xpt, auto-allocated version.
-  ///
-  vd* value_at_point(const chart_point& xpt, bool xauto_access = true) const;
-
-  ///
-  /// Value of the field at xpt, pre-allocated version.
-  ///
-  virtual void value_at_point_pa(const chart_point& xpt,
-                                 vd& xresult,
-                                 bool xauto_access = true) const;
-
-  ///
-  /// Value of the field at xpt, unattached version.
-  ///
-  virtual void value_at_point_ua(const chart_point& xpt,
-                                 value_type* xresult,
-                                 size_type xresult_ub,
-                                 bool xauto_access = true) const;
-
-  ///
-  /// OBSOLETE: no longer supported.
-  ///
-  virtual int dof_packet_ub();
-
-  ///
-  /// Copies the entire dof tuple into xbuf
-  ///
-  void dof_tuple(dof_type* xbuf, int xbuflen) const;
-
-  ///
-  /// sets ith component of section
-  ///
-  void set_comp(int i, scalar_type* xcomponent);
-
-  ///
-  /// Virtual constructor; makes a new handle of the same type as this,
-  /// attached to a copy of the state of this.
-  ///
-  sec_vd* deep_copy(bool xauto_access);
-
-  ///
-  /// Copies the dofs of this to xother.
-  ///
-  void deep_copy(sec_vd& xother, bool xauto_access);
-
-
-//$$SCRIBBLE: These multisection facet functions need to be converted to non-member
-//            functions.  The current version will not compile because sec_vd is
-//            abstract.
-
-  //============================================================================
-  /// @name MULTISECTION FACET
-  //============================================================================
-  //@{
-
-  ///
-  /// Unifies this multisection into result using the painters algorithm
-  /// (result at disccretization point is value of last branch
-  /// overlapping that point); auto-allocated version.
-  ///
-  sec_vd* unify(bool xauto_access);
-
-  ///
-  /// Unifies this multisection into xresult using the painters algorithm
-  /// (result at disccretization point is value of last branch
-  /// overlapping that point); pre-allocated version.
-  ///
-  void unify(sec_vd& xresult, bool xauto_access);
-
-protected:
-
-  ///
-  /// Creates a new component for attach_handle_data_members.
-  /// A "virtual constructor" for components.
-  ///
-  virtual sec_tuple::scalar_type* new_comp();
-
-private:
-
-  //@}
-
-};
-
+//==============================================================================
+// NON-MEMBER CLASSES
+//==============================================================================
 
 //==============================================================================
 // TENSOR SECTION TRAITS

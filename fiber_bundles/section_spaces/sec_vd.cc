@@ -389,6 +389,33 @@ fiber_bundle::sec_vd::
 
 }
 
+bool
+fiber_bundle::sec_vd::
+fiber_is_ancestor_of(const any* xother) const
+{
+
+  // Preconditions:
+
+  require(xother != 0);
+
+  // Body:
+
+  // If xother may be dynamically cast to the type of this fiber then this
+  // fiber is an ancestor of xother.
+
+  bool result = dynamic_cast<const vd*>(xother) != 0;
+
+  // Postconditions:
+
+  ensure(invariant());
+  ensure(xother->invariant());
+
+  // Exit:
+
+  return result;
+
+}
+
 const fiber_bundle::sec_vd::fiber_type&
 fiber_bundle::sec_vd::
 fiber_prototype() const
@@ -564,6 +591,480 @@ put_is_covector(bool xauto_access)
   // Postconditions:
   
   ensure(is_covector(xauto_access));
+
+  // Exit:
+
+  return;
+}
+
+fiber_bundle::sec_vd::scalar_type*
+fiber_bundle::sec_vd::
+comp(int i) const
+{
+  // Preconditions:
+
+  require(0 <= i && i < df());
+
+  // Body:
+
+  scalar_type* result = 0;
+
+  not_implemented();
+
+  // Postconditions:
+
+  ensure(result != 0);
+  ensure(invariant());
+  ensure(result->invariant());
+
+  // Exit:
+
+  return result;
+
+}
+
+void
+fiber_bundle::sec_vd::
+set_comp(int i, scalar_type* component)
+{
+
+  // Preconditions:
+
+  require(0 <= i && i < df());
+  require(component != 0);
+
+  // Body:
+
+  // Place component into the component storage.
+
+  not_implemented();
+
+  // Postconditions:
+
+  //ensure(comp(i) == component);
+  ensure(invariant());
+
+}
+
+
+fiber_bundle::vd*
+fiber_bundle::sec_vd::
+value_at_point(const chart_point& xpt, bool xauto_access) const
+{
+  vd* result;
+
+  // Preconditions:
+
+  require(precondition_of(fiber_prototype().clone()));
+  require(precondition_of(value_at_point_pa(xpt, fiber_prototype().clone(), xauto_access)));
+
+  // Body:
+
+  result = fiber_prototype().clone();
+  value_at_point_pa(xpt, *result, xauto_access);
+
+  // Postconditions:
+
+  ensure(postcondition_of(fiber_prototype().clone()));
+  ensure(postcondition_of(value_at_point_pa(xpt, fiber_prototype().clone(), xauto_access)));
+
+  // Exit:
+
+  return result;
+}
+
+void
+fiber_bundle::sec_vd::
+value_at_point_pa(const chart_point& xpt, vd& result, bool xauto_access) const
+{
+  // Preconditions:
+
+  require(!xauto_access ? result.state_is_read_accessible() : true);
+
+  if(xauto_access)
+  {
+    result.get_read_access();
+  }
+
+  require(precondition_of(value_at_point_ua(xptr, result.row_dof_tuple(), xauto_access)));
+
+  // Body:
+
+  dof_type* ldofs = reinterpret_cast<dof_type*>(result.dof_map().dof_tuple());
+
+  value_at_point_ua(xpt, ldofs, result.d());
+
+  // Postconditions:
+
+  ensure(postcondition_of(value_at_point_ua(xptr, result.row_dof_tuple(), xauto_access)));
+
+  if(xauto_access)
+  {
+    result.release_access();
+  }
+
+  // Exit:
+
+  return;
+}
+
+void
+fiber_bundle::sec_vd::
+value_at_point_ua(const chart_point& xpt,
+                  value_type* xresult,
+                  size_type xresult_ub,
+                  bool xauto_access) const
+{
+  // Preconditions:
+
+  require(!xauto_access ? state_is_read_accessible() : true);
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  require(xpt.is_valid());
+
+  require(schema().evaluation().contains_member(xpt.chart_id()));
+
+  /// @hack the preceding needs to be replaced with the following.
+  /// require(unexecutable(xpt.chart_id() is mappable to a member of schema().evaluation()));
+
+  require(unexecutable("@hack not more than 32 dofs per eval member"));
+  require(xresult != 0);
+  require(xresult_ub >= schema().df());
+
+
+  // Body:
+
+  // Gather the dofs for xpt.chart_id().
+
+  /// @hack assume discretization members are lower cover.
+
+  sec_vd_dof_type lgathered_dofs[32];
+  sec_vd_dof_type* ldofs = lgathered_dofs;
+  size_type ldofs_ct = 0;
+  int ldf = schema().df();
+
+  poset_state_handle* lbase_host = base().host();
+
+  typedef base_space_member::row_dof_tuple_type tuple_type;
+  tuple_type* lchart_tuple =
+    reinterpret_cast<tuple_type*>(lbase_host->member_dof_map(xpt.chart_id()).dof_tuple());
+
+  int lchart_depth = lchart_tuple->refinement_depth;
+
+  index_space_iterator& litr =
+    lbase_host->get_cover_id_space_iterator(LOWER, xpt.chart_id());
+  scoped_index ldisc_id(lbase_host->member_hub_id_space(false));
+  while(!litr.is_done())
+  {
+    ldisc_id = litr.hub_pod();
+
+    assertion(schema().discretization().contains_member(ldisc_id));
+
+    tuple_type* ltuple =
+      reinterpret_cast<tuple_type*>(lbase_host->member_dof_map(ldisc_id).dof_tuple());
+
+    if(ltuple->refinement_depth <= lchart_depth)
+    {
+      // This is a disc mbr for this chart.
+
+      get_fiber(ldisc_id, ldofs, ldf*sizeof(dof_type), false);
+
+      ldofs += ldf;
+      ldofs_ct += ldf;
+
+      assertion(ldofs_ct < 32);
+    }
+    else
+    {
+      // This is a discretization member for some more refined chart
+      // adjacent to this chart; ignore it.
+    }
+    litr.next();
+  }
+
+  lbase_host->release_cover_id_space_iterator(litr);
+
+  //   cout << endl;
+
+  // Get the evaluator for xpt.chart_id().
+
+  sec_rep_descriptor& lrep = schema().host()->rep();
+  eval_family* leval_family = lrep.evaluators();
+  section_evaluator* leval = leval_family->member(*base().host(), xpt.chart_id());
+
+  // Evaluate the field at xpt.local_coords()
+
+  leval->value_at_coord(lgathered_dofs,
+                        ldofs_ct,
+                        xpt.local_coords(),
+                        xpt.db(),
+                        xresult,
+                        ldf);
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+  ensure(unexecutable("for 0 <= i < schema.df(), xresult[i] = i-th component of value"));
+
+
+  // Exit:
+
+  return;
+}
+
+int
+fiber_bundle::sec_vd::
+dof_packet_ub()
+{
+
+  // Preconditions:
+
+
+  // Body:
+
+  static const int result = 10000;
+
+  // Postconditions:
+
+  ensure(invariant());
+
+  // Exit:
+
+  return result;
+
+}
+
+void
+fiber_bundle::sec_vd::
+dof_tuple(dof_type* xbuf, int xbuflen) const
+{
+
+  // Preconditions:
+
+  require(xbuflen >= dof_ct());
+
+  // Body:
+
+  // implementation is same as in sec_tuple
+
+  sec_tuple::dof_tuple(reinterpret_cast<void*>(xbuf), xbuflen*  sizeof(dof_type));
+
+  // Postconditions:
+  ensure(invariant());
+  ensure(unexecutable(xbuf contains copy of dof tuple));
+
+}
+
+
+fiber_bundle::sec_vd*
+fiber_bundle::sec_vd::
+deep_copy(bool xauto_access)
+{
+  sec_vd* result;
+
+  // Preconditions:
+
+  require(xauto_access || host()->in_jim_edit_mode());
+
+  // Body:
+
+  result = clone(true, xauto_access);
+  deep_copy(*result, xauto_access);
+
+  // Postconditions:
+
+  ensure(result != 0);
+  ensure(is_same_type(result));
+
+  // Exit:
+
+  return result;
+}
+
+void
+fiber_bundle::sec_vd::
+deep_copy(sec_vd& xother, bool xauto_access)
+{
+  // Preconditions:
+
+  require(xauto_access || xother.state_is_read_write_accessible());
+  require(xauto_access || state_is_read_accessible());
+
+  if(xauto_access)
+  {
+    xother.get_read_write_access(true);
+    get_read_access();
+  }
+
+  require(same_schema(&xother));
+
+  // Body:
+
+  sec_vd::fiber_type::volatile_type* lfiber =
+    fiber_prototype().lite_prototype().clone();
+
+  const index_space_handle& ldisc_id_space = schema().discretization_id_space();
+  index_space_iterator& ldisc_itr = ldisc_id_space.get_iterator();
+  scoped_index ldisc_id(ldisc_id_space);
+  while(!ldisc_itr.is_done())
+  {
+    ldisc_id = ldisc_itr.pod();
+    
+    get_fiber(ldisc_id.pod(), *lfiber);
+    xother.put_fiber(ldisc_id, *lfiber, false);
+
+    ldisc_itr.next();
+  }
+  ldisc_id_space.release_iterator(ldisc_itr);
+  delete lfiber;
+
+  if(xauto_access)
+  {
+    release_access();
+    xother.release_access();
+  }
+
+  // Postconditions:
+
+
+  // Exit:
+
+  return;
+}
+
+// PROTECTED MEMBER FUNCTIONS
+
+fiber_bundle::sec_tuple::scalar_type*
+fiber_bundle::sec_vd::
+new_comp()
+{
+  scalar_type* result;
+
+  // Preconditions:
+
+  // Body:
+
+  // Create an unattached handle.
+
+  result = new scalar_type;
+
+  // Postconditions:
+
+  /// @hack this causes trouble in fields.t: ensure(invariant());
+  ensure(result != 0);
+  ensure(!result->is_attached());
+  ensure(unexecutable(result conforms to scalar_type));
+
+  // Exit:
+
+  return result;
+}
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+//=============================================================================
+// MULTISECTION FACET
+//=============================================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+fiber_bundle::sec_vd*
+fiber_bundle::sec_vd::
+unify(bool xauto_access)
+{
+  sec_vd* result;
+
+  // Preconditions:
+
+  require(is_multisection(xauto_access));
+  require(xauto_access || host()->in_jim_edit_mode());
+
+  // Body:
+
+  result = clone(true, xauto_access);
+  unify(*result, xauto_access);
+
+  // Postconditions:
+
+  ensure(!result->is_multisection(xauto_access));
+
+  // Exit:
+
+  return result;
+}
+
+void
+fiber_bundle::sec_vd::
+unify(sec_vd& xresult, bool xauto_access)
+{
+  // Preconditions:
+
+  require(is_multisection(xauto_access));
+
+  require(xresult.in_same_space(this));
+  require(!xresult.is_multisection(xauto_access));
+  require(xauto_access || xresult.state_is_read_write_accessible());
+
+  // Body:
+
+  if(xauto_access)
+  {
+    xresult.get_read_write_access(true); // Implies read access to this.
+  }
+
+  sec_vd lbranch;
+
+  int ldf = schema().df();
+  sec_vd_dof_type* ldofs = new sec_vd_dof_type[ldf];
+
+  // Iterate over the poset ids of the branches.
+
+  index_space_iterator& lbranch_itr = get_branch_id_space_iterator(false);
+
+  while(!lbranch_itr.is_done())
+  {
+    lbranch.attach_to_state(_host, lbranch_itr.hub_pod());
+
+    // Iterate over disc seq ids of this branch.
+
+    const index_space_handle& ldisc_id_space = lbranch.schema().discretization_id_space();
+    index_space_iterator& ldisc_itr = ldisc_id_space.get_iterator();
+    scoped_index ldisc_id(ldisc_id_space);
+    while(!ldisc_itr.is_done())
+    {
+      ldisc_id = ldisc_itr.pod();
+
+      lbranch.get_fiber(ldisc_id.pod(), ldofs,
+			ldf*sizeof(sec_vd_dof_type));
+      xresult.put_fiber(ldisc_id, ldofs,
+			ldf*sizeof(sec_vd_dof_type), false);
+
+      ldisc_itr.next();
+    }
+    ldisc_id_space.release_iterator(ldisc_itr);
+    lbranch_itr.next();
+  }
+  release_branch_id_space_iterator(lbranch_itr, false);
+  lbranch.detach_from_state();
+
+  delete[] ldofs;
+
+  if(xauto_access)
+  {
+    xresult.release_access();
+  }
+
+  // Postconditions:
+
 
   // Exit:
 
@@ -842,7 +1343,7 @@ clone() const
 
 
 // ===========================================================
-// POSET_COMPONENT FACET
+// HOST POSET FACET
 // ===========================================================
  
 // PUBLIC MEMBER FUNCTIONS
@@ -871,33 +1372,6 @@ host_is_ancestor_of(const poset_state_handle* xother) const
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
-
-bool
-fiber_bundle::sec_vd::
-fiber_is_ancestor_of(const any* xother) const
-{
-
-  // Preconditions:
-
-  require(xother != 0);
-
-  // Body:
-
-  // If xother may be dynamically cast to the type of this fiber then this
-  // fiber is an ancestor of xother.
-
-  bool result = dynamic_cast<const vd*>(xother) != 0;
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(xother->invariant());
-
-  // Exit:
-
-  return result;
-
-}
 
 bool
 fiber_bundle::sec_vd::
@@ -964,486 +1438,6 @@ invariant() const
 
 // PRIVATE MEMBER FUNCTIONS
 
-
-//=============================================================================
-// MULTISECTION FACET
-//=============================================================================
-
-// PUBLIC MEMBER FUNCTIONS
-
-fiber_bundle::sec_vd*
-fiber_bundle::sec_vd::
-unify(bool xauto_access)
-{
-  sec_vd* result;
-
-  // Preconditions:
-
-  require(is_multisection(xauto_access));
-  require(xauto_access || host()->in_jim_edit_mode());
-
-  // Body:
-
-  result = clone(true, xauto_access);
-  unify(*result, xauto_access);
-
-  // Postconditions:
-
-  ensure(!result->is_multisection(xauto_access));
-
-  // Exit:
-
-  return result;
-}
-
-void
-fiber_bundle::sec_vd::
-unify(sec_vd& xresult, bool xauto_access)
-{
-  // Preconditions:
-
-  require(is_multisection(xauto_access));
-
-  require(xresult.in_same_space(this));
-  require(!xresult.is_multisection(xauto_access));
-  require(xauto_access || xresult.state_is_read_write_accessible());
-
-  // Body:
-
-  if(xauto_access)
-  {
-    xresult.get_read_write_access(true); // Implies read access to this.
-  }
-
-  sec_vd lbranch;
-
-  int ldf = schema().df();
-  sec_vd_dof_type* ldofs = new sec_vd_dof_type[ldf];
-
-  // Iterate over the poset ids of the branches.
-
-  index_space_iterator& lbranch_itr = get_branch_id_space_iterator(false);
-
-  while(!lbranch_itr.is_done())
-  {
-    lbranch.attach_to_state(_host, lbranch_itr.hub_pod());
-
-    // Iterate over disc seq ids of this branch.
-
-    const index_space_handle& ldisc_id_space = lbranch.schema().discretization_id_space();
-    index_space_iterator& ldisc_itr = ldisc_id_space.get_iterator();
-    scoped_index ldisc_id(ldisc_id_space);
-    while(!ldisc_itr.is_done())
-    {
-      ldisc_id = ldisc_itr.pod();
-
-      lbranch.get_fiber(ldisc_id.pod(), ldofs,
-			ldf*sizeof(sec_vd_dof_type));
-      xresult.put_fiber(ldisc_id, ldofs,
-			ldf*sizeof(sec_vd_dof_type), false);
-
-      ldisc_itr.next();
-    }
-    ldisc_id_space.release_iterator(ldisc_itr);
-    lbranch_itr.next();
-  }
-  release_branch_id_space_iterator(lbranch_itr, false);
-  lbranch.detach_from_state();
-
-  delete[] ldofs;
-
-  if(xauto_access)
-  {
-    xresult.release_access();
-  }
-
-  // Postconditions:
-
-
-  // Exit:
-
-  return;
-}
-
-// PROTECTED MEMBER FUNCTIONS
-
-// PRIVATE MEMBER FUNCTIONS
-
-
-//=============================================================================
-
-fiber_bundle::sec_tuple::scalar_type*
-fiber_bundle::sec_vd::
-new_comp()
-{
-  scalar_type* result;
-
-  // Preconditions:
-
-  // Body:
-
-  // Create an unattached handle.
-
-  result = new scalar_type;
-
-  // Postconditions:
-
-  /// @hack this causes trouble in fields.t: ensure(invariant());
-  ensure(result != 0);
-  ensure(!result->is_attached());
-  ensure(unexecutable(result conforms to scalar_type));
-
-  // Exit:
-
-  return result;
-}
-
-
-fiber_bundle::sec_vd::scalar_type*
-fiber_bundle::sec_vd::
-comp(int i) const
-{
-  // Preconditions:
-
-  require(0 <= i && i < df());
-
-  // Body:
-
-  scalar_type* result = 0;
-//   scalar_type* result = dynamic_cast<scalar_type*>(_comps[i]);
-
-  not_implemented();
-
-  // Postconditions:
-
-  ensure(result != 0);
-  ensure(invariant());
-  ensure(result->invariant());
-
-  // Exit:
-
-  return result;
-
-}
-
-void
-fiber_bundle::sec_vd::
-set_comp(int i, scalar_type* component)
-{
-
-  // Preconditions:
-
-  require(0 <= i && i < df());
-  require(component != 0);
-
-  // Body:
-
-  // Place component into the component storage.
-
-//   _comps[i] = component;
-
-  not_implemented();
-
-  // Postconditions:
-
-  //ensure(comp(i) == component);
-  ensure(invariant());
-
-}
-
-
-
-fiber_bundle::sec_vd*
-fiber_bundle::sec_vd::
-deep_copy(bool xauto_access)
-{
-  sec_vd* result;
-
-  // Preconditions:
-
-  require(xauto_access || host()->in_jim_edit_mode());
-
-  // Body:
-
-  result = clone(true, xauto_access);
-  deep_copy(*result, xauto_access);
-
-  // Postconditions:
-
-  ensure(result != 0);
-  ensure(is_same_type(result));
-
-  // Exit:
-
-  return result;
-}
-
-void
-fiber_bundle::sec_vd::
-deep_copy(sec_vd& xother, bool xauto_access)
-{
-  // Preconditions:
-
-  require(xauto_access || xother.state_is_read_write_accessible());
-  require(xauto_access || state_is_read_accessible());
-
-  if(xauto_access)
-  {
-    xother.get_read_write_access(true);
-    get_read_access();
-  }
-
-  require(same_schema(&xother));
-
-  // Body:
-
-  sec_vd::fiber_type::volatile_type* lfiber =
-    fiber_prototype().lite_prototype().clone();
-
-  const index_space_handle& ldisc_id_space = schema().discretization_id_space();
-  index_space_iterator& ldisc_itr = ldisc_id_space.get_iterator();
-  scoped_index ldisc_id(ldisc_id_space);
-  while(!ldisc_itr.is_done())
-  {
-    ldisc_id = ldisc_itr.pod();
-    
-    get_fiber(ldisc_id.pod(), *lfiber);
-    xother.put_fiber(ldisc_id, *lfiber, false);
-
-    ldisc_itr.next();
-  }
-  ldisc_id_space.release_iterator(ldisc_itr);
-  delete lfiber;
-
-  if(xauto_access)
-  {
-    release_access();
-    xother.release_access();
-  }
-
-  // Postconditions:
-
-
-  // Exit:
-
-  return;
-}
-
-fiber_bundle::vd*
-fiber_bundle::sec_vd::
-value_at_point(const chart_point& xpt, bool xauto_access) const
-{
-  vd* result;
-
-  // Preconditions:
-
-  require(precondition_of(fiber_prototype().clone()));
-  require(precondition_of(value_at_point_pa(xpt, fiber_prototype().clone(), xauto_access)));
-
-  // Body:
-
-  result = fiber_prototype().clone();
-  value_at_point_pa(xpt, *result, xauto_access);
-
-  // Postconditions:
-
-  ensure(postcondition_of(fiber_prototype().clone()));
-  ensure(postcondition_of(value_at_point_pa(xpt, fiber_prototype().clone(), xauto_access)));
-
-  // Exit:
-
-  return result;
-}
-
-void
-fiber_bundle::sec_vd::
-value_at_point_pa(const chart_point& xpt, vd& result, bool xauto_access) const
-{
-  // Preconditions:
-
-  require(!xauto_access ? result.state_is_read_accessible() : true);
-
-  if(xauto_access)
-  {
-    result.get_read_access();
-  }
-
-  require(precondition_of(value_at_point_ua(xptr, result.row_dof_tuple(), xauto_access)));
-
-  // Body:
-
-  dof_type* ldofs = reinterpret_cast<dof_type*>(result.dof_map().dof_tuple());
-
-  value_at_point_ua(xpt, ldofs, result.d());
-
-  // Postconditions:
-
-  ensure(postcondition_of(value_at_point_ua(xptr, result.row_dof_tuple(), xauto_access)));
-
-  if(xauto_access)
-  {
-    result.release_access();
-  }
-
-  // Exit:
-
-  return;
-}
-
-void
-fiber_bundle::sec_vd::
-value_at_point_ua(const chart_point& xpt,
-                  value_type* xresult,
-                  size_type xresult_ub,
-                  bool xauto_access) const
-{
-  // Preconditions:
-
-  require(!xauto_access ? state_is_read_accessible() : true);
-
-  if(xauto_access)
-  {
-    get_read_access();
-  }
-
-  require(xpt.is_valid());
-
-  require(schema().evaluation().contains_member(xpt.chart_id()));
-
-  /// @hack the preceding needs to be replaced with the following.
-  /// require(unexecutable(xpt.chart_id() is mappable to a member of schema().evaluation()));
-
-  require(unexecutable("@hack not more than 32 dofs per eval member"));
-  require(xresult != 0);
-  require(xresult_ub >= schema().df());
-
-
-  // Body:
-
-  // Gather the dofs for xpt.chart_id().
-
-  /// @hack assume discretization members are lower cover.
-
-  sec_vd_dof_type lgathered_dofs[32];
-  sec_vd_dof_type* ldofs = lgathered_dofs;
-  size_type ldofs_ct = 0;
-  int ldf = schema().df();
-
-  poset_state_handle* lbase_host = base().host();
-
-  typedef base_space_member::row_dof_tuple_type tuple_type;
-  tuple_type* lchart_tuple =
-    reinterpret_cast<tuple_type*>(lbase_host->member_dof_map(xpt.chart_id()).dof_tuple());
-
-  int lchart_depth = lchart_tuple->refinement_depth;
-
-  index_space_iterator& litr =
-    lbase_host->get_cover_id_space_iterator(LOWER, xpt.chart_id());
-  scoped_index ldisc_id(lbase_host->member_hub_id_space(false));
-  while(!litr.is_done())
-  {
-    ldisc_id = litr.hub_pod();
-
-    assertion(schema().discretization().contains_member(ldisc_id));
-
-    tuple_type* ltuple =
-      reinterpret_cast<tuple_type*>(lbase_host->member_dof_map(ldisc_id).dof_tuple());
-
-    if(ltuple->refinement_depth <= lchart_depth)
-    {
-      // This is a disc mbr for this chart.
-
-      get_fiber(ldisc_id, ldofs, ldf*sizeof(dof_type), false);
-
-      ldofs += ldf;
-      ldofs_ct += ldf;
-
-      assertion(ldofs_ct < 32);
-    }
-    else
-    {
-      // This is a discretization member for some more refined chart
-      // adjacent to this chart; ignore it.
-    }
-    litr.next();
-  }
-
-  lbase_host->release_cover_id_space_iterator(litr);
-
-  //   cout << endl;
-
-  // Get the evaluator for xpt.chart_id().
-
-  sec_rep_descriptor& lrep = schema().host()->rep();
-  eval_family* leval_family = lrep.evaluators();
-  section_evaluator* leval = leval_family->member(*base().host(), xpt.chart_id());
-
-  // Evaluate the field at xpt.local_coords()
-
-  leval->value_at_coord(lgathered_dofs,
-                        ldofs_ct,
-                        xpt.local_coords(),
-                        xpt.db(),
-                        xresult,
-                        ldf);
-
-  if(xauto_access)
-  {
-    release_access();
-  }
-
-  // Postconditions:
-
-  ensure(unexecutable("for 0 <= i < schema.df(), xresult[i] = i-th component of value"));
-
-
-  // Exit:
-
-  return;
-}
-
-void
-fiber_bundle::sec_vd::
-dof_tuple(dof_type* xbuf, int xbuflen) const
-{
-
-  // Preconditions:
-
-  require(xbuflen >= dof_ct());
-
-  // Body:
-
-  // implementation is same as in sec_tuple
-
-  sec_tuple::dof_tuple(reinterpret_cast<void*>(xbuf), xbuflen*  sizeof(dof_type));
-
-  // Postconditions:
-  ensure(invariant());
-  ensure(unexecutable(xbuf contains copy of dof tuple));
-
-}
-
-int
-fiber_bundle::sec_vd::
-dof_packet_ub()
-{
-
-  // Preconditions:
-
-
-  // Body:
-
-  static const int result = 10000;
-
-  // Postconditions:
-
-  ensure(invariant());
-
-  // Exit:
-
-  return result;
-
-}
 
 //==============================================================================
 // NON-MEMBER FUNCTIONS

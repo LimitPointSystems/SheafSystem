@@ -477,30 +477,24 @@ public:
   ///
   int df() const;
 
-  /// @hack using declaration broken in gcc-2.95, have to explicitly
-  /// propagate member functions overloaded in base class
-
   using poset_member::restrict_to;
 
   ///
   /// Restricts this section to base with index xbase_id and
   /// fiber schema with index xfiber_schema_id
   ///
-  virtual void restrict_to(pod_index_type xbase_id,
-                           pod_index_type xfiber_schema_id);
+  virtual void restrict_to(pod_index_type xbase_id, pod_index_type xfiber_schema_id);
 
   ///
   /// Restricts this section to base with index xbase_id and
   /// fiber schema with index xfiber_schema_id
   ///
-  void restrict_to(const scoped_index& xbase_id,
-		   const scoped_index& xfiber_schema_id);
+  void restrict_to(const scoped_index& xbase_id, const scoped_index& xfiber_schema_id);
 
   ///
   /// Restricts this section to base xbase and fiber schema xfiber_schema
   ///
-  virtual void restrict_to(const abstract_poset_member* xbase,
-                           const abstract_poset_member* xfiber_schema);
+  virtual void restrict_to(const abstract_poset_member* xbase, const abstract_poset_member* xfiber_schema);
 
   ///
   /// True if base() is not the same as host()->base();
