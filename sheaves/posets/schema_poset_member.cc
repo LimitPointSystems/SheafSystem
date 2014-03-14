@@ -73,7 +73,7 @@ new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xs
   require(xns.state_is_auto_read_write_accessible(xauto_access));
 
   require(!xhost_path.empty());
-  require(!xns.contains_path(xhost_path, xauto_access));
+  require(!xns.contains_poset(xhost_path, xauto_access));
 
   require(xschema_path.full());
   require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
@@ -103,7 +103,7 @@ new_host(namespace_type& xns, const poset_path& xhost_path, const poset_path& xs
   // Postconditions:
 
   ensure(xns.owns(result, xauto_access));
-  ensure(result.path(true) == xhost_path);
+  ensure(result.path(true).poset_name() == xhost_path.poset_name());
   ensure(result.state_is_not_read_accessible());
   ensure(result.schema(true).path(xauto_access) == xschema_path);
 
@@ -147,7 +147,7 @@ standard_host(namespace_type& xns, const poset_path& xhost_path, bool xauto_acce
   // Postconditions:
 
   ensure(xns.owns(result, xauto_access));
-  ensure(result.path(true) == xhost_path);
+  ensure(result.path(true).poset_name() == xhost_path.poset_name());
   ensure(result.state_is_not_read_accessible());
   ensure(result.schema(true).path(xauto_access) == standard_schema_path());
 

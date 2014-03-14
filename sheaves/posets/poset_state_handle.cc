@@ -822,7 +822,7 @@ new_state(namespace_poset& xns, const poset_path& xpath, const schema_poset_memb
   // Preconditions:
 
   require(!xpath.empty());
-  require(!xns.contains_path(xpath, true));
+  require(!xns.contains_poset(xpath, true));
 
   require(schema_is_ancestor_of(&xschema));
   require(xschema.state_is_read_accessible());
@@ -841,7 +841,7 @@ new_state(namespace_poset& xns, const poset_path& xpath, const schema_poset_memb
   // Postconditions:
 
   ensure(is_attached());
-  ensure(path(true) == xpath);
+  ensure(path(true).poset_name() == xpath.poset_name());
   ensure(schema(true).is_same_state(&xschema));
 
   get_read_access();
@@ -863,6 +863,9 @@ new_state(const poset_path& xpath, const schema_poset_member& xschema, array_pos
   // cout << endl << "Entering poset_state_handle::new_state." << endl;
 
   // Preconditions:
+
+  require(!xpath.empty());
+  require(!xpath.full());
 
   require(schema_is_ancestor_of(&xschema));
   require(xschema.state_is_read_accessible());

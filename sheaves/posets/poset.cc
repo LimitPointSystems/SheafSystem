@@ -48,7 +48,7 @@ new_table(namespace_type& xns, const poset_path& xpath, const poset_path& xschem
   require(xns.state_is_auto_read_write_accessible(xauto_access));
 
   require(!xpath.empty());
-  require(!xns.contains_path(xpath, xauto_access));
+  require(!xns.contains_poset(xpath, xauto_access));
 
   require(xschema_path.full());
   require(xns.path_is_auto_read_accessible(xschema_path, xauto_access));
@@ -90,7 +90,7 @@ new_table(namespace_type& xns, const poset_path& xpath, const poset_path& xschem
   // Postconditions:
 
   ensure(xns.owns(result, xauto_access));
-  ensure(result.path(true) == xpath);
+  ensure(result.path(true).poset_name() == xpath.poset_name());
   ensure(result.state_is_not_read_accessible());
   ensure(result.schema(true).path(xauto_access) == xschema_path);
 
