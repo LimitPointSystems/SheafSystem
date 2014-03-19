@@ -94,8 +94,6 @@ public:
 
   // ITERATOR FACET
 
-  //$$SCRIBBLE jebutler const correctness
-
   ///
   /// True if this has been initialized for
   /// iteration with respect to a specific anchor.

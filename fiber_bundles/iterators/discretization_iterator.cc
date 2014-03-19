@@ -312,7 +312,16 @@ next(bool xtruncate)
             // Multivalued is not enabled or this disc member is single valued.
             // Truncate; move directly to postvisit action on this member.
 
-            ltruncate = true;
+            // Truncating assumes discretization is an antichain, which was originally
+            // the assumption. But that is not the case in general and there are some
+            // important pracical cases in which it is not, e.g. cells_cells_const
+            // ordinary maps, for which disc = whole. So never truncate.
+            // Note that the entire multivalued approach embodied in this class is
+            // not obsolete, replaced by multisections, and is_multivalued always returns
+            // false.
+
+            //            ltruncate = true;
+            ltruncate = false;
           }
         }
         else
