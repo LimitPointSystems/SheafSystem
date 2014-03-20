@@ -1166,6 +1166,7 @@ update_row_cache_with_disc_id_space() const
 
   require(state_is_read_accessible());
   require(host()->base_space().state_is_read_write_accessible());
+  require(discretization().has_id_space());
 
   // Body:
 
