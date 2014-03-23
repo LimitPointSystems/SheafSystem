@@ -172,6 +172,30 @@ public:
   explicit sec_e2_uniform(const sec_rep_space_member* xother);
 
   ///
+  /// Destructor.
+  ///
+  ~sec_e2_uniform();
+
+  // ===========================================================================
+  // EXISTING HANDLE, NEW STATE "CONSTRUCTORS"
+  // ===========================================================================
+
+  using sec_e2::new_jim_state;
+
+  ///
+  /// Attaches this to a new state in xhost with
+  /// min_x() == xmin_x and max_x() == xmax_x.
+  ///
+  void new_jim_state(sec_rep_space* xhost,
+                     const block<dof_type>& xmin,
+                     const block<dof_type>& xmax,
+                     bool xauto_access);
+
+  // ===========================================================================
+  // OTHER 
+  // ===========================================================================
+
+  ///
   /// Assignment operator; synonym for attach_to_state(&xother).
   ///
   virtual sec_e2_uniform& operator=(const abstract_poset_member& xother);
@@ -192,29 +216,54 @@ public:
   sec_e2_uniform& operator=(const e2_lite& xfiber);
 
   ///
-  /// Destructor.
-  ///
-  ~sec_e2_uniform();
-
-  ///
   /// Virtual constructor for the associated fiber type.
   ///
   virtual const fiber_type& fiber_prototype() const;
 
-  // ===========================================================================
-  // EXISTING HANDLE, NEW STATE "CONSTRUCTORS"
-  // ===========================================================================
-
-  using sec_e2::new_jim_state;
 
   ///
-  /// Attaches this to a new state in xhost with
-  /// min_x() == xmin_x and max_x() == xmax_x.
+  /// Sets the dofs to match the rectangle defined by xmin and xmax.
   ///
-  void new_jim_state(sec_rep_space* xhost,
-                     const block<dof_type>& xmin,
-                     const block<dof_type>& xmax,
-                     bool xauto_access);
+  void put_bounds(const block<dof_type>& xmin,
+                  const block<dof_type>& xmax,
+                  bool xauto_access);
+
+  ///
+  /// Gets the bounds.
+  ///
+  void get_bounds(block<dof_type>& xmin, block<dof_type>& xmax, bool xauto_access) const;
+
+  ///
+  /// The minimum value of the x component.
+  ///
+  dof_type min_x(bool xauto_access) const;
+
+  ///
+  /// The minimum value of the y component.
+  ///
+  dof_type min_y(bool xauto_access) const;
+
+  ///
+  /// The maximum value of the x component.
+  ///
+  dof_type max_x(bool xauto_access) const;
+
+  ///
+  /// The maximum value of the y component.
+  ///
+  dof_type max_y(bool xauto_access) const;
+
+  ///
+  /// The increment of the x component; the change in the x component
+  /// when the x vertex index is incremented by 1.
+  ///
+  dof_type inc_x(bool xauto_access) const;
+
+  ///
+  /// The increment of the y component; the change in the y component
+  /// when the y vertex index is incremented by 1.
+  ///
+  dof_type inc_y(bool xauto_access) const;
 
 protected:
 
@@ -392,39 +441,6 @@ private:
   //############################################################################
 
 public:
-
-
-  ///
-  /// Sets the dofs to match the rectangle defined by xmin and xmax.
-  ///
-  void put_bounds(const block<dof_type>& xmin,
-                  const block<dof_type>& xmax,
-                  bool xauto_access);
-
-  ///
-  /// Gets the bounds.
-  ///
-  void get_bounds(block<dof_type>& xmin, block<dof_type>& xmax, bool xauto_access) const;
-
-  ///
-  /// The minimum value of the x component.
-  ///
-  dof_type min_x(bool xauto_access) const;
-
-  ///
-  /// The minimum value of the y component.
-  ///
-  dof_type min_y(bool xauto_access) const;
-
-  ///
-  /// The maximum value of the x component.
-  ///
-  dof_type max_x(bool xauto_access) const;
-
-  ///
-  /// The maximum value of the y component.
-  ///
-  dof_type max_y(bool xauto_access) const;
 
 };
 

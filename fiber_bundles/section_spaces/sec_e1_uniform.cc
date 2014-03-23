@@ -195,7 +195,7 @@ standard_host(namespace_type& xns,
 
 
 //==============================================================================
-// E1_UNIFORM FACET OF CLASS SEC_E1_UNIFORM
+// SEC_E1_UNIFORM FACET OF CLASS SEC_E1_UNIFORM
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -212,121 +212,6 @@ sec_e1_uniform()
 
   ensure(invariant());
 }
-
-fiber_bundle::sec_e1_uniform&
-fiber_bundle::sec_e1_uniform::
-operator=(const abstract_poset_member& xother)
-{
-  // Preconditions:
-
-  require(is_ancestor_of(&xother));
-  require(precondition_of(attach_to_state(&xother)));
-
-  // Body:
-
-  attach_to_state(&xother);
-
-  // Postconditions:
-
-  ensure(postcondition_of(attach_to_state(&xother)));
-
-  // Exit:
-
-  return *this;
-}
-
-fiber_bundle::sec_e1_uniform&
-fiber_bundle::sec_e1_uniform::
-operator=(const sec_e1_uniform& xother)
-{
-  // Preconditions:
-
-  require(precondition_of(attach_to_state(&xother)));
-
-  // Body:
-
-  attach_to_state(&xother);
-
-  // Postconditions:
-
-  ensure(postcondition_of(attach_to_state(&xother)));
-
-  // Exit:
-
-  return *this;
-}
-
-fiber_bundle::sec_e1_uniform&
-fiber_bundle::sec_e1_uniform::
-operator=(const e1& xfiber)
-{
-  // Preconditions:
-
-  require(precondition_of(sec_vd::operator=(xfiber)));
-
-  // Body:
-
-  sec_vd::operator=(xfiber);
-
-  // Postconditions:
-
-  ensure(postcondition_of(sec_vd::operator=(xfiber)));
-
-  // Exit:
-
-  return *this;
-}
-
-fiber_bundle::sec_e1_uniform&
-fiber_bundle::sec_e1_uniform::
-operator=(const e1_lite& xfiber)
-{
-  // Preconditions:
-
-  require(precondition_of(sec_vd::operator=(xfiber)));
-
-  // Body:
-
-  sec_vd::operator=(xfiber);
-
-  // Postconditions:
-
-  ensure(postcondition_of(sec_vd::operator=(xfiber)));
-
-  // Exit:
-
-  return *this;
-}
-
-fiber_bundle::sec_e1_uniform::
-~sec_e1_uniform()
-{
-
-  // Preconditions:
-
-  // Body:
-
-  // Postconditions:
-
-}
-
-const fiber_bundle::sec_e1_uniform::fiber_type&
-fiber_bundle::sec_e1_uniform::
-fiber_prototype() const
-{
-  // Preconditions:
-
-  // Body:
-
-  static const fiber_type result;
-
-  // Postconditions:
-
-  // Exit:
-
-  return result;
-}
-
 
 // =============================================================================
 // NEW HANDLE, NEW STATE CONSTRUCTORS
@@ -541,6 +426,18 @@ sec_e1_uniform(const sec_rep_space_member* xother)
 
 }
 
+fiber_bundle::sec_e1_uniform::
+~sec_e1_uniform()
+{
+
+  // Preconditions:
+
+  // Body:
+
+  // Postconditions:
+
+}
+
 // =============================================================================
 // EXISTING HANDLE, NEW STATE "CONSTRUCTORS"
 // =============================================================================
@@ -572,7 +469,111 @@ new_jim_state(sec_rep_space* xhost,
   return;
 }
 
-//==============================================================================
+// ===========================================================================
+// OTHER 
+// ===========================================================================
+
+fiber_bundle::sec_e1_uniform&
+fiber_bundle::sec_e1_uniform::
+operator=(const abstract_poset_member& xother)
+{
+  // Preconditions:
+
+  require(is_ancestor_of(&xother));
+  require(precondition_of(attach_to_state(&xother)));
+
+  // Body:
+
+  attach_to_state(&xother);
+
+  // Postconditions:
+
+  ensure(postcondition_of(attach_to_state(&xother)));
+
+  // Exit:
+
+  return *this;
+}
+
+fiber_bundle::sec_e1_uniform&
+fiber_bundle::sec_e1_uniform::
+operator=(const sec_e1_uniform& xother)
+{
+  // Preconditions:
+
+  require(precondition_of(attach_to_state(&xother)));
+
+  // Body:
+
+  attach_to_state(&xother);
+
+  // Postconditions:
+
+  ensure(postcondition_of(attach_to_state(&xother)));
+
+  // Exit:
+
+  return *this;
+}
+
+fiber_bundle::sec_e1_uniform&
+fiber_bundle::sec_e1_uniform::
+operator=(const e1& xfiber)
+{
+  // Preconditions:
+
+  require(precondition_of(sec_vd::operator=(xfiber)));
+
+  // Body:
+
+  sec_vd::operator=(xfiber);
+
+  // Postconditions:
+
+  ensure(postcondition_of(sec_vd::operator=(xfiber)));
+
+  // Exit:
+
+  return *this;
+}
+
+fiber_bundle::sec_e1_uniform&
+fiber_bundle::sec_e1_uniform::
+operator=(const e1_lite& xfiber)
+{
+  // Preconditions:
+
+  require(precondition_of(sec_vd::operator=(xfiber)));
+
+  // Body:
+
+  sec_vd::operator=(xfiber);
+
+  // Postconditions:
+
+  ensure(postcondition_of(sec_vd::operator=(xfiber)));
+
+  // Exit:
+
+  return *this;
+}
+
+const fiber_bundle::sec_e1_uniform::fiber_type&
+fiber_bundle::sec_e1_uniform::
+fiber_prototype() const
+{
+  // Preconditions:
+
+  // Body:
+
+  static const fiber_type result;
+
+  // Postconditions:
+
+  // Exit:
+
+  return result;
+}
 
 void
 fiber_bundle::sec_e1_uniform::
@@ -753,6 +754,52 @@ max_x(bool xauto_access) const
   get_fiber(1, lfiber);
 
   result = lfiber[0];
+
+  if(xauto_access)
+  {
+    release_access();
+  }
+
+  // Postconditions:
+
+
+  // Exit:
+
+  return result;
+}
+
+fiber_bundle::sec_e1_uniform::dof_type
+fiber_bundle::sec_e1_uniform::
+inc_x(bool xauto_access) const
+{
+  dof_type result;
+
+  // Preconditions:
+
+  require(xauto_access || state_is_read_accessible());
+
+  // Body:
+
+  if(xauto_access)
+  {
+    get_read_access();
+  }
+
+  // Get the number of zones in the x direction.
+
+  base_space_poset& lbase_host = schema().host()->base_space();
+  pod_index_type lbase_id = schema().base_space_id();
+  base_space_poset::row_dof_tuple_type ltuple;
+  lbase_host.member_dof_tuple(lbase_id, &ltuple, sizeof(ltuple), false);
+  
+  if(ltuple.i_size == 0)
+  {
+    result = 0;
+  }
+  else
+  {
+    result = (max_x(false) - min_x(false))/ltuple.i_size;
+  }
 
   if(xauto_access)
   {

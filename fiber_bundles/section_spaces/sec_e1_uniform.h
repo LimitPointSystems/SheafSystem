@@ -104,19 +104,6 @@ public:
   // NEW HANDLE, NEW STATE CONSTRUCTORS
   // ===========================================================================
 
-  //   ///
-  ///  /// Create a new handle attached to a new state with in a new section space
-  ///  /// with a new fiber space and new base with with name xbase_name
-  ///  /// and size xbase_i_size. Section bounds are given by xmin_x and xmax_x.
-  //   ///
-  //   sec_e1_uniform(fiber_bundles_namespace& xns,
-  //                  const std::string& xbase_name,
-  //                  int xbase_i_size,
-  //                  dof_type xmin_x,
-  //                  dof_type xmax_x,
-  //                  bool xauto_access);
-
-
   ///
   /// Create a new handle attached to a new state in xhost with
   /// min_x() == xmin_x and max_x() == xmax_x.
@@ -186,6 +173,30 @@ public:
   explicit sec_e1_uniform(const sec_rep_space_member* xother);
 
   ///
+  /// Destructor.
+  ///
+  ~sec_e1_uniform();
+
+  // ===========================================================================
+  // EXISTING HANDLE, NEW STATE "CONSTRUCTORS"
+  // ===========================================================================
+
+  using sec_e1::new_jim_state;
+
+  ///
+  /// Attaches this to a new state in xhost with
+  /// min_x() == xmin_x and max_x() == xmax_x.
+  ///
+  void new_jim_state(sec_rep_space* xhost,
+                     dof_type xmin_x,
+                     dof_type xmax_x,
+                     bool xauto_access);
+
+  // ===========================================================================
+  // OTHER 
+  // ===========================================================================
+
+  ///
   /// Assignment operator; synonym for attach_to_state(&xother).
   ///
   virtual sec_e1_uniform& operator=(const abstract_poset_member& xother);
@@ -206,29 +217,40 @@ public:
   sec_e1_uniform& operator=(const e1_lite& xfiber);
 
   ///
-  /// Destructor.
-  ///
-  ~sec_e1_uniform();
-
-  ///
   /// Virtual constructor for the associated fiber type.
   ///
   virtual const fiber_type& fiber_prototype() const;
 
-  // ===========================================================================
-  // EXISTING HANDLE, NEW STATE "CONSTRUCTORS"
-  // ===========================================================================
-
-  using sec_e1::new_jim_state;
+  ///
+  /// Sets the dofs to match the bounds xmin and xmax.
+  ///
+  void put_bounds(const block<dof_type>& xmin, const block<dof_type>& xmax, bool xauto_access);
 
   ///
-  /// Attaches this to a new state in xhost with
-  /// min_x() == xmin_x and max_x() == xmax_x.
+  /// Sets the dofs to match the bounds xmin and xmax.
   ///
-  void new_jim_state(sec_rep_space* xhost,
-                     dof_type xmin_x,
-                     dof_type xmax_x,
-                     bool xauto_access);
+  void put_bounds(dof_type xmin, dof_type xmax, bool xauto_access);
+
+  ///
+  /// Gets the bounds.
+  ///
+  void get_bounds(block<dof_type>& xmin, block<dof_type>& xmax, bool xauto_access) const;
+
+  ///
+  /// The minimum value of the x component.
+  ///
+  dof_type min_x(bool xauto_access) const;
+
+  ///
+  /// The maximum value of the x component.
+  ///
+  dof_type max_x(bool xauto_access) const;
+
+  ///
+  /// The increment of the x component; the change in the x component
+  /// when the x vertex index is incremented by 1.
+  ///
+  dof_type inc_x(bool xauto_access) const;
 
 protected:
 
@@ -401,37 +423,6 @@ protected:
 private:
 
   //@}
-
-
-  //############################################################################
-
-
-public:
-
-  ///
-  /// Sets the dofs to match the bounds xmin and xmax.
-  ///
-  void put_bounds(const block<dof_type>& xmin, const block<dof_type>& xmax, bool xauto_access);
-
-  ///
-  /// Sets the dofs to match the bounds xmin and xmax.
-  ///
-  void put_bounds(dof_type xmin, dof_type xmax, bool xauto_access);
-
-  ///
-  /// Gets the bounds.
-  ///
-  void get_bounds(block<dof_type>& xmin, block<dof_type>& xmax, bool xauto_access) const;
-
-  ///
-  /// The minimum value of the x component.
-  ///
-  dof_type min_x(bool xauto_access) const;
-
-  ///
-  /// The maximum value of the x component.
-  ///
-  dof_type max_x(bool xauto_access) const;
 
 };
 

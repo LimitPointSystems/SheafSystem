@@ -817,6 +817,8 @@ public:
   ///
   void put_refinement_depth(const scoped_index& xmbr_id, int xdepth);
 
+  using refinable_poset::member_dof_tuple;
+  
   ///
   /// The row dof tuple for the member with member hub id xmbr_hub_id.
   ///
