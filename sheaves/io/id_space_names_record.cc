@@ -232,6 +232,18 @@ transfer_internal_buffer_to_poset()
       // Create an id space with that name.
 
       lposet.member_id_spaces(false).new_state(lid_space_name, lid_space_class_name);
+
+      if(lposet.includes_subposet(lid_space_name))
+      {
+        // A subposet with same name exists, assume this is the
+        // id space for the subposet. Attach the subposet to it.
+
+        subposet lsp(&lposet, lid_space_name);
+        if(!lsp.has_id_space())
+        {
+          lsp.attach_id_space();
+        }
+      } 
     }
 
     /// @hack Require that the id space is mutable.  See COM-475.

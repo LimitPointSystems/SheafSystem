@@ -98,6 +98,7 @@ class SHEAF_DLL_SPEC subposet : public poset_component
   friend class section_space_schema_subposet;
   friend class storage_agent;
   friend class subposet_names_record;
+  friend class id_space_names_record;
   friend class subposet_member_iterator;
   friend SHEAF_DLL_SPEC std::ostream & operator << (std::ostream &os, const subposet& s);
 
