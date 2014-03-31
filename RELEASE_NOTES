@@ -1,11 +1,11 @@
 Release notes for SC-29
   1. Reorganized facets in namespace classes for greater coherence and clarity.
-    Removed base space member prototypes from geometry_namespace that belong in surface_complex.
-  2. Fixed problem in discretization_iterator.cc thas was causing eroneous iterations for
-     section schema with discretization subposet not an antichains (e.g. cells subposet).
-  3. Reorganized facets in structured_blcok1,2,3d so correct member function not in any facet.
-  4. Added inc_x,y,z member functions to sec_e1,2,3_uniform.
-  5. Fixed issue COM-481.
+  2. Removed base space member prototypes from geometry_namespace that belong in surface_complex.
+  3. Fixed problem in discretization_iterator.cc thas was causing erroneous iterations for
+     section schema with discretization subposet not an antichain (e.g. cells subposet).
+  4. Reorganized facets in structured_blcok1,2,3d so correct member function not in any facet.
+  5. Added inc_x,y,z member functions to sec_e1,2,3_uniform.
+  6. Fixed issue COM-481: reading subposets and attaching to id spaces.
 
 SheafSystem Release Notes Version 3.5.2.0 02/26/2014
 
