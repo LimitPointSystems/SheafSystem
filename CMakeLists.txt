@@ -121,3 +121,10 @@ else()
     install(FILES ${PROJECT_BINARY_DIR}/${EXPORTS_FILE}.in DESTINATION config/\${BUILD_TYPE})
 endif()    
 
+#
+# Markup the RELEASE_NOTES file. This CMakeLists file is the first in the build chain to have access
+# to component_functions.cmake
+#
+set(RELEASE_DATE)
+get_date(RELEASE_DATE)
+configure_file(${CMAKE_SOURCE_DIR}/RELEASE_NOTES.cmake.in ${CMAKE_SOURCE_DIR}/RELEASE_NOTES)
