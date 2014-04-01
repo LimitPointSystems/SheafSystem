@@ -73,9 +73,10 @@ public:
 			     bool xauto_access);
 
   ///
-  /// Finds or creates a host poset and any prerequisite posets
-  /// for members of this type. The poset is created in namespace xns with path xhost_path
-  /// and schema specified by standard_schema_path().
+  /// The host with path xhost_path.
+  /// Returns the host if it already exists, otherwise, creates it in namespace xns
+  /// with schema specified by standard_schema_path() and standard paths for prerequisites,
+  /// which are also created if needed.
   ///
   static host_type& standard_host(namespace_type& xns, const poset_path& xhost_path, bool xauto_access);
 

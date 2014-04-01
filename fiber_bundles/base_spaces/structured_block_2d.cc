@@ -111,14 +111,25 @@ standard_host(namespace_type& xns, const poset_path& xhost_path, bool xauto_acce
   // Preconditions:
 
   require(xns.state_is_auto_read_write_accessible(xauto_access));
-  require(!xhost_path.empty());
-  require(!xns.contains_path(xhost_path, xauto_access));
+
+  require(poset_path::is_valid_name(xhost_path.poset_name()));
+  require(xns.path_is_auto_read_write_available<host_type>(xhost_path.poset_name(), xauto_access));
+
   require(xns.path_is_auto_read_accessible(standard_schema_path(), xauto_access));
 
   // Body:
 
-  host_type& result =
-    new_host(xns, xhost_path, standard_schema_path(), xauto_access);
+  host_type* result_ptr;
+  if(xns.contains_path(xhost_path.poset_name(), xauto_access))
+  {
+    result_ptr = &xns.member_poset<host_type>(xhost_path, xauto_access);
+  }
+  else
+  {
+    result_ptr = &new_host(xns, xhost_path, standard_schema_path(), xauto_access);
+  }
+  
+  host_type& result = *result_ptr;
 
   // Postconditions:
 
