@@ -1,4 +1,4 @@
-SheafSystem Release Notes Version XXX
+SheafSystem Release Notes Version 3.6.0.0
 
 1. Fixed issue SC-29: need sheaf schema for surface_complex, model, and shred
   a. Reorganized facets in namespace classes for greater coherence and clarity.
