@@ -177,7 +177,16 @@ push_front(pod_type xhub_id)
 
   // Update the extrema.
 
-  update_extrema(0);
+  _begin = 0;
+
+  if(_ct > 1)
+  {
+    ++_end;
+  }
+  else
+  {
+    _end = 1;
+  }
 
   // Postconditions:
 
@@ -185,7 +194,7 @@ push_front(pod_type xhub_id)
   ensure(unglued_hub_pod(0) == xhub_id);
   ensure(ct() == old_ct + 1);
   ensure(begin() == 0);
-  ensure(ct() > 1 ? end() == old_end : end() == 1);
+  ensure(ct() > 1 ? end() == old_end+1 : end() == 1);
   
   // Exit:
 
