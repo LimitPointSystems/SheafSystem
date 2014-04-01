@@ -1,13 +1,18 @@
-Release notes for SC-29
-  1. Reorganized facets in namespace classes for greater coherence and clarity.
-  2. Removed base space member prototypes from geometry_namespace that belong in surface_complex.
-  3. Fixed problem in discretization_iterator.cc thas was causing erroneous iterations for
+SheafSystem Release Notes Version XXX
+
+1. Fixed issue SC-29: need sheaf schema for surface_complex, model, and shred
+  a. Reorganized facets in namespace classes for greater coherence and clarity.
+  b. Removed base space member prototypes from geometry_namespace that belong in surface_complex.
+  c. Fixed problem in discretization_iterator.cc thas was causing erroneous iterations for
      section schema with discretization subposet not an antichain (e.g. cells subposet).
-  4. Reorganized facets in structured_blcok1,2,3d so correct member function not in any facet.
-  5. Added inc_x,y,z member functions to sec_e1,2,3_uniform.
-  6. Fixed issue COM-481: reading subposets and attaching to id spaces.
-  7. Fixed issue COM-467: standard_host methods in base_spaces do not return host if it already exists.
-  8. Fixed bug in list_index_space_state::push_front() that was not updating the end extrema correctly.
+  d. Reorganized facets in structured_blcok1,2,3d so correct member function not in any facet.
+  e. Added inc_x,y,z member functions to sec_e1,2,3_uniform.
+
+2. Fixed issue COM-481: reading subposets and attaching to id spaces.
+
+3. Fixed issue COM-467: standard_host methods in base_spaces do not return host if it already exists.
+
+4. Fixed bug in list_index_space_state::push_front() that was not updating the end extrema correctly.
 
 SheafSystem Release Notes Version 3.5.2.0 02/26/2014
 
