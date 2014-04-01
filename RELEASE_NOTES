@@ -6,6 +6,8 @@ Release notes for SC-29
   4. Reorganized facets in structured_blcok1,2,3d so correct member function not in any facet.
   5. Added inc_x,y,z member functions to sec_e1,2,3_uniform.
   6. Fixed issue COM-481: reading subposets and attaching to id spaces.
+  7. Fixed issue COM-467: standard_host methods in base_spaces do not return host if it already exists.
+  8. Fixed bug in list_index_space_state::push_front() that was not updating the end extrema correctly.
 
 SheafSystem Release Notes Version 3.5.2.0 02/26/2014
 
