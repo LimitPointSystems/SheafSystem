@@ -88,14 +88,6 @@ if(INSTALL_DOCS)
     install(DIRECTORY ${CMAKE_BINARY_DIR}/documentation/ DESTINATION documentation)
 endif()
 
-#
-# Generate some info about the release, and write it to the RELEASE file in install root folder.
-#
-set(RELEASE_DATE)
-get_date(RELEASE_DATE)
-file(WRITE ${CMAKE_BINARY_DIR}/RELEASE "${PROJECT_NAME} snapshot-${LIB_VERSION} ${RELEASE_DATE}  \n")
-install(FILES ${PROJECT_BINARY_DIR}/RELEASE DESTINATION ${CMAKE_INSTALL_PREFIX})
-
 if(LINUX64GNU OR LINUX64INTEL)
     install(FILES ${CMAKE_SOURCE_DIR}/RELEASE_NOTES DESTINATION ${CMAKE_INSTALL_PREFIX})
 else()
@@ -122,8 +114,7 @@ else()
 endif()    
 
 #
-# Markup the RELEASE_NOTES file. This CMakeLists file is the first in the build chain to have access
-# to component_functions.cmake
+# Markup the RELEASE_NOTES file. 
 #
 set(RELEASE_DATE)
 get_date(RELEASE_DATE)
