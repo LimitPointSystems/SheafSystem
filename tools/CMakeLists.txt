@@ -75,3 +75,11 @@ endif()
 # Add a target for the dumpsheaf utility
 #
 add_dumpsheaf_target()
+
+#
+# Add a target for the sheafscope exe wrapper
+#
+if(BUILD_SHEAFSCOPE)
+    add_sheafscope_wrapper_target()
+endif()
+

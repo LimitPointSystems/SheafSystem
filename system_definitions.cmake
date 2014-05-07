@@ -127,7 +127,7 @@ endif()
 #   
 #  Toggle language bindings build
 #
-set(BUILD_BINDINGS NO CACHE BOOL "Toggle build of language bindings.")
+set(BUILD_BINDINGS OFF CACHE BOOL "Toggle build of language bindings.")
 
 #
 # Toggle multi-process compilation in win32.

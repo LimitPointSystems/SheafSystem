@@ -25,8 +25,8 @@ int main(int argc, char* argv[])
 #ifdef __WIN32
 	  return jvm_launcher::launch("SheafScope", argc, argv,
 	                              CLASSPATH, PATH);
-#else
-  return jvm_launcher::launch("SheafScope", argc, argv,
-                              CLASSPATH, LD_LIBRARY_PATH);
+//#else
+//  return jvm_launcher::launch("SheafScope", argc, argv,
+//                              CLASSPATH, LD_LIBRARY_PATH);
 #endif
 }

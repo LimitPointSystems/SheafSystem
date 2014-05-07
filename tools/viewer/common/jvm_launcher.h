@@ -35,24 +35,25 @@ public:
   ///
   /// Return values.
   ///
-  static const int SUCCESS;
-  static const int JVM_CREATE_FAILURE;
-  static const int CLASS_NOT_FOUND;
-  static const int MAIN_NOT_FOUND;
-  static const int OUT_OF_MEMORY;
+  //static const int SUCCESS;
+  //static const int JVM_CREATE_FAILURE;
+  //static const int CLASS_NOT_FOUND;
+  //static const int MAIN_NOT_FOUND;
+  //static const int OUT_OF_MEMORY;
+
 
   ///
   ///  Launch the Java virtual machine, using the current CLASSPATH
   ///  and LD_LIBRARY_PATH environment variables.
   ///
-  static int launch(const char* main_class_name, int argc, char* argv[],
+   int launch(const char* main_class_name, int argc, char* argv[],
                     bool verbose = false);
 
   ///
   ///  Launch the Java virtual machine, using specified values for the
   ///  CLASSPATH and LD_LIBRARY_PATH environment variables.
   ///
-  static int launch(const char* main_class_name, int argc, char* argv[],
+   int launch(const char* main_class_name, int argc, char* argv[],
                     const char* class_path, const char* ld_library_path, bool verbose = false);
 
   ///
@@ -68,7 +69,7 @@ protected:
   ///  This allows LD_LIBRARY_PATH to be set so that the linker
   ///  will recognize it at the proper time.
   ///
-  static void re_exec(int argc, char* argv[],
+  void re_exec(int argc, char* argv[],
                       const char* class_path, const char* ld_library_path);
 
 private:

@@ -25,12 +25,15 @@
 #include <jni.h>
 
 ///@todo Maybe use an enum here.
-const int jvm_launcher::SUCCESS            = 0;
-const int jvm_launcher::JVM_CREATE_FAILURE = 1;
-const int jvm_launcher::CLASS_NOT_FOUND    = 2;
-const int jvm_launcher::MAIN_NOT_FOUND     = 3;
-const int jvm_launcher::OUT_OF_MEMORY      = 4;
+//const int jvm_launcher::SUCCESS            = 0;
+//const int jvm_launcher::JVM_CREATE_FAILURE = 1;
+//const int jvm_launcher::CLASS_NOT_FOUND    = 2;
+//const int jvm_launcher::MAIN_NOT_FOUND     = 3;
+//const int jvm_launcher::OUT_OF_MEMORY      = 4;
 
+enum status_msg {  jvm_launcher::SUCCESS = 0,  jvm_launcher::JVM_CREATE_FAILURE = 1,
+	 jvm_launcher::CLASS_NOT_FOUND = 2,  jvm_launcher::MAIN_NOT_FOUND = 3,
+	 jvm_launcher::OUT_OF_MEMORY = 4 }
 ///
 int
 jvm_launcher::

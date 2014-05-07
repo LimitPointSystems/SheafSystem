@@ -108,7 +108,6 @@ set(${COMPONENT}_IPATHS ${FIELDS_IPATHS} ${${COMPONENT}_IPATH}
 # Specify component prerequisite include directories.
 #
 include_directories(${${COMPONENT}_IPATHS})
-include_directories(${VTK_INCLUDE_DIRS})
 
 #------------------------------------------------------------------------------
 # FUNCTION DEFINITION SECTION
@@ -207,12 +206,13 @@ function(add_bindings_targets)
 
     if(SWIG_FOUND AND BUILD_BINDINGS)  
 
+        include_directories(${VTK_INCLUDE_DIRS})
         link_directories(${VTK_LIB_DIR}) 
 
         #
         # Java ################################################################
         #
-        
+        include_directories(${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})
         include_directories(${SHEAVES_JAVA_BINDING_SRC_DIR})
         include_directories(${SHEAVES_COMMON_BINDING_SRC_DIR})
         include_directories(${FIBER_BUNDLES_JAVA_BINDING_SRC_DIR})
@@ -502,3 +502,23 @@ function(add_dumpsheaf_target)
     set_target_properties(dumpsheaf PROPERTIES FOLDER "Utilities")
                 
 endfunction(add_dumpsheaf_target)
+
+function(add_sheafscope_wrapper_target)
+
+    add_executable(sheafscope ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/util/SheafScope.cc)
+    
+    # Make sure the library is up to date
+    if(WIN64MSVC OR WIN64INTEL)
+        add_dependencies(sheafscope ${TOOLS_IMPORT_LIB})
+        target_link_libraries(sheafscope ${TOOLS_IMPORT_LIBS})
+    else()
+        add_dependencies(sheafscope ${TOOLS_SHARED_LIB})
+        target_link_libraries(sheafscope ${TOOLS_SHARED_LIBS})
+    endif()
+
+    # Supply the *_DLL_IMPORTS directive to preprocessor
+    set_target_properties(sheafscope PROPERTIES COMPILE_DEFINITIONS "SHEAF_DLL_IMPORTS")
+    # Put the target in the Utilities VS folder.
+    set_target_properties(sheafscope PROPERTIES FOLDER "Utilities")
+                
+endfunction(add_sheafscope_wrapper_target)

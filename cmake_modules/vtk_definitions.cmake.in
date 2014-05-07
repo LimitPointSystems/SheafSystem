@@ -23,5 +23,5 @@ vtkhdf5 vtkzlib vtkNetCDF_cxx LSDyna vtkmetaio vtksqlite
 vtkpng vtkjpeg vtktiff vtkexpat vtkDICOMParser 
 CACHE STRING "VTK required libs list" FORCE)
 
-
+set(VTK_INCLUDE_DIRS @VTK_INCLUDE_DIRS@ CACHE STRING "VTK include paths.")
 

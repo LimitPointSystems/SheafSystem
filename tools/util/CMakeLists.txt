@@ -20,6 +20,7 @@
 
 set(CLUSTER ${CMAKE_CURRENT_BINARY_DIR})
 
+
 #
 # Library sources.
 #
@@ -31,8 +32,15 @@ collect_sources()
 #
 # Headers that are NOT associated with a .cc file.
 #
-set(ADDITIONAL_INCS
-   )
+if(BUILD_SHEAFSCOPE)
+    configure_file(lps_environment.h.cmake.in ${CMAKE_BINARY_DIR}/include/lps_environment.h)
+    set(ADDITIONAL_INCS
+        lps_environment.h
+         )
+else()
+    set(ADDITIONAL_INCS
+       )
+endif()
 
 collect_includes()
 
@@ -49,6 +57,7 @@ collect_unit_test_sources()
 #
 set(EXAMPLE_SRCS
      dumpsheaf.cc
+     SheafScope.cc
    )
 
 collect_example_sources()
