@@ -112,6 +112,13 @@ endif()
 #
 set(RELEASE_DATE)
 get_date(RELEASE_DATE)
+
+#
+# Generate some info about the release
+#
+file(WRITE ${CMAKE_BINARY_DIR}/VERSION "${PROJECT_NAME} version ${LIB_VERSION} ${RELEASE_DATE}  \n")
+install(FILES ${PROJECT_BINARY_DIR}/VERSION DESTINATION ${CMAKE_INSTALL_PREFIX})
+
 configure_file(${CMAKE_SOURCE_DIR}/RELEASE_NOTES.in ${CMAKE_BINARY_DIR}/RELEASE_NOTES)
 
 #if(TARGET install)
