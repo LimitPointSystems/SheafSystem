@@ -21,7 +21,7 @@
 ##
 
 set(BUILD_SHEAFSCOPE OFF CACHE BOOL "Toggle build of the SheafScope. If OFF, then no need to look for JDK or VTK unless BUILD_BINDINGS is on.")
-set(INSTALL_DOCS ON CACHE BOOL "Documentation is installed by default.")
+set(INSTALL_DOCS ON CACHE BOOL "Toggle install state of Documentation.")
 
 #
 # Establish the version number for this build.
