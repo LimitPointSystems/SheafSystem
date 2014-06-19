@@ -227,13 +227,17 @@ function(clear_component_variables comp)
     # list the same unit tests n times.
     unset(${COMP}_UNIT_TESTS CACHE)
     
-    # clear the unit tests var so consecutive cmake runs don't
+    # clear the installed includes var so consecutive cmake runs don't
     # list the same includes n times.
-    unset(${COMP}_INCS CACHE)
-    
+    unset(${COMP}_INST_INCS CACHE)
+     
     # clear the ipath var so consecutive cmake runs don't
     # list the same include paths n times.
     unset(${COMP}_IPATH CACHE)
+
+    # clear the ipaths var so consecutive cmake runs don't
+    # list the same include paths n times.
+    unset(${COMP}_IPATHS CACHE)
 
     # clear the ipath var so consecutive cmake runs don't
     # list the same include paths n times.

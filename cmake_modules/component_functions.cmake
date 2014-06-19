@@ -648,12 +648,21 @@ function(install_prereqs)
         GROUP_READ WORLD_READ)
     endforeach()
 
-#    configure_file(${CMAKE_MODULE_PATH}/index.html.in ${CMAKE_BINARY_DIR}/index.html)
-#    configure_file(${CMAKE_MODULE_PATH}/jindex.html.in ${CMAKE_BINARY_DIR}/jindex.html)
     install(DIRECTORY ${PROJECT_BINARY_DIR}/documentation/ DESTINATION documentation)
     install(DIRECTORY ${CMAKE_MODULE_PATH}/css DESTINATION documentation)
     install(DIRECTORY ${CMAKE_MODULE_PATH}/images DESTINATION documentation)
-#    install(FILES ${CMAKE_BINARY_DIR}/index.html DESTINATION documentation)
-#    install(FILES ${CMAKE_BINARY_DIR}/jindex.html DESTINATION documentation/java)
     
 endfunction(install_prereqs)
+
+#
+# Return string with backslash path separators escaped
+# e.g., "c:\my\files" is returned "c:\\my\\files"
+# Usage :
+#    set(VAR "c:\my\files" )
+#    esc_backslash(VAR)
+#
+macro(esc_backslash RESULT)
+    if(WIN32)
+        string(REPLACE "\\" "\\\\" RESULT "${RESULT}")
+    endif()
+endmacro(esc_backslash RESULT)
