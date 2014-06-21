@@ -49,7 +49,7 @@ add_install_target()
 #
 # Write this component's lib targets and include paths to an export file.
 #
-export_targets()
+write_exports_file()
 
 #
 # Prepare this component's lib targets and include paths for export to an install config file.

@@ -374,7 +374,7 @@ endfunction(set_component_vars)
 #
 # Export this component's library targets and list of includes
 #
-function(export_targets)
+function(write_exports_file)
 
     message(STATUS 
         "Writing ${PROJECT_NAME} detail to ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}")
@@ -395,6 +395,7 @@ function(export_targets)
     endif()
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
         "set(${COMPONENT}_INCS ${${COMPONENT}_INCS} CACHE STRING \"${PROJECT_NAME} includes\")\n")
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
         "set(${COMPONENT}_IPATH ${${COMPONENT}_IPATH} CACHE STRING \"${PROJECT_NAME} include path\")\n")
@@ -453,7 +454,7 @@ function(export_targets)
         file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")        
 
     endif()             
-endfunction(export_targets)
+endfunction(write_exports_file)
 
 #
 # Export this component's library targets and list of includes for install
