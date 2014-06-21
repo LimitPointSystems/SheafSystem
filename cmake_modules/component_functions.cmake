@@ -395,38 +395,59 @@ function(write_exports_file)
     endif()
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
         "set(${COMPONENT}_INCS ${${COMPONENT}_INCS} CACHE STRING \"${PROJECT_NAME} includes\")\n")
-    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
+    # Mark the variable as advanced        
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_INCS)\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
         "set(${COMPONENT}_IPATH ${${COMPONENT}_IPATH} CACHE STRING \"${PROJECT_NAME} include path\")\n")
+    # Mark the variable as advanced           
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_IPATH)\n")        
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
         "set(${COMPONENT}_IPATHS ${${COMPONENT}_IPATHS} CACHE STRING \"${PROJECT_NAME} cumulative include path\")\n")
+    # Mark the variable as advanced           
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_IPATHS)\n")          
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
         "set(${COMPONENT}_STATIC_LIB ${${COMPONENT}_STATIC_LIB} CACHE STRING \"${PROJECT_NAME} static library \")\n")
+    # Mark the variable as advanced           
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_STATIC_LIB)\n")  
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")     
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
         "set(${COMPONENT}_STATIC_LIBS ${${COMPONENT}_STATIC_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative static library list\")\n")
+    # Mark the variable as advanced           
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_STATIC_LIBS)\n") 
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")    
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
         "set(${COMPONENT}_SHARED_LIB ${${COMPONENT}_SHARED_LIB} CACHE STRING \"${PROJECT_NAME} shared library \")\n")
+    # Mark the variable as advanced           
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_SHARED_LIB)\n") 
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")     
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
         "set(${COMPONENT}_SHARED_LIBS ${${COMPONENT}_SHARED_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative shared library list\")\n")
+    # Mark the variable as advanced           
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_SHARED_LIBS)\n")         
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")    
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
         "set(${COMPONENT}_CLASSPATH ${${COMPONENT}_CLASSPATH} CACHE STRING \"${PROJECT_NAME} Java classpath\")\n")
+    # Mark the variable as advanced           
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_CLASSPATH)\n")         
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
         "set(${COMPONENT}_BIN_OUTPUT_DIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} CACHE STRING \"${PROJECT_NAME} binary output directory\")\n")
+    # Mark the variable as advanced           
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_BIN_OUTPUT_DIR)\n") 
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
         "set(${COMPONENT}_LIB_OUTPUT_DIR ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} CACHE STRING \"${PROJECT_NAME} library output directory\")\n")
+    # Mark the variable as advanced           
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_LIB_OUTPUT_DIR)\n")         
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     if("${COMPONENT}" MATCHES "SHEAVES")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
             "set(HDF_INCLUDE_DIR ${HDF5_INCLUDE_DIRS} CACHE STRING \"HDF5 Include Path \")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+            "mark_as_advanced(FORCE HDF_INCLUDE_DIR)\n")              
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     endif()
                 
@@ -434,23 +455,36 @@ function(write_exports_file)
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
             "set(VTK_LIB_DIR @VTK_LIB_DIR@ CACHE PATH \"VTK library path\")\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
+        # Mark the variable as advanced               
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
-            "set(VTK_LIBS @VTK_LIBS@ CACHE PATH \"VTK libraries \")\n")
+            "mark_as_advanced(FORCE VTK_LIB_DIR)\n") 
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")        
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
             "set(VTK_BIN_DIR @VTK_BIN_DIR@ CACHE PATH  \"VTK DLL path\")\n")
+        # Mark the variable as advanced                
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+            "mark_as_advanced(FORCE VTK_BIN_DIR)\n")             
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
             "set(VTK_INC_DIR @VTK_INC_DIRS@ CACHE PATH  \"VTK DLL path\")\n")
+        # Mark the variable as advanced                
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+            "mark_as_advanced(FORCE VTK_INC_DIRS)\n")             
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
             "set(VTK_LIBS ${VTK_LIBS} CACHE STRING \"VTK Libraries\")\n")
+        # Mark the variable as advanced                
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+            "mark_as_advanced(FORCE VTK_LIBS)\n")              
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")                  
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")        
         file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
             "set(JMF_JAR ${JMF_JAR} CACHE STRING \"JMF jar location\")\n")
+        # Mark the variable as advanced                
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+            "mark_as_advanced(FORCE JMF_JAR)\n")              
         file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")        
 
     endif()             
