@@ -132,7 +132,8 @@ function(set_scope_sources)
    # command line limit in Windows.
    string(REGEX REPLACE ";" "\r" SHEAFSCOPE_SRCS "${SHEAFSCOPE_SRCS}")
    file(WRITE ${CMAKE_BINARY_DIR}/scopesrcs "${SHEAFSCOPE_SRCS}")
-
+   mark_as_advanced(FORCE SHEAFSCOPE_SRCS)
+   
 endfunction(set_scope_sources)
 
 #

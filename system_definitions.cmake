@@ -62,11 +62,11 @@ file(TO_CMAKE_PATH ${CMAKE_INSTALL_PREFIX} CMAKE_INSTALL_PREFIX)
 # OS is 64 bit Windows, compiler is cl 
 if(CMAKE_HOST_SYSTEM_NAME MATCHES "Windows" AND MSVC AND CMAKE_SIZEOF_VOID_P MATCHES "8")
     set(WIN64MSVC ON CACHE BOOL "MS compiler in use.")
-
+    mark_as_advanced(FORCE WIN64MSVC)
 # OS is 64 bit Windows, compiler is icl
 elseif(CMAKE_HOST_SYSTEM_NAME MATCHES "Windows" AND CMAKE_CXX_COMPILER_ID MATCHES "Intel" AND CMAKE_SIZEOF_VOID_P MATCHES "8")
     set(WIN64INTEL ON CACHE BOOL "Intel compiler in use.")
-
+    mark_as_advanced(WIN64INTEL)
 # OS is 64 bit linux, compiler is g++
 elseif(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux" AND CMAKE_COMPILER_IS_GNUCXX AND CMAKE_SIZEOF_VOID_P MATCHES "8")
     execute_process(COMMAND ${CMAKE_CXX_COMPILER} -dumpversion
@@ -79,10 +79,11 @@ elseif(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux" AND CMAKE_COMPILER_IS_GNUCXX AND C
             message(FATAL "g++ ${GCC_VERSION} is unsupported. Version must be >= 4.2.2")                
         endif()
    set(LINUX64GNU ON CACHE BOOL "GNU CXX compiler ${GCC_VERSION} in use.")
-
+    mark_as_advanced(LINUX64GNU)
 # OS is 64 bit linux, compiler is icpc
 elseif(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux" AND CMAKE_CXX_COMPILER_ID MATCHES "Intel" AND CMAKE_SIZEOF_VOID_P MATCHES "8")
     set(LINUX64INTEL ON CACHE BOOL "Intel compiler in use.")
+     mark_as_advanced(LINUX64INTEL)   
 else()
     message(FATAL_ERROR "A 64 bit Windows or Linux environment was not detected; exiting")
 endif()
@@ -92,6 +93,8 @@ endif()
 #
 set(EXPORTS_FILE ${PROJECT_NAME}-exports.cmake CACHE STRING "System exports file name")
 set(INSTALL_CONFIG_FILE ${PROJECT_NAME}-install.cmake CACHE STRING "Install config file name")
+mark_as_advanced(EXPORTS_FILE)  
+mark_as_advanced(INSTALL_CONFIG_FILE)  
 
 #
 # Delete the exports file at the start of each cmake run
@@ -123,6 +126,8 @@ else()
     set(CMAKE_DEBUG_CONTRACTS_POSTFIX "_debug" CACHE STRING "Debug libs suffix")
     set(CMAKE_DEBUG_NO_CONTRACTS_POSTFIX "_debug" CACHE STRING "Debug libs suffix")
 endif()
+mark_as_advanced(FORCE CMAKE_DEBUG_CONTRACTS_POSTFIX)
+mark_as_advanced(FORCE CMAKE_DEBUG_NO_CONTRACTS_POSTFIX)
 
 #   
 #  Toggle language bindings build
@@ -132,12 +137,16 @@ set(BUILD_BINDINGS OFF CACHE BOOL "Toggle build of language bindings.")
 #
 # Toggle multi-process compilation in win32.
 #
-set(ENABLE_WIN32_MP ON CACHE BOOL "Toggle win32 compiler MP directive. Works for MS and Intel. Default is ON.")
+if(WIN32)
+    set(ENABLE_WIN32_MP ON CACHE BOOL "Toggle win32 compiler MP directive. Works for MS and Intel. Default is ON.")
+    mark_as_advanced(FORCE ENABLE_WIN32_MP)
+endif()
 
 #
 # Toggle intel compiler warnings.
 #
 set(INTELWARN CACHE BOOL "Toggle Intel compiler warnings")
+mark_as_advanced(FORCE INTELWARN)
 
 #   
 #  Type of system documentation to build: Dev or User
@@ -158,6 +167,7 @@ endif()
 #
 if(ENABLE_COVERAGE)
     set(COVERAGE_DIR ${CMAKE_BINARY_DIR}/coverage CACHE STRING "Directory for coverage files")
+    mark_as_advanced(FORCE COVERAGE_DIR)    
     execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${COVERAGE_DIR})
 endif()
 
@@ -313,7 +323,8 @@ function(set_compiler_flags)
         # The probrem is still there; we have only suppressed the warning.
         set(LPS_CXX_FLAGS "-m64 -Wno-deprecated -Wno-abi") 
     endif()
-
+    mark_as_advanced(FORCE LPS_CXX_FLAGS LPS_SHARED_LINKER_FLAGS
+         LPS_EXE_LINKER_FLAGS)
     #                 
     # DEBUG_CONTRACTS section
     #
@@ -336,9 +347,10 @@ function(set_compiler_flags)
             CACHE STRING "Flags used by the linker for executables for Debug_contracts builds")        
     endif()
     
-    mark_as_advanced(CMAKE_CXX_FLAGS_DEBUG_CONTRACTS
+    mark_as_advanced(FORCE CMAKE_CXX_FLAGS_DEBUG_CONTRACTS
          CMAKE_EXE_LINKER_FLAGS_DEBUG_CONTRACTS 
-         CMAKE_SHARED_LINKER_FLAGS_DEBUG_CONTRACTS)
+         CMAKE_SHARED_LINKER_FLAGS_DEBUG_CONTRACTS
+         CMAKE_MODULE_LINKER_FLAGS_DEBUG_CONTRACTS)
 
     #                 
     # DEBUG_NO_CONTRACTS section
@@ -362,9 +374,10 @@ function(set_compiler_flags)
             STRING "Flags used by the C++ compiler for Debug_no_contracts builds" )
     endif()
 
-    mark_as_advanced(CMAKE_CXX_FLAGS_DEBUG_NO_CONTRACTS
+    mark_as_advanced(FORCE CMAKE_CXX_FLAGS_DEBUG_NO_CONTRACTS
          CMAKE_EXE_LINKER_FLAGS_DEBUG_NO_CONTRACTS 
-         CMAKE_SHARED_LINKER_FLAGS_DEBUG_NO_CONTRACTS)
+         CMAKE_SHARED_LINKER_FLAGS_DEBUG_NO_CONTRACTS
+          CMAKE_MODULE_LINKER_FLAGS_DEBUG_NO_CONTRACTS)
          
     #                 
     # RELEASE_CONTRACTS section
@@ -392,9 +405,10 @@ function(set_compiler_flags)
            CACHE STRING "Flags used by the linker for shared libraries for Release_contracts builds" )
     endif()
     
-    mark_as_advanced(CMAKE_CXX_FLAGS_RELEASE_CONTRACTS
+    mark_as_advanced(FORCE CMAKE_CXX_FLAGS_RELEASE_CONTRACTS
          CMAKE_EXE_LINKER_FLAGS_RELEASE_CONTRACTS 
-         CMAKE_SHARED_LINKER_FLAGS_RELEASE_CONTRACTS)
+         CMAKE_SHARED_LINKER_FLAGS_RELEASE_CONTRACTS
+         CMAKE_MODULE_LINKER_FLAGS_RELEASE_CONTRACTS)
          
     #                 
     # RELEASE_NO_CONTRACTS section
@@ -425,9 +439,10 @@ function(set_compiler_flags)
             CACHE STRING "Flags used by the linker for shared libraries for Release_no_contracts builds" )
     endif()
     
-    mark_as_advanced(CMAKE_CXX_FLAGS_RELEASE_NO_CONTRACTS
+    mark_as_advanced(FORCE CMAKE_CXX_FLAGS_RELEASE_NO_CONTRACTS
          CMAKE_EXE_LINKER_FLAGS_RELEASE_NO_CONTRACTS 
-         CMAKE_SHARED_LINKER_FLAGS_RELEASE_NO_CONTRACTS)
+         CMAKE_SHARED_LINKER_FLAGS_RELEASE_NO_CONTRACTS
+         CMAKE_MODULE_LINKER_FLAGS_RELEASE_NO_CONTRACTS)
 
     #                 
     # RelWithDebInfo_contracts section
@@ -448,9 +463,10 @@ function(set_compiler_flags)
             STRING "RelWithDebInfo_contracts linker flags - binding libs" )
     endif()
     
-    mark_as_advanced(CMAKE_CXX_FLAGS_RELWITHDEBINFO_CONTRACTS
+    mark_as_advanced(FORCE CMAKE_CXX_FLAGS_RELWITHDEBINFO_CONTRACTS
          CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO_CONTRACTS 
-         CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO_CONTRACTS)
+         CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO_CONTRACTS
+         CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO_CONTRACTS)
         
     #                 
     # RelWithDebInfo_no_contracts section
@@ -472,9 +488,10 @@ function(set_compiler_flags)
             STRING "RelWithDebInfo_no_contracts linker flags - binding libs" )
     endif()
     
-    mark_as_advanced(CMAKE_CXX_FLAGS_RELWITHDEBINFO_NO_CONTRACTS
+    mark_as_advanced(FORCE CMAKE_CXX_FLAGS_RELWITHDEBINFO_NO_CONTRACTS
          CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO_NO_CONTRACTS 
-         CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO_NO_CONTRACTS)
+         CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO_NO_CONTRACTS
+         CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO_NO_CONTRACTS)
          
 endfunction(set_compiler_flags)
 

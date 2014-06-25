@@ -195,7 +195,8 @@ function(configure_std_headers)
         # Configure the .h files
         configure_file(std/${input_file} ${CMAKE_BINARY_DIR}/include/${std_h})
     endforeach()
-
+    mark_as_advanced(FORCE STD_HEADERS)
+    
 endfunction(configure_std_headers)
 
 #
@@ -346,13 +347,11 @@ function(set_component_vars)
         CACHE STRING "${PROJECT_NAME} csharp source directory")
     set(${COMPONENT}_SWIG_CSHARP_INTERFACE ${PROJECT_NAME}_csharp_binding.i 
         CACHE STRING "${PROJECT_NAME} csharp binding interface file")
-
     
     # Mark all the above as "advanced"
     mark_as_advanced(FORCE ${COMPONENT}_BINARY_DIR)
     mark_as_advanced(FORCE ${COMPONENT}_LIB_DIR)
     mark_as_advanced(FORCE ${COMPONENT}_DYNAMIC_LIB)
-    mark_as_advanced(FORCE ${COMPONENT}_IMPORT_LIB)
     mark_as_advanced(FORCE ${COMPONENT}_SHARED_LIB)
     mark_as_advanced(FORCE ${COMPONENT}_STATIC_LIB)
     mark_as_advanced(FORCE ${COMPONENT}_COMMON_BINDING_SRC_DIR)
@@ -368,6 +367,11 @@ function(set_component_vars)
     mark_as_advanced(FORCE ${COMPONENT}_CSHARP_BINDING_LIB)
     mark_as_advanced(FORCE ${COMPONENT}_CSHARP_BINDING_SRC_DIR)
     mark_as_advanced(FORCE ${COMPONENT}_SWIG_CSHARP_INTERFACE)
+    mark_as_advanced(FORCE ${COMPONENT}_JAVA_BINDING_LIBS)
+    mark_as_advanced(FORCE ${COMPONENT}_JAVA_BINDING_JARS)
+    mark_as_advanced(FORCE ${COMPONENT}_PYTHON_BINDING_LIBS)  
+    mark_as_advanced(FORCE ${COMPONENT}_IPATHS)
+    mark_as_advanced(FORCE ${COMPONENT}_CSHARP_BINDING_ASSY)   
     
 endfunction(set_component_vars)
 
@@ -703,9 +707,9 @@ macro(esc_backslash RESULT)
 endmacro(esc_backslash RESULT)
 
 #
-# Query git for the info regarding this code base.
+# Query git for the info regarding this repository.
 #
-function(get_git_tag)
+function(get_repository_info)
 
     #
     # Get the current branch tag from git
@@ -729,4 +733,4 @@ function(get_git_tag)
     )
     set(GIT_HASH ${HASH} CACHE STRING "Hash for this git branch" FORCE)
 
-endfunction(get_git_tag)
+endfunction(get_repository_info)

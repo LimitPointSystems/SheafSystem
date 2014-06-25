@@ -26,4 +26,8 @@ else()
 	H5Fpublic.h H5FDpublic.h H5Gpublic.h H5MMpublic.h H5Zpublic.h H5Rpublic.h H5Spublic.h H5FDcore.h 
 	H5FDfamily.h H5FDlog.h H5FDmpi.h H5FDmpio.h H5FDmpiposix.h H5FDmulti.h H5Ppublic.h H5FDstdio.h 
 	H5FDsec2.h H5FDdirect.h CACHE STRING "HDF required includes" FORCE)
-endif()	
+endif()
+
+mark_as_advanced(FORCE HDF5_INCS)
+mark_as_advanced(FORCE HDF5_DIR)
+mark_as_advanced(FORCE HDF5_LIBRARY_DIR)				
