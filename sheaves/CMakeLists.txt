@@ -53,7 +53,7 @@ add_install_target()
 #
 # Write this component's lib targets and include paths to an export file.
 #
-export_targets()
+write_exports_file()
 
 #
 # Prepare this component's lib targets and include paths for export to an install config file.
@@ -66,6 +66,10 @@ export_install_config_file_vars()
 # append their location to the exports file.
 #
 file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(STD_HEADERS ${STD_HEADERS} CACHE STRING \"STD headers\")\n")
+# Mark the variable as advanced
+file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE STD_HEADERS)\n") 
 file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(STD_IPATH ${CMAKE_BINARY_DIR}/include CACHE STRING \"STD header include path\")\n")
+# Mark the variable as advanced
+file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE STD_IPATH)\n") 
 
 

@@ -195,7 +195,8 @@ function(configure_std_headers)
         # Configure the .h files
         configure_file(std/${input_file} ${CMAKE_BINARY_DIR}/include/${std_h})
     endforeach()
-
+    mark_as_advanced(FORCE STD_HEADERS)
+    
 endfunction(configure_std_headers)
 
 #
@@ -346,13 +347,11 @@ function(set_component_vars)
         CACHE STRING "${PROJECT_NAME} csharp source directory")
     set(${COMPONENT}_SWIG_CSHARP_INTERFACE ${PROJECT_NAME}_csharp_binding.i 
         CACHE STRING "${PROJECT_NAME} csharp binding interface file")
-
     
     # Mark all the above as "advanced"
     mark_as_advanced(FORCE ${COMPONENT}_BINARY_DIR)
     mark_as_advanced(FORCE ${COMPONENT}_LIB_DIR)
     mark_as_advanced(FORCE ${COMPONENT}_DYNAMIC_LIB)
-    mark_as_advanced(FORCE ${COMPONENT}_IMPORT_LIB)
     mark_as_advanced(FORCE ${COMPONENT}_SHARED_LIB)
     mark_as_advanced(FORCE ${COMPONENT}_STATIC_LIB)
     mark_as_advanced(FORCE ${COMPONENT}_COMMON_BINDING_SRC_DIR)
@@ -368,13 +367,18 @@ function(set_component_vars)
     mark_as_advanced(FORCE ${COMPONENT}_CSHARP_BINDING_LIB)
     mark_as_advanced(FORCE ${COMPONENT}_CSHARP_BINDING_SRC_DIR)
     mark_as_advanced(FORCE ${COMPONENT}_SWIG_CSHARP_INTERFACE)
+    mark_as_advanced(FORCE ${COMPONENT}_JAVA_BINDING_LIBS)
+    mark_as_advanced(FORCE ${COMPONENT}_JAVA_BINDING_JARS)
+    mark_as_advanced(FORCE ${COMPONENT}_PYTHON_BINDING_LIBS)  
+    mark_as_advanced(FORCE ${COMPONENT}_IPATHS)
+    mark_as_advanced(FORCE ${COMPONENT}_CSHARP_BINDING_ASSY)   
     
 endfunction(set_component_vars)
 
 #
 # Export this component's library targets and list of includes
 #
-function(export_targets)
+function(write_exports_file)
 
     message(STATUS 
         "Writing ${PROJECT_NAME} detail to ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}")
@@ -395,37 +399,59 @@ function(export_targets)
     endif()
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
         "set(${COMPONENT}_INCS ${${COMPONENT}_INCS} CACHE STRING \"${PROJECT_NAME} includes\")\n")
+    # Mark the variable as advanced        
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_INCS)\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
         "set(${COMPONENT}_IPATH ${${COMPONENT}_IPATH} CACHE STRING \"${PROJECT_NAME} include path\")\n")
+    # Mark the variable as advanced           
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_IPATH)\n")        
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
         "set(${COMPONENT}_IPATHS ${${COMPONENT}_IPATHS} CACHE STRING \"${PROJECT_NAME} cumulative include path\")\n")
+    # Mark the variable as advanced           
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_IPATHS)\n")          
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
         "set(${COMPONENT}_STATIC_LIB ${${COMPONENT}_STATIC_LIB} CACHE STRING \"${PROJECT_NAME} static library \")\n")
+    # Mark the variable as advanced           
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_STATIC_LIB)\n")  
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")     
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
         "set(${COMPONENT}_STATIC_LIBS ${${COMPONENT}_STATIC_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative static library list\")\n")
+    # Mark the variable as advanced           
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_STATIC_LIBS)\n") 
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")    
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
         "set(${COMPONENT}_SHARED_LIB ${${COMPONENT}_SHARED_LIB} CACHE STRING \"${PROJECT_NAME} shared library \")\n")
+    # Mark the variable as advanced           
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_SHARED_LIB)\n") 
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")     
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
         "set(${COMPONENT}_SHARED_LIBS ${${COMPONENT}_SHARED_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative shared library list\")\n")
+    # Mark the variable as advanced           
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_SHARED_LIBS)\n")         
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")    
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
         "set(${COMPONENT}_CLASSPATH ${${COMPONENT}_CLASSPATH} CACHE STRING \"${PROJECT_NAME} Java classpath\")\n")
+    # Mark the variable as advanced           
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_CLASSPATH)\n")         
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
         "set(${COMPONENT}_BIN_OUTPUT_DIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} CACHE STRING \"${PROJECT_NAME} binary output directory\")\n")
+    # Mark the variable as advanced           
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_BIN_OUTPUT_DIR)\n") 
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
         "set(${COMPONENT}_LIB_OUTPUT_DIR ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} CACHE STRING \"${PROJECT_NAME} library output directory\")\n")
+    # Mark the variable as advanced           
+    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_LIB_OUTPUT_DIR)\n")         
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     if("${COMPONENT}" MATCHES "SHEAVES")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
             "set(HDF_INCLUDE_DIR ${HDF5_INCLUDE_DIRS} CACHE STRING \"HDF5 Include Path \")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+            "mark_as_advanced(FORCE HDF_INCLUDE_DIR)\n")              
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     endif()
                 
@@ -433,27 +459,40 @@ function(export_targets)
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
             "set(VTK_LIB_DIR @VTK_LIB_DIR@ CACHE PATH \"VTK library path\")\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
+        # Mark the variable as advanced               
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
-            "set(VTK_LIBS @VTK_LIBS@ CACHE PATH \"VTK libraries \")\n")
+            "mark_as_advanced(FORCE VTK_LIB_DIR)\n") 
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")        
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
             "set(VTK_BIN_DIR @VTK_BIN_DIR@ CACHE PATH  \"VTK DLL path\")\n")
+        # Mark the variable as advanced                
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+            "mark_as_advanced(FORCE VTK_BIN_DIR)\n")             
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
             "set(VTK_INC_DIR @VTK_INC_DIRS@ CACHE PATH  \"VTK DLL path\")\n")
+        # Mark the variable as advanced                
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+            "mark_as_advanced(FORCE VTK_INC_DIRS)\n")             
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
             "set(VTK_LIBS ${VTK_LIBS} CACHE STRING \"VTK Libraries\")\n")
+        # Mark the variable as advanced                
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+            "mark_as_advanced(FORCE VTK_LIBS)\n")              
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")                  
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")        
         file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
             "set(JMF_JAR ${JMF_JAR} CACHE STRING \"JMF jar location\")\n")
+        # Mark the variable as advanced                
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+            "mark_as_advanced(FORCE JMF_JAR)\n")              
         file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")        
 
     endif()             
-endfunction(export_targets)
+endfunction(write_exports_file)
 
 #
 # Export this component's library targets and list of includes for install
@@ -648,12 +687,50 @@ function(install_prereqs)
         GROUP_READ WORLD_READ)
     endforeach()
 
-    configure_file(${CMAKE_MODULE_PATH}/index.html.in ${CMAKE_BINARY_DIR}/index.html)
-    configure_file(${CMAKE_MODULE_PATH}/jindex.html.in ${CMAKE_BINARY_DIR}/jindex.html)
     install(DIRECTORY ${PROJECT_BINARY_DIR}/documentation/ DESTINATION documentation)
     install(DIRECTORY ${CMAKE_MODULE_PATH}/css DESTINATION documentation)
     install(DIRECTORY ${CMAKE_MODULE_PATH}/images DESTINATION documentation)
-    install(FILES ${CMAKE_BINARY_DIR}/index.html DESTINATION documentation)
-    install(FILES ${CMAKE_BINARY_DIR}/jindex.html DESTINATION documentation/java)
     
 endfunction(install_prereqs)
+
+#
+# Return string with backslash path separators escaped
+# e.g., "c:\my\files" is returned "c:\\my\\files"
+# Usage :
+#    set(VAR "c:\my\files" )
+#    esc_backslash(VAR)
+#
+macro(esc_backslash RESULT)
+    if(WIN32)
+        string(REPLACE "\\" "\\\\" RESULT "${RESULT}")
+    endif()
+endmacro(esc_backslash RESULT)
+
+#
+# Query git for the info regarding this repository.
+#
+function(get_repository_info)
+
+    #
+    # Get the current branch tag from git
+    #
+    execute_process(
+      COMMAND git rev-parse --abbrev-ref HEAD 
+      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+      OUTPUT_VARIABLE TAG
+      OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+    set(GIT_TAG ${TAG} CACHE STRING "Name of this git branch" FORCE)
+    
+    #
+    # Get the hash associated with this branch
+    #
+    execute_process(
+      COMMAND git rev-parse ${GIT_TAG}
+      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+      OUTPUT_VARIABLE HASH
+      OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+    set(GIT_HASH ${HASH} CACHE STRING "Hash for this git branch" FORCE)
+
+endfunction(get_repository_info)
