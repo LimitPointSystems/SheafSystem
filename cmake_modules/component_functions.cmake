@@ -701,3 +701,32 @@ macro(esc_backslash RESULT)
         string(REPLACE "\\" "\\\\" RESULT "${RESULT}")
     endif()
 endmacro(esc_backslash RESULT)
+
+#
+# Query git for the info regarding this code base.
+#
+function(get_git_tag)
+
+    #
+    # Get the current branch tag from git
+    #
+    execute_process(
+      COMMAND git rev-parse --abbrev-ref HEAD 
+      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+      OUTPUT_VARIABLE TAG
+      OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+    set(GIT_TAG ${TAG} CACHE STRING "Name of this git branch" FORCE)
+    
+    #
+    # Get the hash associated with this branch
+    #
+    execute_process(
+      COMMAND git rev-parse ${GIT_TAG}
+      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+      OUTPUT_VARIABLE HASH
+      OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+    set(GIT_HASH ${HASH} CACHE STRING "Hash for this git branch" FORCE)
+
+endfunction(get_git_tag)
