@@ -686,12 +686,20 @@ function(install_prereqs)
         OWNER_WRITE OWNER_READ
         GROUP_READ WORLD_READ)
     endforeach()
+   
+endfunction(install_prereqs)
+
+# 
+# Install any prerequisites that need to ship with our libs
+#
+function(install_docs)
 
     install(DIRECTORY ${PROJECT_BINARY_DIR}/documentation/ DESTINATION documentation)
     install(DIRECTORY ${CMAKE_MODULE_PATH}/css DESTINATION documentation)
     install(DIRECTORY ${CMAKE_MODULE_PATH}/images DESTINATION documentation)
     
-endfunction(install_prereqs)
+endfunction(install_docs)
+
 
 #
 # Return string with backslash path separators escaped

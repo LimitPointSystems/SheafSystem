@@ -65,6 +65,13 @@ create_output_dirs()
 add_doc_targets()
 
 #
+# Install the documentation
+#
+if(INSTALL_DOCS)
+    install_docs()
+endif()    
+
+#
 # Target to generate emacs tags
 #
 add_tags_target()

@@ -14,6 +14,13 @@
 # limitations under the License.
 #
 
+#
+# Install the Windows Runtime lins
+#
+if(WIN32)
+    include(InstallRequiredSystemLibraries)
+endif()
+
 ##
 # This file is the system level counterpart to the component_definitions file
 # found in the top level of any component. Functions and variables
