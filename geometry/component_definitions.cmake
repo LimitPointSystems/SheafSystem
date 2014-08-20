@@ -24,6 +24,17 @@
 include(${CMAKE_MODULE_PATH}/component_functions.cmake)
 
 #
+# The current namespace
+# The namespace should be ${COMPONENTS), but force it to remove all doubt.
+#
+set(NAME_SPACE geometry CACHE STRING "C++ namespace for this project" FORCE)
+
+#
+# Create the build/include folder
+#
+execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${NAME_SPACE})
+
+#
 # Define the clusters for this component.
 #
 set(clusters coordinates general point_locators template_instantiations)
@@ -465,12 +476,22 @@ function(add_install_target)
     elseif(WIN64INTEL OR WIN64MSVC)
         # The BUILD_TYPE variable will be set while CMake is processing the install files. It is not set at configure time
         # for this project. We pass it literally here.
-        install(TARGETS 
-            ${${COMPONENT}_IMPORT_LIB} EXPORT ${${COMPONENT}_IMPORT_LIB} 
-            ARCHIVE DESTINATION lib/\${BUILD_TYPE})
-        install(TARGETS 
-            ${${COMPONENT}_DYNAMIC_LIB} RUNTIME 
-            DESTINATION bin/\${BUILD_TYPE})
+#        install(TARGETS ${${COMPONENT}_IMPORT_LIB} EXPORT 
+#            ${${COMPONENT}_IMPORT_LIB} ARCHIVE DESTINATION lib/\${BUILD_TYPE} INCLUDES DESTINATION include/ComLimitPoint/SheafSystem)
+#        install(EXPORT ${${COMPONENT}_IMPORT_LIB} DESTINATION lib)
+                      
+#        install(TARGETS ${${COMPONENT}_DYNAMIC_LIB} RUNTIME 
+#            DESTINATION bin/\${BUILD_TYPE}  INCLUDES DESTINATION include/ComLimitPoint/SheafSystem)
+ #       install(EXPORT ${${COMPONENT}_IMPORT_LIB} DESTINATION bin) 
+        install(TARGETS  ${PROJECT_NAME} EXPORT SheafSystem 
+            ARCHIVE DESTINATION lib/\${BUILD_TYPE} 
+            RUNTIME DESTINATION bin/\${BUILD_TYPE} 
+            INCLUDES DESTINATION include/ComLimitPoint/SheafSystem)
+
+         install(EXPORT SheafSystem DESTINATION bin) 
+         install(EXPORT SheafSystem DESTINATION lib)
+
+        
         install(FILES 
             ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_DYNAMIC_LIB}_d.pdb 
             DESTINATION bin/\${BUILD_TYPE} OPTIONAL)

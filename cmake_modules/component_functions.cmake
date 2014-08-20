@@ -551,6 +551,8 @@ function(export_install_config_file_vars)
 
 endfunction(export_install_config_file_vars)
 
+
+
 #
 # Generate the installed <project>-exports file. Replace hardcoded vars with cmake substitution vars.
 #
@@ -592,23 +594,58 @@ function(collect_includes)
 
     get_filename_component(CLUSTERNAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
     # Prepend the cluster name to each member of the srcs list
-    if(NOT ${CLUSTERNAME} STREQUAL "template_instantiations")
+    # Exclude the template_instantiations folder
+    if(NOT ${CLUSTERNAME} MATCHES "template_instantiations")
         foreach(src ${SRCS})
             string(REGEX REPLACE ".cc$" ".h"  inc ${src})
-            list(APPEND lincs ${CMAKE_CURRENT_SOURCE_DIR}/${inc})
+            if(WIN32)
+                # Massage the paths for Windows
+                file(TO_NATIVE_PATH "${CMAKE_BINARY_DIR}/include/${LPS_ID}/${NAME_SPACE}/${inc}" BUILD_PATH)
+                file(TO_NATIVE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/${inc}" SOURCE_PATH)
+                 #Create a symlink in ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${NAME_SPACE}to corresponding header file in source tree
+                execute_process(COMMAND cmd.exe /c mklink ${BUILD_PATH} ${SOURCE_PATH} RESULT_VARIABLE LINK_RESULT ERROR_VARIABLE ERROR )
+           else() # Linux
+                # LCreate a symlink in ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${NAME_SPACE} to corresponding header file in source tree
+               execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_CURRENT_SOURCE_DIR}/${inc} ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${NAME_SPACE}/${inc})     
+           endif()
+            list(APPEND inst_incs ${CMAKE_CURRENT_SOURCE_DIR}/${inc})
+        list(APPEND lincs ${CMAKE_CURRENT_SOURCE_DIR}/${inc})            
         endforeach()
    endif()
     
     # Prepend the cluster name to each member of the additional_incs list
-    foreach(inc ${ADDITIONAL_INCS})
-        list(APPEND lincs ${CMAKE_CURRENT_SOURCE_DIR}/${inc})
-    endforeach()
+    if(NOT ${CLUSTERNAME} MATCHES "template_instantiations")
+        foreach(inc ${ADDITIONAL_INCS})
+            if(WIN32)
+                # Massage the paths for Windows
+                file(TO_NATIVE_PATH "${CMAKE_BINARY_DIR}/include/${LPS_ID}/${NAME_SPACE}/${inc}" BUILD_PATH)
+                file(TO_NATIVE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/${inc}" SOURCE_PATH)
+                # Create a symlink in ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${NAME_SPACE} to corresponding header file in source tree
+                execute_process(COMMAND cmd.exe /c mklink ${BUILD_PATH} ${SOURCE_PATH} RESULT_VARIABLE LINK_RESULT ERROR_VARIABLE ERROR )
+          else() # Linux
+              # Create a symlink in ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${NAME_SPACE} to corresponding header file in source tree
+              execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_CURRENT_SOURCE_DIR}/${inc} ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${NAME_SPACE}/${inc})     
+          endif()
+                list(APPEND lincs ${CMAKE_CURRENT_SOURCE_DIR}/${inc})
+                list(APPEND inst_incs ${CMAKE_CURRENT_SOURCE_DIR}/${inc})
+        endforeach()
+   endif()
 
-    set(${COMPONENT}_INCS ${${COMPONENT}_INCS} 
-        ${lincs} CACHE STRING "${PROJECT} includes." FORCE)
+    # Install the header files
+ #   if(NOT "${CLUSTERNAME}" MATCHES "KdLattice")
+ #       install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} DESTINATION  
+ #           ${CMAKE_INSTALL_PREFIX}/include/${LPS_ID}/${NAME_SPACE}
+ #           FILES_MATCHING PATTERN "*.h")
+ #   endif()
+    
+    set(${COMPONENT}_INCS ${${COMPONENT}_INCS} ${lincs} CACHE STRING "${PROJECT} includes." FORCE)
+    set(${COMPONENT}_INST_INCS ${${COMPONENT}_INST_INCS} ${inst_incs} CACHE STRING "${PROJECT} installed includes." FORCE)
+    
+    mark_as_advanced(FORCE ${COMPONENT}_INST_INCS)
     mark_as_advanced(FORCE ${COMPONENT}_INCS)
-
+    
 endfunction(collect_includes)
+
 
 #
 # Append unit test executables to their respective component variables

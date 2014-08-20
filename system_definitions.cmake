@@ -41,7 +41,12 @@ mark_as_advanced(LIB_VERSION)
 #
 # Establish the list of components in this system
 #
-set(COMPONENTS sheaves fiber_bundles geometry fields tools CACHE STRING "List of components in this system" FORCE)
+set(COMPONENTS sheaf fiber_bundle geometry field tools CACHE STRING "List of components in this system" FORCE)
+
+#
+# Create a unique identifier for this as an  LPS project
+#
+set(LPS_ID ComLimitPoint CACHE STRING "Unique Identifier for this as an LPS project" FORCE)
 
 #
 # Set the default value for install location

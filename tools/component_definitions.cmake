@@ -25,6 +25,17 @@
 include(${CMAKE_MODULE_PATH}/component_functions.cmake)
 
 #
+# The current namespace
+# The namespace should be ${COMPONENTS), but force it to remove all doubt.
+#
+set(NAME_SPACE tools CACHE STRING "C++ namespace for this project" FORCE)
+
+#
+# Create the build/include folder
+#
+execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${NAME_SPACE})
+
+#
 # Define the clusters for this component.
 #
 if(BUILD_SHEAFSCOPE)

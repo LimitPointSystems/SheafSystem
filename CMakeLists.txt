@@ -71,6 +71,27 @@ if(INSTALL_DOCS)
     install_docs()
 endif()    
 
+
+#export_libs()
+#
+# Export this component's library targets and list of includes for install
+# The file locations on an install (includes, libs, etc) are different
+# than they are in a build tree. The install config produces
+# a .cmake.in file that is configured by the client.
+#
+function(export_libs)
+    if(WIN64MSVC OR WIN64INTEL)
+        # The BUILD_TYPE variable will be set while CMake is processing the install files. It is not set at configure time
+        # for this project. We pass it literally here.
+        foreach(comp ${COMPONENTS})
+            string(TOUPPER ${comp} COMP)        
+            message(STATUS "Current lib is: ${comp}")
+            install(EXPORT ${${COMP}_IMPORT_LIB} DESTINATION lib)
+            install(EXPORT ${${COMP}_IMPORT_LIB} DESTINATION bin)
+        endforeach()         
+    endif()
+endfunction(export_libs)
+
 #
 # Target to generate emacs tags
 #
@@ -135,3 +156,9 @@ configure_file(${CMAKE_SOURCE_DIR}/RELEASE_NOTES.in ${CMAKE_BINARY_DIR}/RELEASE_
         install(FILES ${CMAKE_BINARY_DIR}/RELEASE_NOTES DESTINATION ${CMAKE_INSTALL_PREFIX} RENAME RELEASE_NOTES.txt)
     endif()
 #endif()
+
+#    if(WIN64MSVC OR WIN64INTEL)
+#        install(TARGETS ${COMPONENTS} EXPORT 
+#            ${PROJECT_NAME} ARCHIVE DESTINATION lib/\${BUILD_TYPE} 
+#            RUNTIME DESTINATION bin/\${BUILD_TYPE} INCLUDES DESTINATION include/ComLimitPoint/SheafSystem)
+#    endif()

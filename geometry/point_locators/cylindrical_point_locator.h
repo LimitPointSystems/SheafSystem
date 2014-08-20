@@ -25,8 +25,8 @@
 #ifndef CYLINDRICAL_POINT_LOCATOR_H
 #define CYLINDRICAL_POINT_LOCATOR_H
 
-#ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
+#include "ComLimitPoint/Sheaf/sheaf_dll_spec.h"
 #endif
 
 #ifndef POINT_LOCATOR_H
