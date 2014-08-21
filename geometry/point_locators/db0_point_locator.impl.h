@@ -37,8 +37,8 @@
 #include "ComLimitPoint/sheaf/block.h"
 #endif
 
-#ifndef CHART_POINT_3D_H
-#include "chart_point_3d.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_CHART_POINT_3D_H
+#include "ComLimitPoint/fiber_bundle/chart_point_3d.h"
 #endif
 
 #ifndef COM_LIMITPOINT_SHEAF_ERROR_MESSAGE_H
@@ -62,7 +62,7 @@
 #endif
 
 #ifndef SECTION_SPACE_SCHEMA_POSET_H
-#include "section_space_schema_poset.h"
+#include "ComLimitPoint/fiber_bundle/section_space_schema_poset.h"
 #endif
 
 #ifndef STD_CMATH_H

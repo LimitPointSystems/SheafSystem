@@ -21,7 +21,7 @@
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "at0.h"
-#include "base_space_member.h"
+#include "ComLimitPoint/fiber_bundle/base_space_member.h"
 #include "ComLimitPoint/sheaf/error_message.h"
 #include "e1.h"
 #include "e2.h"

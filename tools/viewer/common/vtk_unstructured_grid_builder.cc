@@ -20,7 +20,7 @@
 #include "vtk_unstructured_grid_builder.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
-#include "base_space_member.h"
+#include "ComLimitPoint/fiber_bundle/base_space_member.h"
 #include "ComLimitPoint/sheaf/biorder_iterator.h"
 #include "ComLimitPoint/sheaf/block.impl.h"
 #include "ComLimitPoint/sheaf/error_message.h"
@@ -30,7 +30,7 @@
 #include "ComLimitPoint/sheaf/preorder_iterator.h"
 #include "sec_rep_descriptor.h"
 #include "sec_vd_space.h"
-#include "section_space_schema_poset.h"
+#include "ComLimitPoint/fiber_bundle/section_space_schema_poset.h"
 #include "visualization_iterator.h"
 
 #include "vtkUnstructuredGrid.h"

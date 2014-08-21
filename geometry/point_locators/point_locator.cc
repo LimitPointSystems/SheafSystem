@@ -22,7 +22,7 @@
 #include "point_locator.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
-#include "chart_point_3d.h"
+#include "ComLimitPoint/fiber_bundle/chart_point_3d.h"
 #include "ComLimitPoint/sheaf/error_message.h"
 #include "ComLimitPoint/sheaf/preorder_iterator.h"
 #include "sec_at1_space.h"

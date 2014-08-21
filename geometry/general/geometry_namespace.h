@@ -24,8 +24,8 @@
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef FIBER_BUNDLES_NAMESPACE_H
-#include "fiber_bundles_namespace.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_FIBER_BUNDLE_NAMESPACE_H
+#include "ComLimitPoint/fiber_bundle/fiber_bundle_namespace.h"
 #endif
 
 #ifndef GEOMETRY_H

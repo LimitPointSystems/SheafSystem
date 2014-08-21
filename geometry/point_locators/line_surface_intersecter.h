@@ -29,8 +29,8 @@
 #include "ComLimitPoint/sheaf/any.h"
 #endif
 
-#ifndef CHART_POINT_1D_H
-#include "chart_point_1d.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_CHART_POINT_1D_H
+#include "ComLimitPoint/fiber_bundle/chart_point_1d.h"
 #endif
 
 #ifndef D_ARRAY_POINT_LOCATOR_H

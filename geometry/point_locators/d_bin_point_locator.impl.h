@@ -33,8 +33,8 @@
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #endif
 
-#ifndef CHART_POINT_3D_H
-#include "chart_point_3d.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_CHART_POINT_3D_H
+#include "ComLimitPoint/fiber_bundle/chart_point_3d.h"
 #endif
 
 #ifndef D_BIN_COORDINATES_H

@@ -34,16 +34,16 @@
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #endif
 
-#ifndef CHART_POINT_1D_H
-#include "chart_point_1d.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_CHART_POINT_1D_H
+#include "ComLimitPoint/fiber_bundle/chart_point_1d.h"
 #endif
 
-#ifndef CHART_POINT_2D_H
-#include "chart_point_2d.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_CHART_POINT_2D_H
+#include "ComLimitPoint/fiber_bundle/chart_point_2d.h"
 #endif
 
-#ifndef CHART_POINT_3D_H
-#include "chart_point_3d.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_CHART_POINT_3D_H
+#include "ComLimitPoint/fiber_bundle/chart_point_3d.h"
 #endif
 
 #ifndef SEC_AT1_SPACE_H
@@ -54,16 +54,16 @@
 #include "sec_ed.h"
 #endif
 
-#ifndef STRUCTURED_BLOCK_1D_H
-#include "structured_block_1d.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_STRUCTURED_BLOCK_1D_H
+#include "ComLimitPoint/fiber_bundle/structured_block_1d.h"
 #endif
 
-#ifndef STRUCTURED_BLOCK_2D_H
-#include "structured_block_2d.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_STRUCTURED_BLOCK_2D_H
+#include "ComLimitPoint/fiber_bundle/structured_block_2d.h"
 #endif
 
-#ifndef STRUCTURED_BLOCK_3D_H
-#include "structured_block_3d.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_STRUCTURED_BLOCK_3D_H
+#include "ComLimitPoint/fiber_bundle/structured_block_3d.h"
 #endif
 
 #ifndef UNIFORM_1D_H

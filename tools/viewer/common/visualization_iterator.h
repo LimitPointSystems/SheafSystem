@@ -30,7 +30,7 @@
 #endif
 
 #ifndef SEC_VD_H
-#include "sec_vd.h"
+#include "ComLimitPoint/fiber_bundle/sec_vd.h"
 #endif
 
 #ifndef SECTION_ITERATION_STATE_H

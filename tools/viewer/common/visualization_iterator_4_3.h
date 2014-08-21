@@ -29,16 +29,16 @@
 #include "visualization_iterator.h"
 #endif
 
-#ifndef BASE_SPACE_POSET_H
-#include "base_space_poset.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_BASE_SPACE_POSET_H
+#include "ComLimitPoint/fiber_bundle/base_space_poset.h"
 #endif
 
-#ifndef CHART_POINT_3D_H
-#include "chart_point_3d.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_CHART_POINT_3D_H
+#include "ComLimitPoint/fiber_bundle/chart_point_3d.h"
 #endif
 
 #ifndef SEC_VD_H
-#include "sec_vd.h"
+#include "ComLimitPoint/fiber_bundle/sec_vd.h"
 #endif
 
 #ifndef STD_LIST_H

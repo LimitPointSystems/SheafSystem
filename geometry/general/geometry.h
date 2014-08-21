@@ -25,8 +25,8 @@
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef FIBER_BUNDLE_H
-#include "fiber_bundle.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_FIBER_BUNDLE_H
+#include "ComLimitPoint/fiber_bundle/fiber_bundle.h"
 #endif
 
 #ifndef COM_LIMITPOINT_SHEAF_SCOPED_INDEX_H

@@ -22,7 +22,7 @@
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "bilinear_2d.h"
-#include "chart_point_3d.h"
+#include "ComLimitPoint/fiber_bundle/chart_point_3d.h"
 #include "d_bin_coordinates.h"
 #include "eval_iterator.h"
 #include "ComLimitPoint/sheaf/error_message.h"

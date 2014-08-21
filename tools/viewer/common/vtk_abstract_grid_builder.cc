@@ -19,7 +19,7 @@
 
 #include "vtk_abstract_grid_builder.h"
 #include "ComLimitPoint/sheaf/assert_contract.h"
-#include "base_space_member.h"
+#include "ComLimitPoint/fiber_bundle/base_space_member.h"
 #include "eval_iterator.h"
 #include "ComLimitPoint/sheaf/namespace_poset.h"
 

@@ -16,7 +16,7 @@
 //
 
 
-#include "base_space_poset.h"
+#include "ComLimitPoint/fiber_bundle/base_space_poset.h"
 
 #ifdef _WIN32
 #include "io.h"
@@ -29,7 +29,7 @@
 
 /// @hack force initialization of static data members:
 
-#include "fiber_bundles_namespace.h"
+#include "ComLimitPoint/fiber_bundle/fiber_bundle_namespace.h"
 
 using namespace std;
 using namespace fiber_bundle;

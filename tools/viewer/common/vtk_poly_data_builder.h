@@ -33,7 +33,7 @@
 #endif
 
 #ifndef SEC_VD_H
-#include "sec_vd.h"
+#include "ComLimitPoint/fiber_bundle/sec_vd.h"
 #endif
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_H

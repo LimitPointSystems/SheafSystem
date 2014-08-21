@@ -21,9 +21,9 @@
 #include "array_cylindrical_point_locator.h"
 
 #include "sec_ed.h"
-#include "section_space_schema_poset.h"
-#include "structured_block_2d.h"
-#include "unstructured_block.h"
+#include "ComLimitPoint/fiber_bundle/section_space_schema_poset.h"
+#include "ComLimitPoint/fiber_bundle/structured_block_2d.h"
+#include "ComLimitPoint/fiber_bundle/unstructured_block.h"
 
 using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.
