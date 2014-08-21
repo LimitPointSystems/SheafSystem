@@ -22,7 +22,7 @@
 #define D_TREE_POINT_LOCATOR_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
-#include "ComLimitPoint/Sheaf/sheaf_dll_spec.h"
+#include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
 #ifndef D_BIN_POINT_LOCATOR_H
@@ -33,8 +33,8 @@
 #include "d_tree_point_locator_node.h"
 #endif
 
-#ifndef PTR_LINKED_POOL_H
-#include "ptr_linked_pool.h"
+#ifndef COM_LIMITPOINT_SHEAF_PTR_LINKED_POOL_H
+#include "ComLimitPoint/sheaf/ptr_linked_pool.h"
 #endif
 
 #ifndef STD_IOSTREAM_H

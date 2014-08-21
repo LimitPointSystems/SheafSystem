@@ -20,7 +20,7 @@
 
 #include "db0_point_locator.impl.h"
 
-#include "block.impl.h"
+#include "ComLimitPoint/sheaf/block.impl.h"
 
 using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.

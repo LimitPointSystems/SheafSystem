@@ -22,31 +22,31 @@
 #define DB0_POINT_LOCATOR_IMPL_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
-#include "ComLimitPoint/Sheaf/sheaf_dll_spec.h"
+#include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
 #ifndef DB0_POINT_LOCATOR_H
 #include "db0_point_locator.h"
 #endif
 
-#ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#ifndef COM_LIMITPOINT_SHEAF_ASSERT_CONTRACT_H
+#include "ComLimitPoint/sheaf/assert_contract.h"
 #endif
 
-#ifndef BLOCK_H
-#include "block.h"
+#ifndef COM_LIMITPOINT_SHEAF_BLOCK_H
+#include "ComLimitPoint/sheaf/block.h"
 #endif
 
 #ifndef CHART_POINT_3D_H
 #include "chart_point_3d.h"
 #endif
 
-#ifndef ERROR_MESSAGE_H
-#include "error_message.h"
+#ifndef COM_LIMITPOINT_SHEAF_ERROR_MESSAGE_H
+#include "ComLimitPoint/sheaf/error_message.h"
 #endif
 
-#ifndef PREORDER_ITERATOR_H
-#include "preorder_iterator.h"
+#ifndef COM_LIMITPOINT_SHEAF_PREORDER_ITERATOR_H
+#include "ComLimitPoint/sheaf/preorder_iterator.h"
 #endif
 
 #ifndef SEC_AT1_SPACE_H

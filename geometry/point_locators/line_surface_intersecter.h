@@ -22,11 +22,11 @@
 #define LINE_SURFACE_INTERSECTER_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
-#include "ComLimitPoint/Sheaf/sheaf_dll_spec.h"
+#include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef ANY_H
-#include "any.h"
+#ifndef COM_LIMITPOINT_SHEAF_ANY_H
+#include "ComLimitPoint/sheaf/any.h"
 #endif
 
 #ifndef CHART_POINT_1D_H

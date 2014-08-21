@@ -21,10 +21,10 @@
 
 #include "point_locator.h"
 
-#include "assert_contract.h"
+#include "ComLimitPoint/sheaf/assert_contract.h"
 #include "chart_point_3d.h"
-#include "error_message.h"
-#include "preorder_iterator.h"
+#include "ComLimitPoint/sheaf/error_message.h"
+#include "ComLimitPoint/sheaf/preorder_iterator.h"
 #include "sec_at1_space.h"
 #include "sec_ed.h"
 #include "std_iostream.h"

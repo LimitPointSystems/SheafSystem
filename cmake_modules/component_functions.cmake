@@ -280,11 +280,11 @@ function(add_clusters clusters)
         #Add each cluster subdir to the project. 
         add_subdirectory(${cluster})
         #Add each cluster to the compiler search path.
-        include_directories(${cluster})
+#        include_directories(${cluster})
         # Add the fully-qualified cluster names to this component's ipath var
-        set(${COMPONENT}_IPATH ${${COMPONENT}_IPATH} 
-        ${CMAKE_CURRENT_SOURCE_DIR}/${cluster} CACHE 
-        STRING "Include paths for ${PROJECT_NAME}" FORCE)
+#        set(${COMPONENT}_IPATH ${${COMPONENT}_IPATH} 
+#        ${CMAKE_CURRENT_SOURCE_DIR}/${cluster} CACHE 
+#        STRING "Include paths for ${PROJECT_NAME}" FORCE)
     endforeach()
 
 endfunction(add_clusters)
@@ -402,10 +402,10 @@ function(write_exports_file)
     # Mark the variable as advanced        
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_INCS)\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
-        "set(${COMPONENT}_IPATH ${${COMPONENT}_IPATH} CACHE STRING \"${PROJECT_NAME} include path\")\n")
+#    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+#        "set(${COMPONENT}_IPATH ${${COMPONENT}_IPATH} CACHE STRING \"${PROJECT_NAME} include path\")\n")
     # Mark the variable as advanced           
-    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_IPATH)\n")        
+#    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_IPATH)\n")        
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
         "set(${COMPONENT}_IPATHS ${${COMPONENT}_IPATHS} CACHE STRING \"${PROJECT_NAME} cumulative include path\")\n")
@@ -542,8 +542,8 @@ function(export_install_config_file_vars)
         endif()             
     endif()
     file(APPEND  ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-    file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
-        "set(${COMPONENT}_IPATH @SHEAFSYSTEM_HOME@/include CACHE STRING \"${PROJECT_NAME} include path\")\n")
+#    file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+#        "set(${COMPONENT}_IPATH @SHEAFSYSTEM_HOME@/include CACHE STRING \"${PROJECT_NAME} include path\")\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
         "set(${COMPONENT}_IPATHS @SHEAFSYSTEM_HOME@/include CACHE STRING \"${PROJECT_NAME} cumulative include path\")\n")

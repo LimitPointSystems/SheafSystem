@@ -64,7 +64,7 @@ if(WIN64INTEL OR WIN64MSVC)
     #
     # Set the cumulative import library (win32) var for this component.
     #
-    set(${COMPONENT}_IMPORT_LIBS  ${FIELDS_IMPORT_LIBS} 
+    set(${COMPONENT}_IMPORT_LIBS  ${FIELD_IMPORT_LIBS} 
         ${${COMPONENT}_IMPORT_LIB} 
         CACHE STRING " Cumulative import libraries (win32) for ${PROJECT_NAME}" FORCE)
 
@@ -73,14 +73,14 @@ else()
     #
     # Set the cumulative shared library var for this component.
     #
-    set(${COMPONENT}_STATIC_LIBS ${FIELDS_STATIC_LIBS} 
+    set(${COMPONENT}_STATIC_LIBS ${FIELD_STATIC_LIBS} 
         ${${COMPONENT}_STATIC_LIB} 
         CACHE STRING " Cumulative static libraries for ${PROJECT_NAME}" FORCE)
     
     #
     # Set the cumulative shared library var for this component.
     #
-    set(${COMPONENT}_SHARED_LIBS ${FIELDS_SHARED_LIBS} 
+    set(${COMPONENT}_SHARED_LIBS ${FIELD_SHARED_LIBS} 
         ${${COMPONENT}_SHARED_LIB} 
         CACHE STRING " Cumulative shared libraries for ${PROJECT_NAME}" FORCE)
 
@@ -89,31 +89,31 @@ endif()
 #
 # Set the cumulative Java binding library var for this component.
 #
-set(${COMPONENT}_JAVA_BINDING_LIBS ${FIELDS_JAVA_BINDING_LIBS} 
+set(${COMPONENT}_JAVA_BINDING_LIBS ${FIELD_JAVA_BINDING_LIBS} 
     ${${COMPONENT}_JAVA_BINDING_LIB} 
     CACHE STRING " Cumulative Java binding libraries for ${PROJECT_NAME}" FORCE)
 
 #
 # Set the cumulative Java binding jar variable for this component.
 #
-set(${COMPONENT}_JAVA_BINDING_JARS ${FIELDS_JAVA_BINDING_JARS} 
+set(${COMPONENT}_JAVA_BINDING_JARS ${FIELD_JAVA_BINDING_JARS} 
     ${PROJECT_NAME}_java_binding.jar 
     CACHE STRING "Cumulative Java bindings jars for ${PROJECT_NAME}")
 
 #
 # Set the cumulative Python binding library var for this component.
 #
-set(${COMPONENT}_PYTHON_BINDING_LIBS ${FIELDS_PYTHON_BINDING_LIBS} 
+set(${COMPONENT}_PYTHON_BINDING_LIBS ${FIELD_PYTHON_BINDING_LIBS} 
     ${${COMPONENT}_PYTHON_BINDING_LIB} 
     CACHE STRING " Cumulative Python binding libraries for ${PROJECT_NAME}" FORCE)
 
 #
 # Set the cumulative include path for this component.
 #
-set(${COMPONENT}_IPATHS ${FIELDS_IPATHS} ${${COMPONENT}_IPATH} 
-    ${VTK_INCLUDE_DIRS} 
-    ${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2} ${TETGEN_INC_DIR} 
-    CACHE STRING " Cumulative include paths for ${PROJECT_NAME}")
+#set(${COMPONENT}_IPATHS ${FIELD_IPATHS} ${${COMPONENT}_IPATH} 
+#    ${VTK_INCLUDE_DIRS} 
+#    ${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2} ${TETGEN_INC_DIR} 
+#    CACHE STRING " Cumulative include paths for ${PROJECT_NAME}")
 
 #
 # Specify component prerequisite include directories.
@@ -161,9 +161,9 @@ function(add_library_targets)
     
         # Create the DLL.
         add_library(${${COMPONENT}_DYNAMIC_LIB} SHARED ${${COMPONENT}_SRCS})
-        add_dependencies(${${COMPONENT}_DYNAMIC_LIB} ${FIELDS_IMPORT_LIBS})
+        add_dependencies(${${COMPONENT}_DYNAMIC_LIB} ${FIELD_IMPORT_LIBS})
                  
-        target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${FIELDS_IMPORT_LIBS} 
+        target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${FIELD_IMPORT_LIBS} 
             ${JNI_LIBRARIES} ${JAVA_AWT_LIBRARY} 
             ${JAVA_JVM_LIBRARY} ${VTK_LIBS} ) 
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} 
@@ -182,13 +182,13 @@ function(add_library_targets)
         add_library(${${COMPONENT}_STATIC_LIB} STATIC ${${COMPONENT}_SRCS})
         set_target_properties(${${COMPONENT}_STATIC_LIB} 
             PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
-        add_dependencies(${${COMPONENT}_STATIC_LIB} ${FIELDS_STATIC_LIBS})
+        add_dependencies(${${COMPONENT}_STATIC_LIB} ${FIELD_STATIC_LIBS})
     
         # Shared library
         add_library(${${COMPONENT}_SHARED_LIB} SHARED ${${COMPONENT}_SRCS})
         set_target_properties(${${COMPONENT}_SHARED_LIB} PROPERTIES 
             OUTPUT_NAME ${PROJECT_NAME} LINKER_LANGUAGE CXX)
-        add_dependencies(${${COMPONENT}_SHARED_LIB} ${FIELDS_SHARED_LIBS})
+        add_dependencies(${${COMPONENT}_SHARED_LIB} ${FIELD_SHARED_LIBS})
         
         # Override cmake's placing of "${COMPONENT_LIB}_EXPORTS into the preproc symbol table.
         # CMake apparently detects the presence of cdecl_dllspec in the source and places
@@ -203,9 +203,9 @@ function(add_library_targets)
         add_dependencies(${PROJECT_NAME}-shared-lib ${${COMPONENT}_SHARED_LIBS})
         add_dependencies(${PROJECT_NAME}-static-lib ${${COMPONENT}_STATIC_LIBS})
     
-        target_link_libraries(${${COMPONENT}_SHARED_LIB} ${FIELDS_SHARED_LIBS} 
+        target_link_libraries(${${COMPONENT}_SHARED_LIB} ${FIELD_SHARED_LIBS} 
             ${JNI_LIBRARIES} ${JAVA_AWT_LIBRARY} ${JAVA_JVM_LIBRARY} ${VTK_LIBS})
-        target_link_libraries(${${COMPONENT}_STATIC_LIB} ${FIELDS_STATIC_LIBS} 
+        target_link_libraries(${${COMPONENT}_STATIC_LIB} ${FIELD_STATIC_LIBS} 
             ${JNI_LIBRARIES} ${JAVA_AWT_LIBRARY} ${JAVA_JVM_LIBRARY} ${VTK_LIBS})
 
     endif()
@@ -231,8 +231,8 @@ function(add_bindings_targets)
         include_directories(${FIBER_BUNDLES_COMMON_BINDING_SRC_DIR})
         include_directories(${GEOMETRY_JAVA_BINDING_SRC_DIR})
         include_directories(${GEOMETRY_COMMON_BINDING_SRC_DIR})
-        include_directories(${FIELDS_JAVA_BINDING_SRC_DIR})
-        include_directories(${FIELDS_COMMON_BINDING_SRC_DIR})
+        include_directories(${FIELD_JAVA_BINDING_SRC_DIR})
+        include_directories(${FIELD_COMMON_BINDING_SRC_DIR})
         include_directories(${${COMPONENT}_JAVA_BINDING_SRC_DIR})
         include_directories(${${COMPONENT}_COMMON_BINDING_SRC_DIR})
         
@@ -246,14 +246,14 @@ function(add_bindings_targets)
         
         if(WIN64INTEL OR WIN64MSVC)
             add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} 
-                ${FIELDS_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})
+                ${FIELD_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})
             target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${JDK_LIBS} 
-                ${FIELDS_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})   
+                ${FIELD_JAVA_BINDING_LIBS} ${${COMPONENT}_IMPORT_LIBS})   
             set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} 
                 PROPERTIES FOLDER "Binding Targets - Java")
         else()
             add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} 
-                ${FIELDS_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB})
+                ${FIELD_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB})
             target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} ${JDK_LIBS} 
                 ${${COMPONENT}_SHARED_LIB})   
         endif()
@@ -267,9 +267,9 @@ function(add_bindings_targets)
 
         target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} 
             ${${COMPONENT}_SHARED_LIB} 
-            ${FIELDS_JAVA_BINDING_LIBS} ${VTK_LIBS} ${JDK_LIBS}) 
+            ${FIELD_JAVA_BINDING_LIBS} ${VTK_LIBS} ${JDK_LIBS}) 
 
-        list(APPEND ${COMPONENT}_CLASSPATH ${FIELDS_CLASSPATH} 
+        list(APPEND ${COMPONENT}_CLASSPATH ${FIELD_CLASSPATH} 
             ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} 
                 ${VTK_JAR} ${JMF_JAR})
         set(${COMPONENT}_CLASSPATH ${${COMPONENT}_CLASSPATH} 
@@ -279,11 +279,11 @@ function(add_bindings_targets)
         if(WIN64INTEL OR WIN64MSVC)
 
             add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
-                   DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${FIELDS_JAVA_BINDING_JAR}
+                   DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${FIELD_JAVA_BINDING_JAR}
                    set_target_properties(${PROJECT_NAME}_java_binding.jar 
                    PROPERTIES FOLDER "Component Binding Jars")                           
                    COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
-                   COMMAND ${Java_JAVAC_EXECUTABLE} -classpath "${FIELDS_CLASSPATH} ${VTK_JAR} ${JMF_JAR}" -d . *.java
+                   COMMAND ${Java_JAVAC_EXECUTABLE} -classpath "${FIELD_CLASSPATH} ${VTK_JAR} ${JMF_JAR}" -d . *.java
                    COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
                    COMMAND ${Java_JAR_EXECUTABLE} cvf 
                     ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  
@@ -294,7 +294,7 @@ function(add_bindings_targets)
             if(DOC_TARGETS)
                 add_custom_target(${PROJECT_NAME}-java-docs ALL
                         COMMAND ${Java_JAVADOC_EXECUTABLE} -windowtitle 
-                        "${PROJECT_NAME} documentation" -classpath "${FIELDS_CLASSPATH}" 
+                        "${PROJECT_NAME} documentation" -classpath "${FIELD_CLASSPATH}" 
                         -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
                         *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
                         DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
@@ -305,10 +305,10 @@ function(add_bindings_targets)
         
             # The default list item separator in cmake is ";". If Linux, then exchange ";" for  the UNIX style ":"
             # and store the result in parent_classpath.
-            string(REGEX REPLACE ";" ":" parent_classpath "${FIELDS_CLASSPATH}")
+            string(REGEX REPLACE ";" ":" parent_classpath "${FIELD_CLASSPATH}")
             string(REGEX REPLACE ";" ":" this_classpath "${${COMPONENT}_CLASSPATH}")
             add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
-                   DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${FIELDS_JAVA_BINDING_JAR}
+                   DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${FIELD_JAVA_BINDING_JAR}
                    COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
                    COMMAND ${Java_JAVAC_EXECUTABLE} -classpath "${parent_classpath}" -d . *.java
                    COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
@@ -501,11 +501,11 @@ function(add_dumpsheaf_target)
     
     # Make sure the library is up to date
     if(WIN64MSVC OR WIN64INTEL)
-        add_dependencies(dumpsheaf ${FIBER_BUNDLES_IMPORT_LIB})
-        target_link_libraries(dumpsheaf ${FIBER_BUNDLES_IMPORT_LIBS})
+        add_dependencies(dumpsheaf ${FIBER_BUNDLE_IMPORT_LIB})
+        target_link_libraries(dumpsheaf ${FIBER_BUNDLE_IMPORT_LIBS})
     else()
-        add_dependencies(dumpsheaf ${FIBER_BUNDLES_SHARED_LIB})
-        target_link_libraries(dumpsheaf ${FIBER_BUNDLES_SHARED_LIB})
+        add_dependencies(dumpsheaf ${FIBER_BUNDLE_SHARED_LIB})
+        target_link_libraries(dumpsheaf ${FIBER_BUNDLE_SHARED_LIB})
     endif()
 
     # Supply the *_DLL_IMPORTS directive to preprocessor

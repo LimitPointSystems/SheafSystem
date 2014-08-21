@@ -22,11 +22,11 @@
 #define POINT_LOCATOR_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
-#include "ComLimitPoint/Sheaf/sheaf_dll_spec.h"
+#include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef BLOCK_H
-#include "block.h"
+#ifndef COM_LIMITPOINT_SHEAF_BLOCK_H
+#include "ComLimitPoint/sheaf/block.h"
 #endif
 
 #ifndef GEOMETRY_H

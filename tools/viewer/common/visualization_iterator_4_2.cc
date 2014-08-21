@@ -20,7 +20,7 @@
 
 #include "visualization_iterator_4_2.h"
 
-#include "assert_contract.h"
+#include "ComLimitPoint/sheaf/assert_contract.h"
 #include "base_space_member.h"
 #include "binary_section_space_schema_member.h"
 #include "eval_family.h"
@@ -32,7 +32,7 @@
 #include "structured_block_1d.h"
 #include "structured_block_2d.h"
 #include "structured_block_3d.h"
-#include "subposet_member_iterator.h"
+#include "ComLimitPoint/sheaf/subposet_member_iterator.h"
 #include "uniform_eval_family.h"
 #include "vtkDoubleArray.h"
 #include "vtkIdTypeArray.h"

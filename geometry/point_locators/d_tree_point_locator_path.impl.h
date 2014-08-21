@@ -22,15 +22,15 @@
 #define D_TREE_POINT_LOCATOR_PATH_IMPL_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
-#include "ComLimitPoint/Sheaf/sheaf_dll_spec.h"
+#include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
 #ifndef D_TREE_POINT_LOCATOR_PATH_H
 #include "d_tree_point_locator_path.h"
 #endif
 
-#ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#ifndef COM_LIMITPOINT_SHEAF_ASSERT_CONTRACT_H
+#include "ComLimitPoint/sheaf/assert_contract.h"
 #endif
 
 #ifndef D_BOUNDING_BOX_H

@@ -19,8 +19,8 @@
 
 #include "geometry.h"
 
-#include "auto_block.impl.h"
-#include "block.impl.h"
+#include "ComLimitPoint/sheaf/auto_block.impl.h"
+#include "ComLimitPoint/sheaf/block.impl.h"
 
 #include "d_bounding_box.impl.h"
 #include "d_tree_point_locator_node.impl.h"

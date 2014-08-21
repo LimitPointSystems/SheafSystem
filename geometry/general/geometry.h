@@ -22,19 +22,19 @@
 #define GEOMETRY_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
-#include "ComLimitPoint/Sheaf/sheaf_dll_spec.h"
+#include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
 #ifndef FIBER_BUNDLE_H
 #include "fiber_bundle.h"
 #endif
 
-#ifndef SCOPED_INDEX_H
-#include "scoped_index.h"
+#ifndef COM_LIMITPOINT_SHEAF_SCOPED_INDEX_H
+#include "ComLimitPoint/sheaf/scoped_index.h"
 #endif
 
-#ifndef STL_SCOPED_INDEX_H
-#include "stl_scoped_index.h"
+#ifndef COM_LIMITPOINT_SHEAF_STL_SCOPED_INDEX_H
+#include "ComLimitPoint/sheaf/stl_scoped_index.h"
 #endif
 
 #ifndef STD_UNORDERED_SET_H

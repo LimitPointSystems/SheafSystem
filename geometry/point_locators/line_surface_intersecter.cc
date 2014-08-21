@@ -20,7 +20,7 @@
 
 #include "line_surface_intersecter.h"
 
-#include "assert_contract.h"
+#include "ComLimitPoint/sheaf/assert_contract.h"
 #include "base_space_poset.h"
 #include "e3.h"
 #include "sec_at1_space.h"

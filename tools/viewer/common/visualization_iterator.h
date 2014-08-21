@@ -22,11 +22,11 @@
 #define VISUALIZATION_ITERATOR_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
-#include "ComLimitPoint/Sheaf/sheaf_dll_spec.h"
+#include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef FILTERED_DEPTH_FIRST_ITERATOR_H
-#include "filtered_depth_first_iterator.h"
+#ifndef COM_LIMITPOINT_SHEAF_FILTERED_DEPTH_FIRST_ITERATOR_H
+#include "ComLimitPoint/sheaf/filtered_depth_first_iterator.h"
 #endif
 
 #ifndef SEC_VD_H

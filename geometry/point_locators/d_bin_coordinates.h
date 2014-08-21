@@ -22,15 +22,15 @@
 #define D_BIN_COORDINATES_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
-#include "ComLimitPoint/Sheaf/sheaf_dll_spec.h"
+#include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
 #ifndef SECTION_EVALUATOR_H
 #include "section_evaluator.h"
 #endif
 
-#ifndef SHEAF_H
-#include "sheaf.h"
+#ifndef COM_LIMITPOINT_SHEAF_SHEAF_H
+#include "ComLimitPoint/sheaf/sheaf.h"
 #endif
 
 #ifndef STD_CMATH_H

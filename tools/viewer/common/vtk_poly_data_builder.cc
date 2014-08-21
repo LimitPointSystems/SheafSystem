@@ -18,10 +18,10 @@
 // Implementation for class vtk_poly_data_builder
 
 #include "vtk_poly_data_builder.h"
-#include "assert_contract.h"
+#include "ComLimitPoint/sheaf/assert_contract.h"
 #include "base_space_member.h"
 #include "eval_iterator.h"
-#include "namespace_poset.h"
+#include "ComLimitPoint/sheaf/namespace_poset.h"
 #include "sec_vd_space.h"
 
 #include "vtkPolyData.h"

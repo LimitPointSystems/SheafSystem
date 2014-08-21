@@ -22,7 +22,7 @@
 #define ARRAY_CYLINDRICAL_POINT_LOCATOR_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
-#include "ComLimitPoint/Sheaf/sheaf_dll_spec.h"
+#include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
 #ifndef CYLINDRICAL_POINT_LOCATOR_H

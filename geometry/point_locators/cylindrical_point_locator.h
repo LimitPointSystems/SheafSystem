@@ -26,7 +26,7 @@
 #define CYLINDRICAL_POINT_LOCATOR_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
-#include "ComLimitPoint/Sheaf/sheaf_dll_spec.h"
+#include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
 #ifndef POINT_LOCATOR_H
@@ -51,8 +51,8 @@
 #include "singly_linked_list.h"
 #endif
 
-#ifndef STL_SCOPED_INDEX_H
-#include "stl_scoped_index.h"
+#ifndef COM_LIMITPOINT_SHEAF_STL_SCOPED_INDEX_H
+#include "ComLimitPoint/sheaf/stl_scoped_index.h"
 #endif
 
 //#undef DIAGNOSTIC_OUTPUT

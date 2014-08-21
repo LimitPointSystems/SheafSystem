@@ -18,7 +18,7 @@
 // Explicit instantiations for class auto_block.
 
 
-#include "auto_block.impl.h"
+#include "ComLimitPoint/sheaf/auto_block.impl.h"
 
 #include "d_bounding_box.impl.h"
 #include "d_tree_point_locator_node.impl.h"

@@ -22,23 +22,23 @@
 #include "sec_ed_invertible.h"
 
 #include "array_cylindrical_point_locator.h"
-#include "assert_contract.h"
+#include "ComLimitPoint/sheaf/assert_contract.h"
 #include "chart_point.h"
 #include "chart_point_3d.h"
 #include "d_array_point_locator.h"
 #include "db0_point_locator.h"
 #include "d_tree_point_locator.h"
 #include "d_uniform_point_locator.h"
-#include "namespace_poset.h"
-#include "poset.h"
-#include "poset_path.h"
+#include "ComLimitPoint/sheaf/namespace_poset.h"
+#include "ComLimitPoint/sheaf/poset.h"
+#include "ComLimitPoint/sheaf/poset_path.h"
 #include "sec_at0.h"
 #include "sec_at1_space.h"
 #include "sec_rep_descriptor.h"
 #include "sec_rep_space.h"
 #include "section_eval_iterator.h"
 #include "section_evaluator.h"
-#include "sheaf.h"
+#include "ComLimitPoint/sheaf/sheaf.h"
 
 using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.

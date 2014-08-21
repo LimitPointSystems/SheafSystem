@@ -20,7 +20,7 @@
 
 #include "db0_point_locator.impl.h"
 
-#include "block.impl.h"
+#include "ComLimitPoint/sheaf/block.impl.h"
 #include "section_space_schema_poset.h"
 
 using namespace std;

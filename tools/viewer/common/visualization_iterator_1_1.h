@@ -22,7 +22,7 @@
 #define VISUALIZATION_ITERATOR_1_1_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
-#include "ComLimitPoint/Sheaf/sheaf_dll_spec.h"
+#include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
 #ifndef VISUALIZATION_ITERATOR_H
@@ -49,8 +49,8 @@
 #include "std_set.h"
 #endif
 
-#ifndef ZN_TO_BOOL_H
-#include "zn_to_bool.h"
+#ifndef COM_LIMITPOINT_SHEAF_ZN_TO_BOOL_H
+#include "ComLimitPoint/sheaf/zn_to_bool.h"
 #endif
 
 namespace fiber_bundle

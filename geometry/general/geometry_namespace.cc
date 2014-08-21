@@ -19,18 +19,18 @@
 
 #include "geometry_namespace.h"
 
-#include "assert_contract.h"
+#include "ComLimitPoint/sheaf/assert_contract.h"
 #include "at0.h"
 #include "base_space_member.h"
-#include "error_message.h"
+#include "ComLimitPoint/sheaf/error_message.h"
 #include "e1.h"
 #include "e2.h"
 #include "e3.h"
-#include "poset_path.h"
+#include "ComLimitPoint/sheaf/poset_path.h"
 #include "sec_rep_descriptor.h"
 #include "sec_rep_descriptor_poset.h"
 #include "std_iostream.h"
-#include "wsv_block.h"
+#include "ComLimitPoint/sheaf/wsv_block.h"
 
 //#define DIAGNOSTIC_OUTPUT
 

@@ -18,10 +18,10 @@
 // Implementation for class vtk_abstract_grid_builder
 
 #include "vtk_abstract_grid_builder.h"
-#include "assert_contract.h"
+#include "ComLimitPoint/sheaf/assert_contract.h"
 #include "base_space_member.h"
 #include "eval_iterator.h"
-#include "namespace_poset.h"
+#include "ComLimitPoint/sheaf/namespace_poset.h"
 
 #include "vtkUnstructuredGrid.h"
 #include "vtkUnstructuredGridWriter.h"

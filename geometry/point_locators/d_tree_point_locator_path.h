@@ -22,15 +22,15 @@
 #define D_TREE_POINT_LOCATOR_PATH_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
-#include "ComLimitPoint/Sheaf/sheaf_dll_spec.h"
+#include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
 #ifndef D_BIN_COORDINATES_H
 #include "d_bin_coordinates.h"
 #endif
 
-#ifndef SHEAF_H
-#include "sheaf.h"
+#ifndef COM_LIMITPOINT_SHEAF_SHEAF_H
+#include "ComLimitPoint/sheaf/sheaf.h"
 #endif
 
 //#undef DIAGNOSTIC_OUTPUT

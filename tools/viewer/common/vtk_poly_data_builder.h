@@ -21,23 +21,23 @@
 #define VTK_POLY_DATA_BUILDER_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
-#include "ComLimitPoint/Sheaf/sheaf_dll_spec.h"
+#include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef ANY_H
-#include "any.h"
+#ifndef COM_LIMITPOINT_SHEAF_ANY_H
+#include "ComLimitPoint/sheaf/any.h"
 #endif
 
-#ifndef BLOCK_H
-#include "block.h"
+#ifndef COM_LIMITPOINT_SHEAF_BLOCK_H
+#include "ComLimitPoint/sheaf/block.h"
 #endif
 
 #ifndef SEC_VD_H
 #include "sec_vd.h"
 #endif
 
-#ifndef SHEAF_H
-#include "sheaf.h"
+#ifndef COM_LIMITPOINT_SHEAF_SHEAF_H
+#include "ComLimitPoint/sheaf/sheaf.h"
 #endif
 
 #ifndef VTKTYPE_H

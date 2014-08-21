@@ -58,7 +58,7 @@ if(WIN64INTEL OR WIN64MSVC)
     #
     # Set the cumulative import library (win32) var for this component.
     #
-    set(${COMPONENT}_IMPORT_LIBS ${FIBER_BUNDLES_IMPORT_LIBS} 
+    set(${COMPONENT}_IMPORT_LIBS ${FIBER_BUNDLE_IMPORT_LIBS} 
         ${${COMPONENT}_IMPORT_LIB} CACHE STRING 
         " Cumulative import libraries (win32) for ${PROJECT_NAME}" FORCE)
 
@@ -67,14 +67,14 @@ else()
     #
     # Set the cumulative shared library var for this component.
     #
-    set(${COMPONENT}_STATIC_LIBS ${FIBER_BUNDLES_STATIC_LIBS} 
+    set(${COMPONENT}_STATIC_LIBS ${FIBER_BUNDLE_STATIC_LIBS} 
         ${${COMPONENT}_STATIC_LIB} CACHE STRING 
         "Cumulative static libraries for ${PROJECT_NAME}" FORCE)
     
     #
     # Set the cumulative shared library var for this component.
     #
-    set(${COMPONENT}_SHARED_LIBS ${FIBER_BUNDLES_SHARED_LIBS} 
+    set(${COMPONENT}_SHARED_LIBS ${FIBER_BUNDLE_SHARED_LIBS} 
         ${${COMPONENT}_SHARED_LIB} CACHE STRING 
         "Cumulative shared libraries for ${PROJECT_NAME}" FORCE)
     
@@ -83,14 +83,14 @@ endif()
 #
 # Set the cumulative Java binding library var for this component.
 #
-set(${COMPONENT}_JAVA_BINDING_LIBS ${FIBER_BUNDLES_JAVA_BINDING_LIBS} 
+set(${COMPONENT}_JAVA_BINDING_LIBS ${FIBER_BUNDLE_JAVA_BINDING_LIBS} 
     ${${COMPONENT}_JAVA_BINDING_LIB} CACHE STRING 
     "Cumulative Java binding libraries for ${PROJECT_NAME}" FORCE)
 
 #
 # Set the cumulative Java binding jar variable for this component.
 #
-set(${COMPONENT}_JAVA_BINDING_JARS ${FIBER_BUNDLES_JAVA_BINDING_JARS} 
+set(${COMPONENT}_JAVA_BINDING_JARS ${FIBER_BUNDLE_JAVA_BINDING_JARS} 
     ${PROJECT_NAME}_java_binding.jar CACHE STRING 
     "Cumulative Java bindings jars for ${PROJECT_NAME}")
 
@@ -98,21 +98,21 @@ set(${COMPONENT}_JAVA_BINDING_JARS ${FIBER_BUNDLES_JAVA_BINDING_JARS}
 # Set the cumulative Python binding library var for this component.
 #
 set(${COMPONENT}_PYTHON_BINDING_LIBS 
-    ${FIBER_BUNDLES_PYTHON_BINDING_LIBS} 
+    ${FIBER_BUNDLE_PYTHON_BINDING_LIBS} 
     ${${COMPONENT}_PYTHON_BINDING_LIB} CACHE STRING 
     "Cumulative Python binding libraries for ${PROJECT_NAME}" FORCE)
  
 #
 # Set the cumulative include path for this component.
 #
-set(${COMPONENT}_IPATHS ${FIBER_BUNDLES_IPATHS} 
-    ${${COMPONENT}_IPATH} CACHE STRING 
-    "Cumulative include paths for ${PROJECT_NAME}" FORCE)
+#set(${COMPONENT}_IPATHS ${FIBER_BUNDLE_IPATHS} 
+#    ${${COMPONENT}_IPATH} CACHE STRING 
+#    "Cumulative include paths for ${PROJECT_NAME}" FORCE)
 
 #
 # Specify component prerequisite include directories.
 #
-include_directories(${FIBER_BUNDLES_IPATHS})
+#include_directories(${FIBER_BUNDLE_IPATHS})
 
 #------------------------------------------------------------------------------
 # FUNCTION DEFINITION SECTION
@@ -132,9 +132,9 @@ function(add_library_targets)
         add_library(${${COMPONENT}_DYNAMIC_LIB} 
             SHARED ${${COMPONENT}_SRCS})
         add_dependencies(${${COMPONENT}_DYNAMIC_LIB} 
-            ${FIBER_BUNDLES_IMPORT_LIBS})
+            ${FIBER_BUNDLE_IMPORT_LIBS})
         target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} 
-            ${FIBER_BUNDLES_IMPORT_LIBS})        
+            ${FIBER_BUNDLE_IMPORT_LIBS})        
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} 
             PROPERTIES FOLDER "Library Targets")
 
@@ -149,7 +149,7 @@ function(add_library_targets)
         add_library(${${COMPONENT}_STATIC_LIB} 
             STATIC ${${COMPONENT}_SRCS})
         add_dependencies(${${COMPONENT}_STATIC_LIB} 
-            ${FIBER_BUNDLES_STATIC_LIBS})
+            ${FIBER_BUNDLE_STATIC_LIBS})
         set_target_properties(${${COMPONENT}_STATIC_LIB} 
             PROPERTIES OUTPUT_NAME ${PROJECT_NAME})
 
@@ -157,7 +157,7 @@ function(add_library_targets)
         add_library(${${COMPONENT}_SHARED_LIB} 
             SHARED ${${COMPONENT}_SRCS})
         add_dependencies(${${COMPONENT}_SHARED_LIB} 
-            ${FIBER_BUNDLES_SHARED_LIBS})
+            ${FIBER_BUNDLE_SHARED_LIBS})
         set_target_properties(${${COMPONENT}_SHARED_LIB} 
             PROPERTIES OUTPUT_NAME ${PROJECT_NAME} LINKER_LANGUAGE CXX)
         
@@ -179,9 +179,9 @@ function(add_library_targets)
             ${${COMPONENT}_STATIC_LIBS})
         
         target_link_libraries(${${COMPONENT}_SHARED_LIB} 
-            ${FIBER_BUNDLES_SHARED_LIBS}) 
+            ${FIBER_BUNDLE_SHARED_LIBS}) 
         target_link_libraries(${${COMPONENT}_STATIC_LIB} 
-            ${FIBER_BUNDLES_STATIC_LIBS}) 
+            ${FIBER_BUNDLE_STATIC_LIBS}) 
  
     endif()
 
@@ -203,8 +203,8 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
     include_directories(${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})
     include_directories(${SHEAVES_JAVA_BINDING_SRC_DIR})
     include_directories(${SHEAVES_COMMON_BINDING_SRC_DIR})
-    include_directories(${FIBER_BUNDLES_JAVA_BINDING_SRC_DIR})
-    include_directories(${FIBER_BUNDLES_COMMON_BINDING_SRC_DIR})
+    include_directories(${FIBER_BUNDLE_JAVA_BINDING_SRC_DIR})
+    include_directories(${FIBER_BUNDLE_COMMON_BINDING_SRC_DIR})
     include_directories(${${COMPONENT}_JAVA_BINDING_SRC_DIR})
     include_directories(${${COMPONENT}_COMMON_BINDING_SRC_DIR})
 
@@ -219,21 +219,21 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
  
     if(WIN64INTEL OR WIN64MSVC)
         add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} 
-            ${FIBER_BUNDLES_JAVA_BINDING_LIBS} 
+            ${FIBER_BUNDLE_JAVA_BINDING_LIBS} 
             ${${COMPONENT}_IMPORT_LIB})
         swig_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} 
-            ${FIBER_BUNDLES_JAVA_BINDING_LIBS} ${JDK_LIBS} 
+            ${FIBER_BUNDLE_JAVA_BINDING_LIBS} ${JDK_LIBS} 
             ${${COMPONENT}_IMPORT_LIBS})
         set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} 
             PROPERTIES FOLDER "Binding Targets - Java")  
     else()
         add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} 
-            ${FIBER_BUNDLES_JAVA_BINDING_LIBS} ${JDK_LIBS} 
+            ${FIBER_BUNDLE_JAVA_BINDING_LIBS} ${JDK_LIBS} 
             ${${COMPONENT}_SHARED_LIB} 
             ${${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE} 
             ${${COMPONENT}_SWIG_COMMON_INTERFACE})
         target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} 
-            ${FIBER_BUNDLES_JAVA_BINDING_LIBS} ${JDK_LIBS} 
+            ${FIBER_BUNDLE_JAVA_BINDING_LIBS} ${JDK_LIBS} 
             ${${COMPONENT}_SHARED_LIB})   
     endif()
 
@@ -245,28 +245,28 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
         PROPERTIES VERSION ${LIB_VERSION})
 
     target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} 
-        ${${COMPONENT}_SHARED_LIB} ${FIBER_BUNDLES_JAVA_BINDING_LIBS} 
+        ${${COMPONENT}_SHARED_LIB} ${FIBER_BUNDLE_JAVA_BINDING_LIBS} 
         ${JDK_LIBS}) 
 
     list(APPEND ${COMPONENT}_CLASSPATH 
-        ${FIBER_BUNDLES_CLASSPATH} 
+        ${FIBER_BUNDLE_CLASSPATH} 
         ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR})
                 
      # Create the bindings jar file 
     if(WIN64INTEL OR WIN64MSVC)
-        set(${COMPONENT}_CLASSPATH  ${FIBER_BUNDLES_CLASSPATH} 
+        set(${COMPONENT}_CLASSPATH  ${FIBER_BUNDLE_CLASSPATH} 
             ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} 
             CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
         add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
                DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} 
-               ${FIBER_BUNDLES_JAVA_BINDING_JAR}
+               ${FIBER_BUNDLE_JAVA_BINDING_JAR}
 
                set_target_properties(${PROJECT_NAME}_java_binding.jar 
                    PROPERTIES FOLDER "Component Binding Jars")                           
                COMMAND ${CMAKE_COMMAND} -E echo 
                    "Compiling Java files..."
                COMMAND ${Java_JAVAC_EXECUTABLE} -classpath 
-                   "${FIBER_BUNDLES_CLASSPATH}" -d . *.java
+                   "${FIBER_BUNDLE_CLASSPATH}" -d . *.java
                COMMAND ${CMAKE_COMMAND} -E echo 
                    "Creating jar file..."
                COMMAND ${Java_JAR_EXECUTABLE} cvf 
@@ -278,7 +278,7 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
          if(DOC_TARGETS)
             add_custom_target(${PROJECT_NAME}-java-docs ALL
                 COMMAND ${Java_JAVADOC_EXECUTABLE} -windowtitle "${PROJECT_NAME} documentation" 
-                    -classpath "${FIBER_BUNDLES_CLASSPATH}"
+                    -classpath "${FIBER_BUNDLE_CLASSPATH}"
                     -d  ${CMAKE_BINARY_DIR}/documentation/java/${PROJECT_NAME}  
                     *.java WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
                     DEPENDS ${${COMPONENT}_JAVA_BINDING_JAR}
@@ -289,18 +289,18 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
 
          endif()                             
     else()
-        set(${COMPONENT}_CLASSPATH ${FIBER_BUNDLES_CLASSPATH} 
+        set(${COMPONENT}_CLASSPATH ${FIBER_BUNDLE_CLASSPATH} 
             ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR} 
             CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
 
         # The default list item separator in cmake is ";". If Linux, then exchange ";" for  the UNIX style ":"
         # and store the result in parent_classpath.
-        string(REGEX REPLACE ";" ":" parent_classpath "${FIBER_BUNDLES_CLASSPATH}")
+        string(REGEX REPLACE ";" ":" parent_classpath "${FIBER_BUNDLE_CLASSPATH}")
         string(REGEX REPLACE ";" ":" this_classpath "${${COMPONENT}_CLASSPATH}")
 
         add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
                DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} 
-               ${FIBER_BUNDLES_JAVA_BINDING_JAR}
+               ${FIBER_BUNDLE_JAVA_BINDING_JAR}
                COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
                COMMAND ${Java_JAVAC_EXECUTABLE} -classpath "${parent_classpath}" -d . *.java
                COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
@@ -333,7 +333,7 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
     set(CMAKE_SWIG_FLAGS -c++ -w842 -namespace geometry)
     
     include_directories(${SHEAVES_CSHARP_BINDING_SRC_DIR})
-    include_directories(${FIBER_BUNDLES_CSHARP_BINDING_SRC_DIR})
+    include_directories(${FIBER_BUNDLE_CSHARP_BINDING_SRC_DIR})
    
         # Add the csharp binding library target
     set_source_files_properties(
@@ -344,19 +344,19 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
 
     if(WIN64INTEL OR WIN64MSVC)
         add_dependencies(${${COMPONENT}_CSHARP_BINDING_LIB} 
-            ${FIBER_BUNDLES_CSHARP_BINDING_LIB} 
+            ${FIBER_BUNDLE_CSHARP_BINDING_LIB} 
             ${${COMPONENT}_IMPORT_LIB})
         target_link_libraries(${${COMPONENT}_CSHARP_BINDING_LIB} 
-            ${FIBER_BUNDLES_CSHARP_BINDING_LIB} 
+            ${FIBER_BUNDLE_CSHARP_BINDING_LIB} 
             ${${COMPONENT}_IMPORT_LIB} ${CSHARP_LIBRARY})
         set_target_properties(${${COMPONENT}_CSHARP_BINDING_LIB} 
             PROPERTIES FOLDER "Binding Targets - CSharp")
     else()
         add_dependencies(${${COMPONENT}_CSHARP_BINDING_LIB} 
-            ${FIBER_BUNDLES_CSHARP_BINDING_LIB} 
+            ${FIBER_BUNDLE_CSHARP_BINDING_LIB} 
             ${${COMPONENT}_SHARED_LIB})
         target_link_libraries(${${COMPONENT}_CSHARP_BINDING_LIB} 
-        ${FIBER_BUNDLES_CSHARP_BINDING_LIB} 
+        ${FIBER_BUNDLE_CSHARP_BINDING_LIB} 
         ${${COMPONENT}_SHARED_LIB})
     endif()    
     set_target_properties(${${COMPONENT}_CSHARP_BINDING_LIB} 
@@ -400,7 +400,7 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
 
     include_directories(${PYTHON_INCLUDE_DIRS})
     include_directories(${SHEAVES_PYTHON_BINDING_SRC_DIR})
-    include_directories(${FIBER_BUNDLES_PYTHON_BINDING_SRC_DIR})
+    include_directories(${FIBER_BUNDLE_PYTHON_BINDING_SRC_DIR})
 
     set_source_files_properties(${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE} 
         PROPERTIES CPLUSPLUS ON)
@@ -409,16 +409,16 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
 
     if(WIN64INTEL OR WIN64MSVC)
         add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} 
-            ${FIBER_BUNDLES_PYTHON_BINDING_LIBS} 
+            ${FIBER_BUNDLE_PYTHON_BINDING_LIBS} 
             ${${COMPONENT}_IMPORT_LIBS})
         swig_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} 
-            ${FIBER_BUNDLES_PYTHON_BINDING_LIBS} 
+            ${FIBER_BUNDLE_PYTHON_BINDING_LIBS} 
             ${${COMPONENT}_IMPORT_LIB} ${PYTHON_LIBRARY} )
         set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} 
             PROPERTIES FOLDER "Binding Targets - Python")
     else()
         swig_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} 
-            ${FIBER_BUNDLES_PYTHON_BINDING_LIBS} 
+            ${FIBER_BUNDLE_PYTHON_BINDING_LIBS} 
             ${${COMPONENT}_SHARED_LIBS})
     endif()
     set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} 
