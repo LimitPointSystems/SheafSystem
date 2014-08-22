@@ -37,7 +37,7 @@
 #include "d_array_point_locator.h"
 #endif
  
-#ifndefCOM_LIMITPOINT_FIBER_BUNDLE_ E3_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_ E3_H
 #include "ComLimitPoint/fiber_bundle/e3.h"
 #endif
 
