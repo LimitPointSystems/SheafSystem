@@ -25,8 +25,8 @@
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef SECTION_EVALUATOR_H
-#include "section_evaluator.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SECTION_EVALUATOR_H
+#include "ComLimitPoint/fiber_bundle/section_evaluator.h"
 #endif
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_H

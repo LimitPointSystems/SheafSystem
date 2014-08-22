@@ -37,16 +37,16 @@
 #include "d_array_point_locator.h"
 #endif
  
-#ifndef E3_H
-#include "e3.h"
+#ifndefCOM_LIMITPOINT_FIBER_BUNDLE_ E3_H
+#include "ComLimitPoint/fiber_bundle/e3.h"
 #endif
 
 #ifndef GEOMETRY_H
 #include "geometry.h"
 #endif
  
-#ifndef LINEAR_2D_H
-#include "linear_2d.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_LINEAR_2D_H
+#include "ComLimitPoint/fiber_bundle/linear_2d.h"
 #endif  
 
 #ifndef STD_IOSTREAM_H

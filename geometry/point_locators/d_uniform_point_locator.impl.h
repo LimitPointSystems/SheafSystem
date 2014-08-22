@@ -66,16 +66,16 @@
 #include "ComLimitPoint/fiber_bundle/structured_block_3d.h"
 #endif
 
-#ifndef UNIFORM_1D_H
-#include "uniform_1d.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_UNIFORM_1D_H
+#include "ComLimitPoint/fiber_bundle/uniform_1d.h"
 #endif
 
-#ifndef UNIFORM_2D_H
-#include "uniform_2d.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_UNIFORM_2D_H
+#include "ComLimitPoint/fiber_bundle/uniform_2d.h"
 #endif
 
-#ifndef UNIFORM_3D_H
-#include "uniform_3d.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_UNIFORM_3D_H
+#include "ComLimitPoint/fiber_bundle/uniform_3d.h"
 #endif
 
 //#undef DIAGNOSTIC_OUTPUT
