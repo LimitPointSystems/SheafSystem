@@ -46,12 +46,12 @@
 #include "ComLimitPoint/fiber_bundle/chart_point_3d.h"
 #endif
 
-#ifndef SEC_AT1_SPACE_H
-#include "sec_at1_space.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_AT1_SPACE_H
+#include "ComLimitPoint/fiber_bundle/sec_at1_space.h"
 #endif
 
-#ifndef SEC_ED_H
-#include "sec_ed.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_ED_H
+#include "ComLimitPoint/fiber_bundle/sec_ed.h"
 #endif
 
 #ifndef COM_LIMITPOINT_FIBER_BUNDLE_STRUCTURED_BLOCK_1D_H

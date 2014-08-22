@@ -17,8 +17,8 @@
 
 // Implementation for sec_stp facet function templates.
 
-#ifndef SEC_STP_IMPL_H
-#define SEC_STP_IMPL_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_STP_IMPL_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SEC_STP_IMPL_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -28,8 +28,8 @@
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #endif
 
-#ifndef SEC_STP_H
-#include "sec_stp.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_STP_H
+#include "ComLimitPoint/fiber_bundle/sec_stp.h"
 #endif
 
 namespace fiber_bundle
@@ -66,4 +66,4 @@ void symmetric_product(const S0& x0, const S1& x1, SR& xresult,
 
 } // namespace fiber_bundle
 
-#endif // ifndef SEC_STP_IMPL_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_STP_IMPL_H

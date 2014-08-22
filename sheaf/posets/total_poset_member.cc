@@ -37,7 +37,7 @@
 #include "ComLimitPoint/sheaf/zn_to_bool.h"
 
 // ===========================================================
-// TOTAL_POSET_MEMBER FACET
+// COM_LIMITPOINT_SHEAF_TOTAL_POSET_MEMBER FACET
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS

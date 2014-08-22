@@ -142,7 +142,7 @@ class e3_lite;
 class SHEAF_DLL_SPEC at2_e3_lite : public at2_lite
 {
   //============================================================================
-  /// @name AT2_E3 FACET OF CLASS AT2_E3_LITE
+  /// @name COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3 FACET OF CLASS AT2_E3_LITE
   //============================================================================
   //@{
 
@@ -414,7 +414,7 @@ private:
 };
 
 //==============================================================================
-// CLASS AT2_E3
+// CLASS COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3
 //==============================================================================
 
 ///
@@ -424,7 +424,7 @@ private:
 class SHEAF_DLL_SPEC at2_e3 : public at2
 {
   // ===========================================================
-  /// @name HOST FACTORY FACET OF CLASS AT2_E3
+  /// @name HOST FACTORY FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3
   // ===========================================================
   //@{
 
@@ -467,7 +467,7 @@ private:
 
 
   //============================================================================
-  /// @name AT2_E3 FACET OF CLASS AT2_E3
+  /// @name COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3 FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3
   //============================================================================
   //@{
 
@@ -597,7 +597,7 @@ private:
 
 
   //============================================================================
-  /// @name AT2 FACET OF CLASS AT2_E3
+  /// @name AT2 FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3
   //============================================================================
   //@{
 
@@ -609,7 +609,7 @@ private:
 
 
   //============================================================================
-  /// @name ATP FACET OF CLASS AT2_E3
+  /// @name ATP FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3
   //============================================================================
   //@{
 
@@ -621,7 +621,7 @@ private:
 
 
   //============================================================================
-  /// @name TP FACET OF CLASS AT2_E3
+  /// @name TP FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3
   //============================================================================
   //@{
 
@@ -633,7 +633,7 @@ private:
 
 
   //============================================================================
-  /// @name VD FACET OF CLASS AT2_E3
+  /// @name VD FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3
   //============================================================================
   //@{
 
@@ -645,7 +645,7 @@ private:
 
 
   //============================================================================
-  /// @name TUPLE FACET OF CLASS AT2_E3
+  /// @name TUPLE FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3
   //============================================================================
   //@{
 
@@ -676,7 +676,7 @@ private:
 
 
   //============================================================================
-  /// @name ABSTRACT POSET MEMBER FACET OF CLASS AT2_E3
+  /// @name ABSTRACT POSET MEMBER FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3
   //============================================================================
   //@{
 
@@ -715,7 +715,7 @@ private:
 
 
   //============================================================================
-  /// @name ANY FACET OF CLASS AT2_E3
+  /// @name ANY FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3
   //============================================================================
   //@{
 

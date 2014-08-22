@@ -29,7 +29,7 @@
 #include "ComLimitPoint/sheaf/any.h"
 #endif
 
-#ifndef BINARY_SECTION_SPACE_SCHEMA_MEMBER_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_BINARY_SECTION_SPACE_SCHEMA_MEMBER_H
 #include "ComLimitPoint/fiber_bundle/binary_section_space_schema_member.h"
 #endif
 

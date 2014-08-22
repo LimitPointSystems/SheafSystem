@@ -28,8 +28,8 @@
 #include "ComLimitPoint/sheaf/error_message.h"
 #include "ComLimitPoint/fiber_bundle/linear_2d.h"
 #include "ComLimitPoint/sheaf/preorder_iterator.h"
-#include "sec_at1_space.h"
-#include "sec_ed.h"
+#include "ComLimitPoint/fiber_bundle/sec_at1_space.h"
+#include "ComLimitPoint/fiber_bundle/sec_ed.h"
 #include "std_bitset.h"
 
 using namespace std;

@@ -18,18 +18,18 @@
 /// @file
 /// Interface for class sec_at2_e2.
 
-#ifndef SEC_AT2_E2_H
-#define SEC_AT2_E2_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_AT2_E2_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SEC_AT2_E2_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef SEC_AT2_H
-#include "sec_at2.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_AT2_H
+#include "ComLimitPoint/fiber_bundle/sec_at2.h"
 #endif
 
-#ifndef AT2_E2
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_AT2_E2
 #include "ComLimitPoint/fiber_bundle/at2_e2.h"
 #endif
 
@@ -98,7 +98,7 @@ private:
 
 
   //============================================================================
-  /// @name AT2_E2 FACET OF CLASS SEC_AT2_E2
+  /// @name COM_LIMITPOINT_FIBER_BUNDLE_AT2_E2 FACET OF CLASS SEC_AT2_E2
   //============================================================================
   //@{
 
@@ -372,4 +372,4 @@ SHEAF_DLL_SPEC void wedge(const sec_e2& x0, const sec_e2& x1, sec_at2_e2& xresul
 
 } // namespace fiber_bundle
 
-#endif // ifndef SEC_AT2_E2_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_AT2_E2_H

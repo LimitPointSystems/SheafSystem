@@ -17,8 +17,8 @@
 
 // Implementation for sec_st2 facet function templates.
 
-#ifndef SEC_ST2_IMPL_H
-#define SEC_ST2_IMPL_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_ST2_IMPL_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SEC_ST2_IMPL_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -28,8 +28,8 @@
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #endif
 
-#ifndef SEC_ST2_H
-#include "sec_st2.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_ST2_H
+#include "ComLimitPoint/fiber_bundle/sec_st2.h"
 #endif
 
 namespace fiber_bundle
@@ -160,4 +160,4 @@ void determinant(const S0& x0, SR& xresult, bool xauto_access)
 
 } // namespace fiber_bundle
 
-#endif // ifndef SEC_ST2_IMPL_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_ST2_IMPL_H

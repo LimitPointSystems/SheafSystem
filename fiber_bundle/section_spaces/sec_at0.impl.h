@@ -17,8 +17,8 @@
 
 // Implementation for sec_at0 facet function templates.
 
-#ifndef SEC_AT0_IMPL_H
-#define SEC_AT0_IMPL_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_AT0_IMPL_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SEC_AT0_IMPL_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -28,8 +28,8 @@
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #endif
 
-#ifndef SEC_AT0_H
-#include "sec_at0.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_AT0_H
+#include "ComLimitPoint/fiber_bundle/sec_at0.h"
 #endif
 
-#endif // ifndef SEC_AT0_IMPL_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_AT0_IMPL_H

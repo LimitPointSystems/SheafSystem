@@ -195,7 +195,7 @@ const fiber_bundle::at2_e2_lite::row_dofs_type&
 sheaf::row_dofs<fiber_bundle::at2_e2_lite>(const fiber_bundle::at2_e2_lite& x0);
 
 //==============================================================================
-// CLASS AT2_E2
+// CLASS COM_LIMITPOINT_FIBER_BUNDLE_AT2_E2
 //==============================================================================
 
  
@@ -237,7 +237,7 @@ sheaf::row_dofs<fiber_bundle::at2_e3_lite>(const fiber_bundle::at2_e3_lite& x0);
 
 
 //==============================================================================
-// CLASS AT2_E3
+// CLASS COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3
 //==============================================================================
 
 
@@ -299,7 +299,7 @@ sheaf::row_dofs<fiber_bundle::at3_e3_lite>(const fiber_bundle::at3_e3_lite& x0);
 
 
 //==============================================================================
-// CLASS AT3_E3
+// CLASS COM_LIMITPOINT_FIBER_BUNDLE_AT3_E3
 //==============================================================================
 
 
@@ -1079,7 +1079,7 @@ sheaf::row_dofs<fiber_bundle::st2_e2_lite>(const fiber_bundle::st2_e2_lite& x0);
 
 
 //==============================================================================
-// CLASS ST2_E2
+// CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E2
 //==============================================================================
 
 
@@ -1122,7 +1122,7 @@ sheaf::row_dofs<fiber_bundle::st2_e3_lite>(const fiber_bundle::st2_e3_lite& x0);
 
 
 //==============================================================================
-// CLASS ST2_E3
+// CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E3
 //==============================================================================
 
 
@@ -1185,7 +1185,7 @@ sheaf::row_dofs<fiber_bundle::st3_e3_lite>(const fiber_bundle::st3_e3_lite& x0);
 
 
 //==============================================================================
-// CLASS ST3_E3
+// CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST3_E3
 //==============================================================================
 
 
@@ -1250,7 +1250,7 @@ sheaf::row_dofs<fiber_bundle::st4_e2_lite>(const fiber_bundle::st4_e2_lite& x0);
 
 
 //==============================================================================
-// CLASS ST4_E2
+// CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST4_E2
 //==============================================================================
 
 
@@ -1293,7 +1293,7 @@ sheaf::row_dofs<fiber_bundle::st4_e3_lite>(const fiber_bundle::st4_e3_lite& x0);
 
 
 //==============================================================================
-// CLASS ST4_E3
+// CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST4_E3
 //==============================================================================
 
 
@@ -1387,7 +1387,7 @@ sheaf::row_dofs<fiber_bundle::t2_e2_lite>(const fiber_bundle::t2_e2_lite& x0);
 
 
 //==============================================================================
-// CLASS T2_E2
+// CLASS COM_LIMITPOINT_FIBER_BUNDLE_T2_E2
 //==============================================================================
 
 
@@ -1429,7 +1429,7 @@ sheaf::row_dofs<fiber_bundle::t2_e3_lite>(const fiber_bundle::t2_e3_lite& x0);
 
 
 //==============================================================================
-// CLASS T2_E3
+// CLASS COM_LIMITPOINT_FIBER_BUNDLE_T2_E3
 //==============================================================================
 
 
@@ -1492,7 +1492,7 @@ sheaf::row_dofs<fiber_bundle::t3_e3_lite>(const fiber_bundle::t3_e3_lite& x0);
 
 
 //==============================================================================
-// CLASS T3_E3
+// CLASS COM_LIMITPOINT_FIBER_BUNDLE_T3_E3
 //==============================================================================
 
 
@@ -1555,7 +1555,7 @@ sheaf::row_dofs<fiber_bundle::t4_e2_lite>(const fiber_bundle::t4_e2_lite& x0);
 
 
 //==============================================================================
-// CLASS T4_E2
+// CLASS COM_LIMITPOINT_FIBER_BUNDLE_T4_E2
 //==============================================================================
 
 
@@ -1597,7 +1597,7 @@ sheaf::row_dofs<fiber_bundle::t4_e3_lite>(const fiber_bundle::t4_e3_lite& x0);
 
 
 //==============================================================================
-// CLASS T4_E3
+// CLASS COM_LIMITPOINT_FIBER_BUNDLE_T4_E3
 //==============================================================================
 
 

@@ -148,7 +148,7 @@ class e3_lite;
 class SHEAF_DLL_SPEC st2_e3_lite : public st2_lite
 {
   //============================================================================
-  /// @name ST2_E3 FACET OF CLASS ST2_E3_LITE
+  /// @name COM_LIMITPOINT_FIBER_BUNDLE_ST2_E3 FACET OF CLASS ST2_E3_LITE
   //============================================================================
   //@{
 
@@ -422,7 +422,7 @@ private:
 };
 
 //==============================================================================
-// CLASS ST2_E3
+// CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E3
 //==============================================================================
 
 ///@issue Is this class named correctly, is the underlying vector space
@@ -435,7 +435,7 @@ private:
 class SHEAF_DLL_SPEC st2_e3 : public st2
 {
   // ===========================================================
-  /// @name HOST FACTORY FACET OF CLASS ST2_E3
+  /// @name HOST FACTORY FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E3
   // ===========================================================
   //@{
 
@@ -478,7 +478,7 @@ private:
 
 
   //============================================================================
-  /// @name ST2_E3 FACET OF CLASS ST2_E3
+  /// @name COM_LIMITPOINT_FIBER_BUNDLE_ST2_E3 FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E3
   //============================================================================
   //@{
 
@@ -600,7 +600,7 @@ private:
 
 
   //============================================================================
-  /// @name ST2 FACET OF CLASS ST2_E3
+  /// @name ST2 FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E3
   //============================================================================
   //@{
 
@@ -612,7 +612,7 @@ private:
 
 
   //============================================================================
-  /// @name STP FACET OF CLASS ST2_E3
+  /// @name STP FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E3
   //============================================================================
   //@{
 
@@ -624,7 +624,7 @@ private:
 
 
   //============================================================================
-  /// @name TP FACET OF CLASS ST2_E3
+  /// @name TP FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E3
   //============================================================================
   //@{
 
@@ -636,7 +636,7 @@ private:
 
 
   //============================================================================
-  /// @name VD FACET OF CLASS ST2_E3
+  /// @name VD FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E3
   //============================================================================
   //@{
 
@@ -649,7 +649,7 @@ private:
 
 
   //============================================================================
-  /// @name TUPLE FACET OF CLASS ST2_E3
+  /// @name TUPLE FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E3
   //============================================================================
   //@{
 
@@ -680,7 +680,7 @@ private:
 
 
   //===========================================================================
-  /// @name ABSTRACT POSET MEMBER FACET OF CLASS ST2_E3
+  /// @name ABSTRACT POSET MEMBER FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E3
   //===========================================================================
   //@{
 
@@ -719,7 +719,7 @@ private:
 
 
   //===========================================================================
-  /// @name ANY FACET OF CLASS ST2_E3
+  /// @name ANY FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E3
   //===========================================================================
   //@{
 

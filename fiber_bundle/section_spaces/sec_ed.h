@@ -18,15 +18,15 @@
 /// @file
 /// Interface for class sec_ed.
 
-#ifndef SEC_ED_H
-#define SEC_ED_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_ED_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SEC_ED_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef SEC_AT1_H
-#include "sec_at1.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_AT1_H
+#include "ComLimitPoint/fiber_bundle/sec_at1.h"
 #endif
 
 #ifndef COM_LIMITPOINT_FIBER_BUNDLE_ED_H
@@ -358,6 +358,6 @@ SHEAF_DLL_SPEC void normalize(sec_ed& x0, bool xauto_access);
 
 } // namespace fiber_bundle
 
-#endif // ifndef SEC_ED_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_ED_H
 
 

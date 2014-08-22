@@ -49,19 +49,19 @@
 #include "ComLimitPoint/sheaf/preorder_iterator.h"
 #endif
 
-#ifndef SEC_AT1_SPACE_H
-#include "sec_at1_space.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_AT1_SPACE_H
+#include "ComLimitPoint/fiber_bundle/sec_at1_space.h"
 #endif
 
-#ifndef SEC_ED_H
-#include "sec_ed.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_ED_H
+#include "ComLimitPoint/fiber_bundle/sec_ed.h"
 #endif
 
-#ifndef SEC_REP_DESCRIPTOR_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_REP_DESCRIPTOR_H
 #include "ComLimitPoint/fiber_bundle/sec_rep_descriptor.h"
 #endif
 
-#ifndef SECTION_SPACE_SCHEMA_POSET_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SECTION_SPACE_SCHEMA_POSET_H
 #include "ComLimitPoint/fiber_bundle/section_space_schema_poset.h"
 #endif
 

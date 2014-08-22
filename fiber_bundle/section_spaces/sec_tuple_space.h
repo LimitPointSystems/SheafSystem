@@ -18,8 +18,8 @@
 /// @file
 /// Interface for class sec_tuple_space.
 
-#ifndef SEC_TUPLE_SPACE_H
-#define SEC_TUPLE_SPACE_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_TUPLE_SPACE_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SEC_TUPLE_SPACE_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -254,4 +254,4 @@ private:
 } // namespace fiber_bundle
 
 
-#endif // SEC_TUPLE_SPACE_H
+#endif // COM_LIMITPOINT_FIBER_BUNDLE_SEC_TUPLE_SPACE_H

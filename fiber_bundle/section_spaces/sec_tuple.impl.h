@@ -8,22 +8,22 @@
 /// @file
 /// Implementation of template member functions for class sec_tuple
 
-#ifndef SEC_TUPLE_IMPL_H
-#define SEC_TUPLE_IMPL_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_TUPLE_IMPL_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SEC_TUPLE_IMPL_H
 
-#ifndef SEC_TUPLE_H
-#include "sec_tuple.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_TUPLE_H
+#include "ComLimitPoint/fiber_bundle/sec_tuple.h"
 #endif
 
 #ifndef COM_LIMITPOINT_SHEAF_NAMESPACE_POSET_H
 #include "ComLimitPoint/sheaf/namespace_poset.h"
 #endif
  
-#ifndef BINARY_SECTION_SPACE_SCHEMA_MEMBER_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_BINARY_SECTION_SPACE_SCHEMA_MEMBER_H
 #include "ComLimitPoint/fiber_bundle/binary_section_space_schema_member.h"
 #endif
 
-#ifndef BINARY_SECTION_SPACE_SCHEMA_POSET_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_BINARY_SECTION_SPACE_SCHEMA_POSET_H
 #include "ComLimitPoint/fiber_bundle/binary_section_space_schema_poset.h"
 #endif
 
@@ -106,4 +106,4 @@ standard_host_is_available(const namespace_poset& xns,
 }
 
 
-#endif // ifndef SEC_TUPLE_IMPL_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_TUPLE_IMPL_H

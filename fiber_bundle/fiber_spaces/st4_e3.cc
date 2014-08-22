@@ -38,7 +38,7 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 //==============================================================================
 
 //==============================================================================
-// ST4_E3 FACET
+// COM_LIMITPOINT_FIBER_BUNDLE_ST4_E3 FACET
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -497,11 +497,11 @@ row_dofs() const
 
 
 //==============================================================================
-// CLASS ST4_E3
+// CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST4_E3
 //==============================================================================
 
 // ===========================================================
-// HOST FACTORY FACET OF CLASS ST4_E3
+// HOST FACTORY FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST4_E3
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -685,7 +685,7 @@ standard_host(namespace_type& xns, const std::string& xsuffix, bool xauto_access
  
 
 //==============================================================================
-// ST4_E3 FACET
+// COM_LIMITPOINT_FIBER_BUNDLE_ST4_E3 FACET
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS

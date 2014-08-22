@@ -18,14 +18,14 @@
 /// @file
 /// Implementation for class sec_rep_space_member
 
-#include "sec_rep_space_member.h"
+#include "ComLimitPoint/fiber_bundle/sec_rep_space_member.h"
 
 #include "ComLimitPoint/sheaf/arg_list.h"
 #include "ComLimitPoint/sheaf/array_index_space_handle.h"
 #include "ComLimitPoint/sheaf/array_index_space_state.h"
 #include "ComLimitPoint/fiber_bundle/array_section_dof_map.h"
 #include "ComLimitPoint/sheaf/assert_contract.h"
-#include "binary_section_space_schema_member.impl.h"
+#include "ComLimitPoint/fiber_bundle/binary_section_space_schema_member.impl.h"
 #include "ComLimitPoint/fiber_bundle/binary_section_space_schema_poset.h"
 #include "ComLimitPoint/sheaf/index_space_iterator.h"
 #include "ComLimitPoint/sheaf/poset_dof_map.h"

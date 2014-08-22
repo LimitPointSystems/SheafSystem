@@ -18,14 +18,14 @@
 /// @file
 /// Implementation for class section_space_schema_member.
 
-#include "section_space_schema_member.impl.h"
+#include "ComLimitPoint/fiber_bundle/section_space_schema_member.impl.h"
 
 #include "ComLimitPoint/sheaf/arg_list.h"
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/sheaf/array_index_space_handle.h"
 #include "ComLimitPoint/sheaf/array_index_space_state.h"
 #include "ComLimitPoint/fiber_bundle/base_space_member.h"
-#include "binary_section_space_schema_member.impl.h"
+#include "ComLimitPoint/fiber_bundle/binary_section_space_schema_member.impl.h"
 #include "ComLimitPoint/fiber_bundle/binary_section_space_schema_poset.h"
 #include "ComLimitPoint/fiber_bundle/discretization_iterator.h"
 #include "ComLimitPoint/sheaf/ij_product_structure.h"

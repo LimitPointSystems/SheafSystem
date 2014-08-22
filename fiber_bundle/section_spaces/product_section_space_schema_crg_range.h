@@ -18,15 +18,15 @@
 /// @file
 /// Interface for class product_section_space_schema_crg_range
 
-#ifndef PRODUCT_SECTION_SPACE_SCHEMA_CRG_RANGE_H
-#define PRODUCT_SECTION_SPACE_SCHEMA_CRG_RANGE_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_PRODUCT_SECTION_SPACE_SCHEMA_CRG_RANGE_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_PRODUCT_SECTION_SPACE_SCHEMA_CRG_RANGE_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef SECTION_SPACE_SCHEMA_CRG_RANGE_H
-#include "section_space_schema_crg_range.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SECTION_SPACE_SCHEMA_CRG_RANGE_H
+#include "ComLimitPoint/fiber_bundle/section_space_schema_crg_range.h"
 #endif
 
 namespace sheaf
@@ -411,4 +411,4 @@ private:
  
 } // end namespace fiber_bundle
 
-#endif // ifndef PRODUCT_SECTION_SPACE_SCHEMA_CRG_RANGE_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_PRODUCT_SECTION_SPACE_SCHEMA_CRG_RANGE_H

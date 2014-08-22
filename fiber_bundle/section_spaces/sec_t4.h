@@ -18,15 +18,15 @@
 /// @file
 /// Interface for class sec_t4
 
-#ifndef SEC_T4_H
-#define SEC_T4_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_T4_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SEC_T4_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef SEC_TP_H
-#include "sec_tp.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_TP_H
+#include "ComLimitPoint/fiber_bundle/sec_tp.h"
 #endif
 
 #ifndef COM_LIMITPOINT_FIBER_BUNDLE_T4_H
@@ -288,6 +288,6 @@ public:
 
 } // namespace fiber_bundle
 
-#endif // ifndef SEC_T4_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_T4_H
 
 

@@ -18,8 +18,8 @@
 /// @file
 /// Interface for class sec_tp
 
-#ifndef SEC_TP_H
-#define SEC_TP_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_TP_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SEC_TP_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -460,4 +460,4 @@ SHEAF_DLL_SPEC void tensor(const sec_tp& x0, const sec_tp& x1, sec_tp& xresult,
 
 } // namespace fiber_bundle
 
-#endif // ifndef SEC_TP_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_TP_H

@@ -20,7 +20,7 @@
 
 #include "array_cylindrical_point_locator.h"
 
-#include "sec_ed.h"
+#include "ComLimitPoint/fiber_bundle/sec_ed.h"
 #include "ComLimitPoint/fiber_bundle/section_space_schema_poset.h"
 #include "ComLimitPoint/fiber_bundle/structured_block_2d.h"
 #include "ComLimitPoint/fiber_bundle/unstructured_block.h"

@@ -25,8 +25,8 @@
 #include "ComLimitPoint/fiber_bundle/chart_point_3d.h"
 #include "ComLimitPoint/sheaf/error_message.h"
 #include "ComLimitPoint/sheaf/preorder_iterator.h"
-#include "sec_at1_space.h"
-#include "sec_ed.h"
+#include "ComLimitPoint/fiber_bundle/sec_at1_space.h"
+#include "ComLimitPoint/fiber_bundle/sec_ed.h"
 #include "std_iostream.h"
 
 using namespace std;

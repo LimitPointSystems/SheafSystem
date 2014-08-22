@@ -150,7 +150,7 @@ class e2_lite;
 class SHEAF_DLL_SPEC st2_e2_lite : public st2_lite
 {
   //============================================================================
-  /// @name ST2_E2 FACET OF CLASS ST2_E2_LITE
+  /// @name COM_LIMITPOINT_FIBER_BUNDLE_ST2_E2 FACET OF CLASS ST2_E2_LITE
   //============================================================================
   //@{
 
@@ -421,7 +421,7 @@ private:
 };
 
 //==============================================================================
-// CLASS ST2_E2
+// CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E2
 //==============================================================================
 
 ///
@@ -431,7 +431,7 @@ private:
 class SHEAF_DLL_SPEC st2_e2 : public st2
 {
   // ===========================================================
-  /// @name HOST FACTORY FACET OF CLASS ST2_E2
+  /// @name HOST FACTORY FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E2
   // ===========================================================
   //@{
 
@@ -474,7 +474,7 @@ private:
 
 
   //============================================================================
-  /// @name ST2_E2 FACET OF CLASS ST2_E2
+  /// @name COM_LIMITPOINT_FIBER_BUNDLE_ST2_E2 FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E2
   //============================================================================
   //@{
 
@@ -593,7 +593,7 @@ private:
 
 
   //============================================================================
-  /// @name ST2 FACET OF CLASS ST2_E2
+  /// @name ST2 FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E2
   //============================================================================
   //@{
 
@@ -605,7 +605,7 @@ private:
 
 
   //============================================================================
-  /// @name INTERIOR ALGEBRA (STP) FACET OF CLASS ST2_E2
+  /// @name INTERIOR ALGEBRA (STP) FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E2
   //============================================================================
   //@{
 
@@ -617,7 +617,7 @@ private:
 
 
   //============================================================================
-  /// @name TENSOR ALGEBRA (TP) FACET OF CLASS ST2_E2
+  /// @name TENSOR ALGEBRA (TP) FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E2
   //============================================================================
   //@{
 
@@ -629,7 +629,7 @@ private:
 
 
   //============================================================================
-  /// @name VECTOR ALGEBRA (VD) FACET OF CLASS ST2_E2
+  /// @name VECTOR ALGEBRA (VD) FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E2
   //============================================================================
   //@{
 
@@ -663,7 +663,7 @@ private:
 
 
   //============================================================================
-  /// @name CARTESIAN ALGEBRA (TUPLE) FACET OF CLASS ST2_E2
+  /// @name CARTESIAN ALGEBRA (TUPLE) FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E2
   //============================================================================
   //@{
 
@@ -675,7 +675,7 @@ private:
 
 
   //============================================================================
-  /// @name ABSTRACT POSET MEMBER FACET OF CLASS ST2_E2
+  /// @name ABSTRACT POSET MEMBER FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E2
   //============================================================================
   //@{
 
@@ -713,7 +713,7 @@ private:
 
 
   //============================================================================
-  /// @name ANY FACET OF CLASS ST2_E2
+  /// @name ANY FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E2
   //============================================================================
   //@{
 

@@ -57,20 +57,20 @@
 #include "ComLimitPoint/fiber_bundle/point_block_3d.h"
 #endif
 
-#ifndef SEC_E1_UNIFORM_H
-#include "sec_e1_uniform.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_E1_UNIFORM_H
+#include "ComLimitPoint/fiber_bundle/sec_e1_uniform.h"
 #endif
 
-#ifndef SEC_E2_UNIFORM_H
-#include "sec_e2_uniform.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_E2_UNIFORM_H
+#include "ComLimitPoint/fiber_bundle/sec_e2_uniform.h"
 #endif
 
-#ifndef SEC_E3_UNIFORM_H
-#include "sec_e3_uniform.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_E3_UNIFORM_H
+#include "ComLimitPoint/fiber_bundle/sec_e3_uniform.h"
 #endif
 
-#ifndef SECTION_TRAITS_H
-#include "section_traits.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SECTION_TRAITS_H
+#include "ComLimitPoint/fiber_bundle/section_traits.h"
 #endif
 
 #ifndef COM_LIMITPOINT_FIBER_BUNDLE_STRUCTURED_BLOCK_1D_H
@@ -89,13 +89,13 @@
 #include "ComLimitPoint/fiber_bundle/unstructured_block.h"
 #endif
 
-#include "sec_e1.h"
-#include "sec_e2.h"
-#include "sec_e3.h"
+#include "ComLimitPoint/fiber_bundle/sec_e1.h"
+#include "ComLimitPoint/fiber_bundle/sec_e2.h"
+#include "ComLimitPoint/fiber_bundle/sec_e3.h"
 
-#include "sec_at0.h"
-#include "sec_at0_space.h"
-#include "sec_at1_space.h"
+#include "ComLimitPoint/fiber_bundle/sec_at0.h"
+#include "ComLimitPoint/fiber_bundle/sec_at0_space.h"
+#include "ComLimitPoint/fiber_bundle/sec_at1_space.h"
 #include "ComLimitPoint/fiber_bundle/section_space_schema_poset.h"
 
 

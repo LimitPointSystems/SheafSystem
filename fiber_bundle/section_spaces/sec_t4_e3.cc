@@ -19,22 +19,22 @@
 /// Implementation for class sec_t4_e3.
 
 
-#include "sec_t4_e3.h"
+#include "ComLimitPoint/fiber_bundle/sec_t4_e3.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/fiber_bundle/base_space_poset.h"
-#include "binary_section_space_schema_member.impl.h"
+#include "ComLimitPoint/fiber_bundle/binary_section_space_schema_member.impl.h"
 #include "ComLimitPoint/fiber_bundle/at1_space.h"
 #include "ComLimitPoint/fiber_bundle/fiber_bundle_namespace.h"
 #include "ComLimitPoint/sheaf/index_space_iterator.h"
-#include "sec_at0.h"
-#include "sec_at0_space.h"
-#include "sec_at1_space.h"
-#include "sec_e3.h"
+#include "ComLimitPoint/fiber_bundle/sec_at0.h"
+#include "ComLimitPoint/fiber_bundle/sec_at0_space.h"
+#include "ComLimitPoint/fiber_bundle/sec_at1_space.h"
+#include "ComLimitPoint/fiber_bundle/sec_e3.h"
 #include "ComLimitPoint/fiber_bundle/sec_stp_space.h"
-#include "sec_tuple.impl.h"
-#include "sec_tuple_space.impl.h"
-#include "sec_vd.impl.h"
+#include "ComLimitPoint/fiber_bundle/sec_tuple.impl.h"
+#include "ComLimitPoint/fiber_bundle/sec_tuple_space.impl.h"
+#include "ComLimitPoint/fiber_bundle/sec_vd.impl.h"
 #include "ComLimitPoint/fiber_bundle/t4_e3.h"
 #include "ComLimitPoint/fiber_bundle/stp_space.h"
 
@@ -198,7 +198,7 @@ standard_host(namespace_type& xns,
 
 
 //==============================================================================
-// T4_E3 FACET OF CLASS SEC_T4_E3
+// COM_LIMITPOINT_FIBER_BUNDLE_T4_E3 FACET OF CLASS SEC_T4_E3
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS

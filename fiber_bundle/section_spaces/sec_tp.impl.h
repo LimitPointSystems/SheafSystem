@@ -17,8 +17,8 @@
 
 // Implementation for sec_tp facet function templates.
 
-#ifndef SEC_TP_IMPL_H
-#define SEC_TP_IMPL_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_TP_IMPL_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SEC_TP_IMPL_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -28,8 +28,8 @@
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #endif
 
-#ifndef SEC_TP_H
-#include "sec_tp.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_TP_H
+#include "ComLimitPoint/fiber_bundle/sec_tp.h"
 #endif
 
 namespace fiber_bundle
@@ -413,4 +413,4 @@ void contract(const sec_t2_e3& x0, int xp, int xq, sec_at0& xresult,
 
 } // namespace fiber_bundle
 
-#endif // ifndef SEC_TP_IMPL_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_TP_IMPL_H

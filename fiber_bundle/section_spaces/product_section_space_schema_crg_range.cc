@@ -18,13 +18,13 @@
 /// @file
 /// Implementation for class product_section_space_schema_crg_range
 
-#include "product_section_space_schema_crg_range.h"
+#include "ComLimitPoint/fiber_bundle/product_section_space_schema_crg_range.h"
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/sheaf/factory.h"
-#include "cover_set_iterator.h"
+#include "ComLimitPoint/fiber_bundle/cover_set_iterator.h"
 #include "ComLimitPoint/sheaf/ij_product_structure.h"
 #include "ComLimitPoint/fiber_bundle/product_section_space_schema_poset.h"
-#include "section_space_schema_table_dof_crg_range.h"
+#include "ComLimitPoint/fiber_bundle/section_space_schema_table_dof_crg_range.h"
 
 // ===========================================================
 // PRODUCT_SECTION_SPACE_SCHEMA_CRG_RANGE FACET

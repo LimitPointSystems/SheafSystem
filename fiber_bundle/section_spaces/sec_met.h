@@ -18,15 +18,15 @@
 /// @file
 /// Interface for class sec_met.
 
-#ifndef SEC_MET_H
-#define SEC_MET_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_MET_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SEC_MET_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef SEC_ST2_H
-#include "sec_st2.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_ST2_H
+#include "ComLimitPoint/fiber_bundle/sec_st2.h"
 #endif
 
 #ifndef COM_LIMITPOINT_FIBER_BUNDLE_MET_H
@@ -341,6 +341,6 @@ SHEAF_DLL_SPEC void raise(const sec_met& xmetric, const sec_ed& xcovector, sec_e
 
 } // namespace fiber_bundle
 
-#endif // ifndef SEC_MET_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_MET_H
 
 

@@ -18,20 +18,20 @@
 /// @file
 /// Implementation for class sec_atp.
 
-#include "sec_atp.h"
+#include "ComLimitPoint/fiber_bundle/sec_atp.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/fiber_bundle/atp.h"
 #include "ComLimitPoint/fiber_bundle/atp_space.h"
-#include "binary_section_space_schema_member.impl.h"
+#include "ComLimitPoint/fiber_bundle/binary_section_space_schema_member.impl.h"
 #include "ComLimitPoint/fiber_bundle/binary_section_space_schema_poset.h"
 #include "ComLimitPoint/fiber_bundle/fiber_bundle_namespace.h"
-#include "section_space_schema_member.impl.h"
+#include "ComLimitPoint/fiber_bundle/section_space_schema_member.impl.h"
 #include "ComLimitPoint/fiber_bundle/section_space_schema_poset.h"
-#include "sec_at1.h"
-#include "sec_at1_space.h"
-#include "sec_atp_space.h"
-#include "sec_tuple_space.impl.h"
+#include "ComLimitPoint/fiber_bundle/sec_at1.h"
+#include "ComLimitPoint/fiber_bundle/sec_at1_space.h"
+#include "ComLimitPoint/fiber_bundle/sec_atp_space.h"
+#include "ComLimitPoint/fiber_bundle/sec_tuple_space.impl.h"
 
 
 using namespace std;
@@ -717,12 +717,12 @@ invariant() const
 //==============================================================================
 
 #include "ComLimitPoint/sheaf/error_message.h"
-#include "sec_at0.h"
-#include "sec_e2.h"
-#include "sec_e3.h"
-#include "sec_at2_e2.h"
-#include "sec_at2_e3.h"
-#include "sec_at3_e3.h"
+#include "ComLimitPoint/fiber_bundle/sec_at0.h"
+#include "ComLimitPoint/fiber_bundle/sec_e2.h"
+#include "ComLimitPoint/fiber_bundle/sec_e3.h"
+#include "ComLimitPoint/fiber_bundle/sec_at2_e2.h"
+#include "ComLimitPoint/fiber_bundle/sec_at2_e3.h"
+#include "ComLimitPoint/fiber_bundle/sec_at3_e3.h"
 
 void
 fiber_bundle::sec_atp_algebra::

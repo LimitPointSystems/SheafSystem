@@ -18,19 +18,19 @@
 /// @file
 /// Implementation for class sec_jcb_ed.
 
-#include "sec_jcb_ed.h"
+#include "ComLimitPoint/fiber_bundle/sec_jcb_ed.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
-#include "binary_section_space_schema_member.impl.h"
+#include "ComLimitPoint/fiber_bundle/binary_section_space_schema_member.impl.h"
 #include "ComLimitPoint/fiber_bundle/binary_section_space_schema_poset.h"
 #include "ComLimitPoint/fiber_bundle/fiber_bundle_namespace.h"
-#include "section_space_schema_member.impl.h"
+#include "ComLimitPoint/fiber_bundle/section_space_schema_member.impl.h"
 #include "ComLimitPoint/fiber_bundle/section_space_schema_poset.h"
-#include "sec_at0.h"
-#include "sec_at1.h"
-#include "sec_at1_space.h"
+#include "ComLimitPoint/fiber_bundle/sec_at0.h"
+#include "ComLimitPoint/fiber_bundle/sec_at1.h"
+#include "ComLimitPoint/fiber_bundle/sec_at1_space.h"
 #include "ComLimitPoint/fiber_bundle/sec_jcb_space.h"
-#include "sec_tuple_space.impl.h"
+#include "ComLimitPoint/fiber_bundle/sec_tuple_space.impl.h"
 #include "ComLimitPoint/fiber_bundle/jcb_ed.h"
 #include "ComLimitPoint/fiber_bundle/jcb_space.h"
 

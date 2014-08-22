@@ -18,7 +18,7 @@
 /// @file
 /// Implementation for class product_section_space_schema_member.
 
-#include "product_section_space_schema_member.impl.h"
+#include "ComLimitPoint/fiber_bundle/product_section_space_schema_member.impl.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/sheaf/array_index_space_state.h"

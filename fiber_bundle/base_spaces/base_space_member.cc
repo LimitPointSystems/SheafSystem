@@ -1249,7 +1249,7 @@ c_minus(base_space_member& xother,
 
 
 // ===========================================================
-// TOTAL_POSET_MEMBER FACET
+// COM_LIMITPOINT_SHEAF_TOTAL_POSET_MEMBER FACET
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS

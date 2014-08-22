@@ -6,14 +6,14 @@
 
 // Implementation for section_space_schema_member facet function templates.
 
-#ifndef BINARY_SECTION_SPACE_SCHEMA_MEMBER_IMPL_H
-#define BINARY_SECTION_SPACE_SCHEMA_MEMBER_IMPL_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_BINARY_SECTION_SPACE_SCHEMA_MEMBER_IMPL_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_BINARY_SECTION_SPACE_SCHEMA_MEMBER_IMPL_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef BINARY_SECTION_SPACE_SCHEMA_MEMBER_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_BINARY_SECTION_SPACE_SCHEMA_MEMBER_H
 #include "ComLimitPoint/fiber_bundle/binary_section_space_schema_member.h"
 #endif
 
@@ -25,7 +25,7 @@
 #include "ComLimitPoint/fiber_bundle/base_space_poset.h"
 #endif
 
-#ifndef BINARY_SECTION_SPACE_SCHEMA_POSET_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_BINARY_SECTION_SPACE_SCHEMA_POSET_H
 #include "ComLimitPoint/fiber_bundle/binary_section_space_schema_poset.h"
 #endif
 
@@ -33,7 +33,7 @@
 #include "ComLimitPoint/fiber_bundle/fiber_bundle_namespace.h"
 #endif
 
-#ifndef SEC_REP_DESCRIPTOR_POSET_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_REP_DESCRIPTOR_POSET_H
 #include "ComLimitPoint/fiber_bundle/sec_rep_descriptor_poset.h"
 #endif
 
@@ -279,4 +279,4 @@ standard_member(namespace_type& xns,
   return result;
 }
 
-#endif // ifndef BINARY_SECTION_SPACE_SCHEMA_MEMBER_IMPL_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_BINARY_SECTION_SPACE_SCHEMA_MEMBER_IMPL_H

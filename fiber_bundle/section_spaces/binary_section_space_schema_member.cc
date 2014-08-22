@@ -18,7 +18,7 @@
 /// @file
 /// Implementation for class binary_section_space_schema_member.
 
-#include "binary_section_space_schema_member.impl.h"
+#include "ComLimitPoint/fiber_bundle/binary_section_space_schema_member.impl.h"
 
 #include "ComLimitPoint/fiber_bundle/binary_section_space_schema_poset.h"
 #include "ComLimitPoint/sheaf/assert_contract.h"

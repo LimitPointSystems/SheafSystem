@@ -18,14 +18,14 @@
 /// @file
 /// Interface for class sec_tp_space.
 
-#ifndef SEC_TP_SPACE_H
-#define SEC_TP_SPACE_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_TP_SPACE_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SEC_TP_SPACE_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef SEC_VD_SPACE_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_VD_SPACE_H
 #include "ComLimitPoint/fiber_bundle/sec_vd_space.h"
 #endif
 
@@ -440,4 +440,4 @@ private:
 } // namespace fiber_bundle
 
 
-#endif // SEC_TP_SPACE_H
+#endif // COM_LIMITPOINT_FIBER_BUNDLE_SEC_TP_SPACE_H

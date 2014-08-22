@@ -20,13 +20,13 @@
 
 #include "field_factory_2.impl.h"
 
-#include "sec_at0.h"
-#include "sec_e1.h"
-#include "sec_e2.h"
-#include "sec_e3.h"
-#include "sec_e1_uniform.h"
-#include "sec_e2_uniform.h"
-#include "sec_e3_uniform.h"
+#include "ComLimitPoint/fiber_bundle/sec_at0.h"
+#include "ComLimitPoint/fiber_bundle/sec_e1.h"
+#include "ComLimitPoint/fiber_bundle/sec_e2.h"
+#include "ComLimitPoint/fiber_bundle/sec_e3.h"
+#include "ComLimitPoint/fiber_bundle/sec_e1_uniform.h"
+#include "ComLimitPoint/fiber_bundle/sec_e2_uniform.h"
+#include "ComLimitPoint/fiber_bundle/sec_e3_uniform.h"
 #include "sec_ed_invertible.h"
 #include "ComLimitPoint/fiber_bundle/point_block_1d.h"
 #include "ComLimitPoint/fiber_bundle/point_block_2d.h"
@@ -42,8 +42,8 @@
 #include "ComLimitPoint/sheaf/poset_path.h"
 #include "ComLimitPoint/sheaf/wsv_block.h"
 
-#include "sec_tuple.impl.h"
-#include "sec_tuple_space.impl.h"
+#include "ComLimitPoint/fiber_bundle/sec_tuple.impl.h"
+#include "ComLimitPoint/fiber_bundle/sec_tuple_space.impl.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.

@@ -18,23 +18,23 @@
 /// @file
 /// Implementation for class sec_jcb_e13.
 
-#include "sec_jcb_e13.h"
+#include "ComLimitPoint/fiber_bundle/sec_jcb_e13.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/fiber_bundle/base_space_poset.h"
-#include "binary_section_space_schema_member.impl.h"
+#include "ComLimitPoint/fiber_bundle/binary_section_space_schema_member.impl.h"
 #include "ComLimitPoint/fiber_bundle/fiber_bundle_namespace.h"
 #include "ComLimitPoint/sheaf/namespace_poset.impl.h"
-#include "section_space_schema_member.impl.h"
+#include "ComLimitPoint/fiber_bundle/section_space_schema_member.impl.h"
 #include "ComLimitPoint/fiber_bundle/section_space_schema_poset.h"
-#include "sec_at0.h"
-#include "sec_at1.h"
-#include "sec_at1_space.h"
-#include "sec_e1.h"
-#include "sec_e3.h"
+#include "ComLimitPoint/fiber_bundle/sec_at0.h"
+#include "ComLimitPoint/fiber_bundle/sec_at1.h"
+#include "ComLimitPoint/fiber_bundle/sec_at1_space.h"
+#include "ComLimitPoint/fiber_bundle/sec_e1.h"
+#include "ComLimitPoint/fiber_bundle/sec_e3.h"
 #include "ComLimitPoint/fiber_bundle/sec_jcb_space.h"
-#include "sec_tuple.impl.h"
-#include "sec_tuple_space.impl.h"
+#include "ComLimitPoint/fiber_bundle/sec_tuple.impl.h"
+#include "ComLimitPoint/fiber_bundle/sec_tuple_space.impl.h"
 #include "ComLimitPoint/fiber_bundle/jcb_e13.h"
 #include "ComLimitPoint/fiber_bundle/jcb_space.h"
 
@@ -738,9 +738,9 @@ public:
 //==============================================================================
 //==============================================================================
 
-#include "sec_e1.h"
-#include "sec_e3.h"
-#include "sec_vd.impl.h"
+#include "ComLimitPoint/fiber_bundle/sec_e1.h"
+#include "ComLimitPoint/fiber_bundle/sec_e3.h"
+#include "ComLimitPoint/fiber_bundle/sec_vd.impl.h"
 
 using namespace fiber_bundle::sec_vd_algebra;
 

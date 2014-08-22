@@ -18,15 +18,15 @@
 /// @file
 /// Interface for class sec_atp_space.
 
-#ifndef SEC_ATP_SPACE_H
-#define SEC_ATP_SPACE_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_ATP_SPACE_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SEC_ATP_SPACE_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef SEC_TP_SPACE_H
-#include "sec_tp_space.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_TP_SPACE_H
+#include "ComLimitPoint/fiber_bundle/sec_tp_space.h"
 #endif
 
 namespace sheaf
@@ -312,4 +312,4 @@ private:
 } // namespace fiber_bundle
 
 
-#endif // SEC_ATP_SPACE_H
+#endif // COM_LIMITPOINT_FIBER_BUNDLE_SEC_ATP_SPACE_H

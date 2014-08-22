@@ -8,18 +8,18 @@
 /// @file
 /// Interface for class sec_tuple_space.impl
 
-#ifndef SEC_TUPLE_SPACE_IMPL_H
-#define SEC_TUPLE_SPACE_IMPL_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_TUPLE_SPACE_IMPL_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SEC_TUPLE_SPACE_IMPL_H
 
-#ifndef SEC_TUPLE_SPACE_H
-#include "sec_tuple_space.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_TUPLE_SPACE_H
+#include "ComLimitPoint/fiber_bundle/sec_tuple_space.h"
 #endif
 
 #ifndef COM_LIMITPOINT_SHEAF_NAMESPACE_POSET_H
 #include "ComLimitPoint/sheaf/namespace_poset.h"
 #endif
 
-#ifndef SECTION_SPACE_SCHEMA_POSET_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SECTION_SPACE_SCHEMA_POSET_H
 #include "ComLimitPoint/fiber_bundle/section_space_schema_poset.h"
 #endif
 
@@ -60,4 +60,4 @@ fiber_space_conforms(const namespace_poset& xns, const poset_path& xsection_sche
 }
 
 
-#endif // ifndef SEC_TUPLE_SPACE_IMPL_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_TUPLE_SPACE_IMPL_H

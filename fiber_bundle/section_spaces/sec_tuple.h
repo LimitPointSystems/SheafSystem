@@ -18,15 +18,15 @@
 /// @file
 /// Interface for class sec_tuple.
 
-#ifndef SEC_TUPLE_H
-#define SEC_TUPLE_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_TUPLE_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SEC_TUPLE_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef SEC_REP_SPACE_MEMBER_H
-#include "sec_rep_space_member.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_REP_SPACE_MEMBER_H
+#include "ComLimitPoint/fiber_bundle/sec_rep_space_member.h"
 #endif
 
 #ifndef COM_LIMITPOINT_SHEAF_BLOCK_H
@@ -390,6 +390,6 @@ SHEAF_DLL_SPEC size_t deep_size(const sec_tuple& x0, bool xinclude_shallow = tru
 
 } // namespace fiber_bundle
 
-#endif // ifndef SEC_TUPLE_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_TUPLE_H
 
 

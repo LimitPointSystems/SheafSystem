@@ -18,8 +18,8 @@
 /// @file
 /// Interface for class section_space_schema_member.
 
-#ifndef SECTION_SPACE_SCHEMA_MEMBER_H
-#define SECTION_SPACE_SCHEMA_MEMBER_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SECTION_SPACE_SCHEMA_MEMBER_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SECTION_SPACE_SCHEMA_MEMBER_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -37,7 +37,7 @@
 #include "ComLimitPoint/sheaf/schema_poset_member.h"
 #endif
 
-// #ifndef SECTION_SPACE_SCHEMA_POSET_H
+// #ifndef COM_LIMITPOINT_FIBER_BUNDLE_SECTION_SPACE_SCHEMA_POSET_H
 // #include "ComLimitPoint/fiber_bundle/section_space_schema_poset.h"
 // #endif
 
@@ -1464,4 +1464,4 @@ SHEAF_DLL_SPEC std::ostream& operator << (std::ostream &os, section_space_schema
 
 } // namespace fiber_bundle
 
-#endif // SECTION_SPACE_SCHEMA_MEMBER_H
+#endif // COM_LIMITPOINT_FIBER_BUNDLE_SECTION_SPACE_SCHEMA_MEMBER_H

@@ -18,14 +18,14 @@
 /// @file
 /// Interface for class binary_section_space_schema_poset.
 
-#ifndef BINARY_SECTION_SPACE_SCHEMA_POSET_H
-#define BINARY_SECTION_SPACE_SCHEMA_POSET_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_BINARY_SECTION_SPACE_SCHEMA_POSET_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_BINARY_SECTION_SPACE_SCHEMA_POSET_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef SECTION_SPACE_SCHEMA_POSET_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SECTION_SPACE_SCHEMA_POSET_H
 #include "ComLimitPoint/fiber_bundle/section_space_schema_poset.h"
 #endif
 
@@ -314,4 +314,4 @@ private:
 
 } // namespace fiber_bundle
 
-#endif // BINARY_SECTION_SPACE_SCHEMA_POSET_H
+#endif // COM_LIMITPOINT_FIBER_BUNDLE_BINARY_SECTION_SPACE_SCHEMA_POSET_H

@@ -6,8 +6,8 @@
 
 // Implementation for section_space_schema_member facet function templates.
 
-#ifndef SECTION_SPACE_SCHEMA_MEMBER_IMPL_H
-#define SECTION_SPACE_SCHEMA_MEMBER_IMPL_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SECTION_SPACE_SCHEMA_MEMBER_IMPL_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SECTION_SPACE_SCHEMA_MEMBER_IMPL_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -17,7 +17,7 @@
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #endif
 
-#ifndef SECTION_SPACE_SCHEMA_MEMBER_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SECTION_SPACE_SCHEMA_MEMBER_H
 #include "ComLimitPoint/fiber_bundle/section_space_schema_member.h"
 #endif
 
@@ -62,4 +62,4 @@ fiber_space() const
 }
 
 
-#endif // ifndef SECTION_SPACE_SCHEMA_MEMBER_IMPL_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_SECTION_SPACE_SCHEMA_MEMBER_IMPL_H

@@ -18,16 +18,16 @@
 /// @file
 /// Implementation for class sec_t4.
 
-#include "sec_t4.h"
+#include "ComLimitPoint/fiber_bundle/sec_t4.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
-#include "binary_section_space_schema_member.impl.h"
+#include "ComLimitPoint/fiber_bundle/binary_section_space_schema_member.impl.h"
 #include "ComLimitPoint/fiber_bundle/binary_section_space_schema_poset.h"
 #include "ComLimitPoint/fiber_bundle/fiber_bundle_namespace.h"
-#include "sec_at0.h"
-#include "sec_at0_space.h"
-#include "sec_tuple_space.impl.h"
-#include "section_space_schema_member.impl.h"
+#include "ComLimitPoint/fiber_bundle/sec_at0.h"
+#include "ComLimitPoint/fiber_bundle/sec_at0_space.h"
+#include "ComLimitPoint/fiber_bundle/sec_tuple_space.impl.h"
+#include "ComLimitPoint/fiber_bundle/section_space_schema_member.impl.h"
 #include "ComLimitPoint/fiber_bundle/section_space_schema_poset.h"
 #include "ComLimitPoint/fiber_bundle/tp.h"
 #include "ComLimitPoint/fiber_bundle/tp_space.h"

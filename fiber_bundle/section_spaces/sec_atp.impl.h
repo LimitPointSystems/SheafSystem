@@ -16,8 +16,8 @@
 //
 // Implementation for sec_atp facet function templates.
 
-#ifndef SEC_ATP_IMPL_H
-#define SEC_ATP_IMPL_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_ATP_IMPL_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SEC_ATP_IMPL_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -27,8 +27,8 @@
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #endif
 
-#ifndef SEC_ATP_H
-#include "sec_atp.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_ATP_H
+#include "ComLimitPoint/fiber_bundle/sec_atp.h"
 #endif
 
 namespace fiber_bundle
@@ -270,4 +270,4 @@ void wedge(const S0& x0, const S1& x1, SR& xresult, bool xauto_access)
 
 } // namespace fiber_bundle
 
-#endif // ifndef SEC_ATP_IMPL_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_ATP_IMPL_H

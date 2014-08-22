@@ -18,20 +18,20 @@
 /// @file
 /// Implementation for class sec_e1.
 
-#include "sec_e1.h"
+#include "ComLimitPoint/fiber_bundle/sec_e1.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/fiber_bundle/base_space_poset.h"
-#include "binary_section_space_schema_member.impl.h"
+#include "ComLimitPoint/fiber_bundle/binary_section_space_schema_member.impl.h"
 #include "ComLimitPoint/fiber_bundle/at1_space.h"
 #include "ComLimitPoint/fiber_bundle/fiber_bundle_namespace.h"
 #include "ComLimitPoint/sheaf/index_space_iterator.h"
-#include "sec_at0.h"
-#include "sec_at0_space.h"
-#include "sec_at1_space.h"
-#include "sec_tuple.impl.h"
-#include "sec_tuple_space.impl.h"
-#include "sec_vd.impl.h"
+#include "ComLimitPoint/fiber_bundle/sec_at0.h"
+#include "ComLimitPoint/fiber_bundle/sec_at0_space.h"
+#include "ComLimitPoint/fiber_bundle/sec_at1_space.h"
+#include "ComLimitPoint/fiber_bundle/sec_tuple.impl.h"
+#include "ComLimitPoint/fiber_bundle/sec_tuple_space.impl.h"
+#include "ComLimitPoint/fiber_bundle/sec_vd.impl.h"
 
 
 using namespace std;

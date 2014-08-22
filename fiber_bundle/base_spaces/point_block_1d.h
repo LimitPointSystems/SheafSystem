@@ -313,7 +313,7 @@ private:
 
 
   // ===========================================================
-  /// @name TOTAL_POSET_MEMBER FACET
+  /// @name COM_LIMITPOINT_SHEAF_TOTAL_POSET_MEMBER FACET
   // ===========================================================
   //@{
 

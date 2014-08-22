@@ -23,7 +23,7 @@
 #include "ComLimitPoint/fiber_bundle/array_section_dof_map.h"
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/fiber_bundle/at0.h"
-#include "binary_section_space_schema_member.impl.h"
+#include "ComLimitPoint/fiber_bundle/binary_section_space_schema_member.impl.h"
 #include "ComLimitPoint/fiber_bundle/binary_section_space_schema_poset.h"
 #include "ComLimitPoint/fiber_bundle/chart_point.h"
 #include "ComLimitPoint/fiber_bundle/eval_family.h"
@@ -31,11 +31,11 @@
 #include "ComLimitPoint/fiber_bundle/fiber_bundle_namespace.h"
 #include "ComLimitPoint/sheaf/index_space_iterator.h"
 #include "ComLimitPoint/sheaf/namespace_poset.h"
-#include "sec_at0.h"
-#include "sec_tuple_space.impl.h"
+#include "ComLimitPoint/fiber_bundle/sec_at0.h"
+#include "ComLimitPoint/fiber_bundle/sec_tuple_space.impl.h"
 #include "ComLimitPoint/fiber_bundle/sec_vd_space.h"
 #include "ComLimitPoint/fiber_bundle/section_evaluator.h"
-#include "section_space_schema_member.impl.h"
+#include "ComLimitPoint/fiber_bundle/section_space_schema_member.impl.h"
 #include "ComLimitPoint/fiber_bundle/section_space_schema_poset.h"
 #include "ComLimitPoint/fiber_bundle/vd.h"
 #include "ComLimitPoint/fiber_bundle/vd_space.h"
@@ -1529,7 +1529,7 @@ namespace
 ////////////////////////////////////////////////////////////////////////////////
 
 #include "ComLimitPoint/fiber_bundle/e2.h"
-#include "sec_vd.impl.h"
+#include "ComLimitPoint/fiber_bundle/sec_vd.impl.h"
 
 void
 fiber_bundle::sec_vd_algebra::

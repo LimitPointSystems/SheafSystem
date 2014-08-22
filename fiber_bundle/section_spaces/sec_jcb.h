@@ -18,8 +18,8 @@
 /// @file
 /// Interface for class sec_jcb.
 
-#ifndef SEC_JCB_H
-#define SEC_JCB_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_JCB_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SEC_JCB_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -393,6 +393,6 @@ SHEAF_DLL_SPEC void pull(const sec_jcb& xjcb, const sec_at1& xcovector, sec_at1&
 
 } // namespace fiber_bundle
 
-#endif // ifndef SEC_JCB_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_JCB_H
 
 

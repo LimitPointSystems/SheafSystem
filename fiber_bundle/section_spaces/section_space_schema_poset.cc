@@ -48,8 +48,8 @@
 #include "ComLimitPoint/sheaf/primary_index_space_handle.h"
 #include "ComLimitPoint/sheaf/schema_descriptor.h"
 #include "ComLimitPoint/sheaf/schema_poset_member.h"
-#include "section_space_schema_member.impl.h"
-#include "section_space_schema_table_dofs_type.h"
+#include "ComLimitPoint/fiber_bundle/section_space_schema_member.impl.h"
+#include "ComLimitPoint/fiber_bundle/section_space_schema_table_dofs_type.h"
 #include "std_limits.h"
 #include "std_sstream.h"
 

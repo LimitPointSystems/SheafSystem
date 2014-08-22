@@ -19,21 +19,21 @@
 /// Implementation for class sec_at2_e2.
 
 
-#include "sec_at2_e2.h"
+#include "ComLimitPoint/fiber_bundle/sec_at2_e2.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/fiber_bundle/base_space_poset.h"
-#include "binary_section_space_schema_member.impl.h"
+#include "ComLimitPoint/fiber_bundle/binary_section_space_schema_member.impl.h"
 #include "ComLimitPoint/fiber_bundle/at1_space.h"
 #include "ComLimitPoint/fiber_bundle/fiber_bundle_namespace.h"
 #include "ComLimitPoint/sheaf/index_space_iterator.h"
-#include "sec_at0.h"
-#include "sec_at0_space.h"
-#include "sec_at1_space.h"
-#include "sec_e2.h"
-#include "sec_tuple.impl.h"
-#include "sec_tuple_space.impl.h"
-#include "sec_vd.impl.h"
+#include "ComLimitPoint/fiber_bundle/sec_at0.h"
+#include "ComLimitPoint/fiber_bundle/sec_at0_space.h"
+#include "ComLimitPoint/fiber_bundle/sec_at1_space.h"
+#include "ComLimitPoint/fiber_bundle/sec_e2.h"
+#include "ComLimitPoint/fiber_bundle/sec_tuple.impl.h"
+#include "ComLimitPoint/fiber_bundle/sec_tuple_space.impl.h"
+#include "ComLimitPoint/fiber_bundle/sec_vd.impl.h"
 #include "ComLimitPoint/fiber_bundle/at2_e2.h"
 
 using namespace std;
@@ -196,7 +196,7 @@ standard_host(namespace_type& xns,
 
 
 //==============================================================================
-// AT2_E2 FACET OF CLASS SEC_AT2_E2
+// COM_LIMITPOINT_FIBER_BUNDLE_AT2_E2 FACET OF CLASS SEC_AT2_E2
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -756,9 +756,9 @@ namespace
 
 //==============================================================================
 
-#include "sec_vd.impl.h"
-#include "sec_e2.h"
-#include "sec_at0.h"
+#include "ComLimitPoint/fiber_bundle/sec_vd.impl.h"
+#include "ComLimitPoint/fiber_bundle/sec_e2.h"
+#include "ComLimitPoint/fiber_bundle/sec_at0.h"
 
 using namespace fiber_bundle::sec_vd_algebra;
 

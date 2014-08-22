@@ -141,7 +141,7 @@ class SHEAF_DLL_SPEC t4_e2_lite : public t4_lite
 {
 
   //============================================================================
-  /// @name T4_E2 FACET OF CLASS T4_E2_LITE
+  /// @name COM_LIMITPOINT_FIBER_BUNDLE_T4_E2 FACET OF CLASS T4_E2_LITE
   //============================================================================
   //@{
 
@@ -368,7 +368,7 @@ private:
 
 
 //==============================================================================
-// CLASS T4_E2
+// CLASS COM_LIMITPOINT_FIBER_BUNDLE_T4_E2
 //==============================================================================
 
 ///
@@ -379,7 +379,7 @@ class SHEAF_DLL_SPEC t4_e2 : public t4
 {
 
   // ===========================================================
-  /// @name HOST FACTORY FACET OF CLASS T4_E2
+  /// @name HOST FACTORY FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_T4_E2
   // ===========================================================
   //@{
 
@@ -422,7 +422,7 @@ private:
 
 
   //============================================================================
-  /// @name T4_E2 FACET OF CLASS T4_E2
+  /// @name COM_LIMITPOINT_FIBER_BUNDLE_T4_E2 FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_T4_E2
   //============================================================================
   //@{
 
@@ -531,7 +531,7 @@ public:
   operator const row_dofs_type& () const;
 
   //============================================================================
-  /// @name T4 FACET OF CLASS T4_E2
+  /// @name T4 FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_T4_E2
   //============================================================================
   //@{
 
@@ -543,7 +543,7 @@ private:
 
 
   //============================================================================
-  /// @name TP FACET OF CLASS T4_E2
+  /// @name TP FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_T4_E2
   //============================================================================
   //@{
 
@@ -556,7 +556,7 @@ private:
 
 
   //============================================================================
-  /// @name VD FACET OF CLASS T4_E2
+  /// @name VD FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_T4_E2
   //============================================================================
   //@{
 
@@ -568,7 +568,7 @@ private:
 
 
   //============================================================================
-  /// @name TUPLE FACET OF CLASS T4_E2
+  /// @name TUPLE FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_T4_E2
   //============================================================================
   //@{
 
@@ -599,7 +599,7 @@ private:
 
 
   //============================================================================
-  /// @name ABSTRACT POSET MEMBER FACET OF CLASS T4_E2
+  /// @name ABSTRACT POSET MEMBER FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_T4_E2
   //============================================================================
   //@{
 
@@ -637,7 +637,7 @@ private:
 
 
   //============================================================================
-  /// @name ANY FACET OF CLASS T4_E2
+  /// @name ANY FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_T4_E2
   //============================================================================
   //@{
 

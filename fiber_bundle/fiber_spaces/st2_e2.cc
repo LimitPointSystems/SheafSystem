@@ -39,7 +39,7 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 //==============================================================================
 
 //==============================================================================
-// ST2_E2 FACET OF CLASS ST2_E2_LITE
+// COM_LIMITPOINT_FIBER_BUNDLE_ST2_E2 FACET OF CLASS ST2_E2_LITE
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -572,11 +572,11 @@ row_dofs() const
 
 
 //==============================================================================
-// CLASS ST2_E2
+// CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E2
 //==============================================================================
 
 // ===========================================================
-// HOST FACTORY FACET OF CLASS ST2_E2
+// HOST FACTORY FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E2
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -747,7 +747,7 @@ standard_host(namespace_type& xns, const std::string& xsuffix, bool xauto_access
  
 
 //==============================================================================
-// ST2_E2 FACET OF CLASS ST2_E2
+// COM_LIMITPOINT_FIBER_BUNDLE_ST2_E2 FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E2
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -1094,7 +1094,7 @@ lite_type() const
 
 
 //==============================================================================
-// ST2 FACET OF CLASS ST2_E2
+// ST2 FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E2
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -1105,7 +1105,7 @@ lite_type() const
 
 
 //==============================================================================
-// INTERIOR ALGEBRA (STP) FACET OF CLASS ST2_E2
+// INTERIOR ALGEBRA (STP) FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E2
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -1116,7 +1116,7 @@ lite_type() const
 
 
 //==============================================================================
-// TENSOR ALGEBRA (TP) FACET OF CLASS ST2_E2
+// TENSOR ALGEBRA (TP) FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E2
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -1127,7 +1127,7 @@ lite_type() const
 
 
 //==============================================================================
-// VECTOR ALGEBRA (VD) FACET OF CLASS ST2_E2
+// VECTOR ALGEBRA (VD) FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E2
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -1196,7 +1196,7 @@ operator const st2_e2::row_dofs_type& () const
 }
 
 //==============================================================================
-// CARTESIAN ALGEBRA (TUPLE) FACET OF CLASS ST2_E2
+// CARTESIAN ALGEBRA (TUPLE) FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E2
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -1207,7 +1207,7 @@ operator const st2_e2::row_dofs_type& () const
 
 
 //==============================================================================
-// ABSTRACT POSET MEMBER FACET OF CLASS ST2_E2
+// ABSTRACT POSET MEMBER FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E2
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -1280,7 +1280,7 @@ clone() const
 
 
 //==============================================================================
-// ANY FACET OF CLASS ST2_E2
+// ANY FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_ST2_E2
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS

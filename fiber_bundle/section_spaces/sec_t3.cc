@@ -18,16 +18,16 @@
 /// @file
 /// Implementation for class sec_t3.
 
-#include "sec_t3.h"
+#include "ComLimitPoint/fiber_bundle/sec_t3.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
-#include "binary_section_space_schema_member.impl.h"
+#include "ComLimitPoint/fiber_bundle/binary_section_space_schema_member.impl.h"
 #include "ComLimitPoint/fiber_bundle/binary_section_space_schema_poset.h"
 #include "ComLimitPoint/fiber_bundle/fiber_bundle_namespace.h"
-#include "sec_at0.h"
-#include "sec_at0_space.h"
-#include "sec_tuple_space.impl.h"
-#include "section_space_schema_member.impl.h"
+#include "ComLimitPoint/fiber_bundle/sec_at0.h"
+#include "ComLimitPoint/fiber_bundle/sec_at0_space.h"
+#include "ComLimitPoint/fiber_bundle/sec_tuple_space.impl.h"
+#include "ComLimitPoint/fiber_bundle/section_space_schema_member.impl.h"
 #include "ComLimitPoint/fiber_bundle/section_space_schema_poset.h"
 #include "ComLimitPoint/fiber_bundle/tp.h"
 #include "ComLimitPoint/fiber_bundle/tp_space.h"
@@ -704,14 +704,14 @@ namespace
 //==============================================================================
 //==============================================================================
 
-#include "sec_at1.h"
-#include "sec_at2.h"
-#include "sec_at3.h"
-#include "sec_st2.h"
-#include "sec_st3.h"
-#include "sec_t2.h"
-#include "sec_t3.h"
-#include "sec_vd.impl.h"
+#include "ComLimitPoint/fiber_bundle/sec_at1.h"
+#include "ComLimitPoint/fiber_bundle/sec_at2.h"
+#include "ComLimitPoint/fiber_bundle/sec_at3.h"
+#include "ComLimitPoint/fiber_bundle/sec_st2.h"
+#include "ComLimitPoint/fiber_bundle/sec_st3.h"
+#include "ComLimitPoint/fiber_bundle/sec_t2.h"
+#include "ComLimitPoint/fiber_bundle/sec_t3.h"
+#include "ComLimitPoint/fiber_bundle/sec_vd.impl.h"
 
 using namespace fiber_bundle::sec_vd_algebra;
 

@@ -17,8 +17,8 @@
 
 // Interface for class sec_rep_descriptor
 
-#ifndef SEC_REP_DESCRIPTOR_H
-#define SEC_REP_DESCRIPTOR_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_REP_DESCRIPTOR_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SEC_REP_DESCRIPTOR_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -28,11 +28,11 @@
 #include "std_string.h"
 #endif
 
-#ifndef TOTAL_POSET_MEMBER
+#ifndef COM_LIMITPOINT_SHEAF_TOTAL_POSET_MEMBER
 #include "ComLimitPoint/sheaf/total_poset_member.h"
 #endif
 
-#ifndef ARRAY_POSET_DOF_MAP
+#ifndef COM_LIMITPOINT_SHEAF_ARRAY_POSET_DOF_MAP
 #include "ComLimitPoint/sheaf/array_poset_dof_map.h"
 #endif
 
@@ -477,7 +477,7 @@ private:
 
 } // namespace fiber_bundle
 
-#endif // ifndef SEC_REP_DESCRIPTOR_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_REP_DESCRIPTOR_H
 
 
 

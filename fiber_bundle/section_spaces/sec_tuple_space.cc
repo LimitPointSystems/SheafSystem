@@ -18,19 +18,19 @@
 /// @file
 /// Implementation for class sec_tuple_space.
 
-#include "sec_tuple_space.impl.h"
+#include "ComLimitPoint/fiber_bundle/sec_tuple_space.impl.h"
 
 #include "ComLimitPoint/sheaf/abstract_poset_member.impl.h"
 #include "ComLimitPoint/sheaf/assert_contract.h"
-#include "binary_section_space_schema_member.impl.h"
+#include "ComLimitPoint/fiber_bundle/binary_section_space_schema_member.impl.h"
 #include "ComLimitPoint/fiber_bundle/binary_section_space_schema_poset.h"
 #include "ComLimitPoint/fiber_bundle/fiber_bundle_namespace.h"
 #include "ComLimitPoint/sheaf/namespace_poset.impl.h"
 #include "ComLimitPoint/sheaf/namespace_poset_member.h"
 #include "ComLimitPoint/sheaf/poset_handle_factory.h"
-#include "section_space_schema_member.impl.h"
+#include "ComLimitPoint/fiber_bundle/section_space_schema_member.impl.h"
 #include "ComLimitPoint/fiber_bundle/section_space_schema_poset.h"
-#include "sec_tuple.h"
+#include "ComLimitPoint/fiber_bundle/sec_tuple.h"
 #include "ComLimitPoint/fiber_bundle/tuple.h"
 #include "ComLimitPoint/fiber_bundle/tuple_space.h"
 

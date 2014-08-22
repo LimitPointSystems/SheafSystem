@@ -27,8 +27,8 @@
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef SEC_ED_H
-#include "sec_ed.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_ED_H
+#include "ComLimitPoint/fiber_bundle/sec_ed.h"
 #endif
 
 #ifndef GEOMETRY_H

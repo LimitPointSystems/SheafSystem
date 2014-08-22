@@ -18,18 +18,18 @@
 /// @file
 /// Implementation for class sec_stp.
 
-#include "sec_stp.h"
+#include "ComLimitPoint/fiber_bundle/sec_stp.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
-#include "binary_section_space_schema_member.impl.h"
+#include "ComLimitPoint/fiber_bundle/binary_section_space_schema_member.impl.h"
 #include "ComLimitPoint/fiber_bundle/binary_section_space_schema_poset.h"
 #include "ComLimitPoint/fiber_bundle/fiber_bundle_namespace.h"
-#include "section_space_schema_member.impl.h"
+#include "ComLimitPoint/fiber_bundle/section_space_schema_member.impl.h"
 #include "ComLimitPoint/fiber_bundle/section_space_schema_poset.h"
-#include "sec_at1.h"
-#include "sec_at1_space.h"
+#include "ComLimitPoint/fiber_bundle/sec_at1.h"
+#include "ComLimitPoint/fiber_bundle/sec_at1_space.h"
 #include "ComLimitPoint/fiber_bundle/sec_stp_space.h"
-#include "sec_tuple_space.impl.h"
+#include "ComLimitPoint/fiber_bundle/sec_tuple_space.impl.h"
 #include "ComLimitPoint/fiber_bundle/stp.h"
 #include "ComLimitPoint/fiber_bundle/stp_space.h"
 

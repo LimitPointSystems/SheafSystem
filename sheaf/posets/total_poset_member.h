@@ -54,7 +54,7 @@ class storage_agent;
 class SHEAF_DLL_SPEC total_poset_member : public abstract_poset_member
 {
   // ===========================================================
-  /// @name TOTAL_POSET_MEMBER FACET
+  /// @name COM_LIMITPOINT_SHEAF_TOTAL_POSET_MEMBER FACET
   // ===========================================================
   //@{
 

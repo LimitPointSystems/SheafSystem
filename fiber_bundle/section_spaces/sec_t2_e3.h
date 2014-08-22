@@ -18,18 +18,18 @@
 /// @file
 /// Interface for class sec_t2_e3
 
-#ifndef SEC_T2_E3_H
-#define SEC_T2_E3_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_T2_E3_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SEC_T2_E3_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef SEC_T2_H
-#include "sec_t2.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_T2_H
+#include "ComLimitPoint/fiber_bundle/sec_t2.h"
 #endif
 
-#ifndef T2_E3
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_T2_E3
 #include "ComLimitPoint/fiber_bundle/t2_e3.h"
 #endif
 
@@ -100,7 +100,7 @@ private:
 
 
   //============================================================================
-  /// @name T2_E3 FACET OF CLASS SEC_T2_E3
+  /// @name COM_LIMITPOINT_FIBER_BUNDLE_T2_E3 FACET OF CLASS SEC_T2_E3
   //============================================================================
   //@{
 
@@ -326,6 +326,6 @@ private:
 
 } // namespace fiber_bundle
 
-#endif // ifndef SEC_T2_E3_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_T2_E3_H
 
 

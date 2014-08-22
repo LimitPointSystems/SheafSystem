@@ -25,8 +25,8 @@
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef SEC_TUPLE_H
-#include "sec_tuple.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_TUPLE_H
+#include "ComLimitPoint/fiber_bundle/sec_tuple.h"
 #endif
 
 #ifndef COM_LIMITPOINT_FIBER_BUNDLE_AT0_H

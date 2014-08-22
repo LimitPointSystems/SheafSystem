@@ -24,7 +24,7 @@
 #include "ComLimitPoint/sheaf/array_poset_dof_map.h"
 #include "ComLimitPoint/fiber_bundle/base_space_member.h"
 #include "ComLimitPoint/fiber_bundle/base_space_poset.h"
-#include "binary_section_space_schema_member.impl.h"
+#include "ComLimitPoint/fiber_bundle/binary_section_space_schema_member.impl.h"
 #include "ComLimitPoint/sheaf/index_iterator.h"
 #include "ComLimitPoint/sheaf/namespace_poset.impl.h"
 #include "ComLimitPoint/sheaf/namespace_poset_member.h"

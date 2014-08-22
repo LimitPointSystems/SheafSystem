@@ -265,7 +265,7 @@ local_base_space_member()
 
 
 // ===========================================================
-// TOTAL_POSET_MEMBER FACET
+// COM_LIMITPOINT_SHEAF_TOTAL_POSET_MEMBER FACET
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS

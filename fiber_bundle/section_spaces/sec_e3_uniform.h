@@ -18,15 +18,15 @@
 /// @file
 /// Interface for class sec_e3_uniform.
 
-#ifndef SEC_E3_UNIFORM_H
-#define SEC_E3_UNIFORM_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_E3_UNIFORM_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SEC_E3_UNIFORM_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef SEC_E3_H
-#include "sec_e3.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_E3_H
+#include "ComLimitPoint/fiber_bundle/sec_e3.h"
 #endif
 
 namespace fiber_bundle
@@ -459,6 +459,6 @@ private:
 
 } // namespace fiber_bundle
 
-#endif // ifndef SEC_E3_UNIFORM_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_E3_UNIFORM_H
 
 

@@ -31,8 +31,8 @@
 
 // Interface for class section_traits
 
-#ifndef SECTION_TRAITS_H
-#define SECTION_TRAITS_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SECTION_TRAITS_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SECTION_TRAITS_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -1194,4 +1194,4 @@ struct SHEAF_DLL_SPEC section_traits<sec_vd>
 
 } // namespace fiber_bundle
 
-#endif // ifndef SECTION_TRAITS_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_SECTION_TRAITS_H

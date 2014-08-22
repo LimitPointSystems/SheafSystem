@@ -37,7 +37,7 @@ using namespace fiber_bundle; // Workaround for MS C++ bug.
 //==============================================================================
 
 //==============================================================================
-// AT2_E3 FACET OF CLASS AT2_E3_LITE
+// COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3 FACET OF CLASS AT2_E3_LITE
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -569,11 +569,11 @@ row_dofs() const
 
 
 //==============================================================================
-// CLASS AT2_E3
+// CLASS COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3
 //==============================================================================
 
 // ===========================================================
-// HOST FACTORY FACET OF CLASS AT2_E3
+// HOST FACTORY FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -745,7 +745,7 @@ standard_host(namespace_type& xns, const std::string& xsuffix, bool xauto_access
 
 
 //==============================================================================
-// AT2_E3 FACET OF CLASS AT2_E3
+// COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3 FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -1087,7 +1087,7 @@ operator const at2_e3::row_dofs_type& () const
 
 
 //==============================================================================
-// AT2 FACET OF CLASS AT2_E3
+// AT2 FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -1098,24 +1098,13 @@ operator const at2_e3::row_dofs_type& () const
 
 
 //==============================================================================
-// ATP FACET OF CLASS AT2_E3
+// ATP FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
 
 //==============================================================================
-// TP FACET OF CLASS AT2_E3
-//==============================================================================
-
-// PUBLIC MEMBER FUNCTIONS
-
-// PROTECTED MEMBER FUNCTIONS
-
-// PRIVATE MEMBER FUNCTIONS
-
-
-//==============================================================================
-// VD FACET OF CLASS AT2_E3
+// TP FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -1126,7 +1115,18 @@ operator const at2_e3::row_dofs_type& () const
 
 
 //==============================================================================
-// TUPLE FACET OF CLASS AT2_E3
+// VD FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3
+//==============================================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+
+
+//==============================================================================
+// TUPLE FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -1196,7 +1196,7 @@ new_stp(int xp, bool xauto_access) const
 
 
 //==============================================================================
-// ABSTRACT POSET MEMBER FACET OF CLASS AT2_E3
+// ABSTRACT POSET MEMBER FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -1269,7 +1269,7 @@ clone() const
 
 
 //==============================================================================
-// ANY FACET OF CLASS AT2_E3
+// ANY FACET OF CLASS COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3
 //==============================================================================
 
 // PUBLIC MEMBER FUNCTIONS

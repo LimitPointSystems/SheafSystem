@@ -17,8 +17,8 @@
 
 // Implementation for sec_vd facet function templates.
 
-#ifndef SEC_VD_IMPL_H
-#define SEC_VD_IMPL_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_VD_IMPL_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SEC_VD_IMPL_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -32,7 +32,7 @@
 #include "ComLimitPoint/fiber_bundle/sec_vd.h"
 #endif
 
-#ifndef SEC_SECTION_EVALUATOR_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_SECTION_EVALUATOR_H
 #include "ComLimitPoint/fiber_bundle/section_evaluator.h"
 #endif
 
@@ -427,4 +427,4 @@ unary_op(const S0& x0, SR& xresult1, SR& xresult2, F xfunctor,
 
 } // namespace fiber_bundle
 
-#endif // ifndef SEC_VD_IMPL_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_VD_IMPL_H

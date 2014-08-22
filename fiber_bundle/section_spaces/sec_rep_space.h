@@ -33,7 +33,7 @@
 #include "ComLimitPoint/sheaf/poset.h"
 #endif
 
-#ifndef SECTION_SPACE_SCHEMA_MEMBER_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SECTION_SPACE_SCHEMA_MEMBER_H
 #include "ComLimitPoint/fiber_bundle/section_space_schema_member.h"
 #endif
 

@@ -18,15 +18,15 @@
 /// @file
 /// Interface for class sec_st2.
 
-#ifndef SEC_ST2_H
-#define SEC_ST2_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_ST2_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SEC_ST2_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef SEC_STP_H
-#include "sec_stp.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_STP_H
+#include "ComLimitPoint/fiber_bundle/sec_stp.h"
 #endif
 
 #ifndef COM_LIMITPOINT_FIBER_BUNDLE_ST2_H
@@ -338,6 +338,6 @@ SHEAF_DLL_SPEC void determinant(const sec_st2& x0, sec_at0& xresult, bool xauto_
 
 } // namespace fiber_bundle
 
-#endif // ifndef SEC_ST2_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_ST2_H
 
 
