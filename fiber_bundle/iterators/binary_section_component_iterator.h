@@ -24,8 +24,8 @@
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef SECTION_COMPONENT_ITERATOR_H
-#include "section_component_iterator.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SECTION_COMPONENT_ITERATOR_H
+#include "ComLimitPoint/fiber_bundle/section_component_iterator.h"
 #endif
 
 namespace fiber_bundle

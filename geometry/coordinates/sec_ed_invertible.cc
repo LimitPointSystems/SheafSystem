@@ -36,7 +36,7 @@
 #include "sec_at1_space.h"
 #include "ComLimitPoint/fiber_bundle/sec_rep_descriptor.h"
 #include "ComLimitPoint/fiber_bundle/sec_rep_space.h"
-#include "section_eval_iterator.h"
+#include "ComLimitPoint/fiber_bundle/section_eval_iterator.h"
 #include "ComLimitPoint/fiber_bundle/section_evaluator.h"
 #include "ComLimitPoint/sheaf/sheaf.h"
 

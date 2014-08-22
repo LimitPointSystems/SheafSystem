@@ -25,7 +25,7 @@
 #include "ComLimitPoint/fiber_bundle/base_space_poset.h"
 #include "ComLimitPoint/fiber_bundle/binary_section_space_schema_member.h"
 #include "ComLimitPoint/fiber_bundle/binary_section_space_schema_poset.h"
-#include "discretization_context.h"
+#include "ComLimitPoint/fiber_bundle/discretization_context.h"
 #include "ComLimitPoint/sheaf/index_iterator.h"
 #include "ComLimitPoint/sheaf/poset_joiner.h"
 #include "ComLimitPoint/sheaf/postorder_itr.h"

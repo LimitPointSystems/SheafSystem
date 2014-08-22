@@ -17,8 +17,8 @@
 
 // Interface for class section_component_iterator
 
-#ifndef SECTION_COMPONENT_ITERATOR_H
-#define SECTION_COMPONENT_ITERATOR_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SECTION_COMPONENT_ITERATOR_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SECTION_COMPONENT_ITERATOR_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -250,4 +250,4 @@ protected:
 
 } // namespace fiber_bundle
 
-#endif // ifndef SECTION_COMPONENT_ITERATOR_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_SECTION_COMPONENT_ITERATOR_H

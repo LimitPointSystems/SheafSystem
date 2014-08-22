@@ -1136,7 +1136,7 @@ must_use_standard_rep()
 // SPECIALIZATION AND INSTANTIATION FOR SEC_VD
 // =============================================================================
 
-#ifndef SEC_VD_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_VD_H
 #include "ComLimitPoint/fiber_bundle/sec_vd.h"
 #endif
 

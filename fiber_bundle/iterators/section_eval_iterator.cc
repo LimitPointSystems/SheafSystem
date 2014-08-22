@@ -22,7 +22,7 @@
 #include "ComLimitPoint/fiber_bundle/eval_family.h"
 #include "ComLimitPoint/sheaf/poset_state_handle.h"
 #include "ComLimitPoint/sheaf/postorder_iterator.h"
-#include "section_eval_iterator.h"
+#include "ComLimitPoint/fiber_bundle/section_eval_iterator.h"
 #include "ComLimitPoint/fiber_bundle/section_evaluator.h"
 #include "ComLimitPoint/fiber_bundle/section_space_schema_member.h"
 #include "ComLimitPoint/fiber_bundle/section_space_schema_poset.h"

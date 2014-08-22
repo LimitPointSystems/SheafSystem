@@ -24,7 +24,7 @@
 #include "ComLimitPoint/fiber_bundle/bilinear_2d.h"
 #include "ComLimitPoint/fiber_bundle/chart_point_3d.h"
 #include "d_bin_coordinates.h"
-#include "eval_iterator.h"
+#include "ComLimitPoint/fiber_bundle/eval_iterator.h"
 #include "ComLimitPoint/sheaf/error_message.h"
 #include "ComLimitPoint/fiber_bundle/linear_2d.h"
 #include "ComLimitPoint/sheaf/preorder_iterator.h"

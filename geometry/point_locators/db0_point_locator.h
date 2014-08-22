@@ -37,8 +37,8 @@
 #include "std_queue.h"
 #endif
 
-#ifndef SECTION_EVAL_ITERATOR_H
-#include "section_eval_iterator.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SECTION_EVAL_ITERATOR_H
+#include "ComLimitPoint/fiber_bundle/section_eval_iterator.h"
 #endif
 
 //#undef DIAGNOSTIC_OUTPUT

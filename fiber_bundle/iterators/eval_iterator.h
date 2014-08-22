@@ -18,8 +18,8 @@
 // Interface for class eval_iterator
 
 
-#ifndef EVAL_ITERATOR_H
-#define EVAL_ITERATOR_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_EVAL_ITERATOR_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_EVAL_ITERATOR_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -37,7 +37,7 @@
 #include "std_list.h"
 #endif
 
-#ifndef SEC_VD_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_VD_H
 #include "ComLimitPoint/fiber_bundle/sec_vd.h" // just to get typedefs
 #endif
 
@@ -326,4 +326,4 @@ private:
 
 } // namespace fiber_bundle
 
-#endif // ifndef EVAL_ITERATOR_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_EVAL_ITERATOR_H

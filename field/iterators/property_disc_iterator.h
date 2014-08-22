@@ -30,12 +30,12 @@
 #include "ComLimitPoint/sheaf/depth_first_iterator.h"
 #endif
 
-#ifndef SEC_VD_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_VD_H
 #include "ComLimitPoint/fiber_bundle/sec_vd.h"
 #endif
 
-#ifndef SECTION_ITERATION_STATE_H
-#include "section_iteration_state.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SECTION_ITERATION_STATE_H
+#include "omLimitPoint/fiber_bundle/section_iteration_state.h"
 #endif
 
 namespace fields

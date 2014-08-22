@@ -17,7 +17,7 @@
 
 // Implementation for class section_component_iterator
 
-#include "section_component_iterator.h"
+#include "ComLimitPoint/fiber_bundle/section_component_iterator.h"
 
 #include "ComLimitPoint/sheaf/poset_state_handle.h"
 #include "ComLimitPoint/sheaf/assert_contract.h"

@@ -32,7 +32,7 @@
 #include "ComLimitPoint/sheaf/block.h"
 #endif
 
-#ifndef SEC_VD_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_VD_H
 #include "ComLimitPoint/fiber_bundle/sec_vd.h"
 #endif
 

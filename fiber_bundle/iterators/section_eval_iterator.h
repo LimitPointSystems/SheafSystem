@@ -17,22 +17,22 @@
 
 // Interface for class section_eval_iterator
 
-#ifndef SECTION_EVAL_ITERATOR_H
-#define SECTION_EVAL_ITERATOR_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SECTION_EVAL_ITERATOR_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SECTION_EVAL_ITERATOR_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef EVAL_ITERATOR_H
-#include "eval_iterator.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_EVAL_ITERATOR_H
+#include "ComLimitPoint/fiber_bundle/eval_iterator.h"
 #endif
 
 #ifndef COM_LIMITPOINT_SHEAF_POSET_DOF_ITERATOR_H
 #include "ComLimitPoint/sheaf/poset_dof_iterator.h"
 #endif
 
-#ifndef SEC_VD_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_VD_H
 #include "ComLimitPoint/fiber_bundle/sec_vd.h" // just to get typedefs
 #endif
 
@@ -296,4 +296,4 @@ protected:
 
 } // namespace fiber_bundle
 
-#endif // ifndef SECTION_EVAL_ITERATOR_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_SECTION_EVAL_ITERATOR_H

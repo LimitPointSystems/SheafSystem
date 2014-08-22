@@ -18,8 +18,8 @@
 /// @file
 /// Interface for class sec_vd.
 
-#ifndef SEC_VD_H
-#define SEC_VD_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_VD_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SEC_VD_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -888,5 +888,5 @@ void unary_op(const S0& x0, SR& xresult1, SR& xresult2, F xfunctor,
 
 } // namespace fiber_bundle
 
-#endif // ifndef SEC_VD_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_VD_H
 

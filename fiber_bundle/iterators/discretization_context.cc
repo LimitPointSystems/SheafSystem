@@ -17,7 +17,7 @@
 
 // Implementation for class discretization_context
 
-#include "discretization_context.h"
+#include "ComLimitPoint/fiber_bundle/discretization_context.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/sheaf/error_message.h"

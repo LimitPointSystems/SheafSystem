@@ -20,7 +20,7 @@
 #include "vtk_poly_data_builder.h"
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/fiber_bundle/base_space_member.h"
-#include "eval_iterator.h"
+#include "ComLimitPoint/fiber_bundle/eval_iterator.h"
 #include "ComLimitPoint/sheaf/namespace_poset.h"
 #include "ComLimitPoint/fiber_bundle/sec_vd_space.h"
 

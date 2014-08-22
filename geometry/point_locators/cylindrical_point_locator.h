@@ -37,8 +37,8 @@
 #include "d_bounding_box.h"
 #endif
 
-#ifndef EVAL_ITERATOR_H
-#include "eval_iterator.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_EVAL_ITERATOR_H
+#include "ComLimitPoint/fiber_bundle/eval_iterator.h"
 #endif
 
 

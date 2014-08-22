@@ -25,7 +25,7 @@
 #include "ComLimitPoint/fiber_bundle/base_space_poset.h"
 #include "ComLimitPoint/sheaf/block.impl.h"
 #include "ComLimitPoint/sheaf/index_space_iterator.h"
-#include "section_eval_iterator.h"
+#include "ComLimitPoint/fiber_bundle/section_eval_iterator.h"
 #include "ComLimitPoint/fiber_bundle/section_evaluator.h"
 #include "ComLimitPoint/sheaf/subposet.h"
 #include "ComLimitPoint/sheaf/tern.h"

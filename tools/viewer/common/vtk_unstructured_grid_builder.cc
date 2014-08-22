@@ -24,7 +24,7 @@
 #include "ComLimitPoint/sheaf/biorder_iterator.h"
 #include "ComLimitPoint/sheaf/block.impl.h"
 #include "ComLimitPoint/sheaf/error_message.h"
-#include "eval_iterator.h"
+#include "ComLimitPoint/fiber_bundle/eval_iterator.h"
 #include "ComLimitPoint/sheaf/namespace_poset.h"
 #include "ComLimitPoint/sheaf/postorder_iterator.h"
 #include "ComLimitPoint/sheaf/preorder_iterator.h"

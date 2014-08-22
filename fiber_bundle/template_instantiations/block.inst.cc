@@ -24,7 +24,7 @@
 #include "ComLimitPoint/fiber_bundle/chart_point_1d.h"
 #include "ComLimitPoint/fiber_bundle/chart_point_2d.h"
 #include "ComLimitPoint/fiber_bundle/chart_point_3d.h"
-#include "discretization_context.h"
+#include "ComLimitPoint/fiber_bundle/discretization_context.h"
 #include "ComLimitPoint/fiber_bundle/e3.h"
 #include "sec_at0.h"
 #include "ComLimitPoint/fiber_bundle/sec_vd.h"

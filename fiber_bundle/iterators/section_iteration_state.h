@@ -17,8 +17,8 @@
 
 // Interface for class section_iteration_state
 
-#ifndef SECTION_ITERATION_STATE_H
-#define SECTION_ITERATION_STATE_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SECTION_ITERATION_STATE_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SECTION_ITERATION_STATE_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -32,8 +32,8 @@
 #include "ComLimitPoint/sheaf/block.h"
 #endif
 
-#ifndef DISCRETIZATION_CONTEXT_H
-#include "discretization_context.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_DISCRETIZATION_CONTEXT_H
+#include "ComLimitPoint/fiber_bundle/discretization_context.h"
 #endif
 
 #ifndef STD_UNORDERED_MAP_H
@@ -274,4 +274,4 @@ public:
 
 } // namespace fiber_bundle
 
-#endif // ifndef SECTION_ITERATION_STATE_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_SECTION_ITERATION_STATE_H

@@ -36,7 +36,7 @@
 #include "ComLimitPoint/sheaf/postorder_itr.h"
 #include "ComLimitPoint/sheaf/preorder_itr.h"
 #include "ComLimitPoint/fiber_bundle/sec_rep_descriptor.h"
-#include "section_component_iterator.h"
+#include "ComLimitPoint/fiber_bundle/section_component_iterator.h"
 #include "ComLimitPoint/fiber_bundle/section_dof_iterator.h"
 #include "ComLimitPoint/fiber_bundle/section_space_schema_jims_index_space_handle.h"
 #include "ComLimitPoint/fiber_bundle/section_space_schema_jims_index_space_state.h"
