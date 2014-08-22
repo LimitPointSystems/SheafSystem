@@ -24,7 +24,7 @@
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef COM_LIMITPOINT_FIBER_BUNDLE_ E3_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_E3_H
 #include "ComLimitPoint/fiber_bundle/e3.h"
 #endif
 

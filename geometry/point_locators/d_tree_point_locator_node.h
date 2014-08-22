@@ -29,8 +29,8 @@
 #include "ComLimitPoint/sheaf/sheaf.h"
 #endif
 
-#ifndef SINGLY_LINKED_LIST_H
-#include "singly_linked_list.h"
+#ifndef COM_LIMITPOINT_SHEAF_SINGLY_LINKED_LIST_H
+#include "ComLimitPoint/sheaf/singly_linked_list.h"
 #endif
 
 //#undef DIAGNOSTIC_OUTPUT

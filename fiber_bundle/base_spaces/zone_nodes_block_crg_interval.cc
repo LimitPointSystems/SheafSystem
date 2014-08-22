@@ -21,7 +21,7 @@
 #include "ComLimitPoint/fiber_bundle/zone_nodes_block_crg_interval.h"
 
 #include "ComLimitPoint/sheaf/array_implicit_index_space_iterator.h"
-#include "ComLimitPoint/fiber_bundle/array_index_space_interval.h"
+#include "ComLimitPoint/sheaf/array_index_space_interval.h"
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/fiber_bundle/block_connectivity.h"
 #include "ComLimitPoint/sheaf/constant_index_space_interval.h"

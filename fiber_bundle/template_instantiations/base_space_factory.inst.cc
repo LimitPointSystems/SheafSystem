@@ -17,7 +17,7 @@
 
 // Explicit instantiations for class base_space_factory.
 
-#include "ComLimitPoint/sheaf/base_space_factory.impl.h"
+#include "ComLimitPoint/fiber_bundle/base_space_factory.impl.h"
 
 #include "ComLimitPoint/fiber_bundle/point_block_1d.h"
 #include "ComLimitPoint/fiber_bundle/point_block_2d.h"

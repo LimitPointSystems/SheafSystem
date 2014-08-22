@@ -20,7 +20,7 @@
 #include "ComLimitPoint/fiber_bundle/sparse_section_dof_map.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
-#include "ComLimitPoint/fiber_bundle/dof_map_factory.h"
+#include "ComLimitPoint/sheaf/dof_map_factory.h"
 #include "ComLimitPoint/sheaf/ij_product_structure.h"
 #include "ComLimitPoint/sheaf/index_space_iterator.h"
 #include "ComLimitPoint/sheaf/primitive_type.h"

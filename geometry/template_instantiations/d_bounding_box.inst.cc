@@ -23,7 +23,7 @@
 //#include "ComLimitPoint/sheaf/block.impl.h"
 #include "geometry.h"
 #include "std_iostream.h"
-#include "singly_linked_list.h"
+#include "ComLimitPoint/sheaf/singly_linked_list.h"
 
 using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.

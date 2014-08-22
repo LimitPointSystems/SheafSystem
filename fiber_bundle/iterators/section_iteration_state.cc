@@ -17,7 +17,7 @@
 
 // Implementation for class section_iteration_state
 
-#include "omLimitPoint/fiber_bundle/section_iteration_state.h"
+#include "ComLimitPoint/fiber_bundle/section_iteration_state.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/fiber_bundle/base_space_poset.h"

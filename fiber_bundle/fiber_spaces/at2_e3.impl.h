@@ -18,8 +18,8 @@
 /// @file
 /// Implementation for class at2_e3.
 
-#ifndefCOM_LIMITPOINT_FIBER_BUNDLE_AT2_E3_IMPL_H
-#defineCOM_LIMITPOINT_FIBER_BUNDLE_AT2_E3_IMPL_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3_IMPL_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_AT2_E3_IMPL_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"

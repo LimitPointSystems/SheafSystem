@@ -33,8 +33,8 @@
 #include "ComLimitPoint/fiber_bundle/fiber_bundle.h"
 #endif
 
-#ifndef COM_LIMITPOINT_SHEAF_BASE_SPACE_POSET_H
-#include "ComLimitPoint/sheaf/base_space_poset.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_BASE_SPACE_POSET_H
+#include "ComLimitPoint/fiber_bundle/base_space_poset.h"
 #endif
 
 namespace fiber_bundle

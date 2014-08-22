@@ -20,7 +20,7 @@
 
 
 #ifndef COM_LIMITPOINT_FIBER_BUNDLE_E1_H
-#defineCOM_LIMITPOINT_FIBER_BUNDLE_E1_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_E1_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"

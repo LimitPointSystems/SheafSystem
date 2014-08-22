@@ -27,7 +27,7 @@
 #endif
 
 #ifndef COM_LIMITPOINT_SHEAF_BASE_SPACE_CRG_INTERVAL_H
-#include "ComLimitPoint/sheaf/base_space_crg_interval.h"
+#include "ComLimitPoint/fiber_bundle/base_space_crg_interval.h"
 #endif
 
 namespace fiber_bundle

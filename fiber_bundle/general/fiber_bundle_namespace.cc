@@ -34,7 +34,7 @@
 #include "ComLimitPoint/sheaf/array_index_space_handle.h"
 #include "ComLimitPoint/sheaf/array_index_space_state.h"
 #include "ComLimitPoint/fiber_bundle/base_space_member.h"
-#include "ComLimitPoint/sheaf/base_space_poset.h"
+#include "ComLimitPoint/fiber_bundle/base_space_poset.h"
 #include "ComLimitPoint/sheaf/biorder_iterator.h"
 #include "ComLimitPoint/sheaf/block.impl.h"
 #include "ComLimitPoint/fiber_bundle/e1.h"

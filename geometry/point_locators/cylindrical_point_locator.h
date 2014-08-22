@@ -47,8 +47,8 @@
 #include "std_set.h"
 #endif
 
-#ifndef SINGLY_LINKED_LIST_H
-#include "singly_linked_list.h"
+#ifndef COM_LIMITPOINT_SHEAF_SINGLY_LINKED_LIST_H
+#include "ComLimitPoint/sheaf/singly_linked_list.h"
 #endif
 
 #ifndef COM_LIMITPOINT_SHEAF_STL_SCOPED_INDEX_H

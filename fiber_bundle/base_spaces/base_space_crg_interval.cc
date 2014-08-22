@@ -18,7 +18,7 @@
 /// @file
 /// Implementation for class base_space_crg_interval.
 
-#include "ComLimitPoint/sheaf/base_space_crg_interval.h"
+#include "ComLimitPoint/fiber_bundle/base_space_crg_interval.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/fiber_bundle/base_space_poset.h"

@@ -22,7 +22,7 @@
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/fiber_bundle/discretization_iterator.h"
 #include "ComLimitPoint/sheaf/error_message.h"
-#include "ComLimitPoint/fiber_bundle/dof_map_factory.h"
+#include "ComLimitPoint/sheaf/dof_map_factory.h"
 #include "ComLimitPoint/sheaf/postorder_iterator.h"
 #include "ComLimitPoint/fiber_bundle/sec_rep_space.h"
 #include "ComLimitPoint/sheaf/primitive_type.h"

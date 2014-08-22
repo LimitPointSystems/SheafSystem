@@ -29,7 +29,7 @@
 #include "ComLimitPoint/sheaf/runnable.h"
 #endif
 
-#include "singly_linked_list.h"
+#include "ComLimitPoint/sheaf/singly_linked_list.h"
 
 singly_linked_list<thread *> *
 sheaf::thread::

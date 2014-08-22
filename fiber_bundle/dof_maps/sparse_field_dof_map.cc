@@ -21,7 +21,7 @@
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/fiber_bundle/discretization_iterator.h"
-#include "ComLimitPoint/fiber_bundle/dof_map_factory.h"
+#include "ComLimitPoint/sheaf/dof_map_factory.h"
 #include "ComLimitPoint/fiber_bundle/sec_rep_space.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.

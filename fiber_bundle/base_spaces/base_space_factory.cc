@@ -17,9 +17,10 @@
 
 // Template specializations for class base_space_factory.
 
-#include "ComLimitPoint/sheaf/base_space_factory.impl.h"
+#include "ComLimitPoint/fiber_bundle/base_space_factory.impl.h"
 
 //#include "base_space_member_prototype.h"
+#include "ComLimitPoint/fiber_bundle/hex_connectivity.h"
 #include "ComLimitPoint/fiber_bundle/structured_block_3d.h"
 #include "ComLimitPoint/fiber_bundle/line_connectivity.h"
 #include "ComLimitPoint/fiber_bundle/point_block_1d.h"
