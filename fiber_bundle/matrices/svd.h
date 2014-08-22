@@ -18,8 +18,8 @@
 /// @file
 /// Interface for svd.
 
-#ifndef SVD_H
-#define SVD_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_SVD_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_SVD_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -73,4 +73,4 @@ SHEAF_DLL_SPEC double svd_pythag(double xa, double xb);
 
 } // end namespace  fiber_bundle
 
-#endif // ifndef SVD_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_SVD_H

@@ -29,7 +29,7 @@
 #include "ComLimitPoint/fiber_bundle/at2.h"
 #endif
 
-#ifndef ANTISYMMETRIC_MATRIX_2X2_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_ANTISYMMETRIC_MATRIX_2X2_H
 #include "antisymmetric_matrix_2x2.h"
 #endif
 

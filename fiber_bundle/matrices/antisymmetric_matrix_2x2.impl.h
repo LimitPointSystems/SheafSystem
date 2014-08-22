@@ -18,8 +18,8 @@
 // Implementation for antisymmetric_matrix_2x2.
 
 
-#ifndef ANTISYMMETRIC_MATRIX_2X2_IMPL_H
-#define ANTISYMMETRIC_MATRIX_2X2_IMPL_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_ANTISYMMETRIC_MATRIX_2X2_IMPL_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_ANTISYMMETRIC_MATRIX_2X2_IMPL_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -33,24 +33,24 @@
 #include "ComLimitPoint/sheaf/error_message.h"
 #endif
 
-#ifndef ANTISYMMETRIC_MATRIX_2X2_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_ANTISYMMETRIC_MATRIX_2X2_H
 #include "antisymmetric_matrix_2x2.h"
 #endif
 
-#ifndef GENERAL_MATRIX_1X2_H
-#include "general_matrix_1x2.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_GENERAL_MATRIX_1X2_H
+#include "ComLimitPoint/fiber_bundle/general_matrix_1x2.h"
 #endif
 
-#ifndef GENERAL_MATRIX_2X1_H
-#include "general_matrix_2x1.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_GENERAL_MATRIX_2X1_H
+#include "ComLimitPoint/fiber_bundle/general_matrix_2x1.h"
 #endif
 
 #ifndef COM_LIMITPOINT_FIBER_BUNDLE_GENERAL_MATRIX_2X2_H
 #include "ComLimitPoint/fiber_bundle/general_matrix_2x2.h"
 #endif
 
-#ifndef GENERAL_MATRIX_2X3_H
-#include "general_matrix_2x3.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_GENERAL_MATRIX_2X3_H
+#include "ComLimitPoint/fiber_bundle/general_matrix_2x3.h"
 #endif
 
 #ifndef STD_SSTREAM_H
@@ -979,5 +979,5 @@ std::ostream& operator<<(std::ostream& xos, const antisymmetric_matrix_2x2<T>& x
 
 } // namespace fiber_bundle
 
-#endif // ANTISYMMETRIC_MATRIX_2X2_IMPL_H
+#endif // COM_LIMITPOINT_FIBER_BUNDLE_ANTISYMMETRIC_MATRIX_2X2_IMPL_H
  

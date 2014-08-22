@@ -17,8 +17,8 @@
 
 // Interface for antisymmetric_matrix_3x3 classes.
 
-#ifndef ANTISYMMETRIC_MATRIX_3X3_H
-#define ANTISYMMETRIC_MATRIX_3X3_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_ANTISYMMETRIC_MATRIX_3X3_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_ANTISYMMETRIC_MATRIX_3X3_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -274,4 +274,4 @@ std::ostream& operator<<(std::ostream& xos, const antisymmetric_matrix_3x3<T>& x
  
 } // namespace fiber_bundle
 
-#endif // ifndef ANTISYMMETRIC_MATRIX_3X3_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_ANTISYMMETRIC_MATRIX_3X3_H

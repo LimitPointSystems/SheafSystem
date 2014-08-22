@@ -18,8 +18,8 @@
 // Implementation for general_matrix_3x3.
 
 
-#ifndef GENERAL_MATRIX_3X3_IMPL_H
-#define GENERAL_MATRIX_3X3_IMPL_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_GENERAL_MATRIX_3X3_IMPL_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_GENERAL_MATRIX_3X3_IMPL_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -33,12 +33,12 @@
 #include "ComLimitPoint/sheaf/error_message.h"
 #endif
 
-#ifndef ANTISYMMETRIC_MATRIX_3X3_H
-#include "antisymmetric_matrix_3x3.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_ANTISYMMETRIC_MATRIX_3X3_H
+#include "ComLimitPoint/fiber_bundle/antisymmetric_matrix_3x3.h"
 #endif
 
-#ifndef GENERAL_MATRIX_1x3_H
-#include "general_matrix_1x3.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_GENERAL_MATRIX_1x3_H
+#include "ComLimitPoint/fiber_bundle/general_matrix_1x3.h"
 #endif
 
 #ifndef COM_LIMITPOINT_FIBER_BUNDLE_GENERAL_MATRIX_3X1_H
@@ -1374,5 +1374,5 @@ std::ostream& operator<<(std::ostream& xos, const general_matrix_3x3<T>& xm)
 
 } // namespace fiber_bundle
 
-#endif // GENERAL_MATRIX_3X3_IMPL_H
+#endif // COM_LIMITPOINT_FIBER_BUNDLE_GENERAL_MATRIX_3X3_IMPL_H
 

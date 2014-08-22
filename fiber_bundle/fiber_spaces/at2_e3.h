@@ -29,8 +29,8 @@
 #include "ComLimitPoint/fiber_bundle/at2.h"
 #endif
 
-#ifndef ANTISYMMETRIC_MATRIX_3X3_H
-#include "antisymmetric_matrix_3x3.h"
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_ANTISYMMETRIC_MATRIX_3X3_H
+#include "ComLimitPoint/fiber_bundle/antisymmetric_matrix_3x3.h"
 #endif
 
 #ifndef COM_LIMITPOINT_FIBER_BUNDLE_ E3_H

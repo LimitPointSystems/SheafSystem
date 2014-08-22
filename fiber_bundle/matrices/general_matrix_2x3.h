@@ -17,8 +17,8 @@
 
 // Interface for general_matrix_2x3 classes.
 
-#ifndef GENERAL_MATRIX_2X3_H
-#define GENERAL_MATRIX_2X3_H
+#ifndef COM_LIMITPOINT_FIBER_BUNDLE_GENERAL_MATRIX_2X3_H
+#define COM_LIMITPOINT_FIBER_BUNDLE_GENERAL_MATRIX_2X3_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -205,4 +205,4 @@ std::ostream& operator<<(std::ostream& xos, const general_matrix_2x3<T>& xm);
 
 } // namespace fiber_bundle
 
-#endif // ifndef GENERAL_MATRIX_2X3_H
+#endif // ifndef COM_LIMITPOINT_FIBER_BUNDLE_GENERAL_MATRIX_2X3_H
