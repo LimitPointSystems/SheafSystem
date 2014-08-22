@@ -17,7 +17,7 @@
 
 // Explicit_instantiations for class general_matrix_1x2.
 
-#include "general_matrix_1x2.impl.h"
+#include "ComLimitPoint/fiber_bundle/general_matrix_1x2.impl.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

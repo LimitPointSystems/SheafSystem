@@ -17,7 +17,7 @@
 
 // Explicit_instantiations for class antisymmetric_matrix_3x3.
 
-#include "antisymmetric_matrix_3x3.impl.h"
+#include "ComLimitPoint/fiber_bundle/antisymmetric_matrix_3x3.impl.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

@@ -17,7 +17,7 @@
 
 // Explicit_instantiations for class ed.
 
-#include "ed.impl.h"
+#include "ComLimitPoint/fiber_bundle/ed.impl.h"
 
 #include "ComLimitPoint/fiber_bundle/e1.h"
 #include "ComLimitPoint/fiber_bundle/e2.h"

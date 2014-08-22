@@ -18,7 +18,7 @@
 // Implementation for the general_matrix_1x2 template class.
 
 
-//#include "general_matrix_1x2.impl.h"
+//#include "ComLimitPoint/fiber_bundle/general_matrix_1x2.impl.h"
 
 // =============================================================================
 // SPECIALIZATIONS

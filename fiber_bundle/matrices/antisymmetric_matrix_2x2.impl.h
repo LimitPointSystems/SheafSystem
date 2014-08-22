@@ -34,7 +34,7 @@
 #endif
 
 #ifndef COM_LIMITPOINT_FIBER_BUNDLE_ANTISYMMETRIC_MATRIX_2X2_H
-#include "antisymmetric_matrix_2x2.h"
+#include "ComLimitPoint/fiber_bundle/antisymmetric_matrix_2x2.h"
 #endif
 
 #ifndef COM_LIMITPOINT_FIBER_BUNDLE_GENERAL_MATRIX_1X2_H

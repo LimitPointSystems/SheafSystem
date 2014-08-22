@@ -5,7 +5,7 @@
 
 // Explicit_instantiations for class tuple.
 
-#include "tuple.impl.h"
+#include "ComLimitPoint/fiber_bundle/tuple.impl.h"
 
 #include "ComLimitPoint/fiber_bundle/at0.h"
 #include "ComLimitPoint/fiber_bundle/at2_e2.h"

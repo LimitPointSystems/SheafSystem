@@ -18,7 +18,7 @@
 // Implementation for the symmetric_matrix_2x2 template class.
 
 
-//#include "symmetric_matrix_2x2.impl.h"
+//#include "ComLimitPoint/fiber_bundle/symmetric_matrix_2x2.impl.h"
 
 // =============================================================================
 // SPECIALIZATIONS

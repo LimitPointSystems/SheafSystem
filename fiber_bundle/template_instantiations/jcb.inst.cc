@@ -17,7 +17,7 @@
 
 // Explicit_instantiations for class jcb.
 
-#include "jcb.impl.h"
+#include "ComLimitPoint/fiber_bundle/jcb.impl.h"
 
 
 using namespace std;

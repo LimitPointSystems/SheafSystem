@@ -17,7 +17,7 @@
 
 // Explicit_instantiations for class tp.
 
-#include "tp.impl.h"
+#include "ComLimitPoint/fiber_bundle/tp.impl.h"
 
 #include "ComLimitPoint/fiber_bundle/t2_e2.h"
 #include "ComLimitPoint/fiber_bundle/at2_e2.h"

@@ -17,7 +17,7 @@
 
 // Explicit_instantiations for class st2.
 
-#include "st2.impl.h"
+#include "ComLimitPoint/fiber_bundle/st2.impl.h"
 
 #include "ComLimitPoint/fiber_bundle/st2_e2.h"
 #include "ComLimitPoint/fiber_bundle/gl2.h"

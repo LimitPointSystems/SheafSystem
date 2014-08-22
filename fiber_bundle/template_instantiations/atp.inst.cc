@@ -17,7 +17,7 @@
 
 // Explicit_instantiations for class atp.
 
-#include "atp.impl.h"
+#include "ComLimitPoint/fiber_bundle/atp.impl.h"
 
 #include "ComLimitPoint/fiber_bundle/at2_e2.h"
 #include "ComLimitPoint/fiber_bundle/e2.h"

@@ -17,7 +17,7 @@
 
 // Explicit_instantiations for class met.
 
-#include "met.impl.h"
+#include "ComLimitPoint/fiber_bundle/met.impl.h"
 
 
 using namespace std;

@@ -18,7 +18,7 @@
 // Implementation for the general_matrix_3x1 template class.
 
 
-//#include "general_matrix_3x1.impl.h"
+//#include "ComLimitPoint/fiber_bundle/general_matrix_3x1.impl.h"
 
 // =============================================================================
 // SPECIALIZATIONS

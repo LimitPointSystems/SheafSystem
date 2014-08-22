@@ -5,7 +5,7 @@
 
 // Explicit_instantiations for class group.
 
-#include "group.impl.h"
+#include "ComLimitPoint/fiber_bundle/group.impl.h"
 
 #include "ComLimitPoint/fiber_bundle/gl2.h"
 #include "ComLimitPoint/fiber_bundle/gl3.h"

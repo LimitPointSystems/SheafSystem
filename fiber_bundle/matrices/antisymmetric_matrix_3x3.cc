@@ -18,7 +18,7 @@
 // Implementation for the antisymmetric_matrix_3x3 template class.
 
 
-//#include "antisymmetric_matrix_3x3.impl.h"
+//#include "ComLimitPoint/fiber_bundle/antisymmetric_matrix_3x3.impl.h"
 
 // =============================================================================
 // SPECIALIZATIONS
