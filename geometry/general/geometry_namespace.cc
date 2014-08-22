@@ -27,8 +27,8 @@
 #include "ComLimitPoint/fiber_bundle/e2.h"
 #include "ComLimitPoint/fiber_bundle/e3.h"
 #include "ComLimitPoint/sheaf/poset_path.h"
-#include "sec_rep_descriptor.h"
-#include "sec_rep_descriptor_poset.h"
+#include "ComLimitPoint/fiber_bundle/sec_rep_descriptor.h"
+#include "ComLimitPoint/fiber_bundle/sec_rep_descriptor_poset.h"
 #include "std_iostream.h"
 #include "ComLimitPoint/sheaf/wsv_block.h"
 

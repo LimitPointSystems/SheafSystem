@@ -21,7 +21,7 @@
 
 #include "d_uniform_point_locator.impl.h"
 
-#include "sec_rep_descriptor.h"
+#include "ComLimitPoint/fiber_bundle/sec_rep_descriptor.h"
 
 using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.

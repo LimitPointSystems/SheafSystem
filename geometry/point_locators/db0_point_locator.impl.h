@@ -58,7 +58,7 @@
 #endif
 
 #ifndef SEC_REP_DESCRIPTOR_H
-#include "sec_rep_descriptor.h"
+#include "ComLimitPoint/fiber_bundle/sec_rep_descriptor.h"
 #endif
 
 #ifndef SECTION_SPACE_SCHEMA_POSET_H

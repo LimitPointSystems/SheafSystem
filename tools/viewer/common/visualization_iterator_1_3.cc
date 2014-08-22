@@ -25,7 +25,7 @@
 #include "ComLimitPoint/fiber_bundle/binary_section_space_schema_member.h"
 #include "ComLimitPoint/fiber_bundle/eval_family.h"
 #include "ComLimitPoint/sheaf/int_set.h"
-#include "sec_rep_descriptor.h"
+#include "ComLimitPoint/fiber_bundle/sec_rep_descriptor.h"
 #include "ComLimitPoint/fiber_bundle/sec_vd.h"
 #include "ComLimitPoint/fiber_bundle/section_evaluator.h"
 #include "ComLimitPoint/fiber_bundle/section_space_schema_member.h"

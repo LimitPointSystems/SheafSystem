@@ -28,8 +28,8 @@
 #include "ComLimitPoint/sheaf/namespace_poset.h"
 #include "ComLimitPoint/sheaf/postorder_iterator.h"
 #include "ComLimitPoint/sheaf/preorder_iterator.h"
-#include "sec_rep_descriptor.h"
-#include "sec_vd_space.h"
+#include "ComLimitPoint/fiber_bundle/sec_rep_descriptor.h"
+#include "ComLimitPoint/fiber_bundle/sec_vd_space.h"
 #include "ComLimitPoint/fiber_bundle/section_space_schema_poset.h"
 #include "visualization_iterator.h"
 

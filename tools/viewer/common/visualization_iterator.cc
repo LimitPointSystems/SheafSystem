@@ -30,7 +30,7 @@
 #include "visualization_iterator_1_3.h"
 #include "visualization_iterator_4_2.h"
 #include "visualization_iterator_4_3.h"
-#include "sec_rep_descriptor.h"
+#include "ComLimitPoint/fiber_bundle/sec_rep_descriptor.h"
 #include "ComLimitPoint/fiber_bundle/section_evaluator.h"
 #include "ComLimitPoint/fiber_bundle/section_space_schema_member.h"
 #include "ComLimitPoint/fiber_bundle/section_space_schema_poset.h"

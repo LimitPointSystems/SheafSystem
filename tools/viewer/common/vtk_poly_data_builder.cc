@@ -22,7 +22,7 @@
 #include "ComLimitPoint/fiber_bundle/base_space_member.h"
 #include "eval_iterator.h"
 #include "ComLimitPoint/sheaf/namespace_poset.h"
-#include "sec_vd_space.h"
+#include "ComLimitPoint/fiber_bundle/sec_vd_space.h"
 
 #include "vtkPolyData.h"
 #include "vtkPolyDataWriter.h"
