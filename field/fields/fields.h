@@ -25,8 +25,8 @@
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef GEOMETRY_H
-#include "geometry.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_GEOMETRY_H
+#include "ComLimitPoint/geometry/geometry.h"
 #endif
 
 #ifndef COM_LIMITPOINT_SHEAF_SCOPED_INDEX_H

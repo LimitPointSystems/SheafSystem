@@ -18,23 +18,23 @@
 /// @file
 /// Implementation for class d_tree_point_locator_path
 
-#ifndef D_TREE_POINT_LOCATOR_PATH_IMPL_H
-#define D_TREE_POINT_LOCATOR_PATH_IMPL_H
+#ifndef COM_LIMITPOINT_GEOMETRY_D_TREE_POINT_LOCATOR_PATH_IMPL_H
+#define COM_LIMITPOINT_GEOMETRY_D_TREE_POINT_LOCATOR_PATH_IMPL_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef D_TREE_POINT_LOCATOR_PATH_H
-#include "d_tree_point_locator_path.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_D_TREE_POINT_LOCATOR_PATH_H
+#include "ComLimitPoint/geometry/d_tree_point_locator_path.h"
 #endif
 
 #ifndef COM_LIMITPOINT_SHEAF_ASSERT_CONTRACT_H
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #endif
 
-#ifndef D_BOUNDING_BOX_H
-#include "d_bounding_box.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_D_BOUNDING_BOX_H
+#include "ComLimitPoint/geometry/d_bounding_box.h"
 #endif
 
 #ifndef STD_BITSET_H
@@ -406,4 +406,4 @@ operator<<(std::ostream &os, const d_tree_point_locator_path<DC, DB>& xpath)
  
 } // namespace geometry
 
-#endif // ifndef D_TREE_POINT_LOCATOR_PATH_IMPL_H
+#endif // ifndef COM_LIMITPOINT_GEOMETRY_D_TREE_POINT_LOCATOR_PATH_IMPL_H

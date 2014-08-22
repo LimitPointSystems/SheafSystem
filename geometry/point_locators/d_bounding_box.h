@@ -18,8 +18,8 @@
 /// @file
 /// Interface for class d_bounding_box
 
-#ifndef D_BOUNDING_BOX_H
-#define D_BOUNDING_BOX_H
+#ifndef COM_LIMITPOINT_GEOMETRY_D_BOUNDING_BOX_H
+#define COM_LIMITPOINT_GEOMETRY_D_BOUNDING_BOX_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -37,8 +37,8 @@
 #include "std_iostream.h"
 #endif
 
-#ifndef D_BIN_COORDINATES_H
-#include "d_bin_coordinates.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_D_BIN_COORDINATES_H
+#include "ComLimitPoint/geometry/d_bin_coordinates.h"
 #endif
 
 namespace fiber_bundle
@@ -260,4 +260,4 @@ operator<<(std::ostream& xos, const d_bounding_box<DC, DB>& xbox);
  
 } // namespace geometry
 
-#endif // D_BOUNDING_BOX_H
+#endif // COM_LIMITPOINT_GEOMETRY_D_BOUNDING_BOX_H

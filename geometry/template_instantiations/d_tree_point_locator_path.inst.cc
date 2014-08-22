@@ -18,7 +18,7 @@
 /// @file
 /// Explicit instantiations for class d_tree_point_locator_path.
 
-#include "d_tree_point_locator_path.impl.h"
+#include "ComLimitPoint/geometry/d_tree_point_locator_path.impl.h"
 
 //#include "std_iostream.h"
 

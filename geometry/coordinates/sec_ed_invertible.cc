@@ -19,16 +19,16 @@
 /// Implementation for class sec_ed_invertible
 
 
-#include "sec_ed_invertible.h"
+#include "ComLimitPoint/geometry/sec_ed_invertible.h"
 
-#include "array_cylindrical_point_locator.h"
+#include "ComLimitPoint/geometry/array_cylindrical_point_locator.h"
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/fiber_bundle/chart_point.h"
 #include "ComLimitPoint/fiber_bundle/chart_point_3d.h"
-#include "d_array_point_locator.h"
-#include "db0_point_locator.h"
-#include "d_tree_point_locator.h"
-#include "d_uniform_point_locator.h"
+#include "ComLimitPoint/geometry/d_array_point_locator.h"
+#include "ComLimitPoint/geometry/db0_point_locator.h"
+#include "ComLimitPoint/geometry/d_tree_point_locator.h"
+#include "ComLimitPoint/geometry/d_uniform_point_locator.h"
 #include "ComLimitPoint/sheaf/namespace_poset.h"
 #include "ComLimitPoint/sheaf/poset.h"
 #include "ComLimitPoint/sheaf/poset_path.h"

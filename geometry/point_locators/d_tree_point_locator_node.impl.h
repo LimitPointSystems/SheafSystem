@@ -18,8 +18,8 @@
 /// @file
 /// Implementation for class d_tree_point_locator_node
 
-#ifndef D_TREE_POINT_LOCATOR_NODE_IMPL_H
-#define D_TREE_POINT_LOCATOR_NODE_IMPL_H
+#ifndef COM_LIMITPOINT_GEOMETRY_D_TREE_POINT_LOCATOR_NODE_IMPL_H
+#define COM_LIMITPOINT_GEOMETRY_D_TREE_POINT_LOCATOR_NODE_IMPL_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -33,12 +33,12 @@
 #include "ComLimitPoint/sheaf/error_message.h"
 #endif
 
-#ifndef D_TREE_POINT_LOCATOR_H
-#include "d_tree_point_locator.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_D_TREE_POINT_LOCATOR_H
+#include "ComLimitPoint/geometry/d_tree_point_locator.h"
 #endif
 
-#ifndef D_TREE_POINT_LOCATOR_PATH_H
-#include "d_tree_point_locator_path.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_D_TREE_POINT_LOCATOR_PATH_H
+#include "ComLimitPoint/geometry/d_tree_point_locator_path.h"
 #endif
 
 #ifndef STD_SSTREAM_H
@@ -758,4 +758,4 @@ geometry::operator<<(std::ostream& xos, const geometry::d_tree_point_locator_nod
 
 #endif // ifndef DOXYGEN_SHOULD_SKIP_THIS
 
-#endif // D_TREE_POINT_LOCATOR_NODE_IMPL_H
+#endif // COM_LIMITPOINT_GEOMETRY_D_TREE_POINT_LOCATOR_NODE_IMPL_H

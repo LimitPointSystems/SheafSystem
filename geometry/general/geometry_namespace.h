@@ -17,8 +17,8 @@
 
 // Interface for class geometry_namespace
 
-#ifndef GEOMETRY_NAMESPACE_H
-#define GEOMETRY_NAMESPACE_H
+#ifndef COM_LIMITPOINT_GEOMETRY_GEOMETRY_NAMESPACE_H
+#define COM_LIMITPOINT_GEOMETRY_GEOMETRY_NAMESPACE_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -28,8 +28,8 @@
 #include "ComLimitPoint/fiber_bundle/fiber_bundle_namespace.h"
 #endif
 
-#ifndef GEOMETRY_H
-#include "geometry.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_GEOMETRY_H
+#include "ComLimitPoint/geometry/geometry.h"
 #endif
 
 namespace geometry
@@ -120,4 +120,4 @@ private:
   
 } // namespace geometry
 
-#endif // ifndef GEOMETRY_NAMESPACE_H
+#endif // ifndef COM_LIMITPOINT_GEOMETRY_GEOMETRY_NAMESPACE_H

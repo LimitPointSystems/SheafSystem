@@ -26,7 +26,7 @@
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/fiber_bundle/base_space_member.h"
-#include "sec_ed_invertible.h"
+#include "ComLimitPoint/geometry/sec_ed_invertible.h"
 #include "ComLimitPoint/fiber_bundle/sec_t4_e3.h"
 
 using namespace std;

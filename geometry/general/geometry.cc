@@ -18,7 +18,7 @@
 /// @file
 /// Explicit instantiations for the geometry namespace.
 
-#include "geometry.h"
+#include "ComLimitPoint/geometry/geometry.h"
 
 
 using namespace std;

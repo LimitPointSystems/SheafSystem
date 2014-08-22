@@ -18,10 +18,10 @@
 /// @file
 /// Explicit instantiations for class d_bounding_box.
 
-#include "d_bounding_box.impl.h"
+#include "ComLimitPoint/geometry/d_bounding_box.impl.h"
 
 //#include "ComLimitPoint/sheaf/block.impl.h"
-#include "geometry.h"
+#include "ComLimitPoint/geometry/geometry.h"
 #include "std_iostream.h"
 #include "ComLimitPoint/sheaf/singly_linked_list.h"
 

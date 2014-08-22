@@ -37,8 +37,8 @@
 #include "section_pusher_pullback_action.h"
 #endif
 
-#ifndef SEC_ED_INVERTIBLE_H
-#include "sec_ed_invertible.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_SEC_ED_INVERTIBLE_H
+#include "ComLimitPoint/geometry/sec_ed_invertible.h"
 #endif
 
 #ifndef COM_LIMITPOINT_FIBER_BUNDLE_SEC_REP_SPACE_H

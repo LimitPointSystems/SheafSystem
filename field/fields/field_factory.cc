@@ -32,7 +32,7 @@
 #include "ComLimitPoint/fiber_bundle/sec_e1.h"
 #include "ComLimitPoint/fiber_bundle/sec_e2.h"
 #include "ComLimitPoint/fiber_bundle/sec_e3.h"
-#include "sec_ed_invertible.h"
+#include "ComLimitPoint/geometry/sec_ed_invertible.h"
 #include "ComLimitPoint/fiber_bundle/sec_vd_space.h"
 #include "ComLimitPoint/fiber_bundle/section_space_schema_poset.h"
 #include "std_iostream.h"

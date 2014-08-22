@@ -18,15 +18,15 @@
 /// @file
 /// Implementation for class template db0_point_locator
 
-#ifndef DB0_POINT_LOCATOR_IMPL_H
-#define DB0_POINT_LOCATOR_IMPL_H
+#ifndef COM_LIMITPOINT_GEOMETRY_DB0_POINT_LOCATOR_IMPL_H
+#define COM_LIMITPOINT_GEOMETRY_DB0_POINT_LOCATOR_IMPL_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef DB0_POINT_LOCATOR_H
-#include "db0_point_locator.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_DB0_POINT_LOCATOR_H
+#include "ComLimitPoint/geometry/db0_point_locator.h"
 #endif
 
 #ifndef COM_LIMITPOINT_SHEAF_ASSERT_CONTRACT_H
@@ -1171,4 +1171,4 @@ branch_points_at_value(const sec_vd_value_type* xvalue,
  
 } // namespace geometry
 
-#endif // DB0_POINT_LOCATOR_IMPL_H
+#endif // COM_LIMITPOINT_GEOMETRY_DB0_POINT_LOCATOR_IMPL_H

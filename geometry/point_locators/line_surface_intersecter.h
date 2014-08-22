@@ -18,8 +18,8 @@
 /// @file
 /// Interface for class line_surface_intersecter
 
-#ifndef LINE_SURFACE_INTERSECTER_H
-#define LINE_SURFACE_INTERSECTER_H
+#ifndef COM_LIMITPOINT_GEOMETRY_LINE_SURFACE_INTERSECTER_H
+#define COM_LIMITPOINT_GEOMETRY_LINE_SURFACE_INTERSECTER_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -33,16 +33,16 @@
 #include "ComLimitPoint/fiber_bundle/chart_point_1d.h"
 #endif
 
-#ifndef D_ARRAY_POINT_LOCATOR_H
-#include "d_array_point_locator.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_D_ARRAY_POINT_LOCATOR_H
+#include "ComLimitPoint/geometry/d_array_point_locator.h"
 #endif
  
 #ifndef COM_LIMITPOINT_FIBER_BUNDLE_E3_H
 #include "ComLimitPoint/fiber_bundle/e3.h"
 #endif
 
-#ifndef GEOMETRY_H
-#include "geometry.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_GEOMETRY_H
+#include "ComLimitPoint/geometry/geometry.h"
 #endif
  
 #ifndef COM_LIMITPOINT_FIBER_BUNDLE_LINEAR_2D_H
@@ -245,4 +245,4 @@ operator<< (std::ostream &os, const line_surface_intersecter& xp);
   
 } // end namespace geometry
 
-#endif // ifndef LINE_SURFACE_INTERSECTER_H
+#endif // ifndef COM_LIMITPOINT_GEOMETRY_LINE_SURFACE_INTERSECTER_H

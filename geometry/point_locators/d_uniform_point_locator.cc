@@ -19,7 +19,7 @@
 /// Explicit instantiation for class d_uniform_point_locator
 
 
-#include "d_uniform_point_locator.impl.h"
+#include "ComLimitPoint/geometry/d_uniform_point_locator.impl.h"
 
 #include "ComLimitPoint/fiber_bundle/sec_rep_descriptor.h"
 

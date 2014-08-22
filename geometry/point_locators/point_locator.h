@@ -18,8 +18,8 @@
 /// @file
 /// Interface for class point_locator
 
-#ifndef POINT_LOCATOR_H
-#define POINT_LOCATOR_H
+#ifndef COM_LIMITPOINT_GEOMETRY_POINT_LOCATOR_H
+#define COM_LIMITPOINT_GEOMETRY_POINT_LOCATOR_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -29,8 +29,8 @@
 #include "ComLimitPoint/sheaf/block.h"
 #endif
 
-#ifndef GEOMETRY_H
-#include "geometry.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_GEOMETRY_H
+#include "ComLimitPoint/geometry/geometry.h"
 #endif
 
 namespace fiber_bundle
@@ -220,4 +220,4 @@ operator<<(std::ostream& xos, const point_locator& xpl);
  
 } // namespace geometry
 
-#endif // POINT_LOCATOR_H
+#endif // COM_LIMITPOINT_GEOMETRY_POINT_LOCATOR_H

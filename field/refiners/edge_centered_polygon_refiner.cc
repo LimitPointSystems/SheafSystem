@@ -29,7 +29,7 @@
 #include "ComLimitPoint/sheaf/index_space_iterator.h"
 #include "ComLimitPoint/fiber_bundle/integrable_section_evaluator.h"
 #include "ComLimitPoint/fiber_bundle/linear_2d.h"
-#include "sec_ed_invertible.h"
+#include "ComLimitPoint/geometry/sec_ed_invertible.h"
 #include "std_algorithm.h"
 #include "std_iostream.h"
 #include "field_vd.h"

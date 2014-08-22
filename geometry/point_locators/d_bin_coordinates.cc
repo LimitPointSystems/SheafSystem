@@ -18,7 +18,7 @@
 /// @file
 /// Specializations for class d_bin_coordinates,
 
-#include "d_bin_coordinates.impl.h"
+#include "ComLimitPoint/geometry/d_bin_coordinates.impl.h"
 
 #include "std_iostream.h"
 

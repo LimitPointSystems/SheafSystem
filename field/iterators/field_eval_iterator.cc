@@ -30,7 +30,7 @@
 #include "ComLimitPoint/fiber_bundle/section_evaluator.h"
 #include "ComLimitPoint/fiber_bundle/section_space_schema_member.h"
 #include "ComLimitPoint/fiber_bundle/section_space_schema_poset.h"
-#include "sec_ed_invertible.h"
+#include "ComLimitPoint/geometry/sec_ed_invertible.h"
 #include "ComLimitPoint/fiber_bundle/sec_vd.h"
 #include "std_limits.h"
 #include "ComLimitPoint/sheaf/subposet_member_iterator.h"

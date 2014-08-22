@@ -18,15 +18,15 @@
 /// @file
 /// Interface for class d_array_point_locator
 
-#ifndef D_ARRAY_POINT_LOCATOR_H
-#define D_ARRAY_POINT_LOCATOR_H
+#ifndef COM_LIMITPOINT_GEOMETRY_D_ARRAY_POINT_LOCATOR_H
+#define COM_LIMITPOINT_GEOMETRY_D_ARRAY_POINT_LOCATOR_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef D_BIN_POINT_LOCATOR_H
-#include "d_bin_point_locator.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_D_BIN_POINT_LOCATOR_H
+#include "ComLimitPoint/geometry/d_bin_point_locator.h"
 #endif
 
 namespace geometry
@@ -552,4 +552,4 @@ bin_id(const block<size_type>& xid) const;
 
 // namespace geometry/
 
-#endif // D_ARRAY_POINT_LOCATOR_H
+#endif // COM_LIMITPOINT_GEOMETRY_D_ARRAY_POINT_LOCATOR_H

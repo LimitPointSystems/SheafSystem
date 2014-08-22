@@ -18,15 +18,15 @@
 /// @file
 /// Implementation for class d_bounding_box
 
-#ifndef D_BOUNDING_BOX_IMPL_H
-#define D_BOUNDING_BOX_IMPL_H
+#ifndef COM_LIMITPOINT_GEOMETRY_D_BOUNDING_BOX_IMPL_H
+#define COM_LIMITPOINT_GEOMETRY_D_BOUNDING_BOX_IMPL_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef D_BOUNDING_BOX_H
-#include "d_bounding_box.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_D_BOUNDING_BOX_H
+#include "ComLimitPoint/geometry/d_bounding_box.h"
 #endif
 
 #ifndef COM_LIMITPOINT_SHEAF_ASSERT_CONTRACT_H
@@ -498,5 +498,5 @@ operator<<(std::ostream& xos, const d_bounding_box<DC, DB>& xbox)
  
 } // namespace geometry
 
-#endif // D_BOUNDING_BOX_IMPL_H
+#endif // COM_LIMITPOINT_GEOMETRY_D_BOUNDING_BOX_IMPL_H
 

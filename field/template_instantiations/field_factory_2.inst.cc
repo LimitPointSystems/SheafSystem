@@ -27,7 +27,7 @@
 #include "ComLimitPoint/fiber_bundle/sec_e1_uniform.h"
 #include "ComLimitPoint/fiber_bundle/sec_e2_uniform.h"
 #include "ComLimitPoint/fiber_bundle/sec_e3_uniform.h"
-#include "sec_ed_invertible.h"
+#include "ComLimitPoint/geometry/sec_ed_invertible.h"
 #include "ComLimitPoint/fiber_bundle/point_block_1d.h"
 #include "ComLimitPoint/fiber_bundle/point_block_2d.h"
 #include "ComLimitPoint/fiber_bundle/point_block_3d.h"

@@ -23,7 +23,7 @@
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/sheaf/block.h"
 #include "ComLimitPoint/sheaf/error_message.h"
-#include "sec_ed_invertible.h"
+#include "ComLimitPoint/geometry/sec_ed_invertible.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.

@@ -20,8 +20,8 @@
 /// @file
 /// Interface for class sec_ed_invertible
 
-#ifndef SEC_ED_INVERTIBLE_H
-#define SEC_ED_INVERTIBLE_H
+#ifndef COM_LIMITPOINT_GEOMETRY_SEC_ED_INVERTIBLE_H
+#define COM_LIMITPOINT_GEOMETRY_SEC_ED_INVERTIBLE_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -31,8 +31,8 @@
 #include "ComLimitPoint/fiber_bundle/sec_ed.h"
 #endif
 
-#ifndef GEOMETRY_H
-#include "geometry.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_GEOMETRY_H
+#include "ComLimitPoint/geometry/geometry.h"
 #endif
 
 namespace sheaf
@@ -291,4 +291,4 @@ public:
  
 } // namespace geometry
 
-#endif // ifndef SEC_ED_INVERTIBLE_H
+#endif // ifndef COM_LIMITPOINT_GEOMETRY_SEC_ED_INVERTIBLE_H

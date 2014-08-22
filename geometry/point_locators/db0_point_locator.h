@@ -18,15 +18,15 @@
 /// @file
 /// Interface for class db0_point_locator
 
-#ifndef DB0_POINT_LOCATOR_H
-#define DB0_POINT_LOCATOR_H
+#ifndef COM_LIMITPOINT_GEOMETRY_DB0_POINT_LOCATOR_H
+#define COM_LIMITPOINT_GEOMETRY_DB0_POINT_LOCATOR_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef POINT_LOCATOR_H
-#include "point_locator.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_POINT_LOCATOR_H
+#include "ComLimitPoint/geometry/point_locator.h"
 #endif
 
 #ifndef COM_LIMITPOINT_SHEAF_SINGLY_LINKED_LIST_H
@@ -558,4 +558,4 @@ update_search_q(bin_coord_type xold_lb[], bin_coord_type xold_ub[]);
 
 } // namespace geometry
 
-#endif // DB0_POINT_LOCATOR_H
+#endif // COM_LIMITPOINT_GEOMETRY_DB0_POINT_LOCATOR_H

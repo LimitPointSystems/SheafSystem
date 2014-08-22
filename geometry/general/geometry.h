@@ -18,8 +18,8 @@
 /// @file
 /// Interface for class geometry
 
-#ifndef GEOMETRY_H
-#define GEOMETRY_H
+#ifndef COM_LIMITPOINT_GEOMETRY_GEOMETRY_H
+#define COM_LIMITPOINT_GEOMETRY_GEOMETRY_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -85,4 +85,4 @@ namespace geometry
  
 } // namespace geometry
 
-#endif // ifndef GEOMETRY_H
+#endif // ifndef COM_LIMITPOINT_GEOMETRY_GEOMETRY_H

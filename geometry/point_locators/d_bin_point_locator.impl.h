@@ -18,15 +18,15 @@
 /// @file
 /// Implementation for class d_bin_point_locator
 
-#ifndef D_BIN_POINT_LOCATOR_IMPL_H
-#define D_BIN_POINT_LOCATOR_IMPL_H
+#ifndef COM_LIMITPOINT_GEOMETRY_D_BIN_POINT_LOCATOR_IMPL_H
+#define COM_LIMITPOINT_GEOMETRY_D_BIN_POINT_LOCATOR_IMPL_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef D_BIN_POINT_LOCATOR_H
-#include "d_bin_point_locator.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_D_BIN_POINT_LOCATOR_H
+#include "ComLimitPoint/geometry/d_bin_point_locator.h"
 #endif
 
 #ifndef COM_LIMITPOINT_SHEAF_ASSERT_CONTRACT_H
@@ -37,8 +37,8 @@
 #include "ComLimitPoint/fiber_bundle/chart_point_3d.h"
 #endif
 
-#ifndef D_BIN_COORDINATES_H
-#include "d_bin_coordinates.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_D_BIN_COORDINATES_H
+#include "ComLimitPoint/geometry/d_bin_coordinates.h"
 #endif
 
 #ifndef COM_LIMITPOINT_FIBER_BUNDLE_EVAL_ITERATOR_H
@@ -1245,4 +1245,4 @@ branch_points_at_value(const sec_vd_value_type* xvalue,
  
 } // namespace geometry
 
-#endif // D_BIN_POINT_LOCATOR_IMPL_H
+#endif // COM_LIMITPOINT_GEOMETRY_D_BIN_POINT_LOCATOR_IMPL_H

@@ -28,7 +28,7 @@
 #include "ComLimitPoint/fiber_bundle/sec_rep_descriptor.h"
 #include "ComLimitPoint/fiber_bundle/section_evaluator.h"
 #include "ComLimitPoint/fiber_bundle/section_space_schema_member.h"
-#include "sec_ed_invertible.h"
+#include "ComLimitPoint/geometry/sec_ed_invertible.h"
 #include "ComLimitPoint/fiber_bundle/sec_vd.h"
 #include "std_limits.h"
 #include "ComLimitPoint/fiber_bundle/structured_block_1d.h"

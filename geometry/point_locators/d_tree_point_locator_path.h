@@ -18,15 +18,15 @@
 /// @file
 /// Interface for class d_tree_point_locator_path
 
-#ifndef D_TREE_POINT_LOCATOR_PATH_H
-#define D_TREE_POINT_LOCATOR_PATH_H
+#ifndef COM_LIMITPOINT_GEOMETRY_D_TREE_POINT_LOCATOR_PATH_H
+#define COM_LIMITPOINT_GEOMETRY_D_TREE_POINT_LOCATOR_PATH_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef D_BIN_COORDINATES_H
-#include "d_bin_coordinates.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_D_BIN_COORDINATES_H
+#include "ComLimitPoint/geometry/d_bin_coordinates.h"
 #endif
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_H
@@ -210,4 +210,4 @@ operator<<(std::ostream &os, const d_tree_point_locator_path<DC, DB>& xpath);
  
 } // namespace geometry
 
-#endif // ifndef D_TREE_POINT_LOCATOR_PATH_H
+#endif // ifndef COM_LIMITPOINT_GEOMETRY_D_TREE_POINT_LOCATOR_PATH_H

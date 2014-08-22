@@ -18,12 +18,12 @@
 /// @file
 /// Implementation for class cylindrical_point_locator
 
-#include "cylindrical_point_locator.h"
+#include "ComLimitPoint/geometry/cylindrical_point_locator.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/fiber_bundle/bilinear_2d.h"
 #include "ComLimitPoint/fiber_bundle/chart_point_3d.h"
-#include "d_bin_coordinates.h"
+#include "ComLimitPoint/geometry/d_bin_coordinates.h"
 #include "ComLimitPoint/fiber_bundle/eval_iterator.h"
 #include "ComLimitPoint/sheaf/error_message.h"
 #include "ComLimitPoint/fiber_bundle/linear_2d.h"

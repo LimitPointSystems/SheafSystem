@@ -17,10 +17,10 @@
 
 /// Explicit instantiations for class ptr_linked_pool.
 
-#include "ptr_linked_pool.impl.h"
+#include "ComLimitPoint/sheaf/ptr_linked_pool.impl.h"
 
-#include "geometry.h"
-#include "d_tree_point_locator_node.impl.h"
+#include "ComLimitPoint/geometry/geometry.h"
+#include "ComLimitPoint/geometry/d_tree_point_locator_node.impl.h"
 
 using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.

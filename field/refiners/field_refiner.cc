@@ -35,7 +35,7 @@
 #include "local_field_refiner.h"
 #include "field_refiner_family.h"
 #include "ComLimitPoint/fiber_bundle/section_evaluator.h"
-#include "sec_ed_invertible.h"
+#include "ComLimitPoint/geometry/sec_ed_invertible.h"
 #include "ComLimitPoint/fiber_bundle/sec_vd.h"
 #include "variance_bound_refinement_policy.h"
 #include "field_vd.h"

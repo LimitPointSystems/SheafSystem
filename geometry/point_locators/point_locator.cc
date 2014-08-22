@@ -19,7 +19,7 @@
 /// Implementation for class point_locator
 
 
-#include "point_locator.h"
+#include "ComLimitPoint/geometry/point_locator.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/fiber_bundle/chart_point_3d.h"

@@ -26,7 +26,7 @@
 #include "ComLimitPoint/sheaf/block.impl.h"
 #include "field_refinement_buffer.h"
 #include "ComLimitPoint/fiber_bundle/section_evaluator.h"
-#include "sec_ed_invertible.h"
+#include "ComLimitPoint/geometry/sec_ed_invertible.h"
 #include "field_vd.h"
 
 using namespace std;

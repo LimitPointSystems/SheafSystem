@@ -18,19 +18,19 @@
 /// @file
 /// Implementation for class d_array_point_locator
 
-#ifndef D_ARRAY_POINT_LOCATOR_IMPL_H
-#define D_ARRAY_POINT_LOCATOR_IMPL_H
+#ifndef COM_LIMITPOINT_GEOMETRY_D_ARRAY_POINT_LOCATOR_IMPL_H
+#define COM_LIMITPOINT_GEOMETRY_D_ARRAY_POINT_LOCATOR_IMPL_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef D_ARRAY_POINT_LOCATOR_H
-#include "d_array_point_locator.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_D_ARRAY_POINT_LOCATOR_H
+#include "ComLimitPoint/geometry/d_array_point_locator.h"
 #endif
 
-#ifndef D_BIN_POINT_LOCATOR_IMPL_H
-#include "d_bin_point_locator.impl.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_D_BIN_POINT_LOCATOR_IMPL_H
+#include "ComLimitPoint/geometry/d_bin_point_locator.impl.h"
 #endif
 
 namespace geometry
@@ -444,4 +444,4 @@ operator<<(std::ostream& xos, const singly_linked_list<const d_bounding_box<DC, 
  
 } // namespace geometry
 
-#endif // D_ARRAY_POINT_LOCATOR_IMPL_H
+#endif // COM_LIMITPOINT_GEOMETRY_D_ARRAY_POINT_LOCATOR_IMPL_H

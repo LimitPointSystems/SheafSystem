@@ -17,7 +17,7 @@
 
 // Implementation for class geometry_namespace
 
-#include "geometry_namespace.h"
+#include "ComLimitPoint/geometry/geometry_namespace.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/fiber_bundle/at0.h"

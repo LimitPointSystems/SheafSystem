@@ -18,15 +18,15 @@
 /// @file
 /// Interface for class d_uniform_point_locator
 
-#ifndef D_UNIFORM_POINT_LOCATOR_H
-#define D_UNIFORM_POINT_LOCATOR_H
+#ifndef COM_LIMITPOINT_GEOMETRY_D_UNIFORM_POINT_LOCATOR_H
+#define COM_LIMITPOINT_GEOMETRY_D_UNIFORM_POINT_LOCATOR_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef POINT_LOCATOR_H
-#include "point_locator.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_POINT_LOCATOR_H
+#include "ComLimitPoint/geometry/point_locator.h"
 #endif
 
 //#undef DIAGNOSTIC_OUTPUT
@@ -198,4 +198,4 @@ d_uniform_point_locator(sec_ed& xcoords);
 
 } // namespace geometry
 
-#endif // D_UNIFORM_POINT_LOCATOR_H
+#endif // COM_LIMITPOINT_GEOMETRY_D_UNIFORM_POINT_LOCATOR_H

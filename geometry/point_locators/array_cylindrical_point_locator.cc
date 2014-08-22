@@ -18,7 +18,7 @@
 /// @file
 /// Implementation for class array_cylindrical_point_locator
 
-#include "array_cylindrical_point_locator.h"
+#include "ComLimitPoint/geometry/array_cylindrical_point_locator.h"
 
 #include "ComLimitPoint/fiber_bundle/sec_ed.h"
 #include "ComLimitPoint/fiber_bundle/section_space_schema_poset.h"

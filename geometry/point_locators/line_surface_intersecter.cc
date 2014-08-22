@@ -18,7 +18,7 @@
 /// @file
 /// Implementation for class line_surface_intersecter
 
-#include "line_surface_intersecter.h"
+#include "ComLimitPoint/geometry/line_surface_intersecter.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/fiber_bundle/base_space_poset.h"

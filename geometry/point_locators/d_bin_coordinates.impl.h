@@ -18,8 +18,8 @@
 /// @file
 /// Implementation for class d_bin_coordinates
 
-#ifndef D_BIN_COORDINATES_IMPL_H
-#define D_BIN_COORDINATES_IMPL_H
+#ifndef COM_LIMITPOINT_GEOMETRY_D_BIN_COORDINATES_IMPL_H
+#define COM_LIMITPOINT_GEOMETRY_D_BIN_COORDINATES_IMPL_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -29,8 +29,8 @@
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #endif
 
-#ifndef D_BIN_COORDINATES_H
-#include "d_bin_coordinates.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_D_BIN_COORDINATES_H
+#include "ComLimitPoint/geometry/d_bin_coordinates.h"
 #endif
 
 #ifndef STD_BITSET_H
@@ -434,4 +434,4 @@ std::ostream& geometry::operator<<(std::ostream& xos, const geometry::d_bin_coor
 }
 #endif // ifndef DOXYGEN_SHOULD_SKIP_THIS
 
-#endif // ifndef D_BIN_COORDINATES_IMPL_H
+#endif // ifndef COM_LIMITPOINT_GEOMETRY_D_BIN_COORDINATES_IMPL_H

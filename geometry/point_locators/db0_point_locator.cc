@@ -18,7 +18,7 @@
 /// @file
 /// Specializationss for class db0_point_locator
 
-#include "db0_point_locator.impl.h"
+#include "ComLimitPoint/geometry/db0_point_locator.impl.h"
 
 #include "ComLimitPoint/sheaf/block.impl.h"
 #include "ComLimitPoint/fiber_bundle/section_space_schema_poset.h"

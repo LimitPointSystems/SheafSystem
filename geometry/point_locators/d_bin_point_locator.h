@@ -18,19 +18,19 @@
 /// @file
 /// Interface for class d_bin_point_locator
 
-#ifndef D_BIN_POINT_LOCATOR_H
-#define D_BIN_POINT_LOCATOR_H
+#ifndef COM_LIMITPOINT_GEOMETRY_D_BIN_POINT_LOCATOR_H
+#define COM_LIMITPOINT_GEOMETRY_D_BIN_POINT_LOCATOR_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef POINT_LOCATOR_H
-#include "point_locator.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_POINT_LOCATOR_H
+#include "ComLimitPoint/geometry/point_locator.h"
 #endif
 
-#ifndef D_BOUNDING_BOX_H
-#include "d_bounding_box.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_D_BOUNDING_BOX_H
+#include "ComLimitPoint/geometry/d_bounding_box.h"
 #endif
 
 #ifndef COM_LIMITPOINT_FIBER_BUNDLE_EVAL_ITERATOR_H
@@ -315,4 +315,4 @@ public:
  
 } // namespace geometry
 
-#endif // D_BIN_POINT_LOCATOR_H
+#endif // COM_LIMITPOINT_GEOMETRY_D_BIN_POINT_LOCATOR_H

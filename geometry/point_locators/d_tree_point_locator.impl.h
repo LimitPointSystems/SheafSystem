@@ -17,23 +17,23 @@
 /// @file
 /// Implementation for class d_tree_point_locator
 
-#ifndef D_TREE_POINT_LOCATOR_IMPL_H
-#define D_TREE_POINT_LOCATOR_IMPL_H
+#ifndef COM_LIMITPOINT_GEOMETRY_D_TREE_POINT_LOCATOR_IMPL_H
+#define COM_LIMITPOINT_GEOMETRY_D_TREE_POINT_LOCATOR_IMPL_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef D_TREE_POINT_LOCATOR_H
-#include "d_tree_point_locator.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_D_TREE_POINT_LOCATOR_H
+#include "ComLimitPoint/geometry/d_tree_point_locator.h"
 #endif
 
-#ifndef D_BIN_POINT_LOCATOR_IMPL_H
-#include "d_bin_point_locator.impl.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_D_BIN_POINT_LOCATOR_IMPL_H
+#include "ComLimitPoint/geometry/d_bin_point_locator.impl.h"
 #endif
 
-#ifndef D_TREE_POINT_LOCATOR_PATH_H
-#include "d_tree_point_locator_path.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_D_TREE_POINT_LOCATOR_PATH_H
+#include "ComLimitPoint/geometry/d_tree_point_locator_path.h"
 #endif
 
 #ifndef STD_UTILITY_H
@@ -525,4 +525,4 @@ std::ostream& operator<<(std::ostream& xos, const d_tree_point_locator<DC, DB>& 
  
 } // namespace geometry
 
-#endif // D_TREE_POINT_LOCATOR_IMPL_H
+#endif // COM_LIMITPOINT_GEOMETRY_D_TREE_POINT_LOCATOR_IMPL_H

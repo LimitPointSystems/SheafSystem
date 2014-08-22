@@ -18,8 +18,8 @@
 /// @file
 /// Interface for class d_bin_coordinates
 
-#ifndef D_BIN_COORDINATES_H
-#define D_BIN_COORDINATES_H
+#ifndef COM_LIMITPOINT_GEOMETRY_D_BIN_COORDINATES_H
+#define COM_LIMITPOINT_GEOMETRY_D_BIN_COORDINATES_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -301,4 +301,4 @@ d_bin_coordinates<4, 4>::put_branch(size_type xbit, size_type xbranch);
 
 } // namespace geometry
 
-#endif // ifndef D_BIN_COORDINATES_H
+#endif // ifndef COM_LIMITPOINT_GEOMETRY_D_BIN_COORDINATES_H

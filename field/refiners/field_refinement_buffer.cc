@@ -28,7 +28,7 @@
 #include "ComLimitPoint/sheaf/postorder_iterator.h"
 #include "local_field_refiner.h"
 #include "ComLimitPoint/fiber_bundle/section_evaluator.h"
-#include "sec_ed_invertible.h"
+#include "ComLimitPoint/geometry/sec_ed_invertible.h"
 #include "ComLimitPoint/fiber_bundle/sec_vd.h"
 
 using namespace std;

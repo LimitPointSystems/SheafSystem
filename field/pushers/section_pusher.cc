@@ -37,7 +37,7 @@
 #include "ComLimitPoint/sheaf/preorder_iterator.h"
 #include "property_disc_iterator.h"
 #include "ComLimitPoint/fiber_bundle/sec_at1_space.h"
-#include "sec_ed_invertible.h"
+#include "ComLimitPoint/geometry/sec_ed_invertible.h"
 #include "ComLimitPoint/fiber_bundle/sec_rep_descriptor.h"
 #include "ComLimitPoint/fiber_bundle/sec_vd_space.h"
 #include "ComLimitPoint/fiber_bundle/section_evaluator.h"

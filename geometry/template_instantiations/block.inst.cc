@@ -17,14 +17,14 @@
 
 // Implementation for class template block
 
-#include "geometry.h"
+#include "ComLimitPoint/geometry/geometry.h"
 
 #include "ComLimitPoint/sheaf/auto_block.impl.h"
 #include "ComLimitPoint/sheaf/block.impl.h"
 
-#include "d_bounding_box.impl.h"
-#include "d_tree_point_locator_node.impl.h"
-#include "db0_point_locator.impl.h"
+#include "ComLimitPoint/geometry/d_bounding_box.impl.h"
+#include "ComLimitPoint/geometry/d_tree_point_locator_node.impl.h"
+#include "ComLimitPoint/geometry/db0_point_locator.impl.h"
 
 //#include "kd_plane.h"
 //#include "kd_bounding_box.h"

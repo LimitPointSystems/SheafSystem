@@ -18,15 +18,15 @@
 /// @file
 /// Interface for class array_cylindrical_point_locator
 
-#ifndef ARRAY_CYLINDRICAL_POINT_LOCATOR_H
-#define ARRAY_CYLINDRICAL_POINT_LOCATOR_H
+#ifndef COM_LIMITPOINT_GEOMETRY_ARRAY_CYLINDRICAL_POINT_LOCATOR_H
+#define COM_LIMITPOINT_GEOMETRY_ARRAY_CYLINDRICAL_POINT_LOCATOR_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef CYLINDRICAL_POINT_LOCATOR_H
-#include "cylindrical_point_locator.h"
+#ifndef COM_LIMITPOINT_GEOMETRY_CYLINDRICAL_POINT_LOCATOR_H
+#include "ComLimitPoint/geometry/cylindrical_point_locator.h"
 #endif
 
 namespace geometry
@@ -213,4 +213,4 @@ operator << (std::ostream& xos, const array_cylindrical_point_locator& xpl);
  
 } // namespace geometry
 
-#endif // ARRAY_CYLINDRICAL_POINT_LOCATOR_H
+#endif // COM_LIMITPOINT_GEOMETRY_ARRAY_CYLINDRICAL_POINT_LOCATOR_H

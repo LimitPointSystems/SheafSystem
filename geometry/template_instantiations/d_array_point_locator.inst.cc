@@ -19,7 +19,7 @@
 /// Explicit instantiations for class d_array_point_locator.
 
 
-#include "d_array_point_locator.impl.h"
+#include "ComLimitPoint/geometry/d_array_point_locator.impl.h"
 
 using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.

@@ -20,9 +20,9 @@
 
 #include "ComLimitPoint/sheaf/auto_block.impl.h"
 
-#include "d_bounding_box.impl.h"
-#include "d_tree_point_locator_node.impl.h"
-#include "geometry.h"
+#include "ComLimitPoint/geometry/d_bounding_box.impl.h"
+#include "ComLimitPoint/geometry/d_tree_point_locator_node.impl.h"
+#include "ComLimitPoint/geometry/geometry.h"
 #include "ComLimitPoint/sheaf/singly_linked_list.h"
 #include "std_utility.h"
 
