@@ -15,7 +15,7 @@
 // limitations under the License.
 //
 
-package tools.viewer.user;
+package com.limitpoint.tools.viewer.user;
 
 import java.awt.*;
 import javax.swing.*;

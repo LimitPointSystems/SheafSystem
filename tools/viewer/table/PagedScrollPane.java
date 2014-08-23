@@ -15,10 +15,10 @@
 // limitations under the License.
 //
 
-package tools.viewer.table;
+package com.limitpoint.tools.viewer.table;
 
-import tools.viewer.common.*;
-import tools.common.gui.*;
+import com.limitpoimt.tools.viewer.common.*;
+import com.limitpoimt.tools.common.gui.*;
 
 import java.awt.*;
 import java.awt.event.*;

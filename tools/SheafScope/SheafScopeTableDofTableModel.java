@@ -16,10 +16,10 @@
 //
 
 
-package tools.SheafScope;
+package com.limitpoint.tools.SheafScope;
 
 import bindings.java.*;
-import tools.common.util.*;
+import com.limitpoimt.tools.common.util.*;
 
 import javax.swing.table.*;
 import java.util.*;

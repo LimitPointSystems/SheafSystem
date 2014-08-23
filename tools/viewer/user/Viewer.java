@@ -16,15 +16,15 @@
 //
 
 
-package tools.viewer.user;
+package com.limitpoint.tools.viewer.user;
 
 import bindings.java.*;
-import tools.common.gui.*;
-import tools.viewer.animation.*;
-import tools.viewer.application.*;
-import tools.viewer.event.*;
-import tools.viewer.render.*;
-import tools.viewer.common.ViewerConstants.ImageFormat;
+import com.limitpoimt.tools.common.gui.*;
+import com.limitpoimt.tools.viewer.animation.*;
+import com.limitpoimt.tools.viewer.application.*;
+import com.limitpoimt.tools.viewer.event.*;
+import com.limitpoimt.tools.viewer.render.*;
+import com.limitpoimt.tools.viewer.common.ViewerConstants.ImageFormat;
 
 import java.awt.*;
 import java.awt.event.*;

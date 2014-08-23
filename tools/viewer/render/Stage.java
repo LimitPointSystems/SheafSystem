@@ -15,13 +15,13 @@
 // limitations under the License.
 //
 
-package tools.viewer.render;
+package com.limitpoint.tools.viewer.render;
 
-import tools.viewer.animation.*;
-import tools.viewer.common.*;
-import tools.viewer.common.ViewerConstants.ImageFormat;
-import tools.viewer.user.*;
-import tools.viewer.event.*;
+import com.limitpoimt.tools.viewer.animation.*;
+import com.limitpoimt.tools.viewer.common.*;
+import com.limitpoimt.tools.viewer.common.ViewerConstants.ImageFormat;
+import com.limitpoimt.tools.viewer.user.*;
+import com.limitpoimt.tools.viewer.event.*;
 
 import java.awt.*;
 import java.awt.event.*;

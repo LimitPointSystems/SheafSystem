@@ -15,9 +15,9 @@
 // limitations under the License.
 //
 
-package tools.SheafScope;
+package com.limitpoint.tools.SheafScope;
 
-import tools.common.util.*;
+import com.limitpoimt.tools.common.util.*;
 
 import java.awt.*;
 import java.awt.event.*;

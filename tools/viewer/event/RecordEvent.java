@@ -15,9 +15,9 @@
 // limitations under the License.
 //
 
-package tools.viewer.event;
+package com.limitpoint.tools.viewer.event;
 
-import tools.viewer.animation.*;
+import com.limitpoimt.tools.viewer.animation.*;
 
 /**
  *

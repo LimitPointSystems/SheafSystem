@@ -16,9 +16,9 @@
 //
 
 
-package tools.viewer.table;
+package com.limitpoint.tools.viewer.table;
 
-import tools.common.gui.*;
+import com.limitpoimt.tools.common.gui.*;
 import bindings.java.*;
 import javax.swing.*;
 

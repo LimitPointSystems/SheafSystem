@@ -16,10 +16,10 @@
 //
 
 
-package tools.viewer.animation;
+package com.limitpoint.tools.viewer.animation;
 
 import bindings.java.*;
-import tools.viewer.common.*;
+import com.limitpoimt.tools.viewer.common.*;
 import java.io.*;
 import java.util.*;
 import javax.media.*;

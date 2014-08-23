@@ -15,7 +15,7 @@
 // limitations under the License.
 //
 
-package tools.SheafScope;
+package com.limitpoint.tools.SheafScope;
 
 import javax.swing.*;
 import javax.swing.event.*;

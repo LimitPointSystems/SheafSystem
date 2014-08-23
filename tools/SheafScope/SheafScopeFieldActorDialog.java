@@ -15,11 +15,11 @@
 // limitations under the License.
 //
 
-package tools.SheafScope;
+package com.limitpoint.tools.SheafScope;
 
 import bindings.java.*;
-import tools.common.gui.*;
-import tools.viewer.application.*;
+import com.limitpoimt.tools.common.gui.*;
+import com.limitpoimt.tools.viewer.application.*;
 
 import java.awt.*;
 import javax.swing.*;

@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-project(field)
+project(fields)
 
 #
 # Include the functions and variable definitions unique to this component.

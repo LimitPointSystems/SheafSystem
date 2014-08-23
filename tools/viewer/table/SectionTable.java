@@ -15,7 +15,7 @@
 // limitations under the License.
 //
 
-package tools.viewer.table;
+package com.limitpoint.tools.viewer.table;
 
 import bindings.java.*;
 import java.awt.*;

@@ -15,7 +15,7 @@
 // limitations under the License.
 //
 
-package tools.viewer.common;
+package com.limitpoint.tools.viewer.common;
 
 import vtk.vtkObject;
 

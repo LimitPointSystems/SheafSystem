@@ -15,9 +15,9 @@
 // limitations under the License.
 //
 
-package tools.common.gui;
+package com.limitpoint.tools.common.gui;
 
-import tools.common.util.LPSDebug;
+import com.limitpoimt.tools.common.util.LPSDebug;
 
 import java.awt.*;
 import java.awt.event.*;

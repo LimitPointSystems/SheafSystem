@@ -73,6 +73,8 @@ elseif(LINUX64GNU)
         "GNU C++ compiler library path." )
 endif()
 
+
+
 #------------------------------------------------------------------------------
 # Function Definition Section.
 #------------------------------------------------------------------------------
@@ -311,9 +313,12 @@ function(set_component_vars)
             ${PROJECT_NAME}_csharp_assembly.so 
             CACHE STRING "${PROJECT_NAME} csharp binding assembly name")
     endif()
-            
+ 
+     #
+    # Common Language Bindings 
+    #            
     set(${COMPONENT}_COMMON_BINDING_SRC_DIR 
-        ${CMAKE_CURRENT_SOURCE_DIR}/bindings/common/src 
+        ${CMAKE_CURRENT_SOURCE_DIR}/${LANG_BINDINGS_ROOT}/common/src 
         CACHE STRING "${PROJECT_NAME} common binding source directory")
     set(${COMPONENT}_SWIG_COMMON_INTERFACE 
         ${PROJECT_NAME}_common_binding.i 
@@ -321,29 +326,38 @@ function(set_component_vars)
     set(${COMPONENT}_SWIG_COMMON_INCLUDES_INTERFACE 
         ${PROJECT_NAME}_common_binding_includes.i 
         CACHE STRING "${PROJECT_NAME} common includes interface filename" )
-      
+    #
+    # Java Language Bindings
+    #  
     set(${COMPONENT}_JAVA_BINDING_LIB ${PROJECT_NAME}_java_binding 
         CACHE STRING "${PROJECT_NAME} java binding library basename")
     set(${COMPONENT}_JAVA_BINDING_SRC_DIR 
-        ${CMAKE_CURRENT_SOURCE_DIR}/bindings/java/src 
+        ${CMAKE_CURRENT_SOURCE_DIR}/${LANG_BINDINGS_ROOT}/java/src 
         CACHE STRING "${PROJECT_NAME} java binding source directory")
     set(${COMPONENT}_SWIG_JAVA_INTERFACE ${PROJECT_NAME}_java_binding.i 
         CACHE STRING "${PROJECT_NAME} java binding interface file")
     set(${COMPONENT}_JAVA_BINDING_JAR ${PROJECT_NAME}_java_binding.jar 
         CACHE STRING "${PROJECT_NAME} java binding jar name")
 
+    #
+    # Python Language Bindings
+    #
     set(${COMPONENT}_PYTHON_BINDING_LIB ${PROJECT_NAME}_python_binding 
         CACHE STRING "${PROJECT_NAME} python binding library name")    
     set(${COMPONENT}_PYTHON_BINDING_SRC_DIR 
-        ${CMAKE_CURRENT_SOURCE_DIR}/bindings/python/src 
+        ${CMAKE_CURRENT_SOURCE_DIR}/${LANG_BINDINGS_ROOT}/python/src 
         CACHE STRING "${PROJECT_NAME} python source directory")
     set(${COMPONENT}_SWIG_PYTHON_INTERFACE ${PROJECT_NAME}_python_binding.i 
         CACHE STRING "${PROJECT_NAME} python binding interface file")
-    
+
+    #
+    # CSharp Language Bindings
+    #    
     set(${COMPONENT}_CSHARP_BINDING_LIB ${PROJECT_NAME}_csharp_binding 
         CACHE STRING "${PROJECT_NAME} csharp binding library name")
     set(${COMPONENT}_CSHARP_BINDING_SRC_DIR 
-        ${CMAKE_CURRENT_SOURCE_DIR}/bindings/csharp/src 
+ #       ${CMAKE_CURRENT_SOURCE_DIR}/bindings/csharp/src 
+        ${CMAKE_CURRENT_SOURCE_DIR}/${LANG_BINDINGS_ROOT}/csharp/src 
         CACHE STRING "${PROJECT_NAME} csharp source directory")
     set(${COMPONENT}_SWIG_CSHARP_INTERFACE ${PROJECT_NAME}_csharp_binding.i 
         CACHE STRING "${PROJECT_NAME} csharp binding interface file")
@@ -402,10 +416,6 @@ function(write_exports_file)
     # Mark the variable as advanced        
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_INCS)\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-#    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
-#        "set(${COMPONENT}_IPATH ${${COMPONENT}_IPATH} CACHE STRING \"${PROJECT_NAME} include path\")\n")
-    # Mark the variable as advanced           
-#    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_IPATH)\n")        
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
         "set(${COMPONENT}_IPATHS ${${COMPONENT}_IPATHS} CACHE STRING \"${PROJECT_NAME} cumulative include path\")\n")
@@ -454,7 +464,7 @@ function(write_exports_file)
             "mark_as_advanced(FORCE HDF_INCLUDE_DIR)\n")              
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     endif()
-                
+
     if("${COMPONENT}" MATCHES "TOOLS")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 

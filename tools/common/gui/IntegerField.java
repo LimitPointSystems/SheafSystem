@@ -17,7 +17,7 @@
 
 //$$TODO: Maybe add option to have only positive integers.
 
-package tools.common.gui;
+package com.limitpoint.tools.common.gui;
 
 import javax.swing.*;
 import javax.swing.text.*;

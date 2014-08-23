@@ -16,7 +16,7 @@
 //
 
 
-package tools.SheafScope;
+package com.limitpoint.tools.SheafScope;
 
 /**
  *  A collection of constants used by SheafScope.

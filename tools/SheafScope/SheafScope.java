@@ -15,13 +15,13 @@
 // limitations under the License.
 //
 
-import tools.SheafScope.SheafScopeApplication;
+import com.limitpoimt.tools.SheafScope.SheafScopeApplication;
 import bindings.java.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import tools.common.gui.*;
-import tools.viewer.common.*;
+import com.limitpoimt.tools.common.gui.*;
+import com.limitpoimt.tools.viewer.common.*;
 
 /**
  * The main SheafScope application.

@@ -15,7 +15,7 @@
 // limitations under the License.
 //
 
-package tools.viewer.application;
+package com.limitpoint.tools.viewer.application;
 
 import bindings.java.*;
 

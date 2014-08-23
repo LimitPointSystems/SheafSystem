@@ -16,7 +16,7 @@
 //
 
 
-package tools.viewer.user;
+package com.limitpoint.tools.viewer.user;
 
 import java.awt.event.*;
 import javax.swing.*;

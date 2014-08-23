@@ -14,6 +14,9 @@
 # limitations under the License.
 #
 
+# Keep quiet about dependencies that don't exist yet.
+cmake_policy(SET CMP0046 OLD)
+
 #
 # Install the Windows Runtime lins
 #
@@ -37,6 +40,19 @@ set(INSTALL_DOCS ON CACHE BOOL "Toggle install state of Documentation.")
 #
 set(LIB_VERSION 0.0.0.0 CACHE STRING "Library version number for release purposes")
 mark_as_advanced(LIB_VERSION)
+
+
+#
+# Set the base folder for Java language bindings
+#
+set(LANG_BINDINGS_ROOT "com/limitpoint/bindings" CACHE STRING "Language bindings root folder")
+mark_as_advanced(LANG_BINDINGS_ROOT)
+
+#
+# Set the base folder for Java language bindings
+#
+set(JAVA_BINDINGS_PKG "com.limitpoint.bindings.java" CACHE STRING "Java bindings package name")
+mark_as_advanced(JAVA_BINDINGS_PKG)
 
 #
 # Establish the list of components in this system

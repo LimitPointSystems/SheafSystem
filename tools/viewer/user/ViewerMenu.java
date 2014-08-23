@@ -16,13 +16,13 @@
 //
 
 
-package tools.viewer.user;
+package com.limitpoint.tools.viewer.user;
 
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.event.*;
-import tools.viewer.common.*;
-import tools.common.gui.*;
+import com.limitpoimt.tools.viewer.common.*;
+import com.limitpoimt.tools.common.gui.*;
 
 /**
  *

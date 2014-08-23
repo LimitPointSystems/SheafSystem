@@ -200,7 +200,7 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
     #
  
     set(SWIG_CXX_EXTENSION "cxx" CACHE STRING "Swig source file extension")
-    set(CMAKE_SWIG_FLAGS -package bindings.java CACHE STRING "Swig flags")
+    set(CMAKE_SWIG_FLAGS -package ${JAVA_BINDINGS_PKG} CACHE STRING "Swig flags")
 
     include_directories(${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})
     include_directories(${${COMPONENT}_JAVA_BINDING_SRC_DIR})
@@ -262,7 +262,7 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
                COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
                COMMAND ${Java_JAR_EXECUTABLE} cvf 
                    ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  
-                   bindings/java/*.class
+                   ${LANG_BINDINGS_ROOT}/java/*.class
                )
         
         # Java documentation
@@ -298,7 +298,7 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
                COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
                COMMAND ${Java_JAR_EXECUTABLE} cvf 
                    ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  
-                   bindings/java/*.class
+                   ${JAVA_BINDINGS_ROOT}/*.class
                )        
 
         # Java documentation

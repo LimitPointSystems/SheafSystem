@@ -15,7 +15,7 @@
 // limitations under the License.
 //
 
-package tools.common.client_server;
+package com.limitpoint.tools.common.client_server;
 
 
 import java.io.*;

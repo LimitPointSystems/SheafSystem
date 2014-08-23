@@ -245,7 +245,7 @@ function(add_bindings_targets)
                                COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
                                COMMAND ${Java_JAR_EXECUTABLE} cvf 
                                ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  
-                               bindings/java/*.class
+                               ${JAVA_BINDINGS_ROOT}/*.class
                              )
             
             # Java documentation
@@ -275,7 +275,7 @@ function(add_bindings_targets)
                    COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
                    COMMAND ${Java_JAR_EXECUTABLE} cvf 
                    ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${${COMPONENT}_JAVA_BINDING_JAR}  
-                   bindings/java/*.class
+                   ${JAVA_BINDINGS_ROOT}/*.class
                              )
             
              # Java documentation

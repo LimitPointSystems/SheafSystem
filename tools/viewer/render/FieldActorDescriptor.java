@@ -16,11 +16,11 @@
 //
 
 
-package tools.viewer.render;
+package com.limitpoint.tools.viewer.render;
 
-import tools.viewer.animation.*;
-import tools.viewer.common.*;
-import tools.viewer.user.*;
+import com.limitpoimt.tools.viewer.animation.*;
+import com.limitpoimt.tools.viewer.common.*;
+import com.limitpoimt.tools.viewer.user.*;
 import bindings.java.*;
 
 import java.awt.*;

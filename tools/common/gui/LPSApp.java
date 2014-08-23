@@ -15,7 +15,7 @@
 // limitations under the License.
 //
 
-package tools.common.gui;
+package com.limitpoint.tools.common.gui;
 
 import bindings.java.base_client;
 import java.util.*;

@@ -16,7 +16,7 @@
 //
 
 
-package tools.common.gui;
+package com.limitpoint.tools.common.gui;
 
 import java.awt.*;
 import javax.swing.*;
