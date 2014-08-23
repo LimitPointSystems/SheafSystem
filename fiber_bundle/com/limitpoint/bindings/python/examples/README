@@ -1,0 +1,26 @@
+
+README FOR bindings/python/examples:
+------------------------------------
+
+Note that in order to execute the example scripts in this directory,
+the LD_LIBRARY_PATH must be set to include the locations
+of the following shared library files:
+
+    libSheaf.so
+    libBundle.so
+    libFEA.so
+    _sheafmod.so
+    _bundlemod.so
+    _feamod.so
+
+By default, these files are in $COMPONENTS_DIR/lib
+where $COMPONENTS_DIR is something like /home/wemason/components.
+
+Also, the PYTHONPATH environemt variable should be set
+to the locations of the python scripts.  By default these
+are located in the current directory and in components/bindings/lib.
+So the following should work (in csh/tcsh)
+
+    setenv PYTHONPATH .:$COMPONENTS_DIR/lib
+
+
