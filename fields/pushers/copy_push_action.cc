@@ -18,7 +18,7 @@
 /// @file
 /// Implementation for class copy_push_action
 
-#include "copy_push_action.h"
+#include "ComLimitPoint/fields/copy_push_action.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/sheaf/block.h"

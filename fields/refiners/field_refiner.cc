@@ -21,25 +21,25 @@
 // A map from one sec_rep_space to another.
 //
 
-#include "field_refiner.h"
+#include "ComLimitPoint/fields/field_refiner.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/fiber_bundle/base_space_member.h"
 #include "ComLimitPoint/fiber_bundle/base_space_poset.h"
-#include "depth_bound_refinement_policy.h"
+#include "ComLimitPoint/fields/depth_bound_refinement_policy.h"
 #include "ComLimitPoint/sheaf/error_message.h"
 #include "ComLimitPoint/sheaf/factory.h"
 #include "ComLimitPoint/fields/field_eval_iterator.h"
-#include "field_refinement_buffer.h"
-#include "field_refinement_policy.h"
-#include "local_field_refiner.h"
-#include "field_refiner_family.h"
+#include "ComLimitPoint/fields/field_refinement_buffer.h"
+#include "ComLimitPoint/fields/field_refinement_policy.h"
+#include "ComLimitPoint/fields/local_field_refiner.h"
+#include "ComLimitPoint/fields/field_refiner_family.h"
 #include "ComLimitPoint/fiber_bundle/section_evaluator.h"
 #include "ComLimitPoint/geometry/sec_ed_invertible.h"
 #include "ComLimitPoint/fiber_bundle/sec_vd.h"
-#include "variance_bound_refinement_policy.h"
+#include "ComLimitPoint/fields/variance_bound_refinement_policy.h"
 #include "ComLimitPoint/fields/field_vd.h"
-#include "zone_centered_error_bound_refinement_policy.h"
+#include "ComLimitPoint/fields/zone_centered_error_bound_refinement_policy.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.

@@ -18,15 +18,15 @@
 /// @file
 /// Interface for class depth_bound_refinement_policy
 
-#ifndef DEPTH_BOUND_REFINEMENT_POLICY_H
-#define DEPTH_BOUND_REFINEMENT_POLICY_H
+#ifndef COM_LIMITPOINT_FIELDS_DEPTH_BOUND_REFINEMENT_POLICY_H
+#define COM_LIMITPOINT_FIELDS_DEPTH_BOUND_REFINEMENT_POLICY_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef FIELD_REFINEMENT_POLICY_H
-#include "field_refinement_policy.h"
+#ifndef COM_LIMITPOINT_FIELDS_FIELD_REFINEMENT_POLICY_H
+#include "ComLimitPoint/fields/field_refinement_policy.h"
 #endif
 
 namespace fields
@@ -148,4 +148,4 @@ public:
   
 } // namespace fields
 
-#endif // ifndef DEPTH_BOUND_REFINEMENT_POLICY_H
+#endif // ifndef COM_LIMITPOINT_FIELDS_DEPTH_BOUND_REFINEMENT_POLICY_H

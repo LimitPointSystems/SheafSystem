@@ -18,8 +18,8 @@
 /// @file
 /// Interface for class section_pusher_pullback_action
 
-#ifndef SECTION_PUSHER_PULLBACK_ACTION_H
-#define SECTION_PUSHER_PULLBACK_ACTION_H
+#ifndef COM_LIMITPOINT_FIELDS_SECTION_PUSHER_PULLBACK_ACTION_H
+#define COM_LIMITPOINT_FIELDS_SECTION_PUSHER_PULLBACK_ACTION_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -29,8 +29,8 @@
 #include "ComLimitPoint/fields/discretization_push_action.h"
 #endif
 
-#ifndef PULLBACK_MAP_H
-#include "pullback_map.h"
+#ifndef COM_LIMITPOINT_FIELDS_PULLBACK_MAP_H
+#include "ComLimitPoint/fields/pullback_map.h"
 #endif
 
 namespace geometry
@@ -129,4 +129,4 @@ private:
  
 } // namespace fields
 
-#endif // ifndef SECTION_PUSHER_PULLBACK_ACTION_H
+#endif // ifndef COM_LIMITPOINT_FIELDS_SECTION_PUSHER_PULLBACK_ACTION_H

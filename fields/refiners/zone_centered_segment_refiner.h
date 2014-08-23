@@ -18,15 +18,15 @@
 /// @file
 /// Interface for class zone_centered_segment_refiner
 
-#ifndef ZONE_CENTERED_SEGMENT_REFINER_H
-#define ZONE_CENTERED_SEGMENT_REFINER_H
+#ifndef COM_LIMITPOINT_FIELDS_ZONE_CENTERED_SEGMENT_REFINER_H
+#define COM_LIMITPOINT_FIELDS_ZONE_CENTERED_SEGMENT_REFINER_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef LOCAL_FIELD_REFINER_H
-#include "local_field_refiner.h"
+#ifndef COM_LIMITPOINT_FIELDS_LOCAL_FIELD_REFINER_H
+#include "ComLimitPoint/fields/local_field_refiner.h"
 #endif
 
 namespace fields
@@ -187,4 +187,4 @@ public:
   
 } // namespace fields
 
-#endif // ifndef ZONE_CENTERED_SEGMENT_REFINER_H
+#endif // ifndef COM_LIMITPOINT_FIELDS_ZONE_CENTERED_SEGMENT_REFINER_H

@@ -18,14 +18,14 @@
 /// @file
 /// Implementation for class body_factory.
 
-#include "body_factory.h"
+#include "ComLimitPoint/fields/body_factory.h"
 
 #include "ComLimitPoint/sheaf/arg_list.h"
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/sheaf/array_index_space_state.h"
 #include "ComLimitPoint/fiber_bundle/base_space_member.h"
 #include "ComLimitPoint/sheaf/block.impl.h"
-#include "body_builder.h"
+#include "ComLimitPoint/fields/body_builder.h"
 #include "ComLimitPoint/fiber_bundle/fiber_bundle_namespace.h"
 #include "ComLimitPoint/fields/field_factory.h"
 #include "std_cmath.h"

@@ -19,8 +19,8 @@
 /// Interface for class property_disc_iterator
 
 
-#ifndef PROPERTY_DISC_ITERATOR_H
-#define PROPERTY_DISC_ITERATOR_H
+#ifndef COM_LIMITPOINT_FIELDS_PROPERTY_DISC_ITERATOR_H
+#define COM_LIMITPOINT_FIELDS_PROPERTY_DISC_ITERATOR_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -35,7 +35,7 @@
 #endif
 
 #ifndef COM_LIMITPOINT_FIBER_BUNDLE_SECTION_ITERATION_STATE_H
-#include "omLimitPoint/fiber_bundle/section_iteration_state.h"
+#include "ComLimitPoint/fiber_bundle/section_iteration_state.h"
 #endif
 
 namespace fields
@@ -259,4 +259,4 @@ public:
  
 } // namespace fields
 
-#endif // ifndef PROPERTY_DISC_ITERATOR_H
+#endif // ifndef COM_LIMITPOINT_FIELDS_PROPERTY_DISC_ITERATOR_H

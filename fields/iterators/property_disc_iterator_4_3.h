@@ -19,14 +19,14 @@
 /// Interface for class property_disc_iterator_4_3
 
 
-#ifndef PROPERTY_DISC_ITERATOR_4_3_H
-#define PROPERTY_DISC_ITERATOR_4_3_H
+#ifndef COM_LIMITPOINT_FIELDS_PROPERTY_DISC_ITERATOR_4_3_H
+#define COM_LIMITPOINT_FIELDS_PROPERTY_DISC_ITERATOR_4_3_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef PROPERTY_DISC_ITERATOR_H
+#ifndef COM_LIMITPOINT_FIELDS_PROPERTY_DISC_ITERATOR_H
 #include "ComLimitPoint/fields/property_disc_iterator.h"
 #endif
 
@@ -186,4 +186,4 @@ public:
   
 } // namespace fields
 
-#endif // ifndef PROPERTY_DISC_ITERATOR_4_3_H
+#endif // ifndef COM_LIMITPOINT_FIELDS_PROPERTY_DISC_ITERATOR_4_3_H

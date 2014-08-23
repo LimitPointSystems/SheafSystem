@@ -18,15 +18,15 @@
 /// @file
 /// Interface for class constant_base_space_map_push_action
 
-#ifndef CONSTANT_BASE_SPACE_MAP_PUSH_ACTION_H
-#define CONSTANT_BASE_SPACE_MAP_PUSH_ACTION_H
+#ifndef COM_LIMITPOINT_FIELDS_CONSTANT_BASE_SPACE_MAP_PUSH_ACTION_H
+#define COM_LIMITPOINT_FIELDS_CONSTANT_BASE_SPACE_MAP_PUSH_ACTION_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef BASE_SPACE_MAP_PUSH_ACTION_H
-#include "base_space_map_push_action.h"
+#ifndef COM_LIMITPOINT_FIELDS_BASE_SPACE_MAP_PUSH_ACTION_H
+#include "ComLimitPoint/fields/base_space_map_push_action.h"
 #endif
 
 #ifndef COM_LIMITPOINT_SHEAF_BLOCK_H
@@ -135,4 +135,4 @@ public:
   
 } // namespace fields
 
-#endif // ifndef CONSTANT_BASE_SPACE_MAP_PUSH_ACTION_H
+#endif // ifndef COM_LIMITPOINT_FIELDS_CONSTANT_BASE_SPACE_MAP_PUSH_ACTION_H

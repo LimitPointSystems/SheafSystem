@@ -18,8 +18,8 @@
 /// @file
 /// Interface for class refining_section_pusher.
 
-#ifndef REFINING_SECTION_PUSHER_H
-#define REFINING_SECTION_PUSHER_H
+#ifndef COM_LIMITPOINT_FIELDS_REFINING_SECTION_PUSHER_H
+#define COM_LIMITPOINT_FIELDS_REFINING_SECTION_PUSHER_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -149,4 +149,4 @@ public:
  
 } // namespace fields
 
-#endif // ifndef REFINING_SECTION_PUSHER_H
+#endif // ifndef COM_LIMITPOINT_FIELDS_REFINING_SECTION_PUSHER_H

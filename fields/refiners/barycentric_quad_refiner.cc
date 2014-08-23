@@ -18,7 +18,7 @@
 /// @file
 /// Implementation for class barycentric_quad_refiner
 
-#include "barycentric_quad_refiner.h"
+#include "ComLimitPoint/fields/barycentric_quad_refiner.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/sheaf/error_message.h"

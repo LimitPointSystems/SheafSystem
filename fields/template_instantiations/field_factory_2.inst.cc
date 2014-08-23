@@ -18,7 +18,7 @@
 /// @file
 /// Explicit instantiations for class field_factory_2.
 
-#include "field_factory_2.impl.h"
+#include "ComLimitPoint/fields/field_factory_2.impl.h"
 
 #include "ComLimitPoint/fiber_bundle/sec_at0.h"
 #include "ComLimitPoint/fiber_bundle/sec_e1.h"

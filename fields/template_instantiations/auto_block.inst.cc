@@ -19,15 +19,15 @@
 
 #include "ComLimitPoint/sheaf/auto_block.impl.h"
 
-#include "barycentric_refiner_family.h"
-#include "edge_centered_polygon_refiner.h"
-#include "edge_centered_refiner_family.h"
-#include "local_field_refiner.h"
-#include "pullback_map.h"
-#include "zone_centered_refiner_family.h"
-#include "zone_centered_segment_refiner.h"
-#include "zone_centered_tet_refiner.h"
-#include "zone_centered_triangle_refiner.h"
+#include "ComLimitPoint/fields/barycentric_refiner_family.h"
+#include "ComLimitPoint/fields/edge_centered_polygon_refiner.h"
+#include "ComLimitPoint/fields/edge_centered_refiner_family.h"
+#include "ComLimitPoint/fields/local_field_refiner.h"
+#include "ComLimitPoint/fields/pullback_map.h"
+#include "ComLimitPoint/fields/zone_centered_refiner_family.h"
+#include "ComLimitPoint/fields/zone_centered_segment_refiner.h"
+#include "ComLimitPoint/fields/zone_centered_tet_refiner.h"
+#include "ComLimitPoint/fields/zone_centered_triangle_refiner.h"
 
 using namespace std;
 

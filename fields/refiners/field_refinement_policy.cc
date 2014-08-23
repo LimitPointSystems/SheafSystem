@@ -18,11 +18,11 @@
 /// @file
 /// Implementation for class field_refinement_policy
 
-#include "field_refinement_policy.h"
+#include "ComLimitPoint/fields/field_refinement_policy.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/sheaf/factory.impl.h"
-#include "field_refinement_buffer.h"
+#include "ComLimitPoint/fields/field_refinement_buffer.h"
 #include "ComLimitPoint/fields/field_vd.h"
 
 using namespace std;

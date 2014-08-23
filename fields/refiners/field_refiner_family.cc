@@ -18,14 +18,14 @@
 /// @file
 /// Implementation for class field_refiner_family
 
-#include "field_refiner_family.h"
+#include "ComLimitPoint/fields/field_refiner_family.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/fiber_bundle/base_space_member.h"
 #include "ComLimitPoint/fiber_bundle/base_space_poset.h"
 #include "ComLimitPoint/sheaf/factory.impl.h"
-#include "field_refinement_policy.h"
-#include "local_field_refiner.h"
+#include "ComLimitPoint/fields/field_refinement_policy.h"
+#include "ComLimitPoint/fields/local_field_refiner.h"
 #include "ComLimitPoint/sheaf/namespace_poset.h"
 
 using namespace std;

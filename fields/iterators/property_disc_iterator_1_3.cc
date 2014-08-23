@@ -19,7 +19,7 @@
 /// Implementation for class property_disc_iterator_1_3
 
 
-#include "property_disc_iterator_1_3.h"
+#include "ComLimitPoint/fields/property_disc_iterator_1_3.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/fiber_bundle/base_space_member.h"

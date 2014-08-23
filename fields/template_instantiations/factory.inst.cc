@@ -19,12 +19,12 @@
 
 #include "ComLimitPoint/sheaf/factory.impl.h"
 
-#include "field_refinement_policy.h"
-#include "field_refiner_family.h"
+#include "ComLimitPoint/fields/field_refinement_policy.h"
+#include "ComLimitPoint/fields/field_refiner_family.h"
 
-//#include "barycentric_refiner_family.h"
-//#include "edge_centered_refiner_family.h"
-//#include "zone_centered_refiner_family.h"
+//#include "ComLimitPoint/fields/barycentric_refiner_family.h"
+//#include "ComLimitPoint/fields/edge_centered_refiner_family.h"
+//#include "ComLimitPoint/fields/zone_centered_refiner_family.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.

@@ -18,8 +18,8 @@
 /// @file
 /// Interface for class base_space_map.
 
-#ifndef BASE_SPACE_MAP_H
-#define BASE_SPACE_MAP_H
+#ifndef COM_LIMITPOINT_FIELDS_BASE_SPACE_MAP_H
+#define COM_LIMITPOINT_FIELDS_BASE_SPACE_MAP_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -33,8 +33,8 @@
 #include "ComLimitPoint/fields/fields.h"
 #endif
 
-#ifndef SECTION_PUSHER_PULLBACK_ACTION_H
-#include "section_pusher_pullback_action.h"
+#ifndef COM_LIMITPOINT_FIELDS_SECTION_PUSHER_PULLBACK_ACTION_H
+#include "ComLimitPoint/fields/section_pusher_pullback_action.h"
 #endif
 
 #ifndef COM_LIMITPOINT_GEOMETRY_SEC_ED_INVERTIBLE_H
@@ -433,4 +433,4 @@ public:
  
 } // namespace fields
 
-#endif // ifndef BASE_SPACE_MAP_H
+#endif // ifndef COM_LIMITPOINT_FIELDS_BASE_SPACE_MAP_H

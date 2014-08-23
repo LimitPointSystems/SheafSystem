@@ -18,8 +18,8 @@
 /// @file
 /// Interface for class local_field_refiner
 
-#ifndef LOCAL_FIELD_REFINER_H
-#define LOCAL_FIELD_REFINER_H
+#ifndef COM_LIMITPOINT_FIELDS_LOCAL_FIELD_REFINER_H
+#define COM_LIMITPOINT_FIELDS_LOCAL_FIELD_REFINER_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -219,4 +219,4 @@ public:
  
 } // namespace fields
 
-#endif // ifndef LOCAL_FIELD_REFINER_H
+#endif // ifndefCOM_LIMITPOINT_FIELDS_LOCAL_FIELD_REFINER_H

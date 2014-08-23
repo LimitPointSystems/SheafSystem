@@ -18,7 +18,7 @@
 /// @file
 /// Implementation for class base_space_map_push_action
 
-#include "base_space_map_push_action.h"
+#include "ComLimitPoint/fields/base_space_map_push_action.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/sheaf/block.h"

@@ -18,7 +18,7 @@
 /// @file
 /// Implementation for class body_pusher.
 
-#include "body_pusher.h"
+#include "ComLimitPoint/fields/body_pusher.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/fiber_bundle/base_space_member.h"

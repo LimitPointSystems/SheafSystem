@@ -18,15 +18,15 @@
 /// @file
 /// Interface for class edge_centered_triangle_refiner
 
-#ifndef EDGE_CENTERED_TRIANGLE_REFINER_H
-#define EDGE_CENTERED_TRIANGLE_REFINER_H
+#ifndef COM_LIMITPOINT_FIELDS_EDGE_CENTERED_TRIANGLE_REFINER_H
+#define COM_LIMITPOINT_FIELDS_EDGE_CENTERED_TRIANGLE_REFINER_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef EDGE_CENTERED_POLYGON_REFINER_H
-#include "edge_centered_polygon_refiner.h"
+#ifndef COM_LIMITPOINT_FIELDS_EDGE_CENTERED_POLYGON_REFINER_H
+#include "ComLimitPoint/fields/edge_centered_polygon_refiner.h"
 #endif
 
 namespace fields
@@ -169,4 +169,4 @@ public:
   
 } // namespace fields
 
-#endif // ifndef EDGE_CENTERED_TRIANGLE_REFINER_H
+#endif // ifndef COM_LIMITPOINT_FIELDS_EDGE_CENTERED_TRIANGLE_REFINER_H

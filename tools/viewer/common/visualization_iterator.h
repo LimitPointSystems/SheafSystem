@@ -34,7 +34,7 @@
 #endif
 
 #ifndef COM_LIMITPOINT_FIBER_BUNDLE_SECTION_ITERATION_STATE_H
-#include "omLimitPoint/fiber_bundle/section_iteration_state.h"
+#include "ComLimitPoint/fiber_bundle/section_iteration_state.h"
 #endif
 
 #ifndef VTKTYPE_H

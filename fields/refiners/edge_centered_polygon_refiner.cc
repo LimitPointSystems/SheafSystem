@@ -18,14 +18,14 @@
 /// @file
 /// Implementation for class edge_centered_polygon_refiner
 
-#include "edge_centered_polygon_refiner.h"
+#include "ComLimitPoint/fields/edge_centered_polygon_refiner.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/fiber_bundle/base_space_poset.h"
 #include "ComLimitPoint/fiber_bundle/bilinear_2d.h"
 #include "ComLimitPoint/sheaf/block.impl.h"
 #include "ComLimitPoint/sheaf/error_message.h"
-#include "field_refinement_buffer.h"
+#include "ComLimitPoint/fields/field_refinement_buffer.h"
 #include "ComLimitPoint/sheaf/index_space_iterator.h"
 #include "ComLimitPoint/fiber_bundle/integrable_section_evaluator.h"
 #include "ComLimitPoint/fiber_bundle/linear_2d.h"

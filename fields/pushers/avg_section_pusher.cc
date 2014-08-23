@@ -21,7 +21,7 @@
 // A map from one sec_rep_space to another.
 //
 
-#include "avg_section_pusher.h"
+#include "ComLimitPoint/fields/avg_section_pusher.h"
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/geometry/sec_ed_invertible.h"
 

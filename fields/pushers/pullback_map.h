@@ -18,8 +18,8 @@
 /// @file
 /// Interface for class pullback_map
 
-#ifndef PULLBACK_MAP_H
-#define PULLBACK_MAP_H
+#ifndef COM_LIMITPOINT_FIELDS_PULLBACK_MAP_H
+#define COM_LIMITPOINT_FIELDS_PULLBACK_MAP_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -141,4 +141,4 @@ std::ostream& operator<<(std::ostream& xos, const pullback_map_entry& xentry);
  
 } // namespace fields
 
-#endif // ifndef PULLBACK_MAP_H
+#endif // ifndef COM_LIMITPOINT_FIELDS_PULLBACK_MAP_H

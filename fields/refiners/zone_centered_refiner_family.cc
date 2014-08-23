@@ -19,7 +19,7 @@
 /// Implementation for class zone_centered_refiner_family
 
 
-#include "zone_centered_refiner_family.h"
+#include "ComLimitPoint/fields/zone_centered_refiner_family.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/fiber_bundle/base_space_member.h"
@@ -28,9 +28,9 @@
 #include "ComLimitPoint/sheaf/factory.impl.h"
 #include "ComLimitPoint/fiber_bundle/fiber_bundle_namespace.h"
 #include "ComLimitPoint/sheaf/poset.h"
-#include "zone_centered_segment_refiner.h"
-#include "zone_centered_tet_refiner.h"
-#include "zone_centered_triangle_refiner.h"
+#include "ComLimitPoint/fields/zone_centered_segment_refiner.h"
+#include "ComLimitPoint/fields/zone_centered_tet_refiner.h"
+#include "ComLimitPoint/fields/zone_centered_triangle_refiner.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.

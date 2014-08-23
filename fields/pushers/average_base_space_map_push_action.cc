@@ -18,7 +18,7 @@
 /// @file
 /// Implementation for class average_base_space_map_push_action
 
-#include "average_base_space_map_push_action.h"
+#include "ComLimitPoint/fields/average_base_space_map_push_action.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/sheaf/block.h"

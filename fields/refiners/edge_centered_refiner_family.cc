@@ -19,19 +19,19 @@
 /// Implementation for class edge_centered_refiner_family
 
 
-#include "edge_centered_refiner_family.h"
+#include "ComLimitPoint/fields/edge_centered_refiner_family.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
-#include "barycentric_quad_refiner.h"
-#include "barycentric_triangle_refiner.h"
+#include "ComLimitPoint/fields/barycentric_quad_refiner.h"
+#include "ComLimitPoint/fields/barycentric_triangle_refiner.h"
 #include "ComLimitPoint/fiber_bundle/base_space_member.h"
 #include "ComLimitPoint/fiber_bundle/base_space_poset.h"
 #include "ComLimitPoint/sheaf/block.impl.h"
-#include "edge_centered_triangle_refiner.h"
+#include "ComLimitPoint/fields/edge_centered_triangle_refiner.h"
 #include "ComLimitPoint/sheaf/factory.impl.h"
 #include "ComLimitPoint/fiber_bundle/fiber_bundle_namespace.h"
 #include "ComLimitPoint/sheaf/poset.h"
-#include "zone_centered_segment_refiner.h"
+#include "ComLimitPoint/fields/zone_centered_segment_refiner.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.

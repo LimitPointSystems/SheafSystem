@@ -18,8 +18,8 @@
 /// @file
 /// Interface for class field_refiner_family
 
-#ifndef FIELD_REFINER_FAMILY_H
-#define FIELD_REFINER_FAMILY_H
+#ifndef COM_LIMITPOINT_FIELDS_FIELD_REFINER_FAMILY_H
+#define COM_LIMITPOINT_FIELDS_FIELD_REFINER_FAMILY_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -195,7 +195,7 @@ public:
  
 } // namespace fields
 
-#endif // ifndef FIELD_REFINER_FAMILY_H
+#endif // ifndef COM_LIMITPOINT_FIELDS_FIELD_REFINER_FAMILY_H
 
 
 

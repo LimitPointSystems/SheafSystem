@@ -18,14 +18,14 @@
 /// @file
 /// Interface for class avg_section_pusher.
 
-#ifndef AVG_SECTION_PUSHER_H
-#define AVG_SECTION_PUSHER_H
+#ifndef COM_LIMITPOINT_FIELDS_AVG_SECTION_PUSHER_H
+#define COM_LIMITPOINT_FIELDS_AVG_SECTION_PUSHER_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef SECTION_PUSHER_H
+#ifndef COM_LIMITPOINT_FIELDS_SECTION_PUSHER_H
 #include "ComLimitPoint/fields/section_pusher.h"
 #endif
 
@@ -105,4 +105,4 @@ public:
   
 } // namespace fields
 
-#endif // ifndef AVG_SECTION_PUSHER_H
+#endif // ifndef COM_LIMITPOINT_FIELDS_AVG_SECTION_PUSHER_H

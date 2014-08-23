@@ -27,7 +27,7 @@ include(${CMAKE_MODULE_PATH}/component_functions.cmake)
 # The current namespace
 # The namespace should be ${COMPONENTS), but force it to remove all doubt.
 #
-set(NAME_SPACE field CACHE STRING "C++ namespace for this project" FORCE)
+set(NAME_SPACE fields CACHE STRING "C++ namespace for this project" FORCE)
 
 #
 # Create the build/include folder

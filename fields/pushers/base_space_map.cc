@@ -20,13 +20,13 @@
 /// A map from one sec_rep_space to another.
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
-#include "base_space_map.h"
-#include "base_space_map_push_action.h"
+#include "ComLimitPoint/fields/base_space_map.h"
+#include "ComLimitPoint/fields/base_space_map_push_action.h"
 #include "ComLimitPoint/fiber_bundle/binary_section_space_schema_member.h"
 #include "ComLimitPoint/fiber_bundle/binary_section_space_schema_poset.h"
 #include "ComLimitPoint/sheaf/block.impl.h"
-#include "constant_base_space_map_push_action.h"
-#include "copy_base_space_map_push_action.h"
+#include "ComLimitPoint/fields/constant_base_space_map_push_action.h"
+#include "ComLimitPoint/fields/copy_base_space_map_push_action.h"
 #include "ComLimitPoint/fiber_bundle/discretization_context.h"
 #include "ComLimitPoint/fiber_bundle/discretization_iterator.h"
 #include "ComLimitPoint/fields/discretization_pusher.h"

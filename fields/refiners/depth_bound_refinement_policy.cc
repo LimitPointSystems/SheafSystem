@@ -18,11 +18,11 @@
 /// @file
 /// Implementation for class depth_bound_refinement_policy
 
-#include "depth_bound_refinement_policy.h"
+#include "ComLimitPoint/fields/depth_bound_refinement_policy.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/sheaf/factory.impl.h"
-#include "field_refinement_buffer.h"
+#include "ComLimitPoint/fields/field_refinement_buffer.h"
 #include "ComLimitPoint/fields/field_vd.h"
 
 using namespace std;

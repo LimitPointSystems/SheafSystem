@@ -18,7 +18,7 @@
 /// @file
 /// Implementation for class section_pusher_push_action
 
-#include "section_pusher_push_action.h"
+#include "ComLimitPoint/fields/section_pusher_push_action.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/sheaf/block.h"

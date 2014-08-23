@@ -18,8 +18,8 @@
 /// @file
 /// Interface for class body_pusher.
 
-#ifndef BODY_PUSHER_H
-#define BODY_PUSHER_H
+#ifndef COM_LIMITPOINT_FIELDS_BODY_PUSHER_H
+#define COM_LIMITPOINT_FIELDS_BODY_PUSHER_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -41,8 +41,8 @@
 #include "ComLimitPoint/fiber_bundle/chart_point.h"
 #endif
 
-#ifndef BODY_PUSHER_PULLBACK_ACTION_H
-#include "body_pusher_pullback_action.h"
+#ifndef COM_LIMITPOINT_FIELDS_BODY_PUSHER_PULLBACK_ACTION_H
+#include "ComLimitPoint/fields/body_pusher_pullback_action.h"
 #endif
 
 #ifndef COM_LIMITPOINT_GEOMETRY_SEC_ED_INVERTIBLE_H
@@ -298,4 +298,4 @@ public:
  
 } // namespace fields
 
-#endif // ifndef BODY_PUSHER_H
+#endif // ifndef COM_LIMITPOINT_FIELDS_BODY_PUSHER_H

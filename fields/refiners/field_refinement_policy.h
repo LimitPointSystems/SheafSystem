@@ -18,8 +18,8 @@
 /// @file
 /// Interface for class field_refinement_policy
 
-#ifndef FIELD_REFINEMENT_POLICY_H
-#define FIELD_REFINEMENT_POLICY_H
+#ifndef COM_LIMITPOINT_FIELDS_FIELD_REFINEMENT_POLICY_H
+#define COM_LIMITPOINT_FIELDS_FIELD_REFINEMENT_POLICY_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -164,4 +164,4 @@ public:
  
 } // namespace fields
 
-#endif // ifndef FIELD_REFINEMENT_POLICY_H
+#endif // ifndef COM_LIMITPOINT_FIELDS_FIELD_REFINEMENT_POLICY_H

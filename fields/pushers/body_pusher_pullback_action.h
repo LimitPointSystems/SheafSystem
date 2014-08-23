@@ -18,8 +18,8 @@
 /// @file
 /// Interface for class body_pusher_pullback_action
 
-#ifndef BODY_PUSHER_PULLBACK_ACTION_H
-#define BODY_PUSHER_PULLBACK_ACTION_H
+#ifndef COM_LIMITPOINT_FIELDS_BODY_PUSHER_PULLBACK_ACTION_H
+#define COM_LIMITPOINT_FIELDS_BODY_PUSHER_PULLBACK_ACTION_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -37,8 +37,8 @@
 #include "ComLimitPoint/fiber_bundle/chart_point_3d.h"
 #endif
 
-#ifndef PULLBACK_MAP_H
-#include "pullback_map.h"
+#ifndef COM_LIMITPOINT_FIELDS_PULLBACK_MAP_H
+#include "ComLimitPoint/fields/pullback_map.h"
 #endif
 
 namespace geometry
@@ -142,4 +142,4 @@ private:
  
 } // namespace fields
 
-#endif // ifndef BODY_PUSHER_PULLBACK_ACTION_H
+#endif // ifndef COM_LIMITPOINT_FIELDS_BODY_PUSHER_PULLBACK_ACTION_H

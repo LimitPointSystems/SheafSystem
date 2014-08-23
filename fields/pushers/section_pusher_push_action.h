@@ -18,8 +18,8 @@
 /// @file
 /// Interface for class section_pusher_push_action
 
-#ifndef SECTION_PUSHER_PUSH_ACTION_H
-#define SECTION_PUSHER_PUSH_ACTION_H
+#ifndef COM_LIMITPOINT_FIELDS_SECTION_PUSHER_PUSH_ACTION_H
+#define COM_LIMITPOINT_FIELDS_SECTION_PUSHER_PUSH_ACTION_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -29,8 +29,8 @@
 #include "ComLimitPoint/sheaf/any.h"
 #endif
 
-#ifndef PULLBACK_MAP_H
-#include "pullback_map.h"
+#ifndef COM_LIMITPOINT_FIELDS_PULLBACK_MAP_H
+#include "ComLimitPoint/fields/pullback_map.h"
 #endif
 
 namespace sheaf
@@ -151,4 +151,4 @@ public:
  
 } // namespace fields
 
-#endif // ifndef SECTION_PUSHER_PUSH_ACTION_H
+#endif // ifndef COM_LIMITPOINT_FIELDS_SECTION_PUSHER_PUSH_ACTION_H

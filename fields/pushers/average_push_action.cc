@@ -18,7 +18,7 @@
 /// @file
 /// Implementation for class average_push_action
 
-#include "average_push_action.h"
+#include "ComLimitPoint/fields/average_push_action.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/sheaf/block.h"

@@ -18,11 +18,11 @@
 /// @file
 /// Implementation for class variance_bound_refinement_policy
 
-#include "variance_bound_refinement_policy.h"
+#include "ComLimitPoint/fields/variance_bound_refinement_policy.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/sheaf/factory.h"
-#include "field_refinement_buffer.h"
+#include "ComLimitPoint/fields/field_refinement_buffer.h"
 #include "std_cmath.h"
 #include "ComLimitPoint/fields/field_vd.h"
 

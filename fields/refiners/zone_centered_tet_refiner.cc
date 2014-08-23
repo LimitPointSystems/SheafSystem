@@ -18,13 +18,13 @@
 /// @file
 /// Implementation for class zone_centered_tet_refiner
 
-#include "zone_centered_tet_refiner.h"
+#include "ComLimitPoint/fields/zone_centered_tet_refiner.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/fiber_bundle/base_space_poset.h"
 #include "ComLimitPoint/sheaf/block.impl.h"
 #include "ComLimitPoint/sheaf/error_message.h"
-#include "field_refinement_buffer.h"
+#include "ComLimitPoint/fields/field_refinement_buffer.h"
 #include "ComLimitPoint/fiber_bundle/section_evaluator.h"
 #include "ComLimitPoint/geometry/sec_ed_invertible.h"
 #include "ComLimitPoint/fields/field_vd.h"

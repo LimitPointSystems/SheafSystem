@@ -18,7 +18,7 @@
 /// @file
 /// Implementation for class body_builder
 
-#include "body_builder.h"
+#include "ComLimitPoint/fields/body_builder.h"
 
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/fiber_bundle/base_space_member.h"

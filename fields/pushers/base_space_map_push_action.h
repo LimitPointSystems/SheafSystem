@@ -18,8 +18,8 @@
 /// @file
 /// Interface for class base_space_map_push_action
 
-#ifndef BASE_SPACE_MAP_PUSH_ACTION_H
-#define BASE_SPACE_MAP_PUSH_ACTION_H
+#ifndef COM_LIMITPOINT_FIELDS_BASE_SPACE_MAP_PUSH_ACTION_H
+#define COM_LIMITPOINT_FIELDS_BASE_SPACE_MAP_PUSH_ACTION_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -29,8 +29,8 @@
 #include "ComLimitPoint/sheaf/any.h"
 #endif
 
-#ifndef PULLBACK_MAP_H
-#include "pullback_map.h"
+#ifndef COM_LIMITPOINT_FIELDS_PULLBACK_MAP_H
+#include "ComLimitPoint/fields/pullback_map.h"
 #endif
 
 namespace sheaf
@@ -136,4 +136,4 @@ public:
  
 } // namespace fields
 
-#endif // ifndef BASE_SPACE_MAP_PUSH_ACTION_H
+#endif // ifndef COM_LIMITPOINT_FIELDS_BASE_SPACE_MAP_PUSH_ACTION_H

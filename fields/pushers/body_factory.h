@@ -18,8 +18,8 @@
 /// @file
 /// Interface for class body_factory
 
-#ifndef BODY_FACTORY_H
-#define BODY_FACTORY_H
+#ifndef COM_LIMITPOINT_FIELDS_BODY_FACTORY_H
+#define COM_LIMITPOINT_FIELDS_BODY_FACTORY_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -145,4 +145,4 @@ private:
  
 } // namespace fields
 
-#endif // ifndef BODY_FACTORY_H
+#endif // ifndef COM_LIMITPOINT_FIELDS_BODY_FACTORY_H

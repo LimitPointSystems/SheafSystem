@@ -18,15 +18,15 @@
 /// @file
 /// Interface for class zone_centered_error_bound_refinement_policy
 
-#ifndef ZONE_CENTERED_ERROR_BOUND_REFINEMENT_POLICY_H
-#define ZONE_CENTERED_ERROR_BOUND_REFINEMENT_POLICY_H
+#ifndef COM_LIMITPOINT_FIELDS_ZONE_CENTERED_ERROR_BOUND_REFINEMENT_POLICY_H
+#define COM_LIMITPOINT_FIELDS_ZONE_CENTERED_ERROR_BOUND_REFINEMENT_POLICY_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #endif
 
-#ifndef FIELD_REFINEMENT_POLICY_H
-#include "field_refinement_policy.h"
+#ifndef COM_LIMITPOINT_FIELDS_FIELD_REFINEMENT_POLICY_H
+#include "ComLimitPoint/fields/field_refinement_policy.h"
 #endif
 
 namespace fields
@@ -169,4 +169,4 @@ public:
   
 } // namespace fields
 
-#endif // ifndef ZONE_CENTERED_ERROR_BOUND_REFINEMENT_POLICY_H
+#endif // ifndef COM_LIMITPOINT_FIELDS_ZONE_CENTERED_ERROR_BOUND_REFINEMENT_POLICY_H

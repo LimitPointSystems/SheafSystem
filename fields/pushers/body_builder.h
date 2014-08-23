@@ -18,8 +18,8 @@
 /// @file
 /// Interface for class body_builder
 
-#ifndef BODY_BUILDER_H
-#define BODY_BUILDER_H
+#ifndef COM_LIMITPOINT_FIELDS_BODY_BUILDER_H
+#define COM_LIMITPOINT_FIELDS_BODY_BUILDER_H
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_DLL_SPEC_H
 #include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
@@ -182,4 +182,4 @@ public:
  
 } // namespace fields
 
-#endif // ifndef BODY_BUILDER_H
+#endif // ifndef COM_LIMITPOINT_FIELDS_BODY_BUILDER_H
