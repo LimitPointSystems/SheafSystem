@@ -225,8 +225,8 @@ function(add_bindings_targets)
         # Java ################################################################
         #
         include_directories(${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})
-        include_directories(${SHEAVES_JAVA_BINDING_SRC_DIR})
-        include_directories(${SHEAVES_COMMON_BINDING_SRC_DIR})
+        include_directories(${SHEAF_JAVA_BINDING_SRC_DIR})
+        include_directories(${SHEAF_COMMON_BINDING_SRC_DIR})
         include_directories(${FIBER_BUNDLES_JAVA_BINDING_SRC_DIR})
         include_directories(${FIBER_BUNDLES_COMMON_BINDING_SRC_DIR})
         include_directories(${GEOMETRY_JAVA_BINDING_SRC_DIR})

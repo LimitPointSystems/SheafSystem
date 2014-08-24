@@ -187,10 +187,10 @@ function(add_bindings_targets)
         #
                 
         include_directories(${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})
-        include_directories(${SHEAVES_JAVA_BINDING_SRC_DIR})
-        include_directories(${SHEAVES_COMMON_BINDING_SRC_DIR})
-        include_directories(${FIBER_BUNDLES_JAVA_BINDING_SRC_DIR})
-        include_directories(${FIBER_BUNDLES_COMMON_BINDING_SRC_DIR})
+        include_directories(${SHEAF_JAVA_BINDING_SRC_DIR})
+        include_directories(${SHEAF_COMMON_BINDING_SRC_DIR})
+        include_directories(${FIBER_BUNDLE_JAVA_BINDING_SRC_DIR})
+        include_directories(${FIBER_BUNDLE_COMMON_BINDING_SRC_DIR})
         include_directories(${GEOMETRY_JAVA_BINDING_SRC_DIR})
         include_directories(${GEOMETRY_COMMON_BINDING_SRC_DIR})
         include_directories(${${COMPONENT}_JAVA_BINDING_SRC_DIR})
@@ -299,8 +299,8 @@ function(add_bindings_targets)
         
         set(CMAKE_SWIG_FLAGS -c++ -w842 -namespace fields)
         
-        include_directories(${SHEAVES_CSHARP_BINDING_SRC_DIR})
-        include_directories(${FIBER_BUNDLES_CSHARP_BINDING_SRC_DIR})
+        include_directories(${SHEAF_CSHARP_BINDING_SRC_DIR})
+        include_directories(${FIBER_BUNDLE_CSHARP_BINDING_SRC_DIR})
         include_directories(${GEOMETRY_CSHARP_BINDING_SRC_DIR})
    
         # Add the csharp binding library target
@@ -354,8 +354,8 @@ function(add_bindings_targets)
         set(CMAKE_SWIG_FLAGS -c++ )
     
         include_directories(${PYTHON_INCLUDE_DIRS})
-        include_directories(${SHEAVES_PYTHON_BINDING_SRC_DIR})
-        include_directories(${FIBER_BUNDLES_PYTHON_BINDING_SRC_DIR})
+        include_directories(${SHEAF_PYTHON_BINDING_SRC_DIR})
+        include_directories(${FIBER_BUNDLE_PYTHON_BINDING_SRC_DIR})
         include_directories(${GEOMETRY_PYTHON_BINDING_SRC_DIR})
         
         set_source_files_properties(${${COMPONENT}_PYTHON_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_PYTHON_INTERFACE} 

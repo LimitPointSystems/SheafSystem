@@ -229,7 +229,6 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
 
     # Create the bindings jar file 
     if(WIN64INTEL OR WIN64MSVC)
-    message(STATUS "${SHEAF_CLASSPATH}")
         set(${COMPONENT}_CLASSPATH  ${SHEAF_CLASSPATH} 
             ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} 
             CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)

@@ -23,7 +23,7 @@
 
 %module fields_python_binding
 
-%include "sheaves_common_binding_includes.i"
+%include "sheaf_common_binding_includes.i"
 %include "fiber_bundles_common_binding_includes.i"
 %include "geometry_common_binding_includes.i"
 %import  "sheaves_python_binding.i"

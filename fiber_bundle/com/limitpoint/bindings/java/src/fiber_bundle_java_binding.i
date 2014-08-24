@@ -23,16 +23,16 @@
 
 // Set the module name according to the LPS formula.
 
-%module fiber_bundles_java_binding
+%module fiber_bundle_java_binding
 
 //=============================================================================
 
 %include "arrays_java.i"
 
-%include "sheaves_common_binding_includes.i"
-%import "sheaves_java_binding.i"
+%include "sheaf_common_binding_includes.i"
+%import "sheaf_java_binding.i"
 
-%include "fiber_bundles_common_binding.i"
+%include "fiber_bundle_common_binding.i"
 
 //=============================================================================
 

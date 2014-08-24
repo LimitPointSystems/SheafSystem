@@ -14,7 +14,8 @@
 # limitations under the License.
 #
 
-# Keep quiet about dependencies that don't exist yet.
+# In CMake version 3.x Keep quiet about dependencies that don't exist yet.
+# CMP0046 set to "OLD" makes CMake 3 behave like CMake 2.8.x
 cmake_policy(SET CMP0046 OLD)
 
 #

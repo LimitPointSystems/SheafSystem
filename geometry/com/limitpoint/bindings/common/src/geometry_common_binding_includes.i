@@ -33,23 +33,23 @@
 
 %{
 
-#include "geometry.h"
+#include "ComLimitPoint/geometry/geometry.h"
 
-#include "d_bin_coordinates.h"
-#include "d_bounding_box.h"
-#include "d_tree_point_locator_node.h"
-#include "d_tree_point_locator_path.h"
+#include "ComLimitPoint/geometry/d_bin_coordinates.h"
+#include "ComLimitPoint/geometry/d_bounding_box.h"
+#include "ComLimitPoint/geometry/d_tree_point_locator_node.h"
+#include "ComLimitPoint/geometry/d_tree_point_locator_path.h"
 
-#include "point_locator.h"
-#include       "cylindrical_point_locator.h"
-#include             "array_cylindrical_point_locator.h"
-#include       "d_bin_point_locator.h"
-#include             "d_array_point_locator.h"
-#include             "d_tree_point_locator.h"
-#include       "d_uniform_point_locator.h"
-#include       "db0_point_locator.h"
+#include "ComLimitPoint/geometry/point_locator.h"
+#include       "ComLimitPoint/geometry/cylindrical_point_locator.h"
+#include             "ComLimitPoint/geometry/array_cylindrical_point_locator.h"
+#include       "ComLimitPoint/geometry/d_bin_point_locator.h"
+#include             "ComLimitPoint/geometry/d_array_point_locator.h"
+#include             "ComLimitPoint/geometry/d_tree_point_locator.h"
+#include       "ComLimitPoint/geometry/d_uniform_point_locator.h"
+#include       "ComLimitPoint/geometry/db0_point_locator.h"
 
-#include "sec_ed_invertible.h"
+#include "ComLimitPoint/geometry/sec_ed_invertible.h"
 
 using namespace std;
 using namespace geometry;

@@ -205,7 +205,7 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
     include_directories(${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})
     include_directories(${${COMPONENT}_JAVA_BINDING_SRC_DIR})
     include_directories(${${COMPONENT}_COMMON_BINDING_SRC_DIR})
-    
+    include_directories(${CMAKE_BINARY_DIR}/include)    
     set_source_files_properties(
         ${${COMPONENT}_JAVA_BINDING_SRC_DIR}/${${COMPONENT}_SWIG_JAVA_INTERFACE} 
         PROPERTIES CPLUSPLUS ON)

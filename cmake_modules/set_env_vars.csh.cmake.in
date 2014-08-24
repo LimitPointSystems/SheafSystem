@@ -61,7 +61,7 @@ endif # revert_file
 	endif
 	
 	echo setting CLASSPATH in this terminal.
-	setenv CLASSPATH .:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/SheafScope.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/solvers_java_binding.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/tools_java_binding.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/fields_java_binding.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/geometry_java_binding.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/fiber_bundles_java_binding.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/sheaves_java_binding.jar:@VTK_LIB_DIR@/java/vtk.jar:@JMF_LIB_DIR@/jmf.jar
+	setenv CLASSPATH .:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/SheafScope.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/solvers_java_binding.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/tools_java_binding.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/fields_java_binding.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/geometry_java_binding.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/fiber_bundles_java_binding.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/SHEAF_java_binding.jar:@VTK_LIB_DIR@/java/vtk.jar:@JMF_LIB_DIR@/jmf.jar
 
 	echo setting PATH in this terminal.
 	setenv PATH @JDK_BIN_DIR@:$PATH

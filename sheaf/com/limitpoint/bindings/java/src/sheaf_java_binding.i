@@ -24,7 +24,7 @@
 
 // Set the module name according to the LPS formula.
 
-%module sheaves_java_binding
+%module sheaf_java_binding
 
 //=============================================================================
 
@@ -52,7 +52,7 @@ SWIG_JAVABODY_METHODS(public, public, SWIGTYPE *, \
 
 //=============================================================================
 
-%include "sheaves_common_binding.i"
+%include "sheaf_common_binding.i"
 
 //=============================================================================
 
