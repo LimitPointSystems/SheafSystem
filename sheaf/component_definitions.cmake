@@ -105,17 +105,6 @@ set(${COMPONENT}_PYTHON_BINDING_LIBS
     ${${COMPONENT}_PYTHON_BINDING_LIB} 
     CACHE STRING " Cumulative Python binding libraries for ${PROJECT_NAME}" 
     FORCE)
-
-#
-# Set the cumulative include path for this component.
-#
-#set(${COMPONENT}_IPATHS ${${COMPONENT}_IPATH} 
-#    ${CMAKE_BINARY_DIR}/include 
-#    CACHE STRING " Cumulative include paths for ${PROJECT_NAME}" 
-#    FORCE)
-
-#include_directories(${${COMPONENT}_IPATHS})
-
    
 #
 # Configure the STD header files

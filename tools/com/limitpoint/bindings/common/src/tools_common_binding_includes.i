@@ -32,9 +32,9 @@
 //=============================================================================
 
 %{
-#include "vtk_poly_data_builder.h"
-#include "vtk_abstract_grid_builder.h"
-#include "vtk_unstructured_grid_builder.h"
+#include "ComLimitPoint//tools/vtk_poly_data_builder.h"
+#include "ComLimitPoint/tools/vtk_abstract_grid_builder.h"
+#include "ComLimitPoint/tools/vtk_unstructured_grid_builder.h"
 
 using namespace std;
 %}

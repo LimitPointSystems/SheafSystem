@@ -29,7 +29,7 @@
 //=============================================================================
 
 %include "sheaf_common_binding_includes.i"
-%include "fiber_bundles_common_binding_includes.i"
+%include "fiber_bundle_common_binding_includes.i"
 %include "geometry_common_binding_includes.i"
 %include "fields_common_binding_includes.i"
 %import  "sheaf_java_binding.i"

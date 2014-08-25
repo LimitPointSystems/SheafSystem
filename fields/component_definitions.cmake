@@ -104,12 +104,7 @@ set(${COMPONENT}_PYTHON_BINDING_LIBS ${GEOMETRY_PYTHON_BINDING_LIBS}
     ${${COMPONENT}_PYTHON_BINDING_LIB} 
     CACHE STRING " Cumulative Python binding libraries for ${PROJECT_NAME}" FORCE)
 
-#
-# Specify component prerequisite include directories.
-#
-#include_directories(${GEOMETRY_IPATHS})
-
-include_directories(${TETGEN_INC_DIR})
+#include_directories(${TETGEN_INC_DIR})
 
 #------------------------------------------------------------------------------
 # FUNCTION DEFINITION SECTION

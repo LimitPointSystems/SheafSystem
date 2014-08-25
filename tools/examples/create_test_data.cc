@@ -17,7 +17,7 @@
 
 /// @example examples/create_test_data.cc
 
-#include "lps_environment.h"
+#include "ComLimitPoint/tools/lps_environment.h"
 #include "std_iostream.h"
 #include "std_string.h"
 #include "std_unistd.h"
