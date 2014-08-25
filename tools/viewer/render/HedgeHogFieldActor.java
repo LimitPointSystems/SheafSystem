@@ -19,7 +19,7 @@ package com.limitpoint.tools.viewer.render;
 
 import com.limitpoimt.tools.viewer.common.*;
 import com.limitpoimt.tools.viewer.user.*;
-import bindings.java.*;
+import com.limitpoint.bindings.java.*;
 
 import java.awt.*;
 import java.util.*;

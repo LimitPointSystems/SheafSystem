@@ -17,7 +17,7 @@
 
 // Test driver for unstructured_block.java
 
-import bindings.java.*;
+import com.limitpoint.bindings.java.*;
 
 public class unstructured_block_t extends base_example
 {

@@ -18,7 +18,7 @@
 package com.limitpoint.tools.viewer.table;
 
 import com.limitpoimt.tools.viewer.render.*;
-import bindings.java.*;
+import com.limitpoint.bindings.java.*;
 
 import java.awt.*;
 import java.util.*;

@@ -232,8 +232,8 @@ function(add_bindings_targets)
                                "${GEOMETRY_CLASSPATH}" -d . *.java
                                COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
                                COMMAND ${Java_JAR_EXECUTABLE} cvf 
-                               ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  
-                               ${JAVA_BINDINGS_ROOT}/*.class
+                               ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} 
+                               ${LANG_BINDINGS_ROOT}/java/*.class
                              )
             
             # Java documentation

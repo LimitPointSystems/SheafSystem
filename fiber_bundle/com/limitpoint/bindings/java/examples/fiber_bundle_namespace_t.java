@@ -19,7 +19,7 @@
 // Class fiber_bundles_namespace_t
 //
 
-import bindings.java.*;
+import com.limitpoint.bindings.java.*;
 
 public class fiber_bundles_namespace_t extends base_example
 {

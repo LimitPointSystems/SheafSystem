@@ -15,7 +15,7 @@
 // limitations under the License.
 //
 
-import bindings.java.*;
+import com.limitpoint.bindings.java.*;
 
 public class default_namespace_t extends base_example
 {

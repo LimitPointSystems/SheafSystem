@@ -20,7 +20,7 @@
 //$$SCRIBBLE: This is just a placeholder.  It will be
 //            further developed as part of the field algebra project.
 
-import bindings.java.*;
+import com.limitpoint.bindings.java.*;
 
 public class vd_field_t extends base_example
 {

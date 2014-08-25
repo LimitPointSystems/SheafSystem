@@ -16,7 +16,7 @@
 //
 
 import com.limitpoimt.tools.SheafScope.SheafScopeApplication;
-import bindings.java.*;
+import com.limitpoint.bindings.java.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;

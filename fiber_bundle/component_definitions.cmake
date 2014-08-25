@@ -218,22 +218,26 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
     set_target_properties(${${COMPONENT}_JAVA_BINDING_LIB} 
         PROPERTIES VERSION ${LIB_VERSION})
 
-    # Create the bindings jar file 
+    # Create the bindings jar file
+    # Output path in windows differs slightly from Linux. Cmake wont allow a 
+    # conditional inside add_custom_target, so we have to do it outside.
     if(WIN64INTEL OR WIN64MSVC)
+
+        # Set the cumulative classpath variable for this component
         set(${COMPONENT}_CLASSPATH  ${SHEAF_CLASSPATH} 
             ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} 
             CACHE STRING "Cumulative classpath for ${PROJECT_NAME}" FORCE)
+
         add_custom_target(${PROJECT_NAME}_java_binding.jar ALL
                DEPENDS ${${COMPONENT}_JAVA_BINDING_LIB} ${SHEAF_JAVA_BINDING_JAR}
-               set_target_properties(${PROJECT_NAME}_java_binding.jar 
+                set_target_properties(${PROJECT_NAME}_java_binding.jar 
                    PROPERTIES FOLDER "Component Binding Jars")
                COMMAND ${CMAKE_COMMAND} -E echo "Compiling Java files..."
-               COMMAND ${Java_JAVAC_EXECUTABLE} -classpath  
-               "${SHEAF_CLASSPATH}" -d . *.java
+               COMMAND ${Java_JAVAC_EXECUTABLE} -classpath ".;${SHEAF_CLASSPATH}" -d . *.java
                COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
                COMMAND ${Java_JAR_EXECUTABLE} cvf 
                    ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} 
-                   ${JAVA_BINDINGS_ROOT}/*.class
+                   ${LANG_BINDINGS_ROOT}/java/*.class
                    )
            
         # Java documentation

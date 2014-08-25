@@ -18,7 +18,7 @@
 
 package com.limitpoint.tools.viewer.animation;
 
-import bindings.java.*;
+import com.limitpoint.bindings.java.*;
 import com.limitpoimt.tools.viewer.user.*;
 
 import java.awt.*;

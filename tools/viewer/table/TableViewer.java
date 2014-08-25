@@ -19,7 +19,7 @@
 package com.limitpoint.tools.viewer.table;
 
 import com.limitpoimt.tools.common.gui.*;
-import bindings.java.*;
+import com.limitpoint.bindings.java.*;
 import javax.swing.*;
 
 /**

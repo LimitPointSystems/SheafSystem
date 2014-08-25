@@ -17,7 +17,7 @@
 
 // Test driver for structured_block_2d.java
 
-import bindings.java.*;
+import com.limitpoint.bindings.java.*;
 
 public class structured_block_2d_t extends base_example
 {

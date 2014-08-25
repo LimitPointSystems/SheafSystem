@@ -21,7 +21,7 @@ import com.limitpoimt.tools.common.util.*;
 import com.limitpoimt.tools.viewer.common.*;
 import com.limitpoimt.tools.viewer.animation.*;
 import com.limitpoimt.tools.viewer.user.*;
-import bindings.java.*;
+import com.limitpoint.bindings.java.*;
 
 import java.awt.*;
 import java.io.*;

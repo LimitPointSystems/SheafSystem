@@ -18,7 +18,7 @@
 package com.limitpoint.tools.SheafScope;
 
 import com.limitpoimt.tools.common.gui.*;
-import bindings.java.*;
+import com.limitpoint.bindings.java.*;
 
 import java.awt.*;
 import java.awt.event.*;

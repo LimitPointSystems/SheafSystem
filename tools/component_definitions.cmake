@@ -286,8 +286,8 @@ function(add_bindings_targets)
                    COMMAND ${Java_JAVAC_EXECUTABLE} -classpath "${FIELDS_CLASSPATH} ${VTK_JAR} ${JMF_JAR}" -d . *.java
                    COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
                    COMMAND ${Java_JAR_EXECUTABLE} cvf 
-                    ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR}  
-                   ${JAVA_BINDINGS_ROOT}/*.class
+                   ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/${${COMPONENT}_JAVA_BINDING_JAR} 
+                   ${LANG_BINDINGS_ROOT}/java/*.class
                  )
                              
             # Java documentation
@@ -332,8 +332,9 @@ function(add_bindings_targets)
         set_target_properties(${PROJECT_NAME}_java_binding.jar PROPERTIES FOLDER "Library Jars") 
         mark_as_advanced(FORCE ${COMPONENT}_CLASSPATH) 
      
-         # Establish the SheafScope jar dir
-         set(LIB_JAR_DIR ${CMAKE_BINARY_DIR}/SheafScope)
+    # Establish the SheafScope jar dir
+    set(LIB_JAR_DIR ${CMAKE_BINARY_DIR}/SheafScope)
+    
     if(BUILD_SHEAFSCOPE)   
          # Build the SheafScope jar
         if(WIN64INTEL OR WIN64MSVC)

@@ -19,7 +19,7 @@
 // Class read_t
 //
 
-import bindings.java.*;
+import com.limitpoint.bindings.java.*;
 
 public class read_t extends base_example
 {

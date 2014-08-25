@@ -17,8 +17,8 @@
 
 /// @example examples/SheafScope.cc
 
-#include "jvm_launcher.h"
-#include "lps_environment.h" // for CLASSPATH & LD_LIBRARY_PATH
+#include "ComLimitPoint/tools/jvm_launcher.h"
+#include "ComLimitPoint/tools/lps_environment.h" // for CLASSPATH & LD_LIBRARY_PATH
 
 int main(int argc, char* argv[])
 {

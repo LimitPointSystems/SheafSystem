@@ -17,7 +17,7 @@
 
 package com.limitpoint.tools.common.util;
 
-import bindings.java.*;
+import com.limitpoint.bindings.java.*;
 
 /**
  * Sheaf utilities.

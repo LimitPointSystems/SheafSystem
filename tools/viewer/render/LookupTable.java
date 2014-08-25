@@ -17,7 +17,7 @@
 
 package com.limitpoint.tools.viewer.render;
 
-import bindings.java.*;
+import com.limitpoint.bindings.java.*;
 import java.io.*;
 
 import vtk.*;

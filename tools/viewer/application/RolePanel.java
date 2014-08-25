@@ -17,7 +17,7 @@
 
 package com.limitpoint.tools.viewer.application;
 
-import bindings.java.*;
+import com.limitpoint.bindings.java.*;
 
 import java.awt.*;
 import java.awt.event.*;
