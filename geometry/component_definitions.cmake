@@ -101,18 +101,6 @@ set(${COMPONENT}_PYTHON_BINDING_LIBS
     ${FIBER_BUNDLE_PYTHON_BINDING_LIBS} 
     ${${COMPONENT}_PYTHON_BINDING_LIB} CACHE STRING 
     "Cumulative Python binding libraries for ${PROJECT_NAME}" FORCE)
- 
-#
-# Set the cumulative include path for this component.
-#
-#set(${COMPONENT}_IPATHS ${FIBER_BUNDLE_IPATHS} 
-#    ${${COMPONENT}_IPATH} CACHE STRING 
-#    "Cumulative include paths for ${PROJECT_NAME}" FORCE)
-
-#
-# Specify component prerequisite include directories.
-#
-#include_directories(${FIBER_BUNDLE_IPATHS})
 
 #------------------------------------------------------------------------------
 # FUNCTION DEFINITION SECTION

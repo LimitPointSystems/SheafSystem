@@ -104,13 +104,6 @@ set(${COMPONENT}_PYTHON_BINDING_LIBS ${GEOMETRY_PYTHON_BINDING_LIBS}
     ${${COMPONENT}_PYTHON_BINDING_LIB} 
     CACHE STRING " Cumulative Python binding libraries for ${PROJECT_NAME}" FORCE)
 
-
-#
-# Set the cumulative include path for this component.
-#
-#set(${COMPONENT}_IPATHS ${GEOMETRY_IPATHS} ${${COMPONENT}_IPATH} 
-#    CACHE STRING " Cumulative include paths for ${PROJECT_NAME}")
-
 #
 # Specify component prerequisite include directories.
 #
