@@ -1811,7 +1811,6 @@ INTERACTIVE_SVG        = NO
 # The tag DOT_PATH can be used to specify the path where the dot tool can be
 # found. If left blank, it is assumed the dot tool can be found in the path.
 
-#DOT_PATH               = @DOXYGEN_DOT_EXECUTABLE@
 DOT_PATH               = 
 
 # The DOTFILE_DIRS tag can be used to specify one or more directories that
