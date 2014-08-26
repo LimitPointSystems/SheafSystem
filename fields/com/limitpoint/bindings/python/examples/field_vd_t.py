@@ -20,13 +20,13 @@
 
 ##$$TODO: Figure out how to combine these.
 
-from sheaves_python_binding import *
-from fiber_bundles_python_binding import *
+from sheaf_python_binding import *
+from fiber_bundle_python_binding import *
 from fields_python_binding import *
 
 ## Make the sheaves namespace.
 
-ns = fiber_bundles_namespace("field_vd_t")
+ns = fiber_bundle_namespace("field_vd_t")
 
 ## Output a text version to stdout.
 

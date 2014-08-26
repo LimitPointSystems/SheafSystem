@@ -19,13 +19,13 @@ from sheaf_python_binding import *
 
 ## Make the default namespace.
 
-test_namespace = sheaves_namespace("test_namespace")
+test_namespace = sheaf_namespace("test_namespace")
 
 test_namespace.make_triangle(test_namespace);
 
 test_namespace.get_read_access()
 
-## Use standard triangle in sheaves_namespace as the test case.
+## Use standard triangle in sheaf_namespace as the test case.
 ## Member indexing and Correct order of iterations can be 
 ## deduced by inspection of output from sheaves_namespace_t.py
 

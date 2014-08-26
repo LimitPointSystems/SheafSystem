@@ -66,7 +66,7 @@ class block_connectivity;
 class SHEAF_DLL_SPEC zone_nodes_block_crg_interval : public homogeneous_block_crg_interval
 {
 
-  friend class fiber_bundles_namespace;
+  friend class fiber_bundle_namespace;
 
   // ===========================================================
   /// @name ZONE_NODE_BLOCK_CRG_INTERVAL FACET

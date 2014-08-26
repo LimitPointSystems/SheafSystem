@@ -51,7 +51,7 @@ class ijk_adjacency_implicit_index_space_iterator;
 class SHEAF_DLL_SPEC ijk_adjacency_index_space_interval : public index_space_interval
 {
 
-  friend class fiber_bundles_namespace;
+  friend class fiber_bundle_namespace;
   friend SHEAF_DLL_SPEC size_t deep_size(const ijk_adjacency_index_space_interval& xn, bool xinclude_shallow);
 
   // ===========================================================

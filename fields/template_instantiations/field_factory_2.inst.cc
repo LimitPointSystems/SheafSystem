@@ -201,7 +201,7 @@ template
 SHEAF_DLL_SPEC 
 void
 fields::make_base_space<fiber_bundle::base_space_member>(
-    fiber_bundle::fiber_bundles_namespace& xns,
+    fiber_bundle::fiber_bundle_namespace& xns,
     const sheaf::poset_path& xbase_path,
     const sheaf::wsv_block<int>& xbase_index_ubs,
     sheaf::poset_path& xlocal_cell_prototype_path,
@@ -211,7 +211,7 @@ template
 SHEAF_DLL_SPEC 
 void
 fields::make_base_space<fiber_bundle::homogeneous_block>(
-    fiber_bundle::fiber_bundles_namespace& xns,
+    fiber_bundle::fiber_bundle_namespace& xns,
     const sheaf::poset_path& xbase_path,
     const sheaf::wsv_block<int>& xbase_index_ubs,
     sheaf::poset_path& xlocal_cell_prototype_path,

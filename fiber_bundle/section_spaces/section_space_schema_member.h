@@ -46,7 +46,7 @@ namespace fiber_bundle
 
 using namespace sheaf;
 
-class fiber_bundles_namespace;
+class fiber_bundle_namespace;
 class sec_rep_descriptor;
 class section_component_iterator;
 class section_space_schema_poset;
@@ -78,7 +78,7 @@ public:
   ///
   /// The type of namespace for this type of member.
   ///
-  typedef fiber_bundles_namespace namespace_type;
+  typedef fiber_bundle_namespace namespace_type;
 
   ///
   /// The type of host poset.

@@ -41,7 +41,7 @@ namespace fiber_bundle
 ///
 class SHEAF_DLL_SPEC at0_space : public atp_space
 {
-  friend class fiber_bundles_namespace;
+  friend class fiber_bundle_namespace;
 
 public:
 

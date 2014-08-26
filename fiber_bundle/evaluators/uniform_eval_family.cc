@@ -236,7 +236,7 @@ initialize(const namespace_poset& xname_space)
   eval_family::initialize(xname_space);
 
   // The type codes used here must be the same as those used
-  // in fiber_bundles_namespace::make_base_space_member_prototypes().
+  // in fiber_bundle_namespace::make_base_space_member_prototypes().
 
   poset* lhost = &xname_space.member_poset<poset>(base_space_member::prototypes_poset_name(), false);
   lhost->get_read_access();

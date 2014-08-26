@@ -50,7 +50,7 @@ class poset_dof_map;
 class poset_member_iterator;
 class poset_path;
 class schema_poset_member;
-class sheaves_namespace;
+class sheaf_namespace;
 class storage_agent;
 class subposet;
 class tern;

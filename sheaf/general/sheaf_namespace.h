@@ -15,7 +15,7 @@
 // limitations under the License.
 //
 
-// Interface for class sheaves_namespace
+// Interface for class sheaf_namespace
 
 #ifndef COM_LIMITPOINT_SHEAF_SHEAF_NAMESPACE_H
 #define COM_LIMITPOINT_SHEAF_SHEAF_NAMESPACE_H
@@ -34,11 +34,11 @@ namespace sheaf
 ///
 /// The standard sheaves name space.
 ///
-class SHEAF_DLL_SPEC sheaves_namespace : public namespace_poset
+class SHEAF_DLL_SPEC sheaf_namespace : public namespace_poset
 {
 
   // ===========================================================
-  /// @name SHEAVES_NAMESPACE FACET
+  /// @name sheaf_namespace FACET
   // ===========================================================
   //@{
 
@@ -47,35 +47,35 @@ public:
   ///
   /// Creates a sheaves namespace with name xname.
   ///
-  sheaves_namespace(const std::string& xname);
+  sheaf_namespace(const std::string& xname);
 
   ///
   /// Destructor
   ///
-  virtual ~sheaves_namespace();
+  virtual ~sheaf_namespace();
 
   ///
   /// Creates a triangle schema using the primatives poset;
   /// used for test drivers.
   ///
-  static void make_triangle(sheaves_namespace* xns);
+  static void make_triangle(sheaf_namespace* xns);
 
 protected:
 
   ///
   /// Default constructor; creates an unattached handle.
   ///
-  sheaves_namespace();
+  sheaf_namespace();
 
   ///
   /// Covariant constructor.
   ///
-  sheaves_namespace(namespace_poset_member* xtop, namespace_poset_member* xbottom);
+  sheaf_namespace(namespace_poset_member* xtop, namespace_poset_member* xbottom);
 
   ///
   /// Copy constructor; disabled.
   ///
-  sheaves_namespace(const sheaves_namespace& xother) { };
+  sheaf_namespace(const sheaf_namespace& xother) { };
 
 private:
 

@@ -51,7 +51,7 @@ class vd;
 ///
 class SHEAF_DLL_SPEC sec_vd_space : public sec_tuple_space
 {
-  friend class fiber_bundles_namespace;
+  friend class fiber_bundle_namespace;
 
   // ===========================================================
   /// @name SEC_VD_SPACE FACET

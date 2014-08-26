@@ -64,7 +64,7 @@ using namespace fields; // Workaround for MS C++ bug.
 
 fields::field_vd*
 fields::field_factory::
-new_scalar_field_1d_points(fiber_bundles_namespace& xns,
+new_scalar_field_1d_points(fiber_bundle_namespace& xns,
                            const std::string& xname,
                            size_type xi_size,
                            block<sec_vd_value_type>& xlower,
@@ -146,7 +146,7 @@ new_scalar_field_1d_points(fiber_bundles_namespace& xns,
 
 fields::field_vd*
 fields::field_factory::
-new_scalar_field_1d_unstructured(fiber_bundles_namespace& xns,
+new_scalar_field_1d_unstructured(fiber_bundle_namespace& xns,
                                  const std::string& xname,
                                  size_type xi_size,
                                  block<sec_vd_value_type>& xlower,
@@ -223,7 +223,7 @@ new_scalar_field_1d_unstructured(fiber_bundles_namespace& xns,
 
 fields::field_vd*
 fields::field_factory::
-new_scalar_field_1d_uniform(fiber_bundles_namespace& xns,
+new_scalar_field_1d_uniform(fiber_bundle_namespace& xns,
                             const std::string& xname,
                             size_type xi_size,
                             block<sec_vd_value_type>& xlower,
@@ -300,7 +300,7 @@ new_scalar_field_1d_uniform(fiber_bundles_namespace& xns,
 
 fields::field_vd*
 fields::field_factory::
-new_scalar_field_2d_points(fiber_bundles_namespace& xns,
+new_scalar_field_2d_points(fiber_bundle_namespace& xns,
                            const std::string& xname,
                            size_type xi_size,
                            size_type xj_size,
@@ -385,7 +385,7 @@ new_scalar_field_2d_points(fiber_bundles_namespace& xns,
 
 fields::field_vd*
 fields::field_factory::
-new_scalar_field_2d_unstructured(fiber_bundles_namespace& xns,
+new_scalar_field_2d_unstructured(fiber_bundle_namespace& xns,
                                  const std::string& xname,
                                  size_type xi_size,
                                  size_type xj_size,
@@ -466,7 +466,7 @@ new_scalar_field_2d_unstructured(fiber_bundles_namespace& xns,
 #ifdef HAVE_VTK
 fields::field_vd*
 fields::field_factory::
-new_scalar_field_2d_unstructured(fiber_bundles_namespace& xns,
+new_scalar_field_2d_unstructured(fiber_bundle_namespace& xns,
                                  const std::string& xname,
                                  size_type xpt_ct,
                                  block<sec_vd_value_type>& xlower,
@@ -552,7 +552,7 @@ new_scalar_field_2d_unstructured(fiber_bundles_namespace& xns,
 
 fields::field_vd*
 fields::field_factory::
-new_scalar_field_2d_uniform(fiber_bundles_namespace& xns,
+new_scalar_field_2d_uniform(fiber_bundle_namespace& xns,
                             const std::string& xname,
                             size_type xi_size,
                             size_type xj_size,
@@ -630,7 +630,7 @@ new_scalar_field_2d_uniform(fiber_bundles_namespace& xns,
 
 fields::field_vd*
 fields::field_factory::
-new_scalar_field_3d_points(fiber_bundles_namespace& xns,
+new_scalar_field_3d_points(fiber_bundle_namespace& xns,
                            const std::string& xname,
                            size_type xi_size,
                            size_type xj_size,
@@ -717,7 +717,7 @@ new_scalar_field_3d_points(fiber_bundles_namespace& xns,
 
 fields::field_vd*
 fields::field_factory::
-new_scalar_field_3d_unstructured(fiber_bundles_namespace& xns,
+new_scalar_field_3d_unstructured(fiber_bundle_namespace& xns,
                                  const std::string& xname,
                                  size_type xi_size,
                                  size_type xj_size,
@@ -800,7 +800,7 @@ new_scalar_field_3d_unstructured(fiber_bundles_namespace& xns,
 
 fields::field_vd*
 fields::field_factory::
-new_scalar_field_3d_unstructured(fiber_bundles_namespace& xns,
+new_scalar_field_3d_unstructured(fiber_bundle_namespace& xns,
                                  const std::string& xname,
                                  size_type xpt_ct,
                                  block<sec_vd_value_type>& xlower,
@@ -885,7 +885,7 @@ new_scalar_field_3d_unstructured(fiber_bundles_namespace& xns,
 
 fields::field_vd*
 fields::field_factory::
-new_scalar_field_3d_uniform(fiber_bundles_namespace& xns,
+new_scalar_field_3d_uniform(fiber_bundle_namespace& xns,
                             const std::string& xname,
                             size_type xi_size,
                             size_type xj_size,
@@ -971,7 +971,7 @@ new_scalar_field_3d_uniform(fiber_bundles_namespace& xns,
 
 fields::field_vd*
 fields::field_factory::
-new_scalar_field_1d_unstructured(fiber_bundles_namespace& xns,
+new_scalar_field_1d_unstructured(fiber_bundle_namespace& xns,
                                  const std::string& xname,
                                  size_type xi_size,
                                  block<sec_vd_value_type>& xlower,
@@ -1016,7 +1016,7 @@ new_scalar_field_1d_unstructured(fiber_bundles_namespace& xns,
 
 fields::field_vd*
 fields::field_factory::
-new_scalar_field_1d_uniform(fiber_bundles_namespace& xns,
+new_scalar_field_1d_uniform(fiber_bundle_namespace& xns,
                             const std::string& xname,
                             size_type xi_size,
                             block<sec_vd_value_type>& xlower,
@@ -1061,7 +1061,7 @@ new_scalar_field_1d_uniform(fiber_bundles_namespace& xns,
 
 fields::field_vd*
 fields::field_factory::
-new_scalar_field_2d_unstructured(fiber_bundles_namespace& xns,
+new_scalar_field_2d_unstructured(fiber_bundle_namespace& xns,
                                  const std::string& xname,
                                  size_type xi_size,
                                  size_type xj_size,
@@ -1113,7 +1113,7 @@ new_scalar_field_2d_unstructured(fiber_bundles_namespace& xns,
 
 fields::field_vd*
 fields::field_factory::
-new_scalar_field_2d_unstructured(fiber_bundles_namespace& xns,
+new_scalar_field_2d_unstructured(fiber_bundle_namespace& xns,
                                  const std::string& xname,
                                  size_type xpt_ct,
                                  block<sec_vd_value_type>& xlower,
@@ -1159,7 +1159,7 @@ new_scalar_field_2d_unstructured(fiber_bundles_namespace& xns,
 
 fields::field_vd*
 fields::field_factory::
-new_scalar_field_2d_uniform(fiber_bundles_namespace& xns,
+new_scalar_field_2d_uniform(fiber_bundle_namespace& xns,
                             const std::string& xname,
                             size_type xi_size,
                             size_type xj_size,
@@ -1207,7 +1207,7 @@ new_scalar_field_2d_uniform(fiber_bundles_namespace& xns,
 
 fields::field_vd*
 fields::field_factory::
-new_scalar_field_3d_unstructured(fiber_bundles_namespace& xns,
+new_scalar_field_3d_unstructured(fiber_bundle_namespace& xns,
                                  const std::string& xname,
                                  size_type xi_size,
                                  size_type xj_size,
@@ -1261,7 +1261,7 @@ new_scalar_field_3d_unstructured(fiber_bundles_namespace& xns,
 
 fields::field_vd*
 fields::field_factory::
-new_scalar_field_3d_unstructured(fiber_bundles_namespace& xns,
+new_scalar_field_3d_unstructured(fiber_bundle_namespace& xns,
                                  const std::string& xname,
                                  size_type xpt_ct,
                                  block<sec_vd_value_type>& xlower,
@@ -1307,7 +1307,7 @@ new_scalar_field_3d_unstructured(fiber_bundles_namespace& xns,
 
 fields::field_vd*
 fields::field_factory::
-new_scalar_field_3d_uniform(fiber_bundles_namespace& xns,
+new_scalar_field_3d_uniform(fiber_bundle_namespace& xns,
                             const std::string& xname,
                             size_type xi_size,
                             size_type xj_size,
@@ -1530,7 +1530,7 @@ new_0d_point_base_space(namespace_poset& xns, const std::string& xname, size_typ
 
   // Make the base space.
 
-  fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
+  fiber_bundle_namespace& lns = dynamic_cast<fiber_bundle_namespace&>(xns);
   string lbase_name(xname+"_base_space");
   base_space_poset& lhost = unstructured_block::standard_host(lns, lbase_name, 0, false);
   
@@ -1602,7 +1602,7 @@ new_0d_point_base_space(namespace_poset& xns,
 
   // Make the base space.
 
-  fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
+  fiber_bundle_namespace& lns = dynamic_cast<fiber_bundle_namespace&>(xns);
   string lbase_name(xname+"_base_space");
   base_space_poset& lhost = unstructured_block::standard_host(lns, lbase_name, 0, false);
   
@@ -1676,7 +1676,7 @@ new_0d_point_base_space(namespace_poset& xns,
 
   // Make the base space.
 
-  fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
+  fiber_bundle_namespace& lns = dynamic_cast<fiber_bundle_namespace&>(xns);
 //   base_space_poset* lhost = &lns.new_base_space<unstructured_block>(xname+"_base_space",
 // 								    "",
 // 								    "",
@@ -1752,7 +1752,7 @@ new_1d_unstructured_base_space(namespace_poset& xns,
 
   // Make the base space.
 
-  fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
+  fiber_bundle_namespace& lns = dynamic_cast<fiber_bundle_namespace&>(xns);
   base_space_poset& lhost = unstructured_block::standard_host(lns, xname, 1, false);
   
   lhost.get_read_write_access();
@@ -1787,7 +1787,7 @@ new_1d_unstructured_base_space(namespace_poset& xns,
 
 fiber_bundle::sec_e1*
 fields::field_factory::
-new_1d_unstructured_coordinates(fiber_bundles_namespace& xns,
+new_1d_unstructured_coordinates(fiber_bundle_namespace& xns,
                                 const std::string& xname,
                                 size_type xi_size,
                                 block<sec_vd_value_type>& xlower,
@@ -1870,7 +1870,7 @@ new_1d_structured_base_space(namespace_poset& xns,
 
   // Make the base space.
 
-  fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
+  fiber_bundle_namespace& lns = dynamic_cast<fiber_bundle_namespace&>(xns);
 
   base_space_poset& lhost = structured_block_1d::standard_host(lns, xname, false);
   
@@ -1900,7 +1900,7 @@ new_1d_structured_base_space(namespace_poset& xns,
 
 fiber_bundle::sec_e1*
 fields::field_factory::
-new_1d_uniform_coordinates(fiber_bundles_namespace& xns,
+new_1d_uniform_coordinates(fiber_bundle_namespace& xns,
                            const std::string& xname,
                            size_type xi_size,
                            block<sec_vd_value_type>& xlower,
@@ -1991,7 +1991,7 @@ new_2d_unstructured_base_space(namespace_poset& xns,
 
   // Make the base space.
 
-  fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
+  fiber_bundle_namespace& lns = dynamic_cast<fiber_bundle_namespace&>(xns);
 
   string lbase_name(xname+"_base_space");
   base_space_poset& lhost = unstructured_block::standard_host(lns, lbase_name, 2, false);
@@ -2028,7 +2028,7 @@ new_2d_unstructured_base_space(namespace_poset& xns,
 
 fiber_bundle::sec_e2*
 fields::field_factory::
-new_2d_unstructured_coordinates(fiber_bundles_namespace& xns,
+new_2d_unstructured_coordinates(fiber_bundle_namespace& xns,
                                 const std::string& xname,
                                 size_type xi_size,
                                 size_type xj_size,
@@ -2191,7 +2191,7 @@ new_2d_unstructured_base_space(namespace_poset& xns,
 
   // Make the base space using the connectivy from the triangulation.
 
-  fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
+  fiber_bundle_namespace& lns = dynamic_cast<fiber_bundle_namespace&>(xns);
 
   string lbase_name(xname+"_base_space");
   base_space_poset& lhost = unstructured_block::standard_host(lns, lbase_name, 2, false);
@@ -2227,7 +2227,7 @@ new_2d_unstructured_base_space(namespace_poset& xns,
 
 fiber_bundle::sec_e2*
 fields::field_factory::
-new_2d_unstructured_coordinates(fiber_bundles_namespace& xns,
+new_2d_unstructured_coordinates(fiber_bundle_namespace& xns,
                                 const std::string& xname,
                                 size_type xpt_ct,
                                 block<sec_vd_value_type>& xlower,
@@ -2314,7 +2314,7 @@ new_2d_structured_base_space(namespace_poset& xns,
 
   // Make the base space.
 
-  fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
+  fiber_bundle_namespace& lns = dynamic_cast<fiber_bundle_namespace&>(xns);
   
   base_space_poset& lhost = structured_block_2d::standard_host(lns, xname, false);
 
@@ -2344,7 +2344,7 @@ new_2d_structured_base_space(namespace_poset& xns,
 
 fiber_bundle::sec_e2*
 fields::field_factory::
-new_2d_uniform_coordinates(fiber_bundles_namespace& xns,
+new_2d_uniform_coordinates(fiber_bundle_namespace& xns,
                            const string& xname,
                            size_type xi_size,
                            size_type xj_size,
@@ -2439,7 +2439,7 @@ new_3d_unstructured_base_space(namespace_poset& xns,
 
   // Make the base space.
 
-  fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
+  fiber_bundle_namespace& lns = dynamic_cast<fiber_bundle_namespace&>(xns);
 
   string lbase_name(xname+"_base_space");
   base_space_poset& lhost = unstructured_block::standard_host(lns, lbase_name, 3, false);
@@ -2476,7 +2476,7 @@ new_3d_unstructured_base_space(namespace_poset& xns,
 
 fiber_bundle::sec_e3*
 fields::field_factory::
-new_3d_unstructured_coordinates(fiber_bundles_namespace& xns,
+new_3d_unstructured_coordinates(fiber_bundle_namespace& xns,
                                 const std::string& xname,
                                 size_type xi_size,
                                 size_type xj_size,
@@ -2647,7 +2647,7 @@ new_3d_unstructured_base_space(namespace_poset& xns,
 
   // Make the base space using the connectivy from the triangulation.
 
-  fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
+  fiber_bundle_namespace& lns = dynamic_cast<fiber_bundle_namespace&>(xns);
 
   string lbase_name(xname+"_base_space");
   base_space_poset& lhost = unstructured_block::standard_host(lns, lbase_name, 3, false);
@@ -2684,7 +2684,7 @@ new_3d_unstructured_base_space(namespace_poset& xns,
 
 fiber_bundle::sec_e3*
 fields::field_factory::
-new_3d_unstructured_coordinates(fiber_bundles_namespace& xns,
+new_3d_unstructured_coordinates(fiber_bundle_namespace& xns,
                                 const std::string& xname,
                                 size_type xpt_ct,
                                 block<sec_vd_value_type>& xlower,
@@ -2773,7 +2773,7 @@ new_3d_structured_base_space(namespace_poset& xns,
 
   // Make the base space.
 
-  fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(xns);
+  fiber_bundle_namespace& lns = dynamic_cast<fiber_bundle_namespace&>(xns);
   
   string lbase_name(xname+"_base_space");
   base_space_poset& lhost = structured_block_3d::standard_host(lns, lbase_name, false);
@@ -2804,7 +2804,7 @@ new_3d_structured_base_space(namespace_poset& xns,
 
 fiber_bundle::sec_e3*
 fields::field_factory::
-new_3d_uniform_coordinates(fiber_bundles_namespace& xns,
+new_3d_uniform_coordinates(fiber_bundle_namespace& xns,
                            const std::string& xname,
                            size_type xi_size,
                            size_type xj_size,
@@ -2883,7 +2883,7 @@ new_3d_uniform_coordinates(fiber_bundles_namespace& xns,
 
 fiber_bundle::sec_at0*
 fields::field_factory::
-new_property(fiber_bundles_namespace& xns,
+new_property(fiber_bundle_namespace& xns,
              const std::string& xname,
              base_space_member& xbase_space,
              const poset_path& xrep_path)

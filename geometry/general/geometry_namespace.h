@@ -38,7 +38,7 @@ namespace geometry
 ///
 /// Namespace for GEOMETRY component.
 ///
-class SHEAF_DLL_SPEC geometry_namespace : public fiber_bundles_namespace
+class SHEAF_DLL_SPEC geometry_namespace : public fiber_bundle_namespace
 {
 
 public:

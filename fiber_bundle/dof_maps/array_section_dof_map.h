@@ -46,7 +46,7 @@ class sec_rep_space;
 class SHEAF_DLL_SPEC array_section_dof_map : public section_dof_map
 {
 
-  friend class fiber_bundles_namespace;
+  friend class fiber_bundle_namespace;
 
 public:
 

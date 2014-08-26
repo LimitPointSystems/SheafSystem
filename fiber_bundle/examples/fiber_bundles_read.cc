@@ -62,7 +62,7 @@ main(int argc, char** argv)
 
   /// @hack prototype instantiation bug.
 
-  fiber_bundles_namespace::initialize_prototypes();
+  fiber_bundle_namespace::initialize_prototypes();
 
   // Make the default namespace
 

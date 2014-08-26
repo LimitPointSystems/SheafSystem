@@ -35,7 +35,7 @@
 
 namespace fiber_bundle
 {
-  class fiber_bundles_namespace;
+  class fiber_bundle_namespace;
   
 //==============================================================================
 // CLASS SEC_E2

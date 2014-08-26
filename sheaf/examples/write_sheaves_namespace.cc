@@ -19,7 +19,7 @@
 /// An example of what a standard namespace might look like.
 
 // NOTE: This example, produces the equivalent namespace to
-//       one obtained by instantiating a sheaves_namespace
+//       one obtained by instantiating a sheaf_namespace
 //       and writing it out.
 
 #include "ComLimitPoint/sheaf/abstract_poset_member.h"
@@ -78,7 +78,7 @@ int main()
 
   // Create the namespace poset and name it.
 
-  ns = new namespace_poset("sheaves_namespace");
+  ns = new namespace_poset("sheaf_namespace");
 
   // Get read-write access to the namespace.
 
@@ -90,7 +90,7 @@ int main()
 
   // Write it to a file.
 
-  storage_agent sa("sheaves_namespace.hdf", sheaf_file::READ_WRITE);
+  storage_agent sa("sheaf_namespace.hdf", sheaf_file::READ_WRITE);
   sa.put_member_record_buffer_ub(15);
   sa.put_dof_tuple_record_buffer_ub(15);
   sa.write_entire(*ns);

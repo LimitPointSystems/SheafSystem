@@ -51,7 +51,7 @@ namespace fiber_bundle
 ///
 class SHEAF_DLL_SPEC gln_space : public poset
 {
-  friend class fiber_bundles_namespace;
+  friend class fiber_bundle_namespace;
 
 public:
 

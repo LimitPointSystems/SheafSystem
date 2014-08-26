@@ -134,7 +134,7 @@ public:
   ///
   /// The type of namespace for this type of member.
   ///
-  typedef fiber_bundles_namespace namespace_type;
+  typedef fiber_bundle_namespace namespace_type;
 
   ///
   /// The type of host poset for this type of member.
@@ -661,7 +661,7 @@ public:
   //   ///
   //   /// The namespace of host()
   //   ///
-  //   virtual fiber_bundles_namespace* name_space();
+  //   virtual fiber_bundle_namespace* name_space();
 
   //   ///
   //   /// True if other conforms to name_space().

@@ -16,7 +16,7 @@
 //
 
 /// @file
-/// Interface for class fiber_bundles_namespace
+/// Interface for class fiber_bundle_namespace
 
 #ifndef COM_LIMITPOINT_FIBER_BUNDLE_FIBER_BUNDLE_NAMESPACE_H
 #define COM_LIMITPOINT_FIBER_BUNDLE_FIBER_BUNDLE_NAMESPACE_H
@@ -50,11 +50,11 @@ class sec_rep_descriptor_poset;
 /// extends the standard sheaves namespace by
 /// defining base space, fiber space and section space schema.
 ///
-class SHEAF_DLL_SPEC fiber_bundles_namespace : public sheaves_namespace
+class SHEAF_DLL_SPEC fiber_bundle_namespace : public sheaf_namespace
 {
 
   // ===========================================================
-  /// @name FIBER_BUNDLES_NAMESPACE FACET
+  /// @name fiber_bundle_namespace FACET
   // ===========================================================
   //@{
 
@@ -63,29 +63,29 @@ public:
   ///
   /// Creates a fiber bundles namespace with name xname.
   ///
-  fiber_bundles_namespace(const std::string& xname);
+  fiber_bundle_namespace(const std::string& xname);
 
   ///
   /// Destructor
   ///
-  virtual ~fiber_bundles_namespace();
+  virtual ~fiber_bundle_namespace();
 
 protected:
 
   ///
   /// Default constructor; creates an unattached handle.
   ///
-  fiber_bundles_namespace();
+  fiber_bundle_namespace();
 
   ///
   /// Covariant constructor.
   ///
-  fiber_bundles_namespace(namespace_poset_member* xtop, namespace_poset_member* xbottom);
+  fiber_bundle_namespace(namespace_poset_member* xtop, namespace_poset_member* xbottom);
 
   ///
   /// Copy constructor; disabled.
   ///
-  fiber_bundles_namespace(const fiber_bundles_namespace& xother) { };
+  fiber_bundle_namespace(const fiber_bundle_namespace& xother) { };
 
 private:
 

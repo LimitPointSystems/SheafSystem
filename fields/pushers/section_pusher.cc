@@ -194,7 +194,7 @@ section_pusher(const field_vd& xsrc, const field_vd& xdst, bool xauto_access)
 //     sec_rep_space_member::standard_section_space_name(lrange_prop_fiber_name,
 // 						      lrange_base_name);
 
-//   fiber_bundles_namespace* lns = dynamic_cast<fiber_bundles_namespace*>(xdst_coords.name_space());
+//   fiber_bundle_namespace* lns = dynamic_cast<fiber_bundle_namespace*>(xdst_coords.name_space());
 
 //   poset_path lsssp(ldomain_schema.fiber_space().path().poset_name() + 
 // 		   "_on_" + 

@@ -191,7 +191,7 @@ invariant() const
 
     // Must satisfy base class invariant
 
-    invariance(fiber_bundles_namespace::invariant());
+    invariance(fiber_bundle_namespace::invariant());
 
     // Invariances for this class:
 

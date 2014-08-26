@@ -61,7 +61,7 @@ class section_dof_map;
 class SHEAF_DLL_SPEC sec_rep_space : public poset_state_handle
 {
   friend class sheaf::namespace_poset; // Qualification needed by g++ 4.2.2
-  friend class fiber_bundles_namespace;
+  friend class fiber_bundle_namespace;
   
   // ===========================================================
   /// @name SEC_REP_SPACE FACET

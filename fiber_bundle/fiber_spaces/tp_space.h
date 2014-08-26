@@ -46,7 +46,7 @@ namespace fiber_bundle
 ///
 class SHEAF_DLL_SPEC tp_space : public vd_space
 {
-  friend class fiber_bundles_namespace;
+  friend class fiber_bundle_namespace;
 
 public:
 

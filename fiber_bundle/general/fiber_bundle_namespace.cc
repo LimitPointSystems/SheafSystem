@@ -16,7 +16,7 @@
 //
 
 /// @file
-/// Implementation for class fiber_bundles_namespace
+/// Implementation for class fiber_bundle_namespace
 
 #include "ComLimitPoint/sheaf/arg_list.h"
 #include "ComLimitPoint/sheaf/assert_contract.h"
@@ -139,13 +139,13 @@ using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 
 // ===========================================================
-// FIBER_BUNDLES_NAMESPACE FACET
+// fiber_bundle_namespace FACET
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
 
-fiber_bundle::fiber_bundles_namespace::
-fiber_bundles_namespace(const std::string& xname)
+fiber_bundle::fiber_bundle_namespace::
+fiber_bundle_namespace(const std::string& xname)
 {
   // Preconditions:
 
@@ -166,8 +166,8 @@ fiber_bundles_namespace(const std::string& xname)
   return;
 }
 
-fiber_bundle::fiber_bundles_namespace::
-~fiber_bundles_namespace()
+fiber_bundle::fiber_bundle_namespace::
+~fiber_bundle_namespace()
 {
   // Preconditions:
 
@@ -187,8 +187,8 @@ fiber_bundle::fiber_bundles_namespace::
 // PROTECTED MEMBER FUNCTIONS
 
 
-fiber_bundle::fiber_bundles_namespace::
-fiber_bundles_namespace()
+fiber_bundle::fiber_bundle_namespace::
+fiber_bundle_namespace()
 {
   // Preconditions:
 
@@ -203,13 +203,13 @@ fiber_bundles_namespace()
   return;
 }
 
-fiber_bundle::fiber_bundles_namespace::
-fiber_bundles_namespace(namespace_poset_member* xtop, namespace_poset_member* xbottom)
-    :  sheaves_namespace(xtop, xbottom)
+fiber_bundle::fiber_bundle_namespace::
+fiber_bundle_namespace(namespace_poset_member* xtop, namespace_poset_member* xbottom)
+    :  sheaf_namespace(xtop, xbottom)
 {
   // Preconditions:
 
-  require(precondition_of(sheaves_namespace(xtop, xbottom)));
+  require(precondition_of(sheaf_namespace(xtop, xbottom)));
 
   // Body:
 
@@ -217,7 +217,7 @@ fiber_bundles_namespace(namespace_poset_member* xtop, namespace_poset_member* xb
 
   // Postconditions:
 
-  ensure(postcondition_of(sheaves_namespace(xtop, xbottom)));
+  ensure(postcondition_of(sheaf_namespace(xtop, xbottom)));
 
   // Exit:
 
@@ -236,7 +236,7 @@ fiber_bundles_namespace(namespace_poset_member* xtop, namespace_poset_member* xb
 // PROTECTED MEMBER FUNCTIONS
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_base_space_definitions()
 {
   // Preconditions:
@@ -265,10 +265,10 @@ make_base_space_definitions()
 }
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_base_space_schema_poset()
 {
-  //  cout << "Entering fiber_bundles_namespace::make_base_space_schema_poset" << endl;
+  //  cout << "Entering fiber_bundle_namespace::make_base_space_schema_poset" << endl;
   
   // Preconditions:
 
@@ -282,7 +282,7 @@ make_base_space_schema_poset()
   string lname = base_space_member::standard_schema_path().poset_name();
   poset_path lschema_path = primitives().schema().path(false);
 
-  poset& lbase_space_schema_poset = poset::new_table(const_cast<fiber_bundles_namespace&>(*this), lname, lschema_path, false);
+  poset& lbase_space_schema_poset = poset::new_table(const_cast<fiber_bundle_namespace&>(*this), lname, lschema_path, false);
 
   lbase_space_schema_poset.get_read_write_access();
 
@@ -312,13 +312,13 @@ make_base_space_schema_poset()
 
   // Exit:
 
-  //  cout << "Leaving fiber_bundles_namespace::make_base_space_schema_poset" << endl;
+  //  cout << "Leaving fiber_bundle_namespace::make_base_space_schema_poset" << endl;
   return;
 }
 
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_base_space_schema_members()
 {
   // Preconditions:
@@ -361,7 +361,7 @@ make_base_space_schema_members()
 }
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_base_space_member_prototypes_poset()
 {
   // Preconditions:
@@ -404,7 +404,7 @@ make_base_space_member_prototypes_poset()
 
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_base_space_member_prototypes(base_space_poset* xspace)
 {
   // Preconditions:
@@ -482,7 +482,7 @@ make_base_space_member_prototypes(base_space_poset* xspace)
 
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_point_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -507,7 +507,7 @@ make_point_prototype(base_space_poset* xspace)
 
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_segment_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -531,7 +531,7 @@ make_segment_prototype(base_space_poset* xspace)
 }
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_segment_complex_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -576,7 +576,7 @@ make_segment_complex_prototype(base_space_poset* xspace)
 
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_triangle_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -599,7 +599,7 @@ make_triangle_prototype(base_space_poset* xspace)
 }
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_triangle_nodes_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -651,7 +651,7 @@ make_triangle_nodes_prototype(base_space_poset* xspace)
 
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_triangle_complex_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -725,7 +725,7 @@ make_triangle_complex_prototype(base_space_poset* xspace)
 }
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_quad_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -751,7 +751,7 @@ make_quad_prototype(base_space_poset* xspace)
 
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_quad_nodes_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -807,7 +807,7 @@ make_quad_nodes_prototype(base_space_poset* xspace)
 }
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_quad_complex_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -894,7 +894,7 @@ make_quad_complex_prototype(base_space_poset* xspace)
 
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_general_polygon_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -918,7 +918,7 @@ make_general_polygon_prototype(base_space_poset* xspace)
 
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_tetra_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -941,7 +941,7 @@ make_tetra_prototype(base_space_poset* xspace)
 }
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_tetra_nodes_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -997,7 +997,7 @@ make_tetra_nodes_prototype(base_space_poset* xspace)
 
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_tetra_complex_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -1129,7 +1129,7 @@ make_tetra_complex_prototype(base_space_poset* xspace)
 
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_hex_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -1152,7 +1152,7 @@ make_hex_prototype(base_space_poset* xspace)
 }
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_hex_nodes_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -1228,7 +1228,7 @@ make_hex_nodes_prototype(base_space_poset* xspace)
 
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_hex_faces_nodes_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -1364,7 +1364,7 @@ make_hex_faces_nodes_prototype(base_space_poset* xspace)
 
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_hex_complex_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -1571,7 +1571,7 @@ make_hex_complex_prototype(base_space_poset* xspace)
 
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_general_polyhedron_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -1594,7 +1594,7 @@ make_general_polyhedron_prototype(base_space_poset* xspace)
 }
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_zone_nodes_block_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -1619,7 +1619,7 @@ make_zone_nodes_block_prototype(base_space_poset* xspace)
 }
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_unstructured_block_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -1645,7 +1645,7 @@ make_unstructured_block_prototype(base_space_poset* xspace)
 
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_structured_block_1d_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -1672,7 +1672,7 @@ make_structured_block_1d_prototype(base_space_poset* xspace)
 
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_structured_block_2d_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -1698,7 +1698,7 @@ make_structured_block_2d_prototype(base_space_poset* xspace)
 }
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_structured_block_3d_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -1726,7 +1726,7 @@ make_structured_block_3d_prototype(base_space_poset* xspace)
 
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_point_block_1d_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -1754,7 +1754,7 @@ make_point_block_1d_prototype(base_space_poset* xspace)
 
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_point_block_2d_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -1782,7 +1782,7 @@ make_point_block_2d_prototype(base_space_poset* xspace)
 
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_point_block_3d_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -1808,7 +1808,7 @@ make_point_block_3d_prototype(base_space_poset* xspace)
 }
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_part_prototype(base_space_poset* xspace)
 {
   // Preconditions:
@@ -1842,7 +1842,7 @@ make_part_prototype(base_space_poset* xspace)
 // PROTECTED MEMBER FUNCTIONS
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_fiber_space_definitions()
 {
   // Preconditions:
@@ -1864,7 +1864,7 @@ make_fiber_space_definitions()
   return;
 }
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_fiber_space_schema_poset()
 {
   // Preconditions:
@@ -1877,7 +1877,7 @@ make_fiber_space_schema_poset()
   string lname = tuple::standard_schema_path().poset_name();
   poset_path lschema_path = primitives().schema().path(false);
 
-  poset* lfiber_space_schema_poset = &poset::new_table(const_cast<fiber_bundles_namespace&>(*this), lname, lschema_path, false);
+  poset* lfiber_space_schema_poset = &poset::new_table(const_cast<fiber_bundle_namespace&>(*this), lname, lschema_path, false);
   lfiber_space_schema_poset->get_read_write_access();
 
   subposet table_dofs(lfiber_space_schema_poset);
@@ -2253,7 +2253,7 @@ make_fiber_space_schema_poset()
 }
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_fiber_space_schema_members()
 {
   // Preconditions:
@@ -2318,7 +2318,7 @@ make_fiber_space_schema_members()
 }
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_fiber_spaces()
 {
   // Preconditions:
@@ -2350,7 +2350,7 @@ make_fiber_spaces()
 // PROTECTED MEMBER FUNCTIONS
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_section_space_definitions()
 {
 
@@ -2380,7 +2380,7 @@ make_section_space_definitions()
 }
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_sec_rep_descriptor_schema_poset()
 {
   // Preconditions:
@@ -2393,7 +2393,7 @@ make_sec_rep_descriptor_schema_poset()
   string lname = sec_rep_descriptor::standard_schema_path().poset_name();
   poset_path lschema_path = primitives().schema().path(false);
   
-  poset* lschema_host = &poset::new_table(const_cast<fiber_bundles_namespace&>(*this), lname, lschema_path, false);
+  poset* lschema_host = &poset::new_table(const_cast<fiber_bundle_namespace&>(*this), lname, lschema_path, false);
   lschema_host->get_read_write_access();
 
   subposet table_dofs(lschema_host);
@@ -2429,7 +2429,7 @@ make_sec_rep_descriptor_schema_poset()
 }
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_sec_rep_descriptor_schema_members()
 {
   // Preconditions:
@@ -2451,7 +2451,7 @@ make_sec_rep_descriptor_schema_members()
 }
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_sec_rep_descriptor_poset()
 {
   // Preconditions:
@@ -2486,7 +2486,7 @@ make_sec_rep_descriptor_poset()
 }
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_sec_rep_descriptors(sec_rep_descriptor_poset* xhost)
 {
   // Preconditions:
@@ -2502,7 +2502,7 @@ make_sec_rep_descriptors(sec_rep_descriptor_poset* xhost)
                      "",
                      "__elements",
                      "dlinear",
-                     "www.lpsweb.com/fiber_bundles/fiber_bundles_namespace.html",
+                     "www.lpsweb.com/fiber_bundles/fiber_bundle_namespace.html",
                      1,
                      true,
                      false);
@@ -2515,7 +2515,7 @@ make_sec_rep_descriptors(sec_rep_descriptor_poset* xhost)
                      "",
                      "__cells",
                      "dlinear",
-                     "www.lpsweb.com/fiber_bundles/fiber_bundles_namespace.html",
+                     "www.lpsweb.com/fiber_bundles/fiber_bundle_namespace.html",
                      1,
                      true,
                      false);
@@ -2526,7 +2526,7 @@ make_sec_rep_descriptors(sec_rep_descriptor_poset* xhost)
                      "",
                      "__elements",
                      "constant",
-                     "www.lpsweb.com/fiber_bundles/fiber_bundles_namespace.html",
+                     "www.lpsweb.com/fiber_bundles/fiber_bundle_namespace.html",
                      1,
                      false,
                      false);
@@ -2537,7 +2537,7 @@ make_sec_rep_descriptors(sec_rep_descriptor_poset* xhost)
                      "",
                      "__blocks",
                      "dlinear",
-                     "www.lpsweb.com/fiber_bundles/fiber_bundles_namespace.html",
+                     "www.lpsweb.com/fiber_bundles/fiber_bundle_namespace.html",
                      1,
                      true,
                      false);
@@ -2548,7 +2548,7 @@ make_sec_rep_descriptors(sec_rep_descriptor_poset* xhost)
                      "",
                      "__blocks",
                      "uniform",
-                     "www.lpsweb.com/fiber_bundles/fiber_bundles_namespace.html",
+                     "www.lpsweb.com/fiber_bundles/fiber_bundle_namespace.html",
                      1,
                      true,
                      false);
@@ -2559,7 +2559,7 @@ make_sec_rep_descriptors(sec_rep_descriptor_poset* xhost)
                      "",
                      "__1_cells",
                      "constant",
-                     "www.lpsweb.com/fiber_bundles/fiber_bundles_namespace.html",
+                     "www.lpsweb.com/fiber_bundles/fiber_bundle_namespace.html",
                      1,
                      false,
                      false);
@@ -2570,7 +2570,7 @@ make_sec_rep_descriptors(sec_rep_descriptor_poset* xhost)
                      "",
                      "__2_cells",
                      "constant",
-                     "www.lpsweb.com/fiber_bundles/fiber_bundles_namespace.html",
+                     "www.lpsweb.com/fiber_bundles/fiber_bundle_namespace.html",
                      1,
                      false,
                      false);
@@ -2581,7 +2581,7 @@ make_sec_rep_descriptors(sec_rep_descriptor_poset* xhost)
                      "",
                      "__1_cells",
                      "dlinear",
-                     "www.lpsweb.com/fiber_bundles/fiber_bundles_namespace.html",
+                     "www.lpsweb.com/fiber_bundles/fiber_bundle_namespace.html",
                      1,
                      true,
                      false);
@@ -2592,7 +2592,7 @@ make_sec_rep_descriptors(sec_rep_descriptor_poset* xhost)
                      "",
                      "__2_cells",
                      "dlinear",
-                     "www.lpsweb.com/fiber_bundles/fiber_bundles_namespace.html",
+                     "www.lpsweb.com/fiber_bundles/fiber_bundle_namespace.html",
                      1,
                      true,
                      false);
@@ -2603,7 +2603,7 @@ make_sec_rep_descriptors(sec_rep_descriptor_poset* xhost)
                      "",
                      "__1_cells",
                      "dlinear",
-                     "www.lpsweb.com/fiber_bundles/fiber_bundles_namespace.html",
+                     "www.lpsweb.com/fiber_bundles/fiber_bundle_namespace.html",
                      1,
                      true,
                      false);
@@ -2614,7 +2614,7 @@ make_sec_rep_descriptors(sec_rep_descriptor_poset* xhost)
                      "",
                      "__2_cells",
                      "dlinear",
-                     "www.lpsweb.com/fiber_bundles/fiber_bundles_namespace.html",
+                     "www.lpsweb.com/fiber_bundles/fiber_bundle_namespace.html",
                      1,
                      true,
                      false);
@@ -2625,7 +2625,7 @@ make_sec_rep_descriptors(sec_rep_descriptor_poset* xhost)
                      "",
                      "__vertices",
                      "dlinear",
-                     "www.lpsweb.com/fiber_bundles/fiber_bundles_namespace.html",
+                     "www.lpsweb.com/fiber_bundles/fiber_bundle_namespace.html",
                      1,
                      false,
                      false);
@@ -2636,7 +2636,7 @@ make_sec_rep_descriptors(sec_rep_descriptor_poset* xhost)
                      "",
                      "__vertices",
                      "dlinear",
-                     "www.lpsweb.com/fiber_bundles/fiber_bundles_namespace.html",
+                     "www.lpsweb.com/fiber_bundles/fiber_bundle_namespace.html",
                      1,
                      false,
                      false);
@@ -2647,7 +2647,7 @@ make_sec_rep_descriptors(sec_rep_descriptor_poset* xhost)
                      "",
                      "__vertices",
                      "constant",
-                     "www.lpsweb.com/fiber_bundles/fiber_bundles_namespace.html",
+                     "www.lpsweb.com/fiber_bundles/fiber_bundle_namespace.html",
                      1,
                      false,
                      false);
@@ -2658,7 +2658,7 @@ make_sec_rep_descriptors(sec_rep_descriptor_poset* xhost)
                      "",
                      "__cells",
                      "constant",
-                     "www.lpsweb.com/fiber_bundles/fiber_bundles_namespace.html",
+                     "www.lpsweb.com/fiber_bundles/fiber_bundle_namespace.html",
                      1,
                      false,
                      false);
@@ -2674,7 +2674,7 @@ make_sec_rep_descriptors(sec_rep_descriptor_poset* xhost)
 }
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_section_space_schema_schema_poset()
 {
   // Preconditions:
@@ -2690,7 +2690,7 @@ make_section_space_schema_schema_poset()
   string lname = section_space_schema_member::standard_schema_path().poset_name();
   poset_path lschema_path = primitives().schema().path(false);
 
-  poset* lschema_host = &poset::new_table(const_cast<fiber_bundles_namespace&>(*this), lname, lschema_path, false);
+  poset* lschema_host = &poset::new_table(const_cast<fiber_bundle_namespace&>(*this), lname, lschema_path, false);
   lschema_host->get_read_write_access();
 
   subposet table_dofs(lschema_host);
@@ -2726,7 +2726,7 @@ make_section_space_schema_schema_poset()
 }
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 make_section_space_schema_schema_members()
 {
   // Preconditions:
@@ -2759,7 +2759,7 @@ make_section_space_schema_schema_members()
 // PROTECTED MEMBER FUNCTIONS
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 link_poset(const namespace_poset_member& xmbr)
 {
   // Preconditions:
@@ -2912,7 +2912,7 @@ link_poset(const namespace_poset_member& xmbr)
 // PUBLIC MEMBER FUNCTIONS
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 initialize_prototypes()
 {
   // Preconditions:
@@ -2932,7 +2932,7 @@ initialize_prototypes()
 }
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 initialize_poset_prototypes()
 {
   // Preconditions:
@@ -2989,7 +2989,7 @@ initialize_poset_prototypes()
 }
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 initialize_crg_interval_prototypes()
 {
   // Preconditions:
@@ -3027,7 +3027,7 @@ initialize_crg_interval_prototypes()
 }
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 initialize_dof_map_prototypes()
 {
   // Preconditions:
@@ -3062,7 +3062,7 @@ initialize_dof_map_prototypes()
 }
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 initialize_id_space_prototypes()
 {
   // Preconditions:
@@ -3105,7 +3105,7 @@ initialize_id_space_prototypes()
 // PROTECTED MEMBER FUNCTIONS
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 virtual_initialize_prototypes()
 {
   // cout << endl << "Entering namespace_poset::virutal_initialize_prototypes." << endl;
@@ -3117,7 +3117,7 @@ virtual_initialize_prototypes()
 
   // Call static version defined in this class.
 
-  fiber_bundles_namespace::initialize_prototypes();
+  fiber_bundle_namespace::initialize_prototypes();
 
   // Postconditions:
 
@@ -3137,14 +3137,14 @@ virtual_initialize_prototypes()
 // PUBLIC MEMBER FUNCTIONS
 
 sheaf::poset_type
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 type_id() const
 {
   return FIBER_BUNDLES_NAMESPACE_ID;
 }
 
 const char*
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 class_name() const
 {
   // Preconditions:
@@ -3152,7 +3152,7 @@ class_name() const
 
   // Body:
 
-  static const char* result = "fiber_bundles_namespace";
+  static const char* result = "fiber_bundle_namespace";
 
   // Postconditions:
 
@@ -3174,7 +3174,7 @@ class_name() const
 // PROTECTED MEMBER FUNCTIONS
 
 void
-fiber_bundle::fiber_bundles_namespace::
+fiber_bundle::fiber_bundle_namespace::
 initialize_additional_members()
 {
   // Preconditions:

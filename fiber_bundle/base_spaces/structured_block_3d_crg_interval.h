@@ -48,7 +48,7 @@ using namespace sheaf;
 class SHEAF_DLL_SPEC structured_block_3d_crg_interval : public homogeneous_block_crg_interval
 {
 
-  friend class fiber_bundles_namespace;
+  friend class fiber_bundle_namespace;
 
   // ===========================================================
   /// @name STRUCTURED_BLOCK_3D_CRG_INTERVAL FACET

@@ -20,8 +20,8 @@
 
 import os, sys
 from fields_python_binding import *
-from fiber_bundles_python_binding import *
-from sheaves_python_binding import *
+from fiber_bundle_python_binding import *
+from sheaf_python_binding import *
 
 TRUE  = 1
 FALSE = 0
@@ -96,7 +96,7 @@ def test_auto_allocated_push():
 
   post_information_message("Entering test_auto_allocated_push")
 
-  lns = fiber_bundles_namespace("section_pusher_1d_t")
+  lns = fiber_bundle_namespace("section_pusher_1d_t")
   lns.get_read_write_access()
 
   ## An 8 element fine mesh on with xmin = -2.0 and xmax = 2.0.

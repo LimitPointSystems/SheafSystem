@@ -41,7 +41,7 @@ namespace fiber_bundle
 {
 
 class sec_tuple_space;
-class fiber_bundles_namespace;  
+class fiber_bundle_namespace;  
   
 //==============================================================================
 // CLASS SEC_TUPLE
@@ -65,7 +65,7 @@ public:
   ///
   /// The type of namespace for this type of member.
   ///
-  typedef fiber_bundles_namespace namespace_type;
+  typedef fiber_bundle_namespace namespace_type;
 
   ///
   /// The type of host poset.

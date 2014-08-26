@@ -25,9 +25,9 @@
 %module geometry_python_binding
 
 %include "sheaf_common_binding_includes.i"
-%include "fiber_bundles_common_binding_includes.i"
-%import  "sheaves_python_binding.i"
-%import  "fiber_bundles_python_binding.i"
+%include "fiber_bundle_common_binding_includes.i"
+%import  "sheaf_python_binding.i"
+%import  "fiber_bundle_python_binding.i"
 
 %include "geometry_common_binding.i"
 

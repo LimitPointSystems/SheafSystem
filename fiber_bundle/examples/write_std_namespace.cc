@@ -19,11 +19,11 @@
 /// An example of what a standard namespace might look like.
 
 // NOTE: This example, produces the equivalent namespace to
-//       one obtained by instantiating a fiber_bundles_namespace
+//       one obtained by instantiating a fiber_bundle_namespace
 //       and using a storage_agent to write it out.  Briefly, the
 //       code would look like this (without error checking):
 //       ...
-//       fiber_bundles_namespace ns("std_namespace");
+//       fiber_bundle_namespace ns("std_namespace");
 //       storage_agent sa("std_namespace.hdf");
 //       sa.write_entire(ns);
 //       ...
@@ -97,7 +97,7 @@ main()
 {
   // Create the namespace poset and name it.
 
-  ns = new sheaves_namespace("std_namespace");
+  ns = new sheaf_namespace("std_namespace");
 
   // Get read-write access to the namespace.
 

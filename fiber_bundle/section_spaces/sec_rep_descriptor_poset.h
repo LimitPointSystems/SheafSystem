@@ -52,7 +52,7 @@ class sec_rep_descriptor;
 class SHEAF_DLL_SPEC sec_rep_descriptor_poset : public poset
 {
   friend class sheaf::namespace_poset; // Qualification needed by g++ 4.2.2
-  friend class fiber_bundles_namespace;
+  friend class fiber_bundle_namespace;
 
   // ===========================================================
   /// @name SEC_REP_DESCRIPTOR_POSET FACET

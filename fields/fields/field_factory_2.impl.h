@@ -506,7 +506,7 @@ namespace fields
 ///
 template <typename base_type>
 void
-make_base_space(fiber_bundles_namespace& xns,
+make_base_space(fiber_bundle_namespace& xns,
                 const poset_path& xbase_path,
                 const wsv_block<int>& xbase_index_ubs,
                 poset_path& xlocal_cell_prototype_path,
@@ -540,7 +540,7 @@ make_base_space(fiber_bundles_namespace& xns,
 ///
 template <>
 void
-make_base_space(fiber_bundles_namespace& xns,
+make_base_space(fiber_bundle_namespace& xns,
                 const poset_path& xbase_path,
                 const wsv_block<int>& xbase_index_ubs,
                 poset_path& xlocal_cell_prototype_path,
@@ -590,7 +590,7 @@ make_base_space(fiber_bundles_namespace& xns,
 ///
 template <>
 void
-make_base_space(fiber_bundles_namespace& xns,
+make_base_space(fiber_bundle_namespace& xns,
                 const poset_path& xbase_path,
                 const wsv_block<int>& xbase_index_ubs,
                 poset_path& xlocal_cell_prototype_path,
@@ -642,7 +642,7 @@ make_base_space(fiber_bundles_namespace& xns,
 ///
 template <>
 void
-make_base_space(fiber_bundles_namespace& xns,
+make_base_space(fiber_bundle_namespace& xns,
                 const poset_path& xbase_path,
                 const wsv_block<int>& xbase_index_ubs,
                 poset_path& xlocal_cell_prototype_path,
@@ -696,7 +696,7 @@ make_base_space(fiber_bundles_namespace& xns,
 ///
 template <>
 void
-make_base_space(fiber_bundles_namespace& xns,
+make_base_space(fiber_bundle_namespace& xns,
                 const poset_path& xbase_path,
                 const wsv_block<int>& xbase_index_ubs,
                 poset_path& xlocal_cell_prototype_path,
@@ -746,7 +746,7 @@ make_base_space(fiber_bundles_namespace& xns,
 ///
 template <>
 void
-make_base_space(fiber_bundles_namespace& xns,
+make_base_space(fiber_bundle_namespace& xns,
                 const poset_path& xbase_path,
                 const wsv_block<int>& xbase_index_ubs,
                 poset_path& xlocal_cell_prototype_path,
@@ -796,7 +796,7 @@ make_base_space(fiber_bundles_namespace& xns,
 ///
 template <>
 void
-make_base_space(fiber_bundles_namespace& xns,
+make_base_space(fiber_bundle_namespace& xns,
                 const poset_path& xbase_path,
                 const wsv_block<int>& xbase_index_ubs,
                 poset_path& xlocal_cell_prototype_path,
@@ -851,7 +851,7 @@ make_base_space(fiber_bundles_namespace& xns,
 ///
 template <>
 void
-make_base_space(fiber_bundles_namespace& xns,
+make_base_space(fiber_bundle_namespace& xns,
                 const poset_path& xbase_path,
                 const wsv_block<int>& xbase_index_ubs,
                 poset_path& xlocal_cell_prototype_path,
@@ -1001,7 +1001,7 @@ field_factory_2<coord_type, prop_type, base_type>::
 template <typename coord_type, typename prop_type, typename base_type>
 typename field_traits<prop_type>::field_type*
 field_factory_2<coord_type, prop_type, base_type>::
-new_field(fiber_bundles_namespace& xns,
+new_field(fiber_bundle_namespace& xns,
           const poset_path& xbase_path,
           const poset_path& xcoord_path,
           const poset_path& xprop_path,
@@ -1129,7 +1129,7 @@ new_field(fiber_bundles_namespace& xns,
 template <typename coord_type, typename prop_type, typename base_type>
 typename field_traits<prop_type>::field_type*
 field_factory_2<coord_type, prop_type, base_type>::
-standard_field(fiber_bundles_namespace& xns,
+standard_field(fiber_bundle_namespace& xns,
 	       const poset_path& xbase_path,
 	       const std::string& xcoord_name,
 	       const std::string& xprop_name,

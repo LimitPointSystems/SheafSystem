@@ -47,7 +47,7 @@ using namespace fields; // Workaround for MS C++ bug.
 
 fields::field_vd*
 fields::body_factory::
-new_1d_unstructured_bodies(fiber_bundles_namespace& xns,
+new_1d_unstructured_bodies(fiber_bundle_namespace& xns,
                            const std::string& xname_prefix)
 {
   // Preconditions:
@@ -88,7 +88,7 @@ new_1d_unstructured_bodies(fiber_bundles_namespace& xns,
 
 fields::field_vd*
 fields::body_factory::
-new_1d_uniform_bodies(fiber_bundles_namespace& xns,
+new_1d_uniform_bodies(fiber_bundle_namespace& xns,
                       const std::string& xname_prefix)
 {
   // Preconditions:
@@ -130,7 +130,7 @@ new_1d_uniform_bodies(fiber_bundles_namespace& xns,
 
 fields::field_vd*
 fields::body_factory::
-new_2d_unstructured_bodies(fiber_bundles_namespace& xns,
+new_2d_unstructured_bodies(fiber_bundle_namespace& xns,
                            const std::string& xname_prefix)
 {
   // Preconditions:
@@ -173,7 +173,7 @@ new_2d_unstructured_bodies(fiber_bundles_namespace& xns,
 
 fields::field_vd*
 fields::body_factory::
-new_2d_uniform_bodies(fiber_bundles_namespace& xns,
+new_2d_uniform_bodies(fiber_bundle_namespace& xns,
                       const std::string& xname_prefix)
 {
   // Preconditions:
@@ -215,7 +215,7 @@ new_2d_uniform_bodies(fiber_bundles_namespace& xns,
 
 fields::field_vd*
 fields::body_factory::
-new_3d_unstructured_bodies(fiber_bundles_namespace& xns,
+new_3d_unstructured_bodies(fiber_bundle_namespace& xns,
                            const std::string& xname_prefix)
 {
   // Preconditions:
@@ -259,7 +259,7 @@ new_3d_unstructured_bodies(fiber_bundles_namespace& xns,
 
 fields::field_vd*
 fields::body_factory::
-new_3d_uniform_bodies(fiber_bundles_namespace& xns,
+new_3d_uniform_bodies(fiber_bundle_namespace& xns,
                       const std::string& xname_prefix)
 {
   // Preconditions:

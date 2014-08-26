@@ -51,7 +51,7 @@ class ij_connectivity_implicit_index_space_iterator;
 class SHEAF_DLL_SPEC ij_connectivity_index_space_interval : public index_space_interval
 {
 
-  friend class fiber_bundles_namespace;
+  friend class fiber_bundle_namespace;
   friend SHEAF_DLL_SPEC size_t deep_size(const ij_connectivity_index_space_interval& xn, bool xinclude_shallow);
 
   // ===========================================================

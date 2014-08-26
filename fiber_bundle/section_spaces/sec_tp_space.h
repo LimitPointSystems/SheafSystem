@@ -52,7 +52,7 @@ class tp;
 ///
 class SHEAF_DLL_SPEC sec_tp_space : public sec_vd_space
 {
-  friend class fiber_bundles_namespace;
+  friend class fiber_bundle_namespace;
 
   // ===========================================================
   /// @name SEC_TP_SPACE FACET

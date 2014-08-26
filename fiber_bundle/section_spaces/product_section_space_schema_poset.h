@@ -54,7 +54,7 @@ class section_space_schema_table_dof_crg_range;
 ///
 class SHEAF_DLL_SPEC product_section_space_schema_poset : public section_space_schema_poset
 {
-  friend class fiber_bundles_namespace;
+  friend class fiber_bundle_namespace;
   friend class ij_product_structure;
   friend class product_section_space_schema_member;
   friend class product_section_space_schema_crg_range;

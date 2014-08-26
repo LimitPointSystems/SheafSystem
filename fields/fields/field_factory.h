@@ -99,7 +99,7 @@ public:
   /// is used.
   ///
   static field_vd*
-  new_scalar_field_1d_points(fiber_bundles_namespace& xns,
+  new_scalar_field_1d_points(fiber_bundle_namespace& xns,
                              const std::string& xname,
                              size_type xi_size,
                              block<sec_vd_value_type>& xlower,
@@ -115,7 +115,7 @@ public:
   /// then field_vd::property_value_function_example is used.
   ///
   static field_vd*
-  new_scalar_field_1d_unstructured(fiber_bundles_namespace& xns,
+  new_scalar_field_1d_unstructured(fiber_bundle_namespace& xns,
                                    const std::string& xname,
                                    size_type xi_size,
                                    block<sec_vd_value_type>& xlower,
@@ -132,7 +132,7 @@ public:
   /// field_vd::property_value_function_example is used.
   ///
   static field_vd*
-  new_scalar_field_1d_uniform(fiber_bundles_namespace& xns,
+  new_scalar_field_1d_uniform(fiber_bundle_namespace& xns,
                               const std::string& xname,
                               size_type xi_size,
                               block<sec_vd_value_type>& xlower,
@@ -149,7 +149,7 @@ public:
   /// is used.
   ///
   static field_vd*
-  new_scalar_field_2d_points(fiber_bundles_namespace& xns,
+  new_scalar_field_2d_points(fiber_bundle_namespace& xns,
                              const std::string& xname,
                              size_type xi_size,
                              size_type xj_size,
@@ -168,7 +168,7 @@ public:
   /// If xfcn == 0, then field_vd::property_value_function_example is used.
   ///
   static field_vd*
-  new_scalar_field_2d_unstructured(fiber_bundles_namespace& xns,
+  new_scalar_field_2d_unstructured(fiber_bundle_namespace& xns,
                                    const std::string& xname,
                                    size_type xi_size,
                                    size_type xj_size,
@@ -190,7 +190,7 @@ public:
   /// is used.
   ///
   static field_vd*
-  new_scalar_field_2d_unstructured(fiber_bundles_namespace& xns,
+  new_scalar_field_2d_unstructured(fiber_bundle_namespace& xns,
                                    const std::string& xname,
                                    size_type xpt_ct,
                                    block<sec_vd_value_type>& xlower,
@@ -208,7 +208,7 @@ public:
   /// If xfcn == 0, then field_vd::property_value_function_example is used.
   ///
   static field_vd*
-  new_scalar_field_2d_uniform(fiber_bundles_namespace& xns,
+  new_scalar_field_2d_uniform(fiber_bundle_namespace& xns,
                               const std::string& xname,
                               size_type xi_size,
                               size_type xj_size,
@@ -227,7 +227,7 @@ public:
   /// is used.
   ///
   static field_vd*
-  new_scalar_field_3d_points(fiber_bundles_namespace& xns,
+  new_scalar_field_3d_points(fiber_bundle_namespace& xns,
                              const std::string& xname,
                              size_type xi_size,
                              size_type xj_size,
@@ -247,7 +247,7 @@ public:
   /// If xfcn == 0, then field_vd::property_value_function_example is used.
   ///
   static field_vd*
-  new_scalar_field_3d_unstructured(fiber_bundles_namespace& xns,
+  new_scalar_field_3d_unstructured(fiber_bundle_namespace& xns,
                                    const std::string& xname,
                                    size_type xi_size,
                                    size_type xj_size,
@@ -270,7 +270,7 @@ public:
   /// is used.
   ///
   static field_vd*
-  new_scalar_field_3d_unstructured(fiber_bundles_namespace& xns,
+  new_scalar_field_3d_unstructured(fiber_bundle_namespace& xns,
                                    const std::string& xname,
                                    size_type xpt_ct,
                                    block<sec_vd_value_type>& xlower,
@@ -288,7 +288,7 @@ public:
   /// If xfcn == 0, then field_vd::property_value_function_example is used.
   ///
   static field_vd*
-  new_scalar_field_3d_uniform(fiber_bundles_namespace& xns,
+  new_scalar_field_3d_uniform(fiber_bundle_namespace& xns,
                               const std::string& xname,
                               size_type xi_size,
                               size_type xj_size,
@@ -315,7 +315,7 @@ public:
   /// Intended mostly for use from Java wrappers.
   ///
   static field_vd*
-  new_scalar_field_1d_uniform(fiber_bundles_namespace& xns,
+  new_scalar_field_1d_uniform(fiber_bundle_namespace& xns,
                               const std::string& xname,
                               size_type xi_size,
                               block<sec_vd_value_type>& xlower,
@@ -329,7 +329,7 @@ public:
   /// Intended mostly for use from Java wrappers.
   ///
   static field_vd*
-  new_scalar_field_1d_unstructured(fiber_bundles_namespace& xns,
+  new_scalar_field_1d_unstructured(fiber_bundle_namespace& xns,
                                    const std::string& xname,
                                    size_type xi_size,
                                    block<sec_vd_value_type>& xlower,
@@ -345,7 +345,7 @@ public:
   /// Intended mostly for use from Java wrappers.
   ///
   static field_vd*
-  new_scalar_field_2d_unstructured(fiber_bundles_namespace& xns,
+  new_scalar_field_2d_unstructured(fiber_bundle_namespace& xns,
                                    const std::string& xname,
                                    size_type xi_size,
                                    size_type xj_size,
@@ -364,7 +364,7 @@ public:
   /// Intended mostly for use from Java wrappers.
   ///
   static field_vd*
-  new_scalar_field_2d_unstructured(fiber_bundles_namespace& xns,
+  new_scalar_field_2d_unstructured(fiber_bundle_namespace& xns,
                                    const std::string& xname,
                                    size_type xpt_ct,
                                    block<sec_vd_value_type>& xlower,
@@ -380,7 +380,7 @@ public:
   /// Intended mostly for use from Java wrappers.
   ///
   static field_vd*
-  new_scalar_field_2d_uniform(fiber_bundles_namespace& xns,
+  new_scalar_field_2d_uniform(fiber_bundle_namespace& xns,
                               const std::string& xname,
                               size_type xi_size,
                               size_type xj_size,
@@ -397,7 +397,7 @@ public:
   /// Intended mostly for use from Java wrappers.
   ///
   static field_vd*
-  new_scalar_field_3d_unstructured(fiber_bundles_namespace& xns,
+  new_scalar_field_3d_unstructured(fiber_bundle_namespace& xns,
                                    const std::string& xname,
                                    size_type xi_size,
                                    size_type xj_size,
@@ -418,7 +418,7 @@ public:
   /// Intended mostly for use from Java wrappers.
   ///
   static field_vd*
-  new_scalar_field_3d_unstructured(fiber_bundles_namespace& xns,
+  new_scalar_field_3d_unstructured(fiber_bundle_namespace& xns,
                                    const std::string& xname,
                                    size_type xpt_ct,
                                    block<sec_vd_value_type>& xlower,
@@ -434,7 +434,7 @@ public:
   /// Intended mostly for use from Java wrappers.
   ///
   static field_vd*
-  new_scalar_field_3d_uniform(fiber_bundles_namespace& xns,
+  new_scalar_field_3d_uniform(fiber_bundle_namespace& xns,
                               const std::string& xname,
                               size_type xi_size,
                               size_type xj_size,
@@ -534,7 +534,7 @@ protected:
   /// Creates 1D cooordinates with bounds xlower and xupper.
   ///
   static sec_e1*
-  new_1d_unstructured_coordinates(fiber_bundles_namespace& xns,
+  new_1d_unstructured_coordinates(fiber_bundle_namespace& xns,
                                   const std::string& xname,
                                   size_type xi_size,
                                   block<sec_vd_value_type>& xlower,
@@ -555,7 +555,7 @@ protected:
   /// Creates 1D uniform coordinates with bounds xlower and xupper.
   ///
   static sec_e1*
-  new_1d_uniform_coordinates(fiber_bundles_namespace& xns,
+  new_1d_uniform_coordinates(fiber_bundle_namespace& xns,
                              const std::string& xname,
                              size_type xi_size,
                              block<sec_vd_value_type>& xlower,
@@ -578,7 +578,7 @@ protected:
   /// Creates 2D cooordinates with bounds xlower and xupper.
   ///
   static sec_e2*
-  new_2d_unstructured_coordinates(fiber_bundles_namespace& xns,
+  new_2d_unstructured_coordinates(fiber_bundle_namespace& xns,
                                   const std::string& xname,
                                   size_type xi_size,
                                   size_type xj_size,
@@ -607,7 +607,7 @@ protected:
   /// xpt_ct points randomly generated in the unit circle.
   ///
   static sec_e2*
-  new_2d_unstructured_coordinates(fiber_bundles_namespace& xns,
+  new_2d_unstructured_coordinates(fiber_bundle_namespace& xns,
                                   const std::string& xname,
                                   size_type xpt_ct,
                                   block<sec_vd_value_type>& xlower,
@@ -628,7 +628,7 @@ protected:
   /// Creates 2D uniform coordinates with bounds xlower and xupper.
   ///
   static sec_e2*
-  new_2d_uniform_coordinates(fiber_bundles_namespace& xns,
+  new_2d_uniform_coordinates(fiber_bundle_namespace& xns,
                              const std::string& xname,
                              size_type xi_size,
                              size_type xj_size,
@@ -654,7 +654,7 @@ protected:
   /// Creates 3D cooordinates with bounds xlower and xupper.
   ///
   static sec_e3*
-  new_3d_unstructured_coordinates(fiber_bundles_namespace& xns,
+  new_3d_unstructured_coordinates(fiber_bundle_namespace& xns,
                                   const std::string& xname,
                                   size_type xi_size,
                                   size_type xj_size,
@@ -685,7 +685,7 @@ protected:
   /// xpt_ct points randomly generated in the unit circle.
   ///
   static sec_e3*
-  new_3d_unstructured_coordinates(fiber_bundles_namespace& xns,
+  new_3d_unstructured_coordinates(fiber_bundle_namespace& xns,
                                   const std::string& xname,
                                   size_type xpt_ct,
                                   block<sec_vd_value_type>& xlower,
@@ -707,7 +707,7 @@ protected:
   /// Creates 3D uniform coordinates with bounds xlower and xupper.
   ///
   static sec_e3*
-  new_3d_uniform_coordinates(fiber_bundles_namespace& xns,
+  new_3d_uniform_coordinates(fiber_bundle_namespace& xns,
                              const std::string& xname,
                              size_type xi_size,
                              size_type xj_size,
@@ -775,7 +775,7 @@ protected:
   /// If xfcn == 0, then field_vd::property_value_function_example is used.
   ///
   static sec_at0*
-  new_property(fiber_bundles_namespace& xns,
+  new_property(fiber_bundle_namespace& xns,
                const std::string& xname,
                base_space_member& xbase_space,
                const poset_path& xrep_path);

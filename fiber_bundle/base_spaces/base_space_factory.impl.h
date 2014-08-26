@@ -93,7 +93,7 @@ base_space_factory<base_type>::
 template <typename base_type>
 base_space_poset*
 base_space_factory<base_type>::
-new_space(fiber_bundles_namespace& xns)
+new_space(fiber_bundle_namespace& xns)
 {
   // Preconditions:
 
@@ -130,7 +130,7 @@ new_space(fiber_bundles_namespace& xns)
 template <typename base_type>
 base_type*
 base_space_factory<base_type>::
-new_base(fiber_bundles_namespace& xns, const poset_path& xbase_path)
+new_base(fiber_bundle_namespace& xns, const poset_path& xbase_path)
 {
   // Preconditions:
 
@@ -159,7 +159,7 @@ new_base(fiber_bundles_namespace& xns, const poset_path& xbase_path)
 template <typename base_type>
 base_type*
 base_space_factory<base_type>::
-new_base(fiber_bundles_namespace& xns, const std::string& xbase_name)
+new_base(fiber_bundle_namespace& xns, const std::string& xbase_name)
 {
   // Preconditions:
 

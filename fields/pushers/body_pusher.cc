@@ -92,7 +92,7 @@ body_pusher(const geometry::sec_ed_invertible& xdomain_coord, const sec_ed& xran
   
   poset_path lschema_path(lschema_poset_name, lschema_name);
 
-  fiber_bundles_namespace& lns = dynamic_cast<fiber_bundles_namespace&>(*_range->name_space());
+  fiber_bundle_namespace& lns = dynamic_cast<fiber_bundle_namespace&>(*_range->name_space());
 
   if(!lns.contains_poset_member(lschema_path, true))
   {

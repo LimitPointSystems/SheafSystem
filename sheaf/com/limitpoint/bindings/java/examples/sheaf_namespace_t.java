@@ -68,7 +68,7 @@ public class sheaves_namespace_t extends base_example
 
     // Make the sheaves namespace.
 
-    sheaves_namespace the_namespace = new sheaves_namespace(className);
+    sheaf_namespace the_namespace = new sheaf_namespace(className);
 
     // Output a text version to stdout.
 

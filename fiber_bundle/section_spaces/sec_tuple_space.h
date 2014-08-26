@@ -44,7 +44,7 @@ using namespace sheaf;
 
 class sec_tuple;
 class tuple;
-class fiber_bundles_namespace;
+class fiber_bundle_namespace;
   
 
 ///
@@ -52,7 +52,7 @@ class fiber_bundles_namespace;
 ///
 class SHEAF_DLL_SPEC sec_tuple_space : public sec_rep_space
 {
-  friend class fiber_bundles_namespace;
+  friend class fiber_bundle_namespace;
 
   // ===========================================================
   /// @name SEC_TUPLE_SPACE FACET
@@ -64,7 +64,7 @@ public:
   ///
   /// The type of namespace for this type of member.
   ///
-  typedef fiber_bundles_namespace namespace_type;
+  typedef fiber_bundle_namespace namespace_type;
 
   ///
   /// The type of member associated with this space.

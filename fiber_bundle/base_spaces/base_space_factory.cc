@@ -49,7 +49,7 @@ template <>
 SHEAF_DLL_SPEC 
 fiber_bundle::structured_block_1d*
 fiber_bundle::base_space_factory<fiber_bundle::structured_block_1d>::
-new_base(fiber_bundles_namespace& xns, const std::string& xbase_name)
+new_base(fiber_bundle_namespace& xns, const std::string& xbase_name)
 {
   // Preconditions:
 
@@ -95,7 +95,7 @@ template <>
 SHEAF_DLL_SPEC 
 fiber_bundle::structured_block_2d*
 fiber_bundle::base_space_factory<fiber_bundle::structured_block_2d>::
-new_base(fiber_bundles_namespace& xns, const std::string& xbase_name)
+new_base(fiber_bundle_namespace& xns, const std::string& xbase_name)
 {
   // Preconditions:
 
@@ -144,7 +144,7 @@ template <>
 SHEAF_DLL_SPEC 
 fiber_bundle::structured_block_3d*
 fiber_bundle::base_space_factory<fiber_bundle::structured_block_3d>::
-new_base(fiber_bundles_namespace& xns, const std::string& xbase_name)
+new_base(fiber_bundle_namespace& xns, const std::string& xbase_name)
 {
   // Preconditions:
 
@@ -193,7 +193,7 @@ template <>
 SHEAF_DLL_SPEC 
 fiber_bundle::point_block_1d*
 fiber_bundle::base_space_factory<fiber_bundle::point_block_1d>::
-new_base(fiber_bundles_namespace& xns, const std::string& xbase_name)
+new_base(fiber_bundle_namespace& xns, const std::string& xbase_name)
 {
   // Preconditions:
 
@@ -237,7 +237,7 @@ template <>
 SHEAF_DLL_SPEC 
 fiber_bundle::point_block_2d*
 fiber_bundle::base_space_factory<fiber_bundle::point_block_2d>::
-new_base(fiber_bundles_namespace& xns, const std::string& xbase_name)
+new_base(fiber_bundle_namespace& xns, const std::string& xbase_name)
 {
   // Preconditions:
 
@@ -281,7 +281,7 @@ template <>
 SHEAF_DLL_SPEC 
 fiber_bundle::point_block_3d*
 fiber_bundle::base_space_factory<fiber_bundle::point_block_3d>::
-new_base(fiber_bundles_namespace& xns, const std::string& xbase_name)
+new_base(fiber_bundle_namespace& xns, const std::string& xbase_name)
 {
   // Preconditions:
 
@@ -329,7 +329,7 @@ template <>
 SHEAF_DLL_SPEC 
 fiber_bundle::base_space_poset*
 fiber_bundle::base_space_factory<fiber_bundle::zone_nodes_block>::
-new_space(fiber_bundles_namespace& xns)
+new_space(fiber_bundle_namespace& xns)
 {
   // Preconditions:
 
@@ -369,7 +369,7 @@ template <>
 SHEAF_DLL_SPEC 
 fiber_bundle::zone_nodes_block*
 fiber_bundle::base_space_factory<fiber_bundle::zone_nodes_block>::
-new_base(fiber_bundles_namespace& xns, const std::string& xbase_name)
+new_base(fiber_bundle_namespace& xns, const std::string& xbase_name)
 {
   // Preconditions:
 
@@ -455,7 +455,7 @@ template <>
 SHEAF_DLL_SPEC 
 fiber_bundle::base_space_poset*
 fiber_bundle::base_space_factory<fiber_bundle::unstructured_block>::
-new_space(fiber_bundles_namespace& xns)
+new_space(fiber_bundle_namespace& xns)
 {
   // Preconditions:
 
@@ -495,7 +495,7 @@ template <>
 SHEAF_DLL_SPEC 
 fiber_bundle::unstructured_block*
 fiber_bundle::base_space_factory<fiber_bundle::unstructured_block>::
-new_base(fiber_bundles_namespace& xns, const std::string& xbase_name)
+new_base(fiber_bundle_namespace& xns, const std::string& xbase_name)
 {
   // Preconditions:
 

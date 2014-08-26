@@ -226,7 +226,7 @@ namespace fiber_bundle
 class point_block_1d;
 class point_block_2d;
 class point_block_3d;
-class fiber_bundles_namespace;
+class fiber_bundle_namespace;
 class structured_block_1d;
 class structured_block_2d;
 class structured_block_3d;
@@ -276,7 +276,7 @@ public:
   /// specified by xprop_path. Note that poset names specified
   /// by xcoord_path and xprop_path must exist and be accessible..
   ///
-  field_type* new_field(fiber_bundles_namespace& xns,
+  field_type* new_field(fiber_bundle_namespace& xns,
                         const poset_path& xbase_path,
                         const poset_path& xcoord_path,
                         const poset_path& xprop_path,
@@ -288,7 +288,7 @@ public:
   /// Standard section space hosts will be used for the coordinate
   /// and property sections.
   ///
-  field_type* standard_field(fiber_bundles_namespace& xns,
+  field_type* standard_field(fiber_bundle_namespace& xns,
 			     const poset_path& xbase_path,
 			     const std::string& xcoord_name,
 			     const std::string& xprop_name,
@@ -474,7 +474,7 @@ private:
 template <typename base_type>
 SHEAF_DLL_SPEC
 void
-make_base_space(fiber_bundles_namespace& xns,
+make_base_space(fiber_bundle_namespace& xns,
                 const poset_path& xbase_path,
                 const wsv_block<int>& xbase_index_ubs,
                 poset_path& xlocal_cell_prototype_path,
@@ -483,7 +483,7 @@ make_base_space(fiber_bundles_namespace& xns,
 template <>
 SHEAF_DLL_SPEC
 void
-make_base_space(fiber_bundles_namespace& xns,
+make_base_space(fiber_bundle_namespace& xns,
                 const poset_path& xbase_path,
                 const wsv_block<int>& xbase_index_ubs,
                 poset_path& xlocal_cell_prototype_path,
@@ -492,7 +492,7 @@ make_base_space(fiber_bundles_namespace& xns,
 template <>
 SHEAF_DLL_SPEC
 void
-make_base_space(fiber_bundles_namespace& xns,
+make_base_space(fiber_bundle_namespace& xns,
                 const poset_path& xbase_path,
                 const wsv_block<int>& xbase_index_ubs,
                 poset_path& xlocal_cell_prototype_path,
@@ -501,7 +501,7 @@ make_base_space(fiber_bundles_namespace& xns,
 template <>
 SHEAF_DLL_SPEC
 void
-make_base_space(fiber_bundles_namespace& xns,
+make_base_space(fiber_bundle_namespace& xns,
                 const poset_path& xbase_path,
                 const wsv_block<int>& xbase_index_ubs,
                 poset_path& xlocal_cell_prototype_path,
@@ -510,7 +510,7 @@ make_base_space(fiber_bundles_namespace& xns,
 template <>
 SHEAF_DLL_SPEC
 void
-make_base_space(fiber_bundles_namespace& xns,
+make_base_space(fiber_bundle_namespace& xns,
                 const poset_path& xbase_path,
                 const wsv_block<int>& xbase_index_ubs,
                 poset_path& xlocal_cell_prototype_path,
@@ -519,7 +519,7 @@ make_base_space(fiber_bundles_namespace& xns,
 template <>
 SHEAF_DLL_SPEC
 void
-make_base_space(fiber_bundles_namespace& xns,
+make_base_space(fiber_bundle_namespace& xns,
                 const poset_path& xbase_path,
                 const wsv_block<int>& xbase_index_ubs,
                 poset_path& xlocal_cell_prototype_path,
@@ -528,7 +528,7 @@ make_base_space(fiber_bundles_namespace& xns,
 template <>
 SHEAF_DLL_SPEC
 void
-make_base_space(fiber_bundles_namespace& xns,
+make_base_space(fiber_bundle_namespace& xns,
                 const poset_path& xbase_path,
                 const wsv_block<int>& xbase_index_ubs,
                 poset_path& xlocal_cell_prototype_path,
@@ -537,7 +537,7 @@ make_base_space(fiber_bundles_namespace& xns,
 template <>
 SHEAF_DLL_SPEC
 void
-make_base_space(fiber_bundles_namespace& xns,
+make_base_space(fiber_bundle_namespace& xns,
                 const poset_path& xbase_path,
                 const wsv_block<int>& xbase_index_ubs,
                 poset_path& xlocal_cell_prototype_path,

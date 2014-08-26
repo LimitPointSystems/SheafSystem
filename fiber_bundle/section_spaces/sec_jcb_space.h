@@ -52,7 +52,7 @@ class jcb;
 ///
 class SHEAF_DLL_SPEC sec_jcb_space : public sec_vd_space
 {
-  friend class fiber_bundles_namespace;
+  friend class fiber_bundle_namespace;
 
   // ===========================================================
   /// @name SEC_JCB_SPACE FACET

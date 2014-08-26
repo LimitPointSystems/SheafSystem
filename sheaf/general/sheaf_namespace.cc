@@ -15,7 +15,7 @@
 // limitations under the License.
 //
 
-// Implementation for class sheaves_namespace
+// Implementation for class sheaf_namespace
 
 #include "ComLimitPoint/sheaf/abstract_poset_member.h"
 #include "ComLimitPoint/sheaf/arg_list.h"
@@ -31,13 +31,13 @@
 #include "ComLimitPoint/sheaf/refinable_poset.h"
 
 // ===========================================================
-// SHEAVES_NAMESPACE FACET
+// sheaf_namespace FACET
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
 
-sheaf::sheaves_namespace::
-sheaves_namespace(const std::string& xname)
+sheaf::sheaf_namespace::
+sheaf_namespace(const std::string& xname)
     : namespace_poset(xname)
 {
   // Preconditions:
@@ -77,8 +77,8 @@ sheaves_namespace(const std::string& xname)
 }
 
 ///
-sheaf::sheaves_namespace::
-~sheaves_namespace()
+sheaf::sheaf_namespace::
+~sheaf_namespace()
 {
 
   // Preconditions:
@@ -92,8 +92,8 @@ sheaf::sheaves_namespace::
 
 ///
 void
-sheaf::sheaves_namespace::
-make_triangle(sheaves_namespace* xns)
+sheaf::sheaf_namespace::
+make_triangle(sheaf_namespace* xns)
 {
   // Preconditions:
 
@@ -201,8 +201,8 @@ make_triangle(sheaves_namespace* xns)
 // PROTECTED MEMBER FUNCTIONS
 
 ///
-sheaf::sheaves_namespace::
-sheaves_namespace()
+sheaf::sheaf_namespace::
+sheaf_namespace()
 {
   // Preconditions:
 
@@ -219,8 +219,8 @@ sheaves_namespace()
 }
 
 ///
-sheaf::sheaves_namespace::
-sheaves_namespace(namespace_poset_member* xtop, namespace_poset_member* xbottom)
+sheaf::sheaf_namespace::
+sheaf_namespace(namespace_poset_member* xtop, namespace_poset_member* xbottom)
     :  namespace_poset(xtop, xbottom)
 {
   // Preconditions:
@@ -252,7 +252,7 @@ sheaves_namespace(namespace_poset_member* xtop, namespace_poset_member* xbottom)
 
 ///
 sheaf::poset_type
-sheaf::sheaves_namespace::
+sheaf::sheaf_namespace::
 type_id() const
 {
   return SHEAVES_NAMESPACE_ID;
@@ -260,7 +260,7 @@ type_id() const
 
 ///
 const char*
-sheaf::sheaves_namespace::
+sheaf::sheaf_namespace::
 class_name() const
 {
   // Preconditions:
@@ -268,7 +268,7 @@ class_name() const
 
   // Body:
 
-  static const char* result = "sheaves_namespace";
+  static const char* result = "sheaf_namespace";
 
   // Postconditions:
 

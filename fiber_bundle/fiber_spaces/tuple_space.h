@@ -43,7 +43,7 @@ namespace fiber_bundle
 
   using namespace sheaf;  
 
-  class fiber_bundles_namespace;
+  class fiber_bundle_namespace;
   class tuple;
   
 ///
@@ -51,7 +51,7 @@ namespace fiber_bundle
 ///
 class SHEAF_DLL_SPEC tuple_space : public poset
 {
-  friend class fiber_bundles_namespace;
+  friend class fiber_bundle_namespace;
 
   // ===========================================================
   /// @name TUPLE_SPACE FACET
@@ -63,7 +63,7 @@ public:
   ///
   /// The type of namespace for this type of member.
   ///
-  typedef fiber_bundles_namespace namespace_type;
+  typedef fiber_bundle_namespace namespace_type;
 
   ///
   /// The type of member associated with this space.

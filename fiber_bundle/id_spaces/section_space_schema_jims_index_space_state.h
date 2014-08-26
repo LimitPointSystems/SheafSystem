@@ -54,7 +54,7 @@ class section_space_schema_jims_index_space_iterator;
 class SHEAF_DLL_SPEC section_space_schema_jims_index_space_state : public explicit_index_space_state
 {
 
-  friend class fiber_bundles_namespace;
+  friend class fiber_bundle_namespace;
 
   // ===========================================================
   /// @name SPACE FACTORY FACET

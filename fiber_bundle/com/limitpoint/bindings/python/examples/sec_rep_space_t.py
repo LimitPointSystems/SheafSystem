@@ -453,7 +453,7 @@ def main():
     ## Make the default namespace
 
     global test_namespace
-    test_namespace = sheaves_namespace("sec_rep_space_t")
+    test_namespace = sheaf_namespace("sec_rep_space_t")
     
     make_fiber_schema()
 
