@@ -19,7 +19,7 @@
 // Class base_client
 //
 
-package bindings.java;
+package com.limitpoint.bindings.java;
 
 public class base_client
 {

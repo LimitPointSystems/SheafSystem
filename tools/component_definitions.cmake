@@ -38,13 +38,23 @@ execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/i
 #
 # Define the clusters for this component.
 #
+#if(BUILD_SHEAFSCOPE)
+#    set(clusters SheafScope common/client_server common/event common/gui common/util 
+#        util viewer/animation viewer/common viewer/event viewer/render viewer/table 
+#        viewer/user viewer/application)
+#else()
+#    set(clusters util)#
+#endif()
+
 if(BUILD_SHEAFSCOPE)
-    set(clusters SheafScope common/client_server common/event common/gui common/util 
-        util viewer/animation viewer/common viewer/event viewer/render viewer/table 
-        viewer/user viewer/application)
+    set(clusters com/limitpoint/tools/SheafScope com/limitpoint/tools/common/client_server com/limitpoint/tools/common/event 
+        com/limitpoint/tools/common/gui com/limitpoint/tools/common/util 
+        com/limitpoint/tools/util com/limitpoint/tools/viewer/animation com/limitpoint/tools/viewer/common 
+        com/limitpoint/tools/viewer/event com/limitpoint/tools/viewer/render com/limitpoint/tools/viewer/table 
+        com/limitpoint/tools/viewer/user com/limitpoint/tools/viewer/application)
 else()
-    set(clusters util)
-endif()    
+    set(clusters com/limitpoint/tools/util)
+endif()      
 #
 # Initialize all variables for this component.
 #
@@ -107,18 +117,6 @@ set(${COMPONENT}_PYTHON_BINDING_LIBS ${FIELDS_PYTHON_BINDING_LIBS}
     ${${COMPONENT}_PYTHON_BINDING_LIB} 
     CACHE STRING " Cumulative Python binding libraries for ${PROJECT_NAME}" FORCE)
 
-#
-# Set the cumulative include path for this component.
-#
-#set(${COMPONENT}_IPATHS ${FIELDS_IPATHS} ${${COMPONENT}_IPATH} 
-#    ${VTK_INCLUDE_DIRS} 
-#    ${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2} ${TETGEN_INC_DIR} 
-#    CACHE STRING " Cumulative include paths for ${PROJECT_NAME}")
-
-#
-# Specify component prerequisite include directories.
-#
-include_directories(${${COMPONENT}_IPATHS})
 
 #------------------------------------------------------------------------------
 # FUNCTION DEFINITION SECTION
@@ -370,7 +368,7 @@ function(add_bindings_targets)
 
                      COMMAND ${CMAKE_COMMAND} -E echo "Creating jar file..."
                      COMMAND ${Java_JAR_EXECUTABLE} cvmf 
-                         ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/SheafScope/manifest.txt 
+                         ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/com/limitpoint/tools/SheafScope/manifest.txt 
                          ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CMAKE_CFG_INTDIR}/SheafScope.jar  
                          -C ${LIB_JAR_DIR} .
                   )
@@ -498,7 +496,7 @@ endfunction(add_install_target)
 
 function(add_dumpsheaf_target)
 
-    add_executable(dumpsheaf ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/util/dumpsheaf.cc)
+    add_executable(dumpsheaf ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/com/limitpoint/tools/util/dumpsheaf.cc)
     
     # Make sure the library is up to date
     if(WIN64MSVC OR WIN64INTEL)
@@ -518,7 +516,7 @@ endfunction(add_dumpsheaf_target)
 
 function(add_sheafscope_wrapper_target)
 
-    add_executable(sheafscope ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/util/SheafScope.cc)
+    add_executable(sheafscope ${CMAKE_SOURCE_DIR}/${PROJECT_NAME}/com/limitpoint/tools/util/SheafScope.cc)
     
     # Make sure the library is up to date
     if(WIN64MSVC OR WIN64INTEL)

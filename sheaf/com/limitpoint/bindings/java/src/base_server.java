@@ -19,7 +19,7 @@
 // Class base_client
 //
 
-package bindings.java;
+package com.limitpoint.bindings.java;
 
 import java.rmi.registry.Registry;
 import java.rmi.registry.LocateRegistry;

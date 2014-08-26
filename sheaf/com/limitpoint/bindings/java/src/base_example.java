@@ -19,7 +19,7 @@
 // Class base_example
 //
 
-package bindings.java;
+package com.limitpoint.bindings.java;
 
 public class base_example
 {
