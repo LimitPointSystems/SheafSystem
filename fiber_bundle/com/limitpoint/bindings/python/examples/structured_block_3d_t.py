@@ -4,8 +4,8 @@
 ## Copyright (c) 2014 Limit Point Systems, Inc.
 ##
 
-from sheaves_python_binding import *
-from fiber_bundles_python_binding import *
+from sheaf_python_binding import *
+from fiber_bundle_python_binding import *
 import os
 
 TRUE = 1

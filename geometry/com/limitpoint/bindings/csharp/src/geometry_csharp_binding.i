@@ -24,5 +24,5 @@
 
 %module geometry_csharp_binding
 
-%include "fiber_bundles_csharp_binding.i"
+%include "fiber_bundle_csharp_binding.i"
 %include "geometry_common_binding.i"

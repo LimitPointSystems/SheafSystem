@@ -21,14 +21,14 @@
 
 // Set the module name according to the LPS formula.
 
-%module fiber_bundles_python_binding
+%module fiber_bundle_python_binding
 
 //=============================================================================
 
 %include "sheaf_common_binding_includes.i"
-%import  "sheaves_python_binding.i"
+%import  "sheaf_python_binding.i"
 
-%include "fiber_bundles_common_binding.i"
+%include "fiber_bundle_common_binding.i"
 
 //=============================================================================
 
@@ -48,7 +48,7 @@
 
 //$$HACK: The python bindings need to have some way to include the
 //        ".h" files from some of the sheaves classes that are not
-//        included anywhere in fiber_bundles.  So we just list them
+//        included anywhere in fiber_bundle.  So we just list them
 //        here until we find a better way to do this.         
 
 // %{

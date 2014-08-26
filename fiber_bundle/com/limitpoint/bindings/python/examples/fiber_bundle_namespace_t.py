@@ -6,8 +6,8 @@
 
 ##$$TODO: Figure out how to combine these.
 
-from sheaves_python_binding import *
-from fiber_bundles_python_binding import *
+from sheaf_python_binding import *
+from fiber_bundle_python_binding import *
 
 ## Make the sheaves namespace.
 

@@ -21,7 +21,7 @@
 
 // Set the module name according to the LPS formula.
 
-%module fiber_bundles_csharp_binding
+%module fiber_bundle_csharp_binding
 
 //=============================================================================
 // Ignore directives:
@@ -33,7 +33,7 @@
 
 //=============================================================================
 
-%include "sheaves_csharp_binding.i"
-%include "fiber_bundles_common_binding.i"
+%include "sheaf_csharp_binding.i"
+%include "fiber_bundle_common_binding.i"
 
 //=============================================================================

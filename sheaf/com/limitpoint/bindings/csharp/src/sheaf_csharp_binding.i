@@ -24,7 +24,7 @@
 
 // Set the module name according to the LPS formula.
 
-%module sheaves_csharp_binding
+%module sheaf_csharp_binding
 
 //=============================================================================
 
@@ -56,7 +56,7 @@
 
 //=============================================================================
 
-%include "sheaves_common_binding.i"
+%include "sheaf_common_binding.i  "
 
 //=============================================================================
 
