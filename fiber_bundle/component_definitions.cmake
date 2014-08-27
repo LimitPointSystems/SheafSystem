@@ -167,9 +167,9 @@ function(add_library_targets)
             ${${COMPONENT}_STATIC_LIBS})
     
         target_link_libraries(${${COMPONENT}_SHARED_LIB} 
-            ${${COMPONENT}_SHARED_LIBS})
+            ${SHEAF_SHARED_LIBS})
         target_link_libraries(${${COMPONENT}_STATIC_LIB} 
-            ${${COMPONENT}_STATIC_LIBS})
+            ${SHEAF_STATIC_LIBS})
 
     endif()
 

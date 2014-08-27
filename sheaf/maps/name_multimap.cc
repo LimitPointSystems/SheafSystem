@@ -20,7 +20,7 @@
 
 #include "ComLimitPoint/sheaf/name_multimap.h"
 
-#include "ComLimitPoint/Sheaf/sheaf_dll_spec.h"
+#include "ComLimitPoint/sheaf/sheaf_dll_spec.h"
 #include "ComLimitPoint/sheaf/assert_contract.h"
 #include "ComLimitPoint/sheaf/deep_size.h"
 
