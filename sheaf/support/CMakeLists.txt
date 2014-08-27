@@ -21,7 +21,7 @@
 set(CLUSTER ${CMAKE_CURRENT_BINARY_DIR})
 
 configure_file(singly_linked_list.h.in ${CMAKE_BINARY_DIR}/include/${LPS_ID}/sheaf/singly_linked_list.h)
-install(FILES ${CMAKE_BINARY_DIR}/include/{LPS_ID}/sheaf/isingly_linked_list.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include${LPS_ID}/sheaf/)
+install(FILES ${CMAKE_BINARY_DIR}/include/${LPS_ID}/sheaf/singly_linked_list.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include${LPS_ID}/sheaf/)
 
 #
 # Library sources.

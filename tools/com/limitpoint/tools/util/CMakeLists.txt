@@ -33,7 +33,7 @@ collect_sources()
 # Headers that are NOT associated with a .cc file.
 #
 if(BUILD_SHEAFSCOPE)
-    configure_file(lps_environment.h.cmake.in ${CMAKE_BINARY_DIR}/include/ComLimitPoint/tools/lps_environment.h)
+    configure_file(lps_environment.h.in ${CMAKE_BINARY_DIR}/include/ComLimitPoint/tools/util/lps_environment.h)
     set(ADDITIONAL_INCS
         lps_environment.h
          )
