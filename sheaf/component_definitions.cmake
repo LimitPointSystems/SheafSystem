@@ -62,51 +62,11 @@ add_clusters("${clusters}")
 set(NAME_SPACE sheaf CACHE STRING "C++ namespace for this project" FORCE)
 
 #
-# We don't have to use this decision structure. Windows and linux will ignore the 
-# other's lib vars. Just keeps things tidy in the CMake GUI.
-#
-if(WIN64INTEL OR WIN64MSVC)
-    #
-    # Set the cumulative import library (win32) var for this component.
-    #
-    set(${COMPONENT}_IMPORT_LIBS ${${COMPONENT}_IMPORT_LIB}  CACHE 
-        STRING " Cumulative import libraries (win32) for ${PROJECT_NAME}" FORCE)
-else()
-    #
-    # Set the cumulative static library var for this component.
-    #
-    set(${COMPONENT}_STATIC_LIBS ${${COMPONENT}_STATIC_LIB} CACHE 
-        STRING " Cumulative static libraries for ${PROJECT_NAME}" FORCE)   
-    #
-    # Set the cumulative shared library var for this component.
-    #
-    set(${COMPONENT}_SHARED_LIBS ${${COMPONENT}_SHARED_LIB} CACHE 
-        STRING " Cumulative shared libraries for ${PROJECT_NAME}" FORCE)
-endif()
-
-#
-# Set the cumulative Java binding library var for this component.
-#
-set(${COMPONENT}_JAVA_BINDING_LIBS 
-    ${${COMPONENT}_JAVA_BINDING_LIB} 
-    CACHE STRING " Cumulative Java binding libraries for ${PROJECT_NAME}" 
-    FORCE)
-
-#
 # Set the cumulative Java binding jar variable for this component.
 #
 set(${COMPONENT}_JAVA_BINDING_JARS ${PROJECT_NAME}_java_binding.jar 
     CACHE STRING "Cumulative Java bindings jars for ${PROJECT_NAME}")
 
-#
-# Set the cumulative Python binding library var for this component.
-#
-set(${COMPONENT}_PYTHON_BINDING_LIBS 
-    ${${COMPONENT}_PYTHON_BINDING_LIB} 
-    CACHE STRING " Cumulative Python binding libraries for ${PROJECT_NAME}" 
-    FORCE)
-   
-#
 # Configure the STD header files
 #
 configure_std_headers()

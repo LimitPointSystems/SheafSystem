@@ -46,6 +46,9 @@ cmake_minimum_required(VERSION 2.8.12)
 #
 include(system_definitions.cmake)
 
+
+
+
 #
 # Add components to the system
 #
@@ -71,7 +74,14 @@ if(INSTALL_DOCS)
     install_docs()
 endif()    
 
-
+#
+# Write this component's lib targets and include paths to an export file.
+#
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+             "set(SHEAFSYSTEM_LIB_DIR ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} CACHE STRING \"${PROJECT_NAME} library output directory\")\n")
+         # Mark the variable as advanced           
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE SHEAFSYSTEM_LIB_DIR)\n")         
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
 #export_libs()
 #
 # Export this component's library targets and list of includes for install

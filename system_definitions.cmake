@@ -61,6 +61,11 @@ mark_as_advanced(JAVA_BINDINGS_PKG)
 set(COMPONENTS sheaf fiber_bundle geometry fields tools CACHE STRING "List of components in this system" FORCE)
 
 #
+# Comvert the project name to UC
+#
+string(TOUPPER ${PROJECT_NAME} COMPONENT)
+
+#
 # Create a unique identifier for this as an  LPS project
 #
 set(LPS_ID ComLimitPoint CACHE STRING "Unique Identifier for this as an LPS project" FORCE)
@@ -539,3 +544,4 @@ macro(get_date RESULT)
         set(${RESULT} 000000)
     endif(WIN32)
 endmacro(get_date)	
+

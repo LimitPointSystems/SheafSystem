@@ -51,44 +51,14 @@ add_clusters("${clusters}")
 
 if(WIN64INTEL OR WIN64MSVC)
 
-    #
-    # Set the cumulative import library (win32) var for this component.
-    #
-    set(${COMPONENT}_IMPORT_LIBS ${GEOMETRY_IMPORT_LIBS} 
-        ${${COMPONENT}_IMPORT_LIB} 
-        CACHE STRING " Cumulative import libraries (win32) for ${PROJECT_NAME}" FORCE)
-
     # Add a Win32 "lib" target
     # Doing it here makes it a synonym for "Fields", but abstracts away
     # the component hierarchy.
     add_custom_target(lib)
-    add_dependencies(lib ${${COMPONENT}_IMPORT_LIBS})
+    add_dependencies(lib ${${COMPONENT}_IMPORT_LIB})
     set_target_properties(lib PROPERTIES FOLDER "Library Targets")    
-
-else()
-
-    #
-    # Set the cumulative shared library var for this component.
-    #
-    set(${COMPONENT}_STATIC_LIBS ${GEOMETRY_STATIC_LIBS} 
-        ${${COMPONENT}_STATIC_LIB} 
-        CACHE STRING " Cumulative static libraries for ${PROJECT_NAME}" FORCE)
-    
-    #
-    # Set the cumulative shared library var for this component.
-    #
-    set(${COMPONENT}_SHARED_LIBS ${GEOMETRY_SHARED_LIBS}     
-        ${${COMPONENT}_SHARED_LIB} 
-        CACHE STRING " Cumulative shared libraries for ${PROJECT_NAME}" FORCE)
     
 endif()
-
-#
-# Set the cumulative Java binding library var for this component.
-#
-set(${COMPONENT}_JAVA_BINDING_LIBS ${GEOMETRY_JAVA_BINDING_LIBS} 
-    ${${COMPONENT}_JAVA_BINDING_LIB} 
-    CACHE STRING " Cumulative Java binding libraries for ${PROJECT_NAME}" FORCE)
 
 #
 # Set the cumulative Java binding jar variable for this component.
@@ -96,13 +66,6 @@ set(${COMPONENT}_JAVA_BINDING_LIBS ${GEOMETRY_JAVA_BINDING_LIBS}
 set(${COMPONENT}_JAVA_BINDING_JARS ${GEOMETRY_JAVA_BINDING_JARS} 
     ${PROJECT_NAME}_java_binding.jar 
     CACHE STRING "Cumulative Java bindings jars for ${PROJECT_NAME}")
-
-#
-# Set the cumulative Python binding library var for this component.
-#
-set(${COMPONENT}_PYTHON_BINDING_LIBS ${GEOMETRY_PYTHON_BINDING_LIBS} 
-    ${${COMPONENT}_PYTHON_BINDING_LIB} 
-    CACHE STRING " Cumulative Python binding libraries for ${PROJECT_NAME}" FORCE)
 
 #include_directories(${TETGEN_INC_DIR})
 
@@ -121,8 +84,8 @@ function(add_library_targets)
     
         add_library(${${COMPONENT}_DYNAMIC_LIB} SHARED ${${COMPONENT}_SRCS})
 
-        add_dependencies(${${COMPONENT}_DYNAMIC_LIB} ${GEOMETRY_IMPORT_LIBS})
-        target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${GEOMETRY_IMPORT_LIBS} )        
+        add_dependencies(${${COMPONENT}_DYNAMIC_LIB} ${GEOMETRY_IMPORT_LIB})
+        target_link_libraries(${${COMPONENT}_DYNAMIC_LIB} ${GEOMETRY_IMPORT_LIB} )        
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")   
         # Override cmake's placing of "${COMPONENT_LIB}_EXPORTS into the preproc symbol table.
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} 
