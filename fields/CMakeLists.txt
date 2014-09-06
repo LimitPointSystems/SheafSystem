@@ -54,4 +54,4 @@ write_exports_file()
 #
 # Prepare this component's lib targets and include paths for export to an install config file.
 #
-export_install_config_file_vars()
+#export_install_config_file_vars()

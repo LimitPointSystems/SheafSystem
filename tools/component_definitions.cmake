@@ -25,26 +25,13 @@
 include(${CMAKE_MODULE_PATH}/component_functions.cmake)
 
 #
-# The current namespace
-# The namespace should be ${COMPONENTS), but force it to remove all doubt.
-#
-set(NAME_SPACE tools CACHE STRING "C++ namespace for this project" FORCE)
-
-#
 # Create the build/include folder
 #
-execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${NAME_SPACE})
+execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${PROJECT_NAME})
 
 #
 # Define the clusters for this component.
 #
-#if(BUILD_SHEAFSCOPE)
-#    set(clusters SheafScope common/client_server common/event common/gui common/util 
-#        util viewer/animation viewer/common viewer/event viewer/render viewer/table 
-#        viewer/user viewer/application)
-#else()
-#    set(clusters util)#
-#endif()
 
 if(BUILD_SHEAFSCOPE)
     set(clusters com/limitpoint/tools/SheafScope com/limitpoint/tools/common/client_server com/limitpoint/tools/common/event 
@@ -90,7 +77,7 @@ else()
     #
     # Set the cumulative shared library var for this component.
     #
-    set(${COMPONENT}_SHARED_LIBS ${FIELDS_SHARED_LIBS} 
+    set(${COMPONENT}_SHARED_LIB ${FIELDS_SHARED_LIB} 
         ${${COMPONENT}_SHARED_LIB} 
         CACHE STRING " Cumulative shared libraries for ${PROJECT_NAME}" FORCE)
 
@@ -186,7 +173,7 @@ function(add_library_targets)
         add_library(${${COMPONENT}_SHARED_LIB} SHARED ${${COMPONENT}_SRCS})
         set_target_properties(${${COMPONENT}_SHARED_LIB} PROPERTIES 
             OUTPUT_NAME ${PROJECT_NAME} LINKER_LANGUAGE CXX)
-        add_dependencies(${${COMPONENT}_SHARED_LIB} ${FIELDS_SHARED_LIBS})
+        add_dependencies(${${COMPONENT}_SHARED_LIB} ${FIELDS_SHARED_LIB})
         
         # Override cmake's placing of "${COMPONENT_LIB}_EXPORTS into the preproc symbol table.
         # CMake apparently detects the presence of cdecl_dllspec in the source and places
@@ -198,10 +185,10 @@ function(add_library_targets)
             PROPERTIES VERSION ${LIB_VERSION}) 
         
         # Library alias definitions
-        add_dependencies(${PROJECT_NAME}-shared-lib ${${COMPONENT}_SHARED_LIBS})
+        add_dependencies(${PROJECT_NAME}-shared-lib ${${COMPONENT}_SHARED_LIB})
         add_dependencies(${PROJECT_NAME}-static-lib ${${COMPONENT}_STATIC_LIBS})
     
-        target_link_libraries(${${COMPONENT}_SHARED_LIB} ${FIELDS_SHARED_LIBS} 
+        target_link_libraries(${${COMPONENT}_SHARED_LIB} ${FIELDS_SHARED_LIB} 
             ${JNI_LIBRARIES} ${JAVA_AWT_LIBRARY} ${JAVA_JVM_LIBRARY} ${VTK_LIBS})
         target_link_libraries(${${COMPONENT}_STATIC_LIB} ${FIELDS_STATIC_LIBS} 
             ${JNI_LIBRARIES} ${JAVA_AWT_LIBRARY} ${JAVA_JVM_LIBRARY} ${VTK_LIBS})
@@ -501,7 +488,7 @@ function(add_dumpsheaf_target)
     # Make sure the library is up to date
     if(WIN64MSVC OR WIN64INTEL)
         add_dependencies(dumpsheaf ${FIBER_BUNDLE_IMPORT_LIB})
-        target_link_libraries(dumpsheaf ${FIBER_BUNDLE_IMPORT_LIBS})
+        target_link_libraries(dumpsheaf ${FIBER_BUNDLE_IMPORT_LIB})
     else()
         add_dependencies(dumpsheaf ${FIBER_BUNDLE_SHARED_LIB})
         target_link_libraries(dumpsheaf ${FIBER_BUNDLE_SHARED_LIB})
@@ -521,10 +508,10 @@ function(add_sheafscope_wrapper_target)
     # Make sure the library is up to date
     if(WIN64MSVC OR WIN64INTEL)
         add_dependencies(sheafscope ${TOOLS_IMPORT_LIB})
-        target_link_libraries(sheafscope ${TOOLS_IMPORT_LIBS})
+        target_link_libraries(sheafscope ${TOOLS_IMPORT_LIB})
     else()
         add_dependencies(sheafscope ${TOOLS_SHARED_LIB})
-        target_link_libraries(sheafscope ${TOOLS_SHARED_LIBS})
+        target_link_libraries(sheafscope ${TOOLS_SHARED_LIB})
     endif()
 
     # Supply the *_DLL_IMPORTS directive to preprocessor

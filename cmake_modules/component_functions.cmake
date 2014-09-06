@@ -281,12 +281,6 @@ function(add_clusters clusters)
     foreach(cluster ${clusters})
         #Add each cluster subdir to the project. 
         add_subdirectory(${cluster})
-        #Add each cluster to the compiler search path.
-#        include_directories(${cluster})
-        # Add the fully-qualified cluster names to this component's ipath var
-#        set(${COMPONENT}_IPATH ${${COMPONENT}_IPATH} 
-#        ${CMAKE_CURRENT_SOURCE_DIR}/${cluster} CACHE 
-#        STRING "Include paths for ${PROJECT_NAME}" FORCE)
     endforeach()
 
 endfunction(add_clusters)
@@ -389,65 +383,6 @@ function(set_component_vars)
     
 endfunction(set_component_vars)
 
-
-
-#
-# Export this component's library targets and list of includes for install
-# The file locations on an install (includes, libs, etc) are different
-# than they are in a build tree. The install config produces
-# a .cmake.in file that is configured by the client.
-#
-function(export_install_config_file_vars)
-
-    if(WIN64MSVC OR WIN64INTEL)
-        export(TARGETS ${${COMPONENT}_DYNAMIC_LIB} 
-            APPEND FILE ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE})
-        file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
-            "set(${COMPONENT}_IMPORT_LIBS ${${COMPONENT}_IMPORT_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative import library list\")\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-    else()
-        export(TARGETS ${${COMPONENT}_SHARED_LIB} 
-            ${${COMPONENT}_STATIC_LIB} 
-            APPEND FILE ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE})
-        if("${COMPONENT}" MATCHES "SHEAVES")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
-                "set(${COMPONENT}_STATIC_LIBS ${${COMPONENT}_STATIC_LIB} CACHE STRING \"${PROJECT_NAME} cumulative static library list\")\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")    
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
-                "set(${COMPONENT}_SHARED_LIBS ${${COMPONENT}_SHARED_LIB} CACHE STRING \"${PROJECT_NAME} cumulative shared library list\")\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-            # This variable should be SHEAFSYSTEM_LIB_OUTPUT_DIR. Fix it.
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
-                "set(${COMPONENT}_LIB_OUTPUT_DIR ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} CACHE STRING \"${PROJECT_NAME} library output directory\")\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-        else()
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
-                "set(${COMPONENT}_STATIC_LIBS ${${COMPONENT}_STATIC_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative static library list\")\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")    
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
-                "set(${COMPONENT}_SHARED_LIBS ${${COMPONENT}_SHARED_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative shared library list\")\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-        endif()
-
-        if("${COMPONENT}" MATCHES "TOOLS")        
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
-                "set(JMF_JAR ${JMF_JAR} CACHE STRING \"JMF jar location\")\n")
-            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-        endif()             
-    endif()
-    file(APPEND  ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-#    file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
-#        "set(${COMPONENT}_IPATH @SHEAFSYSTEM_HOME@/include CACHE STRING \"${PROJECT_NAME} include path\")\n")
-    file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-    file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
-        "set(${COMPONENT}_IPATHS @SHEAFSYSTEM_HOME@/include CACHE STRING \"${PROJECT_NAME} cumulative include path\")\n")
-    file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
-
-endfunction(export_install_config_file_vars)
-
 #
 # Export this component's library targets and list of includes
 #
@@ -460,36 +395,28 @@ function(write_exports_file)
     if(WIN64MSVC OR WIN64INTEL)
         export(TARGETS ${${COMPONENT}_IMPORT_LIB} APPEND 
             FILE ${CMAKE_BINARY_DIR}/${EXPORTS_FILE})
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
-            "set(${COMPONENT}_IMPORT_LIB ${${COMPONENT}_IMPORT_LIB} CACHE STRING \"${PROJECT_NAME} Win32 import library \")\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")     
+
     else()
         export(TARGETS ${${COMPONENT}_SHARED_LIB} 
             ${${COMPONENT}_STATIC_LIB} APPEND FILE 
             ${CMAKE_BINARY_DIR}/${EXPORTS_FILE})
-        file(APPEND  ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
+#        file(APPEND  ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
 
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
+#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
     
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
-            "set(${COMPONENT}_STATIC_LIB ${${COMPONENT}_STATIC_LIB} CACHE STRING \"${PROJECT_NAME} static library \")\n")
+#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+#            "set(${COMPONENT}_STATIC_LIB ${${COMPONENT}_STATIC_LIB} CACHE STRING \"${PROJECT_NAME} static library \")\n")
         # Mark the variable as advanced           
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_STATIC_LIB)\n")  
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")     
+#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_STATIC_LIB)\n")  
+#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")     
  
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
-            "set(${COMPONENT}_SHARED_LIB ${${COMPONENT}_SHARED_LIB} CACHE STRING \"${PROJECT_NAME} shared library \")\n")
-        # Mark the variable as advanced           
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_SHARED_LIB)\n") 
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")     
+#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+#            "set(${COMPONENT}_SHARED_LIB ${${COMPONENT}_SHARED_LIB} CACHE STRING \"${PROJECT_NAME} shared library \")\n")
+#        # Mark the variable as advanced           
+#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_SHARED_LIB)\n") 
+#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")     
 
     endif()
-
-    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
-        "set(${COMPONENT}_BIN_OUTPUT_DIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} CACHE STRING \"${PROJECT_NAME} binary output directory\")\n")
-    # Mark the variable as advanced           
-    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_BIN_OUTPUT_DIR)\n") 
-    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
       
     if("${COMPONENT}" MATCHES "SHEAF")
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
@@ -532,34 +459,17 @@ function(write_exports_file)
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
             "mark_as_advanced(FORCE VTK_LIBS)\n")              
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")                  
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")        
-        file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
             "set(JMF_JAR ${JMF_JAR} CACHE STRING \"JMF jar location\")\n")
         # Mark the variable as advanced                
         file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
             "mark_as_advanced(FORCE JMF_JAR)\n")              
-        file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")        
+        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")        
 
     endif()
        
 endfunction(write_exports_file)
-
-#
-# Generate the installed <project>-exports file. Replace hardcoded vars with cmake substitution vars.
-#
-function(generate_install_config_file)
-
-    file(READ ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} INSTALL_FILE_CONTENTS)
-
-    string(REPLACE ${CMAKE_BINARY_DIR} "\@SHEAFSYSTEM_HOME\@" 
-        MASSAGED_OUTPUT "${INSTALL_FILE_CONTENTS}")
-
-    file(WRITE ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "${MASSAGED_OUTPUT}")
-    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in "\n")
-    file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}.in 
-        "set(VTK_LIBS ${VTK_LIBS} CACHE STRING \"VTK Runtime Libraries\" FORCE)\n")      
-endfunction(generate_install_config_file)
 
 #
 # Append sources to their respective component variables
@@ -592,13 +502,13 @@ function(collect_includes)
             string(REGEX REPLACE ".cc$" ".h"  inc ${src})
             if(WIN32)
                 # Massage the paths for Windows
-                file(TO_NATIVE_PATH "${CMAKE_BINARY_DIR}/include/${LPS_ID}/${NAME_SPACE}/${inc}" BUILD_PATH)
+                file(TO_NATIVE_PATH "${CMAKE_BINARY_DIR}/include/${LPS_ID}/${PROJECT_NAME}/${inc}" BUILD_PATH)
                 file(TO_NATIVE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/${inc}" SOURCE_PATH)
-                 #Create a symlink in ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${NAME_SPACE}to corresponding header file in source tree
+                 #Create a symlink in ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${PROJECT_NAME}to corresponding header file in source tree
                 execute_process(COMMAND cmd.exe /c mklink ${BUILD_PATH} ${SOURCE_PATH} RESULT_VARIABLE LINK_RESULT ERROR_VARIABLE ERROR )
            else() # Linux
-                # LCreate a symlink in ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${NAME_SPACE} to corresponding header file in source tree
-               execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_CURRENT_SOURCE_DIR}/${inc} ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${NAME_SPACE}/${inc})     
+                # LCreate a symlink in ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${PROJECT_NAME} to corresponding header file in source tree
+               execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_CURRENT_SOURCE_DIR}/${inc} ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${PROJECT_NAME}/${inc})     
            endif()
             list(APPEND inst_incs ${CMAKE_CURRENT_SOURCE_DIR}/${inc})
         list(APPEND lincs ${CMAKE_CURRENT_SOURCE_DIR}/${inc})            
@@ -610,13 +520,13 @@ function(collect_includes)
         foreach(inc ${ADDITIONAL_INCS})
             if(WIN32)
                 # Massage the paths for Windows
-                file(TO_NATIVE_PATH "${CMAKE_BINARY_DIR}/include/${LPS_ID}/${NAME_SPACE}/${inc}" BUILD_PATH)
+                file(TO_NATIVE_PATH "${CMAKE_BINARY_DIR}/include/${LPS_ID}/${PROJECT_NAME}/${inc}" BUILD_PATH)
                 file(TO_NATIVE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/${inc}" SOURCE_PATH)
-                # Create a symlink in ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${NAME_SPACE} to corresponding header file in source tree
+                # Create a symlink in ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${PROJECT_NAME} to corresponding header file in source tree
                 execute_process(COMMAND cmd.exe /c mklink ${BUILD_PATH} ${SOURCE_PATH} RESULT_VARIABLE LINK_RESULT ERROR_VARIABLE ERROR )
           else() # Linux
-              # Create a symlink in ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${NAME_SPACE} to corresponding header file in source tree
-              execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_CURRENT_SOURCE_DIR}/${inc} ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${NAME_SPACE}/${inc})     
+              # Create a symlink in ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${PROJECT_NAME} to corresponding header file in source tree
+              execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_CURRENT_SOURCE_DIR}/${inc} ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${PROJECT_NAME}/${inc})     
           endif()
                 list(APPEND lincs ${CMAKE_CURRENT_SOURCE_DIR}/${inc})
                 list(APPEND inst_incs ${CMAKE_CURRENT_SOURCE_DIR}/${inc})

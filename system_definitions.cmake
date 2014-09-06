@@ -30,18 +30,8 @@ endif()
 # found in the top level of any component. Functions and variables
 # that need to have system scope should be declared and/or defined here.
 ##
-
 set(BUILD_SHEAFSCOPE OFF CACHE BOOL "Toggle build of the SheafScope. If OFF, then no need to look for JDK or VTK unless BUILD_BINDINGS is on.")
 set(INSTALL_DOCS ON CACHE BOOL "Toggle install state of Documentation.")
-
-#
-# Establish the version number for this build.
-# This is only relevant for releases. 0.0.0.0 is chosen here
-# simply as a stub.
-#
-set(LIB_VERSION 0.0.0.0 CACHE STRING "Library version number for release purposes")
-mark_as_advanced(LIB_VERSION)
-
 
 #
 # Set the base folder for Java language bindings
@@ -126,7 +116,7 @@ endif()
 # Define the exports files
 #
 set(EXPORTS_FILE ${PROJECT_NAME}-exports.cmake CACHE STRING "System exports file name")
-set(INSTALL_CONFIG_FILE ${PROJECT_NAME}-install.cmake CACHE STRING "Install config file name")
+#set(INSTALL_CONFIG_FILE ${PROJECT_NAME}-install.cmake CACHE STRING "Install config file name")
 mark_as_advanced(EXPORTS_FILE)  
 mark_as_advanced(INSTALL_CONFIG_FILE)  
 
@@ -233,7 +223,6 @@ include(${CMAKE_MODULE_PATH}/target_declarations.cmake)
 # Prerequisite discovery
 #
 include(${CMAKE_MODULE_PATH}/find_prerequisites.cmake)
-
 
 #
 # Utility function to add components to a system.
@@ -359,6 +348,7 @@ function(set_compiler_flags)
     endif()
     mark_as_advanced(FORCE LPS_CXX_FLAGS LPS_SHARED_LINKER_FLAGS
          LPS_EXE_LINKER_FLAGS)
+ 
     #                 
     # DEBUG_CONTRACTS section
     #

@@ -24,15 +24,9 @@
 include(${CMAKE_MODULE_PATH}/component_functions.cmake)
 
 #
-# The current namespace
-# The namespace should be ${COMPONENTS), but force it to remove all doubt.
-#
-set(NAME_SPACE fiber_bundle CACHE STRING "C++ namespace for this project" FORCE)
-
-#
 # Create the build/include folder
 #
-execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${NAME_SPACE})
+execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${PROJECT_NAME})
 
 #
 # Define the clusters for this component.
@@ -85,6 +79,9 @@ function(add_library_targets)
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} 
             PROPERTIES DEFINE_SYMBOL "SHEAF_DLL_EXPORTS")
 
+        install(TARGETS ${PROJECT_NAME} EXPORT SheafSystem  RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin/\${BUILD_TYPE} ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/\${BUILD_TYPE} INCLUDES DESTINATION ${CMAKE_INSTALL_PREFIX}/include )
+        install(EXPORT SheafSystem  DESTINATION  ${CMAKE_INSTALL_PREFIX}/cmake FILE EXPORT_LINK_INTERFACE_LIBRARIES)
+      
     else() # Linux
     
         # Static library
@@ -99,7 +96,7 @@ function(add_library_targets)
         add_library(${${COMPONENT}_SHARED_LIB} 
             SHARED ${${COMPONENT}_SRCS})
         add_dependencies(${${COMPONENT}_SHARED_LIB} 
-            ${SHEAF_SHARED_LIBS})
+            ${SHEAF_SHARED_LIB})
         set_target_properties(${${COMPONENT}_SHARED_LIB} 
             PROPERTIES OUTPUT_NAME ${PROJECT_NAME} LINKER_LANGUAGE CXX)
         
@@ -116,12 +113,12 @@ function(add_library_targets)
     
         # Library alias definitions
         add_dependencies(${PROJECT_NAME}-shared-lib 
-            ${${COMPONENT}_SHARED_LIBS})
+            ${${COMPONENT}_SHARED_LIB})
         add_dependencies(${PROJECT_NAME}-static-lib 
             ${${COMPONENT}_STATIC_LIBS})
     
         target_link_libraries(${${COMPONENT}_SHARED_LIB} 
-            ${SHEAF_SHARED_LIBS})
+            ${SHEAF_SHARED_LIB})
         target_link_libraries(${${COMPONENT}_STATIC_LIB} 
             ${SHEAF_STATIC_LIBS})
 
@@ -323,10 +320,10 @@ if(SWIG_FOUND AND BUILD_BINDINGS)
     else()
         add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} 
             ${SHEAF_PYTHON_BINDING_LIBS} 
-            ${${COMPONENT}_SHARED_LIBS})
+            ${${COMPONENT}_SHARED_LIB})
         swig_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} 
             ${SHEAF_PYTHON_BINDING_LIBS} 
-            ${${COMPONENT}_SHARED_LIBS})
+            ${${COMPONENT}_SHARED_LIB})
     endif()
     
     set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} 
@@ -357,6 +354,8 @@ endfunction(add_bindings_targets)
 #
 function(add_install_target)
 
+    file(TO_NATIVE_PATH "${CMAKE_INSTALL_PREFIX}/include/${LPS_ID}/${PROJECT_NAME}" NAMESPACE_PATH)
+    
     if(LINUX64INTEL OR LINUX64GNU)
         install(TARGETS ${${COMPONENT}_SHARED_LIB} EXPORT 
             ${${COMPONENT}_SHARED_LIB} LIBRARY DESTINATION 
@@ -385,56 +384,43 @@ function(add_install_target)
 
         # The BUILD_TYPE variable will be set while CMake is processing the install files. It is not set at configure time
         # for this project. We pass it literally here.
- #       install(TARGETS ${${COMPONENT}_IMPORT_LIB} EXPORT 
-#            ${${COMPONENT}_IMPORT_LIB} ARCHIVE DESTINATION lib/\${BUILD_TYPE} INCLUDES DESTINATION include/ComLimitPoint/SheafSystem)
-#        install(EXPORT ${${COMPONENT}_IMPORT_LIB} DESTINATION lib)
-                      
-#        install(TARGETS ${${COMPONENT}_DYNAMIC_LIB} RUNTIME 
-#            DESTINATION bin/\${BUILD_TYPE}  INCLUDES DESTINATION include/ComLimitPoint/SheafSystem)
-#        install(EXPORT ${${COMPONENT}_IMPORT_LIB} DESTINATION bin) 
-         install(TARGETS  ${PROJECT_NAME} EXPORT SheafSystem 
-                ARCHIVE DESTINATION lib/\${BUILD_TYPE} 
-                RUNTIME DESTINATION bin/\${BUILD_TYPE} 
-                INCLUDES DESTINATION include/ComLimitPoint/SheafSystem)
-         install(EXPORT SheafSystem DESTINATION bin) 
-         install(EXPORT SheafSystem DESTINATION lib)
                 
-#        install(FILES 
-#            ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_DYNAMIC_LIB}_d.pdb 
-#            DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
-#        install(FILES 
-#            ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_DYNAMIC_LIB}.pdb 
-#            DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
+        install(FILES 
+            ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_DYNAMIC_LIB}_d.pdb 
+            DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
+        install(FILES 
+            ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_DYNAMIC_LIB}.pdb 
+            DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
                             
-#        if(SWIG_FOUND AND BUILD_BINDINGS)
-#            install(FILES 
-#                ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_LIB}_d.pdb 
-#                DESTINATION bin/\${BUILD_TYPE} OPTIONAL)                
-#            install(FILES 
-#                ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_CSHARP_BINDING_LIB}_d.pdb 
-#                DESTINATION bin/\${BUILD_TYPE} OPTIONAL) 
-#            install(FILES 
-#                ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_LIB}.pdb 
-#                DESTINATION bin/\${BUILD_TYPE} OPTIONAL)                
-#            install(FILES 
-#                ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_CSHARP_BINDING_LIB}.pdb 
-#                DESTINATION bin/\${BUILD_TYPE} OPTIONAL) 
-#            install(FILES 
-#                ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_JAR} 
-#                DESTINATION lib/\${BUILD_TYPE})  
-#            install(FILES 
-#                ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_PYTHON_BINDING_LIB}_d.pdb 
- #               DESTINATION bin/\${BUILD_TYPE} OPTIONAL) 
-#            install(FILES 
-#                ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_PYTHON_BINDING_LIB}.pdb 
-#                DESTINATION bin/\${BUILD_TYPE} OPTIONAL) 
-#            install(FILES
-#                ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_CSHARP_BINDING_ASSY} 
-#                DESTINATION bin/\${BUILD_TYPE})              
-#        endif()
+        if(SWIG_FOUND AND BUILD_BINDINGS)
+            install(FILES 
+                ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_LIB}_d.pdb 
+                DESTINATION bin/\${BUILD_TYPE} OPTIONAL)                
+            install(FILES 
+                ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_CSHARP_BINDING_LIB}_d.pdb 
+                DESTINATION bin/\${BUILD_TYPE} OPTIONAL) 
+            install(FILES 
+                ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_LIB}.pdb 
+                DESTINATION bin/\${BUILD_TYPE} OPTIONAL)                
+            install(FILES 
+                ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_CSHARP_BINDING_LIB}.pdb 
+                DESTINATION bin/\${BUILD_TYPE} OPTIONAL) 
+            install(FILES 
+                ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_JAVA_BINDING_JAR} 
+                DESTINATION lib/\${BUILD_TYPE})  
+            install(FILES 
+                ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_PYTHON_BINDING_LIB}_d.pdb 
+               DESTINATION bin/\${BUILD_TYPE} OPTIONAL) 
+            install(FILES 
+                ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_PYTHON_BINDING_LIB}.pdb 
+                DESTINATION bin/\${BUILD_TYPE} OPTIONAL) 
+            install(FILES
+               ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_CSHARP_BINDING_ASSY} 
+                DESTINATION bin/\${BUILD_TYPE})              
+        endif()
     endif()
 
-    install(FILES ${${COMPONENT}_INCS} DESTINATION include) 
-                         
+      install(FILES ${${COMPONENT}_INCS} DESTINATION ${NAMESPACE_PATH})                        
+
 endfunction(add_install_target)
 

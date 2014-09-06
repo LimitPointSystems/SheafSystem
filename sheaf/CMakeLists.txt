@@ -59,17 +59,7 @@ write_exports_file()
 # Prepare this component's lib targets and include paths for export to an install config file.
 # This data only gets used by clients when the SheafSystem has been installed.
 #
-export_install_config_file_vars()
+#export_install_config_file_vars()
 
-#
-# Sheaves is responsible for the std headers;
-# append their location to the exports file.
-#
-#file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(STD_HEADERS ${STD_HEADERS} CACHE STRING \"STD headers\")\n")
-#file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(STD_IPATH ${CMAKE_BINARY_DIR}/include CACHE STRING \"STD header include path\")\n")
-
-# Mark the variables as advanced#
-#file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE STD_HEADERS)\n") 
-#file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE STD_IPATH)\n") 
 
 

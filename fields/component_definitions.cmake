@@ -24,15 +24,9 @@
 include(${CMAKE_MODULE_PATH}/component_functions.cmake)
 
 #
-# The current namespace
-# The namespace should be ${COMPONENTS), but force it to remove all doubt.
-#
-set(NAME_SPACE fields CACHE STRING "C++ namespace for this project" FORCE)
-
-#
 # Create the build/include folder
 #
-execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${NAME_SPACE})
+execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${PROJECT_NAME})
 
 #
 # Define the clusters for this component.
@@ -90,7 +84,8 @@ function(add_library_targets)
         # Override cmake's placing of "${COMPONENT_LIB}_EXPORTS into the preproc symbol table.
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} 
             PROPERTIES DEFINE_SYMBOL "SHEAF_DLL_EXPORTS")
-
+        install(TARGETS ${PROJECT_NAME} EXPORT SheafSystem  RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin/\${BUILD_TYPE} ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/\${BUILD_TYPE} INCLUDES DESTINATION ${CMAKE_INSTALL_PREFIX}/include )
+        install(EXPORT SheafSystem  DESTINATION  ${CMAKE_INSTALL_PREFIX}/cmake EXPORT_LINK_INTERFACE_LIBRARIES)
     else() # Linux
   
         # Static library
@@ -101,7 +96,7 @@ function(add_library_targets)
         
         # Shared library
         add_library(${${COMPONENT}_SHARED_LIB} SHARED ${${COMPONENT}_SRCS})
-        add_dependencies(${${COMPONENT}_SHARED_LIB} ${GEOMETRY_SHARED_LIBS})
+        add_dependencies(${${COMPONENT}_SHARED_LIB} ${GEOMETRY_SHARED_LIB})
         set_target_properties(${${COMPONENT}_SHARED_LIB} 
             PROPERTIES OUTPUT_NAME ${PROJECT_NAME} LINKER_LANGUAGE CXX)
             
@@ -116,7 +111,7 @@ function(add_library_targets)
             PROPERTIES VERSION ${LIB_VERSION}) 
         
         # Library alias definitions
-        add_dependencies(${PROJECT_NAME}-shared-lib ${${COMPONENT}_SHARED_LIBS})
+        add_dependencies(${PROJECT_NAME}-shared-lib ${${COMPONENT}_SHARED_LIB})
         add_dependencies(${PROJECT_NAME}-static-lib ${${COMPONENT}_STATIC_LIBS})
         
         target_link_libraries(${${COMPONENT}_SHARED_LIB} ${GEOMETRY_IMPORT_LIBS}) 
@@ -166,7 +161,7 @@ function(add_bindings_targets)
             add_dependencies(${${COMPONENT}_JAVA_BINDING_LIB} 
                 ${GEOMETRY_JAVA_BINDING_LIB} ${${COMPONENT}_SHARED_LIB})
             target_link_libraries(${${COMPONENT}_JAVA_BINDING_LIB} 
-                ${GEOMETRY_JAVA_BINDING_LIBS} ${${COMPONENT}_SHARED_LIBS} 
+                ${GEOMETRY_JAVA_BINDING_LIBS} ${${COMPONENT}_SHARED_LIB} 
                 ${JDK_LIBS})
         endif()
         
@@ -326,9 +321,9 @@ function(add_bindings_targets)
                 PROPERTIES FOLDER "Binding Targets - Python")
         else()
             add_dependencies(${${COMPONENT}_PYTHON_BINDING_LIB} 
-                ${GEOMETRY_PYTHON_BINDING_LIBS} ${${COMPONENT}_SHARED_LIBS})
+                ${GEOMETRY_PYTHON_BINDING_LIBS} ${${COMPONENT}_SHARED_LIB})
             target_link_libraries(${${COMPONENT}_PYTHON_BINDING_LIB} 
-                ${GEOMETRY_PYTHON_BINDING_LIBS} ${${COMPONENT}_SHARED_LIBS})
+                ${GEOMETRY_PYTHON_BINDING_LIBS} ${${COMPONENT}_SHARED_LIB})
         endif()
         
         set_target_properties(${${COMPONENT}_PYTHON_BINDING_LIB} PROPERTIES LINKER_LANGUAGE CXX)
@@ -354,6 +349,8 @@ endfunction(add_bindings_targets)
 #
 function(add_install_target)
 
+    file(TO_NATIVE_PATH "${CMAKE_INSTALL_PREFIX}/include/${LPS_ID}/${PROJECT_NAME}" NAMESPACE_PATH)
+    
     if(LINUX64INTEL OR LINUX64GNU)
         install(TARGETS ${${COMPONENT}_SHARED_LIB} EXPORT ${${COMPONENT}_SHARED_LIB} LIBRARY DESTINATION ${CMAKE_BUILD_TYPE}/lib)
         install(TARGETS ${${COMPONENT}_STATIC_LIB} ARCHIVE DESTINATION ${CMAKE_BUILD_TYPE}/lib)
@@ -370,25 +367,7 @@ function(add_install_target)
         endif()
         
     elseif(WIN64INTEL OR WIN64MSVC)
-
-        # The BUILD_TYPE variable will be set while CMake is processing the install files. It is not set at configure time
-        # for this project. We pass it literally here.
-#        install(TARGETS ${${COMPONENT}_IMPORT_LIB} EXPORT 
-#            ${${COMPONENT}_IMPORT_LIB} ARCHIVE DESTINATION lib/\${BUILD_TYPE} INCLUDES DESTINATION include/ComLimitPoint/SheafSystem)
- #       install(EXPORT ${${COMPONENT}_IMPORT_LIB} DESTINATION lib)
-
-        install(TARGETS  ${PROJECT_NAME} EXPORT SheafSystem 
-            ARCHIVE DESTINATION lib/\${BUILD_TYPE} 
-            RUNTIME DESTINATION bin/\${BUILD_TYPE} 
-            INCLUDES DESTINATION include/ComLimitPoint/SheafSystem)
-
-         install(EXPORT SheafSystem DESTINATION bin) 
-         install(EXPORT SheafSystem DESTINATION lib)
-                              
-#        install(TARGETS ${${COMPONENT}_DYNAMIC_LIB} RUNTIME 
-#            DESTINATION bin/\${BUILD_TYPE}  INCLUDES DESTINATION include/ComLimitPoint/SheafSystem)
-#        install(EXPORT ${${COMPONENT}_IMPORT_LIB} DESTINATION bin) 
-        
+       
         install(FILES 
             ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_DYNAMIC_LIB}_d.pdb 
             DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
@@ -424,6 +403,6 @@ function(add_install_target)
         endif()
     endif()
 
-    install(FILES ${${COMPONENT}_INCS} DESTINATION include) 
-                         
+       install(FILES ${${COMPONENT}_INCS} DESTINATION ${NAMESPACE_PATH})                         
+
 endfunction(add_install_target)

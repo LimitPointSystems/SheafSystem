@@ -38,16 +38,13 @@ project(SheafSystem)
 #
 # Specify the minimum cmake version.
 #
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.0.0)
 
 #
 # Include variable definitions and functions
 # unique to and/or required at the system level.
 #
 include(system_definitions.cmake)
-
-
-
 
 #
 # Add components to the system
@@ -75,14 +72,23 @@ if(INSTALL_DOCS)
 endif()    
 
 #
-# Write this component's lib targets and include paths to an export file.
+# Write the system's lib and binary paths to an export file.
 #
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
-             "set(SHEAFSYSTEM_LIB_DIR ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} CACHE STRING \"${PROJECT_NAME} library output directory\")\n")
-         # Mark the variable as advanced           
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE SHEAFSYSTEM_LIB_DIR)\n")         
-        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-#export_libs()
+file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+    "set(SHEAFSYSTEM_LIB_DIR ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} CACHE STRING \"${PROJECT_NAME} library output directory\")\n")
+# Mark the variable as advanced           
+#file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE SHEAFSYSTEM_LIB_DIR)\n")         
+file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
+
+file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+    "set(SHEAFSYSTEM_BIN_OUTPUT_DIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} CACHE STRING \"${PROJECT_NAME} binary output directory\")\n")
+# Mark the variable as advanced           
+#file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_BIN_OUTPUT_DIR)\n") 
+file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
+file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
+    "set(SHEAFSYSTEM_INC_DIR ${CMAKE_BINARY_DIR}/include CACHE STRING \"${PROJECT_NAME} binary output directory\")\n")
+
+
 #
 # Export this component's library targets and list of includes for install
 # The file locations on an install (includes, libs, etc) are different
@@ -129,7 +135,23 @@ endif()
 #
 # Generate the install configuration file.
 #
-generate_install_config_file()
+#generate_install_config_file()
+
+ #       install(TARGETS sheaf fiber_bundle geometry fields EXPORT sheafsystem RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin INCLUDES DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
+#        install(EXPORT sheafsystem DESTINATION  ${CMAKE_INSTALL_PREFIX} FILE ${INSTALL_CONFIG_FILE} EXPORT_LINK_INTERFACE_LIBRARIES)
+        
+#        install(TARGETS fiber_bundle EXPORT fiber_bundle RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin INCLUDES DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
+#        install(EXPORT fiber_bundle DESTINATION  ${CMAKE_INSTALL_PREFIX} FILE ${INSTALL_CONFIG_FILE} EXPORT_LINK_INTERFACE_LIBRARIES)
+        
+#        install(TARGETS geometry EXPORT geometry RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin INCLUDES DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
+#        install(EXPORT geometry DESTINATION  ${CMAKE_INSTALL_PREFIX} FILE ${INSTALL_CONFIG_FILE} EXPORT_LINK_INTERFACE_LIBRARIES)
+        
+#        install(TARGETS fields EXPORT fields RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin INCLUDES DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
+#        install(EXPORT fields DESTINATION  ${CMAKE_INSTALL_PREFIX} FILE ${INSTALL_CONFIG_FILE} EXPORT_LINK_INTERFACE_LIBRARIES)
+
+
+
+
 
 #
 # Install HDF5 headers to <include> dir
@@ -139,11 +161,11 @@ install_prereqs()
 #
 # Install the exports file
 #
-if(LINUX64INTEL OR LINUX64GNU)
-    install(FILES ${PROJECT_BINARY_DIR}/${EXPORTS_FILE}.in DESTINATION ${CMAKE_BUILD_TYPE}/config)
-else()
-    install(FILES ${PROJECT_BINARY_DIR}/${EXPORTS_FILE}.in DESTINATION config/\${BUILD_TYPE})
-endif()    
+#if(LINUX64INTEL OR LINUX64GNU)
+#    install(FILES ${PROJECT_BINARY_DIR}/${EXPORTS_FILE}.in DESTINATION ${CMAKE_BUILD_TYPE}/config)
+#else()
+#    install(FILES ${PROJECT_BINARY_DIR}/${EXPORTS_FILE}.in DESTINATION config/\${BUILD_TYPE})#
+#endif()    
 
 #
 # Markup the RELEASE_NOTES file. 
@@ -172,3 +194,8 @@ configure_file(${CMAKE_SOURCE_DIR}/RELEASE_NOTES.in ${CMAKE_BINARY_DIR}/RELEASE_
 #            ${PROJECT_NAME} ARCHIVE DESTINATION lib/\${BUILD_TYPE} 
 #            RUNTIME DESTINATION bin/\${BUILD_TYPE} INCLUDES DESTINATION include/ComLimitPoint/SheafSystem)
 #    endif()
+
+ #       install(TARGETS sheaf/sheaf fiber_bundle  EXPORT sheafsystem  RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin INCLUDES DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
+ #      install(TARGETS sheaf fiber_bundle  EXPORT sheafsystem ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib INCLUDES DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
+ #       install(EXPORT ${${COMPONENT}_IMPORT_LIB}  DESTINATION  ${CMAKE_INSTALL_PREFIX}/cmake FILE ${INSTALL_CONFIG_FILE} EXPORT_LINK_INTERFACE_LIBRARIES)
+ #       install(EXPORT ${${COMPONENT}_IMPORT_LIB}_implib DESTINATION  ${CMAKE_INSTALL_PREFIX}/cmake FILE ${INSTALL_CONFIG_FILE} EXPORT_LINK_INTERFACE_LIBRARIES)

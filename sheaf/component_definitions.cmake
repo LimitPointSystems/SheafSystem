@@ -24,15 +24,9 @@
 include(${CMAKE_MODULE_PATH}/component_functions.cmake)
 
 #
-# The current namespace
-# The namespace should be ${COMPONENTS), but force it to remove all doubt.
-#
-set(NAME_SPACE sheaf CACHE STRING "C++ namespace for this project" FORCE)
-
-#
 # Create the build/include folder
 #
-execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${NAME_SPACE})
+execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/include/${LPS_ID}/${PROJECT_NAME})
 
 #
 # Check for the presence of system cxx includes.
@@ -59,7 +53,7 @@ add_clusters("${clusters}")
 # The current namespace
 # The namespace should be ${COMPONENTS), but force it to remove all doubt.
 #
-set(NAME_SPACE sheaf CACHE STRING "C++ namespace for this project" FORCE)
+set(PROJECT_NAME sheaf CACHE STRING "C++ namespace for this project" FORCE)
 
 #
 # Set the cumulative Java binding jar variable for this component.
@@ -91,6 +85,9 @@ function(add_library_targets)
             LINK_PRIVATE hdf5 )        
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES 
             FOLDER "Library Targets")
+                
+        install(TARGETS ${PROJECT_NAME}  EXPORT SheafSystem  RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin/\${BUILD_TYPE} ARCHIVE  DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/\${BUILD_TYPE} INCLUDES DESTINATION ${CMAKE_INSTALL_PREFIX}/include )
+        install(EXPORT SheafSystem  DESTINATION  ${CMAKE_INSTALL_PREFIX}/cmake EXPORT_LINK_INTERFACE_LIBRARIES)
 
         # Override cmake's placing of "${${COMPONENT}_DYNAMIC_LIB}_EXPORTS 
         # into the preproc symbol table.
@@ -373,6 +370,8 @@ endfunction(add_bindings_targets)
 #
 function(add_install_target)
 
+    file(TO_NATIVE_PATH "${CMAKE_INSTALL_PREFIX}/include/${LPS_ID}/${PROJECT_NAME}" NAMESPACE_PATH)
+
     if(LINUX64INTEL OR LINUX64GNU)
         install(TARGETS ${${COMPONENT}_SHARED_LIB} EXPORT 
             ${${COMPONENT}_SHARED_LIB} LIBRARY DESTINATION ${CMAKE_BUILD_TYPE}/lib)
@@ -399,28 +398,7 @@ function(add_install_target)
 
         # The BUILD_TYPE variable will be set while CMake is processing the install files. It is not set at configure time
         # for this project. We pass it literally here.
- 
-         install(TARGETS  ${PROJECT_NAME} EXPORT SheafSystem 
-            ARCHIVE DESTINATION lib/\${BUILD_TYPE} 
-            RUNTIME DESTINATION bin/\${BUILD_TYPE} 
-            INCLUDES DESTINATION include/ComLimitPoint/SheafSystem)
-
-         install(EXPORT SheafSystem DESTINATION bin) 
-         install(EXPORT SheafSystem DESTINATION lib)
-        
-#        install(TARGETS  ${PROJECT_NAME} EXPORT SheafSystem 
-#            ARCHIVE DESTINATION lib/\${BUILD_TYPE} 
-#            RUNTIME DESTINATION bin/\${BUILD_TYPE} 
- #           INCLUDES DESTINATION include/ComLimitPoint/SheafSystem)
-                    
-#        install(TARGETS ${${COMPONENT}_IMPORT_LIB} EXPORT 
-            #${${COMPONENT}_IMPORT_LIB} ARCHIVE DESTINATION lib/\${BUILD_TYPE} INCLUDES DESTINATION include/ComLimitPoint/SheafSystem)
-#        install(EXPORT SheafSystem DESTINATION lib)
-                      
-#        install(TARGETS ${${COMPONENT}_DYNAMIC_LIB} RUNTIME 
-#            DESTINATION bin/\${BUILD_TYPE}  INCLUDES DESTINATION include/ComLimitPoint/SheafSystem)
-#        install(EXPORT SheafSystem DESTINATION bin) 
-                   
+            
         install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_DYNAMIC_LIB}_d.pdb 
             DESTINATION bin/\${BUILD_TYPE} OPTIONAL)
         install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/\${BUILD_TYPE}/${${COMPONENT}_DYNAMIC_LIB}.pdb 
@@ -446,7 +424,7 @@ function(add_install_target)
         endif()
     endif()
 
-    install(FILES ${${COMPONENT}_INCS} DESTINATION include) 
+    install(FILES ${${COMPONENT}_INCS} DESTINATION ${NAMESPACE_PATH}) 
     install(FILES ${STD_HEADERS} DESTINATION include)
                      
 endfunction(add_install_target)

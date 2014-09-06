@@ -21,6 +21,24 @@
 # discovered and included here will be visible to the entire system.
 #
 
+find_package(Git)
+
+if(GIT_FOUND)
+    #
+    # Establish the version number for this build.
+    # git describe returns the most recent tag on the repo
+    #
+    if(WIN32)
+         execute_process(COMMAND cmd.exe /c git.exe describe WORKING_DIRECTORY ${CMAKE_SOURCE_DIR} OUTPUT_VARIABLE GIT_HASH ERROR_VARIABLE ERROR)
+    else()
+         execute_process(COMMAND /bin/sh -c git describe WORKING_DIRECTORY ${CMAKE_SOURCE_DIR} OUTPUT_VARIABLE GIT_HASH ERROR_VARIABLE ERROR)
+    endif()
+    set(LIB_VERSION ${GIT_HASH} CACHE STRING "Library version number for release purposes" FORCE)
+    mark_as_advanced(LIB_VERSION)
+else()
+    message(WARNING "Git was not found on your system. Libraries will not be versioned.")
+endif()
+
 find_package(Doxygen)
 
 if(DOXYGEN_FOUND)
