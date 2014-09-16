@@ -15,24 +15,24 @@
 #
 
 #
-# Generate the installed <project>-exports file. Replace hardcoded vars with cmake substitution vars.
+# Generate the installed exports file. Replace hardcoded vars with cmake substitution vars.
 #
-#file(READ ${CMAKE_INSTALL_PREFIX}/cmake/SheafSystem.cmake INSTALL_FILE_CONTENTS)
-
-#string(REPLACE "${CMAKE_INSTALL_PREFIX}" "\@SHEAFSYSTEM_HOME\@" 
-#    MASSAGED_OUTPUT "${INSTALL_FILE_CONTENTS}")
-
-#file(WRITE ${CMAKE_INSTALL_PREFIX}/cmake/SheafSystem.cmake.in "${MASSAGED_OUTPUT}")
-#file(APPEND ${CMAKE_INSTALL_PREFIX}/cmake/SheafSystem.cmake.in "\n")
     
-# glob all the cmake files. Replace the value of CMAKE_INSTALL_PREFIX with @SHEAFSYSTEM_HOME@
+# Glob all the cmake files in CWD. Replace the value of CMAKE_INSTALL_PREFIX with @SHEAFSYSTEM_HOME@
 file(GLOB CONFIG_FILES "${CMAKE_INSTALL_PREFIX}/cmake//SheafSystem*.cmake")
 foreach(file ${CONFIG_FILES})
+    # Read the file. Store contents in ${file}_contents}
     file(READ ${file} ${file}_contents)
-    string(REPLACE ${CMAKE_INSTALL_PREFIX} "\@SHEAFSYSTEM_HOME\@" ${file}_pass1 "${${file}_contents}")
-#        file(WRITE ${file} "${${file}_OUTPUT}")
-#    file(READ ${file} ${file}_contents)         
-    string(REPLACE "BUILD_TYPE" "OutDir" ${file}_pass2 "${${file}_pass1}")     
-    file(WRITE ${file}.in "${${file}_pass2}")     
+   #Replace the value of CMAKE_INSTALL_PREFIX with @SHEAFSYSTEM_HOME@
+    string(REPLACE "${CMAKE_INSTALL_PREFIX}" "\@SHEAFSYSTEM_HOME\@" ${file}_tmp1 "${${file}_contents}")
+     #Replace BUILD_TYPE with the VS macro OutDir. 
+    if(WIN32) 
+        string(REPLACE "BUILD_TYPE" "OutDir" ${file}_pass2 "${${file}_tmp1}")
+    else() # Linux
+        string(REPLACE "BUILD_TYPE" "CMAKE_BUILD_TYPE" ${file}_tmp2 "${${file}_tmp1}")
+    endif()
+    # Write the result out to a ".in"     
+    file(WRITE ${file}.in "${${file}_tmp2}")
+    #Throw away the original cmake file     
     file(REMOVE ${file})
 endforeach()
