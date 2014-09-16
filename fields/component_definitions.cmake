@@ -84,8 +84,9 @@ function(add_library_targets)
         # Override cmake's placing of "${COMPONENT_LIB}_EXPORTS into the preproc symbol table.
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} 
             PROPERTIES DEFINE_SYMBOL "SHEAF_DLL_EXPORTS")
-        install(TARGETS ${PROJECT_NAME} EXPORT SheafSystem  RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin/\${BUILD_TYPE} ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/\${BUILD_TYPE} INCLUDES DESTINATION ${CMAKE_INSTALL_PREFIX}/include )
+        install(TARGETS ${PROJECT_NAME}  EXPORT SheafSystem  RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin/\${BUILD_TYPE} ARCHIVE  DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/\${BUILD_TYPE} INCLUDES DESTINATION ${CMAKE_INSTALL_PREFIX}/include )
         install(EXPORT SheafSystem  DESTINATION  ${CMAKE_INSTALL_PREFIX}/cmake EXPORT_LINK_INTERFACE_LIBRARIES)
+        
     else() # Linux
   
         # Static library

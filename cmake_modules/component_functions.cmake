@@ -390,31 +390,14 @@ function(write_exports_file)
 
     message(STATUS 
         "Writing ${PROJECT_NAME} detail to ${CMAKE_BINARY_DIR}/${EXPORTS_FILE}")
-
-    
+  
     if(WIN64MSVC OR WIN64INTEL)
         export(TARGETS ${${COMPONENT}_IMPORT_LIB} APPEND 
             FILE ${CMAKE_BINARY_DIR}/${EXPORTS_FILE})
-
     else()
         export(TARGETS ${${COMPONENT}_SHARED_LIB} 
             ${${COMPONENT}_STATIC_LIB} APPEND FILE 
             ${CMAKE_BINARY_DIR}/${EXPORTS_FILE})
-#        file(APPEND  ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-
-#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-    
-#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
-#            "set(${COMPONENT}_STATIC_LIB ${${COMPONENT}_STATIC_LIB} CACHE STRING \"${PROJECT_NAME} static library \")\n")
-        # Mark the variable as advanced           
-#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_STATIC_LIB)\n")  
-#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")     
- 
-#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
-#            "set(${COMPONENT}_SHARED_LIB ${${COMPONENT}_SHARED_LIB} CACHE STRING \"${PROJECT_NAME} shared library \")\n")
-#        # Mark the variable as advanced           
-#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_SHARED_LIB)\n") 
-#        file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")     
 
     endif()
       

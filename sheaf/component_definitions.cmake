@@ -85,7 +85,7 @@ function(add_library_targets)
             LINK_PRIVATE hdf5 )        
         set_target_properties(${${COMPONENT}_DYNAMIC_LIB} PROPERTIES 
             FOLDER "Library Targets")
-                
+         
         install(TARGETS ${PROJECT_NAME}  EXPORT SheafSystem  RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin/\${BUILD_TYPE} ARCHIVE  DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/\${BUILD_TYPE} INCLUDES DESTINATION ${CMAKE_INSTALL_PREFIX}/include )
         install(EXPORT SheafSystem  DESTINATION  ${CMAKE_INSTALL_PREFIX}/cmake EXPORT_LINK_INTERFACE_LIBRARIES)
 

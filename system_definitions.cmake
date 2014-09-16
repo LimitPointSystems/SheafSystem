@@ -17,7 +17,7 @@
 # In CMake version 3.x Keep quiet about dependencies that don't exist yet.
 # CMP0046 set to "OLD" makes CMake 3 behave like CMake 2.8.x
 cmake_policy(SET CMP0046 OLD)
-
+cmake_policy(SET CMP0022 NEW)
 #
 # Install the Windows Runtime lins
 #
@@ -118,7 +118,7 @@ endif()
 set(EXPORTS_FILE ${PROJECT_NAME}-exports.cmake CACHE STRING "System exports file name")
 #set(INSTALL_CONFIG_FILE ${PROJECT_NAME}-install.cmake CACHE STRING "Install config file name")
 mark_as_advanced(EXPORTS_FILE)  
-mark_as_advanced(INSTALL_CONFIG_FILE)  
+#mark_as_advanced(INSTALL_CONFIG_FILE)  
 
 #
 # Delete the exports file at the start of each cmake run
@@ -535,3 +535,78 @@ macro(get_date RESULT)
     endif(WIN32)
 endmacro(get_date)	
 
+#
+# Export this component's library targets and list of includes for install
+# The file locations on an install (includes, libs, etc) are different
+# than they are in a build tree. The install config produces
+# a .cmake.in file that is configured by the client.
+#
+function(export_install_config_file_vars)
+
+    if(WIN64MSVC OR WIN64INTEL)
+        export(TARGETS ${${COMPONENT}_DYNAMIC_LIB} 
+            APPEND FILE ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE})
+        file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+            "set(${COMPONENT}_IMPORT_LIBS ${${COMPONENT}_IMPORT_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative import library list\")\n")
+        file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
+    else()
+        export(TARGETS ${${COMPONENT}_SHARED_LIB} 
+            ${${COMPONENT}_STATIC_LIB} 
+            APPEND FILE ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE})
+        if("${COMPONENT}" MATCHES "SHEAVES")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+                "set(${COMPONENT}_STATIC_LIBS ${${COMPONENT}_STATIC_LIB} CACHE STRING \"${PROJECT_NAME} cumulative static library list\")\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")    
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+                "set(${COMPONENT}_SHARED_LIBS ${${COMPONENT}_SHARED_LIB} CACHE STRING \"${PROJECT_NAME} cumulative shared library list\")\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
+            # This variable should be SHEAFSYSTEM_LIB_OUTPUT_DIR. Fix it.
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+                "set(${COMPONENT}_LIB_OUTPUT_DIR ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} CACHE STRING \"${PROJECT_NAME} library output directory\")\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
+        else()
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+                "set(${COMPONENT}_STATIC_LIBS ${${COMPONENT}_STATIC_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative static library list\")\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")    
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+                "set(${COMPONENT}_SHARED_LIBS ${${COMPONENT}_SHARED_LIBS} CACHE STRING \"${PROJECT_NAME} cumulative shared library list\")\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
+        endif()
+
+        if("${COMPONENT}" MATCHES "TOOLS")        
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+                "set(JMF_JAR ${JMF_JAR} CACHE STRING \"JMF jar location\")\n")
+            file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
+        endif()             
+    endif()
+    file(APPEND  ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
+    file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+        "set(${COMPONENT}_IPATH @SHEAFSYSTEM_HOME@/include CACHE STRING \"${PROJECT_NAME} include path\")\n")
+    file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
+    file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} 
+        "set(${COMPONENT}_IPATHS @SHEAFSYSTEM_HOME@/include CACHE STRING \"${PROJECT_NAME} cumulative include path\")\n")
+    file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
+
+endfunction(export_install_config_file_vars)
+
+#
+# Generate the installed <project>-exports file. Replace hardcoded vars with cmake substitution vars.
+#
+function(generate_install_config_file)
+
+    file(READ ${CMAKE_INSTALL_PREFIX}/cmake/SheafSystem.cmake INSTALL_FILE_CONTENTS)
+
+    string(REPLACE ${CMAKE_BINARY_DIR} "\@SHEAFSYSTEM_HOME\@" 
+        MASSAGED_OUTPUT "${INSTALL_FILE_CONTENTS}")
+
+    file(WRITE ${CMAKE_INSTALL_PREFIX}/SheafSystem.cmake.in "${MASSAGED_OUTPUT}")
+    file(APPEND ${CMAKE_INSTALL_PREFIX}/SheafSystem.cmake.in "\n")
+#    file(APPEND ${CMAKE_INSTALL_PREFIX}/SheafSystem.cmake.in 
+#        "set(VTK_LIBS ${VTK_LIBS} CACHE STRING \"VTK Runtime Libraries\" FORCE)\n")    
+        
+        
+          
+endfunction(generate_install_config_file)
