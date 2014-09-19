@@ -76,18 +76,12 @@ endif()
 #
 file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
     "set(SHEAFSYSTEM_LIB_DIR ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} CACHE STRING \"${PROJECT_NAME} library output directory\")\n")
-# Mark the variable as advanced           
-#file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE SHEAFSYSTEM_LIB_DIR)\n")         
 file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
-
 file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
     "set(SHEAFSYSTEM_BIN_OUTPUT_DIR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY} CACHE STRING \"${PROJECT_NAME} binary output directory\")\n")
-# Mark the variable as advanced           
-#file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE ${COMPONENT}_BIN_OUTPUT_DIR)\n") 
 file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "\n")
 file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} 
     "set(SHEAFSYSTEM_INC_DIR ${CMAKE_BINARY_DIR}/include CACHE STRING \"${PROJECT_NAME} binary output directory\")\n")
-
 
 #
 # Export this component's library targets and list of includes for install
@@ -133,27 +127,6 @@ if(INSTALL_DOCS)
 endif()
 
 #
-# Generate the install configuration file.
-#
-#generate_install_config_file()
-
- #       install(TARGETS sheaf fiber_bundle geometry fields EXPORT sheafsystem RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin INCLUDES DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
-#        install(EXPORT sheafsystem DESTINATION  ${CMAKE_INSTALL_PREFIX} FILE ${INSTALL_CONFIG_FILE} EXPORT_LINK_INTERFACE_LIBRARIES)
-        
-#        install(TARGETS fiber_bundle EXPORT fiber_bundle RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin INCLUDES DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
-#        install(EXPORT fiber_bundle DESTINATION  ${CMAKE_INSTALL_PREFIX} FILE ${INSTALL_CONFIG_FILE} EXPORT_LINK_INTERFACE_LIBRARIES)
-        
-#        install(TARGETS geometry EXPORT geometry RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin INCLUDES DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
-#        install(EXPORT geometry DESTINATION  ${CMAKE_INSTALL_PREFIX} FILE ${INSTALL_CONFIG_FILE} EXPORT_LINK_INTERFACE_LIBRARIES)
-        
-#        install(TARGETS fields EXPORT fields RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin INCLUDES DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
-#        install(EXPORT fields DESTINATION  ${CMAKE_INSTALL_PREFIX} FILE ${INSTALL_CONFIG_FILE} EXPORT_LINK_INTERFACE_LIBRARIES)
-
-
-
-
-
-#
 # Install HDF5 headers to <include> dir
 #
 install_prereqs()
@@ -188,14 +161,4 @@ configure_file(${CMAKE_SOURCE_DIR}/RELEASE_NOTES.in ${CMAKE_BINARY_DIR}/RELEASE_
         install(FILES ${CMAKE_BINARY_DIR}/RELEASE_NOTES DESTINATION ${CMAKE_INSTALL_PREFIX} RENAME RELEASE_NOTES.txt)
     endif()
 #endif()
-
-#    if(WIN64MSVC OR WIN64INTEL)
-#        install(TARGETS ${COMPONENTS} EXPORT 
-#            ${PROJECT_NAME} ARCHIVE DESTINATION lib/\${BUILD_TYPE} 
-#            RUNTIME DESTINATION bin/\${BUILD_TYPE} INCLUDES DESTINATION include/ComLimitPoint/SheafSystem)
-#    endif()
-
- #
-# Generate the install configuration file.
-#
 

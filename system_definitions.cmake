@@ -591,22 +591,3 @@ function(export_install_config_file_vars)
     file(APPEND ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE} "\n")
 
 endfunction(export_install_config_file_vars)
-
-#
-# Generate the installed <project>-exports file. Replace hardcoded vars with cmake substitution vars.
-#
-function(generate_install_config_file)
-
-    file(READ ${CMAKE_INSTALL_PREFIX}/cmake/SheafSystem.cmake INSTALL_FILE_CONTENTS)
-
-    string(REPLACE ${CMAKE_BINARY_DIR} "\@SHEAFSYSTEM_HOME\@" 
-        MASSAGED_OUTPUT "${INSTALL_FILE_CONTENTS}")
-
-    file(WRITE ${CMAKE_INSTALL_PREFIX}/SheafSystem.cmake.in "${MASSAGED_OUTPUT}")
-    file(APPEND ${CMAKE_INSTALL_PREFIX}/SheafSystem.cmake.in "\n")
-#    file(APPEND ${CMAKE_INSTALL_PREFIX}/SheafSystem.cmake.in 
-#        "set(VTK_LIBS ${VTK_LIBS} CACHE STRING \"VTK Runtime Libraries\" FORCE)\n")    
-        
-        
-          
-endfunction(generate_install_config_file)

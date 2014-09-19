@@ -73,8 +73,6 @@ elseif(LINUX64GNU)
         "GNU C++ compiler library path." )
 endif()
 
-
-
 #------------------------------------------------------------------------------
 # Function Definition Section.
 #------------------------------------------------------------------------------
@@ -350,7 +348,6 @@ function(set_component_vars)
     set(${COMPONENT}_CSHARP_BINDING_LIB ${PROJECT_NAME}_csharp_binding 
         CACHE STRING "${PROJECT_NAME} csharp binding library name")
     set(${COMPONENT}_CSHARP_BINDING_SRC_DIR 
- #       ${CMAKE_CURRENT_SOURCE_DIR}/bindings/csharp/src 
         ${CMAKE_CURRENT_SOURCE_DIR}/${LANG_BINDINGS_ROOT}/csharp/src 
         CACHE STRING "${PROJECT_NAME} csharp source directory")
     set(${COMPONENT}_SWIG_CSHARP_INTERFACE ${PROJECT_NAME}_csharp_binding.i 
