@@ -2218,9 +2218,9 @@ initialize_poset_id_spaces_for_write(poset_state_handle& xposet)
   }
   else
   {
-    mutable_index_space_handle& lid_space =
+    scattered_insertion_index_space_handle& lid_space =
       xposet.subposet_id_spaces(false).
-      get_id_space<mutable_index_space_handle>(_file_id_space_name);
+      get_id_space<scattered_insertion_index_space_handle>(_file_id_space_name);
     lid_space.clear();
     lid_space.release_id_space();
   }
@@ -2263,7 +2263,7 @@ clear_all_id_spaces(namespace_poset& xns)
   // Clear the member file id spaces for the name space
   // and every poset in it.
 
-  mutable_index_space_handle lid_space;
+  scattered_insertion_index_space_handle lid_space;
 
   zn_to_bool_postorder_itr itr0(xns.top(), "jims", DOWN, NOT_STRICT);
   while(!itr0.is_done())

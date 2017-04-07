@@ -130,7 +130,7 @@ new_space(index_space_family& xid_spaces,
 
 sheaf::array_index_space_state::
 array_index_space_state()
-  : mutable_index_space_state()
+  : scattered_insertion_index_space_state()
 {
   // Preconditions:
     
@@ -259,6 +259,70 @@ capacity() const
 
 // PROTECTED MEMBER FUNCTIONS
 
+void
+sheaf::array_index_space_state::
+update_extrema_after_remove()
+{
+  // cout << endl << "Entering array_index_space_state::update_extrema_after_remove." << endl;
+  // cout << "id space name: " << id_spaces().name(index()) << endl;
+  
+  // Preconditions:
+
+
+  // Body:
+
+  // We've just removed a member, so new bounds must be
+  // within old bounds.
+
+  if(_ct > 0)
+  {
+    // cout << "The id space is not empty." << endl;
+    // cout << "Find the new begin." << endl;
+
+    for(pod_index_type i = _begin; i < _end; ++i)
+    {
+      // cout << "i: " << i;
+      if(is_valid(_to_range[i]))
+      {
+        // cout << " is begin." << endl;
+        _begin = i;
+        break;
+      }
+      // cout << endl;   
+    }
+
+    // cout << "Find the new end." << endl;
+
+    for(pod_index_type i = _end - 1; i >= _begin; --i)
+    {
+      // cout << "i: " << i;
+      if(is_valid(_to_range[i]))
+      {
+        // cout << " is last." << endl;
+        _end = i+1;
+        break;
+      }
+      // cout << endl;
+    }
+    
+  }
+  else
+  {
+    // cout << "The id space is empty." << endl;
+
+    assertion(is_empty());
+
+    invalidate_extrema();
+  }
+
+  // Postconditions:
+
+  // Exit
+
+  // cout << "Leaving array_index_space_state::update_extrema_after_remove." << endl;
+  return;
+}
+
 // PRIVATE MEMBER FUNCTIONS
 
 
@@ -358,6 +422,12 @@ sheaf::size_type
 sheaf::array_index_space_state::
 map_rep_remove_entry(pod_type xid, bool xis_range_id)
 {
+  // cout << endl << "Entering array_index_space_state::map_rep_remove_entry." << endl;
+  // cout << "id space name: " << id_spaces().name(index()) << endl;
+  // cout << "xid: " << xid << endl;
+  // cout << "xis_range_id: " << xis_range_id << endl;
+  // cout << "domain id: " << (xis_range_id ? pod(xid) : xid) << endl;
+
   // Preconditions:
 
   // Body:
@@ -417,6 +487,7 @@ map_rep_remove_entry(pod_type xid, bool xis_range_id)
 
   // Exit
 
+  // cout << "Leaving array_index_space_state::map_rep_remove_entry." << endl;
   return result;
 }
 
@@ -549,7 +620,7 @@ operator==(const explicit_index_space_state& xother) const
   const array_index_space_state& lother =
     dynamic_cast<const array_index_space_state&>(xother);
 
-  bool result = mutable_index_space_state::operator==(xother);
+  bool result = scattered_insertion_index_space_state::operator==(xother);
   result = result && (_to_range.ub() == lother._to_range.ub());
   pod_type lindex(0);
   while(result && lindex < _to_range.ub())
@@ -605,7 +676,7 @@ operator=(const explicit_index_space_state& xother)
   _to_domain = lother._to_domain;
   _to_range  = lother._to_range;
 
-  (void) mutable_index_space_state::operator=(xother);
+  (void) scattered_insertion_index_space_state::operator=(xother);
 
   // Postconditions:
 
@@ -1113,7 +1184,7 @@ invariant() const
 
     // Must satisfy base class invariant
 
-    invariance(mutable_index_space_state::invariant());
+    invariance(scattered_insertion_index_space_state::invariant());
 
     // Invariances for this class:
       
@@ -1148,7 +1219,7 @@ deep_size(const array_index_space_state& xn, bool xinclude_shallow)
 
   // Add any contributions from the parent class.
 
-  const mutable_index_space_state& ixn = static_cast<const mutable_index_space_state&>(xn);
+  const scattered_insertion_index_space_state& ixn = static_cast<const scattered_insertion_index_space_state&>(xn);
   result += deep_size(ixn, false);
 
   // Add contribution from unordered_map<pod_type, pod_type> to_domain_type.

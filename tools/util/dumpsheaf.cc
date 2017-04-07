@@ -24,6 +24,7 @@
 
 #include "namespace_poset.h"
 #include "poset_handle_factory.h"
+#include "std_fstream.h"
 #include "std_iostream.h"
 #include "storage_agent.h"
 
@@ -39,14 +40,16 @@ string filename;
 int
 main(int argc, char** argv)
 {
- if (argc > 1)
+  if (argc > 1)
   {
     // test for existence of file
     // if the filename is not valid, then exit 0 with warning message
 
-    if (access(argv[1],0) == 0)
+    ifstream ltest(argv[1]);
+    if (ltest.is_open())
     {
       filename = argv[1];
+      ltest.close();
     }
     else
     {

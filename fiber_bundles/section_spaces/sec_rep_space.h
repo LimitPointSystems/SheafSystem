@@ -25,8 +25,8 @@
 #include "sheaf_dll_spec.h"
 #endif
 
-#ifndef MUTABLE_INDEX_SPACE_HANDLE_H
-#include "mutable_index_space_handle.h"
+#ifndef SCATTERED_INSERTION_INDEX_SPACE_HANDLE_H
+#include "scattered_insertion_index_space_handle.h"
 #endif
 
 #ifndef POSET_H
@@ -244,24 +244,24 @@ public:
   ///
   /// The sequence id space for multisections (const version).
   ///
-  const mutable_index_space_handle& multisection_id_space(bool xauto_access) const;
+  const scattered_insertion_index_space_handle& multisection_id_space(bool xauto_access) const;
 
   ///
   /// The sequence id space for multisections (mutable version).
   ///
-   mutable_index_space_handle& multisection_id_space(bool xauto_access);
+   scattered_insertion_index_space_handle& multisection_id_space(bool xauto_access);
 
   ///
   /// Allocate an id space handle from the handle pool attached to the
   /// branch id space of the multisection with hub id xhub_id.
   ///
-  mutable_index_space_handle& get_branch_id_space(pod_index_type xhub_id, bool xauto_access);
+  scattered_insertion_index_space_handle& get_branch_id_space(pod_index_type xhub_id, bool xauto_access);
 
   ///
   /// Allocate an id space handle from the handle pool attached to the
   /// branch id space of the multisection with id xid.
   ///
-  mutable_index_space_handle& get_branch_id_space(const scoped_index& xid, bool xauto_access);
+  scattered_insertion_index_space_handle& get_branch_id_space(const scoped_index& xid, bool xauto_access);
 
   ///
   /// Returns the id space handle xid_space to the handle pool.
@@ -300,7 +300,7 @@ protected:
   ///
   /// The sequence id space for multisections.
   ///
-  mutable mutable_index_space_handle _multisection_id_space;
+  mutable scattered_insertion_index_space_handle _multisection_id_space;
 
 private:
 

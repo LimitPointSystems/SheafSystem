@@ -237,7 +237,7 @@ public class Stage implements ActionListener
 
     win2img.SetInput(renderWindow);
     win2img.ReleaseDataFlagOn();
-    imageWriter.SetInput(win2img.GetOutput());
+    imageWriter.SetInputData(win2img.GetOutput());
   }
 
   /**
@@ -1049,7 +1049,7 @@ public class Stage implements ActionListener
 
     lock();
     win2img.Modified();
-    writer.SetInput(win2img.GetOutput());
+    writer.SetInputData(win2img.GetOutput());
     writer.SetFileName(xfileName);
     writer.Write();
     unlock();

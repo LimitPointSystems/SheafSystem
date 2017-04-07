@@ -35,7 +35,7 @@
 #include "list_index_space_state.h" // for initialize_prototypes
 #include "namespace_poset_dof_map.h"
 #include "namespace_poset_member.h"
-#include "mutable_index_space_handle.h"
+#include "scattered_insertion_index_space_handle.h"
 #include "offset_index_space_state.h" // for intialize_prototypes
 #include "poset_handle_factory.h"
 #include "poset_path.h"
@@ -938,8 +938,8 @@ insert_poset(const poset_state_handle& xposet, const std::string& xposet_name, b
 
     // Add member poset to sequence id space.
 
-    mutable_index_space_handle& lid_space = 
-      member_id_spaces(false).get_id_space<mutable_index_space_handle>("member_poset_id_space");
+    scattered_insertion_index_space_handle& lid_space = 
+      member_id_spaces(false).get_id_space<scattered_insertion_index_space_handle>("member_poset_id_space");
     lid_space.push_back(lns_mbr.index());
     release_member_poset_id_space(lid_space, false);
 
@@ -1000,8 +1000,8 @@ insert_poset(const poset_state_handle& xposet, const std::string& xposet_name, b
 
   // Add member poset to sequence id space.
 
-  mutable_index_space_handle& lid_space = 
-    member_id_spaces(false).get_id_space<mutable_index_space_handle>("member_poset_id_space");
+  scattered_insertion_index_space_handle& lid_space = 
+    member_id_spaces(false).get_id_space<scattered_insertion_index_space_handle>("member_poset_id_space");
   lid_space.push_back(lns_mbr.index());
   release_member_poset_id_space(lid_space, false);
 

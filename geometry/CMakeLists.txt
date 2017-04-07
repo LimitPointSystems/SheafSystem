@@ -14,7 +14,35 @@
 # limitations under the License.
 #
 
-project(geometry)
+#
+# Announce current status.
+#
+SheafSystem_status_message("Processing geometry component")
+
+#
+# Define the clusters for this component.
+#
+set(clusters coordinates general point_locators template_instantiations)
+
+#
+# Include functions and definitions common to all components.
+# 
+include(${SHEAFSYSTEM_CMAKE_MODULE_PATH}/component_functions.cmake)
+
+#
+# Initialize all variables for this component.
+#
+SheafSystem_set_component_variables(geometry)
+
+#
+# Add the clusters to the project
+#
+SheafSystem_add_clusters("${clusters}")
+
+#
+# Set the ipath variable.
+#
+SheafSystem_set_component_ipath_variable(geometry "${clusters}")
 
 #
 # Include the functions and variable definitions unique to this component.
@@ -22,37 +50,25 @@ project(geometry)
 include(${CMAKE_CURRENT_SOURCE_DIR}/component_definitions.cmake)
 
 #
-# Announce current status.
+# Set some cumulative geometry-specific variables
 #
-status_message("Processing ${PROJECT_NAME}")
-
-#
-# Set up output directories
-#
-create_output_dirs()
+SheafSystem_set_cumulative_geometry_variables()
 
 #
 # Add the library targets
 #
-add_library_targets()
+SheafSystem_add_geometry_library_targets()
 
 #
 # Add Bindings targets
 #
-add_bindings_targets()
+if(SHEAFSYSTEM_BUILD_BINDINGS)
+   SheafSystem_add_geometry_bindings_targets()
+endif()
 
 #
 # Installation target
 #
-add_install_target()
-
-#
-# Write this component's lib targets and include paths to an export file.
-#
-write_exports_file()
-
-#
-# Prepare this component's lib targets and include paths for export to an install config file.
-#
-export_install_config_file_vars()
+#SheafSystem_add_geometry_install_target()
+SheafSystem_add_component_install_target(geometry)
 

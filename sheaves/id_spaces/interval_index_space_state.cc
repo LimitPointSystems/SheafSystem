@@ -340,7 +340,7 @@ map_value(pod_type xid, const std::map<pod_type, pod_type>& xmap)
 
 sheaf::interval_index_space_state::
 interval_index_space_state()
-  : mutable_index_space_state()
+  : scattered_insertion_index_space_state()
 {
   // Preconditions:
     
@@ -583,7 +583,7 @@ remove_hub_interval(pod_type xhub_begin, pod_type xhub_end)
 
   // Update the extrema.
 
-  update_extrema();
+  update_extrema_after_remove();
 
   // Postconditions:
 
@@ -614,7 +614,7 @@ remove_interval(pod_type xbegin, pod_type xend)
 
   // Update the extrema.
 
-  update_extrema();
+  update_extrema_after_remove();
 
   // Postconditions:
 
@@ -837,6 +837,17 @@ invalid_entry_ct(pod_type xhub_begin, pod_type xhub_end) const
 
 // ===========================================================
 // MUTABLE INDEX SPACE FACET
+// ===========================================================
+
+// PUBLIC MEMBER FUNCTIONS
+
+// PROTECTED MEMBER FUNCTIONS
+
+// PRIVATE MEMBER FUNCTIONS
+ 
+
+// ===========================================================
+// GATHERED_INSERTION_INDEX_SPACE FACET
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -1350,7 +1361,7 @@ operator==(const explicit_index_space_state& xother) const
   const interval_index_space_state& lother =
     dynamic_cast<const interval_index_space_state&>(xother);
 
-  bool result = mutable_index_space_state::operator==(xother);
+  bool result = scattered_insertion_index_space_state::operator==(xother);
   result = result && (_to_range == lother._to_range);
   result = result && (_to_domain == lother._to_domain);
   result = result && (_merge_mode == lother._merge_mode);
@@ -1402,7 +1413,7 @@ operator=(const explicit_index_space_state& xother)
   _merge_mode = lother._merge_mode;
   _capacity   = lother._capacity;
 
-  (void) mutable_index_space_state::operator=(xother);
+  (void) scattered_insertion_index_space_state::operator=(xother);
 
   // Postconditions:
 
@@ -1881,7 +1892,7 @@ invariant() const
 
     // Must satisfy base class invariant
 
-    invariance(mutable_index_space_state::invariant());
+    invariance(scattered_insertion_index_space_state::invariant());
 
     // Invariances for this class:
       
@@ -1916,7 +1927,7 @@ deep_size(const interval_index_space_state& xn, bool xinclude_shallow)
 
   // Add any contributions from the parent class.
 
-  const mutable_index_space_state& ixn = static_cast<const mutable_index_space_state&>(xn);
+  const scattered_insertion_index_space_state& ixn = static_cast<const scattered_insertion_index_space_state&>(xn);
   result += deep_size(ixn, false);
 
   // Add the memory allocated in member _to_domain.

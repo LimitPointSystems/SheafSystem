@@ -54,7 +54,7 @@ extern "C" JNIEXPORT jlong JNICALL
   JAWT_DrawingSurface* ds = awt.GetDrawingSurface(xenv, xcanvas);
   if(ds == NULL)
   {
-    cout << "Error getting drawing surface" << endl;
+    std::cout << "Error getting drawing surface" << std::endl;
     return -1;
   }
 
@@ -64,7 +64,7 @@ extern "C" JNIEXPORT jlong JNICALL
                 ;
   if((lock & JAWT_LOCK_ERROR) != 0)
   {
-    cout << "Error locking drawing surface" << endl;
+    std::cout << "Error locking drawing surface" << std::endl;
     awt.FreeDrawingSurface(ds);
     return -1;
   }
@@ -74,7 +74,7 @@ extern "C" JNIEXPORT jlong JNICALL
   JAWT_DrawingSurfaceInfo* dsi = ds->GetDrawingSurfaceInfo(ds);
   if(dsi == NULL)
   {
-    cout << "Error getting surface info" << endl;
+    std::cout << "Error getting surface info" << std::endl;
     ds->Unlock(ds);
     awt.FreeDrawingSurface(ds);
     return -1;

@@ -56,7 +56,7 @@ box_list(sec_vd_value_type* xpt, size_type xpt_ub) const
   // Body:
 
   d_bin_coordinates<DC, DB> lcoord;
-  relative_position_pa(xpt, xpt_ub, lcoord);
+  this->relative_position_pa(xpt, xpt_ub, lcoord);
 
   const box_list_type& result = _bins[bin_id(lcoord)];
 

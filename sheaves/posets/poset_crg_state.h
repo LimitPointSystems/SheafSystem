@@ -64,7 +64,7 @@
 namespace sheaf
 {
 
-class mutable_index_space_handle;
+class scattered_insertion_index_space_handle;
 class index_space_family;
 class crg_interval;
 class implicit_crg_interval;

@@ -89,7 +89,7 @@ set(SRCS
     section_traits.cc
    )
 
-collect_sources()
+SheafSystem_collect_sources(fiber_bundles "${SRCS}")
 
 #
 # Headers that are NOT associated with a .cc file.
@@ -112,7 +112,7 @@ set(ADDITIONAL_INCS
     section_space_schema_table_dofs_type.h 
    )
 
-collect_includes()
+SheafSystem_collect_includes(fiber_bundles "${SRCS}" "${ADDITIONAL_INCS}")
 
 #
 # Source for unit test executables.
@@ -120,7 +120,7 @@ collect_includes()
 set(UNIT_TEST_SRCS
    )
 
-collect_unit_test_sources()
+SheafSystem_collect_unit_test_sources(fiber_bundles "${UNIT_TEST_SRCS}")
 
 #
 # Source for non-test executables.
@@ -128,4 +128,4 @@ collect_unit_test_sources()
 set(EXAMPLE_SRCS
    )
 
-collect_example_sources()
+SheafSystem_collect_example_sources(fiber_bundles "${EXAMPLE_SRCS}")

@@ -14,7 +14,46 @@
 # limitations under the License.
 #
 
-project(tools)
+# Logic below depends on SHEAFSYSTEM_BUILD_BINDINGS being on if SHEAFSYSTEM_BUILD_SHEAFSCOPE is.
+
+dbc_require_implies(SHEAFSYSTEM_BUILD_SHEAFSCOPE SHEAFSYSTEM_BUILD_BINDINGS)
+
+#
+# Announce current status.
+#
+SheafSystem_status_message("Processing tools component")
+
+#
+# Define the clusters for this component.
+#
+if(SHEAFSYSTEM_BUILD_BINDINGS)
+   set(clusters SheafScope common/client_server common/event common/gui common/util 
+      util viewer/animation viewer/common viewer/event viewer/render viewer/table 
+      viewer/user viewer/application)
+else()
+   set(clusters util)
+endif()
+
+
+#
+# Include functions and definitions common to all components.
+# 
+include(${SHEAFSYSTEM_CMAKE_MODULE_PATH}/component_functions.cmake)
+
+#
+# Initialize standard variables for this component.
+#
+SheafSystem_set_component_variables(tools)
+
+#
+# Add the clusters to the project
+#
+SheafSystem_add_clusters("${clusters}")
+
+#
+# Set the ipath variable.
+#
+SheafSystem_set_component_ipath_variable(tools "${clusters}")
 
 #
 # Include the functions and variable definitions unique to this component.
@@ -22,9 +61,9 @@ project(tools)
 include(${CMAKE_CURRENT_SOURCE_DIR}/component_definitions.cmake)
 
 #
-# Announce current status.
+# Set some cumulative tools-specific variables
 #
-status_message("Processing ${PROJECT_NAME}")
+SheafSystem_set_cumulative_tools_variables()
 
 #
 # examples will corrupt the scope sources. Include it after.
@@ -34,52 +73,32 @@ add_subdirectory(examples)
 #
 # Intialize the SheafScope sources var
 #
-set_scope_sources()
+SheafSystem_set_scope_sources()
 
-#
-# Set up output directories
-#
-create_output_dirs()
-
-#
-# Add the library targets
-#
-if(BUILD_SHEAFSCOPE)
-    add_library_targets()
+if(SHEAFSYSTEM_BUILD_BINDINGS)
+   #
+   # Add the library targets
+   #
+   SheafSystem_add_tools_library_targets()
+   #
+   # Add Bindings targets
+   #
+   SheafSystem_add_tools_bindings_targets()
 endif()
-
-#
-# Add Bindings targets
-#
-add_bindings_targets()
-
-#
-# Installation target
-#
-add_install_target()
-
-
-if(BUILD_SHEAFSCOPE OR BUILD_BINDINGS)
-    #
-    # Write this component's lib targets and include paths to an export file.
-    #
-    write_exports_file()
-    #
-    # Prepare this component's lib targets and include paths for export to an install config file.
-    #
-    export_install_config_file_vars()
-endif()
-
 
 #
 # Add a target for the dumpsheaf utility
 #
-add_dumpsheaf_target()
+SheafSystem_add_dumpsheaf_target()
 
 #
 # Add a target for the sheafscope exe wrapper
 #
-if(BUILD_SHEAFSCOPE)
-    add_sheafscope_wrapper_target()
+if(SHEAFSYSTEM_BUILD_SHEAFSCOPE)
+    SheafSystem_add_sheafscope_wrapper_target()
 endif()
 
+#
+# Installation target
+#
+SheafSystem_add_tools_install_target()

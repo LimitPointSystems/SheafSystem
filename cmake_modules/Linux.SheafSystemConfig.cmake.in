@@ -1,0 +1,63 @@
+#
+#
+# Copyright (c) 2016 Limit Point Systems, Inc. 
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+#
+# SheafSystem config file
+# Should be included by clients using CMake to build applications using SheafSystem
+#
+
+@PACKAGE_INIT@   
+
+# Define variables as abstract names for exported targets.
+
+set(SHEAVES_STATIC_LIB @SHEAVES_STATIC_LIB@ CACHE STRING "Sheaves static library target" FORCE)
+mark_as_advanced(FORCE SHEAVES_STATIC_LIB)
+
+set(SHEAVES_SHARED_LIB @SHEAVES_SHARED_LIB@ CACHE STRING "Sheaves shared library target" FORCE)
+mark_as_advanced(FORCE SHEAVES_SHARED_LIB)
+
+set(FIBER_BUNDLES_STATIC_LIB @FIBER_BUNDLES_STATIC_LIB@ CACHE STRING "Fiber_Bundles static library target" FORCE)
+mark_as_advanced(FORCE FIBER_BUNDLES_STATIC_LIB)
+
+set(FIBER_BUNDLES_SHARED_LIB @FIBER_BUNDLES_SHARED_LIB@ CACHE STRING "Fiber_Bundles shared library target" FORCE)
+mark_as_advanced(FORCE FIBER_BUNDLES_SHARED_LIB)
+
+set(GEOMETRY_STATIC_LIB @GEOMETRY_STATIC_LIB@ CACHE STRING "Geometry static library target" FORCE)
+mark_as_advanced(FORCE GEOMETRY_STATIC_LIB)
+
+set(GEOMETRY_SHARED_LIB @GEOMETRY_SHARED_LIB@ CACHE STRING "Geometry shared library target" FORCE)
+mark_as_advanced(FORCE GEOMETRY_SHARED_LIB)
+
+set(FIELDS_STATIC_LIB @FIELDS_STATIC_LIB@ CACHE STRING "Fields static library target" FORCE)
+mark_as_advanced(FORCE FIELDS_STATIC_LIB)
+
+set(FIELDS_SHARED_LIB @FIELDS_SHARED_LIB@ CACHE STRING "Fields shared library target" FORCE)
+mark_as_advanced(FORCE FIELDS_SHARED_LIB)
+
+set(TOOLS_STATIC_LIB @TOOLS_STATIC_LIB@ CACHE STRING "Tools static library target" FORCE)
+mark_as_advanced(FORCE TOOLS_STATIC_LIB)
+
+set(TOOLS_SHARED_LIB @TOOLS_SHARED_LIB@ CACHE STRING "Tools shared library target" FORCE)
+mark_as_advanced(FORCE TOOLS_SHARED_LIB)
+
+if(NOT TARGET ${SHEAVES_STATIC_LIB})
+
+  # Export targets not already defined by some previous include; define them now.
+  
+  include(@PACKAGE_SHEAFSYSTEM_CONFIG_INSTALL_DIR@/SheafSystemTargets.cmake)
+  
+endif ()

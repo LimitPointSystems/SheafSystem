@@ -16,23 +16,23 @@
 //
 
 /// @file
-/// Implementation for class mutable_index_space_handle
+/// Implementation for class gathered_insertion_index_space_handle
 
-#include "mutable_index_space_handle.h"
+#include "gathered_insertion_index_space_handle.h"
 #include "assert_contract.h"
 #include "index_space_family.h"
 #include "index_space_iterator.h"
-#include "mutable_index_space_state.h"
+#include "gathered_insertion_index_space_state.h"
 #include "scoped_index.h"
 
 // ===========================================================
-// MUTABLE_INDEX_SPACE_HANDLE FACET
+// GATHERED_INSERTION_INDEX_SPACE_HANDLE FACET
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
 
-sheaf::mutable_index_space_handle::
-mutable_index_space_handle()
+sheaf::gathered_insertion_index_space_handle::
+gathered_insertion_index_space_handle()
   : explicit_index_space_handle()
 {
   // Preconditions:
@@ -48,8 +48,8 @@ mutable_index_space_handle()
   return; 
 }
 
-sheaf::mutable_index_space_handle::
-mutable_index_space_handle(const mutable_index_space_handle& xother)
+sheaf::gathered_insertion_index_space_handle::
+gathered_insertion_index_space_handle(const gathered_insertion_index_space_handle& xother)
 {
   // Preconditions:
     
@@ -67,8 +67,8 @@ mutable_index_space_handle(const mutable_index_space_handle& xother)
   return; 
 }
 
-sheaf::mutable_index_space_handle::
-mutable_index_space_handle(const index_space_family& xid_spaces,
+sheaf::gathered_insertion_index_space_handle::
+gathered_insertion_index_space_handle(const index_space_family& xid_spaces,
 			   pod_type xindex)
 {
   // Preconditions:
@@ -92,8 +92,8 @@ mutable_index_space_handle(const index_space_family& xid_spaces,
   return;
 }
 
-sheaf::mutable_index_space_handle::
-mutable_index_space_handle(const index_space_family& xid_spaces,
+sheaf::gathered_insertion_index_space_handle::
+gathered_insertion_index_space_handle(const index_space_family& xid_spaces,
 			   const std::string& xname)
 {
   // Preconditions:
@@ -117,9 +117,9 @@ mutable_index_space_handle(const index_space_family& xid_spaces,
   return;
 }
 
-sheaf::mutable_index_space_handle&
-sheaf::mutable_index_space_handle::
-operator=(const mutable_index_space_handle& xother)
+sheaf::gathered_insertion_index_space_handle&
+sheaf::gathered_insertion_index_space_handle::
+operator=(const gathered_insertion_index_space_handle& xother)
 {
   // Preconditions:
 
@@ -139,8 +139,8 @@ operator=(const mutable_index_space_handle& xother)
   return *this;
 }
 
-sheaf::mutable_index_space_handle::
-~mutable_index_space_handle()
+sheaf::gathered_insertion_index_space_handle::
+~gathered_insertion_index_space_handle()
 {  
   // Preconditions:
     
@@ -157,8 +157,8 @@ sheaf::mutable_index_space_handle::
 
 // PROTECTED MEMBER FUNCTIONS
 
-sheaf::mutable_index_space_state&
-sheaf::mutable_index_space_handle::
+sheaf::gathered_insertion_index_space_state&
+sheaf::gathered_insertion_index_space_handle::
 state()
 {
   // Preconditions:
@@ -167,8 +167,8 @@ state()
 
   // Body:
 
-  mutable_index_space_state& result =
-    reinterpret_cast<mutable_index_space_state&>(*_state);
+  gathered_insertion_index_space_state& result =
+    reinterpret_cast<gathered_insertion_index_space_state&>(*_state);
 
   // Postconditions:
 
@@ -179,8 +179,8 @@ state()
   return result;
 }
 
-const sheaf::mutable_index_space_state&
-sheaf::mutable_index_space_handle::
+const sheaf::gathered_insertion_index_space_state&
+sheaf::gathered_insertion_index_space_handle::
 state() const
 {
   // Preconditions:
@@ -189,8 +189,8 @@ state() const
 
   // Body:
 
-  const mutable_index_space_state& result =
-    reinterpret_cast<const mutable_index_space_state&>(*_state);
+  const gathered_insertion_index_space_state& result =
+    reinterpret_cast<const gathered_insertion_index_space_state&>(*_state);
 
   // Postconditions:
 
@@ -205,72 +205,13 @@ state() const
 
 
 // ===========================================================
-// MUTABLE INDEX SPACE FACET
+// GATHERED_INSERTION INDEX SPACE FACET
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
 
 void
-sheaf::mutable_index_space_handle::
-insert(pod_type xid, const scoped_index& xhub_id)
-{
-  // Preconditions:
-
-  require(is_attached());
-  require(xhub_id.in_scope());
-  require(precondition_of(insert(xid, xhub_id.hub_pod())));
-
-  // Body:
-
-  insert(xid, xhub_id.hub_pod());
-
-  // Postconditions:
-
-  ensure(postcondition_of(insert(xid, xhub_id.hub_pod())));
-
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::mutable_index_space_handle::
-insert(pod_type xid, pod_type xhub_id)
-{
-  // Preconditions:
-
-  require(is_attached());
-  require(is_valid(xid));
-  require(is_valid(xhub_id));
-  require(!contains(xid));
-  require(!contains_hub(xhub_id));
-  require(hub_id_space().contains(xhub_id));
-
-  // Body:
-
-  define_old_variable(size_type old_ct = ct());
-  define_old_variable(pod_type old_begin = begin());
-  define_old_variable(pod_type old_end = end());
-
-  state().insert(xid, xhub_id);
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(contains(xid, xhub_id));
-  ensure(ct() == old_ct + 1);
-  ensure(ct() > 1 ? begin() <= old_begin : true);
-  ensure(begin() <= xid);
-  ensure(ct() > 1 ? end() >= old_end : true);
-  ensure(end() > xid);
-
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::mutable_index_space_handle::
+sheaf::gathered_insertion_index_space_handle::
 push_back(const scoped_index& xhub_id)
 {
   // Preconditions:
@@ -293,7 +234,7 @@ push_back(const scoped_index& xhub_id)
 }
 
 void
-sheaf::mutable_index_space_handle::
+sheaf::gathered_insertion_index_space_handle::
 push_back(pod_type xhub_id)
 {
   // Preconditions:
@@ -324,7 +265,7 @@ push_back(pod_type xhub_id)
 }
 
 void
-sheaf::mutable_index_space_handle::
+sheaf::gathered_insertion_index_space_handle::
 push(index_space_iterator& xitr, const scoped_index& xhub_id)
 {
   // Preconditions:
@@ -347,7 +288,7 @@ push(index_space_iterator& xitr, const scoped_index& xhub_id)
 }
 
 void
-sheaf::mutable_index_space_handle::
+sheaf::gathered_insertion_index_space_handle::
 push(index_space_iterator& xitr, pod_type xhub_id)
 {
   // Preconditions:
@@ -384,8 +325,8 @@ push(index_space_iterator& xitr, pod_type xhub_id)
   return;
 }
 
-sheaf::mutable_index_space_handle::pod_type
-sheaf::mutable_index_space_handle::
+sheaf::gathered_insertion_index_space_handle::pod_type
+sheaf::gathered_insertion_index_space_handle::
 next_id() const
 {
   // Preconditions:
@@ -406,7 +347,7 @@ next_id() const
 }
 
 sheaf::size_type
-sheaf::mutable_index_space_handle::
+sheaf::gathered_insertion_index_space_handle::
 remove(const scoped_index& xid, bool xupdate_extrema)
 {
   // Preconditions:
@@ -429,7 +370,7 @@ remove(const scoped_index& xid, bool xupdate_extrema)
 }
 
 sheaf::size_type
-sheaf::mutable_index_space_handle::
+sheaf::gathered_insertion_index_space_handle::
 remove(pod_type xid, bool xupdate_extrema)
 {
   // Preconditions:
@@ -441,12 +382,14 @@ remove(pod_type xid, bool xupdate_extrema)
   define_old_variable(size_type old_ct = ct());
   define_old_variable(pod_type old_begin = begin());
   define_old_variable(pod_type old_end = end());
+  define_old_variable(pod_type old_hub_pod = hub_pod(xid));
 
   size_type result = state().remove(xid, xupdate_extrema);
   
   // Postconditions:
 
-  ensure(!contains(xid));
+  //  ensure(!contains(xid));
+  ensure(!contains(xid, old_hub_pod));
   ensure((result != 0) ? ct() == old_ct - 1 : ct() == old_ct);
   ensure((result == 0) || xupdate_extrema || begin() == old_begin);
   ensure((result == 0) || xupdate_extrema || end() == old_end);
@@ -461,7 +404,7 @@ remove(pod_type xid, bool xupdate_extrema)
 }
 
 sheaf::size_type
-sheaf::mutable_index_space_handle::
+sheaf::gathered_insertion_index_space_handle::
 remove_hub(pod_type xhub_id, bool xupdate_extrema)
 {
   // Preconditions:
@@ -494,7 +437,7 @@ remove_hub(pod_type xhub_id, bool xupdate_extrema)
 }
 
 void
-sheaf::mutable_index_space_handle::
+sheaf::gathered_insertion_index_space_handle::
 remove(index_space_iterator& xitr, bool xupdate_extrema)
 {
   // Preconditions:
@@ -533,7 +476,7 @@ remove(index_space_iterator& xitr, bool xupdate_extrema)
 }
 
 void
-sheaf::mutable_index_space_handle::
+sheaf::gathered_insertion_index_space_handle::
 gather()
 {
   // Preconditions:
@@ -555,7 +498,7 @@ gather()
 }
 
 void
-sheaf::mutable_index_space_handle::
+sheaf::gathered_insertion_index_space_handle::
 update_extrema()
 {
   // Preconditions:
@@ -576,29 +519,7 @@ update_extrema()
 }
 
 void
-sheaf::mutable_index_space_handle::
-clear()
-{
-  // Preconditions:
-
-  require(is_attached());
-
-  // Body:
-
-  state().clear();
-  
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(is_empty());
-  
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::mutable_index_space_handle::
+sheaf::gathered_insertion_index_space_handle::
 reserve(size_type xcapacity)
 {
   // Preconditions:
@@ -620,7 +541,7 @@ reserve(size_type xcapacity)
 }
 
 sheaf::size_type
-sheaf::mutable_index_space_handle::
+sheaf::gathered_insertion_index_space_handle::
 capacity() const
 {
   // Preconditions:
@@ -638,6 +559,28 @@ capacity() const
   // Exit:
 
   return result;
+}
+
+void
+sheaf::gathered_insertion_index_space_handle::
+clear()
+{
+  // Preconditions:
+
+  require(is_attached());
+
+  // Body:
+
+  state().clear();
+  
+  // Postconditions:
+
+  ensure(invariant());
+  ensure(is_empty());
+  
+  // Exit:
+
+  return;
 }
 
 // PROTECTED MEMBER FUNCTIONS
@@ -662,8 +605,8 @@ capacity() const
 
 // PUBLIC MEMBER FUNCTIONS
 
-sheaf::mutable_index_space_handle&
-sheaf::mutable_index_space_handle::
+sheaf::gathered_insertion_index_space_handle&
+sheaf::gathered_insertion_index_space_handle::
 operator=(const index_space_handle& xother)
 {
   // Preconditions:
@@ -684,15 +627,15 @@ operator=(const index_space_handle& xother)
   return *this;
 }
 
-sheaf::mutable_index_space_handle*
-sheaf::mutable_index_space_handle::
+sheaf::gathered_insertion_index_space_handle*
+sheaf::gathered_insertion_index_space_handle::
 clone() const
 {
   // Preconditions:
 
   // Body:
   
-  mutable_index_space_handle* result = new mutable_index_space_handle(*this);
+  gathered_insertion_index_space_handle* result = new gathered_insertion_index_space_handle(*this);
 
   // Postconditions:
 
@@ -717,7 +660,7 @@ clone() const
 // PUBLIC MEMBER FUNCTIONS
 
 void
-sheaf::mutable_index_space_handle::
+sheaf::gathered_insertion_index_space_handle::
 put_is_persistent(bool xis_persistent)
 {
   // Preconditions:
@@ -747,7 +690,7 @@ put_is_persistent(bool xis_persistent)
 // PUBLIC MEMBER FUNCTIONS
 
 bool
-sheaf::mutable_index_space_handle::
+sheaf::gathered_insertion_index_space_handle::
 conforms_to_state(const index_space_collection& xhost,
 		  pod_type xlocal_id) const
 {
@@ -758,7 +701,7 @@ conforms_to_state(const index_space_collection& xhost,
   // Body:
 
   bool result =
-    (dynamic_cast<mutable_index_space_state*>(state(xhost, xlocal_id)) != 0);
+    (dynamic_cast<gathered_insertion_index_space_state*>(state(xhost, xlocal_id)) != 0);
   
   // Postconditions:
 
@@ -781,7 +724,7 @@ conforms_to_state(const index_space_collection& xhost,
 // PUBLIC MEMBER FUNCTIONS
 
 bool
-sheaf::mutable_index_space_handle::
+sheaf::gathered_insertion_index_space_handle::
 is_ancestor_of(const any *other) const
 {
   // Preconditions:
@@ -792,7 +735,7 @@ is_ancestor_of(const any *other) const
 
   // True if other conforms to this
 
-  bool result = dynamic_cast<const mutable_index_space_handle*>(other) != 0;
+  bool result = dynamic_cast<const gathered_insertion_index_space_handle*>(other) != 0;
 
   // Postconditions:
 
@@ -802,7 +745,7 @@ is_ancestor_of(const any *other) const
 }
 
 bool
-sheaf::mutable_index_space_handle::
+sheaf::gathered_insertion_index_space_handle::
 invariant() const
 {
   bool result = true;
@@ -840,7 +783,7 @@ invariant() const
 
 size_t
 sheaf::
-deep_size(const mutable_index_space_handle& xn, bool xinclude_shallow)
+deep_size(const gathered_insertion_index_space_handle& xn, bool xinclude_shallow)
 {
   // Preconditions:
 

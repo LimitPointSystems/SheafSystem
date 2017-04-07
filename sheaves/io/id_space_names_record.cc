@@ -23,8 +23,8 @@
 #include "index_space_family.h"
 #include "index_space_family_iterator.h"
 #include "index_space_interval.h"
-#include "mutable_index_space_handle.h"
-#include "mutable_index_space_state.h"
+#include "scattered_insertion_index_space_handle.h"
+#include "scattered_insertion_index_space_state.h"
 #include "std_sstream.h"
 
 using namespace std;
@@ -248,8 +248,8 @@ transfer_internal_buffer_to_poset()
 
     /// @hack Require that the id space is mutable.  See COM-475.
 
-    mutable_index_space_handle* lid_space =
-      &lposet.member_id_spaces(false).get_id_space<mutable_index_space_handle>(lid_space_name);
+    scattered_insertion_index_space_handle* lid_space =
+      &lposet.member_id_spaces(false).get_id_space<scattered_insertion_index_space_handle>(lid_space_name);
 
     scaffold().id_spaces().force_item(lid_space_ext_id, lid_space);
   }
@@ -287,10 +287,10 @@ transfer_poset_to_internal_buffer()
   {
     /// @hack Require that the id space is mutable.  See COM-475.
 
-    assertion(lposet.member_id_spaces(false).handle_conforms_to_state<mutable_index_space_handle>(litr.index()));
+    assertion(lposet.member_id_spaces(false).handle_conforms_to_state<scattered_insertion_index_space_handle>(litr.index()));
 
-    mutable_index_space_handle& lid_space =
-      lposet.member_id_spaces(false).get_id_space<mutable_index_space_handle>(litr.index());
+    scattered_insertion_index_space_handle& lid_space =
+      lposet.member_id_spaces(false).get_id_space<scattered_insertion_index_space_handle>(litr.index());
 
     lstream << lid_space.index()
 	    << " " << lid_space.state().class_name()

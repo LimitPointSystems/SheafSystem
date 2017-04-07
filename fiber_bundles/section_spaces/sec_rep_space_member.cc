@@ -728,7 +728,7 @@ has_branch_id_space(bool xauto_access) const
   return result;
 }
 
-sheaf::mutable_index_space_handle&
+sheaf::scattered_insertion_index_space_handle&
 fiber_bundle::sec_rep_space_member::
 get_branch_id_space(bool xauto_access)
 {
@@ -739,7 +739,7 @@ get_branch_id_space(bool xauto_access)
 
   // Body:
 
-  mutable_index_space_handle& result =
+  scattered_insertion_index_space_handle& result =
     host()->get_branch_id_space(index(), xauto_access);
 
   // Postconditions:

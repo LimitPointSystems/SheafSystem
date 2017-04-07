@@ -16,10 +16,10 @@
 //
 
 /// @file
-/// Interface for class mutable_index_space_handle
+/// Interface for class gathered_insertion_index_space_handle
 
-#ifndef MUTABLE_INDEX_SPACE_HANDLE_H
-#define MUTABLE_INDEX_SPACE_HANDLE_H
+#ifndef GATHERED_INSERTION_INDEX_SPACE_HANDLE_H
+#define GATHERED_INSERTION_INDEX_SPACE_HANDLE_H
 
 #ifndef SHEAF_DLL_SPEC_H
 #include "sheaf_dll_spec.h"
@@ -32,20 +32,19 @@
 namespace sheaf
 {
 
-class mutable_index_space_state;
+class gathered_insertion_index_space_state;
   
 ///
-/// An implementation of class explicit_index_space_handle that has
-/// a mutable id space state.
+/// A handle for a gathered_insertion_index_space_state.
 ///
-class SHEAF_DLL_SPEC mutable_index_space_handle : public explicit_index_space_handle
+class SHEAF_DLL_SPEC gathered_insertion_index_space_handle : public explicit_index_space_handle
 {
 
-  friend class mutable_index_space_state;
+  friend class gathered_insertion_index_space_state;
   friend class id_space_names_record;
 
   // ===========================================================
-  /// @name MUTABLE_INDEX_SPACE_HANDLE FACET
+  /// @name GATHERED_INSERTION_INDEX_SPACE_HANDLE FACET
   // ===========================================================
   //@{
 
@@ -54,49 +53,47 @@ public:
   ///
   /// Default constructor
   ///
-  mutable_index_space_handle();
+  gathered_insertion_index_space_handle();
 
   ///
   /// Copy constructor
   ///
-  mutable_index_space_handle(const mutable_index_space_handle& xother);
+  gathered_insertion_index_space_handle(const gathered_insertion_index_space_handle& xother);
 
   ///
   /// Constructor: Attach to state with index xindex in the family xid_spaces.
   ///
-  mutable_index_space_handle(const index_space_family& xid_spaces,
-			     pod_type xindex);
+  gathered_insertion_index_space_handle(const index_space_family& xid_spaces, pod_type xindex);
 
   ///
   /// Constructor: Attach to state with name xname in the family xid_spaces.
   ///
-  mutable_index_space_handle(const index_space_family& xid_spaces,
-			     const std::string& xname);
+  gathered_insertion_index_space_handle(const index_space_family& xid_spaces, const std::string& xname);
 
   ///
   /// Assignment operator; attach this handle to the state of xother.
   /// synonym for attach_to(xother).
   ///
-  mutable_index_space_handle& operator=(const mutable_index_space_handle& xother);
+  gathered_insertion_index_space_handle& operator=(const gathered_insertion_index_space_handle& xother);
 
   ///
   /// Destructor
   ///
-  virtual ~mutable_index_space_handle();
+  virtual ~gathered_insertion_index_space_handle();
 
 protected:
 
   using explicit_index_space_handle::state;
 
   ///
-  /// The mutable id space state (mutable version).
+  /// The gathered_insertion id space state (gathered_insertion version).
   ///
-  mutable_index_space_state& state();
+  gathered_insertion_index_space_state& state();
 
   ///
-  /// The mutable id space state (const version).
+  /// The gathered_insertion id space state (const version).
   ///
-  const mutable_index_space_state& state() const;
+  const gathered_insertion_index_space_state& state() const;
 
 private:
 
@@ -104,22 +101,11 @@ private:
 
 
   // ===========================================================
-  /// @name MUTABLE INDEX SPACE FACET
+  /// @name GATHERED_INSERTION INDEX SPACE FACET
   // ===========================================================
   //@{
 
 public:
-
-  ///
-  /// Make id xid in this id space equivalent to xhub_id in the hub id space.
-  /// synonym for insert(xid, xhub_id.hub_pod()).
-  ///
-  void insert(pod_type xid, const scoped_index& xhub_id);
-
-  ///
-  /// Make id xid in this id space equivalent to xhub_id in the hub id space.
-  ///
-  void insert(pod_type xid, pod_type xhub_id);
 
   ///
   /// Make the next id in this space equivalent to xhub_id in the hub id space.
@@ -234,13 +220,13 @@ public:
   /// Assignment operator; attach this handle to the state of xother.
   /// synonym for attach_to(xother).
   ///
-  virtual mutable_index_space_handle& operator=(const index_space_handle& xother);
+  virtual gathered_insertion_index_space_handle& operator=(const index_space_handle& xother);
 
   ///
   /// Virtual constructor, makes a new instance of the same type as this.
   /// If the handle is attached, attach to the same state.
   ///
-  virtual mutable_index_space_handle* clone() const;
+  virtual gathered_insertion_index_space_handle* clone() const;
 
 protected:
 
@@ -281,8 +267,7 @@ public:
   /// True if this conforms to the handle type required by the state
   /// with local scope id xlocal_id in the host id space collection xhost.
   ///
-  virtual bool conforms_to_state(const index_space_collection& xhost,
-				 pod_type xlocal_id) const;
+  virtual bool conforms_to_state(const index_space_collection& xhost, pod_type xlocal_id) const;
 
 protected:
 
@@ -321,11 +306,11 @@ private:
 // ===========================================================
 
 ///
-/// The deep size of mutable_index_space_handle& xn.
+/// The deep size of gathered_insertion_index_space_handle& xn.
 ///
 SHEAF_DLL_SPEC 
-size_t deep_size(const mutable_index_space_handle& xn, bool xinclude_shallow = true);
+size_t deep_size(const gathered_insertion_index_space_handle& xn, bool xinclude_shallow = true);
   
 } // end namespace sheaf
 
-#endif // ifndef MUTABLE_INDEX_SPACE_HANDLE_H
+#endif // ifndef GATHERED_INSERTION_INDEX_SPACE_HANDLE_H

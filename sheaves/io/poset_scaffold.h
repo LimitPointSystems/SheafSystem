@@ -865,12 +865,12 @@ public:
   ///
   /// The initialization type of the id space block.
   ///
-  typedef zero_block_initialization_policy<mutable_index_space_handle*> init_type;
+  typedef zero_block_initialization_policy<scattered_insertion_index_space_handle*> init_type;
 
   ///
   /// The type of the id space block.
   ///
-  typedef auto_block<mutable_index_space_handle*, init_type> id_spaces_type;
+  typedef auto_block<scattered_insertion_index_space_handle*, init_type> id_spaces_type;
 
   ///
   /// Buffer for id spaces (mutable version).

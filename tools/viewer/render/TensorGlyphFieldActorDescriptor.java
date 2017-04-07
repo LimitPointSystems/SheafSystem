@@ -180,7 +180,7 @@ public class TensorGlyphFieldActorDescriptor extends G3DFieldActorDescriptor
       else
         glyphSource = new vtkSphereSource().GetOutput();
 
-      actor.tensorGlyph.SetSource(glyphSource);
+      actor.tensorGlyph.SetSourceData(glyphSource);
     }
 
     // Set scale factor

@@ -28,7 +28,7 @@ set(SRCS
     geometry_namespace.cc
    )
 
-collect_sources()
+SheafSystem_collect_sources(geometry "${SRCS}")
 
 #
 # Headers that are NOT associated with a .cc file.
@@ -36,7 +36,7 @@ collect_sources()
 set(ADDITIONAL_INCS
    )
 
-collect_includes()
+SheafSystem_collect_includes(geometry "${SRCS}" "${ADDITIONAL_INCS}")
 
 #
 # Source for unit test executables.
@@ -44,7 +44,7 @@ collect_includes()
 set(UNIT_TEST_SRCS
    )
 
-collect_unit_test_sources()
+SheafSystem_collect_unit_test_sources(geometry "${UNIT_TEST_SRCS}")
 
 #
 # Source for example executables.
@@ -52,4 +52,4 @@ collect_unit_test_sources()
 set(EXAMPLE_SRCS
    )
 
-collect_example_sources()
+SheafSystem_collect_example_sources(geometry "${EXAMPLE_SRCS}")

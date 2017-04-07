@@ -23,7 +23,7 @@
 #include "hash_index_space_handle.h"
 #include "hub_index_space_handle.h"
 #include "list_index_space_handle.h"
-#include "mutable_index_space_handle.h"
+#include "scattered_insertion_index_space_handle.h"
 #include "offset_index_space_handle.h"
 #include "singleton_index_space_handle.h"
 #include "set_filter.h"
@@ -63,9 +63,9 @@ get_cover_id_space<sheaf::list_index_space_handle>(bool xlower, pod_index_type x
 
 template 
 SHEAF_DLL_SPEC
-sheaf::mutable_index_space_handle& 
+sheaf::scattered_insertion_index_space_handle& 
 sheaf::poset_state_handle::
-get_cover_id_space<sheaf::mutable_index_space_handle>(bool xlower, pod_index_type xmbr_index) const;
+get_cover_id_space<sheaf::scattered_insertion_index_space_handle>(bool xlower, pod_index_type xmbr_index) const;
 
 template 
 SHEAF_DLL_SPEC

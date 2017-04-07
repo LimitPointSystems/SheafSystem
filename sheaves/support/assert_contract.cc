@@ -73,9 +73,38 @@ print_output_message(const string& xmsg_type, const string& xmsg)
   OutputDebugString("\n\n");
 
   // Output message to standard error so it appears in the
-  // Command Consile.
+  // Command Console.
 
   std::cerr << xmsg << std::endl;
+
+#else
+  
+  // Output Header.
+  
+  int ltype_len = xmsg_type.length();
+  int lmsg_len = xmsg.length();
+  int lline_len = lmsg_len - ltype_len - 4;
+
+  std::cerr << endl << "== " << xmsg_type << " ";
+  for(int i=0; i < lline_len; i++)
+  {
+    std::cerr << "=";
+  }
+  std::cerr << endl;
+
+  // Output Message.
+
+  std::cerr << endl << xmsg.c_str() << endl;
+  
+  // Output Footer
+  
+  std::cerr << endl;
+  for(int i=0; i < lmsg_len; i++)
+  {
+    std::cerr << "=";
+  }
+  std::cerr << endl << endl;
+
 #endif
 };
 
@@ -85,9 +114,27 @@ print_output_message(const string& xmsg_type, const string& xmsg)
 // ASSERT_CONTRACT FACET
 // ===========================================================
 
+// void 
+// sheaf::
+// check_contract(bool xcond, const char* xmsg, const char* xfile, int xline)
+// {
+//   if(!xcond)
+//   {
+//     string lfilepath(xfile);
+//     string::size_type lidx = lfilepath.find_last_of("/\\");
+//     string lfilename = (lidx != string::npos) ? lfilepath.substr(lidx+1) : lfilepath;
+    
+//     stringstream lmsg;
+//     lmsg << "'" << xmsg << "'" << " in file " << lfilename << " at line " << xline;
+
+// 	print_output_message("CONTRACT VIOLATION", lmsg.str());
+//     throw std::logic_error(lmsg.str());
+//   }
+// };  
+
 void 
 sheaf::
-check_contract(bool xcond, const char* xmsg, const char* xfile, int xline)
+check_contract(bool xcond, const char* xmsg, const char* xfunction_name, const char* xfile, int xline)
 {
   if(!xcond)
   {
@@ -96,16 +143,37 @@ check_contract(bool xcond, const char* xmsg, const char* xfile, int xline)
     string lfilename = (lidx != string::npos) ? lfilepath.substr(lidx+1) : lfilepath;
     
     stringstream lmsg;
-    lmsg << "'" << xmsg << "'" << " in file " << lfilename << " at line " << xline;
+    lmsg << "'" << xmsg << "'" << " in function " << xfunction_name << " in file " << lfilename << " at line " << xline;
 
 	print_output_message("CONTRACT VIOLATION", lmsg.str());
     throw std::logic_error(lmsg.str());
   }
 };  
 
+// void 
+// sheaf::
+// check_contract(bool xcond, const char* xcond_msg, int xi, const char* xi_msg, const char* xfile, int xline)
+// {
+//   if(!xcond)
+//   {
+//     string lfilepath(xfile);
+//     string::size_type lidx = lfilepath.find_last_of("/\\");
+//     string lfilename = (lidx != string::npos) ? lfilepath.substr(lidx+1) : lfilepath;
+    
+//     stringstream lmsg;
+//     lmsg << "'" << xcond_msg << "'" 
+// 	 << " failed at " << xi_msg << " = " << xi
+// 	 << " in file " << lfilename << " at line " << xline;
+
+// 	print_output_message("CONTRACT VIOLATION", lmsg.str());
+//     throw std::logic_error(lmsg.str());
+//   }
+// };  
+ 
+
 void 
 sheaf::
-check_contract(bool xcond, const char* xcond_msg, int xi, const char* xi_msg, const char* xfile, int xline)
+check_contract(bool xcond, const char* xcond_msg, int xi, const char* xi_msg, const char* xfunction_name, const char* xfile, int xline)
 {
   if(!xcond)
   {
@@ -116,17 +184,34 @@ check_contract(bool xcond, const char* xcond_msg, int xi, const char* xi_msg, co
     stringstream lmsg;
     lmsg << "'" << xcond_msg << "'" 
 	 << " failed at " << xi_msg << " = " << xi
-	 << " in file " << lfilename << " at line " << xline;
+         << " in function " << xfunction_name << " in file " << lfilename << " at line " << xline;
 
 	print_output_message("CONTRACT VIOLATION", lmsg.str());
     throw std::logic_error(lmsg.str());
   }
 };  
- 
+
+// void 
+// sheaf::
+// post_there_exists_failed(const char* xcond_msg, int xi, const char* xi_msg, int xmin, int xub, const char* xfile, int xline)
+// {
+//   string lfilepath(xfile);
+//   string::size_type lidx = lfilepath.find_last_of("/\\");
+//   string lfilename = (lidx != string::npos) ? lfilepath.substr(lidx+1) : lfilepath;
+    
+//   stringstream lmsg;
+//   lmsg << "'" << xcond_msg << "'" 
+//        << " not true for any " << xi_msg << " in [" << xmin << ", " << xub << ")"
+//        << " in file " << lfilename << " at line " << xline;
+
+//   print_output_message("CONTRACT VIOLATION", lmsg.str());
+//   throw std::logic_error(lmsg.str());
+// };  
 
 void 
 sheaf::
-post_there_exists_failed(const char* xcond_msg, int xi, const char* xi_msg, int xmin, int xub, const char* xfile, int xline)
+post_there_exists_failed(const char* xcond_msg, int xi, const char* xi_msg, int xmin, int xub, 
+                         const char* xfunction_name, const char* xfile, int xline)
 {
   string lfilepath(xfile);
   string::size_type lidx = lfilepath.find_last_of("/\\");
@@ -135,22 +220,37 @@ post_there_exists_failed(const char* xcond_msg, int xi, const char* xi_msg, int 
   stringstream lmsg;
   lmsg << "'" << xcond_msg << "'" 
        << " not true for any " << xi_msg << " in [" << xmin << ", " << xub << ")"
-       << " in file " << lfilename << " at line " << xline;
+       << " in function " << xfunction_name << " in file " << lfilename << " at line " << xline;
 
   print_output_message("CONTRACT VIOLATION", lmsg.str());
   throw std::logic_error(lmsg.str());
 };  
 
+// void 
+// sheaf::
+// post_unimplemented(const char* xcond_msg, const char* xfile, int xline)
+// {
+//   string lfilepath(xfile);
+//   string::size_type lidx = lfilepath.find_last_of("/\\");
+//   string lfilename = (lidx != string::npos) ? lfilepath.substr(lidx+1) : lfilepath;
+    
+//   stringstream lmsg;
+//   lmsg << "Function in file " << lfilename << " at line " << xline << " " << xcond_msg;
+
+//   print_output_message("UNIMPLEMENTED", lmsg.str());
+//   throw std::logic_error(lmsg.str());
+// };    
+
 void 
 sheaf::
-post_unimplemented(const char* xcond_msg, const char* xfile, int xline)
+post_unimplemented(const char* xcond_msg, const char* xfunction_name, const char* xfile, int xline)
 {
   string lfilepath(xfile);
   string::size_type lidx = lfilepath.find_last_of("/\\");
   string lfilename = (lidx != string::npos) ? lfilepath.substr(lidx+1) : lfilepath;
     
   stringstream lmsg;
-  lmsg << "Function in file " << lfilename << " at line " << xline << " " << xcond_msg;
+  lmsg << "Function " << xfunction_name << " in file " << lfilename << " at line " << xline << " " << xcond_msg;
 
   print_output_message("UNIMPLEMENTED", lmsg.str());
   throw std::logic_error(lmsg.str());

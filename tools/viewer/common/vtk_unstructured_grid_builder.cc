@@ -1181,7 +1181,7 @@ build_file(const sec_vd& xcoords, const sec_vd& xproperty, const std::string& xv
   // either ascii or binary.
 
   vtkUnstructuredGridWriter* writer = vtkUnstructuredGridWriter::New();
-  writer->SetInput(lug);
+  writer->SetInputData(lug);
   writer->SetFileName(xvtk_file_name.c_str());
 
   if(xis_ascii)

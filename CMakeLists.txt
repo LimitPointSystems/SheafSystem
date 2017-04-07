@@ -14,6 +14,28 @@
 # limitations under the License.
 #
 
+#
+# Specify the minimum cmake version.
+#
+cmake_minimum_required(VERSION 3.5.0)
+
+#
+# Make sure if() treats constants like TRUE as constants 
+# rather than implicitly treating them as variables and trying to dereference them.
+
+cmake_policy(SET CMP0012 NEW)
+
+#
+# Set the cmake module path.
+#
+set(SHEAFSYSTEM_CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" 
+   CACHE STRING "Location of Sheaf System Cmake modules")
+mark_as_advanced(FORCE SHEAFSYSTEM_CMAKE_MODULE_PATH)
+
+# Make the requires and ensures functions available.
+
+include(${SHEAFSYSTEM_CMAKE_MODULE_PATH}/design_by_contract.cmake)
+
 # Setting CMAKE_CONFIGURATION_TYPES prior to the project function call
 # will eliminate the default configuration types (debug,release,RelWithDebugInfo, et al.) --
 # or at least stop them from appearing in the VS configuration list.
@@ -22,12 +44,13 @@
 
 if(WIN32)
     set(CMAKE_CONFIGURATION_TYPES Debug_contracts Debug_no_contracts Release_contracts Release_no_contracts 
-         RelWithDebInfo_contracts RelWithDebInfo_no_contracts CACHE STRING "Supported configuration types"
-        FORCE)
+       RelWithDebInfo_contracts RelWithDebInfo_no_contracts 
+       CACHE STRING "Supported configuration types" FORCE)
+    mark_as_advanced(FORCE CMAKE_CONFIGURATION_TYPES)
 else()
     set(CMAKE_CONFIGURATION_TYPES Debug_contracts Debug_no_contracts Release_contracts Release_no_contracts 
-         CACHE STRING "Supported configuration types"
-        FORCE)
+       CACHE STRING "Supported configuration types" FORCE)
+    mark_as_advanced(FORCE CMAKE_CONFIGURATION_TYPES)
 endif()
 
 #
@@ -36,102 +59,54 @@ endif()
 project(SheafSystem)
 
 #
-# Specify the minimum cmake version.
-#
-cmake_minimum_required(VERSION 2.8.12)
-
-#
 # Include variable definitions and functions
 # unique to and/or required at the system level.
 #
 include(system_definitions.cmake)
-
-#
-# Add components to the system
-#
-add_components()
+SheafSystem_make_system_definitions()
 
 #
 # Set up output directories
 #
-create_output_dirs()
+SheafSystem_create_output_dirs()
 
 #
-# Add the documentation targets (doc, docclean)
-# Doc targets are system level and system scope.
-# currently there is no notion of building a single
-# component's documentation.
+# Add components to the system
 #
-add_doc_targets()
+SheafSystem_add_components()
 
 #
-# Install the documentation
+# Add all the system level targets.
 #
-if(INSTALL_DOCS)
-    install_docs()
-endif()    
+include(${SHEAFSYSTEM_CMAKE_MODULE_PATH}/target_declarations.cmake)
+SheafSystem_add_system_targets()
 
 #
-# Target to generate emacs tags
+# Configure the environment variable scripts. 
 #
-add_tags_target()
-
-#
-# Configure the environment scripts. 
-#
-if(LINUX64GNU OR LINUX64INTEL)
-    configure_file(${CMAKE_MODULE_PATH}/set_env_vars.csh.cmake.in ${CMAKE_BINARY_DIR}/set_env_vars.csh)
-    configure_file(${CMAKE_MODULE_PATH}/set_env_vars.sh.cmake.in ${CMAKE_BINARY_DIR}/set_env_vars.sh)
-endif()
- 
-#
-# System level is responsible for installing the documentation. The component list (see system_definitions.cmake)
-# determines what components are included in the docs.
-# NOTE: Prepending of ${CMAKE_INSTALL_PREFIX}/ to the value of DESTINATION is implicit in the install command.
-# You need only specify the sub-directory within ${CMAKE_INSTALL_PREFIX}, cmake will create the dir.
-# With no value specified for DESTINATION, all files are placed in ${CMAKE_INSTALL_PREFIX}.
-#
-if(INSTALL_DOCS)
-    install(DIRECTORY ${CMAKE_BINARY_DIR}/documentation/ DESTINATION documentation)
+if(SHEAFSYSTEM_LINUX)
+    configure_file(${SHEAFSYSTEM_CMAKE_MODULE_PATH}/set_env_vars.csh.cmake.in ${CMAKE_BINARY_DIR}/set_env_vars.csh)
+    configure_file(${SHEAFSYSTEM_CMAKE_MODULE_PATH}/set_env_vars.sh.cmake.in ${CMAKE_BINARY_DIR}/set_env_vars.sh)
 endif()
 
 #
 # Generate the install configuration file.
 #
-generate_install_config_file()
+SheafSystem_generate_install_config_files()
 
 #
 # Install HDF5 headers to <include> dir
 #
-install_prereqs()
+SheafSystem_install_prereqs()
 
 #
-# Install the exports file
+# Install the documentation.
 #
-if(LINUX64INTEL OR LINUX64GNU)
-    install(FILES ${PROJECT_BINARY_DIR}/${EXPORTS_FILE}.in DESTINATION ${CMAKE_BUILD_TYPE}/config)
-else()
-    install(FILES ${PROJECT_BINARY_DIR}/${EXPORTS_FILE}.in DESTINATION config/\${BUILD_TYPE})
+if(SHEAFSYSTEM_INSTALL_DOCS)
+    SheafSystem_install_documentation()
 endif()    
 
 #
-# Markup the RELEASE_NOTES file. 
+# Install the release notes.
 #
-set(RELEASE_DATE)
-get_date(RELEASE_DATE)
-
-#
-# Generate some info about the release
-#
-file(WRITE ${CMAKE_BINARY_DIR}/VERSION "${PROJECT_NAME} version ${LIB_VERSION} ${RELEASE_DATE}  \n")
-install(FILES ${PROJECT_BINARY_DIR}/VERSION DESTINATION ${CMAKE_INSTALL_PREFIX})
-
-configure_file(${CMAKE_SOURCE_DIR}/RELEASE_NOTES.in ${CMAKE_BINARY_DIR}/RELEASE_NOTES)
-
-#if(TARGET install)
-    if(LINUX64GNU OR LINUX64INTEL)
-        install(FILES ${CMAKE_BINARY_DIR}/RELEASE_NOTES DESTINATION ${CMAKE_INSTALL_PREFIX})
-    else()
-        install(FILES ${CMAKE_BINARY_DIR}/RELEASE_NOTES DESTINATION ${CMAKE_INSTALL_PREFIX} RENAME RELEASE_NOTES.txt)
-    endif()
-#endif()
+SheafSystem_install_release_notes()

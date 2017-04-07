@@ -25,8 +25,8 @@
 #include "sheaf_dll_spec.h"
 #endif
 
-#ifndef MUTABLE_INDEX_SPACE_HANDLE_H
-#include "mutable_index_space_handle.h"
+#ifndef SCATTERED_INSERTION_INDEX_SPACE_HANDLE_H
+#include "scattered_insertion_index_space_handle.h"
 #endif
 
 #ifndef STD_LIST_H
@@ -37,9 +37,18 @@ namespace sheaf
 {
 
 class list_index_space_state;
+class list_index_space_handle;
+  
+ 
+///
+/// Insert index_space_handle& xn into ostream& xos.
+///
+SHEAF_DLL_SPEC 
+std::ostream & operator << (std::ostream &xos, const list_index_space_handle& xi);
+
   
 ///
-/// An map implementation of class mutable_index_space_handle.
+/// An map implementation of class scattered_insertion_index_space_handle.
 /// This representation is intended to efficiently represent
 /// id spaces that are positive and dense, that is, the domain
 /// ids are in the domain (~0, ~end()).  This representation is optimized
@@ -47,10 +56,11 @@ class list_index_space_state;
 /// in both time and storage for random access lookup and insertion
 /// respectively.
 ///
-class SHEAF_DLL_SPEC list_index_space_handle : public mutable_index_space_handle
+class SHEAF_DLL_SPEC list_index_space_handle : public scattered_insertion_index_space_handle
 {
 
   friend class list_index_space_state;
+  friend SHEAF_DLL_SPEC std::ostream & operator << (std::ostream &xos, const list_index_space_handle& xi);
 
   // ===========================================================
   /// @name SPACE FACTORY FACET
@@ -136,6 +146,11 @@ public:
   ///
   void push_front(pod_type xhub_id);
 
+  ///
+  /// Replaces xold_range_id with xnew_range_id.
+  ///
+  void replace_range_id(pod_type xold_range_id, pod_type xnew_range_id);
+
 protected:
 
   ///
@@ -143,7 +158,7 @@ protected:
   ///
   list_index_space_handle(list_index_space_state& xstate);
 
-  using mutable_index_space_handle::state;
+  using scattered_insertion_index_space_handle::state;
 
   ///
   /// The list id space state (mutable version).
@@ -255,7 +270,7 @@ private:
 
 public:
 
-  using mutable_index_space_handle::conforms_to_state;
+  using scattered_insertion_index_space_handle::conforms_to_state;
 
   ///
   /// True if this conforms to the handle type required by the state

@@ -14,506 +14,965 @@
 # limitations under the License.
 #
 
-#
-# Install the Windows Runtime lins
-#
-if(WIN32)
-    include(InstallRequiredSystemLibraries)
-endif()
-
 ##
 # This file is the system level counterpart to the component_definitions file
 # found in the top level of any component. Functions and variables
 # that need to have system scope should be declared and/or defined here.
 ##
 
-set(BUILD_SHEAFSCOPE OFF CACHE BOOL "Toggle build of the SheafScope. If OFF, then no need to look for JDK or VTK unless BUILD_BINDINGS is on.")
-set(INSTALL_DOCS ON CACHE BOOL "Toggle install state of Documentation.")
+
+#------------------------------------------------------------------------------
+# FUNCTION DEFINITION SECTION
+#------------------------------------------------------------------------------
 
 #
-# Establish the version number for this build.
-# This is only relevant for releases. 0.0.0.0 is chosen here
-# simply as a stub.
+# Make sure system level variables are defined and initialize to default values.
 #
-set(LIB_VERSION 0.0.0.0 CACHE STRING "Library version number for release purposes")
-mark_as_advanced(LIB_VERSION)
+function(SheafSystem_set_system_variable_defaults)
+
+   # Make sure SHEAFSYSTEM_BUILD_SHEAFSCOPE is defined; won't overwrite value if it already exists.
+
+   set(SHEAFSYSTEM_BUILD_SHEAFSCOPE OFF CACHE BOOL "Toggle build of the SheafScope.")
+
+   # Make sure SHEAFSYSTEM_BUILD_BINDINGS is defined; won't overwrite value if it already exists.
+
+   set(SHEAFSYSTEM_BUILD_BINDINGS OFF CACHE BOOL "Toggle build of language bindings.")
+   if(${SHEAFSYSTEM_BUILD_SHEAFSCOPE})
+
+      # SHEAFSYSTEM_BUILD_SHEAFSCOPE implies SHEAFSYSTEM_BUILD_BINDINGS.
+      # Invocation with FROCE will overwrite current value.
+
+      set(SHEAFSYSTEM_BUILD_BINDINGS ON CACHE BOOL "Toggle build of language bindings." FORCE)
+
+   endif()
+
+   # Make sure SHEAFSYSTEM_INSTALL_DOCS is defined; won't overwrite value if it already exists.
+
+   set(SHEAFSYSTEM_INSTALL_DOCS ON CACHE BOOL "Toggle install state of Documentation.")
+
+   #
+   # Make sure SHEAFSYSTEM_LIB_VERSION is defined; won't overwrite value if it already exists.
+   #
+   set(SHEAFSYSTEM_LIB_VERSION 0.0.0.0 CACHE STRING "Library version number for release purposes")
+   mark_as_advanced(SHEAFSYSTEM_LIB_VERSION)
+
+   #
+   # Define the tag for the exported target set
+   #
+   set(SHEAFSYSTEM_EXPORT_NAME SheafSystemTargets
+      CACHE STRING "As used in install(EXPORT <export-name> ...)")
+   mark_as_advanced(SHEAFSYSTEM_EXPORT_NAME)  
+
+   #   
+   #  Type of system documentation to build: Dev or User
+   #  User docs do not contain source code listing. Otherwise,
+   #  Dev and User are identical.
+   #
+   set(SHEAFSYSTEM_DOC_STATE Dev CACHE STRING "Type of documentation to build: [Dev|User]")
+
+   # Set STRINGS property so GUI displays cycle-through or drop-down list.
+   
+   set(ldoc_state_values Dev User)
+   set_property(CACHE SHEAFSYSTEM_DOC_STATE PROPERTY STRINGS ${ldoc_state_values})
+
+   dbc_ensure_implies(SHEAFSYSTEM_BUILD_SHEAFSCOPE SHEAFSYSTEM_BUILD_BINDINGS)
+
+endfunction(SheafSystem_set_system_variable_defaults)
+
 
 #
-# Establish the list of components in this system
+# Set platform definitions
 #
-set(COMPONENTS sheaves fiber_bundles geometry fields tools CACHE STRING "List of components in this system" FORCE)
+function(SheafSystem_set_platform_variables)
+
+   # Make sure platform variables are defined.
+
+   set(SHEAFSYSTEM_WINDOWS OFF
+      CACHE BOOL "True if platform is Windows" FORCE)
+   mark_as_advanced(FORCE SHEAFSYSTEM_WINDOWS)
+
+   set(SHEAFSYSTEM_LINUX OFF
+      CACHE BOOL "True if platform is Linux" FORCE)
+   mark_as_advanced(FORCE SHEAFSYSTEM_LINUX)
+
+   set(SHEAFSYSTEM_WIN64MSVC OFF
+      CACHE BOOL "True if platform is Windows and MS compiler in use." FORCE)
+   mark_as_advanced(FORCE SHEAFSYSTEM_WIN64MSVC)
+
+   set(SHEAFSYSTEM_WIN64INTEL OFF
+      CACHE BOOL "True if platorm is Windows and Intel compiler in use." FORCE)
+   mark_as_advanced(SHEAFSYSTEM_WIN64INTEL)
+
+   set(SHEAFSYSTEM_LINUX64GNU OFF
+      CACHE BOOL "True if platform is Linux and GNU CXX compiler in use." FORCE)
+   mark_as_advanced(SHEAFSYSTEM_LINUX64GNU)
+
+   set(SHEAFSYSTEM_LINUX64INTEL OFF
+      CACHE BOOL "True if platform is Linux and Intel compiler in use." FORCE)
+   mark_as_advanced(SHEAFSYSTEM_LINUX64INTEL)   
+
+   if(CMAKE_SIZEOF_VOID_P MATCHES "8")
+
+      if(CMAKE_HOST_SYSTEM_NAME MATCHES "Windows")
+
+         # OS is 64 bit Windows 
+
+         set(SHEAFSYSTEM_WINDOWS ON CACHE BOOL "True if platform is Windows" FORCE)
+
+         # Toggle multi-process compilation in win32.
+
+         set(SHEAFSYSTEM_ENABLE_WIN32_MP ON
+            CACHE BOOL "Toggle win32 compiler MP directive. Works for MS and Intel. Default is ON.")
+
+         # Turn on project folders for Visual Studio.
+
+         set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
+         if(MSVC)
+
+            # OS is 64 bit Windows, compiler is cl 
+
+            set(SHEAFSYSTEM_WIN64MSVC ON
+               CACHE BOOL "True if platform is Windows and MS compiler in use." FORCE)
+
+         elseif(CMAKE_CXX_COMPILER_ID MATCHES "Intel")
+
+            # OS is 64 bit Windows, compiler is icl
+
+            set(SHEAFSYSTEM_WIN64INTEL ON
+               CACHE BOOL "True if platorm is Windows and Intel compiler in use." FORCE)
+
+            set(INTELWARN CACHE BOOL "Toggle Intel compiler warnings")
+            mark_as_advanced(FORCE INTELWARN)
+
+         else()
+
+            message(FATAL_ERROR "Compiler ${CMAKE_CXX_COMPILER_ID} not supported.")
+
+         endif()
+
+      elseif(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux")
+
+         # OS is 64 bit Linux 
+
+         set(SHEAFSYSTEM_LINUX ON CACHE BOOL "True if platform is Linux" FORCE)
+
+         if(CMAKE_COMPILER_IS_GNUCXX)
+
+            # OS is 64 bit linux, compiler is g++
+
+            if(CMAKE_CXX_COMPILER_VERSION VERSION_LESS 4.9.3)
+               message(FATAL "g++ ${CMAKE_CXX_COMPILER_VERSION} is unsupported. Version must be >= 4.9.3")                
+            endif()
+
+            set(SHEAFSYSTEM_LINUX64GNU ON CACHE BOOL "True if platform is Linux and GNU CXX compiler in use." FORCE)
+
+         elseif(CMAKE_CXX_COMPILER_ID MATCHES "Intel")
+
+            # OS is 64 bit linux, compiler is icpc
+
+            set(SHEAFSYSTEM_LINUX64INTEL ON CACHE BOOL "True if platform is Linux and Intel compiler in use." FORCE)
+
+            set(INTELWARN CACHE BOOL "Toggle Intel compiler warnings")
+            mark_as_advanced(FORCE INTELWARN)
+
+         else()
+
+            message(FATAL_ERROR "Compiler ${CMAKE_CXX_COMPILER_ID} not supported.")
+
+         endif(CMAKE_COMPILER_IS_GNUCXX)
+
+         # The compiler library path; used to set LD_LIBRARY_PATH in env scripts.
+
+         string(REPLACE ";" ":" lshfsys_lib_dirs "${CMAKE_CXX_IMPLICIT_LINK_DIRECTORIES}")
+         set(SHEAFSYSTEM_CXX_IMPLICIT_LINK_DIRECTORIES "${lshfsys_lib_dirs}" 
+            CACHE STRING "C++ compiler library directories." FORCE)
+         mark_as_advanced(FORCE SHEAFSYSTEM_CXX_IMPLICIT_LINK_DIRECTORIES)
+
+      else()
+
+         # Neither Windows or Linux
+
+         message(FATAL_ERROR "Operating system ${CMAKE_HOST_SYSTEM_NAME} not supported")
+
+      endif(CMAKE_HOST_SYSTEM_NAME MATCHES "Windows")
+
+   else(CMAKE_SIZEOF_VOID_P MATCHES "8")
+
+         message(FATAL_ERROR "Only 64 bit platform supported.")
+
+   endif(CMAKE_SIZEOF_VOID_P MATCHES "8")
+
+   dbc_ensure_or(SHEAFSYSTEM_WINDOWS SHEAFSYSTEM_LINUX)
+
+endfunction(SheafSystem_set_platform_variables)
 
 #
 # Set the default value for install location
 #
-if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT AND LIB_VERSION MATCHES "0.0.0.0" )
-    if(LINUX64GNU OR LINUX64INTEL)
-      set(CMAKE_INSTALL_PREFIX
-        "$ENV{HOME}/SheafSystem" CACHE PATH "SheafSystem install prefix" FORCE
-        )
-    else()
-      set(CMAKE_INSTALL_PREFIX
-        "$ENV{USERPROFILE}/SheafSystem" CACHE PATH "SheafSystem install prefix" FORCE
-        )
-    endif()
-endif()
+function(SheafSystem_set_system_install_location_default)
+
+   # Host has to be either Linux or Windows; don't handle any other case.
+
+   dbc_require_or(SHEAFSYSTEM_WINDOWS SHEAFSYSTEM_LINUX)
+
+   if(SHEAFSYSTEM_WINDOWS)
+
+      set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/install CACHE PATH "System install location")
+
+   elseif(SHEAFSYSTEM_LINUX)
+
+      if(${CMAKE_INSTALL_PREFIX} MATCHES "/usr/local")
+
+         # Default linux installation location is /usr/local
+         # Set a default where the user has write permission ; in this
+         # case, the top of the SRFCPX_COMPONENTS source tree/install.
+         # "lib", "include", and "bin" will be appended to this location.
+         # See "add_install_target" in <component>/component_defintions.cmake.
+
+         set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/install CACHE PATH "System install location" FORCE)
+
+      else()
+
+         # CMAKE_INSTALL_PREFIX is either not set or has been set by user.
+         # Set it to something writable if it has not been set, won't
+         # overwrite value if user has already set it.
+
+         set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/install CACHE PATH "System install location")
+
+      endif()
+
+   endif()
+
+   dbc_ensure_defined(CMAKE_INSTALL_PREFIX)
+
+endfunction(SheafSystem_set_system_install_location_default)
+
 
 #
-# Now fix the install path.
+# Set debug configuration properties.
 #
-file(TO_CMAKE_PATH ${CMAKE_INSTALL_PREFIX} CMAKE_INSTALL_PREFIX)
+function(SheafSystem_set_debug_configuration)
 
-#
-# Platform definitions
-#
-# OS is 64 bit Windows, compiler is cl 
-if(CMAKE_HOST_SYSTEM_NAME MATCHES "Windows" AND MSVC AND CMAKE_SIZEOF_VOID_P MATCHES "8")
-    set(WIN64MSVC ON CACHE BOOL "MS compiler in use.")
-    mark_as_advanced(FORCE WIN64MSVC)
-# OS is 64 bit Windows, compiler is icl
-elseif(CMAKE_HOST_SYSTEM_NAME MATCHES "Windows" AND CMAKE_CXX_COMPILER_ID MATCHES "Intel" AND CMAKE_SIZEOF_VOID_P MATCHES "8")
-    set(WIN64INTEL ON CACHE BOOL "Intel compiler in use.")
-    mark_as_advanced(WIN64INTEL)
-# OS is 64 bit linux, compiler is g++
-elseif(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux" AND CMAKE_COMPILER_IS_GNUCXX AND CMAKE_SIZEOF_VOID_P MATCHES "8")
-    execute_process(COMMAND ${CMAKE_CXX_COMPILER} -dumpversion
-                OUTPUT_VARIABLE GCC_VERSION)
-        if(GCC_VERSION VERSION_EQUAL 4.4 OR GCC_VERSION VERSION_GREATER 4.4 )            
-            set(CMAKE_CXX_FLAGS "-std=c++0x")
-        elseif(GCC_VERSION VERSION_GREATER 4.2.1 AND GCC_VERSION VERSION_LESS 4.4 )            
-            set(CMAKE_CXX_FLAGS "-ansi")
-        elseif(GCC_VERSION VERSION_LESS 4.2.2)
-            message(FATAL "g++ ${GCC_VERSION} is unsupported. Version must be >= 4.2.2")                
-        endif()
-   set(LINUX64GNU ON CACHE BOOL "GNU CXX compiler ${GCC_VERSION} in use.")
-    mark_as_advanced(LINUX64GNU)
-# OS is 64 bit linux, compiler is icpc
-elseif(CMAKE_HOST_SYSTEM_NAME MATCHES "Linux" AND CMAKE_CXX_COMPILER_ID MATCHES "Intel" AND CMAKE_SIZEOF_VOID_P MATCHES "8")
-    set(LINUX64INTEL ON CACHE BOOL "Intel compiler in use.")
-     mark_as_advanced(LINUX64INTEL)   
-else()
-    message(FATAL_ERROR "A 64 bit Windows or Linux environment was not detected; exiting")
-endif()
+   # Preconditions:
 
-#
-# Define the exports files
-#
-set(EXPORTS_FILE ${PROJECT_NAME}-exports.cmake CACHE STRING "System exports file name")
-set(INSTALL_CONFIG_FILE ${PROJECT_NAME}-install.cmake CACHE STRING "Install config file name")
-mark_as_advanced(EXPORTS_FILE)  
-mark_as_advanced(INSTALL_CONFIG_FILE)  
+   dbc_require_or(SHEAFSYSTEM_WINDOWS SHEAFSYSTEM_LINUX)
 
-#
-# Delete the exports file at the start of each cmake run
-#
-execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/${EXPORTS_FILE})
-execute_process(COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/${INSTALL_CONFIG_FILE})
+   # Body:
+
+   # Tell CMake which configurations are "debug"
+
+   set_property(GLOBAL PROPERTY DEBUG_CONFIGURATIONS "Debug_contracts" "Debug_no_contracts") 
+
+   # Establish the file name suffix for debug type compiler output
+
+   if(SHEAFSYSTEM_WINDOWS)
+
+      set(CMAKE_DEBUG_CONTRACTS_POSTFIX "_d"
+         CACHE STRING "Debug libs suffix for Debug_contracts configuration")
+      mark_as_advanced(FORCE CMAKE_DEBUG_CONTRACTS_POSTFIX)
+
+      set(CMAKE_DEBUG_NO_CONTRACTS_POSTFIX "_d"
+         CACHE STRING "Debug libs suffix for Debug_no_contracts configuration")
+      mark_as_advanced(FORCE CMAKE_DEBUG_NO_CONTRACTS_POSTFIX)
+
+   elseif(SHEAFSYSTEM_LINUX)
+
+      set(CMAKE_DEBUG_CONTRACTS_POSTFIX "_debug"
+         CACHE STRING "Debug libs suffix for Debug_contracts configuration")
+      mark_as_advanced(FORCE CMAKE_DEBUG_CONTRACTS_POSTFIX)
+
+      set(CMAKE_DEBUG_NO_CONTRACTS_POSTFIX "_debug"
+         CACHE STRING "Debug libs suffix for Debug_no_contracts configuration")
+      mark_as_advanced(FORCE CMAKE_DEBUG_NO_CONTRACTS_POSTFIX)
+
+   endif()
+
+endfunction(SheafSystem_set_debug_configuration)
 
 #
 # Set the default build type.
 #
-if(NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE "Debug_contracts" CACHE STRING
-      "Choose the type of build, options are: ${CMAKE_CONFIGURATION_TYPES}."      
-      FORCE)
-endif(NOT CMAKE_BUILD_TYPE)
+function(SheafSystem_set_default_build_type)
 
-#
-# Tell CMake which configurations are "debug"
-#
-set_property(GLOBAL PROPERTY DEBUG_CONFIGURATIONS "Debug_contracts" "Debug_no_contracts") 
+   if(NOT CMAKE_BUILD_TYPE)      
+      set(CMAKE_BUILD_TYPE "Debug_contracts" 
+         CACHE 
+         STRING 
+         "Choose the type of build, options are: ${CMAKE_CONFIGURATION_TYPES}."
+         FORCE)
+   elseif(NOT (CMAKE_BUILD_TYPE IN_LIST CMAKE_CONFIGURATION_TYPES))
+      message(FATAL_ERROR "CMAKE_BUILD_TYPE must be one of ${CMAKE_CONFIGURATION_TYPES}")
+   endif()
 
-#
-# Establish the file name suffix for debug type compiler output
-#
-if(WIN64MSVC OR WIN64INTEL)
-    set(CMAKE_DEBUG_CONTRACTS_POSTFIX "_d" CACHE STRING "Debug libs suffix")
-    set(CMAKE_DEBUG_NO_CONTRACTS_POSTFIX "_d" CACHE STRING "Debug libs suffix")
-else()
-    set(CMAKE_DEBUG_CONTRACTS_POSTFIX "_debug" CACHE STRING "Debug libs suffix")
-    set(CMAKE_DEBUG_NO_CONTRACTS_POSTFIX "_debug" CACHE STRING "Debug libs suffix")
-endif()
-mark_as_advanced(FORCE CMAKE_DEBUG_CONTRACTS_POSTFIX)
-mark_as_advanced(FORCE CMAKE_DEBUG_NO_CONTRACTS_POSTFIX)
+   if(SHEAFSYSTEM_WINDOWS)
 
-#   
-#  Toggle language bindings build
-#
-set(BUILD_BINDINGS OFF CACHE BOOL "Toggle build of language bindings.")
+      # On Windows the client  doesn't set the build type at configure time,
+      # so mark it advanced so it doesn't clutter up the interface.
 
-#
-# Toggle multi-process compilation in win32.
-#
-if(WIN32)
-    set(ENABLE_WIN32_MP ON CACHE BOOL "Toggle win32 compiler MP directive. Works for MS and Intel. Default is ON.")
-    mark_as_advanced(FORCE ENABLE_WIN32_MP)
-endif()
+      mark_as_advanced(FORCE CMAKE_BUILD_TYPE)
+      
+   endif()
 
-#
-# Toggle intel compiler warnings.
-#
-set(INTELWARN CACHE BOOL "Toggle Intel compiler warnings")
-mark_as_advanced(FORCE INTELWARN)
+   # Set STRINGS property so GUI displays cycle-through or drop-down list.
+   
+   set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS ${CMAKE_CONFIGURATION_TYPES})
 
-#   
-#  Type of system documentation to build: Dev or User
-#  User docs do not contain source code listing. Otherwise,
-#  Dev and User are identical.
-#
-set(DOC_STATE Dev CACHE STRING "Type of documentation to build: [Dev|User]")
+endfunction(SheafSystem_set_default_build_type)
 
-#
-# Enable coverage results
-#
-if(LINUX64GNU OR LINUX64INTEL)
-    set(ENABLE_COVERAGE OFF CACHE BOOL "Set to ON to compile with coverage support. Default is OFF.")
-endif()
+function(SheafSystem_set_coverage_defaults)
 
-#
-# Set the location of the coverage folder and then create it.
-#
-if(ENABLE_COVERAGE)
-    set(COVERAGE_DIR ${CMAKE_BINARY_DIR}/coverage CACHE STRING "Directory for coverage files")
-    mark_as_advanced(FORCE COVERAGE_DIR)    
-    execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${COVERAGE_DIR})
-endif()
+   # Disable coverage results by default; won't overwrit existing value.
 
-#
-# Default linux installation location is /usr/local
-# Set a default where the user has write permission ; in this
-# case, the top of the components source tree.
-# "lib", "include", and "bin" will be appended to this location.
-# See "add_install_target" in cmake_modules/component_functions.cmake for source.
-#
-if(LINUX64GNU OR LINUX64INTEL)
-    set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR} CACHE STRING "System install location")
-elseif(WIN64MSVC OR WIN64INTEL)
-    set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR} CACHE STRING "System install location")
-endif()
+   set(SHEAFSYSTEM_ENABLE_COVERAGE OFF
+      CACHE BOOL "Set to ON to compile with coverage support. Default is OFF.")
+   mark_as_advanced(FORCE SHEAFSYSTEM_ENABLE_COVERAGE)
 
-#
-# Set the cmake module path.
-#
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" CACHE STRING "Location of Cmake modules")
+   # Set the location of the coverage folder and then create it.
 
-#
-# Targets with global scope are declared and optionally defined in 
-# target_declarations.cmake; otherwise defined at first use.
-#
-include(${CMAKE_MODULE_PATH}/target_declarations.cmake)
+   if(SHEAFSYSTEM_ENABLE_COVERAGE)
 
-#
-# Prerequisite discovery
-#
-include(${CMAKE_MODULE_PATH}/find_prerequisites.cmake)
+      set(SHEAFSYSTEM_COVERAGE_DIR ${CMAKE_BINARY_DIR}/coverage CACHE STRING "Directory for coverage files")
+      mark_as_advanced(FORCE SHEAFSYSTEM_COVERAGE_DIR)
+      
+      execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${SHEAFSYSTEM_COVERAGE_DIR})
+
+      #
+      # Set some variables for the Intel coverage utilities.
+      # $$TODO: Linux only for now -- hook up for Windows as well if we pursue 
+      # support for Intel.
+      #
+      if(SHEAFSYSTEM_LINUX64INTEL)
+
+         set(UNCOVERED_COLOR DE0829 CACHE STRING "Color for uncovered code.")
+         set(COVERED_COLOR 319A44 CACHE STRING "Color for covered code.")
+         set(PARTIAL_COLOR E1EA43 CACHE STRING "Color for partially covered code.")
+
+         # Lop the compiler name off the end of the CXX string
+
+         string(REPLACE "/icpc" "" INTELPATH ${CMAKE_CXX_COMPILER})
+
+         # The codecov executable
+
+         set(CODECOV "${INTELPATH}/bin/codecov" CACHE STRING "Intel Code coverage utility.")
+
+         # The profmerge executable
+
+         set(PROFMERGE "${INTELPATH}/bin/profmerge" CACHE STRING "Intel dynamic profile merge utility." )
+
+         # The compiler library path.
+
+         set(INTEL_LIBPATH "${INTELPATH}/lib/intel64" CACHE STRING "Intel C++ compiler library path." )
+
+      elseif(SHEAFSYSTEM_LINUX64GNU)
+
+         # Lop the compiler name off the end of the CXX string to get the gnu root.
+
+         string(REPLACE "bin/g++" "" GNUPATH ${CMAKE_CXX_COMPILER})
+
+         # The compiler library path.
+
+         set(GNU_LIBPATH "${GNUPATH}lib64" CACHE STRING "GNU C++ compiler library path." )
+
+      endif(SHEAFSYSTEM_LINUX64INTEL)
+
+   endif(SHEAFSYSTEM_ENABLE_COVERAGE)
+
+endfunction(SheafSystem_set_coverage_defaults)
 
 
 #
-# Utility function to add components to a system.
+# Create the build output directories.
 #
-function(add_components)
+function(SheafSystem_create_output_dirs)
 
-    foreach(comp ${COMPONENTS})
-        clear_component_variables(${comp})
-        add_subdirectory(${comp})
-    endforeach()
+   # Preconditions:
 
-endfunction(add_components)
+   dbc_require_or(SHEAFSYSTEM_WINDOWS SHEAFSYSTEM_LINUX)
+
+   # Body:
+
+   # Create directory for STD header files.
+
+   file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/include)
+
+   # Create directory for documentation files.
+
+   file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/documentation)
+   
+   # Visual Studio will generate cmake_build_dir folders for the current build type.
+   # Linux needs to be told.
+
+   if(SHEAFSYSTEM_WINDOWS)
+
+      set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib PARENT_SCOPE)
+      set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib PARENT_SCOPE)
+      set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin PARENT_SCOPE)
+
+      # Create build/lib for libraries.
+
+      file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+
+      # Create build/bin for executables.
+
+      file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/bin)        
+
+   elseif(SHEAFSYSTEM_LINUX)
+
+      set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/lib PARENT_SCOPE)
+      set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/lib PARENT_SCOPE)
+      set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/bin PARENT_SCOPE)
+      
+      # Create build/lib for libraries.
+
+      file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/lib)
+      
+      # Create build/bin for executables.
+
+      file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}/bin)        
+
+   endif(SHEAFSYSTEM_WINDOWS)
+
+endfunction(SheafSystem_create_output_dirs)
 
 #
-# Clear cached variables at the start of each cmake run.
-# This prevents the variables from containing diplicate entries.
+# Adds components to the system.
 #
-function(clear_component_variables comp)
+function(SheafSystem_add_components)
 
-    string(TOUPPER ${comp} COMP)
+   set(lcomponents sheaves fiber_bundles geometry fields tools)
 
-    # clear the srcs vars so consecutive cmake runs don't
-    # list the same sources n times.
-    unset(${COMP}_SRCS CACHE)
-    
-    # clear the unit tests var so consecutive cmake runs don't
-    # list the same sources n times.
-    unset(${COMP}_UNIT_TEST_SRCS CACHE)
+   foreach(comp ${lcomponents})
+      add_subdirectory(${comp})
+   endforeach()
 
-    # clear the example binaries var so consecutive cmake runs don't
-    # list the same sources n times.
-    unset(${COMP}_EXAMPLE_SRCS CACHE)
-    
-    # clear the unit tests var so consecutive cmake runs don't
-    # list the same unit tests n times.
-    unset(${COMP}_UNIT_TESTS CACHE)
+endfunction(SheafSystem_add_components)
 
-    # clear the includes var so consecutive cmake runs don't
-    # list the same includes n times.
-    unset(${COMP}_INCS CACHE)
-        
-    # clear the installed includes var so consecutive cmake runs don't
-    # list the same includes n times.
-    unset(${COMP}_INST_INCS CACHE)
-     
-    # clear the ipath var so consecutive cmake runs don't
-    # list the same include paths n times.
-    unset(${COMP}_IPATH CACHE)
-
-    # clear the ipaths var so consecutive cmake runs don't
-    # list the same include paths n times.
-    unset(${COMP}_IPATHS CACHE)
-
-    # clear the ipath var so consecutive cmake runs don't
-    # list the same include paths n times.
-    unset(${COMP}_CLASSPATH CACHE)
-    
-endfunction(clear_component_variables)
-
-# 
-#  Make emacs tags
 #
-function(add_tags_target)
+# Set /MP option in CMAKE_CXX_FLAGS_<xconfig>
+#
+function(SheafSystem_set_mp_option xconfig)
 
-    if(LINUX64GNU OR LINUX64INTEL)
-        add_custom_target(tags
-            COMMAND find ${CMAKE_CURRENT_SOURCE_DIR} -name build -prune -o -name "*.cc" -print -o -name "*.h" -print -o -name "*.t.cc" -print | etags --c++ --members -
-        )
-    endif()
+   # Make a copy of CMAKE_CXX_FLAGS_<xconfig> variable without /MP
 
-endfunction(add_tags_target) 
+   string(TOUPPER ${xconfig} LCONFIG_UC)
+   string(REPLACE "/MP " " " tmp "${CMAKE_CXX_FLAGS_${LCONFIG_UC}}")
+
+   if(SHEAFSYSTEM_ENABLE_WIN32_MP)
+
+      # Add the /MP option
+
+      set(tmp "/MP ${tmp}")
+         
+   endif()
+
+   # Store the result in CMAKE_CXX_FLAGS_<xconfig>.   
+   
+   set(CMAKE_CXX_FLAGS_${LCONFIG_UC} ${tmp}
+      CACHE STRING "Flags used by the C++ compiler for ${xconfig} builds"  FORCE)
+
+endfunction(SheafSystem_set_mp_option xconfig)
 
 #
 # Set the compiler flags per build configuration
 #
-function(set_compiler_flags)
-       
-       # Toggle multi-process compilation in Windows
-       if(ENABLE_WIN32_MP)
-           set(MP "/MP")
-       else()
-           set(MP "")
-       endif()
+function(SheafSystem_set_compiler_flags)
+
+   # Preconditions:
+
+   dbc_require_or(SHEAFSYSTEM_WINDOWS SHEAFSYSTEM_LINUX)
+
+   # Body:
+   
+   # Toggle multi-process compilation in Windows
+
+   if(SHEAFSYSTEM_ENABLE_WIN32_MP)
+      set(MP "/MP")
+   else()
+      set(MP "")
+   endif()
+   
+   if(SHEAFSYSTEM_WIN64MSVC)
+
+      # Windows with MS Visual C++ compiler.
+
+      set(SHEAFSYSTEM_CXX_FLAGS "${MP} /GR /nologo /DWIN32 /D_WINDOWS /W1 /EHsc" 
+         CACHE STRING "C++ Compiler Flags")
+
+      set(SHEAFSYSTEM_SHARED_LINKER_FLAGS "/INCREMENTAL:NO /NOLOGO /DLL /SUBSYSTEM:CONSOLE /MACHINE:X64"
+         CACHE STRING "Linker Flags for Shared Libs")
+
+      set(SHEAFSYSTEM_EXE_LINKER_FLAGS "/INCREMENTAL:NO /NOLOGO /SUBSYSTEM:CONSOLE /MACHINE:X64" 
+         CACHE STRING "Linker Flags for Executables")
+
+      set(SHEAFSYSTEM_EXE_LINKER_FLAGS_DEBUG "/DEBUG" CACHE STRING "Debug Linker Flags" FORCE)
+
+   elseif(SHEAFSYSTEM_WIN64INTEL)
+
+      # Windows with Intel compiler.
+
+      set(SHEAFSYSTEM_CXX_FLAGS "/D_USRDLL ${MP} /GR /nologo /DWIN32 /D_WINDOWS /W1 /wd2651 /EHsc /Qprof-gen:srcpos /D_HDF5USEDLL_" 
+         CACHE STRING "C++ Compiler Flags")
+
+      set(SHEAFSYSTEM_SHARED_LINKER_FLAGS "/INCREMENTAL:NO /NOLOGO /DLL /SUBSYSTEM:CONSOLE /NXCOMPAT /MACHINE:X64" 
+         CACHE STRING "Linker Flags") 
+
+      set(SHEAFSYSTEM_EXE_LINKER_FLAGS CACHE STRING "Linker Flags for Executables")
+
+      set(SHEAFSYSTEM_EXE_LINKER_FLAGS_DEBUG CACHE STRING "Debug Linker Flags" )
+
+   elseif(SHEAFSYSTEM_LINUX64INTEL)
+
+      # Linux with Intel compiler.
+
+      if(SHEAFSYSTEM_ENABLE_COVERAGE)
+         if(INTELWARN)
+            set(SHEAFSYSTEM_CXX_FLAGS "-ansi -m64 -w1 -wd186,1125 -Wno-deprecated -prof-gen=srcpos")
+         else()
+            set(SHEAFSYSTEM_CXX_FLAGS "-ansi -m64 -w0 -Wno-deprecated  -prof-gen=srcpos")
+         endif()
+      else()
+         if(INTELWARN)
+            set(SHEAFSYSTEM_CXX_FLAGS "-ansi -m64 -w1 -wd186,1125 -Wno-deprecated ")
+         else()
+            set(SHEAFSYSTEM_CXX_FLAGS "-ansi -m64 -w0 -Wno-deprecated ")
+         endif()
+      endif(SHEAFSYSTEM_ENABLE_COVERAGE)
+
+      set(SHEAFSYSTEM_SHARED_LINKER_FLAGS CACHE STRING "Linker Flags") 
+
+      set(SHEAFSYSTEM_EXE_LINKER_FLAGS CACHE STRING "Linker Flags for Executables")
+
+      set(SHEAFSYSTEM_EXE_LINKER_FLAGS_DEBUG CACHE STRING "Debug Linker Flags" )
         
-    if(WIN64MSVC)
-       set(LPS_CXX_FLAGS "${MP} /GR /nologo /DWIN32 /D_WINDOWS /W1 /EHsc" 
-           CACHE STRING "C++ Compiler Flags")       
-       set(LPS_SHARED_LINKER_FLAGS 
-           "/INCREMENTAL:NO /NOLOGO /DLL /SUBSYSTEM:CONSOLE /MACHINE:X64"
-           CACHE STRING "Linker Flags for Shared Libs")
-       set(LPS_EXE_LINKER_FLAGS 
-           "/INCREMENTAL:NO /NOLOGO /DLL /SUBSYSTEM:CONSOLE /MACHINE:X64" 
-           CACHE STRING "Linker Flags for Executables")
-    elseif(WIN64INTEL)
-       set(LPS_CXX_FLAGS 
-           "/D_USRDLL ${MP} /GR /nologo /DWIN32 /D_WINDOWS /W1 /wd2651 /EHsc /Qprof-gen:srcpos /D_HDF5USEDLL_" 
-           CACHE STRING "C++ Compiler Flags")
-       set(LPS_SHARED_LINKER_FLAGS 
-           "/INCREMENTAL:NO /NOLOGO /DLL /SUBSYSTEM:CONSOLE /NXCOMPAT /MACHINE:X64" 
-           CACHE STRING "Linker Flags") 
-    elseif(LINUX64INTEL)
-        if(ENABLE_COVERAGE)
-            if(INTELWARN)
-               set(LPS_CXX_FLAGS 
-                   "-ansi -m64 -w1 -wd186,1125 -Wno-deprecated -prof-gen=srcpos")
-            else()
-               set(LPS_CXX_FLAGS 
-                   "-ansi -m64 -w0 -Wno-deprecated  -prof-gen=srcpos")
-            endif()
-        else()
-            if(INTELWARN)
-               set(LPS_CXX_FLAGS "-ansi -m64 -w1 -wd186,1125 -Wno-deprecated ")
-            else()
-               set(LPS_CXX_FLAGS "-ansi -m64 -w0 -Wno-deprecated ")
-            endif()
-       endif() # ENABLE_COVERAGE        
-    elseif(LINUX64GNU)
-        # 12/20/13 -- added "-Wno-abi to suppress the following:
-        #"SheafSystem/sheaves/support/primitive_attributes.h:115: 
-        #note: The ABI of passing union with long double has changed in GCC 4.4"
-        # The probrem is still there; we have only suppressed the warning.
-        set(LPS_CXX_FLAGS "-m64 -Wno-deprecated -Wno-abi") 
-    endif()
-    mark_as_advanced(FORCE LPS_CXX_FLAGS LPS_SHARED_LINKER_FLAGS
-         LPS_EXE_LINKER_FLAGS)
-    #                 
-    # DEBUG_CONTRACTS section
-    #
-        
-    # Configuration specific flags 
-    if(WIN64MSVC OR WIN64INTEL)
-        set(CMAKE_CXX_FLAGS_DEBUG_CONTRACTS 
-            "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od " 
-            CACHE STRING "Flags used by the C++ compiler for Debug_contracts builds" )       
-        set(CMAKE_SHARED_LINKER_FLAGS_DEBUG_CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRT" 
-            CACHE STRING "Flags used by the linker for shared libraries for Debug_contracts builds" )
-        set(CMAKE_EXE_LINKER_FLAGS_DEBUG_CONTRACTS "${LPS_EXE_LINKER_FLAGS} /DEBUG" 
-            CACHE STRING "Flags used by the linker for executables for Debug_contracts builds")            
-        set(CMAKE_MODULE_LINKER_FLAGS_DEBUG_CONTRACTS "${LPS_SHARED_LINKER_FLAGS} /DEBUG" 
-            CACHE STRING "Debug_contracts linker flags - binding libs" )
-    else() # Linux
-        set(CMAKE_CXX_FLAGS_DEBUG_CONTRACTS "${LPS_CXX_FLAGS} -g " 
-            CACHE STRING "Flags used by the C++ compiler for Debug_contracts builds" )
-        set(CMAKE_EXE_LINKER_FLAGS_DEBUG_CONTRACTS ${CMAKE_EXE_LINKER_FLAGS}  
-            CACHE STRING "Flags used by the linker for executables for Debug_contracts builds")        
-    endif()
-    
-    mark_as_advanced(FORCE CMAKE_CXX_FLAGS_DEBUG_CONTRACTS
-         CMAKE_EXE_LINKER_FLAGS_DEBUG_CONTRACTS 
-         CMAKE_SHARED_LINKER_FLAGS_DEBUG_CONTRACTS
-         CMAKE_MODULE_LINKER_FLAGS_DEBUG_CONTRACTS)
+   elseif(SHEAFSYSTEM_LINUX64GNU)
 
-    #                 
-    # DEBUG_NO_CONTRACTS section
-    #      
+      # Linux with g++ compiler.
 
-    if(WIN64MSVC OR WIN64INTEL)
-        set(CMAKE_CXX_FLAGS_DEBUG_NO_CONTRACTS 
-             "${LPS_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od /DNDEBUG " 
-             CACHE STRING "Flags used by the C++ compiler for Debug_no_contracts builds" )            
-        set(CMAKE_SHARED_LINKER_FLAGS_DEBUG_NO_CONTRACTS 
-             "${LPS_SHARED_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRT" 
-             CACHE STRING "Flags used by the linker for shared libraries for Debug_contracts builds" )
-        set(CMAKE_EXE_LINKER_FLAGS_DEBUG_NO_CONTRACTS 
-             "${LPS_EXE_LINKER_FLAGS} /DEBUG" 
-             CACHE STRING "Flags used by the linker for executables for Debug_contracts builds")                  
-        set(CMAKE_MODULE_LINKER_FLAGS_DEBUG_NO_CONTRACTS 
-            "${LPS_SHARED_LINKER_FLAGS} /DEBUG" 
-            CACHE STRING "Debug_no_contracts linker flags - binding libs" )
-    else()
-        set(CMAKE_CXX_FLAGS_DEBUG_NO_CONTRACTS "${LPS_CXX_FLAGS} -g -DNDEBUG" CACHE
-            STRING "Flags used by the C++ compiler for Debug_no_contracts builds" )
-    endif()
+      # 12/20/13 -- added "-Wno-abi to suppress the following:
+      #"SheafSystem/sheaves/support/primitive_attributes.h:115: 
+      #note: The ABI of passing union with long double has changed in GCC 4.4"
+      # The probrem is still there; we have only suppressed the warning.
 
-    mark_as_advanced(FORCE CMAKE_CXX_FLAGS_DEBUG_NO_CONTRACTS
-         CMAKE_EXE_LINKER_FLAGS_DEBUG_NO_CONTRACTS 
-         CMAKE_SHARED_LINKER_FLAGS_DEBUG_NO_CONTRACTS
-          CMAKE_MODULE_LINKER_FLAGS_DEBUG_NO_CONTRACTS)
-         
-    #                 
-    # RELEASE_CONTRACTS section
-    #
+      set(SHEAFSYSTEM_CXX_FLAGS "-std=c++11 -m64 -Wno-deprecated -Wno-abi") 
 
-    if(WIN64MSVC OR WIN64INTEL)
-        set(CMAKE_CXX_FLAGS_RELEASE_CONTRACTS 
-            "${LPS_CXX_FLAGS} /MD /LD /O2 " 
-            CACHE STRING "Flags used by the C++ compiler for Release_contracts builds" )
-        set(CMAKE_EXE_LINKER_FLAGS_RELEASE_CONTRACTS 
-            "${LPS_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD  /NXCOMPAT"  
-            CACHE STRING "Flags used by the linker for executables for Release_contracts builds" )
-        set(CMAKE_SHARED_LINKER_FLAGS_RELEASE_CONTRACTS 
-            "${LPS_SHARED_LINKER_FLAGS}" 
-            CACHE STRING "Flags used by the linker for shared libraries for Release_contracts builds" ) 
-        set(CMAKE_MODULE_LINKER_FLAGS_RELEASE_CONTRACTS 
-            "${LPS_SHARED_LINKER_FLAGS}" 
-            CACHE STRING "Release_contracts linker flags - binding libs" )
-    else()
-        set(CMAKE_CXX_FLAGS_RELEASE_CONTRACTS "${LPS_CXX_FLAGS} " 
-            CACHE STRING "Flags used by the C++ compiler for Release_contracts builds" )
-        set(CMAKE_EXE_LINKER_FLAGS_RELEASE_CONTRACTS "${LPS_EXE_LINKER_FLAGS}"  
-            CACHE STRING "Flags used by the linker for executables for Release_contracts builds" )
-        set(CMAKE_SHARED_LINKER_FLAGS_RELEASE_CONTRACTS "${LPS_SHARED_LINKER_FLAGS}" 
-           CACHE STRING "Flags used by the linker for shared libraries for Release_contracts builds" )
-    endif()
-    
-    mark_as_advanced(FORCE CMAKE_CXX_FLAGS_RELEASE_CONTRACTS
-         CMAKE_EXE_LINKER_FLAGS_RELEASE_CONTRACTS 
-         CMAKE_SHARED_LINKER_FLAGS_RELEASE_CONTRACTS
-         CMAKE_MODULE_LINKER_FLAGS_RELEASE_CONTRACTS)
-         
-    #                 
-    # RELEASE_NO_CONTRACTS section
-    #
+      set(SHEAFSYSTEM_SHARED_LINKER_FLAGS CACHE STRING "Linker Flags") 
 
-    if(WIN64MSVC OR WIN64INTEL)
-        set(CMAKE_CXX_FLAGS_RELEASE_NO_CONTRACTS 
-            "${LPS_CXX_FLAGS}  /MD /LD /O2 /DNDEBUG" 
-            CACHE STRING "Flags used by the C++ compiler for Release_no_contracts builds" )
-        set(CMAKE_EXE_LINKER_FLAGS_RELEASE_NO_CONTRACTS 
-            "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD  /NXCOMPAT" 
-            CACHE STRING "Flags used by the linker for executables for Release_no_contracts builds" )
-        set(CMAKE_SHARED_LINKER_FLAGS_RELEASE_NO_CONTRACTS 
-            "${LPS_SHARED_LINKER_FLAGS}" 
-            CACHE STRING "Flags used by the linker for shared libraries for Release_no_contracts builds" )
-        set(CMAKE_MODULE_LINKER_FLAGS_RELEASE_NO_CONTRACTS 
-            "${LPS_SHARED_LINKER_FLAGS}" 
-            CACHE STRING "Release_no_contracts linker flags - binding libs" )
-    else()
-        set(CMAKE_CXX_FLAGS_RELEASE_NO_CONTRACTS 
-            "${LPS_CXX_FLAGS}  -DNDEBUG" 
-            CACHE STRING "Flags used by the C++ compiler for Release_no_contracts builds" )
-        set(CMAKE_EXE_LINKER_FLAGS_RELEASE_NO_CONTRACTS 
-            "${CMAKE_EXE_LINKER_FLAGS}" 
-           CACHE STRING "Flags used by the linker for executables for Release_no_contracts builds" )
-        set(CMAKE_SHARED_LINKER_FLAGS_RELEASE_NO_CONTRACTS 
-            "${LPS_SHARED_LINKER_FLAGS}" 
-            CACHE STRING "Flags used by the linker for shared libraries for Release_no_contracts builds" )
-    endif()
-    
-    mark_as_advanced(FORCE CMAKE_CXX_FLAGS_RELEASE_NO_CONTRACTS
-         CMAKE_EXE_LINKER_FLAGS_RELEASE_NO_CONTRACTS 
-         CMAKE_SHARED_LINKER_FLAGS_RELEASE_NO_CONTRACTS
-         CMAKE_MODULE_LINKER_FLAGS_RELEASE_NO_CONTRACTS)
+      set(SHEAFSYSTEM_EXE_LINKER_FLAGS CACHE STRING "Linker Flags for Executables")
 
-    #                 
-    # RelWithDebInfo_contracts section
-    #
+      set(SHEAFSYSTEM_EXE_LINKER_FLAGS_DEBUG CACHE STRING "Debug Linker Flags" )
 
-    if(WIN64MSVC OR WIN64INTEL)
-        set(CMAKE_CXX_FLAGS_RELWITHDEBINFO_CONTRACTS 
-            "${LPS_CXX_FLAGS} /MD /LD /O2 " CACHE
-            STRING "RelWithDebInfo_contracts compiler flags" )
-        set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO_CONTRACTS 
-            "${LPS_EXE_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD  /NXCOMPAT"  
-            CACHE STRING "RelWithDebInfo_contracts linker flags - executables" )
-        set(CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO_CONTRACTS 
-            "${LPS_SHARED_LINKER_FLAGS} /DEBUG" CACHE
-            STRING "RelWithDebInfo_contracts linker flags - shared libs" ) 
-        set(CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO_CONTRACTS 
-            "${LPS_SHARED_LINKER_FLAGS} /DEBUG" CACHE
-            STRING "RelWithDebInfo_contracts linker flags - binding libs" )
-    endif()
-    
-    mark_as_advanced(FORCE CMAKE_CXX_FLAGS_RELWITHDEBINFO_CONTRACTS
+   endif()
+
+   mark_as_advanced(FORCE SHEAFSYSTEM_CXX_FLAGS SHEAFSYSTEM_SHARED_LINKER_FLAGS SHEAFSYSTEM_EXE_LINKER_FLAGS SHEAFSYSTEM_EXE_LINKER_FLAGS_DEBUG)
+
+   
+   # Configuration specific flags 
+
+   #                 
+   # DEBUG_CONTRACTS section
+   #
+
+   if(SHEAFSYSTEM_WINDOWS)
+
+      set(CMAKE_CXX_FLAGS_DEBUG_CONTRACTS "${SHEAFSYSTEM_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od " 
+         CACHE STRING "Flags used by the C++ compiler for Debug_contracts builds" )
+      SheafSystem_set_mp_option(Debug_contracts)
+
+      set(CMAKE_SHARED_LINKER_FLAGS_DEBUG_CONTRACTS "${SHEAFSYSTEM_SHARED_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRT" 
+         CACHE STRING "Flags used by the linker for shared libraries for Debug_contracts builds" )
+
+      set(CMAKE_EXE_LINKER_FLAGS_DEBUG_CONTRACTS "${CMAKE_EXE_LINKER_FLAGS} ${SHEAFSYSTEM_EXE_LINKER_FLAGS_DEBUG}" 
+         CACHE STRING "Flags used by the linker for executables for Debug_contracts builds" FORCE)
+
+      set(CMAKE_MODULE_LINKER_FLAGS_DEBUG_CONTRACTS "${SHEAFSYSTEM_SHARED_LINKER_FLAGS} ${SHEAFSYSTEM_EXE_LINKER_FLAGS_DEBUG}" 
+         CACHE STRING "Debug_contracts linker flags - binding libs" )
+
+   elseif(SHEAFSYSTEM_LINUX) 
+
+      set(CMAKE_CXX_FLAGS_DEBUG_CONTRACTS "${SHEAFSYSTEM_CXX_FLAGS} -g " 
+         CACHE STRING "Flags used by the C++ compiler for Debug_contracts builds" )
+
+      set(CMAKE_SHARED_LINKER_FLAGS_DEBUG_CONTRACTS "${SHEAFSYSTEM_SHARED_LINKER_FLAGS} " 
+         CACHE STRING "Flags used by the linker for shared libraries for Debug_contracts builds" )
+
+      set(CMAKE_EXE_LINKER_FLAGS_DEBUG_CONTRACTS ${CMAKE_EXE_LINKER_FLAGS}  
+         CACHE STRING "Flags used by the linker for executables for Debug_contracts builds")
+
+      set(CMAKE_MODULE_LINKER_FLAGS_DEBUG_CONTRACTS "${SHEAFSYSTEM_SHARED_LINKER_FLAGS} ${SHEAFSYSTEM_EXE_LINKER_FLAGS_DEBUG}" 
+         CACHE STRING "Debug_contracts linker flags - binding libs" )
+
+   endif(SHEAFSYSTEM_WINDOWS)
+   
+   mark_as_advanced(FORCE 
+      CMAKE_CXX_FLAGS_DEBUG_CONTRACTS
+      CMAKE_EXE_LINKER_FLAGS_DEBUG_CONTRACTS 
+      CMAKE_SHARED_LINKER_FLAGS_DEBUG_CONTRACTS
+      CMAKE_MODULE_LINKER_FLAGS_DEBUG_CONTRACTS)
+
+   #                 
+   # DEBUG_NO_CONTRACTS section
+   #      
+
+   if(SHEAFSYSTEM_WINDOWS)
+
+      set(CMAKE_CXX_FLAGS_DEBUG_NO_CONTRACTS "${SHEAFSYSTEM_CXX_FLAGS} /Zi /D\"_ITERATOR_DEBUG_LEVEL=2\" /MDd /LDd /Od /DNDEBUG " 
+         CACHE STRING "Flags used by the C++ compiler for Debug_no_contracts builds" )
+      SheafSystem_set_mp_option(Debug_no_contracts)
+
+      set(CMAKE_SHARED_LINKER_FLAGS_DEBUG_NO_CONTRACTS "${SHEAFSYSTEM_SHARED_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRT" 
+         CACHE STRING "Flags used by the linker for shared libraries for Debug_contracts builds" )
+
+      set(CMAKE_EXE_LINKER_FLAGS_DEBUG_NO_CONTRACTS "${CMAKE_EXE_LINKER_FLAGS} ${SHEAFSYSTEM_EXE_LINKER_FLAGS_DEBUG}" 
+         CACHE STRING "Flags used by the linker for executables for Debug_no_contracts builds" FORCE)
+
+      set(CMAKE_MODULE_LINKER_FLAGS_DEBUG_NO_CONTRACTS "${SHEAFSYSTEM_SHARED_LINKER_FLAGS} ${SHEAFSYSTEM_EXE_LINKER_FLAGS_DEBUG}" 
+         CACHE STRING "Debug_no_contracts linker flags - binding libs" )
+
+   elseif(SHEAFSYSTEM_LINUX)
+
+      set(CMAKE_CXX_FLAGS_DEBUG_NO_CONTRACTS "${SHEAFSYSTEM_CXX_FLAGS} -g -DNDEBUG" 
+         CACHE STRING "Flags used by the C++ compiler for Debug_no_contracts builds" )
+
+      set(CMAKE_SHARED_LINKER_FLAGS_DEBUG_NO_CONTRACTS "${SHEAFSYSTEM_SHARED_LINKER_FLAGS}" 
+         CACHE STRING "Flags used by the linker for shared libraries for Debug_contracts builds" )
+
+      set(CMAKE_EXE_LINKER_FLAGS_DEBUG_NO_CONTRACTS "${CMAKE_EXE_LINKER_FLAGS} ${SHEAFSYSTEM_EXE_LINKER_FLAGS_DEBUG}" 
+         CACHE STRING "Flags used by the linker for executables for Debug_no_contracts builds" FORCE)
+
+      set(CMAKE_MODULE_LINKER_FLAGS_DEBUG_NO_CONTRACTS "${SHEAFSYSTEM_SHARED_LINKER_FLAGS} ${SHEAFSYSTEM_EXE_LINKER_FLAGS_DEBUG}" 
+         CACHE STRING "Debug_no_contracts linker flags - binding libs" )
+
+   endif(SHEAFSYSTEM_WINDOWS)
+
+   mark_as_advanced(FORCE 
+      CMAKE_CXX_FLAGS_DEBUG_NO_CONTRACTS
+      CMAKE_EXE_LINKER_FLAGS_DEBUG_NO_CONTRACTS 
+      CMAKE_SHARED_LINKER_FLAGS_DEBUG_NO_CONTRACTS
+      CMAKE_MODULE_LINKER_FLAGS_DEBUG_NO_CONTRACTS)
+   
+   #                 
+   # RELEASE_CONTRACTS section
+   #
+
+   if(SHEAFSYSTEM_WINDOWS)
+
+      set(CMAKE_CXX_FLAGS_RELEASE_CONTRACTS "${SHEAFSYSTEM_CXX_FLAGS}  /MD /LD /O2 " 
+         CACHE STRING "Flags used by the C++ compiler for Release_contracts builds" )
+      SheafSystem_set_mp_option(Release_contracts)
+
+      set(CMAKE_EXE_LINKER_FLAGS_RELEASE_CONTRACTS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD  /NXCOMPAT" 
+         CACHE STRING "Flags used by the linker for executables for Release_contracts builds" )
+
+      set(CMAKE_SHARED_LINKER_FLAGS_RELEASE_CONTRACTS "${SHEAFSYSTEM_SHARED_LINKER_FLAGS}" 
+         CACHE STRING "Flags used by the linker for shared libraries for Release_contracts builds" )
+
+      set(CMAKE_MODULE_LINKER_FLAGS_RELEASE_CONTRACTS "${SHEAFSYSTEM_SHARED_LINKER_FLAGS}" 
+         CACHE STRING "Release_contracts linker flags - binding libs" )
+
+   elseif(SHEAFSYSTEM_LINUX)
+
+      set(CMAKE_CXX_FLAGS_RELEASE_CONTRACTS "${SHEAFSYSTEM_CXX_FLAGS} " 
+         CACHE STRING "Flags used by the C++ compiler for Release_contracts builds" )
+
+      set(CMAKE_EXE_LINKER_FLAGS_RELEASE_CONTRACTS "${SHEAFSYSTEM_EXE_LINKER_FLAGS}"  
+         CACHE STRING "Flags used by the linker for executables for Release_contracts builds" )
+
+      set(CMAKE_SHARED_LINKER_FLAGS_RELEASE_CONTRACTS "${SHEAFSYSTEM_SHARED_LINKER_FLAGS}" 
+         CACHE STRING "Flags used by the linker for shared libraries for Release_contracts builds" )
+
+      set(CMAKE_MODULE_LINKER_FLAGS_RELEASE_CONTRACTS "${SHEAFSYSTEM_SHARED_LINKER_FLAGS}" 
+         CACHE STRING "Release_contracts linker flags - binding libs" )
+
+   endif(SHEAFSYSTEM_WINDOWS)
+   
+   mark_as_advanced(FORCE 
+      CMAKE_CXX_FLAGS_RELEASE_CONTRACTS
+      CMAKE_EXE_LINKER_FLAGS_RELEASE_CONTRACTS 
+      CMAKE_SHARED_LINKER_FLAGS_RELEASE_CONTRACTS
+      CMAKE_MODULE_LINKER_FLAGS_RELEASE_CONTRACTS)
+   
+   #                 
+   # RELEASE_NO_CONTRACTS section
+   #
+
+   if(SHEAFSYSTEM_WINDOWS)
+
+      set(CMAKE_CXX_FLAGS_RELEASE_NO_CONTRACTS "${SHEAFSYSTEM_CXX_FLAGS}  /MD /LD /O2 /DNDEBUG" 
+         CACHE STRING "Flags used by the C++ compiler for Release_no_contracts builds" )
+      SheafSystem_set_mp_option(Release_no_contracts)
+
+      set(CMAKE_EXE_LINKER_FLAGS_RELEASE_NO_CONTRACTS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRTD  /NXCOMPAT" 
+         CACHE STRING "Flags used by the linker for executables for Release_no_contracts builds" )
+
+      set(CMAKE_SHARED_LINKER_FLAGS_RELEASE_NO_CONTRACTS "${SHEAFSYSTEM_SHARED_LINKER_FLAGS}" 
+         CACHE STRING "Flags used by the linker for shared libraries for Release_no_contracts builds" )
+
+      set(CMAKE_MODULE_LINKER_FLAGS_RELEASE_NO_CONTRACTS "${SHEAFSYSTEM_SHARED_LINKER_FLAGS}" 
+         CACHE STRING "Release_no_contracts linker flags - binding libs" )
+
+   elseif(SHEAFSYSTEM_LINUX)
+
+      set(CMAKE_CXX_FLAGS_RELEASE_NO_CONTRACTS "${SHEAFSYSTEM_CXX_FLAGS}  -DNDEBUG" 
+         CACHE STRING "Flags used by the C++ compiler for Release_no_contracts builds" )
+
+      set(CMAKE_EXE_LINKER_FLAGS_RELEASE_NO_CONTRACTS "${CMAKE_EXE_LINKER_FLAGS}" 
+         CACHE STRING "Flags used by the linker for executables for Release_no_contracts builds" )
+
+      set(CMAKE_SHARED_LINKER_FLAGS_RELEASE_NO_CONTRACTS "${SHEAFSYSTEM_SHARED_LINKER_FLAGS}" 
+         CACHE STRING "Flags used by the linker for shared libraries for Release_no_contracts builds" )
+
+      set(CMAKE_MODULE_LINKER_FLAGS_RELEASE_NO_CONTRACTS "${SHEAFSYSTEM_SHARED_LINKER_FLAGS}" 
+         CACHE STRING "Release_no_contracts linker flags - binding libs" )
+
+   endif(SHEAFSYSTEM_WINDOWS)
+   
+   mark_as_advanced(FORCE 
+      CMAKE_CXX_FLAGS_RELEASE_NO_CONTRACTS
+      CMAKE_EXE_LINKER_FLAGS_RELEASE_NO_CONTRACTS 
+      CMAKE_SHARED_LINKER_FLAGS_RELEASE_NO_CONTRACTS
+      CMAKE_MODULE_LINKER_FLAGS_RELEASE_NO_CONTRACTS)
+
+   #                 
+   # RelWithDebInfo_contracts section; Windows only.
+   #
+
+   if(SHEAFSYSTEM_WINDOWS)
+
+      set(CMAKE_CXX_FLAGS_RELWITHDEBINFO_CONTRACTS "${SHEAFSYSTEM_CXX_FLAGS} /MD /LD /O2 " 
+         CACHE STRING "RelWithDebInfo_contracts compiler flags" )
+      SheafSystem_set_mp_option(Relwithdebinfo_contracts)
+
+      set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO_CONTRACTS "${SHEAFSYSTEM_EXE_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD  /NXCOMPAT"
+         CACHE STRING "RelWithDebInfo_contracts linker flags - executables" )
+
+      set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO_CONTRACTS  "${CMAKE_EXE_LINKER_FLAGS} ${SHEAFSYSTEM_EXE_LINKER_FLAGS_DEBUG}" 
+         CACHE STRING "Flags used by the linker for executables for RelWithDebInfo_contracts builds" FORCE)
+
+      set(CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO_CONTRACTS "${SHEAFSYSTEM_SHARED_LINKER_FLAGS} ${SHEAFSYSTEM_EXE_LINKER_FLAGS_DEBUG}" 
+         CACHE STRING "RelWithDebInfo_contracts linker flags - binding libs" )
+
+      set(CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO_CONTRACTS "${SHEAFSYSTEM_SHARED_LINKER_FLAGS} ${SHEAFSYSTEM_EXE_LINKER_FLAGS_DEBUG}" 
+         CACHE STRING "RelWithDebInfo_contracts linker flags - shared libs" ) 
+      
+      mark_as_advanced(FORCE 
+         CMAKE_CXX_FLAGS_RELWITHDEBINFO_CONTRACTS
          CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO_CONTRACTS 
          CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO_CONTRACTS
          CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO_CONTRACTS)
-        
-    #                 
-    # RelWithDebInfo_no_contracts section
-    #
 
-    # Configuration specific flags         
-    if(WIN64MSVC OR WIN64INTEL)
-        set(CMAKE_CXX_FLAGS_RELWITHDEBINFO_NO_CONTRACTS 
-            "${LPS_CXX_FLAGS} /MD /LD /O2 /DNDEBUG" CACHE
-            STRING "RelWithDebInfo_no_contracts compiler flags" )
-        set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO_NO_CONTRACTS 
-            "${CMAKE_EXE_LINKER_FLAGS} /DEBUG /NODEFAULTLIB:MSVCRTD /NXCOMPAT" 
-            CACHE STRING "RelWithDebInfo_no_contracts linker flags - executables" )
-        set(CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO_NO_CONTRACTS 
-            "${LPS_SHARED_LINKER_FLAGS} /DEBUG" CACHE
-            STRING "RelWithDebInfo_no_contracts linker flags - shared libs" )
-        set(CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO_NO_CONTRACTS 
-            "${LPS_SHARED_LINKER_FLAGS} /DEBUG" CACHE
-            STRING "RelWithDebInfo_no_contracts linker flags - binding libs" )
-    endif()
-    
-    mark_as_advanced(FORCE CMAKE_CXX_FLAGS_RELWITHDEBINFO_NO_CONTRACTS
+   endif(SHEAFSYSTEM_WINDOWS)
+   
+   #                 
+   # RelWithDebInfo_no_contracts section; Windows only.
+   #
+
+   if(SHEAFSYSTEM_WINDOWS)
+
+      set(CMAKE_CXX_FLAGS_RELWITHDEBINFO_NO_CONTRACTS "${SHEAFSYSTEM_CXX_FLAGS} /MD /LD /O2 /DNDEBUG" CACHE
+         STRING "RelWithDebInfo_no_contracts compiler flags" )
+      SheafSystem_set_mp_option(Relwithdebinfo_no_contracts)
+
+      set(CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO_NO_CONTRACTS "${CMAKE_EXE_LINKER_FLAGS} ${SHEAFSYSTEM_EXE_LINKER_FLAGS_DEBUG}" 
+         CACHE STRING "Flags used by the linker for executables for RelWithDebInfo_no_contracts builds" FORCE)
+
+      set(CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO_NO_CONTRACTS "${SHEAFSYSTEM_SHARED_LINKER_FLAGS} ${SHEAFSYSTEM_EXE_LINKER_FLAGS_DEBUG}" 
+         CACHE STRING "RelWithDebInfo_contracts linker flags - shared libs" ) 
+
+      set(CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO_NO_CONTRACTS "${SHEAFSYSTEM_SHARED_LINKER_FLAGS} ${SHEAFSYSTEM_EXE_LINKER_FLAGS_DEBUG}" 
+         CACHE STRING "RelWithDebInfo_contracts linker flags - binding libs" )
+      
+      mark_as_advanced(FORCE 
+         CMAKE_CXX_FLAGS_RELWITHDEBINFO_NO_CONTRACTS
          CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO_NO_CONTRACTS 
          CMAKE_SHARED_LINKER_FLAGS_RELWITHDEBINFO_NO_CONTRACTS
          CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO_NO_CONTRACTS)
-         
-endfunction(set_compiler_flags)
+
+   endif(SHEAFSYSTEM_WINDOWS)
+   
+endfunction(SheafSystem_set_compiler_flags)
+
+#
+# Generate and install the CMake standard configuration files. 
+#
+function(SheafSystem_generate_install_config_files)
+
+   # message("Entering system_definition.cmake:generate_install_config_files")
+
+   # Preconditions:
+
+   dbc_require_or(SHEAFSYSTEM_WINDOWS SHEAFSYSTEM_LINUX)
+
+   # Body:
+
+   #
+   # Generate and install the build tree config file.
+   #
+   include (CMakePackageConfigHelpers)
+
+   set(SHEAFSYSTEM_CONFIG_NAME "SheafSystemConfig.cmake")
+   set(SHEAFSYSTEM_VERSION_NAME "SheafSystemVersion.cmake")
+   set(SHEAFSYSTEM_CONFIG_INSTALL_DIR "cmake")
+
+   if(SHEAFSYSTEM_WINDOWS)
+
+      # SHEAFSYSTEM_LIB_INSTALL_DIR exported for use in set_env_var scripts.
+      
+      set(SHEAFSYSTEM_LIB_INSTALL_DIR "lib")      
+      set(SHEAFSYSTEM_BIN_INSTALL_DIR "bin")
+
+      configure_package_config_file (
+         ${SHEAFSYSTEM_CMAKE_MODULE_PATH}/Windows.${SHEAFSYSTEM_CONFIG_NAME}.in
+         "${SHEAFSYSTEM_CONFIG_INSTALL_DIR}/${SHEAFSYSTEM_CONFIG_NAME}"
+         INSTALL_DESTINATION "${SHEAFSYSTEM_CONFIG_INSTALL_DIR}"
+         PATH_VARS SHEAFSYSTEM_CONFIG_INSTALL_DIR SHEAFSYSTEM_LIB_INSTALL_DIR SHEAFSYSTEM_BIN_INSTALL_DIR)
+
+   elseif(SHEAFSYSTEM_LINUX)
+
+      # SHEAFSYSTEM_LIB_INSTALL_DIR exported for use in set_env_var scripts.
+      
+      set(SHEAFSYSTEM_LIB_INSTALL_DIR "${CMAKE_BUILD_TYPE}/lib")
+
+      configure_package_config_file (
+         ${SHEAFSYSTEM_CMAKE_MODULE_PATH}/Linux.${SHEAFSYSTEM_CONFIG_NAME}.in
+         "${SHEAFSYSTEM_CONFIG_INSTALL_DIR}/${SHEAFSYSTEM_CONFIG_NAME}"
+         INSTALL_DESTINATION "${SHEAFSYSTEM_CONFIG_INSTALL_DIR}"
+         PATH_VARS SHEAFSYSTEM_CONFIG_INSTALL_DIR SHEAFSYSTEM_LIB_INSTALL_DIR)
+
+   endif()
+
+   write_basic_package_version_file(
+      "${SHEAFSYSTEM_CONFIG_INSTALL_DIR}/${SHEAFSYSTEM_VERSION_NAME}"
+      VERSION ${SHEAFSYSTEM_LIB_VERSION}
+      COMPATIBILITY AnyNewerVersion)
+
+   #
+   # Generate and install the build tree targets file.
+   #
+
+   export(EXPORT ${SHEAFSYSTEM_EXPORT_NAME} FILE ${SHEAFSYSTEM_CONFIG_INSTALL_DIR}/${SHEAFSYSTEM_EXPORT_NAME}.cmake)
+
+   #
+   # Generate and install the installation tree config and targets files.
+   #
+   install(FILES 
+      "${CMAKE_BINARY_DIR}/${SHEAFSYSTEM_CONFIG_INSTALL_DIR}/${SHEAFSYSTEM_CONFIG_NAME}"
+      "${CMAKE_BINARY_DIR}/${SHEAFSYSTEM_CONFIG_INSTALL_DIR}/${SHEAFSYSTEM_VERSION_NAME}"
+      DESTINATION ${SHEAFSYSTEM_CONFIG_INSTALL_DIR})
+   install(EXPORT ${SHEAFSYSTEM_EXPORT_NAME} DESTINATION ${SHEAFSYSTEM_CONFIG_INSTALL_DIR})
+
+   # message("Leaving system_definition.cmake:generate_install_config_files")
+
+endfunction(SheafSystem_generate_install_config_files)
+
+# 
+# Install documentation
+#
+function(SheafSystem_install_documentation)
+
+   install(DIRECTORY ${CMAKE_BINARY_DIR}/documentation/ DESTINATION documentation)
+   install(DIRECTORY ${SHEAFSYSTEM_CMAKE_MODULE_PATH}/css DESTINATION documentation)
+   install(DIRECTORY ${SHEAFSYSTEM_CMAKE_MODULE_PATH}/images DESTINATION documentation)
+   
+endfunction(SheafSystem_install_documentation)
+
+
+# 
+# Install any prerequisites that need to ship with our libs
+#
+function(SheafSystem_install_prereqs)
+   # Prerequisite components install
+   # Install only the HDF includes we use 
+   foreach(inc ${HDF5_INCS})
+      install(FILES ${HDF5_INCLUDE_DIR}/${inc}
+         DESTINATION include
+         PERMISSIONS OWNER_WRITE OWNER_READ GROUP_READ WORLD_READ)
+   endforeach()
+   
+endfunction(SheafSystem_install_prereqs)
 
 # 
 # Get the current system date and store it in RESULT
 #
 macro(get_date RESULT)
-    if(WIN32)
-        execute_process(COMMAND "cmd" " /C date /T" OUTPUT_VARIABLE ${RESULT})
-        string(REGEX REPLACE "(..)/(..)/..(..).*" "\\1/\\2/\\3" ${RESULT} ${${RESULT}})
-    elseif(UNIX)
-        execute_process(COMMAND "date" "+%m/%d/%Y" OUTPUT_VARIABLE ${RESULT})
-        string(REGEX REPLACE "(..)/(..)/..(..).*" "\\1/\\2/\\3" ${RESULT} ${${RESULT}})
-    else(WIN32)
-        message(WARNING "date not implemented")
-        set(${RESULT} 000000)
-    endif(WIN32)
-endmacro(get_date)	
+   if(WIN32)
+      execute_process(COMMAND "cmd" " /C date /T" OUTPUT_VARIABLE ${RESULT})
+      string(REGEX REPLACE "(..)/(..)/..(..).*" "\\1/\\2/\\3" ${RESULT} ${${RESULT}})
+   elseif(UNIX)
+      execute_process(COMMAND "date" "+%m/%d/%Y" OUTPUT_VARIABLE ${RESULT})
+      string(REGEX REPLACE "(..)/(..)/..(..).*" "\\1/\\2/\\3" ${RESULT} ${${RESULT}})
+   else(WIN32)
+      message(WARNING "date not implemented")
+      set(${RESULT} 000000)
+   endif(WIN32)
+endmacro(get_date)
+
+function(SheafSystem_install_release_notes)
+
+   # Preconditions:
+
+   dbc_require_or(SHEAFSYSTEM_WINDOWS SHEAFSYSTEM_LINUX)
+
+   # Body:
+
+   #
+   # Markup the RELEASE_NOTES file. 
+   #
+   set(RELEASE_DATE)
+   get_date(RELEASE_DATE)
+
+   #
+   # Generate some info about the release
+   #
+   file(WRITE ${CMAKE_BINARY_DIR}/VERSION "SheafSystem version ${SHEAFSYSTEM_LIB_VERSION} ${RELEASE_DATE}  \n")
+   install(FILES ${CMAKE_BINARY_DIR}/VERSION DESTINATION ${CMAKE_INSTALL_PREFIX})
+
+   configure_file(${SHEAFSYSTEM_CMAKE_MODULE_PATH}/RELEASE_NOTES.cmake.in ${CMAKE_BINARY_DIR}/RELEASE_NOTES)
+
+   if(SHEAFSYSTEM_WINDOWS)
+      install(FILES ${CMAKE_BINARY_DIR}/RELEASE_NOTES DESTINATION ${CMAKE_INSTALL_PREFIX} RENAME RELEASE_NOTES.txt)
+   elseif(SHEAFSYSTEM_LINUX)
+      install(FILES ${CMAKE_BINARY_DIR}/RELEASE_NOTES DESTINATION ${CMAKE_INSTALL_PREFIX})
+   endif()
+
+endfunction(SheafSystem_install_release_notes)
+
+function(SheafSystem_make_system_definitions)
+
+   SheafSystem_set_system_variable_defaults()
+   SheafSystem_set_platform_variables()
+   SheafSystem_set_compiler_flags()
+   SheafSystem_set_system_install_location_default()
+   SheafSystem_set_debug_configuration()
+   SheafSystem_set_default_build_type()
+   SheafSystem_set_coverage_defaults()
+
+   if(SHEAFSYSTEM_WINDOWS)
+      #
+      # Install the Windows Runtime libs
+      #
+      # $$ISSUE: This call was previously the first thing in this file.
+      # It combines find functions with install functions, not clear where to put it.
+      #
+      include(InstallRequiredSystemLibraries)
+   endif()
+
+   include(${SHEAFSYSTEM_CMAKE_MODULE_PATH}/find_prerequisites.cmake)
+   SheafSystem_find_prerequisites()
+
+endfunction(SheafSystem_make_system_definitions)
+
+# 
+# Convenience wrapper for the message function.
+# The Eclipse Cmakeed plugin renders this pretty much obsolete
+# from a pregramming viewpoint, but the syntax is prettier
+# than what it wraps.
+#
+function(SheafSystem_status_message txt)
+
+   # Let the user know what's being configured
+   message(STATUS " ")
+   message(STATUS "${txt} - ")
+   message(STATUS " ")
+
+endfunction(SheafSystem_status_message)

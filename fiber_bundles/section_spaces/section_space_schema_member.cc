@@ -30,7 +30,7 @@
 #include "discretization_iterator.h"
 #include "ij_product_structure.h"
 #include "index_space_iterator.h"
-#include "mutable_index_space_handle.h"
+#include "scattered_insertion_index_space_handle.h"
 #include "namespace_poset.h"
 #include "postorder_member_iterator.h"
 #include "postorder_itr.h"
@@ -1225,10 +1225,10 @@ update_row_cache_with_disc_id_space() const
   // The new space will contain a subset of the members in the
   // original client id space in the same relative order as the original.
 
-  assertion(dynamic_cast<mutable_index_space_handle*>(_discretization_id_space) != 0);
+  assertion(dynamic_cast<scattered_insertion_index_space_handle*>(_discretization_id_space) != 0);
 
-  mutable_index_space_handle* ldisc_id_space =
-    reinterpret_cast<mutable_index_space_handle*>(_discretization_id_space);
+  scattered_insertion_index_space_handle* ldisc_id_space =
+    reinterpret_cast<scattered_insertion_index_space_handle*>(_discretization_id_space);
 
   ldisc_id_space->clear();
   ldisc_id_space->reserve(_discretization_ct);

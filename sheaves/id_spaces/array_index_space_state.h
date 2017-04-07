@@ -33,8 +33,8 @@
 #include "list_pool.h"
 #endif
 
-#ifndef MUTABLE_INDEX_SPACE_STATE_H
-#include "mutable_index_space_state.h"
+#ifndef SCATTERED_INSERTION_INDEX_SPACE_STATE_H
+#include "scattered_insertion_index_space_state.h"
 #endif
 
 #ifndef STD_UNORDERED_MAP_H
@@ -49,7 +49,7 @@ class array_index_space_state;
 class array_index_space_iterator;
 
 ///
-/// An array implementation of class mutable_index_space_state.
+/// An array implementation of class scattered_insertion_index_space_state.
 /// This representation is intended to efficiently represent
 /// id spaces that are positive and dense, that is, the domain
 /// ids are in the domain (~0, ~end()) and hence the id to hub id
@@ -57,7 +57,7 @@ class array_index_space_iterator;
 /// for id spaces used to index arrays, in which case the ids
 /// are in the domain [0, end()).
 ///
-class SHEAF_DLL_SPEC array_index_space_state : public mutable_index_space_state
+class SHEAF_DLL_SPEC array_index_space_state : public scattered_insertion_index_space_state
 {
 
   friend class array_index_space_iterator;
@@ -137,7 +137,21 @@ private:
 
 public:
 
-  using mutable_index_space_state::update_extrema;
+protected:
+
+private:
+
+  //@}
+
+
+  // ===========================================================
+  /// @name GATHERED_INSERTION_INDEX_SPACE FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  using gathered_insertion_index_space_state::update_extrema;
 
   ///
   /// Update the id extrema.
@@ -156,10 +170,14 @@ public:
 
 protected:
 
+  ///
+  /// Update the id extrema after a remove operation.
+  ///
+  virtual void update_extrema_after_remove();
+
 private:
 
   //@}
-
 
   // ===========================================================
   /// @name MAP REPRESENTATION FACET

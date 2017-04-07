@@ -79,7 +79,7 @@ new_space(index_space_family& xid_spaces,
 
 sheaf::hash_index_space_handle::
 hash_index_space_handle()
-  : mutable_index_space_handle()
+  : scattered_insertion_index_space_handle()
 {
   // Preconditions:
     
@@ -410,7 +410,7 @@ invariant() const
 
     // Must satisfy base class invariant
 
-    invariance(mutable_index_space_handle::invariant());
+    invariance(scattered_insertion_index_space_handle::invariant());
 
     // Invariances for this class:
       

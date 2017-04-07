@@ -29,8 +29,8 @@
 #include "list_pool.h"
 #endif
 
-#ifndef MUTABLE_INDEX_SPACE_STATE_H
-#include "mutable_index_space_state.h"
+#ifndef SCATTERED_INSERTION_INDEX_SPACE_STATE_H
+#include "scattered_insertion_index_space_state.h"
 #endif
 
 #ifndef STD_UNORDERED_MAP_H
@@ -45,13 +45,13 @@ class hash_index_space_state;
 class hash_index_space_iterator;
 
 ///
-/// An hash map implementation of class mutable_index_space_state.
+/// An hash map implementation of class scattered_insertion_index_space_state.
 /// This representation is intended to efficiently represent
 /// id spaces that are possibly negative and are sparse, that is,
 /// end() is much greater than ct() and hence uses hash maps to
 /// represent both directions of the map.
 ///
-class SHEAF_DLL_SPEC hash_index_space_state : public mutable_index_space_state
+class SHEAF_DLL_SPEC hash_index_space_state : public scattered_insertion_index_space_state
 {
 
   friend class hash_index_space_iterator;
@@ -131,7 +131,20 @@ private:
 
 public:
 
-  using mutable_index_space_state::update_extrema;
+protected:
+
+private:
+
+  //@}
+
+  // ===========================================================
+  /// @name GATHERED_INSERTION_INDEX_SPACE FACET
+  // ===========================================================
+  //@{
+
+public:
+
+  using gathered_insertion_index_space_state::update_extrema;
 
   ///
   /// Update the id extrema.

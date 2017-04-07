@@ -180,7 +180,7 @@ public class G2DFieldActor extends FieldActor
     xyPlotActor.SetHeight(1.0);
     xyPlotActor.SetWidth(1.0);
     xyPlotActor.SetPosition(0.0, 0.0);
-    xyPlotActor.AddInput(grid);
+    xyPlotActor.AddDataSetInput(grid);
 
     xyPlotProperty = xyPlotActor.GetProperty();
     titleProperty = xyPlotActor.GetTitleTextProperty();

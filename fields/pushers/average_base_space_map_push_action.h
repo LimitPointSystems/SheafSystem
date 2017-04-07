@@ -35,7 +35,7 @@
 
 namespace sheaf
 {
-class mutable_index_space_handle;
+class scattered_insertion_index_space_handle;
 }
 
 namespace fields
@@ -74,7 +74,7 @@ protected:
   ///
   /// Discretization id space shared by all output sections.
   ///
-  mutable_index_space_handle* _disc_id_space;
+  scattered_insertion_index_space_handle* _disc_id_space;
 
   ///
   /// Number of branches accumulated for each discretization member.

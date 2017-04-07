@@ -28,7 +28,7 @@
 #include "ijk_product_structure.h"
 #include "interval_index_space_handle.h"
 #include "list_index_space_handle.h"
-#include "mutable_index_space_handle.h"
+#include "scattered_insertion_index_space_handle.h"
 #include "offset_index_space_handle.h"
 #include "primary_index_space_handle.h"
 #include "reserved_primary_index_space_handle.h"
@@ -319,32 +319,32 @@ sheaf::index_space_family::
 get_id_space<sheaf::list_index_space_handle>(pod_type xid) const;
 
 //==============================================================================
-// mutable_index_space_handle
+// scattered_insertion_index_space_handle
 //==============================================================================
 
 template
 SHEAF_DLL_SPEC
 bool
 sheaf::index_space_family::
-handle_conforms_to_state<sheaf::mutable_index_space_handle>(const string& xname) const;
+handle_conforms_to_state<sheaf::scattered_insertion_index_space_handle>(const string& xname) const;
 
 template
 SHEAF_DLL_SPEC
-sheaf::mutable_index_space_handle&
+sheaf::scattered_insertion_index_space_handle&
 sheaf::index_space_family::
-get_id_space<sheaf::mutable_index_space_handle>(const string& xname) const;
+get_id_space<sheaf::scattered_insertion_index_space_handle>(const string& xname) const;
 
 template
 SHEAF_DLL_SPEC
 bool
 sheaf::index_space_family::
-handle_conforms_to_state<sheaf::mutable_index_space_handle>(pod_type xid) const;
+handle_conforms_to_state<sheaf::scattered_insertion_index_space_handle>(pod_type xid) const;
 
 template
 SHEAF_DLL_SPEC
-sheaf::mutable_index_space_handle&
+sheaf::scattered_insertion_index_space_handle&
 sheaf::index_space_family::
-get_id_space<sheaf::mutable_index_space_handle>(pod_type xid) const;
+get_id_space<sheaf::scattered_insertion_index_space_handle>(pod_type xid) const;
 
 //==============================================================================
 // offset_index_space_handle

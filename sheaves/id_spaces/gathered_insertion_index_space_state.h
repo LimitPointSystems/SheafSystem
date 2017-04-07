@@ -16,10 +16,10 @@
 //
 
 /// @file
-/// Interface for class mutable_index_space_state.
+/// Interface for class gathered_insertion_index_space_state.
 
-#ifndef MUTABLE_INDEX_SPACE_STATE_H
-#define MUTABLE_INDEX_SPACE_STATE_H
+#ifndef GATHERED_INSERTION_INDEX_SPACE_STATE_H
+#define GATHERED_INSERTION_INDEX_SPACE_STATE_H
 
 #ifndef SHEAF_DLL_SPEC_H
 #include "sheaf_dll_spec.h"
@@ -32,17 +32,18 @@
 namespace sheaf
 {
 
-class mutable_index_space_handle;
+class gathered_insertion_index_space_handle;
 
 ///
-/// An implementation class explicit_index_space_state that adds an abstract
-/// mutable interface.
+/// An implementation of class explicit_index_space_state that supports
+/// gathered insertion of new members, that is, new members can only be
+/// inserted within the existing domain interval or at the end of it.
 ///
-class SHEAF_DLL_SPEC mutable_index_space_state : public explicit_index_space_state
+class SHEAF_DLL_SPEC gathered_insertion_index_space_state : public explicit_index_space_state
 {
 
   // ===========================================================
-  /// @name MUTABLE_INDEX_SPACE_STATE FACET
+  /// @name GATHERED_INSERTION_INDEX_SPACE_STATE FACET
   // ===========================================================
   //@{
 
@@ -53,17 +54,17 @@ protected:
   ///
   /// Default constructor
   ///
-  mutable_index_space_state();
+  gathered_insertion_index_space_state();
 
   ///
   /// Copy constructor; disabled.
   ///
-  mutable_index_space_state(const mutable_index_space_state& xother) { };
+  gathered_insertion_index_space_state(const gathered_insertion_index_space_state& xother) { };
 
   ///
   /// Destructor
   ///
-  virtual ~mutable_index_space_state();
+  virtual ~gathered_insertion_index_space_state();
 
 private:
 
@@ -71,22 +72,11 @@ private:
 
 
   // ===========================================================
-  /// @name MUTABLE INDEX SPACE FACET
+  /// @name GATHERED_INSERTION INDEX SPACE FACET
   // ===========================================================
   //@{
 
 public:
-
-  ///
-  /// Make id xid in this id space equivalent to xhub_id in the hub id space.
-  /// synonym for insert(xid, xhub_id.hub_pod()).
-  ///
-  void insert(pod_type xid, const scoped_index& xhub_id);
-
-  ///
-  /// Make id xid in this id space equivalent to xhub_id in the hub id space.
-  ///
-  void insert(pod_type xid, pod_type xhub_id);
 
   ///
   /// Make the next id in this space equivalent to xhub_id in the hub id space.
@@ -110,7 +100,7 @@ public:
   ///
   /// Makes id xitr.id() in this id space equivalent to xhub_id in the hub
   /// id space.  Increments all ids greater than xitr.id() if any by one.
-  /// Xitr will be set to the entry with id, xitr.id()+1.
+  /// Xitr will be set to the entry with id xitr.id()+1.
   ///
   void push(index_space_iterator& xitr, pod_type xhub_id);
 
@@ -145,7 +135,7 @@ public:
   void remove(index_space_iterator& xitr, bool update_extrema);
 
   ///
-  /// Gathers this id space into an interval.
+  /// Gathers this id space into a 0-based, contiguous interval.
   ///
   void gather();
   
@@ -170,6 +160,16 @@ public:
   void clear();
 
 protected:
+  
+  ///
+  /// Update the id extrema after a remove operation.
+  ///
+  virtual void update_extrema_after_remove();
+
+  ///
+  /// Update the extrema for the inserted id xid.
+  ///
+  void update_extrema(pod_type xid);
 
 private:
 
@@ -184,11 +184,6 @@ private:
 public:
 
 protected:
-
-  ///
-  /// Inserts entry (xdomain_id, xrange_id) into the map representation.
-  ///
-  virtual void map_rep_insert_entry(pod_type xdomain_id, pod_type xrange_id) = 0;
 
   ///
   /// Inserts entry (next_id(), xrange_id) into the map representation.
@@ -225,11 +220,6 @@ protected:
   ///
   virtual void map_rep_gather() = 0;
 
-  ///
-  /// Update the extrema for the inserted id xid.
-  ///
-  void update_extrema(pod_type xid);
-
 private:
 
   //@}
@@ -252,7 +242,7 @@ protected:
   ///
   /// Assignment operator
   ///
-  virtual mutable_index_space_state& operator=(const explicit_index_space_state& xother);
+  virtual gathered_insertion_index_space_state& operator=(const explicit_index_space_state& xother);
 
 private:
 
@@ -327,11 +317,11 @@ private:
 // ===========================================================
  
 ///
-/// The deep size of mutable_index_space_state& xn.
+/// The deep size of gathered_insertion_index_space_state& xn.
 ///
 SHEAF_DLL_SPEC 
-size_t deep_size(const mutable_index_space_state& xn, bool xinclude_shallow = true);
+size_t deep_size(const gathered_insertion_index_space_state& xn, bool xinclude_shallow = true);
   
 } // end namespace sheaf
 
-#endif // ifndef MUTABLE_INDEX_SPACE_STATE_H
+#endif // ifndef GATHERED_INSERTION_INDEX_SPACE_STATE_H

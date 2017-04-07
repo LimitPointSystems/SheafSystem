@@ -104,8 +104,8 @@ public class TensorGlyphFieldActor extends G3DFieldActor
 
     // Hook the tensor glyph up to the data flow
 
-    tensorGlyph.SetInput(mapperInput);
-    gridMapper.SetInput(tensorGlyph.GetOutput());
+    tensorGlyph.SetInputData(mapperInput);
+    gridMapper.SetInputData(tensorGlyph.GetOutput());
   }
 
   /**

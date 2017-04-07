@@ -97,7 +97,7 @@ new_space(index_space_family& xid_spaces,
   ensure(result.is_persistent() == xis_persistent);
   ensure(result.name() == xname);
 
-  ensure(result.capacity() >= 0);
+  //  ensure(result.capacity() >= 0);
 
   // Exit:
 
@@ -124,6 +124,7 @@ reverse(bool xupdate_extrema)
   // Body:
 
   _to_range.reverse();
+
 
   if(xupdate_extrema)
   {
@@ -202,11 +203,46 @@ push_front(pod_type xhub_id)
   return;
 }
 
+void
+sheaf::list_index_space_state::
+replace_range_id(pod_type xold_range_id, pod_type xnew_range_id)
+{
+  // cout << endl << "Entering list_index_space_state::replace_range_id." << endl;
+
+  // Preconditions:
+
+  require((xnew_range_id != xold_range_id) ? !contains_unglued_hub(xnew_range_id) : true);
+  
+  // Body:
+
+  define_old_variable(bool  old_contains_xold_range_id = contains_unglued_hub(xold_range_id));
+  define_old_variable(pod_type old_domain_id = pod(xold_range_id));
+
+  to_range_type::iterator litr = to_range_itr(xold_range_id, true);
+  if(litr != _to_range.end())
+  {
+    *litr = xnew_range_id;
+  }
+  
+
+  // Postconditions:
+
+  ensure(old_contains_xold_range_id ? contains_unglued_hub(xnew_range_id) : true);
+  ensure((xnew_range_id != xold_range_id) ? !contains_unglued_hub(xold_range_id) : true);
+  ensure(old_contains_xold_range_id ? pod(xnew_range_id) == old_domain_id : true);
+  
+  // Exit:
+
+  // cout << "Leaving list_index_space_state::replace_range_id." << endl;
+  return;
+}
+
+
 // PROTECTED MEMBER FUNCTIONS
 
 sheaf::list_index_space_state::
 list_index_space_state()
-  : mutable_index_space_state()
+  : gathered_insertion_index_space_state()
 {
   // Preconditions:
     
@@ -246,10 +282,11 @@ sheaf::list_index_space_state::
 
 
 // ===========================================================
-// MUTABLE INDEX SPACE FACET
+// GATHERED_INSERTION INDEX SPACE FACET
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
+
 
 void
 sheaf::list_index_space_state::
@@ -259,37 +296,19 @@ update_extrema()
 
   // Body:
 
-  _begin = invalid_pod_index();
-  _end = invalid_pod_index();
+  // List is always gathered by defintion.
 
-  pod_type ldomain_id;
-
-  // Find begin.
-  
-  to_range_type::const_iterator itr;
-
-  for(itr = _to_range.begin(), ldomain_id = 0;
-      itr != _to_range.end();
-      ++itr, ++ldomain_id)
+  if(_ct == 0)
   {
-    if(is_valid(*itr))
-    {
-      _begin = ldomain_id;
-      break;
-    }
-  }
+    // The map is empty.
 
-  if(is_valid(_begin))
-  {
-    // An entry was found, the end is always the last entry in the map.
-
-    _end = _to_range.size();
+    _begin = invalid_pod_index();
+    _end = invalid_pod_index();
   }
   else
   {
-    // The map is empty, end is invalid.
-
-    _end = invalid_pod_index();
+    _begin = 0;
+    _end = _ct;
   }
 
   // Postconditions:s
@@ -368,64 +387,6 @@ to_range() const
 
 void
 sheaf::list_index_space_state::
-map_rep_insert_entry(pod_type xdomain_id, pod_type xrange_id)
-{
-  // Preconditions:
-
-  require(!contains_hub(xrange_id));
-  require(!contains(xdomain_id));
-
-  // Body:
-
-  // Assign mapping.
-
-  if(is_valid(_end) && xdomain_id < _end)
-  {
-    // The domain id already is in the map.  Find it and set the range id.
-
-    to_range_type::iterator itr;
-    pod_type ldomain_id;
-
-    for(itr = _to_range.begin(), ldomain_id = 0;
-	itr != _to_range.end();
-	++itr, ++ldomain_id)
-    {
-      if(ldomain_id == xdomain_id)
-      {
-	*itr = xrange_id;
-	break;
-      }
-    }
-  }
-  else
-  {
-    // The domain id is not in the map.  Construct entries needed to insert
-    // the id into the map.
-
-    if((!is_valid(_end) && xdomain_id > 0) || (xdomain_id > _end))
-    {
-      // Add invalid entries into the map so that the next entry inserted
-      // will be the xdomain_id.
-
-      _to_range.resize(xdomain_id, invalid_pod_index());
-    }
-
-    _to_range.push_back(xrange_id);
-  }
-
-  // Postconditions:
-
-  // Not finished inserting entry; do not ensure invariant.
-
-  ensure(contains(xdomain_id, xrange_id));
-  
-  // Exit
-
-  return;
-}
-
-void
-sheaf::list_index_space_state::
 map_rep_push_back(pod_type xrange_id)
 {
   // Preconditions:
@@ -498,78 +459,96 @@ map_rep_remove_entry(pod_type xid, bool xis_range_id)
 {
   // Preconditions:
 
+
+  define_old_variable(bool old_contains_entry = xis_range_id ? contains_hub(xid) : contains(xid));
+  define_old_variable(pod_type old_pod = xis_range_id ? pod(xid) : xid);
+  define_old_variable(pod_type old_hub_pod = xis_range_id ? xid : hub_pod(xid));
+  
   // Body:
+
+  // $$SCRIBBLE: need to actually remove the entry
 
   size_type result = 0;
 
-  if(xis_range_id)
+  to_range_type::iterator litr = to_range_itr(xid, xis_range_id);
+  if(litr != _to_range.end())
   {
-    to_range_type::iterator litr = _to_range.begin();
-
-    while(litr != _to_range.end())
-    {
-      if(*litr == xid)
-      {
-	// Found the id, remove it.
-
-	*litr = invalid_pod_index();
-	result = 1;
-	break;
-      }
-      else
-      {
-	// Not the id, iterate to the next item.
-
-	++litr;
-      }
-    }
+    _to_range.erase(litr);
+    result = 1;
   }
-  else
-  {
-    pod_type ldomain_id;
 
-    to_range_type::iterator itr;
+//   size_type result = 0;
 
-    for(itr = _to_range.begin(), ldomain_id = 0;
-	itr != _to_range.end();
-	++itr, ++ldomain_id)
-    {
-      if(ldomain_id == xid)
-      {
-	// Found the id.
+//   if(xis_range_id)
+//   {
+//     to_range_type::iterator litr = _to_range.begin();
 
-	if(!is_valid(*itr))
-	{
-	  // Entry does not exist, exit loop.
+//     while(litr != _to_range.end())
+//     {
+//       if(*litr == xid)
+//       {
+// 	// Found the id, remove it.
 
-	  break;
-	}
+// 	*litr = invalid_pod_index();
+// 	result = 1;
+// 	break;
+//       }
+//       else
+//       {
+// 	// Not the id, iterate to the next item.
+
+// 	++litr;
+//       }
+//     }
+//   }
+//   else
+//   {
+//     pod_type ldomain_id;
+
+//     to_range_type::iterator itr;
+
+//     for(itr = _to_range.begin(), ldomain_id = 0;
+// 	itr != _to_range.end();
+// 	++itr, ++ldomain_id)
+//     {
+//       if(ldomain_id == xid)
+//       {
+// 	// Found the id.
+
+// 	if(!is_valid(*itr))
+// 	{
+// 	  // Entry does not exist, exit loop.
+
+// 	  break;
+// 	}
 	
-	// Entry exists, remove it.
+// 	// Entry exists, remove it.
 
-	*itr = invalid_pod_index();
-	result = 1;
+// 	*itr = invalid_pod_index();
+// 	result = 1;
 
-	break;
-      }
-    }
-  }
+// 	break;
+//       }
+//     }
+//   }
 
-  if(result > 0)
-  {
-    // No invalid ids should be on the tail of the list, prone them.
+//   if(result > 0)
+//   {
+//     // No invalid ids should be on the tail of the list, prone them.
 
-    while(!_to_range.empty() && !is_valid(_to_range.back()))
-    {
-      _to_range.pop_back();
-    }  
-  }
+//     while(!_to_range.empty() && !is_valid(_to_range.back()))
+//     {
+//       _to_range.pop_back();
+//     }  
+//   }
   
   // Postconditions:
 
   // Not finished removing entry; do not ensure invariant.
 
-  ensure(xis_range_id ? !contains_hub(xid) : !contains(xid));  
+  //  ensure(xis_range_id ? !contains_hub(xid) : !contains(xid));
+  ensure(!old_contains_entry || !contains(old_pod, old_hub_pod));
+  ensure((result == 0) || (result == 1));
 
   // Exit
 
@@ -655,29 +634,31 @@ map_rep_gather()
 
   // Body:
 
-  to_range_type::iterator itr;
-  to_range_type::iterator new_itr;
+  // $$SCRIBBLE: no need to do anything. Map is always gatherd.
 
-  for(itr = _to_range.begin(), new_itr = _to_range.begin();
-      itr != _to_range.end();
-      ++itr)
-  {
-    if(is_valid(*itr) && (itr != new_itr))
-    {
-      // The current value is value and the position has changed,
-      // assign value to new position.
+//   to_range_type::iterator itr;
+//   to_range_type::iterator new_itr;
 
-      *new_itr = *itr;
-      ++new_itr;
-    }
-  }
+//   for(itr = _to_range.begin(), new_itr = _to_range.begin();
+//       itr != _to_range.end();
+//       ++itr)
+//   {
+//     if(is_valid(*itr) && (itr != new_itr))
+//     {
+//       // The current value is value and the position has changed,
+//       // assign value to new position.
 
-  if(new_itr != _to_range.end())
-  {
-    // Trim the map to the new size.
+//       *new_itr = *itr;
+//       ++new_itr;
+//     }
+//   }
 
-    _to_range.erase(++new_itr, _to_range.end());
-  }
+//   if(new_itr != _to_range.end())
+//   {
+//     // Trim the map to the new size.
+
+//     _to_range.erase(++new_itr, _to_range.end());
+//   }
   
   // Postconditions:
 
@@ -687,6 +668,95 @@ map_rep_gather()
 
   return;
 }
+
+sheaf::list_index_space_state::to_range_type::iterator
+sheaf::list_index_space_state::
+to_range_itr(pod_type xid, bool xis_range_id)
+{
+  // cout << endl << "Entering list_index_space_state::to_range_itr." << endl;
+
+  // Preconditions:
+
+
+  // Body:
+
+  to_range_type::iterator result;
+  
+  if(xis_range_id)
+  {
+    for(result = _to_range.begin(); result != _to_range.end(); ++result)
+    {
+      if(*result == xid)
+      {
+        break;
+      }
+    }
+  }
+  else
+  {
+    pod_type ldomain_id;
+    for(result = _to_range.begin(), ldomain_id = 0; result != _to_range.end(); ++result, ++ldomain_id)
+    {
+      if(ldomain_id == xid)
+      {
+        break;
+      }
+    }
+  }
+  
+
+  // Postconditions:
+
+  // Exit:
+
+  // cout << "Leaving list_index_space_state::to_range_itr." << endl;
+  return result;
+}
+
+sheaf::list_index_space_state::to_range_type::const_iterator
+sheaf::list_index_space_state::
+to_range_const_itr(pod_type xid, bool xis_range_id) const
+{
+  // cout << endl << "Entering list_index_space_state::to_range_const_itr." << endl;
+
+  // Preconditions:
+
+
+  // Body:
+
+  to_range_type::const_iterator result;
+  
+  if(xis_range_id)
+  {
+    for(result = _to_range.begin(); result != _to_range.end(); ++result)
+    {
+      if(*result == xid)
+      {
+        break;
+      }
+    }
+  }
+  else
+  {
+    pod_type ldomain_id;
+    for(result = _to_range.begin(), ldomain_id = 0; result != _to_range.end(); ++result, ++ldomain_id)
+    {
+      if(ldomain_id == xid)
+      {
+        break;
+      }
+    }
+  }
+  
+
+  // Postconditions:
+
+  // Exit:
+
+  // cout << "Leaving list_index_space_state::to_range_const_itr." << endl;
+  return result;
+}
+
 
 // PRIVATE MEMBER FUNCTIONS
 
@@ -710,7 +780,7 @@ operator==(const explicit_index_space_state& xother) const
   const list_index_space_state& lother =
     dynamic_cast<const list_index_space_state&>(xother);
 
-  bool result = mutable_index_space_state::operator==(xother);
+  bool result = gathered_insertion_index_space_state::operator==(xother);
   result = result && (_to_range == lother._to_range);
   result = result && (_capacity == lother._capacity);
 
@@ -758,7 +828,7 @@ operator=(const explicit_index_space_state& xother)
   _to_range = lother._to_range;
   _capacity = lother._capacity;
 
-  (void) mutable_index_space_state::operator=(xother);
+  (void) gathered_insertion_index_space_state::operator=(xother);
 
   // Postconditions:
 
@@ -787,21 +857,29 @@ contains(pod_type xid) const
 
   // Body:
 
-  bool result = false;
+  // If _ct = 0 then _begin == _end == invalid_pod_index() and 
+  // the following expression returns false for any xid. So we don't
+  // have to test whether _begin or _end is valid.
 
-  pod_index_type ldomain_id;
-  to_range_type::const_iterator itr;
+  assertion(is_valid(_begin) == is_valid(_end));
+  
+  bool result = (_begin <= xid) && (xid < _end);
 
-  for(itr = _to_range.begin(), ldomain_id = 0;
-      itr != _to_range.end();
-      ++itr, ++ldomain_id)
-  {
-    if(ldomain_id == xid)
-    {
-      result = is_valid(*itr);
-      break;
-    }
-  }
+//   bool result = false;
+
+//   pod_index_type ldomain_id;
+//   to_range_type::const_iterator itr;
+
+//   for(itr = _to_range.begin(), ldomain_id = 0;
+//       itr != _to_range.end();
+//       ++itr, ++ldomain_id)
+//   {
+//     if(ldomain_id == xid)
+//     {
+//       result = is_valid(*itr);
+//       break;
+//     }
+//   }
 
   // Postconditions:
 
@@ -820,20 +898,21 @@ contains_unglued_hub(pod_type xhub_id) const
 
   // Body:
 
-  bool result = false;
+  bool result = to_range_const_itr(xhub_id, true) != _to_range.end();
+  
 
-  to_range_type::const_iterator itr;
+//   bool result = false;
 
-  for(itr = _to_range.begin();
-      itr != _to_range.end();
-      ++itr)
-  {
-    if(*itr == xhub_id)
-    {
-      result = true;
-      break;
-    }
-  }
+//   to_range_type::const_iterator itr;
+
+//   for(itr = _to_range.begin(); itr != _to_range.end(); ++itr)
+//   {
+//     if(*itr == xhub_id)
+//     {
+//       result = true;
+//       break;
+//     }
+//   }
 
   // Postconditions:
 
@@ -852,21 +931,23 @@ contains(pod_type xid, pod_type xhub_id) const
 
   // Body:
 
-  bool result = false;
+  to_range_type::const_iterator litr = to_range_const_itr(xid, false);
+  bool result = (litr != _to_range.end()) && (*litr == xhub_id);
 
-  pod_index_type ldomain_id;
-  to_range_type::const_iterator itr;
 
-  for(itr = _to_range.begin(), ldomain_id = 0;
-      itr != _to_range.end();
-      ++itr, ++ldomain_id)
-  {
-    if(ldomain_id == xid)
-    {
-      result = (*itr == xhub_id);
-      break;
-    }
-  }
+//   bool result = false;
+
+//   pod_index_type ldomain_id;
+//   to_range_type::const_iterator itr;
+
+//   for(itr = _to_range.begin(), ldomain_id = 0; itr != _to_range.end(); ++itr, ++ldomain_id)
+//   {
+//     if(ldomain_id == xid)
+//     {
+//       result = (*itr == xhub_id);
+//       break;
+//     }
+//   }
 
   // Postconditions:
 
@@ -890,9 +971,7 @@ pod(pod_type xhub_id) const
   pod_index_type ldomain_id;
   to_range_type::const_iterator itr;
 
-  for(itr = _to_range.begin(), ldomain_id = 0;
-      itr != _to_range.end();
-      ++itr, ++ldomain_id)
+  for(itr = _to_range.begin(), ldomain_id = 0; itr != _to_range.end(); ++itr, ++ldomain_id)
   {
     if(*itr == xhub_id)
     {
@@ -918,21 +997,22 @@ unglued_hub_pod(pod_type xid) const
 
   // Body:
 
-  pod_type result = invalid_pod_index();
+  to_range_type::const_iterator litr = to_range_const_itr(xid, false);
+  pod_type result = (litr != _to_range.end()) ? *litr : invalid_pod_index();
 
-  pod_index_type ldomain_id;
-  to_range_type::const_iterator itr;
+//   pod_type result = invalid_pod_index();
 
-  for(itr = _to_range.begin(), ldomain_id = 0;
-      itr != _to_range.end();
-      ++itr, ++ldomain_id)
-  {
-    if(ldomain_id == xid)
-    {
-      result = *itr;
-      break;
-    }
-  }
+//   pod_index_type ldomain_id;
+//   to_range_type::const_iterator itr;
+
+//   for(itr = _to_range.begin(), ldomain_id = 0; itr != _to_range.end(); ++itr, ++ldomain_id)
+//   {
+//     if(ldomain_id == xid)
+//     {
+//       result = *itr;
+//       break;
+//     }
+//   }
 
   // Postconditions:
 
@@ -1321,9 +1401,12 @@ invariant() const
 
     // Must satisfy base class invariant
 
-    invariance(mutable_index_space_state::invariant());
+    invariance(gathered_insertion_index_space_state::invariant());
 
     // Invariances for this class:
+
+    invariance(is_valid(begin()) == is_valid(end()));
+    invariance((begin() == 0) || !is_valid(begin()));
       
     // Finished, turn invariant checking back on.      
 
@@ -1356,7 +1439,7 @@ deep_size(const list_index_space_state& xn, bool xinclude_shallow)
 
   // Add any contributions from the parent class.
 
-  const mutable_index_space_state& ixn = static_cast<const mutable_index_space_state&>(xn);
+  const gathered_insertion_index_space_state& ixn = static_cast<const gathered_insertion_index_space_state&>(xn);
   result += deep_size(ixn, false);
 
   // Add contribution from list<pod_type> _to_range.

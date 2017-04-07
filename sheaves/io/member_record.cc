@@ -3442,7 +3442,7 @@ transfer_eqv_ids_to_member(const scoped_index& xmbr_id)
 
   for(int i = 0; i<_eqv_ids.ct(); i+=2)
   {
-    mutable_index_space_handle* lid_space = scaffold().id_spaces()[_eqv_ids[i]];
+    scattered_insertion_index_space_handle* lid_space = scaffold().id_spaces()[_eqv_ids[i]];
     pod_index_type lext_id = _eqv_ids[i+1];
     pod_index_type lint_id = xmbr_id.hub_pod();
 

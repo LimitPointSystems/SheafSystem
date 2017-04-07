@@ -187,7 +187,7 @@ public class GlyphFieldActorDescriptor extends G3DFieldActorDescriptor
       else
         glyphSource = new vtkSphereSource().GetOutput();
 
-      actor.glyph.SetSource(glyphSource);
+      actor.glyph.SetSourceData(glyphSource);
     }
 
     // Set scale factor

@@ -387,7 +387,7 @@ build_circular_body(field_vd& xfield)
   xfield.get_read_access();
 
   subposet lbodies(lbase_space_host, "bodies");
-  mutable_index_space_handle& lspace = lbodies.id_space();
+  scattered_insertion_index_space_handle& lspace = lbodies.id_space();
 
   body_builder lbody_builder;
   block<scoped_index>& lcircular_bodies =
@@ -443,7 +443,7 @@ build_square_bodies(field_vd& xfield)
   xfield.get_read_access();
 
   subposet lbodies(lbase_space_host, "bodies");
-  mutable_index_space_handle& lspace = lbodies.id_space();
+  scattered_insertion_index_space_handle& lspace = lbodies.id_space();
 
   body_builder lbody_builder;
   block<scoped_index>& lsquare_bodies =

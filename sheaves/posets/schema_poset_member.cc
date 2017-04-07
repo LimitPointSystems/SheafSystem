@@ -2772,8 +2772,8 @@ update_dof_id_space(bool xis_table_dof) const
 
   // Get the dof id space;
 
-  mutable_index_space_handle* ldof_id_space =
-    reinterpret_cast<mutable_index_space_handle*>
+  scattered_insertion_index_space_handle* ldof_id_space =
+    reinterpret_cast<scattered_insertion_index_space_handle*>
     (xis_table_dof ? _table_dof_id_space : _row_dof_id_space);
 
   // Traverse the graph and extract the dof ids.

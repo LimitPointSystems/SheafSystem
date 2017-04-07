@@ -853,7 +853,7 @@ operator>>(std::istream &is, arg_list::arg_type& p)
 {
   // Preconditions:
 
-  require(is);
+  require(!is.fail());
 
   // Body:
 

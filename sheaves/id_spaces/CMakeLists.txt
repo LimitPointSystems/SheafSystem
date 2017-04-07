@@ -38,6 +38,8 @@ set(SRCS
     explicit_index_space_iterator.cc
     explicit_index_space_state.cc
     forwarding_index_space_handle.cc
+    gathered_insertion_index_space_handle.cc
+    gathered_insertion_index_space_state.cc
     hash_index_space_handle.cc
     hash_index_space_iterator.cc
     hash_index_space_state.cc
@@ -61,8 +63,6 @@ set(SRCS
     list_index_space_handle.cc
     list_index_space_iterator.cc
     list_index_space_state.cc
-    mutable_index_space_handle.cc
-    mutable_index_space_state.cc
     offset_index_space_handle.cc
     offset_index_space_iterator.cc
     offset_index_space_state.cc
@@ -78,6 +78,8 @@ set(SRCS
     reserved_primary_index_space_handle.cc
     reserved_primary_index_space_iterator.cc
     reserved_primary_index_space_state.cc
+    scattered_insertion_index_space_handle.cc
+    scattered_insertion_index_space_state.cc
     singleton_implicit_index_space_iterator.cc
     singleton_index_space_handle.cc
     singleton_index_space_interval.cc
@@ -88,7 +90,7 @@ set(SRCS
    )
 
 
-collect_sources()
+SheafSystem_collect_sources(sheaves "${SRCS}")
 
 #
 # Headers that are NOT associated with a .cc file.
@@ -98,7 +100,7 @@ set(ADDITIONAL_INCS
     index_space_handle.impl.h
    )
   
-collect_includes()
+SheafSystem_collect_includes(sheaves "${SRCS}" "${ADDITIONAL_INCS}")
 
 #
 # Source for unit test executables.
@@ -106,7 +108,7 @@ collect_includes()
 set(UNIT_TEST_SRCS
    )
 
-collect_unit_test_sources()
+SheafSystem_collect_unit_test_sources(sheaves "${UNIT_TEST_SRCS}")
 
 #
 # Source for example executables.
@@ -114,4 +116,4 @@ collect_unit_test_sources()
 set(EXAMPLE_SRCS
    )
 
-collect_example_sources()
+SheafSystem_collect_example_sources(sheaves "${EXAMPLE_SRCS}")

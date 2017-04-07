@@ -14,7 +14,21 @@
 # limitations under the License.
 #
 
-project(sheaves)
+#
+# Announce current status.
+#
+SheafSystem_status_message("Processing sheaves component")
+
+#
+# Define the clusters for this component.
+#
+set(clusters concurrency dof_iterators dof_maps examples id_spaces io general
+   iterators maps posets support traversers template_instantiations)
+
+#
+# Include functions and definitions common to all components.
+# 
+include(${SHEAFSYSTEM_CMAKE_MODULE_PATH}/component_functions.cmake)
 
 #
 # Include the functions and variable definitions unique to this component.
@@ -22,54 +36,51 @@ project(sheaves)
 include(${CMAKE_CURRENT_SOURCE_DIR}/component_definitions.cmake)
 
 #
-# Announce current status.
+# Check for the presence of system cxx includes.
 #
-status_message("Processing ${PROJECT_NAME}")
+SheafSystem_check_cxx_includes()
 
 #
-# Set compiler flags for all build configurations
+# Configure the STD header files
 #
-set_compiler_flags() 
+SheafSystem_configure_std_headers()
+
 #
-# Set up output directories
+# Initialize all variables for this component.
 #
-create_output_dirs()
+SheafSystem_set_component_variables(sheaves)
+
+#
+# Add the clusters to the project
+#
+SheafSystem_add_clusters("${clusters}")
+
+#
+# Set the ipath variable.
+#
+SheafSystem_set_component_ipath_variable(sheaves "${clusters}")
+
+#
+# Set some cumulative sheaves-specific variables
+#
+SheafSystem_set_cumulative_sheaves_variables()
 
 #
 # Add the library targets
 #
-add_library_targets()
+SheafSystem_add_sheaves_library_targets()
 
 #
 # Add Bindings targets
 #
-add_bindings_targets()
+if(SHEAFSYSTEM_BUILD_BINDINGS)
+   SheafSystem_add_sheaves_bindings_targets()
+endif()
 
 #
 # Installation target
 #
-add_install_target()
+SheafSystem_add_sheaves_install_target()
 
-#
-# Write this component's lib targets and include paths to an export file.
-#
-write_exports_file()
-
-#
-# Prepare this component's lib targets and include paths for export to an install config file.
-# This data only gets used by clients when the SheafSystem has been installed.
-#
-export_install_config_file_vars()
-
-#
-# Sheaves is responsible for the std headers;
-# append their location to the exports file.
-#
-file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(STD_HEADERS ${STD_HEADERS} CACHE STRING \"STD headers\")\n")
-file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "set(STD_IPATH ${CMAKE_BINARY_DIR}/include CACHE STRING \"STD header include path\")\n")
-
-# Mark the variables as advanced
-file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE STD_HEADERS)\n") 
-file(APPEND ${CMAKE_BINARY_DIR}/${EXPORTS_FILE} "mark_as_advanced(FORCE STD_IPATH)\n") 
 
 

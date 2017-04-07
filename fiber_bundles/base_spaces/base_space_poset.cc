@@ -1796,8 +1796,8 @@ new_member(const std::string& xtype_name, int xdb, const std::string& xlocal_cel
 
   // Set type id.
 
-  mutable_index_space_handle& ltype_id_space =
-    member_id_spaces(false).get_id_space<mutable_index_space_handle>("cell_types");
+  scattered_insertion_index_space_handle& ltype_id_space =
+    member_id_spaces(false).get_id_space<scattered_insertion_index_space_handle>("cell_types");
 
   ltype_id_space.push_back(result);
 
@@ -2083,7 +2083,7 @@ d_cells(int xd) const
   return result;
 }
 
-sheaf::mutable_index_space_handle&
+sheaf::scattered_insertion_index_space_handle&
 fiber_bundle::base_space_poset::
 d_cells_id_space(int xd)
 {
@@ -2094,7 +2094,7 @@ d_cells_id_space(int xd)
 
   // Body:
 
-  mutable_index_space_handle& result = *_d_cells_id_spaces[xd];
+  scattered_insertion_index_space_handle& result = *_d_cells_id_spaces[xd];
 
   // Postconditions:
 
@@ -2105,7 +2105,7 @@ d_cells_id_space(int xd)
   return result;
 }
 
-const sheaf::mutable_index_space_handle&
+const sheaf::scattered_insertion_index_space_handle&
 fiber_bundle::base_space_poset::
 d_cells_id_space(int xd) const
 {
@@ -2116,7 +2116,7 @@ d_cells_id_space(int xd) const
 
   // Body:
 
-  const mutable_index_space_handle& result = *_d_cells_id_spaces[xd];
+  const scattered_insertion_index_space_handle& result = *_d_cells_id_spaces[xd];
 
   // Postconditions:
 
@@ -2271,7 +2271,7 @@ insert_interval_in_standard_subposets(base_space_crg_interval& xinterval)
 
   // Insert the block vertices, if any, in the block vertices subposet.
 
-  mutable_index_space_handle& lvertices_id_space = block_vertices().id_space();
+  scattered_insertion_index_space_handle& lvertices_id_space = block_vertices().id_space();
 
   index_space_iterator& lvertex_itr =
     member_id_spaces(false).get_id_space_iterator(xinterval.block_vertices_space_id());
