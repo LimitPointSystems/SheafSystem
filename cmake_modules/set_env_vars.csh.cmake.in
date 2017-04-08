@@ -53,22 +53,23 @@ if (! -e $revert_file) then
 
 endif # revert_file
 
-	echo setting LD_LIBRARY_PATH in this terminal.
-    if ($?LD_LIBRARY_PATH) then
-		setenv LD_LIBRARY_PATH $LD_LIBRARY_PATH\:@GNU_LIBPATH@:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib:@VTK_LIB_DIR@:@JMF_LIB_DIR@:@JDK_LIB_DIR@:@JVM_LIB_DIR@:@XAWT_LIB_DIR@:@TETGEN_LIB_DIR@:
-	else
-		setenv LD_LIBRARY_PATH @GNU_LIBPATH@:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib:@VTK_LIB_DIR@:@JMF_LIB_DIR@:@JDK_LIB_DIR@:@JVM_LIB_DIR@:@XAWT_LIB_DIR@:@TETGEN_LIB_DIR@:
-	endif
-	
-	echo setting CLASSPATH in this terminal.
-	setenv CLASSPATH .:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/SheafScope.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/solvers_java_binding.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/tools_java_binding.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/fields_java_binding.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/geometry_java_binding.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/fiber_bundles_java_binding.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/sheaves_java_binding.jar:@VTK_LIB_DIR@/java/vtk.jar:@JMF_LIB_DIR@/jmf.jar
+echo setting LD_LIBRARY_PATH in this terminal.
 
-	echo setting PATH in this terminal.
-	setenv PATH @JDK_BIN_DIR@:$PATH
+if ($?LD_LIBRARY_PATH) then
+   setenv LD_LIBRARY_PATH $LD_LIBRARY_PATH\:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib:@VTK_LIB_DIR@:@JMF_LIB_DIR@:@JAVA_JDK_LIB_DIR@:@JAVA_JVM_LIB_DIR@:@JAVA_XAWT_LIB_DIR@:@SHEAFSYSTEM_CXX_IMPLICIT_LINK_DIRECTORIES@:
+else
+   setenv LD_LIBRARY_PATH @CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib:@VTK_LIB_DIR@:@JMF_LIB_DIR@:@JAVA_JDK_LIB_DIR@:@JAVA_JVM_LIB_DIR@:@JAVA_XAWT_LIB_DIR@:@SHEAFSYSTEM_CXX_IMPLICIT_LINK_DIRECTORIES@:
+endif
 
-	echo setting PYTHONPATH in this terminal.
-	setenv PYTHONPATH .:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib
+echo setting CLASSPATH in this terminal.
+setenv CLASSPATH .:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/SheafScope.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/solvers_java_binding.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/tools_java_binding.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/fields_java_binding.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/geometry_java_binding.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/fiber_bundles_java_binding.jar:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib/sheaves_java_binding.jar:@VTK_JAR@:@JMF_LIB_DIR@/jmf.jar
 
-	echo setting PROF_DIR in this terminal.
-	setenv PROF_DIR @COVERAGE_DIR@
+echo setting PATH in this terminal.
+setenv PATH @JDK_BIN_DIR@:$PATH
+
+echo setting PYTHONPATH in this terminal.
+setenv PYTHONPATH .:@CMAKE_BINARY_DIR@/${CMAKE_BUILD_TYPE}/lib
+
+echo setting PROF_DIR in this terminal.
+setenv PROF_DIR @SHEAFSYSTEM_COVERAGE_DIR@
 

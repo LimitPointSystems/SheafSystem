@@ -47,7 +47,7 @@
 
 namespace sheaf
 {
-class mutable_index_space_handle;
+class scattered_insertion_index_space_handle;
 class subposet;
 }
 
@@ -151,17 +151,17 @@ public:
   ///
   /// The sequence id space used by the vertices subposet.
   ///
-  mutable_index_space_handle* vertices_id_space;
+  scattered_insertion_index_space_handle* vertices_id_space;
 
   ///
   /// The discretization sequence id space of the target coordinates.
   ///
-  mutable_index_space_handle* coord_disc_seq_id_space;
+  scattered_insertion_index_space_handle* coord_disc_seq_id_space;
 
   ///
   /// The sequence id space used by the elements subposet.
   ///
-  mutable_index_space_handle* elements_id_space;
+  scattered_insertion_index_space_handle* elements_id_space;
 
   ///
   /// The evaluation subposet used by both the
@@ -182,7 +182,7 @@ public:
   ///
   /// The discretization sequence id space of the target coordinates.
   ///
-  mutable_index_space_handle* prop_disc_seq_id_space;
+  scattered_insertion_index_space_handle* prop_disc_seq_id_space;
 
   ///
   /// A buffer for gathering coordinate dofs.

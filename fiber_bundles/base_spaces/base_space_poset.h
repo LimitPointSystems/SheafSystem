@@ -653,12 +653,12 @@ public:
   ///
   /// The id space for the subposet containing the cells of dimension xd (mutable version).
   ///
-  mutable_index_space_handle& d_cells_id_space(int xd);
+  scattered_insertion_index_space_handle& d_cells_id_space(int xd);
 
   ///
   /// The id space for the subposet containing the cells of dimension xd (const version).
   ///
-  const mutable_index_space_handle& d_cells_id_space(int xd) const;
+  const scattered_insertion_index_space_handle& d_cells_id_space(int xd) const;
 
   ///
   /// The name of the xdb-cell subposet.
@@ -705,7 +705,7 @@ protected:
   ///
   /// The id spaces for the subposets containing the cells of dimension 0 <= d <= db().
   ///
-  block<mutable_index_space_handle*> _d_cells_id_spaces;
+  block<scattered_insertion_index_space_handle*> _d_cells_id_spaces;
 
   ///
   /// The subposet containing all the cells.

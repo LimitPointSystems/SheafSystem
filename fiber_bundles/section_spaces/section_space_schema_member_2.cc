@@ -25,7 +25,7 @@
 #include "cover_set_iterator.h"
 #include "discretization_iterator.h"
 #include "index_space_iterator.h"
-#include "mutable_index_space_handle.h"
+#include "scattered_insertion_index_space_handle.h"
 #include "namespace_poset.h"
 #include "sec_rep_descriptor.h"
 #include "section_space_schema_poset.h"
@@ -965,8 +965,8 @@ contains_dof(const scoped_index& xbase_id,
 //     // the table dofs of the fiber space schema and map into
 //     // the section space schema id space as (base bottom, fiber schema mbr).
 
-//     mutable_index_space_handle* ltable_dof_id_space =
-//       reinterpret_cast<mutable_index_space_handle*>(_table_dof_id_space);
+//     scattered_insertion_index_space_handle* ltable_dof_id_space =
+//       reinterpret_cast<scattered_insertion_index_space_handle*>(_table_dof_id_space);
 //     ltable_dof_id_space->reserve(fiber_schema().table_dof_id_space().ct());
 
 //     index_space_iterator& litr =
@@ -1012,8 +1012,8 @@ update_table_dof_id_space() const
     // Member is factorable, table dof id space is that same as
     // the fiber schema.
 
-    mutable_index_space_handle* ltable_dof_id_space =
-      reinterpret_cast<mutable_index_space_handle*>(_table_dof_id_space);
+    scattered_insertion_index_space_handle* ltable_dof_id_space =
+      reinterpret_cast<scattered_insertion_index_space_handle*>(_table_dof_id_space);
     ltable_dof_id_space->reserve(fiber_schema().table_dof_id_space().ct());
 
     // Table dof ids are the same as fiber schema.

@@ -602,7 +602,7 @@ branch_id_space_name(const scoped_index& xid, bool xauto_access) const
   return result;
 }
 
-const sheaf::mutable_index_space_handle&
+const sheaf::scattered_insertion_index_space_handle&
 fiber_bundle::sec_rep_space::
 multisection_id_space(bool xauto_access) const
 {
@@ -633,7 +633,7 @@ multisection_id_space(bool xauto_access) const
     _multisection_id_space.attach_to(lmultisection_id_space);
   }
 
-  const mutable_index_space_handle& result = _multisection_id_space;
+  const scattered_insertion_index_space_handle& result = _multisection_id_space;
 
   if(xauto_access)
   {
@@ -649,7 +649,7 @@ multisection_id_space(bool xauto_access) const
   return result;
 }
 
-sheaf::mutable_index_space_handle&
+sheaf::scattered_insertion_index_space_handle&
 fiber_bundle::sec_rep_space::
 multisection_id_space(bool xauto_access)
 {
@@ -680,7 +680,7 @@ multisection_id_space(bool xauto_access)
     _multisection_id_space.attach_to(lmultisection_id_space);
   }
 
-  mutable_index_space_handle& result = _multisection_id_space;
+  scattered_insertion_index_space_handle& result = _multisection_id_space;
 
   if(xauto_access)
   {
@@ -696,7 +696,7 @@ multisection_id_space(bool xauto_access)
   return result;
 }
 
-sheaf::mutable_index_space_handle&
+sheaf::scattered_insertion_index_space_handle&
 fiber_bundle::sec_rep_space::
 get_branch_id_space(pod_index_type xhub_id, bool xauto_access)
 {
@@ -715,8 +715,8 @@ get_branch_id_space(pod_index_type xhub_id, bool xauto_access)
     get_read_access();
   }
 
-  mutable_index_space_handle& result =
-    member_id_spaces(false).get_id_space<mutable_index_space_handle>(branch_id_space_name(xhub_id, false));
+  scattered_insertion_index_space_handle& result =
+    member_id_spaces(false).get_id_space<scattered_insertion_index_space_handle>(branch_id_space_name(xhub_id, false));
 
   if(xauto_access)
   {
@@ -732,7 +732,7 @@ get_branch_id_space(pod_index_type xhub_id, bool xauto_access)
   return result;
 }
 
-sheaf::mutable_index_space_handle&
+sheaf::scattered_insertion_index_space_handle&
 fiber_bundle::sec_rep_space::
 get_branch_id_space(const scoped_index& xid, bool xauto_access)
 {
@@ -745,7 +745,7 @@ get_branch_id_space(const scoped_index& xid, bool xauto_access)
 
   // Body:
 
-  mutable_index_space_handle& result =
+  scattered_insertion_index_space_handle& result =
     get_branch_id_space(xid.hub_pod(), xauto_access);
 
   // Postconditions:

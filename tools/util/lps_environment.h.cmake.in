@@ -27,11 +27,11 @@
   ";@VTK_LIB_DIR@/java/vtk.jar"
 
 #define PATH \
-  "%PATH%"\  
+  "%PATH%"\
   ";@CMAKE_BINARY_DIR@/lib"\
-  ";@JDK_LIB_DIR@;@JDK_LIB_DIR@/xawt;@JDK_LIB_DIR@/client"\
+  ";@JAVA_JDK_LIB_DIR@;@JAVA_JDK_LIB_DIR@/xawt;@JAVA_JDK_LIB_DIR@/client"\
   ";@VTK_LIB_DIR@"\
-  ";@HDF5_LIBRARY_DIRS@"  
+  ";@HDF5_LIBRARY_DIRS@"
   
 #else
 
@@ -44,7 +44,7 @@
 #define LD_LIBRARY_PATH \
   "."\
   ":@CMAKE_BINARY_DIR@/lib"\
-  ":@JDK_LIB_DIR@:@JDK_LIB_DIR@/xawt:@JDK_LIB_DIR@/client"\
+  ":@JAVA_JDK_LIB_DIR@:@JAVA_JDK_LIB_DIR@/xawt:@JAVA_JDK_LIB_DIR@/client"\
   ":@VTK_LIB_DIR@"\
   ":@HDF5_LIBRARY_DIRS@"
 

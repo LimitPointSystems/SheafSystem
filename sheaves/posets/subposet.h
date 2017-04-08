@@ -25,8 +25,8 @@
 #include "sheaf_dll_spec.h"
 #endif
 
-#ifndef MUTABLE_INDEX_SPACE_HANDLE_H
-#include "mutable_index_space_handle.h"
+#ifndef SCATTERED_INSERTION_INDEX_SPACE_HANDLE_H
+#include "scattered_insertion_index_space_handle.h"
 #endif
 
 #ifndef STD_UNORDERED_SET_H
@@ -236,17 +236,17 @@ public:
   ///
   /// The id space for the members of with this (const version).
   ///
-  const mutable_index_space_handle& id_space() const;
+  const scattered_insertion_index_space_handle& id_space() const;
 
   ///
   /// The id space for the members of with this (mutable version).
   ///
-  mutable_index_space_handle& id_space();
+  scattered_insertion_index_space_handle& id_space();
 
   ///
   /// Creates an id space for the members of this.
   ///
-  virtual mutable_index_space_handle& new_id_space(const std::string& xstate_class_name);
+  virtual scattered_insertion_index_space_handle& new_id_space(const std::string& xstate_class_name);
 
   ///
   /// True if this already has an id space.

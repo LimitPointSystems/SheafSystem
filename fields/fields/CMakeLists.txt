@@ -80,7 +80,7 @@ set(SRCS
     put_property_dofs_fcn_action.cc
    )
 
-collect_sources()
+SheafSystem_collect_sources(fields "${SRCS}")
 
 #
 # Headers that are NOT associated with a .cc file.
@@ -109,7 +109,7 @@ set(ADDITIONAL_INCS
     field_vd_funcs.impl.h 
    )    
 
-collect_includes()
+SheafSystem_collect_includes(fields "${SRCS}" "${ADDITIONAL_INCS}")
 
 #
 # Source for unit test executables.
@@ -117,7 +117,7 @@ collect_includes()
 set(UNIT_TEST_SRCS
    )
 
-collect_unit_test_sources()
+SheafSystem_collect_unit_test_sources(fields "${UNIT_TEST_SRCS}")
 
 #
 # Source for example executables.
@@ -125,4 +125,4 @@ collect_unit_test_sources()
 set(EXAMPLE_SRCS
    )
 
-collect_example_sources()
+SheafSystem_collect_example_sources(fields "${EXAMPLE_SRCS}")

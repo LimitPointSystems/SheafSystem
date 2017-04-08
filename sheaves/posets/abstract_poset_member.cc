@@ -26,7 +26,7 @@
 #include "dof_descriptor_array.h"
 #include "error_message.h"
 #include "index_space_iterator.h"
-#include "mutable_index_space_handle.h"
+#include "scattered_insertion_index_space_handle.h"
 #include "namespace_poset.h"
 #include "pool.h"
 #include "poset.h"

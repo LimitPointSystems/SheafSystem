@@ -25,8 +25,8 @@
 #include "sheaf_dll_spec.h"
 #endif
 
-#ifndef MUTABLE_INDEX_SPACE_HANDLE_H
-#include "mutable_index_space_handle.h"
+#ifndef SCATTERED_INSERTION_INDEX_SPACE_HANDLE_H
+#include "scattered_insertion_index_space_handle.h"
 #endif
 
 namespace sheaf
@@ -35,13 +35,13 @@ namespace sheaf
 class hash_index_space_state;
   
 ///
-/// An hash map implementation of class mutable_index_space_handle.
+/// An hash map implementation of class scattered_insertion_index_space_handle.
 /// This representation is intended to efficiently represent
 /// id spaces that are possibly negative and are sparse, that is,
 /// end() is much greater than ct() and hence uses hash maps to
 /// represent both directions of the map.
 ///
-class SHEAF_DLL_SPEC hash_index_space_handle : public mutable_index_space_handle
+class SHEAF_DLL_SPEC hash_index_space_handle : public scattered_insertion_index_space_handle
 {
 
   friend class hash_index_space_state;
@@ -117,7 +117,7 @@ protected:
   ///
   hash_index_space_handle(hash_index_space_state& xstate);
 
-  using mutable_index_space_handle::state;
+  using scattered_insertion_index_space_handle::state;
 
   ///
   /// The hash id space state (mutable version).
@@ -195,7 +195,7 @@ private:
 
 public:
 
-  using mutable_index_space_handle::conforms_to_state;
+  using scattered_insertion_index_space_handle::conforms_to_state;
 
   ///
   /// True if this conforms to the handle type required by the state

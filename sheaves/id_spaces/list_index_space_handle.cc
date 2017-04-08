@@ -73,7 +73,7 @@ new_space(index_space_family& xid_spaces,
 
 sheaf::list_index_space_handle::
 list_index_space_handle()
-  : mutable_index_space_handle()
+  : scattered_insertion_index_space_handle()
 {
   // Preconditions:
     
@@ -255,6 +255,38 @@ push_front(pod_type xhub_id)
   // Exit:
 
   // cout << "Leaving list_index_space_handle::push_front." << endl;
+  return;
+}
+
+void
+sheaf::list_index_space_handle::
+replace_range_id(pod_type xold_range_id, pod_type xnew_range_id)
+{
+  // cout << endl << "Entering list_index_space_handle::replace_range_id." << endl;
+
+  // Preconditions:
+
+  require((xnew_range_id != xold_range_id) ? !contains_unglued_hub(xnew_range_id) : true);
+  
+  // Body:
+
+  define_old_variable(bool old_contains_xold_range_id = contains_unglued_hub(xold_range_id));
+  define_old_variable(pod_type old_domain_id = pod(xold_range_id));
+
+
+  state().replace_range_id(xold_range_id, xnew_range_id);
+
+  // Postconditions:
+
+  ensure(invariant());
+
+  ensure(old_contains_xold_range_id ? contains_unglued_hub(xnew_range_id) : true);
+  ensure((xnew_range_id != xold_range_id) ? !contains_unglued_hub(xold_range_id) : true);
+  ensure(old_contains_xold_range_id ? pod(xnew_range_id) == old_domain_id : true);
+  
+  // Exit:
+
+  // cout << "Leaving list_index_space_handle::replace_range_id." << endl;
   return;
 }
 
@@ -490,7 +522,7 @@ invariant() const
 
     // Must satisfy base class invariant
 
-    invariance(mutable_index_space_handle::invariant());
+    invariance(scattered_insertion_index_space_handle::invariant());
 
     // Invariances for this class:
       
@@ -513,6 +545,45 @@ invariant() const
 //  NON-MEMBER FUNCTIONS
 // ===========================================================
 
+ 
+std::ostream& 
+sheaf::
+operator << (std::ostream& xos, const list_index_space_handle& xi)
+{
+  // Preconditions:
+
+  // Body:
+
+  using namespace std;
+
+  if(xi.is_attached())
+  {
+    // Output the raw list.
+
+    xos << "list: ";
+    typedef list_index_space_state::to_range_type to_range_type;
+    for(to_range_type::const_iterator i = xi.state().to_range().begin(); i != xi.state().to_range().end(); ++i)
+    {
+      xos << "  " << *i;
+    }
+    xos << endl << endl;
+
+    // Output the usual id space info.
+
+    xos << static_cast<const index_space_handle&>(xi);
+  }
+  else
+  {
+    xos << "index_space: index = -1 name = \'\'"
+	<< endl;
+  }
+  
+  // Postconditions:
+
+  // Exit:
+
+  return xos;
+}
 
 
  

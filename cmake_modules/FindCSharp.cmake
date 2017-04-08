@@ -30,9 +30,11 @@
 # Copyright (c) 2006-2010 Mathieu Malaterre <mathieu.malaterre@gmail.com>
 #
 
-# TODO: ADD ABILITY TO SELECT WHICH C# COMPILER eg. .NET or Mono (if both exist). For the moment, .NET is selected above Mono.
+# TODO: ADD ABILITY TO SELECT WHICH C# COMPILER eg. .NET or Mono (if both exist).
+# For the moment, .NET is selected above Mono.
 
 # Make sure find package macros are included
+
 include( FindPackageHandleStandardArgs )
 
 unset( CSHARP_COMPILER CACHE )
@@ -42,36 +44,50 @@ unset( CSHARP_VERSION CACHE )
 unset( CSHARP_FOUND CACHE )
 
 # By default use anycpu platform, allow the user to override
+
 set( CSHARP_PLATFORM "anycpu" CACHE STRING "C# target platform: x86, x64, anycpu, or itanium" )
+
 if( NOT ${CSHARP_PLATFORM} MATCHES "x86|x64|anycpu|itanium" )
-  message( FATAL_ERROR "The C# target platform '${CSHARP_PLATFORM}' is not valid. Please enter one of the following: x86, x64, anycpu, or itanium" )
+   
+   message( FATAL_ERROR "The C# target platform '${CSHARP_PLATFORM}' is not valid. Please enter one of the following: x86, x64, anycpu, or itanium" )
+   
 endif( )
-if( WIN32 )
-  find_package( DotNetFrameworkSdk )
-  if( NOT CSHARP_DOTNET_FOUND )
-    find_package( Mono )
-  endif( )
-else( UNIX )
-  #find_package( Mono )
-  FIND_PROGRAM(MONO_COMPILER mcs)
-   if(MONO_COMPILER)
-       set(CSHARP_MONO_FOUND TRUE)
+
+if(SHEAFSYSTEM_WINDOWS)
+   
+   find_package(DotNetFrameworkSdk)
+
+   set( CSHARP_FOUND ${CSHARP_DOTNET_FOUND} CACHE BOOL "True if CSharp package found." FORCE)
+
+   if( CSHARP_DOTNET_FOUND )
+      
+      set(CSHARP_TYPE ".NET" CACHE STRING "Using the .NET compiler")
+      set(CSHARP_VERSION ${CSHARP_DOTNET_VERSION} CACHE STRING "C# .NET compiler version" FORCE)
+      set(CSHARP_COMPILER ${CSHARP_DOTNET_COMPILER_${CSHARP_DOTNET_VERSION}}
+         CACHE STRING "Full path to .NET compiler" FORCE)
+      set(CSHARP_INTERPRETER "" CACHE INTERNAL "" FORCE)
+
+      if (CSHARP_COMPILER MATCHES "bat")
+         set( CSHARP_COMPILER "call ${CSHARP_COMPILER}")
+      endif()
+      
    endif()
-endif( )
+      
+elseif(SHEAFSYSTEM_LINUX)
+   
+   find_program(MCS_EXECUTABLE mcs)
+   
+   if(MCS_EXECUTABLE)
 
-if( CSHARP_DOTNET_FOUND )
-  set( CSHARP_TYPE ".NET" CACHE STRING "Using the .NET compiler" )
-  set( CSHARP_VERSION ${CSHARP_DOTNET_VERSION} CACHE STRING "C# .NET compiler version" FORCE )
-  set( CSHARP_COMPILER ${CSHARP_DOTNET_COMPILER_${CSHARP_DOTNET_VERSION}} CACHE STRING "Full path to .NET compiler" FORCE )
-  set( CSHARP_INTERPRETER "" CACHE INTERNAL "" FORCE )
-elseif( CSHARP_MONO_FOUND )
-  set( CSHARP_TYPE "Mono" CACHE STRING "Using the Mono compiler" )
-  set( CSHARP_COMPILER ${MONO_COMPILER} CACHE STRING "Full path to Mono compiler" FORCE )
-endif( )
+      set(CSHARP_MONO_FOUND TRUE)
+      set(CSHARP_TYPE "Mono" CACHE STRING "Using the Mono compiler")
+      set(CSHARP_COMPILER ${MCS_EXECUTABLE} CACHE STRING "Full path to Mono compiler" FORCE)
+      set(CSHARP_FOUND TRUE CACHE BOOL "True if CSharp package found." FORCE)
 
-# Handle WIN32 specific issues
-if ( WIN32 )
-  if ( CSHARP_COMPILER MATCHES "bat" )
-    set( CSHARP_COMPILER "call ${CSHARP_COMPILER}" )
-  endif ( )
-endif( )
+   else()
+
+      set( CSHARP_FOUND FALSE CACHE BOOL "True if CSharp package found." FORCE)
+      
+   endif()
+   
+endif()

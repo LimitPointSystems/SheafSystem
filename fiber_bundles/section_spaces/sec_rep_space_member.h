@@ -47,7 +47,7 @@
 
 namespace sheaf
 {
-class mutable_index_space_handle;
+class scattered_insertion_index_space_handle;
 class index_space_handle;
 class index_space_iterator;
 class poset_dof_map;
@@ -313,7 +313,7 @@ public:
   /// Allocate an id space handle from the handle pool attached to the
   /// branch id space for this member.
   ///
-  mutable_index_space_handle& get_branch_id_space(bool xauto_access);
+  scattered_insertion_index_space_handle& get_branch_id_space(bool xauto_access);
 
   ///
   /// Returns the id space handle xid_space to the handle pool.

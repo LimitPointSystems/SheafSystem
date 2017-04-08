@@ -347,7 +347,7 @@ public abstract class G3DFieldActor extends FieldActor
     
     vtkPolyDataMapper mapper = new vtkPolyDataMapper();
     //mapper.SetInput(axesTubeFilter.GetOutput());
-    mapper.SetInput(axes.GetOutput());
+    mapper.SetInputData(axes.GetOutput());
     axesActor = new vtkActor();
     axesActor.SetMapper(mapper);
     
@@ -536,7 +536,7 @@ public abstract class G3DFieldActor extends FieldActor
   {
     vtkTransform transform = new vtkTransform();
     transformFilter = new vtkTransformFilter();
-    transformFilter.SetInput(dataSet);
+    transformFilter.SetInputData(dataSet);
     transformFilter.SetTransform(transform);
   }
 
@@ -563,7 +563,7 @@ public abstract class G3DFieldActor extends FieldActor
 	  new vtkExtractTensorComponents();
       tensorFilter.ExtractScalarsOn();
       tensorFilter.SetScalarModeToDeterminant();
-      tensorFilter.SetInput(transformFilter.GetOutput());
+      tensorFilter.SetInputData(transformFilter.GetOutput());
 
       // Update to force the filter to execute.
 
@@ -580,7 +580,7 @@ public abstract class G3DFieldActor extends FieldActor
       // (not normalized).
 
       vtkVectorNorm vecNorm = new vtkVectorNorm();
-      vecNorm.SetInput(transformFilter.GetOutput());
+      vecNorm.SetInputData(transformFilter.GetOutput());
 
       // Update to force the filter to execute.
 
@@ -599,7 +599,7 @@ public abstract class G3DFieldActor extends FieldActor
 
     // Initialize the grid mapper's input.
 
-    gridMapper.SetInput(mapperInput);
+    gridMapper.SetInputData(mapperInput);
 
     // Set the lookup table
 
@@ -644,7 +644,7 @@ public abstract class G3DFieldActor extends FieldActor
     //           props.SetEdgeVisibility() does not seem to work.
 
     edgeMapper = new vtkDataSetMapper();
-    edgeMapper.SetInput(transformFilter.GetOutput());
+    edgeMapper.SetInputData(transformFilter.GetOutput());
     edgeMapper.SetScalarVisibility(0);
     edgeActor = new vtkActor();
     edgeActor.SetMapper(edgeMapper);
@@ -662,10 +662,10 @@ public abstract class G3DFieldActor extends FieldActor
    */
   protected void createPointLabels()
   {
-    pointLabelsVisPts.SetInput(transformFilter.GetOutput());
+    pointLabelsVisPts.SetInputData(transformFilter.GetOutput());
 
     vtkLabeledDataMapper dataMapper = new vtkLabeledDataMapper();
-    dataMapper.SetInput(pointLabelsVisPts.GetOutput());
+    dataMapper.SetInputData(pointLabelsVisPts.GetOutput());
     dataMapper.SetLabelFormat("%ld");
     dataMapper.GetLabelTextProperty().ShadowOff();
     
@@ -698,12 +698,12 @@ public abstract class G3DFieldActor extends FieldActor
   protected void createCellLabels()
   {
     vtkCellCenters cc = new vtkCellCenters();
-    cc.SetInput(transformFilter.GetOutput());
+    cc.SetInputData(transformFilter.GetOutput());
 
-    cellLabelsVisPts.SetInput(cc.GetOutput());
+    cellLabelsVisPts.SetInputData(cc.GetOutput());
 
     vtkLabeledDataMapper dataMapper = new vtkLabeledDataMapper();
-    dataMapper.SetInput(cellLabelsVisPts.GetOutput());
+    dataMapper.SetInputData(cellLabelsVisPts.GetOutput());
     dataMapper.SetLabelFormat("%ld");
     dataMapper.GetLabelTextProperty().ShadowOff();
 

@@ -1314,8 +1314,8 @@ insert_cover_member(pod_index_type xother_mbr_index,
   // Body:
 
   pod_index_type lid = force_explicit_cover(xlower, xmbr_index);
-  mutable_index_space_handle& lcover =
-    _id_spaces.get_id_space<mutable_index_space_handle>(lid);
+  list_index_space_handle& lcover =
+    _id_spaces.get_id_space<list_index_space_handle>(lid);
 
   lcover.push_back(xother_mbr_index);
 
@@ -1349,8 +1349,8 @@ insert_cover_member(pod_index_type xother_mbr_index,
   define_old_variable(pod_index_type old_itr_hub_pod = xitr.hub_pod());
 
   pod_index_type lid = force_explicit_cover(xlower, xmbr_index);
-  mutable_index_space_handle& lcover =
-    _id_spaces.get_id_space<mutable_index_space_handle>(lid);
+  list_index_space_handle& lcover =
+    _id_spaces.get_id_space<list_index_space_handle>(lid);
 
   lcover.push(xitr, xother_mbr_index);
 
@@ -1380,8 +1380,8 @@ remove_cover_member(pod_index_type xother_mbr_index,
   // Body:
 
   pod_index_type lid = force_explicit_cover(xlower, xmbr_index);
-  mutable_index_space_handle& lcover =
-    _id_spaces.get_id_space<mutable_index_space_handle>(lid);
+  list_index_space_handle& lcover =
+    _id_spaces.get_id_space<list_index_space_handle>(lid);
 
   lcover.remove_hub(xother_mbr_index, true);
 
@@ -1413,8 +1413,8 @@ remove_cover_member(index_space_iterator& xitr,
   define_old_variable(pod_index_type old_itr_hub_pod = xitr.hub_pod());
 
   pod_index_type lid = force_explicit_cover(xlower, xmbr_index);
-  mutable_index_space_handle& lcover =
-    _id_spaces.get_id_space<mutable_index_space_handle>(lid);
+  list_index_space_handle& lcover =
+    _id_spaces.get_id_space<list_index_space_handle>(lid);
 
   lcover.remove(xitr, true);
 
@@ -1449,28 +1449,42 @@ replace_cover_member(pod_index_type xold_other_mbr_index,
   // Preconditions:
 
   require(contains_member(xmbr_index));
-
-  define_old_variable(bool old_cover_contains_old_other_mbr_index = cover_contains_member(xlower, xmbr_index, xold_other_mbr_index));
+  require((xnew_other_mbr_index != xold_other_mbr_index) ? !cover_contains_member(xlower, xmbr_index, xnew_other_mbr_index) : true);
 
   // Body:
 
-  pod_index_type lid = force_explicit_cover(xlower, xmbr_index);
-  mutable_index_space_handle& lcover =
-    _id_spaces.get_id_space<mutable_index_space_handle>(lid);
+  define_old_variable(bool old_cover_contains_old_other_mbr_index = cover_contains_member(xlower, xmbr_index, xold_other_mbr_index));
 
-  pod_index_type lold_pod = lcover.pod(xold_other_mbr_index);
+//   pod_index_type lid = force_explicit_cover(xlower, xmbr_index);
+//   scattered_insertion_index_space_handle& lcover =
+//     _id_spaces.get_id_space<scattered_insertion_index_space_handle>(lid);
 
-  /// @todo Add a replace function to mutable id space or loosen the
-  /// preconditions allowing for the pod value to exist.
+//   pod_index_type lold_pod = lcover.pod(xold_other_mbr_index);
 
-  lcover.remove(lold_pod, true);
-  lcover.insert(lold_pod, xnew_other_mbr_index);
+//   /// @todo Add a replace function to mutable id space or loosen the
+//   /// preconditions allowing for the pod value to exist.
 
-  _id_spaces.release_id_space(lcover);
+//   lcover.remove(lold_pod, true);
+//   lcover.insert(lold_pod, xnew_other_mbr_index);
+
+//  _id_spaces.release_id_space(lcover);
+
+  if(cover_contains_member(xlower, xmbr_index, xold_other_mbr_index))
+  {
+    pod_index_type lid = force_explicit_cover(xlower, xmbr_index);
+    list_index_space_handle& lcover =
+      _id_spaces.get_id_space<list_index_space_handle>(lid);
+
+
+    lcover.replace_range_id(xold_other_mbr_index, xnew_other_mbr_index);
+
+    _id_spaces.release_id_space(lcover);
+  }
+  
 
   // Postconditions:
 
-  ensure(!cover_contains_member(xlower, xmbr_index, xold_other_mbr_index));
+  ensure((xnew_other_mbr_index != xold_other_mbr_index) ? !cover_contains_member(xlower, xmbr_index, xold_other_mbr_index) : true);
   ensure(old_cover_contains_old_other_mbr_index ? cover_contains_member(xlower, xmbr_index, xnew_other_mbr_index) : true);
 
   // Exit:
@@ -1489,8 +1503,8 @@ clear_cover(bool xlower, pod_index_type xmbr_index)
   // Body:
 
   pod_index_type lid = force_explicit_cover(xlower, xmbr_index);
-  mutable_index_space_handle& lcover =
-    _id_spaces.get_id_space<mutable_index_space_handle>(lid);
+  list_index_space_handle& lcover =
+    _id_spaces.get_id_space<list_index_space_handle>(lid);
 
   lcover.clear();
 
@@ -1517,8 +1531,8 @@ copy_cover(bool xlower, pod_index_type xmbr_index, pod_index_type xother_mbr_ind
   // Body:
 
   pod_index_type lid = force_explicit_cover(xlower, xmbr_index);
-  mutable_index_space_handle& lcover =
-    _id_spaces.get_id_space<mutable_index_space_handle>(lid);
+  list_index_space_handle& lcover =
+    _id_spaces.get_id_space<list_index_space_handle>(lid);
 
   lcover.clear();
 
@@ -1617,7 +1631,7 @@ force_explicit_cover(bool xlower, pod_index_type xmbr_index, bool xinitialize)
   // Postconditions:
 
   ensure(id_spaces().contains(result));
-  ensure(id_spaces().handle_conforms_to_state<mutable_index_space_handle>(result));
+  ensure(id_spaces().handle_conforms_to_state<list_index_space_handle>(result));
 
   // Exit:
 

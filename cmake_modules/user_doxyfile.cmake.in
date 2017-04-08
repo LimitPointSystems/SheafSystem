@@ -49,7 +49,7 @@ PROJECT_NAME           = @PROJECT_NAME@
 # This could be handy for archiving the generated documentation or
 # if some version control system is used.
 
-PROJECT_NUMBER         = @LIB_VERSION@
+PROJECT_NUMBER         = @SHEAFSYSTEM_LIB_VERSION@
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description
 # for a project that appears at the top of each page and should give viewer
@@ -62,7 +62,7 @@ PROJECT_BRIEF          =
 # exceed 55 pixels and the maximum width should not exceed 200 pixels.
 # Doxygen will copy the logo to the output directory.
 
-PROJECT_LOGO           = @CMAKE_MODULE_PATH@/lpslogo.png
+PROJECT_LOGO           = @SHEAFSYSTEM_CMAKE_MODULE_PATH@/lpslogo.png
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute)
 # base path where the generated documentation will be put.
@@ -923,13 +923,13 @@ HTML_FILE_EXTENSION    = .html
 # have to redo this when upgrading to a newer version of doxygen or when
 # changing the value of configuration settings such as GENERATE_TREEVIEW!
 
-HTML_HEADER            = @CMAKE_MODULE_PATH@/lps_header.html
+HTML_HEADER            = @SHEAFSYSTEM_CMAKE_MODULE_PATH@/lps_header.html
 
 # The HTML_FOOTER tag can be used to specify a personal HTML footer for
 # each generated HTML page. If it is left blank doxygen will generate a
 # standard footer.
 
-HTML_FOOTER            = @CMAKE_MODULE_PATH@/lps_footer.html
+HTML_FOOTER            = @SHEAFSYSTEM_CMAKE_MODULE_PATH@/lps_footer.html
 
 # The HTML_STYLESHEET tag can be used to specify a user-defined cascading
 # style sheet that is used by each HTML page. It can be used to
@@ -938,7 +938,7 @@ HTML_FOOTER            = @CMAKE_MODULE_PATH@/lps_footer.html
 # HTML_EXTRA_STYLESHEET instead of this one, as it is more robust and this
 # tag will in the future become obsolete.
 
-HTML_STYLESHEET        = @CMAKE_MODULE_PATH@/lps_stylesheet.css
+HTML_STYLESHEET        = @SHEAFSYSTEM_CMAKE_MODULE_PATH@/lps_stylesheet.css
 
 # The HTML_EXTRA_STYLESHEET tag can be used to specify an additional
 # user-defined cascading style sheet that is included after the standard

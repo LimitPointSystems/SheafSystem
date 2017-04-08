@@ -130,7 +130,7 @@ new_space(index_space_family& xid_spaces,
 
 sheaf::hash_index_space_state::
 hash_index_space_state()
-  : mutable_index_space_state()
+  : scattered_insertion_index_space_state()
 {
   // Preconditions:
     
@@ -545,7 +545,7 @@ operator==(const explicit_index_space_state& xother) const
   const hash_index_space_state& lother =
     dynamic_cast<const hash_index_space_state&>(xother);
 
-  bool result = mutable_index_space_state::operator==(xother);
+  bool result = scattered_insertion_index_space_state::operator==(xother);
   /// @error Since we still support tr1 unordered_maps the comparison
   ///        operator may not be supported.  See COM-374.
 //   result = result && (_to_range == lother._to_range);
@@ -595,7 +595,7 @@ operator=(const explicit_index_space_state& xother)
   _to_domain = lother._to_domain;
   _to_range  = lother._to_range;
 
-  (void) mutable_index_space_state::operator=(xother);
+  (void) scattered_insertion_index_space_state::operator=(xother);
 
   // Postconditions:
 
@@ -1097,7 +1097,7 @@ invariant() const
 
     // Must satisfy base class invariant
 
-    invariance(mutable_index_space_state::invariant());
+    invariance(scattered_insertion_index_space_state::invariant());
 
     // Invariances for this class:
       
@@ -1132,7 +1132,7 @@ deep_size(const hash_index_space_state& xn, bool xinclude_shallow)
 
   // Add any contributions from the parent class.
 
-  const mutable_index_space_state& ixn = static_cast<const mutable_index_space_state&>(xn);
+  const scattered_insertion_index_space_state& ixn = static_cast<const scattered_insertion_index_space_state&>(xn);
   result += deep_size(ixn, false);
 
   // Add contribution from unordered_map<pod_type, pod_type> to_domain.

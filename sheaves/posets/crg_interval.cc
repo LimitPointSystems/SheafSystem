@@ -505,7 +505,7 @@ cover_is_explicit(bool xlower, pod_index_type xmbr_index) const
 
   // Body:
 
-  return _id_spaces->handle_conforms_to_state<mutable_index_space_handle>(cover_id_space_id(xlower, xmbr_index));
+  return _id_spaces->handle_conforms_to_state<scattered_insertion_index_space_handle>(cover_id_space_id(xlower, xmbr_index));
 }
 
 sheaf::pod_index_type
@@ -520,7 +520,7 @@ force_explicit_cover(bool xlower, pod_index_type xmbr_index, bool xinitialize)
 
   pod_index_type result = cover_id_space_id(xlower, xmbr_index);
   
-  if(!_id_spaces->handle_conforms_to_state<mutable_index_space_handle>(result))
+  if(!_id_spaces->handle_conforms_to_state<scattered_insertion_index_space_handle>(result))
   {
     // Id space is not explicit.  Construct an interval id space in its place.
 

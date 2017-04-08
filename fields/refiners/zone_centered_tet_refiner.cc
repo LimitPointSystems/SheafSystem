@@ -217,9 +217,9 @@ modify_subposets(field_refinement_buffer& xbuffer)
   // More efficient to get id maps from buffer than directly from subposets
   // because latter uses lookup by name.
 
-  mutable_index_space_handle* lvertices_id_space       = xbuffer.vertices_id_space;
-  mutable_index_space_handle* lcoord_disc_seq_id_space = xbuffer.coord_disc_seq_id_space;
-  mutable_index_space_handle* lelements_id_space       = xbuffer.elements_id_space;
+  scattered_insertion_index_space_handle* lvertices_id_space       = xbuffer.vertices_id_space;
+  scattered_insertion_index_space_handle* lcoord_disc_seq_id_space = xbuffer.coord_disc_seq_id_space;
+  scattered_insertion_index_space_handle* lelements_id_space       = xbuffer.elements_id_space;
 
   // Put the new point in the vertices subposet and extend the sequence id space.
 

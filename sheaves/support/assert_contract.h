@@ -34,7 +34,13 @@ namespace sheaf
   /// Tests condition xcond and throws exception if false;
   /// exception message includes xmsg, file name xfile, and line number xline.
   ///
-  SHEAF_DLL_SPEC void check_contract(bool xcond, const char* xmsg, const char* xfile, int xline);  
+  SHEAF_DLL_SPEC void check_contract(bool xcond, const char* xmsg, const char* xfunction_name, const char* xfile, int xline);  
+
+//   ///
+//   /// Tests condition xcond and throws exception if false;
+//   /// exception message includes xmsg, file name xfile, and line number xline.
+//   ///
+//   SHEAF_DLL_SPEC void check_contract(bool xcond, const char* xmsg, const char* xfile, int xline);  
  
   ///
   /// Tests condition xcond for index xi and throws exception if false;
@@ -47,6 +53,41 @@ namespace sheaf
 				     const char* xfile, 
 				     int xline);  
  
+//   ///
+//   /// Tests condition xcond for index xi and throws exception if false;
+//   /// exception message includes xcond_msg, xi_msg, file name xfile, and line number xline.
+//   ///
+//   SHEAF_DLL_SPEC void check_contract(bool xcond, 
+// 				     const char* xcond_msg, 
+// 				     int xi, 
+// 				     const char* xi_msg,
+// 				     const char* xfile, 
+// 				     int xline);  
+ 
+  ///
+  /// Tests condition xcond for index xi and throws exception if false;
+  /// exception message includes xcond_msg, xi_msg, function name xfunction_name, 
+  /// file name xfile, and line number xline.
+  ///
+  SHEAF_DLL_SPEC void check_contract(bool xcond, 
+				     const char* xcond_msg, 
+				     int xi, 
+				     const char* xi_msg,
+                                     const char* xfunction_name, 
+				     const char* xfile, 
+				     int xline);  
+ 
+//   ///
+//   /// Throws exception for existential quantification failure.
+//   ///
+//   SHEAF_DLL_SPEC void post_there_exists_failed(const char* xcond_msg, 
+// 					       int xi, 
+// 					       const char* xi_msg, 
+// 					       int xmin, 
+// 					       int xub, 
+// 					       const char* xfile, 
+// 					       int xline);  
+ 
   ///
   /// Throws exception for existential quantification failure.
   ///
@@ -55,13 +96,14 @@ namespace sheaf
 					       const char* xi_msg, 
 					       int xmin, 
 					       int xub, 
+                                               const char* xfunction_name, 
 					       const char* xfile, 
 					       int xline);  
  
   ///
   /// Throws exception for attempt to invoke is_abstract or not implemented.
   ///
-  SHEAF_DLL_SPEC void post_unimplemented(const char* xcond_msg, const char* xfile, int xline);    
+  SHEAF_DLL_SPEC void post_unimplemented(const char* xcond_msg, const char* xfunction_name, const char* xfile, int xline);    
 
 } // end namespace sheaf
 
@@ -75,11 +117,11 @@ namespace sheaf
 
 // Assert condition x.
 
-#define dbc_assert(x) sheaf::check_contract((x), #x, __FILE__, __LINE__)
+#define dbc_assert(x) sheaf::check_contract((x), #x, __FUNCTION__, __FILE__, __LINE__)
 
 // Assert condition x for case specified by int xi.
 
-#define dbc_assert_for_i(x, xi) sheaf::check_contract((x), #x, (xi), #xi, __FILE__, __LINE__)
+#define dbc_assert_for_i(x, xi) sheaf::check_contract((x), #x, (xi), #xi, __FUNCTION__, __FILE__, __LINE__)
 
 // "Universal" quantification of condition xcondition
 // for int interval [xi_min, xi_ub). Xcondition should depend on int xi,
@@ -111,7 +153,7 @@ namespace sheaf
   { \
     if(xi == ((xi_ub)-1)) \
     { \
-      sheaf::post_there_exists_failed(#xcondition, xi, #xi, (xi_min), (xi_ub), __FILE__, __LINE__); \
+      sheaf::post_there_exists_failed(#xcondition, xi, #xi, (xi_min), (xi_ub), __FUNCTION__, __FILE__, __LINE__); \
     } \
   } \
 }
@@ -189,11 +231,11 @@ namespace sheaf
 // in the current class in order to define the contract. Equivalent
 // to the "is deferred" syntax in Eiffel.
 
-#define is_abstract() sheaf::post_unimplemented("is abstract", __FILE__, __LINE__)
+#define is_abstract() sheaf::post_unimplemented("is abstract", __FUNCTION__, __FILE__, __LINE__)
 
 // Indicates that function is not implemented.
 
-#define not_implemented() sheaf::post_unimplemented("not implemented", __FILE__, __LINE__)
+#define not_implemented() sheaf::post_unimplemented("not implemented", __FUNCTION__, __FILE__, __LINE__)
 
 // Some macros for inserting "comment" assertions
 // These allow construction of assertions that aren't executable,

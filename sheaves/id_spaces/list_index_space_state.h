@@ -29,8 +29,8 @@
 #include "list_pool.h"
 #endif
 
-#ifndef MUTABLE_INDEX_SPACE_STATE_H
-#include "mutable_index_space_state.h"
+#ifndef GATHERED_INSERTION_INDEX_SPACE_STATE_H
+#include "gathered_insertion_index_space_state.h"
 #endif
 
 #ifndef STD_LIST_H
@@ -43,17 +43,21 @@ namespace sheaf
 class list_index_space_handle;
 class list_index_space_state;
 class list_index_space_iterator;
+ 
+///
+/// The deep size of list_index_space_state& xn.
+///
+SHEAF_DLL_SPEC 
+size_t deep_size(const list_index_space_state& xn, bool xinclude_shallow);
 
 ///
-/// An list implementation of class mutable_index_space_state.
+/// An list implementation of class gathered_insertion_index_space_state.
 /// This representation is intended to efficiently represent
-/// id spaces that are positive and dense, that is, the domain
-/// ids are in the domain (~0, ~end()).  This representation is optimized
-/// for sequential access and will have a linear asymptotic performance
-/// in both time and storage for random access lookup and insertion
-/// respectively.
+/// id spaces that are gathered, that is, the domain ids are in the domain [0, end()).  
+/// This representation is optimized for sequential access and will have 
+/// linear asymptotic performance in time for random access lookup and remove.
 ///
-class SHEAF_DLL_SPEC list_index_space_state : public mutable_index_space_state
+class SHEAF_DLL_SPEC list_index_space_state : public gathered_insertion_index_space_state
 {
 
   friend class list_index_space_iterator;
@@ -125,6 +129,11 @@ public:
   ///
   void push_front(pod_type xhub_id);
 
+  ///
+  /// Replaces xold_range_id with xnew_range_id.
+  ///
+  void replace_range_id(pod_type xold_range_id, pod_type xnew_range_id);
+
 protected:
 
   ///
@@ -149,13 +158,13 @@ private:
 
 
   // ===========================================================
-  /// @name MUTABLE INDEX SPACE FACET
+  /// @name GATHERED_INSERTION INDEX SPACE FACET
   // ===========================================================
   //@{
 
 public:
 
-  using mutable_index_space_state::update_extrema;
+  using gathered_insertion_index_space_state::update_extrema;
 
   ///
   /// Update the id extrema.
@@ -195,7 +204,7 @@ public:
   /// The representation of the domain id to range id map.
   /// Warning: direct manipulation of the to_range map can invalid
   /// the state of the index space, make sure to invoke
-  /// update_extrema() before using the rest of the index space interface.
+  /// update_extrema_after_remove() before using the rest of the index space interface.
   ///
   to_range_type& to_range();
 
@@ -203,16 +212,11 @@ public:
   /// The representation of the domain id to range id map, const version.
   /// Warning: direct manipulation of the to_range map can invalid
   /// the state of the index space, make sure to invoke
-  /// update_extrema() before using the rest of the index space interface.
+  /// update_extrema_after_remove() before using the rest of the index space interface.
   ///
   const to_range_type& to_range() const;
 
 protected:
-
-  ///
-  /// Inserts entry (xdomain_id, xrange_id) into the map representation.
-  ///
-  virtual void map_rep_insert_entry(pod_type xdomain_id, pod_type xrange_id);
 
   ///
   /// Inserts entry (next_id(), xrange_id) into the map representation.
@@ -258,6 +262,19 @@ protected:
   /// The capacity of this map.
   ///
   pod_type _capacity;
+
+  ///
+  /// An iterator pointing to the _to_range entry with
+  /// range id (xis_range_id true) or domain id (xis_range_id false) xid.
+  ///
+  to_range_type::iterator to_range_itr(pod_type xid, bool xis_range_id);
+
+  ///
+  /// A const_iterator pointing to the _to_range entry with 
+  /// range id (xis_range_id true) or domain id (xis_range_id false) xid.
+  ///
+  to_range_type::const_iterator to_range_const_itr(pod_type xid, bool xis_range_id) const;
+  
 
 private:
 
@@ -480,12 +497,6 @@ private:
 // ===========================================================
 // NON-MEMBER FUNCTIONS
 // ===========================================================
- 
-///
-/// The deep size of list_index_space_state& xn.
-///
-SHEAF_DLL_SPEC 
-size_t deep_size(const list_index_space_state& xn, bool xinclude_shallow = true);
   
 } // end namespace sheaf
 

@@ -444,7 +444,7 @@ has_id_space() const
   return (_id_space != 0);
 }
 
-const sheaf::mutable_index_space_handle&
+const sheaf::scattered_insertion_index_space_handle&
 sheaf::subposet_state::
 id_space() const
 {
@@ -457,7 +457,7 @@ id_space() const
   return *_id_space;
 }
 
-sheaf::mutable_index_space_handle&
+sheaf::scattered_insertion_index_space_handle&
 sheaf::subposet_state::
 id_space()
 {
@@ -477,7 +477,7 @@ put_id_space(const index_space_family& xid_spaces, pod_index_type xid)
   // Preconditions:
 
   require(xid_spaces.contains(xid));
-  require(xid_spaces.handle_conforms_to_state<mutable_index_space_handle>(xid));
+  require(xid_spaces.handle_conforms_to_state<scattered_insertion_index_space_handle>(xid));
 
   // Body:
 
@@ -489,7 +489,7 @@ put_id_space(const index_space_family& xid_spaces, pod_index_type xid)
     _id_space->release_id_space();
   }
 
-  _id_space = &xid_spaces.get_id_space<mutable_index_space_handle>(xid);
+  _id_space = &xid_spaces.get_id_space<scattered_insertion_index_space_handle>(xid);
 
   // Postconditions:
 
@@ -508,7 +508,7 @@ put_id_space(const index_space_family& xid_spaces, const std::string& xname)
   // Preconditions:
 
   require(xid_spaces.contains(xname));
-  require(xid_spaces.handle_conforms_to_state<mutable_index_space_handle>(xname));
+  require(xid_spaces.handle_conforms_to_state<scattered_insertion_index_space_handle>(xname));
 
   // Body:
 
@@ -520,7 +520,7 @@ put_id_space(const index_space_family& xid_spaces, const std::string& xname)
     _id_space->release_id_space();
   }
 
-  _id_space = &xid_spaces.get_id_space<mutable_index_space_handle>(xname);
+  _id_space = &xid_spaces.get_id_space<scattered_insertion_index_space_handle>(xname);
 
   // Postconditions:
 

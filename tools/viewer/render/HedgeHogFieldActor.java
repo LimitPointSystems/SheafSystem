@@ -104,8 +104,8 @@ public class HedgeHogFieldActor extends G3DFieldActor
 
     // Hook the hedge hog up to the data flow
 
-    hedgeHog.SetInput(mapperInput);
-    gridMapper.SetInput(hedgeHog.GetOutput());
+    hedgeHog.SetInputData(mapperInput);
+    gridMapper.SetInputData(hedgeHog.GetOutput());
   }
 
   /**

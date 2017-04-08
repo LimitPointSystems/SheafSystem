@@ -404,7 +404,7 @@ box_list(sec_vd_value_type* xpt, size_type xpt_ub) const
   // Body:
 
   d_bin_coordinates<DC, DB> rel_pt;
-  relative_position_pa(xpt, xpt_ub, rel_pt);
+  this->relative_position_pa(xpt, xpt_ub, rel_pt);
 
   d_tree_point_locator_path<DC, DB> lpath(rel_pt, this);
   const box_list_type& result = _root.box_list(lpath);

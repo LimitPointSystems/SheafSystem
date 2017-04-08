@@ -662,7 +662,7 @@ diagonalization(symmetric_matrix_3x3<T>& xresult) const
 
     T tmp[3] = {lambda_0, lambda_1, lambda_2};
 
-    sort(&tmp[0], &tmp[3]);
+    std::sort(&tmp[0], &tmp[3]);
     
     xresult[0][0] =  tmp[0];
     xresult[1][1] =  tmp[1];

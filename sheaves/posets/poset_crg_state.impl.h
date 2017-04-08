@@ -111,7 +111,7 @@ remove_cover_members(const filter_type& xfilter, bool xlower, pod_index_type xmb
   // Body:
 
   /// @todo Review.  Is this the most efficient way to do this?  Probably should
-  ///       move this functionality to mutable_index_space_state and allow
+  ///       move this functionality to scattered_insertion_index_space_state and allow
   ///       the given implementations to do as efficiently as possible.
 
   // Gather members that need removed for the cover into a set.
@@ -138,8 +138,8 @@ remove_cover_members(const filter_type& xfilter, bool xlower, pod_index_type xmb
 
      pod_index_type lspace_id = force_explicit_cover(xlower, xmbr_index, true);
 
-     mutable_index_space_handle& lcover =
-       _id_spaces.get_id_space<mutable_index_space_handle>(lspace_id);
+     scattered_insertion_index_space_handle& lcover =
+       _id_spaces.get_id_space<scattered_insertion_index_space_handle>(lspace_id);
 
      set<pod_index_type>::iterator lmbr_itr;
      for(lmbr_itr = lmbrs_to_remove.begin();

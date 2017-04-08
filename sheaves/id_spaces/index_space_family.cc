@@ -27,7 +27,7 @@
 #include "index_space_interval_iterator.h"
 #include "index_space_iterator.h"
 #include "interval_index_space_state.h"
-#include "mutable_index_space_handle.h"
+#include "scattered_insertion_index_space_handle.h"
 #include "poset_path.h"
 #include "primary_index_space_handle.h"
 #include "primary_sum_index_space_state.h"
@@ -563,7 +563,7 @@ new_state(const std::string& xname,
   ensure(contains(xname));
 
   /// @hack See COM-475.  Remove this postcondition once COM-475 is fixed.
-  ensure(handle_conforms_to_state<mutable_index_space_handle>(xname));
+  ensure(handle_conforms_to_state<scattered_insertion_index_space_handle>(xname));
 
   // Exit:
 

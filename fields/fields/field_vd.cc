@@ -1001,7 +1001,7 @@ embed_property(const std::string& xresult_name,
   result = new subposet(lbase_host);
   result->put_name(xresult_name, true, false); // New_id_space requires name.
 
-  mutable_index_space_handle& lresult_space = result->new_id_space("hash_index_space_state");
+  scattered_insertion_index_space_handle& lresult_space = result->new_id_space("hash_index_space_state");
 
   pod_index_type lresult_mbr_client_id;
   pod_index_type lresult_mbr_id;

@@ -2578,96 +2578,96 @@ size_t sheaf::deep_size<sheaf::index_space_handle, sheaf::invalid_block_initiali
 
 
 //==============================================================================
-// auto_block<mutable_index_space_handle*, un_block_initialization_policy>
+// auto_block<scattered_insertion_index_space_handle*, un_block_initialization_policy>
 //==============================================================================
 
-#include "mutable_index_space_handle.h"
+#include "scattered_insertion_index_space_handle.h"
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::un_block_initialization_policy<sheaf::mutable_index_space_handle* >;
+sheaf::un_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::auto_block<sheaf::mutable_index_space_handle*, sheaf::un_block_initialization_policy<sheaf::mutable_index_space_handle* > >;
+sheaf::auto_block<sheaf::scattered_insertion_index_space_handle*, sheaf::un_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* > >;
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
 
 template 
 SHEAF_DLL_SPEC 
-bool sheaf::operator == <sheaf::mutable_index_space_handle*, sheaf::un_block_initialization_policy<sheaf::mutable_index_space_handle* > >(const sheaf::auto_block<sheaf::mutable_index_space_handle*, sheaf::un_block_initialization_policy<sheaf::mutable_index_space_handle* > >& xblk1,
-																	  const sheaf::auto_block<sheaf::mutable_index_space_handle*, sheaf::un_block_initialization_policy<sheaf::mutable_index_space_handle* > >& xblk2);
+bool sheaf::operator == <sheaf::scattered_insertion_index_space_handle*, sheaf::un_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* > >(const sheaf::auto_block<sheaf::scattered_insertion_index_space_handle*, sheaf::un_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* > >& xblk1,
+																	  const sheaf::auto_block<sheaf::scattered_insertion_index_space_handle*, sheaf::un_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* > >& xblk2);
 
 template 
 SHEAF_DLL_SPEC 
-ostream& sheaf::operator << <sheaf::mutable_index_space_handle*, sheaf::un_block_initialization_policy<sheaf::mutable_index_space_handle* > >(ostream& xos,
-																	      const sheaf::auto_block<sheaf::mutable_index_space_handle*, sheaf::un_block_initialization_policy<sheaf::mutable_index_space_handle* > >& xblk);
+ostream& sheaf::operator << <sheaf::scattered_insertion_index_space_handle*, sheaf::un_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* > >(ostream& xos,
+																	      const sheaf::auto_block<sheaf::scattered_insertion_index_space_handle*, sheaf::un_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* > >& xblk);
 
 template 
 SHEAF_DLL_SPEC 
-size_t sheaf::deep_size<sheaf::mutable_index_space_handle, sheaf::un_block_initialization_policy<sheaf::mutable_index_space_handle* > >(const sheaf::auto_block<sheaf::mutable_index_space_handle*, sheaf::un_block_initialization_policy<sheaf::mutable_index_space_handle* > >& xblk,
+size_t sheaf::deep_size<sheaf::scattered_insertion_index_space_handle, sheaf::un_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* > >(const sheaf::auto_block<sheaf::scattered_insertion_index_space_handle*, sheaf::un_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* > >& xblk,
 																	bool xinclude_shallow);
 
 #endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
 
 //==============================================================================
-// auto_block<mutable_index_space_handle*, zero_block_initialization_policy>
+// auto_block<scattered_insertion_index_space_handle*, zero_block_initialization_policy>
 //==============================================================================
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::zero_block_initialization_policy<sheaf::mutable_index_space_handle* >;
+sheaf::zero_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::auto_block<sheaf::mutable_index_space_handle*, sheaf::zero_block_initialization_policy<sheaf::mutable_index_space_handle* > >;
+sheaf::auto_block<sheaf::scattered_insertion_index_space_handle*, sheaf::zero_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* > >;
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
 
 template 
 SHEAF_DLL_SPEC 
-bool sheaf::operator == <sheaf::mutable_index_space_handle*, sheaf::zero_block_initialization_policy<sheaf::mutable_index_space_handle* > >(const sheaf::auto_block<sheaf::mutable_index_space_handle*, sheaf::zero_block_initialization_policy<sheaf::mutable_index_space_handle* > >& xblk1,
-																	    const sheaf::auto_block<sheaf::mutable_index_space_handle*, sheaf::zero_block_initialization_policy<sheaf::mutable_index_space_handle* > >& xblk2);
+bool sheaf::operator == <sheaf::scattered_insertion_index_space_handle*, sheaf::zero_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* > >(const sheaf::auto_block<sheaf::scattered_insertion_index_space_handle*, sheaf::zero_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* > >& xblk1,
+																	    const sheaf::auto_block<sheaf::scattered_insertion_index_space_handle*, sheaf::zero_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* > >& xblk2);
 
 template 
 SHEAF_DLL_SPEC 
-ostream& sheaf::operator << <sheaf::mutable_index_space_handle*, sheaf::zero_block_initialization_policy<sheaf::mutable_index_space_handle* > >(ostream& xos,
-																		const sheaf::auto_block<sheaf::mutable_index_space_handle*, sheaf::zero_block_initialization_policy<sheaf::mutable_index_space_handle* > >& xblk);
+ostream& sheaf::operator << <sheaf::scattered_insertion_index_space_handle*, sheaf::zero_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* > >(ostream& xos,
+																		const sheaf::auto_block<sheaf::scattered_insertion_index_space_handle*, sheaf::zero_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* > >& xblk);
 
 template 
 SHEAF_DLL_SPEC 
-size_t sheaf::deep_size<sheaf::mutable_index_space_handle, sheaf::zero_block_initialization_policy<sheaf::mutable_index_space_handle* > >(const sheaf::auto_block<sheaf::mutable_index_space_handle*, sheaf::zero_block_initialization_policy<sheaf::mutable_index_space_handle* > >& xblk,
+size_t sheaf::deep_size<sheaf::scattered_insertion_index_space_handle, sheaf::zero_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* > >(const sheaf::auto_block<sheaf::scattered_insertion_index_space_handle*, sheaf::zero_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* > >& xblk,
 																	  bool xinclude_shallow);
 
 #endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
 
 //==============================================================================
-// auto_block<mutable_index_space_handle*, invalid_block_initialization_policy>
+// auto_block<scattered_insertion_index_space_handle*, invalid_block_initialization_policy>
 //==============================================================================
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::invalid_block_initialization_policy<sheaf::mutable_index_space_handle* >;
+sheaf::invalid_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* >;
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::auto_block<sheaf::mutable_index_space_handle*, sheaf::invalid_block_initialization_policy<sheaf::mutable_index_space_handle* > >;
+sheaf::auto_block<sheaf::scattered_insertion_index_space_handle*, sheaf::invalid_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* > >;
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
 
 template 
 SHEAF_DLL_SPEC 
-bool sheaf::operator == <sheaf::mutable_index_space_handle*, sheaf::invalid_block_initialization_policy<sheaf::mutable_index_space_handle* > >(const sheaf::auto_block<sheaf::mutable_index_space_handle*, sheaf::invalid_block_initialization_policy<sheaf::mutable_index_space_handle* > >& xblk1,
-																	       const sheaf::auto_block<sheaf::mutable_index_space_handle*, sheaf::invalid_block_initialization_policy<sheaf::mutable_index_space_handle* > >& xblk2);
+bool sheaf::operator == <sheaf::scattered_insertion_index_space_handle*, sheaf::invalid_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* > >(const sheaf::auto_block<sheaf::scattered_insertion_index_space_handle*, sheaf::invalid_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* > >& xblk1,
+																	       const sheaf::auto_block<sheaf::scattered_insertion_index_space_handle*, sheaf::invalid_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* > >& xblk2);
 
 template 
 SHEAF_DLL_SPEC 
-ostream& sheaf::operator << <sheaf::mutable_index_space_handle*, sheaf::invalid_block_initialization_policy<sheaf::mutable_index_space_handle* > >(ostream& xos,
-																		   const sheaf::auto_block<sheaf::mutable_index_space_handle*, sheaf::invalid_block_initialization_policy<sheaf::mutable_index_space_handle* > >& xblk);
+ostream& sheaf::operator << <sheaf::scattered_insertion_index_space_handle*, sheaf::invalid_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* > >(ostream& xos,
+																		   const sheaf::auto_block<sheaf::scattered_insertion_index_space_handle*, sheaf::invalid_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* > >& xblk);
 
 template 
 SHEAF_DLL_SPEC 
-size_t sheaf::deep_size<sheaf::mutable_index_space_handle, sheaf::invalid_block_initialization_policy<sheaf::mutable_index_space_handle* > >(const sheaf::auto_block<sheaf::mutable_index_space_handle*, sheaf::invalid_block_initialization_policy<sheaf::mutable_index_space_handle* > >& xblk,
+size_t sheaf::deep_size<sheaf::scattered_insertion_index_space_handle, sheaf::invalid_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* > >(const sheaf::auto_block<sheaf::scattered_insertion_index_space_handle*, sheaf::invalid_block_initialization_policy<sheaf::scattered_insertion_index_space_handle* > >& xblk,
 																	     bool xinclude_shallow);
 
 #endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS

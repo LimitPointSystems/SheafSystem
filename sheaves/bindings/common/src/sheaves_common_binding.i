@@ -56,25 +56,28 @@
 %ignore *::operator=;
 %ignore *::operator[];
 
-// The following cause unresolved symbol errors during the Windows link phase:
+// Unresolved symbols caused by no -DSHEAF_DLL_IMPORTS when compiling.
 
-%ignore sheaf::poset_state_handle::default_name;
-%ignore sheaf::depth_first_iterator::NULL_FILTER;
-%ignore sheaf::poset_bounds_descriptor::BOTTOM_TOP;
-%ignore sheaf::poset_bounds_descriptor::BOTTOM_BOTTOM;
+/* // The following cause unresolved symbol errors during the Windows link phase: */
 
-%ignore sheaf::storage_agent::RELEASE_ALL;
-%ignore sheaf::storage_agent::RETAIN_READ;
-%ignore sheaf::storage_agent::ABORT;
-%ignore sheaf::storage_agent::COMMIT;
+/* %ignore sheaf::poset_state_handle::default_name; */
+/* %ignore sheaf::depth_first_iterator::NULL_FILTER; */
+/* %ignore sheaf::poset_bounds_descriptor::BOTTOM_TOP; */
+/* %ignore sheaf::poset_bounds_descriptor::BOTTOM_BOTTOM; */
 
-// these methods in storage agent need to be ignored because they reference BOTTOM_TOP in their method signatures.
-// $$ISSUE: this should be looked into even though these methods will not be called directly by the end user.
-%ignore sheaf::storage_agent::read;
-%ignore sheaf::storage_agent::write;
-%ignore sheaf::storage_agent::begin_read_transaction;
-%ignore sheaf::storage_agent::begin_read_write_transaction;
-%ignore sheaf::storage_agent::begin_write_transaction;
+/* %ignore sheaf::storage_agent::RELEASE_ALL; */
+/* %ignore sheaf::storage_agent::RETAIN_READ; */
+/* %ignore sheaf::storage_agent::ABORT; */
+/* %ignore sheaf::storage_agent::COMMIT; */
+
+/* // these methods in storage agent need to be ignored because they reference BOTTOM_TOP in their method signatures. */
+/* // $$ISSUE: this should be looked into even though these methods will not be called directly by the end user. */
+/* %ignore sheaf::storage_agent::read; */
+/* %ignore sheaf::storage_agent::write; */
+/* %ignore sheaf::storage_agent::begin_read_transaction; */
+/* %ignore sheaf::storage_agent::begin_read_write_transaction; */
+/* %ignore sheaf::storage_agent::begin_write_transaction; */
+/* //%ignore sheaf::storage_agent::transaction::transaction; */
 
 
 
@@ -197,31 +200,33 @@ typedef sheaf::arg_list::arg_type arg_type;
 %include       "index_space_handle.h"
 %include             "forwarding_index_space_handle.h"
 %include             "explicit_index_space_handle.h"
-%include                   "offset_index_space_handle.h"
-%include                   "sum_index_space_handle.h"
-%include                         "hub_index_space_handle.h"
-%include                   "mutable_index_space_handle.h"
+%include                   "gathered_insertion_index_space_handle.h"
+%include                   "scattered_insertion_index_space_handle.h"
 %include                         "array_index_space_handle.h"
 %include                         "hash_index_space_handle.h"
 %include                         "interval_index_space_handle.h"
 %include                         "list_index_space_handle.h"
+%include                   "offset_index_space_handle.h"
 %include                   "primary_index_space_handle.h"
 %include                         "reserved_primary_index_space_handle.h"
 %include                   "primitives_index_space_handle.h"
 %include                   "singleton_index_space_handle.h"
+%include                   "sum_index_space_handle.h"
+%include                         "hub_index_space_handle.h"
 %include       "explicit_index_space_state.h"
-%include             "offset_index_space_state.h"
-%include             "mutable_index_space_state.h"
-%include                   "array_index_space_state.h"
-%include                   "hash_index_space_state.h"
-%include                   "interval_index_space_state.h"
+%include             "gathered_insertion_index_space_state.h"
+%include                   "scattered_insertion_index_space_state.h"
+%include                        "array_index_space_state.h"
+%include                        "hash_index_space_state.h"
+%include                        "interval_index_space_state.h"
 %include                   "list_index_space_state.h"
+%include             "offset_index_space_state.h"
 %include             "primary_index_space_state.h"
 %include                   "reserved_primary_index_space_state.h"
-%include             "sum_index_space_state.h"
-%include                   "primary_sum_index_space_state.h"
 %include             "primitives_index_space_state.h"
 %include             "singleton_index_space_state.h"
+%include             "sum_index_space_state.h"
+%include                   "primary_sum_index_space_state.h"
 %include       "index_space_interval_iterator.h"
 %include       "index_space_iterator.h"
 %include             "explicit_index_space_iterator.h"

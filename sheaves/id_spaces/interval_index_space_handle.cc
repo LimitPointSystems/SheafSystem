@@ -79,7 +79,7 @@ new_space(index_space_family& xid_spaces,
 
 sheaf::interval_index_space_handle::
 interval_index_space_handle()
-  : mutable_index_space_handle()
+  : scattered_insertion_index_space_handle()
 {
   // Preconditions:
     
@@ -600,7 +600,7 @@ put_merge_mode(bool xvalue)
 
 
 // ===========================================================
-// MUTABLE_INDEX_SPACE_HANDLE FACET
+// SCATTERED_INSERTION_INDEX_SPACE_HANDLE FACET
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
@@ -769,7 +769,7 @@ invariant() const
 
     // Must satisfy base class invariant
 
-    invariance(mutable_index_space_handle::invariant());
+    invariance(scattered_insertion_index_space_handle::invariant());
 
     // Invariances for this class:
       

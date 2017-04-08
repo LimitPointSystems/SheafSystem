@@ -503,7 +503,7 @@ new_state(poset_state_handle* xhost,
 
 // PUBLIC MEMBER FUNCTIONS
 
-const sheaf::mutable_index_space_handle&
+const sheaf::scattered_insertion_index_space_handle&
 sheaf::subposet::
 id_space() const
 {
@@ -514,7 +514,7 @@ id_space() const
 
   // Body:
 
-  const mutable_index_space_handle& result =
+  const scattered_insertion_index_space_handle& result =
     powerset_member(index())->id_space();
 
   // Postconditions:
@@ -526,7 +526,7 @@ id_space() const
   return result;
 }
 
-sheaf::mutable_index_space_handle&
+sheaf::scattered_insertion_index_space_handle&
 sheaf::subposet::
 id_space()
 {
@@ -537,7 +537,7 @@ id_space()
 
   // Body:
 
-  mutable_index_space_handle& result =
+  scattered_insertion_index_space_handle& result =
     powerset_member(index())->id_space();
 
   // Postconditions:
@@ -549,7 +549,7 @@ id_space()
   return result;
 }
 
-sheaf::mutable_index_space_handle&
+sheaf::scattered_insertion_index_space_handle&
 sheaf::subposet::
 new_id_space(const std::string& xstate_class_name)
 {
@@ -560,7 +560,7 @@ new_id_space(const std::string& xstate_class_name)
   require(!has_id_space());
   require(!host()->member_id_spaces(false).contains(id_space_name()));
   require(!xstate_class_name.empty());
-  require(unexecutable("xstate_class_name is a descendant of mutable_index_space_state"));
+  require(unexecutable("xstate_class_name is a descendant of scattered_insertion_index_space_state"));
 
   // Body:
 
@@ -603,7 +603,7 @@ new_id_space(const std::string& xstate_class_name)
 
   powerset_member(index())->put_id_space(host()->member_id_spaces(false), lid);
 
-  mutable_index_space_handle& result = id_space();
+  scattered_insertion_index_space_handle& result = id_space();
 
   // Postconditions:
 

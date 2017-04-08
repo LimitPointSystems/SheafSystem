@@ -247,7 +247,7 @@ build_file(const sec_vd& xcoords, const sec_vd& xproperty,
   // either ascii or binary.
 
   vtkPolyDataWriter* writer = vtkPolyDataWriter::New();
-  writer->SetInput(lug);
+  writer->SetInputData(lug);
   writer->SetFileName(xvtk_file_name.c_str());
 
   if(xis_ascii)
@@ -298,7 +298,7 @@ build_file(const sec_vd& xcoords,
   // either ascii or binary.
 
   vtkPolyDataWriter* writer = vtkPolyDataWriter::New();
-  writer->SetInput(lug);
+  writer->SetInputData(lug);
   writer->SetFileName(xvtk_file_name.c_str());
 
   if(xis_ascii)

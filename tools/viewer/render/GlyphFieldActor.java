@@ -105,8 +105,8 @@ public class GlyphFieldActor extends G3DFieldActor
 
     // Hook the glyph up to the data flow
 
-    glyph.SetInput(mapperInput);
-    gridMapper.SetInput(glyph.GetOutput());
+    glyph.SetInputData(mapperInput);
+    gridMapper.SetInputData(glyph.GetOutput());
   }
 
   /**

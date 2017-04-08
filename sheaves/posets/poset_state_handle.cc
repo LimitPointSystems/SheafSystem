@@ -7441,7 +7441,7 @@ initialize_dof_id_space(subposet& xdof_subposet)
   {
     xdof_subposet.new_id_space("array_index_space_state");
 
-    mutable_index_space_handle& ldof_id_space = xdof_subposet.id_space();
+    scattered_insertion_index_space_handle& ldof_id_space = xdof_subposet.id_space();
 
     index_iterator ldof_itr = xdof_subposet.indexed_member_iterator();
     while(!ldof_itr.is_done())

@@ -59,7 +59,7 @@ set(SRCS
     wsv_block.cc
    )
 
-collect_sources()
+SheafSystem_collect_sources(sheaves "${SRCS}")
 
 #
 # Headers that are NOT associated with a .cc file.
@@ -87,7 +87,7 @@ set(ADDITIONAL_INCS
     zn_to_bool_filter.h
    )
   
-collect_includes()
+SheafSystem_collect_includes(sheaves "${SRCS}" "${ADDITIONAL_INCS}")
 
 #
 # Source for unit test executables.
@@ -95,7 +95,7 @@ collect_includes()
 set(UNIT_TEST_SRCS
    )
 
-collect_unit_test_sources()
+SheafSystem_collect_unit_test_sources(sheaves "${UNIT_TEST_SRCS}")
 
 #
 # Source for example executables.
@@ -103,6 +103,6 @@ collect_unit_test_sources()
 set(EXAMPLE_SRCS
    )
 
-collect_example_sources()
+SheafSystem_collect_example_sources(sheaves "${EXAMPLE_SRCS}")
 
 

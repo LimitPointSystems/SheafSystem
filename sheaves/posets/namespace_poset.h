@@ -37,8 +37,8 @@
 #include "namespace_poset_schema.h"
 #endif
 
-#ifndef MUTABLE_INDEX_SPACE_HANDLE_H
-#include "mutable_index_space_handle.h"
+#ifndef SCATTERED_INSERTION_INDEX_SPACE_HANDLE_H
+#include "scattered_insertion_index_space_handle.h"
 #endif
 
 #ifndef PRIMITIVES_POSET_H

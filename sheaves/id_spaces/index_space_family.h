@@ -67,7 +67,7 @@ class index_space_family_iterator;
 class index_space_interval;
 class index_space_iterator;
 class index_space_state;
-class mutable_index_space_handle;
+class scattered_insertion_index_space_handle;
 class primary_sum_index_space_state;
 class scoped_index;
 

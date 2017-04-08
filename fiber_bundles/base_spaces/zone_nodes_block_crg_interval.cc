@@ -281,7 +281,7 @@ initialize_vertex_client_id_space(block_adjacency& xadjacency)
 
   // Create the id space.
 
-  mutable_index_space_handle lclient_id_space =
+  scattered_insertion_index_space_handle lclient_id_space =
     hash_index_space_state::new_space(*_id_spaces,
 				      lname,
 				      false,
@@ -802,8 +802,8 @@ get_implicit_private_data(block<pod_index_type>& xdata) const
   xdata[j++] = _nodes_per_zone; // xdata[2]
   xdata[j++] = lconn_size; // xdata[3]
 
-  mutable_index_space_handle& lclient_id_space =
-    _id_spaces->get_id_space<mutable_index_space_handle>(_vertex_client_space_id);  
+  scattered_insertion_index_space_handle& lclient_id_space =
+    _id_spaces->get_id_space<scattered_insertion_index_space_handle>(_vertex_client_space_id);  
 
   for(pod_index_type i = 0; i < lconn_size; ++i)
   {
@@ -862,8 +862,8 @@ put_implicit_private_data(const block<pod_index_type>& xdata)
   // the array interval when constructing the lower cover of the
   // zones.
 
-  mutable_index_space_handle& lclient_id_space =
-    _id_spaces->get_id_space<mutable_index_space_handle>(_vertex_client_space_id);
+  scattered_insertion_index_space_handle& lclient_id_space =
+    _id_spaces->get_id_space<scattered_insertion_index_space_handle>(_vertex_client_space_id);
 
   _connectivity.reserve(lconn_ct);
   _connectivity.set_ct(lconn_ct);

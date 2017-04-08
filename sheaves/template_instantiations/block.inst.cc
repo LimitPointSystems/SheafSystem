@@ -674,26 +674,26 @@ size_t sheaf::deep_size<sheaf::index_space_handle>(const sheaf::block<sheaf::ind
 
 
 //==============================================================================
-// block<mutable_index_space_handle*>
+// block<scattered_insertion_index_space_handle*>
 //==============================================================================
 
 template class 
 SHEAF_DLL_SPEC
-sheaf::block<sheaf::mutable_index_space_handle*>;
+sheaf::block<sheaf::scattered_insertion_index_space_handle*>;
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
 
 template 
 SHEAF_DLL_SPEC
-bool sheaf::operator == <sheaf::mutable_index_space_handle*>(const sheaf::block<sheaf::mutable_index_space_handle*>& xblk1, const sheaf::block<sheaf::mutable_index_space_handle*>& xblk2);
+bool sheaf::operator == <sheaf::scattered_insertion_index_space_handle*>(const sheaf::block<sheaf::scattered_insertion_index_space_handle*>& xblk1, const sheaf::block<sheaf::scattered_insertion_index_space_handle*>& xblk2);
 
 template 
 SHEAF_DLL_SPEC
-ostream& sheaf::operator << <sheaf::mutable_index_space_handle*>(ostream& xos, const sheaf::block<sheaf::mutable_index_space_handle*>& xblk);
+ostream& sheaf::operator << <sheaf::scattered_insertion_index_space_handle*>(ostream& xos, const sheaf::block<sheaf::scattered_insertion_index_space_handle*>& xblk);
 
 template 
 SHEAF_DLL_SPEC
-size_t sheaf::deep_size<sheaf::mutable_index_space_handle>(const sheaf::block<sheaf::mutable_index_space_handle*>& xblk, bool xinclude_shallow);
+size_t sheaf::deep_size<sheaf::scattered_insertion_index_space_handle>(const sheaf::block<sheaf::scattered_insertion_index_space_handle*>& xblk, bool xinclude_shallow);
 
 #endif // ifndef DOXYGEN_SKIP_INSTANTIATIONS
 

@@ -27,22 +27,21 @@ set(CLUSTER ${CMAKE_CURRENT_BINARY_DIR})
 set(SRCS
    )
 
-collect_sources()
+SheafSystem_collect_sources(tools "${SRCS}")
 
 #
 # Headers that are NOT associated with a .cc file.
 #
-if(BUILD_SHEAFSCOPE)
+set(ADDITIONAL_INCS
+   )
+
+
+if(SHEAFSYSTEM_BUILD_SHEAFSCOPE)
     configure_file(lps_environment.h.cmake.in ${CMAKE_BINARY_DIR}/include/lps_environment.h)
-    set(ADDITIONAL_INCS
-        lps_environment.h
-         )
-else()
-    set(ADDITIONAL_INCS
-       )
 endif()
 
-collect_includes()
+
+SheafSystem_collect_includes(tools "${SRCS}" "${ADDITIONAL_INCS}")
 
 #
 # Source for unit test executables.
@@ -50,7 +49,7 @@ collect_includes()
 set(UNIT_TEST_SRCS
    )
 
-collect_unit_test_sources()
+SheafSystem_collect_unit_test_sources(tools "${UNIT_TEST_SRCS}")
 
 #
 # Source for example executables.
@@ -60,4 +59,4 @@ set(EXAMPLE_SRCS
      SheafScope.cc
    )
 
-collect_example_sources()
+SheafSystem_collect_example_sources(tools "${EXAMPLE_SRCS}")

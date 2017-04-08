@@ -285,23 +285,37 @@ next()
   define_old_variable(pod_type old_pod = pod());
   define_old_variable(pod_type old_hub_pod = hub_pod());
 
-  do
+  ++_itr;
+  if(_itr == _to_hub->end())
   {
-    // Move to the next id.
+    // Done with iteration.
 
-    ++_itr;
-    if(_itr == _to_hub->end())
-    {
-      // Done with iteration.
-
-      invalidate_ids();
-      break;
-    }
-
+    invalidate_ids();
+  }
+  else
+  {
     _pod++;
     _hub_pod = *_itr;
   }
-  while(!is_valid(_hub_pod));
+
+
+//   do
+//   {
+//     // Move to the next id.
+
+//     ++_itr;
+//     if(_itr == _to_hub->end())
+//     {
+//       // Done with iteration.
+
+//       invalidate_ids();
+//       break;
+//     }
+
+//     _pod++;
+//     _hub_pod = *_itr;
+//   }
+//   while(!is_valid(_hub_pod));
 
   // Postconditions:
 
@@ -325,36 +339,54 @@ reset()
   // Body:
 
   _itr = _to_hub->begin();
-
-  _pod = 0;
-
-  while(true)
+  if(_itr == _to_hub->end())
   {
-    if(_itr == _to_hub->end())
-    {
-      // No entries found, invalidate the iterator.
+    // The id space is empty.
 
-      invalidate_ids();
-
-      break;
-    }
-    else if(is_valid(*_itr))
-    {
-      // The first entry was found, initialize iterator.
-
-      _is_done = false;
-      _hub_pod = *_itr;
-
-      break;
-    }
-    else
-    {
-      // The entry is empty continue to the next entry.
-
-      ++_pod;
-      ++_itr;
-    }
+    invalidate_ids();
   }
+  else
+  {
+    // The id space is not empty; 
+    // initialize the iteration.
+
+    _pod = 0;
+    _hub_pod = *_itr;
+    _is_done = false;
+  }
+
+
+//   _itr = _to_hub->begin();
+
+//   _pod = 0;
+
+//   while(true)
+//   {
+//     if(_itr == _to_hub->end())
+//     {
+//       // No entries found, invalidate the iterator.
+
+//       invalidate_ids();
+
+//       break;
+//     }
+//     else if(is_valid(*_itr))
+//     {
+//       // The first entry was found, initialize iterator.
+
+//       _is_done = false;
+//       _hub_pod = *_itr;
+
+//       break;
+//     }
+//     else
+//     {
+//       // The entry is empty continue to the next entry.
+
+//       ++_pod;
+//       ++_itr;
+//     }
+//   }
     
   // Postconditions:
 

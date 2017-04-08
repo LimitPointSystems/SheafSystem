@@ -33,8 +33,8 @@
 #include "index_space_family.h"
 #endif
 
-#ifndef MUTABLE_INDEX_SPACE_HANDLE_H
-#include "mutable_index_space_handle.h"
+#ifndef SCATTERED_INSERTION_INDEX_SPACE_HANDLE_H
+#include "scattered_insertion_index_space_handle.h"
 #endif
 
 #ifndef SCOPED_INDEX_H
@@ -190,12 +190,12 @@ public:
   ///
   /// The id space for this subposet state (const version).
   ///
-  const mutable_index_space_handle& id_space() const;
+  const scattered_insertion_index_space_handle& id_space() const;
 
   ///
   /// The id space for this subposet state (mutable version).
   ///
-  mutable_index_space_handle& id_space();
+  scattered_insertion_index_space_handle& id_space();
 
   ///
   /// Put the id space for this subposet state.
@@ -253,7 +253,7 @@ protected:
   ///
   /// The id space for this subposet state.
   ///
-  mutable_index_space_handle* _id_space;
+  scattered_insertion_index_space_handle* _id_space;
 
   ///
   /// True if and only if this subposet should be written to disk.

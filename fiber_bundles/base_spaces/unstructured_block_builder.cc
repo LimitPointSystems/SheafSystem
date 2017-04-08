@@ -371,7 +371,7 @@ build_block_decomposition(base_space_poset* xmesh,
   unstructured_block lblock;
 
   subposet& lblock_sp(xmesh->blocks());
-  mutable_index_space_handle& lid_space = lblock_sp.id_space();
+  scattered_insertion_index_space_handle& lid_space = lblock_sp.id_space();
 
   xmesh->begin_jim_edit_mode(false);
   for(int i=0; i<xblock_ids.ct(); i++)
@@ -452,7 +452,7 @@ build_block_decomposition(base_space_poset* xmesh,
   unstructured_block lblock;
 
   subposet& lblock_sp = xmesh->blocks();
-  mutable_index_space_handle& lid_space = lblock_sp.id_space();
+  scattered_insertion_index_space_handle& lid_space = lblock_sp.id_space();
 
   scoped_index lblock_dof_tuple_id;
 
@@ -1108,7 +1108,7 @@ postvisit_action(const triorder_iterator& xtmplt_itr)
     // If the id has been used before, get the block member index associated with it;
     // otherwise, create a new member.
 
-    mutable_index_space_handle& lid_space = _block_host.d_cells_id_space(lmbr_db);
+    scattered_insertion_index_space_handle& lid_space = _block_host.d_cells_id_space(lmbr_db);
 
     lblk_mbr_id = lid_space.hub_pod(glue_id);
 
@@ -1148,7 +1148,7 @@ postvisit_action(const triorder_iterator& xtmplt_itr)
 
       _block_host.cells().insert_member(lblk_mbr_id);
 
-      mutable_index_space_handle& lid_space2 = _block_host.cells().id_space();
+      scattered_insertion_index_space_handle& lid_space2 = _block_host.cells().id_space();
       lid_space2.push_back(lblk_mbr_id);
 
       if(_name_mode)
@@ -1218,12 +1218,12 @@ postvisit_action(const triorder_iterator& xtmplt_itr)
 
       _block_host.d_cells(lmbr_db).insert_member(lblk_mbr_id.pod());
 
-      mutable_index_space_handle& lid_space = _block_host.d_cells_id_space(lmbr_db);
+      scattered_insertion_index_space_handle& lid_space = _block_host.d_cells_id_space(lmbr_db);
       lid_space.push_back(lblk_mbr_id.pod());
 
       _block_host.cells().insert_member(lblk_mbr_id);
 
-      mutable_index_space_handle& lid_space2 = _block_host.cells().id_space();
+      scattered_insertion_index_space_handle& lid_space2 = _block_host.cells().id_space();
       lid_space2.push_back(lblk_mbr_id);
 
       if(_name_mode)
@@ -1455,7 +1455,7 @@ update_boundary(pod_index_type xhub_id)
   // All members with the boundary dimension are inserted in
   // _boundary_jims when they are created. We have just inserted
   // another member in the upper cover of this member.
-  // Since mutable_index_space::push_back ensures the member is
+  // Since scattered_insertion_index_space::push_back ensures the member is
   // at the back of the list, if the upper cover contains a member
   // not in this block, it must be the first member of the upper cover.
 

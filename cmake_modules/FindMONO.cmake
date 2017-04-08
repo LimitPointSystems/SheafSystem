@@ -31,6 +31,9 @@
 #  BSD license.
 #  For details see the accompanying COPYING-CMAKE-SCRIPTS file.
 #
+
+# OBSOLETE. NO LONGER USED.
+
 SET(MONO_FOUND FALSE)
 
 FIND_PROGRAM(MONO_EXECUTABLE mono PATHS /usr/bin)

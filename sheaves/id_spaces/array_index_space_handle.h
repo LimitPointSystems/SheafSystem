@@ -25,8 +25,8 @@
 #include "sheaf_dll_spec.h"
 #endif
 
-#ifndef MUTABLE_INDEX_SPACE_HANDLE_H
-#include "mutable_index_space_handle.h"
+#ifndef SCATTERED_INSERTION_INDEX_SPACE_HANDLE_H
+#include "scattered_insertion_index_space_handle.h"
 #endif
 
 namespace sheaf
@@ -35,7 +35,7 @@ namespace sheaf
 class array_index_space_state;
   
 ///
-/// An array implementation of class mutable_index_space_handle.
+/// An array implementation of class scattered_insertion_index_space_handle.
 /// This representation is intended to efficiently represent
 /// id spaces that are positive and dense, that is, the domain
 /// ids are in the domain (~0, ~end()) and hence the id to hub id
@@ -43,7 +43,7 @@ class array_index_space_state;
 /// for id spaces used to index arrays, in which case the ids
 /// are in the domain [0, end()).
 ///
-class SHEAF_DLL_SPEC array_index_space_handle : public mutable_index_space_handle
+class SHEAF_DLL_SPEC array_index_space_handle : public scattered_insertion_index_space_handle
 {
 
   friend class array_index_space_state;
@@ -119,7 +119,7 @@ protected:
   ///
   array_index_space_handle(array_index_space_state& xstate);
 
-  using mutable_index_space_handle::state;
+  using scattered_insertion_index_space_handle::state;
 
   ///
   /// The array id space state (mutable version).
@@ -197,7 +197,7 @@ private:
 
 public:
 
-  using mutable_index_space_handle::conforms_to_state;
+  using scattered_insertion_index_space_handle::conforms_to_state;
 
   ///
   /// True if this conforms to the handle type required by the state

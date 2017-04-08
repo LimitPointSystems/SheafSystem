@@ -35,7 +35,7 @@ endif( NOT CSHARP_COMPILER )
 if( CSHARP_TYPE MATCHES ".NET" )
   include( ${DotNetFrameworkSdk_USE_FILE} )
 elseif ( CSHARP_TYPE MATCHES "Mono" )
-  include( ${Mono_USE_FILE} )
+  include( ${SHEAFSYSTEM_CMAKE_MODULE_PATH}/UseMONO.cmake )
 endif ( CSHARP_TYPE MATCHES ".NET" )
 
 macro( CSHARP_ADD_LIBRARY name )

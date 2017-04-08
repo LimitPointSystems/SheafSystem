@@ -16,24 +16,24 @@
 //
 
 /// @file
-/// Implementation for class mutable_index_space_state
+/// Implementation for class gathered_insertion_index_space_state
 
-#include "mutable_index_space_state.h"
+#include "gathered_insertion_index_space_state.h"
 #include "assert_contract.h"
 #include "index_space_iterator.h"
-#include "mutable_index_space_handle.h"
+#include "gathered_insertion_index_space_handle.h"
 #include "scoped_index.h"
 
 // ===========================================================
-// MUTABLE_INDEX_SPACE_STATE FACET
+// GATHERED_INSERTION_INDEX_SPACE_STATE FACET
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
 
 // PROTECTED MEMBER FUNCTIONS
 
-sheaf::mutable_index_space_state::
-mutable_index_space_state()
+sheaf::gathered_insertion_index_space_state::
+gathered_insertion_index_space_state()
   : explicit_index_space_state()
 {
   // Preconditions:
@@ -50,8 +50,8 @@ mutable_index_space_state()
   return; 
 }
 
-sheaf::mutable_index_space_state::
-~mutable_index_space_state()
+sheaf::gathered_insertion_index_space_state::
+~gathered_insertion_index_space_state()
 {  
   // Preconditions:
     
@@ -70,80 +70,13 @@ sheaf::mutable_index_space_state::
 
 
 // ===========================================================
-// MUTABLE INDEX SPACE FACET
+// GATHERED_INSERTION INDEX SPACE FACET
 // ===========================================================
 
 // PUBLIC MEMBER FUNCTIONS
 
 void
-sheaf::mutable_index_space_state::
-insert(pod_type xid, const scoped_index& xhub_id)
-{
-  // Preconditions:
-
-  require(xhub_id.in_scope());
-  require(precondition_of(insert_entry(xid, xhub_id.hub_pod())));
-
-  // Body:
-
-  insert(xid, xhub_id.hub_pod());
-
-  // Postconditions:
-
-  ensure(postcondition_of(insert_entry(xid, xhub_id.hub_pod())));
-
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::mutable_index_space_state::
-insert(pod_type xid, pod_type xhub_id)
-{
-  // Preconditions:
-
-  require(is_valid(xid));
-  require(is_valid(xhub_id));
-  require(!contains(xid));
-  require(!contains_hub(xhub_id));
-  require(hub_id_space().contains(xhub_id));
-
-  // Body:
-
-  define_old_variable(size_type old_ct = _ct);
-  define_old_variable(pod_type old_begin = _begin);
-  define_old_variable(pod_type old_end = _end);
-
-  // Insert the entery in the map representation.
-
-  map_rep_insert_entry(xid, xhub_id);
-
-  // Update the count.
-
-  ++_ct;
-
-  // Update the extrema.
-
-  update_extrema(xid);
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(contains(xid, xhub_id));
-  ensure(ct() == old_ct + 1);
-  ensure(ct() > 1 ? begin() <= old_begin : true);
-  ensure(begin() <= xid);
-  ensure(ct() > 1 ? end() >= old_end : true);
-  ensure(end() > xid);
-
-  // Exit:
-
-  return;
-}
-
-void
-sheaf::mutable_index_space_state::
+sheaf::gathered_insertion_index_space_state::
 push_back(const scoped_index& xhub_id)
 {
   // Preconditions:
@@ -165,7 +98,7 @@ push_back(const scoped_index& xhub_id)
 }
 
 void
-sheaf::mutable_index_space_state::
+sheaf::gathered_insertion_index_space_state::
 push_back(pod_type xhub_id)
 {
   // Preconditions:
@@ -192,6 +125,8 @@ push_back(pod_type xhub_id)
 
   // Postconditions:
 
+  // $$SCRIBBLE: need to express effect of push_back on next_id()
+
   ensure(invariant());
   ensure(contains(old_next_id, xhub_id));
   ensure(ct() == old_ct + 1);
@@ -204,7 +139,7 @@ push_back(pod_type xhub_id)
 }
 
 void
-sheaf::mutable_index_space_state::
+sheaf::gathered_insertion_index_space_state::
 push(index_space_iterator& xitr, const scoped_index& xhub_id)
 {
   // Preconditions:
@@ -226,7 +161,7 @@ push(index_space_iterator& xitr, const scoped_index& xhub_id)
 }
 
 void
-sheaf::mutable_index_space_state::
+sheaf::gathered_insertion_index_space_state::
 push(index_space_iterator& xitr, pod_type xhub_id)
 {
   // Preconditions:
@@ -283,8 +218,8 @@ push(index_space_iterator& xitr, pod_type xhub_id)
   return;
 }
 
-sheaf::mutable_index_space_state::pod_type
-sheaf::mutable_index_space_state::
+sheaf::gathered_insertion_index_space_state::pod_type
+sheaf::gathered_insertion_index_space_state::
 next_id() const
 {
   // Preconditions:
@@ -295,6 +230,9 @@ next_id() const
 
   // Postconditions:
 
+  // $$SCRIBBLE: next_id is not redefined anywhere. The following postcondition is incorrect,
+  // it is not a basic query, it is derived from is_empty and end.
+
   ensure(is_basic_query);
 
   // Exit:
@@ -303,7 +241,7 @@ next_id() const
 }
 
 sheaf::size_type
-sheaf::mutable_index_space_state::
+sheaf::gathered_insertion_index_space_state::
 remove(const scoped_index& xid, bool xupdate_extrema)
 {
   // Preconditions:
@@ -325,7 +263,7 @@ remove(const scoped_index& xid, bool xupdate_extrema)
 }
 
 sheaf::size_type
-sheaf::mutable_index_space_state::
+sheaf::gathered_insertion_index_space_state::
 remove(pod_type xid, bool xupdate_extrema)
 {
   // Preconditions:
@@ -335,6 +273,7 @@ remove(pod_type xid, bool xupdate_extrema)
   define_old_variable(size_type old_ct = _ct);
   define_old_variable(pod_type old_begin = _begin);
   define_old_variable(pod_type old_end = _end);
+  define_old_variable(pod_type old_hub_pod = hub_pod(xid));
 
   // Remove the entry from the map representation.
 
@@ -350,13 +289,14 @@ remove(pod_type xid, bool xupdate_extrema)
     {
       // Update the extrema.
 
-      update_extrema();
+      update_extrema_after_remove();
     }
   }
   
   // Postconditions:
 
-  ensure(!contains(xid));
+  //  ensure(!contains(xid));
+  ensure(!contains(xid, old_hub_pod));
   ensure((result != 0) ? ct() == old_ct - 1 : ct() == old_ct);
   ensure((result == 0) || xupdate_extrema || begin() == old_begin);
   ensure((result == 0) || xupdate_extrema || end() == old_end);
@@ -371,7 +311,7 @@ remove(pod_type xid, bool xupdate_extrema)
 }
 
 sheaf::size_type
-sheaf::mutable_index_space_state::
+sheaf::gathered_insertion_index_space_state::
 remove_hub(pod_type xhub_id, bool xupdate_extrema)
 {
   // Preconditions:
@@ -382,6 +322,7 @@ remove_hub(pod_type xhub_id, bool xupdate_extrema)
   define_old_variable(size_type old_ct = _ct);
   define_old_variable(pod_type old_begin = _begin);
   define_old_variable(pod_type old_end = _end);
+  define_old_variable(pod_type old_pod = pod(xhub_id));
 
   // Remove the entry from the map representation.
 
@@ -397,7 +338,7 @@ remove_hub(pod_type xhub_id, bool xupdate_extrema)
     {
       // Update the extrema.
 
-      update_extrema();
+      update_extrema_after_remove();
     }
   }
   
@@ -418,7 +359,7 @@ remove_hub(pod_type xhub_id, bool xupdate_extrema)
 }
 
 void
-sheaf::mutable_index_space_state::
+sheaf::gathered_insertion_index_space_state::
 remove(index_space_iterator& xitr, bool xupdate_extrema)
 {
   // Preconditions:
@@ -445,7 +386,7 @@ remove(index_space_iterator& xitr, bool xupdate_extrema)
   {
     // Update the extrema.
 
-    update_extrema();
+    update_extrema_after_remove();
   }
 
   // Postconditions:
@@ -468,7 +409,7 @@ remove(index_space_iterator& xitr, bool xupdate_extrema)
 }
 
 void
-sheaf::mutable_index_space_state::
+sheaf::gathered_insertion_index_space_state::
 gather()
 {
   // Preconditions:
@@ -502,7 +443,7 @@ gather()
 }
 
 void
-sheaf::mutable_index_space_state::
+sheaf::gathered_insertion_index_space_state::
 update_extrema()
 {
   // Preconditions:
@@ -519,7 +460,49 @@ update_extrema()
 }
 
 void
-sheaf::mutable_index_space_state::
+sheaf::gathered_insertion_index_space_state::
+reserve(size_type xcapacity)
+{
+  // Preconditions:
+
+  // Body:
+
+  is_abstract();
+
+  // Postconditions:
+
+  ensure(invariant());
+  ensure(capacity() >= xcapacity);
+
+  // Exit:
+
+  return;
+}
+
+sheaf::size_type
+sheaf::gathered_insertion_index_space_state::
+capacity() const
+{
+  // Preconditions:
+
+  // Body:
+
+  size_type result = 0; // Just to silence compiler warnings.
+
+  is_abstract();
+
+  // Postconditions:
+
+  ensure(is_basic_query);
+
+  // Exit:
+
+  return result;
+}
+
+
+void
+sheaf::gathered_insertion_index_space_state::
 clear()
 {
   // Preconditions:
@@ -541,51 +524,31 @@ clear()
   return;
 }
 
-void
-sheaf::mutable_index_space_state::
-reserve(size_type xcapacity)
-{
-  // Preconditions:
-
-  // Body:
-
-  is_abstract();
-
-  // Postconditions:
-
-  ensure(invariant());
-  ensure(capacity() >= xcapacity);
-
-  // Exit:
-
-  return;
-}
-
-sheaf::size_type
-sheaf::mutable_index_space_state::
-capacity() const
-{
-  // Preconditions:
-
-  // Body:
-
-  size_type result = 0; // Just to silence compiler warnings.
-
-  is_abstract();
-
-  // Postconditions:
-
-  ensure(is_basic_query);
-
-  // Exit:
-
-  return result;
-}
 
 // PROTECTED MEMBER FUNCTIONS
 
 void
-sheaf::mutable_index_space_state::
+sheaf::gathered_insertion_index_space_state::
+update_extrema_after_remove()
+{
+  // Preconditions:
+
+  // Body:
+
+  // Default is update_extrema; 
+  // descendants may provide optimized implementations.
+
+  update_extrema();
+
+  // Postconditions:
+
+  // Exit
+
+  return;
+}
+
+void
+sheaf::gathered_insertion_index_space_state::
 update_extrema(pod_type xid)
 {
   // Preconditions:
@@ -642,31 +605,7 @@ update_extrema(pod_type xid)
 // PROTECTED MEMBER FUNCTIONS
 
 void
-sheaf::mutable_index_space_state::
-map_rep_insert_entry(pod_type xdomain_id, pod_type xrange_id)
-{
-  // Preconditions:
-
-  require(!contains_hub(xrange_id));
-  require(!contains(xdomain_id));
-
-  // Body:
-
-  is_abstract();
-  
-  // Postconditions:
-
-  // Not finished inserting entry; do not ensure invariant.
-
-  ensure(contains(xdomain_id, xrange_id));
-  
-  // Exit
-
-  return;
-}
-
-void
-sheaf::mutable_index_space_state::
+sheaf::gathered_insertion_index_space_state::
 map_rep_push_back(pod_type xrange_id)
 {
   // Preconditions:
@@ -691,7 +630,7 @@ map_rep_push_back(pod_type xrange_id)
 }
 
 void
-sheaf::mutable_index_space_state::
+sheaf::gathered_insertion_index_space_state::
 map_rep_push(index_space_iterator& xitr, pod_type xrange_id)
 {
   // Preconditions:
@@ -720,10 +659,14 @@ map_rep_push(index_space_iterator& xitr, pod_type xrange_id)
 }
 
 sheaf::size_type
-sheaf::mutable_index_space_state::
+sheaf::gathered_insertion_index_space_state::
 map_rep_remove_entry(pod_type xid, bool xis_range_id)
 {
   // Preconditions:
+
+  define_old_variable(pod_type old_pod = xis_range_id ? pod(xid) : xid);
+  define_old_variable(pod_type old_hub_pod = xis_range_id ? xid : hub_pod(xid));
+  define_old_variable(bool old_contains_entry = xis_range_id ? contains_hub(xid) : contains(xid));
 
   // Body:
 
@@ -735,7 +678,9 @@ map_rep_remove_entry(pod_type xid, bool xis_range_id)
 
   // Not finished removing entry; do not ensure invariant.
 
-  ensure(xis_range_id ? !contains_hub(xid) : !contains(xid));  
+  //  ensure(xis_range_id ? !contains_hub(xid) : !contains(xid));  
+  ensure(!old_contains_entry || !contains(old_pod, old_hub_pod));
+  ensure((result == 0) || (result == 1));
 
   // Exit
 
@@ -743,7 +688,7 @@ map_rep_remove_entry(pod_type xid, bool xis_range_id)
 }
 
 void
-sheaf::mutable_index_space_state::
+sheaf::gathered_insertion_index_space_state::
 map_rep_remove_entry(index_space_iterator& xitr)
 {
   // Preconditions:
@@ -771,7 +716,7 @@ map_rep_remove_entry(index_space_iterator& xitr)
 }
 
 void
-sheaf::mutable_index_space_state::
+sheaf::gathered_insertion_index_space_state::
 map_rep_clear()
 {
   // Preconditions:
@@ -793,7 +738,7 @@ map_rep_clear()
 }
 
 void
-sheaf::mutable_index_space_state::
+sheaf::gathered_insertion_index_space_state::
 map_rep_gather()
 {
   // Preconditions:
@@ -821,7 +766,7 @@ map_rep_gather()
 // PUBLIC MEMBER FUNCTIONS
 
 bool
-sheaf::mutable_index_space_state::
+sheaf::gathered_insertion_index_space_state::
 operator==(const explicit_index_space_state& xother) const
 {
   // Preconditions:
@@ -830,8 +775,8 @@ operator==(const explicit_index_space_state& xother) const
 
   // Body:
   
-  const mutable_index_space_state& lother =
-    dynamic_cast<const mutable_index_space_state&>(xother);
+  const gathered_insertion_index_space_state& lother =
+    dynamic_cast<const gathered_insertion_index_space_state&>(xother);
 
   bool result = explicit_index_space_state::operator==(xother);
 
@@ -844,8 +789,8 @@ operator==(const explicit_index_space_state& xother) const
 
 // PROTECTED MEMBER FUNCTIONS
 
-sheaf::mutable_index_space_state&
-sheaf::mutable_index_space_state::
+sheaf::gathered_insertion_index_space_state&
+sheaf::gathered_insertion_index_space_state::
 operator=(const explicit_index_space_state& xother)
 {
   // Preconditions:
@@ -876,7 +821,7 @@ operator=(const explicit_index_space_state& xother)
 // PUBLIC MEMBER FUNCTIONS
 
 void
-sheaf::mutable_index_space_state::
+sheaf::gathered_insertion_index_space_state::
 put_is_persistent(bool xis_persistent)
 {
   // Preconditions:
@@ -906,10 +851,10 @@ put_is_persistent(bool xis_persistent)
 // PUBLIC MEMBER FUNCTIONS
 
 const std::string&
-sheaf::mutable_index_space_state::
+sheaf::gathered_insertion_index_space_state::
 class_name() const
 {
-  static const std::string result("mutable_index_space_state");
+  static const std::string result("gathered_insertion_index_space_state");
   return result;
 }
 
@@ -925,7 +870,7 @@ class_name() const
 // PUBLIC MEMBER FUNCTIONS
 
 bool
-sheaf::mutable_index_space_state::
+sheaf::gathered_insertion_index_space_state::
 is_ancestor_of(const any *other) const
 {
   // Preconditions:
@@ -936,7 +881,7 @@ is_ancestor_of(const any *other) const
 
   // True if other conforms to this
 
-  bool result = dynamic_cast<const mutable_index_space_state*>(other) != 0;
+  bool result = dynamic_cast<const gathered_insertion_index_space_state*>(other) != 0;
 
   // Postconditions:
 
@@ -946,7 +891,7 @@ is_ancestor_of(const any *other) const
 }
 
 bool
-sheaf::mutable_index_space_state::
+sheaf::gathered_insertion_index_space_state::
 invariant() const
 {
   bool result = true;
@@ -985,7 +930,7 @@ invariant() const
  
 size_t
 sheaf::
-deep_size(const mutable_index_space_state& xn, bool xinclude_shallow)
+deep_size(const gathered_insertion_index_space_state& xn, bool xinclude_shallow)
 {
   // Preconditions:
 

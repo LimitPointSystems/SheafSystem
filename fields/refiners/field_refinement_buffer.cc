@@ -100,7 +100,7 @@ field_refinement_buffer(const field_vd& xsource,
 
   // Body:
 
-  /// @issue Assuming that the discretization id space is a mutable_index_space.
+  /// @issue Assuming that the discretization id space is a scattered_insertion_index_space.
   /// This is true because refinement is currently only implemented on
   /// unstructured blocks (or potentially zone node blocks).  Once zone
   /// node blocks support binary id spaces, this assumption is not true.
@@ -108,8 +108,8 @@ field_refinement_buffer(const field_vd& xsource,
 
   vertices_id_space       = &base_space->vertices().id_space();
   elements_id_space       = &base_space->elements().id_space();
-  coord_disc_seq_id_space = reinterpret_cast<mutable_index_space_handle*>(&xtarget.coordinates().schema().discretization_id_space());
-  prop_disc_seq_id_space  = reinterpret_cast<mutable_index_space_handle*>(&xtarget.property().schema().discretization_id_space());
+  coord_disc_seq_id_space = reinterpret_cast<scattered_insertion_index_space_handle*>(&xtarget.coordinates().schema().discretization_id_space());
+  prop_disc_seq_id_space  = reinterpret_cast<scattered_insertion_index_space_handle*>(&xtarget.property().schema().discretization_id_space());
 
   coord_value.set_ct(xtarget.dc());
   prop_value.set_ct(xtarget.dp());
@@ -163,7 +163,7 @@ field_refinement_buffer(field_vd& xtarget,
 
   // Body:
 
-  /// @issue Assuming that the discretization id map is a mutable_index_map.
+  /// @issue Assuming that the discretization id map is a scattered_insertion_index_map.
   /// This is true because refinement is currently only implemented on
   /// unstructured blocks (or potentially zone node blocks).  Once zone
   /// node blocks support binary id spaces, this assumption is not true.
@@ -171,8 +171,8 @@ field_refinement_buffer(field_vd& xtarget,
 
   vertices_id_space       = &base_space->vertices().id_space();
   elements_id_space       = &base_space->elements().id_space();
-  coord_disc_seq_id_space = reinterpret_cast<mutable_index_space_handle*>(&xtarget.coordinates().schema().discretization_id_space());
-  prop_disc_seq_id_space  = reinterpret_cast<mutable_index_space_handle*>(&xtarget.property().schema().discretization_id_space());
+  coord_disc_seq_id_space = reinterpret_cast<scattered_insertion_index_space_handle*>(&xtarget.coordinates().schema().discretization_id_space());
+  prop_disc_seq_id_space  = reinterpret_cast<scattered_insertion_index_space_handle*>(&xtarget.property().schema().discretization_id_space());
 
   coord_value.set_ct(xtarget.dc());
   prop_value.set_ct(xtarget.dp());
