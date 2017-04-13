@@ -85,7 +85,7 @@ endfunction(SheafSystem_add_realclean_target)
 #
 # System level bindings Documentation targets
 #
-function(SheafSystem_add_system_bindings_SHEAFSYSTEM_DOC_TARGETS)
+function(SheafSystem_add_system_bindings_sheafsystem_doc_targets)
 
    # Preconditions:
 
@@ -114,7 +114,7 @@ function(SheafSystem_add_system_bindings_SHEAFSYSTEM_DOC_TARGETS)
    add_custom_target(alldocs DEPENDS doc java-docs)
    set_target_properties(alldocs PROPERTIES FOLDER "Documentation Targets")
 
-endfunction(SheafSystem_add_system_bindings_SHEAFSYSTEM_DOC_TARGETS)
+endfunction(SheafSystem_add_system_bindings_sheafsystem_doc_targets)
 
 #
 # System level bindings targets
@@ -167,7 +167,7 @@ endfunction(SheafSystem_add_system_bindings_targets)
 # Add the documentation targets.
 # Default Doc state is "Dev"
 #
-function(SheafSystem_add_SHEAFSYSTEM_DOC_TARGETS)
+function(SheafSystem_add_sheafsystem_doc_targets)
 
    if(SHEAFSYSTEM_DOC_TARGETS)
       if(SHEAFSYSTEM_DOC_STATE MATCHES Dev OR SHEAFSYSTEM_DOC_STATE MATCHES dev OR SHEAFSYSTEM_DOC_STATE MATCHES DEV)
@@ -186,7 +186,7 @@ function(SheafSystem_add_SHEAFSYSTEM_DOC_TARGETS)
       set_target_properties(doc PROPERTIES FOLDER "Documentation Targets")    
    endif() 
 
-endfunction(SheafSystem_add_SHEAFSYSTEM_DOC_TARGETS)
+endfunction(SheafSystem_add_sheafsystem_doc_targets)
 
 
 # 
@@ -421,10 +421,10 @@ function(SheafSystem_add_system_targets)
       SheafSystem_add_realclean_target()
    endif()
 
-   SheafSystem_add_SHEAFSYSTEM_DOC_TARGETS()
+   SheafSystem_add_sheafsystem_doc_targets()
 
    if(SHEAFSYSTEM_BUILD_BINDINGS)
-      SheafSystem_add_system_bindings_SHEAFSYSTEM_DOC_TARGETS()
+      SheafSystem_add_system_bindings_sheafsystem_doc_targets()
       SheafSystem_add_system_bindings_targets()
    endif()
 
