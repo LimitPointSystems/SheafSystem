@@ -103,6 +103,12 @@ function(SheafSystem_add_tools_library_targets)
 
    string(REPLACE ";" "\;" _lps_escaped_paths "${TOOLS_IPATH}" )
    # message("_lps_escaped_paths=${_lps_escaped_paths}")
+
+   # Target to create copies of header files with path ${SHEAFSYSTEM_HEADER_SCOPE}/*.h,
+   # so uniquely scoped paths in include directives with work.
+
+   add_custom_target(sheaves_scoped_headers
+      COMMAND ${CMAKE_COMMAND} -E copy_if_different ${TOOLS_INCS} ${SHEAFSYSTEM_HEADER_SCOPE})
    
    if(SHEAFSYSTEM_WINDOWS)
 
@@ -116,6 +122,7 @@ function(SheafSystem_add_tools_library_targets)
 
       add_library(${TOOLS_DYNAMIC_LIB} SHARED ${TOOLS_SRCS})
       add_dependencies(${TOOLS_DYNAMIC_LIB} ${FIELDS_IMPORT_LIB})
+      add_dependencies(${TOOLS_DYNAMIC_LIB} tools_scoped_headers)
       target_include_directories(${TOOLS_DYNAMIC_LIB} PUBLIC
          $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )           
       target_link_libraries(${TOOLS_DYNAMIC_LIB} ${FIELDS_IMPORT_LIB} 
@@ -135,6 +142,7 @@ function(SheafSystem_add_tools_library_targets)
 
       add_library(${TOOLS_STATIC_LIB} STATIC ${TOOLS_SRCS})
       add_dependencies(${TOOLS_STATIC_LIB} ${FIELDS_STATIC_LIB})
+      add_dependencies(${TOOLS_STATIC_LIB} tools_scoped_headers)
       target_include_directories(${TOOLS_STATIC_LIB} PUBLIC
          $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${TOOLS_STATIC_LIB} ${FIELDS_STATIC_LIB} 
@@ -145,6 +153,7 @@ function(SheafSystem_add_tools_library_targets)
 
       add_library(${TOOLS_SHARED_LIB} SHARED ${TOOLS_SRCS})
       add_dependencies(${TOOLS_SHARED_LIB} ${FIELDS_SHARED_LIB})
+      add_dependencies(${TOOLS_SHARED_LIB} tools_scoped_headers)
       target_include_directories(${TOOLS_SHARED_LIB} PUBLIC
          $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${TOOLS_SHARED_LIB} ${FIELDS_SHARED_LIB} 

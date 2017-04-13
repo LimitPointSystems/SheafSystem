@@ -51,6 +51,12 @@ function(SheafSystem_add_fiber_bundles_library_targets)
    string(REPLACE ";" "\;" _lps_escaped_paths "${FIBER_BUNDLES_IPATH}" )
    # message("_lps_escaped_paths=${_lps_escaped_paths}")
 
+   # Target to create copies of header files with path ${SHEAFSYSTEM_HEADER_SCOPE}/*.h,
+   # so uniquely scoped paths in include directives with work.
+
+   add_custom_target(fiber_bundles_scoped_headers
+      COMMAND ${CMAKE_COMMAND} -E copy_if_different ${FIBER_BUNDLES_INCS} ${SHEAFSYSTEM_HEADER_DIR})
+
    if(SHEAFSYSTEM_WINDOWS)
 
       # Windows.
@@ -63,6 +69,7 @@ function(SheafSystem_add_fiber_bundles_library_targets)
 
       add_library(${FIBER_BUNDLES_DYNAMIC_LIB} SHARED ${FIBER_BUNDLES_SRCS})
       add_dependencies(${FIBER_BUNDLES_DYNAMIC_LIB} ${SHEAVES_IMPORT_LIB})
+      add_dependencies(${FIBER_BUNDLES_DYNAMIC_LIB} fiber_bundles_scoped_headers)
       target_include_directories(${FIBER_BUNDLES_DYNAMIC_LIB} PUBLIC
          $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${FIBER_BUNDLES_DYNAMIC_LIB} ${SHEAVES_IMPORT_LIB})
@@ -81,6 +88,7 @@ function(SheafSystem_add_fiber_bundles_library_targets)
 
       add_library(${FIBER_BUNDLES_STATIC_LIB} STATIC ${FIBER_BUNDLES_SRCS})
       add_dependencies(${FIBER_BUNDLES_STATIC_LIB} ${SHEAVES_STATIC_LIB})
+      add_dependencies(${FIBER_BUNDLES_STATIC_LIB} fiber_bundles_scoped_headers)
       target_include_directories(${FIBER_BUNDLES_STATIC_LIB} PUBLIC
          $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${FIBER_BUNDLES_STATIC_LIB} ${SHEAVES_STATIC_LIB})
@@ -90,6 +98,7 @@ function(SheafSystem_add_fiber_bundles_library_targets)
 
       add_library(${FIBER_BUNDLES_SHARED_LIB} SHARED ${FIBER_BUNDLES_SRCS})
       add_dependencies(${FIBER_BUNDLES_SHARED_LIB} ${SHEAVES_SHARED_LIB})
+      add_dependencies(${FIBER_BUNDLES_SHARED_LIB} fiber_bundles_scoped_headers)
       target_include_directories(${FIBER_BUNDLES_SHARED_LIB} PUBLIC
          $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${FIBER_BUNDLES_SHARED_LIB} ${SHEAVES_SHARED_LIB})

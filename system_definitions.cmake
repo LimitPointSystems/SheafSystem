@@ -63,6 +63,17 @@ function(SheafSystem_set_system_variable_defaults)
       CACHE STRING "As used in install(EXPORT <export-name> ...)")
    mark_as_advanced(SHEAFSYSTEM_EXPORT_NAME)  
 
+   #
+   # Define the unique header file scope qualifier and directory path.
+   #
+   set(SHEAFSYSTEM_HEADER_SCOPE SheafSystem
+      CACHE STRING "Used to give header files unique scope in include directives.")
+   mark_as_advanced(SHEAFSYSTEM_HEADER_SCOPE)  
+
+   set(SHEAFSYSTEM_HEADER_DIR ${CMAKE_BINARY_DIR}/include/${SHEAFSYSTEM_HEADER_SCOPE}
+      CACHE PATH "Path to scoped header file directory.")
+   mark_as_advanced(SHEAFSYSTEM_HEADER_DIR)  
+
    #   
    #  Type of system documentation to build: Dev or User
    #  User docs do not contain source code listing. Otherwise,
@@ -392,9 +403,9 @@ function(SheafSystem_create_output_dirs)
 
    # Body:
 
-   # Create directory for STD header files.
+   # Create directory for scoped header files.
 
-   file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/include)
+   file(MAKE_DIRECTORY ${SHEAFSYSTEM_HEADER_DIR})
 
    # Create directory for documentation files.
 

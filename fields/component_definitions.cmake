@@ -52,6 +52,12 @@ function(SheafSystem_add_fields_library_targets)
    string(REPLACE ";" "\;" _lps_escaped_paths "${FIELDS_IPATH}" )
    # message("_lps_escaped_paths=${_lps_escaped_paths}")
 
+   # Target to create copies of header files with path ${SHEAFSYSTEM_HEADER_SCOPE}/*.h,
+   # so uniquely scoped paths in include directives with work.
+
+   add_custom_target(fields_scoped_headers
+      COMMAND ${CMAKE_COMMAND} -E copy_if_different ${FIELDS_INCS} ${SHEAFSYSTEM_HEADER_DIR})
+
    if(SHEAFSYSTEM_WINDOWS)
 
       # Windwos.
@@ -62,6 +68,7 @@ function(SheafSystem_add_fields_library_targets)
       
       add_library(${FIELDS_DYNAMIC_LIB} SHARED ${FIELDS_SRCS})
       add_dependencies(${FIELDS_DYNAMIC_LIB} ${GEOMETRY_IMPORT_LIB})
+      add_dependencies(${FIELDS_DYNAMIC_LIB} fields_scoped_headers)
       target_include_directories(${FIELDS_DYNAMIC_LIB} PUBLIC
          $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${FIELDS_DYNAMIC_LIB} ${GEOMETRY_IMPORT_LIB} )        
@@ -86,6 +93,7 @@ function(SheafSystem_add_fields_library_targets)
 
       add_library(${FIELDS_STATIC_LIB} STATIC ${FIELDS_SRCS})
       add_dependencies(${FIELDS_STATIC_LIB} ${GEOMETRY_STATIC_LIB})
+      add_dependencies(${FIELDS_STATIC_LIB} fields_scoped_headers)
       target_include_directories(${FIELDS_STATIC_LIB} PUBLIC
          $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${FIELDS_STATIC_LIB} ${GEOMETRY_STATIC_LIB}) 
@@ -95,6 +103,7 @@ function(SheafSystem_add_fields_library_targets)
 
       add_library(${FIELDS_SHARED_LIB} SHARED ${FIELDS_SRCS})
       add_dependencies(${FIELDS_SHARED_LIB} ${GEOMETRY_SHARED_LIB})
+      add_dependencies(${FIELDS_SHARED_LIB} fields_scoped_headers)
       target_include_directories(${FIELDS_SHARED_LIB} PUBLIC
          $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${FIELDS_SHARED_LIB} ${GEOMETRY_SHARED_LIB}) 

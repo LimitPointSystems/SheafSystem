@@ -180,6 +180,12 @@ function(SheafSystem_add_sheaves_library_targets)
    string(REPLACE ";" "\;" _lps_escaped_paths "${SHEAVES_IPATHS}" )
    #message("static _lps_escaped_paths= ${_lps_escaped_paths}")
 
+   # Target to create copies of header files with path ${SHEAFSYSTEM_HEADER_SCOPE}/*.h,
+   # so uniquely scoped paths in include directives with work.
+
+   add_custom_target(sheaves_scoped_headers
+      COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SHEAVES_INCS} ${SHEAFSYSTEM_HEADER_DIR})
+
    if(SHEAFSYSTEM_WINDOWS)
 
       # Tell the linker where to look for this project's libraries.
@@ -189,6 +195,7 @@ function(SheafSystem_add_sheaves_library_targets)
       # Create the DLL.
 
       add_library(${SHEAVES_DYNAMIC_LIB} SHARED ${SHEAVES_SRCS})
+      add_dependencies(${SHEAVES_DYNAMIC_LIB} sheaves_scoped_headers)
       target_include_directories(${SHEAVES_DYNAMIC_LIB} PUBLIC
          $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )
       target_link_libraries(${SHEAVES_DYNAMIC_LIB} PRIVATE hdf5-static)
@@ -215,9 +222,10 @@ function(SheafSystem_add_sheaves_library_targets)
       # In any case, the link and include interface should propagate from the hdf5-static target.
 
       add_library(${SHEAVES_STATIC_LIB} STATIC ${SHEAVES_SRCS})
+      add_dependencies(${SHEAVES_STATIC_LIB} sheaves_scoped_headers)
       target_include_directories(${SHEAVES_STATIC_LIB} PUBLIC
          $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )
-      target_link_libraries(${SHEAVES_STATIC_LIB} PUBLIC hdf5-static)   
+      target_link_libraries(${SHEAVES_STATIC_LIB} PUBLIC hdf5-static)
       set_target_properties(${SHEAVES_STATIC_LIB} PROPERTIES OUTPUT_NAME sheaves)
       set_target_properties(${SHEAVES_STATIC_LIB} PROPERTIES LINKER_LANGUAGE CXX)
 
@@ -233,6 +241,8 @@ function(SheafSystem_add_sheaves_library_targets)
       # so the sheaf shard library ends up requiring libm.so anyway, even if linked statically here.
 
       add_library(${SHEAVES_SHARED_LIB} SHARED ${SHEAVES_SRCS})
+
+      add_dependencies(${SHEAVES_SHARED_LIB} sheaves_scoped_headers)
 
       # Dependence on HDF5 library is private so include directories don't
       # propagate in link interface. But clients will need HDF5 include files,

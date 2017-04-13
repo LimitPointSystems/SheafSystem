@@ -51,6 +51,12 @@ function(SheafSystem_add_geometry_library_targets)
    string(REPLACE ";" "\;" _lps_escaped_paths "${GEOMETRY_IPATH}" )
    # message("_lps_escaped_paths=${_lps_escaped_paths}")
 
+   # Target to create copies of header files with path ${SHEAFSYSTEM_HEADER_SCOPE}/*.h,
+   # so uniquely scoped paths in include directives with work.
+
+   add_custom_target(geometry_scoped_headers
+      COMMAND ${CMAKE_COMMAND} -E copy_if_different ${GEOMETRY_INCS} ${SHEAFSYSTEM_HEADER_DIR})
+
    if(SHEAFSYSTEM_WINDOWS)
 
       # Windows.
@@ -63,6 +69,7 @@ function(SheafSystem_add_geometry_library_targets)
 
       add_library(${GEOMETRY_DYNAMIC_LIB} SHARED ${GEOMETRY_SRCS})
       add_dependencies(${GEOMETRY_DYNAMIC_LIB} ${FIBER_BUNDLES_IMPORT_LIB})
+      add_dependencies(${GEOMETRY_DYNAMIC_LIB} geometry_scoped_headers)
       target_include_directories(${GEOMETRY_DYNAMIC_LIB} PUBLIC
          $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${GEOMETRY_DYNAMIC_LIB} ${FIBER_BUNDLES_IMPORT_LIB})        
@@ -81,6 +88,7 @@ function(SheafSystem_add_geometry_library_targets)
 
       add_library(${GEOMETRY_STATIC_LIB} STATIC ${GEOMETRY_SRCS})
       add_dependencies(${GEOMETRY_STATIC_LIB} ${FIBER_BUNDLES_STATIC_LIB})
+      add_dependencies(${GEOMETRY_STATIC_LIB} geometry_scoped_headers)
       target_include_directories(${GEOMETRY_STATIC_LIB} PUBLIC
          $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${GEOMETRY_STATIC_LIB} ${FIBER_BUNDLES_STATIC_LIB}) 
@@ -90,6 +98,7 @@ function(SheafSystem_add_geometry_library_targets)
 
       add_library(${GEOMETRY_SHARED_LIB} SHARED ${GEOMETRY_SRCS})
       add_dependencies(${GEOMETRY_SHARED_LIB} ${FIBER_BUNDLES_SHARED_LIB})
+      add_dependencies(${GEOMETRY_SHARED_LIB} geometry_scoped_headers)
       target_include_directories(${GEOMETRY_SHARED_LIB} PUBLIC
          $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${GEOMETRY_SHARED_LIB} ${FIBER_BUNDLES_SHARED_LIB}) 
