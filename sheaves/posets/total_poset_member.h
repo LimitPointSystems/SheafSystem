@@ -22,19 +22,19 @@
 #define TOTAL_POSET_MEMBER_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ABSTRACT_POSET_MEMBER_H
-#include "abstract_poset_member.h"
+#include "SheafSystem/abstract_poset_member.h"
 #endif
 
 #ifndef POSET_PATH_H
-#include "poset_path.h"
+#include "SheafSystem/poset_path.h"
 #endif
 
 #ifndef STD_STRING_H
-#include "std_string.h"
+#include "SheafSystem/std_string.h"
 #endif
 
 namespace sheaf 

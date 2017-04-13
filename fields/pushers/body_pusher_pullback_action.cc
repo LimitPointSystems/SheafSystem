@@ -18,12 +18,12 @@
 /// @file
 /// Implementation for class body_pusher_pullback_action
 
-#include "body_pusher_pullback_action.h"
+#include "SheafSystem/body_pusher_pullback_action.h"
 
-#include "assert_contract.h"
-#include "block.h"
-#include "error_message.h"
-#include "sec_ed_invertible.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/block.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/sec_ed_invertible.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.

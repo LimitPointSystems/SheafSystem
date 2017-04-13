@@ -22,35 +22,35 @@
 #define NAMESPACE_POSET_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef POSET_STATE_HANDLE_H
-#include "poset_state_handle.h"
+#include "SheafSystem/poset_state_handle.h"
 #endif
 
 #ifndef NAMESPACE_POSET_DOF_MAP_H
-#include "namespace_poset_dof_map.h"
+#include "SheafSystem/namespace_poset_dof_map.h"
 #endif
 
 #ifndef NAMESPACE_POSET_SCHEMA_H
-#include "namespace_poset_schema.h"
+#include "SheafSystem/namespace_poset_schema.h"
 #endif
 
 #ifndef SCATTERED_INSERTION_INDEX_SPACE_HANDLE_H
-#include "scattered_insertion_index_space_handle.h"
+#include "SheafSystem/scattered_insertion_index_space_handle.h"
 #endif
 
 #ifndef PRIMITIVES_POSET_H
-#include "primitives_poset.h"
+#include "SheafSystem/primitives_poset.h"
 #endif
 
 #ifndef PRIMITIVES_POSET_SCHEMA_H
-#include "primitives_poset_schema.h"
+#include "SheafSystem/primitives_poset_schema.h"
 #endif
 
 #ifndef STD_IOSTREAM_H
-#include "std_iostream.h"
+#include "SheafSystem/std_iostream.h"
 #endif
 
 namespace sheaf

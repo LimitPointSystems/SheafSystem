@@ -18,14 +18,14 @@
 /// @file
 /// Implementation for class section_space_schema_jims_index_space_state
 
-#include "section_space_schema_jims_index_space_state.h"
-#include "assert_contract.h"
-#include "ij_product_structure.h"
-#include "index_space_family.h"
-#include "section_space_schema_jims_index_space_handle.h"
-#include "section_space_schema_jims_index_space_iterator.h"
-#include "deep_size.h"
-#include "hub_index_space_handle.h"
+#include "SheafSystem/section_space_schema_jims_index_space_state.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/ij_product_structure.h"
+#include "SheafSystem/index_space_family.h"
+#include "SheafSystem/section_space_schema_jims_index_space_handle.h"
+#include "SheafSystem/section_space_schema_jims_index_space_iterator.h"
+#include "SheafSystem/deep_size.h"
+#include "SheafSystem/hub_index_space_handle.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

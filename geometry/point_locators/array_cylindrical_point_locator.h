@@ -22,11 +22,11 @@
 #define ARRAY_CYLINDRICAL_POINT_LOCATOR_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef CYLINDRICAL_POINT_LOCATOR_H
-#include "cylindrical_point_locator.h"
+#include "SheafSystem/cylindrical_point_locator.h"
 #endif
 
 namespace geometry

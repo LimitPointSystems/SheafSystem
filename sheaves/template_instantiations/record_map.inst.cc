@@ -18,7 +18,7 @@
 /// @file
 /// Instantiations for class template record_map.
 
-#include "record_map.impl.h"
+#include "SheafSystem/record_map.impl.h"
 
 using namespace std;
 using namespace sheaf; // workaround for MS C++ bug.

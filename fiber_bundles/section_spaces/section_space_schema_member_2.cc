@@ -18,19 +18,19 @@
 /// @file
 /// Implementation for class section_space_schema_member.
 
-#include "section_space_schema_member.impl.h"
+#include "SheafSystem/section_space_schema_member.impl.h"
 
-#include "assert_contract.h"
-#include "array_index_space_state.h"
-#include "cover_set_iterator.h"
-#include "discretization_iterator.h"
-#include "index_space_iterator.h"
-#include "scattered_insertion_index_space_handle.h"
-#include "namespace_poset.h"
-#include "sec_rep_descriptor.h"
-#include "section_space_schema_poset.h"
-#include "sheaves_namespace.h"
-#include "std_set.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/array_index_space_state.h"
+#include "SheafSystem/cover_set_iterator.h"
+#include "SheafSystem/discretization_iterator.h"
+#include "SheafSystem/index_space_iterator.h"
+#include "SheafSystem/scattered_insertion_index_space_handle.h"
+#include "SheafSystem/namespace_poset.h"
+#include "SheafSystem/sec_rep_descriptor.h"
+#include "SheafSystem/section_space_schema_poset.h"
+#include "SheafSystem/sheaves_namespace.h"
+#include "SheafSystem/std_set.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

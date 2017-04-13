@@ -18,10 +18,10 @@
 /// @file
 /// Implementation for class constant_push_action
 
-#include "constant_push_action.h"
-#include "assert_contract.h"
-#include "error_message.h"
-#include "sec_vd.h"
+#include "SheafSystem/constant_push_action.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/sec_vd.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.

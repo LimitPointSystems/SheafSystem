@@ -22,43 +22,43 @@
 #define ANTISYMMETRIC_MATRIX_3X3_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 #ifndef ERROR_MESSAGE_H
-#include "error_message.h"
+#include "SheafSystem/error_message.h"
 #endif
 
 #ifndef ANTISYMMETRIC_MATRIX_3X3_H
-#include "antisymmetric_matrix_3x3.h"
+#include "SheafSystem/antisymmetric_matrix_3x3.h"
 #endif
 
 #ifndef GENERAL_MATRIX_1x3_H
-#include "general_matrix_1x3.h"
+#include "SheafSystem/general_matrix_1x3.h"
 #endif
 
 #ifndef GENERAL_MATRIX_3X2_H
-#include "general_matrix_3x2.h"
+#include "SheafSystem/general_matrix_3x2.h"
 #endif
 
 #ifndef GENERAL_MATRIX_3X1_H
-#include "general_matrix_3x1.h"
+#include "SheafSystem/general_matrix_3x1.h"
 #endif
 
 #ifndef GENERAL_MATRIX_3X3_H
-#include "general_matrix_3x3.h"
+#include "SheafSystem/general_matrix_3x3.h"
 #endif
 
 #ifndef STD_SSTREAM_H
-#include "std_sstream.h"
+#include "SheafSystem/std_sstream.h"
 #endif
 
 #ifndef STD_CMATH_H
-#include "std_cmath.h"
+#include "SheafSystem/std_cmath.h"
 #endif
 
 namespace fiber_bundle

@@ -17,15 +17,15 @@
 
 /// @example examples/query_mesh.cc
 
-#include "adjacency_extractor.h"
-#include "connectivity_extractor.h"
-#include "id_map.h"
-#include "namespace_poset.h"
-#include "neighborhood_extractor.h"
-#include "postorder_member_iterator.h"
-#include "std_iostream.h"
-#include "stencil_extractor.h"
-#include "storage_agent.h"
+#include "SheafSystem/adjacency_extractor.h"
+#include "SheafSystem/connectivity_extractor.h"
+#include "SheafSystem/id_map.h"
+#include "SheafSystem/namespace_poset.h"
+#include "SheafSystem/neighborhood_extractor.h"
+#include "SheafSystem/postorder_member_iterator.h"
+#include "SheafSystem/std_iostream.h"
+#include "SheafSystem/stencil_extractor.h"
+#include "SheafSystem/storage_agent.h"
 
 using namespace fiber_bundle;
 

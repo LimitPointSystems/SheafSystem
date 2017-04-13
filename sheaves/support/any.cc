@@ -17,8 +17,8 @@
 
 // Implementation for class any
 
-#include "any.h"
-#include "assert_contract.h"
+#include "SheafSystem/any.h"
+#include "SheafSystem/assert_contract.h"
 
 
 // PUBLIC MEMBER FUNCTIONS

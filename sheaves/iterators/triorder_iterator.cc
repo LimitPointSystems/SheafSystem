@@ -17,8 +17,8 @@
 
 // Implementation for class triorder_iterator
 
-#include "triorder_iterator.h"
-#include "assert_contract.h"
+#include "SheafSystem/triorder_iterator.h"
+#include "SheafSystem/assert_contract.h"
 
 sheaf::triorder_iterator::
 triorder_iterator()

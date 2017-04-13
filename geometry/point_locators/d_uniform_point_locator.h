@@ -22,11 +22,11 @@
 #define D_UNIFORM_POINT_LOCATOR_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef POINT_LOCATOR_H
-#include "point_locator.h"
+#include "SheafSystem/point_locator.h"
 #endif
 
 //#undef DIAGNOSTIC_OUTPUT

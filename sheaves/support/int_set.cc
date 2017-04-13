@@ -17,12 +17,12 @@
 
 // Implementation for class int_set
 
-#include "int_set.h"
-#include "assert_contract.h"
-#include "subposet.h"
-#include "index_iterator.h"
-#include "std_iostream.h"
-#include "std_algorithm.h"
+#include "SheafSystem/int_set.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/subposet.h"
+#include "SheafSystem/index_iterator.h"
+#include "SheafSystem/std_iostream.h"
+#include "SheafSystem/std_algorithm.h"
 
 using namespace std;
 

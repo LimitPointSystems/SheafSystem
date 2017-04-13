@@ -22,11 +22,11 @@
 #define T2_E2_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef T2_E2_H
-#include "t2_e2.h"
+#include "SheafSystem/t2_e2.h"
 #endif
 
 namespace fiber_bundle

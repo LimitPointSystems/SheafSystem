@@ -18,12 +18,12 @@
 /// @file
 /// Explicit instantiations for class d_bounding_box.
 
-#include "d_bounding_box.impl.h"
+#include "SheafSystem/d_bounding_box.impl.h"
 
-//#include "block.impl.h"
-#include "geometry.h"
-#include "std_iostream.h"
-#include "singly_linked_list.h"
+//#include "SheafSystem/block.impl.h"
+#include "SheafSystem/geometry.h"
+#include "SheafSystem/std_iostream.h"
+#include "SheafSystem/singly_linked_list.h"
 
 using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.

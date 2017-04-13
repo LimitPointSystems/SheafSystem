@@ -18,21 +18,21 @@
 /// @file
 /// Implementation for class homogeneous_block.
 
-#include "homogeneous_block.h"
+#include "SheafSystem/homogeneous_block.h"
 
-#include "assert_contract.h"
-#include "array_index_space_state.h"
-#include "arg_list.h"
-//#include "base_space_member_prototype.h"
-#include "homogeneous_block_crg_interval.h"
-#include "index_space_handle.h"
-#include "index_space_iterator.h"
-#include "fiber_bundles_namespace.h"
-#include "poset_path.h"
-#include "preorder_iterator.h"
-#include "section_space_schema_member.h"
-#include "tern.h"
-#include "wsv_block.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/array_index_space_state.h"
+#include "SheafSystem/arg_list.h"
+//#include "SheafSystem/base_space_member_prototype.h"
+#include "SheafSystem/homogeneous_block_crg_interval.h"
+#include "SheafSystem/index_space_handle.h"
+#include "SheafSystem/index_space_iterator.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/poset_path.h"
+#include "SheafSystem/preorder_iterator.h"
+#include "SheafSystem/section_space_schema_member.h"
+#include "SheafSystem/tern.h"
+#include "SheafSystem/wsv_block.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 

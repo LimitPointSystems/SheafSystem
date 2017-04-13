@@ -23,11 +23,11 @@
 #define AT1_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef AT1_H
-#include "at1.h"
+#include "SheafSystem/at1.h"
 #endif
 
 #endif // ifndef AT1_IMPL_H

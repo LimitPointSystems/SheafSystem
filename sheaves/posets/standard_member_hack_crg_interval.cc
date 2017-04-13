@@ -18,13 +18,13 @@
 /// @file
 /// Implementation for class standard_member_hack_crg_interval.
 
-#include "standard_member_hack_crg_interval.h"
+#include "SheafSystem/standard_member_hack_crg_interval.h"
 
-#include "assert_contract.h"
-#include "explicit_index_space_interval.h"
-#include "factory.h"
-#include "index_space_family.h"
-#include "index_space_iterator.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/explicit_index_space_interval.h"
+#include "SheafSystem/factory.h"
+#include "SheafSystem/index_space_family.h"
+#include "SheafSystem/index_space_iterator.h"
 
 using namespace std;
 

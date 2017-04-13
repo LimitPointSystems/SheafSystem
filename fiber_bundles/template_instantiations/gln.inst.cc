@@ -17,7 +17,7 @@
 
 // Explicit_instantiations for class gln.
 
-#include "gln.impl.h"
+#include "SheafSystem/gln.impl.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

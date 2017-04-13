@@ -21,19 +21,19 @@
 #define POSET_BOUNDS_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ANY_H
-#include "any.h"
+#include "SheafSystem/any.h"
 #endif
 
 #ifndef POSET_BOUNDS_DESCRIPTOR_H
-#include "poset_bounds_descriptor.h"
+#include "SheafSystem/poset_bounds_descriptor.h"
 #endif
 
 #ifndef ZN_TO_BOOL_H
-#include "zn_to_bool.h"
+#include "SheafSystem/zn_to_bool.h"
 #endif
 
 namespace sheaf

@@ -17,15 +17,15 @@
 
 // Implementation for class at0_space.
 
-#include "at0_space.h"
+#include "SheafSystem/at0_space.h"
 
-#include "abstract_poset_member.impl.h"
-#include "assert_contract.h"
-#include "at0.h"
-#include "fiber_bundles_namespace.h"
-#include "namespace_poset.impl.h"
-#include "namespace_poset_member.h"
-#include "poset_handle_factory.h"
+#include "SheafSystem/abstract_poset_member.impl.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/at0.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/namespace_poset.impl.h"
+#include "SheafSystem/namespace_poset_member.h"
+#include "SheafSystem/poset_handle_factory.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

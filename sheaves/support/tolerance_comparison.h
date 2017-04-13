@@ -22,15 +22,15 @@
 #define TOLERANCE_COMPARISON_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef STD_LIMITS_H
-#include "std_limits.h"
+#include "SheafSystem/std_limits.h"
 #endif
  
 #ifndef STD_MATH_H
-#include "std_cmath.h"
+#include "SheafSystem/std_cmath.h"
 #endif
  
 namespace sheaf

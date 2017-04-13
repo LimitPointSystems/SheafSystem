@@ -17,13 +17,13 @@
 
 // Implementation for class member_member_poset_bounds
 
-#include "member_member_poset_bounds.h"
+#include "SheafSystem/member_member_poset_bounds.h"
 
-#include "index_iterator.h"
-#include "poset_bounds_descriptor.h"
-#include "poset_state_handle.h"
-#include "assert_contract.h"
-#include "zn_to_bool.h"
+#include "SheafSystem/index_iterator.h"
+#include "SheafSystem/poset_bounds_descriptor.h"
+#include "SheafSystem/poset_state_handle.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/zn_to_bool.h"
 
 // PUBLIC MEMBER FUNCTIONS
 

@@ -18,17 +18,17 @@
 /// @file
 /// Implementation for class sec_tuple.
 
-#include "sec_tuple.h"
+#include "SheafSystem/sec_tuple.h"
 
-#include "assert_contract.h"
-#include "binary_section_space_schema_member.impl.h"
-#include "binary_section_space_schema_poset.h"
-#include "fiber_bundles_namespace.h"
-#include "section_space_schema_member.impl.h"
-#include "section_space_schema_poset.h"
-#include "sec_tuple_space.impl.h"
-#include "tuple.h"
-#include "tuple_space.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/binary_section_space_schema_member.impl.h"
+#include "SheafSystem/binary_section_space_schema_poset.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/section_space_schema_member.impl.h"
+#include "SheafSystem/section_space_schema_poset.h"
+#include "SheafSystem/sec_tuple_space.impl.h"
+#include "SheafSystem/tuple.h"
+#include "SheafSystem/tuple_space.h"
 
 
 

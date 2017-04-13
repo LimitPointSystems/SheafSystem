@@ -18,11 +18,11 @@
 // Istantiations for class filtered_depth_first_itr<T>.
 
  
-#include "filtered_depth_first_itr.impl.h"
+#include "SheafSystem/filtered_depth_first_itr.impl.h"
 
-#include "zn_to_bool.h"
-#include "std_set.h"
-#include "std_unordered_set.h"
+#include "SheafSystem/zn_to_bool.h"
+#include "SheafSystem/std_set.h"
+#include "SheafSystem/std_unordered_set.h"
 
 using namespace std;
 using namespace unordered;

@@ -17,8 +17,8 @@
 
 // Implementation for class biorder_iterator
 
-#include "biorder_iterator.h"
-#include "assert_contract.h"
+#include "SheafSystem/biorder_iterator.h"
+#include "SheafSystem/assert_contract.h"
 
 sheaf::biorder_iterator::
 biorder_iterator()

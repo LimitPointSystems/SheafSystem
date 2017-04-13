@@ -18,17 +18,17 @@
 /// @file
 /// Implementation for class structured_block.
 
-#include "assert_contract.h"
-#include "block.impl.h"
-#include "chart_point_3d.h"
-#include "fiber_bundles_namespace.h"
-#include "poset_path.h"
-#include "preorder_iterator.h"
-#include "quad_connectivity.h"
-#include "schema_descriptor.h"
-#include "schema_poset_member.h"
-#include "structured_block.h"
-#include "wsv_block.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/block.impl.h"
+#include "SheafSystem/chart_point_3d.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/poset_path.h"
+#include "SheafSystem/preorder_iterator.h"
+#include "SheafSystem/quad_connectivity.h"
+#include "SheafSystem/schema_descriptor.h"
+#include "SheafSystem/schema_poset_member.h"
+#include "SheafSystem/structured_block.h"
+#include "SheafSystem/wsv_block.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

@@ -18,13 +18,13 @@
 /// @file
 /// Implementation for class zone_centered_error_bound_refinement_policy
 
-#include "zone_centered_error_bound_refinement_policy.h"
+#include "SheafSystem/zone_centered_error_bound_refinement_policy.h"
 
-#include "assert_contract.h"
-#include "factory.h"
-#include "field_refinement_buffer.h"
-#include "std_cmath.h"
-#include "field_vd.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/factory.h"
+#include "SheafSystem/field_refinement_buffer.h"
+#include "SheafSystem/std_cmath.h"
+#include "SheafSystem/field_vd.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.

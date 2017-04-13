@@ -22,11 +22,11 @@
 #define T4_E3_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef T4_E3_H
-#include "t4_e3.h"
+#include "SheafSystem/t4_e3.h"
 #endif
 
 namespace fiber_bundle

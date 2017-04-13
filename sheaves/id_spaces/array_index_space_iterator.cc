@@ -18,12 +18,12 @@
 /// @file
 /// Implementation for class array_index_space_iterator
 
-#include "array_index_space_iterator.h"
+#include "SheafSystem/array_index_space_iterator.h"
 
-#include "assert_contract.h"
-#include "explicit_index_space_handle.h"
-#include "index_space_family.h"
-#include "array_index_space_state.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/explicit_index_space_handle.h"
+#include "SheafSystem/index_space_family.h"
+#include "SheafSystem/array_index_space_state.h"
 
 // ===========================================================
 // ARRAY_INDEX_SPACE_ITERATOR FACET

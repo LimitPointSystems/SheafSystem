@@ -17,12 +17,12 @@
 
 // Implementation for class interval_index_space_record
 
-#include "interval_index_space_record.h"
+#include "SheafSystem/interval_index_space_record.h"
 
-#include "assert_contract.h"
-#include "error_message.h"
-#include "member_record_set.h"
-#include "interval_index_space_iterator.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/member_record_set.h"
+#include "SheafSystem/interval_index_space_iterator.h"
 
 //#define DIAGNOSTIC_OUTPUT
 // #undef DIAGNOSTIC_OUTPUT

@@ -22,11 +22,11 @@
 #define LINKORDER_ITR_IMPL_H
 
 #ifndef LINKORDER_ITR_H
-#include "linkorder_itr.h"
+#include "SheafSystem/linkorder_itr.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 

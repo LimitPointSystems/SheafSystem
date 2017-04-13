@@ -22,19 +22,19 @@
 #define SEC_TUPLE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef SEC_REP_SPACE_MEMBER_H
-#include "sec_rep_space_member.h"
+#include "SheafSystem/sec_rep_space_member.h"
 #endif
 
 #ifndef BLOCK_H
-#include "block.h"
+#include "SheafSystem/block.h"
 #endif
 
 #ifndef TUPLE_H
-#include "tuple.h"
+#include "SheafSystem/tuple.h"
 #endif
 
 namespace fiber_bundle

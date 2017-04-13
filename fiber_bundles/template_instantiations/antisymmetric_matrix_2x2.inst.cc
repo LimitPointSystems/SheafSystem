@@ -17,7 +17,7 @@
 
 // Explicit_instantiations for class antisymmetric_matrix_2x2.
 
-#include "antisymmetric_matrix_2x2.impl.h"
+#include "SheafSystem/antisymmetric_matrix_2x2.impl.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

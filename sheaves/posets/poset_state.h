@@ -21,15 +21,15 @@
 #define POSET_STATE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef READ_WRITE_MONITOR_H
-#include "read_write_monitor.h"
+#include "SheafSystem/read_write_monitor.h"
 #endif
 
 #ifndef POSET_TYPE_H
-#include "poset_type.h"
+#include "SheafSystem/poset_type.h"
 #endif
 
 

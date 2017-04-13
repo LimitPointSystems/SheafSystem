@@ -21,23 +21,23 @@
 #define AUTO_BLOCK_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef AUTO_BLOCK_H
-#include "auto_block.h"
+#include "SheafSystem/auto_block.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 #ifndef DEEP_SIZE_H
-#include "deep_size.h"
+#include "SheafSystem/deep_size.h"
 #endif
 
 #ifndef INDEX_TRAITS_H
-#include "index_traits.h"
+#include "SheafSystem/index_traits.h"
 #endif
 
 namespace sheaf

@@ -22,11 +22,11 @@
 #define AVG_SECTION_PUSHER_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef SECTION_PUSHER_H
-#include "section_pusher.h"
+#include "SheafSystem/section_pusher.h"
 #endif
 
 namespace fields

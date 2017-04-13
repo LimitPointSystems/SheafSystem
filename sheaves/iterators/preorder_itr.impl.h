@@ -19,11 +19,11 @@
 /// Implementation for class preorder_itr
 
 #ifndef PREORDER_ITR_H
-#include "preorder_itr.h"
+#include "SheafSystem/preorder_itr.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 #ifndef PREORDER_ITR_IMPL_H

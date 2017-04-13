@@ -21,23 +21,23 @@
 #define MEMBER_RECORD_SET_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef RECORD_SET_H
-#include "record_set.h"
+#include "SheafSystem/record_set.h"
 #endif
 
 #ifndef INTERVAL_INDEX_SPACE_RECORD_H
-#include "interval_index_space_record.h"
+#include "SheafSystem/interval_index_space_record.h"
 #endif
 
 #ifndef MEMBER_RECORD_H
-#include "member_record.h"
+#include "SheafSystem/member_record.h"
 #endif
 
 #ifndef INTERVAL_INDEX_SPACE_HANDLE_H
-#include "interval_index_space_handle.h"
+#include "SheafSystem/interval_index_space_handle.h"
 #endif
 
 

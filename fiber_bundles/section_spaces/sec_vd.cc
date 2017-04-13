@@ -18,27 +18,27 @@
 /// @file
 /// Implementation for class sec_vd.
 
-#include "sec_vd.h"
+#include "SheafSystem/sec_vd.h"
 
-#include "array_section_dof_map.h"
-#include "assert_contract.h"
-#include "at0.h"
-#include "binary_section_space_schema_member.impl.h"
-#include "binary_section_space_schema_poset.h"
-#include "chart_point.h"
-#include "eval_family.h"
-#include "eval_iterator.h"
-#include "fiber_bundles_namespace.h"
-#include "index_space_iterator.h"
-#include "namespace_poset.h"
-#include "sec_at0.h"
-#include "sec_tuple_space.impl.h"
-#include "sec_vd_space.h"
-#include "section_evaluator.h"
-#include "section_space_schema_member.impl.h"
-#include "section_space_schema_poset.h"
-#include "vd.h"
-#include "vd_space.h"
+#include "SheafSystem/array_section_dof_map.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/at0.h"
+#include "SheafSystem/binary_section_space_schema_member.impl.h"
+#include "SheafSystem/binary_section_space_schema_poset.h"
+#include "SheafSystem/chart_point.h"
+#include "SheafSystem/eval_family.h"
+#include "SheafSystem/eval_iterator.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/index_space_iterator.h"
+#include "SheafSystem/namespace_poset.h"
+#include "SheafSystem/sec_at0.h"
+#include "SheafSystem/sec_tuple_space.impl.h"
+#include "SheafSystem/sec_vd_space.h"
+#include "SheafSystem/section_evaluator.h"
+#include "SheafSystem/section_space_schema_member.impl.h"
+#include "SheafSystem/section_space_schema_poset.h"
+#include "SheafSystem/vd.h"
+#include "SheafSystem/vd_space.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
@@ -1528,8 +1528,8 @@ namespace
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-#include "e2.h"
-#include "sec_vd.impl.h"
+#include "SheafSystem/e2.h"
+#include "SheafSystem/sec_vd.impl.h"
 
 void
 fiber_bundle::sec_vd_algebra::

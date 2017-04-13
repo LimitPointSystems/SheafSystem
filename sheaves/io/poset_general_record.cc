@@ -17,13 +17,13 @@
 
 // Implementation for class poset_general_record
 
-#include "poset_general_record.h"
+#include "SheafSystem/poset_general_record.h"
 
-#include "assert_contract.h"
-#include "namespace_poset.h"
-#include "poset.h"
-#include "poset_bounds.h"
-#include "std_sstream.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/namespace_poset.h"
+#include "SheafSystem/poset.h"
+#include "SheafSystem/poset_bounds.h"
+#include "SheafSystem/std_sstream.h"
 
 using namespace std;
 

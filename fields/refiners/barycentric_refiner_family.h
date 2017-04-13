@@ -22,11 +22,11 @@
 #define BARYCENTRIC_REFINER_FAMILY_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef FIELD_REFINER_FAMILY_H
-#include "field_refiner_family.h"
+#include "SheafSystem/field_refiner_family.h"
 #endif
 
 namespace fields

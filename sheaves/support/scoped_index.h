@@ -22,75 +22,75 @@
 #define SCOPED_INDEX_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 #ifndef ERROR_MESSAGE_H
-#include "error_message.h"
+#include "SheafSystem/error_message.h"
 #endif
 
 #ifndef HUB_INDEX_SPACE_HANDLE_H
-#include "hub_index_space_handle.h"
+#include "SheafSystem/hub_index_space_handle.h"
 #endif
 
 #ifndef INDEX_SPACE_FAMILY_H
-#include "index_space_family.h"
+#include "SheafSystem/index_space_family.h"
 #endif
 
 #ifndef INDEX_TRAITS_H
-#include "index_traits.h"
+#include "SheafSystem/index_traits.h"
 #endif
 
 #ifndef NAMESPACE_SCHEMA_MEMBER_INDEX_H
-#include "namespace_schema_member_index.h"
+#include "SheafSystem/namespace_schema_member_index.h"
 #endif
 
 #ifndef NAMESPACE_MEMBER_INDEX_H
-#include "namespace_member_index.h"
+#include "SheafSystem/namespace_member_index.h"
 #endif
 
 #ifndef PRIMITIVE_ATTRIBUTES_H
-#include "primitive_attributes.h"
+#include "SheafSystem/primitive_attributes.h"
 #endif
 
 #ifndef PRIMITIVES_SCHEMA_MEMBER_INDEX_H
-#include "primitives_schema_member_index.h"
+#include "SheafSystem/primitives_schema_member_index.h"
 #endif
 
 #ifndef STANDARD_DOF_TUPLE_INDEX_H
-#include "standard_dof_tuple_index.h"
+#include "SheafSystem/standard_dof_tuple_index.h"
 #endif
 
 #ifndef STANDARD_MEMBER_INDEX_H
-#include "standard_member_index.h"
+#include "SheafSystem/standard_member_index.h"
 #endif
 
 #ifndef STANDARD_SUBPOSET_INDEX_H
-#include "standard_subposet_index.h"
+#include "SheafSystem/standard_subposet_index.h"
 #endif
 
 #ifndef STANDARD_VERSION_INDEX_H
-#include "standard_version_index.h"
+#include "SheafSystem/standard_version_index.h"
 #endif
 
 #ifndef STD_IOSTREAM_H
-#include "std_iostream.h"
+#include "SheafSystem/std_iostream.h"
 #endif
 
 #ifndef STD_SET_H
-#include "std_set.h"
+#include "SheafSystem/std_set.h"
 #endif
 
 #ifndef STD_UNORDERED_MAP_H
-#include "std_unordered_map.h"
+#include "SheafSystem/std_unordered_map.h"
 #endif
 
 #ifndef STD_LIMITS_H
-#include "std_limits.h"
+#include "SheafSystem/std_limits.h"
 #endif
 
 namespace sheaf

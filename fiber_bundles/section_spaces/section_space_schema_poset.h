@@ -22,39 +22,39 @@
 #define SECTION_SPACE_SCHEMA_POSET_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef POSET_STATE_HANDLE_H
-#include "poset_state_handle.h"
+#include "SheafSystem/poset_state_handle.h"
 #endif
 
 #ifndef ARRAY_POSET_DOF_MAP_H
-#include "array_poset_dof_map.h"
+#include "SheafSystem/array_poset_dof_map.h"
 #endif
 
 #ifndef BASE_SPACE_POSET_H
-#include "base_space_poset.h"
+#include "SheafSystem/base_space_poset.h"
 #endif
 
 #ifndef NAMESPACE_RELATIVE_MEMBER_INDEX_H
-#include "namespace_relative_member_index.h"
+#include "SheafSystem/namespace_relative_member_index.h"
 #endif
 
 #ifndef POSET_H
-#include "poset.h"
+#include "SheafSystem/poset.h"
 #endif
 
 #ifndef SECTION_SPACE_SCHEMA_TABLE_DOFS_TYPE_H
-#include "section_space_schema_table_dofs_type.h"
+#include "SheafSystem/section_space_schema_table_dofs_type.h"
 #endif
 
 #ifndef SEC_REP_DESCRIPTOR_H
-#include "sec_rep_descriptor.h"
+#include "SheafSystem/sec_rep_descriptor.h"
 #endif
 
 #ifndef SUBPOSET_H
-#include "subposet.h"
+#include "SheafSystem/subposet.h"
 #endif
 
 namespace sheaf

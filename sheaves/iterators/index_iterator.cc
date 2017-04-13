@@ -17,12 +17,12 @@
 
 // Implementation for class index_iterator
 
-#include "index_iterator.h"
-#include "assert_contract.h"
+#include "SheafSystem/index_iterator.h"
+#include "SheafSystem/assert_contract.h"
 
-#include "std_bitset.h"
-#include "std_limits.h"
-#include "zn_to_bool.h"
+#include "SheafSystem/std_bitset.h"
+#include "SheafSystem/std_limits.h"
+#include "SheafSystem/zn_to_bool.h"
 
 ///
 sheaf::index_iterator::

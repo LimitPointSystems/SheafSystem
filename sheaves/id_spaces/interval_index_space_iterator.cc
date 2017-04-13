@@ -18,12 +18,12 @@
 /// @file
 /// Implementation for class interval_index_space_iterator
 
-#include "interval_index_space_iterator.h"
+#include "SheafSystem/interval_index_space_iterator.h"
 
-#include "assert_contract.h"
-#include "explicit_index_space_handle.h"
-#include "index_space_family.h"
-#include "interval_index_space_state.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/explicit_index_space_handle.h"
+#include "SheafSystem/index_space_family.h"
+#include "SheafSystem/interval_index_space_state.h"
 
 // ===========================================================
 // INTERVAL_INDEX_SPACE_ITERATOR FACET

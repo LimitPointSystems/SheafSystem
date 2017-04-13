@@ -17,10 +17,10 @@
 
 // Implementation for class variable_length_record
 
-#include "variable_length_record.h"
+#include "SheafSystem/variable_length_record.h"
 
-#include "record_index.h"
-#include "assert_contract.h"
+#include "SheafSystem/record_index.h"
+#include "SheafSystem/assert_contract.h"
 
 // PUBLIC MEMBER FUNCTIONS
 

@@ -22,23 +22,23 @@
 #define INDEX_SPACE_FAMILY_ITERATOR_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ANY_H
-#include "any.h"
+#include "SheafSystem/any.h"
 #endif
 
 #ifndef INDEX_SPACE_FAMILY_H
-#include "index_space_family.h"
+#include "SheafSystem/index_space_family.h"
 #endif
 
 #ifndef INDEX_SPACE_INTERVAL_ITERATOR_H
-#include "index_space_interval_iterator.h"
+#include "SheafSystem/index_space_interval_iterator.h"
 #endif
 
 #ifndef POD_TYPES_H
-#include "pod_types.h"
+#include "SheafSystem/pod_types.h"
 #endif
 
 namespace sheaf

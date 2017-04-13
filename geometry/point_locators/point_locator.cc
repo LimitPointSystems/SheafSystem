@@ -19,15 +19,15 @@
 /// Implementation for class point_locator
 
 
-#include "point_locator.h"
+#include "SheafSystem/point_locator.h"
 
-#include "assert_contract.h"
-#include "chart_point_3d.h"
-#include "error_message.h"
-#include "preorder_iterator.h"
-#include "sec_at1_space.h"
-#include "sec_ed.h"
-#include "std_iostream.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/chart_point_3d.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/preorder_iterator.h"
+#include "SheafSystem/sec_at1_space.h"
+#include "SheafSystem/sec_ed.h"
+#include "SheafSystem/std_iostream.h"
 
 using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.

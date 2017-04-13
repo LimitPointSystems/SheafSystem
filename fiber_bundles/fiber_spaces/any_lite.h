@@ -22,15 +22,15 @@
 #define ANY_LITE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef SHEAF_H
-#include "sheaf.h"
+#include "SheafSystem/sheaf.h"
 #endif
 
 #ifndef STD_STRING_H
-#include "std_string.h"
+#include "SheafSystem/std_string.h"
 #endif
 
 namespace fiber_bundle

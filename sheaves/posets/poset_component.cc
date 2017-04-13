@@ -18,15 +18,15 @@
 /// @file
 /// Implementation for class poset_component
 
-#include "poset_component.h"
+#include "SheafSystem/poset_component.h"
 
-#include "assert_contract.h"
-#include "namespace_poset.h"
-#include "poset.h"
-#include "poset_state.h"
-#include "poset_crg_state.h"
-#include "pool.h"
-#include "std_typeinfo.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/namespace_poset.h"
+#include "SheafSystem/poset.h"
+#include "SheafSystem/poset_state.h"
+#include "SheafSystem/poset_crg_state.h"
+#include "SheafSystem/pool.h"
+#include "SheafSystem/std_typeinfo.h"
 
 using namespace std;
 

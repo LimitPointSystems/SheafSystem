@@ -22,11 +22,11 @@
 #define JCB_E13_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef JCB_E13_H
-#include "jcb_e13.h"
+#include "SheafSystem/jcb_e13.h"
 #endif
 
 namespace fiber_bundle

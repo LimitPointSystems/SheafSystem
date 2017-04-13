@@ -22,7 +22,7 @@
 #define READ_WRITE_MONITOR_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 
@@ -33,16 +33,16 @@
 // causes conflict in declaration of timespec in thread_condition_variable.h
 // if unordered_map.h included when not _PTHREADS
 #ifndef STD_UNORDERED_MAP_H
-#include "std_unordered_map.h"
+#include "SheafSystem/std_unordered_map.h"
 #endif
 
-#include "pthread.h"
+#include "SheafSystem/pthread.h"
 #endif
 
-#include "any.h"
+#include "SheafSystem/any.h"
 
 #ifndef STD_UTILITY_H
-#include "std_utility.h"
+#include "SheafSystem/std_utility.h"
 #endif
 
 namespace sheaf

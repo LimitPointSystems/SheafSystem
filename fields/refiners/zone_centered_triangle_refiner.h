@@ -22,11 +22,11 @@
 #define ZONE_CENTERED_TRIANGLE_REFINER_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef LOCAL_FIELD_REFINER_H
-#include "local_field_refiner.h"
+#include "SheafSystem/local_field_refiner.h"
 #endif
 
 namespace fields

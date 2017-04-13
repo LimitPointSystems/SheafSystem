@@ -18,7 +18,7 @@
 // Implementation for the general_matrix_3x2 template class.
 
 
-//#include "general_matrix_3x2.impl.h"
+//#include "SheafSystem/general_matrix_3x2.impl.h"
 
 // =============================================================================
 // SPECIALIZATIONS

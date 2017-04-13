@@ -18,11 +18,11 @@
 /// @file
 /// Implementation for class dof_descriptor_array
 
-#include "dof_descriptor_array.h"
+#include "SheafSystem/dof_descriptor_array.h"
 
-#include "assert_contract.h"
-#include "primitive_attributes.h"
-#include "std_string.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/primitive_attributes.h"
+#include "SheafSystem/std_string.h"
 
 // ===========================================================
 // DOF_DESCRIPTOR_ARRAY FACET

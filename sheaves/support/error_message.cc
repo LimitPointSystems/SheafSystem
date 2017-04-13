@@ -17,12 +17,12 @@
 
 // Implementation for class error_message.
 
-#include "error_message.h"
+#include "SheafSystem/error_message.h"
 
-#include "assert_contract.h"
-#include "std_iostream.h"
-#include "std_sstream.h"
-#include "std_stdexcept.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/std_iostream.h"
+#include "SheafSystem/std_sstream.h"
+#include "SheafSystem/std_stdexcept.h"
 
 using namespace std;
 

@@ -22,11 +22,11 @@
 #define SEC_E1_UNIFORM_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef SEC_E1_H
-#include "sec_e1.h"
+#include "SheafSystem/sec_e1.h"
 #endif
 
 namespace fiber_bundle

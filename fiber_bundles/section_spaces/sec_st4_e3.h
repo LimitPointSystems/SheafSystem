@@ -22,15 +22,15 @@
 #define SEC_ST4_E3_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef SEC_ST4_H
-#include "sec_st4.h"
+#include "SheafSystem/sec_st4.h"
 #endif
 
 #ifndef ST4_E3
-#include "st4_e3.h"
+#include "SheafSystem/st4_e3.h"
 #endif
 
 namespace fiber_bundle

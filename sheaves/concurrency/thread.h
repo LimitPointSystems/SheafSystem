@@ -21,18 +21,18 @@
 #define THREAD_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifdef _PTHREADS
-#include "pthread.h"
+#include "SheafSystem/pthread.h"
 
 #ifndef STD_UNISTD_H
-#include "std_unistd.h"
+#include "SheafSystem/std_unistd.h"
 #endif
 
 #ifndef SINGLY_LINKED_LIST_H
-#include "singly_linked_list.h"
+#include "SheafSystem/singly_linked_list.h"
 #endif
 
 namespace sheaf

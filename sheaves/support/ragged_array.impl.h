@@ -21,15 +21,15 @@
 #define RAGGED_ARRAY_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef RAGGED_ARRAY_H
-#include "ragged_array.h"
+#include "SheafSystem/ragged_array.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 namespace sheaf

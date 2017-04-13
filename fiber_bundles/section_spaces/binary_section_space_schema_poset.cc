@@ -18,25 +18,25 @@
 /// @file
 /// Implementation for class binary_section_space_schema_poset.
 
-#include "binary_section_space_schema_poset.h"
+#include "SheafSystem/binary_section_space_schema_poset.h"
 
-#include "abstract_poset_member.h"
-#include "array_poset_dof_map.h"
-#include "base_space_member.h"
-#include "base_space_poset.h"
-#include "binary_section_space_schema_member.impl.h"
-#include "index_iterator.h"
-#include "namespace_poset.impl.h"
-#include "namespace_poset_member.h"
-#include "poset_handle_factory.h"
-#include "poset_member_iterator.h"
-#include "poset_state.h"
-#include "poset_type.h"
-#include "postorder_member_iterator.h"
-#include "schema_poset_member.h"
-#include "sec_rep_descriptor_poset.h"
-#include "sheaves_namespace.h"
-#include "subposet.h"
+#include "SheafSystem/abstract_poset_member.h"
+#include "SheafSystem/array_poset_dof_map.h"
+#include "SheafSystem/base_space_member.h"
+#include "SheafSystem/base_space_poset.h"
+#include "SheafSystem/binary_section_space_schema_member.impl.h"
+#include "SheafSystem/index_iterator.h"
+#include "SheafSystem/namespace_poset.impl.h"
+#include "SheafSystem/namespace_poset_member.h"
+#include "SheafSystem/poset_handle_factory.h"
+#include "SheafSystem/poset_member_iterator.h"
+#include "SheafSystem/poset_state.h"
+#include "SheafSystem/poset_type.h"
+#include "SheafSystem/postorder_member_iterator.h"
+#include "SheafSystem/schema_poset_member.h"
+#include "SheafSystem/sec_rep_descriptor_poset.h"
+#include "SheafSystem/sheaves_namespace.h"
+#include "SheafSystem/subposet.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

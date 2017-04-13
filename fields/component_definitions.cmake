@@ -70,7 +70,7 @@ function(SheafSystem_add_fields_library_targets)
       add_dependencies(${FIELDS_DYNAMIC_LIB} ${GEOMETRY_IMPORT_LIB})
       add_dependencies(${FIELDS_DYNAMIC_LIB} fields_scoped_headers)
       target_include_directories(${FIELDS_DYNAMIC_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${FIELDS_DYNAMIC_LIB} ${GEOMETRY_IMPORT_LIB} )        
       set_target_properties(${FIELDS_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")   
 
@@ -95,7 +95,7 @@ function(SheafSystem_add_fields_library_targets)
       add_dependencies(${FIELDS_STATIC_LIB} ${GEOMETRY_STATIC_LIB})
       add_dependencies(${FIELDS_STATIC_LIB} fields_scoped_headers)
       target_include_directories(${FIELDS_STATIC_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${FIELDS_STATIC_LIB} ${GEOMETRY_STATIC_LIB}) 
       set_target_properties(${FIELDS_STATIC_LIB} PROPERTIES OUTPUT_NAME fields)
       
@@ -105,7 +105,7 @@ function(SheafSystem_add_fields_library_targets)
       add_dependencies(${FIELDS_SHARED_LIB} ${GEOMETRY_SHARED_LIB})
       add_dependencies(${FIELDS_SHARED_LIB} fields_scoped_headers)
       target_include_directories(${FIELDS_SHARED_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${FIELDS_SHARED_LIB} ${GEOMETRY_SHARED_LIB}) 
       set_target_properties(${FIELDS_SHARED_LIB} PROPERTIES OUTPUT_NAME fields)
       set_target_properties(${FIELDS_SHARED_LIB} PROPERTIES LINKER_LANGUAGE CXX)

@@ -22,15 +22,15 @@
 #define BASE_SPACE_CRG_INTERVAL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef IMPLICIT_CRG_INTERVAL_H
-#include "implicit_crg_interval.h"
+#include "SheafSystem/implicit_crg_interval.h"
 #endif
 
 #ifndef SCATTERED_INSERTION_INDEX_SPACE_HANDLE_H
-#include "scattered_insertion_index_space_handle.h"
+#include "SheafSystem/scattered_insertion_index_space_handle.h"
 #endif
 
 namespace fiber_bundle

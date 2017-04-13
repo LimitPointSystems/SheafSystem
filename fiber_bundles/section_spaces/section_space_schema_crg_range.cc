@@ -18,9 +18,9 @@
 /// @file
 /// Implementation for class section_space_schema_crg_range
 
-#include "section_space_schema_crg_range.h"
-#include "assert_contract.h"
-#include "base_space_poset.h"
+#include "SheafSystem/section_space_schema_crg_range.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/base_space_poset.h"
 
 // ===========================================================
 // SECTION_SPACE_SCHEMA_CRG_RANGE FACET

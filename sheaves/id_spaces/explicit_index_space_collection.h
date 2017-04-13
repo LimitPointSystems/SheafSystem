@@ -22,15 +22,15 @@
 #define EXPLICIT_INDEX_SPACE_COLLECTION_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef INDEX_SPACE_COLLECTION_H
-#include "index_space_collection.h"
+#include "SheafSystem/index_space_collection.h"
 #endif
 
 #ifndef STD_UNORDERED_MAP_H
-#include "std_unordered_map.h"
+#include "SheafSystem/std_unordered_map.h"
 #endif
 
 namespace sheaf

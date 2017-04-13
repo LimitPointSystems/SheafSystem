@@ -21,15 +21,15 @@
 #define PRIMITIVE_TYPE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef STD_CLIMITS_H
-#include "std_climits.h"
+#include "SheafSystem/std_climits.h"
 #endif
 
 #ifndef POD_TYPES_H
-#include "pod_types.h"
+#include "SheafSystem/pod_types.h"
 #endif
 
 namespace sheaf

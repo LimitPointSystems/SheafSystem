@@ -22,31 +22,31 @@
 #define GEOMETRY_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef FIBER_BUNDLE_H
-#include "fiber_bundle.h"
+#include "SheafSystem/fiber_bundle.h"
 #endif
 
 #ifndef SCOPED_INDEX_H
-#include "scoped_index.h"
+#include "SheafSystem/scoped_index.h"
 #endif
 
 #ifndef STL_SCOPED_INDEX_H
-#include "stl_scoped_index.h"
+#include "SheafSystem/stl_scoped_index.h"
 #endif
 
 #ifndef STD_UNORDERED_SET_H
-#include "std_unordered_set.h"
+#include "SheafSystem/std_unordered_set.h"
 #endif
 
 #ifndef STD_LIST_H
-#include "std_list.h"
+#include "SheafSystem/std_list.h"
 #endif
  
 #ifndef STD_SET_H
-#include "std_set.h"
+#include "SheafSystem/std_set.h"
 #endif
 
 

@@ -21,15 +21,15 @@
 #define GLN_SPACE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef POSET_H
-#include "poset.h"
+#include "SheafSystem/poset.h"
 #endif
 
 #ifndef GLN_TABLE_DOFS_TYPE_H
-#include "gln_table_dofs_type.h"
+#include "SheafSystem/gln_table_dofs_type.h"
 #endif
  
 

@@ -22,11 +22,11 @@
 #define GL3_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef GL3_H
-#include "gl3.h"
+#include "SheafSystem/gl3.h"
 #endif
 
 namespace fiber_bundle

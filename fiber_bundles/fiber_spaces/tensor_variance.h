@@ -22,15 +22,15 @@
 #define TENSOR_VARIANCE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef STD_BITSET_H
-#include "std_bitset.h"
+#include "SheafSystem/std_bitset.h"
 #endif
 
 #ifndef STD_LIMITS_H
-#include "std_limits.h"
+#include "SheafSystem/std_limits.h"
 #endif
 
 namespace fiber_bundle

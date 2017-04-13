@@ -22,11 +22,11 @@
 #define STRUCTURED_BLOCK_3D_CRG_INTERVAL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef HOMOGENEOUS_BLOCK_CRG_INTERVAL_H
-#include "homogeneous_block_crg_interval.h"
+#include "SheafSystem/homogeneous_block_crg_interval.h"
 #endif
 
 namespace sheaf

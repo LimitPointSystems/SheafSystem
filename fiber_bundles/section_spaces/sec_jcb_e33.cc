@@ -18,24 +18,24 @@
 /// @file
 /// Implementation for class sec_jcb_e33.
 
-#include "sec_jcb_e33.h"
+#include "SheafSystem/sec_jcb_e33.h"
 
-#include "assert_contract.h"
-#include "base_space_poset.h"
-#include "binary_section_space_schema_member.impl.h"
-#include "fiber_bundles_namespace.h"
-#include "namespace_poset.impl.h"
-#include "section_space_schema_member.impl.h"
-#include "section_space_schema_poset.h"
-#include "sec_at0.h"
-#include "sec_at1.h"
-#include "sec_at1_space.h"
-#include "sec_e3.h"
-#include "sec_jcb_space.h"
-#include "sec_tuple.impl.h"
-#include "sec_tuple_space.impl.h"
-#include "jcb_e33.h"
-#include "jcb_space.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/base_space_poset.h"
+#include "SheafSystem/binary_section_space_schema_member.impl.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/namespace_poset.impl.h"
+#include "SheafSystem/section_space_schema_member.impl.h"
+#include "SheafSystem/section_space_schema_poset.h"
+#include "SheafSystem/sec_at0.h"
+#include "SheafSystem/sec_at1.h"
+#include "SheafSystem/sec_at1_space.h"
+#include "SheafSystem/sec_e3.h"
+#include "SheafSystem/sec_jcb_space.h"
+#include "SheafSystem/sec_tuple.impl.h"
+#include "SheafSystem/sec_tuple_space.impl.h"
+#include "SheafSystem/jcb_e33.h"
+#include "SheafSystem/jcb_space.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
@@ -727,8 +727,8 @@ public:
 //==============================================================================
 
 
-#include "sec_e3.h"
-#include "sec_vd.impl.h"
+#include "SheafSystem/sec_e3.h"
+#include "SheafSystem/sec_vd.impl.h"
 
 using namespace fiber_bundle::sec_vd_algebra;
 

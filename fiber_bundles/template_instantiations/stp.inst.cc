@@ -17,7 +17,7 @@
 
 // Explicit_instantiations for class stp.
 
-#include "stp.impl.h"
+#include "SheafSystem/stp.impl.h"
 
 
 using namespace std;

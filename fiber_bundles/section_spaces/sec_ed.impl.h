@@ -21,15 +21,15 @@
 #define SEC_ED_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 #ifndef SEC_ED_H
-#include "sec_ed.h"
+#include "SheafSystem/sec_ed.h"
 #endif
 
 namespace fiber_bundle

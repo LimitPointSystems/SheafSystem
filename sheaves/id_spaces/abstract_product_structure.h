@@ -22,15 +22,15 @@
 #define ABSTRACT_PRODUCT_STRUCTURE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ANY_H
-#include "any.h"
+#include "SheafSystem/any.h"
 #endif
 
 #ifndef POD_TYPES_H
-#include "pod_types.h"
+#include "SheafSystem/pod_types.h"
 #endif
 
 namespace sheaf

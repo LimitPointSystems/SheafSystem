@@ -22,23 +22,23 @@
 #define D_BIN_COORDINATES_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 #ifndef D_BIN_COORDINATES_H
-#include "d_bin_coordinates.h"
+#include "SheafSystem/d_bin_coordinates.h"
 #endif
 
 #ifndef STD_BITSET_H
-#include "std_bitset.h"
+#include "SheafSystem/std_bitset.h"
 #endif
 
 #ifndef STD_LIMITS_H
-#include "std_limits.h"
+#include "SheafSystem/std_limits.h"
 #endif
 
 namespace geometry

@@ -18,21 +18,21 @@
 /// @file
 /// Implementation for class sec_jcb.
 
-#include "sec_jcb.h"
+#include "SheafSystem/sec_jcb.h"
 
-#include "assert_contract.h"
-#include "binary_section_space_schema_member.impl.h"
-#include "binary_section_space_schema_poset.h"
-#include "fiber_bundles_namespace.h"
-#include "section_space_schema_member.impl.h"
-#include "section_space_schema_poset.h"
-#include "sec_at0.h"
-#include "sec_at1.h"
-#include "sec_at1_space.h"
-#include "sec_jcb_space.h"
-#include "sec_tuple_space.impl.h"
-#include "jcb.h"
-#include "jcb_space.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/binary_section_space_schema_member.impl.h"
+#include "SheafSystem/binary_section_space_schema_poset.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/section_space_schema_member.impl.h"
+#include "SheafSystem/section_space_schema_poset.h"
+#include "SheafSystem/sec_at0.h"
+#include "SheafSystem/sec_at1.h"
+#include "SheafSystem/sec_at1_space.h"
+#include "SheafSystem/sec_jcb_space.h"
+#include "SheafSystem/sec_tuple_space.impl.h"
+#include "SheafSystem/jcb.h"
+#include "SheafSystem/jcb_space.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
@@ -833,14 +833,14 @@ set_comp2(int row, int col, sec_at0* new_comp)
 // NON-MEMBER FUNCTIONS
 //==============================================================================
 
-#include "error_message.h"
-#include "sec_at1.h"
-#include "sec_e1.h"
-#include "sec_e2.h"
-#include "sec_e3.h"
-#include "sec_jcb_e13.h"
-#include "sec_jcb_e23.h"
-#include "sec_jcb_e33.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/sec_at1.h"
+#include "SheafSystem/sec_e1.h"
+#include "SheafSystem/sec_e2.h"
+#include "SheafSystem/sec_e3.h"
+#include "SheafSystem/sec_jcb_e13.h"
+#include "SheafSystem/sec_jcb_e23.h"
+#include "SheafSystem/sec_jcb_e33.h"
 
 void
 fiber_bundle::sec_jcb_algebra::

@@ -21,15 +21,15 @@
 #define BINARY_INDEX_BLOCK_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef BINARY_INDEX_BLOCK_H
-#include "binary_index_block.h"
+#include "SheafSystem/binary_index_block.h"
 #endif
 
 #ifndef BLOCK_IMPL_H
-#include "block.impl.h"
+#include "SheafSystem/block.impl.h"
 #endif
 
 namespace sheaf

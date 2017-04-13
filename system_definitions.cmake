@@ -896,7 +896,7 @@ function(SheafSystem_install_prereqs)
    # Install only the HDF includes we use 
    foreach(inc ${HDF5_INCS})
       install(FILES ${HDF5_INCLUDE_DIR}/${inc}
-         DESTINATION include
+         DESTINATION include/${SHEAFSYSTEM_HEADER_SCOPE}
          PERMISSIONS OWNER_WRITE OWNER_READ GROUP_READ WORLD_READ)
    endforeach()
    

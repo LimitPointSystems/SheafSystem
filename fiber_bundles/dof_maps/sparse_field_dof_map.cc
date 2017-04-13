@@ -17,12 +17,12 @@
 
 // Implementation for class sparse_field_dof_map
 
-#include "sparse_field_dof_map.h"
+#include "SheafSystem/sparse_field_dof_map.h"
 
-#include "assert_contract.h"
-#include "discretization_iterator.h"
-#include "dof_map_factory.h"
-#include "sec_rep_space.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/discretization_iterator.h"
+#include "SheafSystem/dof_map_factory.h"
+#include "SheafSystem/sec_rep_space.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 

@@ -18,14 +18,14 @@
 /// @file
 /// Implementation for class line_surface_intersecter
 
-#include "line_surface_intersecter.h"
+#include "SheafSystem/line_surface_intersecter.h"
 
-#include "assert_contract.h"
-#include "base_space_poset.h"
-#include "e3.h"
-#include "sec_at1_space.h"
-#include "sec_e3.h"
-#include "section_space_schema_poset.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/base_space_poset.h"
+#include "SheafSystem/e3.h"
+#include "SheafSystem/sec_at1_space.h"
+#include "SheafSystem/sec_e3.h"
+#include "SheafSystem/section_space_schema_poset.h"
 
 using namespace std;
 using namespace geometry;  // Workaround for MSVC++ bug

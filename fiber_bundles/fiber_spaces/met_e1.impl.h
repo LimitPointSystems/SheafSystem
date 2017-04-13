@@ -22,11 +22,11 @@
 #define MET_E1_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef MET_E1_H
-#include "met_e1.h"
+#include "SheafSystem/met_e1.h"
 #endif
 
 namespace fiber_bundle

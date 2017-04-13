@@ -18,7 +18,7 @@
 /// @file
 /// Explicit instantiations for the geometry namespace.
 
-#include "geometry.h"
+#include "SheafSystem/geometry.h"
 
 
 using namespace std;

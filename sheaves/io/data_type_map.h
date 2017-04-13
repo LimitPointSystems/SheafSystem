@@ -21,19 +21,19 @@
 #define DATA_TYPE_MAP_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ANY_H
-#include "any.h"
+#include "SheafSystem/any.h"
 #endif
 
 #ifndef PRIMITIVE_TYPE_H
-#include "primitive_type.h"
+#include "SheafSystem/primitive_type.h"
 #endif
 
 #ifndef STD_HDF5_H
-#include "std_hdf5.h"
+#include "SheafSystem/std_hdf5.h"
 #endif
 
 namespace sheaf

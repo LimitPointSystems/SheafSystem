@@ -22,27 +22,27 @@
 #define POSET_COMPONENT_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef POSET_STATE_H
-#include "poset_state.h"
+#include "SheafSystem/poset_state.h"
 #endif
 
 #ifndef READ_WRITE_MONITOR_HANDLE_H
-#include "read_write_monitor_handle.h"
+#include "SheafSystem/read_write_monitor_handle.h"
 #endif
 
 #ifndef SCOPED_INDEX_H
-#include "scoped_index.h"
+#include "SheafSystem/scoped_index.h"
 #endif
  
 #ifndef STANDARD_VERSION_INDEX_H
-#include "standard_version_index.h"
+#include "SheafSystem/standard_version_index.h"
 #endif
 
 #ifndef STD_STRING_H
-#include "std_string.h"
+#include "SheafSystem/std_string.h"
 #endif
 
 namespace sheaf

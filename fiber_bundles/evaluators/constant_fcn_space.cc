@@ -17,11 +17,11 @@
 
 // Implementation for class constant_fcn_space
 
-#include "constant_fcn_space.h"
+#include "SheafSystem/constant_fcn_space.h"
 
-#include "assert_contract.h"
-#include "error_message.h"
-#include "std_limits.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/std_limits.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 

@@ -19,7 +19,7 @@
 
 // Implementation is mostly inline in namespace_relative_subposet_index.h
 
-#include "namespace_relative_subposet_index.h"
+#include "SheafSystem/namespace_relative_subposet_index.h"
 
 using namespace std;
 

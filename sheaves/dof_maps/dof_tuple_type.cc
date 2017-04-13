@@ -17,10 +17,10 @@
 
 // Definitions for class dof_tuple_type
 
-#include "dof_tuple_type.h"
+#include "SheafSystem/dof_tuple_type.h"
 
-#include "assert_contract.h"
-#include "error_message.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/error_message.h"
 
 using namespace std;
 

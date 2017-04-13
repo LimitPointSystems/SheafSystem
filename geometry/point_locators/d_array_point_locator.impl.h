@@ -22,15 +22,15 @@
 #define D_ARRAY_POINT_LOCATOR_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef D_ARRAY_POINT_LOCATOR_H
-#include "d_array_point_locator.h"
+#include "SheafSystem/d_array_point_locator.h"
 #endif
 
 #ifndef D_BIN_POINT_LOCATOR_IMPL_H
-#include "d_bin_point_locator.impl.h"
+#include "SheafSystem/d_bin_point_locator.impl.h"
 #endif
 
 namespace geometry

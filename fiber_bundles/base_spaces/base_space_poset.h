@@ -22,11 +22,11 @@
 #define BASE_SPACE_POSET_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef REFINABLE_POSET_H
-#include "refinable_poset.h"
+#include "SheafSystem/refinable_poset.h"
 #endif
 
 namespace sheaf

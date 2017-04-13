@@ -21,7 +21,7 @@
 #define MEMBER_MEMBER_POSET_BOUNDS_H
 
 #ifndef POSET_BOUNDS_H
-#include "poset_bounds.h"
+#include "SheafSystem/poset_bounds.h"
 #endif
 
 class zn_to_bool;

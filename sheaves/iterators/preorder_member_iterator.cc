@@ -17,12 +17,12 @@
 
 // Implementation for class preorder_member_iterator
 
-#include "preorder_member_iterator.h"
+#include "SheafSystem/preorder_member_iterator.h"
 
-#include "poset_state_handle.h"
-#include "preorder_iterator.h"
-#include "assert_contract.h"
-#include "total_poset_member.h"
+#include "SheafSystem/poset_state_handle.h"
+#include "SheafSystem/preorder_iterator.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/total_poset_member.h"
 
 
 sheaf::preorder_member_iterator::

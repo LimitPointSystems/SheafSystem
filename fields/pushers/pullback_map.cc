@@ -18,10 +18,10 @@
 /// @file
 /// Implementation for class discretization_point
 
-#include "pullback_map.h"
+#include "SheafSystem/pullback_map.h"
 
-#include "std_iomanip.h"
-#include "std_iostream.h"
+#include "SheafSystem/std_iomanip.h"
+#include "SheafSystem/std_iostream.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.

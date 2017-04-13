@@ -18,17 +18,17 @@
 /// @file
 /// Implementation for class local_field_refiner
 
-#include "local_field_refiner.h"
+#include "SheafSystem/local_field_refiner.h"
 
-#include "assert_contract.h"
-#include "base_space_poset.h"
-#include "block.impl.h"
-#include "depth_bound_refinement_policy.h"
-#include "field_refinement_buffer.h"
-#include "field_refinement_policy.h"
-#include "section_evaluator.h"
-#include "sec_vd.h"
-#include "field_vd.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/base_space_poset.h"
+#include "SheafSystem/block.impl.h"
+#include "SheafSystem/depth_bound_refinement_policy.h"
+#include "SheafSystem/field_refinement_buffer.h"
+#include "SheafSystem/field_refinement_policy.h"
+#include "SheafSystem/section_evaluator.h"
+#include "SheafSystem/sec_vd.h"
+#include "SheafSystem/field_vd.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.

@@ -17,15 +17,15 @@
 
 // Explicit instantiations for class block.
 
-#include "block.impl.h"
+#include "SheafSystem/block.impl.h"
 
-#include "arg_list.h"
-#include "deep_size.h"
-#include "poset_path.h"
-#include "poset_state_handle.h"
-#include "primitive_value.h"
-#include "schema_descriptor.h"
-#include "subposet.h"
+#include "SheafSystem/arg_list.h"
+#include "SheafSystem/deep_size.h"
+#include "SheafSystem/poset_path.h"
+#include "SheafSystem/poset_state_handle.h"
+#include "SheafSystem/primitive_value.h"
+#include "SheafSystem/schema_descriptor.h"
+#include "SheafSystem/subposet.h"
 
 using namespace std;
 using namespace sheaf; // workaround for MS C++ bug.
@@ -525,7 +525,7 @@ ostream& sheaf::operator << <sheaf::block<double>* >(ostream& xos, const sheaf::
 // block<string>
 //==============================================================================
 
-#include "std_string.h"
+#include "SheafSystem/std_string.h"
 
 template class 
 SHEAF_DLL_SPEC 
@@ -571,7 +571,7 @@ ostream& sheaf::operator << <std::string*>(ostream& xos, const sheaf::block<std:
 // block<subposet_state*>
 //==============================================================================
 
-#include "subposet_state.h"
+#include "SheafSystem/subposet_state.h"
 
 template class 
 SHEAF_DLL_SPEC 
@@ -601,7 +601,7 @@ size_t sheaf::deep_size<sheaf::subposet_state>(const sheaf::block<sheaf::subpose
 // block<poset_dof_map*>
 //==============================================================================
 
-#include "poset_dof_map.h"
+#include "SheafSystem/poset_dof_map.h"
 
 template class 
 SHEAF_DLL_SPEC 
@@ -816,7 +816,7 @@ size_t sheaf::deep_size<subposet>(const sheaf::block<subposet>& xblk, bool xincl
 // block<list<sheaf::scoped_index> >
 //==============================================================================
 
-#include "std_list.h"
+#include "SheafSystem/std_list.h"
 typedef list<sheaf::scoped_index> list_type;
 
 template class 
@@ -831,7 +831,7 @@ size_t sheaf::deep_size<list_type>(const sheaf::block<list_type>& xblk, bool xin
 // block<set<int> >
 //==============================================================================
 
-#include "std_set.h"
+#include "SheafSystem/std_set.h"
 typedef set<int> set_type;
 
 template class 

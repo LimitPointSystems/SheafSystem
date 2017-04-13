@@ -22,15 +22,15 @@
 #define INTERVAL_SET_ITERATOR_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ANY_H
-#include "any.h"
+#include "SheafSystem/any.h"
 #endif
 
 #ifndef INTERVAL_SET_H
-#include "interval_set.h"
+#include "SheafSystem/interval_set.h"
 #endif
 
 namespace sheaf

@@ -21,15 +21,15 @@
 #define FILTERED_DEPTH_FIRST_MEMBER_ITERATOR_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ANY_H
-#include "any.h"
+#include "SheafSystem/any.h"
 #endif
 
 #ifndef FILTERED_DEPTH_FIRST_ITERATOR_H
-#include "filtered_depth_first_iterator.h"
+#include "SheafSystem/filtered_depth_first_iterator.h"
 #endif
 
 namespace sheaf

@@ -18,17 +18,17 @@
 /// @file
 /// Implementation for class poset.
 
-#include "abstract_poset_member.h"
-#include "array_poset_dof_map.h"
+#include "SheafSystem/abstract_poset_member.h"
+#include "SheafSystem/array_poset_dof_map.h"
 class index_iterator;
-#include "namespace_poset.impl.h"
-#include "poset.h"
-#include "poset_handle_factory.h"
-#include "poset_member_iterator.h"
-#include "poset_state.h"
-#include "poset_type.h"
-#include "schema_poset_member.h"
-#include "subposet.h"
+#include "SheafSystem/namespace_poset.impl.h"
+#include "SheafSystem/poset.h"
+#include "SheafSystem/poset_handle_factory.h"
+#include "SheafSystem/poset_member_iterator.h"
+#include "SheafSystem/poset_state.h"
+#include "SheafSystem/poset_type.h"
+#include "SheafSystem/schema_poset_member.h"
+#include "SheafSystem/subposet.h"
 
 // ===========================================================
 // POSET FACET

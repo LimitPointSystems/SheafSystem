@@ -22,19 +22,19 @@
 #define TP_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef VD_H
-#include "vd.h"
+#include "SheafSystem/vd.h"
 #endif
 
 #ifndef TENSOR_VARIANCE_H
-#include "tensor_variance.h"
+#include "SheafSystem/tensor_variance.h"
 #endif
 
 #ifndef TP_TABLE_DOFS_TYPE_H
-#include "tp_table_dofs_type.h"
+#include "SheafSystem/tp_table_dofs_type.h"
 #endif
  
  

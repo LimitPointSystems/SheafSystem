@@ -18,9 +18,9 @@
 /// @file
 /// Implementation for class index_space_interval
 
-#include "index_space_interval.h"
-#include "assert_contract.h"
-#include "index_space_family.h"
+#include "SheafSystem/index_space_interval.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/index_space_family.h"
 
 // ===========================================================
 // INDEX_SPACE_INTERVAL FACET

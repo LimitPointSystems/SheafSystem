@@ -18,15 +18,15 @@
 /// @file
 /// Implementation for class index_equivalence_class
 
-#include "index_equivalence_class.h"
+#include "SheafSystem/index_equivalence_class.h"
 
-#include "assert_contract.h"
-#include "hub_index_space_handle.h"
-#include "index_space_family_iterator.h"
-#include "index_space_family.h"
-#include "index_space_iterator.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/hub_index_space_handle.h"
+#include "SheafSystem/index_space_family_iterator.h"
+#include "SheafSystem/index_space_family.h"
+#include "SheafSystem/index_space_iterator.h"
 
-#include "block.impl.h"
+#include "SheafSystem/block.impl.h"
 
 // ===========================================================
 // INDEX_EQUIVALENCE_CLASS FACET

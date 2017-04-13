@@ -21,11 +21,11 @@
 #define LINE_CONNECTIVITY_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef BLOCK_CONNECTIVITY_H
-#include "block_connectivity.h"
+#include "SheafSystem/block_connectivity.h"
 #endif
 
 namespace fiber_bundle

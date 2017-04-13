@@ -18,18 +18,18 @@
 /// @file
 /// Implementation for class namespace_poset_schema
 
-#include "namespace_poset_schema.h"
+#include "SheafSystem/namespace_poset_schema.h"
 
-#include "assert_contract.h"
-#include "array_poset_dof_map.h"
-#include "namespace_poset.impl.h"
-#include "poset_handle_factory.h"
-#include "poset_type.h"
-#include "primitives_poset_dof_map.h"
-#include "std_iomanip.h"
-#include "std_iostream.h"
-#include "total_poset_member.h"
-#include "tern.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/array_poset_dof_map.h"
+#include "SheafSystem/namespace_poset.impl.h"
+#include "SheafSystem/poset_handle_factory.h"
+#include "SheafSystem/poset_type.h"
+#include "SheafSystem/primitives_poset_dof_map.h"
+#include "SheafSystem/std_iomanip.h"
+#include "SheafSystem/std_iostream.h"
+#include "SheafSystem/total_poset_member.h"
+#include "SheafSystem/tern.h"
 
 // ===========================================================
 // NAMESPACE_POSET_SCHEMA FACET

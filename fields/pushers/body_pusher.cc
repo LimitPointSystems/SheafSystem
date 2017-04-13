@@ -18,22 +18,22 @@
 /// @file
 /// Implementation for class body_pusher.
 
-#include "body_pusher.h"
+#include "SheafSystem/body_pusher.h"
 
-#include "assert_contract.h"
-#include "base_space_member.h"
-#include "base_space_poset.h"
-#include "binary_section_space_schema_member.h"
-#include "binary_section_space_schema_poset.h"
-#include "discretization_context.h"
-#include "index_iterator.h"
-#include "poset_joiner.h"
-#include "postorder_itr.h"
-#include "property_disc_iterator.h"
-#include "sec_ed_invertible.h"
-#include "sec_rep_descriptor.h"
-#include "section_evaluator.h"
-#include "tern.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/base_space_member.h"
+#include "SheafSystem/base_space_poset.h"
+#include "SheafSystem/binary_section_space_schema_member.h"
+#include "SheafSystem/binary_section_space_schema_poset.h"
+#include "SheafSystem/discretization_context.h"
+#include "SheafSystem/index_iterator.h"
+#include "SheafSystem/poset_joiner.h"
+#include "SheafSystem/postorder_itr.h"
+#include "SheafSystem/property_disc_iterator.h"
+#include "SheafSystem/sec_ed_invertible.h"
+#include "SheafSystem/sec_rep_descriptor.h"
+#include "SheafSystem/section_evaluator.h"
+#include "SheafSystem/tern.h"
 
 using namespace std;
 using namespace unordered;

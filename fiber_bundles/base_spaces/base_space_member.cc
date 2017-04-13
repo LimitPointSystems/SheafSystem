@@ -18,16 +18,16 @@
 /// @file
 /// Implementation for class base_space_member.
 
-#include "base_space_member.h"
+#include "SheafSystem/base_space_member.h"
 
-#include "assert_contract.h"
-#include "arg_list.h"
-#include "base_space_poset.h"
-#include "fiber_bundles_namespace.h"
-#include "poset_path.h"
-#include "preorder_iterator.h"
-#include "tern.h"
-#include "wsv_block.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/arg_list.h"
+#include "SheafSystem/base_space_poset.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/poset_path.h"
+#include "SheafSystem/preorder_iterator.h"
+#include "SheafSystem/tern.h"
+#include "SheafSystem/wsv_block.h"
 
 using namespace std;
 using namespace fiber_bundle;

@@ -22,11 +22,11 @@
 #define STL_SCOPED_INDEX_IMPL_H
 
 #ifndef STL_SCOPED_INDEX_H
-#include "stl_scoped_index.h"
+#include "SheafSystem/stl_scoped_index.h"
 #endif
 
 #ifndef  ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 using namespace sheaf;

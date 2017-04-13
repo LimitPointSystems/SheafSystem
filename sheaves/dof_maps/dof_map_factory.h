@@ -21,23 +21,23 @@
 #define DOF_MAP_FACTORY_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef BLOCK_H
-#include "block.h"
+#include "SheafSystem/block.h"
 #endif
 
 #ifndef DOF_TUPLE_TYPE_H
-#include "dof_tuple_type.h"
+#include "SheafSystem/dof_tuple_type.h"
 #endif
 
 #ifndef STD_MAP_H
-#include "std_map.h"
+#include "SheafSystem/std_map.h"
 #endif
 
 #ifndef STD_STRING_H
-#include "std_string.h"
+#include "SheafSystem/std_string.h"
 #endif
 
 

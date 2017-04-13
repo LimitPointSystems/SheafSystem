@@ -23,15 +23,15 @@
 #define TUPLE_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef TUPLE_H
-#include "tuple.h"
+#include "SheafSystem/tuple.h"
 #endif
 
 #ifndef FIBER_BUNDLES_NAMESPACE_H
-#include "fiber_bundles_namespace.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
 #endif
 
 namespace fiber_bundle

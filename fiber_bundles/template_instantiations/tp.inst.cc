@@ -17,19 +17,19 @@
 
 // Explicit_instantiations for class tp.
 
-#include "tp.impl.h"
+#include "SheafSystem/tp.impl.h"
 
-#include "t2_e2.h"
-#include "at2_e2.h"
-#include "st2_e2.h"
+#include "SheafSystem/t2_e2.h"
+#include "SheafSystem/at2_e2.h"
+#include "SheafSystem/st2_e2.h"
 
-#include "t2_e3.h"
-#include "at2_e3.h"
-#include "st2_e3.h"
+#include "SheafSystem/t2_e3.h"
+#include "SheafSystem/at2_e3.h"
+#include "SheafSystem/st2_e3.h"
 
-#include "t3_e3.h"
-#include "at3_e3.h"
-#include "st3_e3.h"
+#include "SheafSystem/t3_e3.h"
+#include "SheafSystem/at3_e3.h"
+#include "SheafSystem/st3_e3.h"
 
 
 using namespace std;

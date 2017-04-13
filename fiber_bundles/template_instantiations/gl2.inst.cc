@@ -17,7 +17,7 @@
 
 // Explicit_instantiations for class gl2.
 
-#include "gl2.impl.h"
+#include "SheafSystem/gl2.impl.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

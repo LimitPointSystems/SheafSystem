@@ -22,27 +22,27 @@
 #define NAMESPACE_POSET_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef NAMESPACE_POSET_H
-#include "namespace_poset.h"
+#include "SheafSystem/namespace_poset.h"
 #endif
 
 #ifndef ARRAY_POSET_DOF_MAP_H
-#include "array_poset_dof_map.h"
+#include "SheafSystem/array_poset_dof_map.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 #ifndef NAMESPACE_POSET_MEMBER_H
-#include "namespace_poset_member.h"
+#include "SheafSystem/namespace_poset_member.h"
 #endif
  
 #ifndef POSET_PATH_H
-#include "poset_path.h"
+#include "SheafSystem/poset_path.h"
 #endif
    
 // ===========================================================

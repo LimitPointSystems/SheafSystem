@@ -19,7 +19,7 @@
 
 // Most of the implementation is inline in namespace_relative_member_index.h
 
-#include "namespace_relative_member_index.h"
+#include "SheafSystem/namespace_relative_member_index.h"
 
 using namespace std;
 

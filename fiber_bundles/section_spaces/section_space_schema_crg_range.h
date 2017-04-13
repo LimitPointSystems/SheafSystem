@@ -22,11 +22,11 @@
 #define SECTION_SPACE_SCHEMA_CRG_RANGE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef IMPLICIT_CRG_RANGE_H
-#include "implicit_crg_range.h"
+#include "SheafSystem/implicit_crg_range.h"
 #endif
 
 namespace sheaf

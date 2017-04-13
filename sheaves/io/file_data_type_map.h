@@ -21,11 +21,11 @@
 #define FILE_DATA_TYPE_MAP_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef DATA_TYPE_MAP_H
-#include "data_type_map.h"
+#include "SheafSystem/data_type_map.h"
 #endif
 
 namespace sheaf

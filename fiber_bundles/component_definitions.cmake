@@ -71,7 +71,7 @@ function(SheafSystem_add_fiber_bundles_library_targets)
       add_dependencies(${FIBER_BUNDLES_DYNAMIC_LIB} ${SHEAVES_IMPORT_LIB})
       add_dependencies(${FIBER_BUNDLES_DYNAMIC_LIB} fiber_bundles_scoped_headers)
       target_include_directories(${FIBER_BUNDLES_DYNAMIC_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${FIBER_BUNDLES_DYNAMIC_LIB} ${SHEAVES_IMPORT_LIB})
       set_target_properties(${FIBER_BUNDLES_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")
 
@@ -90,7 +90,7 @@ function(SheafSystem_add_fiber_bundles_library_targets)
       add_dependencies(${FIBER_BUNDLES_STATIC_LIB} ${SHEAVES_STATIC_LIB})
       add_dependencies(${FIBER_BUNDLES_STATIC_LIB} fiber_bundles_scoped_headers)
       target_include_directories(${FIBER_BUNDLES_STATIC_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${FIBER_BUNDLES_STATIC_LIB} ${SHEAVES_STATIC_LIB})
       set_target_properties(${FIBER_BUNDLES_STATIC_LIB} PROPERTIES OUTPUT_NAME fiber_bundles )
 
@@ -100,7 +100,7 @@ function(SheafSystem_add_fiber_bundles_library_targets)
       add_dependencies(${FIBER_BUNDLES_SHARED_LIB} ${SHEAVES_SHARED_LIB})
       add_dependencies(${FIBER_BUNDLES_SHARED_LIB} fiber_bundles_scoped_headers)
       target_include_directories(${FIBER_BUNDLES_SHARED_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${FIBER_BUNDLES_SHARED_LIB} ${SHEAVES_SHARED_LIB})
       set_target_properties(${FIBER_BUNDLES_SHARED_LIB} PROPERTIES OUTPUT_NAME fiber_bundles)
       set_target_properties(${FIBER_BUNDLES_SHARED_LIB} PROPERTIES LINKER_LANGUAGE CXX)

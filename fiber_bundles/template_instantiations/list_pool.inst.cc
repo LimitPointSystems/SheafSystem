@@ -18,16 +18,16 @@
  
 // Explicit instantiations for class list_pool.
 
-#include "list_pool.impl.h"
+#include "SheafSystem/list_pool.impl.h"
 
-#include "i_adjacency_implicit_index_space_iterator.h"
-#include "i_connectivity_implicit_index_space_iterator.h"
-#include "ij_adjacency_implicit_index_space_iterator.h"
-#include "ij_connectivity_implicit_index_space_iterator.h"
-#include "ijk_adjacency_implicit_index_space_iterator.h"
-#include "ijk_connectivity_implicit_index_space_iterator.h"
-#include "section_space_schema_jims_index_space_handle.h"
-#include "section_space_schema_jims_index_space_iterator.h"
+#include "SheafSystem/i_adjacency_implicit_index_space_iterator.h"
+#include "SheafSystem/i_connectivity_implicit_index_space_iterator.h"
+#include "SheafSystem/ij_adjacency_implicit_index_space_iterator.h"
+#include "SheafSystem/ij_connectivity_implicit_index_space_iterator.h"
+#include "SheafSystem/ijk_adjacency_implicit_index_space_iterator.h"
+#include "SheafSystem/ijk_connectivity_implicit_index_space_iterator.h"
+#include "SheafSystem/section_space_schema_jims_index_space_handle.h"
+#include "SheafSystem/section_space_schema_jims_index_space_iterator.h"
 
 //==============================================================================
 // EXPLICIT INSTANTIATIONS

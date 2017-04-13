@@ -23,15 +23,15 @@
 #define GROUP_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef GROUP_H
-#include "group.h"
+#include "SheafSystem/group.h"
 #endif
 
 #ifndef FIBER_BUNDLES_NAMESPACE_H
-#include "fiber_bundles_namespace.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
 #endif
 
 namespace fiber_bundle

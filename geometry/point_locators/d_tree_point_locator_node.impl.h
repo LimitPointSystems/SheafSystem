@@ -22,27 +22,27 @@
 #define D_TREE_POINT_LOCATOR_NODE_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 #ifndef ERROR_MESSAGE_H
-#include "error_message.h"
+#include "SheafSystem/error_message.h"
 #endif
 
 #ifndef D_TREE_POINT_LOCATOR_H
-#include "d_tree_point_locator.h"
+#include "SheafSystem/d_tree_point_locator.h"
 #endif
 
 #ifndef D_TREE_POINT_LOCATOR_PATH_H
-#include "d_tree_point_locator_path.h"
+#include "SheafSystem/d_tree_point_locator_path.h"
 #endif
 
 #ifndef STD_SSTREAM_H
-#include "std_sstream.h"
+#include "SheafSystem/std_sstream.h"
 #endif
 
 //#undef DIAGNOSTIC_OUTPUT

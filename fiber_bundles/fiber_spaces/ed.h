@@ -22,12 +22,12 @@
 #define ED_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef AT1_H
-#include "at1.h"
-#include "tp_space.h"
+#include "SheafSystem/at1.h"
+#include "SheafSystem/tp_space.h"
 #endif
 
 namespace fiber_bundle

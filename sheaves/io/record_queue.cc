@@ -18,9 +18,9 @@
 /// @file
 /// Implementation for class record_queue
 
-#include "record_queue.h"
+#include "SheafSystem/record_queue.h"
 
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 
 // ===========================================================
 // RECORD_QUEUE FACET

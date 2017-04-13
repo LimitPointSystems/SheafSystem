@@ -17,14 +17,14 @@
 
 // Implementation for class eval_family
 
-#include "eval_family.h"
+#include "SheafSystem/eval_family.h"
 
-#include "assert_contract.h"
-#include "constant_eval_family.h"
-#include "dlinear_eval_family.h"
-#include "factory.impl.h"
-#include "section_evaluator.h"
-#include "uniform_eval_family.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/constant_eval_family.h"
+#include "SheafSystem/dlinear_eval_family.h"
+#include "SheafSystem/factory.impl.h"
+#include "SheafSystem/section_evaluator.h"
+#include "SheafSystem/uniform_eval_family.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

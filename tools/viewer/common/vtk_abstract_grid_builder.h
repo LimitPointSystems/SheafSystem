@@ -21,23 +21,23 @@
 #define VTK_ABSTRACT_GRID_BUILDER_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ANY_H
-#include "any.h"
+#include "SheafSystem/any.h"
 #endif
 
 #ifndef BLOCK_H
-#include "block.h"
+#include "SheafSystem/block.h"
 #endif
 
 #ifndef SEC_VD_H
-#include "sec_vd.h"
+#include "SheafSystem/sec_vd.h"
 #endif
 
 #ifndef SHEAF_H
-#include "sheaf.h"
+#include "SheafSystem/sheaf.h"
 #endif
 
 class vtkDataSet;

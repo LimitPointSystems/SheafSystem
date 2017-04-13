@@ -18,14 +18,14 @@
 /// @file
 /// Implementation for class assert_contract
 
-#include "assert_contract.h"
-#include "std_stdexcept.h"
-#include "std_iostream.h"
-#include "std_sstream.h"
-#include "std_string.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/std_stdexcept.h"
+#include "SheafSystem/std_iostream.h"
+#include "SheafSystem/std_sstream.h"
+#include "SheafSystem/std_string.h"
 
 #ifdef _WIN32
-#include "windows.h" // Compiling with MS C++, needed for OutputDebugString.
+#include "SheafSystem/windows.h" // Compiling with MS C++, needed for OutputDebugString.
 #endif
 
 using namespace std;

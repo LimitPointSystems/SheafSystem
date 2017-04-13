@@ -22,11 +22,11 @@
 #define DEPTH_BOUND_REFINEMENT_POLICY_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef FIELD_REFINEMENT_POLICY_H
-#include "field_refinement_policy.h"
+#include "SheafSystem/field_refinement_policy.h"
 #endif
 
 namespace fields

@@ -18,16 +18,16 @@
 /// @file
 /// Implementation for class tp
 
-#include "tp.h"
+#include "SheafSystem/tp.h"
 
-#include "abstract_poset_member.impl.h"
-#include "assert_contract.h"
-#include "at1.h"
-#include "at1_space.h"
-#include "fiber_bundles_namespace.h"
-#include "schema_poset_member.h"
-#include "tp_space.h"
-#include "wsv_block.h"
+#include "SheafSystem/abstract_poset_member.impl.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/at1.h"
+#include "SheafSystem/at1_space.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/schema_poset_member.h"
+#include "SheafSystem/tp_space.h"
+#include "SheafSystem/wsv_block.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
@@ -1449,21 +1449,21 @@ operator<<(std::ostream& xos, tp_lite::table_dofs_type& xt)
 // TP FACET
 //==============================================================================
 
-#include "error_message.h"
-#include "at0.h"
-#include "at1.h"
-#include "at2.h"
-#include "at3_e3.h"
-#include "st2.h"
-#include "st3.h"
-#include "st3_e3.h"
-#include "st4_e2.h"
-#include "st4_e3.h"
-#include "t2.h"
-#include "t3.h"
-#include "t3_e3.h"
-#include "t4_e2.h"
-#include "t4_e3.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/at0.h"
+#include "SheafSystem/at1.h"
+#include "SheafSystem/at2.h"
+#include "SheafSystem/at3_e3.h"
+#include "SheafSystem/st2.h"
+#include "SheafSystem/st3.h"
+#include "SheafSystem/st3_e3.h"
+#include "SheafSystem/st4_e2.h"
+#include "SheafSystem/st4_e3.h"
+#include "SheafSystem/t2.h"
+#include "SheafSystem/t3.h"
+#include "SheafSystem/t3_e3.h"
+#include "SheafSystem/t4_e2.h"
+#include "SheafSystem/t4_e3.h"
 
 void
 fiber_bundle::tp_algebra::

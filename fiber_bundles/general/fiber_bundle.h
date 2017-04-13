@@ -19,11 +19,11 @@
 #define FIBER_BUNDLE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef SHEAF_H
-#include "sheaf.h"
+#include "SheafSystem/sheaf.h"
 #endif
 
 namespace sheaf

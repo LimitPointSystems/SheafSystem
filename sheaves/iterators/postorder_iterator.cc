@@ -17,8 +17,8 @@
 
 // Implementation for class postorder_iterator
 
-#include "postorder_iterator.h"
-#include "assert_contract.h"
+#include "SheafSystem/postorder_iterator.h"
+#include "SheafSystem/assert_contract.h"
 
 sheaf::postorder_iterator::
 postorder_iterator()

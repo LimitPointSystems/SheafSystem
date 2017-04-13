@@ -18,9 +18,9 @@
 /// @file
 /// Explicit instantiations for class d_tree_point_locator
 
-#include "d_tree_point_locator.impl.h"
+#include "SheafSystem/d_tree_point_locator.impl.h"
 
-#include "std_iostream.h"
+#include "SheafSystem/std_iostream.h"
 
 using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.

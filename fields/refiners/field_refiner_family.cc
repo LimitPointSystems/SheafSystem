@@ -18,15 +18,15 @@
 /// @file
 /// Implementation for class field_refiner_family
 
-#include "field_refiner_family.h"
+#include "SheafSystem/field_refiner_family.h"
 
-#include "assert_contract.h"
-#include "base_space_member.h"
-#include "base_space_poset.h"
-#include "factory.impl.h"
-#include "field_refinement_policy.h"
-#include "local_field_refiner.h"
-#include "namespace_poset.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/base_space_member.h"
+#include "SheafSystem/base_space_poset.h"
+#include "SheafSystem/factory.impl.h"
+#include "SheafSystem/field_refinement_policy.h"
+#include "SheafSystem/local_field_refiner.h"
+#include "SheafSystem/namespace_poset.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.

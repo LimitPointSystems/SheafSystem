@@ -20,15 +20,15 @@
 #define MEMBER_NAMES_RECORD_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef STD_UTILITY_H
-#include "std_utility.h"
+#include "SheafSystem/std_utility.h"
 #endif
 
 #ifndef ATTRIBUTES_RECORD_H
-#include "attributes_record.h"
+#include "SheafSystem/attributes_record.h"
 #endif
 
 namespace sheaf

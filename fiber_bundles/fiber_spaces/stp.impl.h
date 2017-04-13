@@ -23,11 +23,11 @@
 #define STP_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef STP_H
-#include "stp.h"
+#include "SheafSystem/stp.h"
 #endif
 
 namespace fiber_bundle

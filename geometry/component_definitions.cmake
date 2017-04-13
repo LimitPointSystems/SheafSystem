@@ -71,7 +71,7 @@ function(SheafSystem_add_geometry_library_targets)
       add_dependencies(${GEOMETRY_DYNAMIC_LIB} ${FIBER_BUNDLES_IMPORT_LIB})
       add_dependencies(${GEOMETRY_DYNAMIC_LIB} geometry_scoped_headers)
       target_include_directories(${GEOMETRY_DYNAMIC_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${GEOMETRY_DYNAMIC_LIB} ${FIBER_BUNDLES_IMPORT_LIB})        
       set_target_properties(${GEOMETRY_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")
 
@@ -90,7 +90,7 @@ function(SheafSystem_add_geometry_library_targets)
       add_dependencies(${GEOMETRY_STATIC_LIB} ${FIBER_BUNDLES_STATIC_LIB})
       add_dependencies(${GEOMETRY_STATIC_LIB} geometry_scoped_headers)
       target_include_directories(${GEOMETRY_STATIC_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${GEOMETRY_STATIC_LIB} ${FIBER_BUNDLES_STATIC_LIB}) 
       set_target_properties(${GEOMETRY_STATIC_LIB} PROPERTIES OUTPUT_NAME geometry)
 
@@ -100,7 +100,7 @@ function(SheafSystem_add_geometry_library_targets)
       add_dependencies(${GEOMETRY_SHARED_LIB} ${FIBER_BUNDLES_SHARED_LIB})
       add_dependencies(${GEOMETRY_SHARED_LIB} geometry_scoped_headers)
       target_include_directories(${GEOMETRY_SHARED_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${GEOMETRY_SHARED_LIB} ${FIBER_BUNDLES_SHARED_LIB}) 
       set_target_properties(${GEOMETRY_SHARED_LIB} PROPERTIES OUTPUT_NAME geometry)
       set_target_properties(${GEOMETRY_SHARED_LIB} PROPERTIES LINKER_LANGUAGE CXX)

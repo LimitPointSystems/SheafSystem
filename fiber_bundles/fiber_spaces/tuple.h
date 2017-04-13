@@ -22,36 +22,36 @@
 #define TUPLE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ANY_LITE_H
-#include "any_lite.h"
+#include "SheafSystem/any_lite.h"
 #endif
 
 #ifndef ARRAY_POSET_DOF_MAP_H
-#include "array_poset_dof_map.h"
+#include "SheafSystem/array_poset_dof_map.h"
 #endif
 
 #ifndef FIBER_BUNDLE_H
-#include "fiber_bundle.h"
+#include "SheafSystem/fiber_bundle.h"
 #endif
 
 #ifndef TOTAL_POSET_MEMBER_H
-#include "total_poset_member.h"
+#include "SheafSystem/total_poset_member.h"
 #endif
 
 #ifndef TUPLE_TABLE_DOFS_TYPE_H
-#include "tuple_table_dofs_type.h"
+#include "SheafSystem/tuple_table_dofs_type.h"
 #endif
  
 
 // #ifndef POSET_H
-// #include "poset.h"
+// #include "SheafSystem/poset.h"
 // #endif
 
 // #ifndef STD_VECTOR_H
-// #include "std_vector.h"
+// #include "SheafSystem/std_vector.h"
 // #endif
 
 namespace sheaf

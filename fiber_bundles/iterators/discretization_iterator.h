@@ -22,15 +22,15 @@
 #define DISCRETIZATION_ITERATOR_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef DEPTH_FIRST_ITERATOR_H
-#include "depth_first_iterator.h"
+#include "SheafSystem/depth_first_iterator.h"
 #endif
 
 #ifndef SINGLY_LINKED_LIST_H
-#include "singly_linked_list.h"
+#include "SheafSystem/singly_linked_list.h"
 #endif
 
 namespace fiber_bundle

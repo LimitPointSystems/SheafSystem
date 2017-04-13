@@ -22,12 +22,12 @@
 ///          generated.  If you need to make permanent changes,
 ///          edit the code template and rerun the generator instead.
 
-#include "field_e3.h"
+#include "SheafSystem/field_e3.h"
 
-#include "assert_contract.h"
-#include "base_space_member.h"
-#include "sec_ed_invertible.h"
-#include "sec_e3.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/base_space_member.h"
+#include "SheafSystem/sec_ed_invertible.h"
+#include "SheafSystem/sec_e3.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
@@ -553,5 +553,5 @@ operator<<(std::ostream& xos, const field_e3& xfield)
 
 /// Include field_vd algebra function definitions.
 
-#include "field_e3_funcs.impl.h"
+#include "SheafSystem/field_e3_funcs.impl.h"
 

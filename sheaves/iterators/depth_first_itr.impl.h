@@ -22,20 +22,20 @@
 #define DEPTH_FIRST_ITR_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 #ifndef DEPTH_FIRST_ITR_H
-#include "depth_first_itr.h"
+#include "SheafSystem/depth_first_itr.h"
 #endif
 
 #ifndef INDEX_SPACE_ITERATOR_H
-#include "index_space_iterator.h"
+#include "SheafSystem/index_space_iterator.h"
 #endif
 
 //#define DIAGNOSTIC_OUTPUT

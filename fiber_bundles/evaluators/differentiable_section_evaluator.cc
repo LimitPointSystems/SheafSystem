@@ -17,11 +17,11 @@
 
 // Implementation for class section_evaluator
 
-#include "differentiable_section_evaluator.h"
+#include "SheafSystem/differentiable_section_evaluator.h"
 
-#include "assert_contract.h"
-#include "block.h"
-#include "sec_vd.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/block.h"
+#include "SheafSystem/sec_vd.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 

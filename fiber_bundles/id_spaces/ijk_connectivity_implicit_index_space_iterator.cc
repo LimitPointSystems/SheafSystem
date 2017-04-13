@@ -18,11 +18,11 @@
 /// @file
 /// Implementation for class ijk_connectivity_implicit_index_space_iterator
 
-#include "ijk_connectivity_implicit_index_space_iterator.h"
+#include "SheafSystem/ijk_connectivity_implicit_index_space_iterator.h"
 
-#include "assert_contract.h"
-#include "ijk_connectivity_index_space_interval.h"
-#include "index_space_family.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/ijk_connectivity_index_space_interval.h"
+#include "SheafSystem/index_space_family.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 

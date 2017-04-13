@@ -17,15 +17,15 @@
 
 /// @example examples/sheaves_read.cc
 
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 
 #ifdef _WIN32
-#include "io.h"
+#include "SheafSystem/io.h"
 #endif
 
-#include "std_iostream.h"
-#include "namespace_poset.h"
-#include "storage_agent.h"
+#include "SheafSystem/std_iostream.h"
+#include "SheafSystem/namespace_poset.h"
+#include "SheafSystem/storage_agent.h"
 
 
 

@@ -18,23 +18,23 @@
 /// @file
 /// Implementation for class sec_stp_space.
 
-#include "sec_stp_space.h"
+#include "SheafSystem/sec_stp_space.h"
 
-#include "abstract_poset_member.impl.h"
-#include "assert_contract.h"
-#include "binary_section_space_schema_member.impl.h"
-#include "binary_section_space_schema_poset.h"
-#include "fiber_bundles_namespace.h"
-#include "namespace_poset.impl.h"
-#include "namespace_poset_member.h"
-#include "poset_handle_factory.h"
-#include "sec_at1.h"
-#include "sec_at1_space.h"
-#include "sec_stp.h"
-#include "sec_tuple_space.impl.h"
-#include "section_space_schema_member.impl.h"
-#include "section_space_schema_poset.h"
-#include "stp_space.h"
+#include "SheafSystem/abstract_poset_member.impl.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/binary_section_space_schema_member.impl.h"
+#include "SheafSystem/binary_section_space_schema_poset.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/namespace_poset.impl.h"
+#include "SheafSystem/namespace_poset_member.h"
+#include "SheafSystem/poset_handle_factory.h"
+#include "SheafSystem/sec_at1.h"
+#include "SheafSystem/sec_at1_space.h"
+#include "SheafSystem/sec_stp.h"
+#include "SheafSystem/sec_tuple_space.impl.h"
+#include "SheafSystem/section_space_schema_member.impl.h"
+#include "SheafSystem/section_space_schema_poset.h"
+#include "SheafSystem/stp_space.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

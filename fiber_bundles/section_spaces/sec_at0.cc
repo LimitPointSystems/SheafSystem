@@ -20,19 +20,19 @@
 
 //#define DIAGNOSTIC_OUTPUT
 
-#include "sec_at0.h"
+#include "SheafSystem/sec_at0.h"
 
-#include "assert_contract.h"
-#include "at0.impl.h"
-#include "at0_space.h"
-#include "base_space_poset.h"
-#include "binary_section_space_schema_member.impl.h"
-#include "fiber_bundles_namespace.h"
-#include "index_space_iterator.h"
-#include "sec_at0_space.h"
-#include "sec_tuple.impl.h"
-#include "sec_tuple_space.impl.h"
-#include "std_iomanip.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/at0.impl.h"
+#include "SheafSystem/at0_space.h"
+#include "SheafSystem/base_space_poset.h"
+#include "SheafSystem/binary_section_space_schema_member.impl.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/index_space_iterator.h"
+#include "SheafSystem/sec_at0_space.h"
+#include "SheafSystem/sec_tuple.impl.h"
+#include "SheafSystem/sec_tuple_space.impl.h"
+#include "SheafSystem/std_iomanip.h"
 
 
 using namespace std;
@@ -1145,7 +1145,7 @@ namespace
 
 //==============================================================================
 
-#include "sec_vd.impl.h"
+#include "SheafSystem/sec_vd.impl.h"
 
 using namespace fiber_bundle::sec_vd_algebra;
 

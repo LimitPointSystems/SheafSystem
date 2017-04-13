@@ -17,10 +17,10 @@
 
 // Implementation for class poset_data_type_map
 
-#include "poset_data_type_map.h"
+#include "SheafSystem/poset_data_type_map.h"
 
-#include "assert_contract.h"
-#include "data_converter.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/data_converter.h"
 
 // ===========================================================
 // ANY FACET

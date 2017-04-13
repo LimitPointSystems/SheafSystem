@@ -22,35 +22,35 @@
 #define SCHEMA_POSET_MEMBER_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef TOTAL_POSET_MEMBER_H
-#include "total_poset_member.h"
+#include "SheafSystem/total_poset_member.h"
 #endif
 
 #ifndef EXPLICIT_INDEX_SPACE_HANDLE_H
-#include "explcit_index_space_handle.h"
+#include "SheafSystem/explcit_index_space_handle.h"
 #endif
 
 #ifndef STD_UNORDERED_MAP_H
-#include "std_unordered_map.h"
+#include "SheafSystem/std_unordered_map.h"
 #endif
 
 #ifndef STD_LIST_H
-#include "std_list.h"
+#include "SheafSystem/std_list.h"
 #endif
 
 #ifndef STD_IOSTREAM_H
-#include "std_iostream.h"
+#include "SheafSystem/std_iostream.h"
 #endif
 
 #ifndef PRIMITIVES_POSET_DOF_MAP_H
-#include "primitives_poset_dof_map.h"
+#include "SheafSystem/primitives_poset_dof_map.h"
 #endif
 
 #ifndef STD_STRING_H
-#include "std_string.h"
+#include "SheafSystem/std_string.h"
 #endif
 
 namespace sheaf

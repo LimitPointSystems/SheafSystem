@@ -20,8 +20,9 @@
 
 set(CLUSTER ${CMAKE_CURRENT_BINARY_DIR})
 
-configure_file(singly_linked_list.h.in ${CMAKE_BINARY_DIR}/include/singly_linked_list.h)
-install(FILES ${CMAKE_BINARY_DIR}/include/singly_linked_list.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
+configure_file(singly_linked_list.h.in ${SHEAFSYSTEM_HEADER_DIR}/singly_linked_list.h)
+install(FILES ${SHEAFSYSTEM_HEADER_DIR}/singly_linked_list.h
+   DESTINATION ${CMAKE_INSTALL_PREFIX}/include/${SHEAFSYSTEM_HEADER_SCOPE})
 
 #
 # Library sources.

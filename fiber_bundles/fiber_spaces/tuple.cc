@@ -18,16 +18,16 @@
 /// @file
 /// Implementation for class tuple.
 
-#include "tuple.h"
+#include "SheafSystem/tuple.h"
 
-#include "abstract_poset_member.impl.h"
-#include "assert_contract.h"
-#include "namespace_poset.h"
-#include "schema_poset_member.h"
-#include "wsv_block.h"
+#include "SheafSystem/abstract_poset_member.impl.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/namespace_poset.h"
+#include "SheafSystem/schema_poset_member.h"
+#include "SheafSystem/wsv_block.h"
 
-#include "fiber_bundles_namespace.h"
-#include "tuple_space.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/tuple_space.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

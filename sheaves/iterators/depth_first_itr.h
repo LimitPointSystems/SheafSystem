@@ -22,35 +22,35 @@
 #define DEPTH_FIRST_ITR_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ANY_H
-#include "any.h"
+#include "SheafSystem/any.h"
 #endif
 
 #ifndef STD_UNORDERED_SET_H
-#include "std_unordered_set.h"
+#include "SheafSystem/std_unordered_set.h"
 #endif
 
 #ifndef POSET_STATE_HANDLE_H
-#include "poset_state_handle.h"
+#include "SheafSystem/poset_state_handle.h"
 #endif
 
 #ifndef STD_SET_H
-#include "std_set.h"
+#include "SheafSystem/std_set.h"
 #endif
 
 #ifndef STD_STACK_H
-#include "std_stack.h"
+#include "SheafSystem/std_stack.h"
 #endif
 
 #ifndef SUBPOSET_H
-#include "subposet.h"
+#include "SheafSystem/subposet.h"
 #endif
 
 #ifndef TOTAL_POSET_MEMBER_H
-#include "total_poset_member.h"
+#include "SheafSystem/total_poset_member.h"
 #endif
 
 namespace sheaf

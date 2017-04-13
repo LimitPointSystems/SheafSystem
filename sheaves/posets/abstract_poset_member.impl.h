@@ -23,11 +23,11 @@
 #define ABSTRACT_POSET_MEMBER_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ABSTRACT_POSET_MEMBER_H
-#include "abstract_poset_member.h"
+#include "SheafSystem/abstract_poset_member.h"
 #endif
 
 namespace sheaf

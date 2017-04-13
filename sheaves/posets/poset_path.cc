@@ -17,14 +17,14 @@
 
 // Implementation for class poset_path
 
-#include "poset_path.h"
+#include "SheafSystem/poset_path.h"
 
-#include "assert_contract.h"
-#include "namespace_poset.h"
-#include "primitive_value.h"
-#include "schema_poset_member.h"
-#include "std_iostream.h"
-#include "std_sstream.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/namespace_poset.h"
+#include "SheafSystem/primitive_value.h"
+#include "SheafSystem/schema_poset_member.h"
+#include "SheafSystem/std_iostream.h"
+#include "SheafSystem/std_sstream.h"
 
 using namespace sheaf;
 using namespace std;

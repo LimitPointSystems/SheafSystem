@@ -22,11 +22,11 @@
 #define SCATTERED_INSERTION_INDEX_SPACE_STATE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef GATHERED_INSERTION_INDEX_SPACE_STATE_H
-#include "gathered_insertion_index_space_state.h"
+#include "SheafSystem/gathered_insertion_index_space_state.h"
 #endif
 
 namespace sheaf

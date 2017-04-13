@@ -18,12 +18,12 @@
 /// @file
 /// Implementation for class poset_powerset_state
 
-#include "poset_powerset_state.h"
-#include "assert_contract.h"
-#include "index_space_iterator.h"
-#include "hub_index_space_handle.h"
-#include "std_sstream.h"
-#include "std_iomanip.h"
+#include "SheafSystem/poset_powerset_state.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/index_space_iterator.h"
+#include "SheafSystem/hub_index_space_handle.h"
+#include "SheafSystem/std_sstream.h"
+#include "SheafSystem/std_iomanip.h"
 
 using namespace std;
 

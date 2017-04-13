@@ -17,10 +17,10 @@
 
 // Implementation for class linear_fcn_space
 
-#include "linear_fcn_space.h"
+#include "SheafSystem/linear_fcn_space.h"
 
-#include "assert_contract.h"
-#include "std_cmath.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/std_cmath.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 

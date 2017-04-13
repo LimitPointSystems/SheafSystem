@@ -18,9 +18,9 @@
 // JNI code for NativeVtk.java
 
 #include <jni.h>
-#include "vtkObject.h"
-#include "vtkJavaUtil.h"
-#include "vtkSystemIncludes.h"
+#include "SheafSystem/vtkObject.h"
+#include "SheafSystem/vtkJavaUtil.h"
+#include "SheafSystem/vtkSystemIncludes.h"
 
 #ifdef __cplusplus
 extern "C"

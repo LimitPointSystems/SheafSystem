@@ -17,20 +17,20 @@
 
 // Implementation for class geometry_namespace
 
-#include "geometry_namespace.h"
+#include "SheafSystem/geometry_namespace.h"
 
-#include "assert_contract.h"
-#include "at0.h"
-#include "base_space_member.h"
-#include "error_message.h"
-#include "e1.h"
-#include "e2.h"
-#include "e3.h"
-#include "poset_path.h"
-#include "sec_rep_descriptor.h"
-#include "sec_rep_descriptor_poset.h"
-#include "std_iostream.h"
-#include "wsv_block.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/at0.h"
+#include "SheafSystem/base_space_member.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/e1.h"
+#include "SheafSystem/e2.h"
+#include "SheafSystem/e3.h"
+#include "SheafSystem/poset_path.h"
+#include "SheafSystem/sec_rep_descriptor.h"
+#include "SheafSystem/sec_rep_descriptor_poset.h"
+#include "SheafSystem/std_iostream.h"
+#include "SheafSystem/wsv_block.h"
 
 //#define DIAGNOSTIC_OUTPUT
 

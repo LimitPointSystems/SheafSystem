@@ -21,31 +21,31 @@
 #define POSET_DATA_TYPE_MAP_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef DATA_TYPE_MAP_H
-#include "data_type_map.h"
+#include "SheafSystem/data_type_map.h"
 #endif
 
 //#ifndef NAME_MULTIMAP_H
-//#include "name_multimap.h"
+//#include "SheafSystem/name_multimap.h"
 //#endif
 
 #ifndef RECORD_INDEX_H
-#include "record_index.h"
+#include "SheafSystem/record_index.h"
 #endif
 
 #ifndef STD_UNORDERED_MAP_H
-#include "std_unordered_map.h"
+#include "SheafSystem/std_unordered_map.h"
 #endif
 
 #ifndef STD_STRING_H
-#include "std_string.h"
+#include "SheafSystem/std_string.h"
 #endif
 
 #ifndef STD_VECTOR_H
-#include "std_vector.h"
+#include "SheafSystem/std_vector.h"
 #endif
 
 namespace sheaf

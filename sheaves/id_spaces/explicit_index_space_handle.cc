@@ -18,13 +18,13 @@
 /// @file
 /// Implementation for class explicit_index_space_handle
 
-#include "abstract_product_structure.h"
-#include "explicit_index_space_handle.h"
-#include "assert_contract.h"
-#include "explicit_index_space_state.h"
-#include "hub_index_space_handle.h"
-#include "index_space_family.h"
-#include "index_space_iterator.h"
+#include "SheafSystem/abstract_product_structure.h"
+#include "SheafSystem/explicit_index_space_handle.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/explicit_index_space_state.h"
+#include "SheafSystem/hub_index_space_handle.h"
+#include "SheafSystem/index_space_family.h"
+#include "SheafSystem/index_space_iterator.h"
 
 // ===========================================================
 // EXPLICIT_INDEX_SPACE_HANDLE FACET

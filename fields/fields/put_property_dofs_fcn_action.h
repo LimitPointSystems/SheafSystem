@@ -22,11 +22,11 @@
 #define PUT_PROPERTY_DOFS_FCN_ACTION_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef PUT_PROPERTY_DOFS_ACTION_H
-#include "put_property_dofs_action.h"
+#include "SheafSystem/put_property_dofs_action.h"
 #endif
 
 namespace fields

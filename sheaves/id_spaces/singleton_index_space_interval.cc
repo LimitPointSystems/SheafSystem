@@ -18,14 +18,14 @@
 /// @file
 /// Implementation for class singleton_index_space_interval
 
-#include "abstract_product_structure.h"
-#include "singleton_index_space_interval.h"
-#include "assert_contract.h"
-#include "singleton_implicit_index_space_iterator.h"
-#include "forwarding_index_space_handle.h"
-#include "explicit_index_space_state.h"
-#include "hub_index_space_handle.h"
-#include "index_space_family.h"
+#include "SheafSystem/abstract_product_structure.h"
+#include "SheafSystem/singleton_index_space_interval.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/singleton_implicit_index_space_iterator.h"
+#include "SheafSystem/forwarding_index_space_handle.h"
+#include "SheafSystem/explicit_index_space_state.h"
+#include "SheafSystem/hub_index_space_handle.h"
+#include "SheafSystem/index_space_family.h"
 
 // ===========================================================
 // SPACE FACTORY FACET

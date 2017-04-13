@@ -18,10 +18,10 @@
 /// @file
 /// Implementation for class scoped_index
 
-#include "scoped_index.h"
+#include "SheafSystem/scoped_index.h"
 
-#include "poset_state_handle.h"
-#include "std_iomanip.h"
+#include "SheafSystem/poset_state_handle.h"
+#include "SheafSystem/std_iomanip.h"
 
 // ===========================================================
 // SCOPED_INDEX FACET

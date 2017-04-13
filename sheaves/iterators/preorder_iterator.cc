@@ -17,8 +17,8 @@
 
 // Implementation for class preorder_iterator
 
-#include "preorder_iterator.h"
-#include "assert_contract.h"
+#include "SheafSystem/preorder_iterator.h"
+#include "SheafSystem/assert_contract.h"
 
 sheaf::preorder_iterator::
 preorder_iterator()

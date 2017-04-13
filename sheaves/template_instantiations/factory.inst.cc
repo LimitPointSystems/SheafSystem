@@ -17,11 +17,11 @@
 
 // Implementation for class factory.
 
-#include "factory.impl.h"
+#include "SheafSystem/factory.impl.h"
 
-#include "crg_interval.h"
-#include "explicit_index_space_state.h"
-#include "index_space_interval.h"
+#include "SheafSystem/crg_interval.h"
+#include "SheafSystem/explicit_index_space_state.h"
+#include "SheafSystem/index_space_interval.h"
 
 using namespace std;
 using namespace sheaf; // Workaround for MS C++ bug.

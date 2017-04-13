@@ -18,9 +18,9 @@
 /// @file
 /// Instantiations for class template d_bin_coordinates
 
-#include "d_bin_coordinates.impl.h"
+#include "SheafSystem/d_bin_coordinates.impl.h"
 
-#include "std_iostream.h"
+#include "SheafSystem/std_iostream.h"
 
 using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.

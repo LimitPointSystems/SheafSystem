@@ -411,7 +411,7 @@ function(SheafSystem_add_component_install_target xcomponent_name)
       endif()
    endif()
 
-   install(FILES ${${LCOMP_NAME_UC}_INCS} DESTINATION include) 
+   install(FILES ${${LCOMP_NAME_UC}_INCS} DESTINATION include/${SHEAFSYSTEM_HEADER_SCOPE}) 
 
    # message("Leaving SheafSystem_add_component_install_target")
    

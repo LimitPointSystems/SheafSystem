@@ -21,11 +21,11 @@
 #define SECTION_DOF_ITERATOR_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef POSET_DOF_ITERATOR_H
-#include "poset_dof_iterator.h"
+#include "SheafSystem/poset_dof_iterator.h"
 #endif
 
 namespace sheaf

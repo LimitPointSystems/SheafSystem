@@ -156,7 +156,7 @@ function(SheafSystem_configure_std_headers)
 
       # Configure the .h files
 
-      configure_file(std/${input_file} ${CMAKE_BINARY_DIR}/include/${std_h})
+      configure_file(std/${input_file} ${SHEAFSYSTEM_HEADER_DIR}/${std_h})
 
    endforeach()
 
@@ -197,7 +197,7 @@ function(SheafSystem_add_sheaves_library_targets)
       add_library(${SHEAVES_DYNAMIC_LIB} SHARED ${SHEAVES_SRCS})
       add_dependencies(${SHEAVES_DYNAMIC_LIB} sheaves_scoped_headers)
       target_include_directories(${SHEAVES_DYNAMIC_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )
       target_link_libraries(${SHEAVES_DYNAMIC_LIB} PRIVATE hdf5-static)
       set_target_properties(${SHEAVES_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")
 
@@ -224,7 +224,7 @@ function(SheafSystem_add_sheaves_library_targets)
       add_library(${SHEAVES_STATIC_LIB} STATIC ${SHEAVES_SRCS})
       add_dependencies(${SHEAVES_STATIC_LIB} sheaves_scoped_headers)
       target_include_directories(${SHEAVES_STATIC_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )
       target_link_libraries(${SHEAVES_STATIC_LIB} PUBLIC hdf5-static)
       set_target_properties(${SHEAVES_STATIC_LIB} PROPERTIES OUTPUT_NAME sheaves)
       set_target_properties(${SHEAVES_STATIC_LIB} PROPERTIES LINKER_LANGUAGE CXX)
@@ -253,7 +253,7 @@ function(SheafSystem_add_sheaves_library_targets)
       # message("shared _lps_escaped_paths= ${_lps_escaped_paths}")
 
       target_include_directories(${SHEAVES_SHARED_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )   
 
       #target_link_libraries(${SHEAVES_SHARED_LIB} 
       #   PRIVATE -Wl,-Bstatic hdf5 m rt z szip -Wl,-Bdynamic 
@@ -764,6 +764,6 @@ endfunction(SheafSystem_add_sheaves_bindings_targets)
 function(SheafSystem_add_sheaves_install_target)
 
    SheafSystem_add_component_install_target(sheaves)
-   install(FILES ${SHEAVES_STD_HEADERS} DESTINATION include)
+   install(FILES ${SHEAVES_STD_HEADERS} DESTINATION include/${SHEAFSYSTEM_HEADER_SCOPE})
    
 endfunction(SheafSystem_add_sheaves_install_target)

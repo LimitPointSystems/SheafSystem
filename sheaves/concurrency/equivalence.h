@@ -21,16 +21,16 @@
 #define EQUIVALENCE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifdef PARALLEL_MPI
 
 #ifndef STD_HDF5_H
-#include "std_hdf5.h"
+#include "SheafSystem/std_hdf5.h"
 #endif
 
-#include "mpi.h"
+#include "SheafSystem/mpi.h"
 
 namespace sheaf
 {

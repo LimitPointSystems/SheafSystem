@@ -23,11 +23,11 @@
 #define HOMOGENEOUS_BLOCK_CRG_INTERVAL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef BASE_SPACE_CRG_INTERVAL_H
-#include "base_space_crg_interval.h"
+#include "SheafSystem/base_space_crg_interval.h"
 #endif
 
 namespace fiber_bundle

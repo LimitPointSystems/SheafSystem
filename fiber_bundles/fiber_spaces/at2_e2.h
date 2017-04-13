@@ -22,19 +22,19 @@
 #define AT2_E2_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef AT2_H
-#include "at2.h"
+#include "SheafSystem/at2.h"
 #endif
 
 #ifndef ANTISYMMETRIC_MATRIX_2X2_H
-#include "antisymmetric_matrix_2x2.h"
+#include "SheafSystem/antisymmetric_matrix_2x2.h"
 #endif
 
 #ifndef E2_H
-#include "e2.h"
+#include "SheafSystem/e2.h"
 #endif
 
 namespace fiber_bundle

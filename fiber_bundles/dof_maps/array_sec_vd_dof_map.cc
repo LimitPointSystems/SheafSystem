@@ -17,15 +17,15 @@
 
 // Implementation for class array_sec_vd_dof_map
 
-#include "array_sec_vd_dof_map.h"
+#include "SheafSystem/array_sec_vd_dof_map.h"
 
-#include "assert_contract.h"
-#include "discretization_iterator.h"
-#include "dof_map_factory.h"
-#include "id_map.h"
-#include "postorder_iterator.h"
-#include "sec_rep_space.h"
-#include "primitive_type.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/discretization_iterator.h"
+#include "SheafSystem/dof_map_factory.h"
+#include "SheafSystem/id_map.h"
+#include "SheafSystem/postorder_iterator.h"
+#include "SheafSystem/sec_rep_space.h"
+#include "SheafSystem/primitive_type.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 

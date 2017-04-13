@@ -17,10 +17,10 @@
 
 // Definitions for poset type id facet of namespace sheaf.
 
-#include "poset_type.h"
+#include "SheafSystem/poset_type.h"
 
-#include "assert_contract.h"
-#include "error_message.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/error_message.h"
 
 // =============================================================================
 // POSET TYPE FACET

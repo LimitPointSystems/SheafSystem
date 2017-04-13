@@ -18,8 +18,8 @@
 /// @file
 /// Implementation for class chart_point_1d
 
-#include "chart_point_1d.h"
-#include "assert_contract.h"
+#include "SheafSystem/chart_point_1d.h"
+#include "SheafSystem/assert_contract.h"
 
 using namespace fiber_bundle; // Workaround for bug in MS C++.
 

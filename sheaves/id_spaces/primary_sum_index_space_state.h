@@ -22,35 +22,35 @@
 #define PRIMARY_SUM_INDEX_SPACE_STATE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef SUM_INDEX_SPACE_STATE_H
-#include "sum_index_space_state.h"
+#include "SheafSystem/sum_index_space_state.h"
 #endif
 
 #ifndef LIST_POOL_H
-#include "list_pool.h"
+#include "SheafSystem/list_pool.h"
 #endif
 
 #ifndef INTERVAL_INDEX_SPACE_HANDLE_H
-#include "interval_index_space_handle.h"
+#include "SheafSystem/interval_index_space_handle.h"
 #endif
  
 #ifndef INTERVAL_SET_H
-#include "interval_set.h"
+#include "SheafSystem/interval_set.h"
 #endif
 
 #ifndef RESERVED_PRIMARY_INDEX_SPACE_HANDLE_H
-#include "reserved_primary_index_space_handle.h"
+#include "SheafSystem/reserved_primary_index_space_handle.h"
 #endif
 
 #ifndef STD_UNORDERED_MAP_H
-#include "std_unordered_map.h"
+#include "SheafSystem/std_unordered_map.h"
 #endif
 
 #ifndef STD_UNORDERED_SET_H
-#include "std_unordered_set.h"
+#include "SheafSystem/std_unordered_set.h"
 #endif
 
 namespace sheaf

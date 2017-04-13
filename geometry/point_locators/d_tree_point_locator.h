@@ -22,23 +22,23 @@
 #define D_TREE_POINT_LOCATOR_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef D_BIN_POINT_LOCATOR_H
-#include "d_bin_point_locator.h"
+#include "SheafSystem/d_bin_point_locator.h"
 #endif
 
 #ifndef D_TREE_POINT_LOCATOR_NODE_H
-#include "d_tree_point_locator_node.h"
+#include "SheafSystem/d_tree_point_locator_node.h"
 #endif
 
 #ifndef PTR_LINKED_POOL_H
-#include "ptr_linked_pool.h"
+#include "SheafSystem/ptr_linked_pool.h"
 #endif
 
 #ifndef STD_IOSTREAM_H
-#include "std_iostream.h"
+#include "SheafSystem/std_iostream.h"
 #endif
 
 //#undef DIAGNOSTIC_OUTPUT

@@ -18,11 +18,11 @@
 /// @file
 /// Implementation for class constant_implicit_index_space_iterator
 
-#include "constant_implicit_index_space_iterator.h"
+#include "SheafSystem/constant_implicit_index_space_iterator.h"
 
-#include "assert_contract.h"
-#include "constant_index_space_interval.h"
-#include "index_space_family.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/constant_index_space_interval.h"
+#include "SheafSystem/index_space_family.h"
 
 // ===========================================================
 // CONSTANT_IMPLICIT_INDEX_SPACE_ITERATOR FACET

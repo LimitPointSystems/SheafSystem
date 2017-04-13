@@ -17,7 +17,7 @@
 
 // Instantiations for class auto_block.
 
-#include "auto_block.impl.h"
+#include "SheafSystem/auto_block.impl.h"
 
 
 using namespace std;
@@ -1401,7 +1401,7 @@ size_t sheaf::deep_size<long double, sheaf::zero_block_initialization_policy<lon
 // auto_block<string, S>
 //==============================================================================
 
-#include "std_string.h"
+#include "SheafSystem/std_string.h"
 
 template class 
 SHEAF_DLL_SPEC 
@@ -1521,7 +1521,7 @@ size_t sheaf::deep_size<std::string, sheaf::invalid_block_initialization_policy<
 // auto_block<poset_state_handle*, un_block_initialization_policy>
 //==============================================================================
 
-#include "poset_state_handle.h"
+#include "SheafSystem/poset_state_handle.h"
 
 template class 
 SHEAF_DLL_SPEC
@@ -1616,7 +1616,7 @@ size_t sheaf::deep_size<sheaf::poset_state_handle, sheaf::invalid_block_initiali
 // auto_block<sheaf::arg_list, S>
 //==============================================================================
 
-#include "arg_list.h"
+#include "SheafSystem/arg_list.h"
 
 template class 
 SHEAF_DLL_SPEC
@@ -1680,7 +1680,7 @@ size_t sheaf::deep_size<sheaf::arg_list::arg_type, sheaf::un_block_initializatio
 // auto_block<sheaf::primitive_attributes, S>
 //==============================================================================
 
-#include "primitive_attributes.h"
+#include "SheafSystem/primitive_attributes.h"
 
 template class 
 SHEAF_DLL_SPEC
@@ -1713,7 +1713,7 @@ ostream& sheaf::operator << <sheaf::primitive_attributes, sheaf::un_block_initia
 // auto_block<sheaf::poset_path, S>
 //==============================================================================
 
-#include "poset_path.h"
+#include "SheafSystem/poset_path.h"
 
 template class 
 SHEAF_DLL_SPEC
@@ -1746,7 +1746,7 @@ size_t sheaf::deep_size<sheaf::poset_path, sheaf::un_block_initialization_policy
 // auto_block<sheaf::schema_descriptor, S>
 //==============================================================================
 
-#include "schema_descriptor.h"
+#include "SheafSystem/schema_descriptor.h"
 
 template class 
 SHEAF_DLL_SPEC
@@ -1779,7 +1779,7 @@ size_t sheaf::deep_size<sheaf::schema_descriptor, sheaf::un_block_initialization
 // auto_block<sheaf::subposet, S>
 //==============================================================================
 
-#include "subposet.h"
+#include "SheafSystem/subposet.h"
 
 template class 
 SHEAF_DLL_SPEC
@@ -1813,7 +1813,7 @@ size_t sheaf::deep_size<sheaf::subposet, sheaf::un_block_initialization_policy<s
 // auto_block<subposet_state*, un_block_initialization_policy>
 //==============================================================================
 
-#include "subposet_state.h"
+#include "SheafSystem/subposet_state.h"
 
 template class 
 SHEAF_DLL_SPEC
@@ -1908,7 +1908,7 @@ size_t sheaf::deep_size<sheaf::subposet_state, sheaf::invalid_block_initializati
 // auto_block<block<double>, S>
 //==============================================================================
 
-#include "block.h"
+#include "SheafSystem/block.h"
 
 template class 
 SHEAF_DLL_SPEC
@@ -2165,7 +2165,7 @@ size_t sheaf::deep_size<sheaf::block<int>, sheaf::invalid_block_initialization_p
 // auto_block<scoped_index, un_block_initialization_policy>
 //==============================================================================
 
-#include "scoped_index.h"
+#include "SheafSystem/scoped_index.h"
 
 template class 
 SHEAF_DLL_SPEC
@@ -2261,7 +2261,7 @@ size_t sheaf::deep_size<sheaf::scoped_index, sheaf::invalid_block_initialization
 // auto_block<list<sheaf::scoped_index>, un_block_initialization_policy>
 //==============================================================================
 
-#include "std_list.h"
+#include "SheafSystem/std_list.h"
 
 template class 
 SHEAF_DLL_SPEC
@@ -2295,7 +2295,7 @@ size_t sheaf::deep_size<std::list<sheaf::scoped_index>, sheaf::un_block_initiali
 // auto_block<primitive_value, un_block_initialization_policy>
 //==============================================================================
 
-#include "primitive_value.h"
+#include "SheafSystem/primitive_value.h"
 
 template class 
 SHEAF_DLL_SPEC
@@ -2391,7 +2391,7 @@ size_t sheaf::deep_size<sheaf::primitive_value, sheaf::invalid_block_initializat
 // auto_block<explicit_index_space_state*, un_block_initialization_policy>
 //==============================================================================
 
-#include "explicit_index_space_state.h"
+#include "SheafSystem/explicit_index_space_state.h"
 
 template class 
 SHEAF_DLL_SPEC
@@ -2581,7 +2581,7 @@ size_t sheaf::deep_size<sheaf::index_space_handle, sheaf::invalid_block_initiali
 // auto_block<scattered_insertion_index_space_handle*, un_block_initialization_policy>
 //==============================================================================
 
-#include "scattered_insertion_index_space_handle.h"
+#include "SheafSystem/scattered_insertion_index_space_handle.h"
 
 template class 
 SHEAF_DLL_SPEC
@@ -2677,7 +2677,7 @@ size_t sheaf::deep_size<sheaf::scattered_insertion_index_space_handle, sheaf::in
 // auto_block<poset_dof_map*, un_block_initialization_policy>
 //==============================================================================
 
-#include "poset_dof_map.h"
+#include "SheafSystem/poset_dof_map.h"
 
 template class 
 SHEAF_DLL_SPEC
@@ -2773,7 +2773,7 @@ size_t sheaf::deep_size<sheaf::poset_dof_map, sheaf::invalid_block_initializatio
 // auto_block<set<int>, un_block_initialization_policy>
 //==============================================================================
 
-#include "std_set.h"
+#include "SheafSystem/std_set.h"
 
 template class 
 SHEAF_DLL_SPEC

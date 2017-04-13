@@ -22,23 +22,23 @@
 #define IMPLICIT_ENTRY_MAP_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ANY_H
-#include "any.h"
+#include "SheafSystem/any.h"
 #endif
 
 #ifndef POD_TYPES_H
-#include "pod_types.h"
+#include "SheafSystem/pod_types.h"
 #endif
 
 #ifndef STD_UNORDERED_MAP_H
-#include "std_unordered_map.h"
+#include "SheafSystem/std_unordered_map.h"
 #endif
 
 #ifndef STD_MAP_H
-#include "std_map.h"
+#include "SheafSystem/std_map.h"
 #endif
 
 namespace sheaf

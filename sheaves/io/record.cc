@@ -18,8 +18,8 @@
 
 // Implementation for class record
 
-#include "record.h"
-#include "assert_contract.h"
+#include "SheafSystem/record.h"
+#include "SheafSystem/assert_contract.h"
 
 // PUBLIC MEMBER FUNCTIONS
 

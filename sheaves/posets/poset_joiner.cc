@@ -20,21 +20,21 @@
 
 // Implementation for class POSET_JOINER
 
-#include "poset_joiner.h"
-#include "assert_contract.h"
+#include "SheafSystem/poset_joiner.h"
+#include "SheafSystem/assert_contract.h"
 
-#include "abstract_poset_member.h"
-#include "error_message.h"
-#include "unordered_set_filter.h"
-#include "total_poset_member.h"
-#include "poset_state_handle.h"
-#include "scoped_index.h"
-#include "set_filter.h"
-#include "std_algorithm.h"
-#include "std_unordered_set.h"
-#include "std_set.h"
-#include "tern.h"
-#include "triorder_itr.h"
+#include "SheafSystem/abstract_poset_member.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/unordered_set_filter.h"
+#include "SheafSystem/total_poset_member.h"
+#include "SheafSystem/poset_state_handle.h"
+#include "SheafSystem/scoped_index.h"
+#include "SheafSystem/set_filter.h"
+#include "SheafSystem/std_algorithm.h"
+#include "SheafSystem/std_unordered_set.h"
+#include "SheafSystem/std_set.h"
+#include "SheafSystem/tern.h"
+#include "SheafSystem/triorder_itr.h"
 
 using namespace sheaf;
 using namespace std;

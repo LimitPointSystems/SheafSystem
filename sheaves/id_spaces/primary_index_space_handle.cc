@@ -18,10 +18,10 @@
 /// @file
 /// Implementation for class primary_index_space_handle
 
-#include "primary_index_space_handle.h"
-#include "assert_contract.h"
-#include "index_space_family.h"
-#include "primary_index_space_state.h"
+#include "SheafSystem/primary_index_space_handle.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/index_space_family.h"
+#include "SheafSystem/primary_index_space_state.h"
 
 // ===========================================================
 // PRIMARY_INDEX_SPACE_HANDLE FACET

@@ -18,8 +18,8 @@
 /// @file
 /// Implementation for class tolerance_comparison
 
-#include "tolerance_comparison.h"
-#include "assert_contract.h"
+#include "SheafSystem/tolerance_comparison.h"
+#include "SheafSystem/assert_contract.h"
 
 using namespace sheaf;  // Workaround for MSVC++ bug
 

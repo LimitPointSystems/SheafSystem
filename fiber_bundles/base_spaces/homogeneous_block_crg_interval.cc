@@ -18,18 +18,18 @@
 /// @file
 /// Implementation for class homogeneous_block_crg_interval
 
-#include "homogeneous_block_crg_interval.h"
+#include "SheafSystem/homogeneous_block_crg_interval.h"
 
-#include "assert_contract.h"
-#include "arg_list.h"
-#include "base_space_poset.h"
-#include "error_message.h"
-#include "offset_index_space_state.h"
-#include "index_space_iterator.h"
-#include "std_iomanip.h"
-#include "std_string.h"
-#include "std_sstream.h"
-#include "homogeneous_block.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/arg_list.h"
+#include "SheafSystem/base_space_poset.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/offset_index_space_state.h"
+#include "SheafSystem/index_space_iterator.h"
+#include "SheafSystem/std_iomanip.h"
+#include "SheafSystem/std_string.h"
+#include "SheafSystem/std_sstream.h"
+#include "SheafSystem/homogeneous_block.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

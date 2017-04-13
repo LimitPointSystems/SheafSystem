@@ -18,16 +18,16 @@
 /// @file
 /// Implementation for class t2.
 
-#include "t2.h"
+#include "SheafSystem/t2.h"
 
-#include "abstract_poset_member.impl.h"
-#include "assert_contract.h"
-#include "at1.h"
-#include "at1_space.h"
-#include "fiber_bundles_namespace.h"
-#include "schema_poset_member.h"
-#include "tp_space.h"
-#include "wsv_block.h"
+#include "SheafSystem/abstract_poset_member.impl.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/at1.h"
+#include "SheafSystem/at1_space.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/schema_poset_member.h"
+#include "SheafSystem/tp_space.h"
+#include "SheafSystem/wsv_block.h"
 
 
 using namespace std;
@@ -1080,11 +1080,11 @@ is_ancestor_of(const any* xother) const
 // NON-MEMBER FUNCTIONS
 //==============================================================================
 
-#include "at0.h"
-#include "at1.h"
-#include "at2.h"
-#include "st2.h"
-#include "t2.h"
+#include "SheafSystem/at0.h"
+#include "SheafSystem/at1.h"
+#include "SheafSystem/at2.h"
+#include "SheafSystem/st2.h"
+#include "SheafSystem/t2.h"
 
 void
 fiber_bundle::tp_algebra::

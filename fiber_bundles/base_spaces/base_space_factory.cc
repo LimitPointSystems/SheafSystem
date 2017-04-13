@@ -17,22 +17,22 @@
 
 // Template specializations for class base_space_factory.
 
-#include "base_space_factory.impl.h"
+#include "SheafSystem/base_space_factory.impl.h"
 
-//#include "base_space_member_prototype.h"
-#include "hex_connectivity.h" 
-#include "line_connectivity.h" 
-#include "point_block_1d.h"
-#include "point_block_2d.h"
-#include "point_block_3d.h"
-#include "quad_connectivity.h" 
-#include "structured_block_1d.h"
-#include "structured_block_2d.h"
-#include "structured_block_3d.h"
-#include "tetra_connectivity.h" 
-#include "triangle_connectivity.h" 
-#include "unstructured_block.h"
-#include "zone_nodes_block.h"
+//#include "SheafSystem/base_space_member_prototype.h"
+#include "SheafSystem/hex_connectivity.h" 
+#include "SheafSystem/line_connectivity.h" 
+#include "SheafSystem/point_block_1d.h"
+#include "SheafSystem/point_block_2d.h"
+#include "SheafSystem/point_block_3d.h"
+#include "SheafSystem/quad_connectivity.h" 
+#include "SheafSystem/structured_block_1d.h"
+#include "SheafSystem/structured_block_2d.h"
+#include "SheafSystem/structured_block_3d.h"
+#include "SheafSystem/tetra_connectivity.h" 
+#include "SheafSystem/triangle_connectivity.h" 
+#include "SheafSystem/unstructured_block.h"
+#include "SheafSystem/zone_nodes_block.h"
 
 using namespace std;
 

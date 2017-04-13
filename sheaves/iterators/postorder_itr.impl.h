@@ -22,11 +22,11 @@
 #define POSTORDER_ITR_IMPL_H
 
 #ifndef POSTORDER_ITR_H
-#include "postorder_itr.h"
+#include "SheafSystem/postorder_itr.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 

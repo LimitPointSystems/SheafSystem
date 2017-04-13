@@ -19,7 +19,7 @@
 /// Explicit instantiations for class depth_first_itr.
  
 
-#include "depth_first_itr.impl.h"
+#include "SheafSystem/depth_first_itr.impl.h"
 
 using namespace std;
 using namespace unordered;
@@ -33,7 +33,7 @@ using namespace unordered;
 // =============================================================================
 
 
-#include "zn_to_bool.h"
+#include "SheafSystem/zn_to_bool.h"
 
 template <>
 void
@@ -124,7 +124,7 @@ put_has_visited(pod_index_type xindex, bool xvalue)
 // SET
 // =============================================================================
 
-#include "std_set.h"
+#include "SheafSystem/std_set.h"
 
 template <>
 void
@@ -225,7 +225,7 @@ put_has_visited(pod_index_type xindex, bool xvalue)
 // UNORDERED_SET
 // =============================================================================
 
-#include "std_unordered_set.h"
+#include "SheafSystem/std_unordered_set.h"
 
 template <>
 void

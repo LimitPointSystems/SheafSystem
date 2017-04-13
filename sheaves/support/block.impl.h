@@ -22,15 +22,15 @@
 #define BLOCK_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef BLOCK_H
-#include "block.h"
+#include "SheafSystem/block.h"
 #endif
 
 #ifndef AUTO_BLOCK_IMPL_H
-#include "auto_block.impl.h"
+#include "SheafSystem/auto_block.impl.h"
 #endif
 
 namespace sheaf

@@ -17,7 +17,7 @@
 
 // Implementation for deep_size functions
 
-#include "deep_size.impl.h"
+#include "SheafSystem/deep_size.impl.h"
 
 size_t
 sheaf::deep_size(const std::string& xp, bool xinclude_shallow)

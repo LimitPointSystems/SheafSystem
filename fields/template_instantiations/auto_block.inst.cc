@@ -17,17 +17,17 @@
 
 // Explicit instantiations for class auto_block.
 
-#include "auto_block.impl.h"
+#include "SheafSystem/auto_block.impl.h"
 
-#include "barycentric_refiner_family.h"
-#include "edge_centered_polygon_refiner.h"
-#include "edge_centered_refiner_family.h"
-#include "local_field_refiner.h"
-#include "pullback_map.h"
-#include "zone_centered_refiner_family.h"
-#include "zone_centered_segment_refiner.h"
-#include "zone_centered_tet_refiner.h"
-#include "zone_centered_triangle_refiner.h"
+#include "SheafSystem/barycentric_refiner_family.h"
+#include "SheafSystem/edge_centered_polygon_refiner.h"
+#include "SheafSystem/edge_centered_refiner_family.h"
+#include "SheafSystem/local_field_refiner.h"
+#include "SheafSystem/pullback_map.h"
+#include "SheafSystem/zone_centered_refiner_family.h"
+#include "SheafSystem/zone_centered_segment_refiner.h"
+#include "SheafSystem/zone_centered_tet_refiner.h"
+#include "SheafSystem/zone_centered_triangle_refiner.h"
 
 using namespace std;
 

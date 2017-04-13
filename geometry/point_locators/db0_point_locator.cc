@@ -18,10 +18,10 @@
 /// @file
 /// Specializationss for class db0_point_locator
 
-#include "db0_point_locator.impl.h"
+#include "SheafSystem/db0_point_locator.impl.h"
 
-#include "block.impl.h"
-#include "section_space_schema_poset.h"
+#include "SheafSystem/block.impl.h"
+#include "SheafSystem/section_space_schema_poset.h"
 
 using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.

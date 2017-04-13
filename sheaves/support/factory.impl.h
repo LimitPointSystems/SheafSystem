@@ -21,19 +21,19 @@
 #define FACTORY_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef FACTORY_H
-#include "factory.h"
+#include "SheafSystem/factory.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 #ifndef NAMESPACE_POSET_H
-#include "namespace_poset.h"
+#include "SheafSystem/namespace_poset.h"
 #endif
 
 namespace sheaf

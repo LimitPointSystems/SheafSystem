@@ -18,15 +18,15 @@
 /// @file
 /// Implementation for class base_space_crg_interval.
 
-#include "base_space_crg_interval.h"
+#include "SheafSystem/base_space_crg_interval.h"
 
-#include "assert_contract.h"
-#include "base_space_poset.h"
-#include "list_index_space_state.h"
-#include "index_space_iterator.h"
-#include "scoped_index.h"
-#include "std_iomanip.h"
-#include "std_string.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/base_space_poset.h"
+#include "SheafSystem/list_index_space_state.h"
+#include "SheafSystem/index_space_iterator.h"
+#include "SheafSystem/scoped_index.h"
+#include "SheafSystem/std_iomanip.h"
+#include "SheafSystem/std_string.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

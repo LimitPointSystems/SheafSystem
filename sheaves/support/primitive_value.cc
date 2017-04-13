@@ -18,14 +18,14 @@
 //
 // Implementation for class primitive_value
 
-#include "primitive_value.h"
+#include "SheafSystem/primitive_value.h"
 
-#include "assert_contract.h"
-#include "block.impl.h"
-#include "poset_path.h"
-#include "primitive_traits.h"
-#include "std_cstring.h"
-#include "std_sstream.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/block.impl.h"
+#include "SheafSystem/poset_path.h"
+#include "SheafSystem/primitive_traits.h"
+#include "SheafSystem/std_cstring.h"
+#include "SheafSystem/std_sstream.h"
 
 using namespace sheaf;
 using namespace std;

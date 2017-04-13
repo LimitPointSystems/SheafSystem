@@ -18,23 +18,23 @@
 /// @file
 /// Implementation for class e2.
 
-#include "e2.impl.h"
+#include "SheafSystem/e2.impl.h"
 
-#include "abstract_poset_member.impl.h"
-#include "assert_contract.h"
-#include "at0.h"
-#include "at0_space.h"
-#include "at1_space.h"
-#include "at2_e2.h"
-#include "fiber_bundles_namespace.h"
-#include "atp_space.h"
-#include "schema_poset_member.h"
-#include "st2_e2.h"
-#include "st4_e2.h"
-#include "stp_space.h"
-#include "t2_e2.h"
-#include "t4_e2.h"
-#include "wsv_block.h"
+#include "SheafSystem/abstract_poset_member.impl.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/at0.h"
+#include "SheafSystem/at0_space.h"
+#include "SheafSystem/at1_space.h"
+#include "SheafSystem/at2_e2.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/atp_space.h"
+#include "SheafSystem/schema_poset_member.h"
+#include "SheafSystem/st2_e2.h"
+#include "SheafSystem/st4_e2.h"
+#include "SheafSystem/stp_space.h"
+#include "SheafSystem/t2_e2.h"
+#include "SheafSystem/t4_e2.h"
+#include "SheafSystem/wsv_block.h"
 
 
 using namespace std;

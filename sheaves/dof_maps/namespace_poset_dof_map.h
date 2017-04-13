@@ -22,19 +22,19 @@
 #define NAMESPACE_POSET_DOF_MAP_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef BLOCK_H
-#include "block.h"
+#include "SheafSystem/block.h"
 #endif
 
 #ifndef POSET_DOF_MAP_H
-#include "poset_dof_map.h"
+#include "SheafSystem/poset_dof_map.h"
 #endif
 
 #ifndef POSET_TYPE_H
-#include "poset_type.h"
+#include "SheafSystem/poset_type.h"
 #endif
 
 namespace sheaf 

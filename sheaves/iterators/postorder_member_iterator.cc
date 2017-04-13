@@ -17,12 +17,12 @@
 
 // Implementation for class postorder_member_iterator
 
-#include "postorder_member_iterator.h"
+#include "SheafSystem/postorder_member_iterator.h"
 
-#include "poset_state_handle.h"
-#include "postorder_iterator.h"
-#include "assert_contract.h"
-#include "total_poset_member.h"
+#include "SheafSystem/poset_state_handle.h"
+#include "SheafSystem/postorder_iterator.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/total_poset_member.h"
 
 
 sheaf::postorder_member_iterator::

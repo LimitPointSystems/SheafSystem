@@ -22,19 +22,19 @@
 #define POSET_STATE_HANDLE_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef POSET_STATE_HANDLE_H
-#include "poset_state_handle.h"
+#include "SheafSystem/poset_state_handle.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 #ifndef INDEX_SPACE_ITERATOR_H
-#include "index_space_iterator.h"
+#include "SheafSystem/index_space_iterator.h"
 #endif
 
 // ===========================================================

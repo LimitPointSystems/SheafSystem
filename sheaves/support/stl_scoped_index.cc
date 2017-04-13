@@ -18,8 +18,8 @@
 /// @file
 /// Implementation for class stl_scoped_index.
 
-#include "stl_scoped_index.h"
-#include "assert_contract.h"
+#include "SheafSystem/stl_scoped_index.h"
+#include "SheafSystem/assert_contract.h"
 
 using namespace sheaf;
 

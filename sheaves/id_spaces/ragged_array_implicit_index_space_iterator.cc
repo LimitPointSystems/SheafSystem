@@ -18,11 +18,11 @@
 /// @file
 /// Implementation for class ragged_array_implicit_index_space_iterator
 
-#include "ragged_array_implicit_index_space_iterator.h"
+#include "SheafSystem/ragged_array_implicit_index_space_iterator.h"
 
-#include "assert_contract.h"
-#include "ragged_array_index_space_interval.h"
-#include "index_space_family.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/ragged_array_index_space_interval.h"
+#include "SheafSystem/index_space_family.h"
 
 // ===========================================================
 // RAGGED_ARRAY_IMPLICIT_INDEX_SPACE_ITERATOR FACET

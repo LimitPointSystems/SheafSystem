@@ -23,35 +23,35 @@
 #define PROPERTY_DISC_ITERATOR_1_2_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef PROPERTY_DISC_ITERATOR_H
-#include "property_disc_iterator.h"
+#include "SheafSystem/property_disc_iterator.h"
 #endif
 
 #ifndef BASE_SPACE_POSET_H
-#include "base_space_poset.h"
+#include "SheafSystem/base_space_poset.h"
 #endif
 
 #ifndef CHART_POINT_3D_H
-#include "chart_point_3d.h"
+#include "SheafSystem/chart_point_3d.h"
 #endif
 
 #ifndef SEC_VD_H
-#include "sec_vd.h"
+#include "SheafSystem/sec_vd.h"
 #endif
 
 #ifndef STD_LIST_H
-#include "std_list.h"
+#include "SheafSystem/std_list.h"
 #endif
 
 #ifndef STD_SET_H
-#include "std_set.h"
+#include "SheafSystem/std_set.h"
 #endif
 
 #ifndef ZN_TO_BOOL_H
-#include "zn_to_bool.h"
+#include "SheafSystem/zn_to_bool.h"
 #endif
 
 namespace fiber_bundle

@@ -26,11 +26,11 @@
 #define ${DERIVED}_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ${BASE}_H
-#include "${base}.h"
+#include "SheafSystem/${base}.h"
 #endif
 
 namespace fiber_bundle

@@ -18,13 +18,13 @@
 /// @file
 /// Implementation for class primary_index_space_state
 
-#include "primary_index_space_state.h"
-#include "assert_contract.h"
-#include "deep_size.h"
-#include "index_space_family.h"
-#include "hub_index_space_handle.h"
-#include "primary_index_space_handle.h"
-#include "primary_index_space_iterator.h"
+#include "SheafSystem/primary_index_space_state.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/deep_size.h"
+#include "SheafSystem/index_space_family.h"
+#include "SheafSystem/hub_index_space_handle.h"
+#include "SheafSystem/primary_index_space_handle.h"
+#include "SheafSystem/primary_index_space_iterator.h"
 
 // ===========================================================
 // SPACE FACTORY FACET

@@ -15,12 +15,12 @@
 // limitations under the License.
 //
 
-#include "fiber_bundle.h"
+#include "SheafSystem/fiber_bundle.h"
 
-#include "assert_contract.h"
-#include "block.impl.h"
-#include "error_message.h"
-#include "poset_path.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/block.impl.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/poset_path.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 

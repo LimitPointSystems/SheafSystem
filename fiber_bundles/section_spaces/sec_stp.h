@@ -22,15 +22,15 @@
 #define SEC_STP_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef SEC_TP_H
-#include "sec_tp.h"
+#include "SheafSystem/sec_tp.h"
 #endif
 
 #ifndef STP_H
-#include "stp.h"
+#include "SheafSystem/stp.h"
 #endif
 
 namespace fiber_bundle

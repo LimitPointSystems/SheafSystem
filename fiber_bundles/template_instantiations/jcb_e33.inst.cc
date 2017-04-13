@@ -17,7 +17,7 @@
 
 // Explicit_instantiations for class jcb_e33.
 
-#include "jcb_e33.impl.h"
+#include "SheafSystem/jcb_e33.impl.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

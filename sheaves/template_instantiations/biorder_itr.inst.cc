@@ -18,11 +18,11 @@
 // Istantiations for class biorder_itr<T>.
 
  
-#include "biorder_itr.impl.h"
+#include "SheafSystem/biorder_itr.impl.h"
 
-#include "zn_to_bool.h"
-#include "std_set.h"
-#include "std_unordered_set.h"
+#include "SheafSystem/zn_to_bool.h"
+#include "SheafSystem/std_set.h"
+#include "SheafSystem/std_unordered_set.h"
 
 using namespace std;
 using namespace unordered;

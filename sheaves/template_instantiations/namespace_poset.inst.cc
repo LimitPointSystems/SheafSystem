@@ -15,10 +15,10 @@
 // limitations under the License.
 //
 
-#include "namespace_poset.impl.h"
-#include "poset.h"
-#include "poset_state_handle.h"
-#include "refinable_poset.h"
+#include "SheafSystem/namespace_poset.impl.h"
+#include "SheafSystem/poset.h"
+#include "SheafSystem/poset_state_handle.h"
+#include "SheafSystem/refinable_poset.h"
 
 using namespace sheaf; // workaround for MS C++ bug.
 

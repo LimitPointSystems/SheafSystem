@@ -22,11 +22,11 @@
 #define COPY_BASE_SPACE_MAP_PUSH_ACTION_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef BASE_SPACE_MAP_PUSH_ACTION_H
-#include "base_space_map_push_action.h"
+#include "SheafSystem/base_space_map_push_action.h"
 #endif
 
 namespace fields

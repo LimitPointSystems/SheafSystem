@@ -17,12 +17,12 @@
 
 // Definitions relating to sheaf system primitive types.
 
-#include "primitive_type.h"
+#include "SheafSystem/primitive_type.h"
 
-#include "assert_contract.h"
-#include "error_message.h"
-#include "primitive_attributes.h"
-#include "std_iomanip.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/primitive_attributes.h"
+#include "SheafSystem/std_iomanip.h"
 
 using namespace std;
 

@@ -21,15 +21,15 @@
 #define SUBPOSET_MEMBER_ITERATOR_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef POSET_MEMBER_ITERATOR_H
-#include "poset_member_iterator.h"
+#include "SheafSystem/poset_member_iterator.h"
 #endif
 
 #ifndef INDEX_ITERATOR_H
-#include "index_iterator.h"
+#include "SheafSystem/index_iterator.h"
 #endif
 
 namespace sheaf

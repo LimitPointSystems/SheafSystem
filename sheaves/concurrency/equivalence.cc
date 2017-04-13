@@ -17,16 +17,16 @@
 
 // Implementation for class EQUIVALENCE
 
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 
 #ifndef EQUIVALENCE_H
-#include "equivalence.h"
+#include "SheafSystem/equivalence.h"
 #endif
 
 #ifdef PARALLEL_MPI
 
 #ifndef POSET_H
-#include "poset.h"
+#include "SheafSystem/poset.h"
 #endif
 
 sheaf::equivalence::

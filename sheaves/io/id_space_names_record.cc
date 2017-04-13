@@ -17,15 +17,15 @@
 
 // Implementation for class id_space_names_record
 
-#include "id_space_names_record.h"
+#include "SheafSystem/id_space_names_record.h"
 
-#include "assert_contract.h"
-#include "index_space_family.h"
-#include "index_space_family_iterator.h"
-#include "index_space_interval.h"
-#include "scattered_insertion_index_space_handle.h"
-#include "scattered_insertion_index_space_state.h"
-#include "std_sstream.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/index_space_family.h"
+#include "SheafSystem/index_space_family_iterator.h"
+#include "SheafSystem/index_space_interval.h"
+#include "SheafSystem/scattered_insertion_index_space_handle.h"
+#include "SheafSystem/scattered_insertion_index_space_state.h"
+#include "SheafSystem/std_sstream.h"
 
 using namespace std;
 

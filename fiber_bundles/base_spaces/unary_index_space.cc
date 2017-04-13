@@ -17,8 +17,8 @@
 
 // Implementation for class unary_index_space
 
-#include "unary_index_space.h"
-#include "assert_contract.h"
+#include "SheafSystem/unary_index_space.h"
+#include "SheafSystem/assert_contract.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 

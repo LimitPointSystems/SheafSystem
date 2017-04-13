@@ -17,20 +17,20 @@
 
 // Implementation for class template block
 
-#include "geometry.h"
+#include "SheafSystem/geometry.h"
 
-#include "auto_block.impl.h"
-#include "block.impl.h"
+#include "SheafSystem/auto_block.impl.h"
+#include "SheafSystem/block.impl.h"
 
-#include "d_bounding_box.impl.h"
-#include "d_tree_point_locator_node.impl.h"
-#include "db0_point_locator.impl.h"
+#include "SheafSystem/d_bounding_box.impl.h"
+#include "SheafSystem/d_tree_point_locator_node.impl.h"
+#include "SheafSystem/db0_point_locator.impl.h"
 
-//#include "kd_plane.h"
-//#include "kd_bounding_box.h"
+//#include "SheafSystem/kd_plane.h"
+//#include "SheafSystem/kd_bounding_box.h"
 
-#include "singly_linked_list.h"
-#include "std_utility.h"
+#include "SheafSystem/singly_linked_list.h"
+#include "SheafSystem/std_utility.h"
 
 using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.

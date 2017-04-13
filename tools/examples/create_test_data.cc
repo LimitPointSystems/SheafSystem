@@ -17,10 +17,10 @@
 
 /// @example examples/create_test_data.cc
 
-#include "lps_environment.h"
-#include "std_iostream.h"
-#include "std_string.h"
-#include "std_unistd.h"
+#include "SheafSystem/lps_environment.h"
+#include "SheafSystem/std_iostream.h"
+#include "SheafSystem/std_string.h"
+#include "SheafSystem/std_unistd.h"
 #include <sys/wait.h>
 
 void exec_test_case(string xfile);

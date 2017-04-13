@@ -17,6 +17,6 @@
 
 // Implementation for class linkorder_itr<T> is in linkorder_itr_impl.h
 
-#include "linkorder_itr.impl.h"
+#include "SheafSystem/linkorder_itr.impl.h"
 
 

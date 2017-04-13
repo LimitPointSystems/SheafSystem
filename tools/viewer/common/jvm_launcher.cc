@@ -17,11 +17,11 @@
 
 // Implementation for class jvm_launcher
 
-#include "jvm_launcher.h"
-#include "std_cstdlib.h"
-#include "std_iostream.h"
-#include "std_string.h"
-#include "std_unistd.h"
+#include "SheafSystem/jvm_launcher.h"
+#include "SheafSystem/std_cstdlib.h"
+#include "SheafSystem/std_iostream.h"
+#include "SheafSystem/std_string.h"
+#include "SheafSystem/std_unistd.h"
 #include <jni.h>
 
 ///@todo Maybe use an enum here.

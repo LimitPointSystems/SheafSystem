@@ -124,7 +124,7 @@ function(SheafSystem_add_tools_library_targets)
       add_dependencies(${TOOLS_DYNAMIC_LIB} ${FIELDS_IMPORT_LIB})
       add_dependencies(${TOOLS_DYNAMIC_LIB} tools_scoped_headers)
       target_include_directories(${TOOLS_DYNAMIC_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )           
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )           
       target_link_libraries(${TOOLS_DYNAMIC_LIB} ${FIELDS_IMPORT_LIB} 
          ${JNI_LIBRARIES} ${JAVA_AWT_LIBRARY} ${JAVA_JVM_LIBRARY} ${VTK_LIBS} ) 
       set_target_properties(${TOOLS_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")        
@@ -144,7 +144,7 @@ function(SheafSystem_add_tools_library_targets)
       add_dependencies(${TOOLS_STATIC_LIB} ${FIELDS_STATIC_LIB})
       add_dependencies(${TOOLS_STATIC_LIB} tools_scoped_headers)
       target_include_directories(${TOOLS_STATIC_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${TOOLS_STATIC_LIB} ${FIELDS_STATIC_LIB} 
          ${JAVA_AWT_LIBRARY} ${JAVA_MAWT_LIBRARY} ${JAVA_JVM_LIBRARY} ${VTK_LIBS})
       set_target_properties(${TOOLS_STATIC_LIB} PROPERTIES OUTPUT_NAME tools)
@@ -155,7 +155,7 @@ function(SheafSystem_add_tools_library_targets)
       add_dependencies(${TOOLS_SHARED_LIB} ${FIELDS_SHARED_LIB})
       add_dependencies(${TOOLS_SHARED_LIB} tools_scoped_headers)
       target_include_directories(${TOOLS_SHARED_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${TOOLS_SHARED_LIB} ${FIELDS_SHARED_LIB} 
          ${JAVA_AWT_LIBRARY} ${JAVA_MAWT_LIBRARY} ${JAVA_JVM_LIBRARY} ${VTK_LIBS})
       set_target_properties(${TOOLS_SHARED_LIB} PROPERTIES OUTPUT_NAME tools)

@@ -21,23 +21,23 @@
 #define POOL_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef POOL_H
-#include "pool.h"
+#include "SheafSystem/pool.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 #ifndef STD_IOMANIP_H
-#include "std_iomanip.h"
+#include "SheafSystem/std_iomanip.h"
 #endif
 
 #ifndef ZN_TO_BOOL_H
-#include "zn_to_bool.h"
+#include "SheafSystem/zn_to_bool.h"
 #endif
 
 namespace sheaf

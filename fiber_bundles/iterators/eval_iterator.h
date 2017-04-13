@@ -22,23 +22,23 @@
 #define EVAL_ITERATOR_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef DEPTH_FIRST_ITERATOR_H
-#include "depth_first_iterator.h"
+#include "SheafSystem/depth_first_iterator.h"
 #endif
 
 #ifndef BASE_SPACE_POSET_H
-#include "base_space_poset.h"
+#include "SheafSystem/base_space_poset.h"
 #endif
 
 #ifndef STD_LIST_H
-#include "std_list.h"
+#include "SheafSystem/std_list.h"
 #endif
 
 #ifndef SEC_VD_H
-#include "sec_vd.h" // just to get typedefs
+#include "SheafSystem/sec_vd.h" // just to get typedefs
 #endif
 
 namespace sheaf

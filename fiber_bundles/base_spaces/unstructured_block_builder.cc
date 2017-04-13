@@ -17,23 +17,23 @@
 
 // Implementation for class unstructured_block_builder
 
-#include "unstructured_block_builder.h"
+#include "SheafSystem/unstructured_block_builder.h"
 
-#include "error_message.h"
-#include "index_space_iterator.h"
-#include "poset.h"
-#include "poset_path.h"
-#include "postorder_iterator.h"
-#include "preorder_iterator.h"
-#include "ragged_array.h"
-#include "assert_contract.h"
-#include "sheaves_namespace.h"
-#include "std_iostream.h"
-#include "std_iomanip.h"
-#include "subposet.h"
-#include "triorder_iterator.h"
-#include "unstructured_block.h"
-#include "tern.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/index_space_iterator.h"
+#include "SheafSystem/poset.h"
+#include "SheafSystem/poset_path.h"
+#include "SheafSystem/postorder_iterator.h"
+#include "SheafSystem/preorder_iterator.h"
+#include "SheafSystem/ragged_array.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/sheaves_namespace.h"
+#include "SheafSystem/std_iostream.h"
+#include "SheafSystem/std_iomanip.h"
+#include "SheafSystem/subposet.h"
+#include "SheafSystem/triorder_iterator.h"
+#include "SheafSystem/unstructured_block.h"
+#include "SheafSystem/tern.h"
 
 using namespace std;
 using namespace unordered;

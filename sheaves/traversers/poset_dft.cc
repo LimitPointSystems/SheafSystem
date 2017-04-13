@@ -19,15 +19,15 @@
 
 
 #ifndef POSET_DFT_H
-#include "poset_dft.h"
+#include "SheafSystem/poset_dft.h"
 #endif
 
-#include "abstract_poset_member.h"
-#include "assert_contract.h"
-#include "poset.h"
-#include "total_poset_member.h"
-#include "index_space_iterator.h"
-#include "zn_to_bool.h"
+#include "SheafSystem/abstract_poset_member.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/poset.h"
+#include "SheafSystem/total_poset_member.h"
+#include "SheafSystem/index_space_iterator.h"
+#include "SheafSystem/zn_to_bool.h"
 
 ///
 sheaf::poset_dft::

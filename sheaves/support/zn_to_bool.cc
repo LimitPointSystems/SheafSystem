@@ -18,11 +18,11 @@
 // Implementation for class ZN_TO_BOOL
 
 
-#include "zn_to_bool.h"
-#include "assert_contract.h"
-#include "block.h"
-#include "error_message.h"
-#include "std_iomanip.h"
+#include "SheafSystem/zn_to_bool.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/block.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/std_iomanip.h"
 
 using namespace std;
 

@@ -18,25 +18,25 @@
 // Implementation for class POSET_TRAVERSER
 
 #ifndef POSET_TRAVERSER_H
-#include "poset_traverser.h"
+#include "SheafSystem/poset_traverser.h"
 #endif
 
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 
 #ifndef POSET_H
-#include "poset.h"
+#include "SheafSystem/poset.h"
 #endif
 
 #ifndef POSET_MEMBER_H
-#include "total_poset_member.h"
+#include "SheafSystem/total_poset_member.h"
 #endif
 
 #ifndef POSET_MEMBER_ITERATOR_H
-#include "poset_member_iterator.h"
+#include "SheafSystem/poset_member_iterator.h"
 #endif
 
 #ifndef BIT_VECTOR_H
-#include "zn_to_bool.h"
+#include "SheafSystem/zn_to_bool.h"
 #endif
 
 ///

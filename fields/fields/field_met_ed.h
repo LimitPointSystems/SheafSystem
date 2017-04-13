@@ -26,11 +26,11 @@
 #define FIELD_MET_ED_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef FIELD_MET_H
-#include "field_met.h"
+#include "SheafSystem/field_met.h"
 #endif
 
 namespace fiber_bundle

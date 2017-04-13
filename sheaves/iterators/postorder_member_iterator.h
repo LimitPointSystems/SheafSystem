@@ -21,11 +21,11 @@
 #define POSTORDER_MEMBER_ITERATOR_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef FILTERED_DEPTH_FIRST_MEMBER_ITERATOR_H
-#include "filtered_depth_first_member_iterator.h"
+#include "SheafSystem/filtered_depth_first_member_iterator.h"
 #endif
 
 namespace sheaf

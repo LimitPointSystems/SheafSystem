@@ -18,11 +18,11 @@
 /// @file
 /// Implementation for class interval_index_space_handle
 
-#include "interval_index_space_handle.h"
-#include "assert_contract.h"
-#include "index_space_family.h"
-#include "interval_index_space_state.h"
-#include "scoped_index.h"
+#include "SheafSystem/interval_index_space_handle.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/index_space_family.h"
+#include "SheafSystem/interval_index_space_state.h"
+#include "SheafSystem/scoped_index.h"
 
 // ===========================================================
 // SPACE FACTORY FACET

@@ -18,16 +18,16 @@
 /// @file
 /// Implementation for class ij_connectivity_index_space_interval
 
-#include "ij_connectivity_index_space_interval.h"
+#include "SheafSystem/ij_connectivity_index_space_interval.h"
 
-#include "abstract_product_structure.h"
-#include "assert_contract.h"
-#include "ij_connectivity_implicit_index_space_iterator.h"
-#include "ij_product_structure.h"
-#include "forwarding_index_space_handle.h"
-#include "explicit_index_space_state.h"
-#include "hub_index_space_handle.h"
-#include "index_space_family.h"
+#include "SheafSystem/abstract_product_structure.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/ij_connectivity_implicit_index_space_iterator.h"
+#include "SheafSystem/ij_product_structure.h"
+#include "SheafSystem/forwarding_index_space_handle.h"
+#include "SheafSystem/explicit_index_space_state.h"
+#include "SheafSystem/hub_index_space_handle.h"
+#include "SheafSystem/index_space_family.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

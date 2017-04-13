@@ -22,11 +22,11 @@
 #define PRODUCT_SECTION_SPACE_SCHEMA_MEMBER_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef SECTION_SPACE_SCHEMA_MEMBER_H
-#include "section_space_schema_member.h"
+#include "SheafSystem/section_space_schema_member.h"
 #endif
 
 namespace fiber_bundle

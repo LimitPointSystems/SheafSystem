@@ -22,15 +22,15 @@
 #define BASE_SPACE_MAP_PUSH_ACTION_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ANY_H
-#include "any.h"
+#include "SheafSystem/any.h"
 #endif
 
 #ifndef PULLBACK_MAP_H
-#include "pullback_map.h"
+#include "SheafSystem/pullback_map.h"
 #endif
 
 namespace sheaf

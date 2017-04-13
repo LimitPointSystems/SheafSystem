@@ -18,11 +18,11 @@
 /// @file
 /// Implementation for class barycentric_triangle_refiner
 
-#include "barycentric_triangle_refiner.h"
+#include "SheafSystem/barycentric_triangle_refiner.h"
 
-#include "assert_contract.h"
-#include "error_message.h"
-#include "wsv_block.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/wsv_block.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.

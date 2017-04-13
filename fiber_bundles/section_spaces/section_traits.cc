@@ -17,20 +17,20 @@
 
 // Template specialization and instantiation for class template section_traits
 
-#include "section_traits.h"
-#include "base_space_member.h"
-#include "fiber_bundles_namespace.h"
-#include "poset_path.h"
-#include "sec_rep_descriptor.h"
+#include "SheafSystem/section_traits.h"
+#include "SheafSystem/base_space_member.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/poset_path.h"
+#include "SheafSystem/sec_rep_descriptor.h"
 
-#include "std_string.h"
+#include "SheafSystem/std_string.h"
 
 // =============================================================================
 // SPECIALIZATION AND INSTANTIATION FOR SEC_AT0
 // =============================================================================
 
 #ifndef SEC_AT0_H
-#include "sec_at0.h"
+#include "SheafSystem/sec_at0.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -70,7 +70,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_AT1_H
-#include "sec_at1.h"
+#include "SheafSystem/sec_at1.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -112,7 +112,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_AT2_E2_H
-#include "sec_at2_e2.h"
+#include "SheafSystem/sec_at2_e2.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -153,7 +153,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_AT2_E3_H
-#include "sec_at2_e3.h"
+#include "SheafSystem/sec_at2_e3.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -194,7 +194,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_AT3_E3_H
-#include "sec_at3_e3.h"
+#include "SheafSystem/sec_at3_e3.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -235,7 +235,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_E1_H
-#include "sec_e1.h"
+#include "SheafSystem/sec_e1.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -276,7 +276,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_E1_UNIFORM_H
-#include "sec_e1_uniform.h"
+#include "SheafSystem/sec_e1_uniform.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -317,7 +317,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_E2_H
-#include "sec_e2.h"
+#include "SheafSystem/sec_e2.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -358,7 +358,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_E2_UNIFORM_H
-#include "sec_e2_uniform.h"
+#include "SheafSystem/sec_e2_uniform.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -399,7 +399,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_E3_H
-#include "sec_e3.h"
+#include "SheafSystem/sec_e3.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -440,7 +440,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_E3_UNIFORM_H
-#include "sec_e3_uniform.h"
+#include "SheafSystem/sec_e3_uniform.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -481,7 +481,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_JCB_E13_H
-#include "sec_jcb_e13.h"
+#include "SheafSystem/sec_jcb_e13.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -522,7 +522,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_JCB_E23_H
-#include "sec_jcb_e23.h"
+#include "SheafSystem/sec_jcb_e23.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -563,7 +563,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_JCB_E33_H
-#include "sec_jcb_e33.h"
+#include "SheafSystem/sec_jcb_e33.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -604,7 +604,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_MET_E1_H
-#include "sec_met_e1.h"
+#include "SheafSystem/sec_met_e1.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -645,7 +645,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_MET_E2_H
-#include "sec_met_e2.h"
+#include "SheafSystem/sec_met_e2.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -686,7 +686,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_MET_E3_H
-#include "sec_met_e3.h"
+#include "SheafSystem/sec_met_e3.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -727,7 +727,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_ST2_E2_H
-#include "sec_st2_e2.h"
+#include "SheafSystem/sec_st2_e2.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -768,7 +768,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_ST2_E3_H
-#include "sec_st2_e3.h"
+#include "SheafSystem/sec_st2_e3.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -809,7 +809,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_ST3_E3_H
-#include "sec_st3_e3.h"
+#include "SheafSystem/sec_st3_e3.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -850,7 +850,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_ST4_E2_H
-#include "sec_st4_e2.h"
+#include "SheafSystem/sec_st4_e2.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -891,7 +891,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_ST4_E3_H
-#include "sec_st4_e3.h"
+#include "SheafSystem/sec_st4_e3.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -932,7 +932,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_T2_E2_H
-#include "sec_t2_e2.h"
+#include "SheafSystem/sec_t2_e2.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -973,7 +973,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_T2_E3_H
-#include "sec_t2_e3.h"
+#include "SheafSystem/sec_t2_e3.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -1014,7 +1014,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_T3_E3_H
-#include "sec_t3_e3.h"
+#include "SheafSystem/sec_t3_e3.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -1055,7 +1055,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_T4_E2_H
-#include "sec_t4_e2.h"
+#include "SheafSystem/sec_t4_e2.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -1096,7 +1096,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_T4_E3_H
-#include "sec_t4_e3.h"
+#include "SheafSystem/sec_t4_e3.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS
@@ -1137,7 +1137,7 @@ must_use_standard_rep()
 // =============================================================================
 
 #ifndef SEC_VD_H
-#include "sec_vd.h"
+#include "SheafSystem/sec_vd.h"
 #endif
 
 #ifndef DOXYGEN_SKIP_INSTANTIATIONS

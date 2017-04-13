@@ -21,11 +21,11 @@
 #define UNSTRUCTURED_BLOCK_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef HOMOGENEOUS_BLOCK_H
-#include "homogeneous_block.h"
+#include "SheafSystem/homogeneous_block.h"
 #endif
 
 namespace fiber_bundle

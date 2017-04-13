@@ -18,21 +18,21 @@
 /// @file
 /// Implementation for class edge_centered_polygon_refiner
 
-#include "edge_centered_polygon_refiner.h"
+#include "SheafSystem/edge_centered_polygon_refiner.h"
 
-#include "assert_contract.h"
-#include "base_space_poset.h"
-#include "bilinear_2d.h"
-#include "block.impl.h"
-#include "error_message.h"
-#include "field_refinement_buffer.h"
-#include "index_space_iterator.h"
-#include "integrable_section_evaluator.h"
-#include "linear_2d.h"
-#include "sec_ed_invertible.h"
-#include "std_algorithm.h"
-#include "std_iostream.h"
-#include "field_vd.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/base_space_poset.h"
+#include "SheafSystem/bilinear_2d.h"
+#include "SheafSystem/block.impl.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/field_refinement_buffer.h"
+#include "SheafSystem/index_space_iterator.h"
+#include "SheafSystem/integrable_section_evaluator.h"
+#include "SheafSystem/linear_2d.h"
+#include "SheafSystem/sec_ed_invertible.h"
+#include "SheafSystem/std_algorithm.h"
+#include "SheafSystem/std_iostream.h"
+#include "SheafSystem/field_vd.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.

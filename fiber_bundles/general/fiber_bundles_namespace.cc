@@ -18,122 +18,122 @@
 /// @file
 /// Implementation for class fiber_bundles_namespace
 
-#include "arg_list.h"
-#include "assert_contract.h"
-#include "at0.h"
-#include "at0_space.h"
-#include "at1.h"
-#include "at1_space.h"
-#include "at2.h"
-#include "at2_e2.h"
-#include "at2_e3.h"
-#include "at3.h"
-#include "at3_e3.h"
-#include "atp.h"
-#include "atp_space.h"
-#include "array_index_space_handle.h"
-#include "array_index_space_state.h"
-#include "base_space_member.h"
-#include "base_space_poset.h"
-#include "biorder_iterator.h"
-#include "block.impl.h"
-#include "e1.h"
-#include "e2.h"
-#include "e3.h"
-#include "e4.h"
-#include "ed.h"
-#include "fiber_bundles_namespace.h"
-#include "gl2.h"
-#include "gl3.h"
-#include "gln.h"
-#include "gln_space.h"
-#include "homogeneous_block.h"
-#include "i_adjacency_index_space_interval.h" // for initialize_prototypes
-#include "i_connectivity_index_space_interval.h" // for initialize_prototypes
-#include "ij_adjacency_index_space_interval.h" // for initialize_prototypes
-#include "ij_connectivity_index_space_interval.h" // for initialize_prototypes
-#include "ijk_adjacency_index_space_interval.h" // for initialize_prototypes
-#include "ijk_connectivity_index_space_interval.h" // for initialize_prototypes
-#include "index_iterator.h"
-#include "index_space_iterator.h"
-#include "jcb.h"
-#include "jcb_space.h"
-#include "jcb_e13.h"
-#include "jcb_e23.h"
-#include "jcb_e33.h"
-#include "jcb_ed.h"
-#include "met.h"
-#include "met_e1.h"
-#include "met_e2.h"
-#include "met_e3.h"
-#include "met_ed.h"
-#include "namespace_poset.h"
-#include "namespace_poset_member.h"
-#include "point_block_1d.h"
-#include "point_block_2d.h"
-#include "point_block_3d.h"
-#include "point_block_crg_interval.h" // For initialize_prototypes.
-#include "poset.h"
-#include "poset_handle_factory.h"
-#include "poset_member_iterator.h"
-#include "postorder_iterator.h"
-#include "primitives_poset.h"
-#include "primitives_poset_schema.h"
-#include "binary_section_space_schema_member.h"
-#include "binary_section_space_schema_poset.h"
-#include "schema_poset_member.h"
-#include "sec_at0_space.h" // For initialize_prototypes.
-#include "sec_at1_space.h" // For initialize_prototypes.
-#include "sec_atp_space.h" // For initialize_prototypes.
-#include "sec_jcb_space.h" // For initialize_prototypes.
-#include "sec_rep_descriptor.h"
-#include "sec_rep_descriptor_poset.h"
-#include "sec_rep_space.h"
-#include "sec_stp_space.h" // For initialize_prototypes.
-#include "sec_tp_space.h" // For initialize_prototypes.
-#include "sec_vd_space.h" // For initialize_prototypes.
-#include "section_space_schema_jims_index_space_state.h" // For initialize_prototypes
-#include "st2.h"
-#include "st2_e2.h"
-#include "st2_e3.h"
-#include "st3.h"
-#include "st3_e3.h"
-#include "st4.h"
-#include "st4_e2.h"
-#include "st4_e3.h"
-#include "std_cstring.h"
-#include "std_iostream.h"
-#include "std_string.h"
-#include "stp.h"
-#include "stp_space.h"
-#include "structured_block_1d.h"
-#include "structured_block_2d.h"
-#include "structured_block_3d.h"
-#include "structured_block_1d_crg_interval.h" // For initialize_prototypes.
-#include "structured_block_2d_crg_interval.h" // For initialize_prototypes.
-#include "structured_block_3d_crg_interval.h" // For initialize_prototypes.
-#include "t2.h"
-#include "t2_e2.h"
-#include "t2_e3.h"
-#include "t3.h"
-#include "t3_e3.h"
-#include "t4.h"
-#include "t4_e2.h"
-#include "t4_e3.h"
-#include "tp.h"
-#include "tp_space.h"
-#include "tern.h"
-#include "tuple.h"
-#include "unstructured_block.h"
-#include "vd.h"
-#include "vd_space.h"
-#include "zone_nodes_block.h"
-#include "zone_nodes_block_crg_interval.h" // For initialize_prototypes.
+#include "SheafSystem/arg_list.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/at0.h"
+#include "SheafSystem/at0_space.h"
+#include "SheafSystem/at1.h"
+#include "SheafSystem/at1_space.h"
+#include "SheafSystem/at2.h"
+#include "SheafSystem/at2_e2.h"
+#include "SheafSystem/at2_e3.h"
+#include "SheafSystem/at3.h"
+#include "SheafSystem/at3_e3.h"
+#include "SheafSystem/atp.h"
+#include "SheafSystem/atp_space.h"
+#include "SheafSystem/array_index_space_handle.h"
+#include "SheafSystem/array_index_space_state.h"
+#include "SheafSystem/base_space_member.h"
+#include "SheafSystem/base_space_poset.h"
+#include "SheafSystem/biorder_iterator.h"
+#include "SheafSystem/block.impl.h"
+#include "SheafSystem/e1.h"
+#include "SheafSystem/e2.h"
+#include "SheafSystem/e3.h"
+#include "SheafSystem/e4.h"
+#include "SheafSystem/ed.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/gl2.h"
+#include "SheafSystem/gl3.h"
+#include "SheafSystem/gln.h"
+#include "SheafSystem/gln_space.h"
+#include "SheafSystem/homogeneous_block.h"
+#include "SheafSystem/i_adjacency_index_space_interval.h" // for initialize_prototypes
+#include "SheafSystem/i_connectivity_index_space_interval.h" // for initialize_prototypes
+#include "SheafSystem/ij_adjacency_index_space_interval.h" // for initialize_prototypes
+#include "SheafSystem/ij_connectivity_index_space_interval.h" // for initialize_prototypes
+#include "SheafSystem/ijk_adjacency_index_space_interval.h" // for initialize_prototypes
+#include "SheafSystem/ijk_connectivity_index_space_interval.h" // for initialize_prototypes
+#include "SheafSystem/index_iterator.h"
+#include "SheafSystem/index_space_iterator.h"
+#include "SheafSystem/jcb.h"
+#include "SheafSystem/jcb_space.h"
+#include "SheafSystem/jcb_e13.h"
+#include "SheafSystem/jcb_e23.h"
+#include "SheafSystem/jcb_e33.h"
+#include "SheafSystem/jcb_ed.h"
+#include "SheafSystem/met.h"
+#include "SheafSystem/met_e1.h"
+#include "SheafSystem/met_e2.h"
+#include "SheafSystem/met_e3.h"
+#include "SheafSystem/met_ed.h"
+#include "SheafSystem/namespace_poset.h"
+#include "SheafSystem/namespace_poset_member.h"
+#include "SheafSystem/point_block_1d.h"
+#include "SheafSystem/point_block_2d.h"
+#include "SheafSystem/point_block_3d.h"
+#include "SheafSystem/point_block_crg_interval.h" // For initialize_prototypes.
+#include "SheafSystem/poset.h"
+#include "SheafSystem/poset_handle_factory.h"
+#include "SheafSystem/poset_member_iterator.h"
+#include "SheafSystem/postorder_iterator.h"
+#include "SheafSystem/primitives_poset.h"
+#include "SheafSystem/primitives_poset_schema.h"
+#include "SheafSystem/binary_section_space_schema_member.h"
+#include "SheafSystem/binary_section_space_schema_poset.h"
+#include "SheafSystem/schema_poset_member.h"
+#include "SheafSystem/sec_at0_space.h" // For initialize_prototypes.
+#include "SheafSystem/sec_at1_space.h" // For initialize_prototypes.
+#include "SheafSystem/sec_atp_space.h" // For initialize_prototypes.
+#include "SheafSystem/sec_jcb_space.h" // For initialize_prototypes.
+#include "SheafSystem/sec_rep_descriptor.h"
+#include "SheafSystem/sec_rep_descriptor_poset.h"
+#include "SheafSystem/sec_rep_space.h"
+#include "SheafSystem/sec_stp_space.h" // For initialize_prototypes.
+#include "SheafSystem/sec_tp_space.h" // For initialize_prototypes.
+#include "SheafSystem/sec_vd_space.h" // For initialize_prototypes.
+#include "SheafSystem/section_space_schema_jims_index_space_state.h" // For initialize_prototypes
+#include "SheafSystem/st2.h"
+#include "SheafSystem/st2_e2.h"
+#include "SheafSystem/st2_e3.h"
+#include "SheafSystem/st3.h"
+#include "SheafSystem/st3_e3.h"
+#include "SheafSystem/st4.h"
+#include "SheafSystem/st4_e2.h"
+#include "SheafSystem/st4_e3.h"
+#include "SheafSystem/std_cstring.h"
+#include "SheafSystem/std_iostream.h"
+#include "SheafSystem/std_string.h"
+#include "SheafSystem/stp.h"
+#include "SheafSystem/stp_space.h"
+#include "SheafSystem/structured_block_1d.h"
+#include "SheafSystem/structured_block_2d.h"
+#include "SheafSystem/structured_block_3d.h"
+#include "SheafSystem/structured_block_1d_crg_interval.h" // For initialize_prototypes.
+#include "SheafSystem/structured_block_2d_crg_interval.h" // For initialize_prototypes.
+#include "SheafSystem/structured_block_3d_crg_interval.h" // For initialize_prototypes.
+#include "SheafSystem/t2.h"
+#include "SheafSystem/t2_e2.h"
+#include "SheafSystem/t2_e3.h"
+#include "SheafSystem/t3.h"
+#include "SheafSystem/t3_e3.h"
+#include "SheafSystem/t4.h"
+#include "SheafSystem/t4_e2.h"
+#include "SheafSystem/t4_e3.h"
+#include "SheafSystem/tp.h"
+#include "SheafSystem/tp_space.h"
+#include "SheafSystem/tern.h"
+#include "SheafSystem/tuple.h"
+#include "SheafSystem/unstructured_block.h"
+#include "SheafSystem/vd.h"
+#include "SheafSystem/vd_space.h"
+#include "SheafSystem/zone_nodes_block.h"
+#include "SheafSystem/zone_nodes_block_crg_interval.h" // For initialize_prototypes.
 
 /// @hack force initialization of static data members:
 
-#include "array_section_dof_map.h"
-#include "sparse_section_dof_map.h"
+#include "SheafSystem/array_section_dof_map.h"
+#include "SheafSystem/sparse_section_dof_map.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

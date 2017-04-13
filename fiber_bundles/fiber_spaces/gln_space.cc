@@ -17,15 +17,15 @@
 
 // Implementation for class gln_space.
 
-#include "gln_space.h"
+#include "SheafSystem/gln_space.h"
 
-#include "abstract_poset_member.impl.h"
-#include "assert_contract.h"
-#include "gln.h"
-#include "namespace_poset.impl.h"
-#include "namespace_poset_member.h"
-#include "poset_handle_factory.h"
-#include "vd_space.h"
+#include "SheafSystem/abstract_poset_member.impl.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/gln.h"
+#include "SheafSystem/namespace_poset.impl.h"
+#include "SheafSystem/namespace_poset_member.h"
+#include "SheafSystem/poset_handle_factory.h"
+#include "SheafSystem/vd_space.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

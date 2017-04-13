@@ -22,15 +22,15 @@
 #define SEC_JCB_E23_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef SEC_JCB_ED_H
-#include "sec_jcb_ed.h"
+#include "SheafSystem/sec_jcb_ed.h"
 #endif
 
 #ifndef JCB_E23_H
-#include "jcb_e23.h"
+#include "SheafSystem/jcb_e23.h"
 #endif
 
 namespace fiber_bundle

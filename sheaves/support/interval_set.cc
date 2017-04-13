@@ -18,10 +18,10 @@
 /// @file
 /// Implementation for class interval_set
 
-#include "interval_set.h"
-#include "assert_contract.h"
-#include "deep_size.h"
-#include "interval_set_iterator.h"
+#include "SheafSystem/interval_set.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/deep_size.h"
+#include "SheafSystem/interval_set_iterator.h"
 
 using namespace std;
 

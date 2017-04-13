@@ -17,10 +17,10 @@
 
 // Implementation for class dof_map_factory
 
-#include "dof_map_factory.h"
+#include "SheafSystem/dof_map_factory.h"
 
-#include "assert_contract.h"
-#include "poset_dof_map.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/poset_dof_map.h"
 
 using namespace std;
 

@@ -19,9 +19,9 @@
 /// Explicit instantiation for class d_uniform_point_locator
 
 
-#include "d_uniform_point_locator.impl.h"
+#include "SheafSystem/d_uniform_point_locator.impl.h"
 
-#include "sec_rep_descriptor.h"
+#include "SheafSystem/sec_rep_descriptor.h"
 
 using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.

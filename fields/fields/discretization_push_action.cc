@@ -18,10 +18,10 @@
 /// @file
 /// Implementation for class discretization_push_action
 
-#include "discretization_push_action.h"
+#include "SheafSystem/discretization_push_action.h"
 
-#include "assert_contract.h"
-#include "block.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/block.h"
 
 using namespace fields; // Workaround for MS C++ bug.
 

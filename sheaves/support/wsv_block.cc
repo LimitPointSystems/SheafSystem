@@ -17,7 +17,7 @@
 
 // Instantiation for class template wsv_list
 
-#include "wsv_block.impl.h"
+#include "SheafSystem/wsv_block.impl.h"
 
 using namespace std;
 

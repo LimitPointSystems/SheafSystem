@@ -21,15 +21,15 @@
 #define BILINEAR_2D_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef LINEAR_FCN_SPACE_H
-#include "linear_fcn_space.h"
+#include "SheafSystem/linear_fcn_space.h"
 #endif
 
 #ifndef BLOCK_H
-#include "block.h"
+#include "SheafSystem/block.h"
 #endif
 
 namespace fiber_bundle

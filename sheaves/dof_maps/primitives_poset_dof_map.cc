@@ -17,14 +17,14 @@
 
 // Implementation for class primitives_poset_dof_map
 
-#include "primitives_poset_dof_map.h"
+#include "SheafSystem/primitives_poset_dof_map.h"
 
-#include "assert_contract.h"
-#include "dof_map_factory.h"
-#include "primitive_traits.h"
-#include "primitives_poset.h"
-#include "primitives_poset_schema.h"
-#include "std_string.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/dof_map_factory.h"
+#include "SheafSystem/primitive_traits.h"
+#include "SheafSystem/primitives_poset.h"
+#include "SheafSystem/primitives_poset_schema.h"
+#include "SheafSystem/std_string.h"
 
 using namespace std;
 

@@ -17,15 +17,15 @@
 
 // Implementation for class at3_e3.
 
-#include "at3_e3.impl.h"
+#include "SheafSystem/at3_e3.impl.h"
 
-#include "abstract_poset_member.impl.h"
-#include "assert_contract.h"
-#include "at0.h"
-#include "at1_space.h"
-#include "fiber_bundles_namespace.h"
-#include "schema_poset_member.h"
-#include "wsv_block.h"
+#include "SheafSystem/abstract_poset_member.impl.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/at0.h"
+#include "SheafSystem/at1_space.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/schema_poset_member.h"
+#include "SheafSystem/wsv_block.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.
@@ -1257,8 +1257,8 @@ invariant() const
 // NON-MEMBER FUNCTIONS
 //==============================================================================
 
-#include "at0.h"
-#include "at2_e3.h"
+#include "SheafSystem/at0.h"
+#include "SheafSystem/at2_e3.h"
 
 void
 fiber_bundle::atp_algebra::

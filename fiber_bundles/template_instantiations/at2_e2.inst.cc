@@ -19,7 +19,7 @@
 
 // Explicit_instantiations for class at2_e2.
 
-#include "at2_e2.impl.h"
+#include "SheafSystem/at2_e2.impl.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

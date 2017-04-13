@@ -21,19 +21,19 @@
 #define SECTION_EVAL_ITERATOR_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef EVAL_ITERATOR_H
-#include "eval_iterator.h"
+#include "SheafSystem/eval_iterator.h"
 #endif
 
 #ifndef POSET_DOF_ITERATOR_H
-#include "poset_dof_iterator.h"
+#include "SheafSystem/poset_dof_iterator.h"
 #endif
 
 #ifndef SEC_VD_H
-#include "sec_vd.h" // just to get typedefs
+#include "SheafSystem/sec_vd.h" // just to get typedefs
 #endif
 
 namespace sheaf

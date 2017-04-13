@@ -22,35 +22,35 @@
 #define SUBPOSET_STATE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef DOF_DESCRIPTOR_ARRAY_H
-#include "dof_descriptor_array.h"
+#include "SheafSystem/dof_descriptor_array.h"
 #endif
 
 #ifndef INDEX_SPACE_FAMILY_H
-#include "index_space_family.h"
+#include "SheafSystem/index_space_family.h"
 #endif
 
 #ifndef SCATTERED_INSERTION_INDEX_SPACE_HANDLE_H
-#include "scattered_insertion_index_space_handle.h"
+#include "SheafSystem/scattered_insertion_index_space_handle.h"
 #endif
 
 #ifndef SCOPED_INDEX_H
-#include "scoped_index.h"
+#include "SheafSystem/scoped_index.h"
 #endif
 
 #ifndef STD_STRING_H
-#include "std_string.h"
+#include "SheafSystem/std_string.h"
 #endif
 
 #ifndef STD_IOSTREAM_H
-#include "std_iostream.h"
+#include "SheafSystem/std_iostream.h"
 #endif
 
 #ifndef ZN_TO_BOOL_H
-#include "zn_to_bool.h"
+#include "SheafSystem/zn_to_bool.h"
 #endif
 
 namespace sheaf

@@ -18,21 +18,21 @@
 /// @file
 /// Implementation for class sec_jcb_ed.
 
-#include "sec_jcb_ed.h"
+#include "SheafSystem/sec_jcb_ed.h"
 
-#include "assert_contract.h"
-#include "binary_section_space_schema_member.impl.h"
-#include "binary_section_space_schema_poset.h"
-#include "fiber_bundles_namespace.h"
-#include "section_space_schema_member.impl.h"
-#include "section_space_schema_poset.h"
-#include "sec_at0.h"
-#include "sec_at1.h"
-#include "sec_at1_space.h"
-#include "sec_jcb_space.h"
-#include "sec_tuple_space.impl.h"
-#include "jcb_ed.h"
-#include "jcb_space.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/binary_section_space_schema_member.impl.h"
+#include "SheafSystem/binary_section_space_schema_poset.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/section_space_schema_member.impl.h"
+#include "SheafSystem/section_space_schema_poset.h"
+#include "SheafSystem/sec_at0.h"
+#include "SheafSystem/sec_at1.h"
+#include "SheafSystem/sec_at1_space.h"
+#include "SheafSystem/sec_jcb_space.h"
+#include "SheafSystem/sec_tuple_space.impl.h"
+#include "SheafSystem/jcb_ed.h"
+#include "SheafSystem/jcb_space.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

@@ -18,21 +18,21 @@
 // Implementation for class constant_eval_family
 
 
-#include "constant_eval_family.h"
+#include "SheafSystem/constant_eval_family.h"
 
-#include "assert_contract.h"
-#include "base_space_member.h"
-#include "constant_hex.h"
-#include "constant_point.h"
-#include "constant_quad.h"
-#include "constant_segment.h"
-#include "constant_tet.h"
-#include "constant_triangle.h"
-#include "factory.h"
-#include "fiber_bundles_namespace.h"
-#include "int_set.h"
-#include "namespace_poset.h"
-#include "sheaf.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/base_space_member.h"
+#include "SheafSystem/constant_hex.h"
+#include "SheafSystem/constant_point.h"
+#include "SheafSystem/constant_quad.h"
+#include "SheafSystem/constant_segment.h"
+#include "SheafSystem/constant_tet.h"
+#include "SheafSystem/constant_triangle.h"
+#include "SheafSystem/factory.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/int_set.h"
+#include "SheafSystem/namespace_poset.h"
+#include "SheafSystem/sheaf.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

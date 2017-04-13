@@ -22,15 +22,15 @@
 #define GL3_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef GLN_H
-#include "gln.h"
+#include "SheafSystem/gln.h"
 #endif
 
 #ifndef GENERAL_MATRIX_3X3_H
-#include "general_matrix_3x3.h"
+#include "SheafSystem/general_matrix_3x3.h"
 #endif
 
 

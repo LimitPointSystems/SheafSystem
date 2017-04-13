@@ -18,10 +18,10 @@
 /// @file
 /// Implementation for class singleton_index_space_handle
 
-#include "singleton_index_space_handle.h"
-#include "assert_contract.h"
-#include "index_space_family.h"
-#include "singleton_index_space_state.h"
+#include "SheafSystem/singleton_index_space_handle.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/index_space_family.h"
+#include "SheafSystem/singleton_index_space_state.h"
 
 // ===========================================================
 // SPACE FACTORY FACET

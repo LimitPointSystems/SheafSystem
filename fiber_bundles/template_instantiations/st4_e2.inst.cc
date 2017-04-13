@@ -17,7 +17,7 @@
 
 // Explicit_instantiations for class st4_e2.
 
-#include "st4_e2.impl.h"
+#include "SheafSystem/st4_e2.impl.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

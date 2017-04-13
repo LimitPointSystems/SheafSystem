@@ -17,8 +17,8 @@
 
 // Implementation for class linkorder_iterator
 
-#include "linkorder_iterator.h"
-#include "assert_contract.h"
+#include "SheafSystem/linkorder_iterator.h"
+#include "SheafSystem/assert_contract.h"
 
 sheaf::linkorder_iterator::
 linkorder_iterator()

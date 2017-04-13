@@ -18,13 +18,13 @@
 // Implementation for class THREAD_MUTEX
 
 #ifndef THREAD_MUTEX_H
-#include "thread_mutex.h"
+#include "SheafSystem/thread_mutex.h"
 #endif
 
 #ifdef _PTHREADS
 
-#include "assert_contract.h"
-#include "std_errno.h" // for EBUSY
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/std_errno.h" // for EBUSY
 
 ///
 sheaf::thread_mutex::

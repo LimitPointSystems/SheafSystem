@@ -22,15 +22,15 @@
 #define VD_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 #ifndef VD_H
-#include "vd.h"
+#include "SheafSystem/vd.h"
 #endif
 
 namespace fiber_bundle

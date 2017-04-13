@@ -18,15 +18,15 @@
 /// @file
 /// Implementation for class binary_section_space_schema_member.
 
-#include "binary_section_space_schema_member.impl.h"
+#include "SheafSystem/binary_section_space_schema_member.impl.h"
 
-#include "binary_section_space_schema_poset.h"
-#include "assert_contract.h"
-#include "base_space_poset.h"
-#include "fiber_bundles_namespace.h"
-#include "sec_rep_descriptor.h"
-#include "sec_rep_descriptor_poset.h"
-#include "wsv_block.h"
+#include "SheafSystem/binary_section_space_schema_poset.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/base_space_poset.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/sec_rep_descriptor.h"
+#include "SheafSystem/sec_rep_descriptor_poset.h"
+#include "SheafSystem/wsv_block.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

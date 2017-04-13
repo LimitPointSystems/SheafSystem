@@ -21,19 +21,19 @@
 #define SECTION_COMPONENT_ITERATOR_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ANY_H
-#include "any.h"
+#include "SheafSystem/any.h"
 #endif
 
 #ifndef SCOPED_INDEX_H
-#include "scoped_index.h"
+#include "SheafSystem/scoped_index.h"
 #endif
 
 #ifndef POSTORDER_ITERATOR_H
-#include "postorder_iterator.h"
+#include "SheafSystem/postorder_iterator.h"
 #endif
 
 namespace sheaf

@@ -21,19 +21,19 @@
 #define PTR_LINKED_POOL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef BLOCK_H
-#include "block.h"
+#include "SheafSystem/block.h"
 #endif
 
 #ifndef STD_IOSTREAM_H
-#include "std_iostream.h"
+#include "SheafSystem/std_iostream.h"
 #endif
 
 #ifndef SINGLY_LINKED_LIST_H
-#include "singly_linked_list.h"
+#include "SheafSystem/singly_linked_list.h"
 #endif
 
 namespace sheaf

@@ -22,15 +22,15 @@
 #define FIELDS_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef GEOMETRY_H
-#include "geometry.h"
+#include "SheafSystem/geometry.h"
 #endif
 
 #ifndef SCOPED_INDEX_H
-#include "scoped_index.h"
+#include "SheafSystem/scoped_index.h"
 #endif
 
 namespace sheaf

@@ -21,23 +21,23 @@
 #define PTR_LINKED_POOL_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef PTR_LINKED_POOL_H
-#include "ptr_linked_pool.h"
+#include "SheafSystem/ptr_linked_pool.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 #ifndef BLOCK_IMPL_H
-#include "block.impl.h"
+#include "SheafSystem/block.impl.h"
 #endif
 
 #ifndef STD_IOMANIP_H
-#include "std_iomanip.h"
+#include "SheafSystem/std_iomanip.h"
 #endif
 
 namespace sheaf

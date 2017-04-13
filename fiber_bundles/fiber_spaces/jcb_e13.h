@@ -22,23 +22,23 @@
 #define JCB_E13_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef JCB_ED_H
-#include "jcb_ed.h"
+#include "SheafSystem/jcb_ed.h"
 #endif
 
 #ifndef GENERAL_MATRIX_3X1_H
-#include "general_matrix_3x1.h"
+#include "SheafSystem/general_matrix_3x1.h"
 #endif
 
 #ifndef E1_H
-#include "e1.h"
+#include "SheafSystem/e1.h"
 #endif
 
 #ifndef E3_H
-#include "e3.h"
+#include "SheafSystem/e3.h"
 #endif
 
 namespace fiber_bundle

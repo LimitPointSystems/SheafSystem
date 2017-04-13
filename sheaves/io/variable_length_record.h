@@ -21,11 +21,11 @@
 #define VARIABLE_LENGTH_RECORD_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef RECORD_H
-#include "record.h"
+#include "SheafSystem/record.h"
 #endif
 
 namespace sheaf 

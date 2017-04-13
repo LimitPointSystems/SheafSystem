@@ -22,7 +22,7 @@
 #define FIELD_FACTORY_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 // ===========================================================
@@ -30,19 +30,19 @@
 // ===========================================================
 
 #ifndef FIELDS_H
-#include "fields.h"
+#include "SheafSystem/fields.h"
 #endif
 
 #ifndef POSET_PATH_H
-#include "poset_path.h"
+#include "SheafSystem/poset_path.h"
 #endif
 
 #ifndef STD_STRING_H
-#include "std_string.h"
+#include "SheafSystem/std_string.h"
 #endif
 
 #ifndef FIBER_BUNDLES_NAMESPACE_H
-#include "fiber_bundles_namespace.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
 #endif
 
 namespace sheaf

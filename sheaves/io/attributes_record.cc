@@ -17,11 +17,11 @@
 
 // Implementation for class attributes_record
 
-#include "attributes_record.h"
+#include "SheafSystem/attributes_record.h"
 
-#include "assert_contract.h"
-#include "namespace_poset.h"
-#include "poset.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/namespace_poset.h"
+#include "SheafSystem/poset.h"
 
 using namespace std;
 

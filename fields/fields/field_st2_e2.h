@@ -26,11 +26,11 @@
 #define FIELD_ST2_E2_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef FIELD_ST2_H
-#include "field_st2.h"
+#include "SheafSystem/field_st2.h"
 #endif
 
 namespace fiber_bundle

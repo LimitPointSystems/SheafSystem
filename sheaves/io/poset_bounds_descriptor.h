@@ -21,19 +21,19 @@
 #define POSET_BOUNDS_DESCRIPTOR_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ANY_H
-#include "any.h"
+#include "SheafSystem/any.h"
 #endif
 
 #ifndef POSET_STATE_HANDLE_H
-#include "poset_state_handle.h"
+#include "SheafSystem/poset_state_handle.h"
 #endif
 
 #ifndef SUBPOSET_H
-#include "subposet.h"
+#include "SheafSystem/subposet.h"
 #endif
 
 namespace sheaf

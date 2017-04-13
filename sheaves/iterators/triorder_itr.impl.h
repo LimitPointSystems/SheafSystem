@@ -22,11 +22,11 @@
 #define TRIORDER_ITR_IMPL_H
 
 #ifndef TRIORDER_ITR_H
-#include "triorder_itr.h"
+#include "SheafSystem/triorder_itr.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 namespace sheaf

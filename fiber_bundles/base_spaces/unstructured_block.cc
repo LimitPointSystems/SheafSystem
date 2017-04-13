@@ -17,22 +17,22 @@
 
 // Implementation for class unstructured_block.
 
-#include "unstructured_block.h"
+#include "SheafSystem/unstructured_block.h"
 
-#include "assert_contract.h"
-#include "arg_list.h"
-#include "fiber_bundles_namespace.h"
-#include "hex_connectivity.h"
-#include "line_connectivity.h"
-#include "namespace_poset.h"
-#include "point_connectivity.h"
-#include "poset_path.h"
-#include "preorder_iterator.h"
-#include "quad_connectivity.h"
-#include "tetra_connectivity.h"
-#include "triangle_connectivity.h"
-#include "unstructured_block_builder.h"
-#include "wsv_block.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/arg_list.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/hex_connectivity.h"
+#include "SheafSystem/line_connectivity.h"
+#include "SheafSystem/namespace_poset.h"
+#include "SheafSystem/point_connectivity.h"
+#include "SheafSystem/poset_path.h"
+#include "SheafSystem/preorder_iterator.h"
+#include "SheafSystem/quad_connectivity.h"
+#include "SheafSystem/tetra_connectivity.h"
+#include "SheafSystem/triangle_connectivity.h"
+#include "SheafSystem/unstructured_block_builder.h"
+#include "SheafSystem/wsv_block.h"
 
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.

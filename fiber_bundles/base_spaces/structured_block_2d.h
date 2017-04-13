@@ -21,19 +21,19 @@
 #define STRUCTURED_BLOCK_2D_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef STRUCTURED_BLOCK_H
-#include "structured_block.h"
+#include "SheafSystem/structured_block.h"
 #endif
 
 #ifndef STRUCTURED_BLOCK_2D_CRG_INTERVAL_H
-#include "structured_block_2d_crg_interval.h"
+#include "SheafSystem/structured_block_2d_crg_interval.h"
 #endif
 
 #ifndef CHART_POINT_2D_H
-#include "chart_point_2d.h"
+#include "SheafSystem/chart_point_2d.h"
 #endif
 
 namespace fiber_bundle

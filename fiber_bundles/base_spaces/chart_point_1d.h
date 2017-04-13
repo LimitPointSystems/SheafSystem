@@ -22,11 +22,11 @@
 #define CHART_POINT_1D_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef CHART_POINT_H
-#include "chart_point.h"
+#include "SheafSystem/chart_point.h"
 #endif
 
 namespace fiber_bundle

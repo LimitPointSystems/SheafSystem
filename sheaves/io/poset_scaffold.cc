@@ -18,22 +18,22 @@
 /// @file
 /// Implementation for class poset_scaffold
 
-#include "subposet.h"
-#include "poset_scaffold.h"
-#include "assert_contract.h"
-#include "data_converter.h"
-#include "error_message.h"
-#include "index_space_iterator.h"
-#include "interval_index_space_state.h"
-#include "namespace_poset.h"
-#include "namespace_relative_member_index.h"
-#include "namespace_relative_subposet_index.h"
-#include "poset.h"
-#include "poset_bounds.h"
-#include "primitive_type.h"
-#include "std_cstdlib.h"
-#include "std_sstream.h"
-#include "storage_agent.h"
+#include "SheafSystem/subposet.h"
+#include "SheafSystem/poset_scaffold.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/data_converter.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/index_space_iterator.h"
+#include "SheafSystem/interval_index_space_state.h"
+#include "SheafSystem/namespace_poset.h"
+#include "SheafSystem/namespace_relative_member_index.h"
+#include "SheafSystem/namespace_relative_subposet_index.h"
+#include "SheafSystem/poset.h"
+#include "SheafSystem/poset_bounds.h"
+#include "SheafSystem/primitive_type.h"
+#include "SheafSystem/std_cstdlib.h"
+#include "SheafSystem/std_sstream.h"
+#include "SheafSystem/storage_agent.h"
 
 using namespace std;
 

@@ -22,35 +22,35 @@
 #define BASE_SPACE_MAP_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ANY_H
-#include "any.h"
+#include "SheafSystem/any.h"
 #endif
 
 #ifndef FIELDS_H
-#include "fields.h"
+#include "SheafSystem/fields.h"
 #endif
 
 #ifndef SECTION_PUSHER_PULLBACK_ACTION_H
-#include "section_pusher_pullback_action.h"
+#include "SheafSystem/section_pusher_pullback_action.h"
 #endif
 
 #ifndef SEC_ED_INVERTIBLE_H
-#include "sec_ed_invertible.h"
+#include "SheafSystem/sec_ed_invertible.h"
 #endif
 
 #ifndef SEC_REP_SPACE_H
-#include "sec_rep_space.h"
+#include "SheafSystem/sec_rep_space.h"
 #endif
 
 #ifndef STD_SET_H
-#include "std_set.h"
+#include "SheafSystem/std_set.h"
 #endif
 
 #ifndef STL_SCOPED_INDEX_H
-#include "stl_scoped_index.h"
+#include "SheafSystem/stl_scoped_index.h"
 #endif
 
 namespace fiber_bundle
