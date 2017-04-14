@@ -152,7 +152,7 @@ function(SheafSystem_configure_std_headers)
 
       string(REGEX REPLACE ".in$" ""  std_h ${input_file})
       message(STATUS "Creating ${CMAKE_BINARY_DIR}/include/${std_h} from std/${input_file}")
-      list(APPEND std_incs ${CMAKE_BINARY_DIR}/include/${std_h})
+      list(APPEND std_incs ${SHEAFSYSTEM_HEADER_DIR}/${std_h})
 
       # Configure the .h files
 
@@ -610,7 +610,6 @@ function(SheafSystem_add_sheaves_bindings_targets)
    dbc_require(SHEAFSYSTEM_BUILD_BINDINGS)
 
    include(${SHEAFSYSTEM_CMAKE_MODULE_PATH}/UseSWIG.cmake)
-#   include(UseSWIG)
 
    SheafSystem_add_sheaves_java_bindings_targets()
 
@@ -626,140 +625,6 @@ function(SheafSystem_add_sheaves_bindings_targets)
 
 endfunction(SheafSystem_add_sheaves_bindings_targets)
 
-
-#function(SheafSystem_add_sheaves_install_target)
-#
-#   # message("Entering sheaves/component_defintions::add_install_target")
-#
-#   if(SHEAFSYSTEM_LINUX)
-#
-#      install(TARGETS ${SHEAVES_SHARED_LIB} ${SHEAVES_STATIC_LIB}
-#         EXPORT ${SHEAFSYSTEM_EXPORT_NAME}
-#         ARCHIVE DESTINATION ${CMAKE_BUILD_TYPE}/lib
-#         LIBRARY DESTINATION ${CMAKE_BUILD_TYPE}/lib)
-#
-#      if(SHEAFSYSTEM_BUILD_BINDINGS)
-#
-#         install(TARGETS ${SHEAVES_JAVA_BINDING_LIB} 
-#            EXPORT ${SHEAFSYSTEM_EXPORT_NAME}
-#            LIBRARY DESTINATION ${CMAKE_BUILD_TYPE}/lib)
-#
-#         install(FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${SHEAVES_JAVA_BINDING_JAR} 
-#            DESTINATION ${CMAKE_BUILD_TYPE}/lib)  
-#
-#         install(TARGETS ${SHEAVES_PYTHON_BINDING_LIB} 
-#            EXPORT ${SHEAFSYSTEM_EXPORT_NAME}
-#            LIBRARY DESTINATION ${CMAKE_BUILD_TYPE}/lib)
-#
-#         install(TARGETS ${SHEAVES_CSHARP_BINDING_LIB} 
-#            EXPORT ${SHEAFSYSTEM_EXPORT_NAME}
-#            LIBRARY DESTINATION ${CMAKE_BUILD_TYPE}/lib)
-#
-#         install(FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_BUILD_TYPE}/${SHEAVES_CSHARP_BINDING_ASSY} 
-#            DESTINATION ${CMAKE_BUILD_TYPE}/lib) 
-#
-#      endif()
-#      
-#   elseif(SHEAFSYSTEM_WINDOWS)
-#
-#      # Install the sheaves libs.
-#      
-#      install(TARGETS ${SHEAVES_IMPORT_LIB}
-#         EXPORT ${SHEAFSYSTEM_EXPORT_NAME}
-#         ARCHIVE
-#         DESTINATION lib/$<CONFIG>)
-#
-#      # The dynmaic library is not directly referred to by clients,
-#      # so it is not an exported target.
-#      
-#      install(TARGETS ${SHEAVES_DYNAMIC_LIB}
-#         RUNTIME
-#         DESTINATION bin/$<CONFIG>)
-#
-#      install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>/${SHEAVES_DYNAMIC_LIB}_d.pdb 
-#         DESTINATION bin/$<CONFIG> 
-#         OPTIONAL)
-#
-#      install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>/${SHEAVES_DYNAMIC_LIB}.pdb 
-#         DESTINATION bin/$<CONFIG> 
-#         OPTIONAL)
-#      
-#      if(SHEAFSYSTEM_BUILD_BINDINGS)
-#
-#         # Install the sheaves java bindings libs.
-#         
-#         install(TARGETS ${SHEAVES_JAVA_BINDING_LIB} 
-#            EXPORT ${SHEAFSYSTEM_EXPORT_NAME}
-#            ARCHIVE
-#            DESTINATION lib/$<CONFIG>)
-#         
-#         install(TARGETS ${SHEAVES_JAVA_BINDING_LIB} 
-#            RUNTIME
-#            DESTINATION bin/$<CONFIG>)
-#
-#         install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>/${SHEAVES_JAVA_BINDING_LIB}_d.pdb 
-#            DESTINATION bin/$<CONFIG> 
-#            OPTIONAL)
-#
-#         install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>/${SHEAVES_JAVA_BINDING_LIB}.pdb 
-#            DESTINATION bin/$<CONFIG> 
-#            OPTIONAL)
-#
-#         install(FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/$<CONFIG>/${SHEAVES_JAVA_BINDING_JAR} 
-#            DESTINATION lib/$<CONFIG>)  
-#
-#         # Install the sheaves csharp bindings libs
-#         
-#         install(TARGETS ${SHEAVES_CSHARP_BINDING_LIB} 
-#            EXPORT ${SHEAFSYSTEM_EXPORT_NAME}
-#            ARCHIVE
-#            DESTINATION lib/$<CONFIG>)         
-#         
-#         install(TARGETS ${SHEAVES_CSHARP_BINDING_LIB} 
-#            RUNTIME
-#            DESTINATION bin/$<CONFIG>)         
-#
-#         install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>/${SHEAVES_CSHARP_BINDING_LIB}_d.pdb 
-#            DESTINATION bin/$<CONFIG> 
-#            OPTIONAL) 
-#
-#         install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>/${SHEAVES_CSHARP_BINDING_LIB}.pdb 
-#            DESTINATION bin/$<CONFIG> 
-#            OPTIONAL) 
-#
-#         install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>/${SHEAVES_CSHARP_BINDING_ASSY} 
-#            DESTINATION bin/$<CONFIG>) 
-#
-#         # Install sheaves python bindings libs.
-#         
-#         install(TARGETS ${SHEAVES_PYTHON_BINDING_LIB} 
-#            EXPORT ${SHEAFSYSTEM_EXPORT_NAME}
-#            ARCHIVE
-#            DESTINATION lib/$<CONFIG>)         
-#         
-#         install(TARGETS ${SHEAVES_PYTHON_BINDING_LIB} 
-#            RUNTIME
-#            DESTINATION bin/$<CONFIG>)         
-#         
-#         install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>/${SHEAVES_PYTHON_BINDING_LIB}_d.pdb 
-#            DESTINATION bin/$<CONFIG> 
-#            OPTIONAL) 
-#
-#         install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>/${SHEAVES_PYTHON_BINDING_LIB}.pdb 
-#            DESTINATION bin/$<CONFIG> 
-#            OPTIONAL) 
-#         
-#      endif()
-#   endif()
-#
-#   install(FILES ${SHEAVES_INCS} DESTINATION include) 
-#
-#   install(FILES ${SHEAVES_STD_HEADERS} DESTINATION include)
-#
-#   # message("Leaving sheaves/component_defintions::add_install_target")
-#   
-#endfunction(SheafSystem_add_sheaves_install_target)
-#
 
 function(SheafSystem_add_sheaves_install_target)
 
