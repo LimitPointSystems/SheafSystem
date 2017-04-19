@@ -146,7 +146,8 @@ function(SheafSystem_add_geometry_java_bindings_targets)
 
    # Body:
 
-   include_directories(${GEOMETRY_IPATHS})
+#   include_directories(${GEOMETRY_IPATHS})
+   include_directories(${SHEAFSYSTEM_BUILD_INC_DIR})
    include_directories(${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})
    include_directories(${SHEAVES_JAVA_BINDING_SRC_DIR})
    include_directories(${SHEAVES_COMMON_BINDING_SRC_DIR})
@@ -154,6 +155,7 @@ function(SheafSystem_add_geometry_java_bindings_targets)
    include_directories(${FIBER_BUNDLES_COMMON_BINDING_SRC_DIR})
    include_directories(${GEOMETRY_JAVA_BINDING_SRC_DIR})
    include_directories(${GEOMETRY_COMMON_BINDING_SRC_DIR})
+   include_directories(${HDF5_INCLUDE_DIR})
 
    
    set_source_files_properties(${GEOMETRY_JAVA_BINDING_SRC_DIR}/${GEOMETRY_SWIG_JAVA_INTERFACE} 
@@ -320,6 +322,7 @@ function(SheafSystem_add_geometry_csharp_bindings_targets)
    
    include_directories(${SHEAVES_CSHARP_BINDING_SRC_DIR})
    include_directories(${FIBER_BUNDLES_CSHARP_BINDING_SRC_DIR})
+   include_directories(${HDF5_INCLUDE_DIR})
    
    # Add the csharp binding library target
 
@@ -421,6 +424,7 @@ function(SheafSystem_add_geometry_python_bindings_targets)
    include_directories(${SHEAFSYSTEM_PYTHON_INCLUDE_DIRS})
    include_directories(${SHEAVES_PYTHON_BINDING_SRC_DIR})
    include_directories(${FIBER_BUNDLES_PYTHON_BINDING_SRC_DIR})
+   include_directories(${HDF5_INCLUDE_DIR})
 
    set_source_files_properties(${GEOMETRY_PYTHON_BINDING_SRC_DIR}/${GEOMETRY_SWIG_PYTHON_INTERFACE} 
       PROPERTIES CPLUSPLUS ON)

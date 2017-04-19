@@ -61,7 +61,18 @@ function(SheafSystem_set_system_variable_defaults)
    #
    set(SHEAFSYSTEM_EXPORT_NAME SheafSystemTargets
       CACHE STRING "As used in install(EXPORT <export-name> ...)")
-   mark_as_advanced(SHEAFSYSTEM_EXPORT_NAME)  
+   mark_as_advanced(SHEAFSYSTEM_EXPORT_NAME)
+
+   #
+   # Define path to include dir for build and installed configurations.
+   #
+   set(SHEAFSYSTEM_BUILD_INC_DIR ${CMAKE_BINARY_DIR}/include
+      CACHE PATH "Path to build include directory.")
+   mark_as_advanced(SHEAFSYSTEM_BUILD_INC_DIR)  
+
+   set(SHEAFSYSTEM_INSTALL_INC_DIR include
+      CACHE PATH "Relative path to install include directory.")
+   mark_as_advanced(SHEAFSYSTEM_INSTALL_INC_DIR)  
 
    #
    # Define the unique header file scope qualifier and directory path.
@@ -70,7 +81,7 @@ function(SheafSystem_set_system_variable_defaults)
       CACHE STRING "Used to give header files unique scope in include directives.")
    mark_as_advanced(SHEAFSYSTEM_HEADER_SCOPE)  
 
-   set(SHEAFSYSTEM_HEADER_DIR ${CMAKE_BINARY_DIR}/include/${SHEAFSYSTEM_HEADER_SCOPE}
+   set(SHEAFSYSTEM_HEADER_DIR ${SHEAFSYSTEM_BUILD_INC_DIR}/${SHEAFSYSTEM_HEADER_SCOPE}
       CACHE PATH "Path to scoped header file directory.")
    mark_as_advanced(SHEAFSYSTEM_HEADER_DIR)  
 

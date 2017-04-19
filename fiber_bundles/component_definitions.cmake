@@ -149,12 +149,14 @@ function(SheafSystem_add_fiber_bundles_java_bindings_targets)
 
    # Body:
 
-   include_directories(${FIBER_BUNDLES_IPATHS})
+#   include_directories(${FIBER_BUNDLES_IPATHS})
+   include_directories(${SHEAFSYSTEM_BUILD_INC_DIR})
    include_directories(${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})
    include_directories(${SHEAVES_JAVA_BINDING_SRC_DIR})
    include_directories(${SHEAVES_COMMON_BINDING_SRC_DIR})
    include_directories(${FIBER_BUNDLES_JAVA_BINDING_SRC_DIR})
    include_directories(${FIBER_BUNDLES_COMMON_BINDING_SRC_DIR})        
+   include_directories(${HDF5_INCLUDE_DIR})
    
    set_source_files_properties(${FIBER_BUNDLES_JAVA_BINDING_SRC_DIR}/${FIBER_BUNDLES_SWIG_JAVA_INTERFACE} 
       PROPERTIES CPLUSPLUS ON)
@@ -313,6 +315,7 @@ function(SheafSystem_add_fiber_bundles_csharp_bindings_targets)
    set(CMAKE_SWIG_FLAGS -c++ -w842 -namespace fiber_bundle)
    
    include_directories(${SHEAVES_CSHARP_BINDING_SRC_DIR})
+   include_directories(${HDF5_INCLUDE_DIR})
    
    # Add the csharp binding library target
 

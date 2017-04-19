@@ -148,7 +148,8 @@ function(SheafSystem_add_fields_java_bindings_targets)
 
    dbc_unexecutable_require("geometry java bindings")
 
-   include_directories(${FIELDS_IPATHS})
+#   include_directories(${FIELDS_IPATHS})
+   include_directories(${SHEAFSYSTEM_BUILD_INC_DIR})
    include_directories(${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})
    include_directories(${SHEAVES_JAVA_BINDING_SRC_DIR})
    include_directories(${SHEAVES_COMMON_BINDING_SRC_DIR})
@@ -158,6 +159,7 @@ function(SheafSystem_add_fields_java_bindings_targets)
    include_directories(${GEOMETRY_COMMON_BINDING_SRC_DIR})
    include_directories(${FIELDS_JAVA_BINDING_SRC_DIR})
    include_directories(${FIELDS_COMMON_BINDING_SRC_DIR})
+   include_directories(${HDF5_INCLUDE_DIR})
 
    
    set_source_files_properties(${FIELDS_JAVA_BINDING_SRC_DIR}/${FIELDS_SWIG_JAVA_INTERFACE} 
@@ -324,6 +326,7 @@ function(SheafSystem_add_fields_csharp_bindings_targets)
    include_directories(${SHEAVES_CSHARP_BINDING_SRC_DIR})
    include_directories(${FIBER_BUNDLES_CSHARP_BINDING_SRC_DIR})
    include_directories(${GEOMETRY_CSHARP_BINDING_SRC_DIR})
+   include_directories(${HDF5_INCLUDE_DIR})
    
    # Add the csharp binding library target
 
@@ -427,6 +430,7 @@ function(SheafSystem_add_fields_python_bindings_targets)
    include_directories(${SHEAVES_PYTHON_BINDING_SRC_DIR})
    include_directories(${FIBER_BUNDLES_PYTHON_BINDING_SRC_DIR})
    include_directories(${GEOMETRY_PYTHON_BINDING_SRC_DIR})
+   include_directories(${HDF5_INCLUDE_DIR})
    
    set_source_files_properties(${FIELDS_PYTHON_BINDING_SRC_DIR}/${FIELDS_SWIG_PYTHON_INTERFACE} 
       PROPERTIES CPLUSPLUS ON)

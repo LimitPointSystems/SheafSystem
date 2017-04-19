@@ -298,10 +298,12 @@ function(SheafSystem_add_sheaves_java_bindings_targets)
    dbc_require(SHEAFSYSTEM_FOUND_JAVA)
    dbc_require(SHEAFSYSTEM_FOUND_JNI)
 
-   include_directories(${SHEAVES_IPATHS})
+#   include_directories(${SHEAVES_IPATHS})
+   include_directories(${SHEAFSYSTEM_BUILD_INC_DIR})
    include_directories(${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})
    include_directories(${SHEAVES_JAVA_BINDING_SRC_DIR})
    include_directories(${SHEAVES_COMMON_BINDING_SRC_DIR})
+   include_directories(${HDF5_INCLUDE_DIR})
    
    set_source_files_properties(${SHEAVES_JAVA_BINDING_SRC_DIR}/${SHEAVES_SWIG_JAVA_INTERFACE}
       PROPERTIES CPLUSPLUS ON)

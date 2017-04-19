@@ -46,13 +46,13 @@
 
 #ifdef HAVE_VTK
 
-#include "SheafSystem/vtkConnectivityFilter.h"
-#include "SheafSystem/vtkDelaunay2D.h"
-#include "SheafSystem/vtkDelaunay3D.h"
-#include "SheafSystem/vtkMath.h"
-#include "SheafSystem/vtkPoints.h"
-#include "SheafSystem/vtkPolyData.h"
-#include "SheafSystem/vtkUnstructuredGrid.h"
+#include "vtkConnectivityFilter.h"
+#include "vtkDelaunay2D.h"
+#include "vtkDelaunay3D.h"
+#include "vtkMath.h"
+#include "vtkPoints.h"
+#include "vtkPolyData.h"
+#include "vtkUnstructuredGrid.h"
 
 #endif
 

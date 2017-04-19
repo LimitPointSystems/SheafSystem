@@ -37,7 +37,7 @@
 //=============================================================================
 
 %{
-#include "std_iostream.h"
+#include "SheafSystem/std_iostream.h"
 %}
                                                                                                     
 %inline %{

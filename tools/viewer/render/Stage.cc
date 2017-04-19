@@ -19,10 +19,10 @@
 
 // See jawt.h in jdk for more information on what is being done here.
 
-#include "SheafSystem/jawt_md.h"
+#include "jawt_md.h"
 #include <jni.h>
-#include "SheafSystem/vtkRenderWindow.h"
-#include "SheafSystem/vtkJavaUtil.h"
+#include "vtkRenderWindow.h"
+#include "vtkJavaUtil.h"
 
 
 ///

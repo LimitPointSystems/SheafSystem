@@ -24,15 +24,15 @@
 #include "SheafSystem/namespace_poset.h"
 #include "SheafSystem/sec_vd_space.h"
 
-#include "SheafSystem/vtkPolyData.h"
-#include "SheafSystem/vtkPolyDataWriter.h"
-#include "SheafSystem/vtkDoubleArray.h"
-#include "SheafSystem/vtkFieldData.h"
-#include "SheafSystem/vtkIntArray.h"
+#include "vtkPolyData.h"
+#include "vtkPolyDataWriter.h"
+#include "vtkDoubleArray.h"
+#include "vtkFieldData.h"
+#include "vtkIntArray.h"
 
-#include "SheafSystem/vtkPoints.h"
-#include "SheafSystem/vtkCellArray.h"
-#include "SheafSystem/vtkPointData.h"
+#include "vtkPoints.h"
+#include "vtkCellArray.h"
+#include "vtkPointData.h"
 
 //#unfine DIAGNOSTIC_OUTPUT
 // #define DIAGNOSTIC_OUTPUT

@@ -107,8 +107,8 @@ function(SheafSystem_add_tools_library_targets)
    # Target to create copies of header files with path ${SHEAFSYSTEM_HEADER_SCOPE}/*.h,
    # so uniquely scoped paths in include directives with work.
 
-   add_custom_target(sheaves_scoped_headers
-      COMMAND ${CMAKE_COMMAND} -E copy_if_different ${TOOLS_INCS} ${SHEAFSYSTEM_HEADER_SCOPE})
+   add_custom_target(tools_scoped_headers
+      COMMAND ${CMAKE_COMMAND} -E copy_if_different ${TOOLS_INCS} ${SHEAFSYSTEM_HEADER_DIR})
    
    if(SHEAFSYSTEM_WINDOWS)
 
@@ -202,7 +202,8 @@ function(SheafSystem_add_tools_java_bindings_targets)
    include_directories(${VTK_INCLUDE_DIRS})
    link_directories(${VTK_LIB_DIR}) 
 
-   include_directories(${TOOLS_IPATHS})
+#   include_directories(${TOOLS_IPATHS})
+   include_directories(${SHEAFSYSTEM_BUILD_INC_DIR})
    include_directories(${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})
    include_directories(${SHEAVES_JAVA_BINDING_SRC_DIR})
    include_directories(${SHEAVES_COMMON_BINDING_SRC_DIR})
@@ -214,6 +215,7 @@ function(SheafSystem_add_tools_java_bindings_targets)
    include_directories(${FIELDS_COMMON_BINDING_SRC_DIR})
    include_directories(${TOOLS_JAVA_BINDING_SRC_DIR})
    include_directories(${TOOLS_COMMON_BINDING_SRC_DIR})
+   include_directories(${HDF5_INCLUDE_DIR})
    
    set_source_files_properties(${TOOLS_JAVA_BINDING_SRC_DIR}/${TOOLS_SWIG_JAVA_INTERFACE}
       PROPERTIES CPLUSPLUS ON)

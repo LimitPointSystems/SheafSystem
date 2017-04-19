@@ -41,8 +41,8 @@
 #include "SheafSystem/structured_block_3d.h"
 #include "SheafSystem/subposet_member_iterator.h"
 #include "SheafSystem/uniform_eval_family.h"
-#include "SheafSystem/vtkDoubleArray.h"
-#include "SheafSystem/vtkIdTypeArray.h"
+#include "vtkDoubleArray.h"
+#include "vtkIdTypeArray.h"
 
 //#define DIAGNOSTIC_OUTPUT 1
 

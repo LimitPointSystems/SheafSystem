@@ -41,7 +41,7 @@
 #endif
 
 #ifndef VTKTYPE_H
-#include "SheafSystem/vtkType.h"
+#include "vtkType.h"
 #endif
  
 class vtkDataSet;

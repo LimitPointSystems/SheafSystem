@@ -56,22 +56,22 @@
 
 //=============================================================================
 
-%include "geometry.h"
+%include "SheafSystem/geometry.h"
 
-%include "d_bin_coordinates.h"
-%include "d_bounding_box.h"
-%include "d_tree_point_locator_node.h"
-%include "d_tree_point_locator_path.h"
+%include "SheafSystem/d_bin_coordinates.h"
+%include "SheafSystem/d_bounding_box.h"
+%include "SheafSystem/d_tree_point_locator_node.h"
+%include "SheafSystem/d_tree_point_locator_path.h"
 
-%include "point_locator.h"
-%include       "cylindrical_point_locator.h"
-%include             "array_cylindrical_point_locator.h"
-%include       "d_bin_point_locator.h"
-%include             "d_array_point_locator.h"
-%include             "d_tree_point_locator.h"
-%include       "d_uniform_point_locator.h"
-%include       "db0_point_locator.h"
+%include "SheafSystem/point_locator.h"
+%include       "SheafSystem/cylindrical_point_locator.h"
+%include             "SheafSystem/array_cylindrical_point_locator.h"
+%include       "SheafSystem/d_bin_point_locator.h"
+%include             "SheafSystem/d_array_point_locator.h"
+%include             "SheafSystem/d_tree_point_locator.h"
+%include       "SheafSystem/d_uniform_point_locator.h"
+%include       "SheafSystem/db0_point_locator.h"
 
-%include "sec_ed_invertible.h"
+%include "SheafSystem/sec_ed_invertible.h"
 
 //=============================================================================

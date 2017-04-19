@@ -33,16 +33,16 @@
 #include "SheafSystem/section_space_schema_poset.h"
 #include "SheafSystem/visualization_iterator.h"
 
-#include "SheafSystem/vtkUnstructuredGrid.h"
-#include "SheafSystem/vtkUnstructuredGridWriter.h"
-#include "SheafSystem/vtkDoubleArray.h"
-#include "SheafSystem/vtkFieldData.h"
-#include "SheafSystem/vtkIdTypeArray.h"
-#include "SheafSystem/vtkIntArray.h"
-#include "SheafSystem/vtkPoints.h"
-#include "SheafSystem/vtkCellArray.h"
-#include "SheafSystem/vtkCellData.h"
-#include "SheafSystem/vtkPointData.h"
+#include "vtkUnstructuredGrid.h"
+#include "vtkUnstructuredGridWriter.h"
+#include "vtkDoubleArray.h"
+#include "vtkFieldData.h"
+#include "vtkIdTypeArray.h"
+#include "vtkIntArray.h"
+#include "vtkPoints.h"
+#include "vtkCellArray.h"
+#include "vtkCellData.h"
+#include "vtkPointData.h"
 
 //#undefine DIAGNOSTIC_OUTPUT
 //#define DIAGNOSTIC_OUTPUT
