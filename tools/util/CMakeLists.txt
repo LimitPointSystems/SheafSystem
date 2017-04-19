@@ -37,7 +37,7 @@ set(ADDITIONAL_INCS
 
 
 if(SHEAFSYSTEM_BUILD_SHEAFSCOPE)
-    configure_file(lps_environment.h.cmake.in ${CMAKE_BINARY_DIR}/include/lps_environment.h)
+    configure_file(lps_environment.h.cmake.in ${SHEAFSYSTEM_HEADER_DIR}/lps_environment.h)
 endif()
 
 

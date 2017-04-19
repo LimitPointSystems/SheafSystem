@@ -30,38 +30,32 @@
 class SHEAF_DLL_SPEC jvm_launcher
 {
 
-public:
+ public:
 
   ///
   /// Return values.
   ///
-  //static const int SUCCESS;
-  //static const int JVM_CREATE_FAILURE;
-  //static const int CLASS_NOT_FOUND;
-  //static const int MAIN_NOT_FOUND;
-  //static const int OUT_OF_MEMORY;
-
+  enum status_msg {SUCCESS = 0, JVM_CREATE_FAILURE = 1, CLASS_NOT_FOUND = 2, MAIN_NOT_FOUND = 3, OUT_OF_MEMORY = 4 };
 
   ///
   ///  Launch the Java virtual machine, using the current CLASSPATH
   ///  and LD_LIBRARY_PATH environment variables.
   ///
-   int launch(const char* main_class_name, int argc, char* argv[],
-                    bool verbose = false);
+  int launch(const char* main_class_name, int argc, char* argv[], bool verbose = false);
 
   ///
   ///  Launch the Java virtual machine, using specified values for the
   ///  CLASSPATH and LD_LIBRARY_PATH environment variables.
   ///
-   int launch(const char* main_class_name, int argc, char* argv[],
-                    const char* class_path, const char* ld_library_path, bool verbose = false);
+  int launch(const char* main_class_name, int argc, char* argv[],
+             const char* class_path, const char* ld_library_path, bool verbose = false);
 
   ///
   /// Destructor
   ///
   virtual ~jvm_launcher();
 
-protected:
+ protected:
 
   ///
   ///  Re-exec the current process with the using specified
@@ -69,10 +63,9 @@ protected:
   ///  This allows LD_LIBRARY_PATH to be set so that the linker
   ///  will recognize it at the proper time.
   ///
-  void re_exec(int argc, char* argv[],
-                      const char* class_path, const char* ld_library_path);
+  void re_exec(int argc, char* argv[], const char* class_path, const char* ld_library_path);
 
-private:
+ private:
 
   ///
   /// Default constructor.  Private because we don't ever need to
