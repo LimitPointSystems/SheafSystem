@@ -177,8 +177,11 @@ function(SheafSystem_add_sheaves_library_targets)
    # generator expression, otherwise it inserts the current source directory 
    # just before the expression. Go figure.
 
-   string(REPLACE ";" "\;" _lps_escaped_paths "${SHEAVES_IPATHS}" )
+   #string(REPLACE ";" "\;" _lps_escaped_paths "${SHEAVES_IPATHS}" )
    #message("static _lps_escaped_paths= ${_lps_escaped_paths}")
+
+   set(_lps_escaped_paths "${CMAKE_BINARY_DIR}/include\;${HDF5_INCLUDE_DIR}")
+   message("shared _lps_escaped_paths= ${_lps_escaped_paths}")
 
    # Target to create copies of header files with path ${SHEAFSYSTEM_HEADER_SCOPE}/*.h,
    # so uniquely scoped paths in include directives with work.
@@ -188,16 +191,13 @@ function(SheafSystem_add_sheaves_library_targets)
 
    if(SHEAFSYSTEM_WINDOWS)
 
-      # Tell the linker where to look for this project's libraries.
-      # $$ISSUE: shouldn't be necessary.
-      #link_directories(${SHEAVES_OUTPUT_DIR})
-
       # Create the DLL.
 
       add_library(${SHEAVES_DYNAMIC_LIB} SHARED ${SHEAVES_SRCS})
       add_dependencies(${SHEAVES_DYNAMIC_LIB} sheaves_scoped_headers)
       target_include_directories(${SHEAVES_DYNAMIC_LIB} PUBLIC
-         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )
+         $<BUILD_INTERFACE:${_lps_escaped_paths}>
+         $<INSTALL_INTERFACE:include> )
       target_link_libraries(${SHEAVES_DYNAMIC_LIB} PRIVATE hdf5-static)
       set_target_properties(${SHEAVES_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")
 
@@ -211,7 +211,7 @@ function(SheafSystem_add_sheaves_library_targets)
       # Static library
 
       # Statically "linking" a library is really just putting the .o files into a .a file
-      # and perhapd creating an index for the .a file. There is no actual linking involved.
+      # and perhapS creating an index for the .a file. There is no actual linking involved.
       # However, the link_target_libraries command distinguishes between the link dependencies,
       # those libraries needed to "link" the target, and the link interface, those libraries
       # needed by clients linking to the target library. The list of link dependencies for the 
@@ -224,7 +224,8 @@ function(SheafSystem_add_sheaves_library_targets)
       add_library(${SHEAVES_STATIC_LIB} STATIC ${SHEAVES_SRCS})
       add_dependencies(${SHEAVES_STATIC_LIB} sheaves_scoped_headers)
       target_include_directories(${SHEAVES_STATIC_LIB} PUBLIC
-         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>
+         $<INSTALL_INTERFACE:include> )
       target_link_libraries(${SHEAVES_STATIC_LIB} PUBLIC hdf5-static)
       set_target_properties(${SHEAVES_STATIC_LIB} PROPERTIES OUTPUT_NAME sheaves)
       set_target_properties(${SHEAVES_STATIC_LIB} PROPERTIES LINKER_LANGUAGE CXX)
@@ -238,7 +239,7 @@ function(SheafSystem_add_sheaves_library_targets)
       # to be compiled with -fPIC. Unfortunately, libdl.a as distributed with 
       # glibc-static-2.12-1.149.el6.x86_64.rpm isn't compiled -fPIC and can't be linked statically.
       # The others apparently can be linked statically, although libstdc++ requires libm.so,
-      # so the sheaf shard library ends up requiring libm.so anyway, even if linked statically here.
+      # so the sheaf shared library ends up requiring libm.so anyway, even if linked statically here.
 
       add_library(${SHEAVES_SHARED_LIB} SHARED ${SHEAVES_SRCS})
 
@@ -249,15 +250,9 @@ function(SheafSystem_add_sheaves_library_targets)
       # so we have to explicitly put them into the interface.
       # See ../cmake_modules/find_prerequisites.cmake for defintion of HDF5_INCLUDE_DIR.
 
-      string(APPEND _lps_escaped_paths "\;${HDF5_INCLUDE_DIR}")
-      # message("shared _lps_escaped_paths= ${_lps_escaped_paths}")
-
       target_include_directories(${SHEAVES_SHARED_LIB} PUBLIC
-         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )   
-
-      #target_link_libraries(${SHEAVES_SHARED_LIB} 
-      #   PRIVATE -Wl,-Bstatic hdf5 m rt z szip -Wl,-Bdynamic 
-      #   PUBLIC dl)  
+         $<BUILD_INTERFACE:${_lps_escaped_paths}>
+         $<INSTALL_INTERFACE:include> )   
 
       target_link_libraries(${SHEAVES_SHARED_LIB} PRIVATE -Wl,-Bstatic hdf5-static -Wl,-Bdynamic PUBLIC dl)  
       set_target_properties(${SHEAVES_SHARED_LIB} PROPERTIES OUTPUT_NAME sheaves)

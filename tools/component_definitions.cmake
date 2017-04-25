@@ -594,7 +594,7 @@ function(SheafSystem_add_tools_install_target)
 
    endif(SHEAFSYSTEM_LINUX)
 
-   install(FILES ${TOOLS_INCS} DESTINATION include) 
+   install(FILES ${TOOLS_INCS} DESTINATION include/${SHEAFSYSTEM_HEADER_SCOPE}) 
    
 endfunction(SheafSystem_add_tools_install_target)
 
