@@ -17,10 +17,10 @@
 
 // Implementation for class RUNNABLE
 
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 
 #ifndef RUNNABLE_H
-#include "runnable.h"
+#include "SheafSystem/runnable.h"
 #endif
 
 #ifdef _PTHREADS

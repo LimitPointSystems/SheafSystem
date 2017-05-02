@@ -17,15 +17,15 @@
 
 // Implementation for class section_eval_iterator
 
-#include "assert_contract.h"
-#include "block.h"
-#include "eval_family.h"
-#include "poset_state_handle.h"
-#include "postorder_iterator.h"
-#include "section_eval_iterator.h"
-#include "section_evaluator.h"
-#include "section_space_schema_member.h"
-#include "section_space_schema_poset.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/block.h"
+#include "SheafSystem/eval_family.h"
+#include "SheafSystem/poset_state_handle.h"
+#include "SheafSystem/postorder_iterator.h"
+#include "SheafSystem/section_eval_iterator.h"
+#include "SheafSystem/section_evaluator.h"
+#include "SheafSystem/section_space_schema_member.h"
+#include "SheafSystem/section_space_schema_poset.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

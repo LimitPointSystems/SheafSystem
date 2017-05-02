@@ -17,15 +17,15 @@
 
 // Implementation for class sparse_section_dof_map
 
-#include "sparse_section_dof_map.h"
+#include "SheafSystem/sparse_section_dof_map.h"
 
-#include "assert_contract.h"
-#include "dof_map_factory.h"
-#include "ij_product_structure.h"
-#include "index_space_iterator.h"
-#include "primitive_type.h"
-#include "sec_rep_space.h"
-#include "sec_vd.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/dof_map_factory.h"
+#include "SheafSystem/ij_product_structure.h"
+#include "SheafSystem/index_space_iterator.h"
+#include "SheafSystem/primitive_type.h"
+#include "SheafSystem/sec_rep_space.h"
+#include "SheafSystem/sec_vd.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

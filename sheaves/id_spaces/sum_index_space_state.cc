@@ -18,12 +18,12 @@
 /// @file
 /// Implementation for class sum_index_space_state
 
-#include "sum_index_space_state.h"
-#include "assert_contract.h"
-#include "deep_size.h"
-#include "index_space_family.h"
-#include "scoped_index.h"
-#include "std_limits.h"
+#include "SheafSystem/sum_index_space_state.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/deep_size.h"
+#include "SheafSystem/index_space_family.h"
+#include "SheafSystem/scoped_index.h"
+#include "SheafSystem/std_limits.h"
 
 using namespace std;
 

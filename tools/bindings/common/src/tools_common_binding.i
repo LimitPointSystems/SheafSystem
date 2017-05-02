@@ -44,6 +44,6 @@
 
 //=============================================================================
 
-%include "vtk_poly_data_builder.h"
-%include "vtk_abstract_grid_builder.h"
-%include "vtk_unstructured_grid_builder.h"
+%include "SheafSystem/vtk_poly_data_builder.h"
+%include "SheafSystem/vtk_abstract_grid_builder.h"
+%include "SheafSystem/vtk_unstructured_grid_builder.h"

@@ -21,19 +21,19 @@
 #define INT_SET_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef STD_SET_H
-#include "std_set.h"
+#include "SheafSystem/std_set.h"
 #endif
 
 #ifndef STD_IOSTREAM_H
-#include "std_iostream.h"
+#include "SheafSystem/std_iostream.h"
 #endif
 
 #ifndef STD_ITERATOR_H
-#include "std_iterator.h"
+#include "SheafSystem/std_iterator.h"
 #endif
 
 namespace sheaf

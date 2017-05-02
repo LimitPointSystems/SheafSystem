@@ -17,10 +17,10 @@
 
 // Instantiations for class deep_size templated functions.
 
-#include "deep_size.impl.h"
+#include "SheafSystem/deep_size.impl.h"
 
-#include "crg_interval.h"
-#include "scoped_index.h"
+#include "SheafSystem/crg_interval.h"
+#include "SheafSystem/scoped_index.h"
 
 using namespace std;
 using namespace unordered;

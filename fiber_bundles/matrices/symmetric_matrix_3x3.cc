@@ -18,7 +18,7 @@
 // Implementation for the symmetric_matrix_3x3 template class.
 
 
-//#include "symmetric_matrix_3x3.impl.h"
+//#include "SheafSystem/symmetric_matrix_3x3.impl.h"
 
 // =============================================================================
 // SPECIALIZATIONS

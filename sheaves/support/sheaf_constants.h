@@ -21,39 +21,39 @@
 #define SHEAF_CONSTANTS_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef DOF_TUPLE_TYPE_H
-#include "dof_tuple_type.h"
+#include "SheafSystem/dof_tuple_type.h"
 #endif
 
 #ifndef POSET_TYPE_H
-#include "poset_type.h"
+#include "SheafSystem/poset_type.h"
 #endif
 
 #ifndef PRIMITIVE_TYPE_H
-#include "primitive_type.h"
+#include "SheafSystem/primitive_type.h"
 #endif
 
 #ifndef SCOPED_INDEX_H
-#include "scoped_index.h"
+#include "SheafSystem/scoped_index.h"
 #endif
 
 #ifndef STANDARD_VERSION_INDEX_H
-#include "standard_version_index.h"
+#include "SheafSystem/standard_version_index.h"
 #endif
 
 #ifndef STD_CSTDDEF_H
-#include "std_cstddef.h"
+#include "SheafSystem/std_cstddef.h"
 #endif
 
 #ifndef STD_IOSTREAM_H
-#include "std_iostream.h"
+#include "SheafSystem/std_iostream.h"
 #endif
 
 #ifndef STD_STRING_H
-#include "std_string.h"
+#include "SheafSystem/std_string.h"
 #endif
 
 namespace sheaf

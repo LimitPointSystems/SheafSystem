@@ -18,19 +18,19 @@
 /// @file
 /// Implementation for class t3_e3
 
-#include "t3_e3.impl.h"
+#include "SheafSystem/t3_e3.impl.h"
 
-#include "abstract_poset_member.impl.h"
-#include "assert_contract.h"
-#include "at0.h"
-#include "at1_space.h"
-#include "fiber_bundles_namespace.h"
-#include "schema_poset_member.h"
-#include "tp_space.h"
-#include "wsv_block.h"
+#include "SheafSystem/abstract_poset_member.impl.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/at0.h"
+#include "SheafSystem/at1_space.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/schema_poset_member.h"
+#include "SheafSystem/tp_space.h"
+#include "SheafSystem/wsv_block.h"
 
-#include "at3_e3.h"
-#include "st3_e3.h"
+#include "SheafSystem/at3_e3.h"
+#include "SheafSystem/st3_e3.h"
 
 
 using namespace std;
@@ -1317,8 +1317,8 @@ is_ancestor_of(const any* xother) const
 // NON-MEMBER FUNCTIONS
 //==============================================================================
 
-#include "at3_e3.h"
-#include "st3_e3.h"
+#include "SheafSystem/at3_e3.h"
+#include "SheafSystem/st3_e3.h"
 
 void
 fiber_bundle::tp_algebra::

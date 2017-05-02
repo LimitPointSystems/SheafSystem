@@ -18,8 +18,8 @@
 /// @file
 /// Implementation for class ij_product_structure
 
-#include "ij_product_structure.h"
-#include "assert_contract.h"
+#include "SheafSystem/ij_product_structure.h"
+#include "SheafSystem/assert_contract.h"
 
 
 // ===========================================================

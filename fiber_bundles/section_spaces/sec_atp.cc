@@ -18,20 +18,20 @@
 /// @file
 /// Implementation for class sec_atp.
 
-#include "sec_atp.h"
+#include "SheafSystem/sec_atp.h"
 
-#include "assert_contract.h"
-#include "atp.h"
-#include "atp_space.h"
-#include "binary_section_space_schema_member.impl.h"
-#include "binary_section_space_schema_poset.h"
-#include "fiber_bundles_namespace.h"
-#include "section_space_schema_member.impl.h"
-#include "section_space_schema_poset.h"
-#include "sec_at1.h"
-#include "sec_at1_space.h"
-#include "sec_atp_space.h"
-#include "sec_tuple_space.impl.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/atp.h"
+#include "SheafSystem/atp_space.h"
+#include "SheafSystem/binary_section_space_schema_member.impl.h"
+#include "SheafSystem/binary_section_space_schema_poset.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/section_space_schema_member.impl.h"
+#include "SheafSystem/section_space_schema_poset.h"
+#include "SheafSystem/sec_at1.h"
+#include "SheafSystem/sec_at1_space.h"
+#include "SheafSystem/sec_atp_space.h"
+#include "SheafSystem/sec_tuple_space.impl.h"
 
 
 using namespace std;
@@ -716,13 +716,13 @@ invariant() const
 // NON-MEMBER FUNCTIONS
 //==============================================================================
 
-#include "error_message.h"
-#include "sec_at0.h"
-#include "sec_e2.h"
-#include "sec_e3.h"
-#include "sec_at2_e2.h"
-#include "sec_at2_e3.h"
-#include "sec_at3_e3.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/sec_at0.h"
+#include "SheafSystem/sec_e2.h"
+#include "SheafSystem/sec_e3.h"
+#include "SheafSystem/sec_at2_e2.h"
+#include "SheafSystem/sec_at2_e3.h"
+#include "SheafSystem/sec_at3_e3.h"
 
 void
 fiber_bundle::sec_atp_algebra::

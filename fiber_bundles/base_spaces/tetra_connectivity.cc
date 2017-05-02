@@ -17,8 +17,8 @@
 
 // Implementation for class tetra_connectivity
 
-#include "assert_contract.h"
-#include "tetra_connectivity.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/tetra_connectivity.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

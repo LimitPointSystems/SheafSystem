@@ -18,10 +18,10 @@
 //
 // Implementation for class index_scope
 
-#include "index_scope.h"
+#include "SheafSystem/index_scope.h"
 
-#include "assert_contract.h"
-#include "scoped_index.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/scoped_index.h"
 
 // ===========================================================
 // INDEX_SCOPE FACET

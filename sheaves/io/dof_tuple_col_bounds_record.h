@@ -21,11 +21,11 @@
 #define DOF_TUPLE_COL_BOUNDS_RECORD_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ATTRIBUTES_RECORD_H
-#include "attributes_record.h"
+#include "SheafSystem/attributes_record.h"
 #endif
 
 namespace sheaf

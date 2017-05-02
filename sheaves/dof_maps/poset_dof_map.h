@@ -22,27 +22,27 @@
 #define POSET_DOF_MAP_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ANY_H
-#include "any.h"
+#include "SheafSystem/any.h"
 #endif
 
 #ifndef DOF_TUPLE_TYPE_H
-#include "dof_tuple_type.h"
+#include "SheafSystem/dof_tuple_type.h"
 #endif
 
 #ifndef PRIMITIVE_VALUE_H
-#include "primitive_value.h"
+#include "SheafSystem/primitive_value.h"
 #endif
 
 #ifndef SCOPED_INDEX_H
-#include "scoped_index.h"
+#include "SheafSystem/scoped_index.h"
 #endif
 
 #ifndef STD_STRING_H
-#include "std_string.h"
+#include "SheafSystem/std_string.h"
 #endif 
 
 namespace sheaf

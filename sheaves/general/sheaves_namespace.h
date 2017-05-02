@@ -21,11 +21,11 @@
 #define SHEAVES_NAMESPACE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef NAMESPACE_POSET_H
-#include "namespace_poset.h"
+#include "SheafSystem/namespace_poset.h"
 #endif
 
 namespace sheaf

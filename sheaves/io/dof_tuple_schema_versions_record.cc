@@ -17,10 +17,10 @@
 
 // Implementation for class dof_tuple_schema_versions_record
 
-#include "dof_tuple_schema_versions_record.h"
+#include "SheafSystem/dof_tuple_schema_versions_record.h"
 
-#include "assert_contract.h"
-#include "std_sstream.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/std_sstream.h"
 
 using namespace std;
 

@@ -17,8 +17,8 @@
 
 // Implementation for class point_connectivity
 
-#include "assert_contract.h"
-#include "point_connectivity.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/point_connectivity.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 

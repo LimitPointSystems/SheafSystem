@@ -18,10 +18,10 @@
 // Definitions for standard_member_index facet of namespace sheaf.
 
 
-#include "standard_member_index.h"
+#include "SheafSystem/standard_member_index.h"
 
-#include "assert_contract.h"
-#include "std_string.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/std_string.h"
 
 using namespace std;
 

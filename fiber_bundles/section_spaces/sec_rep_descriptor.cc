@@ -18,21 +18,21 @@
 // Implementation for class sec_rep_descriptor
 
 
-#include "sec_rep_descriptor.h"
+#include "SheafSystem/sec_rep_descriptor.h"
 
-#include "assert_contract.h"
-#include "eval_family.h"
-#include "namespace_poset.h"
-#include "poset.h"
-#include "poset_dof_map.h"
-#include "poset_state_handle.h"
-#include "postorder_iterator.h"
-#include "std_string.h"
-#include "std_typeinfo.h"
-#include "schema_descriptor.h"
-#include "sec_rep_descriptor_poset.h"
-#include "sec_rep_space.h"
-#include "wsv_block.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/eval_family.h"
+#include "SheafSystem/namespace_poset.h"
+#include "SheafSystem/poset.h"
+#include "SheafSystem/poset_dof_map.h"
+#include "SheafSystem/poset_state_handle.h"
+#include "SheafSystem/postorder_iterator.h"
+#include "SheafSystem/std_string.h"
+#include "SheafSystem/std_typeinfo.h"
+#include "SheafSystem/schema_descriptor.h"
+#include "SheafSystem/sec_rep_descriptor_poset.h"
+#include "SheafSystem/sec_rep_space.h"
+#include "SheafSystem/wsv_block.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

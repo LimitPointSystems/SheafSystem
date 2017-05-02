@@ -17,18 +17,18 @@
 
 // Implementation for class mesh_partition
 
-#include "mesh_partition.h"
+#include "SheafSystem/mesh_partition.h"
 
-#include "assert_contract.h"
-#include "base_space_member.h"
-#include "error_message.h"
-#include "hash_index_space_state.h"
-#include "id_block.h"
-#include "index_iterator.h"
-#include "preorder_iterator.h"
-#include "std_set.h"
-#include "std_sstream.h"
-#include "tern.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/base_space_member.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/hash_index_space_state.h"
+#include "SheafSystem/id_block.h"
+#include "SheafSystem/index_iterator.h"
+#include "SheafSystem/preorder_iterator.h"
+#include "SheafSystem/std_set.h"
+#include "SheafSystem/std_sstream.h"
+#include "SheafSystem/tern.h"
 
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.

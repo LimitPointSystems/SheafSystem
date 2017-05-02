@@ -18,18 +18,18 @@
 /// @file
 /// Implementation for class body_builder
 
-#include "body_builder.h"
+#include "SheafSystem/body_builder.h"
 
-#include "assert_contract.h"
-#include "base_space_member.h"
-#include "base_space_poset.h"
-#include "block.impl.h"
-#include "index_space_iterator.h"
-#include "section_eval_iterator.h"
-#include "section_evaluator.h"
-#include "subposet.h"
-#include "tern.h"
-#include "field_vd.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/base_space_member.h"
+#include "SheafSystem/base_space_poset.h"
+#include "SheafSystem/block.impl.h"
+#include "SheafSystem/index_space_iterator.h"
+#include "SheafSystem/section_eval_iterator.h"
+#include "SheafSystem/section_evaluator.h"
+#include "SheafSystem/subposet.h"
+#include "SheafSystem/tern.h"
+#include "SheafSystem/field_vd.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.

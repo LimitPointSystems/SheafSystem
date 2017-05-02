@@ -18,11 +18,11 @@
 /// @file
 /// Implementation for class ij_adjacency_implicit_index_space_iterator
 
-#include "ij_adjacency_implicit_index_space_iterator.h"
+#include "SheafSystem/ij_adjacency_implicit_index_space_iterator.h"
 
-#include "assert_contract.h"
-#include "ij_adjacency_index_space_interval.h"
-#include "index_space_family.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/ij_adjacency_index_space_interval.h"
+#include "SheafSystem/index_space_family.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 

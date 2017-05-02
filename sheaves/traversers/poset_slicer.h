@@ -21,11 +21,11 @@
 #define POSET_SLICER_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef POSET_DFT_H
-#include "poset_dft.h"
+#include "SheafSystem/poset_dft.h"
 #endif
 
 namespace sheaf

@@ -22,12 +22,12 @@
 ///          generated.  If you need to make permanent changes,
 ///          edit the code template and rerun the generator instead.
 
-#include "${derived}.h"
+#include "SheafSystem/${derived}.h"
 
-#include "assert_contract.h"
-#include "base_space_member.h"
-#include "${coords_invertible}.h"
-#include "${property}.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/base_space_member.h"
+#include "SheafSystem/${coords_invertible}.h"
+#include "SheafSystem/${property}.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.

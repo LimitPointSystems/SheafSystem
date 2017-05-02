@@ -18,11 +18,11 @@
 // Istantiations for class linkorder_itr<T>.
 
  
-#include "linkorder_itr.impl.h"
+#include "SheafSystem/linkorder_itr.impl.h"
 
-#include "zn_to_bool.h"
-#include "std_set.h"
-#include "std_unordered_set.h"
+#include "SheafSystem/zn_to_bool.h"
+#include "SheafSystem/std_set.h"
+#include "SheafSystem/std_unordered_set.h"
 
 using namespace std;
 using namespace unordered;

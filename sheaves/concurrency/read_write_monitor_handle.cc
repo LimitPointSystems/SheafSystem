@@ -17,15 +17,15 @@
 
 // Implementation for class read_write_monitor_handle
 
-#include "read_write_monitor_handle.h"
-#include "assert_contract.h"
-#include "poset_state.h"
-#include "read_write_monitor.h"
+#include "SheafSystem/read_write_monitor_handle.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/poset_state.h"
+#include "SheafSystem/read_write_monitor.h"
 
 #undef DEBUG
 
 #ifdef DEBUG
-#include "poset_state_handle.h"
+#include "SheafSystem/poset_state_handle.h"
 #endif
 
 ///

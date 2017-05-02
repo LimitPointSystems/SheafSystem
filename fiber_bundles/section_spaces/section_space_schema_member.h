@@ -22,23 +22,23 @@
 #define SECTION_SPACE_SCHEMA_MEMBER_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef SCOPED_INDEX_H
-#include "scoped_index.h"
+#include "SheafSystem/scoped_index.h"
 #endif
 
 #ifndef SECTION_DOF_ITERATOR_H
-#include "section_dof_iterator.h"
+#include "SheafSystem/section_dof_iterator.h"
 #endif
 
 #ifndef SCHEMA_POSET_MEMBER_H
-#include "schema_poset_member.h"
+#include "SheafSystem/schema_poset_member.h"
 #endif
 
 // #ifndef SECTION_SPACE_SCHEMA_POSET_H
-// #include "section_space_schema_poset.h"
+// #include "SheafSystem/section_space_schema_poset.h"
 // #endif
 
 namespace fiber_bundle

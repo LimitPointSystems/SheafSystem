@@ -18,13 +18,13 @@
 /// @file
 /// Implementation for class local_base_space_member.
 
-#include "local_base_space_member.h"
+#include "SheafSystem/local_base_space_member.h"
 
-#include "chart_point.h"
-#include "namespace_poset.h"
-#include "poset_path.h"
-#include "preorder_iterator.h"
-#include "assert_contract.h"
+#include "SheafSystem/chart_point.h"
+#include "SheafSystem/namespace_poset.h"
+#include "SheafSystem/poset_path.h"
+#include "SheafSystem/preorder_iterator.h"
+#include "SheafSystem/assert_contract.h"
 
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.

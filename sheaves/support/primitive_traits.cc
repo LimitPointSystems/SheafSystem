@@ -17,9 +17,9 @@
 
 // Implementation for class template primitive_traits.
 
-#include "primitive_traits.h"
-#include "error_message.h"
-#include "hdf5.h"
+#include "SheafSystem/primitive_traits.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/std_hdf5.h"
 
 // Definitions of primitive_traits::hdf_type given here to encapsulate hdf.
 /// @issue The return type is declared int to encapsulate hdf, but the

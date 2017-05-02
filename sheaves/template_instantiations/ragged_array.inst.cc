@@ -17,7 +17,7 @@
 
 // Explicit instantiation for class template RAGGED_ARRAY.
 
-#include "ragged_array.impl.h"
+#include "SheafSystem/ragged_array.impl.h"
 
 using namespace std;
 using namespace sheaf; // workaround for MS C++ bug.

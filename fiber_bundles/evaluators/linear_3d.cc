@@ -17,12 +17,12 @@
 
 // Implementation for class linear_3d
 
-#include "linear_3d.h"
+#include "SheafSystem/linear_3d.h"
 
-#include "assert_contract.h"
-#include "std_cmath.h"
-#include "std_iostream.h"
-#include "std_limits.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/std_cmath.h"
+#include "SheafSystem/std_iostream.h"
+#include "SheafSystem/std_limits.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

@@ -22,15 +22,15 @@
 #define GLN_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef GROUP_H
-#include "group.h"
+#include "SheafSystem/group.h"
 #endif
 
 #ifndef GLN_TABLE_DOFS_TYPE_H
-#include "gln_table_dofs_type.h"
+#include "SheafSystem/gln_table_dofs_type.h"
 #endif
 
 namespace fiber_bundle

@@ -17,8 +17,8 @@
 
 // Implementation for class block_relation
 
-#include "assert_contract.h"
-#include "block_relation.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/block_relation.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 

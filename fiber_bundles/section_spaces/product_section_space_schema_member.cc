@@ -18,19 +18,19 @@
 /// @file
 /// Implementation for class product_section_space_schema_member.
 
-#include "product_section_space_schema_member.impl.h"
+#include "SheafSystem/product_section_space_schema_member.impl.h"
 
-#include "assert_contract.h"
-#include "array_index_space_state.h"
-#include "ij_product_structure.h"
-#include "namespace_poset.h"
-#include "postorder_itr.h"
-#include "preorder_itr.h"
-#include "product_section_dof_iterator.h"
-#include "product_section_space_schema_poset.h"
-#include "sec_rep_descriptor.h"
-#include "section_space_schema_jims_index_space_handle.h"
-#include "section_space_schema_jims_index_space_state.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/array_index_space_state.h"
+#include "SheafSystem/ij_product_structure.h"
+#include "SheafSystem/namespace_poset.h"
+#include "SheafSystem/postorder_itr.h"
+#include "SheafSystem/preorder_itr.h"
+#include "SheafSystem/product_section_dof_iterator.h"
+#include "SheafSystem/product_section_space_schema_poset.h"
+#include "SheafSystem/sec_rep_descriptor.h"
+#include "SheafSystem/section_space_schema_jims_index_space_handle.h"
+#include "SheafSystem/section_space_schema_jims_index_space_state.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

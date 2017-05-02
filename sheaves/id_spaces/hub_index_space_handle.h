@@ -22,11 +22,11 @@
 #define HUB_INDEX_SPACE_HANDLE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef SUM_INDEX_SPACE_HANDLE_H
-#include "sum_index_space_handle.h"
+#include "SheafSystem/sum_index_space_handle.h"
 #endif
 
 namespace sheaf

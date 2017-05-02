@@ -21,27 +21,27 @@
 #define WSV_BLOCK_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef WSV_BLOCK_H
-#include "wsv_block.h"
+#include "SheafSystem/wsv_block.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 #ifndef BLOCK_H
-#include "block_impl.h"
+#include "SheafSystem/block_impl.h"
 #endif
 
 #ifndef STD_CSTRING_H
-#include "std_cstring.h"
+#include "SheafSystem/std_cstring.h"
 #endif
 
 #ifndef STD_SSTREAM_H
-#include "std_sstream.h"
+#include "SheafSystem/std_sstream.h"
 #endif
 
 namespace sheaf

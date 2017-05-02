@@ -18,11 +18,11 @@
 /// @file
 /// Implementation for class singleton_implicit_index_space_iterator
 
-#include "singleton_implicit_index_space_iterator.h"
+#include "SheafSystem/singleton_implicit_index_space_iterator.h"
 
-#include "assert_contract.h"
-#include "singleton_index_space_interval.h"
-#include "index_space_family.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/singleton_index_space_interval.h"
+#include "SheafSystem/index_space_family.h"
 
 // ===========================================================
 // SINGLETON_IMPLICIT_INDEX_SPACE_ITERATOR FACET

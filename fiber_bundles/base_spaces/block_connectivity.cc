@@ -17,10 +17,10 @@
 
 // Implementation for class block_connectivity
 
-#include "assert_contract.h"
-#include "block_connectivity.h"
-#include "std_limits.h"
-#include "std_set.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/block_connectivity.h"
+#include "SheafSystem/std_limits.h"
+#include "SheafSystem/std_set.h"
 
 using namespace std;
 using namespace fiber_bundle;

@@ -21,11 +21,11 @@
 #define INTEGRABLE_SECTION_EVALUATOR_H
 
 #ifndef DIFFERENTIABLE_SECTION_EVALUATOR_H
-#include "differentiable_section_evaluator.h"
+#include "SheafSystem/differentiable_section_evaluator.h"
 #endif
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 namespace fiber_bundle

@@ -17,9 +17,9 @@
 
 // Explicit instantiations for class index_space_family.
 
-#include "index_space_family.impl.h"
+#include "SheafSystem/index_space_family.impl.h"
 
-#include "section_space_schema_jims_index_space_handle.h"
+#include "SheafSystem/section_space_schema_jims_index_space_handle.h"
 
 using namespace std;
 

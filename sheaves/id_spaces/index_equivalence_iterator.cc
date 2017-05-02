@@ -18,10 +18,10 @@
 /// @file
 /// Implementation for class index_equivalence_iterator
 
-#include "index_equivalence_iterator.h"
+#include "SheafSystem/index_equivalence_iterator.h"
 
-#include "assert_contract.h"
-#include "index_space_family.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/index_space_family.h"
 
 // ===========================================================
 // INDEX_EQUIVALENCE_ITERATOR FACET

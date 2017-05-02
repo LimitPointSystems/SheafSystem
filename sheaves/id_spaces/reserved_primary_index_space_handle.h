@@ -22,11 +22,11 @@
 #define RESERVED_PRIMARY_INDEX_SPACE_HANDLE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef PRIMARY_INDEX_SPACE_HANDLE_H
-#include "primary_index_space_handle.h"
+#include "SheafSystem/primary_index_space_handle.h"
 #endif
 
 namespace sheaf

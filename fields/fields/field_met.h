@@ -26,11 +26,11 @@
 #define FIELD_MET_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef FIELD_ST2_H
-#include "field_st2.h"
+#include "SheafSystem/field_st2.h"
 #endif
 
 namespace fiber_bundle
@@ -203,7 +203,7 @@ SHEAF_DLL_SPEC std::ostream& operator<<(std::ostream& xos, const field_met& xfie
 
 /// Include field_vd algebra function declarations.
 
-#include "field_met_funcs.h"
+#include "SheafSystem/field_met_funcs.h"
 
 
 #endif // ifndef FIELD_MET_H

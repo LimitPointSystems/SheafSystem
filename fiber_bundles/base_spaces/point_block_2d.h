@@ -22,15 +22,15 @@
 #define POINT_BLOCK_2D_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef HOMOGENEOUS_BLOCK_H
-#include "homogeneous_block.h"
+#include "SheafSystem/homogeneous_block.h"
 #endif
 
 #ifndef CHART_POINT_2D_H
-#include "chart_point_2d.h"
+#include "SheafSystem/chart_point_2d.h"
 #endif
 
 namespace fiber_bundle

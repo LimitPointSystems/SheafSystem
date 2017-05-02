@@ -17,7 +17,7 @@
 
 // Explicit_instantiations for class st3_e3.
 
-#include "st3_e3.impl.h"
+#include "SheafSystem/st3_e3.impl.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

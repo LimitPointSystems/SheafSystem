@@ -17,7 +17,7 @@
 
 // Definitions for class sheaf_constants
 
-#include "sheaf_constants.h"
+#include "SheafSystem/sheaf_constants.h"
 
 // =============================================================================
 // POSET TYPES FACET

@@ -22,27 +22,27 @@
 #define FACTORY_2_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef FACTORY_2_H
-#include "factory_2.h"
+#include "SheafSystem/factory_2.h"
 #endif
 
 #ifndef ARG_LIST_H
-#include "arg_list.h"
+#include "SheafSystem/arg_list.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 #ifndef NAMESPACE_POSET_H
-#include "namespace_poset.h"
+#include "SheafSystem/namespace_poset.h"
 #endif
 
 #ifndef RC_PTR_H
-#include "rc_ptr.h"
+#include "SheafSystem/rc_ptr.h"
 #endif
 
 namespace sheaf

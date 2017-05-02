@@ -17,9 +17,9 @@
 /// @file
 /// Implementation for class interval_set_iterator
 
-#include "interval_set_iterator.h"
+#include "SheafSystem/interval_set_iterator.h"
 
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 
 // ===========================================================
 // INTERVAL_SET_ITERATOR FACET

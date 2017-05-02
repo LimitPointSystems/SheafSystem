@@ -18,13 +18,13 @@
 // Explicit instantiations for class auto_block.
 
 
-#include "auto_block.impl.h"
+#include "SheafSystem/auto_block.impl.h"
 
-#include "d_bounding_box.impl.h"
-#include "d_tree_point_locator_node.impl.h"
-#include "geometry.h"
-#include "singly_linked_list.h"
-#include "std_utility.h"
+#include "SheafSystem/d_bounding_box.impl.h"
+#include "SheafSystem/d_tree_point_locator_node.impl.h"
+#include "SheafSystem/geometry.h"
+#include "SheafSystem/singly_linked_list.h"
+#include "SheafSystem/std_utility.h"
 
 
 using namespace std;

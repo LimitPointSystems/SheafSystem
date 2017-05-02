@@ -21,15 +21,15 @@
 #define DISCRETIZATION_CONTEXT_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef CHART_POINT_3D_H
-#include "chart_point_3d.h"
+#include "SheafSystem/chart_point_3d.h"
 #endif
 
 #ifndef FIBER_BUNDLE_H
-#include "fiber_bundle.h"
+#include "SheafSystem/fiber_bundle.h"
 #endif
 
 namespace fiber_bundle

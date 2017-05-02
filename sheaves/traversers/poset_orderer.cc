@@ -18,12 +18,12 @@
 /// @file
 /// Implementation for class poset_orderer.
 
-#include "poset_orderer.h"
-#include "assert_contract.h"
-#include "poset_state_handle.h"
-#include "poset_member.h"
-#include "index_space_iterator.h"
-#include "subposet.h"
+#include "SheafSystem/poset_orderer.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/poset_state_handle.h"
+#include "SheafSystem/poset_member.h"
+#include "SheafSystem/index_space_iterator.h"
+#include "SheafSystem/subposet.h"
 
 // ===========================================================
 // POSET_ORDERER FACET

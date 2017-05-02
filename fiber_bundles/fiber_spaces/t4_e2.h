@@ -23,15 +23,15 @@
 #define T4_E2_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef T4_H
-#include "t4.h"
+#include "SheafSystem/t4.h"
 #endif
 
 #ifndef E2_H
-#include "e2.h"
+#include "SheafSystem/e2.h"
 #endif
 
 namespace fiber_bundle

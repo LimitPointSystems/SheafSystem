@@ -17,14 +17,14 @@
 
 // Implementation for class poset_state
 
-#include "poset_state.h"
+#include "SheafSystem/poset_state.h"
 
-#include "assert_contract.h"
-#include "poset_crg_state.h"
-#include "poset_powerset_state.h"
-#include "poset_table_state.h"
-#include "schema_poset_member.h"
-#include "subposet.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/poset_crg_state.h"
+#include "SheafSystem/poset_powerset_state.h"
+#include "SheafSystem/poset_table_state.h"
+#include "SheafSystem/schema_poset_member.h"
+#include "SheafSystem/subposet.h"
 
 // ===========================================================
 // POSET_STATE FACET

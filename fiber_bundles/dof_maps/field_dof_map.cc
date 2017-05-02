@@ -17,8 +17,8 @@
 
 // Implementation for class field_dof_map
 
-#include "field_dof_map.h"
-#include "assert_contract.h"
+#include "SheafSystem/field_dof_map.h"
+#include "SheafSystem/assert_contract.h"
 
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.

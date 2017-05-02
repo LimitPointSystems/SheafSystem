@@ -22,15 +22,15 @@
 #define FIELD_VD_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ANY_H
-#include "any.h"
+#include "SheafSystem/any.h"
 #endif
 
 #ifndef FIELDS_H
-#include "fields.h"
+#include "SheafSystem/fields.h"
 #endif
 
 namespace sheaf
@@ -517,7 +517,7 @@ std::ostream& operator<<(std::ostream& xos, const field_vd& xfield);
 
 /// Include field_vd algebra function declarations.
 
-#include "field_vd_funcs.h"
+#include "SheafSystem/field_vd_funcs.h"
 
 
 #endif // ifndef FIELD_VD_H

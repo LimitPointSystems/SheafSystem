@@ -17,11 +17,11 @@
 
 // Implementation for class subposet_member_iterator
 
-#include "subposet_member_iterator.h"
-#include "assert_contract.h"
+#include "SheafSystem/subposet_member_iterator.h"
+#include "SheafSystem/assert_contract.h"
 
-#include "poset_state_handle.h"
-#include "subposet.h"
+#include "SheafSystem/poset_state_handle.h"
+#include "SheafSystem/subposet.h"
 
 ///
 sheaf::subposet_member_iterator::

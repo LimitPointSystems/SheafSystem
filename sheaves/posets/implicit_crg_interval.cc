@@ -18,15 +18,15 @@
 /// @file
 /// Implementation for class implicit_crg_interval.
 
-#include "implicit_crg_interval.h"
+#include "SheafSystem/implicit_crg_interval.h"
 
-#include "arg_list.h"
-#include "assert_contract.h"
-#include "index_space_family.h"
-#include "index_space_iterator.h"
-#include "list_index_space_handle.h"
-#include "list_index_space_state.h"
-#include "poset_state_handle.h"
+#include "SheafSystem/arg_list.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/index_space_family.h"
+#include "SheafSystem/index_space_iterator.h"
+#include "SheafSystem/list_index_space_handle.h"
+#include "SheafSystem/list_index_space_state.h"
+#include "SheafSystem/poset_state_handle.h"
 
 using namespace std;
 

@@ -21,11 +21,11 @@
 #define INTERVAL_INDEX_SPACE_RECORD_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef VARIABLE_LENGTH_RECORD_H
-#include "variable_length_record.h"
+#include "SheafSystem/variable_length_record.h"
 #endif
 
 namespace sheaf

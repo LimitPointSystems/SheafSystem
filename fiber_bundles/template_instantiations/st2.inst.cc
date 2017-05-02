@@ -17,13 +17,13 @@
 
 // Explicit_instantiations for class st2.
 
-#include "st2.impl.h"
+#include "SheafSystem/st2.impl.h"
 
-#include "st2_e2.h"
-#include "gl2.h"
+#include "SheafSystem/st2_e2.h"
+#include "SheafSystem/gl2.h"
 
-#include "st2_e3.h"
-#include "gl3.h"
+#include "SheafSystem/st2_e3.h"
+#include "SheafSystem/gl3.h"
 
 
 using namespace std;

@@ -18,7 +18,7 @@
 /// @file
 /// Expliicit instantiations for class stl_scoped_index.
 
-#include "stl_scoped_index.impl.h"
+#include "SheafSystem/stl_scoped_index.impl.h"
 
 using namespace sheaf; // Workaround for MS C++ bug.
 

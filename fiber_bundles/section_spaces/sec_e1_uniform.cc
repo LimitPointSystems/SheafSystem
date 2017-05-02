@@ -18,22 +18,22 @@
 /// @file
 /// Implementation for class sec_e1_uniform.
 
-#include "sec_e1_uniform.h"
+#include "SheafSystem/sec_e1_uniform.h"
 
-#include "assert_contract.h"
-#include "base_space_poset.h"
-#include "binary_section_space_schema_member.impl.h"
-#include "at0_space.h"
-#include "at1_space.h"
-#include "e1.h"
-#include "fiber_bundles_namespace.h"
-#include "sec_at0.h"
-#include "sec_at0_space.h"
-#include "sec_at1_space.h"
-#include "structured_block_1d.h"
-#include "sec_tuple.impl.h"
-#include "sec_tuple_space.impl.h"
-#include "sec_vd.impl.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/base_space_poset.h"
+#include "SheafSystem/binary_section_space_schema_member.impl.h"
+#include "SheafSystem/at0_space.h"
+#include "SheafSystem/at1_space.h"
+#include "SheafSystem/e1.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/sec_at0.h"
+#include "SheafSystem/sec_at0_space.h"
+#include "SheafSystem/sec_at1_space.h"
+#include "SheafSystem/structured_block_1d.h"
+#include "SheafSystem/sec_tuple.impl.h"
+#include "SheafSystem/sec_tuple_space.impl.h"
+#include "SheafSystem/sec_vd.impl.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

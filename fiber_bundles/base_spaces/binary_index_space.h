@@ -19,15 +19,15 @@
 #define BINARY_INDEX_SPACE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef BINARY_INDEX_H
-#include "binary_index.h"
+#include "SheafSystem/binary_index.h"
 #endif
 
 #ifndef RAGGED_ARRAY_H
-#include "ragged_array.h"
+#include "SheafSystem/ragged_array.h"
 #endif
 
 namespace fiber_bundle

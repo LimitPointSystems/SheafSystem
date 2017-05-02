@@ -17,7 +17,7 @@
 
 // Explicit_instantiations for class gl3.
 
-#include "gl3.impl.h"
+#include "SheafSystem/gl3.impl.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

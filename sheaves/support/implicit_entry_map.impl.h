@@ -22,23 +22,23 @@
 #define IMPLICIT_ENTRY_MAP_IMPL_H
 
 #ifndef IMPLICIT_ENTRY_MAP_H
-#include "implicit_entry_map.h"
+#include "SheafSystem/implicit_entry_map.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 #ifndef DEEP_SIZE_H
-#include "deep_size.h"
+#include "SheafSystem/deep_size.h"
 #endif
 
 #ifndef IMPLICIT_ENTRY_MAP_ITERATOR_H
-#include "implicit_entry_map_iterator.h"
+#include "SheafSystem/implicit_entry_map_iterator.h"
 #endif
 
 #ifndef RC_PTR_H
-#include "rc_ptr.h"
+#include "SheafSystem/rc_ptr.h"
 #endif
 
 namespace sheaf

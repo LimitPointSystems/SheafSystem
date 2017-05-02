@@ -22,15 +22,15 @@
 #define SECTION_DOF_MAP_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef POSET_DOF_MAP_H
-#include "poset_dof_map.h"
+#include "SheafSystem/poset_dof_map.h"
 #endif
 
 #ifndef SEC_REP_SPACE_H
-#include "sec_rep_space.h"
+#include "SheafSystem/sec_rep_space.h"
 #endif
 
 namespace sheaf

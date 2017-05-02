@@ -22,15 +22,15 @@
 #define INDEX_SPACE_HANDLE_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef INDEX_SPACE_HANDLE_H
-#include "index_space_handle.h"
+#include "SheafSystem/index_space_handle.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 // ===========================================================

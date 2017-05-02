@@ -18,19 +18,19 @@
 /// @file
 /// Implementation for class primitives_poset
 
-#include "primitives_poset.h"
+#include "SheafSystem/primitives_poset.h"
 
-#include "assert_contract.h"
-#include "array_poset_dof_map.h"
-#include "namespace_poset.impl.h"
-#include "poset_handle_factory.h"
-#include "primitive_attributes.h"
-#include "primitives_poset_dof_map.h"
-#include "primitives_poset_schema.h"
-#include "poset_type.h"
-#include "primitive_type.h"
-#include "std_iomanip.h"
-#include "total_poset_member.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/array_poset_dof_map.h"
+#include "SheafSystem/namespace_poset.impl.h"
+#include "SheafSystem/poset_handle_factory.h"
+#include "SheafSystem/primitive_attributes.h"
+#include "SheafSystem/primitives_poset_dof_map.h"
+#include "SheafSystem/primitives_poset_schema.h"
+#include "SheafSystem/poset_type.h"
+#include "SheafSystem/primitive_type.h"
+#include "SheafSystem/std_iomanip.h"
+#include "SheafSystem/total_poset_member.h"
 
 using namespace std;
 

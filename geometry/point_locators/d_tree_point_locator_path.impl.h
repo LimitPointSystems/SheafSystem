@@ -22,27 +22,27 @@
 #define D_TREE_POINT_LOCATOR_PATH_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef D_TREE_POINT_LOCATOR_PATH_H
-#include "d_tree_point_locator_path.h"
+#include "SheafSystem/d_tree_point_locator_path.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 #ifndef D_BOUNDING_BOX_H
-#include "d_bounding_box.h"
+#include "SheafSystem/d_bounding_box.h"
 #endif
 
 #ifndef STD_BITSET_H
-#include "std_bitset.h"
+#include "SheafSystem/std_bitset.h"
 #endif
 
 #ifndef STD_LIMITS_H
-#include "std_limits.h"
+#include "SheafSystem/std_limits.h"
 #endif
 
 //#undef DIAGNOSTIC_OUTPUT

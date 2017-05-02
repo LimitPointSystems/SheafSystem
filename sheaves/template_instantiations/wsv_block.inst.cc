@@ -17,7 +17,7 @@
 
 // Instantiation for class template wsv_list
 
-#include "wsv_block.impl.h"
+#include "SheafSystem/wsv_block.impl.h"
 
 using namespace sheaf; // workaround for MS C++ bug.
 
@@ -56,11 +56,11 @@ template class
 SHEAF_DLL_SPEC
 sheaf::wsv_block<size_type>;
 
-#include "schema_descriptor.h"
+#include "SheafSystem/schema_descriptor.h"
 
 template class 
 SHEAF_DLL_SPEC
 sheaf::wsv_block<sheaf::schema_descriptor>;
 
-// #include "arg_list.h"
+// #include "SheafSystem/arg_list.h"
 // template class wsv_block<arg_list>;

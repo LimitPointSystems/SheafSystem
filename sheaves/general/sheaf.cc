@@ -17,12 +17,12 @@
 
 // Definitions for class sheaf_constants
 
-#include "sheaf.h"
+#include "SheafSystem/sheaf.h"
 
-#include "error_message.h"
-#include "std_cstdlib.h"
-#include "std_cmath.h"
-#include "std_iostream.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/std_cstdlib.h"
+#include "SheafSystem/std_cmath.h"
+#include "SheafSystem/std_iostream.h"
 
 using namespace std;
 

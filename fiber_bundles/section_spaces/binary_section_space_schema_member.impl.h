@@ -10,35 +10,35 @@
 #define BINARY_SECTION_SPACE_SCHEMA_MEMBER_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef BINARY_SECTION_SPACE_SCHEMA_MEMBER_H
-#include "binary_section_space_schema_member.h"
+#include "SheafSystem/binary_section_space_schema_member.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 #ifndef BASE_SPACE_POSET_H
-#include "base_space_poset.h"
+#include "SheafSystem/base_space_poset.h"
 #endif
 
 #ifndef BINARY_SECTION_SPACE_SCHEMA_POSET_H
-#include "binary_section_space_schema_poset.h"
+#include "SheafSystem/binary_section_space_schema_poset.h"
 #endif
 
 #ifndef FIBER_BUNDLES_NAMESPACE_H
-#include "fiber_bundles_namespace.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
 #endif
 
 #ifndef SEC_REP_DESCRIPTOR_POSET_H
-#include "sec_rep_descriptor_poset.h"
+#include "SheafSystem/sec_rep_descriptor_poset.h"
 #endif
 
 #ifndef TUPLE_H
-#include "tuple.h"
+#include "SheafSystem/tuple.h"
 #endif
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.

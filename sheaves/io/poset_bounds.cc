@@ -17,9 +17,9 @@
 
 // Implementation for class poset_bounds
 
-#include "poset_bounds.h"
+#include "SheafSystem/poset_bounds.h"
 
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 
 // ===========================================================
 // ANY FACET

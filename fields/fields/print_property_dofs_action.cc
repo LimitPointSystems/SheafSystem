@@ -18,13 +18,13 @@
 /// @file
 /// Implementation for class print_property_dofs_action
 
-#include "print_property_dofs_action.h"
+#include "SheafSystem/print_property_dofs_action.h"
 
-#include "assert_contract.h"
-#include "block.h"
-#include "error_message.h"
-#include "sec_vd.h"
-#include "std_iomanip.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/block.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/sec_vd.h"
+#include "SheafSystem/std_iomanip.h"
 
 using namespace fields; // Workaround for MS C++ bug.
 

@@ -21,15 +21,15 @@
 #define POSET_DFT_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef POSET_TRAVERSER_H
-#include "poset_traverser.h"
+#include "SheafSystem/poset_traverser.h"
 #endif
 
 #ifndef STD_STACK_H
-#include "std_stack.h"
+#include "SheafSystem/std_stack.h"
 #endif
 
 namespace sheaf

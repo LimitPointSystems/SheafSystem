@@ -18,45 +18,45 @@
 /// @file
 /// Implementation for class namespace_poset
 
-#include "namespace_poset.h"
+#include "SheafSystem/namespace_poset.h"
 
-#include "array_index_space_handle.h"
-#include "array_index_space_state.h" // for intialize_prototypes
-#include "array_index_space_interval.h" // for initialize_prototypes
-#include "array_poset_dof_map.h"
-#include "assert_contract.h"
-#include "constant_index_space_interval.h" // for initialize_prototypes
-#include "error_message.h"
-#include "explicit_crg_interval.h" // for initialize_prototypes
-#include "explicit_index_space_interval.h" // for initialize_prototypes
-#include "hash_index_space_state.h" // for intialize_prototypes
-#include "index_space_iterator.h"
-#include "interval_index_space_state.h" // for intialize_prototypes
-#include "list_index_space_state.h" // for initialize_prototypes
-#include "namespace_poset_dof_map.h"
-#include "namespace_poset_member.h"
-#include "scattered_insertion_index_space_handle.h"
-#include "offset_index_space_state.h" // for intialize_prototypes
-#include "poset_handle_factory.h"
-#include "poset_path.h"
-#include "poset_type.h"
-#include "postorder_member_iterator.h"
-#include "postorder_iterator.h"
-#include "primary_index_space_state.h" // for initialize_prototypes
-#include "primary_sum_index_space_state.h" // for initialize_prototypes
-#include "primitives_index_space_state.h" // for initialize_prototypes
-#include "ragged_array_index_space_interval.h" // for initialize_prototypes
-#include "refinable_poset.h" // for intialize_prototypes
-#include "reserved_primary_index_space_state.h" // for initialize_prototypes
-#include "singleton_index_space_state.h" // for initalize_prototypes
-#include "singleton_index_space_interval.h" // for initialize_prototypes
-#include "standard_member_hack_crg_interval.h" // for initialize_prototypes
-#include "std_list.h"
-#include "std_set.h"
-#include "std_sstream.h"
-#include "subposet_member_iterator.h"
-#include "tern.h"
-#include "total_poset_member.h"
+#include "SheafSystem/array_index_space_handle.h"
+#include "SheafSystem/array_index_space_state.h" // for intialize_prototypes
+#include "SheafSystem/array_index_space_interval.h" // for initialize_prototypes
+#include "SheafSystem/array_poset_dof_map.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/constant_index_space_interval.h" // for initialize_prototypes
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/explicit_crg_interval.h" // for initialize_prototypes
+#include "SheafSystem/explicit_index_space_interval.h" // for initialize_prototypes
+#include "SheafSystem/hash_index_space_state.h" // for intialize_prototypes
+#include "SheafSystem/index_space_iterator.h"
+#include "SheafSystem/interval_index_space_state.h" // for intialize_prototypes
+#include "SheafSystem/list_index_space_state.h" // for initialize_prototypes
+#include "SheafSystem/namespace_poset_dof_map.h"
+#include "SheafSystem/namespace_poset_member.h"
+#include "SheafSystem/scattered_insertion_index_space_handle.h"
+#include "SheafSystem/offset_index_space_state.h" // for intialize_prototypes
+#include "SheafSystem/poset_handle_factory.h"
+#include "SheafSystem/poset_path.h"
+#include "SheafSystem/poset_type.h"
+#include "SheafSystem/postorder_member_iterator.h"
+#include "SheafSystem/postorder_iterator.h"
+#include "SheafSystem/primary_index_space_state.h" // for initialize_prototypes
+#include "SheafSystem/primary_sum_index_space_state.h" // for initialize_prototypes
+#include "SheafSystem/primitives_index_space_state.h" // for initialize_prototypes
+#include "SheafSystem/ragged_array_index_space_interval.h" // for initialize_prototypes
+#include "SheafSystem/refinable_poset.h" // for intialize_prototypes
+#include "SheafSystem/reserved_primary_index_space_state.h" // for initialize_prototypes
+#include "SheafSystem/singleton_index_space_state.h" // for initalize_prototypes
+#include "SheafSystem/singleton_index_space_interval.h" // for initialize_prototypes
+#include "SheafSystem/standard_member_hack_crg_interval.h" // for initialize_prototypes
+#include "SheafSystem/std_list.h"
+#include "SheafSystem/std_set.h"
+#include "SheafSystem/std_sstream.h"
+#include "SheafSystem/subposet_member_iterator.h"
+#include "SheafSystem/tern.h"
+#include "SheafSystem/total_poset_member.h"
 
 using namespace std;
 

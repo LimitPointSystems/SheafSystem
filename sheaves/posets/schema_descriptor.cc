@@ -17,9 +17,9 @@
 
 // Implementation for class schema_descriptor
 
-#include "schema_descriptor.h"
-#include "assert_contract.h"
-#include "std_string.h"
+#include "SheafSystem/schema_descriptor.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/std_string.h"
 
 using namespace std;
 

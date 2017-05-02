@@ -22,19 +22,19 @@
 #define NAMESPACE_POSET_SCHEMA_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef POSET_H
-#include "poset.h"
+#include "SheafSystem/poset.h"
 #endif
 
 #ifndef POSET_MEMBER_H
-#include "poset_member.h"
+#include "SheafSystem/poset_member.h"
 #endif
 
 #ifndef POSET_STATE_HANDLE_H
-#include "poset_state_handle.h"
+#include "SheafSystem/poset_state_handle.h"
 #endif
 
 namespace sheaf

@@ -22,19 +22,19 @@
 #define IJK_ADJACENCY_INDEX_SPACE_INTERVAL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef FORWARDING_INDEX_SPACE_HANDLE_H
-#include "forwarding_index_space_handle.h"
+#include "SheafSystem/forwarding_index_space_handle.h"
 #endif
 
 #ifndef INDEX_SPACE_INTERVAL_H
-#include "index_space_interval.h"
+#include "SheafSystem/index_space_interval.h"
 #endif
 
 #ifndef LIST_POOL_H
-#include "list_pool.h"
+#include "SheafSystem/list_pool.h"
 #endif
 
 namespace fiber_bundle

@@ -19,9 +19,9 @@
 
 // Implementation for class binary_index
 
-#include "binary_index.h"
-#include "assert_contract.h"
-#include "std_iostream.h"
+#include "SheafSystem/binary_index.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/std_iostream.h"
 
 
 // Member functions all inlined in header file.

@@ -17,12 +17,12 @@
 
 // Implementation for class depth_first_iterator
 
-#include "depth_first_iterator.h"
-#include "index_space_iterator.h"
-#include "poset_state_handle.h"
-#include "assert_contract.h"
-#include "subposet.h"
-#include "zn_to_bool.h"
+#include "SheafSystem/depth_first_iterator.h"
+#include "SheafSystem/index_space_iterator.h"
+#include "SheafSystem/poset_state_handle.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/subposet.h"
+#include "SheafSystem/zn_to_bool.h"
 
 //#define DIAGNOSTIC_OUTPUT
 //#undef DIAGNOSTIC_OUTPUT

@@ -18,10 +18,10 @@
 /// @file
 /// Implementation for class hash_index_space_handle
 
-#include "hash_index_space_handle.h"
-#include "assert_contract.h"
-#include "index_space_family.h"
-#include "hash_index_space_state.h"
+#include "SheafSystem/hash_index_space_handle.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/index_space_family.h"
+#include "SheafSystem/hash_index_space_state.h"
 
 // ===========================================================
 // SPACE FACTORY FACET

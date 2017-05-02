@@ -17,10 +17,10 @@
 
 // Implementation for class linear_1d
 
-#include "linear_1d.h"
-#include "assert_contract.h"
-#include "std_limits.h"
-#include "std_cmath.h"
+#include "SheafSystem/linear_1d.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/std_limits.h"
+#include "SheafSystem/std_cmath.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

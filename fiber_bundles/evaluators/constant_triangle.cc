@@ -17,11 +17,11 @@
 
 // Implementation for class constant_triangle
 
-#include "constant_triangle.h"
+#include "SheafSystem/constant_triangle.h"
 
-#include "assert_contract.h"
-#include "error_message.h"
-#include "std_limits.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/std_limits.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

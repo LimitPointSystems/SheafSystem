@@ -18,13 +18,13 @@
 /// @file
 /// Implementation for class primitives_index_space_iterator
 
-#include "primitives_index_space_iterator.h"
+#include "SheafSystem/primitives_index_space_iterator.h"
 
-#include "assert_contract.h"
-#include "explicit_index_space_handle.h"
-#include "index_space_family.h"
-#include "primitives_index_space_state.h"
-#include "primitives_schema_member_index.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/explicit_index_space_handle.h"
+#include "SheafSystem/index_space_family.h"
+#include "SheafSystem/primitives_index_space_state.h"
+#include "SheafSystem/primitives_schema_member_index.h"
 
 namespace
 {

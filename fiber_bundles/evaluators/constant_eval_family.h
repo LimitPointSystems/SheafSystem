@@ -21,11 +21,11 @@
 #define CONSTANT_EVAL_FAMILY_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef EVAL_FAMILY
-#include "eval_family.h"
+#include "SheafSystem/eval_family.h"
 #endif
 
 namespace fiber_bundle

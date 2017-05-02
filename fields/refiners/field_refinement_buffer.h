@@ -22,27 +22,27 @@
 #define FIELD_REFINEMENT_BUFFER_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef BLOCK_H
-#include "block.h"
+#include "SheafSystem/block.h"
 #endif
 
 #ifndef FIELDS_H
-#include "fields.h"
+#include "SheafSystem/fields.h"
 #endif
 
 #ifndef FIBER_BUNDLE_H
-#include "fiber_bundle.h"
+#include "SheafSystem/fiber_bundle.h"
 #endif
 
 #ifndef FIELD_VD_H
-#include "field_vd.h"
+#include "SheafSystem/field_vd.h"
 #endif
 
 #ifndef ZN_TO_BOOL_H
-#include "zn_to_bool.h"
+#include "SheafSystem/zn_to_bool.h"
 #endif
 
 namespace sheaf

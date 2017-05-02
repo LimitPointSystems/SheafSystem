@@ -22,23 +22,23 @@
 #define D_BOUNDING_BOX_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef SCOPED_INDEX_H
-#include "scoped_index.h"
+#include "SheafSystem/scoped_index.h"
 #endif
 
 #ifndef SHEAF_H
-#include "sheaf.h"
+#include "SheafSystem/sheaf.h"
 #endif
 
 #ifndef STD_IOSTREAM_H
-#include "std_iostream.h"
+#include "SheafSystem/std_iostream.h"
 #endif
 
 #ifndef D_BIN_COORDINATES_H
-#include "d_bin_coordinates.h"
+#include "SheafSystem/d_bin_coordinates.h"
 #endif
 
 namespace fiber_bundle

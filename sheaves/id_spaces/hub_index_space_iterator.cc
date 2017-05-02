@@ -18,13 +18,13 @@
 /// @file
 /// Implementation for class hub_index_space_iterator
 
-#include "hub_index_space_iterator.h"
+#include "SheafSystem/hub_index_space_iterator.h"
 
-#include "assert_contract.h"
-#include "explicit_index_space_handle.h"
-#include "index_space_family.h"
-#include "interval_set_iterator.h"
-#include "primary_sum_index_space_state.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/explicit_index_space_handle.h"
+#include "SheafSystem/index_space_family.h"
+#include "SheafSystem/interval_set_iterator.h"
+#include "SheafSystem/primary_sum_index_space_state.h"
 
 // ===========================================================
 // HUB_INDEX_SPACE_ITERATOR FACET

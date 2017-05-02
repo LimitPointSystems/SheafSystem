@@ -17,15 +17,15 @@
 
 // Implementation for class attributes_record_set
 
-#include "attributes_record_set.h"
+#include "SheafSystem/attributes_record_set.h"
 
-#include "assert_contract.h"
-#include "error_message.h"
-#include "interval_index_space_handle.h"
-#include "namespace_poset.h"
-#include "poset_bounds.h"
-#include "poset_bounds_descriptor.h"
-#include "sheaf_file.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/interval_index_space_handle.h"
+#include "SheafSystem/namespace_poset.h"
+#include "SheafSystem/poset_bounds.h"
+#include "SheafSystem/poset_bounds_descriptor.h"
+#include "SheafSystem/sheaf_file.h"
 
 using namespace std;
 

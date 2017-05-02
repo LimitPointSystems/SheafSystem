@@ -18,11 +18,11 @@
 /// @file
 /// Implementation for class name_multimap
 
-#include "name_multimap.h"
+#include "SheafSystem/name_multimap.h"
 
-#include "sheaf_dll_spec.h"
-#include "assert_contract.h"
-#include "deep_size.h"
+#include "SheafSystem/sheaf_dll_spec.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/deep_size.h"
 
 using namespace std;
 

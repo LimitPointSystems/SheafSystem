@@ -22,23 +22,23 @@
 #define POSET_CRG_STATE_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef POSET_CRG_STATE_H
-#include "poset_crg_state.h"
+#include "SheafSystem/poset_crg_state.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 #ifndef CRG_INTERVAL_H
-#include "crg_interval.h"
+#include "SheafSystem/crg_interval.h"
 #endif
 
 #ifndef INDEX_SPACE_ITERATOR_H
-#include "index_space_iterator.h"
+#include "SheafSystem/index_space_iterator.h"
 #endif
    
 using namespace std;

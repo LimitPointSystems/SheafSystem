@@ -22,15 +22,15 @@
 #define INTERVAL_INDEX_SPACE_ITERATOR_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef EXPLICIT_INDEX_SPACE_ITERATOR_H
-#include "explicit_index_space_iterator.h"
+#include "SheafSystem/explicit_index_space_iterator.h"
 #endif
 
 #ifndef STD_MAP_H
-#include "std_map.h"
+#include "SheafSystem/std_map.h"
 #endif
 
 namespace sheaf

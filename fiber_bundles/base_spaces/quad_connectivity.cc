@@ -17,8 +17,8 @@
 
 // Implementation for class quad_connectivity
 
-#include "assert_contract.h"
-#include "quad_connectivity.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/quad_connectivity.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 

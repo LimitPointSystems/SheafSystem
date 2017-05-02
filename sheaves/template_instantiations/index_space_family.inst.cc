@@ -17,23 +17,23 @@
 
 // Explicit instantiations for class index_space_family.
 
-#include "index_space_family.impl.h"
+#include "SheafSystem/index_space_family.impl.h"
 
-#include "array_index_space_handle.h"
-#include "explicit_index_space_handle.h"
-#include "forwarding_index_space_handle.h"
-#include "hash_index_space_handle.h"
-#include "hub_index_space_handle.h"
-#include "ij_product_structure.h"
-#include "ijk_product_structure.h"
-#include "interval_index_space_handle.h"
-#include "list_index_space_handle.h"
-#include "scattered_insertion_index_space_handle.h"
-#include "offset_index_space_handle.h"
-#include "primary_index_space_handle.h"
-#include "reserved_primary_index_space_handle.h"
-#include "singleton_index_space_handle.h"
-#include "sum_index_space_handle.h"
+#include "SheafSystem/array_index_space_handle.h"
+#include "SheafSystem/explicit_index_space_handle.h"
+#include "SheafSystem/forwarding_index_space_handle.h"
+#include "SheafSystem/hash_index_space_handle.h"
+#include "SheafSystem/hub_index_space_handle.h"
+#include "SheafSystem/ij_product_structure.h"
+#include "SheafSystem/ijk_product_structure.h"
+#include "SheafSystem/interval_index_space_handle.h"
+#include "SheafSystem/list_index_space_handle.h"
+#include "SheafSystem/scattered_insertion_index_space_handle.h"
+#include "SheafSystem/offset_index_space_handle.h"
+#include "SheafSystem/primary_index_space_handle.h"
+#include "SheafSystem/reserved_primary_index_space_handle.h"
+#include "SheafSystem/singleton_index_space_handle.h"
+#include "SheafSystem/sum_index_space_handle.h"
 
 using namespace std;
 using namespace sheaf; // Workaround for MS C++ bug.

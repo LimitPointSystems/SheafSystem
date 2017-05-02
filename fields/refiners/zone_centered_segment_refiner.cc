@@ -18,16 +18,16 @@
 /// @file
 /// Implementation for class zone_centered_segment_refiner
 
-#include "zone_centered_segment_refiner.h"
+#include "SheafSystem/zone_centered_segment_refiner.h"
 
-#include "assert_contract.h"
-#include "base_space_poset.h"
-#include "error_message.h"
-#include "block.impl.h"
-#include "field_refinement_buffer.h"
-#include "section_evaluator.h"
-#include "sec_ed_invertible.h"
-#include "field_vd.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/base_space_poset.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/block.impl.h"
+#include "SheafSystem/field_refinement_buffer.h"
+#include "SheafSystem/section_evaluator.h"
+#include "SheafSystem/sec_ed_invertible.h"
+#include "SheafSystem/field_vd.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.

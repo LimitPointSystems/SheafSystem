@@ -18,17 +18,17 @@
 /// @file
 /// Implementation for class primary_sum_index_space_state
 
-#include "primary_sum_index_space_state.h"
-#include "assert_contract.h"
-#include "deep_size.h"
-#include "index_space_family.h"
-#include "interval_index_space_state.h"
-#include "poset_path.h"
-#include "primary_index_space_handle.h"
-#include "primitive_value.h"
-#include "hub_index_space_iterator.h"
-#include "reserved_primary_index_space_state.h"
-#include "std_sstream.h"
+#include "SheafSystem/primary_sum_index_space_state.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/deep_size.h"
+#include "SheafSystem/index_space_family.h"
+#include "SheafSystem/interval_index_space_state.h"
+#include "SheafSystem/poset_path.h"
+#include "SheafSystem/primary_index_space_handle.h"
+#include "SheafSystem/primitive_value.h"
+#include "SheafSystem/hub_index_space_iterator.h"
+#include "SheafSystem/reserved_primary_index_space_state.h"
+#include "SheafSystem/std_sstream.h"
 
 using namespace std;
 

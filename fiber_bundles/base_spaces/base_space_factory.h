@@ -21,19 +21,19 @@
 #define BASE_SPACE_FACTORY_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef POSET_PATH_H
-#include "poset_path.h"
+#include "SheafSystem/poset_path.h"
 #endif
 
 #ifndef STD_STRING_H
-#include "std_string.h"
+#include "SheafSystem/std_string.h"
 #endif
 
 #ifndef WSV_BLOCK_H
-#include "wsv_block.h"
+#include "SheafSystem/wsv_block.h"
 #endif
 
 namespace fiber_bundle

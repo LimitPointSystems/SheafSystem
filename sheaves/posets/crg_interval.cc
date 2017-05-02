@@ -18,17 +18,17 @@
 /// @file
 /// Implementation for class crg_interval.
 
-#include "crg_interval.h"
+#include "SheafSystem/crg_interval.h"
 
-#include "arg_list.h"
-#include "assert_contract.h"
-#include "factory.h"
-#include "index_space_family.h"
-#include "index_space_iterator.h"
-#include "list_index_space_handle.h"
-#include "list_index_space_state.h"
-#include "poset_crg_state.h"
-#include "poset_path.h"
+#include "SheafSystem/arg_list.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/factory.h"
+#include "SheafSystem/index_space_family.h"
+#include "SheafSystem/index_space_iterator.h"
+#include "SheafSystem/list_index_space_handle.h"
+#include "SheafSystem/list_index_space_state.h"
+#include "SheafSystem/poset_crg_state.h"
+#include "SheafSystem/poset_path.h"
 
 using namespace std;
 

@@ -61,7 +61,29 @@ function(SheafSystem_set_system_variable_defaults)
    #
    set(SHEAFSYSTEM_EXPORT_NAME SheafSystemTargets
       CACHE STRING "As used in install(EXPORT <export-name> ...)")
-   mark_as_advanced(SHEAFSYSTEM_EXPORT_NAME)  
+   mark_as_advanced(SHEAFSYSTEM_EXPORT_NAME)
+
+   #
+   # Define path to include dir for build and installed configurations.
+   #
+   set(SHEAFSYSTEM_BUILD_INC_DIR ${CMAKE_BINARY_DIR}/include
+      CACHE PATH "Path to build include directory.")
+   mark_as_advanced(SHEAFSYSTEM_BUILD_INC_DIR)  
+
+   set(SHEAFSYSTEM_INSTALL_INC_DIR include
+      CACHE PATH "Relative path to install include directory.")
+   mark_as_advanced(SHEAFSYSTEM_INSTALL_INC_DIR)  
+
+   #
+   # Define the unique header file scope qualifier and directory path.
+   #
+   set(SHEAFSYSTEM_HEADER_SCOPE SheafSystem
+      CACHE STRING "Used to give header files unique scope in include directives.")
+   mark_as_advanced(SHEAFSYSTEM_HEADER_SCOPE)  
+
+   set(SHEAFSYSTEM_HEADER_DIR ${SHEAFSYSTEM_BUILD_INC_DIR}/${SHEAFSYSTEM_HEADER_SCOPE}
+      CACHE PATH "Path to scoped header file directory.")
+   mark_as_advanced(SHEAFSYSTEM_HEADER_DIR)  
 
    #   
    #  Type of system documentation to build: Dev or User
@@ -211,36 +233,23 @@ endfunction(SheafSystem_set_platform_variables)
 # Set the default value for install location
 #
 function(SheafSystem_set_system_install_location_default)
+   
+   if(NOT DEFINED SHEAFSYSTEM_INSTALL_PREFIX_SET)
 
-   # Host has to be either Linux or Windows; don't handle any other case.
+      # CMAKE_INSTALL_PREFIX is set to cmake default, which is not usually writable.
+      # Set it to something reasonable that should be writable.
+      
+      set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/install CACHE PATH "System install location" FORCE)
 
-   dbc_require_or(SHEAFSYSTEM_WINDOWS SHEAFSYSTEM_LINUX)
+      set(SHEAFSYSTEM_INSTALL_PREFIX_SET "TRUE" CACHE INTERNAL "True if CMAKE_INSTALL_PREFIX has been initialized")
+      
+   else()
 
-   if(SHEAFSYSTEM_WINDOWS)
+      # CMAKE_INSTALL_PREFIX is either not set or has been set by user.
+      # Set it to something writable if it has not been set, won't
+      # overwrite value if user has already set it.
 
       set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/install CACHE PATH "System install location")
-
-   elseif(SHEAFSYSTEM_LINUX)
-
-      if(${CMAKE_INSTALL_PREFIX} MATCHES "/usr/local")
-
-         # Default linux installation location is /usr/local
-         # Set a default where the user has write permission ; in this
-         # case, the top of the SRFCPX_COMPONENTS source tree/install.
-         # "lib", "include", and "bin" will be appended to this location.
-         # See "add_install_target" in <component>/component_defintions.cmake.
-
-         set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/install CACHE PATH "System install location" FORCE)
-
-      else()
-
-         # CMAKE_INSTALL_PREFIX is either not set or has been set by user.
-         # Set it to something writable if it has not been set, won't
-         # overwrite value if user has already set it.
-
-         set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/install CACHE PATH "System install location")
-
-      endif()
 
    endif()
 
@@ -392,9 +401,9 @@ function(SheafSystem_create_output_dirs)
 
    # Body:
 
-   # Create directory for STD header files.
+   # Create directory for scoped header files.
 
-   file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/include)
+   file(MAKE_DIRECTORY ${SHEAFSYSTEM_HEADER_DIR})
 
    # Create directory for documentation files.
 
@@ -885,7 +894,7 @@ function(SheafSystem_install_prereqs)
    # Install only the HDF includes we use 
    foreach(inc ${HDF5_INCS})
       install(FILES ${HDF5_INCLUDE_DIR}/${inc}
-         DESTINATION include
+         DESTINATION include/${SHEAFSYSTEM_HEADER_SCOPE}
          PERMISSIONS OWNER_WRITE OWNER_READ GROUP_READ WORLD_READ)
    endforeach()
    

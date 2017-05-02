@@ -17,15 +17,15 @@
 
 // Implementation for class poset_dof_map
 
-#include "poset_dof_map.h"
+#include "SheafSystem/poset_dof_map.h"
 
-#include "arg_list.h"
-#include "assert_contract.h"
-#include "dof_descriptor_array.h"
-#include "dof_map_factory.h"
-#include "poset_dof_iterator.h"
-#include "poset_state_handle.h"
-#include "primitive_value.h"
+#include "SheafSystem/arg_list.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/dof_descriptor_array.h"
+#include "SheafSystem/dof_map_factory.h"
+#include "SheafSystem/poset_dof_iterator.h"
+#include "SheafSystem/poset_state_handle.h"
+#include "SheafSystem/primitive_value.h"
 
 using namespace std;
 

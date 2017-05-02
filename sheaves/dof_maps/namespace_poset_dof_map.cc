@@ -17,17 +17,17 @@
 
 // Implementation for class namespace_poset_dof_map
 
-#include "namespace_poset_dof_map.h"
+#include "SheafSystem/namespace_poset_dof_map.h"
 
-#include "assert_contract.h"
-#include "error_message.h"
-#include "dof_map_factory.h"
-#include "index_space_iterator.h"
-#include "namespace_poset.h"
-#include "namespace_poset_schema.h"
-#include "poset_type.h"
-#include "primitive_type.h"
-#include "std_string.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/dof_map_factory.h"
+#include "SheafSystem/index_space_iterator.h"
+#include "SheafSystem/namespace_poset.h"
+#include "SheafSystem/namespace_poset_schema.h"
+#include "SheafSystem/poset_type.h"
+#include "SheafSystem/primitive_type.h"
+#include "SheafSystem/std_string.h"
 
 using namespace std;
 

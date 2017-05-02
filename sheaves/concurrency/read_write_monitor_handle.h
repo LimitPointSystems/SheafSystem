@@ -21,17 +21,17 @@
 #define READ_WRITE_MONITOR_HANDLE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ANY_H
-#include "any.h"
+#include "SheafSystem/any.h"
 #endif
 
 // class read_write_monitor;
 
 #ifndef READ_WRITE_MONITOR_H
-#include "read_write_monitor.h"
+#include "SheafSystem/read_write_monitor.h"
 #endif
 
 namespace sheaf

@@ -22,27 +22,27 @@
 #define SUM_INDEX_SPACE_STATE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef EXPLICIT_INDEX_SPACE_STATE_H
-#include "explicit_index_space_state.h"
+#include "SheafSystem/explicit_index_space_state.h"
 #endif
 
 #ifndef BLOCK_H
-#include "block.h"
+#include "SheafSystem/block.h"
 #endif
  
 #ifndef STD_UNORDERED_MAP_H
-#include "std_unordered_map.h"
+#include "SheafSystem/std_unordered_map.h"
 #endif
 
 #ifndef STD_MAP_H
-#include "std_map.h"
+#include "SheafSystem/std_map.h"
 #endif
 
 #ifndef STD_LIST_H
-#include "std_list.h"
+#include "SheafSystem/std_list.h"
 #endif
 
 namespace sheaf

@@ -18,20 +18,20 @@
 /// @file
 /// Implementation for class sec_stp.
 
-#include "sec_stp.h"
+#include "SheafSystem/sec_stp.h"
 
-#include "assert_contract.h"
-#include "binary_section_space_schema_member.impl.h"
-#include "binary_section_space_schema_poset.h"
-#include "fiber_bundles_namespace.h"
-#include "section_space_schema_member.impl.h"
-#include "section_space_schema_poset.h"
-#include "sec_at1.h"
-#include "sec_at1_space.h"
-#include "sec_stp_space.h"
-#include "sec_tuple_space.impl.h"
-#include "stp.h"
-#include "stp_space.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/binary_section_space_schema_member.impl.h"
+#include "SheafSystem/binary_section_space_schema_poset.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/section_space_schema_member.impl.h"
+#include "SheafSystem/section_space_schema_poset.h"
+#include "SheafSystem/sec_at1.h"
+#include "SheafSystem/sec_at1_space.h"
+#include "SheafSystem/sec_stp_space.h"
+#include "SheafSystem/sec_tuple_space.impl.h"
+#include "SheafSystem/stp.h"
+#include "SheafSystem/stp_space.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

@@ -18,12 +18,12 @@
 /// @file
 /// Implementation for class namespace_poset_member.
 
-#include "namespace_poset_member.h"
+#include "SheafSystem/namespace_poset_member.h"
 
-#include "assert_contract.h"
-#include "namespace_poset.h"
-#include "postorder_iterator.h"
-#include "tern.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/namespace_poset.h"
+#include "SheafSystem/postorder_iterator.h"
+#include "SheafSystem/tern.h"
 
 // ===========================================================
 // NAMESPACE_POSET_MEMBER FACET

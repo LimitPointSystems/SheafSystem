@@ -23,15 +23,15 @@
 #define ARRAY_FIELD_DOF_MAP_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef STD_STRING_H
-#include "std_string.h"
+#include "SheafSystem/std_string.h"
 #endif
 
 #ifndef FIELD_DOF_MAP_H
-#include "field_dof_map.h"
+#include "SheafSystem/field_dof_map.h"
 #endif
 
 namespace sheaf

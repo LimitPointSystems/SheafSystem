@@ -23,11 +23,11 @@
 #define T3_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef TP_H
-#include "tp.h"
+#include "SheafSystem/tp.h"
 #endif
 
 namespace fiber_bundle

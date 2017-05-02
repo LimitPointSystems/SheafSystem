@@ -18,10 +18,10 @@
 /// @file
 /// Implementation for class group.
 
-#include "group.h"
+#include "SheafSystem/group.h"
 
-#include "assert_contract.h"
-#include "poset.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/poset.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

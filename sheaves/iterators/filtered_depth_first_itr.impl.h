@@ -22,27 +22,27 @@
 #define FILTERED_DEPTH_FIRST_ITR_IMPL_H
 
 #ifndef FILTERED_DEPTH_FIRST_ITR_H
-#include "filtered_depth_first_itr.h"
+#include "SheafSystem/filtered_depth_first_itr.h"
 #endif
 
 #ifndef POSET_STATE_HANDLE_H
-#include "poset_state_handle.h"
+#include "SheafSystem/poset_state_handle.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 #ifndef SUBPOSET_H
-#include "subposet.h"
+#include "SheafSystem/subposet.h"
 #endif
 
 #ifndef ZN_TO_BOOL_H
-#include "zn_to_bool.h"
+#include "SheafSystem/zn_to_bool.h"
 #endif
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 //#define DIAGNOSTIC_OUTPUT

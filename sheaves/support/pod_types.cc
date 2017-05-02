@@ -17,9 +17,9 @@
 
 // Definitions for pod_types facet of namespace sheaf.
 
-#include "pod_types.h"
+#include "SheafSystem/pod_types.h"
 
-#include "std_limits.h"
+#include "SheafSystem/std_limits.h"
 
 using namespace std;
 

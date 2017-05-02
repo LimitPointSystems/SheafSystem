@@ -17,7 +17,7 @@
 
 // Explicit instantiations for class abstract_poset_member
 
-#include "abstract_poset_member.impl.h"
+#include "SheafSystem/abstract_poset_member.impl.h"
 
 using namespace sheaf; // workaround for MS C++ bug.
 

@@ -22,15 +22,15 @@
 #define POINT_LOCATOR_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef BLOCK_H
-#include "block.h"
+#include "SheafSystem/block.h"
 #endif
 
 #ifndef GEOMETRY_H
-#include "geometry.h"
+#include "SheafSystem/geometry.h"
 #endif
 
 namespace fiber_bundle

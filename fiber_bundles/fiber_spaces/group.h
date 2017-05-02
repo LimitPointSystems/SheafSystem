@@ -22,23 +22,23 @@
 #define GROUP_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ANY_LITE_H
-#include "any_lite.h"
+#include "SheafSystem/any_lite.h"
 #endif
 
 #ifndef FIBER_BUNDLE_H
-#include "fiber_bundle.h"
+#include "SheafSystem/fiber_bundle.h"
 #endif
 
 #ifndef PARTIAL_POSET_MEMBER_H
-#include "partial_poset_member.h"
+#include "SheafSystem/partial_poset_member.h"
 #endif
 
 // #ifndef POSET_H
-// #include "poset.h"
+// #include "SheafSystem/poset.h"
 // #endif
 
 

@@ -51,6 +51,11 @@ function(SheafSystem_add_geometry_library_targets)
    string(REPLACE ";" "\;" _lps_escaped_paths "${GEOMETRY_IPATH}" )
    # message("_lps_escaped_paths=${_lps_escaped_paths}")
 
+   # Create target to create copies of header files with path ${SHEAFSYSTEM_HEADER_SCOPE}/*.h,
+   # so uniquely scoped paths in include directives will work.
+
+   SheafSystem_add_component_scoped_headers_target(geometry)
+
    if(SHEAFSYSTEM_WINDOWS)
 
       # Windows.
@@ -63,8 +68,9 @@ function(SheafSystem_add_geometry_library_targets)
 
       add_library(${GEOMETRY_DYNAMIC_LIB} SHARED ${GEOMETRY_SRCS})
       add_dependencies(${GEOMETRY_DYNAMIC_LIB} ${FIBER_BUNDLES_IMPORT_LIB})
+      add_dependencies(${GEOMETRY_DYNAMIC_LIB} geometry_scoped_headers)
       target_include_directories(${GEOMETRY_DYNAMIC_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${GEOMETRY_DYNAMIC_LIB} ${FIBER_BUNDLES_IMPORT_LIB})        
       set_target_properties(${GEOMETRY_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")
 
@@ -81,8 +87,9 @@ function(SheafSystem_add_geometry_library_targets)
 
       add_library(${GEOMETRY_STATIC_LIB} STATIC ${GEOMETRY_SRCS})
       add_dependencies(${GEOMETRY_STATIC_LIB} ${FIBER_BUNDLES_STATIC_LIB})
+      add_dependencies(${GEOMETRY_STATIC_LIB} geometry_scoped_headers)
       target_include_directories(${GEOMETRY_STATIC_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${GEOMETRY_STATIC_LIB} ${FIBER_BUNDLES_STATIC_LIB}) 
       set_target_properties(${GEOMETRY_STATIC_LIB} PROPERTIES OUTPUT_NAME geometry)
 
@@ -90,8 +97,9 @@ function(SheafSystem_add_geometry_library_targets)
 
       add_library(${GEOMETRY_SHARED_LIB} SHARED ${GEOMETRY_SRCS})
       add_dependencies(${GEOMETRY_SHARED_LIB} ${FIBER_BUNDLES_SHARED_LIB})
+      add_dependencies(${GEOMETRY_SHARED_LIB} geometry_scoped_headers)
       target_include_directories(${GEOMETRY_SHARED_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${GEOMETRY_SHARED_LIB} ${FIBER_BUNDLES_SHARED_LIB}) 
       set_target_properties(${GEOMETRY_SHARED_LIB} PROPERTIES OUTPUT_NAME geometry)
       set_target_properties(${GEOMETRY_SHARED_LIB} PROPERTIES LINKER_LANGUAGE CXX)
@@ -137,7 +145,8 @@ function(SheafSystem_add_geometry_java_bindings_targets)
 
    # Body:
 
-   include_directories(${GEOMETRY_IPATHS})
+#   include_directories(${GEOMETRY_IPATHS})
+   include_directories(${SHEAFSYSTEM_BUILD_INC_DIR})
    include_directories(${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})
    include_directories(${SHEAVES_JAVA_BINDING_SRC_DIR})
    include_directories(${SHEAVES_COMMON_BINDING_SRC_DIR})
@@ -145,6 +154,7 @@ function(SheafSystem_add_geometry_java_bindings_targets)
    include_directories(${FIBER_BUNDLES_COMMON_BINDING_SRC_DIR})
    include_directories(${GEOMETRY_JAVA_BINDING_SRC_DIR})
    include_directories(${GEOMETRY_COMMON_BINDING_SRC_DIR})
+   include_directories(${HDF5_INCLUDE_DIR})
 
    
    set_source_files_properties(${GEOMETRY_JAVA_BINDING_SRC_DIR}/${GEOMETRY_SWIG_JAVA_INTERFACE} 
@@ -311,6 +321,7 @@ function(SheafSystem_add_geometry_csharp_bindings_targets)
    
    include_directories(${SHEAVES_CSHARP_BINDING_SRC_DIR})
    include_directories(${FIBER_BUNDLES_CSHARP_BINDING_SRC_DIR})
+   include_directories(${HDF5_INCLUDE_DIR})
    
    # Add the csharp binding library target
 
@@ -412,6 +423,7 @@ function(SheafSystem_add_geometry_python_bindings_targets)
    include_directories(${SHEAFSYSTEM_PYTHON_INCLUDE_DIRS})
    include_directories(${SHEAVES_PYTHON_BINDING_SRC_DIR})
    include_directories(${FIBER_BUNDLES_PYTHON_BINDING_SRC_DIR})
+   include_directories(${HDF5_INCLUDE_DIR})
 
    set_source_files_properties(${GEOMETRY_PYTHON_BINDING_SRC_DIR}/${GEOMETRY_SWIG_PYTHON_INTERFACE} 
       PROPERTIES CPLUSPLUS ON)

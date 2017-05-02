@@ -29,7 +29,7 @@
 %include exception.i
 
 %{
-#include "std_string.h"
+#include "SheafSystem/std_string.h"
 %}
 
 namespace std {

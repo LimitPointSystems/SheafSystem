@@ -21,19 +21,19 @@
 #define BLOCK_ADJACENCY_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef BLOCK_RELATION_H
-#include "block_relation.h"
+#include "SheafSystem/block_relation.h"
 #endif
 
 #ifndef STD_MAP_H
-#include "std_map.h"
+#include "SheafSystem/std_map.h"
 #endif
 
 #ifndef SINGLY_LINKED_LIST_H
-#include "singly_linked_list.h"
+#include "SheafSystem/singly_linked_list.h"
 #endif
 
 namespace fiber_bundle

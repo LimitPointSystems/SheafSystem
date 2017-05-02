@@ -17,12 +17,12 @@
 
 // Implementation for class plot
 
-#include "plot.h"
+#include "SheafSystem/plot.h"
 
-#include "assert_contract.h"
-#include "std_iostream.h"
-#include "std_sstream.h"
-#include "std_string.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/std_iostream.h"
+#include "SheafSystem/std_sstream.h"
+#include "SheafSystem/std_string.h"
 
 using namespace std;
 

@@ -22,23 +22,23 @@
 #define BASE_SPACE_MEMBER_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef TOTAL_POSET_MEMBER_H
-#include "total_poset_member.h"
+#include "SheafSystem/total_poset_member.h"
 #endif
 
 #ifndef ARRAY_POSET_DOF_MAP_H
-#include "array_poset_dof_map.h"
+#include "SheafSystem/array_poset_dof_map.h"
 #endif
 
 #ifndef FIBER_BUNDLES_NAMESPACE_H
-#include "fiber_bundles_namespace.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
 #endif
 
 #ifndef NAMESPACE_RELATIVE_MEMBER_INDEX_H
-#include "namespace_relative_member_index.h"
+#include "SheafSystem/namespace_relative_member_index.h"
 #endif
 
 namespace sheaf

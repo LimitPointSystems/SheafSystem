@@ -26,11 +26,11 @@
 #define FIELD_AT2_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef FIELD_ATP_H
-#include "field_atp.h"
+#include "SheafSystem/field_atp.h"
 #endif
 
 namespace fiber_bundle

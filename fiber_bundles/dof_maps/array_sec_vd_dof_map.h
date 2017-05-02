@@ -19,11 +19,11 @@
 #define ARRAY_SEC_VD_DOF_MAP_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ARRAY_SECTION_DOF_MAP_H
-#include "array_section_dof_map.h"
+#include "SheafSystem/array_section_dof_map.h"
 #endif
 
 namespace fiber_bundle

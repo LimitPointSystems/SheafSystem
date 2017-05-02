@@ -52,6 +52,11 @@ function(SheafSystem_add_fields_library_targets)
    string(REPLACE ";" "\;" _lps_escaped_paths "${FIELDS_IPATH}" )
    # message("_lps_escaped_paths=${_lps_escaped_paths}")
 
+   # Create target to create copies of header files with path ${SHEAFSYSTEM_HEADER_SCOPE}/*.h,
+   # so uniquely scoped paths in include directives will work.
+
+   SheafSystem_add_component_scoped_headers_target(fields)
+
    if(SHEAFSYSTEM_WINDOWS)
 
       # Windwos.
@@ -62,8 +67,9 @@ function(SheafSystem_add_fields_library_targets)
       
       add_library(${FIELDS_DYNAMIC_LIB} SHARED ${FIELDS_SRCS})
       add_dependencies(${FIELDS_DYNAMIC_LIB} ${GEOMETRY_IMPORT_LIB})
+      add_dependencies(${FIELDS_DYNAMIC_LIB} fields_scoped_headers)
       target_include_directories(${FIELDS_DYNAMIC_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${FIELDS_DYNAMIC_LIB} ${GEOMETRY_IMPORT_LIB} )        
       set_target_properties(${FIELDS_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")   
 
@@ -86,8 +92,9 @@ function(SheafSystem_add_fields_library_targets)
 
       add_library(${FIELDS_STATIC_LIB} STATIC ${FIELDS_SRCS})
       add_dependencies(${FIELDS_STATIC_LIB} ${GEOMETRY_STATIC_LIB})
+      add_dependencies(${FIELDS_STATIC_LIB} fields_scoped_headers)
       target_include_directories(${FIELDS_STATIC_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${FIELDS_STATIC_LIB} ${GEOMETRY_STATIC_LIB}) 
       set_target_properties(${FIELDS_STATIC_LIB} PROPERTIES OUTPUT_NAME fields)
       
@@ -95,8 +102,9 @@ function(SheafSystem_add_fields_library_targets)
 
       add_library(${FIELDS_SHARED_LIB} SHARED ${FIELDS_SRCS})
       add_dependencies(${FIELDS_SHARED_LIB} ${GEOMETRY_SHARED_LIB})
+      add_dependencies(${FIELDS_SHARED_LIB} fields_scoped_headers)
       target_include_directories(${FIELDS_SHARED_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${FIELDS_SHARED_LIB} ${GEOMETRY_SHARED_LIB}) 
       set_target_properties(${FIELDS_SHARED_LIB} PROPERTIES OUTPUT_NAME fields)
       set_target_properties(${FIELDS_SHARED_LIB} PROPERTIES LINKER_LANGUAGE CXX)
@@ -139,7 +147,8 @@ function(SheafSystem_add_fields_java_bindings_targets)
 
    dbc_unexecutable_require("geometry java bindings")
 
-   include_directories(${FIELDS_IPATHS})
+#   include_directories(${FIELDS_IPATHS})
+   include_directories(${SHEAFSYSTEM_BUILD_INC_DIR})
    include_directories(${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})
    include_directories(${SHEAVES_JAVA_BINDING_SRC_DIR})
    include_directories(${SHEAVES_COMMON_BINDING_SRC_DIR})
@@ -149,6 +158,7 @@ function(SheafSystem_add_fields_java_bindings_targets)
    include_directories(${GEOMETRY_COMMON_BINDING_SRC_DIR})
    include_directories(${FIELDS_JAVA_BINDING_SRC_DIR})
    include_directories(${FIELDS_COMMON_BINDING_SRC_DIR})
+   include_directories(${HDF5_INCLUDE_DIR})
 
    
    set_source_files_properties(${FIELDS_JAVA_BINDING_SRC_DIR}/${FIELDS_SWIG_JAVA_INTERFACE} 
@@ -315,6 +325,7 @@ function(SheafSystem_add_fields_csharp_bindings_targets)
    include_directories(${SHEAVES_CSHARP_BINDING_SRC_DIR})
    include_directories(${FIBER_BUNDLES_CSHARP_BINDING_SRC_DIR})
    include_directories(${GEOMETRY_CSHARP_BINDING_SRC_DIR})
+   include_directories(${HDF5_INCLUDE_DIR})
    
    # Add the csharp binding library target
 
@@ -418,6 +429,7 @@ function(SheafSystem_add_fields_python_bindings_targets)
    include_directories(${SHEAVES_PYTHON_BINDING_SRC_DIR})
    include_directories(${FIBER_BUNDLES_PYTHON_BINDING_SRC_DIR})
    include_directories(${GEOMETRY_PYTHON_BINDING_SRC_DIR})
+   include_directories(${HDF5_INCLUDE_DIR})
    
    set_source_files_properties(${FIELDS_PYTHON_BINDING_SRC_DIR}/${FIELDS_SWIG_PYTHON_INTERFACE} 
       PROPERTIES CPLUSPLUS ON)

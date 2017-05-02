@@ -17,13 +17,13 @@
 
 // Implementation for class product_section_dof_iterator
 
-#include "product_section_dof_iterator.h"
+#include "SheafSystem/product_section_dof_iterator.h"
 
-#include "product_section_space_schema_member.h"
-#include "product_section_space_schema_poset.h"
-#include "poset_state_handle.h"
-#include "assert_contract.h"
-#include "discretization_iterator.h"
+#include "SheafSystem/product_section_space_schema_member.h"
+#include "SheafSystem/product_section_space_schema_poset.h"
+#include "SheafSystem/poset_state_handle.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/discretization_iterator.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 

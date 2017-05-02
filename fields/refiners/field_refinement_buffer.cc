@@ -18,18 +18,18 @@
 /// @file
 /// Implementation for class field_refinement_buffer
 
-#include "field_refinement_buffer.h"
+#include "SheafSystem/field_refinement_buffer.h"
 
-#include "assert_contract.h"
-#include "array_section_dof_map.h"
-#include "base_space_member.h"
-#include "base_space_poset.h"
-#include "binary_section_space_schema_member.h"
-#include "postorder_iterator.h"
-#include "local_field_refiner.h"
-#include "section_evaluator.h"
-#include "sec_ed_invertible.h"
-#include "sec_vd.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/array_section_dof_map.h"
+#include "SheafSystem/base_space_member.h"
+#include "SheafSystem/base_space_poset.h"
+#include "SheafSystem/binary_section_space_schema_member.h"
+#include "SheafSystem/postorder_iterator.h"
+#include "SheafSystem/local_field_refiner.h"
+#include "SheafSystem/section_evaluator.h"
+#include "SheafSystem/sec_ed_invertible.h"
+#include "SheafSystem/sec_vd.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.

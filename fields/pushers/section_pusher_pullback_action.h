@@ -22,15 +22,15 @@
 #define SECTION_PUSHER_PULLBACK_ACTION_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef DISCRETIZATION_PUSH_ACTION_H
-#include "discretization_push_action.h"
+#include "SheafSystem/discretization_push_action.h"
 #endif
 
 #ifndef PULLBACK_MAP_H
-#include "pullback_map.h"
+#include "SheafSystem/pullback_map.h"
 #endif
 
 namespace geometry

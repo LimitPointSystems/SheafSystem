@@ -22,15 +22,15 @@
 #define PRODUCT_SECTION_SPACE_SCHEMA_POSET_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef SECTION_SPACE_SCHEMA_POSET_H
-#include "section_space_schema_poset.h"
+#include "SheafSystem/section_space_schema_poset.h"
 #endif
 
 #ifndef NAMESPACE_RELATIVE_MEMBER_INDEX_H
-#include "namespace_relative_member_index.h"
+#include "SheafSystem/namespace_relative_member_index.h"
 #endif
 
 namespace sheaf

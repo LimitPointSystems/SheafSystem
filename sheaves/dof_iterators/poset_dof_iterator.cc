@@ -19,11 +19,11 @@
 
  
 
-#include "poset_dof_iterator.h"
+#include "SheafSystem/poset_dof_iterator.h"
 
-#include "assert_contract.h"
-#include "poset_state_handle.h"
-#include "schema_poset_member.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/poset_state_handle.h"
+#include "SheafSystem/schema_poset_member.h"
 
 using namespace std;
 

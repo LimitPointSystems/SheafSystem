@@ -24,15 +24,15 @@
 #define SEC_ED_INVERTIBLE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef SEC_ED_H
-#include "sec_ed.h"
+#include "SheafSystem/sec_ed.h"
 #endif
 
 #ifndef GEOMETRY_H
-#include "geometry.h"
+#include "SheafSystem/geometry.h"
 #endif
 
 namespace sheaf

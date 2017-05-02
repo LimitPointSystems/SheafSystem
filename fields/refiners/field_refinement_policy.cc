@@ -18,12 +18,12 @@
 /// @file
 /// Implementation for class field_refinement_policy
 
-#include "field_refinement_policy.h"
+#include "SheafSystem/field_refinement_policy.h"
 
-#include "assert_contract.h"
-#include "factory.impl.h"
-#include "field_refinement_buffer.h"
-#include "field_vd.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/factory.impl.h"
+#include "SheafSystem/field_refinement_buffer.h"
+#include "SheafSystem/field_vd.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.

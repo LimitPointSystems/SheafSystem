@@ -21,15 +21,15 @@
 #define PRIMITIVE_TRAITS_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef STD_CSTRING_H
-#include "std_cstring.h"
+#include "SheafSystem/std_cstring.h"
 #endif
 
 #ifndef PRIMITIVE_TYPE_H
-#include "primitive_type.h"
+#include "SheafSystem/primitive_type.h"
 #endif
 
 namespace sheaf

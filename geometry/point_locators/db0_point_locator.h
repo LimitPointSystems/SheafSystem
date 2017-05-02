@@ -22,23 +22,23 @@
 #define DB0_POINT_LOCATOR_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef POINT_LOCATOR_H
-#include "point_locator.h"
+#include "SheafSystem/point_locator.h"
 #endif
 
 #ifndef SINGLY_LINKED_LIST_H
-#include "singly_linked_list.h"
+#include "SheafSystem/singly_linked_list.h"
 #endif
 
 #ifndef STD_QUEUE_H
-#include "std_queue.h"
+#include "SheafSystem/std_queue.h"
 #endif
 
 #ifndef SECTION_EVAL_ITERATOR_H
-#include "section_eval_iterator.h"
+#include "SheafSystem/section_eval_iterator.h"
 #endif
 
 //#undef DIAGNOSTIC_OUTPUT

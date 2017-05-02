@@ -22,23 +22,23 @@
 #define D_BIN_COORDINATES_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef SECTION_EVALUATOR_H
-#include "section_evaluator.h"
+#include "SheafSystem/section_evaluator.h"
 #endif
 
 #ifndef SHEAF_H
-#include "sheaf.h"
+#include "SheafSystem/sheaf.h"
 #endif
 
 #ifndef STD_CMATH_H
-#include "std_cmath.h"
+#include "SheafSystem/std_cmath.h"
 #endif
 
 #ifndef STD_IOSTREAM_H
-#include "std_iostream.h"
+#include "SheafSystem/std_iostream.h"
 #endif
 
 namespace geometry
@@ -219,7 +219,7 @@ private:
 // ===========================================================
 
 // #ifndef STD_BITSET_H
-// #include "std_bitset.h"
+// #include "SheafSystem/std_bitset.h"
 // #endif
 
 ///

@@ -22,19 +22,19 @@
 #define ST2_E3_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ST2_H
-#include "st2.h"
+#include "SheafSystem/st2.h"
 #endif
 
 #ifndef SYMMETRIC_MATRIX_3X3_H
-#include "symmetric_matrix_3x3.h"
+#include "SheafSystem/symmetric_matrix_3x3.h"
 #endif
 
 #ifndef E3_H
-#include "e3.h"
+#include "SheafSystem/e3.h"
 #endif
 
 namespace fiber_bundle

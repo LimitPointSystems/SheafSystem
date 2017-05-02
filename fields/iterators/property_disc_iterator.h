@@ -23,19 +23,19 @@
 #define PROPERTY_DISC_ITERATOR_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef DEPTH_FIRST_ITERATOR_H
-#include "depth_first_iterator.h"
+#include "SheafSystem/depth_first_iterator.h"
 #endif
 
 #ifndef SEC_VD_H
-#include "sec_vd.h"
+#include "SheafSystem/sec_vd.h"
 #endif
 
 #ifndef SECTION_ITERATION_STATE_H
-#include "section_iteration_state.h"
+#include "SheafSystem/section_iteration_state.h"
 #endif
 
 namespace fields

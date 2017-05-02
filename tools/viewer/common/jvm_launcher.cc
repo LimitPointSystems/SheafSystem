@@ -17,23 +17,14 @@
 
 // Implementation for class jvm_launcher
 
-#include "jvm_launcher.h"
-#include "std_cstdlib.h"
-#include "std_iostream.h"
-#include "std_string.h"
-#include "std_unistd.h"
+#include "SheafSystem/jvm_launcher.h"
+#include "SheafSystem/std_cstdlib.h"
+#include "SheafSystem/std_iostream.h"
+#include "SheafSystem/std_string.h"
+#include "SheafSystem/std_unistd.h"
 #include <jni.h>
 
-///@todo Maybe use an enum here.
-//const int jvm_launcher::SUCCESS            = 0;
-//const int jvm_launcher::JVM_CREATE_FAILURE = 1;
-//const int jvm_launcher::CLASS_NOT_FOUND    = 2;
-//const int jvm_launcher::MAIN_NOT_FOUND     = 3;
-//const int jvm_launcher::OUT_OF_MEMORY      = 4;
 
-enum status_msg {  jvm_launcher::SUCCESS = 0,  jvm_launcher::JVM_CREATE_FAILURE = 1,
-	 jvm_launcher::CLASS_NOT_FOUND = 2,  jvm_launcher::MAIN_NOT_FOUND = 3,
-	 jvm_launcher::OUT_OF_MEMORY = 4 }
 ///
 int
 jvm_launcher::
@@ -54,8 +45,8 @@ jvm_launcher::
 launch(const char* main_class_name, int argc, char* argv[],
        const char* xclass_path, const char* xld_library_path, bool verbose)
 {
-  //cout << "jvm_launcher::launch xclass_path = " << xclass_path << endl;
-  //cout << "jvm_launcher::launch xld_library_path = " << xld_library_path << endl;
+  //std::cout << "jvm_launcher::launch xclass_path = " << xclass_path << std::endl;
+  //std::cout << "jvm_launcher::launch xld_library_path = " << xld_library_path << std::endl;
 
   // to be set from within the process.
 
@@ -69,8 +60,8 @@ launch(const char* main_class_name, int argc, char* argv[],
 
   // Set default paths to ".".
 
-  string class_path(xclass_path);
-  string ld_library_path(xld_library_path);
+  std::string class_path(xclass_path);
+  std::string ld_library_path(xld_library_path);
 
   // Append the user's path if a passed-in value differs from the user's.
   // This is so we can move the executable and still have it work (provided
@@ -81,7 +72,7 @@ launch(const char* main_class_name, int argc, char* argv[],
   char* ucp = getenv("CLASSPATH");
   if(ucp != NULL)
   {
-    string user_class_path(ucp);
+    std::string user_class_path(ucp);
     if(class_path != user_class_path)
     {
       class_path += ":" + user_class_path;
@@ -91,25 +82,25 @@ launch(const char* main_class_name, int argc, char* argv[],
   char* uld = getenv("LD_LIBRARY_PATH");
   if(uld != NULL)
   {
-    string user_ld_library_path(uld);
+    std::string user_ld_library_path(uld);
     if(ld_library_path != ld_library_path)
     {
       ld_library_path += ":" + user_ld_library_path;
     }
   }
 
-  //cout << "jvm_launcher::launch class_path = " << class_path << endl;
-  //cout << "jvm_launcher::launch ld_library_path = " << ld_library_path << endl;
+  //std::cout << "jvm_launcher::launch class_path = " << class_path << std::endl;
+  //std::cout << "jvm_launcher::launch ld_library_path = " << ld_library_path << std::endl;
 
   // Allocate the VM options array.
 
   JavaVMOption options[3];
 
-  string s0("-Djava.class.path=");
+  std::string s0("-Djava.class.path=");
   s0 += class_path;
   options[0].optionString = const_cast<char*>(s0.c_str());
 
-  string s1("-Djava.library.path=");
+  std::string s1("-Djava.library.path=");
   s1 += ld_library_path;
   options[1].optionString = const_cast<char*>(s1.c_str());
 
@@ -126,14 +117,14 @@ launch(const char* main_class_name, int argc, char* argv[],
   jint rval = JNI_CreateJavaVM(&vm, (void**)&env, &vm_args);
   if(rval < 0)
   {
-    cout << "Couldn't create the Java VM" << endl;
+    std::cout << "Couldn't create the Java VM" << std::endl;
     return(1);
   }
 
   jclass main_class = env->FindClass(main_class_name);
   if(main_class == 0)
   {
-    cout << main_class_name << " class not found" << endl;
+    std::cout << main_class_name << " class not found" << std::endl;
     return(2);
   }
 
@@ -142,7 +133,7 @@ launch(const char* main_class_name, int argc, char* argv[],
 
   if(main_method_id == 0)
   {
-    cout << "main() method not found" << endl;
+    std::cout << "main() method not found" << std::endl;
     return(3);
   }
 
@@ -152,7 +143,7 @@ launch(const char* main_class_name, int argc, char* argv[],
   jobjectArray args = env->NewObjectArray(argc-1, string_class, NULL);
   if(args == 0)
   {
-    cout << "Out of memory" << endl;
+    std::cout << "Out of memory" << std::endl;
     return(4);
   }
 
@@ -229,11 +220,10 @@ re_exec(int argc, char* argv[],
 // An "extern" function which can more easily be execed from a "dlsym"
 // (dynamic linker method ) provided function pointer.
 //
-extern "C" int launch_jvm(const char* main_class_name, int argc, char** argv,
-                            const char* xclass_path, const char* xld_library_path)
-{
-  return jvm_launcher::launch(main_class_name, argc, argv,
-                              xclass_path, xld_library_path);
-}
+// extern "C" int launch_jvm(const char* main_class_name, int argc, char** argv,
+//                           const char* xclass_path, const char* xld_library_path)
+// {
+//   return jvm_launcher::launch(main_class_name, argc, argv, xclass_path, xld_library_path);
+// }
 
 

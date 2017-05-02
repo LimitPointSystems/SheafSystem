@@ -23,19 +23,19 @@
 #define T2_E3_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef T2_H
-#include "t2.h"
+#include "SheafSystem/t2.h"
 #endif
 
 #ifndef GENERAL_MATRIX_3X3_H
-#include "general_matrix_3x3.h"
+#include "SheafSystem/general_matrix_3x3.h"
 #endif
 
 #ifndef E3_H
-#include "e3.h"
+#include "SheafSystem/e3.h"
 #endif
 
 namespace fiber_bundle

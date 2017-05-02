@@ -17,14 +17,14 @@
 
 // Implementation for class file_data_type_map
 
-#include "file_data_type_map.h"
+#include "SheafSystem/file_data_type_map.h"
 
-#include "assert_contract.h"
-#include "data_converter.h"
-#include "namespace_relative_member_index.h"
-#include "namespace_relative_subposet_index.h"
-#include "primitive_attributes.h"
-#include "sheaf_file.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/data_converter.h"
+#include "SheafSystem/namespace_relative_member_index.h"
+#include "SheafSystem/namespace_relative_subposet_index.h"
+#include "SheafSystem/primitive_attributes.h"
+#include "SheafSystem/sheaf_file.h"
 
 using namespace std;
 

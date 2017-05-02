@@ -18,14 +18,14 @@
 // Implementation for class THREAD_CONDITION_VARIABLE
 
 #ifndef THREAD_CONDITION_VARIABLE_H
-#include "thread_condition_variable.h"
+#include "SheafSystem/thread_condition_variable.h"
 #endif
 
 #ifdef _PTHREADS
 
-#include "std_iostream.h"
+#include "SheafSystem/std_iostream.h"
 
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 
 ///
 sheaf::thread_condition_variable::

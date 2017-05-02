@@ -17,8 +17,8 @@
 
 // Implementation for class hex_connectivity
 
-#include "assert_contract.h"
-#include "hex_connectivity.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/hex_connectivity.h"
 
 using namespace fiber_bundle; // Workaround for bug in MS C++.
 

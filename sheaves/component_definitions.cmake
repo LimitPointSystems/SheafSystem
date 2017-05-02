@@ -1,3 +1,4 @@
+
 #
 # Copyright (c) 2014 Limit Point Systems, Inc. 
 #
@@ -152,11 +153,11 @@ function(SheafSystem_configure_std_headers)
 
       string(REGEX REPLACE ".in$" ""  std_h ${input_file})
       message(STATUS "Creating ${CMAKE_BINARY_DIR}/include/${std_h} from std/${input_file}")
-      list(APPEND std_incs ${CMAKE_BINARY_DIR}/include/${std_h})
+      list(APPEND std_incs ${SHEAFSYSTEM_HEADER_DIR}/${std_h})
 
       # Configure the .h files
 
-      configure_file(std/${input_file} ${CMAKE_BINARY_DIR}/include/${std_h})
+      configure_file(std/${input_file} ${SHEAFSYSTEM_HEADER_DIR}/${std_h})
 
    endforeach()
 
@@ -177,20 +178,26 @@ function(SheafSystem_add_sheaves_library_targets)
    # generator expression, otherwise it inserts the current source directory 
    # just before the expression. Go figure.
 
-   string(REPLACE ";" "\;" _lps_escaped_paths "${SHEAVES_IPATHS}" )
+   #string(REPLACE ";" "\;" _lps_escaped_paths "${SHEAVES_IPATHS}" )
    #message("static _lps_escaped_paths= ${_lps_escaped_paths}")
 
-   if(SHEAFSYSTEM_WINDOWS)
+   set(_lps_escaped_paths "${CMAKE_BINARY_DIR}/include\;${HDF5_INCLUDE_DIR}")
+   #message("_lps_escaped_paths= ${_lps_escaped_paths}")
 
-      # Tell the linker where to look for this project's libraries.
-      # $$ISSUE: shouldn't be necessary.
-      #link_directories(${SHEAVES_OUTPUT_DIR})
+   # Create target to create copies of header files with path ${SHEAFSYSTEM_HEADER_SCOPE}/*.h,
+   # so uniquely scoped paths in include directives will work.
+
+   SheafSystem_add_component_scoped_headers_target(sheaves)
+   
+   if(SHEAFSYSTEM_WINDOWS)
 
       # Create the DLL.
 
       add_library(${SHEAVES_DYNAMIC_LIB} SHARED ${SHEAVES_SRCS})
+      add_dependencies(${SHEAVES_DYNAMIC_LIB} sheaves_scoped_headers)
       target_include_directories(${SHEAVES_DYNAMIC_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )
+         $<BUILD_INTERFACE:${_lps_escaped_paths}>
+         $<INSTALL_INTERFACE:include> )
       target_link_libraries(${SHEAVES_DYNAMIC_LIB} PRIVATE hdf5-static)
       set_target_properties(${SHEAVES_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")
 
@@ -204,7 +211,7 @@ function(SheafSystem_add_sheaves_library_targets)
       # Static library
 
       # Statically "linking" a library is really just putting the .o files into a .a file
-      # and perhapd creating an index for the .a file. There is no actual linking involved.
+      # and perhapS creating an index for the .a file. There is no actual linking involved.
       # However, the link_target_libraries command distinguishes between the link dependencies,
       # those libraries needed to "link" the target, and the link interface, those libraries
       # needed by clients linking to the target library. The list of link dependencies for the 
@@ -215,9 +222,11 @@ function(SheafSystem_add_sheaves_library_targets)
       # In any case, the link and include interface should propagate from the hdf5-static target.
 
       add_library(${SHEAVES_STATIC_LIB} STATIC ${SHEAVES_SRCS})
+      add_dependencies(${SHEAVES_STATIC_LIB} sheaves_scoped_headers)
       target_include_directories(${SHEAVES_STATIC_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )
-      target_link_libraries(${SHEAVES_STATIC_LIB} PUBLIC hdf5-static)   
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include>
+         $<INSTALL_INTERFACE:include> )
+      target_link_libraries(${SHEAVES_STATIC_LIB} PUBLIC hdf5-static)
       set_target_properties(${SHEAVES_STATIC_LIB} PROPERTIES OUTPUT_NAME sheaves)
       set_target_properties(${SHEAVES_STATIC_LIB} PROPERTIES LINKER_LANGUAGE CXX)
 
@@ -230,24 +239,20 @@ function(SheafSystem_add_sheaves_library_targets)
       # to be compiled with -fPIC. Unfortunately, libdl.a as distributed with 
       # glibc-static-2.12-1.149.el6.x86_64.rpm isn't compiled -fPIC and can't be linked statically.
       # The others apparently can be linked statically, although libstdc++ requires libm.so,
-      # so the sheaf shard library ends up requiring libm.so anyway, even if linked statically here.
+      # so the sheaf shared library ends up requiring libm.so anyway, even if linked statically here.
 
       add_library(${SHEAVES_SHARED_LIB} SHARED ${SHEAVES_SRCS})
+
+      add_dependencies(${SHEAVES_SHARED_LIB} sheaves_scoped_headers)
 
       # Dependence on HDF5 library is private so include directories don't
       # propagate in link interface. But clients will need HDF5 include files,
       # so we have to explicitly put them into the interface.
       # See ../cmake_modules/find_prerequisites.cmake for defintion of HDF5_INCLUDE_DIR.
 
-      string(APPEND _lps_escaped_paths "\;${HDF5_INCLUDE_DIR}")
-      # message("shared _lps_escaped_paths= ${_lps_escaped_paths}")
-
       target_include_directories(${SHEAVES_SHARED_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
-
-      #target_link_libraries(${SHEAVES_SHARED_LIB} 
-      #   PRIVATE -Wl,-Bstatic hdf5 m rt z szip -Wl,-Bdynamic 
-      #   PUBLIC dl)  
+         $<BUILD_INTERFACE:${_lps_escaped_paths}>
+         $<INSTALL_INTERFACE:include> )   
 
       target_link_libraries(${SHEAVES_SHARED_LIB} PRIVATE -Wl,-Bstatic hdf5-static -Wl,-Bdynamic PUBLIC dl)  
       set_target_properties(${SHEAVES_SHARED_LIB} PROPERTIES OUTPUT_NAME sheaves)
@@ -288,10 +293,12 @@ function(SheafSystem_add_sheaves_java_bindings_targets)
    dbc_require(SHEAFSYSTEM_FOUND_JAVA)
    dbc_require(SHEAFSYSTEM_FOUND_JNI)
 
-   include_directories(${SHEAVES_IPATHS})
+#   include_directories(${SHEAVES_IPATHS})
+   include_directories(${SHEAFSYSTEM_BUILD_INC_DIR})
    include_directories(${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})
    include_directories(${SHEAVES_JAVA_BINDING_SRC_DIR})
    include_directories(${SHEAVES_COMMON_BINDING_SRC_DIR})
+   include_directories(${HDF5_INCLUDE_DIR})
    
    set_source_files_properties(${SHEAVES_JAVA_BINDING_SRC_DIR}/${SHEAVES_SWIG_JAVA_INTERFACE}
       PROPERTIES CPLUSPLUS ON)
@@ -600,7 +607,6 @@ function(SheafSystem_add_sheaves_bindings_targets)
    dbc_require(SHEAFSYSTEM_BUILD_BINDINGS)
 
    include(${SHEAFSYSTEM_CMAKE_MODULE_PATH}/UseSWIG.cmake)
-#   include(UseSWIG)
 
    SheafSystem_add_sheaves_java_bindings_targets()
 
@@ -617,143 +623,9 @@ function(SheafSystem_add_sheaves_bindings_targets)
 endfunction(SheafSystem_add_sheaves_bindings_targets)
 
 
-#function(SheafSystem_add_sheaves_install_target)
-#
-#   # message("Entering sheaves/component_defintions::add_install_target")
-#
-#   if(SHEAFSYSTEM_LINUX)
-#
-#      install(TARGETS ${SHEAVES_SHARED_LIB} ${SHEAVES_STATIC_LIB}
-#         EXPORT ${SHEAFSYSTEM_EXPORT_NAME}
-#         ARCHIVE DESTINATION ${CMAKE_BUILD_TYPE}/lib
-#         LIBRARY DESTINATION ${CMAKE_BUILD_TYPE}/lib)
-#
-#      if(SHEAFSYSTEM_BUILD_BINDINGS)
-#
-#         install(TARGETS ${SHEAVES_JAVA_BINDING_LIB} 
-#            EXPORT ${SHEAFSYSTEM_EXPORT_NAME}
-#            LIBRARY DESTINATION ${CMAKE_BUILD_TYPE}/lib)
-#
-#         install(FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${SHEAVES_JAVA_BINDING_JAR} 
-#            DESTINATION ${CMAKE_BUILD_TYPE}/lib)  
-#
-#         install(TARGETS ${SHEAVES_PYTHON_BINDING_LIB} 
-#            EXPORT ${SHEAFSYSTEM_EXPORT_NAME}
-#            LIBRARY DESTINATION ${CMAKE_BUILD_TYPE}/lib)
-#
-#         install(TARGETS ${SHEAVES_CSHARP_BINDING_LIB} 
-#            EXPORT ${SHEAFSYSTEM_EXPORT_NAME}
-#            LIBRARY DESTINATION ${CMAKE_BUILD_TYPE}/lib)
-#
-#         install(FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_BUILD_TYPE}/${SHEAVES_CSHARP_BINDING_ASSY} 
-#            DESTINATION ${CMAKE_BUILD_TYPE}/lib) 
-#
-#      endif()
-#      
-#   elseif(SHEAFSYSTEM_WINDOWS)
-#
-#      # Install the sheaves libs.
-#      
-#      install(TARGETS ${SHEAVES_IMPORT_LIB}
-#         EXPORT ${SHEAFSYSTEM_EXPORT_NAME}
-#         ARCHIVE
-#         DESTINATION lib/$<CONFIG>)
-#
-#      # The dynmaic library is not directly referred to by clients,
-#      # so it is not an exported target.
-#      
-#      install(TARGETS ${SHEAVES_DYNAMIC_LIB}
-#         RUNTIME
-#         DESTINATION bin/$<CONFIG>)
-#
-#      install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>/${SHEAVES_DYNAMIC_LIB}_d.pdb 
-#         DESTINATION bin/$<CONFIG> 
-#         OPTIONAL)
-#
-#      install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>/${SHEAVES_DYNAMIC_LIB}.pdb 
-#         DESTINATION bin/$<CONFIG> 
-#         OPTIONAL)
-#      
-#      if(SHEAFSYSTEM_BUILD_BINDINGS)
-#
-#         # Install the sheaves java bindings libs.
-#         
-#         install(TARGETS ${SHEAVES_JAVA_BINDING_LIB} 
-#            EXPORT ${SHEAFSYSTEM_EXPORT_NAME}
-#            ARCHIVE
-#            DESTINATION lib/$<CONFIG>)
-#         
-#         install(TARGETS ${SHEAVES_JAVA_BINDING_LIB} 
-#            RUNTIME
-#            DESTINATION bin/$<CONFIG>)
-#
-#         install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>/${SHEAVES_JAVA_BINDING_LIB}_d.pdb 
-#            DESTINATION bin/$<CONFIG> 
-#            OPTIONAL)
-#
-#         install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>/${SHEAVES_JAVA_BINDING_LIB}.pdb 
-#            DESTINATION bin/$<CONFIG> 
-#            OPTIONAL)
-#
-#         install(FILES ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/$<CONFIG>/${SHEAVES_JAVA_BINDING_JAR} 
-#            DESTINATION lib/$<CONFIG>)  
-#
-#         # Install the sheaves csharp bindings libs
-#         
-#         install(TARGETS ${SHEAVES_CSHARP_BINDING_LIB} 
-#            EXPORT ${SHEAFSYSTEM_EXPORT_NAME}
-#            ARCHIVE
-#            DESTINATION lib/$<CONFIG>)         
-#         
-#         install(TARGETS ${SHEAVES_CSHARP_BINDING_LIB} 
-#            RUNTIME
-#            DESTINATION bin/$<CONFIG>)         
-#
-#         install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>/${SHEAVES_CSHARP_BINDING_LIB}_d.pdb 
-#            DESTINATION bin/$<CONFIG> 
-#            OPTIONAL) 
-#
-#         install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>/${SHEAVES_CSHARP_BINDING_LIB}.pdb 
-#            DESTINATION bin/$<CONFIG> 
-#            OPTIONAL) 
-#
-#         install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>/${SHEAVES_CSHARP_BINDING_ASSY} 
-#            DESTINATION bin/$<CONFIG>) 
-#
-#         # Install sheaves python bindings libs.
-#         
-#         install(TARGETS ${SHEAVES_PYTHON_BINDING_LIB} 
-#            EXPORT ${SHEAFSYSTEM_EXPORT_NAME}
-#            ARCHIVE
-#            DESTINATION lib/$<CONFIG>)         
-#         
-#         install(TARGETS ${SHEAVES_PYTHON_BINDING_LIB} 
-#            RUNTIME
-#            DESTINATION bin/$<CONFIG>)         
-#         
-#         install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>/${SHEAVES_PYTHON_BINDING_LIB}_d.pdb 
-#            DESTINATION bin/$<CONFIG> 
-#            OPTIONAL) 
-#
-#         install(FILES ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIG>/${SHEAVES_PYTHON_BINDING_LIB}.pdb 
-#            DESTINATION bin/$<CONFIG> 
-#            OPTIONAL) 
-#         
-#      endif()
-#   endif()
-#
-#   install(FILES ${SHEAVES_INCS} DESTINATION include) 
-#
-#   install(FILES ${SHEAVES_STD_HEADERS} DESTINATION include)
-#
-#   # message("Leaving sheaves/component_defintions::add_install_target")
-#   
-#endfunction(SheafSystem_add_sheaves_install_target)
-#
-
 function(SheafSystem_add_sheaves_install_target)
 
    SheafSystem_add_component_install_target(sheaves)
-   install(FILES ${SHEAVES_STD_HEADERS} DESTINATION include)
+   install(FILES ${SHEAVES_STD_HEADERS} DESTINATION include/${SHEAFSYSTEM_HEADER_SCOPE})
    
 endfunction(SheafSystem_add_sheaves_install_target)

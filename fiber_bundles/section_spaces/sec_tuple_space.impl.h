@@ -12,15 +12,15 @@
 #define SEC_TUPLE_SPACE_IMPL_H
 
 #ifndef SEC_TUPLE_SPACE_H
-#include "sec_tuple_space.h"
+#include "SheafSystem/sec_tuple_space.h"
 #endif
 
 #ifndef NAMESPACE_POSET_H
-#include "namespace_poset.h"
+#include "SheafSystem/namespace_poset.h"
 #endif
 
 #ifndef SECTION_SPACE_SCHEMA_POSET_H
-#include "section_space_schema_poset.h"
+#include "SheafSystem/section_space_schema_poset.h"
 #endif
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.

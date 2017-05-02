@@ -22,11 +22,11 @@
 #define AT3_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ATP_H
-#include "atp.h"
+#include "SheafSystem/atp.h"
 #endif
 
 namespace fiber_bundle

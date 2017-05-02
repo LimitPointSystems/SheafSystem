@@ -17,5 +17,5 @@
 
 // Implementation for class triorder_itr<T> is in triorder_itr_impl.h
 
-#include "triorder_itr.impl.h"
+#include "SheafSystem/triorder_itr.impl.h"
 

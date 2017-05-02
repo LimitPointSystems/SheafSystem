@@ -21,11 +21,11 @@
 #define VTK_UNSTRUCTURED_GRID_BUILDER_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef VTK_ABSTRACT_GRID_BUILDER_H
-#include "vtk_abstract_grid_builder.h"
+#include "SheafSystem/vtk_abstract_grid_builder.h"
 #endif
 
 #ifndef VTKTYPE_H

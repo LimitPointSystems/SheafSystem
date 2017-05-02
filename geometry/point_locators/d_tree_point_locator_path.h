@@ -22,15 +22,15 @@
 #define D_TREE_POINT_LOCATOR_PATH_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef D_BIN_COORDINATES_H
-#include "d_bin_coordinates.h"
+#include "SheafSystem/d_bin_coordinates.h"
 #endif
 
 #ifndef SHEAF_H
-#include "sheaf.h"
+#include "SheafSystem/sheaf.h"
 #endif
 
 //#undef DIAGNOSTIC_OUTPUT

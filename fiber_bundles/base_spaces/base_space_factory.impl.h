@@ -21,23 +21,23 @@
 #define BASE_SPACE_FACTORY_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef BASE_SPACE_FACTORY_H
-#include "base_space_factory.h"
+#include "SheafSystem/base_space_factory.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 #ifndef ERROR_MESSAGE_H
-#include "error_message.h"
+#include "SheafSystem/error_message.h"
 #endif
 
 #ifndef FIBER_BUNDLES_NAMESPACE_H
-#include "fiber_bundles_namespace.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
 #endif
 
 namespace fiber_bundle

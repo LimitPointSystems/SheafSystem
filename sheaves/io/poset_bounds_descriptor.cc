@@ -18,8 +18,8 @@
 // Implementation for class poset_bounds_descriptor
 
 
-#include "poset_bounds_descriptor.h"
-#include "assert_contract.h"
+#include "SheafSystem/poset_bounds_descriptor.h"
+#include "SheafSystem/assert_contract.h"
 
 // PUBLIC MEMBER FUNCTIONS
 

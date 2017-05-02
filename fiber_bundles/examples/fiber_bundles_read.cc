@@ -17,20 +17,20 @@
 
 /// @example examples/fiber_bundles_read.cc
 
-#include "base_space_poset.h"
+#include "SheafSystem/base_space_poset.h"
 
 #ifdef _WIN32
-#include "io.h"
+#include "SheafSystem/io.h"
 #endif
 
-#include "namespace_poset.h"
-#include "poset_handle_factory.h"
-#include "std_iostream.h"
-#include "storage_agent.h"
+#include "SheafSystem/namespace_poset.h"
+#include "SheafSystem/poset_handle_factory.h"
+#include "SheafSystem/std_iostream.h"
+#include "SheafSystem/storage_agent.h"
 
 /// @hack force initialization of static data members:
 
-#include "fiber_bundles_namespace.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
 
 using namespace fiber_bundle;
 

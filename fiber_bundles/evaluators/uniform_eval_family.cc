@@ -18,17 +18,17 @@
 // Implementation for class uniform_eval_family
 
 
-#include "base_space_member.h"
-#include "factory.h"
-#include "fiber_bundles_namespace.h"
-#include "int_set.h"
-#include "namespace_poset.h"
-#include "sheaf.h"
-#include "assert_contract.h"
-#include "uniform_1d.h"
-#include "uniform_2d.h"
-#include "uniform_3d.h"
-#include "uniform_eval_family.h"
+#include "SheafSystem/base_space_member.h"
+#include "SheafSystem/factory.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/int_set.h"
+#include "SheafSystem/namespace_poset.h"
+#include "SheafSystem/sheaf.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/uniform_1d.h"
+#include "SheafSystem/uniform_2d.h"
+#include "SheafSystem/uniform_3d.h"
+#include "SheafSystem/uniform_eval_family.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

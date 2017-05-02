@@ -18,9 +18,9 @@
 /// @file
 /// Implementation for class tensor_variance
 
-#include "tensor_variance.h"
-#include "assert_contract.h"
-#include "std_iostream.h"
+#include "SheafSystem/tensor_variance.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/std_iostream.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

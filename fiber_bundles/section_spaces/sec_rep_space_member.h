@@ -22,27 +22,27 @@
 #define SEC_REP_SPACE_MEMBER_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef POSET_MEMBER_H
-#include "poset_member.h"
+#include "SheafSystem/poset_member.h"
 #endif
 
 #ifndef FIBER_BUNDLE_H
-#include "fiber_bundle.h"
+#include "SheafSystem/fiber_bundle.h"
 #endif
  
 #ifndef SECTION_DOF_MAP_H
-#include "section_dof_map.h"
+#include "SheafSystem/section_dof_map.h"
 #endif
 
 #ifndef SECTION_SPACE_SCHEMA_MEMBER_H
-#include "section_space_schema_member.h"
+#include "SheafSystem/section_space_schema_member.h"
 #endif
 
 #ifndef TOTAL_POSET_MEMBER_H
-#include "total_poset_member.h"
+#include "SheafSystem/total_poset_member.h"
 #endif
 
 namespace sheaf

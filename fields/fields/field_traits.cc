@@ -17,7 +17,7 @@
 
 // Implementation for class field_traits.
 
-#include "field_traits.h"
+#include "SheafSystem/field_traits.h"
 
 using namespace fields; // Workaround for MS C++ bug.
 

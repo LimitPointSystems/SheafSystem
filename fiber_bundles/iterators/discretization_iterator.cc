@@ -17,11 +17,11 @@
 
 // Implementation for class discretization_iterator
 
-#include "discretization_iterator.h"
-#include "assert_contract.h"
-#include "section_space_schema_member.h"
-#include "section_space_schema_poset.h"
-#include "sec_rep_descriptor.h"
+#include "SheafSystem/discretization_iterator.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/section_space_schema_member.h"
+#include "SheafSystem/section_space_schema_poset.h"
+#include "SheafSystem/sec_rep_descriptor.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 

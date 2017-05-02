@@ -18,11 +18,11 @@
 /// @file
 /// Implementation for class gathered_insertion_index_space_state
 
-#include "gathered_insertion_index_space_state.h"
-#include "assert_contract.h"
-#include "index_space_iterator.h"
-#include "gathered_insertion_index_space_handle.h"
-#include "scoped_index.h"
+#include "SheafSystem/gathered_insertion_index_space_state.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/index_space_iterator.h"
+#include "SheafSystem/gathered_insertion_index_space_handle.h"
+#include "SheafSystem/scoped_index.h"
 
 // ===========================================================
 // GATHERED_INSERTION_INDEX_SPACE_STATE FACET

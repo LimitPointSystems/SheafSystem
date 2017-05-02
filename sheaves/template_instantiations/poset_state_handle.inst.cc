@@ -17,18 +17,18 @@
 
 // Explicit instantiations for class poset_state_handle.
 
-#include "poset_state_handle.impl.h"
+#include "SheafSystem/poset_state_handle.impl.h"
 
-#include "array_index_space_handle.h"
-#include "hash_index_space_handle.h"
-#include "hub_index_space_handle.h"
-#include "list_index_space_handle.h"
-#include "scattered_insertion_index_space_handle.h"
-#include "offset_index_space_handle.h"
-#include "singleton_index_space_handle.h"
-#include "set_filter.h"
-#include "unordered_set_filter.h"
-#include "zn_to_bool_filter.h"
+#include "SheafSystem/array_index_space_handle.h"
+#include "SheafSystem/hash_index_space_handle.h"
+#include "SheafSystem/hub_index_space_handle.h"
+#include "SheafSystem/list_index_space_handle.h"
+#include "SheafSystem/scattered_insertion_index_space_handle.h"
+#include "SheafSystem/offset_index_space_handle.h"
+#include "SheafSystem/singleton_index_space_handle.h"
+#include "SheafSystem/set_filter.h"
+#include "SheafSystem/unordered_set_filter.h"
+#include "SheafSystem/zn_to_bool_filter.h"
 
 using namespace sheaf; // Workaround for MS C++ bug.
 

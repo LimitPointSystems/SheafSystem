@@ -23,19 +23,19 @@
 #define T2_E2_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef T2_H
-#include "t2.h"
+#include "SheafSystem/t2.h"
 #endif
 
 #ifndef GENERAL_MATRIX_2X2_H
-#include "general_matrix_2x2.h"
+#include "SheafSystem/general_matrix_2x2.h"
 #endif
 
 #ifndef E2_H
-#include "e2.h"
+#include "SheafSystem/e2.h"
 
 #endif
 

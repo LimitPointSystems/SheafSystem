@@ -26,11 +26,11 @@
 #define FIELD_JCB_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef FIELD_VD_H
-#include "field_vd.h"
+#include "SheafSystem/field_vd.h"
 #endif
 
 namespace fiber_bundle
@@ -203,7 +203,7 @@ SHEAF_DLL_SPEC std::ostream& operator<<(std::ostream& xos, const field_jcb& xfie
 
 /// Include field_vd algebra function declarations.
 
-#include "field_jcb_funcs.h"
+#include "SheafSystem/field_jcb_funcs.h"
 
 
 #endif // ifndef FIELD_JCB_H

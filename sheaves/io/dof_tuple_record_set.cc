@@ -17,20 +17,20 @@
 
 // Implementation for class dof_tuple_record_set
 
-#include "dof_tuple_record_set.h"
+#include "SheafSystem/dof_tuple_record_set.h"
 
-#include "assert_contract.h"
-#include "data_converter.h"
-#include "error_message.h"
-#include "poset_bounds.h"
-#include "poset_dof_iterator.h"
-#include "poset_scaffold.h"
-#include "preorder_member_iterator.h"
-#include "primitive_value.h"
-#include "sheaf_file.h"
-#include "std_iostream.h"
-#include "std_sstream.h"
-#include "std_string.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/data_converter.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/poset_bounds.h"
+#include "SheafSystem/poset_dof_iterator.h"
+#include "SheafSystem/poset_scaffold.h"
+#include "SheafSystem/preorder_member_iterator.h"
+#include "SheafSystem/primitive_value.h"
+#include "SheafSystem/sheaf_file.h"
+#include "SheafSystem/std_iostream.h"
+#include "SheafSystem/std_sstream.h"
+#include "SheafSystem/std_string.h"
 
 using namespace std;
 

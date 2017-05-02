@@ -18,19 +18,19 @@
 /// @file
 /// Implementation for class cylindrical_point_locator
 
-#include "cylindrical_point_locator.h"
+#include "SheafSystem/cylindrical_point_locator.h"
 
-#include "assert_contract.h"
-#include "bilinear_2d.h"
-#include "chart_point_3d.h"
-#include "d_bin_coordinates.h"
-#include "eval_iterator.h"
-#include "error_message.h"
-#include "linear_2d.h"
-#include "preorder_iterator.h"
-#include "sec_at1_space.h"
-#include "sec_ed.h"
-#include "std_bitset.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/bilinear_2d.h"
+#include "SheafSystem/chart_point_3d.h"
+#include "SheafSystem/d_bin_coordinates.h"
+#include "SheafSystem/eval_iterator.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/linear_2d.h"
+#include "SheafSystem/preorder_iterator.h"
+#include "SheafSystem/sec_at1_space.h"
+#include "SheafSystem/sec_ed.h"
+#include "SheafSystem/std_bitset.h"
 
 using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.

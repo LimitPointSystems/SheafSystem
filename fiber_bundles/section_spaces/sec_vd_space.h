@@ -22,15 +22,15 @@
 #define SEC_VD_SPACE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef SEC_TUPLE_SPACE_H
-#include "sec_tuple_space.h"
+#include "SheafSystem/sec_tuple_space.h"
 #endif
 
 #ifndef VD_TABLE_DOFS_TYPE_H
-#include "vd_table_dofs_type.h"
+#include "SheafSystem/vd_table_dofs_type.h"
 #endif
 
 namespace sheaf

@@ -25,19 +25,19 @@
 #define ST2_E2_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ST2_E2_H
-#include "st2_e2.h"
+#include "SheafSystem/st2_e2.h"
 #endif
 
 #ifndef GL2_H
-#include "gl2.h"
+#include "SheafSystem/gl2.h"
 #endif
 
 #ifndef STD_CMATH_H
-#include "std_cmath.h"
+#include "SheafSystem/std_cmath.h"
 #endif
 
 namespace fiber_bundle

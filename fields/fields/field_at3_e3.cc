@@ -22,12 +22,12 @@
 ///          generated.  If you need to make permanent changes,
 ///          edit the code template and rerun the generator instead.
 
-#include "field_at3_e3.h"
+#include "SheafSystem/field_at3_e3.h"
 
-#include "assert_contract.h"
-#include "base_space_member.h"
-#include "sec_ed_invertible.h"
-#include "sec_at3_e3.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/base_space_member.h"
+#include "SheafSystem/sec_ed_invertible.h"
+#include "SheafSystem/sec_at3_e3.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.

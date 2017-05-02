@@ -17,7 +17,7 @@
 
 // Explicit_instantiations for class at3_e3.
 
-#include "at3_e3.impl.h"
+#include "SheafSystem/at3_e3.impl.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

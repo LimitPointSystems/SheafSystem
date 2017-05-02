@@ -17,17 +17,17 @@
 
 // Explicit_instantiations for class atp.
 
-#include "atp.impl.h"
+#include "SheafSystem/atp.impl.h"
 
-#include "at2_e2.h"
-#include "e2.h"
+#include "SheafSystem/at2_e2.h"
+#include "SheafSystem/e2.h"
 
-#include "at2_e3.h"
-#include "e3.h"
+#include "SheafSystem/at2_e3.h"
+#include "SheafSystem/e3.h"
 
-#include "at3_e3.h"
+#include "SheafSystem/at3_e3.h"
 
-#include "at0.h"
+#include "SheafSystem/at0.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

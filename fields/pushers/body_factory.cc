@@ -18,21 +18,21 @@
 /// @file
 /// Implementation for class body_factory.
 
-#include "body_factory.h"
+#include "SheafSystem/body_factory.h"
 
-#include "arg_list.h"
-#include "assert_contract.h"
-#include "array_index_space_state.h"
-#include "base_space_member.h"
-#include "block.impl.h"
-#include "body_builder.h"
-#include "fiber_bundles_namespace.h"
-#include "field_factory.h"
-#include "std_cmath.h"
-#include "std_iostream.h"
-#include "std_sstream.h"
-#include "field_vd.h"
-#include "wsv_block.impl.h"
+#include "SheafSystem/arg_list.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/array_index_space_state.h"
+#include "SheafSystem/base_space_member.h"
+#include "SheafSystem/block.impl.h"
+#include "SheafSystem/body_builder.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/field_factory.h"
+#include "SheafSystem/std_cmath.h"
+#include "SheafSystem/std_iostream.h"
+#include "SheafSystem/std_sstream.h"
+#include "SheafSystem/field_vd.h"
+#include "SheafSystem/wsv_block.impl.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.

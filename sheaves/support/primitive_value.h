@@ -21,23 +21,23 @@
 #define PRIMITIVE_VALUE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef PRIMITIVE_TYPE_H
-#include "primitive_type.h"
+#include "SheafSystem/primitive_type.h"
 #endif
 
 #ifndef NAMESPACE_RELATIVE_MEMBER_INDEX_H
-#include "namespace_relative_member_index.h"
+#include "SheafSystem/namespace_relative_member_index.h"
 #endif
 
 #ifndef NAMESPACE_RELATIVE_SUBPOSET_INDEX_H
-#include "namespace_relative_subposet_index.h"
+#include "SheafSystem/namespace_relative_subposet_index.h"
 #endif
 
 #ifndef STD_MAP_H
-#include "std_map.h"
+#include "SheafSystem/std_map.h"
 #endif
 
 namespace sheaf

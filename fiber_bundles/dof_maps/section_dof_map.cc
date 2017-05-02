@@ -19,11 +19,11 @@
 
 // Implementation for class section_dof_map
 
-#include "section_dof_map.h"
+#include "SheafSystem/section_dof_map.h"
 
-#include "assert_contract.h"
-#include "binary_section_space_schema_member.h"
-#include "poset_type.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/binary_section_space_schema_member.h"
+#include "SheafSystem/poset_type.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

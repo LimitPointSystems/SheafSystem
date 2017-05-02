@@ -21,9 +21,9 @@
 // A map from one sec_rep_space to another.
 //
 
-#include "avg_section_pusher.h"
-#include "assert_contract.h"
-#include "sec_ed_invertible.h"
+#include "SheafSystem/avg_section_pusher.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/sec_ed_invertible.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.

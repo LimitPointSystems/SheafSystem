@@ -17,16 +17,16 @@
 
 // Implementation for class poset_handle_factory
 
-#include "poset_handle_factory.h"
+#include "SheafSystem/poset_handle_factory.h"
 
-#include "assert_contract.h"
-#include "error_message.h"
-#include "namespace_poset.h"
-#include "poset.h"
-#include "poset_type.h"
-#include "primitives_poset.h"
-#include "primitives_poset_schema.h"
-#include "refinable_poset.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/namespace_poset.h"
+#include "SheafSystem/poset.h"
+#include "SheafSystem/poset_type.h"
+#include "SheafSystem/primitives_poset.h"
+#include "SheafSystem/primitives_poset_schema.h"
+#include "SheafSystem/refinable_poset.h"
 
 //#define DIAGNOSTIC_OUTPUT
 //#undef DIAGNOSTIC_OUTPUT

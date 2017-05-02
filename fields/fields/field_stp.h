@@ -26,11 +26,11 @@
 #define FIELD_STP_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef FIELD_TP_H
-#include "field_tp.h"
+#include "SheafSystem/field_tp.h"
 #endif
 
 namespace fiber_bundle
@@ -203,7 +203,7 @@ SHEAF_DLL_SPEC std::ostream& operator<<(std::ostream& xos, const field_stp& xfie
 
 /// Include field_vd algebra function declarations.
 
-#include "field_stp_funcs.h"
+#include "SheafSystem/field_stp_funcs.h"
 
 
 #endif // ifndef FIELD_STP_H

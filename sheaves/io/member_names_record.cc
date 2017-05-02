@@ -17,10 +17,10 @@
 
 // Implementation for class member_names_record
 
-#include "member_names_record.h"
+#include "SheafSystem/member_names_record.h"
 
-#include "assert_contract.h"
-#include "std_sstream.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/std_sstream.h"
 
 using namespace std;
 

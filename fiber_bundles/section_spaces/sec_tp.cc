@@ -18,19 +18,19 @@
 /// @file
 /// Implementation for class sec_tp.
 
-#include "sec_tp.h"
+#include "SheafSystem/sec_tp.h"
 
-#include "assert_contract.h"
-#include "binary_section_space_schema_member.impl.h"
-#include "binary_section_space_schema_poset.h"
-#include "fiber_bundles_namespace.h"
-#include "section_space_schema_member.impl.h"
-#include "section_space_schema_poset.h"
-#include "sec_at1.h"
-#include "sec_at1_space.h"
-#include "sec_tuple_space.impl.h"
-#include "tp.h"
-#include "tp_space.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/binary_section_space_schema_member.impl.h"
+#include "SheafSystem/binary_section_space_schema_poset.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/section_space_schema_member.impl.h"
+#include "SheafSystem/section_space_schema_poset.h"
+#include "SheafSystem/sec_at1.h"
+#include "SheafSystem/sec_at1_space.h"
+#include "SheafSystem/sec_tuple_space.impl.h"
+#include "SheafSystem/tp.h"
+#include "SheafSystem/tp_space.h"
 
 
 using namespace std;
@@ -1055,23 +1055,23 @@ invariant() const
 // NON-MEMBER FUNCTIONS
 //==============================================================================
 
-#include "error_message.h"
-#include "sec_at0.h"
-#include "sec_at1.h"
-#include "sec_at2.h"
-#include "sec_at3_e3.h"
-#include "sec_atp.h"
-#include "sec_st2.h"
-#include "sec_st3.h"
-#include "sec_st3_e3.h"
-#include "sec_st4_e2.h"
-#include "sec_st4_e3.h"
-#include "sec_stp.h"
-#include "sec_t2.h"
-#include "sec_t3.h"
-#include "sec_t3_e3.h"
-#include "sec_t4_e2.h"
-#include "sec_t4_e3.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/sec_at0.h"
+#include "SheafSystem/sec_at1.h"
+#include "SheafSystem/sec_at2.h"
+#include "SheafSystem/sec_at3_e3.h"
+#include "SheafSystem/sec_atp.h"
+#include "SheafSystem/sec_st2.h"
+#include "SheafSystem/sec_st3.h"
+#include "SheafSystem/sec_st3_e3.h"
+#include "SheafSystem/sec_st4_e2.h"
+#include "SheafSystem/sec_st4_e3.h"
+#include "SheafSystem/sec_stp.h"
+#include "SheafSystem/sec_t2.h"
+#include "SheafSystem/sec_t3.h"
+#include "SheafSystem/sec_t3_e3.h"
+#include "SheafSystem/sec_t4_e2.h"
+#include "SheafSystem/sec_t4_e3.h"
 
 void
 fiber_bundle::sec_tp_algebra::

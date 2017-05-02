@@ -18,22 +18,22 @@
 /// @file
 /// Implementation for class index_space_family
 
-#include "index_space_family.h"
-#include "assert_contract.h"
-#include "explicit_index_space_interval.h"
-#include "hub_index_space_handle.h"
-#include "index_equivalence_iterator.h"
-#include "index_space_family_iterator.h"
-#include "index_space_interval_iterator.h"
-#include "index_space_iterator.h"
-#include "interval_index_space_state.h"
-#include "scattered_insertion_index_space_handle.h"
-#include "poset_path.h"
-#include "primary_index_space_handle.h"
-#include "primary_sum_index_space_state.h"
-#include "scoped_index.h"
-#include "std_iomanip.h"
-#include "std_set.h"
+#include "SheafSystem/index_space_family.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/explicit_index_space_interval.h"
+#include "SheafSystem/hub_index_space_handle.h"
+#include "SheafSystem/index_equivalence_iterator.h"
+#include "SheafSystem/index_space_family_iterator.h"
+#include "SheafSystem/index_space_interval_iterator.h"
+#include "SheafSystem/index_space_iterator.h"
+#include "SheafSystem/interval_index_space_state.h"
+#include "SheafSystem/scattered_insertion_index_space_handle.h"
+#include "SheafSystem/poset_path.h"
+#include "SheafSystem/primary_index_space_handle.h"
+#include "SheafSystem/primary_sum_index_space_state.h"
+#include "SheafSystem/scoped_index.h"
+#include "SheafSystem/std_iomanip.h"
+#include "SheafSystem/std_set.h"
 
 using namespace std;
 

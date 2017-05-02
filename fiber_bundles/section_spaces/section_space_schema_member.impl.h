@@ -10,15 +10,15 @@
 #define SECTION_SPACE_SCHEMA_MEMBER_IMPL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 #ifndef SECTION_SPACE_SCHEMA_MEMBER_H
-#include "section_space_schema_member.h"
+#include "SheafSystem/section_space_schema_member.h"
 #endif
 
 template <typename F>

@@ -17,10 +17,10 @@
 
 // Explicit instantiations for class index_space_handle.
 
-#include "index_space_handle.impl.h"
+#include "SheafSystem/index_space_handle.impl.h"
 
-#include "ij_product_structure.h"
-#include "ijk_product_structure.h"
+#include "SheafSystem/ij_product_structure.h"
+#include "SheafSystem/ijk_product_structure.h"
 
 using namespace sheaf; // Workaround for MS C++ bug.
 

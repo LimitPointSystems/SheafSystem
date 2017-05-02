@@ -18,18 +18,18 @@
 /// @file
 /// Implementation for class structured_block_3d.
 
-#include "structured_block_3d.h"
+#include "SheafSystem/structured_block_3d.h"
 
-#include "assert_contract.h"
-#include "arg_list.h"
-//#include "base_space_member_prototype.h"
-#include "chart_point_3d.h"
-#include "fiber_bundles_namespace.h"
-#include "namespace_poset.h"
-#include "poset_path.h"
-#include "preorder_iterator.h"
-#include "tern.h"
-#include "wsv_block.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/arg_list.h"
+//#include "SheafSystem/base_space_member_prototype.h"
+#include "SheafSystem/chart_point_3d.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/namespace_poset.h"
+#include "SheafSystem/poset_path.h"
+#include "SheafSystem/preorder_iterator.h"
+#include "SheafSystem/tern.h"
+#include "SheafSystem/wsv_block.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 

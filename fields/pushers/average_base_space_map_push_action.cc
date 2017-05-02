@@ -18,15 +18,15 @@
 /// @file
 /// Implementation for class average_base_space_map_push_action
 
-#include "average_base_space_map_push_action.h"
+#include "SheafSystem/average_base_space_map_push_action.h"
 
-#include "assert_contract.h"
-#include "block.h"
-#include "error_message.h"
-#include "index_space_iterator.h"
-#include "preorder_iterator.h"
-#include "sec_vd.h"
-#include "section_space_schema_poset.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/block.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/index_space_iterator.h"
+#include "SheafSystem/preorder_iterator.h"
+#include "SheafSystem/sec_vd.h"
+#include "SheafSystem/section_space_schema_poset.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.

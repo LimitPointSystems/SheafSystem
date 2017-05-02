@@ -22,39 +22,39 @@
 #define LINE_SURFACE_INTERSECTER_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef ANY_H
-#include "any.h"
+#include "SheafSystem/any.h"
 #endif
 
 #ifndef CHART_POINT_1D_H
-#include "chart_point_1d.h"
+#include "SheafSystem/chart_point_1d.h"
 #endif
 
 #ifndef D_ARRAY_POINT_LOCATOR_H
-#include "d_array_point_locator.h"
+#include "SheafSystem/d_array_point_locator.h"
 #endif
  
 #ifndef E3_H
-#include "e3.h"
+#include "SheafSystem/e3.h"
 #endif
 
 #ifndef GEOMETRY_H
-#include "geometry.h"
+#include "SheafSystem/geometry.h"
 #endif
  
 #ifndef LINEAR_2D_H
-#include "linear_2d.h"
+#include "SheafSystem/linear_2d.h"
 #endif  
 
 #ifndef STD_IOSTREAM_H
-#include "std_iostream.h"
+#include "SheafSystem/std_iostream.h"
 #endif
 
 #ifndef STD_MAP_H
-#include "std_map.h"
+#include "SheafSystem/std_map.h"
 #endif
   
 namespace sheaf

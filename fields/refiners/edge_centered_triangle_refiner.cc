@@ -18,13 +18,13 @@
 /// @file
 /// Implementation for class edge_centered_triangle_refiner
 
-#include "edge_centered_triangle_refiner.h"
+#include "SheafSystem/edge_centered_triangle_refiner.h"
 
-#include "assert_contract.h"
-#include "base_space_poset.h"
-#include "error_message.h"
-#include "field_refinement_buffer.h"
-#include "wsv_block.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/base_space_poset.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/field_refinement_buffer.h"
+#include "SheafSystem/wsv_block.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.

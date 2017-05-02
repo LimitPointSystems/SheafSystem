@@ -17,16 +17,16 @@
 
 // Implementation for class table_dof_tuple_record
 
-#include "table_dof_tuple_record.h"
+#include "SheafSystem/table_dof_tuple_record.h"
 
-#include "arg_list.h"
-#include "array_poset_dof_map.h"
-#include "assert_contract.h"
-#include "namespace_poset.h"
-#include "namespace_poset_member.h"
-#include "primitive_type.h"
-#include "std_limits.h"
-#include "std_sstream.h"
+#include "SheafSystem/arg_list.h"
+#include "SheafSystem/array_poset_dof_map.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/namespace_poset.h"
+#include "SheafSystem/namespace_poset_member.h"
+#include "SheafSystem/primitive_type.h"
+#include "SheafSystem/std_limits.h"
+#include "SheafSystem/std_sstream.h"
 
 using namespace std;
 

@@ -22,23 +22,23 @@
 #define VD_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef PRIMITIVE_TYPE_H
-#include "primitive_type.h"
+#include "SheafSystem/primitive_type.h"
 #endif
 
 #ifndef TUPLE_H
-#include "tuple.h"
+#include "SheafSystem/tuple.h"
 #endif
 
 #ifndef STD_CMATH_H
-#include "std_cmath.h"
+#include "SheafSystem/std_cmath.h"
 #endif
 
 #ifndef VD_TABLE_DOFS_TYPE_H
-#include "vd_table_dofs_type.h"
+#include "SheafSystem/vd_table_dofs_type.h"
 #endif
  
 namespace fiber_bundle

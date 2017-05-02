@@ -17,9 +17,9 @@
 
 // Implementation for class tern
 
-#include "tern.h"
-#include "assert_contract.h"
-#include "error_message.h"
+#include "SheafSystem/tern.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/error_message.h"
 
 ///@hack Something in the AIX xlC environment
 /// is defining TRUE and FALSE. Until we find a

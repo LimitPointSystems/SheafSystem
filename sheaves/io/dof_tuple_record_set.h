@@ -21,15 +21,15 @@
 #define DOF_TUPLE_RECORD_SET_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef RECORD_SET_H
-#include "record_set.h"
+#include "SheafSystem/record_set.h"
 #endif
 
 #ifdef ZN_TO_BOOL_H
-#include "zn_to_bool.h"
+#include "SheafSystem/zn_to_bool.h"
 #endif
 
 namespace sheaf

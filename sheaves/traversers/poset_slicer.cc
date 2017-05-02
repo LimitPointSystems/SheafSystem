@@ -17,12 +17,12 @@
 
 // Implementation for class POSET_SLICER
 
-#include "poset_slicer.h"
-#include "assert_contract.h"
-#include "poset.h"
-#include "subposet.h"
-#include "subposet_member_iterator.h"
-#include "total_poset_member.h"
+#include "SheafSystem/poset_slicer.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/poset.h"
+#include "SheafSystem/subposet.h"
+#include "SheafSystem/subposet_member_iterator.h"
+#include "SheafSystem/total_poset_member.h"
 
 // inlines placed here so they will be visible when called
 // Not put in header file because they are olny used here and

@@ -17,14 +17,14 @@
 
 // Implementation for class section_dof_iterator
 
-#include "section_dof_iterator.h"
+#include "SheafSystem/section_dof_iterator.h"
 
-#include "poset_state_handle.h"
-#include "section_space_schema_member.h"
-#include "section_space_schema_poset.h"
-#include "assert_contract.h"
-#include "discretization_iterator.h"
-#include "postorder_iterator.h"
+#include "SheafSystem/poset_state_handle.h"
+#include "SheafSystem/section_space_schema_member.h"
+#include "SheafSystem/section_space_schema_poset.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/discretization_iterator.h"
+#include "SheafSystem/postorder_iterator.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

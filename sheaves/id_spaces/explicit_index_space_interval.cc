@@ -18,14 +18,14 @@
 /// @file
 /// Implementation for class explicit_index_space_interval
 
-#include "explicit_index_space_interval.h"
+#include "SheafSystem/explicit_index_space_interval.h"
 
-#include "abstract_product_structure.h"
-#include "assert_contract.h"
-#include "explicit_index_space_state.h"
-#include "hub_index_space_handle.h"
-#include "index_space_family.h"
-#include "index_space_iterator.h"
+#include "SheafSystem/abstract_product_structure.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/explicit_index_space_state.h"
+#include "SheafSystem/hub_index_space_handle.h"
+#include "SheafSystem/index_space_family.h"
+#include "SheafSystem/index_space_iterator.h"
 
 // ===========================================================
 // SPACE FACTORY FACET
@@ -932,7 +932,7 @@ invariant() const
 //  NON-MEMBER FUNCTIONS
 // ===========================================================
  
-#include "index_space_family.h"
+#include "SheafSystem/index_space_family.h"
 
 size_t
 sheaf::

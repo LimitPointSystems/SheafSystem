@@ -22,23 +22,23 @@
 #define POSET_MEMBER_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef PARTIAL_POSET_MEMBER_H
-#include "partial_poset_member.h"
+#include "SheafSystem/partial_poset_member.h"
 #endif
 
 #ifndef SCHEMA_POSET_MEMBER_H
-#include "schema_poset_member.h"
+#include "SheafSystem/schema_poset_member.h"
 #endif
 
 #ifndef STD_IOSTREAM_H
-#include "std_iostream.h"
+#include "SheafSystem/std_iostream.h"
 #endif
 
 #ifndef STD_STRING_H
-#include "std_string.h"
+#include "SheafSystem/std_string.h"
 #endif
 
 namespace sheaf 

@@ -22,12 +22,12 @@
 ///          generated.  If you need to make permanent changes,
 ///          edit the code template and rerun the generator instead.
 
-#include "field_stp.h"
+#include "SheafSystem/field_stp.h"
 
-#include "assert_contract.h"
-#include "base_space_member.h"
-#include "sec_ed_invertible.h"
-#include "sec_stp.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/base_space_member.h"
+#include "SheafSystem/sec_ed_invertible.h"
+#include "SheafSystem/sec_stp.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.
@@ -553,5 +553,5 @@ operator<<(std::ostream& xos, const field_stp& xfield)
 
 /// Include field_vd algebra function definitions.
 
-#include "field_stp_funcs.impl.h"
+#include "SheafSystem/field_stp_funcs.impl.h"
 

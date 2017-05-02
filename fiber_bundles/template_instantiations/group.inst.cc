@@ -5,10 +5,10 @@
 
 // Explicit_instantiations for class group.
 
-#include "group.impl.h"
+#include "SheafSystem/group.impl.h"
 
-#include "gl2.h"
-#include "gl3.h"
+#include "SheafSystem/gl2.h"
+#include "SheafSystem/gl3.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

@@ -18,10 +18,10 @@
 /// @file
 /// Implementation for class primitives_index_space_handle
 
-#include "primitives_index_space_handle.h"
-#include "assert_contract.h"
-#include "index_space_family.h"
-#include "primitives_index_space_state.h"
+#include "SheafSystem/primitives_index_space_handle.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/index_space_family.h"
+#include "SheafSystem/primitives_index_space_state.h"
 
 // ===========================================================
 // PRIMITIVES_INDEX_SPACE_HANDLE FACET

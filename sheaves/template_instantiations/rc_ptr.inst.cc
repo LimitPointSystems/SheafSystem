@@ -17,7 +17,7 @@
 
 // Explicit instantiations for class rc_ptr.
 
-#include "rc_ptr.impl.h"
+#include "SheafSystem/rc_ptr.impl.h"
 
 using namespace sheaf; // workaround for MS C++ bug.
 

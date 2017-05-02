@@ -18,12 +18,12 @@
 /// @file
 /// Implementation for class scattered_insertion_index_space_handle
 
-#include "scattered_insertion_index_space_handle.h"
-#include "assert_contract.h"
-#include "index_space_family.h"
-#include "index_space_iterator.h"
-#include "scattered_insertion_index_space_state.h"
-#include "scoped_index.h"
+#include "SheafSystem/scattered_insertion_index_space_handle.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/index_space_family.h"
+#include "SheafSystem/index_space_iterator.h"
+#include "SheafSystem/scattered_insertion_index_space_state.h"
+#include "SheafSystem/scoped_index.h"
 
 // ===========================================================
 // SCATTERED_INSERTION_INDEX_SPACE_HANDLE FACET

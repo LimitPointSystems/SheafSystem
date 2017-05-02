@@ -21,31 +21,31 @@
 #define POSET_GENERAL_RECORD_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef DATA_CONVERTER_H
-#include "data_converter.h"
+#include "SheafSystem/data_converter.h"
 #endif
 
 #ifndef POSET_DATA_TYPE_MAP_H
-#include "poset_data_type_map.h"
+#include "SheafSystem/poset_data_type_map.h"
 #endif
 
 #ifndef ASSERT_CONTRACT_H
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 #endif
 
 #ifndef STD_CSTDLIB_H
-#include "std_cstdlib.h"
+#include "SheafSystem/std_cstdlib.h"
 #endif
 
 #ifndef STD_UTILITY_H
-#include "std_utility.h"
+#include "SheafSystem/std_utility.h"
 #endif
 
 #ifndef ATTRIBUTES_RECORD_H
-#include "attributes_record.h"
+#include "SheafSystem/attributes_record.h"
 #endif
 
 namespace sheaf

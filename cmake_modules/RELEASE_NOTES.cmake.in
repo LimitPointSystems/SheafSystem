@@ -6,6 +6,25 @@
 
 SheafSystem Release Notes Version @SHEAFSYSTEM_LIB_VERSION@  @RELEASE_DATE@
 
+Changes pulled from github.com/DavidMButler/SheafSystem branch issue2
+
+1. Qualified all internal includes of SheafSystem header files by scope "SheafSystem",
+i.e. #include "SheafSystem/xxx.h".
+
+2. Updated build system to copy all header files into <installation dir>/include/SheafSystem
+   or <build dir>/include/SheafSystem so scoped header references will resolve correctly
+   at compile time.
+
+SheafSystem Release Notes Version 4.0.0.1  Tue 04/08/17
+
+Changes pulled from github.com/DavidMButler/SheafSystem branch version-4-merge
+
+1.  Merged release 4.0.0.0 from LPS private repository into github repository.
+    Private repository was heretofore maintained to satisfy contractual obligations
+    that no longer exist. All future development will take place in github repository.
+
+SheafSystem Release Notes Version 4.0.0.0  Tue 07/26/16
+
 Changes in branch COM-521:
 
 1.  Updated entire system to Windows10/VS2015/RHEL6.6/gcc4.9.3/C++11

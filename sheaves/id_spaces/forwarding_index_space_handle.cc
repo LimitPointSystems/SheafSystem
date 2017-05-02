@@ -18,12 +18,12 @@
 /// @file
 /// Implementation for class forwarding_index_space_handle
 
-#include "abstract_product_structure.h"
-#include "forwarding_index_space_handle.h"
-#include "assert_contract.h"
-#include "hub_index_space_handle.h"
-#include "index_space_family.h"
-#include "index_space_iterator.h"
+#include "SheafSystem/abstract_product_structure.h"
+#include "SheafSystem/forwarding_index_space_handle.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/hub_index_space_handle.h"
+#include "SheafSystem/index_space_family.h"
+#include "SheafSystem/index_space_iterator.h"
 
 // ===========================================================
 // FORWARDING_INDEX_SPACE_HANDLE FACET

@@ -21,11 +21,11 @@
 
 //$$TODO: See svd.h.
 
-#include "svd.h"
+#include "SheafSystem/svd.h"
 
-#include "std_algorithm.h"
-#include "std_cmath.h"
-#include "std_iostream.h"
+#include "SheafSystem/std_algorithm.h"
+#include "SheafSystem/std_cmath.h"
+#include "SheafSystem/std_iostream.h"
 
 using namespace std;
 

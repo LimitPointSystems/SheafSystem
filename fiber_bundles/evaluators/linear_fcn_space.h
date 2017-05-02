@@ -21,11 +21,11 @@
 #define LINEAR_FCN_SPACE_H
 
 #ifndef INTEGRABLE_SECTION_EVALUATOR_H
-#include "integrable_section_evaluator.h"
+#include "SheafSystem/integrable_section_evaluator.h"
 #endif
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
  

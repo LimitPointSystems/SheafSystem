@@ -103,21 +103,23 @@ function(SheafSystem_add_tools_library_targets)
 
    string(REPLACE ";" "\;" _lps_escaped_paths "${TOOLS_IPATH}" )
    # message("_lps_escaped_paths=${_lps_escaped_paths}")
+
+   # Create target to create copies of header files with path ${SHEAFSYSTEM_HEADER_SCOPE}/*.h,
+   # so uniquely scoped paths in include directives will work.
+
+   SheafSystem_add_component_scoped_headers_target(tools)
    
    if(SHEAFSYSTEM_WINDOWS)
 
       # Windows
 
-      # Tell the linker where to look for this project's libraries. 
-      # $$ISSUE: shouldn't be necessary.
-      # link_directories(${TOOLS_OUTPUT_DIR})
-      
       # Create the DLL.
 
       add_library(${TOOLS_DYNAMIC_LIB} SHARED ${TOOLS_SRCS})
       add_dependencies(${TOOLS_DYNAMIC_LIB} ${FIELDS_IMPORT_LIB})
+      add_dependencies(${TOOLS_DYNAMIC_LIB} tools_scoped_headers)
       target_include_directories(${TOOLS_DYNAMIC_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )           
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )           
       target_link_libraries(${TOOLS_DYNAMIC_LIB} ${FIELDS_IMPORT_LIB} 
          ${JNI_LIBRARIES} ${JAVA_AWT_LIBRARY} ${JAVA_JVM_LIBRARY} ${VTK_LIBS} ) 
       set_target_properties(${TOOLS_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")        
@@ -135,8 +137,9 @@ function(SheafSystem_add_tools_library_targets)
 
       add_library(${TOOLS_STATIC_LIB} STATIC ${TOOLS_SRCS})
       add_dependencies(${TOOLS_STATIC_LIB} ${FIELDS_STATIC_LIB})
+      add_dependencies(${TOOLS_STATIC_LIB} tools_scoped_headers)
       target_include_directories(${TOOLS_STATIC_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${TOOLS_STATIC_LIB} ${FIELDS_STATIC_LIB} 
          ${JAVA_AWT_LIBRARY} ${JAVA_MAWT_LIBRARY} ${JAVA_JVM_LIBRARY} ${VTK_LIBS})
       set_target_properties(${TOOLS_STATIC_LIB} PROPERTIES OUTPUT_NAME tools)
@@ -145,8 +148,9 @@ function(SheafSystem_add_tools_library_targets)
 
       add_library(${TOOLS_SHARED_LIB} SHARED ${TOOLS_SRCS})
       add_dependencies(${TOOLS_SHARED_LIB} ${FIELDS_SHARED_LIB})
+      add_dependencies(${TOOLS_SHARED_LIB} tools_scoped_headers)
       target_include_directories(${TOOLS_SHARED_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${TOOLS_SHARED_LIB} ${FIELDS_SHARED_LIB} 
          ${JAVA_AWT_LIBRARY} ${JAVA_MAWT_LIBRARY} ${JAVA_JVM_LIBRARY} ${VTK_LIBS})
       set_target_properties(${TOOLS_SHARED_LIB} PROPERTIES OUTPUT_NAME tools)
@@ -193,7 +197,8 @@ function(SheafSystem_add_tools_java_bindings_targets)
    include_directories(${VTK_INCLUDE_DIRS})
    link_directories(${VTK_LIB_DIR}) 
 
-   include_directories(${TOOLS_IPATHS})
+#   include_directories(${TOOLS_IPATHS})
+   include_directories(${SHEAFSYSTEM_BUILD_INC_DIR})
    include_directories(${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})
    include_directories(${SHEAVES_JAVA_BINDING_SRC_DIR})
    include_directories(${SHEAVES_COMMON_BINDING_SRC_DIR})
@@ -205,6 +210,7 @@ function(SheafSystem_add_tools_java_bindings_targets)
    include_directories(${FIELDS_COMMON_BINDING_SRC_DIR})
    include_directories(${TOOLS_JAVA_BINDING_SRC_DIR})
    include_directories(${TOOLS_COMMON_BINDING_SRC_DIR})
+   include_directories(${HDF5_INCLUDE_DIR})
    
    set_source_files_properties(${TOOLS_JAVA_BINDING_SRC_DIR}/${TOOLS_SWIG_JAVA_INTERFACE}
       PROPERTIES CPLUSPLUS ON)
@@ -507,8 +513,11 @@ function(SheafSystem_add_tools_install_target)
          install(PROGRAMS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/SheafScope.jar 
             DESTINATION ${CMAKE_BUILD_TYPE}/lib)
 
-         install(PROGRAMS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/sheafscope 
-            DESTINATION ${CMAKE_BUILD_TYPE}/bin)
+         # SheafScope wrapper at least temporarily removed from build.
+         # See tools/CMakeLists.txt
+         
+         # install(PROGRAMS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/sheafscope 
+         #   DESTINATION ${CMAKE_BUILD_TYPE}/bin)
 
       endif(SHEAFSYSTEM_BUILD_SHEAFSCOPE)
 
@@ -583,7 +592,7 @@ function(SheafSystem_add_tools_install_target)
 
    endif(SHEAFSYSTEM_LINUX)
 
-   install(FILES ${TOOLS_INCS} DESTINATION include) 
+   install(FILES ${TOOLS_INCS} DESTINATION include/${SHEAFSYSTEM_HEADER_SCOPE}) 
    
 endfunction(SheafSystem_add_tools_install_target)
 

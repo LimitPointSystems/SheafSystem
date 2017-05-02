@@ -22,15 +22,15 @@
 #define LOCAL_BASE_SPACE_MEMBER_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef BASE_SPACE_MEMBER_H
-#include "base_space_member.h"
+#include "SheafSystem/base_space_member.h"
 #endif
 
 #ifndef ARRAY_POSET_DOF_MAP_H
-#include "array_poset_dof_map.h"
+#include "SheafSystem/array_poset_dof_map.h"
 #endif
 
 namespace fiber_bundle

@@ -18,18 +18,18 @@
 // Implementation for class THREAD
 
 #ifndef THREAD_H
-#include "thread.h"
+#include "SheafSystem/thread.h"
 #endif
 
 #ifdef _PTHREADS
 
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 
 #ifndef RUNNABLE_H
-#include "runnable.h"
+#include "SheafSystem/runnable.h"
 #endif
 
-#include "singly_linked_list.h"
+#include "SheafSystem/singly_linked_list.h"
 
 singly_linked_list<thread *> *
 sheaf::thread::

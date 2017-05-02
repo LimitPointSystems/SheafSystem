@@ -22,15 +22,15 @@
 #define SECTION_SPACE_SCHEMA_JIMS_INDEX_SPACE_STATE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef EXPLICIT_INDEX_SPACE_STATE_H
-#include "explicit_index_space_state.h"
+#include "SheafSystem/explicit_index_space_state.h"
 #endif
 
 #ifndef LIST_POOL_H
-#include "list_pool.h"
+#include "SheafSystem/list_pool.h"
 #endif
 
 namespace sheaf

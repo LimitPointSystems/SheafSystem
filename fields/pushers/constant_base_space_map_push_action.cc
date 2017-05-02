@@ -18,12 +18,12 @@
 /// @file
 /// Implementation for class constant_base_space_map_push_action
 
-#include "constant_base_space_map_push_action.h"
+#include "SheafSystem/constant_base_space_map_push_action.h"
 
-#include "assert_contract.h"
-#include "block.impl.h"
-#include "error_message.h"
-#include "sec_vd.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/block.impl.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/sec_vd.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.

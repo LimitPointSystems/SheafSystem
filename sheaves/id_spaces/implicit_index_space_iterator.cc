@@ -18,10 +18,10 @@
 /// @file
 /// Implementation for class implicit_index_space_iterator
 
-#include "implicit_index_space_iterator.h"
+#include "SheafSystem/implicit_index_space_iterator.h"
 
-#include "assert_contract.h"
-#include "index_space_family.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/index_space_family.h"
 
 // ===========================================================
 // IMPLICIT_INDEX_SPACE_ITERATOR FACET

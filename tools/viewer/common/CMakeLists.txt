@@ -36,11 +36,11 @@ set(SRCS
    )
 
 #
-# $$HACK:
-# jvm_launcher is linux specific. We may have to extend it to
-# cover win32 as well, but for now, ignore it in windows.
+# jvm_launcher is linux specific and is used only by SheafScope.cc,
+# which has been removed from the build, see tools/util/CMakeLists.txt
+# so remove jvm_launcher as well.
 #
-#if((LINUX64INTEL OR LINUX64GNU) AND SHEAFSYSTEM_BUILD_BINDINGS)
+#if(SHEAFSYSTEM_LINUX AND SHEAFSYSTEM_BUILD_BINDINGS)
 #    set(SRCS ${SRCS} jvm_launcher.cc)
 #endif()
 

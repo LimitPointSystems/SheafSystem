@@ -22,15 +22,15 @@
 #define AVERAGE_PUSH_ACTION_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef SECTION_PUSHER_PUSH_ACTION_H
-#include "section_pusher_push_action.h"
+#include "SheafSystem/section_pusher_push_action.h"
 #endif
 
 #ifndef BLOCK_H
-#include "block.h"
+#include "SheafSystem/block.h"
 #endif
 
 namespace fiber_bundle

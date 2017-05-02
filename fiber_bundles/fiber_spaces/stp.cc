@@ -18,16 +18,16 @@
 /// @file
 /// Implementation for class stp.
 
-#include "stp.h"
+#include "SheafSystem/stp.h"
 
-#include "abstract_poset_member.impl.h"
-#include "assert_contract.h"
-#include "at1.h"
-#include "at1_space.h"
-#include "fiber_bundles_namespace.h"
-#include "schema_poset_member.h"
-#include "stp_space.h"
-#include "wsv_block.h"
+#include "SheafSystem/abstract_poset_member.impl.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/at1.h"
+#include "SheafSystem/at1_space.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/schema_poset_member.h"
+#include "SheafSystem/stp_space.h"
+#include "SheafSystem/wsv_block.h"
 
 
 using namespace std;

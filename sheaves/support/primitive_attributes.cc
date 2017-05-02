@@ -18,15 +18,15 @@
 //
 // Implementation for class primitive_attributes
 
-#include "primitive_attributes.h"
+#include "SheafSystem/primitive_attributes.h"
 
-#include "assert_contract.h"
-#include "block.impl.h"
-#include "namespace_relative_member_index.h"
-#include "namespace_relative_subposet_index.h"
-#include "primitive_traits.h"
-#include "std_map.h"
-#include "std_sstream.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/block.impl.h"
+#include "SheafSystem/namespace_relative_member_index.h"
+#include "SheafSystem/namespace_relative_subposet_index.h"
+#include "SheafSystem/primitive_traits.h"
+#include "SheafSystem/std_map.h"
+#include "SheafSystem/std_sstream.h"
 
 using namespace sheaf;
 using namespace std;

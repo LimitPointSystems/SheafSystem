@@ -19,11 +19,11 @@
 
  
 
-#include "filtered_depth_first_member_iterator.h"
+#include "SheafSystem/filtered_depth_first_member_iterator.h"
 
-#include "poset_state_handle.h"
-#include "assert_contract.h"
-#include "total_poset_member.h"
+#include "SheafSystem/poset_state_handle.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/total_poset_member.h"
 
 // const bool sheaf::filtered_depth_first_member_iterator::DOWN = true;
 // const bool sheaf::filtered_depth_first_member_iterator::UP = false;

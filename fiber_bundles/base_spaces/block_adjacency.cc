@@ -17,11 +17,11 @@
 
 // Implementation for class block_adjacency
 
-#include "block_adjacency.h"
+#include "SheafSystem/block_adjacency.h"
 
-#include "assert_contract.h"
-#include "block_connectivity.h"
-#include "std_iomanip.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/block_connectivity.h"
+#include "SheafSystem/std_iomanip.h"
 
 using namespace std;
 using namespace fiber_bundle;

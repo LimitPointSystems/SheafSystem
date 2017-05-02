@@ -17,16 +17,16 @@
 
 // Explicit instantiations for class base_space_factory.
 
-#include "base_space_factory.impl.h"
+#include "SheafSystem/base_space_factory.impl.h"
 
-#include "point_block_1d.h"
-#include "point_block_2d.h"
-#include "point_block_3d.h"
-#include "structured_block_1d.h"
-#include "structured_block_2d.h"
-#include "structured_block_3d.h"
-#include "unstructured_block.h"
-#include "zone_nodes_block.h"
+#include "SheafSystem/point_block_1d.h"
+#include "SheafSystem/point_block_2d.h"
+#include "SheafSystem/point_block_3d.h"
+#include "SheafSystem/structured_block_1d.h"
+#include "SheafSystem/structured_block_2d.h"
+#include "SheafSystem/structured_block_3d.h"
+#include "SheafSystem/unstructured_block.h"
+#include "SheafSystem/zone_nodes_block.h"
 
 //==============================================================================
 // EXPLICIT INSTANTIATIONS

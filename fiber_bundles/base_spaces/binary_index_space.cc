@@ -17,9 +17,9 @@
 
 // Implementation for class binary_index_space
 
-#include "binary_index_space.h"
+#include "SheafSystem/binary_index_space.h"
 
-#include "assert_contract.h"
+#include "SheafSystem/assert_contract.h"
 
 using namespace fiber_bundle; // Workaround for MS C++ bug.
 

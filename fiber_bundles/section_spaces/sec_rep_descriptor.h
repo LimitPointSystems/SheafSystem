@@ -21,19 +21,19 @@
 #define SEC_REP_DESCRIPTOR_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifdef STD_STRING_H
-#include "std_string.h"
+#include "SheafSystem/std_string.h"
 #endif
 
 #ifndef TOTAL_POSET_MEMBER
-#include "total_poset_member.h"
+#include "SheafSystem/total_poset_member.h"
 #endif
 
 #ifndef ARRAY_POSET_DOF_MAP
-#include "array_poset_dof_map.h"
+#include "SheafSystem/array_poset_dof_map.h"
 #endif
 
 namespace sheaf

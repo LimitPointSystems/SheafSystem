@@ -18,7 +18,7 @@
  
 // Implementation for class auto_block.
 
-#include "auto_block.impl.h"
+#include "SheafSystem/auto_block.impl.h"
 
 using namespace std;
 

@@ -26,11 +26,11 @@
 #define FIELD_JCB_E13_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef FIELD_JCB_ED_H
-#include "field_jcb_ed.h"
+#include "SheafSystem/field_jcb_ed.h"
 #endif
 
 namespace fiber_bundle

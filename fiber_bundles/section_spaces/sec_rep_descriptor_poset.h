@@ -22,15 +22,15 @@
 #define SEC_REP_DESCRIPTOR_POSET_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef POSET_H
-#include "poset.h"
+#include "SheafSystem/poset.h"
 #endif
 
 #ifndef SEC_REP_DESCRIPTOR_TABLE_DOFS_TYPE_H
-#include "sec_rep_descriptor_table_dofs_type.h"
+#include "SheafSystem/sec_rep_descriptor_table_dofs_type.h"
 #endif
 
 namespace sheaf

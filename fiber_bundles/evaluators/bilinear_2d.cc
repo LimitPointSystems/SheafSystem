@@ -17,11 +17,11 @@
 
 // Implementation for class bilinear_2d
 
-#include "bilinear_2d.h"
-#include "assert_contract.h"
-#include "std_cfloat.h"
-#include "std_cmath.h"
-#include "std_limits.h"
+#include "SheafSystem/bilinear_2d.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/std_cfloat.h"
+#include "SheafSystem/std_cmath.h"
+#include "SheafSystem/std_limits.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

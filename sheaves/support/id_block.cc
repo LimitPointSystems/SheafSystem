@@ -17,13 +17,13 @@
 
 // Implementation for class id_block
 
-#include "id_block.h"
+#include "SheafSystem/id_block.h"
 
-#include "any.h"
-#include "assert_contract.h"
-#include "error_message.h"
-#include "hub_index_space_handle.h"
-#include "poset_state_handle.h"
+#include "SheafSystem/any.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/hub_index_space_handle.h"
+#include "SheafSystem/poset_state_handle.h"
 
 // =============================================================================
 // ANY FACET

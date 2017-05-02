@@ -17,9 +17,9 @@
 
 // Explicit instantiations for class factory.
 
-#include "factory.impl.h"
+#include "SheafSystem/factory.impl.h"
 
-#include "eval_family.h"
+#include "SheafSystem/eval_family.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

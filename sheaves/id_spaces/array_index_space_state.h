@@ -22,23 +22,23 @@
 #define ARRAY_INDEX_SPACE_STATE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef AUTO_BLOCK_H
-#include "auto_block.h"
+#include "SheafSystem/auto_block.h"
 #endif
 
 #ifndef LIST_POOL_H
-#include "list_pool.h"
+#include "SheafSystem/list_pool.h"
 #endif
 
 #ifndef SCATTERED_INSERTION_INDEX_SPACE_STATE_H
-#include "scattered_insertion_index_space_state.h"
+#include "SheafSystem/scattered_insertion_index_space_state.h"
 #endif
 
 #ifndef STD_UNORDERED_MAP_H
-#include "std_unordered_map.h"
+#include "SheafSystem/std_unordered_map.h"
 #endif
 
 namespace sheaf

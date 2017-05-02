@@ -17,7 +17,7 @@
 
 // Explicit_instantiations for class met_e2.
 
-#include "met_e2.impl.h"
+#include "SheafSystem/met_e2.impl.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

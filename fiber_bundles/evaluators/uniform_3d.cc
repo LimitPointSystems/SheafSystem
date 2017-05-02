@@ -17,9 +17,9 @@
 
 // Implementation for class uniform_3d
 
-#include "uniform_3d.h"
-#include "assert_contract.h"
-#include "std_limits.h"
+#include "SheafSystem/uniform_3d.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/std_limits.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

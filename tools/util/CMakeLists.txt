@@ -37,7 +37,7 @@ set(ADDITIONAL_INCS
 
 
 if(SHEAFSYSTEM_BUILD_SHEAFSCOPE)
-    configure_file(lps_environment.h.cmake.in ${CMAKE_BINARY_DIR}/include/lps_environment.h)
+    configure_file(lps_environment.h.cmake.in ${SHEAFSYSTEM_HEADER_DIR}/lps_environment.h)
 endif()
 
 
@@ -54,9 +54,14 @@ SheafSystem_collect_unit_test_sources(tools "${UNIT_TEST_SRCS}")
 #
 # Source for example executables.
 #
+# SheafScope.cc was originally intended as an easy way to launch
+# the SheafScope. But it never worked, or at least not reliably, and
+# won't even build on Windows. So it has been removed from the build
+# until we make it work, if that ever happens.
+
 set(EXAMPLE_SRCS
      dumpsheaf.cc
-     SheafScope.cc
+#     SheafScope.cc
    )
 
 SheafSystem_collect_example_sources(tools "${EXAMPLE_SRCS}")

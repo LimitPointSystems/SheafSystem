@@ -18,8 +18,8 @@
 /// @file
 /// Implementation for class any_lite.
 
-#include "any_lite.h"
-#include "assert_contract.h"
+#include "SheafSystem/any_lite.h"
+#include "SheafSystem/assert_contract.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

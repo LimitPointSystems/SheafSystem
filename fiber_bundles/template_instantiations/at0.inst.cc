@@ -17,7 +17,7 @@
 
 // Explicit_instantiations for class at0.
 
-#include "at0.impl.h"
+#include "SheafSystem/at0.impl.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

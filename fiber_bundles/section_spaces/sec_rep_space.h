@@ -22,19 +22,19 @@
 #define SEC_REP_SPACE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef SCATTERED_INSERTION_INDEX_SPACE_HANDLE_H
-#include "scattered_insertion_index_space_handle.h"
+#include "SheafSystem/scattered_insertion_index_space_handle.h"
 #endif
 
 #ifndef POSET_H
-#include "poset.h"
+#include "SheafSystem/poset.h"
 #endif
 
 #ifndef SECTION_SPACE_SCHEMA_MEMBER_H
-#include "section_space_schema_member.h"
+#include "SheafSystem/section_space_schema_member.h"
 #endif
 
 namespace sheaf

@@ -22,15 +22,15 @@
 #define SUM_INDEX_SPACE_HANDLE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef EXPLICIT_INDEX_SPACE_HANDLE_H
-#include "explicit_index_space_handle.h"
+#include "SheafSystem/explicit_index_space_handle.h"
 #endif
 
 #ifndef STD_LIST_H
-#include "std_list.h"
+#include "SheafSystem/std_list.h"
 #endif
 
 namespace sheaf

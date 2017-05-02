@@ -18,12 +18,12 @@
 /// @file
 /// Implementation for class copy_push_action
 
-#include "copy_push_action.h"
+#include "SheafSystem/copy_push_action.h"
 
-#include "assert_contract.h"
-#include "block.h"
-#include "error_message.h"
-#include "sec_vd.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/block.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/sec_vd.h"
 
 using namespace std;
 using namespace fields; // Workaround for MS C++ bug.

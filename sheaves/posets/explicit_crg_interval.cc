@@ -18,13 +18,13 @@
 /// @file
 /// Implementation for class explicit_crg_interval.
 
-#include "explicit_crg_interval.h"
+#include "SheafSystem/explicit_crg_interval.h"
 
-#include "assert_contract.h"
-#include "explicit_index_space_interval.h"
-#include "factory.h"
-#include "index_space_family.h"
-#include "index_space_iterator.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/explicit_index_space_interval.h"
+#include "SheafSystem/factory.h"
+#include "SheafSystem/index_space_family.h"
+#include "SheafSystem/index_space_iterator.h"
 
 // ===========================================================
 // EXPLICIT_CRG_INTERVAL FACET

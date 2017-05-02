@@ -51,6 +51,11 @@ function(SheafSystem_add_fiber_bundles_library_targets)
    string(REPLACE ";" "\;" _lps_escaped_paths "${FIBER_BUNDLES_IPATH}" )
    # message("_lps_escaped_paths=${_lps_escaped_paths}")
 
+   # Create target to create copies of header files with path ${SHEAFSYSTEM_HEADER_SCOPE}/*.h,
+   # so uniquely scoped paths in include directives will work.
+
+   SheafSystem_add_component_scoped_headers_target(fiber_bundles)
+
    if(SHEAFSYSTEM_WINDOWS)
 
       # Windows.
@@ -63,8 +68,9 @@ function(SheafSystem_add_fiber_bundles_library_targets)
 
       add_library(${FIBER_BUNDLES_DYNAMIC_LIB} SHARED ${FIBER_BUNDLES_SRCS})
       add_dependencies(${FIBER_BUNDLES_DYNAMIC_LIB} ${SHEAVES_IMPORT_LIB})
+      add_dependencies(${FIBER_BUNDLES_DYNAMIC_LIB} fiber_bundles_scoped_headers)
       target_include_directories(${FIBER_BUNDLES_DYNAMIC_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${FIBER_BUNDLES_DYNAMIC_LIB} ${SHEAVES_IMPORT_LIB})
       set_target_properties(${FIBER_BUNDLES_DYNAMIC_LIB} PROPERTIES FOLDER "Library Targets")
 
@@ -81,8 +87,9 @@ function(SheafSystem_add_fiber_bundles_library_targets)
 
       add_library(${FIBER_BUNDLES_STATIC_LIB} STATIC ${FIBER_BUNDLES_SRCS})
       add_dependencies(${FIBER_BUNDLES_STATIC_LIB} ${SHEAVES_STATIC_LIB})
+      add_dependencies(${FIBER_BUNDLES_STATIC_LIB} fiber_bundles_scoped_headers)
       target_include_directories(${FIBER_BUNDLES_STATIC_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${FIBER_BUNDLES_STATIC_LIB} ${SHEAVES_STATIC_LIB})
       set_target_properties(${FIBER_BUNDLES_STATIC_LIB} PROPERTIES OUTPUT_NAME fiber_bundles )
 
@@ -90,8 +97,9 @@ function(SheafSystem_add_fiber_bundles_library_targets)
 
       add_library(${FIBER_BUNDLES_SHARED_LIB} SHARED ${FIBER_BUNDLES_SRCS})
       add_dependencies(${FIBER_BUNDLES_SHARED_LIB} ${SHEAVES_SHARED_LIB})
+      add_dependencies(${FIBER_BUNDLES_SHARED_LIB} fiber_bundles_scoped_headers)
       target_include_directories(${FIBER_BUNDLES_SHARED_LIB} PUBLIC
-         $<BUILD_INTERFACE:${_lps_escaped_paths}> $<INSTALL_INTERFACE:include> )   
+         $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/include> $<INSTALL_INTERFACE:include> )   
       target_link_libraries(${FIBER_BUNDLES_SHARED_LIB} ${SHEAVES_SHARED_LIB})
       set_target_properties(${FIBER_BUNDLES_SHARED_LIB} PROPERTIES OUTPUT_NAME fiber_bundles)
       set_target_properties(${FIBER_BUNDLES_SHARED_LIB} PROPERTIES LINKER_LANGUAGE CXX)
@@ -140,12 +148,14 @@ function(SheafSystem_add_fiber_bundles_java_bindings_targets)
 
    # Body:
 
-   include_directories(${FIBER_BUNDLES_IPATHS})
+#   include_directories(${FIBER_BUNDLES_IPATHS})
+   include_directories(${SHEAFSYSTEM_BUILD_INC_DIR})
    include_directories(${JAVA_INCLUDE_PATH} ${JAVA_INCLUDE_PATH2})
    include_directories(${SHEAVES_JAVA_BINDING_SRC_DIR})
    include_directories(${SHEAVES_COMMON_BINDING_SRC_DIR})
    include_directories(${FIBER_BUNDLES_JAVA_BINDING_SRC_DIR})
    include_directories(${FIBER_BUNDLES_COMMON_BINDING_SRC_DIR})        
+   include_directories(${HDF5_INCLUDE_DIR})
    
    set_source_files_properties(${FIBER_BUNDLES_JAVA_BINDING_SRC_DIR}/${FIBER_BUNDLES_SWIG_JAVA_INTERFACE} 
       PROPERTIES CPLUSPLUS ON)
@@ -304,6 +314,7 @@ function(SheafSystem_add_fiber_bundles_csharp_bindings_targets)
    set(CMAKE_SWIG_FLAGS -c++ -w842 -namespace fiber_bundle)
    
    include_directories(${SHEAVES_CSHARP_BINDING_SRC_DIR})
+   include_directories(${HDF5_INCLUDE_DIR})
    
    # Add the csharp binding library target
 

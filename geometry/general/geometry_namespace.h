@@ -21,15 +21,15 @@
 #define GEOMETRY_NAMESPACE_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef FIBER_BUNDLES_NAMESPACE_H
-#include "fiber_bundles_namespace.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
 #endif
 
 #ifndef GEOMETRY_H
-#include "geometry.h"
+#include "SheafSystem/geometry.h"
 #endif
 
 namespace geometry

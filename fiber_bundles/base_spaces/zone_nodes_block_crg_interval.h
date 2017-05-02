@@ -23,31 +23,31 @@
 #define ZONE_NODES_BLOCK_CRG_INTERVAL_H
 
 #ifndef SHEAF_DLL_SPEC_H
-#include "sheaf_dll_spec.h"
+#include "SheafSystem/sheaf_dll_spec.h"
 #endif
 
 #ifndef HOMOGENEOUS_BLOCK_CRG_INTERVAL_H
-#include "homogeneous_block_crg_interval.h"
+#include "SheafSystem/homogeneous_block_crg_interval.h"
 #endif
 
 #ifndef BLOCK_ADJACENCY_H
-#include "block_adjacency.h"
+#include "SheafSystem/block_adjacency.h"
 #endif
 
 #ifndef SCATTERED_INSERTION_INDEX_SPACE_HANDLE_H
-#include "scattered_insertion_index_space_handle.h"
+#include "SheafSystem/scattered_insertion_index_space_handle.h"
 #endif
 
 #ifndef RAGGED_ARRAY_H
-#include "ragged_array.h"
+#include "SheafSystem/ragged_array.h"
 #endif
 
 #ifndef STD_MAP_H
-#include "std_map.h"
+#include "SheafSystem/std_map.h"
 #endif
 
 #ifndef SINGLY_LINKED_LIST_H
-#include "singly_linked_list.h"
+#include "SheafSystem/singly_linked_list.h"
 #endif
 
 namespace fiber_bundle

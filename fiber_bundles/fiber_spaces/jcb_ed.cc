@@ -18,17 +18,17 @@
 /// @file
 /// Implementation for class jcb_ed
 
-#include "jcb_ed.h"
+#include "SheafSystem/jcb_ed.h"
 
-#include "abstract_poset_member.impl.h"
-#include "assert_contract.h"
-#include "at1.h"
-#include "at1_space.h"
-#include "ed.h"
-#include "jcb_space.h"
-#include "fiber_bundles_namespace.h"
-#include "schema_poset_member.h"
-#include "wsv_block.h"
+#include "SheafSystem/abstract_poset_member.impl.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/at1.h"
+#include "SheafSystem/at1_space.h"
+#include "SheafSystem/ed.h"
+#include "SheafSystem/jcb_space.h"
+#include "SheafSystem/fiber_bundles_namespace.h"
+#include "SheafSystem/schema_poset_member.h"
+#include "SheafSystem/wsv_block.h"
 
 
 using namespace std;

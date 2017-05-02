@@ -17,15 +17,15 @@
 
 // Implementation for class record_set
 
-#include "record_set.h"
+#include "SheafSystem/record_set.h"
 
-#include "data_converter.h"
-#include "error_message.h"
-#include "namespace_poset.h"
-#include "record_index.h"
-#include "assert_contract.h"
-#include "sheaf_file.h"
-#include "record.h"
+#include "SheafSystem/data_converter.h"
+#include "SheafSystem/error_message.h"
+#include "SheafSystem/namespace_poset.h"
+#include "SheafSystem/record_index.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/sheaf_file.h"
+#include "SheafSystem/record.h"
 
 using namespace std;
 

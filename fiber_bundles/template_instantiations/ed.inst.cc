@@ -17,12 +17,12 @@
 
 // Explicit_instantiations for class ed.
 
-#include "ed.impl.h"
+#include "SheafSystem/ed.impl.h"
 
-#include "e1.h"
-#include "e2.h"
-#include "e3.h"
-#include "e4.h"
+#include "SheafSystem/e1.h"
+#include "SheafSystem/e2.h"
+#include "SheafSystem/e3.h"
+#include "SheafSystem/e4.h"
 
 using namespace std;
 using namespace fiber_bundle; // Workaround for MS C++ bug.

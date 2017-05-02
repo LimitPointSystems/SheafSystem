@@ -18,12 +18,12 @@
 /// @file
 /// Implementation for class array_cylindrical_point_locator
 
-#include "array_cylindrical_point_locator.h"
+#include "SheafSystem/array_cylindrical_point_locator.h"
 
-#include "sec_ed.h"
-#include "section_space_schema_poset.h"
-#include "structured_block_2d.h"
-#include "unstructured_block.h"
+#include "SheafSystem/sec_ed.h"
+#include "SheafSystem/section_space_schema_poset.h"
+#include "SheafSystem/structured_block_2d.h"
+#include "SheafSystem/unstructured_block.h"
 
 using namespace std;
 using namespace geometry; // Workaround for MS C++ bug.

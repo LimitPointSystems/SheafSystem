@@ -22,18 +22,18 @@
 //       one obtained by instantiating a sheaves_namespace
 //       and writing it out.
 
-#include "abstract_poset_member.h"
-#include "namespace_poset.h"
-#include "index_iterator.h"
-#include "namespace_poset_member.h"
-#include "poset.h"
-#include "poset_member_iterator.h"
-#include "postorder_iterator.h"
-#include "primitives_poset.h"
-#include "primitives_poset_schema.h"
-#include "schema_poset_member.h"
-#include "assert_contract.h"
-#include "storage_agent.h"
+#include "SheafSystem/abstract_poset_member.h"
+#include "SheafSystem/namespace_poset.h"
+#include "SheafSystem/index_iterator.h"
+#include "SheafSystem/namespace_poset_member.h"
+#include "SheafSystem/poset.h"
+#include "SheafSystem/poset_member_iterator.h"
+#include "SheafSystem/postorder_iterator.h"
+#include "SheafSystem/primitives_poset.h"
+#include "SheafSystem/primitives_poset_schema.h"
+#include "SheafSystem/schema_poset_member.h"
+#include "SheafSystem/assert_contract.h"
+#include "SheafSystem/storage_agent.h"
 
 using namespace sheaf;
 
