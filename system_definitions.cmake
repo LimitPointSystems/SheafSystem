@@ -233,58 +233,23 @@ endfunction(SheafSystem_set_platform_variables)
 # Set the default value for install location
 #
 function(SheafSystem_set_system_install_location_default)
+   
+   if(NOT DEFINED SHEAFSYSTEM_INSTALL_PREFIX_SET)
 
-   # Host has to be either Linux or Windows; don't handle any other case.
+      # CMAKE_INSTALL_PREFIX is set to cmake default, which is not usually writable.
+      # Set it to something reasonable that should be writable.
+      
+      set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/install CACHE PATH "System install location" FORCE)
 
-   dbc_require_or(SHEAFSYSTEM_WINDOWS SHEAFSYSTEM_LINUX)
+      set(SHEAFSYSTEM_INSTALL_PREFIX_SET "TRUE" CACHE INTERNAL "True if CMAKE_INSTALL_PREFIX has been initialized")
+      
+   else()
 
-   if(SHEAFSYSTEM_WINDOWS)
+      # CMAKE_INSTALL_PREFIX is either not set or has been set by user.
+      # Set it to something writable if it has not been set, won't
+      # overwrite value if user has already set it.
 
-      if(${CMAKE_INSTALL_PREFIX} MATCHES "C:/Programs/SheafSystem")
-
-         # Default Windows installation is C:/Prgrams/SheafSystem".
-         # Set a default where the user has write permission;
-         # in this case, the top of the source tree/install.
-         # "lib", "include", and "bin" will be appended to this location.
-         # See "add_install_target" in <component>/component_defintions.cmake.
-         
-         set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/install
-            CACHE PATH "System install location" FORCE)
-
-      else()
-
-         # CMAKE_INSTALL_PREFIX is either not set or has been set by user.
-         # Set it to something writable if it has not been set, won't
-         # overwrite value if user has already set it.
-
-         set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/install
-            CACHE PATH "System install location")
-
-      endif()
-
-   elseif(SHEAFSYSTEM_LINUX)
-
-      if(${CMAKE_INSTALL_PREFIX} MATCHES "/usr/local")
-
-         # Default linux installation location is /usr/local
-         # Set a default where the user has write permission;
-         # in this case, the top of the source tree/install.
-         # "lib", "include", and "bin" will be appended to this location.
-         # See "add_install_target" in <component>/component_defintions.cmake.
-
-         set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/install
-            CACHE PATH "System install location" FORCE)
-
-      else()
-
-         # CMAKE_INSTALL_PREFIX is either not set or has been set by user.
-         # Set it to something writable if it has not been set, won't
-         # overwrite value if user has already set it.
-
-         set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/install
-            CACHE PATH "System install location")
-
-      endif()
+      set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/install CACHE PATH "System install location")
 
    endif()
 
@@ -986,7 +951,7 @@ function(SheafSystem_make_system_definitions)
    SheafSystem_set_system_variable_defaults()
    SheafSystem_set_platform_variables()
    SheafSystem_set_compiler_flags()
-#   SheafSystem_set_system_install_location_default()
+   SheafSystem_set_system_install_location_default()
    SheafSystem_set_debug_configuration()
    SheafSystem_set_default_build_type()
    SheafSystem_set_coverage_defaults()

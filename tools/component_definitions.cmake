@@ -513,8 +513,11 @@ function(SheafSystem_add_tools_install_target)
          install(PROGRAMS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/SheafScope.jar 
             DESTINATION ${CMAKE_BUILD_TYPE}/lib)
 
-         install(PROGRAMS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/sheafscope 
-            DESTINATION ${CMAKE_BUILD_TYPE}/bin)
+         # SheafScope wrapper at least temporarily removed from build.
+         # See tools/CMakeLists.txt
+         
+         # install(PROGRAMS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/sheafscope 
+         #   DESTINATION ${CMAKE_BUILD_TYPE}/bin)
 
       endif(SHEAFSYSTEM_BUILD_SHEAFSCOPE)
 
