@@ -51,11 +51,10 @@ function(SheafSystem_add_fiber_bundles_library_targets)
    string(REPLACE ";" "\;" _lps_escaped_paths "${FIBER_BUNDLES_IPATH}" )
    # message("_lps_escaped_paths=${_lps_escaped_paths}")
 
-   # Target to create copies of header files with path ${SHEAFSYSTEM_HEADER_SCOPE}/*.h,
-   # so uniquely scoped paths in include directives with work.
+   # Create target to create copies of header files with path ${SHEAFSYSTEM_HEADER_SCOPE}/*.h,
+   # so uniquely scoped paths in include directives will work.
 
-   add_custom_target(fiber_bundles_scoped_headers
-      COMMAND ${CMAKE_COMMAND} -E copy_if_different ${FIBER_BUNDLES_INCS} ${SHEAFSYSTEM_HEADER_DIR})
+   SheafSystem_add_component_scoped_headers_target(fiber_bundles)
 
    if(SHEAFSYSTEM_WINDOWS)
 

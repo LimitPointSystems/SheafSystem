@@ -94,9 +94,14 @@ SheafSystem_add_dumpsheaf_target()
 #
 # Add a target for the sheafscope exe wrapper
 #
-if(SHEAFSYSTEM_BUILD_SHEAFSCOPE)
-    SheafSystem_add_sheafscope_wrapper_target()
-endif()
+# SheafScope.cc was originally intended as an easy way to launch
+# the SheafScope. But it never worked, or at least not reliably, and
+# won't even build on Windows. So it has been removed from the build
+# until we make it work, if that ever happens.
+#
+#if(SHEAFSYSTEM_BUILD_SHEAFSCOPE)
+#    SheafSystem_add_sheafscope_wrapper_target()
+#endif()
 
 #
 # Installation target

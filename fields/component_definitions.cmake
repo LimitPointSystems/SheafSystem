@@ -52,11 +52,10 @@ function(SheafSystem_add_fields_library_targets)
    string(REPLACE ";" "\;" _lps_escaped_paths "${FIELDS_IPATH}" )
    # message("_lps_escaped_paths=${_lps_escaped_paths}")
 
-   # Target to create copies of header files with path ${SHEAFSYSTEM_HEADER_SCOPE}/*.h,
-   # so uniquely scoped paths in include directives with work.
+   # Create target to create copies of header files with path ${SHEAFSYSTEM_HEADER_SCOPE}/*.h,
+   # so uniquely scoped paths in include directives will work.
 
-   add_custom_target(fields_scoped_headers
-      COMMAND ${CMAKE_COMMAND} -E copy_if_different ${FIELDS_INCS} ${SHEAFSYSTEM_HEADER_DIR})
+   SheafSystem_add_component_scoped_headers_target(fields)
 
    if(SHEAFSYSTEM_WINDOWS)
 

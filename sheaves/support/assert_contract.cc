@@ -25,7 +25,7 @@
 #include "SheafSystem/std_string.h"
 
 #ifdef _WIN32
-#include "SheafSystem/windows.h" // Compiling with MS C++, needed for OutputDebugString.
+#include "windows.h" // Compiling with MS C++, needed for OutputDebugString.
 #endif
 
 using namespace std;

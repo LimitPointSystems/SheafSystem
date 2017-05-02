@@ -19,7 +19,7 @@
 #include "SheafSystem/base_space_poset.h"
 
 #ifdef _WIN32
-#include "SheafSystem/io.h"
+#include "io.h"
 #endif
 
 #include "SheafSystem/namespace_poset.h"

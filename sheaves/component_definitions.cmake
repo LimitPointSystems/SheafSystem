@@ -1,3 +1,4 @@
+
 #
 # Copyright (c) 2014 Limit Point Systems, Inc. 
 #
@@ -181,14 +182,13 @@ function(SheafSystem_add_sheaves_library_targets)
    #message("static _lps_escaped_paths= ${_lps_escaped_paths}")
 
    set(_lps_escaped_paths "${CMAKE_BINARY_DIR}/include\;${HDF5_INCLUDE_DIR}")
-   message("shared _lps_escaped_paths= ${_lps_escaped_paths}")
+   #message("_lps_escaped_paths= ${_lps_escaped_paths}")
 
-   # Target to create copies of header files with path ${SHEAFSYSTEM_HEADER_SCOPE}/*.h,
-   # so uniquely scoped paths in include directives with work.
+   # Create target to create copies of header files with path ${SHEAFSYSTEM_HEADER_SCOPE}/*.h,
+   # so uniquely scoped paths in include directives will work.
 
-   add_custom_target(sheaves_scoped_headers
-      COMMAND ${CMAKE_COMMAND} -E copy_if_different ${SHEAVES_INCS} ${SHEAFSYSTEM_HEADER_DIR})
-
+   SheafSystem_add_component_scoped_headers_target(sheaves)
+   
    if(SHEAFSYSTEM_WINDOWS)
 
       # Create the DLL.

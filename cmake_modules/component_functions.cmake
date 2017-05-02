@@ -418,6 +418,36 @@ function(SheafSystem_add_component_install_target xcomponent_name)
 endfunction(SheafSystem_add_component_install_target)
 
 
+# Function to create target to create copies of header files with path ${SHEAFSYSTEM_HEADER_SCOPE}/*.h,
+# so uniquely scoped paths in include directives will work.
+# Note: can't use copy_if_different command with multiple input files
+# directly in add_custom_target because fails on Windows, apparently
+# due to error in copy_if_different dealing with long lists
+
+function(SheafSystem_add_component_scoped_headers_target xcomponent_name)
+
+   string(TOUPPER ${xcomponent_name} LCOMP_NAME_UC)
+   string(TOLOWER ${xcomponent_name} LCOMP_NAME_LC)
+
+   set(all_scoped_hdrs)
+   foreach(hdr_path ${${LCOMP_NAME_UC}_INCS})
+
+      get_filename_component(hdr_file ${hdr_path} NAME)
+
+      add_custom_command(OUTPUT ${SHEAFSYSTEM_HEADER_DIR}/${hdr_file}
+         COMMAND ${CMAKE_COMMAND} -E copy_if_different ${hdr_path} ${SHEAFSYSTEM_HEADER_DIR}
+         DEPENDS ${hdr_path}
+         )
+
+      list(APPEND all_scoped_hdrs ${SHEAFSYSTEM_HEADER_DIR}/${hdr_file})
+
+   endforeach()
+
+   add_custom_target(${LCOMP_NAME_LC}_scoped_headers DEPENDS ${all_scoped_hdrs} )
+
+endfunction(SheafSystem_add_component_scoped_headers_target)
+
+
 #------------------------------------------------------------------------------
 # Misc functions
 #------------------------------------------------------------------------------

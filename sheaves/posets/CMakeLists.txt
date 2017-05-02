@@ -73,7 +73,6 @@ set(ADDITIONAL_INCS
     abstract_poset_member.impl.h 
     namespace_poset.impl.h 
     poset_crg_state.impl.h 
-    namespace_poset.impl.h 
     poset_state_handle.impl.h
    )
 
